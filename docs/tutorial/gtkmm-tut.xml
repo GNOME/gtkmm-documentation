@@ -6426,11 +6426,12 @@ some point.
 <sect2>
 <title>Example</title>
 <para>
-The <literal>basic</literal> example in the
-<application>libglademm</application> package shows how to load a
-<application>Glade</application> file at runtime and access the widgets with
+This simple example shows how to load a <application>Glade</application> file at runtime and access the widgets with
 <application>libglademm</application>.
 </para>
+
+<para><ulink url="&url_examples_base;libglademm/simple">Source Code</ulink></para>
+
 </sect2>
 
 </sect1>
@@ -6493,8 +6494,12 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gnom
 
 <sect2>
 <title>Example</title>
-<para>The <literal>derived</literal> example in the <literal>libglademm</literal> package shows how to load a Glade file at runtime and access a widgets via a derived class.
+<para>
+This example shows how to load a <application>Glade</application> file at runtime and access the widgets via a derived class.
 </para>
+
+<para><ulink url="&url_examples_base;libglademm/derived">Source Code</ulink></para>
+
 </sect2>
 
 </sect1>

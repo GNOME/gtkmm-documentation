@@ -194,7 +194,7 @@ AC_LANG_POP(C++)
 #########################################################################
 #  Dependancy checks
 #########################################################################
-PKG_CHECK_MODULES(GTKMMDOCS, gtkmm-2.4 >= 2.10.0})
+PKG_CHECK_MODULES(GTKMMDOCS, gtkmm-2.4 >= 2.10.0 libglademm-2.4 >= 2.6.0})
 AC_SUBST(GTKMMDOCS_CFLAGS)
 AC_SUBST(GTKMMDOCS_LIBS)
 
@@ -315,6 +315,9 @@ if test "x$enable_examples" = "xyes"; then
         examples/book/idle/Makefile
         examples/book/input/Makefile
         examples/book/label/Makefile
+        examples/book/libglademm/Makefile
+          examples/book/libglademm/simple/Makefile
+          examples/book/libglademm/derived/Makefile
         examples/book/menus/Makefile
           examples/book/menus/main_menu/Makefile
           examples/book/menus/popup/Makefile
@@ -397,9 +400,6 @@ AUTOHEADER=':'
 
 AC_CONFIG_FILES([
   Makefile
-])
-
-AC_CONFIG_FILES([
   scripts/Makefile
 ])
 

@@ -1,5 +1,14 @@
 2007-10-03  Murray Cumming  <murrayc@murrayc.com>
 
+	* configure.in:
+	* docs/tutorial/gtkmm-tut.xml:
+	* examples/book/libglademm/derived/
+	* examples/book/libglademm/simple/: Added the examples from 
+	libglademm and included them inline in the gtkmm book in 
+	the libglademm chapter.
+
+2007-10-03  Murray Cumming  <murrayc@murrayc.com>
+
 	* Makefile.am: Removed mentions of non-existing directories, 
 	to fix the distcheck.
 

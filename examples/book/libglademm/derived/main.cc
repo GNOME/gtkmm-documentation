@@ -28,7 +28,7 @@ int main (int argc, char **argv)
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
   {
-    refXml = Gnome::Glade::Xml::create("basic.glade");
+    refXml = Gnome::Glade::Xml::create("simple.glade");
   }
   catch(const Gnome::Glade::XmlError& ex)
   {
@@ -37,7 +37,7 @@ int main (int argc, char **argv)
   }
 #else
   std::auto_ptr<Gnome::Glade::XmlError> error;
-  refXml = Gnome::Glade::Xml::create("basic.glade", "", "", error);
+  refXml = Gnome::Glade::Xml::create("simple.glade", "", "", error);
   if(error.get())
   {
     std::cerr << error->what() << std::endl;
