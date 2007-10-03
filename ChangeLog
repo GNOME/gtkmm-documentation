@@ -1,5 +1,10 @@
 2007-10-03  Murray Cumming  <murrayc@murrayc.com>
 
+	* Makefile.am: Removed mentions of non-existing directories, 
+	to fix the distcheck.
+
+2007-10-03  Murray Cumming  <murrayc@murrayc.com>
+
 	* scripts/Makefile.am:
 	* scripts/docgen.m4:
 	* scripts/reduced.m4: Removed unused .m4 files.
