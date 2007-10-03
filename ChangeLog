@@ -1,5 +1,11 @@
 2007-10-03  Murray Cumming  <murrayc@murrayc.com>
 
+	* scripts/Makefile.am:
+	* scripts/docgen.m4:
+	* scripts/reduced.m4: Removed unused .m4 files.
+
+2007-10-03  Murray Cumming  <murrayc@murrayc.com>
+
 	Initial version, moving examples/ and docs/ from the main 
 	gtkmm module, so that the book can have examples of extra APIs.
 
