@@ -1,0 +1,6 @@
+2007-10-03  Murray Cumming  <murrayc@murrayc.com>
+
+	Initial version, moving examples/ and docs/ from the main 
+	gtkmm module, so that the book can have examples of extra APIs.
+
+
