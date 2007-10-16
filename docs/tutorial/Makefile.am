@@ -51,11 +51,12 @@ validate: gtkmm-tut-with-examples.xml
 gtkmm-tut-html.tar.gz: html/index.html
 	tar cf - figures html | gzip -c --best >$@
 
-post-html: html/index.html style.css
+post-html: html/index.html style.css pdf
 	rsync $(rsync_args) figures/*.png $$USER@$(web_host):$(gtkmm_tut_path)/figures/
 	rsync $(rsync_args) icons/*.png $$USER@$(web_host):$(gtkmm_tut_path)/icons/
 	rsync $(rsync_args) -r html/ $$USER@$(web_host):$(gtkmm_tut_path)/html/
 	rsync $(rsync_args) *.css $$USER@$(web_host):$(gtkmm_tut_path)/html/
+	rsync $(rsync_args) -r pdf/ $$USER@$(web_host):$(gtkmm_tut_path)/pdf/
 
 # we need to produce a full examples with all of the XIncludes done so that it
 # can processed for PDF

@@ -1,5 +1,10 @@
 2007-10-16  Murray Cumming  <murrayc@murrayc.com>
 
+	* docs/tutorial/Makefile.am: Build and upload the pdf when 
+	uploading.
+
+2007-10-16  Murray Cumming  <murrayc@murrayc.com>
+
 	* configure.in: Corrected the package name.
 
 2007-10-03  Murray Cumming  <murrayc@murrayc.com>
