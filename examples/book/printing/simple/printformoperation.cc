@@ -141,3 +141,4 @@ void PrintFormOperation::on_draw_page(
   }
   while (line_index < end_page_line && iter.next_line());
 }
+
