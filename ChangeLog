@@ -1,3 +1,11 @@
+2007-10-17  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.in:
+	* examples/Makefile.am:
+	* examples/: Moved non-book examples into an other/ 
+	directory, so that these less-great examples don't 
+	distract from all the good stuff in book/.
+
 2007-10-16  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/tutorial/Makefile.am: Build and upload the pdf when 

@@ -260,8 +260,6 @@ if test "x$enable_examples" = "xyes"; then
   EXAMPLE_SUBDIR="examples"
   AC_CONFIG_FILES([
     examples/Makefile
-      examples/arrow/Makefile
-      examples/base/Makefile
       examples/book/Makefile
         examples/book/alignment/Makefile
         examples/book/aspectframe/Makefile
@@ -353,16 +351,19 @@ if test "x$enable_examples" = "xyes"; then
           examples/book/treeview/filter_modify/Makefile
           examples/book/treeview/modelsort/Makefile
         examples/book/update_ui/Makefile
-      examples/calendar/Makefile
-      examples/dnd/Makefile
-      examples/exception/Makefile
-      examples/gdk/Makefile
-      examples/rulers/Makefile
-      examples/statusbar/Makefile
-      examples/stock/Makefile
-      examples/tictactoe/Makefile
-      examples/treemodelcustom/Makefile
-      examples/window/Makefile
+      examples/others/Makefile
+        examples/others/arrow/Makefile
+        examples/others/base/Makefile
+        examples/others/calendar/Makefile
+        examples/others/dnd/Makefile
+        examples/others/exception/Makefile
+        examples/others/gdk/Makefile
+        examples/others/rulers/Makefile
+        examples/others/statusbar/Makefile
+        examples/others/stock/Makefile
+        examples/others/tictactoe/Makefile
+        examples/others/treemodelcustom/Makefile
+        examples/others/window/Makefile
   ])
 else
   EXAMPLE_SUBDIR=""

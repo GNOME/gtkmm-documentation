@@ -1,20 +1,4 @@
-example_dirs =		\
-book			\
-arrow			\
-base			\
-calendar		\
-dnd			\
-exception		\
-gdk			\
-rulers			\
-statusbar		\
-stock			\
-tictactoe		\
-treemodelcustom \
-window
-
-# Doesn't build with GLIBMM_ENABLE_PROPERTIES unset:
-#cellrenderercustom
+example_dirs = book others
 
 SUBDIRS = $(example_dirs)
 EXTRA_DIST = README Makefile.am_fragment
