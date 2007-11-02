@@ -8404,13 +8404,29 @@ $ jhbuild sanitycheck</screen>
 
 <appendix id="sec-appendix-wrapping-c-libraries">
 <title>Wrapping C Libraries with gmmproc</title>
-<para>gtkmm uses the gmmproc tool to generate most of its source code, using .defs files that define the APIs of GObject-based libraries. So it's quite easy to create additional gtkmm-style wrappers of other glib/GObject-based libraries.</para> 
-<para>This involves a variety of tools and some copying of existing build files, but it does at least work, and has been used successfully by several projects.</para>
+<para>&gtkmm; uses the <command>gmmproc</command> tool to generate most of its
+    source code, using .defs files that define the APIs of
+    <classname>GObject</classname>-based libraries. So it's quite easy to create
+    additional gtkmm-style wrappers of other glib/GObject-based
+    libraries.</para> 
+<para>This involves a variety of tools and some copying of existing build files,
+    but it does at least work, and has been used successfully by several
+    projects.</para>
 
 <sect1>
 <title>The build structure</title>
-<para>Generation of the source code for a gtkmm-style wrapper API requires use of tools such as gmmproc and  generate_wrap_init.pl. In theory you could write your own build files to use these appropriately, but in practice it's usually easier to simply copy an existing project and modify it for your needs. Note however, that there is plenty of scope for improvement in the build structure that we use, so try to copy the latest version, and feel free to suggest improvements to make it more generic.</para>
-<para>For instance, let's pretend that we are wrapping a C library called libexample. It provides a GObject-based API with types named, for instance, ExampleThing and ExampleStuff.</para>
+<para>Generation of the source code for a gtkmm-style wrapper API requires use
+    of tools such as <command>gmmproc</command> and
+    <filename>generate_wrap_init.pl</filename>. In theory you could write your
+    own build files to use these appropriately, but in practice it's usually
+    easier to simply copy an existing project and modify it for your needs. Note
+    however, that there is plenty of scope for improvement in the build
+    structure that we use, so try to copy the latest version, and feel free to
+    suggest improvements to make it more generic.</para>
+<para>For instance, let's pretend that we are wrapping a C library called
+    libexample. It provides a <classname>GObject</classname>-based API with
+    types named, for instance, <classname>ExampleThing</classname> and
+    <classname>ExampleStuff</classname>.</para>
 
 <sect2>
 <title>Copying an existing project</title>
@@ -8422,16 +8438,20 @@ $ cp -r gnomemm/libgdamm libsomethingmm
 </programlisting>
 </para>
 <para>
-This provides a directory structure for the source .hg and .ccg files and the generated .h and .cc files, with Makefile.am fragments that can specify the various files in use, in terms of generic Makefile.am variables. The directory structure usually looks like this, after we have renamed the directories appropriately:
+    This provides a directory structure for the source .hg and .ccg files and
+    the generated .h and .cc files, with <filename>Makefile.am</filename>
+    fragments that can specify the various files in use, in terms of generic
+    <filename>Makefile.am</filename> variables. The directory structure usually
+    looks like this, after we have renamed the directories appropriately:
 <itemizedlist>
-  <listitem><para>libsomethingmm: The top-level directory.</para>
+    <listitem><para><filename>libsomethingmm</filename>: The top-level directory.</para>
      <itemizedlist>
-       <listitem><para>libsomething: Contains the main include file and the pkg-config .pc file.</para>
+         <listitem><para><filename>libsomething</filename>: Contains the main include file and the pkg-config .pc file.</para>
          <itemizedlist>
-           <listitem><para>src: Contains .hg and .ccg source files.</para></listitem>
-           <listitem><para>libsomethingmm: Contains generated and hand-written .h and .cc files.</para>
+             <listitem><para><filename>src</filename>: Contains .hg and .ccg source files.</para></listitem>
+             <listitem><para><filename>libsomethingmm</filename>: Contains generated and hand-written .h and .cc files.</para>
              <itemizedlist>
-               <listitem><para>private: Contains generated *_p.h files.</para></listitem>
+                 <listitem><para><filename>private</filename>: Contains generated <filename>*_p.h</filename> files.</para></listitem>
              </itemizedlist>
            </listitem>
          </itemizedlist>
@@ -8441,7 +8461,8 @@ This provides a directory structure for the source .hg and .ccg files and the ge
 </itemizedlist>
 </para>
 
-<para>As well as renaming the directories, we should rename some of the source files. For instance:
+<para>As well as renaming the directories, we should rename some of the source
+    files. For instance:
 <programlisting>
 $ mv libsomething/libgdamm-2.0.pc.in libsomething/libsomethingmm-1.0.pc.in
 $ mv libsomething/libgdammconfig.h.in libsomething/libsomethingmmconfig.h.in
@@ -8456,83 +8477,158 @@ $ mv libsomething/src/libgda_vfuncs.defs libsomething/src/libsomething_vfuncs.de
 $ mv libsomething/src/libgda_docs.xml libsomething/src/libsomething_docs.xml
 $ mv libsomething/src/libgda_docs_override.xml libsomething/src/libsomething_docs_override.xml
 </programlisting>
-A multiple-file renaming tool, such as prefixsuffix might help with this. We will provide the contents of these files later.
+A multiple-file renaming tool, such as <command>prefixsuffix</command> might
+help with this. We will provide the contents of these files later.
 </para>
 <para>
-Note that files ending in .in will be used to generate files with the same name but without the .in suffix, by replacing some variables with actual values during the configure stage.
+    Note that files ending in <filename>.in</filename> will be used to generate
+    files with the same name but without the <filename>.in</filename> suffix, by
+    replacing some variables with actual values during the configure stage.
 </para>
 </sect2>
 
 <sect2>
 <title>Modifying build files</title>
 
-<para>Now we edit the files to adapt them to to our needs. You might prefer to use a multiple-file search-replace too for this, such as regexxer.</para>
+<para>Now we edit the files to adapt them to to our needs. You might prefer to
+    use a multiple-file search-replace too for this, such as
+    <command>regexxer</command>.</para>
 
 <sect3>
 <title>autogen.sh</title>
-<para>For instance, in autogen.sh:
+<para>For instance, in <filename>autogen.sh</filename>:
 <itemizedlist>
-  <listitem><para>PKG_NAME must contain the new package name, such as libexamplemm.</para></listitem>
-  <listitem><para>The test script lines must check for appropriate directory names, such as $srcdir/libsomething/src.</para></listitem>
+    <listitem><para><varname>PKG_NAME</varname> must contain the new package
+            name, such as libexamplemm.</para></listitem>
+  <listitem><para>The test script lines must check for appropriate directory
+          names, such as <filename>$srcdir/libsomething/src</filename>.</para></listitem>
 </itemizedlist>
 </para>
 </sect3>
 
 <sect3>
 <title>configure.in</title>
-<para>In configure.in (or configure.ac in newer projects),
+<para>In <filename>configure.in</filename> (or <filename>configure.ac</filename>
+    in newer projects),
 <itemizedlist>
-  <listitem><para>The AC_INIT() line must mention a file in our library. We can edit this later if we don't yet know the names of any of the files that we will create.</para></listitem>
-  <listitem><para>The PACKAGE variable must be changed to the correct name of the project, such as libsomethingmm.</para></listitem>
-  <listitem><para>The version numbers should be reset to something small, such as 0.0.1. You may want to rename the version variables if they are not something generic. For instance, we would rename LIBGDAMM_MAJOR_VERSION to LIBSOMETHINGMM_MAJOR_VERSION or LIBGENERICMM_MAJOR_VERSION.</para></listitem>
-  <listitem><para>The AM_CONFIG_HEADER() line must mention the correctly named config header file.</para></listitem>
-  <listitem><para>The PKG_CHECK_MODULES() line must be modified to check for the correct dependencies. For instance, it might be changed to PKG_CHECK_MODULES(LIBGENERICMM, gtkmm-2.4 &gt;= 2.6.0 libsomething-1.0 &gt;= 1.0.0).</para></listitem>
-  <listitem><para>The AC_OUTPUT() block must mention the correct directory names, as described above.</para></listitem>
-  <listitem><para>The m4 script to generate doxygen input directory paths must mention the correct directory.</para></listitem>
+    <listitem><para>The <function>AC_INIT()</function> line must mention a file
+            in our library. We can edit this later if we don't yet know the
+            names of any of the files that we will create.</para></listitem>
+    <listitem><para>The <varname>PACKAGE</varname> variable must be changed to
+            the correct name of the project, such as
+            libsomethingmm.</para></listitem>
+  <listitem><para>The version numbers should be reset to something small, such
+          as 0.0.1. You may want to rename the version variables if they are not
+          something generic. For instance, we would rename
+          <varname>LIBGDAMM_MAJOR_VERSION</varname> to
+          <varname>LIBSOMETHINGMM_MAJOR_VERSION</varname> or
+          <varname>LIBGENERICMM_MAJOR_VERSION</varname>.</para></listitem>
+  <listitem><para>The <function>AM_CONFIG_HEADER()</function> line must mention
+          the correctly named config header file.</para></listitem>
+  <listitem><para>The <function>PKG_CHECK_MODULES()</function> line must be modified to check for the
+          correct dependencies. For instance, it might be changed to
+          <code>PKG_CHECK_MODULES(LIBGENERICMM, gtkmm-2.4 &gt;= 2.6.0 libsomething-1.0
+          &gt;= 1.0.0).</code></para></listitem>
+  <listitem><para>The <function>AC_OUTPUT()</function> block must mention the correct directory
+          names, as described above.</para></listitem>
+  <listitem><para>The m4 script to generate doxygen input directory paths must
+          mention the correct directory.</para></listitem>
 </itemizedlist>
 </para>
 </sect3>
 
 <sect3>
 <title>Makefile.am files</title>
-<para>Next we must adapt the various Makefile.am files:
+<para>Next we must adapt the various <filename>Makefile.am</filename> files:
 <itemizedlist>
-  <listitem><para>The top-level Makefile.am must mention the correct child directory in the SUBDIRS variable.</para></listitem>
-  <listitem><para>The libexample/Makefile.am must mention:</para>
+    <listitem><para>The top-level <filename>Makefile.am</filename> must mention
+            the correct child directory in the <varname>SUBDIRS</varname>
+            variable.</para></listitem>
+    <listitem><para>The <filename>libexample/Makefile.am</filename> must mention:</para>
     <itemizedlist>
-      <listitem><para>The correct child directories in the SUBDIRS variable.</para></listitem>
-      <listitem><para>The correct filenames in EXTRA_DIST.</para></listitem>
-      <listitem><para>The correct filenames in *_includedir, *_include_HEADERS, *_configdir, and *_config_DATA.</para></listitem>
+        <listitem><para>The correct child directories in the <varname>SUBDIRS</varname> variable.</para></listitem>
+        <listitem><para>The correct filenames in <varname>EXTRA_DIST</varname>.</para></listitem>
+        <listitem><para>The correct filenames in
+                <varname>*_includedir</varname>,
+                <varname>*_include_HEADERS</varname>,
+                <varname>*_configdir</varname>, and
+                <varname>*_config_DATA</varname>.</para></listitem>
     </itemizedlist>
   </listitem>
-  <listitem><para>In libexample/libexamplemm/Makefile.am we must mention the correct names in the generic variables that are used elsewhere in the build system:</para>
-    <itemizedlist>
-      <listitem><para>sublib_name: The name of the library, such as libsomethingmm.</para></listitem>
-      <listitem><para>sublib_libname: The versioned name of the library, such as libsomethingmm-1.0</para></listitem>
-      <listitem><para>sublib_namespace: The name of the C++ namespace to use for this library, such as Something.</para></listitem>
-      <listitem><para>files_defs: The list of .defs and *docs*.xml files.</para></listitem>
-      <listitem><para>The lib_LTLIBRARIES variable must mention the correct library name, and this library name must be used to form the _SOURCES, _LDFLAGS, and _LIBADD variable names.</para></listitem>	
-    </itemizedlist>
+  <listitem><para>In <filename>libexample/libexamplemm/Makefile.am</filename> we
+          must mention the correct names in the generic variables that are used
+          elsewhere in the build system:</para>
+      <variablelist>
+          <varlistentry>
+              <term><varname>sublib_name</varname></term>
+              <listitem><para>The name of the library, such as
+                      libsomethingmm.</para></listitem>
+          </varlistentry>
+          <varlistentry>
+              <term><varname>sublib_libname</varname></term>
+              <listitem><para>The versioned name of the library, such as
+                      libsomethingmm-1.0</para></listitem>
+          </varlistentry>
+          <varlistentry>
+              <term><varname>sublib_namespace</varname></term>
+              <listitem><para>The name of the C++ namespace to use for this
+                      library, such as Something.</para></listitem>
+          </varlistentry>
+          <varlistentry>
+              <term><varname>files_defs</varname></term>
+              <listitem><para>The list of .defs and
+                      <filename>*docs*.xml</filename> files.</para></listitem>
+          </varlistentry>
+          <varlistentry>
+              <term><varname>lib_LTLIBRARIES</varname></term>
+              <listitem><para>This variable must mention the correct library
+                      name, and this library name must be used to form the
+                      <varname>_SOURCES</varname>, <varname>_LDFLAGS</varname>,
+                      and <varname>_LIBADD</varname> variable
+                      names.</para></listitem>	
+          </varlistentry>
+      </variablelist>
   </listitem>
-  <listitem><para>In libexample/libexamplemm/private/Makefile.am, private_includedir must contain the correct path.</para></listitem>
-  <listitem><para>In examples/Makefile.am_fragment, local_libgenericmm_lib and all_includes must contain the correct paths.</para></listitem>
-  <listitem><para>In libexample/src/Makefile.am we must set some more generic variables:</para>
-    <itemizedlist>
-      <listitem><para>sublib_name: The name of the library, as in libexample/libexamplemm/Makefile.am.</para></listitem>
-      <listitem><para>sublib_namespace: The name of the C++ namespace, as in libexample/libexamplemm/Makefile.am</para></listitem>
-      <listitem><para>sublib_parentdir: The name of the directory containing the generated files, such as libexamplemm.</para></listitem>
-      <listitem><para>files_defs: The list of .defs and *docs*.xml files.</para></listitem>	
-    </itemizedlist>
+  <listitem><para>In <filename>libexample/libexamplemm/private/Makefile.am</filename>, <varname>private_includedir</varname> must contain the correct path.</para></listitem>
+  <listitem><para>In <filename>examples/Makefile.am_fragment</filename>,
+          <varname>local_libgenericmm_lib</varname> and
+          <varname>all_includes</varname> must contain the correct
+          paths.</para></listitem>
+  <listitem><para>In <filename>libexample/src/Makefile.am</filename> we must set
+          some more generic variables:</para>
+      <variablelist>
+          <varlistentry>
+              <term><varname>sublib_name</varname></term>
+              <listitem><para>The name of the library, as in <filename>libexample/libexamplemm/Makefile.am</filename>.</para></listitem>
+          </varlistentry>
+          <varlistentry>
+              <term><varname>sublib_namespace</varname></term>
+              <listitem><para>The name of the C++ namespace, as in <varname>libexample/libexamplemm/Makefile.am</varname></para></listitem>
+          </varlistentry>
+          <varlistentry>
+              <term><varname>sublib_parentdir</varname></term>
+              <listitem><para>The name of the directory containing the generated files, such as libexamplemm.</para></listitem>
+          </varlistentry>
+          <varlistentry>
+              <term><varname>files_defs</varname></term>
+              <listitem><para>The list of .defs and <filename>*docs*.xml</filename> files.</para></listitem>	
+          </varlistentry>
+      </variablelist>
   </listitem>
-  <listitem><para>In build_shared/Makefile_gensrc.am_fragment, you should remove the --namespace=Gnome option from 
-      the gen_wrap_init_args variable if your namespace will not be under the Gnome namespace. This should be the only place that you need to edit the generic build_shared/ files.</para></listitem>
+  <listitem><para>In
+          <filename>build_shared/Makefile_gensrc.am_fragment</filename>, you
+          should remove the --namespace=Gnome option from the
+          <varname>gen_wrap_init_args</varname> variable if your namespace will
+          not be under the Gnome namespace. This should be the only place that
+          you need to edit the generic <filename>build_shared/</filename> files.</para></listitem>
 </itemizedlist>
 </para>
 </sect3>
 
 <sect3>
 <title>Creating .hg and .ccg files</title>
-<para>We should now create our first .hg and .ccg files, to wrap one of the objects in the C library. We will delete any existing .hg and .ccg files:
+<para>We should now create our first .hg and .ccg files, to wrap one of the
+    objects in the C library. We will delete any existing .hg and .ccg files:
 <programlisting>
 $ rm -rf libexample/src/*.hg
 $ rm -rf libexample/src/*.ccg
@@ -8543,8 +8639,14 @@ $ touch libexample/src/thing.hg
 $ touch libexample/src/thing.ccg
 </programlisting>
 </para>
-<para>We must mention all of our .hg and .ccg files in the libexample/src/Makefile_list_of_hg.am_fragment file, in the files_hg variable.</para>
-<para>Any extra non-generated .h and .cc source files may be placed in libexample/libexamplemm/ and mentioned in  libexample/libexamplemm/Makefile.am, in the files_extra_h and files_extra_cc variables.</para>
+<para>We must mention all of our .hg and .ccg files in the
+    <filename>libexample/src/Makefile_list_of_hg.am_fragment</filename> file, in
+    the <varname>files_hg</varname> variable.</para>
+<para>Any extra non-generated .h and .cc source files may be placed in
+    <filename>libexample/libexamplemm/</filename> and mentioned in
+    <filename>libexample/libexamplemm/Makefile.am</filename>, in the
+    <varname>files_extra_h</varname> and <varname>files_extra_cc</varname>
+    variables.</para>
 <para>In the <link linkend="sec-appendix_wrapping_hg_files">.hg and .ccg files</link> section you can learn about the syntax used in these files.</para>
 </sect3>
 </sect2>
@@ -8562,19 +8664,39 @@ $ touch libexample/src/thing.ccg
   <listitem><para>vfuncs</para></listitem>
 </itemizedlist>
 </para>
-<para>At the moment, we have separate tools for generating different parts of these .defs, so we split them up into separate files. For instance, in gtkmm/gtk/src, you will find these files:
-<itemizedlist>
-  <listitem><para>gtk.defs: Includes the other files.</para></listitem>
-  <listitem><para>gtk_methods.defs: Objects and functions.</para></listitem>
-  <listitem><para>gtk_enums.defs: Enums.</para></listitem>
-  <listitem><para>gtk_signals.def: Signals and properties.</para></listitem>
-  <listitem><para>gtk_vfuncs.defs: vfuncs (function pointer member fields in structs), written by hand.</para></listitem>
-</itemizedlist>
+<para>At the moment, we have separate tools for generating different parts of
+    these .defs, so we split them up into separate files.
+    For instance, in <filename>gtkmm/gtk/src</filename>, you will find these
+    files:
+    <variablelist>
+        <varlistentry>
+            <term><filename>gtk.defs</filename></term>
+            <listitem><para>Includes the other files.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term><filename>gtk_methods.defs</filename></term>
+            <listitem><para>Objects and functions.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term><filename>gtk_enums.defs</filename></term>
+            <listitem><para>Enums.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term><filename>gtk_signals.def</filename></term>
+            <listitem><para>Signals and properties.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+            <term><filename>gtk_vfuncs.defs</filename></term>
+            <listitem><para>vfuncs (function pointer member fields in structs), written by hand.</para></listitem>
+        </varlistentry>
+    </variablelist>
 </para>
 
 <sect2>
 <title>Generating the methods .defs</title>
-<para>This .defs file describes objects and their functions. It is generated by the h2defs.py script which you can find in pygtk's codegen directory. For instance,
+<para>This .defs file describes objects and their functions. It is generated by
+    the <command>h2defs.py</command> script which you can find in pygtk's
+    codegen directory. For instance,
 <programlisting>
 $ ./h2defs.py /usr/include/gtk-2.0/gtk/*.h &gt; gtk_methods.defs
 </programlisting>
@@ -8583,7 +8705,9 @@ $ ./h2defs.py /usr/include/gtk-2.0/gtk/*.h &gt; gtk_methods.defs
 
 <sect2>
 <title>Generating the enums .defs</title>
-<para>This .defs files describes enum types and their possible values. It is generated by the enums.pl script which you can find in glibmm's tools directory. For instance,
+<para>This .defs file describes enum types and their possible values. It is
+    generated by the <filename>enum.pl</filename> script which you can find in
+    glibmm's <filename>tools</filename> directory. For instance,
 <programlisting>
 $ ./enum.pl /usr/include/gtk-2.0/gtk/*.h &gt; gtk_enums.defs
 </programlisting>
@@ -8592,19 +8716,27 @@ $ ./enum.pl /usr/include/gtk-2.0/gtk/*.h &gt; gtk_enums.defs
 
 <sect2>
 <title>Generating the signals and properties .defs</title>
-<para> This .defs file describes signals and properties. It is generated by the special extra_defs utility that is in every wrapping project, such as gtkmm/tools/extra_defs_gen/. For instance <command></command>
+<para> This .defs file describes signals and properties. It is generated by the
+    special <filename>extra_defs</filename> utility that is in every wrapping
+    project, such as <filename>gtkmm/tools/extra_defs_gen/</filename>. For
+    instance <command></command>
 <programlisting>
 $ cd tools/extra_defs_gen
 $ ./generate_extra_defs &gt; gtk_signals.defs
 </programlisting>
 </para>
-<para>You must edit the source code of your own extra_defs_gen tool in order to generate the .defs for the C types that you wish to wrap. Start by renaming the file:
+<para>You must edit the source code of your own
+    <filename>extra_defs_gen</filename> tool in order to generate the .defs for
+    the C types that you wish to wrap. Start by renaming the file:
 <programlisting>
 $ cd tools/extra_defs_gen
 $ mv generate_defs_gda.cc generate_defs_example.cc
 </programlisting>
 </para>
-<para>Then edit the Makefile.am so that it mentions the new file name, and edit the new .cc file to specify the correct types. For instance, your main() function might look like this:
+<para>Then edit the <filename>Makefile.am</filename> so that it mentions the new
+    file name, and edit the new <filename>.cc</filename> file to specify the
+    correct types. For instance, your <function>main()</function> function might
+    look like this:
 <programlisting>
 #include &lt;libsomething.h&gt;
 
@@ -8631,9 +8763,19 @@ int main (int argc, char *argv[])
 </sect1>
 
 <sect1 id="sec-appendix_wrapping_hg_files">
-<title>The .hg and .ccg files</title>
-<para>The .hg and .ccg source files are very much like .h anc .cc C++ source files, but they contain extra macros, such as _CLASS_GOBJECT() and _WRAP_METHOD(), from which gmmproc generates appropriate C++ source code, usually at the same position in the header. Any additional C++ source code will be copied verbatim into the corresponding .h or .cc file.</para>
-<para>A .hg file will typically include some headers and then declare a class, using some macros to add API or behaviour to this class. For instance, gtkmm's button.hg looks roughly like this:
+    <title>The .hg and .ccg files</title>
+    <para>The .hg and .ccg source files are very much like
+        .h anc .cc C++ source files, but they contain extra macros, such as
+        <function>_CLASS_GOBJECT()</function> and
+        <function>_WRAP_METHOD()</function>, from which
+        <command>gmmproc</command> generates appropriate C++ source code,
+        usually at the same position in the header.  Any additional C++ source
+        code will be copied verbatim into the corresponding
+        .h or .cc file.</para>
+    <para>A .hg file will typically include some headers
+        and then declare a class, using some macros to add API or behaviour to
+        this class. For instance, gtkmm's <filename>button.hg</filename> looks
+        roughly like this:
 
 <programlisting>
 #include &lt;gtkmm/bin.h&gt;
@@ -8668,33 +8810,62 @@ public:
 </programlisting>
 </para>
 <para>The macros in this example do the following:
-<itemizedlist>
-  <listitem><para>_DEFS(): Specifies the destination directry for generated sources, and the name of the main .defs file that gmmproc should parse.</para></listitem>
-  <listitem><para>_PINCLUDE(): Tells gmmproc to include a header from the generated private/button_p.h file.</para></listitem>
-  <listitem><para>_CLASS_GTKOBJECT(): Tells gmmproc to add some typedefs, constructors, and standard methods to this class, as appropriate when wrapping a GtkObject-derived type.</para></listitem>
-  <listitem><para>_WRAP_METHOD(), _WRAP_SIGNAL(), and _WRAP_PROPERTY() add methods to wrap parts of the C API.</para></listitem>
-</itemizedlist>
+<variablelist>
+    <varlistentry>
+        <term><function>_DEFS()</function></term>
+        <listitem><para>Specifies the destination directry for generated sources, and the name of the main .defs file that <command>gmmproc</command> should parse.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+        <term><function>_PINCLUDE()</function></term>
+        <listitem><para>Tells <command>gmmproc</command> to include a header from the generated private/button_p.h file.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+        <term><function>_CLASS_GTKOBJECT()</function></term>
+        <listitem><para>Tells <command>gmmproc</command> to add some typedefs, constructors, and standard methods to this class, as appropriate when wrapping a GtkObject-derived type.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+        <term><function>_WRAP_METHOD()</function>,
+            <function>_WRAP_SIGNAL()</function>, and
+            <function>_WRAP_PROPERTY()</function></term>
+        <listitem><para>Add methods to wrap parts of the C API.</para></listitem>
+    </varlistentry>
+</variablelist>
 </para>
-<para>The .h and .cc files will be generated from the .hg and .ccg files by processing them with gmmproc like so, though this happens automatically when using the above build structure:
+<para>The .h and .cc files will be generated from the .hg and .ccg files by
+    processing them with <command>gmmproc</command> like so, though this happens
+    automatically when using the above build structure:
 <programlisting>
 $ cd gtk/src
 $ /usr/lib/glibmm-2.4/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtkmm
 </programlisting>
 </para>
-<para>Notice that we provided gmmproc with the path to the .m4 convert files, the path to the .defs file, the name of a .hg file, the src directory, and the destination directory.</para> 
-<para>You should avoid including the C header from your C++ header, to avoid polluting the global namespace, and to avoid exporting unnecessary public API. But you will need to include the necessary C headers from your .ccg file.</para>
+<para>Notice that we provided <command>gmmproc</command> with the path to the
+    .m4 convert files, the path to the .defs file, the name of a .hg file, the
+    source directory, and the destination directory.</para> 
+<para>You should avoid including the C header from your C++ header, to avoid
+    polluting the global namespace, and to avoid exporting unnecessary public
+    API. But you will need to include the necessary C headers from your
+    .ccg file.</para>
 
 <para>The macros are explained in more detail in the following sections.</para>
 <sect2>
 <title>Class macros</title>
-<para>The class macro declares the class itself and its relationship with the underlying C type. It generates some internal constructors, the member gobject_, typedefs, the gobj() accessors, type registration, and the Glib::wrap() method, among other things.</para>
-<para>Other macros, such as _WRAP_METHOD() and _SIGNAL() may only be used after a call to a _CLASS_* macro.</para>
+<para>The class macro declares the class itself and its relationship with the
+    underlying C type. It generates some internal constructors, the member
+    <varname>gobject_</varname>, typedefs, the <function>gobj()</function>
+    accessors, type registration, and the <function>Glib::wrap()</function>
+    method, among other things.</para>
+<para>Other macros, such as <function>_WRAP_METHOD()</function> and
+    <function>_SIGNAL()</function> may only be used after a call to a
+    <function>_CLASS_*</function> macro.</para>
 
 <sect3>
 <title>_CLASS_GOBJECT</title>
-<para>This macro declares a wrapper for a type that is derived from GObject, but which is not derived from GtkObject.</para>
+<para>This macro declares a wrapper for a type that is derived from
+    <classname>GObject</classname>, but which is not derived from
+    <classname>GtkObject</classname>.</para>
 <para><function>_CLASS_GOBJECT( C++ class, C class, C casting macro, C++ base class, C base class )</function></para>
-<para>For instance, from accelgroup.hg:
+<para>For instance, from <filename>accelgroup.hg</filename>:
 <programlisting>
 _CLASS_GOBJECT(AccelGroup, GtkAccelGroup, GTK_ACCEL_GROUP, Glib::Object, GObject)
 </programlisting>
@@ -8703,9 +8874,10 @@ _CLASS_GOBJECT(AccelGroup, GtkAccelGroup, GTK_ACCEL_GROUP, Glib::Object, GObject
 
 <sect3>
 <title>_CLASS_GTKOBJECT</title>
-<para>This macro declares a wrapper for a type that is derived from GtkObject, such as a widget or dialog.</para>
+<para>This macro declares a wrapper for a type that is derived from
+    <classname>GtkObject</classname>, such as a widget or dialog.</para>
 <para><function>_CLASS_GTKOBJECT( C++ class, C class, C casting macro, C++ base class, C base class )</function></para>
-<para>For instance, from button.hg:
+<para>For instance, from <filename>button.hg</filename>:
 <programlisting>
 _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)
 </programlisting>
@@ -8714,9 +8886,11 @@ _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)
 
 <sect3>
 <title>_CLASS_BOXEDTYPE</title>
-<para>This macro declares a wrapper for a non-GObject struct, registed with g_boxed_type_register_static().</para>
+<para>This macro declares a wrapper for a non-<classname>GObject</classname>
+    struct, registered with
+    <function>g_boxed_type_register_static()</function>.</para>
 <para><function>_CLASS_BOXEDTYPE( C++ class, C class, new function, copy function, free function )</function></para>
-<para>For instance, for Gdk::Color:
+<para>For instance, for <classname>Gdk::Color</classname>:
 <programlisting>
 _CLASS_BOXEDTYPE(Color, GdkColor, NONE, gdk_color_copy, gdk_color_free)
 </programlisting>
@@ -8725,10 +8899,12 @@ _CLASS_BOXEDTYPE(Color, GdkColor, NONE, gdk_color_copy, gdk_color_free)
 
 <sect3>
 <title>_CLASS_BOXEDTYPE_STATIC</title>
-<para>This macro declares a wrapper for a simple assignable struct such as GdkRectangle. It is similar to _CLASS_BOXEDTYPE,
-but the C struct is not allocated dynamically.</para>
+<para>This macro declares a wrapper for a simple assignable struct such as
+    <classname>GdkRectangle</classname>. It is similar to
+    <function>_CLASS_BOXEDTYPE</function>, but the C struct is not allocated
+    dynamically.</para>
 <para><function>_CLASS_BOXEDTYPE_STATIC( C++ class, C class )</function></para>
-<para>For instance, for Gdk::Rectangle:
+<para>For instance, for <classname>Gdk::Rectangle</classname>:
 <programlisting>
 _CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle)
 </programlisting>
@@ -8737,9 +8913,11 @@ _CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle)
 
 <sect3>
 <title>_CLASS_OPAQUE_COPYABLE</title>
-<para>This macro declares a wrapper for an opaque struct that has copy and free functions. The new, copy and free functions will be used to instantiate the default constructor, copy constructor and destructor.</para>
+<para>This macro declares a wrapper for an opaque struct that has copy and free
+    functions. The new, copy and free functions will be used to instantiate the
+    default constructor, copy constructor and destructor.</para>
 <para><function>_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, copy function, free function )</function></para>
-<para>For instance, for Gdk::Region:
+<para>For instance, for <classname>Gdk::Region</classname>:
 <programlisting>
 _CLASS_OPAQUE_COPYABLE(Region, GdkRegion, gdk_region_new, gdk_region_copy, gdk_region_destroy)
 </programlisting>
@@ -8748,10 +8926,11 @@ _CLASS_OPAQUE_COPYABLE(Region, GdkRegion, gdk_region_new, gdk_region_copy, gdk_r
 
 <sect3>
 <title>_CLASS_OPAQUE_REFCOUNTED</title>
-<para>This macro declares a wrapper for a reference-counted opaque struct. The C++ wrapper can not be directly
-instantiated and can only be used with Glib::RefPtr.</para>
+<para>This macro declares a wrapper for a reference-counted opaque struct. The
+    C++ wrapper can not be directly instantiated and can only be used with
+    <classname>Glib::RefPtr</classname>.</para>
 <para><function>_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, ref function, unref function )</function></para>
-<para>For instance, for Pango::Coverage:
+<para>For instance, for <classname>Pango::Coverage</classname>:
 <programlisting>
 _CLASS_OPAQUE_REFCOUNTED(Coverage, PangoCoverage, pango_coverage_new, pango_coverage_ref, pango_coverage_unref)
 </programlisting>
@@ -8760,9 +8939,10 @@ _CLASS_OPAQUE_REFCOUNTED(Coverage, PangoCoverage, pango_coverage_new, pango_cove
 
 <sect3>
 <title>_CLASS_GENERIC</title>
-<para>This macro can be used to wrap structs which don't fit into any specialized category.</para>
+<para>This macro can be used to wrap structs which don't fit into any
+    specialized category.</para>
 <para><function>_CLASS_GENERIC( C++ class, C class )</function></para>
-<para>For instance, for Pango::AttrIter:
+<para>For instance, for <classname>Pango::AttrIter</classname>:
 <programlisting>
 _CLASS_GENERIC(AttrIter, PangoAttrIterator)
 </programlisting>
@@ -8774,8 +8954,21 @@ _CLASS_GENERIC(AttrIter, PangoAttrIterator)
 
 <sect2>
 <title>Constructor macros</title>
-<para>The _CTOR_DEFAULT() and _WRAP_CTOR() macros add constructors, wrapping the specified *_new() C functions. These macros assume that the C object has properties with the same names as the function parameters, as is usually the case, so that it can supply the parameters directly to a g_object_new() call. These constructors never actually call the *_new() C functions, because gtkmm must actually instantiate derived GTypes, and the *_new() C functions are meant only as convenience functions for C programmers.</para> 
-<para>When using _CLASS_GOBJECT(), the constructors should be protected (rather than public) and each constructor should have a corresponding _WRAP_CREATE() in the public section. This prevents the class from being instantiated without using a RefPtr. For instance, 
+<para>The <function>_CTOR_DEFAULT()</function> and
+    <function>_WRAP_CTOR()</function> macros add constructors, wrapping the
+    specified <function>*_new()</function> C functions. These macros assume that
+    the C object has properties with the same names as the function parameters,
+    as is usually the case, so that it can supply the parameters directly to a
+    <function>g_object_new()</function> call. These constructors never actually
+    call the <function>*_new()</function> C functions,
+    because gtkmm must actually instantiate derived GTypes, and the
+    <function>*_new()</function> C functions are meant only as convenience
+    functions for C programmers.</para> 
+<para>When using <function>_CLASS_GOBJECT()</function>, the constructors should
+    be protected (rather than public) and each constructor should have a
+    corresponding <function>_WRAP_CREATE()</function> in the public section.
+    This prevents the class from being instantiated without using a
+    <classname>RefPtr</classname>. For instance:
 <programlisting>
 class ActionGroup : public Glib::Object
 {
@@ -8797,13 +8990,22 @@ public:
 
 <sect3>
 <title>_WRAP_CTOR</title>
-<para>This macro creates a constructor with arguments, equivalent to a *_new() C function. It takes a C++ constructor signature, and a C function name.
+<para>This macro creates a constructor with arguments, equivalent to a
+    <function>*_new()</function> C function. It takes a C++ constructor
+    signature, and a C function name.
 </para>
 </sect3>
 
 <sect3>
 <title>Hand-coding constructors</title>
-<para>When a constructor must be partly hand written because, for instance, the *_new() C function's parameters do not correspond directly to object properties, or because the *_new() C function does more than call g_object_new(), the _CONSTRUCT() macro may be used in the .ccg file to save some work. The _CONSTRUCT macro takes a series of property names and values. For instance, from button.ccg:
+<para>When a constructor must be partly hand written because, for instance, the
+    <function>*_new()</function> C function's parameters do not correspond
+    directly to object properties, or because the <function>*_new()</function> C
+    function does more than call <function>g_object_new()</function>, the
+    <function>_CONSTRUCT()</function> macro may be used in the
+    .ccg file to save some work. The <function>_CONSTRUCT</function> macro takes
+    a series of property names and values.  For instance, from
+    <filename>button.ccg</filename>:
 <programlisting>
 Button::Button(const Glib::ustring&amp; label, bool mnemonic)
 :
@@ -8823,26 +9025,80 @@ Button::Button(const Glib::ustring&amp; label, bool mnemonic)
 <title>_WRAP_METHOD</title>
 <para>This macro generates the C++ method to wrap a C function.</para>
 <para><function>_WRAP_METHOD( C++ method signature, C function name)</function></para>
-<para>For instance, from entry.hg:
+<para>For instance, from <filename>entry.hg</filename>:
 <programlisting>
 _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
 </programlisting>
 </para>
-<para>The C function (e.g. gtk_entry_set_text) is described more fully in the .defs file, and the convert*.m4 files contain the necessary conversion from the C++ parameter type to the C parameter type. This macro also generates doxygen documentation comments based on the *_docs.xml and *_docs_override.xml files.</para>
+<para>The C function (e.g. <function>gtk_entry_set_text</function>) is described
+    more fully in the .defs file, and the <filename>convert*.m4</filename> files
+    contain the necessary conversion from the C++ parameter type to the C
+    parameter type.  This macro also generates doxygen documentation comments
+    based on the <filename>*_docs.xml</filename> and
+    <filename>*_docs_override.xml</filename> files.</para>
 <para>There are some optional extra arguments:
-<itemizedlist>
-  <listitem><para>refreturn: Do an extra reference() on the return value, in case the C function does not provide a reference.</para></listitem>
-  <listitem><para>errthrow: Use the last GError* parameter of the C function to throw an exception.</para></listitem>
-  <listitem><para>deprecated: Puts the generated code in #ifdef blocks. Text about the deprecation can be specified as an optional parameter.</para></listitem>
-  <listitem><para>constversion: Just call the non-const version of the same function, instead of generating almost duplicate code.</para></listitem>
-</itemizedlist>
+<variablelist>
+    <varlistentry>
+        <term>refreturn</term>
+        <listitem>
+            <para>Do an extra reference() on the return value, in case the C
+                function does not provide a reference.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>errthrow</term>
+        <listitem>
+            <para>Use the last GError* parameter of the C function to
+                throw an exception.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>deprecated</term>
+        <listitem>
+            <para>Puts the generated code in #ifdef blocks. Text about the
+                deprecation can be specified as an optional
+                parameter.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>constversion</term>
+        <listitem>
+            <para>Just call the non-const version of the same function,
+                instead of generating almost duplicate code.</para>
+        </listitem>
+    </varlistentry>
+</variablelist>
 </para>
 <para>Though it's usually obvious what C++ types should be used in the C++ method, here are some hints:
 <itemizedlist>
-  <listitem><para>Objects used via RefPtr: Pass the RefPtr as a const reference. For instance, const Glib::RefPtr&lt;Gtk::Action&gt;&amp; action.</para></listitem>
-  <listitem><para>Const Objects used via RefPtr: If the object should not be changed by the function, then make sure that the object is const, even if the RefPtr is already const. For instance, const Glib::RefPtr&lt;const Gtk::Action&gt;&amp; action.</para></listitem>
-  <listitem><para>Wrapping GList* and GSList* parameters: First, you need to discover what objects are contained in the list's data field for each item, usually by reading the documentation for the C function. The list can then be wrapped by an appropriate intermediate type, such as Glib::ListHandle or Glib::SListHandle. These are templates, so you can specify the item type. For instance, Glib::ListHandle&lt; Glib::RefPtr&lt;Action&gt; &gt;. Existing typedefs exist for some common list types. You may need to define a Traits type to specify how the C and C++ types should be converted.</para></listitem>
-  <listitem><para>Wrapping GList* and GSList* return types: You must discover whether the caller should free the list and whether it should release the items in the list, again by reading the documentation of the C function. With this information you can choose the ownership (none, shallow or deep) for the m4 conversion rule, which you should probably put directly into the .hg file because the ownership depends on the function rather than the type. For instance:
+    <listitem><para>Objects used via <classname>RefPtr</classname>: Pass the
+            <classname>RefPtr</classname> as a const reference. For instance,
+            <code>const Glib::RefPtr&lt;Gtk::Action&gt;&amp;
+                action</code>.</para></listitem>
+    <listitem><para>Const Objects used via <classname>RefPtr</classname>: If the
+            object should not be changed by the function, then make sure that
+            the object is const, even if the <classname>RefPtr</classname> is
+            already const. For instance, <code>const Glib::RefPtr&lt;const
+            Gtk::Action&gt;&amp; action</code>.</para></listitem>
+<listitem><para>Wrapping <classname>GList*</classname> and
+        <classname>GSList*</classname> parameters: First, you need to discover
+        what objects are contained in the list's data field for each item,
+        usually by reading the documentation for the C function. The list can
+        then be wrapped by an appropriate intermediate type, such as
+        <classname>Glib::ListHandle</classname> or
+        <classname>Glib::SListHandle</classname>. These are templates, so you
+        can specify the item type. For instance, <code>Glib::ListHandle&lt;
+        Glib::RefPtr&lt;Action&gt; &gt;</code>. Existing typedefs exist for some common
+        list types. You may need to define a Traits type to specify how the C
+        and C++ types should be converted.</para></listitem>
+<listitem><para>Wrapping <classname>GList*</classname> and
+        <classname>GSList*</classname> return types: You must discover whether
+        the caller should free the list and whether it should release the items
+        in the list, again by reading the documentation of the C function. With
+        this information you can choose the ownership (none, shallow or deep)
+        for the m4 conversion rule, which you should probably put directly into
+        the .hg file because the ownership depends on the
+        function rather than the type. For instance:
 <programlisting>#m4 _CONVERSION(`GSList*', `Glib::SListHandle&lt;Widget*&gt;', `$2($3, Glib::OWNERSHIP_NONE)')</programlisting></para></listitem>
 </itemizedlist>
 </para>
@@ -8850,9 +9106,12 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
 
 <sect3>
 <title>_WRAP_METHOD_DOCS_ONLY</title>
-<para>This macro is like _WRAP_METHOD(), but it generates only the documentation for a  C++ method that wraps a C function. Use this when you must hand-code the method, but you want to use the documentation that would be generated if the method was generated.</para>
-<para><function>_WRAP_METHOD( C++ method signature, C function name)</function></para>
-<para>For instance, from container.hg:
+<para>This macro is like <function>_WRAP_METHOD()</function>, but it generates
+    only the documentation for a  C++ method that wraps a C function. Use this
+    when you must hand-code the method, but you want to use the documentation
+    that would be generated if the method was generated.</para>
+<para><function>_WRAP_METHOD_DOCS_ONLY(C function name)</function></para>
+<para>For instance, from <filename>container.hg</filename>:
 <programlisting>
 _WRAP_METHOD_DOCS_ONLY(gtk_container_remove)
 </programlisting>
@@ -8861,9 +9120,13 @@ _WRAP_METHOD_DOCS_ONLY(gtk_container_remove)
 
 <sect3>
 <title>_IGNORE()</title>
-<para>gmmproc will warn you on stdout about functions that you have forgotten to wrap, helping to ensure that you are wrapping the complete API. Buf if you don't want to wrap some functions or if you chose to hand-code some methods then you can use the _IGNORE() macro the make gmmproc stop complaining.</para>
+<para><command>gmmproc</command> will warn you on stdout about functions that
+    you have forgotten to wrap, helping to ensure that you are wrapping the
+    complete API. Buf if you don't want to wrap some functions or if you chose
+    to hand-code some methods then you can use the _IGNORE() macro the make
+    <command>gmmproc</command> stop complaining.</para>
 <para><function>_IGNORE(C function name 1, C function name2, etc)</function></para>
-<para>For instance, from buttonbox.hg:
+<para>For instance, from <filename>buttonbox.hg</filename>:
 <programlisting>
 _IGNORE(gtk_button_box_set_spacing, gtk_button_box_get_spacing,
 </programlisting>
@@ -8872,46 +9135,48 @@ _IGNORE(gtk_button_box_set_spacing, gtk_button_box_get_spacing,
 
 <sect3>
 <title>_WRAP_SIGNAL</title>
-<para>This macro generates the C++ libsigc++-style signal to wrap a C GObject signal. It actually generates a public accessor method, such as signal_clicked(), which returns a proxy object.  gmmproc uses the .defs file to discover the C parameter types and the .m4 convert files to discover appropriate type conversions.</para>
+<para>This macro generates the C++ libsigc++-style signal to wrap a C GObject
+    signal. It actually generates a public accessor method, such as
+    <function>signal_clicked()</function>, which returns a proxy object.
+    <command>gmmproc</command> uses the .defs file to discover the C parameter
+    types and the .m4 convert files to discover appropriate type
+    conversions.</para>
 <para><function>_WRAP_SIGNAL( C++ signal handler signature, C signal name)</function></para>
-<para>For instance, from button.hg:
+<para>For instance, from <filename>button.hg</filename>:
 <programlisting>
 _WRAP_SIGNAL(void clicked(),"clicked")
 </programlisting>
 </para>
-<para>Signals usually have function pointers in the GTK struct, with a corresponding enum value. and a g_signal_new() in the .c file.</para>
+<para>Signals usually have function pointers in the GTK struct, with a
+    corresponding enum value. and a <function>g_signal_new()</function> in the
+    .c file.</para>
 <para>There are some optional extra arguments:
-<itemizedlist>
-  <listitem>
-    <para>no_default_handler: Do not generate an on_something() virtual
-      method to allow easy overriding of the default signal handler. Use this
-      when adding a signal with a default signal handler would break the ABI by
-      increasing the size of the class's virtual function
-      table.</para>
-  </listitem>
-</itemizedlist>
+<variablelist>
+    <varlistentry>
+        <term>no_default_handler</term>
+        <listitem>
+            <para>Do not generate an <function>on_something()</function> virtual
+                method to allow easy overriding of the default signal handler.
+                Use this when adding a signal with a default signal handler
+                would break the ABI by increasing the size of the class's
+                virtual function table.</para>
+        </listitem>
+    </varlistentry>
+</variablelist>
 </para>
 </sect3>
 
 <sect3>
 <title>_WRAP_PROPERTY</title>
-<para>This macro generates the C++ method to wrap a C GObject property. You must specify the property name and the wanted C++ type for the property. gmmproc uses the .defs file to discover the C type and the .m4 convert files to discover appropriate type conversions.</para>
+<para>This macro generates the C++ method to wrap a C GObject property. You must
+    specify the property name and the wanted C++ type for the property. <command>gmmproc</command>
+    uses the .defs file to discover the C type and the .m4 convert files to
+    discover appropriate type conversions.</para>
 <para><function>_WRAP_PROPERTY(C property name, C++ type)</function></para>
-<para>For instance, from button.hg:
+<para>For instance, from <filename>button.hg</filename>:
 <programlisting>
 _WRAP_PROPERTY("label", Glib::ustring)
 </programlisting>
-</para>
-<para>Signals usually have function pointers in the GTK struct, with a corresponding enum value. and a g_signal_new() in the .c file.</para>
-<para>There are some optional extra arguments:
-<itemizedlist>
-  <listitem>
-    <para>no_default_handler: Do not generate an on_something() virtual method
-      to allow easy overriding of the default signal handler. Use this when
-      adding a signal with a default signal handler would break the ABI by
-      increasing the size of the class's virtual function table.</para>
-  </listitem>
-</itemizedlist>
 </para>
 </sect3>
 
@@ -8920,9 +9185,11 @@ _WRAP_PROPERTY("label", Glib::ustring)
 <sect2>
 <title>Other macros</title>
 <sect3>
-<title>_WRAP_ENUM()</title>
-<para>This macro generates a C++ enum, usually in a C++ namespace, to wrap a C enum from the globabl namespace. You must specify the desired C++ name and the name of the underlying C enum.</para>
-<para>For instance, from widget.hg:
+<title>_WRAP_ENUM</title>
+<para>This macro generates a C++ enum, usually in a C++ namespace, to wrap a C
+    enum from the global namespace. You must specify the desired C++ name and
+    the name of the underlying C enum.</para>
+<para>For instance, from <filename>widget.hg</filename>:
 <programlisting>
 _WRAP_ENUM(WindowType, GdkWindowType)
 </programlisting>
@@ -8935,12 +9202,24 @@ _WRAP_ENUM(WindowType, GdkWindowType)
 
 <sect1>
 <title>Hand-coded source files</title>
-<para>You might want to contain extra source files that will not be generated by gmmproc from .hg and .ccg files. You can simply place these in your libsomething/libsomethingmm directory and mention them in the Makefile.am in the files_extra_h and files_extra_cc variables.</para>
+<para>You might want to contain extra source files that will not be generated by
+    <command>gmmproc</command> from .hg and .ccg files. You can simply place
+    these in your <filename>libsomething/libsomethingmm</filename> directory and
+    mention them in the <filename>Makefile.am</filename> in the
+    <varname>files_extra_h</varname> and <varname>files_extra_cc</varname>
+    variables.</para>
 </sect1>
 
 <sect1>
 <title>Initialization</title>
-<para>Your library must be initialized before it can be used, to register the new types that it makes available. Also, the C library that you are wrapping might have its own initialization function that you should call. You can do this in an init() function that you can place in hand-coded init.h and init.cc files. This function should initialize your dependencies (such as the C function, and gtkmm) and call your generated wrap_init() function. For instance:
+<para>Your library must be initialized before it can be used, to register the
+    new types that it makes available. Also, the C library that you are wrapping
+    might have its own initialization function that you should call. You can do
+    this in an <function>init()</function> function that you can place in
+    hand-coded <filename>init.h</filename> and <filename>init.cc</filename>
+    files. This function should initialize your dependencies (such as the C
+    function, and &gtkmm;) and call your generated
+    <function>wrap_init()</function> function. For instance:
 <programlisting>
 void init()
 {
@@ -8949,7 +9228,12 @@ void init()
 }
 </programlisting>
 </para>
-<para>The implemenation of the wrap_init() method in wrap_init.cc is generated by generate_wrap_init.pl, but the declaration in wrap_init.h is hand-coded, so you will need to adjust wrap_init.h so that the init() function appears in the correct C++ namespace.</para> 
+<para>The implementation of the <function>wrap_init()</function> method in
+    <filename>wrap_init.cc</filename> is generated by
+    <filename>generate_wrap_init.pl</filename>, but the declaration in
+    <filename>wrap_init.h</filename> is hand-coded, so you will need to adjust
+    <filename>wrap_init.h</filename> so that the <function>init()</function>
+    function appears in the correct C++ namespace.</para> 
 </sect1>
 
 <sect1>
@@ -8967,7 +9251,7 @@ struct _ExampleWidget
 };
 </programlisting>
 </para>
-<para>The extra typedef allows the struct to be used in a header without including its full defintion, simply by predeclaring it, by repeating that typedef. This means that you don't have to include the C library's header in your C++ header, thus keeping it out of your public API. gmmproc assumes that this technique was used, so you will see compiler errors if that is not the case.</para>
+<para>The extra typedef allows the struct to be used in a header without including its full defintion, simply by predeclaring it, by repeating that typedef. This means that you don't have to include the C library's header in your C++ header, thus keeping it out of your public API. <command>gmmproc</command> assumes that this technique was used, so you will see compiler errors if that is not the case.</para>
 <para>
 This compiler error might look like this:
 <programlisting>
@@ -8986,7 +9270,12 @@ example-widget.h:60: error: '_ExampleWidget ExampleWidget' redeclared as differe
 
 <sect2>
 <title>Lack of properties</title>
-<para>By convention, glib/GTK+-style objects have *_new() functions, such as example_widget_new() that do nothing more than call g_object_new() and return the result. The input parameters are supplied to g_object_new() along with the names of the properties for which they are values. For instance,
+<para>By convention, glib/GTK+-style objects have <function>*_new()</function>
+    functions, such as <function>example_widget_new()</function> that do nothing
+    more than call <function>g_object_new()</function> and return the result.
+    The input parameters are supplied to <function>g_object_new()</function>
+    along with the names of the properties for which they are values. For
+    instance,
 <programlisting>
 GtkWidget* example_widget_new(int something, const char* thing)
 {
@@ -8994,9 +9283,18 @@ GtkWidget* example_widget_new(int something, const char* thing)
 }
 </programlisting>
 </para>
-<para>This allows language bindings to implement their own equivalents (such as C++ constructors), without using the *_new() function. This is often necessary so that they can actually instantiate a derived GType, to add their own hooks for signal handlers and vfuncs.</para>
-<para>At the least, the _new() function should not use any private API (functions that are only in a .c file). Even when there are no functions, we can sometimes reimplement 2 or 3 lines of code in a _new() function as long as those lines of code use API that is available to us.</para> 
-<para>Another workaround is to add a *_construct() function that the C++ constructor can call after instantiating its own type. For instance,
+<para>This allows language bindings to implement their own equivalents (such as
+    C++ constructors), without using the <function>*_new()</function> function.
+    This is often necessary so that they can actually instantiate a derived
+    GType, to add their own hooks for signal handlers and vfuncs.</para>
+<para>At the least, the <function>_new()</function> function should not use any
+    private API (functions that are only in a .c file). Even when there are no
+    functions, we can sometimes reimplement 2 or 3 lines of code in a
+    <function>_new()</function> function as long as those lines of code use API
+    that is available to us.</para> 
+<para>Another workaround is to add a <function>*_construct()</function> function
+    that the C++ constructor can call after instantiating its own type. For
+    instance,
 <programlisting>
 GtkWidget* example_widget_new(int something, const char* thing)
 {
@@ -9013,7 +9311,10 @@ void example_widget_construct(ExampleWidget* widget, int something, const char* 
 }
 </programlisting>
 </para>
-<para>Adding properties, and ensuring that they interact properly with each other, is relatively difficult to correct in the C library, but it is possible, so do file a bug and try to send a patch to the relevant maintainer.</para>
+<para>Adding properties, and ensuring that they interact properly with each
+    other, is relatively difficult to correct in the C library, but it is
+    possible, so do file a bug and try to send a patch to the relevant
+    maintainer.</para>
 </sect2>
 </sect1>
 
@@ -9023,18 +9324,26 @@ void example_widget_construct(ExampleWidget* widget, int something, const char* 
 
 <sect2>
 <title>Reusing C documentation</title>
-<para>You might wish to reuse documentation that exists for the C library that you are wrapping. GTK-style C libraries typically use gtk-doc and therefore have source code comments formatted for gtk-doc and some extra documentation in .tmpl files. The docextract_to_xml.py script, from pygtk's codegen directory, can read these files and generate an .xml file that gmmproc can use to generate doxygen comments. gmmproc will even try to transform the documentation to make it more appropriate for a C++ API.</para>
+<para>You might wish to reuse documentation that exists for the C library that you are wrapping. GTK-style C libraries typically use gtk-doc and therefore have source code comments formatted for gtk-doc and some extra documentation in .tmpl files. The docextract_to_xml.py script, from pygtk's codegen directory, can read these files and generate an .xml file that <command>gmmproc</command> can use to generate doxygen comments. <command>gmmproc</command> will even try to transform the documentation to make it more appropriate for a C++ API.</para>
 <para>
 For instance,
 <programlisting>./docextract_to_xml.py -s /gnome/head/cvs/gtk+/gtk/ -s /gnome/head/cvs/gtk+/docs/reference/gtk/tmpl/ > gtk_docs.xml
 </programlisting>
 </para>
-<para>Because this automatic transformation is not always appropriate, you might want to provide hand-written text for a particular method. You can do this by copying the XML node for the function from your something_docs.xml file to the something_docs_override.xml file and changing the contents.</para>
+<para>Because this automatic transformation is not always appropriate, you might
+    want to provide hand-written text for a particular method. You can do this
+    by copying the XML node for the function from your
+    <filename>something_docs.xml</filename> file to the
+    <filename>something_docs_override.xml</filename> file and changing the
+    contents.</para>
 </sect2>
 
 <sect2>
 <title>Documentation build structure</title>
-<para>If you copied the structure of an existing project then you will already have a suitable Makefile and doxygen file. The standard makefile target uses the Doxyfile doxygen file to process the .h and .cc files and output generated documentation to the html directory. 
+<para>If you copied the structure of an existing project then you will already
+    have a suitable Makefile and doxygen file. The standard makefile target uses
+    the Doxyfile doxygen file to process the .h and .cc files and output
+    generated documentation to the html directory. 
 </para>
 </sect2>
 
@@ -9045,9 +9354,27 @@ For instance,
 
 <appendix id="sec-appendix-optional-api">
 <title>Optional API</title>
-<para>The gtkmm API is meant to be easy and convenient. However, some of these conveniences are not worth the overhead on reduced resources devices, such as the Nokia 770 internet tablet. For instance, with regular gtkmm you can implement a signal handler by deriving the class and overriding its virtual on_thesignalname() method. But that additional API increases code size. And in the case of virtual methods, it increases per-object memory size, and demands that the linker loads the method's symbol even if you don't use it. Therefore, gtkmm can be built with a reduced API. In general, the optional API is rarely used, and there are slightly less convenient alternatives for all of the optional API.</para>
-<para>When gtkmm has been built with optional API disabled, macros will be undefined, indicating that the API is not available. If you attempt to compile an application that uses this optional API, against a version of gtkmm that has disabled that API, you will see compiler warnings about missing functions.</para>
-<para>The following sections describe the available configure options used to disable optional API. Most developers will rarely need to provide these configure options, because they will rarely build glibmm or gtkmm, preferring to use official packages or installers. However, if you are developing for an embedded device, you might need to be aware of these options.</para>
+<para>The gtkmm API is meant to be easy and convenient. However, some of these
+    conveniences are not worth the overhead on reduced resources devices, such
+    as the Nokia 770 internet tablet. For instance, with regular gtkmm you can
+    implement a signal handler by deriving the class and overriding its virtual
+    <function>on_thesignalname()</function> method. But that additional API
+    increases code size. And in the case of virtual methods, it increases
+    per-object memory size, and demands that the linker loads the method's
+    symbol even if you don't use it.  Therefore, gtkmm can be built with a
+    reduced API. In general, the optional API is rarely used, and there are
+    slightly less convenient alternatives for all of the optional API.</para>
+<para>When gtkmm has been built with optional API disabled, macros will be
+    undefined, indicating that the API is not available. If you attempt to
+    compile an application that uses this optional API, against a version of
+    gtkmm that has disabled that API, you will see compiler warnings about
+    missing functions.</para>
+<para>The following sections describe the available configure options used to
+    disable optional API. Most developers will rarely need to provide these
+    configure options, because they will rarely build glibmm or gtkmm,
+    preferring to use official packages or installers. However, if you are
+    developing for an embedded device, you might need to be aware of these
+    options.</para>
 
 <sect1>
 <title>Optional API when building glibmm</title>
@@ -9056,15 +9383,31 @@ For instance,
 <sect2>
 <title>--enable-deprecated-api=no</title>
 <para>
-When enable-deprecated-api is disabled, no deprecated classes or methods will be available in glibmm. For instance, the Date::set_time(GTime time) method overload will not be provided. The reference documentation contains a <ulink url="&url_refdocs_base_glib_html;deprecated.html">full list of deprecated glibmm API</ulink>.</para>
-<para>If deprecated glibmm API is available, the GLIBMM_DISABLE_DEPRECATED macro will not be defined.</para>
+    When enable-deprecated-api is disabled, no deprecated classes or methods
+    will be available in glibmm. For instance, the <code>Date::set_time(GTime
+        time)</code> method overload will not be provided. The reference
+    documentation contains a <ulink
+        url="&url_refdocs_base_glib_html;deprecated.html">full list of
+        deprecated glibmm API</ulink>.</para>
+<para>If deprecated glibmm API is available, the
+    <varname>GLIBMM_DISABLE_DEPRECATED</varname> macro will not be
+    defined.</para>
 </sect2>
 
 <sect2>
 <title>--enable-api-exceptions=no</title>
 <para>
-When enable-api-exceptions is disabled, no exceptions will be used in the glibmm or gtkmm API, and no exceptions will be thrown. This allows applications to be built without support for exceptions. For intance, the g++ -fno-exceptions option may be used. Where a method would normally throw an exception, that method will instead take an additional std::auto_ptr&lt;Glib::Error&gt;&amp; output parameter. If you are not using exceptions then you should check whether this parameter was set and handle any error appropriately.</para>
-<para>If exceptions are not available, the GLIBMM_EXCEPTIONS_ENABLED macro will not be defined.</para>
+When enable-api-exceptions is disabled, no exceptions will be used in the glibmm
+or gtkmm API, and no exceptions will be thrown. This allows applications to be
+built without support for exceptions. For intance, the <command>g++
+    -fno-exceptions</command> option may be used. Where a method would normally
+throw an exception, that method will instead take an additional
+<code>std::auto_ptr&lt;Glib::Error&gt;&amp;</code> output parameter. If you are
+not using exceptions then you should check whether this parameter was set and
+handle any error appropriately.</para>
+<para>If exceptions are not available, the
+    <varname>GLIBMM_EXCEPTIONS_ENABLED</varname> macro will not be
+    defined.</para>
 </sect2>
 
 <sect2>
@@ -9081,23 +9424,44 @@ When enable-api-properties is disabled, no property accessors will be available 
 #endif
 </programlisting>
 </para>
-<para>If property accessors are not available, the GLIBMM_PROPERTIES_ENABLED macro will not be defined.</para>
+<para>If property accessors are not available, the
+    <varname>GLIBMM_PROPERTIES_ENABLED</varname> macro will not be
+    defined.</para>
 </sect2>
 
 <sect2>
 <title>--enable-api-vfuncs=no</title>
 <para>
-When enable-api-exceptions is disabled, no _vfunc virtual methods will be available in the glibmm or gtkmm API. These methods allow the developer to override some low-level behaviour of the underlying GTK+ objects, and they are therefore rarely used. For instance, <function>Gtk::Frame::compute_child_allocation_vfunc()</function> will not be available.</para>
-<para>However, if you really need to override a _vfunc, for instance when implementing a custom <classname>Gtk::TreeModel</classname>, you may directly access the underlying GObject via the <function>gobj()</function> method.</para>
-<para>If vfuncs are not available, the GLIBMM_VFUNCS_ENABLED macro will not be defined.</para>
+    When enable-api-exceptions is disabled, no <function>_vfunc</function>
+    virtual methods will be available in the glibmm or gtkmm API. These methods
+    allow the developer to override some low-level behaviour of the underlying
+    GTK+ objects, and they are therefore rarely used. For instance,
+    <function>Gtk::Frame::compute_child_allocation_vfunc()</function> will not
+    be available.</para>
+<para>However, if you really need to override a <function>_vfunc</function>, for
+    instance when implementing a custom <classname>Gtk::TreeModel</classname>,
+    you may directly access the underlying GObject via the
+    <function>gobj()</function> method.</para>
+<para>If vfuncs are not available, the <varname>GLIBMM_VFUNCS_ENABLED</varname>
+    macro will not be defined.</para>
 </sect2>
 
 <sect2>
 <title>--enable-api-default-signal-handlers=no</title>
 <para>
-When enable-api-exceptions is disabled, no virtual signal handler methods will be available in the glibmm or gtkmm API. For instance, the <function>Gtk::Button::on_clicked()</function> method will not be provided. Instead you must connect a signal handler by using the signal_clicked() accessor. This option offers a considerable code size and per-object memory reduction.</para>
-<para>Note, however, that the compiler will not complain if you attempt to override a default signal handler when they are not supported by &gtkmm;, because the compiler cannot know that you expected to override a virtual method.</para>
-<para>If default signal handlers are not available, the GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED macro will not be defined.</para>
+When enable-api-exceptions is disabled, no virtual signal handler methods will
+be available in the glibmm or gtkmm API. For instance, the
+<function>Gtk::Button::on_clicked()</function> method will not be provided.
+Instead you must connect a signal handler by using the
+<function>signal_clicked()</function> accessor. This option offers a
+considerable code size and per-object memory reduction.</para>
+<para>Note, however, that the compiler will not complain if you attempt to
+    override a default signal handler when they are not supported by &gtkmm;,
+    because the compiler cannot know that you expected to override a virtual
+    method.</para>
+<para>If default signal handlers are not available, the
+    <varname>GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED</varname> macro will not be
+    defined.</para>
 </sect2>
 
 </sect1>
@@ -9108,15 +9472,26 @@ When enable-api-exceptions is disabled, no virtual signal handler methods will b
 <sect2>
 <title>--enable-deprecated-api=no</title>
 <para>
-When enable-deprecated-api is disabled, no deprecated classes or methods will be available in gtkmm. For instance, the Gtk::FileSelection dialog will not be provided, because it is replaced by Gtk::FileChooserDialog. The reference documentation contains a <ulink url="&url_refdocs_base_gtk_html;deprecated.html">full list of deprecated gtkmm API</ulink>.</para>
-<para>If deprecated gtkmm API is available, the GTKMM_DISABLE_DEPRECATED macro will not be defined.</para>
+    When enable-deprecated-api is disabled, no deprecated classes or methods
+    will be available in gtkmm. For instance, the
+    <classname>Gtk::FileSelection</classname> dialog will not be provided,
+    because it is replaced by <classname>Gtk::FileChooserDialog</classname>. The
+    reference documentation contains a <ulink
+        url="&url_refdocs_base_gtk_html;deprecated.html">full list of deprecated
+        gtkmm API</ulink>.</para>
+<para>If deprecated gtkmm API is available, the
+    <varname>GTKMM_DISABLE_DEPRECATED</varname> macro will not be
+    defined.</para>
 </sect2>
 
 <sect2>
 <title>--enable-api-atk=no</title>
 <para>
-When enable-api-atk is disabled, no atkmm API will be available in gtkmm. For instance, Gtk::Widget will not inherit from Atk::Implementor.</para>
-<para>If the atkmm API is not available, the GTKMM_ATKMM_ENABLED macro will not be defined.</para>
+    When enable-api-atk is disabled, no atkmm API will be available in gtkmm.
+    For instance, <classname>Gtk::Widget</classname> will not inherit from
+    <classname>Atk::Implementor</classname>.</para>
+<para>If the atkmm API is not available, the
+    <varname>GTKMM_ATKMM_ENABLED</varname> macro will not be defined.</para>
 </sect2>
 
 </sect1>

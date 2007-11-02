@@ -1,3 +1,8 @@
+2007-11-01  Jonathon Jongsma  <jjongsma@gnome.org>
+
+	* docs/tutorial/gtkmm-tut.xml: touched up the 'wrapping C libraries with
+	gmmproc' chapter to use a lot more semantic markup, etc.
+
 2007-10-17  Murray Cumming  <murrayc@murrayc.com>
 
 	* configure.in:
