@@ -1,6 +1,7 @@
 body    {
     font-size: 1em;
     margin: 2em 10em;
+    line-height: 150%;
 }
 
 a:link, a:visited  {
@@ -43,13 +44,25 @@ div.autotoc ul li {
 *.block-verbatim {
     white-space: pre;
 }
+
+pre
+{
+    line-height: 100%;
+}
+
 pre.programlisting, pre.screen {
     padding: 1em;
     color: #555555;
     -moz-border-radius: 8px;
-    background-color: #F6F6F6;
     border: solid 1px #DDDDDD;
 }
+
+pre.programlisting,
+pre.screen,
+code.code {
+    background-color: #F6F6F6;
+}
+
 
 div.tip pre.programlisting,
 div.note pre.programlisting     {
@@ -263,7 +276,8 @@ span.application    {
 }
 
 code.classname, code.function, code.filename  {
-    font-weight: bold;
+    font-weight: normal;
+    font-family: monospace;
 }
 
 hr  {

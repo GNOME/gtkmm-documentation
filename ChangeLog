@@ -1,5 +1,13 @@
 2007-11-01  Jonathon Jongsma  <jjongsma@gnome.org>
 
+	* docs/tutorial/style.css: minor style changes to the tutorial.  Remove bold
+	font from filenames and function / variable names so that they don't stand
+	out so much -- just make them monospaced.
+	Also increase the default line height slightly to make it a bit easier to
+	read, but don't increase the line height for the example code segments
+
+2007-11-01  Jonathon Jongsma  <jjongsma@gnome.org>
+
 	* docs/tutorial/gtkmm-tut.xml: touched up the 'wrapping C libraries with
 	gmmproc' chapter to use a lot more semantic markup, etc.
 
