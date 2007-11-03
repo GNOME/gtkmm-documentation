@@ -18,7 +18,10 @@ gtkmm-tut-with-examples.xml: gtkmm-tut.xml insert_example_code.pl
 	$(PERL_PATH) $(srcdir)/insert_example_code.pl $(top_srcdir)/examples/book $< >$@
 
 # The new XML DocBook way:
-html/index.html: gtkmm-tut-with-examples.xml
+# Set the use.id.as.filename param so that we don't use the chapter / section
+# number as the filename, otherwise the url will change every time anything is
+# re-ordered or inserted in the documentation
+html/index.html: gtkmm-tut-with-examples.xml Makefile.am
 	rm -rf html
 	$(mkinstalldirs) html
 	$(XSLTPROC) \
@@ -33,6 +36,7 @@ html/index.html: gtkmm-tut-with-examples.xml
 		--stringparam navig.graphics.extension ".png"	\
 		--stringparam navig.graphics.path "../icons/"	\
 		--stringparam toc.list.type "ul"	\
+		--stringparam use.id.as.filename "1" \
 		-o html/ --xinclude --catalogs $(DOCBOOK_STYLESHEET)	\
 		$<
 

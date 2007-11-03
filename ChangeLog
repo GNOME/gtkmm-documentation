@@ -1,3 +1,15 @@
+2007-11-02  Jonathon Jongsma  <jjongsma@gnome.org>
+
+	* docs/tutorial/Makefile.am: build the tutorial using the section ids as the
+	filenames.  This is much better for publishing on the web because under the
+	old system, the filenames were based on the chapter/section numbers, so if
+	you moved or inserted sections in the book, the urls would all be
+	invalidated.  Now the urls will be valid as long as we don't change the IDs
+	of the chapters and sections
+	* docs/tutorial/gtkmm-tut.xml: added 'id' attributes to all of the chapter
+	and sect1 elements so that they can be used for filenames.  Also modified
+	the id attributes to make them all follow the same general standard.
+
 2007-11-01  Jonathon Jongsma  <jjongsma@gnome.org>
 
 	* docs/tutorial/style.css: minor style changes to the tutorial.  Remove bold

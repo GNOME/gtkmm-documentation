@@ -45,7 +45,7 @@ name
         <firstname>Jonathon</firstname>
         <surname>Jongsma</surname>
         <contrib>Chapter on &quot;Drawing with Cairo&quot;.</contrib>
-        <contrib>Chapter on &quot;Working with CVS&quot;.</contrib>
+        <contrib>Chapter on &quot;Working with Subversion&quot;.</contrib>
         <contrib>Chapter on &quot;Recent Files&quot;.</contrib>
       </author>
       <author>
@@ -110,10 +110,10 @@ name
 
   </bookinfo>
 
-<chapter id="sec-introduction">
+<chapter id="chapter-introduction">
 <title>Introduction</title>
 
-<sect1>
+<sect1 id="sec-this-book">
 <title>This book</title>
 
 <para>This book assumes a good
@@ -129,7 +129,7 @@ This document is a work in progress. You can find updates on the
 
 <para>
 We would very much like to hear of any problems you have learning &gtkmm;
-with this document, and would appreciate input regarding improvements. Please see the <link linkend="sec-Contributing">Contributing</link> section for further information.
+with this document, and would appreciate input regarding improvements. Please see the <link linkend="chapter-contributing">Contributing</link> section for further information.
 </para>
 </sect1>
 
@@ -171,9 +171,9 @@ using &gtkmm; without purchasing licenses.
 
 </chapter>
 
-<chapter id="sec-installation">
+<chapter id="chapter-installation">
 <title>Installation</title>
-<sect1>
+<sect1 id="sec-installation-dependencies">
 <title>Dependencies</title>
 <para>
   Before attempting to install &gtkmm; 2.4, you might first need to install these other
@@ -197,7 +197,7 @@ applications and libraries:
 </itemizedlist>
 </sect1>
 
-<sect1 id="sec-install_unix_and_linux">
+<sect1 id="sec-install-unix-and-linux">
 <title>Unix and Linux</title>
 
 <sect2 id="sec-linux-install-from-packages">
@@ -228,7 +228,7 @@ surprised, for instance, to find &gtkmm; 2.8 supplied by Debian's
 </note>
 </sect2>
 
-<sect2 id="sec-install_from_source">
+<sect2 id="sec-install-from-source">
 <title>Installing From Source</title>
 
 <para>
@@ -284,13 +284,13 @@ be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
   If you want to help develop &gtkmm; or experiment with new features, you can
   also install &gtkmm; from CVS.  Most users will never need to do this, but if
   you're interested in helping with &gtkmm; development, see the <link
-    linkend="sec-appendix_working_with_cvs">Working with CVS</link> appendix.
+    linkend="chapter-working-with-svn">Working with Subversion</link> appendix.
 </para>
 </sect2>
 
 </sect1>
 
-<sect1 id="sec-packages_windows">
+<sect1 id="sec-packages-windows">
 <title>Microsoft Windows</title>
 <para>GTK+ and &gtkmm; were designed to work well with Microsoft Windows, and the developers encourage its use on the win32 platform.  However, Windows has no standard installation system for development libraries. Please see the <link linkend="sec-windows-installation">Windows Installation</link>
 appendix for Windows-specific installation instructions and notes.</para>
@@ -298,7 +298,7 @@ appendix for Windows-specific installation instructions and notes.</para>
 
 </chapter>
 
-<chapter id="sec-basics">
+<chapter id="chapter-basics">
 <title>Basics</title>
 
 <para>
@@ -308,7 +308,7 @@ This chapter will introduce some of the most important aspects of &gtkmm; coding
 Your existing knowledge of C++ will help you with &gtkmm; as it would with any library. Unless we state otherwise, you can expect &gtkmm; classes to behave like any other C++ class, and you can expect to use your existing C++ techniques with &gtkmm; classes.
 </para>
 
-<sect1>
+<sect1 id="sec-basics-simple-example">
 <title>Simple Example</title>
 
 <para>
@@ -317,12 +317,12 @@ program possible. This program will create an empty 200 x 200 pixel window.
 </para>
 
 <para>
-Source location: examples/base/base.cc
+Source location: examples/others/base/base.cc
 </para>
 
 <programlisting>
 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-  href="../../examples/base/base.cc" parse="text"/>
+    href="../../examples/others/base/base.cc" parse="text"/>
 </programlisting>
 
 <para>We will now explain each line of the example</para>
@@ -367,7 +367,7 @@ the command's output as part of the command line.
 </para>
 </sect1>
 
-<sect1 id="sec-headers_and_linking">
+<sect1 id="sec-headers-and-linking">
 <title>Headers and Linking</title>
 <para>
 Although we have shown the compilation command for the simple example, you really should use the automake and autoconf tools, as described in "Autoconf, Automake, Libtool", by G. V. Vaughan et al. The examples used in this book are included in the &gtkmm; package, with appropriate build files, so we won't show the build commands in future. You'll just need to find the appropriate directory and type <literal>make</literal>.
@@ -399,7 +399,7 @@ Openismus has more <ulink url="http://www.openismus.com/documents/linux/automake
 
 </sect1>
 
-<sect1 id="sec-widgets">
+<sect1 id="sec-widgets-overview">
 <title>Widgets</title>
 <para>&gtkmm; applications consist of windows containing widgets, such as buttons and text boxes. In some other systems, widgets are called "controls". For each widget in your application's windows, there is a C++ object in your application's code. So you just need to call a method of the widget's class to affect the visible widget.</para>
  <para>Widgets are arranged inside container widgets such as frames and notebooks, in a hierarchy of widgets within widgets. Some of these container widgets, such as Gtk::VBox, are not visible - they exist only to arrange other widgets. Here is some example code that adds 2 Gtk::Button widgets to a Gtk::VBox container widgets:
@@ -409,18 +409,18 @@ and here is how to add the Gtk::VBox, containing those buttons, to a Gtk::Frame,
 <programlisting>m_frame.add(m_box);</programlisting>
 </para>
 <para>
-Most of the chapters in this book deal with specific widgets. See the <link linkend="sec-ContainerWidgets">Container Widgets</link> section for more details about adding widgets to container widgets.
+Most of the chapters in this book deal with specific widgets. See the <link linkend="chapter-container-widgets">Container Widgets</link> section for more details about adding widgets to container widgets.
 </para>
 
-<para>Although you can specify the layout and appearance of windows and widgets with C++ code, you will probably find it more convenient to design your user interfaces with <literal>Glade</literal> and load them at runtime with <literal>libglademm</literal>. See the <link linkend="sec-libglademm">Glade and libglademm</link> chapter.
+<para>Although you can specify the layout and appearance of windows and widgets with C++ code, you will probably find it more convenient to design your user interfaces with <literal>Glade</literal> and load them at runtime with <literal>libglademm</literal>. See the <link linkend="chapter-libglademm">Glade and libglademm</link> chapter.
 </para>
 
-<para>Although &gtkmm; widget instances have lifetimes and scopes just like those of other C++ classes, &gtkmm; has an optional time-saving feature that you will see in some of the examples. <function>Gtk::manage()</function> allows you to say that a child widget is owned by the container into which you place it. This is allows you to <function>new()</function> the widget, add it to the container and forget about deleting it. You can learn more about &gtkmm; memory management techniques in the <link linkend="sec-Memory">Memory Management chapter</link>.
+<para>Although &gtkmm; widget instances have lifetimes and scopes just like those of other C++ classes, &gtkmm; has an optional time-saving feature that you will see in some of the examples. <function>Gtk::manage()</function> allows you to say that a child widget is owned by the container into which you place it. This is allows you to <function>new()</function> the widget, add it to the container and forget about deleting it. You can learn more about &gtkmm; memory management techniques in the <link linkend="chapter-memory">Memory Management chapter</link>.
 </para>
 
 </sect1>
 
-<sect1 id="sec-signals">
+<sect1 id="sec-signals-overview">
 <title>Signals</title>
 
 <para>
@@ -435,9 +435,9 @@ button click result in an action, we set up a
   &amp;HelloWorld::on_button_clicked) );</programlisting>
 </para>
 
-<para>For more detailed information about signals, see the <link linkend="sec-appendix-signals">appendix</link>.</para> 
+<para>For more detailed information about signals, see the <link linkend="chapter-signals">appendix</link>.</para> 
 <para>For information about implementing your own signals rather than
-just connecting to the existing &gtkmm; signals, see the <link linkend="sec-appendix-custom_signals">appendix</link>.</para> 
+just connecting to the existing &gtkmm; signals, see the <link linkend="chapter-custom-signals">appendix</link>.</para> 
 
 </sect1>
 
@@ -453,11 +453,11 @@ just connecting to the existing &gtkmm; signals, see the <link linkend="sec-appe
 
 <para><ulink url="&url_refdocs_base_glib;ustring.html">Reference</ulink></para>
 
-<para>See the <link linkend="sec-internationalization">Internationalization</link> section for information about providing the UTF-8 string literals.</para> 
+<para>See the <link linkend="chapter-internationalization">Internationalization</link> section for information about providing the UTF-8 string literals.</para> 
 
 </sect1>
 
-<sect1 id="sec-intermediatetypes">
+<sect1 id="sec-intermediate-types">
 <title>Intermediate types</title>
 <para>Some parts of the &gtkmm; API use intermediate data containers, such as <classname>Glib::StringArrayHandle</classname> instead of a specific Standard C++ container such as <classname>std::vector</classname> or <classname>std::list</classname>. You should not declare these types yourself -- you should use whatever Standard C++ container you prefer instead. &gtkmm; will do the conversion for you. Here are some of these intermediate types:
 <itemizedlist>
@@ -588,7 +588,7 @@ takes no arguments, but it isn't visible yet. When we call Gtk::Main::run(), giv
 </chapter>
 
 
-<chapter id="sec-buttonwidget">
+<chapter id="chapter-button-widget">
 <title>Buttons</title>
 
 <para>
@@ -602,7 +602,7 @@ takes no arguments, but it isn't visible yet. When we call Gtk::Main::run(), giv
 <listitem>
 <para>
 <ulink url="&url_refdocs_base_gtk;Button.html"><classname>Gtk::Button</classname></ulink>. Standard buttons, usually
-marked with a label or picture. Pushing one triggers an action.  See the <link linkend="sec-Pushbuttons">Button</link> section.
+marked with a label or picture. Pushing one triggers an action.  See the <link linkend="sec-pushbuttons">Button</link> section.
 </para>
 </listitem>
 </varlistentry>
@@ -612,7 +612,7 @@ marked with a label or picture. Pushing one triggers an action.  See the <link l
 <para>
 <ulink url="&url_refdocs_base_gtk;ToggleButton.html"><classname>Gtk::ToggleButton</classname></ulink>.
 Unlike a normal Button, which springs back up, a ToggleButton stays down until you
-press it again. It might be useful as an on/off switch.  See the <link linkend="sec-Toggle-Buttons">ToggleButton</link> section.
+press it again. It might be useful as an on/off switch.  See the <link linkend="sec-toggle-buttons">ToggleButton</link> section.
 </para>
 </listitem>
 </varlistentry>
@@ -624,7 +624,7 @@ press it again. It might be useful as an on/off switch.  See the <link linkend="
 These act like ToggleButtons, but show their state in small squares,
 with their label at the side. They should be used in most situations
 which require an on/off setting.  
-See the <link linkend="sec-Checkboxes">CheckBox</link> section.
+See the <link linkend="sec-checkboxes">CheckBox</link> section.
 </para>
 </listitem>
 </varlistentry>
@@ -639,7 +639,7 @@ mutually exclusive. Pressing one causes all the
 others in its group to turn off.  They are similar to
 CheckBoxes (a small widget with a label at the side), but usually
 look different.
-See the <link linkend="sec-Radio-Buttons">RadioButton</link> section.
+See the <link linkend="sec-radio-buttons">RadioButton</link> section.
 </para>
 </listitem>
 </varlistentry>
@@ -651,7 +651,7 @@ widgets will vary.  In the case of checkboxes and radio buttons, they
 may vary considerably.
 </para>
 
-<sect1 id="sec-Pushbuttons">
+<sect1 id="sec-pushbuttons">
 <title>Button</title>
 
 <sect2><title>Constructors</title>
@@ -757,7 +757,7 @@ Emitted when the mouse pointer leaves the button's window.
 </sect2>
 </sect1>
 
-<sect1 id="sec-Toggle-Buttons">
+<sect1 id="sec-toggle-buttons">
 <title>ToggleButton</title>
 
 <para><classname>ToggleButton</classname>s are like normal <classname>Button</classname>s, but when clicked they remain activated, or pressed,  until clicked again.</para>
@@ -784,7 +784,7 @@ forcing it to be up or down: This switches the button's state, and causes the <l
 
 </sect1>
 
-<sect1 id="sec-Checkboxes">
+<sect1 id="sec-checkboxes">
 <title>CheckButton</title>
 
 <para>
@@ -811,7 +811,7 @@ member methods as for <classname>Gtk::ToggleButton</classname>.
 
 </sect1>
 
-<sect1 id="sec-Radio-Buttons">
+<sect1 id="sec-radio-buttons">
 <title>RadioButton</title>
 
 <para>
@@ -924,7 +924,7 @@ The following example demonstrates the use of
 </chapter>
 
 
-<chapter id="sec-Range-Widgets">
+<chapter id="chapter-range-widgets">
 <title>Range Widgets</title>
 
 <para>
@@ -939,7 +939,7 @@ scrollbar behaviour.
 </para>
 
 <para>
-As will be explained in the <link linkend="sec-Adjustment">Adjustment</link>
+As will be explained in the <link linkend="chapter-adjustment">Adjustment</link>
 section, all Range widgets are associated with a
 <classname>Adjustment</classname> object. To change the lower, upper, and
 current values used by the widget you need to use the methods of its
@@ -948,13 +948,13 @@ current values used by the widget you need to use the methods of its
 widgets' default constructors create an <classname>Adjustment</classname>
 automatically, or you can specify an existing
 <classname>Adjustment</classname>, maybe to share it with another widget. See
-the <link linkend="sec-Adjustment">Adjustments</link> section for further
+the <link linkend="chapter-adjustment">Adjustments</link> section for further
 details.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;Range.html">Reference</ulink></para>
 
-<sect1>
+<sect1 id="sec-scrollbar-widgets">
 <title>Scrollbar Widgets</title>
 
 <para>
@@ -974,7 +974,7 @@ There are horizontal and vertical scrollbar classes -
 
 </sect1>
 
-<sect1 id="sec-scale_widgets">
+<sect1 id="sec-scale-widgets">
 <title>Scale Widgets</title>
 
 <para>
@@ -1021,7 +1021,7 @@ specified by the <function>set_value_pos()</function> method.
 </sect2>
 </sect1>
 
-<sect1 id="sec-update_policies">
+<sect1 id="sec-range-update-policies">
 <title>Update Policies</title>
 
 <para>
@@ -1062,7 +1062,7 @@ for a short period of time.
 </para>
 </sect1>
 
-<sect1 id="sec-Range-Example">
+<sect1 id="sec-range-example">
 <title>Example</title>
 
 <para>
@@ -1073,7 +1073,7 @@ adjustments, so you can see how they affect the way these widgets work
 for the user.
 </para>
 
-<figure id="figure-range_widgets">
+<figure id="figure-range-widgets">
   <title>Range Widgets</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;range_widgets.png"/>
@@ -1086,10 +1086,10 @@ for the user.
 
 </chapter>
 
-<chapter id="sec-miscwidgets">
+<chapter id="chapter-misc-widgets">
 <title>Miscellaneous Widgets</title>
 
-<sect1 id="sec-Labels">
+<sect1 id="sec-labels">
 <title>Label</title>
 
 <para>
@@ -1119,7 +1119,7 @@ TODO: gtkmm2: markup.
 <para>
 Below is a short example to illustrate these functions. This example
 makes use of the Frame widget to better demonstrate the label styles.
- (The Frame widget is explained in the <link linkend="sec-Frame">Frame</link> section.)
+ (The Frame widget is explained in the <link linkend="sec-frame">Frame</link> section.)
 </para>
 
 <figure id="figure-label">
@@ -1135,7 +1135,7 @@ makes use of the Frame widget to better demonstrate the label styles.
 
 </sect1>
 
-<sect1 id="sec-TextEntries">
+<sect1 id="sec-text-entry">
 <title>Entry</title>
 
 <para>
@@ -1193,7 +1193,7 @@ visible flags.
 
 </sect1>
 
-<sect1 id="sec-Spinbuttons">
+<sect1 id="sec-spinbutton">
 <title>SpinButton</title>
 
 <para>
@@ -1213,7 +1213,7 @@ change more quickly the longer the arrow is held down.
 
 <para>
 <classname>SpinButton</classname>s use an <link
-    linkend="sec-Adjustment">Adjustment</link> object to hold information about
+    linkend="chapter-adjustment">Adjustment</link> object to hold information about
 the range of values. These Adjustment attributes are used by the Spin Button
 like so:
 <itemizedlist>
@@ -1340,7 +1340,7 @@ Here's an example of a <classname>SpinButton</classname> in action:
 
 </sect1>
 
-<sect1 id="sec-ProgressBar">
+<sect1 id="sec-progressbar">
 <title>ProgressBar</title>
 
 <para>
@@ -1406,7 +1406,7 @@ string within its trough, using the <function>set_text()</function> method.
 
 </sect1>
 
-<sect1 id="sec-Tooltips">
+<sect1 id="sec-tooltips">
 <title>Tooltips</title>
 
 <para>
@@ -1429,7 +1429,7 @@ allow you to turn a whole group of tooltips on and off.
 
 </chapter>
 
-<chapter id="sec-ContainerWidgets">
+<chapter id="chapter-container-widgets">
 <title>Container Widgets</title>
 
 <para>
@@ -1440,7 +1440,7 @@ typically have more complex interfaces.  Others, such as
 <classname>Gtk::Frame</classname> contain only one child widget.
 </para>
 
-<sect1 id="sec-SingleItemWidgets">
+<sect1 id="sec-single-item-containers">
 <title>Single-item Containers</title>
 
 <para>
@@ -1457,7 +1457,7 @@ to divide a window into two separate "panes".  This widget actually contains
 two child widgets, but the number is fixed so it seems appropriate.
 </para>
 
-<sect2 id="sec-Frame">
+<sect2 id="sec-frame">
 <title>Frame</title>
 
 <para>
@@ -1525,7 +1525,7 @@ so.
 
 </sect2>
 
-<sect2 id="sec-ScrolledWindows">
+<sect2 id="sec-scrolledwindow">
 <title>ScrolledWindow</title>
 
 <para>
@@ -1570,7 +1570,7 @@ Here is a simple example that packs 100 toggle buttons into a ScrolledWindow. Tr
 
 </sect2>
 
-<sect2 id="sec-AspectFrames">
+<sect2 id="sec-aspectframe">
 <title>AspectFrame</title>
 
 <para>
@@ -1605,7 +1605,7 @@ resizes the top-level window.
 </sect2>
 
 
-<sect2 id="sec-Alignment">
+<sect2 id="sec-alignment">
 <title>Alignment</title>
 
 <para>
@@ -1641,7 +1641,7 @@ This example right-aligns a button in a window by using an
 <para><ulink url="&url_examples_base;alignment">Source Code</ulink></para>
 
 <para>
-See the <link linkend="sec-ProgressBar">ProgressBar</link> section for another
+See the <link linkend="sec-progressbar">ProgressBar</link> section for another
 example that uses an <classname>Alignment</classname>.
 </para>
 
@@ -1651,7 +1651,7 @@ example that uses an <classname>Alignment</classname>.
 
 </sect1>
 
-<sect1 id="sec-MultiItemWidgets">
+<sect1 id="sec-multi-item-containers">
 <title>Multiple-item widgets </title>
 
 <para>
@@ -1773,7 +1773,7 @@ Let's take a look at a slightly improved <literal>helloworld</literal>, showing 
 After building and running this program, try resizing the window to see the
 behaviour. Also, try playing with the options to
 <function>pack_start()</function> while reading the <link
-    linkend="sec-Boxes">Boxes</link> section.
+    linkend="sec-boxes">Boxes</link> section.
 </para>
 
 </sect2>
@@ -1965,7 +1965,7 @@ object, which is then inserted into the container.
 
 <para>
 As an example, let's look at the <classname>Notebook</classname> widget
-(explained in the section on <link linkend="sec-Notebook">Notebooks</link>).
+(explained in the section on <link linkend="sec-notebook">Notebooks</link>).
 <classname>Notebook</classname> widgets contain a series of "pages".
 </para>
 
@@ -2137,7 +2137,7 @@ as expected.
 
 </sect2>
 
-<sect2 id="sec-Boxes">
+<sect2 id="sec-boxes">
 <title>Boxes</title>
 
 <para>
@@ -2179,7 +2179,7 @@ There are basically five
 different styles, as shown in this picture:
 </para>
 
-<figure id="figure-box_packing1">
+<figure id="figure-box-packing1">
   <title>Box Packing 1</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;box_packing1.png"/>
@@ -2246,7 +2246,7 @@ objects, and padding is added on either side of a widget. The following
 figure should make it clearer:
 </para>
 
-<figure id="figure-box_packing2">
+<figure id="figure-box-packing2">
   <title>Box Packing 2</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;box_packing2.png"/>
@@ -2266,8 +2266,8 @@ Here is the source code for the example that produced the screenshots above. Whe
 
 </sect2>
 
-<sect2 id="sec-ButtonBoxes">
-<title>ButtonBoxes </title>
+<sect2 id="sec-buttonbox">
+<title>ButtonBoxes</title>
 
 <para>
 Button boxes are a convenient way to quickly arrange a group of buttons. They
@@ -2469,7 +2469,7 @@ third button is placed in the lower row, spanning both columns.
 
 </sect2>
 
-<sect2 id="sec-Notebook">
+<sect2 id="sec-notebook">
 <title>Notebook</title>
 
 <para>
@@ -2500,7 +2500,7 @@ To programmatically change the selected page, use the
 <function>set_page()</function> method.
 </para>
 
-<para>There is also an  <link linkend="sec-Notebook-STL-style">STL-style API</link> which you might find more obvious.</para>
+<para>There is also an  <link linkend="sec-notebook-stl-style">STL-style API</link> which you might find more obvious.</para>
 
 <para><ulink url="&url_refdocs_base_gtk;Notebook.html">Reference</ulink></para>
 
@@ -2517,7 +2517,7 @@ To programmatically change the selected page, use the
 
 </sect3>
 
-<sect3 id="sec-Notebook-STL-style">
+<sect3 id="sec-notebook-stl-style">
 <title>STL-style API</title>
 <para>
 The <classname>Gtk::Notebook</classname> widget has an STL-style API, available
@@ -2551,7 +2551,7 @@ of the <classname>PageList</classname>:
 
 </chapter>
 
-<chapter id="sec-chapter-treeview">
+<chapter id="chapter-treeview">
 
 <title>The TreeView widget</title>
 <para>
@@ -2559,7 +2559,7 @@ The <classname>Gtk::TreeView</classname> widget can contain lists or trees of
 data, in columns.
 </para>
 
-<sect1>
+<sect1 id="sec-treeview-model">
 <title>The Model</title>
 <para>
 Each <classname>Gtk::TreeView</classname> has an associated
@@ -2719,7 +2719,7 @@ some, and it can show them in various ways.
 
 <para><ulink url="&url_refdocs_base_gtk;TreeView.html">Reference</ulink></para>
 
-<sect2 id="sec-using_a_model">
+<sect2 id="sec-treeview-using-a-model">
 <title>Using a Model</title>
 <para>
 You can specify a <classname>Gtk::TreeModel</classname> when constructing the
@@ -2880,7 +2880,7 @@ store it in the Model if that is appropriate for your application.
 
 </sect1>
 
-<sect1 id="sec-iterating_over_model_rows">
+<sect1 id="sec-iterating-over-model-rows">
 <title>Iterating over Model Rows</title>
 <para>
 <classname>Gtk::TreeModel</classname> provides an STL-style container of its
@@ -2910,7 +2910,7 @@ container of child <classname>Row</classname>s:
 
 </sect1>
 
-<sect1 id="sec-treeview_selection">
+<sect1 id="sec-treeview-selection">
 <title>The Selection</title>
 <para>
 To find out what rows the user has selected, get the
@@ -3077,7 +3077,7 @@ treeview.set_model(sorted_model);</programlisting>
 when used with the <classname>Gtk::ListStore</classname> or
 <classname>Gtk::TreeStore</classname> models. If necessary, it also allows you
 to implement more complex behaviour when items are dragged and dropped, using
-the normal <link linkend="sec-draganddrop">Drag and Drop</link> API.
+the normal <link linkend="chapter-draganddrop">Drag and Drop</link> API.
 </para>
 
 <sect2>
@@ -3120,7 +3120,7 @@ so that the right-click will cause the row to be selected first.
 
 </sect1>
 
-<sect1 id="sec-treeview_examples"><title>Examples</title>
+<sect1 id="sec-treeview-examples"><title>Examples</title>
 
 <sect2><title>ListStore</title>
 <para>
@@ -3159,7 +3159,7 @@ children to the rows.
 
 </sect2>
 
-<sect2 id="sec-editable_cells_example"><title>Editable Cells</title>
+<sect2 id="sec-editable-cells-example"><title>Editable Cells</title>
 
 <para>
 This example is identical to the <classname>ListStore</classname> example, but
@@ -3228,7 +3228,7 @@ section.
 </chapter>
 
 
-<chapter id="sec-chapter-comboboxes">
+<chapter id="chapter-combobox">
 <title>Combo Boxes</title>
 
 <para>The <classname>ComboBox</classname> and <classname>ComboBoxEntry</classname> widgets offers a list (or tree) of choices in a dropdown menu. If appropriate, they can show extra information about each item, such as text, a picture, a checkbox, or a progress bar. The <classname>ComboBox</classname> widget restricts the user to the available choices, but the <classname>ComboBoxEntry</classname> contains an <classname>Entry</classname>, allowing the user to enter arbitrary text if the none of the available choices are suitable.
@@ -3287,7 +3287,7 @@ You might need to react to every change of selection in the ComboBox, for instan
 
 <sect2><title>Full Example</title>
 
-<figure id="figure-combobox_complex">
+<figure id="figure-combobox-complex">
   <title>ComboBox</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;combobox_complex.png"/>
@@ -3300,7 +3300,7 @@ You might need to react to every change of selection in the ComboBox, for instan
 
 <sect2><title>Simple Text Example</title>
 
-<figure id="figure-combobox_text">
+<figure id="figure-combobox-text">
   <title>ComboBox</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;combobox_text.png"/>
@@ -3336,7 +3336,7 @@ When you select a choice from the drop-down menu, the value from this column wil
 
 <sect2><title>Full Example</title>
 
-<figure id="figure-comboboxentry_complex">
+<figure id="figure-comboboxentry-complex">
   <title>ComboBoxEntry</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;comboboxentry_complex.png"/>
@@ -3349,7 +3349,7 @@ When you select a choice from the drop-down menu, the value from this column wil
 
 <sect2><title>Simple Text Example</title>
 
-<figure id="figure-comboboxentry_text">
+<figure id="figure-comboboxentry-text">
   <title>ComboBoxEntryText</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;comboboxentry_text.png"/>
@@ -3368,7 +3368,7 @@ When you select a choice from the drop-down menu, the value from this column wil
 </chapter>
 
 
-<chapter id="sec-chapter-textview">
+<chapter id="chapter-textview">
 <title>TextView</title>
 <para>
 The <classname>TextView</classname> widget can be used to display and edit
@@ -3377,7 +3377,7 @@ has a model/view design. In this case the <classname>TextBuffer</classname> is
 the model.
 </para>
 
-<sect1>
+<sect1 id="sec-textview-buffer">
 <title>The Buffer</title>
 <para>
 <classname>Gtk::TextBuffer</classname> is a model containing the data for the
@@ -3554,7 +3554,7 @@ show the found text.
 
 </sect1>
 
-<sect1 id="sec-widgets_and_childanchors">
+<sect1 id="sec-widgets-and-childanchors">
 <title>Widgets and ChildAnchors</title>
 <para>
 You can embed widgets, such as <classname>Gtk::Button</classname>s, in the
@@ -3576,7 +3576,7 @@ Then, to add a widget at that position, use
 
 </sect1>
 
-<sect1 id="sec-examples"><title>Examples</title>
+<sect1 id="sec-textview-examples"><title>Examples</title>
 
 <sect2><title>Simple Example</title>
 
@@ -3595,7 +3595,7 @@ Then, to add a widget at that position, use
 
 </chapter>
 
-<chapter id="sec-MenusAndToolbars">
+<chapter id="chapter-menus-and-toolbars">
 <title>Menus and Toolbars</title>
 
 <para>
@@ -3614,7 +3614,7 @@ classes, all of which should be instantiated via their
 <classname>RefPtr</classname>s.
 </para>
 
-<sect1>
+<sect1 id="sec-actions">
 <title>Actions</title>
 <para>
 First create the <classname>Action</classname>s and add them to an
@@ -3651,7 +3651,7 @@ m_refActionGroup-&gt;add( Gtk::Action::create(&quot;Quit&quot;, Gtk::Stock::QUIT
 </sect1>
 
 
-<sect1>
+<sect1 id="sec-uimanager">
 <title>UIManager</title>
 <para>
 Next you should create a <classname>UIManager</classname> and add the
@@ -3750,7 +3750,8 @@ signal, which you will need to handle anyway. For instance:
 
 </sect1>
 
-<sect1><title>Examples</title>
+<sect1 id="sec-menus-examples">
+    <title>Examples</title>
 
 <sect2><title>Main Menu example</title>
 
@@ -3782,13 +3783,13 @@ signal, which you will need to handle anyway. For instance:
 
 </chapter>
 
-<chapter id="sec-Adjustment">
+<chapter id="chapter-adjustment">
 <title>Adjustments </title>
 
 <para>
 &gtkmm; has various widgets that can be visually adjusted using the mouse or
 the keyboard, such as the <classname>Range</classname> widgets (described in
-the <link linkend="sec-Range-Widgets">Range Widgets</link> section).  There are
+the <link linkend="chapter-range-widgets">Range Widgets</link> section).  There are
 also a few widgets that display some adjustable part of a larger area, such as
 the <classname>Viewport</classname> widget. These widgets have
 <classname>Gtk::Adjustment</classname> objects that express this common part of
@@ -3802,7 +3803,7 @@ scrollbar, <classname>Gtk::Adjustment</classname> has a
 <function>get_changed()</function> method to discover the new value.
 </para>
 
-<sect1>
+<sect1 id="sec-creating-adjustment">
 <title>Creating an Adjustment</title>
 
 <para>
@@ -3834,7 +3835,7 @@ TODO: Investigate the upper argument properly. There was some unclear stuff abou
 
 </sect1>
 
-<sect1 id="sec-adjustments_the_easy_way">
+<sect1 id="sec-adjustments-easy">
 <title>Using Adjustments the Easy Way</title>
 
 <para>
@@ -3876,7 +3877,7 @@ Gtk::VScrollbar vscrollbar (*(text.get_vadjustment()));</programlisting>
 
 </sect1>
 
-<sect1 id="sec-adjustment_internals">
+<sect1 id="sec-adjustment-internals">
 <title>Adjustment Internals</title>
 
 <para>
@@ -3937,7 +3938,7 @@ writing a new type of range widget.
 
 </chapter>
 
-<chapter id="widgets_without_xwindows">
+<chapter id="chapter-widgets-without-xwindows">
 <title>Widgets Without X-Windows</title>
 
 <para>
@@ -3946,7 +3947,7 @@ receive X events. This means that the signals described in the  <link
     linkend="sec-xeventsignals">X event signals</link> section will not be
 emitted. If you want to capture events for these widgets you can use a special
 container called <classname>Gtk::EventBox</classname>, which is described in
-the <link linkend="sec-EventBox">EventBox</link> section.
+the <link linkend="sec-eventbox">EventBox</link> section.
 </para>
 
 <para>
@@ -3984,7 +3985,7 @@ These widgets are mainly used for decoration or layout, so you won't often need
 to capture events on them. They are intended to have no X-Window in order to improve performance.
 </para>
 
-<sect1 id="sec-EventBox">
+<sect1 id="sec-eventbox">
 <title>EventBox</title>
 
 <para>
@@ -4035,7 +4036,7 @@ Resizing the window reveals varying amounts of the label.
 
 </chapter>
 
-<chapter id="sec-Dialogs">
+<chapter id="chapter-dialogs">
 <title>Dialogs</title>
 
 <para>
@@ -4069,7 +4070,7 @@ response value that you specified when using <function>add_button()</function>.
 
 <para><ulink url="&url_refdocs_base_gtk;Dialog.html">Reference</ulink></para>
 
-<sect1 id="sec-dialogs_messagedialog"><title>MessageDialog</title>
+<sect1 id="sec-dialogs-messagedialog"><title>MessageDialog</title>
 <para>
 <classname>MessageDialog</classname> is a convenience class, used to create
 simple, standard message dialogs, with a message, an icon, and buttons for user
@@ -4095,7 +4096,7 @@ as well as specifying standard buttons via the
 
 </sect1>
 
-<sect1 id="sec-dialogs_filechooserdialog"><title>FileChooserDialog</title>
+<sect1 id="sec-dialogs-filechooserdialog"><title>FileChooserDialog</title>
 <para>
 The <classname>FileChooserDialog</classname> is suitable for use with
 &quot;Open&quot; or &quot;Save&quot; menu items. 
@@ -4121,7 +4122,7 @@ Most of the useful member methods for this class are actually in the
 </sect2>
 </sect1>
 
-<sect1 id="sec-color_selection_dialog"><title>ColorSelectionDialog</title>
+<sect1 id="sec-color-selection-dialog"><title>ColorSelectionDialog</title>
 <para>
 The <classname>ColorSelectionDialog</classname> allows the user to choose a
 color.
@@ -4144,7 +4145,7 @@ color.
 
 </sect1>
 
-<sect1 id="sec-font_selection_dialog"><title>FontSelectionDialog</title>
+<sect1 id="sec-font-selection-dialog"><title>FontSelectionDialog</title>
 <para>
 The <classname>FontSelectionDialog</classname> allows the user to choose a
 font.
@@ -4170,7 +4171,7 @@ font.
 
 </chapter>
 
-<chapter id="sec-drawingarea">
+<chapter id="chapter-drawingarea">
   <title>The Drawing Area Widget</title>
   <para>
     The <classname>DrawingArea</classname> widget is a blank window that gives
@@ -4189,7 +4190,7 @@ font.
       (<classname>Gdk::GC</classname>) and other GDK drawing functions, but this
       has been largely superceded by the <ulink
           url="http://cairographics.org">Cairo</ulink> graphics library and its
-      C++ binding <application>Cairomm</application>. See the <link linkend="sec-appendix-gdk-drawing">Gdk Appendix</link> for a description of the deprecated GDK techniques. In general, the Cairo drawing API is simpler than the GDK one, and it is
+      C++ binding <application>Cairomm</application>. See the <link linkend="chapter-gdk-drawing">Gdk Appendix</link> for a description of the deprecated GDK techniques. In general, the Cairo drawing API is simpler than the GDK one, and it is
       generally recommended to use the Cairo drawing methods wherever possible
       in preference to the older GDK drawing methods.
   </para>
@@ -4217,7 +4218,7 @@ font.
       examples), and then present a simple application that uses Cairo to draw
       a custom clock widget. 
   </para>
-  <sect1 id="sec-cairo_drawing_model">
+  <sect1 id="sec-cairo-drawing-model">
     <title>The Cairo Drawing Model</title>
     <para>
         The basic concept of drawing in Cairo involves defining 'invisible'
@@ -4302,7 +4303,7 @@ myContext->set_line_width(2.0);</programlisting>
         </tip>
     </para>
   </sect1>
-  <sect1 id="sec-drawing_lines">
+  <sect1 id="sec-cairo-drawing-lines">
     <title>Drawing Straight Lines</title>
     <para>
         Now that we understand the basics of the Cairo graphics library, we're
@@ -4437,7 +4438,7 @@ myContext->set_line_width(2.0);</programlisting>
         </para>
     </sect2>
 </sect1>
-    <sect1>
+    <sect1 id="sec-cairo-curved-lines">
         <title>Drawing Curved Lines</title>
         <para>
             In addition to drawing straight lines Cairo allows you to easily
@@ -4495,7 +4496,7 @@ myContext->set_line_width(2.0);</programlisting>
         </para>
         </sect2>
   </sect1>
-  <sect1>
+  <sect1 id="sec-cairo-drawing-arcs">
       <title>Drawing Arcs and Circles</title>
       <para>
           With Cairo, the same function is used to draw arcs, circles, or
@@ -4586,7 +4587,7 @@ context->restore();</programlisting>
 
       </sect2>
   </sect1>
-  <sect1 id="sec-drawing_text">
+  <sect1 id="sec-drawing-text">
       <title>Drawing Text</title>
       <sect2>
           <title>Drawing Text with Pango</title>
@@ -4611,7 +4612,7 @@ context->restore();</programlisting>
       </sect2>
       -->
   </sect1>
-  <sect1 id="sec-draw_images">
+  <sect1 id="sec-draw-images">
       <title>Drawing Images</title>
       <sect2>
           <title>Drawing Images with Gdk</title>
@@ -4757,13 +4758,13 @@ return true;
   </sect1>
 </chapter>
 
-<chapter id="sec-draganddrop">
+<chapter id="chapter-draganddrop">
 <title>Drag and Drop</title>
 <para>
 <classname>Gtk::Widget</classname> has several methods and signals which are
 prefixed with "drag_". These are used for Drag and Drop.
 </para>
-<sect1>
+<sect1 id="sec-dnd-sources-destinations">
 <title>Sources and Destinations</title>
 <para>
 Things are dragged from <literal>sources</literal> to be dropped on
@@ -4786,7 +4787,7 @@ emitted, telling the signal handlers which
 
 </sect1>
 
-<sect1 id="sec-drag_and_drop_methods">
+<sect1 id="sec-dnd-methods">
 <title>Methods</title>
 <para>
 <classname>Widgets</classname> can be identified as sources or destinations
@@ -4843,7 +4844,7 @@ using these <classname>Gtk::Widget</classname> methods:
 </itemizedlist>
 </sect1>
 
-<sect1 id="sec-drag_and_drop_signals">
+<sect1 id="sec-dnd-signals">
 <title>Signals</title>
 <para>
 When a drop destination has accepted a dragged item, certain signals will be
@@ -4855,7 +4856,7 @@ the user can only select the actions which you have specified in your calls to
 <function>drag_source_set()</function>.
 </para>
 
-<sect2 id="sec-drag_and_drop_signals_copy">
+<sect2 id="sec-dnd-signals-copy">
 <title>Copy</title>
 <para>
 The source widget will emit these signals, in this order:
@@ -4913,11 +4914,11 @@ the drop was successful.
 </para>
 </sect1>
 
-<sect1 id="sec-drag_and_drop_example">
+<sect1 id="sec-dnd-example">
 <title>Example</title>
 <para>Here is a very simple example, demonstrating a drag and drop <literal>Copy</literal> operation:</para>
 
-<figure id="figure-drag_and_drop">
+<figure id="figure-drag-and-drop">
   <title>Drag and Drop</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;drag_and_drop.png"/>
@@ -4934,7 +4935,7 @@ There is a more complex example in examples/dnd.
 
 </chapter>
 
-<chapter id="sec-clipboard">
+<chapter id="chapter-clipboard">
 <title>The Clipboard</title>
 <para>Simple text copy-paste functionality is provided for free by widgets such as Gtk::Entry and Gtk::TextView, but you might need special code to deal with your own data formats. For instance, a drawing program would need special code to allow copy and paste within a view, or between documents.</para>
 
@@ -4954,7 +4955,7 @@ either providing the requested data, or asking for data.
 
 <para><ulink url="&url_refdocs_base_gtk;Clipboard.html">Reference</ulink></para>
 
-<sect1>
+<sect1 id="sec-clipboard-targets">
 <title>Targets</title>
 <para>
 Different applications contain different types of data, and they might make that data available in
@@ -4973,10 +4974,10 @@ overloads that allow you to specify the format in more detail if
 necessary.
 </para>
 
-<para>The <link linkend="sec-draganddrop">Drag and Drop</link> API uses the same mechanism. You should probably use the same data targets and formats for both Clipboard and Drag and Drap operations.</para>
+<para>The <link linkend="chapter-draganddrop">Drag and Drop</link> API uses the same mechanism. You should probably use the same data targets and formats for both Clipboard and Drag and Drap operations.</para>
 </sect1>
 
-<sect1 id="sec-drag_and_drop_copy">
+<sect1 id="sec-clipboard-copy">
 <title>Copy</title>
 <para>
 When the user asks to copy some data, you should tell the
@@ -5017,7 +5018,7 @@ The <literal>ideal</literal> example below can supply more than one clipboard ta
 
 </sect1>
 
-<sect1 id="sec-drag_and_drop_paste">
+<sect1 id="sec-clipboard-paste">
 <title>Paste</title>
 <para>
 When the user asks to paste data from the <classname>Clipboard</classname>, you
@@ -5073,7 +5074,7 @@ In your callback, compare the list of available targets with those that your app
 
 </sect1>
 
-<sect1 id="sec-clipboard_examples"><title>Examples</title>
+<sect1 id="sec-clipboard-examples"><title>Examples</title>
 
 <sect2 id="sec-clipboard-example-simple"><title>Simple</title>
 <para>
@@ -5119,7 +5120,7 @@ type.
 
 </chapter>
 
-<chapter id="sec-printing">
+<chapter id="chapter-printing">
 <title>Printing</title>
 
 <note>
@@ -5240,7 +5241,7 @@ during which various signals are emitted:
 
 </sect1>
 
-<sect1 id="sec-page_setup">
+<sect1 id="sec-page-setup">
 <title>Page setup</title>
 
 <para>
@@ -5279,7 +5280,7 @@ use the <function>PrintOperation::set_unit()</function> method.
 
 </sect1>
 
-<sect1 id="sec-printing_rendering_text">
+<sect1 id="sec-printing-rendering-text">
 <title>Rendering text</title>
 
 <para>
@@ -5298,13 +5299,13 @@ page number.
 </para>
 
 <para>
-See <link linkend="sec-printing_example-simple">an example</link>
+See <link linkend="sec-printing-example-simple">an example</link>
 of exactly how this can be done.
 </para>
 
 </sect1>
 
-<sect1 id="sec-async_printing_ops">
+<sect1 id="sec-async-printing-ops">
 <title>Asynchronous operations</title>
 
 <para>
@@ -5362,7 +5363,7 @@ void ExampleWindow::on_printoperation_status_changed(const Glib::RefPtr&lt;Print
 
 </sect1>
 
-<sect1 id="sec-export_to_pdf">
+<sect1 id="sec-printing-export-to-pdf">
 <title>Export to PDF</title>
 <para>
 The 'Print to file' option is available in the print dialog, without the need for extra implementation. However, it is sometimes useful to generate a pdf file directly from code. For instance,
@@ -5378,7 +5379,7 @@ Gtk::PrintOperationResult res = op-&gt;run(Gtk::PRINT_OPERATION_ACTION_EXPORT);
 
 </sect1>
 
-<sect1 id="sec-extending_print_dialog">
+<sect1 id="sec-extending-print-dialog">
 <title>Extending the print dialog</title>
 
 <para>
@@ -5444,7 +5445,7 @@ The example in examples/book/printing/advanced demonstrates this.
 
 </sect1>
 
-<sect1 id="sec-printing_preview">
+<sect1 id="sec-printing-preview">
 <title>Preview</title>
 
 <para>
@@ -5468,10 +5469,10 @@ located in /examples/book/printing/advanced.
 
 </sect1>
 
-<sect1 id="sec-printing_example">
+<sect1 id="sec-printing-example">
 <title>Example</title>
 
-<sect2 id="sec-printing_example-simple">
+<sect2 id="sec-printing-example-simple">
 <title>Simple</title>
 
 <para>
@@ -5496,7 +5497,7 @@ and update the print settings.
 
 </chapter>
 
-<chapter id="sec-recent-documents">
+<chapter id="chapter-recent-documents">
   <title>Recently Used Documents</title>
   <note>
     <para>Recent Files support is available in &gtkmm; version 2.10 and
@@ -5518,7 +5519,7 @@ and update the print settings.
     application registered it, whether it's private to the registering
     application, and several other things.
   </para>
-  <sect1>
+  <sect1 id="sec-recentmanager">
     <title>RecentManager</title>
     <para>
       <classname>RecentManager</classname> acts as the central database of
@@ -5652,7 +5653,7 @@ if (info)
     </sect2>
   </sect1>
 
-  <sect1>
+  <sect1 id="sec-recentchooser">
     <title>RecentChooser</title>
     <note>
       <para>Recent Files support is available in &gtkmm; version 2.10 and
@@ -5707,7 +5708,7 @@ if (info)
       <para>
         The constructor for <classname>ExampleWindow</classname> creates the
         menu using <classname>UIManager</classname> (see <xref
-          linkend="sec-MenusAndToolbars"/> for more information).  It then adds
+          linkend="chapter-menus-and-toolbars"/> for more information).  It then adds
         the menu and the toolbar to the window.
       </para>
     </sect2>
@@ -5735,9 +5736,9 @@ if (info)
   </sect1>
 </chapter>
 
-<chapter id="sec-plugs-sockets">
+<chapter id="chapter-plugs-sockets">
   <title>Plugs and Sockets</title>
-  <sect1>
+  <sect1 id="sec-plugs-sockets-overview">
     <title>Overview</title>
     <para>
       From time to time, it may be useful to be able to embed a widget from
@@ -5827,7 +5828,7 @@ if (info)
       </para>
     </sect2>
   </sect1>
-  <sect1>
+  <sect1 id="sec-plugs-sockets-example">
     <title>Plugs and Sockets Example</title>
     <para>
       The following is a simple example of using sockets and plugs.  The method
@@ -5886,10 +5887,10 @@ A plug was added</screen>
   </sect1>
 </chapter>
 
-<chapter id="sec-timeouts">
+<chapter id="chapter-chapter-timeouts">
 <title>Timeouts, I/O and Idle Functions </title>
 
-<sect1>
+<sect1 id="sec-timeouts">
 <title>Timeouts</title>
 
 <para>
@@ -5947,7 +5948,7 @@ Here's an example of this technique:
 
 </sect1>
 
-<sect1 id="sec-monitoring_io">
+<sect1 id="sec-monitoring-io">
 <title>Monitoring I/O</title>
 
 <para>
@@ -6033,7 +6034,7 @@ testfifo</literal>.
 
 </sect1>
 
-<sect1 id="sec-idle_functions">
+<sect1 id="sec-idle-functions">
 <title>Idle Functions</title>
 
 <para>
@@ -6087,10 +6088,10 @@ progress bar will increase steadily; the lower one will slow down.
 
 </chapter>
 
-<chapter id="sec-Memory">
+<chapter id="chapter-memory">
 <title>Memory management</title>
 
-<sect1>
+<sect1 id="sec-memory-widgets">
 <title>Widgets</title>
 
 <sect2>
@@ -6255,7 +6256,7 @@ be an instance in your <function>main()</function> function..
 </sect2>
 </sect1>
 
-<sect1 id="sec-Memory-SharedResources">
+<sect1 id="sec-memory-shared-resources">
 <title>Shared resources</title>
 
 <para>
@@ -6303,7 +6304,7 @@ Glib::RefPtr&lt;Gdk::Bitmap&gt; bitmap2 = bitmap.
 the instance will not be destroyed until the last <classname>RefPtr</classname>
 has gone out of scope.
 </para>
-<para>See the <link linkend="sec-appendix-refptr">appendix</link> for detailed information about RefPtr.</para>
+<para>See the <link linkend="chapter-refptr">appendix</link> for detailed information about RefPtr.</para>
 <para>
 If you wish to learn more about smartpointers, you might look in these
 books:
@@ -6321,7 +6322,7 @@ Nicolai M. Josuttis, "The C++ Standard Library" - section 4.2
 
 </chapter>
 
-<chapter id="sec-libglademm">
+<chapter id="chapter-libglademm">
 <title>Glade and libglademm</title>
 <para>
 Although you can use C++ code to instantiate and arrange widgets, this
@@ -6348,18 +6349,18 @@ actions, but using <application>libglademm</application> for the basic widget
 layout allows you to focus on implementing that functionality.
 </para>
 
-<sect1 id="sec-libglademm_headers_and_linking">
+<sect1 id="sec-libglademm-headers-and-linking">
 <title>Headers and Linking</title>
 <para>To use libglade, you must include the header file, like so:
 <programlisting>
 #include &lt;libglademm.h&gt;
 </programlisting>
 </para>
-<para>You must also link to the libglademm library. For instance, you can add libglademm-2.4 to your list of pkg-config modules, as described in the <link linkend="sec-headers_and_linking">Headers and Linking section for gtkmm</link>.
+<para>You must also link to the libglademm library. For instance, you can add libglademm-2.4 to your list of pkg-config modules, as described in the <link linkend="sec-libglademm-headers-and-linking">Headers and Linking section for gtkmm</link>.
 </para>
 </sect1>
 
-<sect1 id="sec-loading_glade_file">
+<sect1 id="sec-libglademm-loading-glade-file">
 <title>Loading the .glade file</title>
 <para>
 <classname>Gnome::Glade::Xml</classname> must be used via a
@@ -6381,7 +6382,7 @@ Glib::RefPtr&lt;Gnome::Glade::Xml&gt; refXml = Gnome::Glade::Xml::create(&quot;b
 
 </sect1>
 
-<sect1 id="sec-accessing_widgets">
+<sect1 id="sec-libglademm-accessing-widgets">
 <title>Accessing widgets</title>
 
 <para>
@@ -6413,7 +6414,7 @@ widgets are instantiated during <function>Glade::Xml::create()</function>.
 
 <para>
 <function>get_widget()</function> returns child widgets that are
-<function>manage()</function>ed (see the <link linkend="sec-Memory">Memory 
+<function>manage()</function>ed (see the <link linkend="chapter-memory">Memory 
 Management</link> chapter), so they will be deleted when their parent
 container is deleted. So, if you get only a child widget from
 <application>libglademm</application>, instead of a whole window, then you must
@@ -6437,7 +6438,7 @@ This simple example shows how to load a <application>Glade</application> file at
 </sect1>
 
 
-<sect1 id="sec-using_derived_widgets">
+<sect1 id="sec-libglademm-using-derived-widgets">
 <title>Using derived widgets</title>
 <para>
 You can use <application>Glade</application> to layout your own custom widgets
@@ -6506,7 +6507,7 @@ This example shows how to load a <application>Glade</application> file at runtim
 
 </chapter>
 
-<chapter id="sec-internationalization">
+<chapter id="chapter-internationalization">
   <title>Internationalization and Localization</title>
 
   <para>
@@ -6865,7 +6866,7 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
 
 </sect1>
 
-<sect1 id="sec-expecting_utf8">
+<sect1 id="sec-i18n-expecting-utf8">
 <title>Expecting UTF8</title>
 <para>
 A properly internationalized application will not make assumptions about the
@@ -6992,7 +6993,7 @@ instance, you cannot use the copyright sign (&copy;).
       </sect2>
     </sect1>
 
-    <sect1 id="sec-getting_help_with_translations">
+    <sect1 id="sec-i18n-getting-help-with-translations">
       <title>Getting help with translations</title>
 
       <para>If your program is free software, there is a whole <literal>GNOME</literal>
@@ -7030,11 +7031,11 @@ instance, you cannot use the copyright sign (&copy;).
     </sect1>
 </chapter>
 
-<chapter id="sec-customwidgets">
+<chapter id="chapter-customwidgets">
     <title>Custom Widgets</title>
 
     <para>&gtkmm; makes it very easy to derive new widgets by inheriting from an existing widget class, either by deriving from a container and adding child widgets, or by deriving from a single-item widget, and changing its behaviour. But you might occasionally find that no suitable starting point already exists. In this case, you can implement a widget from scratch.</para>
-    <sect1>
+    <sect1 id="sec-custom-containers">
     <title>Custom Containers</title>
     <para>When deriving from <classname>Gtk::Container</classname>, you should override the following virtual methods:
     <itemizedlist>
@@ -7119,7 +7120,7 @@ instance, you cannot use the copyright sign (&copy;).
 
     </sect1>  
 
-    <sect1>
+    <sect1 id="sec-custom-widgets">
     <title>Custom Widgets</title>
     <para>By deriving directly from <classname>Gtk::Widget</classname> you can
         do all the drawing for your widget directly, instead of just arranging
@@ -7147,7 +7148,7 @@ instance, you cannot use the copyright sign (&copy;).
 
 </chapter>
   
-<chapter id="sec-gathering">
+<chapter id="chapter-recommended-techniques">
 <title>Recommended Techniques</title>
 
 <para>This section is simply a gathering of wisdom, general style guidelines
@@ -7173,11 +7174,12 @@ and hints for creating &gtkmm; applications.
     communicate with each other via signals and signal handlers. This is much
     simpler than objects holding pointers to each other and calling each
     other's methods. &gtkmm;'s classes uses special versions of
-    <classname>Sigc::Signal</classname>, but you should use normal
+    <classname>sigc::signal</classname>, but you should use normal
     <classname>sigc::signal</classname>s, as described in the
     <application>libsigc++</application> documentation.</para>
 
-<sect1><title>Application lifetime</title>
+<sect1 id="sec-application-lifetime">
+    <title>Application Lifetime</title>
 <para>Most applications will have only one <classname>Window</classname>, or
     only one main window. These applications can use the
     <function>Gtk::Main::run(Gtk::Window&amp;)</function> overload. It shows
@@ -7189,7 +7191,7 @@ and hints for creating &gtkmm; applications.
 <para>Most of our examples use this technique.</para>
 </sect1>
 
-<sect1 id="sec-using_a_gtkmm_widget">
+<sect1 id="sec-using-a-gtkmm-widget">
 <title>Using a &gtkmm; widget</title>
 
 <para>
@@ -7254,7 +7256,7 @@ first see a blank window, into which the widgets will be gradually drawn.
 </sect1>
 </chapter>
 
-<chapter id="sec-Contributing">
+<chapter id="chapter-contributing">
 <title>Contributing </title>
 
 <para>
@@ -7280,7 +7282,7 @@ your examples in their programs, and copies of this document
 
 </chapter>
 
-<appendix id="sec-appendix-refptr">
+<appendix id="chapter-refptr">
 <title>The RefPtr smartpointer</title>
 <para>
 <classname>Glib::RefPtr</classname> is a smartpointer. Specifically, it is a
@@ -7294,7 +7296,8 @@ reference-counting shared smartpointer, and a future version of &gtkmm; might po
 
 <para>A smartpointer acts much like a normal pointer. Here are a few examples.</para> 
 
-<sect1><title>Copying</title>
+<sect1 id="sec-refptr-copying">
+    <title>Copying</title>
 <para>
 You can copy <classname>RefPtr</classname>s, just like normal pointers. But
 unlike normal pointers, you don't need to worry about deleting the underlying
@@ -7321,7 +7324,7 @@ listPixmaps.push_back(refPixmap);
 </para>
 </sect1>
 
-<sect1 id="sec-dereferencing"><title>Dereferencing</title>
+<sect1 id="sec-refptr-dereferencing"><title>Dereferencing</title>
 <para>You can dereference a smartpointer with the -&gt; operator, to
 call the methods of the underlying instance, just like a normal pointer.
 </para>
@@ -7344,7 +7347,7 @@ Gdk::Bitmap* underlying = *refBitmap; //Syntax error - will not compile.
 </para>
 </sect1>
 
-<sect1 id="sec-casting"><title>Casting</title>
+<sect1 id="sec-refptr-casting"><title>Casting</title>
 <para>
 You can cast <classname>RefPtrs</classname> to base types, just like normal
 pointers.
@@ -7373,7 +7376,7 @@ Glib::RefPtr&lt;Gtk::TreeStore&gt;::cast_static(refModel);
 </sect1>
 
 
-<sect1 id="sec-checking_for_null"><title>Checking for null</title>
+<sect1 id="sec-refptr-checking-for-null"><title>Checking for null</title>
 <para>
 Just like normal pointers, you can check whether a
 <classname>RefPtr</classname> points to anything.
@@ -7395,7 +7398,7 @@ initialized to null so you don't need to remember to do that yourself.
 </sect1>
 
 
-<sect1 id="sec-constness"><title>Constness</title>
+<sect1 id="sec-refptr-constness"><title>Constness</title>
 <para>
 The use of the <literal>const</literal> keyword in C++ is not always clear. You
 might not realise that <type>const Something*</type> declares a pointer to a
@@ -7420,10 +7423,10 @@ copying.
 </appendix>
 
 
-<appendix id="sec-appendix-signals">
+<appendix id="chapter-signals">
 <title>Signals</title>
 
-<sect1>
+<sect1 id="sec-connecting-signal-handlers">
 <title>Connecting signal handlers</title>
 <para>
 &gtkmm; widget classes have signal accessor methods, such as
@@ -7568,7 +7571,7 @@ signal.
 </para>
 </sect1>
 
-<sect1 id="sec-writing_signal_handlers">
+<sect1 id="sec-writing-signal-handlers">
 <title>Writing signal handlers</title>
 
 <para>
@@ -7622,7 +7625,7 @@ void on_insert_text(const Glib::ustring&amp; text, int length, int* position);
 </para>
 </sect1>
 
-<sect1 id="sec-disconnecting_signal_handlers">
+<sect1 id="sec-disconnecting-signal-handlers">
 <title>Disconnecting signal handlers</title>
 
 <para>
@@ -7645,7 +7648,7 @@ can disconnect its associated signal handler using the method
 </para>
 
 </sect1>
-<sect1 id="sec-overriding_default_signal_handlers">
+<sect1 id="sec-overriding-default-signal-handlers">
 <title>Overriding default signal handlers</title>
 
 <para>
@@ -7720,7 +7723,7 @@ your custom code.
 
 </sect1>
 
-<sect1 id="sec-binding_extra_arguments">
+<sect1 id="sec-binding-extra-arguments">
 <title>Binding extra arguments</title>
 <para>
 If you use one signal handler to catch the same signal from several widgets,
@@ -7817,7 +7820,7 @@ button.signal_button_press_event().connect( sigc::ptr_fun(&amp;on_mywindow_butto
 
 
 
-<appendix id="sec-appendix-custom_signals">
+<appendix id="chapter-custom-signals">
 <title>Creating your own signals</title>
 <para>
 Now that you've seen signals and signal handlers in &gtkmm;, you
@@ -7947,7 +7950,7 @@ practical - and sensible - to subclass a button for that purpose.
 	  on the cygwin distribution will be described in the last section of
       this chapter.
     </para>
-    <sect1>
+    <sect1 id="sec-dev-cpp-ide">
       <title>The Dev-C++ IDE</title>
       <sect2>
 	<title>Pre-Installation Issues</title>
@@ -8105,7 +8108,7 @@ practical - and sensible - to subclass a button for that purpose.
     </sect2>
     </sect1>
 
-    <sect1 id="sec-build_with_command_line_tools">
+    <sect1 id="sec-dev-cpp-command-line-tools">
       <title>Command line tools</title>
       <para>
 	To build your &gtkmm; application with command line tools, we recommend you either use mingw combined with cygwin
@@ -8179,7 +8182,7 @@ practical - and sensible - to subclass a button for that purpose.
       </para>
     </sect1>
 
-  <sect1 id="sec-building_on_win32">
+  <sect1 id="sec-building-on-win32">
 	<title>Building &gtkmm; on Win32</title>
     <para>Please see the appropriate README file in the source distribution.
     </para>
@@ -8187,9 +8190,9 @@ practical - and sensible - to subclass a button for that purpose.
     </sect1>
 </appendix>
 
-<appendix id="sec-appendix-gdk-drawing">
+<appendix id="chapter-gdk-drawing">
 <title>Drawing With GDK</title>
-<para>The GDK drawing API described here is now deprecated, in favour of Cairo. See the <link linkend="sec-drawingarea">DrawingArea</link> chapter for information about the Cairo API.</para> 
+<para>The GDK drawing API described here is now deprecated, in favour of Cairo. See the <link linkend="chapter-drawingarea">DrawingArea</link> chapter for information about the Cairo API.</para> 
 <para>
       Gdk graphics contexts (<classname>Gdk::GC</classname>) are a
       server-side resource. They contain information that describes how
@@ -8248,8 +8251,8 @@ some_gc.set_foreground(some_color);</programlisting>
       important to know what they are and how they're used.
   </para>
 </appendix>
-<appendix id="sec-appendix_working_with_cvs">
-  <title>Working with CVS</title>
+<appendix id="chapter-working-with-svn">
+  <title>Working with Subversion</title>
   <para>
     If you are interested in helping out with the development of &gtkmm;, or
     fixing a bug in &gtkmm;, you'll probably need to build the development
@@ -8279,7 +8282,7 @@ some_gc.set_foreground(some_color);</programlisting>
     be, but it will take quite a while to build and install them all.
     </para>
   </note>
-  <sect1 id="sec-setting_up_jhbuild">
+  <sect1 id="sec-setting-up-jhbuild">
     <title>Setting up jhbuild</title>
     <para>
       To set up <application>jhbuild</application>, follow the basic
@@ -8339,7 +8342,7 @@ some_gc.set_foreground(some_color);</programlisting>
       </para>
     </important>
   </sect1>
-  <sect1 id="sec-installing_jhbuild">
+  <sect1 id="sec-installing-jhbuild">
     <title>Installing and Using the CVS version of &gtkmm;</title>
     <para>
       Once you've configured <application>jhbuild</application> as described
@@ -8402,7 +8405,7 @@ $ jhbuild sanitycheck</screen>
   </sect1>
 </appendix>
 
-<appendix id="sec-appendix-wrapping-c-libraries">
+<appendix id="chapter-wrapping-c-libraries">
 <title>Wrapping C Libraries with gmmproc</title>
 <para>&gtkmm; uses the <command>gmmproc</command> tool to generate most of its
     source code, using .defs files that define the APIs of
@@ -8413,7 +8416,7 @@ $ jhbuild sanitycheck</screen>
     but it does at least work, and has been used successfully by several
     projects.</para>
 
-<sect1>
+<sect1 id="sec-wrapping-build-structure">
 <title>The build structure</title>
 <para>Generation of the source code for a gtkmm-style wrapper API requires use
     of tools such as <command>gmmproc</command> and
@@ -8647,12 +8650,12 @@ $ touch libexample/src/thing.ccg
     <filename>libexample/libexamplemm/Makefile.am</filename>, in the
     <varname>files_extra_h</varname> and <varname>files_extra_cc</varname>
     variables.</para>
-<para>In the <link linkend="sec-appendix_wrapping_hg_files">.hg and .ccg files</link> section you can learn about the syntax used in these files.</para>
+<para>In the <link linkend="sec-wrapping-hg-files">.hg and .ccg files</link> section you can learn about the syntax used in these files.</para>
 </sect3>
 </sect2>
 </sect1>
 
-<sect1 id="sec-appendix_wrapping_defs_files">
+<sect1 id="sec-wrapping-defs-files">
 <title>Generating the .defs files.</title>
 <para>The .defs file are text files, in a lisp format, that describe the API of a C library, including its
 <itemizedlist>
@@ -8762,7 +8765,7 @@ int main (int argc, char *argv[])
 
 </sect1>
 
-<sect1 id="sec-appendix_wrapping_hg_files">
+<sect1 id="sec-wrapping-hg-files">
     <title>The .hg and .ccg files</title>
     <para>The .hg and .ccg source files are very much like
         .h anc .cc C++ source files, but they contain extra macros, such as
@@ -9200,7 +9203,7 @@ _WRAP_ENUM(WindowType, GdkWindowType)
 </sect1>
 
 
-<sect1>
+<sect1 id="sec-wrapping-hand-coded-files">
 <title>Hand-coded source files</title>
 <para>You might want to contain extra source files that will not be generated by
     <command>gmmproc</command> from .hg and .ccg files. You can simply place
@@ -9210,7 +9213,7 @@ _WRAP_ENUM(WindowType, GdkWindowType)
     variables.</para>
 </sect1>
 
-<sect1>
+<sect1 id="sec-wrapping-initialization">
 <title>Initialization</title>
 <para>Your library must be initialized before it can be used, to register the
     new types that it makes available. Also, the C library that you are wrapping
@@ -9236,7 +9239,7 @@ void init()
     function appears in the correct C++ namespace.</para> 
 </sect1>
 
-<sect1>
+<sect1 id="sec-wrapping-problems">
 <title>Problems in the C API.</title>
 <para>You are likely to encounter some problems in the library that you are wrapping, particularly if it is a new project. Here are some common problems, with solutions.</para>
 <sect2>
@@ -9318,7 +9321,7 @@ void example_widget_construct(ExampleWidget* widget, int something, const char* 
 </sect2>
 </sect1>
 
-<sect1 id="sec-appendix_wrapping_documentation">
+<sect1 id="sec-wrapping-documentation">
 <title>Documentation</title>
 <para>In general, gtkmm-style projects use Doxygen, which reads specially formatted C++ comments and generates HTML documentation. You may write these doxygen comments directly in the header files.</para>
 
@@ -9352,7 +9355,7 @@ For instance,
 </appendix>
 
 
-<appendix id="sec-appendix-optional-api">
+<appendix id="chapter-optional-api">
 <title>Optional API</title>
 <para>The gtkmm API is meant to be easy and convenient. However, some of these
     conveniences are not worth the overhead on reduced resources devices, such
@@ -9376,7 +9379,7 @@ For instance,
     developing for an embedded device, you might need to be aware of these
     options.</para>
 
-<sect1>
+<sect1 id="sec-glibmm-optional-api">
 <title>Optional API when building glibmm</title>
 
 
@@ -9466,7 +9469,7 @@ considerable code size and per-object memory reduction.</para>
 
 </sect1>
 
-<sect1>
+<sect1 id="sec-gtkmm-optional-api">
 <title>Optional API when building gtkmm</title>
 
 <sect2>
@@ -9498,7 +9501,7 @@ considerable code size and per-object memory reduction.</para>
 
 </appendix>
 
-<appendix id="sec-appendix-msvc">
+<appendix id="chapter-msvc">
 <title>Using &gtkmm; with Visual Studio 2005</title>
 <sect1 id="sec-installing-and-configuring-vs2005-express">
 <title>Installing and Configuring Visual Studio 2005 Express</title>
@@ -9555,7 +9558,7 @@ your end users will depend on.
 </para>
 </sect1>
 
-<sect1>
+<sect1 id="sec-visual-studio-new-project">
 <title>Creating a New Project with Gtkmm Support</title>
 <sect2>
   <title>Getting Started</title>
@@ -9666,10 +9669,10 @@ your end users will depend on.
   <para>
     Next, add the contents of a simple &gtkmm; program to the
     <literal>main()</literal> function. The example shown in the figure below is
-    the one from <xref linkend="sec-basics"/>
+    the one from <xref linkend="chapter-basics"/>
   </para>
 
-  <figure id="figure-msvc-main_program">
+  <figure id="figure-msvc-main-program">
     <title>Simple &gtkmm; Program.</title>
     <screenshot>
       <graphic format="PNG" fileref="&url_figures_base;msvc_main_program.png"/>
@@ -9724,7 +9727,7 @@ your end users will depend on.
       linkend="figure-msvc-property-manager-with-gtkmm-properties" />.
   </para>
 
-  <figure id="figure-msvc-add_existing-property-sheet">
+  <figure id="figure-msvc-add-existing-property-sheet">
     <title>Adding an Existing Property Sheet.</title>
     <screenshot>
       <graphic format="PNG" fileref="&url_figures_base;msvc_add_existing_property_sheet.png"/>
