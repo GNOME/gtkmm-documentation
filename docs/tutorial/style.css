@@ -325,6 +325,7 @@ div.list-of-figures > p {
     font-size: 130%;
 }
 
+div.appendix div.toc > ul > li,
 div.chapter div.toc > ul > li   {
     margin-bottom: 0em;
     list-style: decimal;
