@@ -1,5 +1,9 @@
 2007-11-02  Jonathon Jongsma  <jjongsma@gnome.org>
 
+	* update ignored files
+
+2007-11-02  Jonathon Jongsma  <jjongsma@gnome.org>
+
 	* docs/tutorial/Makefile.am: build the tutorial using the section ids as the
 	filenames.  This is much better for publishing on the web because under the
 	old system, the filenames were based on the chapter/section numbers, so if
