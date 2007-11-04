@@ -282,7 +282,7 @@ be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
 </warning>
 <para>
   If you want to help develop &gtkmm; or experiment with new features, you can
-  also install &gtkmm; from CVS.  Most users will never need to do this, but if
+  also install &gtkmm; from svn.  Most users will never need to do this, but if
   you're interested in helping with &gtkmm; development, see the <link
     linkend="chapter-working-with-svn">Working with Subversion</link> appendix.
 </para>
@@ -7268,7 +7268,7 @@ consider contributing to this document.
 <para>
 Ideally, we would like you to <ulink url="http://www.gtkmm.org/bugs.shtml">provide a patch</ulink> to the
 <filename>docs/tutorial/gtkmm-tut.xml</filename> file.  This file is currently
-in the <literal>gtkmm</literal> module in GNOME cvs. See 
+in the <literal>gtkmm</literal> module in GNOME svn.
 </para>
 
 <para>
@@ -8266,7 +8266,7 @@ some_gc.set_foreground(some_color);</programlisting>
     <application>jhbuild</application> is a program that makes building GNOME
     software much easier by calculating dependencies and building things in the
     correct order.  This section will give a brief explanation of how to set up
-    jhbuild to build and install &gtkmm; from CVS.  For up-to-date information
+    jhbuild to build and install &gtkmm; from svn.  For up-to-date information
     on <application>jhbuild</application>, please refer to the <ulink 
       url="http://www.gnome.org/~jamesh/jhbuild.html">jhbuild website</ulink>.
     If you need assistance using <application>jhbuild</application>, you should
@@ -8276,10 +8276,10 @@ some_gc.set_foreground(some_color);</programlisting>
   </para>
   <note>
     <para>
-    Note that to build &gtkmm; from <application>CVS</application>, you'll
-    need to build all of its dependencies from CVS as well.
-    <application>jhbuild</application> makes this easier than it would normally
-    be, but it will take quite a while to build and install them all.
+    Note that to build &gtkmm; from svn, you'll need to build all of its
+    dependencies from svn as well.  <application>jhbuild</application> makes
+    this easier than it would normally be, but it will take quite a while to
+    build and install them all.
     </para>
   </note>
   <sect1 id="sec-setting-up-jhbuild">
@@ -8317,14 +8317,6 @@ some_gc.set_foreground(some_color);</programlisting>
       can always build a different moduleset later by specifying it on the
       commandline (e.g.  <command>jhbuild build gtkmm</command>).
     </para>
-    <para>
-      Note that the GNOME moduleset is most likely set up to build the branch of
-      &gtkmm; that will be included with that GNOME release, so it may not build
-      &gtkmm; HEAD by default.  The branch name is specified in the
-      <literal>revision</literal> attribute of the <literal>cvsmodule</literal>
-      element.  In order to build the HEAD version of &gtkmm;, edit your
-      moduleset file and delete the <literal>revision</literal> attribute.
-    </para>
     <important>
       <title>Setting a prefix</title>
       <para>
@@ -8335,7 +8327,7 @@ some_gc.set_foreground(some_color);</programlisting>
         prefix, but it is recommended that you keep this prefix different from
         other software that you've installed (don't set it to
         <filename>/usr</filename>!) This way you can keep using your stable
-        versions without conflict and use the CVS versions when you want to.
+        versions without conflict and use the svn versions when you want to.
         You may want to choose a prefix that your user account has write access
         to so that you don't need to run <application>jhbuild</application> as
         <literal>root</literal>.
@@ -8343,7 +8335,7 @@ some_gc.set_foreground(some_color);</programlisting>
     </important>
   </sect1>
   <sect1 id="sec-installing-jhbuild">
-    <title>Installing and Using the CVS version of &gtkmm;</title>
+    <title>Installing and Using the svn version of &gtkmm;</title>
     <para>
       Once you've configured <application>jhbuild</application> as described
       above, building &gtkmm; should be relatively straightforward.  The first
@@ -8358,7 +8350,7 @@ $ jhbuild sanitycheck</screen>
       <title>Installing &gtkmm; with <application>jhbuild</application></title>
       <para>
         If everything worked correctly, you should be able to build &gtkmm; and
-        all of its dependencies from CVS by executing <command>jhbuild
+        all of its dependencies from svn by executing <command>jhbuild
           build</command> (or, if you didn't specify &gtkmm; in the
         <varname>modules</varname> variable, with the command <command>jhbuild
           build gtkmm</command>).
@@ -8374,9 +8366,9 @@ $ jhbuild sanitycheck</screen>
       </para>
     </sect2>
     <sect2>
-      <title>Using the CVS version of &gtkmm;</title>
+      <title>Using the svn version of &gtkmm;</title>
       <para>
-        After you've installed the CVS version of &gtkmm;, you're ready to start
+        After you've installed the svn version of &gtkmm;, you're ready to start
         using and experimenting with it.  In order to use the new version of
         &gtkmm; you've just installed, you need to set some environment
         variables so that your <filename>configure</filename> script knows where

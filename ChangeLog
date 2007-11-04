@@ -1,5 +1,10 @@
 2007-11-03  Jonathon Jongsma  <jjongsma@gnome.org>
 
+	* docs/tutorial/gtkmm-tut.xml: update the 'working with cvs' section to
+	refer to svn instead of cvs
+
+2007-11-03  Jonathon Jongsma  <jjongsma@gnome.org>
+
 	* docs/tutorial/style.css: more minor style tweaking.  Only applied the
 	slightly larger line-height to text in <p> elements so that other things
 	like lists and stuff don't get too wide.  Also reduced the spacing between
