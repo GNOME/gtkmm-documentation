@@ -1,7 +1,6 @@
 body    {
     font-size: 1em;
     margin: 2em 10em;
-    line-height: 150%;
 }
 
 a:link, a:visited  {
@@ -59,7 +58,8 @@ pre.programlisting, pre.screen {
 
 pre.programlisting,
 pre.screen,
-code.code {
+code.code,
+*.command {
     background-color: #F6F6F6;
 }
 
@@ -226,7 +226,8 @@ div + * { margin-top: 1em; }
 p   + * { margin-top: 1em; }
 p &gt; div { margin-top: 1em; margin-bottom: 1em; }
 p &gt; div + div { margin-top: 0em; }
-p { text-align: justify; }
+p { text-align: justify;
+    line-height: 150%; }
 
 div.navheader tbody , div.navfooter tbody, div.navfooter td   {
     border: 0px;
@@ -275,7 +276,7 @@ span.application    {
     font-family: monospace;
 }
 
-code.classname, code.function, code.filename  {
+code.classname, code.function, code.filename, code.code, *.command  {
     font-weight: normal;
     font-family: monospace;
 }
@@ -322,6 +323,11 @@ div.list-of-figures {
 div.toc > p,
 div.list-of-figures > p {
     font-size: 130%;
+}
+
+div.chapter div.toc > ul > li   {
+    margin-bottom: 0em;
+    list-style: decimal;
 }
 
 div.toc > ul > li   {
