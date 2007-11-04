@@ -1,5 +1,11 @@
 2007-11-03  Jonathon Jongsma  <jjongsma@gnome.org>
 
+	* docs/tutorial/gtkmm-tut.xml: added a bit more semantic markup to some
+	classnames that I noticed was missing so they're displayed consistently in
+	monospace font
+
+2007-11-03  Jonathon Jongsma  <jjongsma@gnome.org>
+
 	* docs/tutorial/style.css: fixed the section mini-toc style change to also
 	apply to appendixes, not just chapters
 

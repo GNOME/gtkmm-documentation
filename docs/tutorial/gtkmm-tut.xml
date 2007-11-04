@@ -461,9 +461,9 @@ just connecting to the existing &gtkmm; signals, see the <link linkend="chapter-
 <title>Intermediate types</title>
 <para>Some parts of the &gtkmm; API use intermediate data containers, such as <classname>Glib::StringArrayHandle</classname> instead of a specific Standard C++ container such as <classname>std::vector</classname> or <classname>std::list</classname>. You should not declare these types yourself -- you should use whatever Standard C++ container you prefer instead. &gtkmm; will do the conversion for you. Here are some of these intermediate types:
 <itemizedlist>
-	<listitem><para>Glib::StringArrayHandle or Glib::ArrayHandle&lt;Glib::ustring&gt;: Use std::vector&lt;Glib::ustring&gt;, std::list&lt;Glib::ustring&gt;, const char*[], etc.</para></listitem>
-<listitem><para>Glib::ListHandle&lt;Gtk::Widget*&gt;: Use std::vector&lt;Gtk::Widget*&gt;, std::list&lt;Gtk::Widget*&gt;, etc.</para></listitem>
-<listitem><para>Glib::SListHandle&lt;Gtk::Widget*&gt;: Use std::vector&lt;Gtk::Widget*&gt;, std::list&lt;Gtk::Widget*&gt;, etc.</para></listitem>
+    <listitem><para><classname>Glib::StringArrayHandle</classname> or <classname>Glib::ArrayHandle&lt;Glib::ustring&gt;</classname>: Use <classname>std::vector&lt;Glib::ustring&gt;</classname>, <classname>std::list&lt;Glib::ustring&gt;</classname>, <type>const char*[]</type>, etc.</para></listitem>
+    <listitem><para><classname>Glib::ListHandle&lt;Gtk::Widget*&gt;</classname>: Use <classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::list&lt;Gtk::Widget*&gt;</classname>, etc.</para></listitem>
+    <listitem><para><classname>Glib::SListHandle&lt;Gtk::Widget*&gt;</classname>: Use <classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::list&lt;Gtk::Widget*&gt;</classname>, etc.</para></listitem>
 </itemizedlist>
 
 </para>
