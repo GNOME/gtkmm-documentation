@@ -1,5 +1,10 @@
 2007-11-03  Jonathon Jongsma  <jjongsma@gnome.org>
 
+	* docs/tutorial/gtkmm-tut.xml: fixed a couple more cvs-isms and changed them
+	to reference svn instead
+
+2007-11-03  Jonathon Jongsma  <jjongsma@gnome.org>
+
 	* docs/tutorial/gtkmm-tut.xml: added a bit more semantic markup to some
 	classnames that I noticed was missing so they're displayed consistently in
 	monospace font

@@ -8426,10 +8426,9 @@ $ jhbuild sanitycheck</screen>
 <sect2>
 <title>Copying an existing project</title>
 
-<para>Typically our wrapper library would be called libexamplemm. We can start by copying an existing *mm library, such as libgdamm, after checking it out from cvs.
+<para>Typically our wrapper library would be called libexamplemm. We can start by copying an existing *mm library, such as libgdamm, after checking it out from svn.
 <programlisting>
-$ cvs -z3 co gnomemm/libgdamm
-$ cp -r gnomemm/libgdamm libsomethingmm
+$ svn co svn.gnome.org/svn/gnomemm/libgdamm/trunk libsomethingmm
 </programlisting>
 </para>
 <para>
@@ -8473,7 +8472,9 @@ $ mv libsomething/src/libgda_docs.xml libsomething/src/libsomething_docs.xml
 $ mv libsomething/src/libgda_docs_override.xml libsomething/src/libsomething_docs_override.xml
 </programlisting>
 A multiple-file renaming tool, such as <command>prefixsuffix</command> might
-help with this. We will provide the contents of these files later.
+help with this. We will provide the contents of these files later.  In addition,
+if you started from an svn checkout, you'll probably want to get rid of all of
+the extra <filename>.svn</filename> directories in the source tree.
 </para>
 <para>
     Note that files ending in <filename>.in</filename> will be used to generate
