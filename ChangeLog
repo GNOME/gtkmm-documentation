@@ -1,3 +1,8 @@
+2007-11-05  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/tutorial/gtkmm-tut.xml: Added a warning about not making TreeColumnRecords 
+	static. Bug #443586 (Robert Pearce).
+
 2007-11-03  Jonathon Jongsma  <jjongsma@gnome.org>
 
 	* docs/tutorial/gtkmm-tut.xml: fixed a couple more cvs-isms and changed them

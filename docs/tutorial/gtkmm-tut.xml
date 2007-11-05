@@ -2647,6 +2647,8 @@ like so:
 </para>
 <programlisting>Glib::RefPtr&lt;Gtk::ListStore&gt; refListStore =
     Gtk::ListStore::create(m_Columns);</programlisting>
+<para>Note that the instance (such as m_Columns here) should usually not be static, because it often needs to be instantiated after 
+glibmm has been instantiated.</para>
 </sect2>
 
 <sect2>
