@@ -1,5 +1,14 @@
 2007-11-05  Jonathon Jongsma  <jjongsma@gnome.org>
 
+	* docs/tutorial/gtkmm-tut.xml: add 'id' attributes for all of the elements
+	that the docbook xsl stylesheets spit out warnings for.  This makes sure
+	that the sub-page links will be more permanent as well, (e.g.
+	gtkmm.org/docs/tutorial/page.html#permanent-id).  It's an annoyingly manual
+	process, but I don't see any other alternative, and I think the benefits are
+	worthwhile
+
+2007-11-05  Jonathon Jongsma  <jjongsma@gnome.org>
+
 	* docs/tutorial/gtkmm-tut.xml: increase docbook version to 4.5 since I was
 	using some markup that wasn't valid in the old 4.1.2 sepecification
 
