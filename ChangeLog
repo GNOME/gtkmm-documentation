@@ -1,3 +1,8 @@
+2007-11-05  Jonathon Jongsma  <jjongsma@gnome.org>
+
+	* docs/tutorial/gtkmm-tut.xml: increase docbook version to 4.5 since I was
+	using some markup that wasn't valid in the old 4.1.2 sepecification
+
 2007-11-05  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/tutorial/gtkmm-tut.xml: x-event-signals section:
