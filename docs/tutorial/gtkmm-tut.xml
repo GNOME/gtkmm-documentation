@@ -3991,15 +3991,20 @@ to capture events on them. They are intended to have no X-Window in order to imp
 <title>EventBox</title>
 
 <para>
-TODO: Why don't they have X Windows - explain clipping.
 Some &gtkmm; widgets don't have associated X windows; they draw on
 their parents' windows.  Because of this, they cannot receive events.
 Also, if they are incorrectly sized, they don't clip, so you can get
-messy overwriting etc. If you require more from these widgets, the
-<classname>EventBox</classname> is for you.  Although the name
+messy overwriting etc. To receive events on one of these widgets, you can it  
+inside an <classname>EventBox</classname> widget and then call 
+<function>Gtk::Widget::set_events()</function> on the EventBox before showing it.</para>
+
+<para>Although the name
 <classname>EventBox</classname> emphasises the event-handling method, the
 widget can also be used for clipping (and more; see the example below).
 </para>
+<para>TODO: Why don't they have X Windows - explain clipping.
+Also, how does this affect platform such as Windows and MacOS that don't use X.
+</para> 
 
 <para>
 The constructor for <classname>Gtk::EventBox</classname> is:
@@ -7784,6 +7789,13 @@ Handling an X event doesn't affect the Widget's other signals.  If you handle
 <literal>button_pressed_event</literal> for
 <classname>Gtk::Button</classname>, you'll still be able to get the
 <literal>clicked</literal> signal.  They are emitted at (nearly) the same time.
+</para>
+
+<para>Note also that not all widgets recieve all X events by default. To receive additional 
+X events, you can use <function>Gtk::Widget::set_events()</function> before showing the 
+widget, or <function>Gtk::Widget::add_events()</function> after showing the widget. However, 
+some widgets must first be placed inside an <classname>EventBox</classname> widget. See 
+the <link linkend="chapter-widgets-without-xwindows">Widgets Without X-Windows</link> chapter.
 </para>
 
 <para>

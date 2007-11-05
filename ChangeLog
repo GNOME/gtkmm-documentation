@@ -1,5 +1,12 @@
 2007-11-05  Murray Cumming  <murrayc@murrayc.com>
 
+	* docs/tutorial/gtkmm-tut.xml: x-event-signals section:
+	Mention add_events(), set_events(), and EventBox.
+	EventBox section: Mention set_events().
+	Bug #454709 (Daniel Hornung).
+
+2007-11-05  Murray Cumming  <murrayc@murrayc.com>
+
 	* docs/tutorial/gtkmm-tut.xml: Added a warning about not making TreeColumnRecords 
 	static. Bug #443586 (Robert Pearce).
 
