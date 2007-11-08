@@ -9001,8 +9001,10 @@ public:
 <sect3 id="gmmproc-wrap-ctor">
 <title>_WRAP_CTOR</title>
 <para>This macro creates a constructor with arguments, equivalent to a
-    <function>*_new()</function> C function. It takes a C++ constructor
-    signature, and a C function name.
+  <function>*_new()</function> C function. It won't actually call the
+  <function>*_new()</function> function, but will simply create an equivalent
+  constructor with the same argument types. It takes a C++ constructor
+  signature, and a C function name.
 </para>
 </sect3>
 
@@ -9205,8 +9207,70 @@ _WRAP_ENUM(WindowType, GdkWindowType)
 </programlisting>
 </para>
 </sect3>
+<sect3 id="gmmproc-member-set-get">
+    <title>_MEMBER_GET / _MEMBER_SET</title>
+  <para>
+    Use this macro if you're wrapping simple struct or boxed type that provides
+    direct access to its data members, and you want to create accessors and
+    mutators for the data members.
+  </para>
+  <para><function>_MEMBER_GET(C++ name, C name, C++ type, C type)</function></para>
+  <para><function>_MEMBER_SET(C++ name, C name, C++ type, C type)</function></para>
+  <para>
+    For example, in <filename>rectangle.hg</filename>:
+    <programlisting>_MEMBER_GET(x, x, int, int)</programlisting>
+  </para>
+</sect3>
+<sect3 id="gmmproc-member-get-set-ptr">
+  <title>_MEMBER_GET_PTR / _MEMBER_SET_PTR</title>
+  <para>
+    Use this macro to automatically provide accessors and mutators for a data
+    member that is a pointer type.  It will create two accessors, one const and
+    one non-const.
+  </para>
+  <para><function>_MEMBER_GET_PTR(C++ name, C name, C++ type, C type)</function></para>
+  <para><function>_MEMBER_SET_PTR(C++ name, C name, C++ type, C type)</function></para>
+  <para>For example, in <filename>dialog.hg</filename>:
+<programlisting>
+_MEMBER_GET_PTR(vbox, vbox, VBox*, GtkWidget*)
+</programlisting>
+  </para>
+</sect3>
+<sect3 id="gmmproc-member-get-set-gobject">
+  <title>_MEMBER_GET_GOBJECT / _MEMBER_SET_GOBJECT</title>
+  <para>
+    Use this macro to provide accessors and mutators for a data member that is a
+    <classname>GObject</classname> type that must be referenced before being
+    returned.
+  </para>
+  <para><function>_MEMBER_GET_GOBJECT(C++ name, C name, C++ type, C type)</function></para>
+  <para><function>_MEMBER_SET_GOBJECT(C++ name, C name, C++ type, C type)</function></para>
+  <para>For example, in <filename>progress.hg</filename>:
+<programlisting>
+_MEMBER_GET_GOBJECT(offscreen_pixmap, offscreen_pixmap, Gdk::Pixmap, GdkPixmap*)
+</programlisting>
+  </para>
+</sect3>
 </sect2>
-
+<sect2 id="gmmproc-basic-types">
+  <title>Basic Types</title>
+  <para>Some of the basic types that are used in C APIs have better alternatives
+    in C++ (for example, there's no need for a <type>gboolean</type> type since
+    C++ has <type>bool</type>.  The following list shows some commonly-used
+    types in C APIs and what you might convert them to in a C++ wrapper library.
+  </para>
+  <segmentedlist><title>Basic Type equivalents</title>
+    <?dbhtml list-presentation="table"?>
+    <segtitle>C type</segtitle>
+    <segtitle>C++ type</segtitle>
+    <seglistitem><seg><type>gboolean</type></seg><seg><type>bool</type></seg></seglistitem>
+    <seglistitem><seg><type>gint</type></seg><seg><type>int</type></seg></seglistitem>
+    <seglistitem><seg><type>guint</type></seg><seg><type>guint</type></seg></seglistitem>
+    <seglistitem><seg><type>gdouble</type></seg><seg><type>double</type></seg></seglistitem>
+    <seglistitem><seg><type>gunichar</type></seg><seg><type>gunichar</type></seg></seglistitem>
+    <seglistitem><seg><type>gchar*</type></seg><seg><classname>Glib::ustring</classname> (or <classname>std::string</classname> for filenames)</seg></seglistitem>
+  </segmentedlist>
+</sect2>
 </sect1>
 
 

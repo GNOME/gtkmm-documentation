@@ -1,3 +1,10 @@
+2007-11-07  Jonathon Jongsma  <jjongsma@gnome.org>
+
+	* docs/tutorial/gtkmm-tut.xml: added a bit more information to the
+	'wrapping' appendix.  Added basic info about _MEMBER_GET/SET macros.  Also
+	added a bit of clarification to the _WRAP_CTOR description, and added a
+	brief section on 'basic' types
+
 2007-11-05  Jonathon Jongsma  <jjongsma@gnome.org>
 
 	* docs/tutorial/gtkmm-tut.xml: add 'id' attributes for all of the elements
