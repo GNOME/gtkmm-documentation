@@ -1,3 +1,7 @@
+2007-11-12  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/tutorial/gtkmm-tut.xml: Added a description of _WRAP_GERROR().
+
 2007-11-07  Jonathon Jongsma  <jjongsma@gnome.org>
 
 	* docs/tutorial/gtkmm-tut.xml: added a bit more information to the

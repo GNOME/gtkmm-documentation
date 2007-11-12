@@ -9198,8 +9198,7 @@ _WRAP_PROPERTY("label", Glib::ustring)
 <title>Other macros</title>
 <sect3 id="gmmproc-wrap-enum">
 <title>_WRAP_ENUM</title>
-<para>This macro generates a C++ enum, usually in a C++ namespace, to wrap a C
-    enum from the global namespace. You must specify the desired C++ name and
+<para>This macro generates a C++ enum to wrap a C enum. You must specify the desired C++ name and
     the name of the underlying C enum.</para>
 <para>For instance, from <filename>widget.hg</filename>:
 <programlisting>
@@ -9207,12 +9206,25 @@ _WRAP_ENUM(WindowType, GdkWindowType)
 </programlisting>
 </para>
 </sect3>
+
+<sect3 id="gmmproc-wrap-gerror">
+<title>_WRAP_GERROR</title>
+<para>This macro generates a C++ exception class, derived from Glib::Error, with 
+a Code enum and a code() method. You must specify the desired C++ name, the name 
+of the corresponding C enum, and the prefix for the C enum values.</para>
+<para>This exception can then be thrown by methods which are generated from _WRAP_METHOD() with the errthrow option.</para>
+<para>For instance, from <filename>pixbuf.hg</filename>:
+<programlisting>
+_WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)
+</programlisting>
+</para>
+</sect3>
+
 <sect3 id="gmmproc-member-set-get">
     <title>_MEMBER_GET / _MEMBER_SET</title>
   <para>
-    Use this macro if you're wrapping simple struct or boxed type that provides
-    direct access to its data members, and you want to create accessors and
-    mutators for the data members.
+    Use these macro if you're wrapping a simple struct or boxed type that provides
+    direct access to its data members, to create getters and setters for the data members.
   </para>
   <para><function>_MEMBER_GET(C++ name, C name, C++ type, C type)</function></para>
   <para><function>_MEMBER_SET(C++ name, C name, C++ type, C type)</function></para>
@@ -9224,9 +9236,9 @@ _WRAP_ENUM(WindowType, GdkWindowType)
 <sect3 id="gmmproc-member-get-set-ptr">
   <title>_MEMBER_GET_PTR / _MEMBER_SET_PTR</title>
   <para>
-    Use this macro to automatically provide accessors and mutators for a data
-    member that is a pointer type.  It will create two accessors, one const and
-    one non-const.
+    Use these macros to automatically provide getters and setters for a data
+    member that is a pointer type.  For the getter function, it will 
+    create two methods, one const and one non-const.
   </para>
   <para><function>_MEMBER_GET_PTR(C++ name, C name, C++ type, C type)</function></para>
   <para><function>_MEMBER_SET_PTR(C++ name, C name, C++ type, C type)</function></para>
@@ -9239,7 +9251,7 @@ _MEMBER_GET_PTR(vbox, vbox, VBox*, GtkWidget*)
 <sect3 id="gmmproc-member-get-set-gobject">
   <title>_MEMBER_GET_GOBJECT / _MEMBER_SET_GOBJECT</title>
   <para>
-    Use this macro to provide accessors and mutators for a data member that is a
+    Use this macro to provide getters and setters for a data member that is a
     <classname>GObject</classname> type that must be referenced before being
     returned.
   </para>
@@ -9255,7 +9267,7 @@ _MEMBER_GET_GOBJECT(offscreen_pixmap, offscreen_pixmap, Gdk::Pixmap, GdkPixmap*)
 <sect2 id="gmmproc-basic-types">
   <title>Basic Types</title>
   <para>Some of the basic types that are used in C APIs have better alternatives
-    in C++ (for example, there's no need for a <type>gboolean</type> type since
+    in C++. For example, there's no need for a <type>gboolean</type> type since
     C++ has <type>bool</type>.  The following list shows some commonly-used
     types in C APIs and what you might convert them to in a C++ wrapper library.
   </para>
