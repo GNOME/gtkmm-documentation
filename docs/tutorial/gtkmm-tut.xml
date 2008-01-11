@@ -3252,7 +3252,7 @@ section.
 { add(m_col_id); add(m_col_name); }
 
   Gtk::TreeModelColumn&lt;int&gt; m_col_id;
-  Gtk::TreeModelColumn&lt;Glib::ustring&lt; m_col_name;
+  Gtk::TreeModelColumn&lt;Glib::ustring&gt; m_col_name;
 };
 
 ModelColumns m_columns;</programlisting>
