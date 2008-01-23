@@ -35,6 +35,7 @@ ExampleWindow::ExampleWindow()
   m_Combo.signal_changed().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_combo_changed) );
 
+  m_Combo.property_has_frame() = false;
   show_all_children();
 }
 

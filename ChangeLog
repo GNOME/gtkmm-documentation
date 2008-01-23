@@ -1,3 +1,15 @@
+2008-01-23  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.in:
+	* examples/book/Makefile.am:
+	* examples/book/comboboxentry/text/examplewindow.cc:
+	* examples/book/giomm/Makefile.am:
+	* examples/book/giomm/directory_list/Makefile.am:
+	* examples/book/giomm/directory_list/main.cc:
+	* examples/book/giomm/read_file/Makefile.am:
+	* examples/book/giomm/read_file/main.cc: Added two simple giomm 
+	examples. Let's add some more here.
+
 2008-01-11  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/tutorial/gtkmm-tut.xml: ComboBox section: Correct a typo in 
