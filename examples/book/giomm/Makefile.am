@@ -1,1 +1,1 @@
-SUBDIRS = directory_list read_file
+SUBDIRS = directory_list read_file volumes
