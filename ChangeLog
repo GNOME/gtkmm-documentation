@@ -1,3 +1,8 @@
+2008-01-26  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/book/giomm/volumes/main.cc: Get the volumes for the drives 
+	too, though no drives are reported for some reason.
+
 2008-01-24  Murray Cumming  <murrayc@murrayc.com>
 
 	* configure.in:
