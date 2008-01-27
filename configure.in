@@ -310,6 +310,8 @@ if test "x$enable_examples" = "xyes"; then
           examples/book/giomm/directory_list/Makefile
           examples/book/giomm/read_file/Makefile
           examples/book/giomm/volumes/Makefile
+          examples/book/giomm/getline/Makefile
+          examples/book/giomm/monitor_directory/Makefile
         examples/book/frame/Makefile
         examples/book/helloworld/Makefile
         examples/book/helloworld2/Makefile

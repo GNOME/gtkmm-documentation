@@ -26,7 +26,7 @@ int main(int argc, char** argv)
 
   try
   {
-    Glib::RefPtr<Gio::File> directory = Gio::File::create_for_path("/home/murrayc/");
+    Glib::RefPtr<Gio::File> directory = Gio::File::create_for_path("/etc");
     if(!directory)
       std::cerr << "Gio::File::create_for_path() returned an empty RefPtr." << std::endl;
 

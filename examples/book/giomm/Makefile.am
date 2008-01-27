@@ -1,1 +1,1 @@
-SUBDIRS = directory_list read_file volumes
+SUBDIRS = directory_list read_file volumes getline monitor_directory

@@ -1,3 +1,21 @@
+2008-01-27  Jonathon Jongsma  <jjongsma@gnome.org>
+
+
+	* configure.in: add new giomm examples
+	* examples/book/giomm/directory_list/main.cc: change directory to a more
+	generic '/etc' that almost everybody will have
+	* examples/book/giomm/read_file/main.cc: changed to more generic filename
+	that most people will have: /etc/fstab
+	* examples/book/giomm/getline: add a simple example for implementing
+	something similar to std::istream::getline() using giomm.  I'm not sure how
+	useful this one is as an example.  I'm also not sure how efficient it is to
+	read a file one character at a time, but I think that's how the standard
+	library function is implemented as well...
+	* examples/book/giomm/monitor_directory: add an example for monitoring a
+	directory using giomm.  It should monitor the current directory, then create
+	a file and print out information on the commannd line when we get a change
+	notification
+
 2008-01-26  Murray Cumming  <murrayc@murrayc.com>
 
 	* examples/book/giomm/volumes/main.cc: Get the volumes for the drives 
