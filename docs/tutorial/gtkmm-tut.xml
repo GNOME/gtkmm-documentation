@@ -8959,6 +8959,28 @@ _CLASS_GENERIC(AttrIter, PangoAttrIterator)
 </para>
 </sect3>
 
+<sect3 id="gmmproc-class-interface">
+<title>_CLASS_INTERFACE</title>
+<para>This macro declares a wrapper for a type that is derived from
+    <classname>GObject</classname>, but which is not derived from
+    <classname>GtkObject</classname>.
+</para>
+<para><function>_CLASS_INTERFACE( C++ class, C class, C casting macro, C interface struct, Base C++ class (optional), Base C class (optional) )</function></para>
+<para>
+For instance, from <filename>celleditable.hg</filename>:
+<programlisting>
+  _CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)
+</programlisting>
+</para>
+<para>Two extra parameters are optional, for the case that the interface derives from another interface, 
+which should be the case when the GInterface has another GInterface as a prerequisitite. 
+For instance, from <filename>loadableicon.hg</filename>:
+<programlisting>
+  _CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)
+</programlisting>
+</para>
+</sect3>
+
 
 </sect2>
 

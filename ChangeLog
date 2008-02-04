@@ -1,5 +1,9 @@
-2008-01-27  Jonathon Jongsma  <jjongsma@gnome.org>
+2008-02-04  Murray Cumming  <murrayc@murrayc.com>
 
+	* docs/tutorial/gtkmm-tut.xml: gmmproc section: Document _CLASS_INTERFACE(), 
+	including documenting the new optional parameters.
+
+2008-01-27  Jonathon Jongsma  <jjongsma@gnome.org>
 
 	* configure.in: add new giomm examples
 	* examples/book/giomm/directory_list/main.cc: change directory to a more
