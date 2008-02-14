@@ -1,3 +1,11 @@
+2008-02-13  Jonathon Jongsma  <jjongsma@gnome.org>
+
+	* examples/book/giomm/getline/getline.cc: fix this example to use the
+	correct buffered data input stream instead of doing it manually (and very
+	inefficiently).
+	* examples/book/giomm/monitor_directory/monitor_directory.cc: fix build
+	failure
+
 2008-02-04  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/tutorial/gtkmm-tut.xml: gmmproc section: Document _CLASS_INTERFACE(), 

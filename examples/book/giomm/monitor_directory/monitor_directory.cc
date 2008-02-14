@@ -73,7 +73,7 @@ bool create_temp_file ()
         // FIXME: need to add an overload to giomm without a cancellable
         Glib::RefPtr<Gio::Cancellable> cancellable = Gio::Cancellable::create ();
         Glib::RefPtr<Gio::FileOutputStream> stream =
-            temp_file->create_file (Gio::FILE_CREATE_NONE, cancellable);
+            temp_file->create_file ();
         stream->write ("this is only a test");
         stream->close ();
     }
