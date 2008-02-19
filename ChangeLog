@@ -1,3 +1,9 @@
+2008-02-18  Jonathon Jongsma  <jjongsma@gnome.org>
+
+	* examples/book/custom/custom_widget/custom_gtkrc: make the class name in
+	the .gtkrc file begin with a lower-case 'gtkmm__' so that the rc file is
+	parsed properly.  Fixes Bug #396198
+
 2008-02-13  Jonathon Jongsma  <jjongsma@gnome.org>
 
 	* examples/book/giomm/getline/getline.cc: fix this example to use the
