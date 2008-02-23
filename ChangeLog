@@ -1,3 +1,12 @@
+2008-02-22  Jonathon Jongsma  <jjongsma@gnome.org>
+
+	* configure.in:
+	* examples/book/giomm/Makefile.am:
+	* examples/book/giomm/usage/Makefile.am:
+	* examples/book/giomm/usage/usage.cc: add another simple giomm example --
+	this one just takes a directory argument on the command line at recursively
+	calculates the size of the files in that directory
+
 2008-02-18  Jonathon Jongsma  <jjongsma@gnome.org>
 
 	* examples/book/custom/custom_widget/custom_gtkrc: make the class name in
