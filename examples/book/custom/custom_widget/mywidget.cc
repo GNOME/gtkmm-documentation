@@ -158,7 +158,7 @@ bool MyWidget::on_expose_event(GdkEventExpose* event)
     double scale_y = (double)get_allocation().get_height() / m_scale;
 
     Cairo::RefPtr<Cairo::Context> cr = m_refGdkWindow->create_cairo_context();
-    if (event)
+    if(event)
     {
       // clip to the area that needs to be re-exposed so we don't draw any
       // more than we need to.

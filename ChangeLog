@@ -1,3 +1,15 @@
+2008-03-05  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.in:
+	* examples/book/giomm/Makefile.am:
+	* examples/book/giomm/read_file_async/: Added a version of the 
+	read_file() example that uses the async methods. Seems to work fine.
+
+	* examples/book/giomm/getline/getline.cc:
+	* examples/book/giomm/monitor_directory/monitor_directory.cc:
+	* examples/book/giomm/usage/usage.cc: Whitespace corrections for 
+	consistency.
+
 2008-03-03  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/index.html: Added links into giomm.

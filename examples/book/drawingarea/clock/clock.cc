@@ -44,7 +44,7 @@ bool Clock::on_expose_event(GdkEventExpose* event)
 
     Cairo::RefPtr<Cairo::Context> cr = window->create_cairo_context();
 
-    if (event)
+    if(event)
     {
         // clip to the area indicated by the expose event so that we only
         // redraw the portion of the window that needs to be redrawn
@@ -79,7 +79,7 @@ bool Clock::on_expose_event(GdkEventExpose* event)
         cr->save();
         cr->set_line_cap(Cairo::LINE_CAP_ROUND);
 
-        if (i % 3 != 0)
+        if(i % 3 != 0)
         {
             inset *= 0.8;
             cr->set_line_width(0.03);

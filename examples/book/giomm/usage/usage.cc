@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- *  Copyright (c) 2008 Jonathon Jongsma
+ *  Copyright(c) 2008 Jonathon Jongsma
  *
  *  This file is part of gtkmm
  *
@@ -21,47 +21,53 @@
 #include <giomm.h>
 #include <iostream>
 
-goffset get_size_recursively (const Glib::RefPtr<Gio::File>& file)
+goffset get_size_recursively(const Glib::RefPtr<Gio::File>& file)
 {
-    goffset total = 0;
-    g_return_val_if_fail (file, total);
-    try {
-        Glib::RefPtr<Gio::FileInfo> info = file->query_info ();
-        if (info->get_file_type () == Gio::FILE_TYPE_DIRECTORY)
-        {
-            Glib::RefPtr<Gio::FileEnumerator> children = file->enumerate_children ();
-            Glib::RefPtr<Gio::FileInfo> child_info;
-            while (child_info = children->next_file ())
-            {
-                goffset size = get_size_recursively (
-                        file->get_child (child_info->get_name ()));
-                total += size;
-            }
-            //std::cout << file->get_path () << ": " << total << std::endl;
-        }
-        else
-        {
-            total = info->get_size ();
-        }
-    }
-    catch (const Glib::Error& error)
+  goffset total = 0;
+  g_return_val_if_fail(file, total);
+
+  try
+  {
+    Glib::RefPtr<Gio::FileInfo> info = file->query_info();
+    if(info->get_file_type() == Gio::FILE_TYPE_DIRECTORY)
     {
-        std::cerr << error.what () << std::endl;
+      Glib::RefPtr<Gio::FileEnumerator> children = file->enumerate_children();
+      Glib::RefPtr<Gio::FileInfo> child_info;
+
+      while(child_info = children->next_file())
+      {
+        goffset size = get_size_recursively(
+            file->get_child(child_info->get_name()));
+        total += size;
+      }
+
+      //std::cout << file->get_path() << ": " << total << std::endl;
     }
-    return total;
+    else
+    {
+      total = info->get_size();
+    }
+  }
+  catch(const Glib::Error& error)
+  {
+    std::cerr << error.what() << std::endl;
+  }
+  return total;
 }
 
 int main(int argc, char** argv)
 {
-    std::string root_dir = ".";
-    if (argc > 1) {
-        root_dir = argv[1];
-    }
-    Gio::init ();
-    Glib::RefPtr<Gio::File> file = Gio::File::create_for_path (root_dir);
-    std::cout << "Gathering disk usage information for '" << file->get_path () << "'" << std::endl;
-    goffset total = get_size_recursively (file);
-    std::cout << "Total: " << total << std::endl;
+  std::string root_dir = ".";
+  if(argc > 1)
+    root_dir = argv[1];
 
-    return 0;
+  Gio::init();
+
+  Glib::RefPtr<Gio::File> file = Gio::File::create_for_path(root_dir);
+  std::cout << "Gathering disk usage information for '" << file->get_path() << "'" << std::endl;
+
+  const goffset total = get_size_recursively(file);
+  std::cout << "Total: " << total << std::endl;
+
+  return 0;
 }

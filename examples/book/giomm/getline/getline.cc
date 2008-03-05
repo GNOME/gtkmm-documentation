@@ -27,17 +27,17 @@
  */
 int main(int argc, char** argv)
 {
-    Gio::init();
-    Glib::RefPtr<Gio::File> f = Gio::File::create_for_path ("/etc/profile");
-    Glib::RefPtr<Gio::FileInputStream> file_stream = f->read ();
-    Glib::RefPtr<Gio::DataInputStream> data_stream =
-        Gio::DataInputStream::create (file_stream);
-    std::string line;
-    int line_num = 1;
-    while (data_stream->read_line(line))
-    {
-        // print each line out prefixed with the line number
-        std::cout << std::setw (5) << line_num++ << ": >" << line << std::endl;
-    }
-    return 0;
+  Gio::init();
+  Glib::RefPtr<Gio::File> f = Gio::File::create_for_path("/etc/profile");
+  Glib::RefPtr<Gio::FileInputStream> file_stream = f->read();
+  Glib::RefPtr<Gio::DataInputStream> data_stream = Gio::DataInputStream::create(file_stream);
+
+  std::string line;
+  int line_num = 1;
+  while (data_stream->read_line(line))
+  {
+    // print each line out prefixed with the line number
+    std::cout << std::setw (5) << line_num++ << ": >" << line << std::endl;
+  }
+  return 0;
 }
