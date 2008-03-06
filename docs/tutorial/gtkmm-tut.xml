@@ -8858,6 +8858,36 @@ $ /usr/lib/glibmm-2.4/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtkm
     .ccg file.</para>
 
 <para>The macros are explained in more detail in the following sections.</para>
+
+<sect2 id="gmmproc-m4-conversions">
+<title>m4 Conversions</title>
+<para>The macros that you use in the .hg and .ccg files often need to know how 
+to convert a C++ type to a C type, or vice-versa. gmmproc takes this information 
+from an .m4 file in your <literal>tools/m4/</literal> directory. This allows it 
+to call a C function in the implementation of your C++ method, passing the 
+appropriate parameters to that C functon. For instance, this 
+tells gmmproc how to convert a GtkTreeView pointer to a Gtk::TreeView pointer:
+<programlisting>
+_CONVERSION(`GtkTreeView*',`TreeView*',`Glib::wrap($3)')
+</programlisting>
+</para>
+
+<para><literal>$3</literal> will be replaced by the parameter name when this 
+conversion is used by gmmproc.
+</para>
+
+<para>
+Some extra macros make this easier and consistent. Look in gtkmm's .m4 files 
+for examples. For instance:
+<programlisting>
+_CONVERSION(`PrintSettings&amp;',`GtkPrintSettings*',__FR2P)
+_CONVERSION(`const PrintSettings&amp;',`GtkPrintSettings*',__FCR2P)
+_CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REFPTR_TO_P($3))
+</programlisting>
+</para>
+</sect2>
+
+
 <sect2 id="gmmproc-class-macros">
 <title>Class macros</title>
 <para>The class macro declares the class itself and its relationship with the
