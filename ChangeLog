@@ -1,3 +1,10 @@
+2008-03-28  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.in:
+	* examples/book/giomm/Makefile.am:
+	* examples/book/giomm/write_file/: Added this example, showing how to 
+	create files and how to replace their contents using a stream.
+
 2008-03-06  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/tutorial/gtkmm-tut.xml: gmmproc appendix: Mention the m4 
