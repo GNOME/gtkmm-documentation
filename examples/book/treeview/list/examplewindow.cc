@@ -75,7 +75,7 @@ ExampleWindow::ExampleWindow()
           "%010d" /* 10 digits, using leading zeroes. */);
 
   //Display a progress bar instead of a decimal number:
-  Gtk::CellRendererProgress* cell = new Gtk::CellRendererProgress;
+  Gtk::CellRendererProgress* cell = Gtk::manage(new Gtk::CellRendererProgress);
   int cols_count = m_TreeView.append_column("Some percentage", *cell);
   Gtk::TreeViewColumn* pColumn = m_TreeView.get_column(cols_count - 1);
   if(pColumn)
