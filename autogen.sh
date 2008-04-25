@@ -97,6 +97,7 @@ fi
 $set_xtrace -x
 
 "$libtoolize" $LIBTOOLIZE_FLAGS	|| exit 1
+gnome-doc-prepare --force --copy || exit 1
 "$aclocal" $ACLOCAL_FLAGS	|| exit 1
 #"$autoheader"			|| exit 1
 "$automake" $AUTOMAKE_FLAGS	|| exit 1

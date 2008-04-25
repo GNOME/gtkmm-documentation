@@ -1,3 +1,18 @@
+2008-04-25  Murray Cumming  <murrayc@murrayc.com>
+
+	* autogen.sh:
+	* configure.in:
+	* docs/tutorial/Makefile.am: Use the gnome-doc-utils structure/build 
+	so that the tutorial can be translated easily.
+	We still generate a html directory at the top-level, for uploading 
+	to the website, and maybe for installing like before.
+	* docs/tutorial/gtkmm-tut.xml: moved to:
+	* docs/tutorial/C/gtkmm-tut.xml:
+	* docs/tutorial/figures/: moved to 
+	* docs/tutorial/C/figures/
+	* docs/tutorial/icons/: moved to 
+	* docs/tutorial/C/icons/
+
 2008-04-12  Jonathon Jongsma  <jjongsma@gnome.org>
 
 	* docs/tutorial/gtkmm-tut.xml: update link to jhbuild manual to point to

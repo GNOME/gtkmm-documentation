@@ -6,7 +6,9 @@
   <!ENTITY url_refdocs_base_gtk_html "../../reference/html/">
   <!ENTITY url_refdocs_base_gtk "../../reference/html/classGtk_1_1">
   <!ENTITY url_refdocs_base_gtk_namespace "../../reference/html/namespaceGtk_1_1">
-  <!ENTITY url_figures_base "../figures/"> 
+  <!ENTITY url_figures_base "figures/"> 
+  <!ENTITY path_examples_others_base "../../examples/others/">
+  <!ENTITY url_examples_others_base "../&path_examples_others_base;">
   <!ENTITY path_examples_base "../../examples/book/">
   <!ENTITY url_examples_base "../&path_examples_base;">
   <!ENTITY gtkmm "<application>gtkmm</application>">
@@ -316,14 +318,7 @@ To begin our introduction to &gtkmm;, we'll start with the simplest
 program possible. This program will create an empty 200 x 200 pixel window.
 </para>
 
-<para>
-Source location: examples/others/base/base.cc
-</para>
-
-<programlisting>
-<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-    href="../../examples/others/base/base.cc" parse="text"/>
-</programlisting>
+<para><ulink url="&url_examples_others_base;base">Source Code</ulink></para>
 
 <para>We will now explain each line of the example</para>
 <programlisting>#include &lt;gtkmm.h&gt;</programlisting>
@@ -9083,7 +9078,6 @@ Button::Button(const Glib::ustring&amp; label, bool mnemonic)
 
 <sect2 id="gmmproc-method-macros">
 <title>Method macros</title>
-<para></para>
 
 <sect3 id="gmmproc-wrap-method">
 <title>_WRAP_METHOD</title>
