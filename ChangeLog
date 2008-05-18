@@ -1,3 +1,8 @@
+2008-05-18  Hubert Figuiere  <hub@figuiere.net>
+
+	* docs/tutorial/C/gtkmm-tut.xml: It is h2def.py not
+	h2defs.py
+
 2008-04-25  Murray Cumming  <murrayc@murrayc.com>
 
 	* autogen.sh:
