@@ -9251,6 +9251,11 @@ _WRAP_PROPERTY("label", Glib::ustring)
 _WRAP_ENUM(WindowType, GdkWindowType)
 </programlisting>
 </para>
+<para>If the enum is not a <classname>GType</classname>, you must pass a third parameter NO_GTYPE. For example:
+<programlisting>
+_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
+</programlisting>
+</para>
 </sect3>
 
 <sect3 id="gmmproc-wrap-gerror">
