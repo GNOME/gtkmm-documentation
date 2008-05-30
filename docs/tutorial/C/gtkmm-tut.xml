@@ -9251,7 +9251,12 @@ _WRAP_PROPERTY("label", Glib::ustring)
 _WRAP_ENUM(WindowType, GdkWindowType)
 </programlisting>
 </para>
-<para>If the enum is not a <classname>GType</classname>, you must pass a third parameter NO_GTYPE. For example:
+<para>If the enum is not a <classname>GType</classname>, you must pass a third parameter NO_GTYPE. 
+This is the case when there is no <function>*_get_type()</function> function for the C enum, 
+but be careful that you don't just need to include an extra header for that function. You should also 
+file a bug against the C API, because all enums should be regeistered as GTypes.</para>
+<para>
+For example:
 <programlisting>
 _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
 </programlisting>

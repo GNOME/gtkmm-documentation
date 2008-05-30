@@ -1,3 +1,8 @@
+2008-05-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/tutorial/C/gtkmm-tut.xml: Clarify the new text about non-GType 
+	enums.
+
 2008-05-18  Hubert Figuiere  <hub@figuiere.net>
 
 	* docs/tutorial/C/gtkmm-tut.xml: It is h2def.py not
