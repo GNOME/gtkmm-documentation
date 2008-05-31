@@ -22,10 +22,14 @@
 #include "clock.h"
 
 Clock::Clock()
-    : m_radius(0.42), m_lineWidth(0.05)
+: m_radius(0.42), m_line_width(0.05)
 {
-    Glib::signal_timeout().connect(
-                sigc::mem_fun(*this, &Clock::onSecondElapsed), 1000);
+  Glib::signal_timeout().connect( sigc::mem_fun(*this, &Clock::on_timeout), 1000 );
+
+  #ifndef GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED
+  //Connect the signal handler if it isn't already a virtual method override:
+  signal_expose_event().connect(sigc::mem_fun(*this, &Clock::on_expose_event), false);
+  #endif //GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED
 }
 
 Clock::~Clock()
@@ -57,7 +61,7 @@ bool Clock::on_expose_event(GdkEventExpose* event)
     // the center of the window
     cr->scale(width, height);
     cr->translate(0.5, 0.5);
-    cr->set_line_width(m_lineWidth);
+    cr->set_line_width(m_line_width);
 
     cr->save();
     cr->set_source_rgba(0.337, 0.612, 0.117, 0.9);   // green
@@ -110,7 +114,7 @@ bool Clock::on_expose_event(GdkEventExpose* event)
 
     // draw the seconds hand
     cr->save();
-    cr->set_line_width(m_lineWidth / 3);
+    cr->set_line_width(m_line_width / 3);
     cr->set_source_rgba(0.7, 0.7, 0.7, 0.8); // gray
     cr->move_to(0, 0);
     cr->line_to(sin(seconds) * (m_radius * 0.9), 
@@ -134,7 +138,7 @@ bool Clock::on_expose_event(GdkEventExpose* event)
     cr->restore();
 
     // draw a little dot in the middle
-    cr->arc(0, 0, m_lineWidth / 3.0, 0, 2 * M_PI);
+    cr->arc(0, 0, m_line_width / 3.0, 0, 2 * M_PI);
     cr->fill();
 
   }
@@ -143,7 +147,7 @@ bool Clock::on_expose_event(GdkEventExpose* event)
 }
 
 
-bool Clock::onSecondElapsed(void)
+bool Clock::on_timeout()
 {
     // force our program to redraw the entire clock.
     Glib::RefPtr<Gdk::Window> win = get_window();

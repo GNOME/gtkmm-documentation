@@ -1,3 +1,11 @@
+2008-05-31  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/book/drawingarea/clock/clock.cc
+	* examples/book/drawingarea/clock/clock.h: Cleaned up the formatting 
+	of this example.
+	Added a connect() for when GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED is 
+	disabled.
+
 2008-05-30  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/tutorial/C/gtkmm-tut.xml: Clarify the new text about non-GType 
