@@ -1,3 +1,12 @@
+2.13.1:
+
+* Uses gnome-doc-utils, so it can be translated and installed properly.
+  (Murray Cumming)
+* Addition to the gmmproc chapter about non-GType-registered enums.
+  (Hubert Figuiere
+* Corrected the link to jhbuild.
+  (Jonathon Jongsma)
+
 2.13.0:
 
 Initial release.
