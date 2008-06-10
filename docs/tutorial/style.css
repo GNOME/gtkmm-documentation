@@ -276,6 +276,18 @@ span.application    {
     font-family: monospace;
 }
 
+span.guilabel    {
+    font-style: italic;
+}
+
+span.guimenu    {
+    font-style: italic;
+}
+
+span.guimenuitem    {
+    font-style: italic;
+}
+
 code.classname, code.function, code.filename, code.code, *.command  {
     font-weight: normal;
     font-family: monospace;

@@ -1,3 +1,11 @@
+2008-06-10  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/tutorial/style.css: Added italic styling for the guilabel, 
+	guimenu, and guimenuitem DocBook tags. We do not actually use these 
+	in the gtkmm book, but I am using a version of this stylesheet for 
+	Flumotion, and I want this to be the definitive example DocBook HTML 
+	stylesheet. 
+
 2.13.1:
 
 2008-05-31  Murray Cumming  <murrayc@murrayc.com>
