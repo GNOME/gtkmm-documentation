@@ -1,3 +1,10 @@
+2008-06-11  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/tutorial/Makefile.am: Put the style.css in the html directory, 
+	and use it from there, so it is self contained. This also fixes the 
+	upload, because we were assuming that it was there already.
+ 	Thanks to Gerald Wodni.
+
 2008-06-10  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/tutorial/style.css: Added italic styling for the guilabel, 

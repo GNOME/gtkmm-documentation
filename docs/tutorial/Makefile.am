@@ -64,11 +64,12 @@ DOC_LINGUAS = de
 html/index.html: C/gtkmm-tut-with-examples.xml Makefile.am
 	rm -rf html
 	$(mkinstalldirs) html
+	cp style.css html/
 	cp -r C/figures html/
 	cp -r C/icons html/
 	$(XSLTPROC) \
 		--param toc.section.depth 1	\
-		--stringparam html.stylesheet "../style.css"	\
+		--stringparam html.stylesheet "style.css"	\
 		--stringparam admon.graphics 1	\
 		--stringparam admon.graphics.path "icons/"	\
 		--stringparam admon.graphics.extension ".png"	\
