@@ -57,8 +57,8 @@ int main (int argc, char **argv)
   }
 
   delete pDialog;
+  pDialog = 0;
     
-
   return 0;
 }
 

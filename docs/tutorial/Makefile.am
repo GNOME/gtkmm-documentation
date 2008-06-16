@@ -83,7 +83,7 @@ html/index.html: C/gtkmm-tut-with-examples.xml Makefile.am
 		-o html/ --xinclude --catalogs $(DOCBOOK_STYLESHEET)	\
 		$<
 
-validate_original: gtkmm-tut.xml
+validate_original: C/gtkmm-tut.xml
 	$(XMLLINT) --xinclude --postvalid --noout $<
 
 validate: C/gtkmm-tut-with-examples.xml

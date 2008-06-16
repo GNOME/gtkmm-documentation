@@ -1,3 +1,10 @@
+2008-06-16  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/tutorial/Makefile.am: Correct the validate target to use the 
+	file in C/
+	* examples/book/libglademm/simple/main.cc: Delete the dialog when we 
+	are finished. The derived example already did this.
+
 2008-06-11  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/tutorial/Makefile.am: Put the style.css in the html directory, 

@@ -37,7 +37,6 @@ int main (int argc, char **argv)
 #endif
 
   //Get the Glade-instantiated Dialog:
-  
   refXml->get_widget("DialogBasic", pDialog);
   if(pDialog)
   {
@@ -50,6 +49,9 @@ int main (int argc, char **argv)
     }
 
     kit.run(*pDialog);
+    
+    delete pDialog;
+    pDialog = 0;
   }
 
   return 0;
