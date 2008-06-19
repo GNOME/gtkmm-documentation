@@ -9655,7 +9655,7 @@ section titled <link linkend="sec-win32-installing-gtkmm-exe">Installing
 
 <para>
 Download Visual Studio 2005 Express from <ulink
-  url="http://msdn.microsoft.com/vstudio/express/visualc/">Microsoft's Visual
+  url="http://www.microsoft.com/express/2005/">Microsoft's Visual
   C++ Download Page.</ulink>
 </para>
 
@@ -9674,8 +9674,8 @@ The Platform SDK can be downloaded from the <ulink
 
 <para>
 After installing the Platform SDK, use the instructions from <ulink
-  url="http://msdn.microsoft.com/vstudio/express/visualc/usingpsdk/">Brian
-  Johnson's MSDN page</ulink> to configure Visual Studio to build native Win32
+  url="http://www.microsoft.com/express/2005/platformsdk/default.aspx">Brian
+  Johnson</ulink> to configure Visual Studio to build native Win32
 Applications. 
 </para>
 </sect1>
