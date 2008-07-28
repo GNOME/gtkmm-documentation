@@ -1,3 +1,7 @@
+2008-07-28  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/index.html: Update the link for pangomm.
+
 2008-06-19  Deng Xiyue <manphiz@gmail.com>
 
        * docs/tutorial/C/gtkmm-tut.xml: Update the links to Visual C++ 2005
