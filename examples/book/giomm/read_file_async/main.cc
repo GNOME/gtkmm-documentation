@@ -18,6 +18,7 @@
 
 #include <giomm.h>
 #include <iostream>
+#include <cstring>
 
 
 

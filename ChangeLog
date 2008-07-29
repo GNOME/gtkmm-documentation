@@ -1,11 +1,17 @@
+2008-07-29  Deng Xiyue <manphiz@gmail.com>
+	* examples/book/giomm/read_file_async/main.cc:
+	* examples/book/giomm/read_file/main.cc:
+	* examples/book/custom/custom_widget/mywidget.cc: Add missing header
+	files to fix build error using gcc 4.3.
+
 2008-07-28  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/index.html: Update the link for pangomm.
 
 2008-06-19  Deng Xiyue <manphiz@gmail.com>
 
-       * docs/tutorial/C/gtkmm-tut.xml: Update the links to Visual C++ 2005
-       Download page and Platform SDK setting instruction page.
+	* docs/tutorial/C/gtkmm-tut.xml: Update the links to Visual C++ 2005
+	Download page and Platform SDK setting instruction page.
 
 2008-06-16  Murray Cumming  <murrayc@murrayc.com>
 

@@ -21,6 +21,7 @@
 #include <gdkmm/general.h>  // for cairo helper functions
 #include <iostream>
 //#include <gtk/gtkwidget.h> //For GTK_IS_WIDGET()
+#include <cstring>
 
 
 MyWidget::MyWidget() :
