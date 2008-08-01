@@ -1,4 +1,11 @@
+2008-08-01  Deng Xiyue <manphiz@gmail.com>
+	
+	* docs/tutorial/Makefile.am: Reinstate rules to install generated
+	html tutorial.
+	* docs/index.html: Fix links to html tutorial.
+	
 2008-07-29  Deng Xiyue <manphiz@gmail.com>
+	
 	* examples/book/giomm/read_file_async/main.cc:
 	* examples/book/giomm/read_file/main.cc:
 	* examples/book/custom/custom_widget/mywidget.cc: Add missing header

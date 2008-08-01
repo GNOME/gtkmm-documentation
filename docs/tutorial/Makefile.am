@@ -120,6 +120,26 @@ doc-clean:
 
 tutorialdir = $(gtkmm_docdir)/tutorial/html
 
+install-tutorial: html/index.html style.css
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(tutorialdir)
+	@dir='$(<D)'; for p in $$dir/*.html ; do \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/$$f"; \
+	  $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/$$f; \
+	done
+	$(INSTALL_DATA) $(srcdir)/style.css $(DESTDIR)$(tutorialdir)
+
+uninstall-tutorial: html/index.html style.css
+	@$(NORMAL_UNINSTALL)
+	@dir='$(<D)'; for p in $$dir/*.html ; do \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " rm -f $(DESTDIR)$(tutorialdir)/$$f"; \
+	  rm -f $(DESTDIR)$(tutorialdir)/$$f; \
+	done
+	rm -f $(DESTDIR)$(tutorialdir)/style.css
+	rm -f $(DESTDIR)$(tutorialdir)/icons
+
 all-local: html/index.html
 
 install-data-local: install-tutorial
