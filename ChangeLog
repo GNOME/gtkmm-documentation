@@ -1,3 +1,12 @@
+2008-08-01  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/Makefile.am:
+	* docs/index.html: Removed index.html. The true copy is in 
+	gnomemm-website (uploaded to gtkmm.org).
+	It does not seem likely that the links could be correct for local 
+	installs, given how varied the installation locations are on various 
+	distros.
+
 2008-08-01  Deng Xiyue <manphiz@gmail.com>
 	
 	* docs/tutorial/Makefile.am: Reinstate rules to install generated
