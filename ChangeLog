@@ -1,3 +1,10 @@
+2008-06-11  Ainsley Pereira <gtkmm@pebble.org.uk>
+
+	* docs/tutorial/C/gtkmm-tut.xml: Fixed text in Chapter 21. Timeouts, 
+	I/O and	Idle Functions - example code was right, but text referred to
+	older versions.
+	Bug #537858
+
 2008-08-03  Deng Xiyue <manphiz@gmail.com>
 
 	* COPYING: Replace LGPL-2.1 with GFDL-1.2.

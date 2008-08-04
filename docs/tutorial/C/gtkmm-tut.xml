@@ -5954,9 +5954,7 @@ Here's an example of this technique:
 <title>Monitoring I/O</title>
 
 <para>
-TODO: This is now in Glib, not Gdk. 
-
-A nifty feature of GDK (one of the libraries underlying
+A nifty feature of Glib (one of the libraries underlying
 &gtkmm;) is the ability to have it check for data on a file descriptor
 for you.  This is especially useful for networking applications. The
 following method is used to do this:
@@ -5964,14 +5962,14 @@ following method is used to do this:
 
 <para>
 <programlisting>
-sigc::connection Glib::Main::SignalInput::connect(const SlotType&amp; sd, int source,
-                                    Glib::InputCondition condition);
+sigc::connection Glib::SignalInput::connect(const sigc::slot&lt;bool,Glib::IOCondition&gt;&amp; slot, 
+                                    int fd, Glib::IOCondition condition,
+                                    int priority = Glib::PRIORITY_DEFAULT);
 </programlisting>
 </para>
 
 <para>
-The first argument is a slot (<classname>SlotType</classname> is a typedef to a
-<classname>sigc::slot&lt;&gt;</classname>) you wish to have called when then
+The first argument is a slot you wish to have called when then 
 the specified event (see argument 3) occurs on the file descriptor you specify
 using argument two. Argument three may be one or more (using
 <literal>&verbar;</literal>) of:
@@ -5981,7 +5979,7 @@ using argument two. Argument three may be one or more (using
 <listitem>
 
 <para>
-GDK_INPUT_READ - Call your method when there is data ready for
+Glib::IO_IN - Call your method when there is data ready for
 reading on your file descriptor.
 
 </para>
@@ -5989,7 +5987,7 @@ reading on your file descriptor.
 <listitem>
 
 <para>
-GDK_INPUT_WRITE - Call your method when the file descriptor is
+Glib::IO_OUT - Call your method when the file descriptor is
 ready for writing.
 
 </para>
@@ -5997,8 +5995,21 @@ ready for writing.
 <listitem>
 
 <para>
-GDK_INPUT_EXCEPTION - Call your method when an exception happened
-on the file descriptor.
+Glib::IO_PRI - Call your method when the file descriptor has urgent data to be read.
+
+</para>
+</listitem>
+<listitem>
+    
+<para>
+Glib::IO_ERR - Call your method when an error has occurred on the file descriptor.
+
+</para>
+</listitem>
+<listitem>
+    
+<para>
+Glib::IO_HUP - Call your method when hung up (the connection has been broken usually for pipes and sockets).
 </para>
 </listitem>
 
@@ -6007,17 +6018,17 @@ on the file descriptor.
 <para>
     The return value is a <classname>sigc::connection</classname> that may be used to stop monitoring
 this file descriptor using its <function>disconnect()</function> method.  The
-<parameter>sd</parameter> signal handler should be declared as follows:
+<parameter>slot</parameter> signal handler should be declared as follows:
 </para>
 
 <para>
 <programlisting>
-void input_callback(int source, GdkInputCondition condition);
+bool input_callback(Glib::IOCondition condition);
 </programlisting>
 </para>
 
 <para>
-where <parameter>source</parameter> and <parameter>condition</parameter> are as
+where <parameter>condition</parameter> is as
 specified above. As usual the slot is created with
 <function>sigc::mem_fun()</function> (for a member method of an object.), or
 <function>sigc::ptr_fun()</function> (for a function).
@@ -6045,24 +6056,22 @@ If you want to specify a method that gets called when nothing else is happening,
 
 <para>
 <programlisting>
-sigc::connection  Glib::Main::SignalIdle::connect(const Slot&lt;int&gt;&amp; idlefunc, int priority);
+sigc::connection  Glib::SignalIdle::connect(const sigc::slot&lt;bool&gt;&amp; slot, int priority = Glib::PRIORITY_DEFAULT_IDLE);
 </programlisting>
 </para>
 
 <para>
 This causes &gtkmm; to call the specified method whenever nothing else is
-happening. You can add a priority (lower numbers are higher priorities).  If
-you don't supply a priority value, then Gtk::PRIORITY_DEFAULT will be
-used. There are two ways to remove the signal handler: calling
+happening. You can add a priority (lower numbers are higher priorities). There are two ways to remove the signal handler: calling
 <function>disconnect()</function> on the
 <classname>sigc::connection</classname> object, or returning
-<literal>false</literal> (or 0) in the signal handler, which should be declared
+<literal>false</literal> in the signal handler, which should be declared
 as follows:
 </para>
 
 <para>
 <programlisting>
-int idleFunc();
+bool idleFunc();
 </programlisting>
 </para>
 
