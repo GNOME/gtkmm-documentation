@@ -1,5 +1,5 @@
 /* XPM */
-static char * drag_icon_xpm[] = {
+static const char * drag_icon_xpm[] = {
 "36 48 9 1",
 " 	c None",
 ".	c #020204",
@@ -60,7 +60,7 @@ static char * drag_icon_xpm[] = {
 "...................................."};
 
 /* XPM */
-static char * trashcan_closed_xpm[] = {
+static const char * trashcan_closed_xpm[] = {
 "64 80 17 1",
 " 	c None",
 ".	c #030304",
@@ -161,7 +161,7 @@ static char * trashcan_closed_xpm[] = {
 "                                                                "};
 
 /* XPM */
-static char * trashcan_open_xpm[] = {
+static const char * trashcan_open_xpm[] = {
 "64 80 17 1",
 " 	c None",
 ".	c #030304",

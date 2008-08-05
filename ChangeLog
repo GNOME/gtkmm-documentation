@@ -1,3 +1,10 @@
+2008-08-05  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/book/drag_and_drop/dndwindow.cc:
+	* examples/others/dnd/dnd_images.h:
+	* examples/others/dnd/dndwindow.cc: Updated for latest non-deprecated 
+	SelectionData API.
+
 2008-06-11  Ainsley Pereira <gtkmm@pebble.org.uk>
 
 	* docs/tutorial/C/gtkmm-tut.xml: Fixed text in Chapter 21. Timeouts, 

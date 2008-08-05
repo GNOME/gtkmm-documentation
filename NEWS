@@ -1,3 +1,19 @@
+2.13.2:
+
+* Timeouts: Updated the inline example code and text.
+  (Ainsley Pereira) Bug #537858
+* Add a COPYING.examples and corrected COPYING to GFDL-1.2, as 
+  used in the documentation text.
+  (Deng Xiyue) Bug #545892
+* Install generated html, as we did when this was in the gtkmm tarball.
+  (Deng Xiyue)
+* Remove index.html because the definitive copy of this is on the website.
+  (Murray Cumming)
+* Fix the examples build for gcc 4.3, adding headers.
+  (Deng Xiyue)
+* Update the links for Visual C++ 2005.
+  (Deng Xiyue)
+
 2.13.1:
 
 * Uses gnome-doc-utils, so it can be translated and installed properly.

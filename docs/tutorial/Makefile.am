@@ -137,8 +137,8 @@ uninstall-tutorial: html/index.html style.css
 	  echo " rm -f $(DESTDIR)$(tutorialdir)/$$f"; \
 	  rm -f $(DESTDIR)$(tutorialdir)/$$f; \
 	done
-	rm -f $(DESTDIR)$(tutorialdir)/style.css
-	rm -f $(DESTDIR)$(tutorialdir)/icons
+	rm -f $(DESTDIR)$(tutorialdir)/html/style.css
+	rm -f $(DESTDIR)$(tutorialdir)/html/icons
 
 all-local: html/index.html
 
