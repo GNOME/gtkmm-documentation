@@ -1,3 +1,21 @@
+2008-08-06  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/tutorial/C/figures/Makefile.am: Remove this because it is not used.
+	* configure.in:
+	* docs/tutorial/C/icons/
+	* docs/tutorial/Makefile.am: Moved icons from tutorial/C to tutorial/
+	because it is only used for the html build.
+	Distributed html/ as we did when this was in gtkmm. If we install it then 
+	we must distribute it.
+	Correct some paths to fix the install and distcheck, though distcheck 
+	still fails due to files remaining.
+	Bug #545712
+
+2008-08-05  Deng Xiyue <manphiz@gmail.com>
+
+	* docs/tutorial/Makefile.am: Install html/{icons,figures} as well.
+	Bug #545712
+
 2008-08-05  Murray Cumming  <murrayc@murrayc.com>
 
 	* examples/book/drag_and_drop/dndwindow.cc:

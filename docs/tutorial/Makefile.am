@@ -2,11 +2,11 @@ include $(top_srcdir)/docs/Makefile_web.am_fragment
 
 gtkmm_tut_path = $(web_path_docs)tutorial
 
-SUBDIRS =
+SUBDIRS = icons
 
 DOCBOOK_PHPWEBNOTES_TRANSFORM = docbook_phpwebnotes.xsl
 
-EXTRA_DIST = README insert_example_code.pl C/gtkmm-tut.xml C/gtkmm-tut-with-examples.xml style.css $(DOCBOOK_PHPWEBNOTES_TRANSFORM)
+EXTRA_DIST = README insert_example_code.pl C/gtkmm-tut.xml C/gtkmm-tut-with-examples.xml html style.css $(DOCBOOK_PHPWEBNOTES_TRANSFORM)
 
 DOCBOOK_STYLESHEET ?= http://docbook.sourceforge.net/release/xsl/current/html/chunk.xsl
 XMLLINT = xmllint
@@ -64,9 +64,9 @@ DOC_LINGUAS = de
 html/index.html: C/gtkmm-tut-with-examples.xml Makefile.am
 	rm -rf html
 	$(mkinstalldirs) html
-	cp style.css html/
-	cp -r C/figures html/
-	cp -r C/icons html/
+	cp $(srcdir)/style.css html/
+	cp -r $(srcdir)/C/figures html/
+	cp -r $(srcdir)/icons html/
 	$(XSLTPROC) \
 		--param toc.section.depth 1	\
 		--stringparam html.stylesheet "style.css"	\
@@ -92,9 +92,9 @@ validate: C/gtkmm-tut-with-examples.xml
 gtkmm-tut-html.tar.gz: html/index.html
 	tar cf - C/figures html | gzip -c --best >$@
 
-post-html: html/index.html style.css pdf
+post-html: html/index.html html/style.css pdf
 	rsync $(rsync_args) C/figures/*.png $$USER@$(web_host):$(gtkmm_tut_path)/figures/
-	rsync $(rsync_args) C/icons/*.png $$USER@$(web_host):$(gtkmm_tut_path)/icons/
+	rsync $(rsync_args) icons/*.png $$USER@$(web_host):$(gtkmm_tut_path)/icons/
 	rsync $(rsync_args) -r html/ $$USER@$(web_host):$(gtkmm_tut_path)/html/
 	rsync $(rsync_args) *.css $$USER@$(web_host):$(gtkmm_tut_path)/html/
 	rsync $(rsync_args) -r pdf/ $$USER@$(web_host):$(gtkmm_tut_path)/pdf/
@@ -120,7 +120,7 @@ doc-clean:
 
 tutorialdir = $(gtkmm_docdir)/tutorial/html
 
-install-tutorial: html/index.html style.css
+install-tutorial: html/index.html html/style.css
 	@$(NORMAL_INSTALL)
 	$(mkinstalldirs) $(DESTDIR)$(tutorialdir)
 	@dir='$(<D)'; for p in $$dir/*.html ; do \
@@ -128,9 +128,21 @@ install-tutorial: html/index.html style.css
 	  echo " $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/$$f"; \
 	  $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/$$f; \
 	done
-	$(INSTALL_DATA) $(srcdir)/style.css $(DESTDIR)$(tutorialdir)
+	$(mkinstalldirs) $(DESTDIR)$(tutorialdir)/icons
+	@dir='$(<D)/icons'; for p in $$dir/* ; do \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/icons/$$f"; \
+	  $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/icons/$$f; \
+	done
+	$(mkinstalldirs) $(DESTDIR)$(tutorialdir)/figures
+	@dir='$(<D)/figures'; for p in $$dir/* ; do \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/figures/$$f"; \
+	  $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/figures/$$f; \
+	done
+	$(INSTALL_DATA) $(srcdir)/html/style.css $(DESTDIR)$(tutorialdir)
 
-uninstall-tutorial: html/index.html style.css
+uninstall-tutorial: html/index.html html/style.css
 	@$(NORMAL_UNINSTALL)
 	@dir='$(<D)'; for p in $$dir/*.html ; do \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
@@ -139,6 +151,7 @@ uninstall-tutorial: html/index.html style.css
 	done
 	rm -f $(DESTDIR)$(tutorialdir)/html/style.css
 	rm -f $(DESTDIR)$(tutorialdir)/html/icons
+	rm -f $(DESTDIR)$(tutorialdir)/html/figures
 
 all-local: html/index.html
 

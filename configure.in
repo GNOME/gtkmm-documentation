@@ -392,6 +392,7 @@ if test "x$enable_docs" = "xyes"; then
       docs/FAQ/Makefile
       docs/images/Makefile
       docs/tutorial/Makefile
+      docs/tutorial/icons/Makefile
   ])
 else
   DOCS_SUBDIR=""
