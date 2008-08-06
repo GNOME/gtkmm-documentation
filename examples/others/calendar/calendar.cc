@@ -196,7 +196,7 @@ CalendarExample::CalendarExample()
   frameFlags->add(*vbox3);
 
   struct {
-    char *label;
+    const char *label;
   } flags[] =
     {
       { "Show Heading" },

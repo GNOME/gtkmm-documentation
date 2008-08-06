@@ -129,13 +129,13 @@ install-tutorial: html/index.html html/style.css
 	  $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/$$f; \
 	done
 	$(mkinstalldirs) $(DESTDIR)$(tutorialdir)/icons
-	@dir='$(<D)/icons'; for p in $$dir/* ; do \
+	@dir='$(<D)/icons'; for p in $$dir/*.png ; do \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
 	  echo " $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/icons/$$f"; \
 	  $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/icons/$$f; \
 	done
 	$(mkinstalldirs) $(DESTDIR)$(tutorialdir)/figures
-	@dir='$(<D)/figures'; for p in $$dir/* ; do \
+	@dir='$(<D)/figures'; for p in $$dir/*.png ; do \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
 	  echo " $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/figures/$$f"; \
 	  $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/figures/$$f; \
@@ -149,9 +149,9 @@ uninstall-tutorial: html/index.html html/style.css
 	  echo " rm -f $(DESTDIR)$(tutorialdir)/$$f"; \
 	  rm -f $(DESTDIR)$(tutorialdir)/$$f; \
 	done
-	rm -f $(DESTDIR)$(tutorialdir)/html/style.css
-	rm -f $(DESTDIR)$(tutorialdir)/html/icons
-	rm -f $(DESTDIR)$(tutorialdir)/html/figures
+	rm -f $(DESTDIR)$(tutorialdir)/style.css
+	rm -rf $(DESTDIR)$(tutorialdir)/icons
+	rm -rf $(DESTDIR)$(tutorialdir)/figures
 
 all-local: html/index.html
 
