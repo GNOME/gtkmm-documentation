@@ -1,3 +1,8 @@
+2008-08-06  Deng Xiyue <manphiz@gmail.com>
+
+	* configure.in: Update gtkmm dependency to >= 2.13.4 as some tutorial
+	uses new API introduced since then.
+
 2.13.2:
 
 2008-08-06  Deng Xiyue <manphiz@gmail.com>

@@ -194,7 +194,7 @@ AC_LANG_POP(C++)
 #########################################################################
 #  Dependancy checks
 #########################################################################
-PKG_CHECK_MODULES(GTKMMDOCS, gtkmm-2.4 >= 2.10.0 giomm-2.4 >= 2.15.2 libglademm-2.4 >= 2.6.0})
+PKG_CHECK_MODULES(GTKMMDOCS, gtkmm-2.4 >= 2.13.4 giomm-2.4 >= 2.15.2 libglademm-2.4 >= 2.6.0})
 AC_SUBST(GTKMMDOCS_CFLAGS)
 AC_SUBST(GTKMMDOCS_LIBS)
 
