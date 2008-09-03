@@ -1,3 +1,9 @@
+2008-09-03  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/book/dialogs/aboutdialog/examplewindow.cc:
+	* examples/book/dialogs/aboutdialog/examplewindow.h: Respond to the Close 
+	button. Bug #550675 (Götz Waschk).
+
 2008-08-06  Deng Xiyue <manphiz@gmail.com>
 
 	* configure.in: Update gtkmm dependency to >= 2.13.4 as some tutorial
