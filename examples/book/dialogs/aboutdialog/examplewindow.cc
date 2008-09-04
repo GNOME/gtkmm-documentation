@@ -64,7 +64,7 @@ void ExampleWindow::on_about_dialog_response(int response_id)
 {
   std::cout << response_id << ", close=" << GTK_RESPONSE_CLOSE << ", cancel=" << GTK_RESPONSE_CANCEL << std::endl;
 
-  if((response_id == Gtk::RESPONSE_CLOSE) &&
+  if((response_id == Gtk::RESPONSE_CLOSE) ||
      (response_id == Gtk::RESPONSE_CANCEL) )
   {
     m_Dialog.hide();

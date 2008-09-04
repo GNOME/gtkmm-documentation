@@ -1,3 +1,8 @@
+2008-09-04  Götz Waschk <waschk@mandriva.org>
+
+	* examples/book/dialogs/aboutdialog/examplewindow.cc: fix logic for closing
+	the about dialog (Bug #550675)
+
 2008-09-03  Murray Cumming  <murrayc@murrayc.com>
 
 	* examples/book/dialogs/aboutdialog/examplewindow.cc:
