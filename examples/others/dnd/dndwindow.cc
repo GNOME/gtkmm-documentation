@@ -100,8 +100,8 @@ DnDWindow::~DnDWindow()
 
 void DnDWindow::on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int, int, const Gtk::SelectionData& selection_data, guint, guint time)
 {
-  guint length = 0;
-  const guchar* data = selection_data.get_data(length);
+  const guint length = selection_data.get_length();
+  const guchar* data = selection_data.get_data();
 
   if((length >= 0) && (selection_data.get_format() == 8))
   {
@@ -134,8 +134,8 @@ void DnDWindow::on_label_popup_drag_leave(const Glib::RefPtr<Gdk::DragContext>&,
 
 void DnDWindow::on_image_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int, int, const Gtk::SelectionData& selection_data, guint, guint time)
 {
-  guint length = 0;
-  const guchar* data = selection_data.get_data(length);
+  const guint length = selection_data.get_length();
+  const guchar* data = selection_data.get_data();
 
   if( (length >= 0) && (selection_data.get_format() == 8) )
   {

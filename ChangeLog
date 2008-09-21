@@ -1,3 +1,11 @@
+2.14.0:
+
+2008-09-21  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/book/drag_and_drop/dndwindow.cc:
+	* examples/others/dnd/dndwindow.cc: Adapted back to the old 
+	SelectionData API.
+
 2008-09-04  Götz Waschk <waschk@mandriva.org>
 
 	* examples/book/dialogs/aboutdialog/examplewindow.cc: fix logic for closing
