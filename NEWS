@@ -1,3 +1,8 @@
+2.14.0:
+
+* AboutDialog example: Respond to the close button.
+  (Murray Cumming, Götz Waschk) Bug #550675
+
 2.13.2:
 
 * Timeouts: Updated the inline example code and text.
