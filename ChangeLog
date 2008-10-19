@@ -1,3 +1,14 @@
+2008-10-19  Armin Burgmeier  <armin@openismus.com>
+
+	* docs/tutorial/C/gtkmm-tut.xml: Removed the section on Dev-C++
+	because it was outdated, and g++ 3.4.2, which is shipped by default
+	with Dev-C++, seems to be incompatible to 3.4.5 (ABI-wise), with which
+	the gtkmm binaries are built. Instead, refer to the online
+	instructions on live.gnome.org. Updated the section on using gtkmm
+	with Visual Studio.
+
+	* docs/tutorial/C/figures/devcpp_project_options.png: Removed.
+
 2.14.0:
 
 2008-09-21  Murray Cumming  <murrayc@murrayc.com>

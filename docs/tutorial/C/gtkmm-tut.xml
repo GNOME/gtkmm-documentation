@@ -7949,260 +7949,19 @@ practical - and sensible - to subclass a button for that purpose.
       versa) with few modifications to the source.
     </para>
     <para>
-      &gtkmm; currently only works with the <ulink
-	url="http://mingw.org/">MingW/GCC3.2 compiler</ulink> on the
-      Windows platform. This is unlikely to change in the near
-      future, unless Microsoft upgrades its compilers in Visual
-      Studio to fully support the C++ standard. Information about the &gtkmm; and the latest Microsoft C++ compiler might be on the mailing list.
+      &gtkmm; currently works with the <ulink
+	url="http://mingw.org/">MingW/GCC3.4 compiler</ulink> and Microsoft
+      Visual C++ 2005 or later (including the freely available express
+      editions) on the Windows platform. There is an
+      <ulink url="ftp://ftp.gnome.org/pub/GNOME/binaries/win32/gtkmm">
+      installer</ulink> available for gtkmm on Microsoft Windows. Refer to
+      <ulink url="http://live.gnome.org/gtkmm/MSWindows/">
+      http://live.gnome.org/gtkmm/MSWindows</ulink> for instructions how to
+      use it.
     </para>
-    <para>
-      Installation of MingW is beyond the scope of this document, though not excessively difficult.
-      However, a good GPL'd C++ IDE for windows called <ulink
-	url="http://www.bloodshed.net/">Dev-C++</ulink> has a
-      convenient Windows installer that installs both the IDE and
-      the MingW/GCC3.2 compiler, and we can recommend it.  We will now 
-      show step by step how to install &gtkmm; and properly set
-      up Dev-C++ as your &gtkmm; development environment. The following
-	  instructions should work for Dev-C++ versions 4.9.8.0 or higher.
-	  For people who prefer command line compiler tools, a solution based
-	  on the cygwin distribution will be described in the last section of
-      this chapter.
-    </para>
-    <sect1 id="sec-dev-cpp-ide">
-      <title>The Dev-C++ IDE</title>
-      <sect2 id="dev-cpp-installation-issues">
-	<title>Pre-Installation Issues</title>
-	<para>
-	  We strongly recommend that Dev-C++ is installed and
-	  tested before installing any of the GTK+ or &gtkmm; libraries,
-	  as we will be installing all the libraries into the Dev-C++
-	  directory.  Ensure that you are able to successfully compile and
-	  run a simple C++ program from Dev-C++ before proceeding to the
-	  next step. For instance, try a simple Hello World program.
-	</para>
-	<para>
-	  Note: Currently (as of v4.9.8.0) Dev-C++ does not like to be
-	  installed in directories with spaces in them. Installing
-	  Dev-C++ to the "Program Files" directory may cause problems at
-	  a later stage when it looks for the include and lib
-	  directories.
-	</para>
-      </sect2>
-
-      <sect2 id="dev-cpp-dependencies">
-	<title>Dependencies</title>
-	<para>
-	  The &gtkmm; Windows installer requires you to first
-	  install the following dependencies:
-	</para>
-	<itemizedlist>
-	  <listitem>
-	    <para>GTK+ 2.x</para>
-	    <para>
-	      Before installing &gtkmm;, you need to install the latest GTK+ 2.x.  You
-	      can find the latest windows installer at <ulink
-		url="http://gladewin32.sourceforge.net/">Glade/Gtk+ for Win32</ulink>. The Windows
-	      installer will correctly install any dependencies that GTK+
-	      2.x may need.
-	    </para>
-	    <para>
-		  You will need to download and install the Gtk+/Win32 Development
-		  Environment.  This includes the runtime, devel, docs, and glade.
-	      Start with the Development GTK+ installer, and allow the
-	      installation to proceed to the default directory.  
-	    </para>
-	  </listitem>
-	</itemizedlist>
-      </sect2>
-
-      <sect2 id="dev-cpp-installation">
-	<title>Installation</title>
-	<para>
-	  Now you are ready to install &gtkmm;. You can find a link to an installer on the <ulink url="http://www.gtkmm.org/">&gtkmm; web site's</ulink> download page.
-	  The &gtkmm; Windows installer includes both the development
-	  and the runtime files.
-	</para>
-	<para>
-	  Since we are going to be using Dev-C++ as our IDE, it is
-	  strongly suggested that you install &gtkmm; into the base
-	  Dev-C++ directory (ie. d:\dev-cpp). This will make things
-	  easier later on when setting up the include and lib
-	  directories in Dev-C++.
-	</para>
-	<para>
-	  You should now be ready to execute Win32 &gtkmm; compiled
-	  binaries.  Note: Some older versions of Windows may require a reboot
-	  before the installer's change to the PATH variable takes effect.
-	</para>
-      </sect2>
-
-      <sect2 id="dev-cpp-compiling">
-	<title>Compiling &gtkmm; Apps with Dev-C++</title>
-	<para>
-	  Now we need to set some project options to create our
-	  first &gtkmm; project in Dev-C++.
-	</para>
-	<para>
-	  First, we need to let Dev-C++ know what files and libraries to
-	  include when it invokes MingW/GCC3.2. To find out what
-	  arguments need to be passed to GCC, we need to open a command
-	  prompt and type the following:
-	</para>
-	<para>
-	  <command>
-	    pkg-config --cflags gtkmm-2.4
-	  </command>
-	</para>
-	<para>
-	  If the pkg-config command cannot be found, you can cd to the
-	  bin/ directory of where you installed Dev-C++ and execute the
-	  above line from there.  Depending on where you installed
-	  &gtkmm;, you will get output that looks similar to the
-	  following:
-	</para>
-	<para>
-	  <programlisting>
-	    -Id:/dev-c++/include/gtkmm-2.4
-	    -Id:/dev-c++/lib/gtkmm-2.4/include
-	    -Id:/dev-c++/include/gtk-2.0
-	    -Id:/dev-c++/lib/sigc++-2.0/include
-	    -Id:/dev-c++/include/sigc++-2.0
-	    -Id:/dev-c++/include/glib-2.0
-	    -Id:/dev-c++/lib/glib-2.0/include
-	    -Id:/dev-c++/lib/gtk-2.0/include
-	    -Id:/dev-c++/include/pango-1.0 -Id:/dev-c++/include/atk-1.0
-	    -Ld:/dev-c++/lib 
-	  </programlisting>
-	</para>
-	<para>
-	  The next step is to obtain the list of libraries by issuing the following
-	  command:
-	</para>
-	<para>
-	  <command>
-	    pkg-config --libs gtkmm-2.4
-	  </command>
-	</para>
-	<para>
-	  Your results may look something similar to this:
-	</para>
-	<para>
-	  <programlisting>
-	    -lgtkmm-2.4 -lgdkmm-2.4 -latkmm-1.0
-	    -lgtk-win32-2.0 -lpangomm-1.4 -lglibmm-2.4 -lsigc-2.0
-	    -lgdk-win32-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lpangowin32-1.0
-	    -lgdi32 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -lglib-2.0
-	    -lintl -liconv
-	  </programlisting>
-	</para>
-
-	<para>
-	  <figure id="figure-project-options">
-	    <title>Dev-C++ Project Options</title>
-	    <screenshot>
-	      <graphic format="PNG" fileref="&url_figures_base;devcpp_project_options.png"/>
-	    </screenshot>
-	  </figure>
-	</para>
-
-	<para>
-	  Now create a new Project.  We will make this project work with
-	  &gtkmm;.  After creating a new project, select <literal>Project Options</literal>
-	  from the menu, and under the <literal>Parameters</literal> tab, we will need to enter the information
-	  we obtained earlier:  In the <literal>Additional commandline options</literal> for
-	  the C++ compiler, paste the include and lib <emphasis>directories</emphasis> you obtained with
-	  the --cflags argument. (The commandline options preceeded by either an -I or a -L).
-	</para>
-
-	<para>
-	  Now we must tell the linker what libraries to include, by pasting the libraries into the <literal>Additional commandline options</literal> for the Linker. (These commandline options are preceeded by a -l).
-	</para>
-
-	<para>
-	  Congratulations. You have successfully created a new project in Dev-C++ that
-	  works with &gtkmm;.  Try compiling some of the examples in this
-	  tutorial.
-	</para>
-    </sect2>
-    </sect1>
-
-    <sect1 id="sec-dev-cpp-command-line-tools">
-      <title>Command line tools</title>
-      <para>
-	To build your &gtkmm; application with command line tools, we recommend you either use mingw combined with cygwin
-	(<ulink url="http://www.cygwin.com"></ulink>) or msys (<ulink
-	  url="http://www.mingw.org"></ulink>). If you use
-	mingw/cygwin, make sure that the directory that contains the
-	mingw executables is first in your PATH (by checking with g++
-	-v). Then
-      </para>
-      <para>
-	<orderedlist>
-	  <listitem>
-	    <para>Add the directories with the &gtkmm; and gtk+ DLLs and
-	      the gtk+ executables (particularly the one containing
-	      pkg-config.exe) to your path. If you have selected the
-	      corresponding option in the &gtkmm; installer, both the
-	      &gtkmm; and gtk+ runtime will already be in your
-	      PATH. Make sure pkg-config is available by typing
-	      <command>'pkg-config --version'</command>.
-	    </para>
-	  </listitem>
-	  <listitem>
-	    <para>Set the PKG_CONFIG_PATH environment variable to
-	      point to the various lib/pkgconfig directories. Look for
-	      files with the .pc extension in the gtk+ and &gtkmm;
-	      developer packages. It's the same syntax as on
-	      linux but the directories are separated by semicolons.</para>
-	  </listitem>
-	  <listitem>
-	    <para>Check the &gtkmm; distribution by typing
-	      <command>'pkg-config --modversion --cflags --libs
-		gtkmm-2.4'</command>. You should get something like
-	    </para>
-	    <para><programlisting>
-		2.2.1
-		-IC:/target/libsigc/lib/sigc++-2.0/include
-		-IC:/target/libsigc/include/sigc++-2.0
-		-IC:/target/gtkmm/include/gtkmm-2.4
-		-IC:/target/gtkmm/lib/gtkmm-2.4/include
-		-IC:/target/gtk-2.0/include/gtk-2.0
-		-IC:/target/gtk-2.0/include/glib-2.0
-		-IC:/target/gtk-2.0/lib/glib-2.0/include
-		-IC:/target/gtk-2.0/lib/gtk-2.0/include
-		-IC:/target/gtk-2.0/include/pango-1.0
-		-IC:/target/gtk-2.0/include/atk-1.0
-		-LC:/target/libsigc/lib
-		-LC:/target/gtkmm/lib
-		-LC:/target/gtk-2.0/lib -lgtkmm-2.4
-		-lgdkmm-2.4 -latkmm-1.4 -lgtk-win32-2.0 -lpangomm-1.4
-		-lglibmm-2.4 -lsigc-2.0 -lgdk-win32-2.0 -latk-1.0
-		-lgdk_pixbuf-2.0 -lpangowin32-1.0 -lgdi32 -lpango-1.0
-		-lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lintl
-		-liconv</programlisting>
-	    </para>
-	    <para>Of course, the target directories will show your local
-	      installation tree.
-	    </para>
-	  </listitem>
-	  <listitem>
-	    <para>You can compile a single source file like so:</para>
-	    <para>
-	      <command>g++ `pkg-config --cflags gtkmm-2.4`
-		my_programs.cc -o my_program `pkg-config --libs
-		gtkmm-2.4`</command>
-	    </para>
-	  </listitem>
-	</orderedlist>
-      </para>
-      <para>
-	See the &gtkmm; FAQ for more build help.
-      </para>
-    </sect1>
-
   <sect1 id="sec-building-on-win32">
 	<title>Building &gtkmm; on Win32</title>
-    <para>Please see the appropriate README file in the source distribution.
+    <para>Please see <ulink url="http://live.gnome.org/gtkmm/MSWindows/BuildingGtkmm">http://live.gnome.org/gtkmm/MSWindows/BuildingGtkmm</ulink> for instructions on how to build gtkmm on Windws.
     </para>
     
     </sect1>
@@ -9693,16 +9452,12 @@ Applications.
 <title>Installing &gtkmm;</title>
 <para>
 Once Visual Studio is installed and has been configured to build native Win32
-applications, you must install the Gtk+ and &gtkmm; development packages. First,
-download and install the Gtk+ development package (listed as
-<literal>gtk+-win32-devel</literal>) from the <ulink
-  url="http://gladewin32.sourceforge.net/modules/wfdownloads/">GladeWin32
-  website</ulink>. Next, download the &gtkmm; development package from the
-<ulink url="http://ftp.gnome.org/pub/gnome/binaries/win32/gtkmm/2.10/">Gnome FTP
-  site.</ulink> Make sure you get the same version of both packages. At the time
-of this writing, the latest version is 2.10. Do not be afraid of the size of the
-development packages as they are much larger than the runtime packages which
-your end users will depend on.
+applications, you must install the &gtkmm; development package. To do this,
+download and install the &gtkmm; development package from the
+<ulink url="http://ftp.gnome.org/pub/gnome/binaries/win32/gtkmm/">Gnome FTP
+  site.</ulink> At the time of this writing, the latest version is 2.14. Do not
+  be afraid of the size of the development packages as they are much larger
+  than the runtime packages which your end users will depend on.
 </para>
 </sect1>
 
@@ -9845,7 +9600,8 @@ your end users will depend on.
   </para>
 
   <figure id="figure-msvc-property-files">
-    <title>Visual Stuio Property files in the &gtkmm; Distribution.</title>
+    <title>Visual Studio Property files in the &gtkmm; Distribution.</title>
+    <!-- TODO: Make a new screenshot that shows the new gtkmm-vc80-d-2_4.vsprops -->
     <screenshot>
       <graphic format="PNG" fileref="&url_figures_base;msvc_property_files.png"/>
     </screenshot>
@@ -9867,11 +9623,13 @@ your end users will depend on.
   <para>
     Right-Click on the <literal>Debug | Win32</literal> folder and select
     <literal>Add Existing Property Sheet.</literal> From the file browser,
-    select the file <literal>&gtkmm;-2.4<literal>d</literal>.vsprops</literal>.
+    select the file <literal>&gtkmm;-vc80-<literal>d</literal>-2_4.vsprops</literal>.
     Next, Right-Click on the <literal>Release | Win32</literal> folder and again
     select <literal>Add Existing Property Sheet.</literal> From the file
-    browser, this time select the file <literal>&gtkmm;-2.4.vsprops</literal>.
-    When you are done, the Property Manager should look like the one in <xref
+    browser, this time select the file <literal>&gtkmm;-vc80-2_4.vsprops</literal>.
+    If you are using MSVC++ 2008 instead of MSVC++ 2005, then you might want
+    to use the vc90 property sheets instead. When you are done, the Property
+    Manager should look like the one in <xref
       linkend="figure-msvc-property-manager-with-gtkmm-properties" />.
   </para>
 
