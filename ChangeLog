@@ -1,3 +1,12 @@
+2008-10-21  Armin Burgmeier  <armin@openismus.com>
+
+	* docs/tutorial/C/gtkmm-tut.xml: Removed the section on MSVC++ 2005 as
+	it has been moved to the wiki on
+	http://live.gnome.org/gtkmm/MSWindows/UsingMSVC. Fixed the installer
+	link in the Windows packaging section.
+
+	* docs/tutorial/C/figures/msvc_*.png: Removed.
+
 2008-10-20  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/Makefile.am: Do not try to upload the non-existant index.html file.
