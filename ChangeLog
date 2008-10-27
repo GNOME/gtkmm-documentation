@@ -1,3 +1,9 @@
+2008-10-27  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/book/dialogs/messagedialog/examplewindow.cc: Include 
+	messagedialog.h here. It is not necessary, but someone (Jody) found that 
+	clearer.
+
 2008-10-21  Armin Burgmeier  <armin@openismus.com>
 
 	* docs/tutorial/C/gtkmm-tut.xml: Removed the section on MSVC++ 2005 as
