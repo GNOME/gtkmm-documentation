@@ -1,3 +1,8 @@
+2008-11-07  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/tutorial/C/gtkmm-tut.xml: X Event Signals appendix:
+	Corrected a typo found by Tomasz Mikolajczyk.
+
 2008-10-27  Murray Cumming  <murrayc@murrayc.com>
 
 	* examples/book/dialogs/messagedialog/examplewindow.cc: Include 

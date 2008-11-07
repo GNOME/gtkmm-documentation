@@ -7776,7 +7776,7 @@ correspond to the underlying X-Windows events. These are suffixed by
 </para>
 <para>
 You might occasionally find it useful to handle X events when there's something
-you can't accomplish with normal signals.  <classname>Gtk::Button</classname>,
+you can't accomplish with normal signals. <classname>Gtk::Button</classname>,
 for example, does not send mouse-pointer coordinates with its
 <literal>clicked</literal> signal, but you could handle
 <literal>button_pressed_event</literal> if you needed this
@@ -7812,7 +7812,7 @@ button.signal_button_press_event().connect( sigc::ptr_fun(&amp;on_button_press) 
 </para>
 <para>
 When the mouse is over the button and a mouse button is pressed,
-<function>on_button_pressed()</function> will be called.
+<function>on_button_press()</function> will be called.
 </para>
 
 <para>
