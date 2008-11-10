@@ -1,3 +1,5 @@
+2.14.1:
+
 2008-11-10  Murray Cumming  <murrayc@murrayc.com>
 
 	* examples/book/builder/basic/main.cc:
@@ -5,8 +7,6 @@
 	BuilderError, because that is what the C function actually gives if the 
 	filename is wrong.
 	Bug #548022 (Alexander Shaduri)
-
-2.14.1:
 
 2008-11-07  Murray Cumming  <murrayc@murrayc.com>
 
