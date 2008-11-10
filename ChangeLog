@@ -1,3 +1,11 @@
+2008-11-10  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/book/builder/basic/main.cc:
+	* examples/book/builder/derived/main.cc: Catch FileError as well as 
+	BuilderError, because that is what the C function actually gives if the 
+	filename is wrong.
+	Bug #548022 (Alexander Shaduri)
+
 2.14.1:
 
 2008-11-07  Murray Cumming  <murrayc@murrayc.com>

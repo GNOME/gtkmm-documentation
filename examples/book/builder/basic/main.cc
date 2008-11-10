@@ -19,14 +19,18 @@ int main (int argc, char **argv)
   {
     refBuilder->add_from_file("basic.ui");
   }
+  catch(const Glib::FileError& ex)
+  {
+    std::cerr << "FileError: " << ex.what() << std::endl;
+    return 1;
+  }
   catch(const Gtk::BuilderError& ex)
   {
-    std::cerr << ex.what() << std::endl;
+    std::cerr << "BuilderError: " << ex.what() << std::endl;
     return 1;
   }
 
   //Get the GtkBuilder-instantiated Dialog:
-  
   refBuilder->get_widget("DialogBasic", pDialog);
   if(pDialog)
   {
