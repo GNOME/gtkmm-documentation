@@ -1,3 +1,9 @@
+2.14.1:
+
+* Removed the appendix about Dev-C++ because it was outdated.
+  Instead, refer to the online instructions on live.gnome.org.
+  (Armin Burgmeier)
+
 2.14.0:
 
 * AboutDialog example: Respond to the close button.
