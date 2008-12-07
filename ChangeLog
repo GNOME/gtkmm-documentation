@@ -1,3 +1,8 @@
+2008-12-07  Armin Burgmeier  <armin@openismus.com>
+
+	* docs/tutorial/Makefile.am: Removed the MSVC figures from
+	DOC_FIGURES.
+
 2.14.1:
 
 2008-11-10  Murray Cumming  <murrayc@murrayc.com>

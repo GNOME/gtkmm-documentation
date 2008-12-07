@@ -45,13 +45,7 @@ DOC_FIGURES = \
 	figures/treeview_list.png figures/treeview_tree.png figures/treeview_editablecells.png figures/treeview_combo_renderer.png \
         figures/treeview_draganddrop.png figures/treeview_popup.png \
         figures/devcpp_project_options.png figures/cairo_clock.png figures/cairo_joins.png  \
-        figures/update_ui.png \
-        figures/msvc_add_existing_property_sheet.png figures/msvc_new_project_menu.png figures/msvc_properties_subsystem_windows.png \
-        figures/msvc_application_settings.png figures/msvc_project_created.png msvc_property_files.png \
-        figures/msvc_corrected_main.png figures/msvc_project_properties.png figures/msvc_property_manager.png \
-        figures/msvc_corrected_stdafx.png figures/msvc_properties_maincrtstartup.png figures/msvc_property_manager_with_gtkmm_properties.png \
-        figures/msvc_main_program.png figures/msvc_properties_noinherit.png \
-        figures/msvc_new_project_dialog.png figures/msvc_properties_remove_warning_4250.png
+        figures/update_ui.png
 
 DOC_LINGUAS = de
 
