@@ -1,3 +1,8 @@
+2008-12-16  Fabrício Godoy  <skarllot@gmail.com>
+
+	* examples/book/range_widgets/examplewindow.cc: Remove unnecessary 
+	casts to int.
+
 2008-12-07  Armin Burgmeier  <armin@openismus.com>
 
 	* docs/tutorial/Makefile.am: Removed the MSVC figures from
