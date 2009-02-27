@@ -294,7 +294,7 @@ be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
 
 <sect1 id="sec-packages-windows">
 <title>Microsoft Windows</title>
-<para>GTK+ and &gtkmm; were designed to work well with Microsoft Windows, and the developers encourage its use on the win32 platform.  However, Windows has no standard installation system for development libraries. Please see the <link url="http://live.gnome.org/gtkmm/MSWindows">Windows Installation</link>
+<para>GTK+ and &gtkmm; were designed to work well with Microsoft Windows, and the developers encourage its use on the win32 platform.  However, Windows has no standard installation system for development libraries. Please see the <ulink url="http://live.gnome.org/gtkmm/MSWindows">Windows Installation</ulink>
 page for Windows-specific installation instructions and notes.</para>
 </sect1>
 
