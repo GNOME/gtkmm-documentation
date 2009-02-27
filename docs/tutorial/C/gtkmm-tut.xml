@@ -2492,7 +2492,7 @@ you a pointer to the actual child widget.
 
 <para>
 To programmatically change the selected page, use the
-<function>set_page()</function> method.
+<function>set_current_page()</function> method.
 </para>
 
 <para>There is also an  <link linkend="sec-notebook-stl-style">STL-style API</link> which you might find more obvious.</para>

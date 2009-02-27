@@ -1,3 +1,8 @@
+2009-02-27  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/tutorial/C/gtkmm-tut.xml: Notebook: Mention set_current_page() 
+	instead of set_page(), which does not exist. Noticed by Jason Curole. 
+
 2008-12-16  Fabrício Godoy  <skarllot@gmail.com>
 
 	* examples/book/range_widgets/examplewindow.cc: Remove unnecessary 
