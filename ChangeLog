@@ -1,5 +1,11 @@
 2009-02-27  Murray Cumming  <murrayc@murrayc.com>
 
+	* docs/tutorial/C/gtkmm-tut.xml: Mention pygobject instead of pygtk 
+	for the codegen stuff such as h2def.py and docextract_to_xml.py.
+	Noticed by Krzesimir Nowak.
+
+2009-02-27  Murray Cumming  <murrayc@murrayc.com>
+
 	* docs/tutorial/C/gtkmm-tut.xml: Use <methodname> instead of <function> 
 	for method names.
 
