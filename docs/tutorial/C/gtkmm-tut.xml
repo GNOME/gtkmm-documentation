@@ -410,7 +410,7 @@ Most of the chapters in this book deal with specific widgets. See the <link link
 <para>Although you can specify the layout and appearance of windows and widgets with C++ code, you will probably find it more convenient to design your user interfaces with <literal>Glade</literal> and load them at runtime with <literal>libglademm</literal>. See the <link linkend="chapter-libglademm">Glade and libglademm</link> chapter.
 </para>
 
-<para>Although &gtkmm; widget instances have lifetimes and scopes just like those of other C++ classes, &gtkmm; has an optional time-saving feature that you will see in some of the examples. <function>Gtk::manage()</function> allows you to say that a child widget is owned by the container into which you place it. This is allows you to <function>new()</function> the widget, add it to the container and forget about deleting it. You can learn more about &gtkmm; memory management techniques in the <link linkend="chapter-memory">Memory Management chapter</link>.
+<para>Although &gtkmm; widget instances have lifetimes and scopes just like those of other C++ classes, &gtkmm; has an optional time-saving feature that you will see in some of the examples. <function>Gtk::manage()</function> allows you to say that a child widget is owned by the container into which you place it. This is allows you to <function>new</function> the widget, add it to the container and forget about deleting it. You can learn more about &gtkmm; memory management techniques in the <link linkend="chapter-memory">Memory Management chapter</link>.
 </para>
 
 </sect1>
@@ -532,7 +532,7 @@ object the label &quot;Hello World&quot;.
 </para>
 
 <para>
-Next we call the Window's <function>set_border_width()</function> method.  This sets
+Next we call the Window's <methodname>set_border_width()</methodname> method.  This sets
 the amount of space between the sides of the window and the widget it
 contains.
 </para>
@@ -543,11 +543,11 @@ This prints our friendly greeting to <literal>stdout</literal>.
 </para>
 
 <para>
-Next, we use the Window's <function>add()</function> method to put <literal>m_button</literal> in
-the Window.  (<function>add()</function> comes from <classname>Gtk::Container</classname>, which is
-described in the chapter on container widgets.)  The <function>add()</function> method
+Next, we use the Window's <methodname>add()</methodname> method to put <literal>m_button</literal> in
+the Window.  (<methodname>add()</methodname> comes from <classname>Gtk::Container</classname>, which is
+described in the chapter on container widgets.)  The <methodname>add()</methodname> method
 places the Widget in the Window, but it doesn't display
-the widget.  &gtkmm; widgets are always invisible when you create them - to display them, you must call their <function>show()</function> method, which
+the widget.  &gtkmm; widgets are always invisible when you create them - to display them, you must call their <methodname>show()</methodname> method, which
 is what we do in the next line.
 </para>
 
@@ -654,7 +654,7 @@ may vary considerably.
 <para>
 There are two ways to create a Button. You can specify a label
 string in the <classname>Gtk::Button</classname> constructor,
-or set it later with <function>set_label()</function>.
+or set it later with <methodname>set_label()</methodname>.
 </para>
 
 <para>To define an accelerator key for keyboard navigation, place an underscore before one of the label's characters and specify <literal>true</literal> for the optional <literal>mnemonic</literal> parameter. For instance:
@@ -759,13 +759,13 @@ Emitted when the mouse pointer leaves the button's window.
 
 <para>
 To retrieve the state of the <classname>ToggleButton</classname>, you can use the 
-<function>get_active()</function> method. This returns <literal>true</literal> if the button
-is "down". You can also set the toggle button's state, with <function>set_active()</function>. Note that, if you do this, and the state actually changes, it causes the
+<methodname>get_active()</methodname> method. This returns <literal>true</literal> if the button
+is "down". You can also set the toggle button's state, with <methodname>set_active()</methodname>. Note that, if you do this, and the state actually changes, it causes the
 "clicked" signal to be emitted.  This is usually what you want.
 </para>
 
 <para>
-You can use the <function>toggled()</function> method to toggle the button, rather than
+You can use the <methodname>toggled()</methodname> method to toggle the button, rather than
 forcing it to be up or down: This switches the button's state, and causes the <literal>toggled</literal> signal to be emitted.
 </para>
 
@@ -844,15 +844,15 @@ RadioButtons::RadioButtons()
 }</programlisting>
 <para>
 We told &gtkmm; to put all three <classname>RadioButton</classname>s in the
-same group by obtaining the group with <function>get_group()</function> and using
-<function>set_group()</function> to tell the other
+same group by obtaining the group with <methodname>get_group()</methodname> and using
+<methodname>set_group()</methodname> to tell the other
 <classname>RadioButton</classname>s to share that group.
 </para>
 
 <para>
 Note that you can't just do
 <programlisting>m_rb2.set_group(m_rb1.get_group()); //doesn't work</programlisting>
-because the group is modified by <function>set_group()</function> and therefore
+because the group is modified by <methodname>set_group()</methodname> and therefore
 non-const.
 </para>
 
@@ -890,7 +890,7 @@ buttons, using a constructor to make each of them part of
 <para>
 <classname>RadioButtons</classname> are "off" when created; this means that
 when you first make a group of them, they will all be off. Don't forget to turn
-one of them on using <function>set_active()</function>:
+one of them on using <methodname>set_active()</methodname>:
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;RadioButton.html">Reference</ulink></para>
@@ -939,7 +939,7 @@ section, all Range widgets are associated with a
 <classname>Adjustment</classname> object. To change the lower, upper, and
 current values used by the widget you need to use the methods of its
 <classname>Adjustment</classname>, which you can get with the
-<function>get_adjustment()</function> method. The <classname>Range</classname>
+<methodname>get_adjustment()</methodname> method. The <classname>Range</classname>
 widgets' default constructors create an <classname>Adjustment</classname>
 automatically, or you can specify an existing
 <classname>Adjustment</classname>, maybe to share it with another widget. See
@@ -996,19 +996,19 @@ horizontal and vertical widgets - <classname>Gtk::HScale</classname> and
 <para>
 <classname>Scale</classname> widgets can display their current value as a number
 next to the trough. By default they show the value, but you can change this
-with the <function>set_draw_value()</function> method.
+with the <methodname>set_draw_value()</methodname> method.
 </para>
 
 <para>
 The value displayed by a scale widget is rounded to one decimal point
 by default, as is the <literal>value</literal> field in its
 <classname>Gtk::Adjustment</classname>. You can change this with the
-<function>set_digits()</function> method.
+<methodname>set_digits()</methodname> method.
 </para>
 
 <para>
 Also, the value can be drawn in different positions relative to the trough,
-specified by the <function>set_value_pos()</function> method.
+specified by the <methodname>set_value_pos()</methodname> method.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;Scale.html">Reference</ulink></para>
@@ -1024,7 +1024,7 @@ The <emphasis>update policy</emphasis> of a <classname>Range</classname> widget
 defines at what points during user interaction it will change the
 <literal>value</literal> field of its <classname>Gtk::Adjustment</classname> and
 emit the <literal>value_changed</literal> signal. The update policies,
-set with the <function>set_update_policy()</function> method, are:
+set with the <methodname>set_update_policy()</methodname> method, are:
 
 <itemizedlist>
 <listitem>
@@ -1091,7 +1091,7 @@ for the user.
 Labels are the  main method of placing non-editable text in windows, for
 instance to place a title next to a <classname>Entry</classname> widget. You
 can specify the text in the constructor, or with the
-<function>set_text()</function> method.
+<methodname>set_text()</methodname> method.
 </para>
 
 <para>
@@ -1099,9 +1099,9 @@ The width of the label will be adjusted automatically.  You can produce multi-li
 </para>
 
 <para>
-The label text can be justified using the <function>set_justify()</function>
+The label text can be justified using the <methodname>set_justify()</methodname>
 method. The widget is also capable of word-wrapping - this can be activated
-with <function>set_line_wrap()</function>.
+with <methodname>set_line_wrap()</methodname>.
 </para>
 
 <para>
@@ -1139,19 +1139,19 @@ enough).
 </para>
 
 <para>
-You can change the contents with the <function>set_text()</function> method,
-and read the current contents with the <function>get_text()</function> method.
+You can change the contents with the <methodname>set_text()</methodname> method,
+and read the current contents with the <methodname>get_text()</methodname> method.
 </para>
 
 <para>
 Occasionally you might want to make an <classname>Entry</classname> widget
 read-only.  This can be done by passing <literal>false</literal> to the
-<function>set_editable()</function> method.
+<methodname>set_editable()</methodname> method.
 </para>
 
 <para>
 For the input of passwords, passphrases and other information you don't want
-echoed on the screen,  calling <function>set_visibility()</function> with
+echoed on the screen,  calling <methodname>set_visibility()</methodname> with
 <literal>false</literal> will cause the text to be hidden.
 </para>
 
@@ -1261,7 +1261,7 @@ Additionally, mouse button 3 can be used to jump directly to the
 <para>
 The <classname>SpinButton</classname> can create a default
 <classname>Adjustment</classname>, which you can access via the
-<function>get_adjustment()</function> method, or you can specify an existing
+<methodname>get_adjustment()</methodname> method, or you can specify an existing
 <classname>Adjustment</classname> in the constructor.
 </para>
 
@@ -1270,16 +1270,16 @@ The <classname>SpinButton</classname> can create a default
 
 <para>
 The number of decimal places can be altered using the
-<function>set_digits()</function> method.
+<methodname>set_digits()</methodname> method.
 </para>
 
 <para>
-You can set the spinbutton's value using the <function>set_value()</function>
-method, and retrieve it with <function>get_value()</function>.
+You can set the spinbutton's value using the <methodname>set_value()</methodname>
+method, and retrieve it with <methodname>get_value()</methodname>.
 </para>
 
 <para>
-The <function>spin()</function> method 'spins' the
+The <methodname>spin()</methodname> method 'spins' the
 <classname>SpinButton</classname>, as if one of its arrows had been clicked.
 You need to specify a <classname>Gtk::SpinType</classname> to specify the
 direction or new position.
@@ -1287,29 +1287,29 @@ direction or new position.
 
 <para>
 To prevent the user from typing non-numeric characters into the entry box, pass
-<literal>true</literal> to the <function>set_numeric()</function> method.
+<literal>true</literal> to the <methodname>set_numeric()</methodname> method.
 </para>
 
 <para>
 To make the <classname>SpinButton</classname> 'wrap' between its upper and
-lower bounds, use the <function>set_wrap()</function> method.
+lower bounds, use the <methodname>set_wrap()</methodname> method.
 </para>
 
 <para>
 To force it to snap to the nearest <literal>step_increment</literal>,
-use <function>set_snap_to_ticks()</function>.
+use <methodname>set_snap_to_ticks()</methodname>.
 </para>
 
 <para>
 You can modify the update policy using the
-<function>set_update_policy()</function> method, specifying either
+<methodname>set_update_policy()</methodname> method, specifying either
 <literal>Gtk::UPDATE_ALWAYS</literal> or
 <literal>Gtk::UPDATE_IF_VALID</literal>.
 <literal>Gtk::UPDATE_ALWAYS</literal> causes the
 <classname>SpinButton</classname> to ignore errors encountered while converting
 the text in the entry box to a numeric value.  This setting also therefore
 allows the <classname>SpinButton</classname> to accept non-numeric values. You
-can force an immediate update using the <function>update()</function> method.
+can force an immediate update using the <methodname>update()</methodname> method.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;SpinButton.html">Reference</ulink></para>
@@ -1345,7 +1345,7 @@ been completed.
 </para>
 
 <para>
-To change the value shown, use the <function>set_fraction()</function> method,
+To change the value shown, use the <methodname>set_fraction()</methodname> method,
 passing a double between 0 and 1 to provide the new percentage.
 </para>
 
@@ -1357,7 +1357,7 @@ fraction of the bar should be filled.
 <para>
 A <classname>ProgressBar</classname>is horizontal and left-to-right by default,
 but you can change it to a vertical progress bar by using the
-<function>set_orientation()</function> method.
+<methodname>set_orientation()</methodname> method.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;ProgressBar.html">Reference</ulink></para>
@@ -1375,14 +1375,14 @@ receiving a file of unknown length).
 </para>
 
 <para>
-To do this, you need to call the <function>pulse()</function> method at regular
+To do this, you need to call the <methodname>pulse()</methodname> method at regular
 intervals. You can also choose the step size, with the
-<function>set_pulse_step()</function> method.
+<methodname>set_pulse_step()</methodname> method.
 </para>
 
 <para>
 When in continuous mode, the progress bar can also display a configurable text
-string within its trough, using the <function>set_text()</function> method.
+string within its trough, using the <methodname>set_text()</methodname> method.
 </para>
 </sect2>
 
@@ -1409,12 +1409,12 @@ string within its trough, using the <function>set_text()</function> method.
 you leave your pointer over a widget for a few seconds and the
 <classname>Gtk::Tooltips</classname> object is a group of these tooltips. After
 creating a <classname>Gtk::Tooltips</classname> instance, you can use the
-<function>set_tip()</function> method to associate some descriptive text with a
+<methodname>set_tip()</methodname> method to associate some descriptive text with a
 <classname>Widget</classname>.
 </para>
 
 <para>
-The <function>enable()</function> and <function>disable()</function> methods
+The <methodname>enable()</methodname> and <methodname>disable()</methodname> methods
 allow you to turn a whole group of tooltips on and off.
 </para>
 
@@ -1440,7 +1440,7 @@ typically have more complex interfaces.  Others, such as
 
 <para>
 The single-item container widgets derive from <classname>Gtk::Bin</classname>,
-which provides the <function>add()</function> and <function>remove()</function>
+which provides the <methodname>add()</methodname> and <methodname>remove()</methodname>
 methods for the child widget. Note that <classname>Gtk::Button</classname> and
 <classname>Gtk::Window</classname> are technically single-item containers, but
 we have discussed them already elsewhere. 
@@ -1493,13 +1493,13 @@ than the names and the orientations, there's no difference between the two.
 <para>
 Unlike the other widgets in this chapter, pane widgets contain not one but two
 child widgets, one in each pane. Therefore, you should use
-<function>add1()</function> and <function>add2()</function> instead of the
-<function>add()</function> method.
+<methodname>add1()</methodname> and <methodname>add2()</methodname> instead of the
+<methodname>add()</methodname> method.
 </para>
 
 <para>
 You can adjust the position of the divider using the
-<function>set_position()</function> method, and you will probably need to do
+<methodname>set_position()</methodname> method, and you will probably need to do
 so.
 </para>
 
@@ -1535,7 +1535,7 @@ regardless of its size by using the scrollbars. Note that
 <para>
 Scrolled windows have <emphasis>scrollbar policies</emphasis> which determine
 whether the <classname>Scrollbar</classname>s will be displayed. The policies
-can be set with the <function>set_policy()</function> method. The policy may be
+can be set with the <methodname>set_policy()</methodname> method. The policy may be
 one of <literal>Gtk::POLICY_AUTOMATIC</literal> or
 <literal>Gtk::POLICY_ALWAYS</literal>.
 <literal>Gtk::POLICY_AUTOMATIC</literal> will cause the scrolled window
@@ -1611,7 +1611,7 @@ widget itself.  For instance, it might be used to center a widget.
 
 <para>
 You need to specify the <classname>Alignment</classname>'s characteristics to
-the constructor, or to the <function>set()</function> method. In particular, you
+the constructor, or to the <methodname>set()</methodname> method. In particular, you
 won't notice much effect unless you specify a number other than 1.0 for the
 <literal>xscale</literal> and <literal>yscale</literal> parameters, because 1.0
 simply means that the child widget will expand to fill all available space.
@@ -1651,10 +1651,10 @@ example that uses an <classname>Alignment</classname>.
 
 <para>
 Multiple-item widgets inherit from <classname>Gtk::Container</classname>; just
-as with <classname>Gtk::Bin</classname>, you use the <function>add()</function>
-and <function>remove()</function> methods to add and remove contained widgets.
-Unlike <function>Gtk::Bin::remove()</function>, however, the
-<function>remove()</function> method for <classname>Gtk::Container</classname>
+as with <classname>Gtk::Bin</classname>, you use the <methodname>add()</methodname>
+and <methodname>remove()</methodname> methods to add and remove contained widgets.
+Unlike <methodname>Gtk::Bin::remove()</methodname>, however, the
+<methodname>remove()</methodname> method for <classname>Gtk::Container</classname>
 takes an argument, specifiying which widget to remove.
 </para>
 
@@ -1721,7 +1721,7 @@ the window. The most useful container widgets are
 <para>
 <classname>Gtk::VBox</classname> and <classname>Gtk::HBox</classname> arrange
 their child widgets vertically and horizontally, respectively. Use
-<function>pack_start()</function> and <function>pack_end()</function> to insert
+<methodname>pack_start()</methodname> and <methodname>pack_end()</methodname> to insert
 child widgets.
 </para>
 </listitem>
@@ -1729,7 +1729,7 @@ child widgets.
 <listitem>
 <para>
 <classname>Gtk::Table</classname> arranges its widgets in a grid. Use
-<function>attach()</function> to insert widgets.
+<methodname>attach()</methodname> to insert widgets.
 </para>
 </listitem>
 
@@ -1767,7 +1767,7 @@ Let's take a look at a slightly improved <literal>helloworld</literal>, showing 
 <para>
 After building and running this program, try resizing the window to see the
 behaviour. Also, try playing with the options to
-<function>pack_start()</function> while reading the <link
+<methodname>pack_start()</methodname> while reading the <link
     linkend="sec-boxes">Boxes</link> section.
 </para>
 
@@ -1781,8 +1781,8 @@ TODO: Use 'Standard Library' instead of STL.
 If you're an accomplished C++ programmer, you'll be happy to hear that most of
 the &gtkmm; <classname>Container</classname> widgets provide STL-style APIs,
 available via accessor methods, such as
-<function>Gtk::Box::children()</function> or
-<function>Gtk::Notebook::pages()</function>. They don't use actual STL
+<methodname>Gtk::Box::children()</methodname> or
+<methodname>Gtk::Notebook::pages()</methodname>. They don't use actual STL
 containers (there are good reasons for this), but they look, feel, and act much
 like STL container classes.
 </para>
@@ -1795,8 +1795,8 @@ you to the STL documentation for most of their methods. This is all part of &gtk
 However, STL-style APIs can require awkward or lengthy code in some situations,
 so some people prefer not to use them, while other people use them religiously.
 Therefore, you are not forced to use them - most container widgets have a
-simpler non-STL-style API, with methods such as <function>append()</function>
-and <function>prepend()</function>. 
+simpler non-STL-style API, with methods such as <methodname>append()</methodname>
+and <methodname>prepend()</methodname>. 
 </para>
 
 <para>
@@ -1806,109 +1806,109 @@ always expect the following methods to be available for &gtkmm; STL-style APIs:
 
 <listitem>
 <para>
-<function>begin()</function> returns a <literal>begin</literal> iterator
+<methodname>begin()</methodname> returns a <literal>begin</literal> iterator
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>end()</function> returns an <literal>end</literal> iterator
+<methodname>end()</methodname> returns an <literal>end</literal> iterator
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>rbegin()</function> returns a reverse <literal>begin</literal> iterator
+<methodname>rbegin()</methodname> returns a reverse <literal>begin</literal> iterator
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>rend()</function> returns a reverse <literal>end</literal> iterator
+<methodname>rend()</methodname> returns a reverse <literal>end</literal> iterator
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>size()</function>
+<methodname>size()</methodname>
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>max_size()</function>
+<methodname>max_size()</methodname>
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>empty()</function>
+<methodname>empty()</methodname>
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>insert()</function>
+<methodname>insert()</methodname>
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>push_front()</function>
+<methodname>push_front()</methodname>
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>push_back()</function>
+<methodname>push_back()</methodname>
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>pop_front()</function>
+<methodname>pop_front()</methodname>
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>pop_back()</function>
+<methodname>pop_back()</methodname>
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>clear()</function>
+<methodname>clear()</methodname>
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>erase()</function>
+<methodname>erase()</methodname>
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>remove()</function>
+<methodname>remove()</methodname>
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>find()</function>
+<methodname>find()</methodname>
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>front()</function>
+<methodname>front()</methodname>
 </para>
 </listitem>
 
 <listitem>
 <para>
-<function>back()</function>
+<methodname>back()</methodname>
 </para>
 </listitem>
 
@@ -2000,13 +2000,13 @@ helper classes, like this:
 Let's see what's
 going on here.  Assume we have a pointer to a <classname>Notebook</classname>
 widget called <literal>notebook</literal>; we go from that to a member method
-called <function>pages()</function>, which returns an STL-like list object.  On
-this we call the method <function>push_back()</function> (this should be
+called <methodname>pages()</methodname>, which returns an STL-like list object.  On
+this we call the method <methodname>push_back()</methodname> (this should be
 familiar to those who know STL).
 </para>
 
 <para>
-The object that the <function>pages()</function> method returns is called a
+The object that the <methodname>pages()</methodname> method returns is called a
 <classname>Notebook_Helpers::PageList</classname>.  It's one of the
 STL-like containers that we keep referring to.  Let's take a look at this class
 (this has been heavily edited for clarity; see
@@ -2031,7 +2031,7 @@ There are two important things to notice here:
 
 <listitem>
 <para>
-The <function>push_back()</function> method takes as argument an
+The <methodname>push_back()</methodname> method takes as argument an
 <classname>Element</classname> object (helper);
 </para>
 </listitem>
@@ -2108,9 +2108,9 @@ items().push_back(*m);</programlisting>
 
 <para>
 We constructed a new <classname>MenuElem</classname> helper object, and then
-tried to invoke <function>right_justify()</function> on it before adding
+tried to invoke <methodname>right_justify()</methodname> on it before adding
 it to the menu.  The trouble is that there is no
-<function>right_justify()</function> method in the
+<methodname>right_justify()</methodname> method in the
 <classname>MenuElem</classname> class.  The correct way to accomplish this
 would be:
 </para>
@@ -2119,12 +2119,12 @@ items().back()-&#62;right_justify();</programlisting>
 
 <para>
 Here, we've constructed a <classname>MenuElem</classname> and inserted it into
-the menu by passing it to <function>push_back()</function>, causing the
+the menu by passing it to <methodname>push_back()</methodname>, causing the
 real menu item to be created.  We've then called
-<function>right_justify()</function> on the object retrieved from the
+<methodname>right_justify()</methodname> on the object retrieved from the
 list.  This is correct - the object retrieved from the list is not a
 <classname>MenuElem</classname>, but a real <classname>MenuItem</classname>,
-and therefore supports the <function>right_justify()</function> method
+and therefore supports the <methodname>right_justify()</methodname> method
 as expected.
 </para>
 
@@ -2140,7 +2140,7 @@ Most packing uses boxes as in the above example. These
 are invisible containers into which we can pack our widgets. When
 packing widgets into a horizontal box, the objects are inserted
 horizontally from left to right or right to left depending on whether
-<function>pack_start()</function> or <function>pack_end()</function> is used.
+<methodname>pack_start()</methodname> or <methodname>pack_end()</methodname> is used.
 In a vertical box, widgets are packed from top to bottom or vice
 versa. You may use any combination of boxes inside or beside other
 boxes to create the desired effect.
@@ -2149,15 +2149,15 @@ boxes to create the desired effect.
 <sect3 id="boxes-adding-widgets"><title>Adding widgets</title>
 <sect4 id="per-child-packing-options"><title>Per-child packing options</title>
 <para>
-The <function>pack_start()</function> and
-<function>pack_end()</function> methods place widgets inside these
-containers. The <function>pack_start()</function> method will start at
+The <methodname>pack_start()</methodname> and
+<methodname>pack_end()</methodname> methods place widgets inside these
+containers. The <methodname>pack_start()</methodname> method will start at
 the top and work its way down in a <classname>VBox</classname>, or pack left to
 right in an <classname>HBox</classname>.
-<function>pack_end()</function> will do the opposite, packing from
+<methodname>pack_end()</methodname> will do the opposite, packing from
 bottom to top in a <classname>VBox</classname>, or right to left in an
 <classname>HBox</classname>. Using these methods allows us to right justify or
-left justify our widgets. We will use <function>pack_start()</function>
+left justify our widgets. We will use <methodname>pack_start()</methodname>
 in most of our examples.
 </para>
 
@@ -2185,11 +2185,11 @@ different styles, as shown in this picture:
 Each line contains one horizontal box (<classname>HBox</classname>) with
 several buttons. Each of the buttons on a line is packed into the
 <classname>HBox</classname> with the same arguments to the
-<function>pack_start()</function> method).
+<methodname>pack_start()</methodname> method).
 </para>
 
 <para>
-This is the declaration of the <function>pack_start()</function> method:
+This is the declaration of the <methodname>pack_start()</methodname> method:
 </para>
 <programlisting>void pack_start(Gtk::Widget&amp; child,
                 PackOptions options = PACK_EXPAND_WIDGET,
@@ -2214,8 +2214,8 @@ border area to leave around the packed widget.
 </para>
 
 <para>
-Instead of the <function>pack_start()</function> and
-<function>pack_end()</function> methods, you might prefer to use the STL-style
+Instead of the <methodname>pack_start()</methodname> and
+<methodname>pack_end()</methodname> methods, you might prefer to use the STL-style
 API, available via the <literal>children</literal> method. See the <link
     linkend="sec-stl-style">STL-style APIs</link> section for more details.
 </para>
@@ -2278,13 +2278,13 @@ because they use standard settings, such as inter-button spacing and packing.
 
 <para>
 Buttons are added to a <classname>ButtonBox</classname> with the
-<function>add()</function> method.
+<methodname>add()</methodname> method.
 </para>
 
 <para>
 Button boxes support several layout styles.  The style can be retrieved and
-changed using <function>get_layout()</function> and
-<function>set_layout()</function>.
+changed using <methodname>get_layout()</methodname> and
+<methodname>set_layout()</methodname>.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;ButtonBox.html">Reference</ulink></para>
@@ -2420,23 +2420,23 @@ will shrink with the table.
 
 <para>
 The padding arguments work just as they do for
-<function>pack_start()</function>.
+<methodname>pack_start()</methodname>.
 </para>
 </sect3>
 
 <sect3 id="table-other-methods"><title>Other methods</title>
 
 <para>
-<function>set_row_spacing()</function> and
-<function>set_col_spacing()</function> set the spacing between
+<methodname>set_row_spacing()</methodname> and
+<methodname>set_col_spacing()</methodname> set the spacing between
 the rows at the specified row or column. Note that for columns, the space goes
 to the right of the column, and for rows, the space goes below the row.
 </para>
 
 <para>
 You can also set a consistent spacing for all rows and/or columns with
-<function>set_row_spacings()</function> and
-<function>set_col_spacings()</function>. Note that with these calls, the last
+<methodname>set_row_spacings()</methodname> and
+<methodname>set_col_spacings()</methodname>. Note that with these calls, the last
 row and last column do not get any spacing.
 </para>
 
@@ -2477,22 +2477,22 @@ used in preferences dialogs.
 </para>
 
 <para>
-Use the <function>append_page()</function>, <function>prepend_page()</function>
-and <function>insert_page()</function> methods to add tabbed pages to the
+Use the <methodname>append_page()</methodname>, <methodname>prepend_page()</methodname>
+and <methodname>insert_page()</methodname> methods to add tabbed pages to the
 <literal>Notebook</literal>, supplying the child widget and the name for the
 tab.
 </para>
 
 <para>
 To discover the currently visible page, use the
-<function>get_current_page()</function> method. This returns the page number,
-and then calling <function>get_nth_page()</function> with that number will give
+<methodname>get_current_page()</methodname> method. This returns the page number,
+and then calling <methodname>get_nth_page()</methodname> with that number will give
 you a pointer to the actual child widget.
 </para>
 
 <para>
 To programmatically change the selected page, use the
-<function>set_current_page()</function> method.
+<methodname>set_current_page()</methodname> method.
 </para>
 
 <para>There is also an  <link linkend="sec-notebook-stl-style">STL-style API</link> which you might find more obvious.</para>
@@ -2516,7 +2516,7 @@ To programmatically change the selected page, use the
 <title>STL-style API</title>
 <para>
 The <classname>Gtk::Notebook</classname> widget has an STL-style API, available
-via the <function>pages()</function> method,  which you might prefer to use to
+via the <methodname>pages()</methodname> method,  which you might prefer to use to
 add and access pages. See the <link linkend="sec-stl-style">STL-style
     APIs</link> section for generic information.</para>
 
@@ -2533,7 +2533,7 @@ class, like so:
 
 <para>
 To access an existing child widget, you can call
-<function>get_child()</function> on one of the <classname>Page</classname> elements
+<methodname>get_child()</methodname> on one of the <classname>Page</classname> elements
 of the <classname>PageList</classname>:
 </para>
 <programlisting>Gtk::Widget* pWidget = m_Notebook.pages()[2].get_child();</programlisting>
@@ -2649,8 +2649,8 @@ glibmm has been instantiated.</para>
 <sect2 id="treeview-adding-rows">
 <title>Adding Rows</title>
 <para>
-Add rows to the model with the <function>append()</function>,
-<function>prepend()</function>, or <function>insert()</function> methods.
+Add rows to the model with the <methodname>append()</methodname>,
+<methodname>prepend()</methodname>, or <methodname>insert()</methodname> methods.
 </para>
 <programlisting>Gtk::TreeModel::iterator iter = m_refListStore-&gt;append();</programlisting>
 <para>You can dereference the iterator to get the Row:
@@ -2659,8 +2659,8 @@ Add rows to the model with the <function>append()</function>,
 <sect3 id="treeview-adding-child-rows"><title>Adding child rows</title>
 <para>
 <classname>Gtk::TreeStore</classname> models can have child items. Add them
-with the <function>append()</function>, <function>prepend()</function>, or
-<function>insert()</function> methods, like so:
+with the <methodname>append()</methodname>, <methodname>prepend()</methodname>, or
+<methodname>insert()</methodname> methods, like so:
 </para>
 <programlisting>Gtk::TreeModel::iterator iter_child =
     m_refListStore-&gt;append(row.children());</programlisting>
@@ -2671,7 +2671,7 @@ with the <function>append()</function>, <function>prepend()</function>, or
 <sect2 id="treeview-setting-values">
 <title>Setting values</title>
 <para>
-You can use the <function>operator[]</function> override to set the data for a
+You can use the <methodname>operator[]</methodname> override to set the data for a
 particular column in the row, specifying the
 <classname>TreeModelColumn</classname> used to create the model.
 </para>
@@ -2681,7 +2681,7 @@ particular column in the row, specifying the
 <sect2 id="treeview-getting-values">
 <title>Getting values</title>
 <para>
-You can use the <function>operator[]</function> override to get the data in a
+You can use the <methodname>operator[]</methodname> override to get the data in a
 particular column in a row, specifiying the
 <classname>TreeModelColumn</classname> used to create the model.
 </para>
@@ -2721,7 +2721,7 @@ some, and it can show them in various ways.
 <para>
 You can specify a <classname>Gtk::TreeModel</classname> when constructing the
 <classname>Gtk::TreeView</classname>, or you can use the
-<function>set_model()</function> method, like so:
+<methodname>set_model()</methodname> method, like so:
 </para>
 <programlisting>m_TreeView.set_model(m_refListStore);</programlisting>
 </sect2>
@@ -2729,20 +2729,20 @@ You can specify a <classname>Gtk::TreeModel</classname> when constructing the
 <sect2 id="treeview-adding-view-columns">
 <title>Adding View Columns</title>
 <para>
-You can use the <function>append_column()</function> method to  tell the View
+You can use the <methodname>append_column()</methodname> method to  tell the View
 that it should display certain Model columns, in a certain order, with a
 certain column title.
 </para>
 <programlisting>m_TreeView.append_column("Messages", m_Columns.m_col_text);</programlisting>
 <para>
-When using this simple <function>append_column()</function> override, the
+When using this simple <methodname>append_column()</methodname> override, the
 <classname>TreeView</classname> will display the model data with an appropriate
 <classname>CellRenderer</classname>. For instance, strings and numbers are
 shown in a simple <classname>Gtk::Entry</classname> widget, and booleans are
 shown in a <classname>Gtk::CheckButton</classname>. This is usually what you
 need.  For other column types you must either connect a callback that converts
 your type into a string representation, with
-<function>TreeViewColumn::set_cell_data_func()</function>, or derive a custom
+<methodname>TreeViewColumn::set_cell_data_func()</methodname>, or derive a custom
 <classname>CellRenderer</classname>.  Note that (unsigned) short is not
 supported by default - You could use (unsigned) int or (unsigned) long as the
 column type instead.
@@ -2754,12 +2754,12 @@ column type instead.
 <para>
 To render more than one model column in a view column, you need to create the
 <classname>TreeView::Column</classname> widget manually, and use
-<function>pack_start()</function> to add the model columns to it.
+<methodname>pack_start()</methodname> to add the model columns to it.
 </para>
 
 <para>
-Then use <function>append_column()</function> to add the view Column to the
-View. Notice that <function>Gtk::View::append_column()</function> is overridden
+Then use <methodname>append_column()</methodname> to add the view Column to the
+View. Notice that <methodname>Gtk::View::append_column()</methodname> is overridden
 to accept either a prebuilt <classname>Gtk::View::Column</classname> widget, or
 just the <classname>TreeModelColumn</classname> from which it generates an
 appropriate <classname>Gtk::View::Column</classname> widget.
@@ -2823,9 +2823,9 @@ pRenderer-&gt;signal_toggled().connect(
 <para>
 Cells in a <classname>TreeView</classname> can be edited in-place by the user.
 To allow this, use the <classname>Gtk::TreeView</classname>
-<function>insert_column_editable()</function> and
-<function>append_column_editable()</function> methods instead of
-<function>insert_column()</function> and <function>append_column()</function>.
+<methodname>insert_column_editable()</methodname> and
+<methodname>append_column_editable()</methodname> methods instead of
+<methodname>insert_column()</methodname> and <methodname>append_column()</methodname>.
 When these cells are edited the new values will be stored immediately in the
 Model. Note that these methods are templates which can only be instantiated for
 simple column types such as <classname>Glib::ustring</classname>, int, and
@@ -2842,8 +2842,8 @@ certain characters or ranges of values.
 </para>
 <para>
 To achieve this, you should use the normal <classname>Gtk::TreeView</classname>
-<function>insert_column()</function> and <function>append_column()</function>
-methods, then use <function>get_column_cell_renderer()</function> to get the
+<methodname>insert_column()</methodname> and <methodname>append_column()</methodname>
+methods, then use <methodname>get_column_cell_renderer()</methodname> to get the
 <classname>Gtk::CellRenderer</classname> used by that column.
 </para>
 <para>
@@ -2860,11 +2860,11 @@ property instead.
 </para>
 <para>You can then connect
 to the appropriate "edited" signal. For instance, connect to
-<function>Gtk::CellRendererText::signal_edited()</function>, or
-<function>Gtk::CellRendererToggle::signal_toggled()</function>. If the column
+<methodname>Gtk::CellRendererText::signal_edited()</methodname>, or
+<methodname>Gtk::CellRendererToggle::signal_toggled()</methodname>. If the column
 contains more than one <classname>CellRenderer</classname> then you will need
-to use <function>Gtk::TreeView::get_column()</function> and then call
-<function>get_cell_renderers()</function> on that view Column.
+to use <methodname>Gtk::TreeView::get_column()</methodname> and then call
+<methodname>get_cell_renderers()</methodname> on that view Column.
 </para>
 <para>
 In your signal handler, you should examine the new value and then
@@ -2881,8 +2881,8 @@ store it in the Model if that is appropriate for your application.
 <title>Iterating over Model Rows</title>
 <para>
 <classname>Gtk::TreeModel</classname> provides an STL-style container of its
-children, via the <function>children()</function> method. You can use the
-familiar <function>begin()</function> and <function>end()</function> methods
+children, via the <methodname>children()</methodname> method. You can use the
+familiar <methodname>begin()</methodname> and <methodname>end()</methodname> methods
 iterator incrementing, like so:
 </para>
 <programlisting>typedef Gtk::TreeModel::Children type_children; //minimise code length.
@@ -2899,7 +2899,7 @@ for(type_children::iterator iter = children.begin();
 <para>
 When using a <classname>Gtk::TreeStore</classname>, the rows can have child
 rows, which can have their own children in turn. Use
-<function>Gtk::TreeModel::Row::children()</function> to get the STL-style
+<methodname>Gtk::TreeModel::Row::children()</methodname> to get the STL-style
 container of child <classname>Row</classname>s:
 <programlisting>Gtk::TreeModel::Children children = row.children();</programlisting>
 </para>
@@ -2929,7 +2929,7 @@ multiple selection by setting the mode, like so:
 <sect2 id="treeview-selected-rows">
 <title>The selected rows</title>
 <para>
-For single-selection, you can just call <function>get_selected()</function>,
+For single-selection, you can just call <methodname>get_selected()</methodname>,
 like so:
 </para>
 <programlisting>TreeModel::iterator iter = refTreeSelection-&gt;get_selected();
@@ -2941,9 +2941,9 @@ if(iter) //If anything is selected
 
 <para>
 For multiple-selection, you need to define a callback, and give it to
-<function>selected_foreach()</function>,
-<function>selected_foreach_path()</function>, or
-<function>selected_foreach_iter()</function>, like so:
+<methodname>selected_foreach()</methodname>,
+<methodname>selected_foreach_path()</methodname>, or
+<methodname>selected_foreach_iter()</methodname>, like so:
 </para>
 <programlisting>refTreeSelection-&gt;selected_foreach_iter(
     sigc::mem_fun(*this, &amp;TheClass::selected_row_callback) );
@@ -2977,7 +2977,7 @@ but it doesn't make any sense to select a demo category.
 </para>
 <para>
 To control which rows can be selected, use the
-<function>set_select_function()</function> method, providing a
+<methodname>set_select_function()</methodname> method, providing a
 <classname>sigc::slot</classname> callback. For instance:
 </para>
 <programlisting>m_refTreeSelection-&gt;set_select_function( sigc::mem_fun(*this,
@@ -3018,7 +3018,7 @@ if(iter)
 <sect1 id="sec-treeview-sort">
 <title>Sorting</title>
 <para>
-The standard tree models (<classname>TreeStore</classname> and <classname>ListStore</classname> derive from <classname>TreeSortable</classname>, so they offer sorting functionality. For instance, call <function>set_sort_column()</function>, to sort the model by the specified column. Or supply a callback function to <function>set_sort_func()</function> to implement a more complicated sorting algorithm.
+The standard tree models (<classname>TreeStore</classname> and <classname>ListStore</classname> derive from <classname>TreeSortable</classname>, so they offer sorting functionality. For instance, call <methodname>set_sort_column()</methodname>, to sort the model by the specified column. Or supply a callback function to <methodname>set_sort_func()</methodname> to implement a more complicated sorting algorithm.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;TreeSortable.html">TreeSortable Reference</ulink></para>
@@ -3026,7 +3026,7 @@ The standard tree models (<classname>TreeStore</classname> and <classname>ListSt
 <sect2 id="treeview-sort-headers">
 <title>Sorting by clicking on columns</title>
 <para>
-So that a user can click on a <classname>TreeView</classname>'s column header to sort the <classname>TreeView</classname>'s contents, call <function>Gtk::TreeViewModel::set_sort_column()</function>, supplying the model column on which model should be sorted when the header is clicked. For instance:
+So that a user can click on a <classname>TreeView</classname>'s column header to sort the <classname>TreeView</classname>'s contents, call <methodname>Gtk::TreeViewModel::set_sort_column()</methodname>, supplying the model column on which model should be sorted when the header is clicked. For instance:
 </para>
 <programlisting>Gtk::TreeView::Column* pColumn = treeview.get_column(0);
 if(pColumn)
@@ -3036,7 +3036,7 @@ if(pColumn)
 <sect2 id="treeview-sort-independent-views">
 <title>Independently sorted views of the same model</title>
 <para>
-The <classname>TreeView</classname> already allows you to show the same <classname>TreeModel</classname> in two <classname>TreeView</classname> widgets. If you need one of these TreeViews to sort the model differently than the other then you should use a <classname>TreeModelSort</classname> instead of just, for instance, <function>Gtk::TreeViewModel::set_sort_column()</function>. <classname>TreeModelSort</classname> is a model that contains another model, presenting a sorted version of that model. For instance, you might add a sorted version of a model to a <classname>TreeView</classname> like so:
+The <classname>TreeView</classname> already allows you to show the same <classname>TreeModel</classname> in two <classname>TreeView</classname> widgets. If you need one of these TreeViews to sort the model differently than the other then you should use a <classname>TreeModelSort</classname> instead of just, for instance, <methodname>Gtk::TreeViewModel::set_sort_column()</methodname>. <classname>TreeModelSort</classname> is a model that contains another model, presenting a sorted version of that model. For instance, you might add a sorted version of a model to a <classname>TreeView</classname> like so:
 </para>
 <programlisting>Glib::RefPtr&lt;Gtk::TreeModelSort&gt; sorted_model =
     Gtk::TreeModelSort::create(model);
@@ -3080,7 +3080,7 @@ the normal <link linkend="chapter-draganddrop">Drag and Drop</link> API.
 <sect2 id="treeview-reorderable-rows">
 <title>Reorderable rows</title>
 <para>
-If you call <function>Gtk::TreeView::set_reorderable()</function> then your
+If you call <methodname>Gtk::TreeView::set_reorderable()</methodname> then your
 TreeView's items can be moved within the treeview itself. This is demonstrated
 in the <classname>TreeStore</classname> example.
 </para>
@@ -3108,7 +3108,7 @@ To detect a click of the right mouse button, you need to handle the
 was pressed. Because the <classname>TreeView</classname> normally handles this
 signal completely, you need to either override the default signal handler in a
 derived <classname>TreeView</classname> class, or use
-<function>connect_nofify()</function> insted of <function>connect()</function>.
+<methodname>connect_nofify()</methodname> instead of <methodname>connect()</methodname>.
 You probably also want to call the default handler before doing anything else,
 so that the right-click will cause the row to be selected first.
 </para>
@@ -3160,8 +3160,8 @@ children to the rows.
 
 <para>
 This example is identical to the <classname>ListStore</classname> example, but
-it uses <function>TreeView::append_column_editable()</function> instead of
-<function>TreeView::append_column()</function>.
+it uses <methodname>TreeView::append_column_editable()</methodname> instead of
+<methodname>TreeView::append_column()</methodname>.
 </para>
 
 <figure id="figure-treeview-editablecells">
@@ -3231,7 +3231,7 @@ section.
 <para>The <classname>ComboBox</classname> and <classname>ComboBoxEntry</classname> widgets offers a list (or tree) of choices in a dropdown menu. If appropriate, they can show extra information about each item, such as text, a picture, a checkbox, or a progress bar. The <classname>ComboBox</classname> widget restricts the user to the available choices, but the <classname>ComboBoxEntry</classname> contains an <classname>Entry</classname>, allowing the user to enter arbitrary text if the none of the available choices are suitable.
 </para>
 
-<para>For both widgets, the list is provided via a <classname>TreeModel</classname>, and columns from this model are added to the ComboBox's view with the <function>ComboBox::pack_start()</function>. This provides a great deal of flexibility and compile-time type-safety, but the <classname>ComboBoxText</classname> and <classname>ComboBoxEntryText</classname> classes provide a simple text-based specialisation in case that flexibility is not required.
+<para>For both widgets, the list is provided via a <classname>TreeModel</classname>, and columns from this model are added to the ComboBox's view with the <methodname>ComboBox::pack_start()</methodname>. This provides a great deal of flexibility and compile-time type-safety, but the <classname>ComboBoxText</classname> and <classname>ComboBoxEntryText</classname> classes provide a simple text-based specialisation in case that flexibility is not required.
 </para>
 
 <sect1 id="sec-combobox">
@@ -3252,12 +3252,12 @@ section.
 
 ModelColumns m_columns;</programlisting>
 
-<para>After appending rows to this model, you should provide the model to the <classname>ComboBox</classname> with the <function>set_model()</function> method. Then use the <function>pack_start()</function> or <function>pack_end()</function> methods to specify what methods will be displayed in the ComboBox. As with the TreeView you may either use the default cell renderer by passing the <classname>TreeModelColumn</classname> to the pack methods, or you may instantiate a specific <classname>CellRenderer</classname> and specify a particular mapping with either <function>add_attribute()</function> or <function>set_cell_data_func()</function>. Note that these methods are in the <classname>CellLayout</classname> base class.</para>
+<para>After appending rows to this model, you should provide the model to the <classname>ComboBox</classname> with the <methodname>set_model()</methodname> method. Then use the <methodname>pack_start()</methodname> or <methodname>pack_end()</methodname> methods to specify what methods will be displayed in the ComboBox. As with the TreeView you may either use the default cell renderer by passing the <classname>TreeModelColumn</classname> to the pack methods, or you may instantiate a specific <classname>CellRenderer</classname> and specify a particular mapping with either <methodname>add_attribute()</methodname> or <methodname>set_cell_data_func()</methodname>. Note that these methods are in the <classname>CellLayout</classname> base class.</para>
 </sect2>
 
 <sect2 id="sec-combobox-get">
 <title>The chosen item</title>
-<para>To discover what item, if any, the user has chosen from the ComboBox, call <function>ComboBox::get_active()</function>. This returns a <classname>TreeModel::iterator</classname> that you can dereference to a <classname>Row</classname> in order to read the values in your columns. For instance, you might read an integer ID value from the model, even though you have chosen only to show the human-readable description in the Combo. For instance:
+<para>To discover what item, if any, the user has chosen from the ComboBox, call <methodname>ComboBox::get_active()</methodname>. This returns a <classname>TreeModel::iterator</classname> that you can dereference to a <classname>Row</classname> in order to read the values in your columns. For instance, you might read an integer ID value from the model, even though you have chosen only to show the human-readable description in the Combo. For instance:
 </para>
 <programlisting>Gtk::TreeModel::iterator iter = m_Combo.get_active();
 if(iter)
@@ -3317,7 +3317,7 @@ You might need to react to every change of selection in the ComboBox, for instan
 
 <sect2 id="sec-comboboxentry-text-column">
 <title>The text column</title>
-<para>Unlike a regular <classname>ComboBox</classname>, a <classname>ComboBoxEntry</classname> contains a <classname>Entry</classname> widget for entering of arbitrary text. So that this Entry can interact with the drop-down list of choices, you must specify which of your model columns are the text column, with <function>set_text_column()</function>. For instance:
+<para>Unlike a regular <classname>ComboBox</classname>, a <classname>ComboBoxEntry</classname> contains a <classname>Entry</classname> widget for entering of arbitrary text. So that this Entry can interact with the drop-down list of choices, you must specify which of your model columns are the text column, with <methodname>set_text_column()</methodname>. For instance:
 <programlisting>m_combo.set_text_column(m_columns.m_col_name);</programlisting>
 </para>
 <para>
@@ -3327,7 +3327,7 @@ When you select a choice from the drop-down menu, the value from this column wil
 
 <sect2 id="sec-comboboxentry-model">
 <title>The entry</title>
-<para>Because the user may enter arbitrary text, an active model row isn't enough to tell us what text the user has inputted. Therefore, you should retrieve the <classname>Entry</classname> widget with the <function>ComboBoxEntry::get_entry()</function> method and call <function>get_text()</function> on that.
+<para>Because the user may enter arbitrary text, an active model row isn't enough to tell us what text the user has inputted. Therefore, you should retrieve the <classname>Entry</classname> widget with the <methodname>ComboBoxEntry::get_entry()</methodname> method and call <methodname>get_text()</methodname> on that.
 </para>
 </sect2>
 
@@ -3389,7 +3389,7 @@ times in the same <classname>Gtk::TextView</classname> widget.
 <para>
 The <classname>TextView</classname> creates its own default
 <classname>TextBuffer</classname>, which you can access via the
-<function>get_buffer()</function> method.
+<methodname>get_buffer()</methodname> method.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;TextBuffer.html">Reference</ulink></para>
@@ -3413,7 +3413,7 @@ To specify that some text in the buffer should have specific formatting, you mus
 refTagMatch-&gt;property_background() = "orange";</programlisting>
 <para>
 You can specify a name for the <classname>Tag</classname> when using the
-<function>create()</function> method, but it is not necessary.
+<methodname>create()</methodname> method, but it is not necessary.
 </para>
 
 <para>
@@ -3444,7 +3444,7 @@ Glib::RefPtr&lt;Gtk::TextBuffer&gt; refBuffer =
     Gtk::TextBuffer::create(refTagTable);</programlisting>
 
 <para>
-You can also use <function>get_tag_table()</function> to get, and maybe modify,
+You can also use <methodname>get_tag_table()</methodname> to get, and maybe modify,
 the <classname>TextBuffer</classname>'s default <classname>TagTable</classname>
 instead of creating one explicitly.
 </para>
@@ -3470,10 +3470,10 @@ refBuffer-&gt;insert_with_tag(iter, "Some text", refTagMatch);
 
 <para>
 You can apply more than one <classname>Tag</classname> to the same text, by
-using <function>apply_tag()</function> more than once, or by using
-<function>insert_with_tags()</function>. The <classname>Tag</classname>s might
+using <methodname>apply_tag()</methodname> more than once, or by using
+<methodname>insert_with_tags()</methodname>. The <classname>Tag</classname>s might
 specify different values for the same properties, but you can resolve these
-conflicts by using <function>Tag::set_priority()</function>.
+conflicts by using <methodname>Tag::set_priority()</methodname>.
 </para>
 
 </sect3>
@@ -3490,15 +3490,15 @@ remember a position in these situations. For instance,
     refBuffer-&gt;create_mark(iter);</programlisting>
 
 <para>
-You can then use the <function>get_iter()</function> method later to create an
+You can then use the <methodname>get_iter()</methodname> method later to create an
 iterator for the <classname>Mark</classname>'s new position.
 </para>
 
 <para>
 There are two built-in <classname>Mark</classname>s - <literal>insert</literal>
 and <literal>select_bound</literal>, which you can access with
-<classname>TextBuffer</classname>'s <function>get_insert()</function> and
-<function>get_selection_bound()</function> methods.
+<classname>TextBuffer</classname>'s <methodname>get_insert()</methodname> and
+<methodname>get_selection_bound()</methodname> methods.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;TextMark.html">Reference</ulink></para>
@@ -3529,8 +3529,8 @@ scrollbars.
 <classname>TextView</classname> has various methods which allow you to change
 the presentation of the buffer for this particular view. Some of these may be
 overridden by the <classname>Gtk::TextTag</classname>s in the buffer, if they
-specify the same things. For instance, <function>set_left_margin()</function>,
-<function>set_right_margin()</function>, <function>set_indent()</function>,
+specify the same things. For instance, <methodname>set_left_margin()</methodname>,
+<methodname>set_right_margin()</methodname>, <methodname>set_indent()</methodname>,
 etc.
 </para>
 </sect3>
@@ -3539,9 +3539,9 @@ etc.
 <title>Scrolling</title>
 <para>
 <classname>Gtk::TextView</classname> has various
-<function>scroll_to_*()</function> methods. These allow you to ensure that a
+<methodname>scroll_to_*()</methodname> methods. These allow you to ensure that a
 particular part of the text buffer is visible. For instance, your application's
-Find feature might use <function>Gtk::TextView::scroll_to_iter()</function> to
+Find feature might use <methodname>Gtk::TextView::scroll_to_iter()</methodname> to
 show the found text.
 </para>
 </sect3>
@@ -3558,14 +3558,14 @@ You can embed widgets, such as <classname>Gtk::Button</classname>s, in the
 text. Each such child widget needs a <classname>ChildAnchor</classname>.
 ChildAnchors are associated with <classname>iterators</classname>. For
 instance, to create a child anchor at a particular position, use
-<function>Gtk::TextBuffer::create_child_anchor()</function>:
+<methodname>Gtk::TextBuffer::create_child_anchor()</methodname>:
 </para>
 <programlisting>Glib::RefPtr&lt;Gtk::TextChildAnchor&gt; refAnchor =
     refBuffer-&gt;create_child_anchor(iter);</programlisting>
 
 <para>
 Then, to add a widget at that position, use
-<function>Gtk::TextView::add_child_at_anchor()</function>:
+<methodname>Gtk::TextView::add_child_at_anchor()</methodname>:
 </para>
 <programlisting>m_TextView.add_child_at_anchor(m_Button, refAnchor);</programlisting>
 
@@ -3607,7 +3607,7 @@ menu and toolbar item via the action.
 This involves the use of the <classname>Gtk::ActionGroup</classname>,
 <classname>Gtk::Action</classname>, and <classname>UIManager</classname>
 classes, all of which should be instantiated via their
-<function>create()</function> methods, which return
+<methodname>create()</methodname> methods, which return
 <classname>RefPtr</classname>s.
 </para>
 
@@ -3616,18 +3616,18 @@ classes, all of which should be instantiated via their
 <para>
 First create the <classname>Action</classname>s and add them to an
 <classname>ActionGroup</classname>, with
-<function>ActionGroup::add()</function>.
+<methodname>ActionGroup::add()</methodname>.
 </para>
 
 <para>
-The arguments to <function>Action::create()</function> specify the action's
+The arguments to <methodname>Action::create()</methodname> specify the action's
 name and how it will appear in menus and toolbars. Use stock items where
 possible so that you don't need to specify the label, accelerator, icon, and
 tooltips, and so you can use pre-existing translations.
 </para>
 <para>
 You can also specify a signal handler when calling
-<function>ActionGroup::add()</function>. This signal handler will be called
+<methodname>ActionGroup::add()</methodname>. This signal handler will be called
 when the action is activated via either a menu item or a toolbar button.
 </para>
 <para>Note that you must specify actions for sub menus as well as menu items.</para>
@@ -3653,9 +3653,9 @@ m_refActionGroup-&gt;add( Gtk::Action::create(&quot;Quit&quot;, Gtk::Stock::QUIT
 <para>
 Next you should create a <classname>UIManager</classname> and add the
 <classname>ActionGroup</classname> to the <classname>UIManager</classname> with
-<function>insert_action_group()</function> At this point is also a good idea to
+<methodname>insert_action_group()</methodname> At this point is also a good idea to
 tell the parent window to respond to the specified keyboard shortcuts, by using
-<function>add_accel_group()</function>.
+<methodname>add_accel_group()</methodname>.
 </para>  
 
 <para>For instance,
@@ -3697,7 +3697,7 @@ m_refUIManager-&gt;add_ui_from_string(ui_info);</programlisting>
 <para>
 To instantiate a <classname>Gtk::MenuBar</classname> or
 <classname>Gtk::Toolbar</classname> which you can actually show, you should use
-the <function>UIManager::get_widget()</function> method, and then add the widget
+the <methodname>UIManager::get_widget()</methodname> method, and then add the widget
 to a container. For instance:
 </para>
 <programlisting>Gtk::Widget* pMenubar = m_refUIManager-&gt;get_widget(&quot;/MenuBar&quot;);
@@ -3729,7 +3729,7 @@ m_refUIManager-&gt;add_ui_from_string(ui_info);</programlisting>
 
 <para>
 To show the popup menu, use <classname>Gtk::Menu</classname>'s
-<function>popup()</function> method, providing the button identifier and the
+<methodname>popup()</methodname> method, providing the button identifier and the
 time of activation, as provided by the <literal>button_press_event</literal>
 signal, which you will need to handle anyway. For instance:
 </para>
@@ -3797,7 +3797,7 @@ their API.
 So that applications can react to changes, for instance when a user moves a
 scrollbar, <classname>Gtk::Adjustment</classname> has a
 <literal>changed</literal> signal. You can then use the
-<function>get_changed()</function> method to discover the new value.
+<methodname>get_changed()</methodname> method to discover the new value.
 </para>
 
 <sect1 id="sec-creating-adjustment">
@@ -3882,7 +3882,7 @@ OK, you say, that's nice, but what if I want to create my own handlers to
 respond when the user adjusts a <classname>Range</classname> widget or a
 <classname>SpinButton</classname>.  To access the value of a
 <classname>Gtk::Adjustment</classname>, you can use the
-<function>get_value()</function> and <function>set_value()</function> methods:
+<methodname>get_value()</methodname> and <methodname>set_value()</methodname> methods:
 </para>
 
 <para>
@@ -3991,7 +3991,7 @@ their parents' windows.  Because of this, they cannot receive events.
 Also, if they are incorrectly sized, they don't clip, so you can get
 messy overwriting etc. To receive events on one of these widgets, you can it  
 inside an <classname>EventBox</classname> widget and then call 
-<function>Gtk::Widget::set_events()</function> on the EventBox before showing it.</para>
+<methodname>Gtk::Widget::set_events()</methodname> on the EventBox before showing it.</para>
 
 <para>Although the name
 <classname>EventBox</classname> emphasises the event-handling method, the
@@ -4044,7 +4044,7 @@ Resizing the window reveals varying amounts of the label.
 <para>
 Dialogs are used as secondary windows, to provide specific information or to
 ask questions. <classname>Gtk::Dialog</classname> windows contain a few pre-packed
-widgets to ensure consistency, and a <function>run()</function> method which
+widgets to ensure consistency, and a <methodname>run()</methodname> method which
 blocks until the user dismisses the dialog.
 </para>
 
@@ -4058,16 +4058,16 @@ class to provide more complex functionality.
 <para>
 To pack widgets into a custom dialog, you should pack them into the
 <classname>Gtk::VBox</classname>, available via
-<function>get_vbox()</function>.  To just add a <classname>Button</classname>
+<methodname>get_vbox()</methodname>.  To just add a <classname>Button</classname>
 to the bottom of the <classname>Dialog</classname>, you could use the
-<function>add_button()</function> method.
+<methodname>add_button()</methodname> method.
 </para>
 
 <para>
-The <function>run()</function> method returns an <literal>int</literal>. This
+The <methodname>run()</methodname> method returns an <literal>int</literal>. This
 may be a value from the <literal>Gtk::ResponseType</literal> if the user
 closed the button by clicking a standard button, or it could be the custom
-response value that you specified when using <function>add_button()</function>.
+response value that you specified when using <methodname>add_button()</methodname>.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;Dialog.html">Reference</ulink></para>
@@ -4184,7 +4184,7 @@ font.
     DrawingArea  does not, allowing you to write your own expose event signal
     handler to determine how the contents of the widget will be drawn.  This is
     most often done by overriding the virtual
-    <function>on_expose_event()</function> member function.  
+    <methodname>on_expose_event()</methodname> member function.  
   </para>
   <note>
   <para>
@@ -4234,7 +4234,7 @@ font.
         allows the actual drawing functions to take fewer arguments to simplify
         the interface.  In &gtkmm;, a <classname>Cairo::Context</classname> is
         created by calling the
-        <function>Gdk::Window::create_cairo_context()</function> function.
+        <methodname>Gdk::Window::create_cairo_context()</methodname> function.
         Since Cairo context are reference-counted objects, this function
         returns a <classname>Cairo::RefPtr&lt;Cairo::Context&gt;</classname>
         object.
@@ -4260,14 +4260,14 @@ myContext->set_line_width(2.0);</programlisting>
     <para>
         There are a number of graphics state variables that can be set for a
         Cairo context.  The most common context attributes are color (using
-        <function>set_source_rgb()</function> or
-        <function>set_source_rgba()</function> for translucent colors), line
-        width (using <function>set_line_width()</function>), line dash pattern
-        (using <function>set_dash()</function>), line cap style (using
-        <function>set_line_cap()</function>), and line join style (using
-        <function>set_line_join()</function>), and font styles (using
-        <function>set_font_size()</function>,
-        <function>set_font_face()</function> and others).
+        <methodname>set_source_rgb()</methodname> or
+        <methodname>set_source_rgba()</methodname> for translucent colors), line
+        width (using <methodname>set_line_width()</methodname>), line dash pattern
+        (using <methodname>set_dash()</methodname>), line cap style (using
+        <methodname>set_line_cap()</methodname>), and line join style (using
+        <methodname>set_line_join()</methodname>), and font styles (using
+        <methodname>set_font_size()</methodname>,
+        <methodname>set_font_face()</methodname> and others).
         There are many other settings as well, such as transformation matrices,
         fill rules, whether to perform antialiasing, and others.  For further
         information, see the Cairomm API documentation.
@@ -4276,21 +4276,21 @@ myContext->set_line_width(2.0);</programlisting>
         The current state of a <classname>Cairo::Context</classname> can be
         saved to an internal stack of saved states and later be restored to the
         state it was in when you saved it.  To do this, use the
-        <function>save()</function>
-        method and the <function>restore()</function> method.  This can be
+        <methodname>save()</methodname>
+        method and the <methodname>restore()</methodname> method.  This can be
         useful if you need to temporarily change the line width and color (or
         any other graphics setting) in order to draw something and then return
         to the previous settings.  In this situation, you could call
-        <function>Cairo::Context::save()</function>, change the graphics
+        <methodname>Cairo::Context::save()</methodname>, change the graphics
         settings, draw the lines, and then call
-        <function>Cairo::Context::restore()</function> to restore the original
-        graphics state.  Multiple calls to <function>save()</function> and
-        <function>restore()</function> can be nested; each call to
-        <function>restore()</function> restores the state from the
-        matching paired <function>save()</function>.
+        <methodname>Cairo::Context::restore()</methodname> to restore the original
+        graphics state.  Multiple calls to <methodname>save()</methodname> and
+        <methodname>restore()</methodname> can be nested; each call to
+        <methodname>restore()</methodname> restores the state from the
+        matching paired <methodname>save()</methodname>.
         <tip>
             <para>It is good practice to put all modifications to the graphics state
-            between <function>save()</function>/<function>restore()</function>
+            between <methodname>save()</methodname>/<methodname>restore()</methodname>
             function calls. For example, if you have a function that takes a
             <classname>Cairo::Context</classname> reference as an argument, you
             might implement it as follows:
@@ -4325,7 +4325,7 @@ myContext->set_line_width(2.0);</programlisting>
             full width and height of a window both range from 0 to 1 (the 'unit
             square') or some other mapping that works for your application.
             this can be done with the
-            <function>Cairo::Context::scale()</function> function.</para>
+            <methodname>Cairo::Context::scale()</methodname> function.</para>
         </tip>
     </para>
 
@@ -4334,28 +4334,28 @@ myContext->set_line_width(2.0);</programlisting>
         In this example, we'll construct a small but fully functional &gtkmm;
         program and draw some lines into the window.  The lines are drawn by
         creating a path and then stroking it.  A path is created using the
-        functions <function>Cairo::Context::move_to()</function> and
-        <function>Cairo::Context::line_to()</function>. The function
-        <function>move_to()</function> is similar to the act of lifting your
+        functions <methodname>Cairo::Context::move_to()</methodname> and
+        <methodname>Cairo::Context::line_to()</methodname>. The function
+        <methodname>move_to()</methodname> is similar to the act of lifting your
         pen off of the paper and placing it somewhere else -- no line is drawn
         between the point you were at and the point you moved to.  To draw a
-        line between two points, use the <function>line_to()</function>
+        line between two points, use the <methodname>line_to()</methodname>
         function. 
     </para>
     <para>
         After you've finished creating your path, you still haven't
         drawn anything visible yet.  To make the path visible, you must use the
-        function <function>stroke()</function> which will stroke the current
+        function <methodname>stroke()</methodname> which will stroke the current
         path with the line width and style specified in your
         <classname>Cairo::Context</classname> object.  After stroking, the
         current path will be cleared so that you can start on your next path.
     </para>
         <tip>
-            <para>Many Cairo drawing functions have a <function>_preserve()</function>
+            <para>Many Cairo drawing functions have a <methodname>_preserve()</methodname>
             variant.  Normally drawing functions such as
-            <function>clip()</function>, <function>fill()</function>, or
-            <function>stroke()</function> will clear the current path.  If you
-            use the <function>_preserve()</function> variant, the current path
+            <methodname>clip()</methodname>, <methodname>fill()</methodname>, or
+            <methodname>stroke()</methodname> will clear the current path.  If you
+            use the <methodname>_preserve()</methodname> variant, the current path
             will be retained so that you can use the same path with the next
             drawing function.</para>
         </tip>
@@ -4372,31 +4372,31 @@ myContext->set_line_width(2.0);</programlisting>
     <para>
         This program contains a single class, <classname>MyArea</classname>,
         which is a subclass of <classname>Gtk::DrawingArea</classname> and
-        contains an <function>on_expose_event()</function> member function.
+        contains an <methodname>on_expose_event()</methodname> member function.
         This method is called whenever the image in the drawing area needs to
         be redrawn.  This function is passed a pointer to a
         <classname>GdkEventExpose</classname> structure which defines the area
         that needs to be redrawn.  We use these values to create a rectangle
-        path in Cairo (using the <function>rectangle()</function> function) and
-        then <function>clip()</function> to this path.  The
-        <function>clip()</function> function sets a clip region.  The current
+        path in Cairo (using the <methodname>rectangle()</methodname> function) and
+        then <methodname>clip()</methodname> to this path.  The
+        <methodname>clip()</methodname> function sets a clip region.  The current
         clip region affects all drawing operations by effectively masking out
         any changes to the surface that are outside the current clip region.
         This allows us to limit our redrawing to only the area that needs to be
         redrawn. 
         The actual drawing code sets the color we want to use for drawing by
-        using <function>set_source_rgb()</function> which takes arguments
+        using <methodname>set_source_rgb()</methodname> which takes arguments
         defining the Red, Green, and Blue components of the desired color
         (valid values are between 0 and 1).  After setting the color, we
-        created a new path using the functions <function>move_to()</function>
-        and <function>line_to()</function>, and then stroked this path with
-        <function>stroke()</function>.
+        created a new path using the functions <methodname>move_to()</methodname>
+        and <methodname>line_to()</methodname>, and then stroked this path with
+        <methodname>stroke()</methodname>.
     </para>
     <tip>
         <title>Drawing with relative coordinates</title>
         <para>In the example above we drew everything using absolute coordinates.  You can also draw using
         relative coordinates.  For a straight line, this is done with the
-        function <function>Cairo::Context::rel_line_to()</function>.</para>
+        function <methodname>Cairo::Context::rel_line_to()</methodname>.</para>
     </tip>
     </sect2>
     <sect2 id="cairo-line-styles">
@@ -4421,7 +4421,7 @@ myContext->set_line_width(2.0);</programlisting>
         </figure>
         <para>
             The line join style is set using the function
-            <function>Cairo::Context::set_line_join()</function>.
+            <methodname>Cairo::Context::set_line_join()</methodname>.
         </para>
         <para>
             Line ends can have different styles as well.  The default style
@@ -4431,7 +4431,7 @@ myContext->set_line_width(2.0);</programlisting>
             circle at the end point) or Square (uses a squared ending, with
             the center of the square at the end point).  This setting is set
             using the function
-            <function>Cairo::Context::set_line_cap()</function>.
+            <methodname>Cairo::Context::set_line_cap()</methodname>.
         </para>
         <para>
             There are other things you can customize as well, including
@@ -4445,8 +4445,8 @@ myContext->set_line_width(2.0);</programlisting>
         <para>
             In addition to drawing straight lines Cairo allows you to easily
             draw curved lines (technically a cubic Bézier spline) using the
-            <function>Cairo::Context::curve_to()</function> and
-            <function>Cairo::Context::rel_curve_to()</function> functions.
+            <methodname>Cairo::Context::curve_to()</methodname> and
+            <methodname>Cairo::Context::rel_curve_to()</methodname> functions.
             These functions take coordinates for a destination point as well as
             coordinates for two 'control' points.  This is best explained using
             an example, so let's dive in.
@@ -4467,14 +4467,14 @@ myContext->set_line_width(2.0);</programlisting>
         <para><ulink url="&url_examples_base;drawingarea/curve">Source Code</ulink></para>
         <para>
             The only difference between this example and the straight line
-            example is in the <function>on_expose_event()</function> function,
+            example is in the <methodname>on_expose_event()</methodname> function,
             but there are a few new concepts and functions introduced here, so
             let's examine them briefly.
         </para>
         <para>
             Note that we clip to the area that needs re-exposing just as we did
             in the last example.  After clipping, however, we make a call to
-            <function>Cairo::Context::scale()</function>, passing in the width
+            <methodname>Cairo::Context::scale()</methodname>, passing in the width
             and height of the drawing area.  This scales the user-space
             coordinate system such that the the width and height of the widget
             are both equal to 1.0 'units'.  There's no particular reason to
@@ -4482,7 +4482,7 @@ myContext->set_line_width(2.0);</programlisting>
             drawing operations easier.
         </para>
         <para>
-            The call to <function>Cairo::Context::curve_to()</function> should
+            The call to <methodname>Cairo::Context::curve_to()</methodname> should
             be fairly self-explanatory.  The first pair of coordinates define
             the control point for the beginning of the curve.  The second set
             of coordinates define the control point for the end of the curve,
@@ -4491,8 +4491,8 @@ myContext->set_line_width(2.0);</programlisting>
             line has been draw from each control point to the end-point on the
             curve that it is associated with.  Note that these control point
             lines are both translucent.  This is achieved with a variant of
-            <function>set_source_rgb()</function> called
-            <function>set_source_rgba()</function>.  This function takes a
+            <methodname>set_source_rgb()</methodname> called
+            <methodname>set_source_rgba()</methodname>.  This function takes a
             fourth argument specifying the alpha value of the color (valid
             values are between 0 and 1).
         </para>
@@ -4502,7 +4502,7 @@ myContext->set_line_width(2.0);</programlisting>
       <title>Drawing Arcs and Circles</title>
       <para>
           With Cairo, the same function is used to draw arcs, circles, or
-          ellipses: <function>Cairo::Context::arc()</function>.  This function
+          ellipses: <methodname>Cairo::Context::arc()</methodname>.  This function
           takes five arguments.  The first two are the coordinates of the
           center point of the arc, the third argument is the radius of the arc,
           and the final two arguments define the start and end angle of the
@@ -4550,7 +4550,7 @@ context->restore();</programlisting>
           <para>
               There are a couple of things to note about this example code.
               Again, the only real difference between this example and the
-              previous ones is the <function>on_expose_event()</function>
+              previous ones is the <methodname>on_expose_event()</methodname>
               function, so we'll limit our focus to that function.  In
               addition, the first part of the function is nearly identical to
               the previous examples, so we'll skip that portion.
@@ -4561,18 +4561,18 @@ context->restore();</programlisting>
               of the lines.  Because of this, when you resize the window,
               everything scales with the window.  Also note that there are
               three drawing sections in the function and each is wrapped with a
-              <function>save()</function>/<function>restore()</function> pair
+              <methodname>save()</methodname>/<methodname>restore()</methodname> pair
               so that we're back at a known state after each drawing.
           </para>
           <para>
               The section for drawing an arc introduces one new function,
-              <function>close_path()</function>.  This function will in effect
+              <methodname>close_path()</methodname>.  This function will in effect
               draw a straight line from the current point back to the first
               point in the path.  There is a significant difference between
-              calling <function>close_path()</function> and manually drawing a
+              calling <methodname>close_path()</methodname> and manually drawing a
               line back to the starting point, however.  If you use
-              <function>close_path()</function>, the lines will be nicely
-              joined together.  If you use <function>line_to()</function>
+              <methodname>close_path()</methodname>, the lines will be nicely
+              joined together.  If you use <methodname>line_to()</methodname>
               instead, the lines will end at the same point, but Cairo won't do
               any special joining.
           </para>
@@ -4580,9 +4580,9 @@ context->restore();</programlisting>
               <title>Drawing counter-clockwise</title>
               <para>
                   The function
-                  <function>Cairo::Context::arc_negative()</function> is
+                  <methodname>Cairo::Context::arc_negative()</methodname> is
                   exactly the same as
-                  <function>Cairo::Context::arc()</function> but the angles go
+                  <methodname>Cairo::Context::arc()</methodname> but the angles go
                   the opposite direction.
               </para>
           </note>
@@ -4596,10 +4596,10 @@ context->restore();</programlisting>
           <para>
               Text is drawn via Pango Layouts. The easiest way to create a
               <classname>Pango::Layout</classname> is to use
-              <function>create_pango_layout</function>. Once created, the layout
+              <methodname>create_pango_layout</methodname>. Once created, the layout
               can be manipulated in various ways, including changing the text,
               font, etc. Finally, the layout can be rendered using the
-              <function>draw_layout</function> method of
+              <methodname>draw_layout</methodname> method of
               <classname>Gdk::Drawable</classname>, which takes a
               <classname>Gdk::GC</classname> object, an x-position, a
               y-position and the layout itself.
@@ -4620,11 +4620,11 @@ context->restore();</programlisting>
           <title>Drawing Images with Gdk</title>
           <para>
               There are a couple of drawing methods for putting image data into
-              a drawing area. <function>draw_pixmap()</function> can copy the
+              a drawing area. <methodname>draw_pixmap()</methodname> can copy the
               contents of a <classname>Gdk::Drawable</classname> (the window of
               a drawing area is one) into the drawing area.  There is also
-              <function>draw_bitmap()</function> for drawing a two-color image
-              into the drawing area, and <function>draw_image()</function> for
+              <methodname>draw_bitmap()</methodname> for drawing a two-color image
+              into the drawing area, and <methodname>draw_image()</methodname> for
               drawing an image with more than two colors.
           </para>
           <para>
@@ -4648,17 +4648,17 @@ context->restore();</programlisting>
           <para>
               Probably the most common way of creating
               <classname>Gdk::Pixbuf</classname>s is to use
-              <function>Gdk::Pixbuf::create_from_file()</function>, which can
+              <methodname>Gdk::Pixbuf::create_from_file()</methodname>, which can
               read an image file, such as a png file into a pixbuf ready for
               rendering.
           </para>
           <para>
               The <classname>Gdk::Pixbuf</classname> can be rendered with
-              <function>render_to_drawable</function>, which takes quite a few
-              parameters. The <function>render_to_drawable</function> is a
+              <methodname>render_to_drawable</methodname>, which takes quite a few
+              parameters. The <methodname>render_to_drawable</methodname> is a
               member of <classname>Gdk::Pixbuf</classname> rather than
               <classname>Gdk::Drawable</classname>, which is unlike the
-              <function>draw_*</function> functions described earlier. As such,
+              <methodname>draw_*</methodname> functions described earlier. As such,
               its first parameter is the drawable to render to. The second
               parameter is still the <classname>Gdk::GC</classname>. The next
               two parameters are the point in the pixbuf to start drawing from.
@@ -4716,18 +4716,18 @@ return true;
       <para><ulink url="&url_examples_base;drawingarea/clock">Source Code</ulink></para>
       <para>
           As before, almost all of the interesting stuff is done in the expose
-          event handler <function>on_expose_event()</function>.  Before we dig
+          event handler <methodname>on_expose_event()</methodname>.  Before we dig
           into the expose event handler, notice that the constructor for the
           <classname>Clock</classname> widget connects a handler function
-          <function>onSecondElapsed()</function> to a timer with a timeout
+          <methodname>onSecondElapsed()</methodname> to a timer with a timeout
           period of 1000 milliseconds (1 second).  This means that
-          <function>onSecondElapsed()</function> will get called once per
+          <methodname>onSecondElapsed()</methodname> will get called once per
           second.  The sole responsibility of this function is to invalidate
           the window so that &gtkmm; will be forced to redraw it.
       </para>
       <para>
           Now let's take a look at the code that performs the actual drawing.
-          The first section of <function>on_expose_event()</function> should be
+          The first section of <methodname>on_expose_event()</methodname> should be
           pretty familiar by now as it's mostly 'boilerplate' code for getting
           the <classname>Gdk::Window</classname>, creating a
           <classname>Cairo::Context</classname>, and clipping to the area that
@@ -4739,14 +4739,14 @@ return true;
           center of the window.  
       </para>
       <para>
-          The function <function>Cairo::Context::paint()</function> is used here
+          The function <methodname>Cairo::Context::paint()</methodname> is used here
           to set the background color of the window.  This function takes no
           arguments and fills the current surface (or the clipped portion of
           the surface) with the source color currently active.  After setting
           the background color of the window, we draw a circle for the clock
           outline, fill it with white, and then stroke the outline in black.
           Notice that both of these actions use the
-          <function>_preserve</function> variant to preserve the current path,
+          <methodname>_preserve</methodname> variant to preserve the current path,
           and then this same path is clipped to make sure than our next lines
           don't go outside the outline of the clock.
       </para>
@@ -4854,8 +4854,8 @@ emitted, depending on what action has been selected. For instance, the user
 might have held down the <keycap>Shift</keycap> key to specify a
 <literal>move</literal> rather than a <literal>copy</literal>. Remember that
 the user can only select the actions which you have specified in your calls to
-<function>drag_dest_set()</function> and
-<function>drag_source_set()</function>.
+<methodname>drag_dest_set()</methodname> and
+<methodname>drag_source_set()</methodname>.
 </para>
 
 <sect2 id="sec-dnd-signals-copy">
@@ -4878,7 +4878,7 @@ The destination widget will emit this signal, after the source destination has e
         <literal>drag_data_received</literal>: Provides <literal>info</literal>
         about the dragged data format, and a
         <literal>GtkSelectionData</literal> structure which contains the
-        dropped data. You should  call the <function>drag_finish()</function>
+        dropped data. You should  call the <methodname>drag_finish()</methodname>
         method of the <literal>DragContext</literal> to indicate whether the
         operation was successful.
     </para>
@@ -4909,8 +4909,8 @@ The destination widget will emit this signal, after the source destination has e
 The drag and drop signals provide a DragContext, which contains some
 information about the drag and drop operation and can be used to influence the
 process. For instance, you can discover the source widget, or  change the drag
-and drop icon, by using the <function>set_icon()</function> methods. More
-importantly, you should call the <function>drag_finish()</function> method from
+and drop icon, by using the <methodname>set_icon()</methodname> methods. More
+importantly, you should call the <methodname>drag_finish()</methodname> method from
 your <literal>drag_data_received</literal> signal handler to indicate whether
 the drop was successful.
 </para>
@@ -4943,7 +4943,7 @@ There is a more complex example in examples/dnd.
 
 <para>
 <classname>Gtk::Clipboard</classname> is a singleton. You can get the one and
-only instance with <function>Gtk::Clipboard::get()</function>.
+only instance with <methodname>Gtk::Clipboard::get()</methodname>.
 </para>
 
 <para>
@@ -5044,7 +5044,7 @@ called with the actual data. For instance:
 <para>
 To find out what targets are currently available on the
 <classname>Clipboard</classname> for pasting, call the
-<function>request_targets()</function> method, specifying a method to be called
+<methodname>request_targets()</methodname> method, specifying a method to be called
 with the information. For instance:
 </para>
 <programlisting>refClipboard-&gt;request_targets( sigc::mem_fun(*this,
@@ -5102,7 +5102,7 @@ type.
 <orderedlist>
 <listitem><simpara>Defines a custom clipboard target, though the format of that target is still text.</simpara></listitem>
 <listitem><simpara>It supports pasting of 2 targets - both the custom one and a text one that creates an arbitrary text representation of the custom data.</simpara></listitem>
-<listitem><simpara>It uses <function>request_targets()</function> and disables the Paste button if it can't use anything on the clipboard</simpara></listitem>
+<listitem><simpara>It uses <methodname>request_targets()</methodname> and disables the Paste button if it can't use anything on the clipboard</simpara></listitem>
 </orderedlist>
 </para>
 
@@ -5149,7 +5149,7 @@ affecting the print loop.
 <title>Signals</title>
 
 <para>
-The <function>PrintOperation::run()</function> method starts the print loop, 
+The <methodname>PrintOperation::run()</methodname> method starts the print loop, 
 during which various signals are emitted:
 
 <itemizedlist>
@@ -5167,7 +5167,7 @@ during which various signals are emitted:
     <para>
       <literal>paginate</literal>: Pagination is potentially slow so if you
       need to monitor it you can call the
-      <function>PrintOperation::set_show_progress()</function> method and
+      <methodname>PrintOperation::set_show_progress()</methodname> method and
       handle this signal.
     </para>
   </listitem>
@@ -5225,10 +5225,10 @@ during which various signals are emitted:
     <para>
       <literal>status_changed</literal>: Emitted whenever a print job's
       status changes, until it is finished. Call the 
-      <function>PrintOperation::set_track_print_status()</function> method to
+      <methodname>PrintOperation::set_track_print_status()</methodname> method to
       monitor the job status after spooling. To see the status, use
-      <function>get_status()</function> or
-      <function>get_status_string()</function>.
+      <methodname>get_status()</methodname> or
+      <methodname>get_status_string()</methodname>.
     </para>
   </listitem>
 </itemizedlist>
@@ -5248,9 +5248,9 @@ during which various signals are emitted:
 
 <para>
 The <classname>PrintOperation</classname> class has a method called
-<function>set_default_page_setup()</function> which selects the default
+<methodname>set_default_page_setup()</methodname> which selects the default
 paper size, orientation and margins. To show a page setup dialog from your
-application, use the <function>Gtk::run_page_setup_dialog()</function> method,
+application, use the <methodname>Gtk::run_page_setup_dialog()</methodname> method,
 which returns a <classname>Gtk::PageSetup</classname> object with the chosen
 settings. Use this object to update a <classname>PrintOperation</classname>
 and to access the selected <classname>Gtk::PaperSize</classname>,
@@ -5275,9 +5275,9 @@ m_refPageSetup = new_page_setup;
 The Cairo coordinate system, in the <literal>draw_page</literal> handler,
 is automatically rotated to the current page orientation. It is normally
 within the printer margins, but you can change that via the 
-<function>PrintOperation::set_use_full_page()</function>
+<methodname>PrintOperation::set_use_full_page()</methodname>
 method. The default measurement unit is device pixels. To select other units,
-use the <function>PrintOperation::set_unit()</function> method.
+use the <methodname>PrintOperation::set_unit()</methodname> method.
 </para>
 
 </sect1>
@@ -5288,14 +5288,14 @@ use the <function>PrintOperation::set_unit()</function> method.
 <para>
 Text rendering is done using Pango.
 The <classname>Pango::Layout</classname> object for printing should be created by calling
-the <function>PrintContext::create_pango_layout()</function> method.
+the <methodname>PrintContext::create_pango_layout()</methodname> method.
 The <classname>PrintContext</classname> object also provides the page metrics,
-via <function>get_width()</function> and <function>get_height()</function>.
+via <methodname>get_width()</methodname> and <methodname>get_height()</methodname>.
 The number of pages can be set with
-<function>PrintOperation::set_n_pages()</function>. To actually render the
+<methodname>PrintOperation::set_n_pages()</methodname>. To actually render the
  Pango text in <literal>on_draw_page</literal>, get a
 <classname>Cairo::Context</classname> with 
-<function>PrintContext::get_cairo_context()</function> and show the
+<methodname>PrintContext::get_cairo_context()</methodname> and show the
 <classname>Pango::LayoutLine</classname>s that appear within the requested
 page number.
 </para>
@@ -5311,14 +5311,14 @@ of exactly how this can be done.
 <title>Asynchronous operations</title>
 
 <para>
-By default, <function>PrintOperation::run()</function> returns when a print
+By default, <methodname>PrintOperation::run()</methodname> returns when a print
 operation is completed. If you need to run a non-blocking print operation,
-call <function>PrintOperation::set_allow_async()</function>. Note that <function>set_allow_async()</function> is not supported
+call <methodname>PrintOperation::set_allow_async()</methodname>. Note that <methodname>set_allow_async()</methodname> is not supported
 on all platforms, however the <literal>done</literal> signal will still be emitted.
 </para>
 
 <para>
-<function>run()</function> may return
+<methodname>run()</methodname> may return
 <literal>PRINT_OPERATION_RESULT_IN_PROGRESS</literal>. To track status
 and handle the result or error you need to implement signal handlers for
 the <literal>done</literal> and <literal>status_changed</literal> signals:
@@ -5391,7 +5391,7 @@ You may add a custom tab to the print dialog:
   <listitem>
     <para>
       Set the title of the tab via
-      <function>PrintOperation::set_custom_tab_label()</function>,
+      <methodname>PrintOperation::set_custom_tab_label()</methodname>,
       create a new widget and return it from the
       <literal>create_custom_widget</literal> signal handler. You'll probably
       want this to be a container widget, packed with some others.
@@ -5532,7 +5532,7 @@ and update the print settings.
       You can create a new <classname>RecentManager</classname>, but you'll most
       likely just want to use the default one.  You can get a reference to the
       default <classname>RecentManager</classname> with
-      <function>get_default()</function>.  
+      <methodname>get_default()</methodname>.  
       </para>
     <sect2 id="recent-files-adding">
       <title>Adding Items to the List of Recent Files</title>
@@ -5545,7 +5545,7 @@ recent_manager->add_item(uri);</programlisting>
       <para>
         If you want to register a file with metadata, you can pass a
         <classname>RecentManager::Data</classname> parameter to
-        <function>add_item()</function>.  The metadata that can be set on a
+        <methodname>add_item()</methodname>.  The metadata that can be set on a
         particular file item is as follows:
       </para>
       <itemizedlist>
@@ -5591,12 +5591,12 @@ recent_manager->add_item(uri);</programlisting>
       <para>
         To look up recently used files, <classname>RecentManager</classname>
         provides several functions.  To look up a specific item by its URI, you
-        can use the <function>lookup_item()</function> function, which will
+        can use the <methodname>lookup_item()</methodname> function, which will
         return a <classname>RecentInfo</classname> class.  If the specified URI
         did not exist in the list of recent files, the
         <classname>RecentInfo</classname> object will be invalid.
         <classname>RecentInfo</classname> provides an implementation for
-        <function>operator bool()</function> which can be used to test for
+        <methodname>operator bool()</methodname> which can be used to test for
         validity.  For example:
       </para>
 <programlisting>Gtk::RecentInfo info = recent_manager-&gt;lookup_item(uri);
@@ -5613,7 +5613,7 @@ if (info)
       <para>
         If you don't want to look for a specific URI, but instead want to get a
         list of all recently used items, <classname>RecentManager</classname>
-        provides the <function>get_items()</function> function.  The return
+        provides the <methodname>get_items()</methodname> function.  The return
         value of this function can be assigned to any standard C++ container
         (e.g. <classname>std::vector</classname>,
         <classname>std::list</classname>, etc) and contains a list of all
@@ -5624,8 +5624,8 @@ if (info)
       <programlisting>std::vector&lt;Gtk::RecentInfo&gt; info_list = recent_manager-&gt;get_items();</programlisting>
       <para>
         The limit on the number of items returned can be set
-        by <function>set_limit()</function>, and queried with
-        <function>get_limit()</function>.  
+        by <methodname>set_limit()</methodname>, and queried with
+        <methodname>get_limit()</methodname>.  
       </para>
     </sect2>
     <sect2 id="recent-files-modifying">
@@ -5635,19 +5635,19 @@ if (info)
         For instance, if a file is moved or renamed, you may need to update the
         file's location in the recent files list so that it doesn't point to an
         incorrect location.  You can update an item's location by using
-        <function>move_item()</function>.
+        <methodname>move_item()</methodname>.
       </para>
       <para>
         In addition to changing a file's URI, you can also remove items from the
         list, either one at a time or by clearint them all at once.  The former
-        is accomplished with <function>remove_item()</function>, the latter with
-        <function>purge_items()</function>.
+        is accomplished with <methodname>remove_item()</methodname>, the latter with
+        <methodname>purge_items()</methodname>.
       </para>
       <note>
         <para>
-        The functions <function>move_item()</function>,
-        <function>remove_item()</function> and
-        <function>purge_items()</function> have no effect on the actual files
+        The functions <methodname>move_item()</methodname>,
+        <methodname>remove_item()</methodname> and
+        <methodname>purge_items()</methodname> have no effect on the actual files
         that are referred to by the URIs, they only modify the list of recent
         files.
         </para>
@@ -5722,17 +5722,17 @@ if (info)
         can filter the list to show only those that you want.  You can filter
         the list with the help of the <classname>RecentFilter</classname> class.
         This class allows you to filter recent files by their name
-        (<function>add_pattern()</function>), their mime type
-        (<function>add_mime_type()</function>), the application that registered
-        them (<function>add_application()</function>), or by a custom filter
-        function (<function>add_custom()</function>).  It also provides the
+        (<methodname>add_pattern()</methodname>), their mime type
+        (<methodname>add_mime_type()</methodname>), the application that registered
+        them (<methodname>add_application()</methodname>), or by a custom filter
+        function (<methodname>add_custom()</methodname>).  It also provides the
         ability to filter based on how long ago the file was modified and which
         groups it belongs to.
       </para>
       <para>
         After you've created and set up the filter to match only the items you
         want, you can apply a filter to a chooser widget with the
-        <function>RecentChooser::add_filter()</function> function.
+        <methodname>RecentChooser::add_filter()</methodname> function.
       </para>
     </sect2>
   </sect1>
@@ -5761,7 +5761,7 @@ if (info)
       The way that <classname>Sockets</classname> and
       <classname>Plugs</classname> work together is through their window ids.
       Both a <classname>Socket</classname> and a <classname>Plug</classname>
-      have IDs that can be retrieved with their <function>get_id()</function>
+      have IDs that can be retrieved with their <methodname>get_id()</methodname>
       member functions.  The use of these IDs will be explained below in <xref
           linkend="sec-connecting-plugs-sockets"/>.
     </para>
@@ -5795,7 +5795,7 @@ if (info)
       <para>
         After a <classname>Socket</classname> or <classname>Plug</classname>
         object is realized, you can obtain its ID with its
-        <function>get_id()</function> function.  This ID can then be shared with
+        <methodname>get_id()</methodname> function.  This ID can then be shared with
         other processes so that other processes know how to connect to
         eachother.
       </para>
@@ -5822,7 +5822,7 @@ if (info)
               <classname>Plug</classname> to other processes that need to use
               it.  The ID of the <classname>Plug</classname> can be associated
               with a particular <classname>Socket</classname> object using the
-              <function>Socket::add_id()</function> function.  This is the
+              <methodname>Socket::add_id()</methodname> function.  This is the
               approach used in the example below.
             </para>
           </listitem>
@@ -5872,7 +5872,7 @@ A plug was added</screen>
       been notified that it has been embedded inside of a
       <classname>Socket</classname>.  The second line was emitted by
       <filename>socket</filename> in response to its
-      <function>plug_added</function> signal. If everything was done as
+      <methodname>plug_added</methodname> signal. If everything was done as
       described above, the <filename>socket</filename> window should look
       roughly like the following:
     </para>
@@ -5897,7 +5897,7 @@ A plug was added</screen>
 
 <para>
 You may be wondering how to make &gtkmm; do useful work while it's idling along
-(well, sleeping actually) in <function>Gtk::Main::run()</function>.  Happily,
+(well, sleeping actually) in <methodname>Gtk::Main::run()</methodname>.  Happily,
 you have several options.  Using the following methods you can create a timeout
 method that will be called every few milliseconds.
 </para>
@@ -5913,7 +5913,7 @@ The first argument is a <classname>slot</classname> you wish to have called
 when the timeout occurs. The second argument is the number of milliseconds
 between calls to that method. You receive a
 <classname>sigc::connection</classname> object that can be used to deactivate
-the connection using its <function>disconnect()</function> method:
+the connection using its <methodname>disconnect()</methodname> method:
 </para>
 
 <para>
@@ -6017,7 +6017,7 @@ Glib::IO_HUP - Call your method when hung up (the connection has been broken usu
 
 <para>
     The return value is a <classname>sigc::connection</classname> that may be used to stop monitoring
-this file descriptor using its <function>disconnect()</function> method.  The
+this file descriptor using its <methodname>disconnect()</methodname> method.  The
 <parameter>slot</parameter> signal handler should be declared as follows:
 </para>
 
@@ -6063,7 +6063,7 @@ sigc::connection  Glib::SignalIdle::connect(const sigc::slot&lt;bool&gt;&amp; sl
 <para>
 This causes &gtkmm; to call the specified method whenever nothing else is
 happening. You can add a priority (lower numbers are higher priorities). There are two ways to remove the signal handler: calling
-<function>disconnect()</function> on the
+<methodname>disconnect()</methodname> on the
 <classname>sigc::connection</classname> object, or returning
 <literal>false</literal> in the signal handler, which should be declared
 as follows:
@@ -6207,7 +6207,7 @@ Alternatively, you can let a widget's container control when the widget is
 destroyed.  In most cases, you want a widget to last only as long as the
 container it is in.  To delegate the management of a widget's lifetime to its
 container, first create it with <function>manage()</function> and
-pack it into its container with <function>add()</function>.  Now, the
+pack it into its container with <methodname>add()</methodname>.  Now, the
 widget will be destroyed whenever its container is destroyed.
 </para>
 
@@ -6216,7 +6216,7 @@ widget will be destroyed whenever its container is destroyed.
 
 <para>
 &gtkmm; provides the <function>manage()</function> function and
-<function>add()</function> methods to create and destroy widgets.  Every widget
+<methodname>add()</methodname> methods to create and destroy widgets.  Every widget
 except a top-level window must be added or packed into a container in order to
 be displayed.  The <function>manage()</function> function marks a packed widget
 so that when the widget is added to a container, the container becomes
@@ -6239,7 +6239,7 @@ free the button's memory; its deletion has been delegated to the
 </para>
 
 <para>
-&gtkmm; also provides the <function>set_manage()</function> method for
+&gtkmm; also provides the <methodname>set_manage()</methodname> method for
 all widgets.  This can be used to generate the same result as
 <function>manage()</function>, but is more tedious: 
 </para>
@@ -6281,7 +6281,7 @@ reference and unreference these objects, &gtkmm; uses the
 
 <para>
 Objects such as <classname>Gdk::Bitmap</classname> can only be instantiated
-with a <function>create()</function> function. For instance,
+with a <methodname>create()</methodname> function. For instance,
 <programlisting>
 Glib::RefPtr&lt;Gdk::Bitmap&gt; bitmap = Gdk::Bitmap::create(window, data, width, height);
 </programlisting>
@@ -6301,7 +6301,7 @@ if(bitmap)
 
 <para>
 When <varname>bitmap</varname> goes out of scope an
-<function>unref()</function> will happen in the background and you don't need
+<methodname>unref()</methodname> will happen in the background and you don't need
 to worry about it anymore. There's no <literal>new</literal> so there's no
 <literal>delete</literal>.
 </para>
@@ -6376,7 +6376,7 @@ layout allows you to focus on implementing that functionality.
 <para>
 <classname>Gnome::Glade::Xml</classname> must be used via a
 <classname>Glib::RefPtr</classname>. Like all such classes, you need to use
-<function>create()</function> method to instantiate it. 
+<methodname>create()</methodname> method to instantiate it. 
 <programlisting>
 Glib::RefPtr&lt;Gnome::Glade::Xml&gt; refXml = Gnome::Glade::Xml::create(&quot;basic.glade&quot;);
 </programlisting>
@@ -6397,8 +6397,8 @@ Glib::RefPtr&lt;Gnome::Glade::Xml&gt; refXml = Gnome::Glade::Xml::create(&quot;b
 <title>Accessing widgets</title>
 
 <para>
-To access a widget, for instance to <function>show()</function> a dialog, use
-the <function>get_widget()</function> method, providing the widget's name. This
+To access a widget, for instance to <methodname>show()</methodname> a dialog, use
+the <methodname>get_widget()</methodname> method, providing the widget's name. This
 name should be specified in the <application>Glade</application> Properties
 window. If the widget could not be found, or is of the wrong type, then the
 pointer will be set to 0.
@@ -6416,15 +6416,15 @@ line about these.
 
 <para>
 Remember that you are not instantiating a widget with
-<function>get_widget()</function>, you are just obtaining a pointer to one that
+<methodname>get_widget()</methodname>, you are just obtaining a pointer to one that
 already exists. You will always receive a pointer to the same instance when you
-call <function>get_widget()</function> on the same
+call <methodname>get_widget()</methodname> on the same
 <classname>Gnome::Glade::Xml</classname>, with the same widget name. The
-widgets are instantiated during <function>Glade::Xml::create()</function>. 
+widgets are instantiated during <methodname>Glade::Xml::create()</methodname>. 
 </para>
 
 <para>
-<function>get_widget()</function> returns child widgets that are
+<methodname>get_widget()</methodname> returns child widgets that are
 <function>manage()</function>ed (see the <link linkend="chapter-memory">Memory 
 Management</link> chapter), so they will be deleted when their parent
 container is deleted. So, if you get only a child widget from
@@ -6459,7 +6459,7 @@ your derived widget in <application>Glade</application>, but you can specify
 its location and child widgets and the properties of its &gtkmm; base class.
 </para>
 
-<para>Use <function>Glade::Xml::get_widget_derived()</function> like so: 
+<para>Use <methodname>Glade::Xml::get_widget_derived()</methodname> like so: 
 <programlisting>
 DerivedDialog* pDialog = 0;
 refXml-&gt;get_widget_derived(&quot;DialogBasic&quot;, pDialog);
@@ -6486,8 +6486,8 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gnom
  
 <para>
 You could then encapsulate the manipulation of the child widgets in the
-constructor of the derived class, maybe using <function>get_widget()</function>
-or <function>get_widget_derived()</function> again. For instance,
+constructor of the derived class, maybe using <methodname>get_widget()</methodname>
+or <methodname>get_widget_derived()</methodname> again. For instance,
 <programlisting>
 DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gnome::Glade::Xml&gt;&amp; refGlade)
 : Gtk::Dialog(cobject),
@@ -7050,20 +7050,20 @@ instance, you cannot use the copyright sign (&copy;).
     <title>Custom Containers</title>
     <para>When deriving from <classname>Gtk::Container</classname>, you should override the following virtual methods:
     <itemizedlist>
-      <listitem><para><function>on_size_request()</function>: Calculate the minimum height and width needed by the container.</para></listitem>
-      <listitem><para><function>on_size_allocate()</function>: Position the child widgets, given the height and width that the container has actually been given.</para></listitem>
-      <listitem><para><function>forall_vfunc()</function>: Call the same callback for each of the children.</para></listitem>
-      <listitem><para><function>on_add()</function>: </para></listitem>
-      <listitem><para><function>on_remove()</function>: </para></listitem>
-      <listitem><para><function>child_type_vfunc()</function>: Return what type of child can be added.</para></listitem>
+      <listitem><para><methodname>on_size_request()</methodname>: Calculate the minimum height and width needed by the container.</para></listitem>
+      <listitem><para><methodname>on_size_allocate()</methodname>: Position the child widgets, given the height and width that the container has actually been given.</para></listitem>
+      <listitem><para><methodname>forall_vfunc()</methodname>: Call the same callback for each of the children.</para></listitem>
+      <listitem><para><methodname>on_add()</methodname>: </para></listitem>
+      <listitem><para><methodname>on_remove()</methodname>: </para></listitem>
+      <listitem><para><methodname>child_type_vfunc()</methodname>: Return what type of child can be added.</para></listitem>
     </itemizedlist>
     </para>
 
-    <para>The <function>on_size_request()</function> and
-        <function>on_size_allocate()</function> virtual methods control the
+    <para>The <methodname>on_size_request()</methodname> and
+        <methodname>on_size_allocate()</methodname> virtual methods control the
         layout of the child widgets. For instance, if your container has 2
         child widgets, with one below the other, your
-        <function>on_size_request()</function> might report the maximum of
+        <methodname>on_size_request()</methodname> might report the maximum of
         their widths and the sum of their heights. If you want padding between
         the child widgets then you would add that to the width and height too.
         Your widget's container will use this result to ensure that your widget
@@ -7071,42 +7071,42 @@ instance, you cannot use the copyright sign (&copy;).
         its parent, this logic will eventually decide the size of the top-level
         window.</para>
 
-   <para><function>on_size_allocate()</function>, however, receives the actual
+   <para><methodname>on_size_allocate()</methodname>, however, receives the actual
        height and width that the parent container has decided to give to your
        widget. This might be more than the minimum, for instance if the
        top-level window has been expanded. You might choose to ignore the extra
        space and leave a blank area, or you might choose to expand your child
        widgets to fill the space, or you might choose to expand the padding
        between your widgets. Its your container, so you decide. Don't forget to
-       call <function>set_allocation()</function> inside your
-       <function>on_size_allocate()</function> implementation to actually use the
+       call <methodname>set_allocation()</methodname> inside your
+       <methodname>on_size_allocate()</methodname> implementation to actually use the
        allocated space that has been offered by the parent container.</para>
 
   <para>Unless your container is a top-level window that derives from
       <classname>Gtk::Window</classname>, you should also call
-      <function>Gtk::Container::set_flags(Gtk::NO_WINDOW)</function> in your
+      <methodname>Gtk::Container::set_flags(Gtk::NO_WINDOW)</methodname> in your
       constructor. Otherwise, your container will appear in its own window,
       regardless of what container you put it in. And unless your container
       draws directly onto the underlying <classname>Gdk::Window</classname>,
       you should probably call
-      <function>set_redraw_on_allocate(false)</function> to improve
+      <methodname>set_redraw_on_allocate(false)</methodname> to improve
       performance.</para>
 
-  <para>By overriding <function>forall_vfunc()</function> you can allow
+  <para>By overriding <methodname>forall_vfunc()</methodname> you can allow
       applications to operate on all of the container's child widgets. For
-      instance, <function>show_all_children()</function> uses this to find all
+      instance, <methodname>show_all_children()</methodname> uses this to find all
       the child widgets and show them.</para>
  
   <para>Although your container might have its own method to set the child
       widgets, you should still provide an implementation for the virtual
-      <function>on_add()</function> and <function>on_remove()</function>
+      <methodname>on_add()</methodname> and <methodname>on_remove()</methodname>
       methods from the base class, so that the add() and remove() methods will
       do something appropriate if they are called.</para>
 
-  <para>Your implementation of the <function>child_type_vfunc()</function>
+  <para>Your implementation of the <methodname>child_type_vfunc()</methodname>
       method should report the type of widget that may be added to your
       container, if it is not yet full. This is usually
-      <function>Gtk::Widget::get_type()</function> to indicate that the
+      <methodname>Gtk::Widget::get_type()</methodname> to indicate that the
       container may contain any class derived from
       <classname>Gtk::Widget</classname>. If the container may not contain any
       more widgets, then this method should return
@@ -7193,12 +7193,12 @@ and hints for creating &gtkmm; applications.
     <title>Application Lifetime</title>
 <para>Most applications will have only one <classname>Window</classname>, or
     only one main window. These applications can use the
-    <function>Gtk::Main::run(Gtk::Window&amp;)</function> overload. It shows
+    <methodname>Gtk::Main::run(Gtk::Window&amp;)</methodname> overload. It shows
     the window and returns when the window has been hidden. This might happen
     when the user closes the window, or when your code decides to
-    <function>hide()</function> the window.  You can prevent the user from
+    <methodname>hide()</methodname> the window.  You can prevent the user from
     closing the window (for instance, if there are unsaved changes) by
-    overriding <function>Gtk::Window::on_delete_event()</function>.</para>
+    overriding <methodname>Gtk::Window::on_delete_event()</methodname>.</para>
 <para>Most of our examples use this technique.</para>
 </sect1>
 
@@ -7239,14 +7239,14 @@ Connect any signals you wish to use to the appropriate handlers.
 <listitem>
 <para>
 Pack the widget into a container using the appropriate call,
-e.g. <function>Gtk::Container::add()</function> or
-<function>pack_start()</function>.
+e.g. <methodname>Gtk::Container::add()</methodname> or
+<methodname>pack_start()</methodname>.
 </para>
 </listitem>
 
 <listitem>
 <para>
-Call <function>show()</function> to display the widget.
+Call <methodname>show()</methodname> to display the widget.
 </para>
 </listitem>
 
@@ -7255,9 +7255,9 @@ Call <function>show()</function> to display the widget.
 </para>
 
 <para>
-<function>Gtk::Widget::show()</function> lets &gtkmm; know that we have
+<methodname>Gtk::Widget::show()</methodname> lets &gtkmm; know that we have
 finished setting the attributes of the widget, and that it is ready to be
-displayed. You can use <function>Gtk::Widget::hide()</function> to make it
+displayed. You can use <methodname>Gtk::Widget::hide()</methodname> to make it
 disappear again. The order in which you show the widgets is not important, but
 we do suggest that you show the top-level window last; this way, the whole
 window will appear with its contents already drawn.  Otherwise, the user will
@@ -7441,7 +7441,7 @@ copying.
 <title>Connecting signal handlers</title>
 <para>
 &gtkmm; widget classes have signal accessor methods, such as
-<function>Gtk::Button::signal_clicked()</function>, which allow you to connect
+<methodname>Gtk::Button::signal_clicked()</methodname>, which allow you to connect
 your signal handler. Thanks to the flexibility of
 <application>libsigc++</application>, the callback library used by &gtkmm;, the
 signal handler can be almost any kind of function, but you will probably want
@@ -7479,7 +7479,7 @@ First let's identify the parties involved:
 <listitem>
 
 <para>
-The signal handler is <function>on_button_clicked()</function>.
+The signal handler is <methodname>on_button_clicked()</methodname>.
 </para>
 </listitem>
 <listitem>
@@ -7493,7 +7493,7 @@ We're hooking it up to the <classname>Gtk::Button</classname> object called
 
 <para>
 When the Button emits its <literal>clicked</literal> signal,
-<function>on_button_clicked()</function> will be called.
+<methodname>on_button_clicked()</methodname> will be called.
 </para>
 </listitem>
 
@@ -7512,10 +7512,10 @@ Now let's look at the connection again:
 </para>
 
 <para>
-Note that we don't pass a pointer to <function>on_button_clicked()</function>
-directly to the signal's <function>connect()</function> method.  Instead, we
+Note that we don't pass a pointer to <methodname>on_button_clicked()</methodname>
+directly to the signal's <methodname>connect()</methodname> method.  Instead, we
 call <function>sigc::ptr_fun()</function>, and pass the result to
-<function>connect()</function>.
+<methodname>connect()</methodname>.
 </para>
 
 <para>
@@ -7552,7 +7552,7 @@ main()
 </para>
 
 <para>
-The first call to <function>connect()</function> is just like the one we saw
+The first call to <methodname>connect()</methodname> is just like the one we saw
 last time; nothing new here.</para>
 <para>The next is more interesting. 
 <function>sigc::mem_fun()</function> is called with two arguments.  The first
@@ -7561,12 +7561,12 @@ new slot will be pointing at. The second argument is a pointer to one of its
 methods. This particular version of <function>sigc::mem_fun()</function>
 creates a slot which will, when "called", call the pointed-to method of the
 specified object, in this case 
-<function>some_object.on_button_clicked()</function>.
+<methodname>some_object.on_button_clicked()</methodname>.
 </para>
 
 <para>
 Another thing to note about this example is that we made the call to
-<function>connect()</function> twice for the same signal object.  This is
+<methodname>connect()</methodname> twice for the same signal object.  This is
 perfectly fine - when the button is clicked, both signal handlers will be
 called.
 </para>
@@ -7655,7 +7655,7 @@ Notice that the return value is of type
 implicitely converted into a <classname>sigc::connection</classname> which in
 turn can be used to control the connection. By keeping a connection object you
 can disconnect its associated signal handler using the method
-<function>sigc::connection::disconnect()</function>.
+<methodname>sigc::connection::disconnect()</methodname>.
 </para>
 
 </sect1>
@@ -7713,7 +7713,7 @@ void OverriddenButton::on_clicked()
 <para>
 Here  we define a new class called <classname>OverriddenButton</classname>,
 which inherits from <classname>Gtk::Button</classname>.  The only thing we
-change is the <function>on_clicked()</function> method, which is called
+change is the <methodname>on_clicked()</methodname> method, which is called
 whenever <classname>Gtk::Button</classname> emits the
 <literal>clicked</literal> signal.  This method prints "Hello World" to
 <literal>stdout</literal>, and then calls the original, overridden method, to
@@ -7772,7 +7772,7 @@ is very difficult in C.  We have far less need of this hack in &gtkmm;.
 The <classname>Widget</classname> class has some special signals which
 correspond to the underlying X-Windows events. These are suffixed by
 <literal>_event</literal>; for instance,
-<function>Widget::signal_button_pressed_event()</function>.
+<methodname>Widget::signal_button_pressed_event()</methodname>.
 </para>
 <para>
 You might occasionally find it useful to handle X events when there's something
@@ -7796,8 +7796,8 @@ Handling an X event doesn't affect the Widget's other signals.  If you handle
 </para>
 
 <para>Note also that not all widgets recieve all X events by default. To receive additional 
-X events, you can use <function>Gtk::Widget::set_events()</function> before showing the 
-widget, or <function>Gtk::Widget::add_events()</function> after showing the widget. However, 
+X events, you can use <methodname>Gtk::Widget::set_events()</methodname> before showing the 
+widget, or <methodname>Gtk::Widget::add_events()</methodname> after showing the widget. However, 
 some widgets must first be placed inside an <classname>EventBox</classname> widget. See 
 the <link linkend="chapter-widgets-without-xwindows">Widgets Without X-Windows</link> chapter.
 </para>
@@ -7812,7 +7812,7 @@ button.signal_button_press_event().connect( sigc::ptr_fun(&amp;on_button_press) 
 </para>
 <para>
 When the mouse is over the button and a mouse button is pressed,
-<function>on_button_press()</function> will be called.
+<methodname>on_button_press()</methodname> will be called.
 </para>
 
 <para>
@@ -7989,11 +7989,11 @@ some_colormap.alloc(some_color);
 some_gc.set_foreground(some_color);</programlisting>
   <para>
       The first two lines create the graphics context and assign it to the
-      appropriate widget. The <function>get_window() </function> method is
+      appropriate widget. The <methodname>get_window()</methodname> method is
       a part of the <classname>Gtk::Widget</classname> class, so if you put
       this code into a derived widget's implementation then you can call it
       just as it is, otherwise you'd use
-      <function>some_widget.get_window()</function>.
+      <methodname>some_widget.get_window()</methodname>.
   </para>
   <para>
       The next two lines create the <classname>Gdk::Color</classname> and
@@ -8010,12 +8010,12 @@ some_gc.set_foreground(some_color);</programlisting>
       There are a number of attributes that can be set for a graphics
       context. There's the foreground and background color.  When drawing
       lines, you can set the thickness of the line with
-      <function>set_line_width()</function>. Whether a solid or dashed line
-      is drawn can be set with <function>set_line_style()</function>. The
+      <methodname>set_line_width()</methodname>. Whether a solid or dashed line
+      is drawn can be set with <methodname>set_line_style()</methodname>. The
       size and proportions of the dashes are set with
-      <function>set_dashes</function>. How two lines join together, whether
+      <methodname>set_dashes</methodname>. How two lines join together, whether
       round or pointed or beveled off, is set with
-      <function>set_join_style()</function>.  Other things that can be set
+      <methodname>set_join_style()</methodname>.  Other things that can be set
       within a graphics context include font style, stippling and tiling
       for the filling of solid polygons.
   </para>
@@ -9268,7 +9268,7 @@ For instance,
     conveniences are not worth the overhead on reduced resources devices, such
     as the Nokia 770 internet tablet. For instance, with regular gtkmm you can
     implement a signal handler by deriving the class and overriding its virtual
-    <function>on_thesignalname()</function> method. But that additional API
+    <methodname>on_thesignalname()</methodname> method. But that additional API
     increases code size. And in the case of virtual methods, it increases
     per-object memory size, and demands that the linker loads the method's
     symbol even if you don't use it.  Therefore, gtkmm can be built with a
@@ -9323,8 +9323,8 @@ handle any error appropriately.</para>
 <sect2 id="glibmm-enable-properties">
 <title>--enable-api-properties=no</title>
 <para>
-When enable-api-properties is disabled, no property accessors will be available in the glibmm or gtkmm API. For instance, the <function>Gtk::Button::property_label()</function> method will not be available. &quot;getter&quot; and &quot;setter&quot; methods, such as <function>Gtk::Button::set_label()</function> will still be available.</para>
-<para>When you really need to set or get the property value directly, for instance when using the <classname>Gtk::CellRenderer</classname> API, you can use the alternative <function>set_property()</function> and <function>get_property()</function> methods. For instance:</para>
+When enable-api-properties is disabled, no property accessors will be available in the glibmm or gtkmm API. For instance, the <methodname>Gtk::Button::property_label()</methodname> method will not be available. &quot;getter&quot; and &quot;setter&quot; methods, such as <methodname>Gtk::Button::set_label()</methodname> will still be available.</para>
+<para>When you really need to set or get the property value directly, for instance when using the <classname>Gtk::CellRenderer</classname> API, you can use the alternative <methodname>set_property()</methodname> and <methodname>get_property()</methodname> methods. For instance:</para>
 <para>
 <programlisting>
 #ifdef GLIBMM_PROPERTIES_ENABLED
@@ -9342,16 +9342,16 @@ When enable-api-properties is disabled, no property accessors will be available 
 <sect2 id="glibmm-enable-vfuncs">
 <title>--enable-api-vfuncs=no</title>
 <para>
-    When enable-api-exceptions is disabled, no <function>_vfunc</function>
+    When enable-api-exceptions is disabled, no <methodname>_vfunc</methodname>
     virtual methods will be available in the glibmm or gtkmm API. These methods
     allow the developer to override some low-level behaviour of the underlying
     GTK+ objects, and they are therefore rarely used. For instance,
-    <function>Gtk::Frame::compute_child_allocation_vfunc()</function> will not
+    <methodname>Gtk::Frame::compute_child_allocation_vfunc()</methodname> will not
     be available.</para>
-<para>However, if you really need to override a <function>_vfunc</function>, for
+<para>However, if you really need to override a <methodname>_vfunc</methodname>, for
     instance when implementing a custom <classname>Gtk::TreeModel</classname>,
     you may directly access the underlying GObject via the
-    <function>gobj()</function> method.</para>
+    <methodname>gobj()</methodname> method.</para>
 <para>If vfuncs are not available, the <varname>GLIBMM_VFUNCS_ENABLED</varname>
     macro will not be defined.</para>
 </sect2>
@@ -9361,9 +9361,9 @@ When enable-api-properties is disabled, no property accessors will be available 
 <para>
 When enable-api-exceptions is disabled, no virtual signal handler methods will
 be available in the glibmm or gtkmm API. For instance, the
-<function>Gtk::Button::on_clicked()</function> method will not be provided.
+<methodname>Gtk::Button::on_clicked()</methodname> method will not be provided.
 Instead you must connect a signal handler by using the
-<function>signal_clicked()</function> accessor. This option offers a
+<methodname>signal_clicked()</methodname> accessor. This option offers a
 considerable code size and per-object memory reduction.</para>
 <para>Note, however, that the compiler will not complain if you attempt to
     override a default signal handler when they are not supported by &gtkmm;,

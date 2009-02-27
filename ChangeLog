@@ -1,5 +1,10 @@
 2009-02-27  Murray Cumming  <murrayc@murrayc.com>
 
+	* docs/tutorial/C/gtkmm-tut.xml: Use <methodname> instead of <function> 
+	for method names.
+
+2009-02-27  Murray Cumming  <murrayc@murrayc.com>
+
 	* docs/tutorial/C/gtkmm-tut.xml: Notebook: Mention set_current_page() 
 	instead of set_page(), which does not exist. Noticed by Jason Curole. 
 
