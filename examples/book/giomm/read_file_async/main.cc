@@ -72,7 +72,7 @@ void on_file_read_async_ready(Glib::RefPtr<Gio::AsyncResult>& result)
   }
 }
 
-int main(int argc, char** argv)
+int main(int /* argc */, char** /* argv */)
 {
   Gio::init();
 

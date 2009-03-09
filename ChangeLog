@@ -1,3 +1,15 @@
+2009-03-09  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/book/drag_and_drop/dndwindow.cc:
+	* examples/book/giomm/directory_list/main.cc:
+	* examples/book/giomm/getline/getline.cc:
+	* examples/book/giomm/monitor_directory/monitor_directory.cc:
+	* examples/book/giomm/read_file/main.cc:
+	* examples/book/giomm/read_file_async/main.cc:
+	* examples/book/giomm/volumes/main.cc:
+	* examples/book/giomm/write_file/main.cc:
+	* examples/others/dnd/dndwindow.cc: Dealt with some compiler warnings.
+
 2009-02-27  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/tutorial/C/gtkmm-tut.xml: Mention pygobject instead of pygtk 

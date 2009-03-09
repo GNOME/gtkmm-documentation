@@ -104,7 +104,7 @@ bool quit ()
   return false;
 }
 
-int main(int argc, char** argv)
+int main(int /* argc */, char** /* argv */)
 {
   Gio::init();
   mainloop = Glib::MainLoop::create();
@@ -124,7 +124,7 @@ int main(int argc, char** argv)
   // directory monitor.
   Glib::signal_timeout().connect_seconds(sigc::ptr_fun (&create_temp_file), 2);
 
-  // then exit a couple seconds later
+  // Then exit a couple seconds later:
   Glib::signal_timeout().connect_seconds(sigc::ptr_fun (&quit), 4);
   mainloop->run();
   return 0;

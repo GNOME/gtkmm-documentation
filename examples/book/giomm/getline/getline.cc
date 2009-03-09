@@ -25,7 +25,7 @@
 /* This is just a simple example to show you how to read a line of text at a
  * time, similar to using std::istream::getline()
  */
-int main(int argc, char** argv)
+int main(int /* argc */, char** /* argv */)
 {
   Gio::init();
   Glib::RefPtr<Gio::File> f = Gio::File::create_for_path("/etc/profile");
