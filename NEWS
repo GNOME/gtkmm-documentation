@@ -1,5 +1,8 @@
-2.14.2:
+2.16.0:
 
+* Added entry/progress and entry/icon examples, just to test that API.
+
+2.14.2:
 
 * gmmproc appendix: Mention pygobject instead of pygtk  for the codegen stuff 
   such as h2def.py and docextract_to_xml.py. Noticed by Krzesimir Nowak.

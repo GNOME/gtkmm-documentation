@@ -1,3 +1,12 @@
+2.16.0:
+
+2009-03-17  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/book/entry/Makefile.am:
+	* examples/book/entry/icon/:
+	* examples/book/entry/progress/: Added entry/progress and entry/icon 
+	examples, just to test that API.
+
 2009-03-09  Murray Cumming  <murrayc@murrayc.com>
 
 	* examples/book/drag_and_drop/dndwindow.cc:

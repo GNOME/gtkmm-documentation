@@ -1,1 +1,1 @@
-SUBDIRS = simple completion
+SUBDIRS = simple completion progress icon
