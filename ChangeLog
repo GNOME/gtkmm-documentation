@@ -1,4 +1,17 @@
+2009-03-23  Daniel Elstner  <danielk@openismus.com>
+
+	* examples/book/builder/basic/main.cc: Conditionalize all exception
+	handling in order to fix the build with --disable-api-exceptions.
+	* examples/book/builder/derived/main.cc: ditto,
+	* examples/book/custom/custom_widget/mywidget.{cc,h}: ditto,
+	* examples/book/printing/advanced/examplewindow.cc: ditto,
+	* examples/book/printing/advanced/previewdialog.cc: ditto,
+	* examples/book/printing/simple/examplewindow.cc: ditto,
+	* examples/book/tooltips/examplewindow.cc: ditto,
+	* examples/book/treeview/popup/treeview_withpopup.cc: ditto,
+
 2.16.0:
+=======
 
 2009-03-17  Murray Cumming  <murrayc@murrayc.com>
 
