@@ -410,7 +410,7 @@ Most of the chapters in this book deal with specific widgets. See the <link link
 <para>Although you can specify the layout and appearance of windows and widgets with C++ code, you will probably find it more convenient to design your user interfaces with <literal>Glade</literal> and load them at runtime with <literal>libglademm</literal>. See the <link linkend="chapter-libglademm">Glade and libglademm</link> chapter.
 </para>
 
-<para>Although &gtkmm; widget instances have lifetimes and scopes just like those of other C++ classes, &gtkmm; has an optional time-saving feature that you will see in some of the examples. <function>Gtk::manage()</function> allows you to say that a child widget is owned by the container into which you place it. This is allows you to <function>new</function> the widget, add it to the container and forget about deleting it. You can learn more about &gtkmm; memory management techniques in the <link linkend="chapter-memory">Memory Management chapter</link>.
+<para>Although &gtkmm; widget instances have lifetimes and scopes just like those of other C++ classes, &gtkmm; has an optional time-saving feature that you will see in some of the examples. <function>Gtk::manage()</function> allows you to say that a child widget is owned by the container into which you place it. This allows you to <function>new</function> the widget, add it to the container and forget about deleting it. You can learn more about &gtkmm; memory management techniques in the <link linkend="chapter-memory">Memory Management chapter</link>.
 </para>
 
 </sect1>

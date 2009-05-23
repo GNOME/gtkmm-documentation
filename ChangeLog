@@ -1,3 +1,8 @@
+2009-05-23  Armin Burgmeier  <armin@openismus.com>
+
+	* docs/tutorial/C/gtkmm-tut.xml: Fixed a typo in the introduction
+	mentioning Gtk::manage. Влад Устинов.
+
 2009-03-23  Daniel Elstner  <danielk@openismus.com>
 
 	* examples/book/builder/basic/main.cc: Conditionalize all exception
