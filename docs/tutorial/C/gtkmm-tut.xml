@@ -5054,23 +5054,17 @@ with the information. For instance:
 In your callback, compare the list of available targets with those that your application supports for pasting. You could enable or disable a Paste menu item, depending on whether pasting is currently possible. For instance:
 </para>
 <programlisting>void ExampleWindow::on_clipboard_received_targets(
-    const Gtk::SelectionData&amp; selection_data)
+  const Glib::StringArrayHandle&amp; targets_array)
 {
-  bool bPasteIsPossible = false;
+  // Get the list of available clipboard targets:
+  std::list&lt;std::string&gt; targets = targets_array;
 
-  //Get the list of available clipboard targets:
-  typedef std::list&lt;Glib::ustring&gt; type_listTargets;
-  type_listTargets targets = selection_data.get_targets();
+  const bool bPasteIsPossible =
+    std::find(targets.begin(), targets.end(),
+      example_target_custom) != targets.end();
 
-  //and see if one is suitable:
-  for(type_listTargets::const_iterator iter = targets.begin();
-      iter != targets.end(); ++iter)
-  {
-    if(*iter == &quot;example_custom_target&quot;)
-      bPasteIsPossible = true;
-  }
-
-  //Do something, depending on whether bPasteIsPossible is true.
+  // Enable/Disable the Paste button appropriately:
+  m_Button_Paste.set_sensitive(bPasteIsPossible);
 }</programlisting>
 </sect2>
 

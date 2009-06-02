@@ -106,8 +106,8 @@ void ExampleWindow::on_button_paste()
   //Tell the clipboard to call our method when it is ready:
   Glib::RefPtr<Gtk::Clipboard> refClipboard = Gtk::Clipboard::get();
 
-  refClipboard->request_contents(example_target_custom,  sigc::mem_fun(*this,
-              &ExampleWindow::on_clipboard_received) );
+  refClipboard->request_contents(example_target_custom, 
+    sigc::mem_fun(*this, &ExampleWindow::on_clipboard_received) );
 
   update_paste_status();
 }
@@ -184,14 +184,14 @@ void ExampleWindow::update_paste_status()
 }
 
 void ExampleWindow::on_clipboard_received_targets(
-        const Glib::StringArrayHandle& targets_array)
+  const Glib::StringArrayHandle& targets_array)
 {
   // Get the list of available clipboard targets:
   std::list<std::string> targets = targets_array;
 
   const bool bPasteIsPossible =
-      std::find(targets.begin(), targets.end(),
-              example_target_custom) != targets.end();
+    std::find(targets.begin(), targets.end(),
+      example_target_custom) != targets.end();
 
   // Enable/Disable the Paste button appropriately:
   m_Button_Paste.set_sensitive(bPasteIsPossible);

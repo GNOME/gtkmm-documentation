@@ -1,3 +1,10 @@
+2009-06-02  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/tutorial/C/gtkmm-tut.xml: Clipboard: Paste: Discovering Available 
+	Targets: Corrected the parameter types of the callback slot based on the 
+	correctly-compiling code in examples/book/clipboard/ideal/examplewindow.cc.
+	Bug #583702 (Jason Curole)
+
 2009-05-23  Armin Burgmeier  <armin@openismus.com>
 
 	* docs/tutorial/C/gtkmm-tut.xml: Fixed a typo in the introduction
