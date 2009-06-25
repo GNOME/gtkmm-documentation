@@ -1,3 +1,8 @@
+2009-06-25   Stas Sergeev  <stsp@aknet.ru>
+
+	* configure.in: Add AC_PROG_CXX to avoid circular dependency aclocal error.
+	Bug #586700.
+
 2009-06-02  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/tutorial/C/gtkmm-tut.xml: Clipboard: Paste: Discovering Available 
