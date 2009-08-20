@@ -17,7 +17,7 @@
 #include "previewdialog.h"
 #include "printformoperation.h"
 
-#include <math.h>
+#include <cmath>
 
 PreviewDialog::PreviewDialog(
                PrintFormOperation* pfo,

@@ -9,7 +9,7 @@
 #include <gtkmm/toolbutton.h>
 #include <gtkmm/separatortoolitem.h>
 
-#include <stdio.h>
+#include <cstdio>
 //#include <glib.h>
 //#include <gdk/gdk.h>
 //#include <gtk/gtk.h>

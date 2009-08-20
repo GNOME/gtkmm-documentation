@@ -20,7 +20,7 @@
 #define GTKMM_EXAMPLEWINDOW_H
 
 #include <gtkmm.h>
-#include <packbox.h>
+#include "packbox.h"
 
 class ExampleWindow : public Gtk::Window
 {

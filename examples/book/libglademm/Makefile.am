@@ -1,3 +1,0 @@
-SUBDIRS = simple derived
-
-

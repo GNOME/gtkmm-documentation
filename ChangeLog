@@ -1,3 +1,19 @@
+2009-08-20  Daniel Elstner  <danielk@openismus.com>
+
+	Convert examples to non-recursive build
+
+	* autogen.sh: Replace with minimal version from the glom module.
+	* Makefile.am: Clean up and remove old cruft.
+	* configure.ac: Rename file from configure.in and downsize it.
+	* examples/**/Makefile.am: Remove obsolete non-recursive build files.
+	* examples/Makefile.am_fragment: ditto.
+	* examples/Makefile.am: Rewrite to non-recursive build.
+	* examples/**/*.{cc,h}: Fix #include statements to use double quotes
+	when including from the same directory as the source file.
+	* scripts/: Delete directory and all files in it.
+	* docs/tutorial/Makefile.am: Include gnome-doc-utils.make from the
+	build/ subdirectory.
+
 2009-06-25   Stas Sergeev  <stsp@aknet.ru>
 
 	* configure.in: Add AC_PROG_CXX to avoid circular dependency aclocal error.

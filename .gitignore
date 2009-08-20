@@ -1,0 +1,17 @@
+Makefile
+Makefile.in
+stamp-h?
+/INSTALL
+/aclocal.m4
+/autom4te.cache/
+/config.log
+/config.status
+/config.status.lineno
+/configure
+/configure.lineno
+/omf.make
+/xmldocs.make
+/docs/FAQ/html/
+/docs/tutorial/html/
+/docs/tutorial/*/gtkmm-tut-with-examples.xml
+/docs/tutorial/*/*.[mp]o

@@ -18,7 +18,7 @@ C/gtkmm-tut-with-examples.xml: C/gtkmm-tut.xml insert_example_code.pl
 	$(PERL_PATH) $(srcdir)/insert_example_code.pl $(top_srcdir)/examples/book $< >$@
 
 
-include $(top_srcdir)/scripts/gnome-doc-utils.make
+include $(top_srcdir)/build/gnome-doc-utils.make
 dist-hook: doc-dist-hook
 
 DOC_MODULE = gtkmm-tut-with-examples

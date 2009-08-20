@@ -1,5 +1,5 @@
+#include <build/config.h>
 #include <gtkmm/main.h>
-#include "gtkmmconfig.h" //For HAVE_MKFIFO
 #include <fcntl.h>
 #include <iostream>
 

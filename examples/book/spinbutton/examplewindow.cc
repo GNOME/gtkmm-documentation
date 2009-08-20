@@ -18,7 +18,7 @@
 
 #include "examplewindow.h"
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 
 ExampleWindow::ExampleWindow()
 :

@@ -17,7 +17,7 @@
  */
 
 #include "examplewindow.h"
-#include <stdio.h> //For sprintf()
+#include <cstdio>
 
 ExampleWindow::ExampleWindow()
 : m_Table(10, 10),
