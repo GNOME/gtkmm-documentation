@@ -2,9 +2,9 @@
 
 AUTOMAKE_OPTIONS = subdir-objects
 
-AM_CPPFLAGS = -I$(top_builddir) $(GTHREAD_CFLAGS) $(EXAMPLES_CFLAGS)
+AM_CPPFLAGS = -I$(top_builddir) $(GTHREAD_CFLAGS) $(LIBGLADEMM_CFLAGS)
 AM_CXXFLAGS = $(EXAMPLES_WXXFLAGS)
-LDADD       = $(EXAMPLES_LIBS)
+LDADD       = $(GTKMM_LIBS)
 
 noinst_PROGRAMS =					\
 	book/alignment/example				\
@@ -318,27 +318,35 @@ book_frame_example_SOURCES =		\
 	book/frame/examplewindow.h	\
 	book/frame/main.cc
 
+book_giomm_directory_list_example_LDADD = $(GIOMM_LIBS)
 book_giomm_directory_list_example_SOURCES = \
 	book/giomm/directory_list/main.cc
 
+book_giomm_getline_getline_LDADD = $(GIOMM_LIBS)
 book_giomm_getline_getline_SOURCES = \
 	book/giomm/getline/getline.cc
 
+book_giomm_monitor_directory_monitor_directory_LDADD = $(GIOMM_LIBS)
 book_giomm_monitor_directory_monitor_directory_SOURCES = \
 	book/giomm/monitor_directory/monitor_directory.cc
 
+book_giomm_read_file_example_LDADD = $(GIOMM_LIBS)
 book_giomm_read_file_example_SOURCES = \
 	book/giomm/read_file/main.cc
 
+book_giomm_read_file_async_example_LDADD = $(GIOMM_LIBS)
 book_giomm_read_file_async_example_SOURCES = \
 	book/giomm/read_file_async/main.cc
 
+book_giomm_usage_usage_LDADD = $(GIOMM_LIBS)
 book_giomm_usage_usage_SOURCES = \
 	book/giomm/usage/usage.cc
 
+book_giomm_volumes_example_LDADD = $(GIOMM_LIBS)
 book_giomm_volumes_example_SOURCES = \
 	book/giomm/volumes/main.cc
 
+book_giomm_write_file_example_LDADD = $(GIOMM_LIBS)
 book_giomm_write_file_example_SOURCES = \
 	book/giomm/write_file/main.cc
 
@@ -370,11 +378,13 @@ book_label_example_SOURCES =		\
 	book/label/examplewindow.h	\
 	book/label/main.cc
 
+book_libglademm_derived_example_LDADD = $(LIBGLADEMM_LIBS)
 book_libglademm_derived_example_SOURCES =		\
 	book/libglademm/derived/deriveddialog.cc	\
 	book/libglademm/derived/deriveddialog.h		\
 	book/libglademm/derived/main.cc
 
+book_libglademm_simple_example_LDADD = $(LIBGLADEMM_LIBS)
 book_libglademm_simple_example_SOURCES = \
 	book/libglademm/simple/main.cc
 

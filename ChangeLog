@@ -1,5 +1,16 @@
 2009-08-21  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	Link with required libraries only
+
+	* configure.ac: Call PKG_CHECK_MODULES() separately for giomm,
+	gtkmm and libglademm.
+	* examples/Makefile.am (AM_CPPFLAGS): Use $(LIBGLADEMM_CFLAGS).
+	(LDADD): Link with $(GTKMM_LIBS) by default.
+	(book_giomm_*_LDADD): Link with $(GIOMM_LIBS).
+	(book_libglademm_*_LDADD): Link with $(LIBGLADEMM_LIBS).
+
+2009-08-21  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	Remove gnome-doc-common from autogen.sh
 
 	* autogen.sh: Remove invocation of gnome-doc-common as it is not
