@@ -9,8 +9,6 @@ stamp-h?
 /config.status.lineno
 /configure
 /configure.lineno
-/omf.make
-/xmldocs.make
 /docs/FAQ/html/
 /docs/tutorial/html/
 /docs/tutorial/*/gtkmm-tut-with-examples.xml

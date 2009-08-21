@@ -1,3 +1,10 @@
+2009-08-21  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	Remove gnome-doc-common from autogen.sh
+
+	* autogen.sh: Remove invocation of gnome-doc-common as it is not
+	needed to build gtkmm-documentation.
+
 2009-08-20  Daniel Elstner  <danielk@openismus.com>
 
 	Convert examples to non-recursive build
