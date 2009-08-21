@@ -1,5 +1,17 @@
 2009-08-21  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	Get tutorial build to distcheck correctly
+
+	* Makefile.am (DISTCHECK_CONFIGURE_FLAGS): Raise warning level
+	to fatal.
+	* docs/tutorial/Makefile.am (uninstall-tutorial): Do not depend
+	html/index.html when uninstalling.
+	(EXTRA_DIST): Remove html/ subdirectory as gnome-doc-utils.make
+	already distributes it.
+	(DISTCLEANFILES): List wildcards for HTML tutorial files.
+
+2009-08-21  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	Build examples on make check
 
 	* examples/Makefile.am (check_PROGRAMS): Rename from

@@ -6,7 +6,7 @@ SUBDIRS = icons
 
 DOCBOOK_PHPWEBNOTES_TRANSFORM = docbook_phpwebnotes.xsl
 
-EXTRA_DIST = README insert_example_code.pl C/gtkmm-tut.xml C/gtkmm-tut-with-examples.xml html style.css $(DOCBOOK_PHPWEBNOTES_TRANSFORM)
+EXTRA_DIST = README insert_example_code.pl C/gtkmm-tut.xml C/gtkmm-tut-with-examples.xml style.css $(DOCBOOK_PHPWEBNOTES_TRANSFORM)
 
 DOCBOOK_STYLESHEET ?= http://docbook.sourceforge.net/release/xsl/current/html/chunk.xsl
 XMLLINT = xmllint
@@ -15,7 +15,7 @@ DB2PDF = docbook2pdf
 
 # Create a DocBook source file that doesn't have the examples' comments blocks:
 C/gtkmm-tut-with-examples.xml: C/gtkmm-tut.xml insert_example_code.pl
-	$(PERL_PATH) $(srcdir)/insert_example_code.pl $(top_srcdir)/examples/book $< >$@
+	$(PERL) $(srcdir)/insert_example_code.pl $(top_srcdir)/examples/book $< >$@
 
 
 include $(top_srcdir)/build/gnome-doc-utils.make
@@ -49,6 +49,7 @@ DOC_FIGURES = \
 
 DOC_LINGUAS = de
 
+DISTCLEANFILES = html/figures/*.png html/icons/*.png html/*.css html/*.html
 
 # Create a html generation of the C locale's version of the DocBook, 
 # using our custom stylesheet and graphics:
@@ -56,11 +57,12 @@ DOC_LINGUAS = de
 # number as the filename, otherwise the url will change every time anything is
 # re-ordered or inserted in the documentation
 html/index.html: C/gtkmm-tut-with-examples.xml Makefile.am
-	rm -rf html
-	$(mkinstalldirs) html
-	cp $(srcdir)/style.css html/
-	cp -r $(srcdir)/C/figures html/
-	cp -r $(srcdir)/icons html/
+	rm -fr html
+	$(MKDIR_P) html/figures
+	$(MKDIR_P) html/icons
+	cp -f $(srcdir)/style.css html/style.css
+	cp -f $(srcdir)/C/figures/*.png html/figures/
+	cp -f $(srcdir)/icons/*.png html/icons/
 	$(XSLTPROC) \
 		--param toc.section.depth 1	\
 		--stringparam html.stylesheet "style.css"	\
@@ -95,9 +97,7 @@ post-html: html/index.html html/style.css pdf
 
 # we need to produce a full examples with all of the XIncludes done so that it
 # can processed for PDF
-C/programming-with-gtkmm-pdf.xml: C/gtkmm-tut-with-examples.xml
-	rm -rf html
-	$(mkinstalldirs) html
+C/programming-with-gtkmm-pdf.xml: C/gtkmm-tut-with-examples.xml html/index.html
 	$(XMLLINT) --xinclude --postvalid $< -o $@
 
 # We have to generate the pdf in a subdirectory (e.g. pdf/) because the tutorial
@@ -114,38 +114,33 @@ doc-clean:
 
 tutorialdir = $(gtkmm_docdir)/tutorial/html
 
-install-tutorial: html/index.html html/style.css
+install-tutorial: html/index.html
 	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(tutorialdir)
-	@dir='$(<D)'; for p in $$dir/*.html ; do \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	$(MKDIR_P) "$(DESTDIR)$(tutorialdir)/icons"
+	$(MKDIR_P) "$(DESTDIR)$(tutorialdir)/figures"
+	@dir='$(<D)'; for p in $$dir/*.css $$dir/*.html ; do \
+	  f=`echo "$$p" | sed -e 's|^.*/||'`; \
 	  echo " $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/$$f"; \
-	  $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/$$f; \
+	  $(INSTALL_DATA) "$$p" "$(DESTDIR)$(tutorialdir)/$$f"; \
 	done
-	$(mkinstalldirs) $(DESTDIR)$(tutorialdir)/icons
 	@dir='$(<D)/icons'; for p in $$dir/*.png ; do \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  f=`echo "$$p" | sed -e 's|^.*/||'`; \
 	  echo " $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/icons/$$f"; \
-	  $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/icons/$$f; \
+	  $(INSTALL_DATA) "$$p" "$(DESTDIR)$(tutorialdir)/icons/$$f"; \
 	done
-	$(mkinstalldirs) $(DESTDIR)$(tutorialdir)/figures
 	@dir='$(<D)/figures'; for p in $$dir/*.png ; do \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  f=`echo "$$p" | sed -e 's|^.*/||'`; \
 	  echo " $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/figures/$$f"; \
-	  $(INSTALL_DATA) $$p $(DESTDIR)$(tutorialdir)/figures/$$f; \
+	  $(INSTALL_DATA) "$$p" "$(DESTDIR)$(tutorialdir)/figures/$$"; \
 	done
-	$(INSTALL_DATA) $(srcdir)/html/style.css $(DESTDIR)$(tutorialdir)
 
-uninstall-tutorial: html/index.html html/style.css
+uninstall-tutorial:
 	@$(NORMAL_UNINSTALL)
-	@dir='$(<D)'; for p in $$dir/*.html ; do \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " rm -f $(DESTDIR)$(tutorialdir)/$$f"; \
-	  rm -f $(DESTDIR)$(tutorialdir)/$$f; \
-	done
-	rm -f $(DESTDIR)$(tutorialdir)/style.css
-	rm -rf $(DESTDIR)$(tutorialdir)/icons
-	rm -rf $(DESTDIR)$(tutorialdir)/figures
+	(cd '$(DESTDIR)$(tutorialdir)' 2>/dev/null || exit 0; \
+	 find . -type f \( -name '*.html' -o -name '*.css' -o -name '*.png' \) -exec rm -f '{}' '+')
+	-test ! -r '$(DESTDIR)$(tutorialdir)/icons' || rmdir '$(DESTDIR)$(tutorialdir)/icons'
+	-test ! -r '$(DESTDIR)$(tutorialdir)/figures' || rmdir '$(DESTDIR)$(tutorialdir)/figures'
+	-test ! -r '$(DESTDIR)$(tutorialdir)' || rmdir '$(DESTDIR)$(tutorialdir)'
 
 all-local: html/index.html
 

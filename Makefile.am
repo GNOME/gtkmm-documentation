@@ -1,7 +1,7 @@
 ## This file is part of gtkmm-documentation.
 
 ACLOCAL_AMFLAGS	= -I build ${ACLOCAL_FLAGS}
-DISTCHECK_CONFIGURE_FLAGS = --enable-warnings=max
+DISTCHECK_CONFIGURE_FLAGS = --enable-warnings=fatal
 
 if HAVE_GNOME_DOC_UTILS
 doc_subdirs = docs

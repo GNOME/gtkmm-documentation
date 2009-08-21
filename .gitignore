@@ -13,3 +13,4 @@ stamp-h?
 /docs/tutorial/html/
 /docs/tutorial/*/gtkmm-tut-with-examples.xml
 /docs/tutorial/*/*.[mp]o
+/gtkmm-documentation-*.tar.*
