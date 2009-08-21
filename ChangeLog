@@ -1,5 +1,12 @@
 2009-08-21  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	Distribute example data files
+
+	* examples/Makefile.am (dist_noinst_DATA): List data files of
+	the example programs.
+
+2009-08-21  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	Link with required libraries only
 
 	* configure.ac: Call PKG_CHECK_MODULES() separately for giomm,

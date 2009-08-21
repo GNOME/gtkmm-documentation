@@ -112,6 +112,25 @@ noinst_PROGRAMS =					\
 	others/treemodelcustom/example			\
 	others/window/wheelbarrow
 
+dist_noinst_DATA =				\
+	README					\
+	book/README				\
+	book/builder/basic/basic.ui		\
+	book/builder/derived/basic.ui		\
+	book/buttons/button/info.xpm		\
+	book/custom/custom_widget/custom_gtkrc	\
+	book/iconview/gnome-dice-1.svg		\
+	book/iconview/gnome-dice-2.svg		\
+	book/iconview/gnome-dice-3.svg		\
+	book/iconview/gnome-dice-4.svg		\
+	book/iconview/gnome-dice-5.svg		\
+	book/iconview/gnome-dice-6.svg		\
+	book/iconview/mozilla-firefox.png	\
+	book/iconview/xmms.xpm			\
+	book/libglademm/derived/simple.glade	\
+	book/libglademm/simple/simple.glade	\
+	book/menus_and_toolbars/rain.png
+
 book_alignment_example_SOURCES =		\
 	book/alignment/examplewindow.cc		\
 	book/alignment/examplewindow.h		\
