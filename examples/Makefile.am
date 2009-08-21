@@ -6,7 +6,7 @@ AM_CPPFLAGS = -I$(top_builddir) $(GTHREAD_CFLAGS) $(LIBGLADEMM_CFLAGS)
 AM_CXXFLAGS = $(EXAMPLES_WXXFLAGS)
 LDADD       = $(GTKMM_LIBS)
 
-noinst_PROGRAMS =					\
+check_PROGRAMS =					\
 	book/alignment/example				\
 	book/aspectframe/example			\
 	book/box/example				\

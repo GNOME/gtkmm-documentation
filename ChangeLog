@@ -1,5 +1,14 @@
 2009-08-21  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	Build examples on make check
+
+	* examples/Makefile.am (check_PROGRAMS): Rename from
+	noinst_PROGRAMS, so that the example programs are prerequisites
+	of the target 'check' rather than 'all'.  This way, there is no
+	need for a configure switch to disable the examples build.
+
+2009-08-21  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	Distribute example data files
 
 	* examples/Makefile.am (dist_noinst_DATA): List data files of
