@@ -1,3 +1,37 @@
+2009-08-23  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	Distribute generated HTML files of the tutorial
+
+	* configure.ac (AC_CONFIG_FILES): Remove output files docs/Makefile,
+	docs/images/Makefile and docs/tutorial/icons/Makefile from the list.
+	* Makefile.am (doc_subdirs): Recurse directly into the docs/FAQ/
+	and docs/tutorial/ subdirectories, skipping docs/.
+	(dist_images_DATA): Distribute and install image files in the
+	docs/images/ subdirectory from here.
+	* docs/tutorial/Makefile.am (SUBDIRS): Do not recurse into icons/.
+	(vpath_listall): Copy VPATH listing function from doc-reference.am
+	in mm-common.
+	(DISTCLEANFILES): Only clean generated HTML files.
+	(MAINTAINERCLEANFILES): Clean distributed HTML in the source tree.
+	(dist_noinst_DATA): Distribute generated HTML.
+	(tutorial_figures_DATA): Use Automake constructs to install the
+	figures into a subdirectory of the HTML installation directory.
+	The distribution is taken care of by gnome-doc-utils.make.
+	(dist_tutorial_icons_DATA): Likewise for the icons, but distribute
+	them via Automake as well.
+	(install-tutorial): Simplify and cut down on shell commands.  Use
+	GNU make features to produce the list of files at the make level.
+	Only install the HTML files and style.css manually.
+	(uninstall-tutorial): Simplify.  Limit the deletion to HTML files
+	and style.css.
+	(html/index.html): Remove dependency on Makefile.am, mainly because
+	it is not consistent with the behavior of other targets or modules.
+	(html/%): Declare html/index.html as order-only prerequisite of any
+	file in the html/ subdirectory.
+	(all-local): Remove target.
+	(pdf), (post-html), (doc-clean): Disable targets for now.
+	* docs{,/images,/tutorial/icons}/Makefile.am: Delete obsolete files.
+
 2009-08-21  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	Get tutorial build to distcheck correctly
