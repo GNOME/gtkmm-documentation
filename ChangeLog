@@ -1,3 +1,14 @@
+2009-08-25  Daniel Elstner  <danielk@openismus.com>
+
+	Work around gnome-doc-utils.make VPATH problems
+
+	* docs/tutorial/Makefile.am (C/gtkmm-tut-with-examples.xml): Always
+	put this generated file into the source tree, because the rules in
+	gnome-doc-utils.make do not perform a correct VPATH search for the
+	xml2po input file.
+	(C/programming-with-gtkmm-pdf.xml): Run $(MKDIR_P) C to create the
+	output directory if necessary.
+
 2009-08-25  Murray Cumming  <murrayc@murrayc.com>
 
 	Update for Gtk::Builder.

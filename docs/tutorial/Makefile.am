@@ -154,7 +154,7 @@ uninstall-tutorial:
 # Set the use.id.as.filename param so that we don't use the chapter / section
 # number as the filename, otherwise the url will change every time anything is
 # re-ordered or inserted in the documentation
-html/index.html: C/gtkmm-tut-with-examples.xml
+html/index.html: $(srcdir)/C/gtkmm-tut-with-examples.xml
 	rm -fr html
 	$(MKDIR_P) html
 	$(XSLTPROC) $(xslt_params) -o html/ --xinclude --catalogs '$(DOCBOOK_STYLESHEET)' $<
@@ -164,13 +164,13 @@ html/index.html: C/gtkmm-tut-with-examples.xml
 html/%: | html/index.html
 
 # Create a DocBook source file that doesn't have the examples' comments blocks:
-C/gtkmm-tut-with-examples.xml: C/gtkmm-tut.xml $(srcdir)/insert_example_code.pl
+$(srcdir)/C/gtkmm-tut-with-examples.xml: $(srcdir)/C/gtkmm-tut.xml $(srcdir)/insert_example_code.pl
 	$(PERL) -- $(srcdir)/insert_example_code.pl $(top_srcdir)/examples/book $< >$@
 
-validate_original: C/gtkmm-tut.xml
+validate_original: $(srcdir)/C/gtkmm-tut.xml
 	$(XMLLINT) --xinclude --postvalid --noout $<
 
-validate: C/gtkmm-tut-with-examples.xml
+validate: $(srcdir)/C/gtkmm-tut-with-examples.xml
 	$(XMLLINT) --xinclude --postvalid --noout $<
 
 #gtkmm-tut-html.tar.gz: html/index.html
@@ -185,7 +185,8 @@ validate: C/gtkmm-tut-with-examples.xml
 
 # we need to produce a full examples with all of the XIncludes done so that it
 # can processed for PDF
-C/programming-with-gtkmm-pdf.xml: C/gtkmm-tut-with-examples.xml
+C/programming-with-gtkmm-pdf.xml: $(srcdir)/C/gtkmm-tut-with-examples.xml
+	$(MKDIR_P) C
 	$(XMLLINT) --xinclude --postvalid $< -o $@
 
 # We have to generate the pdf in a subdirectory (e.g. pdf/) because the tutorial
