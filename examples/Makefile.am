@@ -2,7 +2,7 @@
 
 AUTOMAKE_OPTIONS = subdir-objects
 
-AM_CPPFLAGS = -I$(top_builddir) $(GTHREAD_CFLAGS)
+AM_CPPFLAGS = -I$(top_builddir) $(GTHREAD_CFLAGS) $(GTKMM_CFLAGS)
 AM_CXXFLAGS = $(EXAMPLES_WXXFLAGS)
 LDADD       = $(GTKMM_LIBS)
 

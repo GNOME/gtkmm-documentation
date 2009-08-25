@@ -1,5 +1,12 @@
 2009-08-25  Daniel Elstner  <danielk@openismus.com>
 
+	Build examples with $(GTKMM_CFLAGS)
+
+	* examples/Makefile.am (AM_CPPFLAGS): Append $(GTKMM_CFLAGS) to
+	get the example programs to build again.
+
+2009-08-25  Daniel Elstner  <danielk@openismus.com>
+
 	Handle missing dependency in gnome-doc-utils.make
 
 	* docs/tutorial/Makefile.am: Move the gnome-doc-utils.make include
