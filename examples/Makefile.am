@@ -2,7 +2,7 @@
 
 AUTOMAKE_OPTIONS = subdir-objects
 
-AM_CPPFLAGS = -I$(top_builddir) $(GTHREAD_CFLAGS) $(LIBGLADEMM_CFLAGS)
+AM_CPPFLAGS = -I$(top_builddir) $(GTHREAD_CFLAGS)
 AM_CXXFLAGS = $(EXAMPLES_WXXFLAGS)
 LDADD       = $(GTKMM_LIBS)
 
@@ -61,8 +61,6 @@ check_PROGRAMS =					\
 	book/idle/idle					\
 	book/input/example				\
 	book/label/example				\
-	book/libglademm/derived/example			\
-	book/libglademm/simple/example			\
 	book/menus/main_menu/main_menu			\
 	book/menus/popup/popup				\
 	book/menus_and_toolbars/example			\
@@ -127,8 +125,6 @@ dist_noinst_DATA =				\
 	book/iconview/gnome-dice-6.svg		\
 	book/iconview/mozilla-firefox.png	\
 	book/iconview/xmms.xpm			\
-	book/libglademm/derived/simple.glade	\
-	book/libglademm/simple/simple.glade	\
 	book/menus_and_toolbars/rain.png
 
 book_alignment_example_SOURCES =		\
@@ -396,16 +392,6 @@ book_label_example_SOURCES =		\
 	book/label/examplewindow.cc	\
 	book/label/examplewindow.h	\
 	book/label/main.cc
-
-book_libglademm_derived_example_LDADD = $(LIBGLADEMM_LIBS)
-book_libglademm_derived_example_SOURCES =		\
-	book/libglademm/derived/deriveddialog.cc	\
-	book/libglademm/derived/deriveddialog.h		\
-	book/libglademm/derived/main.cc
-
-book_libglademm_simple_example_LDADD = $(LIBGLADEMM_LIBS)
-book_libglademm_simple_example_SOURCES = \
-	book/libglademm/simple/main.cc
 
 book_menus_main_menu_main_menu_SOURCES =	\
 	book/menus/main_menu/examplewindow.cc	\

@@ -1,3 +1,15 @@
+2009-08-25  Murray Cumming  <murrayc@murrayc.com>
+
+	Update for Gtk::Builder.
+
+	* docs/tutorial/C/gtkmm-tut.xml: Glade and libglademm chapter: 
+	Change this to a Glade and Gtk::Builder chapter, and change links and 
+	mentions elsewhere. The examples already existed.
+	Use US organize instead of organise. Use cannot instead of can not. 
+	* examples/book/libglademm: Removed.
+	* configure.ac:
+	* examples/Makefile.am: Adapted.
+
 2009-08-23  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	Distribute generated HTML files of the tutorial

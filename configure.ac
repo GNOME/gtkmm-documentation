@@ -18,7 +18,6 @@ AC_PATH_PROG([PERL], [perl], [perl])
 
 PKG_CHECK_MODULES([GIOMM], [giomm-2.4 >= 2.16.0])
 PKG_CHECK_MODULES([GTKMM], [gtkmm-2.4 >= 2.16.0])
-PKG_CHECK_MODULES([LIBGLADEMM], [libglademm-2.4 >= 2.6.0])
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
 
 AC_LANG([C++])

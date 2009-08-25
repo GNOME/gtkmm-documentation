@@ -149,7 +149,7 @@ using &gtkmm; without purchasing licenses.
 
 <sect2 id="why-use-gtkmm">
 <title>Why use &gtkmm; instead of GTK+?</title>
-<para>&gtkmm; allows you to write code using normal C++ techniques such as encapsulation, derivation, and polymorphism. As a C++ programmer you probably already realise that this leads to clearer and better organised code.</para>
+<para>&gtkmm; allows you to write code using normal C++ techniques such as encapsulation, derivation, and polymorphism. As a C++ programmer you probably already realise that this leads to clearer and better organized code.</para>
 <para>&gtkmm; is more type-safe, so the compiler can detect errors that would only be detected at run time when using C. This use of specific types also makes the API clearer because you can see what types should be used just by looking at a method's declaration.</para>
 <para>Inheritance can be used to derive new widgets. The derivation of new widgets in GTK+ C code is so complicated and error prone that almost no C coders do it. As a C++ developer you know that derivation is an essential Object Orientated technique.</para>
 <para>Member instances can be used, simplifying memory management. All GTK+ C widgets are dealt with by use of pointers. As a C++ coder you know that pointers should be avoided where possible.</para>
@@ -160,14 +160,13 @@ using &gtkmm; without purchasing licenses.
 <title>&gtkmm; compared to QT</title>
 <para>Trolltech's QT is the closest competition to &gtkmm;, so it deserves discussion.</para>
 
-<para>&gtkmm; developers tend to prefer &gtkmm; to QT because &gtkmm; does things in a more C++ way. QT originates from a time when C++ and the standard library were not standardised or well supported by compilers. It therefore duplicates a lot of stuff that is now in the standard library, such as containers and type information. Most significantly, Trolltech modified the C++ language to provide signals, so that QT classes can not be used easily with non-QT classes. &gtkmm; was able to use standard C++ to provide signals without changing the C++ language. See the FAQ for more detailed differences.</para>
+<para>&gtkmm; developers tend to prefer &gtkmm; to QT because &gtkmm; does things in a more C++ way. QT originates from a time when C++ and the standard library were not standardised or well supported by compilers. It therefore duplicates a lot of stuff that is now in the standard library, such as containers and type information. Most significantly, Trolltech modified the C++ language to provide signals, so that QT classes cannot be used easily with non-QT classes. &gtkmm; was able to use standard C++ to provide signals without changing the C++ language. See the FAQ for more detailed differences.</para>
 </sect2>
 
 <sect2 id="gtkmm-is-a-wrapper">
 <title>&gtkmm; is a wrapper</title>
 <para>
 &gtkmm; is not a native C++ toolkit, but a C++ wrapper of a C toolkit. This separation of interface and implementation has advantages. The &gtkmm; developers spend most of their time talking about how &gtkmm; can present the clearest API, without awkward compromises due to obscure technical details. We contribute a little to the underlying GTK+ code base, but so do the C coders, and the Perl coders and the Python coders, etc. Therefore GTK+ benefits from a broader user base than language-specific toolkits - there are more implementers, more developers, more testers, and more users.</para>
-<para>Microsoft's MFC has given GUI wrapper libraries a bad name, but &gtkmm; doesn't suffer from the same problems because GTK+ is written in high quality object-orientated C, with language-bindings in mind.</para>
 </sect2>
 </sect1>
 
@@ -407,7 +406,7 @@ and here is how to add the Gtk::VBox, containing those buttons, to a Gtk::Frame,
 Most of the chapters in this book deal with specific widgets. See the <link linkend="chapter-container-widgets">Container Widgets</link> section for more details about adding widgets to container widgets.
 </para>
 
-<para>Although you can specify the layout and appearance of windows and widgets with C++ code, you will probably find it more convenient to design your user interfaces with <literal>Glade</literal> and load them at runtime with <literal>libglademm</literal>. See the <link linkend="chapter-libglademm">Glade and libglademm</link> chapter.
+<para>Although you can specify the layout and appearance of windows and widgets with C++ code, you will probably find it more convenient to design your user interfaces with <literal>Glade</literal> and load them at runtime with <literal>Gtk::Builder</literal>. See the <link linkend="chapter-builder">Glade and Gtk::Builder</link> chapter.
 </para>
 
 <para>Although &gtkmm; widget instances have lifetimes and scopes just like those of other C++ classes, &gtkmm; has an optional time-saving feature that you will see in some of the examples. <function>Gtk::manage()</function> allows you to say that a child widget is owned by the container into which you place it. This allows you to <function>new</function> the widget, add it to the container and forget about deleting it. You can learn more about &gtkmm; memory management techniques in the <link linkend="chapter-memory">Memory Management chapter</link>.
@@ -2166,7 +2165,7 @@ There are several options governing how  widgets are to be packed, and this can
 be confusing at first. If you have difficulties then it is sometimes a good
 idea to play with the <application>glade</application> GUI designer to see what
 is possible. You might even decide to use the
-<application>libglademm</application> API to load your GUI at runtime.
+<application>Gtk::Builder</application> API to load your GUI at runtime.
 </para>
 
 <para>
@@ -6327,14 +6326,14 @@ Nicolai M. Josuttis, "The C++ Standard Library" - section 4.2
 
 </chapter>
 
-<chapter id="chapter-libglademm">
-<title>Glade and libglademm</title>
+<chapter id="chapter-builder">
+<title>Glade and Gtk::Builder</title>
 <para>
 Although you can use C++ code to instantiate and arrange widgets, this
 can soon become tedious and repetitive. And it requires a recompilation to show
 changes. The <application>Glade</application> application allows you to layout
 widgets on screen and then save an XML description of the arrangement. Your
-application can then use the <application>libglademm</application> API to load
+application can then use the <application>Gtk::Builder</application> API to load
 that XML file at runtime and obtain a pointer to specifically named widget
 instances. 
 </para>
@@ -6350,44 +6349,33 @@ This has the following advantages:
 
 <para>
 You still need C++ code to deal with User Interface changes triggered by user
-actions, but using <application>libglademm</application> for the basic widget
+actions, but using <application>Gtk::Builder</application> for the widget
 layout allows you to focus on implementing that functionality.
 </para>
 
-<sect1 id="sec-libglademm-headers-and-linking">
-<title>Headers and Linking</title>
-<para>To use libglade, you must include the header file, like so:
-<programlisting>
-#include &lt;libglademm.h&gt;
-</programlisting>
-</para>
-<para>You must also link to the libglademm library. For instance, you can add libglademm-2.4 to your list of pkg-config modules, as described in the <link linkend="sec-libglademm-headers-and-linking">Headers and Linking section for gtkmm</link>.
-</para>
-</sect1>
-
-<sect1 id="sec-libglademm-loading-glade-file">
+<sect1 id="sec-builder-loading-glade-file">
 <title>Loading the .glade file</title>
 <para>
-<classname>Gnome::Glade::Xml</classname> must be used via a
-<classname>Glib::RefPtr</classname>. Like all such classes, you need to use
-<methodname>create()</methodname> method to instantiate it. 
+<classname>Gtk::Builder</classname> must be used via a
+<classname>Glib::RefPtr</classname>. Like all such classes, you need to use a 
+<methodname>create()</methodname> method to instantiate it. For instance, 
 <programlisting>
-Glib::RefPtr&lt;Gnome::Glade::Xml&gt; refXml = Gnome::Glade::Xml::create(&quot;basic.glade&quot;);
+Glib::RefPtr&lt;Gtk::Builder&gt; builder = Gtk::Builder::create(&quot;basic.glade&quot;);
 </programlisting>
 This will instantiate the windows defined in the .glade file, though they will
-not be shown immediately unless you have specified that via the Properties
+not be shown immediately unless you have specified that via the <guilabel>Properties</guilabel> 
 window in <application>Glade</application>.
 </para>
 
 <para>To instantiate just one window, or just one of the child widgets, you can specify the name of a widget as the second parameter. For instance,
 <programlisting>
-Glib::RefPtr&lt;Gnome::Glade::Xml&gt; refXml = Gnome::Glade::Xml::create(&quot;basic.glade&quot;, &quot;treeview_products&quot;);
+Glib::RefPtr&lt;Gtk::Builder&gt; builder = Gtk::Builder::create(&quot;basic.glade&quot;, &quot;treeview_products&quot;);
 </programlisting>
 </para>
 
 </sect1>
 
-<sect1 id="sec-libglademm-accessing-widgets">
+<sect1 id="sec-builder-accessing-widgets">
 <title>Accessing widgets</title>
 
 <para>
@@ -6398,12 +6386,12 @@ window. If the widget could not be found, or is of the wrong type, then the
 pointer will be set to 0.
 <programlisting>
 Gtk::Dialog* pDialog = 0;
-refXml-&gt;get_widget(&quot;DialogBasic&quot;, pDialog);
+builder-&gt;get_widget(&quot;DialogBasic&quot;, pDialog);
 </programlisting>
 </para>
 
 <para>
-<application>libglademm</application> checks for a null pointer, and checks
+<application>Gtk::Builder</application> checks for a null pointer, and checks
 that the widget is of the expected type, and will show warnings on the command
 line about these.
 </para>
@@ -6412,9 +6400,9 @@ line about these.
 Remember that you are not instantiating a widget with
 <methodname>get_widget()</methodname>, you are just obtaining a pointer to one that
 already exists. You will always receive a pointer to the same instance when you
-call <methodname>get_widget()</methodname> on the same
-<classname>Gnome::Glade::Xml</classname>, with the same widget name. The
-widgets are instantiated during <methodname>Glade::Xml::create()</methodname>. 
+call <methodname>get_widget()</methodname> on the same 
+<classname>Gtk::Builder</classname>, with the same widget name. The
+widgets are instantiated during <methodname>Gtk::Builder::create()</methodname>. 
 </para>
 
 <para>
@@ -6422,47 +6410,47 @@ widgets are instantiated during <methodname>Glade::Xml::create()</methodname>.
 <function>manage()</function>ed (see the <link linkend="chapter-memory">Memory 
 Management</link> chapter), so they will be deleted when their parent
 container is deleted. So, if you get only a child widget from
-<application>libglademm</application>, instead of a whole window, then you must
+<application>Gtk::Builder</application>, instead of a whole window, then you must
 either put it in a <classname>Container</classname> or delete it.
-<classname>Windows</classname> (such as <classname>Dialogs</classname>) can not
+<classname>Windows</classname> (such as <classname>Dialogs</classname>) cannot
 be managed because they have no parent container, so you must delete them at
 some point.
 </para>
 
-<sect2 id="libglademm-example-loading">
+<sect2 id="builder-example-loading">
 <title>Example</title>
 <para>
 This simple example shows how to load a <application>Glade</application> file at runtime and access the widgets with
-<application>libglademm</application>.
+<application>Gtk::Builder</application>.
 </para>
 
-<para><ulink url="&url_examples_base;libglademm/simple">Source Code</ulink></para>
+<para><ulink url="&url_examples_base;builder/basic">Source Code</ulink></para>
 
 </sect2>
 
 </sect1>
 
 
-<sect1 id="sec-libglademm-using-derived-widgets">
+<sect1 id="sec-builder-using-derived-widgets">
 <title>Using derived widgets</title>
 <para>
 You can use <application>Glade</application> to layout your own custom widgets
-derived from &gtkmm; widget classes. This keeps your code organised and
+derived from &gtkmm; widget classes. This keeps your code organized and
 encapsulated. Of course you won't see the exact appearance and properties of
 your derived widget in <application>Glade</application>, but you can specify
 its location and child widgets and the properties of its &gtkmm; base class.
 </para>
 
-<para>Use <methodname>Glade::Xml::get_widget_derived()</methodname> like so: 
+<para>Use <methodname>Gtk::Builder::get_widget_derived()</methodname> like so: 
 <programlisting>
 DerivedDialog* pDialog = 0;
-refXml-&gt;get_widget_derived(&quot;DialogBasic&quot;, pDialog);
+builder-&gt;get_widget_derived(&quot;DialogBasic&quot;, pDialog);
 </programlisting>
 </para>
 
 <para>
 Your derived class must have a constructor that takes a pointer to the
-underlying C type, and the <classname>Gnome::Glade::Xml</classname> instance.
+underlying C type, and the <classname>Gtk::Builder</classname> instance.
 All relevant classes of &gtkmm; typedef their underlying C type as
 <classname>BaseObjectType</classname> (<classname>Gtk::Dialog</classname>
 typedefs <classname>BaseObjectType</classname> as <type>GtkDialog</type>, for instance).
@@ -6471,7 +6459,7 @@ typedefs <classname>BaseObjectType</classname> as <type>GtkDialog</type>, for in
 You must call the base class's constructor in the initialization list, providing the C pointer.  For
 instance,
 <programlisting>
-DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gnome::Glade::Xml&gt;&amp; refGlade)
+DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)
 : Gtk::Dialog(cobject)
 {
 }
@@ -6483,13 +6471,13 @@ You could then encapsulate the manipulation of the child widgets in the
 constructor of the derived class, maybe using <methodname>get_widget()</methodname>
 or <methodname>get_widget_derived()</methodname> again. For instance,
 <programlisting>
-DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gnome::Glade::Xml&gt;&amp; refGlade)
+DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)
 : Gtk::Dialog(cobject),
-  m_refGlade(refGlade),
+  m_builder(builder),
   m_pButton(0)
 {
   //Get the Glade-instantiated Button, and connect a signal handler:
-  m_refGlade-&gt;get_widget(&quot;quit_button&quot;, m_pButton);
+  m_builder-&gt;get_widget(&quot;quit_button&quot;, m_pButton);
   if(m_pButton)
   {
     m_pButton-&gt;signal_clicked().connect( sigc::mem_fun(*this, &amp;DerivedDialog::on_button_quit) );
@@ -6498,13 +6486,13 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gnom
 </programlisting>
 </para>
 
-<sect2 id="libglademm-example-accessing">
+<sect2 id="builder-example-accessing">
 <title>Example</title>
 <para>
 This example shows how to load a <application>Glade</application> file at runtime and access the widgets via a derived class.
 </para>
 
-<para><ulink url="&url_examples_base;libglademm/derived">Source Code</ulink></para>
+<para><ulink url="&url_examples_base;builder/derived">Source Code</ulink></para>
 
 </sect2>
 
@@ -7170,7 +7158,7 @@ and hints for creating &gtkmm; applications.
     portability..
 </para>
 
-<para>Subclass Widgets to better organise your code. You should probably
+<para>Subclass Widgets to better organize your code. You should probably
     subclass your main <classname>Window</classname> at least. Then you can
     make your child Widgets and signal handlers members of that class.
 </para>
@@ -8724,7 +8712,7 @@ _CLASS_OPAQUE_COPYABLE(Region, GdkRegion, gdk_region_new, gdk_region_copy, gdk_r
 <sect3 id="gmmproc-class-opaque-refcounted">
 <title>_CLASS_OPAQUE_REFCOUNTED</title>
 <para>This macro declares a wrapper for a reference-counted opaque struct. The
-    C++ wrapper can not be directly instantiated and can only be used with
+    C++ wrapper cannot be directly instantiated and can only be used with
     <classname>Glib::RefPtr</classname>.</para>
 <para><function>_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, ref function, unref function )</function></para>
 <para>For instance, for <classname>Pango::Coverage</classname>:
