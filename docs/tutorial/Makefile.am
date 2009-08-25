@@ -18,10 +18,6 @@ XMLLINT = xmllint
 XSLTPROC = xsltproc
 DB2PDF = docbook2pdf
 
-include $(top_srcdir)/build/gnome-doc-utils.make
-
-dist-hook: doc-dist-hook
-
 DOC_MODULE = gtkmm-tut-with-examples
 DOC_ENTITIES =
 DOC_INCLUDES =
@@ -133,6 +129,12 @@ dist_tutorial_icons_DATA =	\
 	icons/tip.png		\
 	icons/up.png		\
 	icons/warning.png
+
+include $(top_srcdir)/build/gnome-doc-utils.make
+
+dist-hook: doc-dist-hook
+
+all-local: $(addsuffix /gtkmm-tut-with-examples.xml,C $(DOC_LINGUAS)) html/index.html
 
 install-data-local: install-tutorial
 

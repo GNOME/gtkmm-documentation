@@ -1,5 +1,16 @@
 2009-08-25  Daniel Elstner  <danielk@openismus.com>
 
+	Handle missing dependency in gnome-doc-utils.make
+
+	* docs/tutorial/Makefile.am: Move the gnome-doc-utils.make include
+	below the variable assignments to make the behavior more obvious.
+	(all-local): Explicitly depend on the gtkmm-tut-with-examples.xml
+	files of all languages.  The dependency is missing from the install
+	rule in gnome-doc-utils.make and otherwise only made a prerequisite
+	of target 'all', which does not run at install time.
+
+2009-08-25  Daniel Elstner  <danielk@openismus.com>
+
 	Work around gnome-doc-utils.make VPATH problems
 
 	* docs/tutorial/Makefile.am (C/gtkmm-tut-with-examples.xml): Always
