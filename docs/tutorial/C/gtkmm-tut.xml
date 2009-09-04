@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
   "http://docbook.org/docbook/xml/4.5/docbookx.dtd" [
-  <!ENTITY url_refdocs_base_glib_html "../../../../glibmm-2.4/docs/reference/html/">
-  <!ENTITY url_refdocs_base_glib "../../../../glibmm-2.4/docs/reference/html/classGlib_1_1">
-  <!ENTITY url_refdocs_base_gtk_html "../../reference/html/">
-  <!ENTITY url_refdocs_base_gtk "../../reference/html/classGtk_1_1">
-  <!ENTITY url_refdocs_base_gtk_namespace "../../reference/html/namespaceGtk_1_1">
+  <!ENTITY url_refdocs_base_glib_html "http://library.gnome.org/devel/glibmm/unstable/">
+  <!ENTITY url_refdocs_base_glib "&url_refdocs_base_glib_html;classGlib_1_1">
+  <!ENTITY url_refdocs_base_gtk_html "http://library.gnome.org/devel/gtkmm/unstable/">
+  <!ENTITY url_refdocs_base_gtk "&url_refdocs_base_gtk_html;classGtk_1_1">
+  <!ENTITY url_refdocs_base_gtk_namespace "&url_refdocs_base_gtk_html;namespaceGtk_1_1">
   <!ENTITY url_figures_base "figures/"> 
   <!ENTITY path_examples_others_base "../../examples/others/">
   <!ENTITY url_examples_others_base "../&path_examples_others_base;">

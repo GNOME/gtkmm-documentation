@@ -1,3 +1,11 @@
+2009-09-04  Murray Cumming  <murrayc@murrayc.com>
+
+	Link to library.gnome.org.
+
+	* docs/tutorial/C/gtkmm-tut.xml: Change reference API links (via 
+	XML entities) to library.gnome.org, though I guess we should discover 
+	these somehow at build time via the new mm build system.
+
 2009-08-25  Daniel Elstner  <danielk@openismus.com>
 
 	Build examples with $(GTKMM_CFLAGS)
