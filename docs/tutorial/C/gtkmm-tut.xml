@@ -16,6 +16,7 @@
   <!ENTITY szlig "&#223;" >
   <!ENTITY verbar "&#124;" >
   <!ENTITY copy "&#169;" >
+  <!ENTITY nbsp "&#160;" >
 ]>
 
 <!--
@@ -8163,8 +8164,8 @@ $ jhbuild sanitycheck</screen>
     <classname>GObject</classname>-based libraries. So it's quite easy to create
     additional gtkmm-style wrappers of other glib/GObject-based
     libraries.</para> 
-<para>This involves a variety of tools and some copying of existing build files,
-    but it does at least work, and has been used successfully by several
+<para>This involves a variety of tools, some of them crufty, but it does at
+    least work, and has been used successfully by several
     projects.</para>
 
 <sect1 id="sec-wrapping-build-structure">
@@ -8172,29 +8173,29 @@ $ jhbuild sanitycheck</screen>
 <para>Generation of the source code for a gtkmm-style wrapper API requires use
     of tools such as <command>gmmproc</command> and
     <filename>generate_wrap_init.pl</filename>. In theory you could write your
-    own build files to use these appropriately, but in practice it's usually
-    easier to simply copy an existing project and modify it for your needs. Note
-    however, that there is plenty of scope for improvement in the build
-    structure that we use, so try to copy the latest version, and feel free to
-    suggest improvements to make it more generic.</para>
+    own build files to use these appropriately, but a much better option is to
+    make use of the build infrastructure provided by the mm-common module. To
+    get started, it helps a lot to pick an existing binding module as an example
+    to look at.</para>
 <para>For instance, let's pretend that we are wrapping a C library called
     libexample. It provides a <classname>GObject</classname>-based API with
     types named, for instance, <classname>ExampleThing</classname> and
     <classname>ExampleStuff</classname>.</para>
 
-<sect2 id="copying-existing-project">
-<title>Copying an existing project</title>
+<sect2 id="copying-skeleton-project">
+<title>Copying the skeleton project</title>
 
-<para>Typically our wrapper library would be called libexamplemm. We can start by copying an existing *mm library, such as libgdamm, after checking it out from svn.
+<para>Typically our wrapper library would be called libsomethingmm. We can start by copying the <ulink url="http://git.gnome.org/cgit/mm-common/tree/skeletonmm">skeleton source tree</ulink> from the mm-common module.
 <programlisting>
-$ svn co svn.gnome.org/svn/gnomemm/libgdamm/trunk libsomethingmm
+  $ git clone git://git.gnome.org/mm-common
+  $ cp -a mm-common/skeletonmm libsomethingmm
 </programlisting>
 </para>
 <para>
     This provides a directory structure for the source .hg and .ccg files and
-    the generated .h and .cc files, with <filename>Makefile.am</filename>
-    fragments that can specify the various files in use, in terms of generic
-    <filename>Makefile.am</filename> variables. The directory structure usually
+    the generated .h and .cc files, with <filename>filelist.am</filename>
+    Automake include files that can specify the various files in use, in terms of generic
+    <filename>Automake</filename> variables. The directory structure usually
     looks like this, after we have renamed the directories appropriately:
 <itemizedlist>
     <listitem><para><filename>libsomethingmm</filename>: The top-level directory.</para>
@@ -8217,23 +8218,9 @@ $ svn co svn.gnome.org/svn/gnomemm/libgdamm/trunk libsomethingmm
 <para>As well as renaming the directories, we should rename some of the source
     files. For instance:
 <programlisting>
-$ mv libsomething/libgdamm-2.0.pc.in libsomething/libsomethingmm-1.0.pc.in
-$ mv libsomething/libgdammconfig.h.in libsomething/libsomethingmmconfig.h.in
-$ mv libsomething/libgdamm.h libsomething/libsomethingmm.h
-$
-$ mv libsomething/src/libgda.defs libsomething/src/libsomething.defs
-$ mv libsomething/src/libgda_enums.defs libsomething/src/libsomething_enums.defs
-$ mv libsomething/src/libgda_methods.defs libsomething/src/libsomething_methods.defs
-$ mv libsomething/src/libgda_others.defs libsomething/src/libsomething_others.defs
-$ mv libsomething/src/libgda_signals.defs libsomething/src/libsomething_signals.defs
-$ mv libsomething/src/libgda_vfuncs.defs libsomething/src/libsomething_vfuncs.defs
-$ mv libsomething/src/libgda_docs.xml libsomething/src/libsomething_docs.xml
-$ mv libsomething/src/libgda_docs_override.xml libsomething/src/libsomething_docs_override.xml
+  $ for f in $(find libsomethingmm -depth -name '*skeleton*'); do d="${f%/*}"; b="${f##*/}"; mv "$f" "$d/${b//skeleton/libsomething}"; done
 </programlisting>
-A multiple-file renaming tool, such as <command>prefixsuffix</command> might
-help with this. We will provide the contents of these files later.  In addition,
-if you started from an svn checkout, you'll probably want to get rid of all of
-the extra <filename>.svn</filename> directories in the source tree.
+A number of the skeleton file still need to be filled in with project-specific content later.
 </para>
 <para>
     Note that files ending in <filename>.in</filename> will be used to generate
@@ -8245,49 +8232,43 @@ the extra <filename>.svn</filename> directories in the source tree.
 <sect2 id="modifying-build-files">
 <title>Modifying build files</title>
 
-<para>Now we edit the files to adapt them to to our needs. You might prefer to
-    use a multiple-file search-replace too for this, such as
-    <command>regexxer</command>.</para>
+<para>Now we edit the files to adapt them to to our needs. You might prefer
+  to use a multiple-file search-replace utility for this, such as
+  <command>regexxer</command>.</para>
+<para>All mentions of <varname>skeleton</varname> should be replaced
+  by the correct name of the C library you are wrapping, such as
+  "something" or "libsomething". In the same manner, all instances of
+  <varname>SKELETON</varname> should be replaced by "SOMETHING" or
+  "LIBSOMETHING", and all occurrences of <varname>Skeleton</varname>
+  changed to "Something".</para>
+<para>Likewise, replace all instances of <varname>Joe&nbsp;Hacker</varname>
+  by the name of the intended copyright holder, which is probably you. Do the
+  same for the <varname>joe@example.com</varname> email address.</para>
 
-<sect3 id="modifying-autogen.sh">
-<title>autogen.sh</title>
-<para>For instance, in <filename>autogen.sh</filename>:
+<sect3 id="modifying-configure.ac">
+<title>configure.ac</title>
+<para>In <filename>configure.ac</filename>,
 <itemizedlist>
-    <listitem><para><varname>PKG_NAME</varname> must contain the new package
-            name, such as libexamplemm.</para></listitem>
-  <listitem><para>The test script lines must check for appropriate directory
-          names, such as <filename>$srcdir/libsomething/src</filename>.</para></listitem>
-</itemizedlist>
-</para>
-</sect3>
-
-<sect3 id="modifying-configure.in">
-<title>configure.in</title>
-<para>In <filename>configure.in</filename> (or <filename>configure.ac</filename>
-    in newer projects),
-<itemizedlist>
-    <listitem><para>The <function>AC_INIT()</function> line must mention a file
-            in our library. We can edit this later if we don't yet know the
-            names of any of the files that we will create.</para></listitem>
-    <listitem><para>The <varname>PACKAGE</varname> variable must be changed to
-            the correct name of the project, such as
-            libsomethingmm.</para></listitem>
-  <listitem><para>The version numbers should be reset to something small, such
-          as 0.0.1. You may want to rename the version variables if they are not
-          something generic. For instance, we would rename
-          <varname>LIBGDAMM_MAJOR_VERSION</varname> to
-          <varname>LIBSOMETHINGMM_MAJOR_VERSION</varname> or
-          <varname>LIBGENERICMM_MAJOR_VERSION</varname>.</para></listitem>
-  <listitem><para>The <function>AM_CONFIG_HEADER()</function> line must mention
-          the correctly named config header file.</para></listitem>
-  <listitem><para>The <function>PKG_CHECK_MODULES()</function> line must be modified to check for the
-          correct dependencies. For instance, it might be changed to
-          <code>PKG_CHECK_MODULES(LIBGENERICMM, gtkmm-2.4 &gt;= 2.6.0 libsomething-1.0
-          &gt;= 1.0.0).</code></para></listitem>
-  <listitem><para>The <function>AC_OUTPUT()</function> block must mention the correct directory
-          names, as described above.</para></listitem>
-  <listitem><para>The m4 script to generate doxygen input directory paths must
-          mention the correct directory.</para></listitem>
+  <listitem><para>The <function>AC_CONFIG_SRCDIR()</function> line must mention a file
+      in our source tree. We can edit this later if we don't yet know the
+      names of any of the files that we will create.</para></listitem>
+  <listitem><para>It is common for binding modules to track the version number
+      of the library they are wrapping. So, for instance, if the C library is
+      at version 1.23.4, then the initial version of the binding module would
+      be 1.23.0. However, avoid starting with an even minor version number as
+      that usually indicates a stable release.</para></listitem>
+  <listitem><para>The <function>AC_CONFIG_HEADERS()</function> line is used to
+      generate two or more configuration header files. The first header file
+      in the list contains all configuration macros which are set during the
+      configure run. The remaining headers in the list contain only a subset
+      of configuration macros and their corresponding <filename>configh.h.in</filename>
+      file will not be autogenerated. The reason for this separation is that
+      the namespaced configuration headers are installed with your library and
+      define publically visible macros.</para></listitem>
+  <listitem><para>The <function>AC_SUBST([SOMETHINGMM_MODULES], ['...'])</function>
+      line may need to be modified to check for the correct dependencies.</para></listitem>
+  <listitem><para>The <function>AC_CONFIG_FILES()</function> block must mention
+      the correct directory names, as described above.</para></listitem>
 </itemizedlist>
 </para>
 </sect3>
@@ -8295,114 +8276,73 @@ the extra <filename>.svn</filename> directories in the source tree.
 <sect3 id="modifying-makefile.am">
 <title>Makefile.am files</title>
 <para>Next we must adapt the various <filename>Makefile.am</filename> files:
-<itemizedlist>
-    <listitem><para>The top-level <filename>Makefile.am</filename> must mention
-            the correct child directory in the <varname>SUBDIRS</varname>
-            variable.</para></listitem>
-    <listitem><para>The <filename>libexample/Makefile.am</filename> must mention:</para>
-    <itemizedlist>
-        <listitem><para>The correct child directories in the <varname>SUBDIRS</varname> variable.</para></listitem>
-        <listitem><para>The correct filenames in <varname>EXTRA_DIST</varname>.</para></listitem>
-        <listitem><para>The correct filenames in
-                <varname>*_includedir</varname>,
-                <varname>*_include_HEADERS</varname>,
-                <varname>*_configdir</varname>, and
-                <varname>*_config_DATA</varname>.</para></listitem>
-    </itemizedlist>
-  </listitem>
-  <listitem><para>In <filename>libexample/libexamplemm/Makefile.am</filename> we
-          must mention the correct names in the generic variables that are used
-          elsewhere in the build system:</para>
+  <itemizedlist>
+    <listitem><para>In <filename>skeleton/skeletonmm/Makefile.am</filename> we
+            must mention the correct names in the generic variables that are used
+            elsewhere in the build system:</para>
+        <variablelist>
+            <varlistentry>
+                <term><varname>binding_name</varname></term>
+                <listitem><para>The name of the library, such as
+                        libsomethingmm.</para></listitem>
+            </varlistentry>
+            <varlistentry>
+                <term><varname>wrap_init_flags</varname></term>
+                <listitem><para>Additional command-line flags passed to the
+                    <filename>generate_wrap_init.pl</filename> script, such
+                    as the C++ namespace and the parent directory prefix of
+                    include files.</para></listitem>
+            </varlistentry>
+        </variablelist>
+    </listitem>
+    <listitem><para>In <filename>skeleton/skeletonmm/Makefile.am</filename> we
+            must mention the correct names in the generic variables that are used
+            elsewhere in the build system:</para>
       <variablelist>
-          <varlistentry>
-              <term><varname>sublib_name</varname></term>
-              <listitem><para>The name of the library, such as
-                      libsomethingmm.</para></listitem>
-          </varlistentry>
-          <varlistentry>
-              <term><varname>sublib_libname</varname></term>
-              <listitem><para>The versioned name of the library, such as
-                      libsomethingmm-1.0</para></listitem>
-          </varlistentry>
-          <varlistentry>
-              <term><varname>sublib_namespace</varname></term>
-              <listitem><para>The name of the C++ namespace to use for this
-                      library, such as Something.</para></listitem>
-          </varlistentry>
-          <varlistentry>
-              <term><varname>files_defs</varname></term>
-              <listitem><para>The list of .defs and
-                      <filename>*docs*.xml</filename> files.</para></listitem>
-          </varlistentry>
-          <varlistentry>
-              <term><varname>lib_LTLIBRARIES</varname></term>
-              <listitem><para>This variable must mention the correct library
-                      name, and this library name must be used to form the
-                      <varname>_SOURCES</varname>, <varname>_LDFLAGS</varname>,
-                      and <varname>_LIBADD</varname> variable
-                      names.</para></listitem>	
-          </varlistentry>
+        <varlistentry>
+          <term><varname>lib_LTLIBRARIES</varname></term>
+          <listitem><para>This variable must mention the correct library
+              name, and this library name must be used to form the
+              <varname>_SOURCES</varname>, <varname>_LDFLAGS</varname>, and
+              <varname>_LIBADD</varname> variable names. It is permissible to
+              use variables substituted by <filename>configure</filename> like
+              <varname>@SOMETHINGMM_API_VERSION@</varname> as part of the
+              variable names.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><varname>AM_CPPFLAGS</varname></term>
+          <listitem><para>The command line options passed to the C
+              preprocessor.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><varname>AM_CXXFLAGS</varname></term>
+          <listitem><para>The command line options passed to the C++
+              compiler.</para></listitem>
+        </varlistentry>
       </variablelist>
-  </listitem>
-  <listitem><para>In <filename>libexample/libexamplemm/private/Makefile.am</filename>, <varname>private_includedir</varname> must contain the correct path.</para></listitem>
-  <listitem><para>In <filename>examples/Makefile.am_fragment</filename>,
-          <varname>local_libgenericmm_lib</varname> and
-          <varname>all_includes</varname> must contain the correct
-          paths.</para></listitem>
-  <listitem><para>In <filename>libexample/src/Makefile.am</filename> we must set
-          some more generic variables:</para>
-      <variablelist>
-          <varlistentry>
-              <term><varname>sublib_name</varname></term>
-              <listitem><para>The name of the library, as in <filename>libexample/libexamplemm/Makefile.am</filename>.</para></listitem>
-          </varlistentry>
-          <varlistentry>
-              <term><varname>sublib_namespace</varname></term>
-              <listitem><para>The name of the C++ namespace, as in <varname>libexample/libexamplemm/Makefile.am</varname></para></listitem>
-          </varlistentry>
-          <varlistentry>
-              <term><varname>sublib_parentdir</varname></term>
-              <listitem><para>The name of the directory containing the generated files, such as libexamplemm.</para></listitem>
-          </varlistentry>
-          <varlistentry>
-              <term><varname>files_defs</varname></term>
-              <listitem><para>The list of .defs and <filename>*docs*.xml</filename> files.</para></listitem>	
-          </varlistentry>
-      </variablelist>
-  </listitem>
-  <listitem><para>In
-          <filename>build_shared/Makefile_gensrc.am_fragment</filename>, you
-          should remove the --namespace=Gnome option from the
-          <varname>gen_wrap_init_args</varname> variable if your namespace will
-          not be under the Gnome namespace. This should be the only place that
-          you need to edit the generic <filename>build_shared/</filename> files.</para></listitem>
-</itemizedlist>
+    </listitem>
+  </itemizedlist>
 </para>
 </sect3>
 
 <sect3 id="creating-hg-ccg">
 <title>Creating .hg and .ccg files</title>
 <para>We should now create our first .hg and .ccg files, to wrap one of the
-    objects in the C library. We will delete any existing .hg and .ccg files:
-<programlisting>
-$ rm -rf libexample/src/*.hg
-$ rm -rf libexample/src/*.ccg
-</programlisting>
-and create new files:
-<programlisting>
-$ touch libexample/src/thing.hg
-$ touch libexample/src/thing.ccg
-</programlisting>
-</para>
-<para>We must mention all of our .hg and .ccg files in the
-    <filename>libexample/src/Makefile_list_of_hg.am_fragment</filename> file, in
-    the <varname>files_hg</varname> variable.</para>
-<para>Any extra non-generated .h and .cc source files may be placed in
-    <filename>libexample/libexamplemm/</filename> and mentioned in
-    <filename>libexample/libexamplemm/Makefile.am</filename>, in the
-    <varname>files_extra_h</varname> and <varname>files_extra_cc</varname>
-    variables.</para>
-<para>In the <link linkend="sec-wrapping-hg-files">.hg and .ccg files</link> section you can learn about the syntax used in these files.</para>
+  objects in the C library. One pair of example source files already exists:
+  <filename>skeleton.ccg</filename> and <filename>skeleton.hg</filename>.
+  Create copies of these files as necessary.</para>
+<para>We must mention all of our <filename>.hg</filename> and
+  <filename>.ccg</filename> files in the
+  <filename>skeleton/src/filelist.am</filename> file, typically in the
+  <varname>files_hg</varname> variable.</para>
+<para>Any extra non-generated <filename>.h</filename> and
+  <filename>.cc</filename> source files may be placed in
+  <filename>skeleton/skeletonmm/</filename> and listed in
+  <filename>skeleton/skeletonmm/filelist.am</filename>, typically in the
+  <varname>files_extra_h</varname> and <varname>files_extra_cc</varname>
+  variables.</para>
+<para>In the <link linkend="sec-wrapping-hg-files">.hg and .ccg files</link>
+  section you can learn about the syntax used in these files.</para>
 </sect3>
 </sect2>
 </sect1>

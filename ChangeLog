@@ -1,3 +1,11 @@
+2009-09-07  Daniel Elstner  <danielk@openismus.com>
+
+	Update the new bindings chapter for mm-common
+
+	* docs/tutorial/C/gtkmm-tut.xml: Update the chapter on the creation
+	of new binding modules to document the new build infrastructure and
+	skeleton project provided with mm-common.
+
 2009-09-04  Murray Cumming  <murrayc@murrayc.com>
 
 	Link to library.gnome.org.
