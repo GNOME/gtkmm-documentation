@@ -1,7 +1,7 @@
-docbook_docs = gtkmm-faq.xml
+## This file is part of gtkmm-documentation.
 
-include $(top_srcdir)/docs/Makefile_web.am_fragment
-gtkmm_faq_path  = $(web_path_docs)FAQ
+gtkmm_docdir = $(datadir)/doc/gtkmm-2.4
+docbook_docs = gtkmm-faq.xml
 
 EXTRA_DIST = README gtkmm-faq.xml html
 
@@ -13,8 +13,8 @@ html/index.html: $(docbook_docs)
 	$(mkinstalldirs) html
 	xsltproc -o html/ --catalogs $(DOCBOOK_STYLESHEET) $<
 
-post-html: html/index.html
-	rsync $(rsync_args) -r html $$USER@$(web_host):$(gtkmm_faq_path)/
+#post-html: html/index.html
+#	rsync $(rsync_args) -r html $$USER@$(web_host):$(gtkmm_faq_path)/
 
 doc-clean:
 	-rm -rf html

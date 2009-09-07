@@ -1,5 +1,16 @@
 2009-09-07  Daniel Elstner  <danielk@openismus.com>
 
+	Install files into ${datadir}/doc/gtkmm-2.4
+
+	* docs/{FAQ,tutorial}/Makefile.am: Remove include statement for
+	Makefile_web.am_fragment.
+	(gtkmm_docdir): Set to $(datadir)/doc/gtkmm-2.4, without the /docs
+	suffix, in order to match the new installation location of the
+	reference documentation.
+	* docs/Makefile_web.am_fragment: Delete obsolete file.
+
+2009-09-07  Daniel Elstner  <danielk@openismus.com>
+
 	Update the new bindings chapter for mm-common
 
 	* docs/tutorial/C/gtkmm-tut.xml: Update the chapter on the creation

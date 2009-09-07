@@ -1,6 +1,6 @@
-include $(top_srcdir)/docs/Makefile_web.am_fragment
+## This file is part of gtkmm-documentation.
 
-gtkmm_tut_path = $(web_path_docs)tutorial
+gtkmm_docdir = $(datadir)/doc/gtkmm-2.4
 
 DOCBOOK_PHPWEBNOTES_TRANSFORM = docbook_phpwebnotes.xsl
 
