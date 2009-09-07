@@ -7251,7 +7251,7 @@ first see a blank window, into which the widgets will be gradually drawn.
 </chapter>
 
 <chapter id="chapter-contributing">
-<title>Contributing </title>
+<title>Contributing</title>
 
 <para>
 This document, like so much other great software out there, was
@@ -7261,8 +7261,8 @@ consider contributing to this document.
 </para>
 <para>
 Ideally, we would like you to <ulink url="http://www.gtkmm.org/bugs.shtml">provide a patch</ulink> to the
-<filename>docs/tutorial/gtkmm-tut.xml</filename> file.  This file is currently
-in the <literal>gtkmm</literal> module in GNOME svn.
+<filename>docs/tutorial/C/gtkmm-tut.xml</filename> file.  This file is currently
+in the <literal>gtkmm-documentation</literal> module in GNOME git.
 </para>
 
 <para>

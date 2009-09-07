@@ -1,5 +1,13 @@
 2009-09-07  Daniel Elstner  <danielk@openismus.com>
 
+	Update reference to the gtkmm-tut.xml file
+
+	* docs/tutorial/C/gtkmm-tut.xml (chapter-contributing): Correct
+	location of the gtkmm-tut.xml file in the paragraph explaining how
+	to contribute to the documentation.
+
+2009-09-07  Daniel Elstner  <danielk@openismus.com>
+
 	Do not check for unused C library functions
 
 	* configure.ac (AC_CHECK_FUNCS): Do not check for the library
