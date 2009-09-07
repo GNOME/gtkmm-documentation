@@ -1,5 +1,12 @@
 2009-09-07  Daniel Elstner  <danielk@openismus.com>
 
+	Update changed author email addresses
+
+	* AUTHORS: Correct the email addresses of Murray Cumming and
+	Daniel Elstner.
+
+2009-09-07  Daniel Elstner  <danielk@openismus.com>
+
 	Install files into ${datadir}/doc/gtkmm-2.4
 
 	* docs/{FAQ,tutorial}/Makefile.am: Remove include statement for
