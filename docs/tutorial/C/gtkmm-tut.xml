@@ -8220,7 +8220,7 @@ $ jhbuild sanitycheck</screen>
 <programlisting>
   $ for f in $(find libsomethingmm -depth -name '*skeleton*'); do d="${f%/*}"; b="${f##*/}"; mv "$f" "$d/${b//skeleton/libsomething}"; done
 </programlisting>
-A number of the skeleton file still need to be filled in with project-specific content later.
+A number of the skeleton files must still be filled in with project-specific content later.
 </para>
 <para>
     Note that files ending in <filename>.in</filename> will be used to generate
