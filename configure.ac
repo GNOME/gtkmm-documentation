@@ -21,7 +21,7 @@ PKG_CHECK_MODULES([GTKMM], [gtkmm-2.4 >= 2.16.0])
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
 
 AC_LANG([C++])
-AC_CHECK_FUNCS([mkfifo flockfile funlockfile getc_unlocked])
+AC_CHECK_FUNCS([mkfifo])
 
 MM_ARG_ENABLE_WARNINGS([EXAMPLES_WXXFLAGS],
                        [-Wall],

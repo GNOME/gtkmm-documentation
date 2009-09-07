@@ -1,5 +1,13 @@
 2009-09-07  Daniel Elstner  <danielk@openismus.com>
 
+	Do not check for unused C library functions
+
+	* configure.ac (AC_CHECK_FUNCS): Do not check for the library
+	functions flockfile(), funlockfile() and getc_unlocked(), because
+	they are not used in any example program.
+
+2009-09-07  Daniel Elstner  <danielk@openismus.com>
+
 	Bump version to 2.17.0 and update news
 
 	* configure.ac (AC_INIT): Increment version number to 2.17.0.
