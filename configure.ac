@@ -1,7 +1,7 @@
 ## This file is part of gtkmm-documentation.
 
 AC_PREREQ([2.59])
-AC_INIT([gtkmm-documentation], [2.16.0], [http://bugzilla.gnome.org/enter_bug.cgi?product=gtkmm],
+AC_INIT([gtkmm-documentation], [2.17.0], [http://bugzilla.gnome.org/enter_bug.cgi?product=gtkmm],
         [gtkmm-documentation], [http://www.gtkmm.org/])
 
 AC_CONFIG_SRCDIR([examples/book/box/packbox.cc])
@@ -9,7 +9,7 @@ AC_CONFIG_AUX_DIR([build])
 AC_CONFIG_MACRO_DIR([build])
 AC_CONFIG_HEADERS([build/config.h])
 
-AM_INIT_AUTOMAKE([1.9 -Wno-portability dist-bzip2 no-define nostdinc tar-pax])
+AM_INIT_AUTOMAKE([1.9 -Wno-portability check-news dist-bzip2 no-define nostdinc tar-pax])
 AM_MAINTAINER_MODE
 AC_ARG_VAR([ACLOCAL_FLAGS], [aclocal flags, e.g. -I <macro dir>])
 

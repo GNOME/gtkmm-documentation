@@ -1,5 +1,13 @@
 2009-09-07  Daniel Elstner  <danielk@openismus.com>
 
+	Bump version to 2.17.0 and update news
+
+	* configure.ac (AC_INIT): Increment version number to 2.17.0.
+	(AM_INIT_AUTOMAKE): Add check-news option.
+	* NEWS: Write news entry for gtkmm-documentation 2.17.0.
+
+2009-09-07  Daniel Elstner  <danielk@openismus.com>
+
 	Update changed author email addresses
 
 	* AUTHORS: Correct the email addresses of Murray Cumming and

@@ -1,3 +1,12 @@
+2.17.0:
+
+* A number of example programs have been corrected.
+* All libglademm examples have been removed in favor of Gtk::Builder.
+* The build system is now largely based on non-recursive make.
+* The source archive now ships with the generated HTML files of the tutorial.
+* The appendix in the tutorial on the creation of new C++ binding modules
+  has been updated for the new mm-common build infrastructure.
+
 2.16.0:
 
 * Added entry/progress and entry/icon examples, just to test that API.
