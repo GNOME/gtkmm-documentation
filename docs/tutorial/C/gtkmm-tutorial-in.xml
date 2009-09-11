@@ -28,7 +28,7 @@ desired (e.g. boldface, monospace, etc) to make it stand out as the project
 name
 -->
 
-<book>
+<book id="index">
 
   <bookinfo>
 

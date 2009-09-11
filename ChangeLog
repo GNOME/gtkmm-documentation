@@ -1,5 +1,13 @@
 2009-09-11  Daniel Elstner  <danielk@openismus.com>
 
+	Set id="index" attribute of element <book>
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml (book): Set attribute
+	id="index" because the Docbook XSLT script for library.gnome.org
+	requires it in order for the index.html file to be generated.
+
+2009-09-11  Daniel Elstner  <danielk@openismus.com>
+
 	Rename GNOME doc module to gtkmm-tutorial
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Rename file from
