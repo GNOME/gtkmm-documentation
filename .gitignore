@@ -11,6 +11,6 @@ stamp-h?
 /configure.lineno
 /docs/FAQ/html/
 /docs/tutorial/html/
-/docs/tutorial/*/gtkmm-tut-with-examples.xml
+/docs/tutorial/*/gtkmm-tutorial.xml
 /docs/tutorial/*/*.[mp]o
 /gtkmm-documentation-*.tar.*

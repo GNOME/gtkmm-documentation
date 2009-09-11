@@ -1,3 +1,18 @@
+2009-09-11  Daniel Elstner  <danielk@openismus.com>
+
+	Rename GNOME doc module to gtkmm-tutorial
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Rename file from
+	gtkmm-tut.xml, and substitute references to the filename in
+	the content.
+	* docs/tutorial/Makefile.am: Rename the intermediate file
+	gtkmm-tut.xml to gtkmm-tutorial-in.xml.
+	(DOC_MODULE): Rename the ugly gtkmm-tut-with-examples to
+	gtkmm-tutorial, since it will be visible as part of the URL
+	on library.gnome.org.  Adjust references accordingly.
+	* docs/tutorial/README: Reference new tutorial filename.
+	* docs/tutorial/docbook_phpwebnotes.xsl: ditto.
+
 2009-09-07  Daniel Elstner  <danielk@openismus.com>
 
 	Update reference to the gtkmm-tut.xml file

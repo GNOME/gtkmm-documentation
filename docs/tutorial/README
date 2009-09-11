@@ -1,4 +1,4 @@
-gtkmm-tut.xml is a gtkmm tutorial in DocBook XML format.
+gtkmm-tutorial-in.xml is a gtkmm tutorial in DocBook XML format.
 
 You can build the html by typing
 make html

@@ -11,7 +11,7 @@ set XML_DEBUG_CATALOG=1
 
 <!--
 xsltproc command line:
-xsltproc -o html/ -xinclude docbook_phpwebnotes.xsl gtkmm-tut-with-examples.xml
+xsltproc -o html/ -xinclude docbook_phpwebnotes.xsl gtkmm-tutorial.xml
 -->
 
 <!-- set 'html.ext' to '.php' -->

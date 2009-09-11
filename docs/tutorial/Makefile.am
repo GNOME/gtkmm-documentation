@@ -11,14 +11,14 @@ DOCBOOK_PHPWEBNOTES_TRANSFORM = docbook_phpwebnotes.xsl
 vpath_srclist = $(patsubst $(srcdir)/%,%,$(wildcard $(addprefix $(srcdir)/,$(1))))
 vpath_listall = $(sort $(wildcard $(1)) $(if $(srcdir:.=),$(vpath_srclist)))
 
-EXTRA_DIST = README insert_example_code.pl C/gtkmm-tut.xml C/gtkmm-tut-with-examples.xml $(DOCBOOK_PHPWEBNOTES_TRANSFORM)
+EXTRA_DIST = README insert_example_code.pl C/gtkmm-tutorial-in.xml C/gtkmm-tutorial.xml $(DOCBOOK_PHPWEBNOTES_TRANSFORM)
 
 DOCBOOK_STYLESHEET ?= http://docbook.sourceforge.net/release/xsl/current/html/chunk.xsl
 XMLLINT = xmllint
 XSLTPROC = xsltproc
 DB2PDF = docbook2pdf
 
-DOC_MODULE = gtkmm-tut-with-examples
+DOC_MODULE = gtkmm-tutorial
 DOC_ENTITIES =
 DOC_INCLUDES =
 DOC_FIGURES =					\
@@ -92,6 +92,9 @@ DOC_LINGUAS = de
 DISTCLEANFILES = html/*.html
 MAINTAINERCLEANFILES = $(srcdir)/html/*.html
 
+# Set the use.id.as.filename param so that we don't use the chapter / section
+# number as the filename, otherwise the url will change every time anything is
+# re-ordered or inserted in the documentation
 xslt_params = $(strip						\
 	--param       toc.section.depth		1		\
 	--stringparam html.stylesheet		'style.css'	\
@@ -134,7 +137,7 @@ include $(top_srcdir)/build/gnome-doc-utils.make
 
 dist-hook: doc-dist-hook
 
-all-local: $(addsuffix /gtkmm-tut-with-examples.xml,C $(DOC_LINGUAS)) html/index.html
+all-local: $(addsuffix /gtkmm-tutorial.xml,C $(DOC_LINGUAS)) html/index.html
 
 install-data-local: install-tutorial
 
@@ -153,10 +156,7 @@ uninstall-tutorial:
 
 # Create a html generation of the C locale's version of the DocBook, 
 # using our custom stylesheet and graphics:
-# Set the use.id.as.filename param so that we don't use the chapter / section
-# number as the filename, otherwise the url will change every time anything is
-# re-ordered or inserted in the documentation
-html/index.html: $(srcdir)/C/gtkmm-tut-with-examples.xml
+html/index.html: $(srcdir)/C/gtkmm-tutorial.xml
 	rm -fr html
 	$(MKDIR_P) html
 	$(XSLTPROC) $(xslt_params) -o html/ --xinclude --catalogs '$(DOCBOOK_STYLESHEET)' $<
@@ -166,28 +166,18 @@ html/index.html: $(srcdir)/C/gtkmm-tut-with-examples.xml
 html/%: | html/index.html
 
 # Create a DocBook source file that doesn't have the examples' comments blocks:
-$(srcdir)/C/gtkmm-tut-with-examples.xml: $(srcdir)/C/gtkmm-tut.xml $(srcdir)/insert_example_code.pl
+$(srcdir)/C/gtkmm-tutorial.xml: $(srcdir)/C/gtkmm-tutorial-in.xml $(srcdir)/insert_example_code.pl
 	$(PERL) -- $(srcdir)/insert_example_code.pl $(top_srcdir)/examples/book $< >$@
 
-validate_original: $(srcdir)/C/gtkmm-tut.xml
+validate_original: $(srcdir)/C/gtkmm-tutorial-in.xml
 	$(XMLLINT) --xinclude --postvalid --noout $<
 
-validate: $(srcdir)/C/gtkmm-tut-with-examples.xml
+validate: $(srcdir)/C/gtkmm-tutorial.xml
 	$(XMLLINT) --xinclude --postvalid --noout $<
-
-#gtkmm-tut-html.tar.gz: html/index.html
-#	tar cf - C/figures html | gzip -c --best >$@
-
-#post-html: html/index.html html/style.css pdf
-#	rsync $(rsync_args) C/figures/*.png $$USER@$(web_host):$(gtkmm_tut_path)/figures/
-#	rsync $(rsync_args) icons/*.png $$USER@$(web_host):$(gtkmm_tut_path)/icons/
-#	rsync $(rsync_args) -r html/ $$USER@$(web_host):$(gtkmm_tut_path)/html/
-#	rsync $(rsync_args) *.css $$USER@$(web_host):$(gtkmm_tut_path)/html/
-#	rsync $(rsync_args) -r pdf/ $$USER@$(web_host):$(gtkmm_tut_path)/pdf/
 
 # we need to produce a full examples with all of the XIncludes done so that it
 # can processed for PDF
-C/programming-with-gtkmm-pdf.xml: $(srcdir)/C/gtkmm-tut-with-examples.xml
+C/programming-with-gtkmm-pdf.xml: $(srcdir)/C/gtkmm-tutorial.xml
 	$(MKDIR_P) C
 	$(XMLLINT) --xinclude --postvalid $< -o $@
 
@@ -197,12 +187,6 @@ C/programming-with-gtkmm-pdf.xml: $(srcdir)/C/gtkmm-tut-with-examples.xml
 pdf/programming-with-gtkmm-pdf.pdf: C/programming-with-gtkmm-pdf.xml
 	$(MKDIR_P) pdf
 	$(DB2PDF) --output pdf/ $<
-
-#pdf: pdf/programming-with-gtkmm-pdf.pdf
-
-#doc-clean:
-#	-rm -f C/gtkmm-tut-with-examples.xml gtkmm-tut-html.tar.gz C/programming-with-gtkmm-pdf.xml
-#	-rm -rf pdf
 
 .PHONY: install-tutorial uninstall-tutorial
 

@@ -7261,7 +7261,7 @@ consider contributing to this document.
 </para>
 <para>
 Ideally, we would like you to <ulink url="http://www.gtkmm.org/bugs.shtml">provide a patch</ulink> to the
-<filename>docs/tutorial/C/gtkmm-tut.xml</filename> file.  This file is currently
+<filename>docs/tutorial/C/gtkmm-tutorial-in.xml</filename> file.  This file is currently
 in the <literal>gtkmm-documentation</literal> module in GNOME git.
 </para>
 
