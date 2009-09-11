@@ -1,5 +1,12 @@
 2009-09-11  Daniel Elstner  <danielk@openismus.com>
 
+	Bump version to 2.17.1 and update news
+
+	* configure.ac (AC_INIT): Increment version number to 2.17.1.
+	* NEWS: Write news entry for the 2.17.1 release.
+
+2009-09-11  Daniel Elstner  <danielk@openismus.com>
+
 	Set id="index" attribute of element <book>
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml (book): Set attribute

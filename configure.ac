@@ -1,7 +1,8 @@
 ## This file is part of gtkmm-documentation.
 
 AC_PREREQ([2.59])
-AC_INIT([gtkmm-documentation], [2.17.0], [http://bugzilla.gnome.org/enter_bug.cgi?product=gtkmm],
+AC_INIT([gtkmm-documentation], [2.17.1],
+        [http://bugzilla.gnome.org/enter_bug.cgi?product=gtkmm],
         [gtkmm-documentation], [http://www.gtkmm.org/])
 
 AC_CONFIG_SRCDIR([examples/book/box/packbox.cc])
