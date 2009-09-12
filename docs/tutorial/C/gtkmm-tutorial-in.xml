@@ -28,6 +28,7 @@ desired (e.g. boldface, monospace, etc) to make it stand out as the project
 name
 -->
 
+<!-- The XSL for library.gnome.org requires this id. -->
 <book id="index">
 
   <bookinfo>
