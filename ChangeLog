@@ -1,5 +1,11 @@
 2009-09-14  Daniel Elstner  <danielk@openismus.com>
 
+	Enable verbose output of autoreconf
+
+	* autogen.sh: Pass the --verbose option to autoreconf.
+
+2009-09-14  Daniel Elstner  <danielk@openismus.com>
+
 	Clarify that all skeleton files need editing
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Globally remove trailing
