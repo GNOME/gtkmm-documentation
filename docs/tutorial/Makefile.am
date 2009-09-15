@@ -52,6 +52,7 @@ DOC_FIGURES =					\
 	figures/drawingarea_lines.png		\
 	figures/drawingarea_text.png		\
 	figures/entry.png			\
+	figures/entry_completion.png		\
 	figures/eventbox.png			\
 	figures/expander.png			\
 	figures/filechooserbutton.png		\

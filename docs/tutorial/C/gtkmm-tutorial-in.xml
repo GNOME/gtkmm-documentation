@@ -1129,13 +1129,11 @@ makes use of the Frame widget to better demonstrate the label styles.
 <sect1 id="sec-text-entry">
 <title>Entry</title>
 
-<para>
-Entry widgets allow the user to enter text (surprisingly
-enough).
-</para>
+<sect2 id="sec-text-entry-simple">
+<title>Simple Use</title>
 
 <para>
-You can change the contents with the <methodname>set_text()</methodname> method,
+Entry widgets allow the user to enter text. You can change the contents with the <methodname>set_text()</methodname> method,
 and read the current contents with the <methodname>get_text()</methodname> method.
 </para>
 
@@ -1147,7 +1145,7 @@ read-only.  This can be done by passing <literal>false</literal> to the
 
 <para>
 For the input of passwords, passphrases and other information you don't want
-echoed on the screen,  calling <methodname>set_visibility()</methodname> with
+echoed on the screen, calling <methodname>set_visibility()</methodname> with
 <literal>false</literal> will cause the text to be hidden.
 </para>
 
@@ -1163,23 +1161,122 @@ or filter the text the user types.
 
 <para><ulink url="&url_refdocs_base_gtk;Entry.html">Reference</ulink></para>
 
-<sect2 id="entry-example"><title>Example</title>
+<sect3 id="entry-example"><title>Simple Entry Example</title>
 <para>
-Here is an example using <classname>Gtk::Entry</classname>.  As well as a
-<classname>Gtk::Entry</classname> widget, it has two
+This example uses <classname>Gtk::Entry</classname>.  It also has two
 <classname>CheckButton</classname>s, with which you can toggle the editable and
 visible flags.
 </para>
 
-<figure id="figure-entry">
+<figure id="figure-entry-simple">
   <title>Entry</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;entry.png"/>
   </screenshot>
 </figure>
 
-<para><ulink url="&url_examples_base;entry">Source Code</ulink></para>
+<para><ulink url="&url_examples_base;entry/simple">Source Code</ulink></para>
 
+</sect3>
+
+</sect2>
+
+<sect2 id="sec-text-entry-completion">
+<title>Entry Completion</title>
+<para>A <classname>Entry</classname> widget can offer a drop-down list of 
+pre-existing choices based on the first few characters typed by the user. For 
+instance, a search dialog could suggest text from previous searches. 
+</para>
+
+<para>To enable this functionality, you must create a 
+<classname>EntryCompletion</classname> object, and provide it to the 
+<classname>Entry</classname> widget via the 
+<methodname>set_completion()</methodname> method.</para>
+
+<para>The <classname>EntryCompletion</classname> may use a 
+<classname>TreeModel</classname> containing possible entries, specified with 
+<methodname>set_model()</methodname>. You should then call 
+<methodname>set_text_column()</methodname> to specify which of your model columns 
+should be used to match possible text entries.</para>
+
+<para>Alternatively, if a complete list of possible entries 
+would be too large or too inconvenient to generate, a callback slot may instead 
+be specified with <methodname>set_match_func()</methodname>. That callback 
+function. This is also useful if you wish to match on a part of the string other 
+than the start.</para>
+
+<para><ulink url="&url_refdocs_base_gtk;EntryCompletion.html">Reference</ulink></para>
+
+<sect3 id="entry-completion-example"><title>Entry Completion Example</title>
+<para>
+This example creates a <classname>Gtk::EntryCompletion</classname> and associates 
+it with a <classname>Gtk::Entry</classname> widget. The completion uses a 
+<classname>Gtk::TreeModel</classname> of possible entries, and some additional 
+actions.
+</para>
+
+<figure id="figure-entry-completion">
+  <title>Entry Completion</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;entry_completion.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;entry/completion">Source Code</ulink></para>
+
+</sect3>
+</sect2>
+
+<sect2 id="sec-text-entry-icons">
+<title>Entry Icons</title>
+<para>An <classname>Entry</classname> widget can show an icon at the start or 
+end of the text area. The icon can be specifed by methods such as 
+<methodname>set_icon_from_pixbuf()</methodname> or 
+<methodname>set_icon_from_stock()</methodname>. An application can respond to the 
+user pressing the icon by handling the 
+<methodname>signal_icon_press</methodname> signal.</para>
+
+<sect3 id="entry-icon-example"><title>Entry Icon Example</title>
+<para>
+This example shows a <classname>Gtk::Entry</classname> widget with a stock 
+search icon, and prints text to the terminal when the icon is pressed.
+</para>
+
+<figure id="figure-entry-icon">
+  <title>Entry with Icon</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;entry_icon.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;entry/icon">Source Code</ulink></para>
+
+</sect3>
+</sect2>
+
+<sect2 id="sec-text-entry-progress">
+<title>Entry Progress</title>
+<para>An <classname>Entry</classname> widget can show a progress bar inside the 
+text area, under the entered text. The progress bar will be shown if the 
+<methodname>set_progress_fraction()</methodname> or 
+<methodname>set_progress_pulse_step()</methodname> methods are called.</para>
+
+<sect3 id="entry-progress-example"><title>Entry Progress Example</title>
+<para>
+This example shows a <classname>Gtk::Entry</classname> widget with a progress  
+bar.
+</para>
+
+<figure id="figure-entry-progress">
+  <title>Entry with Progress Bar</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;entry_progress.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;entry/progress">Source Code</ulink></para>
+
+</sect3>
 </sect2>
 
 </sect1>

@@ -27,9 +27,9 @@ ExampleWindow::ExampleWindow() :
   set_title("Gtk::EntryCompletion");
 
   add(m_VBox);
-  m_VBox.pack_start(m_Entry);
+  m_VBox.pack_start(m_Entry, Gtk::PACK_SHRINK);
 
-  m_VBox.pack_start(m_Label, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_Label, Gtk::PACK_EXPAND_WIDGET);
 
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
@@ -80,8 +80,8 @@ ExampleWindow::ExampleWindow() :
   //completions.
 
   //Remember them for later.
-  m_CompletionActions[0] = "use wizard";
-  m_CompletionActions[1] = "browse for filename";
+  m_CompletionActions[0] = "Use Wizard";
+  m_CompletionActions[1] = "Browse for Filename";
 
   for(type_actions_map::iterator iter = m_CompletionActions.begin();
           iter != m_CompletionActions.end(); ++iter)
@@ -107,7 +107,7 @@ void ExampleWindow::on_button_close()
 }
 
 /* You can do more complex matching with a handler like this.
- * For instance, you could check for substrings inside th string instead of the start,
+ * For instance, you could check for substrings inside the string instead of the start,
  * or you could look for the key in extra model columns as well as the model column that will be displayed.
  * The code here is not actually more complex - it's a reimplementation of the default behaviour.
  *

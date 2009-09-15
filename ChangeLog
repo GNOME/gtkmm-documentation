@@ -1,3 +1,16 @@
+2009-09-15  Murray Cumming  <murrayc@murrayc-desktop>
+
+	Entry: Mention Completion, Icons, and Progress.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Entry: Move the existing 
+	text and example into a Simple Use sect2 and add sect2 sections for 
+	Completion, Icon, and Progress, using the examples that I already 
+	added a while ago.
+	* docs/tutorial/Makefile.am:
+	* docs/tutorial/C/figures/entry_completion.png:
+	* docs/tutorial/C/figures/entry_icon.png:
+	* docs/tutorial/C/figures/entry_progress.png: Added screenshots.
+
 2009-09-15  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Introduction: Slightly 
