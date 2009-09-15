@@ -7,10 +7,8 @@
   <!ENTITY url_refdocs_base_gtk "&url_refdocs_base_gtk_html;classGtk_1_1">
   <!ENTITY url_refdocs_base_gtk_namespace "&url_refdocs_base_gtk_html;namespaceGtk_1_1">
   <!ENTITY url_figures_base "figures/">
-  <!ENTITY path_examples_others_base "../../examples/others/">
-  <!ENTITY url_examples_others_base "../&path_examples_others_base;">
-  <!ENTITY path_examples_base "../../examples/book/">
-  <!ENTITY url_examples_base "../&path_examples_base;">
+  <!ENTITY url_examples_others_base "http://git.gnome.org/cgit/gtkmm-documentation/tree/examples/others/">
+  <!ENTITY url_examples_base "http://git.gnome.org/cgit/gtkmm-documentation/tree/examples/book/">
   <!ENTITY gtkmm "<application>gtkmm</application>">
   <!ENTITY uuml "&#252;" >
   <!ENTITY szlig "&#223;" >

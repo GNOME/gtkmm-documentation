@@ -1,6 +1,15 @@
+2009-09-15  Daniel Elstner  <danielk@openismus.com>
+
+	Make example code file links point to cgit
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml (url_examples_others_base):
+	Point to the example code accessible via the cgit web interface of
+	git.gnome.org.
+	(url_examples_base): ditto.
+
 2.17.2:
 
-2009-09-15  Murray Cumming  <murrayc@murrayc-desktop>
+2009-09-15  Murray Cumming  <murrayc@murrayc.com>
 
 	Entry: Mention Completion, Icons, and Progress.
 
