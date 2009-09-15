@@ -1,5 +1,13 @@
 2009-09-15  Daniel Elstner  <danielk@openismus.com>
 
+	Install figures/ and icons/ below tutorial/html/
+
+	* docs/tutorial/Makefile.am (tutorial_{figuresdir,iconsdir}):
+	Install figures and icons into subdirectories of tutorial/html/
+	so that the relative links in the HTML files work.
+
+2009-09-15  Daniel Elstner  <danielk@openismus.com>
+
 	Make example code file links point to cgit
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml (url_examples_others_base):

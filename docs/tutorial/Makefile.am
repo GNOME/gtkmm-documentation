@@ -113,8 +113,8 @@ xslt_params = $(strip						\
 
 tutorialdir         = $(gtkmm_docdir)/tutorial
 tutorial_htmldir    = $(tutorialdir)/html
-tutorial_figuresdir = $(tutorialdir)/figures
-tutorial_iconsdir   = $(tutorialdir)/icons
+tutorial_figuresdir = $(tutorial_htmldir)/figures
+tutorial_iconsdir   = $(tutorial_htmldir)/icons
 
 tutorial_html_files = $(call vpath_listall,html/*.html) style.css
 tutorial_html_inst  = $(foreach\
