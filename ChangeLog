@@ -1,3 +1,9 @@
+2009-09-15  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Introduction: Slightly 
+	improve the text and copy into the <abstract>, so it has a sane 
+	description on library.gnome.org.
+
 2009-09-14  Daniel Elstner  <danielk@openismus.com>
 
 	Enable verbose output of autoreconf

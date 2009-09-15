@@ -93,12 +93,8 @@ name
 
     <abstract>
 
-      <para>
-        We very much appreciate any reports of inaccuracies or other errors in
-        this document.  Contributions are also most welcome.  Post your
-        suggestions, critiques or addenda to the <ulink
-          url="mailto:gtkmm-list@gnome.org">&gtkmm; mailing list</ulink> -- The
-        &gtkmm; Development Team
+      <!-- This text is copied from the introduction. --> 
+      <para>This book explains key concepts of the &gtkmm; C++ API for creating user interfaces. It also introduces the main user interface elements ("widgets").
       </para>
 
     </abstract>
@@ -126,16 +122,9 @@ name
 <sect1 id="sec-this-book">
 <title>This book</title>
 
-<para>This book assumes a good
-understanding of C++, and how to create C++ programs.
-</para>
+<para>This book explains key concepts of the &gtkmm; C++ API for creating user interfaces. It also introduces the main user interface elements ("widgets"). Although it mentions classes, constructors, and methods, it does not go into great detail. Therefore, for full API information you should follow the links into the reference documentation.</para>
 
-<para>This book attempts to explain key &gtkmm; concepts and introduce some of the more commonly used user interface elements ("widgets"). Although it mentions classes, constructors, and methods, it does not go into great detail. For full API information you should follow the links into the reference documentation.</para>
-
-<para>
-This document is a work in progress. You can find updates on the
-<ulink url="http://www.gtkmm.org/">&gtkmm; home page</ulink>.
-</para>
+<para>This book assumes a good understanding of C++, and how to create C++ programs.</para>
 
 <para>
 We would very much like to hear of any problems you have learning &gtkmm;
