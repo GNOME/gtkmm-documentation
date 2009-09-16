@@ -26,7 +26,7 @@ AC_CHECK_FUNCS([mkfifo])
 
 MM_ARG_ENABLE_WARNINGS([EXAMPLES_WXXFLAGS],
                        [-Wall],
-                       [-pedantic -Wall -Wextra]
+                       [-pedantic -Wall -Wextra],
                        [G PANGO ATK GDK GDK_PIXBUF GTK])
 
 GNOME_DOC_INIT([0.9.0],,
