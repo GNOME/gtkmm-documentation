@@ -2,16 +2,12 @@
 
 gtkmm_docdir = $(datadir)/doc/gtkmm-2.4
 
-DOCBOOK_PHPWEBNOTES_TRANSFORM = docbook_phpwebnotes.xsl
-
 # Function: $(call vpath_listall,PATTERN ...)
 # Get all filenames which match a PATTERN from the list.  Look for files
 # relative to either the current directory or $(srcdir).  Strip $(srcdir)/
 # again before returning and remove any duplicates.
 vpath_srclist = $(patsubst $(srcdir)/%,%,$(wildcard $(addprefix $(srcdir)/,$(1))))
 vpath_listall = $(sort $(wildcard $(1)) $(if $(srcdir:.=),$(vpath_srclist)))
-
-EXTRA_DIST = README insert_example_code.pl C/gtkmm-tutorial-in.xml C/gtkmm-tutorial.xml $(DOCBOOK_PHPWEBNOTES_TRANSFORM)
 
 DOCBOOK_STYLESHEET ?= http://docbook.sourceforge.net/release/xsl/current/html/chunk.xsl
 XMLLINT = xmllint
@@ -120,9 +116,18 @@ tutorial_html_files = $(call vpath_listall,html/*.html) style.css
 tutorial_html_inst  = $(foreach\
 	file,$(tutorial_html_files),$(or $(wildcard $(file)),$(srcdir)/$(file)))
 
-dist_noinst_DATA = $(tutorial_html_files)
+tutorial_xml_files  = $(addsuffix /gtkmm-tutorial.xml,C $(DOC_LINGUAS))
+tutorial_po_files   = $(foreach lang,$(lang)/$(lang).po,$(DOC_LINGUAS))
 
-tutorial_figures_DATA = $(addprefix C/,$(DOC_FIGURES))
+dist_noinst_DATA =		\
+	insert_example_code.pl	\
+	C/gtkmm-tutorial-in.xml	\
+	$(tutorial_po_files)	\
+	$(tutorial_xml_files)	\
+	$(tutorial_html_files)
+
+dist_tutorial_figures_DATA = $(addprefix C/,$(DOC_FIGURES))
+
 dist_tutorial_icons_DATA =	\
 	icons/caution.png	\
 	icons/home.png		\
@@ -135,8 +140,6 @@ dist_tutorial_icons_DATA =	\
 	icons/warning.png
 
 include $(top_srcdir)/build/gnome-doc-utils.make
-
-dist-hook: doc-dist-hook
 
 all-local: $(addsuffix /gtkmm-tutorial.xml,C $(DOC_LINGUAS)) html/index.html
 
@@ -153,7 +156,6 @@ uninstall-tutorial:
 	@$(NORMAL_UNINSTALL)
 	rm -f '$(DESTDIR)$(tutorial_htmldir)'/*.html
 	rm -f '$(DESTDIR)$(tutorial_htmldir)/style.css'
-	-test ! -r '$(DESTDIR)$(tutorial_htmldir)' || rmdir '$(DESTDIR)$(tutorial_htmldir)'
 
 # Create a html generation of the C locale's version of the DocBook, 
 # using our custom stylesheet and graphics:
@@ -164,7 +166,7 @@ html/index.html: $(srcdir)/C/gtkmm-tutorial.xml
 
 # Make sure that the documentation will always have been generated before
 # executing the commands of a rule that depends on files in html/.
-html/%: | html/index.html
+html/chapter-%.html html/sec-%.html: | html/index.html
 
 # Create a DocBook source file that doesn't have the examples' comments blocks:
 $(srcdir)/C/gtkmm-tutorial.xml: $(srcdir)/C/gtkmm-tutorial-in.xml $(srcdir)/insert_example_code.pl

@@ -1,5 +1,16 @@
 2009-09-16  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	Do not use broken doc-dist-hook rule (bgo #574530)
+
+	* docs/tutorial/Makefile.am (dist_noinst_DATA): List files formerly
+	distributed through EXTRA_DIST or the doc-dist-hook rule included
+	with gnome-doc-utils.make.
+	(dist_tutorial_figures_DATA): Add "dist_" prefix.
+	(dist-hook): Remove doc-dist-hook prerequisite.
+	* docs/tutorial/docbook_phpwebnotes.xsl: Delete unused file.
+
+2009-09-16  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	Do not overwrite image files of gtkmm install
 
 	* Makefile.am (dist_images_DATA): Neither distribute nor install
