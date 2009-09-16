@@ -30,8 +30,7 @@ int main(int argc, char *argv[])
   if(argc != 2)
   {
     std::cerr << "usage: packbox num, where num is 1, 2, or 3." << std::endl;
-    // this just does cleanup in GTK, and exits with an exit status of 1.
-    gtk_exit (1);
+    return 1;
   }
 
   ExampleWindow window( atoi(argv[1]) );

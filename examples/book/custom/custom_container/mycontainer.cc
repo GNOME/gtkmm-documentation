@@ -112,8 +112,7 @@ void MyContainer::on_size_allocate(Gtk::Allocation& allocation)
     m_child_two->size_allocate(child_allocation_two);
 }
 
-void MyContainer::forall_vfunc(gboolean /* include_internals */,
-        GtkCallback callback, gpointer callback_data)
+void MyContainer::forall_vfunc(gboolean, GtkCallback callback, gpointer callback_data)
 {
   if(m_child_one)
     callback(m_child_one->gobj(), callback_data);
@@ -165,7 +164,7 @@ void MyContainer::on_remove(Gtk::Widget* child)
   }
 }
 
-GtkType MyContainer::child_type_vfunc() const
+GType MyContainer::child_type_vfunc() const
 {
   //If there is still space for one widget, then report the type of widget that
   //may be added.

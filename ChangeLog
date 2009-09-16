@@ -1,5 +1,13 @@
 2009-09-16  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	Replace deprecated GTK+ symbols in example code
+
+	* examples/book/box/main.cc (main): Do not use gtk_exit().
+	* examples/book/custom/custom_container/mycontainer.{cc,h}:
+	Substitute GType for GtkType.
+
+2009-09-16  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	Do not use broken doc-dist-hook rule (bgo #574530)
 
 	* docs/tutorial/Makefile.am (dist_noinst_DATA): List files formerly

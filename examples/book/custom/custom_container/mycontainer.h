@@ -39,7 +39,7 @@ protected:
 
   virtual void on_add(Gtk::Widget* child);
   virtual void on_remove(Gtk::Widget* child);
-  virtual GtkType child_type_vfunc() const;
+  virtual GType child_type_vfunc() const;
 
   Gtk::Widget* m_child_one;
   Gtk::Widget* m_child_two;
