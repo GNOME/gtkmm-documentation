@@ -1,5 +1,15 @@
 2009-09-16  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	Do not overwrite image files of gtkmm install
+
+	* Makefile.am (dist_images_DATA): Neither distribute nor install
+	the files gtkmm_logo.gif and top.gif, as they are already included
+	with gtkmm.
+	* docs/images/{gtkmm_logo,top}.gif: Delete image files, as they
+	are not used anywhere in gtkmm-documentation.
+
+2009-09-16  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	Insert missing comma in Autoconf macro call
 
 	* configure.ac (EXAMPLES_WXXFLAGS): Insert missing comma to separate
