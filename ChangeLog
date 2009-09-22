@@ -1,3 +1,16 @@
+2009-09-22  José Alburquerque  <jaalburqu@svn.gnome.org>
+
+	Book: Add a Gtk::InfoBar example.
+
+	* examples/book/infobar/examplewindow.cc:
+	* examples/book/infobar/examplewindow.h:
+	* examples/book/infobar/main.cc: Add these to exemplify the usage of a
+	Gtk::InfoBar.
+	* examples/Makefile.am (check_PROGRAMS): Add the new Gtk::InfoBar
+	example to the check.
+	(book_infobar_example_SOURCES): Declare the Gtk::InfoBar example
+	sources.
+
 2009-09-16  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	Replace deprecated GTK+ symbols in example code

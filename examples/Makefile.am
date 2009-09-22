@@ -59,6 +59,7 @@ check_PROGRAMS =					\
 	book/helloworld2/helloworld2			\
 	book/iconview/example				\
 	book/idle/idle					\
+	book/infobar/example				\
 	book/input/example				\
 	book/label/example				\
 	book/menus/main_menu/main_menu			\
@@ -384,6 +385,11 @@ book_idle_idle_SOURCES =		\
 	book/idle/idleexample.cc	\
 	book/idle/idleexample.h		\
 	book/idle/main.cc
+
+book_infobar_example_SOURCES =		\
+	book/infobar/examplewindow.cc	\
+	book/infobar/examplewindow.h	\
+	book/infobar/main.cc
 
 book_input_example_SOURCES = \
 	book/input/main.cc
