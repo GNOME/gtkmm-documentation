@@ -34,26 +34,26 @@ public:
   virtual ~DnDWindow();
 
 protected:
-  virtual void create_popup();
+  void create_popup();
 
   //Signal handlers:
-  virtual void on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time);
-  virtual bool on_label_popup_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);
-  virtual void on_label_popup_drag_leave(const Glib::RefPtr<Gdk::DragContext>& context, guint time);
+  void on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time);
+  bool on_label_popup_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);
+  void on_label_popup_drag_leave(const Glib::RefPtr<Gdk::DragContext>& context, guint time);
 
-  virtual void on_image_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time);
-  virtual bool on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);
-  virtual void on_image_drag_leave(const Glib::RefPtr<Gdk::DragContext>& context, guint time);
-  virtual bool on_image_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);
+  void on_image_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time);
+  bool on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);
+  void on_image_drag_leave(const Glib::RefPtr<Gdk::DragContext>& context, guint time);
+  bool on_image_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);
 
-  virtual void on_button_drag_data_get(const Glib::RefPtr<Gdk::DragContext>& context, Gtk::SelectionData& selection_data, guint info, guint time);
-  virtual void on_button_drag_data_delete(const Glib::RefPtr<Gdk::DragContext>& context);
+  void on_button_drag_data_get(const Glib::RefPtr<Gdk::DragContext>& context, Gtk::SelectionData& selection_data, guint info, guint time);
+  void on_button_drag_data_delete(const Glib::RefPtr<Gdk::DragContext>& context);
 
-  virtual bool on_popdown_timeout();
-  virtual bool on_popup_timeout();
+  bool on_popdown_timeout();
+  bool on_popup_timeout();
 
-  virtual bool on_popup_button_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);		
-  virtual void on_popup_button_drag_leave(const Glib::RefPtr<Gdk::DragContext>& context, guint time);
+  bool on_popup_button_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);		
+  void on_popup_button_drag_leave(const Glib::RefPtr<Gdk::DragContext>& context, guint time);
 
 
   //Member widgets:

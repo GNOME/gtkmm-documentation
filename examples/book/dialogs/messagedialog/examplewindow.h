@@ -29,8 +29,8 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_info_clicked();
-  virtual void on_button_question_clicked();
+  void on_button_info_clicked();
+  void on_button_question_clicked();
 
   //Child widgets:
   Gtk::VButtonBox m_ButtonBox;

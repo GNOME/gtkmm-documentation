@@ -27,7 +27,7 @@ public:
   Server();
   virtual ~Server();
 
-  virtual void do_something();
+  void do_something();
 
   //signal accessor:
   typedef sigc::signal<void, bool, int> type_signal_something;

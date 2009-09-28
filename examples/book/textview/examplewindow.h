@@ -29,12 +29,12 @@ public:
 
 protected:
 
-  virtual void fill_buffers();
+  void fill_buffers();
   
   //Signal handlers:
-  virtual void on_button_quit();
-  virtual void on_button_buffer1();
-  virtual void on_button_buffer2();
+  void on_button_quit();
+  void on_button_buffer1();
+  void on_button_buffer2();
 
   //Child widgets:
   Gtk::VBox m_VBox;

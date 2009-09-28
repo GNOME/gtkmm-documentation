@@ -27,7 +27,7 @@ public:
   MyContainer();
   virtual ~MyContainer();
 
-  virtual void set_child_widgets(Gtk::Widget& child_one, Gtk::Widget& child_two);
+  void set_child_widgets(Gtk::Widget& child_one, Gtk::Widget& child_two);
 
 protected:
 

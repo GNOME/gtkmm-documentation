@@ -34,9 +34,9 @@ protected:
                       const Glib::ustring& id, const Glib::ustring& label);
 
   //Signal handlers:
-  virtual void on_action_file_new();
-  virtual void on_action_file_quit();
-  virtual void on_action_others();
+  void on_action_file_new();
+  void on_action_file_quit();
+  void on_action_others();
 
   //Child widgets:
   Gtk::VBox m_Box;

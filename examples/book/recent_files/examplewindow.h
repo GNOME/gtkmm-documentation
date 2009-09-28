@@ -29,9 +29,9 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_menu_file_recent_files_dialog();
-  virtual void on_menu_file_quit();
-  virtual void on_menu_file_new();
+  void on_menu_file_recent_files_dialog();
+  void on_menu_file_quit();
+  void on_menu_file_new();
 
   //Child widgets:
   Gtk::VBox m_Box;

@@ -32,7 +32,7 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_clicked();
+  void on_button_clicked();
 
   //Child widgets:
   Gtk::VBox m_Box_Top, m_Box1, m_Box2;

@@ -23,23 +23,23 @@ class PrintFormOperation;
 
 class PreviewDialog : public Gtk::Window
 {
- public:
+public:
   explicit PreviewDialog(PrintFormOperation* pfo, const Glib::RefPtr<Gtk::PrintOperationPreview>& preview, const Glib::RefPtr<Gtk::PrintContext>& context, Gtk::Window& parent);
   ~PreviewDialog();
 
- protected:
+protected:
 
-  virtual void on_drawing_area_realized();
+  void on_drawing_area_realized();
 
-  virtual void on_page_number_changed();
-  virtual void on_close_clicked();
+  void on_page_number_changed();
+  void on_close_clicked();
   virtual void on_hide();
 
   virtual bool on_drawing_area_expose_event(GdkEventExpose* event);
 
   //PrintOperationPreview signal handlers:
-  virtual void on_popreview_ready(const Glib::RefPtr<Gtk::PrintContext>& print_ctx);
-  virtual void on_popreview_got_page_size(const Glib::RefPtr<Gtk::PrintContext>& context, const Glib::RefPtr<Gtk::PageSetup>& page_setup);
+  void on_popreview_ready(const Glib::RefPtr<Gtk::PrintContext>& print_ctx);
+  void on_popreview_got_page_size(const Glib::RefPtr<Gtk::PrintContext>& context, const Glib::RefPtr<Gtk::PageSetup>& page_setup);
 
   PrintFormOperation* m_pOperation;
 

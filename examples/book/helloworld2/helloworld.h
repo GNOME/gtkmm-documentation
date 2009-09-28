@@ -33,7 +33,7 @@ protected:
 
   // Signal handlers:
   // Our new improved on_button_clicked(). (see below)
-  virtual void on_button_clicked(Glib::ustring data);
+  void on_button_clicked(Glib::ustring data);
 
   // Child widgets:
   Gtk::HBox m_box1;

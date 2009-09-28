@@ -30,7 +30,7 @@ public:
 protected:
   //Signal handlers:
   virtual bool on_button_press_event(GdkEventButton* event);
-  virtual void on_menu_file_popup_generic();
+  void on_menu_file_popup_generic();
 
   //Child widgets:
   Gtk::VBox m_Box;

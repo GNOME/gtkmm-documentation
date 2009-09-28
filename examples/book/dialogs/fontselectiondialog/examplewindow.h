@@ -29,7 +29,7 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_font_set();
+  void on_button_font_set();
 
   //Child widgets:
   Gtk::FontButton m_Button;

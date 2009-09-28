@@ -29,9 +29,9 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_copy();
-  virtual void on_button_paste();
-  virtual void on_clipboard_text_received(const Glib::ustring& text);
+  void on_button_copy();
+  void on_button_paste();
+  void on_clipboard_text_received(const Glib::ustring& text);
 
   //Child widgets:
   Gtk::VBox m_VBox;

@@ -30,7 +30,7 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_combo_changed();
+  void on_combo_changed();
 
   //Child widgets:
   Gtk::ComboBoxEntryText m_Combo;

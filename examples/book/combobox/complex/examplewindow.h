@@ -31,7 +31,7 @@ public:
 
 protected:  
   //Signal handlers:
-  virtual void on_combo_changed();
+  void on_combo_changed();
 
   //Tree model columns:
   class ModelColumns : public Gtk::TreeModel::ColumnRecord

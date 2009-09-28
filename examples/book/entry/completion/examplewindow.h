@@ -29,12 +29,12 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_close();
+  void on_button_close();
 
-  virtual void on_completion_action_activated(int index);
+  void on_completion_action_activated(int index);
 
   //See the comment in the implementation:
-  //virtual bool on_completion_match(const Glib::ustring& key, const Gtk::TreeModel::const_iterator& iter);
+  //bool on_completion_match(const Glib::ustring& key, const Gtk::TreeModel::const_iterator& iter);
 
 
   //Tree model columns, for the EntryCompletion's filter model:

@@ -29,14 +29,14 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_copy();
-  virtual void on_button_paste();
+  void on_button_copy();
+  void on_button_paste();
 
-  virtual void on_clipboard_get(Gtk::SelectionData& selection_data, guint info);
-  virtual void on_clipboard_clear();
+  void on_clipboard_get(Gtk::SelectionData& selection_data, guint info);
+  void on_clipboard_clear();
 
-  virtual void on_clipboard_received(const Gtk::SelectionData& selection_data);
-  virtual void on_clipboard_received_targets(const Glib::StringArrayHandle& targets_array);
+  void on_clipboard_received(const Gtk::SelectionData& selection_data);
+  void on_clipboard_received_targets(const Glib::StringArrayHandle& targets_array);
    
   virtual void update_paste_status(); //Disable the paste button if there is nothing to paste.
 

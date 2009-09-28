@@ -29,11 +29,11 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_checkbutton_text();
-  virtual void on_checkbutton_activity();
-  virtual void on_checkbutton_orientation();
+  void on_checkbutton_text();
+  void on_checkbutton_activity();
+  void on_checkbutton_orientation();
   virtual bool on_timeout();
-  virtual void on_button_close();
+  void on_button_close();
 
   //Child widgets:
   Gtk::VBox m_VBox;

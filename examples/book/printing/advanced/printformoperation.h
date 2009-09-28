@@ -49,7 +49,7 @@ class PrintFormOperation : public Gtk::PrintOperation
 
   virtual bool on_preview(const Glib::RefPtr<Gtk::PrintOperationPreview>& preview, const Glib::RefPtr<Gtk::PrintContext>& context, Gtk::Window* parent);
 
-  virtual void on_preview_window_hide();
+  void on_preview_window_hide();
 
   PreviewDialog* m_pDialog;
 

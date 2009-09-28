@@ -30,7 +30,7 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_quit_clicked();
+  void on_button_quit_clicked();
 
   //Child widgets:
   Gtk::Button m_button;

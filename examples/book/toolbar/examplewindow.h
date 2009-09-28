@@ -29,8 +29,8 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_close();
-  virtual void on_toolbar_item();
+  void on_button_close();
+  void on_toolbar_item();
 
   //Child widgets:
   Gtk::VBox m_VBox;

@@ -27,7 +27,7 @@ public:
   MessageText();
   virtual ~MessageText();
 
-  virtual void insert_text();
+  void insert_text();
 
 protected:
   Gtk::TextView m_TextView;

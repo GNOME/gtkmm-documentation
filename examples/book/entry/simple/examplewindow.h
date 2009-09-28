@@ -29,9 +29,9 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_checkbox_editable_toggled();
-  virtual void on_checkbox_visibility_toggled();
-  virtual void on_button_close();
+  void on_checkbox_editable_toggled();
+  void on_checkbox_visibility_toggled();
+  void on_button_close();
 
   //Child widgets:
   Gtk::HBox m_HBox;

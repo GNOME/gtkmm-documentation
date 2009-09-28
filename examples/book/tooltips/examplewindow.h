@@ -35,9 +35,9 @@ protected:
   void connect_signals();
 
   //Signal handlers:
-  virtual void on_markup_checkbutton_click();
-  virtual bool on_textview_query_tooltip(int x, int y, bool keyboard_tooltip, const Glib::RefPtr<Gtk::Tooltip>& tooltip);
-  virtual bool on_button_query_tooltip(int x, int y, bool keyboard_tooltip, const Glib::RefPtr<Gtk::Tooltip>& tooltip);
+  void on_markup_checkbutton_click();
+  bool on_textview_query_tooltip(int x, int y, bool keyboard_tooltip, const Glib::RefPtr<Gtk::Tooltip>& tooltip);
+  bool on_button_query_tooltip(int x, int y, bool keyboard_tooltip, const Glib::RefPtr<Gtk::Tooltip>& tooltip);
 
   //Child widgets:
   Gtk::VBox m_vbox;

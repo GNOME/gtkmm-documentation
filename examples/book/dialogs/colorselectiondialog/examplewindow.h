@@ -29,7 +29,7 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_color_set();
+  void on_button_color_set();
 
   //Child widgets:
   Gtk::VBox m_VBox;

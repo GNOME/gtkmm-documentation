@@ -31,7 +31,7 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_quit();
+  void on_button_quit();
 
 
   //Child widgets:

@@ -29,12 +29,12 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_checkbutton_toggled();
-  virtual void on_menu_position(Gtk::PositionType type);
-  virtual void on_menu_policy(Gtk::UpdateType type);
-  virtual void on_adjustment1_value_changed();
-  virtual void on_adjustment2_value_changed();
-  virtual void on_button_quit();
+  void on_checkbutton_toggled();
+  void on_menu_position(Gtk::PositionType type);
+  void on_menu_policy(Gtk::UpdateType type);
+  void on_adjustment1_value_changed();
+  void on_adjustment2_value_changed();
+  void on_button_quit();
 
   //Child widgets:
   Gtk::VBox m_VBox_Top, m_VBox2, m_VBox_HScale;

@@ -33,23 +33,23 @@ public:
 
 protected:
 
-  virtual void build_main_menu();
+  void build_main_menu();
 
-  virtual void print_or_preview(Gtk::PrintOperationAction print_action);
+  void print_or_preview(Gtk::PrintOperationAction print_action);
 
   //PrintOperation signal handlers.
   //We handle these so can get necessary information to update the UI or print settings.
   //Our derived PrintOperation class also overrides some default signal handlers.
-  virtual void on_printoperation_status_changed(Glib::RefPtr<PrintFormOperation>* operation);
+  void on_printoperation_status_changed(Glib::RefPtr<PrintFormOperation>* operation);
 
-  virtual void on_printoperation_done(Gtk::PrintOperationResult result, Glib::RefPtr<PrintFormOperation>* operation);
+  void on_printoperation_done(Gtk::PrintOperationResult result, Glib::RefPtr<PrintFormOperation>* operation);
   
   //Action signal handlers:
-  virtual void on_menu_file_new();
-  virtual void on_menu_file_page_setup();
-  virtual void on_menu_file_print_preview();
-  virtual void on_menu_file_print();
-  virtual void on_menu_file_quit();
+  void on_menu_file_new();
+  void on_menu_file_page_setup();
+  void on_menu_file_print_preview();
+  void on_menu_file_print();
+  void on_menu_file_quit();
 
   //Printing-related objects:
   Glib::RefPtr<Gtk::PageSetup> m_refPageSetup;

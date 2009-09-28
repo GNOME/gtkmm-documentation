@@ -29,12 +29,12 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_menu_file_new_generic();
-  virtual void on_menu_file_quit();
-  virtual void on_menu_others();
+  void on_menu_file_new_generic();
+  void on_menu_file_quit();
+  void on_menu_others();
 
-  virtual void on_menu_choices_one();
-  virtual void on_menu_choices_two();
+  void on_menu_choices_one();
+  void on_menu_choices_two();
 
   //Child widgets:
   Gtk::VBox m_Box;

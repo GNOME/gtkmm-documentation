@@ -31,7 +31,7 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_clicked();
+  void on_button_clicked();
 
   //Member widgets:
   Gtk::Button m_button;

@@ -31,9 +31,9 @@ public:
 protected:
   // Signal handlers:
   //
-  virtual void on_button_quit();
-  virtual void on_item_activated(const Gtk::TreeModel::Path& path);
-  virtual void on_selection_changed();
+  void on_button_quit();
+  void on_item_activated(const Gtk::TreeModel::Path& path);
+  void on_selection_changed();
 
   void add_entry(const std::string& filename, const Glib::ustring& description);
 

@@ -27,10 +27,10 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_quit();
-  virtual void on_button_clear();
-  virtual void on_textbuffer_changed();
-  virtual void on_infobar_response(int response);
+  void on_button_quit();
+  void on_button_clear();
+  void on_textbuffer_changed();
+  void on_infobar_response(int response);
 
   //Child widgets:
   Gtk::VBox m_VBox;

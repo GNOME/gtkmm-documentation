@@ -29,9 +29,9 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_quit();
+  void on_button_quit();
 
-  virtual void on_filter_modify(const Gtk::TreeModel::iterator& iter, Glib::ValueBase& value, int column);
+  void on_filter_modify(const Gtk::TreeModel::iterator& iter, Glib::ValueBase& value, int column);
 
   //Tree model columns:
   //These are the types of the columns in the child model:

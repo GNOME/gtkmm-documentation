@@ -29,7 +29,7 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_close();
+  void on_button_close();
 
   //Child widgets:
   Gtk::ScrolledWindow m_ScrolledWindow;

@@ -33,7 +33,7 @@ protected:
   virtual bool on_button_press_event(GdkEventButton *ev);
 
   //Signal handler for popup menu items:
-  virtual void on_menu_file_popup_generic();
+  void on_menu_file_popup_generic();
 
   
   //Tree model columns:

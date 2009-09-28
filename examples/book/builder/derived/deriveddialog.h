@@ -30,7 +30,7 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_quit();
+  void on_button_quit();
 
   Glib::RefPtr<Gtk::Builder> m_refGlade;
   Gtk::Button* m_pButton;

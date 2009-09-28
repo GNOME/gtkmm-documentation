@@ -29,8 +29,8 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_start();
-  virtual void on_button_quit();
+  void on_button_start();
+  void on_button_quit();
 
 
   //Child widgets:

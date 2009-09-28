@@ -29,9 +29,9 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_quit();
+  void on_button_quit();
 
-  virtual void on_cellrenderer_choice_edited(const Glib::ustring& path_string, const Glib::ustring& new_text);
+  void on_cellrenderer_choice_edited(const Glib::ustring& path_string, const Glib::ustring& new_text);
  
   //Tree model columns for the TreeView:
   class ModelColumns : public Gtk::TreeModel::ColumnRecord

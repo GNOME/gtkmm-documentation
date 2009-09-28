@@ -29,17 +29,17 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_checkbutton_snap();
-  virtual void on_checkbutton_numeric();
-  virtual void on_spinbutton_digits_changed();
-  virtual void on_button_close();
+  void on_checkbutton_snap();
+  void on_checkbutton_numeric();
+  void on_spinbutton_digits_changed();
+  void on_button_close();
 
   enum enumValueFormats
   {
     VALUE_FORMAT_INT,
     VALUE_FORMAT_FLOAT
   };
-  virtual void on_button_getvalue(enumValueFormats display);
+  void on_button_getvalue(enumValueFormats display);
 
   //Child widgets:
   Gtk::Frame m_Frame_NotAccelerated, m_Frame_Accelerated;

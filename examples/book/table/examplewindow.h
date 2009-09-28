@@ -29,8 +29,8 @@ public:
 
 protected:
   //Signal handlers:
-  virtual void on_button_quit();
-  virtual void on_button_numbered(Glib::ustring data);
+  void on_button_quit();
+  void on_button_numbered(Glib::ustring data);
 
   //Child widgets:
   Gtk::Table m_Table;

@@ -30,7 +30,7 @@ public:
   virtual ~Client();
 
   //Signal handler:
-  virtual void on_server_something(bool a, int b);
+  void on_server_something(bool a, int b);
 };
 
 #endif //GTKMM_EXAMPLE_CLIENT_H
