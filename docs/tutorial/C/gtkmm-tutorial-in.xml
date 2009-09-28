@@ -1492,6 +1492,30 @@ string within its trough, using the <methodname>set_text()</methodname> method.
 
 </sect1>
 
+
+<sect1 id="sec-infobar">
+<title>InfoBar</title>
+
+<para>
+An <classname>InfoBar</classname> may be used to show small items of information or to ask brief questions. Unlike a <classname>Dialog</classname>, it appears at the top of the current window instead of opening a new window. Its API is very similar to the <link linkend="chapter-dialogs">Gtk::Dialog</link> API.</para>
+
+<para><ulink url="&url_refdocs_base_gtk;InfoBar.html">Reference</ulink></para>
+
+<sect2 id="infobar-example"><title>Example</title>
+
+<figure id="figure-infobar">
+  <title>InfoBar</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;infobar.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;infobar">Source Code</ulink></para>
+
+</sect2>
+
+</sect1>
+
 <sect1 id="sec-tooltips">
 <title>Tooltips</title>
 

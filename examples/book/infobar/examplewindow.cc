@@ -17,16 +17,17 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_Button_Quit(Gtk::Stock::QUIT),
+: m_VBox(false, 6),
+  m_Button_Quit(Gtk::Stock::QUIT),
   m_Button_Clear("Clear")
 {
   set_title("Gtk::InfoBar example");
-  set_border_width(5);
+  set_border_width(6);
   set_default_size(400, 200);
 
   add(m_VBox);
 
-  // Create the buffer and set it on the TextView:
+  // Create the buffer and set it for the TextView:
   m_refTextBuffer = Gtk::TextBuffer::create();
   m_TextView.set_buffer(m_refTextBuffer);
 
@@ -43,14 +44,12 @@ ExampleWindow::ExampleWindow()
 
   m_ButtonBox.pack_start(m_Button_Clear, Gtk::PACK_SHRINK);
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
-  m_ButtonBox.set_border_width(5);
-  m_ButtonBox.set_spacing(5);
+  m_ButtonBox.set_spacing(6);
   m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
 
   // Add the message label to the InfoBar:
   Gtk::Container* infoBarContainer =
-    static_cast<Gtk::Container*>(m_InfoBar.get_content_area());
-
+    dynamic_cast<Gtk::Container*>(m_InfoBar.get_content_area());
   if (infoBarContainer)
     infoBarContainer->add(m_Message_Label);
 
@@ -94,7 +93,7 @@ void ExampleWindow::on_button_quit()
 void ExampleWindow::on_button_clear()
 {
   m_refTextBuffer->set_text("");
-  m_Message_Label.set_text("Cleared the TextBuffer.");
+  m_Message_Label.set_text("Cleared the text.");
   m_InfoBar.set_message_type(Gtk::MESSAGE_INFO);
   m_InfoBar.show();
 }

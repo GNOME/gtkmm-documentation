@@ -56,6 +56,7 @@ DOC_FIGURES =					\
 	figures/helloworld.png			\
 	figures/helloworld2.png			\
 	figures/idle.png			\
+	figures/infobar.png			\
 	figures/label.png			\
 	figures/main_menu.png			\
 	figures/menu_popup.png			\

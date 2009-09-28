@@ -1,5 +1,13 @@
 2009-09-28  Murray Cumming  <murrayc@murrayc.com>
 
+	Added InfoBar section.
+
+	* docs/tutorial/C/figures/infobar.png: Added.
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Miscellaneous Widgets: 
+	Added an InfoBar sub-section, mostly just to mention the new example.
+
+2009-09-28  Murray Cumming  <murrayc@murrayc.com>
+
 	Examples: Do not use virtual on all methods.
 
 	* examples/*.h: Removed unnecessary virtual keywords. I once thought 
