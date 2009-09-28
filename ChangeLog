@@ -1,3 +1,5 @@
+2.17.3:
+
 2009-09-28  Murray Cumming  <murrayc@murrayc.com>
 
 	Added InfoBar section.
@@ -25,6 +27,8 @@
 	example to the check.
 	(book_infobar_example_SOURCES): Declare the Gtk::InfoBar example
 	sources.
+
+2.17.3:
 
 2009-09-16  Daniel Elstner  <daniel.kitta@gmail.com>
 
