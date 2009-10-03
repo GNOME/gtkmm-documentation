@@ -1,4 +1,13 @@
-2.17.3:
+2009-10-03  Daniel Elstner  <daniel.kitta@gmail.com>
+
+	Create output subdirectories automatically
+
+	* docs/tutorial/Makefile.am (all-local): Prepend the $(DOC_LINGUAS)
+	directories to the list of prerequisites.
+	($(DOC_LINGUAS)): New rule to create output subdirectories on the
+	fly when needed, i.e. when building from a completely clean tree.
+
+2.17.4:
 
 2009-09-28  Murray Cumming  <murrayc@murrayc.com>
 

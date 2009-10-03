@@ -142,7 +142,7 @@ dist_tutorial_icons_DATA =	\
 
 include $(top_srcdir)/build/gnome-doc-utils.make
 
-all-local: $(addsuffix /gtkmm-tutorial.xml,C $(DOC_LINGUAS)) html/index.html
+all-local: $(DOC_LINGUAS) $(addsuffix /gtkmm-tutorial.xml,C $(DOC_LINGUAS)) html/index.html
 
 install-data-local: install-tutorial
 
@@ -157,6 +157,9 @@ uninstall-tutorial:
 	@$(NORMAL_UNINSTALL)
 	rm -f '$(DESTDIR)$(tutorial_htmldir)'/*.html
 	rm -f '$(DESTDIR)$(tutorial_htmldir)/style.css'
+
+$(DOC_LINGUAS):
+	@$(MKDIR_P) $@
 
 # Create a html generation of the C locale's version of the DocBook, 
 # using our custom stylesheet and graphics:
