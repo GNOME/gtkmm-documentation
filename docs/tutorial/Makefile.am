@@ -87,8 +87,7 @@ DOC_FIGURES =					\
 
 DOC_LINGUAS = de
 
-DISTCLEANFILES = html/*.html
-MAINTAINERCLEANFILES = $(srcdir)/html/*.html
+MAINTAINERCLEANFILES = html/*.html $(srcdir)/html/*.html
 
 # Set the use.id.as.filename param so that we don't use the chapter / section
 # number as the filename, otherwise the url will change every time anything is
@@ -164,9 +163,10 @@ $(DOC_LINGUAS):
 # Create a html generation of the C locale's version of the DocBook, 
 # using our custom stylesheet and graphics:
 html/index.html: $(srcdir)/C/gtkmm-tutorial.xml
-	rm -fr html
-	$(MKDIR_P) html
-	$(XSLTPROC) $(xslt_params) -o html/ --xinclude --catalogs '$(DOCBOOK_STYLESHEET)' $<
+	$(AM_V_at)rm -fr html
+	$(AM_V_at)$(MKDIR_P) html
+	$(AM_V_GEN)$(XSLTPROC) $(xslt_params) -o html/ --xinclude --catalogs \
+		'$(DOCBOOK_STYLESHEET)' $<
 
 # Make sure that the documentation will always have been generated before
 # executing the commands of a rule that depends on files in html/.
@@ -174,7 +174,7 @@ html/chapter-%.html html/sec-%.html: | html/index.html
 
 # Create a DocBook source file that doesn't have the examples' comments blocks:
 $(srcdir)/C/gtkmm-tutorial.xml: $(srcdir)/C/gtkmm-tutorial-in.xml $(srcdir)/insert_example_code.pl
-	$(PERL) -- $(srcdir)/insert_example_code.pl $(top_srcdir)/examples/book $< >$@
+	$(AM_V_GEN)$(PERL) -- $(srcdir)/insert_example_code.pl $(top_srcdir)/examples/book $< >$@
 
 validate_original: $(srcdir)/C/gtkmm-tutorial-in.xml
 	$(XMLLINT) --xinclude --postvalid --noout $<
@@ -185,15 +185,15 @@ validate: $(srcdir)/C/gtkmm-tutorial.xml
 # we need to produce a full examples with all of the XIncludes done so that it
 # can processed for PDF
 C/programming-with-gtkmm-pdf.xml: $(srcdir)/C/gtkmm-tutorial.xml
-	$(MKDIR_P) C
-	$(XMLLINT) --xinclude --postvalid $< -o $@
+	$(AM_V_at)$(MKDIR_P) C
+	$(AM_V_GEN)$(XMLLINT) --xinclude --postvalid -o $@ $<
 
 # We have to generate the pdf in a subdirectory (e.g. pdf/) because the tutorial
 # specifies the path to the figures as '../figures' so if we build it in this
 # directory, it won't find the images.
 pdf/programming-with-gtkmm-pdf.pdf: C/programming-with-gtkmm-pdf.xml
-	$(MKDIR_P) pdf
-	$(DB2PDF) --output pdf/ $<
+	$(AM_V_at)$(MKDIR_P) pdf
+	$(AM_V_GEN)$(DB2PDF) --output pdf/ $<
 
 .PHONY: install-tutorial uninstall-tutorial
 

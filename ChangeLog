@@ -1,5 +1,17 @@
 2009-10-03  Daniel Elstner  <daniel.kitta@gmail.com>
 
+	Support Automake silent rules
+
+	* configure.ac: Call the AM_SILENT_RULES macro if it is defined.
+	* docs/tutorial/Makefile.am: Prefix $(AM_V_at) and $(AM_V_GEN)
+	to commands of custom rules in order to suppress the echoing of
+	executed commands in silent rules mode.
+	* docs/FAQ/Makefile.am: Modernize build rules as already done for
+	the tutorial build.  Prefix $(AM_V_at) and $(AM_V_GEN) to commands
+	in order to support Automake silent rules.
+
+2009-10-03  Daniel Elstner  <daniel.kitta@gmail.com>
+
 	Create output subdirectories automatically
 
 	* docs/tutorial/Makefile.am (all-local): Prepend the $(DOC_LINGUAS)
