@@ -1,3 +1,15 @@
+2009-10-05  José Alburquerque  <jaalburqu@svn.gnome.org>
+
+	InfoBar Example: Move the bar to the top of the window.
+
+	* examples/book/infobar/examplewindow.cc:
+	* examples/book/infobar/examplewindow.h: Modify the example to show
+	the info bar at the top of the window for consistency with the
+	tutorial.
+	* docs/tutorial/C/figures/infobar.png: Upload a new image using the
+	clearlooks theme for consistency with the rest of the figures in the
+	tutorial (I hope that's okay).
+
 2009-10-03  Daniel Elstner  <daniel.kitta@gmail.com>
 
 	Support Automake silent rules

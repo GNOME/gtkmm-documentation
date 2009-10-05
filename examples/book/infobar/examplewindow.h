@@ -27,10 +27,10 @@ public:
 
 protected:
   //Signal handlers:
+  void on_infobar_response(int response);
   void on_button_quit();
   void on_button_clear();
   void on_textbuffer_changed();
-  void on_infobar_response(int response);
 
   //Child widgets:
   Gtk::VBox m_VBox;
@@ -40,11 +40,11 @@ protected:
   
   Glib::RefPtr<Gtk::TextBuffer> m_refTextBuffer;
 
-  Gtk::HButtonBox m_ButtonBox;
-  Gtk::Button m_Button_Quit, m_Button_Clear;
-
   Gtk::InfoBar m_InfoBar;
   Gtk::Label m_Message_Label;
+
+  Gtk::HButtonBox m_ButtonBox;
+  Gtk::Button m_Button_Quit, m_Button_Clear;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

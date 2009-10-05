@@ -27,6 +27,18 @@ ExampleWindow::ExampleWindow()
 
   add(m_VBox);
 
+  // Add the message label to the InfoBar:
+  Gtk::Container* infoBarContainer =
+    dynamic_cast<Gtk::Container*>(m_InfoBar.get_content_area());
+  if (infoBarContainer)
+    infoBarContainer->add(m_Message_Label);
+
+  // Add an ok button to the InfoBar:
+  m_InfoBar.add_button(Gtk::Stock::OK, 0);
+
+  // Add the InfoBar to the vbox:
+  m_VBox.pack_start(m_InfoBar, Gtk::PACK_SHRINK);
+
   // Create the buffer and set it for the TextView:
   m_refTextBuffer = Gtk::TextBuffer::create();
   m_TextView.set_buffer(m_refTextBuffer);
@@ -47,28 +59,15 @@ ExampleWindow::ExampleWindow()
   m_ButtonBox.set_spacing(6);
   m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
 
-  // Add the message label to the InfoBar:
-  Gtk::Container* infoBarContainer =
-    dynamic_cast<Gtk::Container*>(m_InfoBar.get_content_area());
-  if (infoBarContainer)
-    infoBarContainer->add(m_Message_Label);
-
-
-  // Add an ok button to the InfoBar:
-  m_InfoBar.add_button(Gtk::Stock::OK, 0);
-
-  // Add the InfoBar:
-  m_VBox.pack_start(m_InfoBar, Gtk::PACK_SHRINK);
-
   // Connect signals:
+  m_InfoBar.signal_response().connect(sigc::mem_fun(*this,
+              &ExampleWindow::on_infobar_response) );
   m_Button_Quit.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_quit) );
   m_Button_Clear.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_clear) );
   m_refTextBuffer->signal_changed().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_textbuffer_changed) );
-  m_InfoBar.signal_response().connect(sigc::mem_fun(*this,
-              &ExampleWindow::on_infobar_response) );
 
   show_all_children();
 
@@ -83,6 +82,13 @@ ExampleWindow::ExampleWindow()
 
 ExampleWindow::~ExampleWindow()
 {
+}
+
+void ExampleWindow::on_infobar_response(int)
+{
+  // Clear the message and hide the info bar:
+  m_Message_Label.set_text("");
+  m_InfoBar.hide();
 }
 
 void ExampleWindow::on_button_quit()
@@ -101,11 +107,4 @@ void ExampleWindow::on_button_clear()
 void ExampleWindow::on_textbuffer_changed()
 {
   m_Button_Clear.set_sensitive(m_refTextBuffer->size() > 0);
-}
-
-void ExampleWindow::on_infobar_response(int)
-{
-  // Clear the message and hide the info bar:
-  m_Message_Label.set_text("");
-  m_InfoBar.hide();
 }
