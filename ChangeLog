@@ -1,3 +1,8 @@
+2009-11-11  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Glade and Gtk::Builder chapter:
+	Mention create_from_file() instead of create(), as noticed by Paul Jones. 
+
 2009-10-05  José Alburquerque  <jaalburqu@svn.gnome.org>
 
 	InfoBar Example: Move the bar to the top of the window.

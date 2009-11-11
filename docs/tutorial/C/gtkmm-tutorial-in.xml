@@ -6476,7 +6476,7 @@ layout allows you to focus on implementing that functionality.
 <classname>Glib::RefPtr</classname>. Like all such classes, you need to use a
 <methodname>create()</methodname> method to instantiate it. For instance,
 <programlisting>
-Glib::RefPtr&lt;Gtk::Builder&gt; builder = Gtk::Builder::create(&quot;basic.glade&quot;);
+Glib::RefPtr&lt;Gtk::Builder&gt; builder = Gtk::Builder::create_from_file(&quot;basic.glade&quot;);
 </programlisting>
 This will instantiate the windows defined in the .glade file, though they will
 not be shown immediately unless you have specified that via the <guilabel>Properties</guilabel>
@@ -6485,7 +6485,7 @@ window in <application>Glade</application>.
 
 <para>To instantiate just one window, or just one of the child widgets, you can specify the name of a widget as the second parameter. For instance,
 <programlisting>
-Glib::RefPtr&lt;Gtk::Builder&gt; builder = Gtk::Builder::create(&quot;basic.glade&quot;, &quot;treeview_products&quot;);
+Glib::RefPtr&lt;Gtk::Builder&gt; builder = Gtk::Builder::create_from_file(&quot;basic.glade&quot;, &quot;treeview_products&quot;);
 </programlisting>
 </para>
 
@@ -6518,7 +6518,7 @@ Remember that you are not instantiating a widget with
 already exists. You will always receive a pointer to the same instance when you
 call <methodname>get_widget()</methodname> on the same
 <classname>Gtk::Builder</classname>, with the same widget name. The
-widgets are instantiated during <methodname>Gtk::Builder::create()</methodname>.
+widgets are instantiated during <methodname>Gtk::Builder::create_from_file()</methodname>.
 </para>
 
 <para>
