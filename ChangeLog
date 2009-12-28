@@ -1,5 +1,13 @@
 2009-12-28  Murray Cumming  <murrayc@murrayc.com>
 
+	ToolPalette example: Show drag preview.
+
+	* examples/book/toolpalette/canvas.[h|cc]:
+	* examples/book/toolpalette/examplewindow.cc: Preview the dragged 
+	item, though there is a problem with the drag-leave signal.
+
+2009-12-28  Murray Cumming  <murrayc@murrayc.com>
+
 	Added ToolPalette example.
 
 	* examples/Makefile.am:

@@ -34,6 +34,9 @@ Canvas::~Canvas()
     delete item;
     m_canvas_items.erase(iter);
   }
+
+  if(m_drop_item)
+    delete m_drop_item;
 }
 
 void Canvas::item_draw(const CanvasItem *item,
@@ -85,7 +88,38 @@ bool Canvas::on_expose_event(GdkEventExpose* event)
   return true;
 }
 
-void  Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time)
+
+bool Canvas::on_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context,
+  int x, int y, guint time)
+{
+  if(m_drop_item)
+  { 
+    // We already have a drop indicator so just update its position.
+
+    m_drop_item->x = x;
+    m_drop_item->y = y;
+
+    queue_draw();
+    context->drag_status (Gdk::ACTION_COPY, time);
+  }
+  else
+  {
+    // Request DnD data for creating a drop indicator.
+    // This will cause on_drag_data_received() to be called.
+    const Glib::ustring target = drag_dest_find_target(context);
+
+    if (target.empty())
+      return false;
+
+    drag_get_data(context, target, time);
+  }
+
+  Gtk::DrawingArea::on_drag_motion(context, x, y, time);
+  return true;
+}
+
+
+void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time)
 {
   // Find the tool button which is the source of this DnD operation.
   Gtk::Widget* widget = drag_get_source_widget(context);
@@ -101,18 +135,63 @@ void  Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& contex
   if(drag_palette)
     drag_item = drag_palette->get_drag_item(selection_data);
 
+  /* Create a drop indicator when a tool button was found. */
   Gtk::ToolButton* button = dynamic_cast<Gtk::ToolButton*>(drag_item);
   if(!button)
     return;
 
-  // Add a canvas item at the position,
-  // to be drawn in our expose_event handler.
-  CanvasItem* canvas_item = new CanvasItem(this, button, x, y);
-  m_canvas_items.push_back(canvas_item);
+  if(m_drop_item)
+    delete m_drop_item;
+
+  m_drop_item = new CanvasItem(this, button, x, y);
+
+  // We are getting this data due to a request in drag_motion,
+  // rather than due to a request in drag_drop, so we are just
+  // supposed to call gdk_drag_status (), not actually paste in 
+  // the data.
+  context->drag_status(Gdk::ACTION_COPY, time);
   queue_draw();
 
   Gtk::DrawingArea::on_drag_data_received(context, x, y, selection_data, info, time);
 }
 
 
+bool Canvas::on_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time)
+{
+  //std::cout << "Canvas::on_drag_drop" << std::endl;
 
+  if(!m_drop_item)
+    return false;
+
+  // Turn the drop indicator into a real canvas item:
+  m_drop_item->x = x;
+  m_drop_item->y = y;
+
+  m_canvas_items.push_back(m_drop_item);
+  m_drop_item = 0;
+
+  /* Signal that the item was accepted and then redraw. */
+  context->drag_finish(true /* success */, false /* del */, time);
+  queue_draw();
+
+  Gtk::DrawingArea::on_drag_drop(context, x, y, time);
+  return true;
+}
+
+void Canvas::on_drag_leave(const Glib::RefPtr<Gdk::DragContext>& context, guint time)
+{
+  //TODO: Why does on_drag_leave() run even when just dropping, before on_drag_drop()?
+  //gtk's gtk-demo uses an idle-handler to work around this, but there should be a simpler solution.
+  //std::cout << "Canvas::on_drag_leave" << std::endl;
+  return;
+
+  if(!m_drop_item)
+    return;
+
+  delete m_drop_item;
+  m_drop_item = 0;
+
+  queue_draw();
+
+  Gtk::DrawingArea::on_drag_leave(context, time);
+}

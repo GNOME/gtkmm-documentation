@@ -249,7 +249,7 @@ ExampleWindow::ExampleWindow()
   m_HBox.pack_start(m_ScrolledWindowCanvas);
 
   m_ToolPalette.add_drag_dest(m_Canvas,
-    Gtk::DEST_DEFAULT_ALL, Gtk::TOOL_PALETTE_DRAG_ITEMS, Gdk::ACTION_COPY);
+    Gtk::DEST_DEFAULT_HIGHLIGHT, Gtk::TOOL_PALETTE_DRAG_ITEMS, Gdk::ACTION_COPY);
 
   show_all_children();
 }
