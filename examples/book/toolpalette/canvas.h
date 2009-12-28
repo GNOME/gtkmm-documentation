@@ -58,6 +58,7 @@ private:
   virtual bool on_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);
   virtual void on_drag_leave(const Glib::RefPtr<Gdk::DragContext>& context, guint time);
 
+  bool m_drag_data_requested_for_drop; //So we know what to do in on_drag_data_received().
   CanvasItem* m_drop_item;
   
   typedef std::list<CanvasItem*> type_list_items;

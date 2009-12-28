@@ -1,5 +1,12 @@
 2009-12-28  Murray Cumming  <murrayc@murrayc.com>
 
+	ToolPalette example: Correction.
+
+	* examples/book/toolpalette/canvas.[h|cc]: Fix the drag-leave problem, 
+	by no longer abusing drag-motion to pre-create the item.
+
+2009-12-28  Murray Cumming  <murrayc@murrayc.com>
+
 	ToolPalette example: Show drag preview.
 
 	* examples/book/toolpalette/canvas.[h|cc]:
