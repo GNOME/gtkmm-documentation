@@ -82,6 +82,7 @@ check_PROGRAMS =					\
 	book/textview/example				\
 	book/timeout/timeout				\
 	book/toolbar/example				\
+	book/toolpalette/example			\
 	book/tooltips/example				\
 	book/treeview/combo_renderer/example		\
 	book/treeview/drag_and_drop/example		\
@@ -506,6 +507,13 @@ book_toolbar_example_SOURCES =		\
 	book/toolbar/examplewindow.cc	\
 	book/toolbar/examplewindow.h	\
 	book/toolbar/main.cc
+
+book_toolpalette_example_SOURCES =		\
+	book/toolpalette/examplewindow.cc	\
+	book/toolpalette/examplewindow.h	\
+	book/toolpalette/canvas.cc	\
+	book/toolpalette/canvas.h	\
+	book/toolpalette/main.cc
 
 book_tooltips_example_SOURCES =		\
 	book/tooltips/examplewindow.cc	\

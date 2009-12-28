@@ -1,3 +1,11 @@
+2009-12-28  Murray Cumming  <murrayc@murrayc.com>
+
+	Added ToolPalette example.
+
+	* examples/Makefile.am:
+	* examples/book/toolpalette/: Added an example based on the code in 
+	gtk-demo. 
+
 2009-11-11  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Glade and Gtk::Builder chapter:
