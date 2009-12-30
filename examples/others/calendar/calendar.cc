@@ -136,7 +136,7 @@ void CalendarExample::select_font()
     //font_dialog_->get_cancel_button()->signal_clicked.connect(sigc::bind(sigc::mem_fun(this, &CalendarExample::destroy_widget), font_dialog_));
   }
 
-  if (!font_dialog_->is_visible())
+  if (!font_dialog_->get_visible())
     font_dialog_->show();
   else
   {

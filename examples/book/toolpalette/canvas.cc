@@ -69,7 +69,7 @@ bool Canvas::on_expose_event(GdkEventExpose* event)
 
   Cairo::RefPtr<Cairo::Context> cr = window->create_cairo_context();
   const Gdk::Region region(event->region, true /* copy */);
-  Gdk::Cairo::region(cr, region);
+  Gdk::Cairo::add_region_to_path(cr, region);
   cr->clip();
 
   cr->set_source_rgb(1.0, 1.0, 1.0);
@@ -175,7 +175,7 @@ void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context
 }
 
 
-bool Canvas::on_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time)
+bool Canvas::on_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int /* x */, int /* y */, guint time)
 {
   // Request DnD data for creating a dopped item.
   // This will cause on_drag_data_received() to be called.

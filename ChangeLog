@@ -1,3 +1,17 @@
+2009-12-30  Murray Cumming  <murrayc@murrayc.com>
+
+	Do not use deprecated API.
+
+	* configure.ac: Add *MM to the list of MM_ARG_ENABLE_WARNINGS() 
+	deprecation defines.
+	* examples/book/combo/: Remove this because it is about deprecated API.
+	* examples/book/custom/custom_container/mycontainer.cc:
+	* examples/book/statusicon/main.cc:
+	* examples/book/toolpalette/canvas.cc:
+	* examples/others/calendar/calendar.cc:
+	Correct use of deprecated API.
+	Bug #601929 (Deng Xiyue)
+
 2009-12-28  Murray Cumming  <murrayc@murrayc.com>
 
 	ToolPalette example: Correction.

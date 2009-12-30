@@ -20,7 +20,6 @@ check_PROGRAMS =					\
 	book/buttons/togglebutton/example		\
 	book/clipboard/ideal/example			\
 	book/clipboard/simple/example			\
-	book/combo/example				\
 	book/combobox/complex/example			\
 	book/combobox/text/example			\
 	book/comboboxentry/complex/example		\
@@ -195,11 +194,6 @@ book_clipboard_simple_example_SOURCES =		\
 	book/clipboard/simple/examplewindow.cc	\
 	book/clipboard/simple/examplewindow.h	\
 	book/clipboard/simple/main.cc
-
-book_combo_example_SOURCES =		\
-	book/combo/examplewindow.cc	\
-	book/combo/examplewindow.h	\
-	book/combo/main.cc
 
 book_combobox_complex_example_SOURCES =		\
 	book/combobox/complex/examplewindow.cc	\

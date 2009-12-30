@@ -51,10 +51,10 @@ void MyContainer::on_size_request(Gtk::Requisition* requisition)
 
    Gtk::Requisition child_requisition_one = {0, 0};
    Gtk::Requisition child_requisition_two = {0, 0};
-   if(m_child_one && m_child_one->is_visible())
+   if(m_child_one && m_child_one->get_visible())
      child_requisition_one = m_child_one->size_request();
 
-   if(m_child_two && m_child_two->is_visible())
+   if(m_child_two && m_child_two->get_visible())
      child_requisition_two = m_child_two->size_request();
 
   //See which one has the most width:
@@ -93,7 +93,7 @@ void MyContainer::on_size_allocate(Gtk::Allocation& allocation)
   //Make it take up half the height available:
   child_allocation_one.set_height( allocation.get_height() / 2);
 
-  if(m_child_one && m_child_one->is_visible())
+  if(m_child_one && m_child_one->get_visible())
     m_child_one->size_allocate(child_allocation_one);
 
   //Place the second child below the first child:
@@ -108,7 +108,7 @@ void MyContainer::on_size_allocate(Gtk::Allocation& allocation)
   child_allocation_two.set_height( allocation.get_height() -
           child_allocation_one.get_height());
 
-  if(m_child_two && m_child_two->is_visible())
+  if(m_child_two && m_child_two->get_visible())
     m_child_two->size_allocate(child_allocation_two);
 }
 
@@ -140,7 +140,7 @@ void MyContainer::on_remove(Gtk::Widget* child)
 {
   if(child)
   {
-    const bool visible = child->is_visible();
+    const bool visible = child->get_visible();
     bool found = false;
 
     if(child == m_child_one)
