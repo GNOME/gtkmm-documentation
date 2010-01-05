@@ -155,7 +155,7 @@ bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& conte
 
   Gtk::Widget* source_widget = Gtk::Widget::drag_get_source_widget(context);
   g_print ("motion, source %s\n", source_widget ?
-           GTK_OBJECT_TYPE_NAME (source_widget) :
+           G_OBJECT_TYPE_NAME (source_widget) :
            "NULL");
 
   typedef std::list<Glib::ustring> type_targets;

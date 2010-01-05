@@ -5,6 +5,10 @@
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add the beginnings of a ToolPallette 
 	chapter.
 	* examples/book/toolpalette/examplewindow.cc: Use the latest gtkmm API.
+2010-01-05  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/others/dnd/dndwindow.cc: Fix a use of the deprecated 
+	GTK_OBJECT_TYPE_NAME() macro.
 
 2009-12-30  Murray Cumming  <murrayc@murrayc.com>
 
@@ -468,7 +472,6 @@
 	* examples/book/treeview/popup/treeview_withpopup.cc: ditto,
 
 2.16.0:
-=======
 
 2009-03-17  Murray Cumming  <murrayc@murrayc.com>
 
