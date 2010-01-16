@@ -81,7 +81,7 @@ void ExampleWindow::load_stock_items()
     Gtk::ToolButton* button = Gtk::manage(new Gtk::ToolButton(stockid));
     button->set_tooltip_text(str);
     button->set_is_important();
-    group->insert(*button, -1);
+    group->insert(*button);
 
     Gtk::StockItem stockitem;
     if(!Gtk::StockItem::lookup(stockid, stockitem) || 
@@ -106,7 +106,7 @@ void ExampleWindow::load_toggle_items()
     button->set_group(radio_group);
     button->set_label(label);
    
-    group->insert(*button, -1);
+    group->insert(*button);
   }
 }
 
@@ -133,42 +133,42 @@ void ExampleWindow::load_special_items()
   m_ToolPalette.add(*group);
 
   Gtk::ToolItem* item = create_entry_item ("homogeneous=false");
-  group->insert(*item, -1);
+  group->insert(*item);
   //TODO: Add Gtk::Container::set_child_property().
   gtk_container_child_set (GTK_CONTAINER (group->gobj()), GTK_WIDGET (item->gobj()),
                            "homogeneous", FALSE, NULL);
 
   item = create_entry_item ("homogeneous=FALSE, expand=TRUE");
-  group->insert(*item, -1);
+  group->insert(*item);
   gtk_container_child_set (GTK_CONTAINER (group->gobj()), GTK_WIDGET (item->gobj()),
                            "homogeneous", FALSE, "expand", TRUE,
                            NULL);
 
   item = create_entry_item ("homogeneous=FALSE, expand=TRUE, fill=FALSE");
-  group->insert(*item, -1);
+  group->insert(*item);
   gtk_container_child_set (GTK_CONTAINER (group->gobj()), GTK_WIDGET (item->gobj()),
                            "homogeneous", FALSE, "expand", TRUE,
                            "fill", FALSE, NULL);
 
   item = create_entry_item ("homogeneous=FALSE, expand=TRUE, new-row=TRUE");
-  group->insert(*item, -1);
+  group->insert(*item);
   gtk_container_child_set (GTK_CONTAINER (group->gobj()), GTK_WIDGET (item->gobj()),
                            "homogeneous", FALSE, "expand", TRUE,
                            "new-row", TRUE, NULL);
 
   item = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::GO_UP));
   item->set_tooltip_text("Show on vertical palettes only");
-  group->insert(*item, -1);
+  group->insert(*item);
   item->set_visible_horizontal(false);
 
   item = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::GO_FORWARD));
   item->set_tooltip_text("Show on horizontal palettes only");
-  group->insert(*item, -1);
+  group->insert(*item);
   item->set_visible_vertical(false);
 
   item = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::FULLSCREEN));
   item->set_tooltip_text("Expanded this item");
-  group->insert(*item, -1);
+  group->insert(*item);
   gtk_container_child_set (GTK_CONTAINER (group->gobj()), GTK_WIDGET (item->gobj()),
                            "homogeneous", FALSE,
                            "expand", TRUE,
@@ -176,7 +176,7 @@ void ExampleWindow::load_special_items()
 
   item = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::HELP));
   item->set_tooltip_text("A regular item");
-  group->insert(*item, -1);
+  group->insert(*item);
 }
 
 ExampleWindow::ExampleWindow()

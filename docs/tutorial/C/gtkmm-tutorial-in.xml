@@ -3895,8 +3895,57 @@ signal, which you will need to handle anyway. For instance:
 
 </chapter>
 
+<chapter id="chapter-toolpalette">
+<title>ToolPalette</title>
+
+<para>A <classname>ToolPalette</classname> is similar to a <classname>Toolbar</classname> but can contain a grid of items, categorized into groups. The user may hide or expand each group. As in a toolbar, the items may be displayed as only icons, as only text, or as icons with text.
+</para>
+<para>The <classname>ToolPalette</classname>'s items might be dragged or simply activated. For instance, the user might drag objects to a canvas to create new items there. Or the user might click an item to activate a certain brush size in a drawing application.</para>
+<para><classname>ToolItemGroup</classname>s should be added to the tool pallete via the base class's <function>Gtk::Container::add()</function> method, for instance like so:
+</para>
+<para>
+<programlisting>
+Gtk::ToolItemGroup* group_brushes = 
+  Gtk::manage(new Gtk::ToolItemGroup("Brushes"));
+m_ToolPalette.add(*group_brushes);
+</programlisting>
+</para>
+<para>
+<classname>Gtk::ToolItem</classname>s can then be added to the group. For instance, like so:
+</para>
+<para>
+<programlisting>
+Gtk::ToolButton* button = Gtk::manage(new Gtk::ToolButton(icon, "Big"));
+button->set_tooltip_text("Big Brush);
+group_brushes->insert(*button);
+</programlisting>
+</para>
+<para>You might then handle the <classname>ToolButton</classname>'s <literal>clicked</literal> signal. Alternatively, you could allow the item to be dragged to another widget, by calling <methodname>Gtk::ToolPalette::add_drag_dest()</methodname> and then using <methodname>Gtk::ToolPalette::get_drag_item()</methodname> in the other widget's <literal>drag_data_received</literal> signal handler.</para>
+
+<para><ulink url="&url_refdocs_base_gtk;ToolPalette.html">ToolPalette Reference</ulink></para>
+<para><ulink url="&url_refdocs_base_gtk;ToolItemGroup.html">ToolItemGroup Reference</ulink></para>
+<para><ulink url="&url_refdocs_base_gtk;ToolItem.html">ToolItem Reference</ulink></para>
+
+
+<sect1 id="toolpalette-example"><title>ToolPalette Example</title>
+
+<para>This example adds a <classname>ToolPalette</classname> and a <classname>DrawingArea</classname> to a window and allows the user to drag icons from the tool palette to the drawing area. The tool palette contains several groups of items. The combo boxes allow the user to change the style and orientation of the tool palette.</para>
+
+<figure id="figure-toolpalette">
+  <title>ToolPalette</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;toolpalette.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;toolpalette/">Source Code</ulink></para>
+
+</sect1>
+
+</chapter>
+
 <chapter id="chapter-adjustment">
-<title>Adjustments </title>
+<title>Adjustments</title>
 
 <para>
 &gtkmm; has various widgets that can be visually adjusted using the mouse or

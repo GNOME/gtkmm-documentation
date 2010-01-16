@@ -1,3 +1,11 @@
+2010-01-16  Murray Cumming  <murrayc@murrayc.com>
+
+  Started a ToolPalette chapter.
+  
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add the beginnings of a ToolPallette 
+	chapter.
+	* examples/book/toolpalette/examplewindow.cc: Use the latest gtkmm API.
+
 2009-12-30  Murray Cumming  <murrayc@murrayc.com>
 
 	Do not use deprecated API.
