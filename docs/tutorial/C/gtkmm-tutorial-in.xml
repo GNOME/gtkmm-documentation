@@ -3926,6 +3926,11 @@ group_brushes->insert(*button);
 <para><ulink url="&url_refdocs_base_gtk;ToolItemGroup.html">ToolItemGroup Reference</ulink></para>
 <para><ulink url="&url_refdocs_base_gtk;ToolItem.html">ToolItem Reference</ulink></para>
 
+<sect1 id="toolpallete-dranganddrop">
+<title>Drag and Drop</title>
+<para>Call <methodname>add_drag_dest()</methodname> to allow items or groups to be dragged from the tool palette to a particular destination widget. You can then use <methodname>get_drag_item()</methodname> to discover which ToolItem or ToolItemGroup is being dragged. You can use <literal>dynamic_cast</literal> to discover whether is it an item or a group. For instance, you might use this in your <literal>drag_data_received</literal> signal handler, to add a dropped item, or to show a suitable icon while dragging.</para>
+<para>See the <link linkend="chapter-draganddrop">Drag and Drop</link> chapter for general advice about Drag and Drop with gtkmm.</para>
+</sect1>
 
 <sect1 id="toolpalette-example"><title>ToolPalette Example</title>
 
