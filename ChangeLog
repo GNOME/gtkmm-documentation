@@ -1,3 +1,5 @@
+2.19.2:
+
 2010-01-18  Murray Cumming  <murrayc@murrayc.com>
 
 	ToolPalette chapter: Add a drag and drop sub-section.
@@ -10,7 +12,7 @@
 
 2010-01-16  Murray Cumming  <murrayc@murrayc.com>
 
-  Started a ToolPalette chapter.
+	Started a ToolPalette chapter.
   
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add the beginnings of a ToolPallette 
 	chapter.

@@ -1,3 +1,17 @@
+2.19.2:
+
+* Added ToolPalette chapter.
+  (Murray Cumming)
+* examples:
+  - Do not use deprecated API.
+  (Murray Cumming)
+  - InfoBar Example: Move the bar to the top of the window.
+  (José Alburquerque)
+* Build:
+  - Support Automake silent rules
+  - Create output subdirectories automatically
+  (Daniel Elstner)
+
 2.17.4:
 
 * Added an InfoBar example.
