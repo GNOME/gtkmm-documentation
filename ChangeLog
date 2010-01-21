@@ -1,3 +1,12 @@
+2010-01-21  Murray Cumming  <murrayc@murrayc.com>
+
+	Custom Signals appendix: Really show the example.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Custom Signals appendix:
+	Really show the example code and link to it.
+	In the inline code, add a missing public keyword.
+	Thanks to Matt Marsh for noticing.
+
 2.19.2:
 
 2010-01-18  Murray Cumming  <murrayc@murrayc.com>

@@ -8020,6 +8020,7 @@ an accessor method, like so:
 <programlisting>
 class Server
 {
+public:
   //signal accessor:
   typedef sigc::signal&lt;void, bool, int&gt; type_signal_something;
   type_signal_something signal_something();
@@ -8047,6 +8048,17 @@ server.signal_something().connect(
 See <filename>examples/book/signals/custom/</filename> for a full
 working example.
 </para>
+
+
+<sect1 id="chapter-custom-signals-example"><title>Example</title>
+
+<para>
+This is a full working example that defines and uses custom signal. 
+</para>
+
+<para><ulink url="&url_examples_base;signals/custom/">Source Code</ulink></para>
+
+</sect1>
 
 </appendix>
 
