@@ -8044,11 +8044,6 @@ server.signal_something().connect(
   sigc::mem_fun(client, &amp;Client::on_server_something) );
 </programlisting>
 </para>
-<para>
-See <filename>examples/book/signals/custom/</filename> for a full
-working example.
-</para>
-
 
 <sect1 id="chapter-custom-signals-example"><title>Example</title>
 
