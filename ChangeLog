@@ -1,3 +1,12 @@
+2010-01-27  Murray Cumming  <murrayc@murrayc.com>
+
+	Remove FAQ - moved to live.gnome.org/gtkmm/FAQ
+
+	* configure.ac:
+	* Makefile.am:
+	* docs/FAQ: Removed the FAQ because it has moved to 
+	http://live.gnome.org/gtkmm/FAQ instead.
+
 2010-01-21  Murray Cumming  <murrayc@murrayc.com>
 
 	Custom Signals appendix: Really show the example.

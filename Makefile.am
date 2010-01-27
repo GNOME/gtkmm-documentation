@@ -4,7 +4,7 @@ ACLOCAL_AMFLAGS	= -I build ${ACLOCAL_FLAGS}
 DISTCHECK_CONFIGURE_FLAGS = --enable-warnings=fatal
 
 if HAVE_GNOME_DOC_UTILS
-doc_subdirs = docs/FAQ docs/tutorial
+doc_subdirs = docs/tutorial
 else
 doc_subdirs =
 endif

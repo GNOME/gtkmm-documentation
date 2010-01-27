@@ -35,6 +35,5 @@ GNOME_DOC_INIT([0.9.0],,
 
 AC_CONFIG_FILES([Makefile
                  examples/Makefile
-                 docs/FAQ/Makefile
                  docs/tutorial/Makefile])
 AC_OUTPUT
