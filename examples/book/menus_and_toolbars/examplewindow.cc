@@ -32,25 +32,25 @@ ExampleWindow::ExampleWindow()
 
   m_refActionGroup->add( Gtk::Action::create("MenuFile", "_File") );
   m_refActionGroup->add( Gtk::Action::create("New", Gtk::Stock::NEW),
-          sigc::mem_fun(*this, &ExampleWindow::on_action_file_new) );
+    sigc::mem_fun(*this, &ExampleWindow::on_action_file_new) );
   m_refActionGroup->add( Gtk::Action::create("Open", Gtk::Stock::OPEN),
-          sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
+    sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
 
   register_stock_items(); //Makes the "example_stock_rain" stock item available.
   m_refActionGroup->add( Gtk::ToggleAction::create("Rain",
-              Gtk::StockID("example_stock_rain") ),
-          sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
+    Gtk::StockID("example_stock_rain") ),
+    sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
 
   m_refActionGroup->add( Gtk::Action::create("Quit", Gtk::Stock::QUIT),
-          sigc::mem_fun(*this, &ExampleWindow::on_action_file_quit) );
+    sigc::mem_fun(*this, &ExampleWindow::on_action_file_quit) );
 
   m_refActionGroup->add( Gtk::Action::create("MenuEdit", "_Edit") );
   m_refActionGroup->add( Gtk::Action::create("Cut", Gtk::Stock::CUT),
-          sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
+    sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
   m_refActionGroup->add( Gtk::Action::create("Copy", Gtk::Stock::COPY),
-          sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
+    sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
   m_refActionGroup->add( Gtk::Action::create("Paste", Gtk::Stock::PASTE),
-          sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
+    sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
 
   //Define how the actions are presented in the menus and toolbars:
   Glib::RefPtr<Gtk::UIManager> m_refUIManager = Gtk::UIManager::create();
@@ -59,28 +59,28 @@ ExampleWindow::ExampleWindow()
 
   //Layout the actions in a menubar and toolbar:
   Glib::ustring ui_info =
-        "<ui>"
-        "  <menubar name='MenuBar'>"
-        "    <menu action='MenuFile'>"
-        "      <menuitem action='New'/>"
-        "      <menuitem action='Open'/>"
-        "      <separator/>"
-        "      <menuitem action='Rain'/>"
-        "      <separator/>"
-        "      <menuitem action='Quit'/>"
-        "    </menu>"
-        "    <menu action='MenuEdit'>"
-        "      <menuitem action='Cut'/>"
-        "      <menuitem action='Copy'/>"
-        "      <menuitem action='Paste'/>"
-        "    </menu>"
-        "  </menubar>"
-        "  <toolbar  name='ToolBar'>"
-        "    <toolitem action='Open'/>"
-        "    <toolitem action='Rain'/>"
-        "    <toolitem action='Quit'/>"
-        "  </toolbar>"
-        "</ui>";
+    "<ui>"
+    "  <menubar name='MenuBar'>"
+    "    <menu action='MenuFile'>"
+    "      <menuitem action='New'/>"
+    "      <menuitem action='Open'/>"
+    "      <separator/>"
+    "      <menuitem action='Rain'/>"
+    "      <separator/>"
+    "      <menuitem action='Quit'/>"
+    "    </menu>"
+    "    <menu action='MenuEdit'>"
+    "      <menuitem action='Cut'/>"
+    "      <menuitem action='Copy'/>"
+    "      <menuitem action='Paste'/>"
+    "    </menu>"
+    "  </menubar>"
+    "  <toolbar  name='ToolBar'>"
+    "    <toolitem action='Open'/>"
+    "    <toolitem action='Rain'/>"
+    "    <toolitem action='Quit'/>"
+    "  </toolbar>"
+    "</ui>";
 
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
@@ -135,17 +135,18 @@ void ExampleWindow::on_action_others()
 
 
 void ExampleWindow::add_stock_item(
-        const Glib::RefPtr<Gtk::IconFactory>& factory,
-        const std::string& filepath,
-        const Glib::ustring& id, const Glib::ustring& label)
+  const Glib::RefPtr<Gtk::IconFactory>& factory,
+  const std::string& filepath,
+  const Glib::ustring& id, const Glib::ustring& label)
 {
   Gtk::IconSource source;
 
+  Glib::RefPtr<Gdk::Pixbuf> pixbuf;
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
   {
     //This throws an exception if the file is not found:
-    source.set_pixbuf( Gdk::Pixbuf::create_from_file(filepath) );
+    pixbuf = Gdk::Pixbuf::create_from_file(filepath);
   }
   catch(const Glib::Exception& ex)
   {
@@ -153,13 +154,17 @@ void ExampleWindow::add_stock_item(
   }
   #else
   std::auto_ptr<Glib::Error> ex;
-  source.set_pixbuf( Gdk::Pixbuf::create_from_file(filepath, ex) );
+  pixbuf = Gdk::Pixbuf::create_from_file(filepath, ex);
   if(ex.get())
   { 
     std::cerr <<  ex->what();
   }
   #endif //GLIBMM_EXCEPTIONS_ENABLED
 
+  if(!pixbuf)
+    return;
+    
+  source.set_pixbuf(pixbuf);
   source.set_size(Gtk::ICON_SIZE_SMALL_TOOLBAR);
   source.set_size_wildcarded(); //Icon may be scaled.
 
