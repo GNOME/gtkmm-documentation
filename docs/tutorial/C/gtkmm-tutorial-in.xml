@@ -47,7 +47,7 @@ name
         <firstname>Jonathon</firstname>
         <surname>Jongsma</surname>
         <contrib>Chapter on &quot;Drawing with Cairo&quot;.</contrib>
-        <contrib>Chapter on &quot;Working with Subversion&quot;.</contrib>
+        <contrib>Chapter on &quot;Working with gtkmm's Source Code&quot;.</contrib>
         <contrib>Chapter on &quot;Recent Files&quot;.</contrib>
       </author>
       <author>
@@ -278,9 +278,9 @@ be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
 </warning>
 <para>
   If you want to help develop &gtkmm; or experiment with new features, you can
-  also install &gtkmm; from svn.  Most users will never need to do this, but if
+  also install &gtkmm; from git.  Most users will never need to do this, but if
   you're interested in helping with &gtkmm; development, see the <link
-    linkend="chapter-working-with-svn">Working with Subversion</link> appendix.
+    linkend="chapter-working-with-source">Working with gtkmm's Source Code</link> appendix.
 </para>
 </sect2>
 
@@ -8187,14 +8187,14 @@ some_gc.set_foreground(some_color);</programlisting>
       important to know what they are and how they're used.
   </para>
 </appendix>
-<appendix id="chapter-working-with-svn">
-  <title>Working with Subversion</title>
+<appendix id="chapter-working-with-source">
+  <title>Working with gtkmm's Source Code</title>
   <para>
     If you are interested in helping out with the development of &gtkmm;, or
     fixing a bug in &gtkmm;, you'll probably need to build the development
-    version of &gtkmm;.  You don't want to install a development version over
-    your stable version, you want to install it alongside your existing &gtkmm;
-    installation.
+    version of &gtkmm;.  However, you should not to install a development version over
+    your stable version. Instead, you should install it alongside your existing &gtkmm;
+    installation, in a separate path.
   </para>
   <para>
     The easiest way to do this is using <ulink
@@ -8202,7 +8202,7 @@ some_gc.set_foreground(some_color);</programlisting>
     <application>jhbuild</application> is a program that makes building GNOME
     software much easier by calculating dependencies and building things in the
     correct order.  This section will give a brief explanation of how to set up
-    jhbuild to build and install &gtkmm; from svn.  For up-to-date information
+    jhbuild to build and install &gtkmm; from the source repository (git).  For up-to-date information
     on <application>jhbuild</application>, please refer to the <ulink
       url="http://library.gnome.org/devel/jhbuild/unstable/">jhbuild manual</ulink>.
     If you need assistance using <application>jhbuild</application>, you should
@@ -8212,10 +8212,10 @@ some_gc.set_foreground(some_color);</programlisting>
   </para>
   <note>
     <para>
-    Note that to build &gtkmm; from svn, you'll need to build all of its
-    dependencies from svn as well.  <application>jhbuild</application> makes
+    Note that to build &gtkmm; from git, you'll often need to build all of its
+    dependencies from git as well.  <application>jhbuild</application> makes
     this easier than it would normally be, but it will take quite a while to
-    build and install them all.
+    build and install them all. You will probably encounter build problems, though these will usually be corrected quickly if you report them.
     </para>
   </note>
   <sect1 id="sec-setting-up-jhbuild">
@@ -8224,7 +8224,7 @@ some_gc.set_foreground(some_color);</programlisting>
       To set up <application>jhbuild</application>, follow the basic
       installation instructions from the <ulink
         url="http://library.gnome.org/devel/jhbuild/unstable/">jhbuild manual</ulink>.
-      After you've gotten <application>jhbuild</application> installed, you
+      After you've have installd <application>jhbuild</application>, you
       should copy the sample <application>jhbuild</application> configuration
       file into your home directory by executing the following command from the
       <application>jhbuild</application> directory:
@@ -8235,7 +8235,7 @@ some_gc.set_foreground(some_color);</programlisting>
       <filename>gnome-2.xx.modules</filename>, so edit your
       <filename>.jhbuildrc</filename> file and set your moduleset setting to the
       latest version of GNOME like so:
-      <programlisting>moduleset = 'gnome-2.16'</programlisting>
+      <programlisting>moduleset = 'gnome-2.30'</programlisting>
     </para>
     <para>
       After setting the correct moduleset, you need to tell
@@ -8262,16 +8262,14 @@ some_gc.set_foreground(some_color);</programlisting>
         <filename>/opt/gnome2</filename> prefix.  You can choose a different
         prefix, but it is recommended that you keep this prefix different from
         other software that you've installed (don't set it to
-        <filename>/usr</filename>!) This way you can keep using your stable
-        versions without conflict and use the svn versions when you want to.
-        You may want to choose a prefix that your user account has write access
-        to so that you don't need to run <application>jhbuild</application> as
-        <literal>root</literal>.
+        <filename>/usr</filename>!) If you've followed the jhbuild instructions 
+        then this prefix belongs to your user, so you don't need to run jhbuild 
+        as <literal>root</literal>.
       </para>
     </important>
   </sect1>
   <sect1 id="sec-installing-jhbuild">
-    <title>Installing and Using the svn version of &gtkmm;</title>
+    <title>Installing and Using the git version of &gtkmm;</title>
     <para>
       Once you've configured <application>jhbuild</application> as described
       above, building &gtkmm; should be relatively straightforward.  The first
@@ -8286,7 +8284,7 @@ $ jhbuild sanitycheck</screen>
       <title>Installing &gtkmm; with <application>jhbuild</application></title>
       <para>
         If everything worked correctly, you should be able to build &gtkmm; and
-        all of its dependencies from svn by executing <command>jhbuild
+        all of its dependencies from git by executing <command>jhbuild
           build</command> (or, if you didn't specify &gtkmm; in the
         <varname>modules</varname> variable, with the command <command>jhbuild
           build gtkmm</command>).
@@ -8302,9 +8300,9 @@ $ jhbuild sanitycheck</screen>
       </para>
     </sect2>
     <sect2 id="jhbuild-using-gtkmm">
-      <title>Using the svn version of &gtkmm;</title>
+      <title>Using the git version of &gtkmm;</title>
       <para>
-        After you've installed the svn version of &gtkmm;, you're ready to start
+        After you've installed the git version of &gtkmm;, you're ready to start
         using and experimenting with it.  In order to use the new version of
         &gtkmm; you've just installed, you need to set some environment
         variables so that your <filename>configure</filename> script knows where
