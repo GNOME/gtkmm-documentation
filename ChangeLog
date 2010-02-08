@@ -1,5 +1,13 @@
 2010-02-08  Murray Cumming  <murrayc@murrayc.com>
 
+	Removed Drawing With GDK appendix.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Removed deprecated 
+	Drawing With GDK appendix. The older versions are online if people 
+	need this.
+
+2010-02-08  Murray Cumming  <murrayc@murrayc.com>
+
 	Building from svn chapter: Mention git instead.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Building from svn: 
