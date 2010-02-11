@@ -1,17 +1,24 @@
+2010-02-11  Murray Cumming  <murrayc@murrayc.com>
+
+	Basics: Add mixing C and C++ APIs section.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Basics chapter: Add the
+	Mixing C and C++ APIs section from the maemomm documentation.
+
 2010-02-08  Murray Cumming  <murrayc@murrayc.com>
 
 	Removed Drawing With GDK appendix.
 
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: Removed deprecated 
-	Drawing With GDK appendix. The older versions are online if people 
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Removed deprecated
+	Drawing With GDK appendix. The older versions are online if people
 	need this.
 
 2010-02-08  Murray Cumming  <murrayc@murrayc.com>
 
 	Building from svn chapter: Mention git instead.
 
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: Building from svn: 
-	Update to mention git. I generally worry that this duplicates too 
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Building from svn:
+	Update to mention git. I generally worry that this duplicates too
 	much from other places though.
 
 2010-01-27  Murray Cumming  <murrayc@murrayc.com>
@@ -20,7 +27,7 @@
 
 	* configure.ac:
 	* Makefile.am:
-	* docs/FAQ: Removed the FAQ because it has moved to 
+	* docs/FAQ: Removed the FAQ because it has moved to
 	http://live.gnome.org/gtkmm/FAQ instead.
 
 2010-01-21  Murray Cumming  <murrayc@murrayc.com>
@@ -38,29 +45,29 @@
 
 	ToolPalette chapter: Add a drag and drop sub-section.
 
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: ToolPalette chapter: Add a 
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: ToolPalette chapter: Add a
 	drag and drop sub-section.
 	* docs/tutorial/Makefile.am:
-	* docs/tutorial/C/figures/toolpalette.png: Added screenshot, already 
+	* docs/tutorial/C/figures/toolpalette.png: Added screenshot, already
 	mentioned in tkmm-tutorial-in.xml.
 
 2010-01-16  Murray Cumming  <murrayc@murrayc.com>
 
 	Started a ToolPalette chapter.
-  
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add the beginnings of a ToolPallette 
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add the beginnings of a ToolPallette
 	chapter.
 	* examples/book/toolpalette/examplewindow.cc: Use the latest gtkmm API.
 2010-01-05  Murray Cumming  <murrayc@murrayc.com>
 
-	* examples/others/dnd/dndwindow.cc: Fix a use of the deprecated 
+	* examples/others/dnd/dndwindow.cc: Fix a use of the deprecated
 	GTK_OBJECT_TYPE_NAME() macro.
 
 2009-12-30  Murray Cumming  <murrayc@murrayc.com>
 
 	Do not use deprecated API.
 
-	* configure.ac: Add *MM to the list of MM_ARG_ENABLE_WARNINGS() 
+	* configure.ac: Add *MM to the list of MM_ARG_ENABLE_WARNINGS()
 	deprecation defines.
 	* examples/book/combo/: Remove this because it is about deprecated API.
 	* examples/book/custom/custom_container/mycontainer.cc:
@@ -74,7 +81,7 @@
 
 	ToolPalette example: Correction.
 
-	* examples/book/toolpalette/canvas.[h|cc]: Fix the drag-leave problem, 
+	* examples/book/toolpalette/canvas.[h|cc]: Fix the drag-leave problem,
 	by no longer abusing drag-motion to pre-create the item.
 
 2009-12-28  Murray Cumming  <murrayc@murrayc.com>
@@ -82,7 +89,7 @@
 	ToolPalette example: Show drag preview.
 
 	* examples/book/toolpalette/canvas.[h|cc]:
-	* examples/book/toolpalette/examplewindow.cc: Preview the dragged 
+	* examples/book/toolpalette/examplewindow.cc: Preview the dragged
 	item, though there is a problem with the drag-leave signal.
 
 2009-12-28  Murray Cumming  <murrayc@murrayc.com>
@@ -90,13 +97,13 @@
 	Added ToolPalette example.
 
 	* examples/Makefile.am:
-	* examples/book/toolpalette/: Added an example based on the code in 
-	gtk-demo. 
+	* examples/book/toolpalette/: Added an example based on the code in
+	gtk-demo.
 
 2009-11-11  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Glade and Gtk::Builder chapter:
-	Mention create_from_file() instead of create(), as noticed by Paul Jones. 
+	Mention create_from_file() instead of create(), as noticed by Paul Jones.
 
 2009-10-05  José Alburquerque  <jaalburqu@svn.gnome.org>
 
@@ -138,14 +145,14 @@
 	Added InfoBar section.
 
 	* docs/tutorial/C/figures/infobar.png: Added.
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: Miscellaneous Widgets: 
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Miscellaneous Widgets:
 	Added an InfoBar sub-section, mostly just to mention the new example.
 
 2009-09-28  Murray Cumming  <murrayc@murrayc.com>
 
 	Examples: Do not use virtual on all methods.
 
-	* examples/*.h: Removed unnecessary virtual keywords. I once thought 
+	* examples/*.h: Removed unnecessary virtual keywords. I once thought
 	this was a good default, but changed my mind at some point.
 
 2009-09-22  José Alburquerque  <jaalburqu@svn.gnome.org>
@@ -229,9 +236,9 @@
 
 	Entry: Mention Completion, Icons, and Progress.
 
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: Entry: Move the existing 
-	text and example into a Simple Use sect2 and add sect2 sections for 
-	Completion, Icon, and Progress, using the examples that I already 
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Entry: Move the existing
+	text and example into a Simple Use sect2 and add sect2 sections for
+	Completion, Icon, and Progress, using the examples that I already
 	added a while ago.
 	* docs/tutorial/Makefile.am:
 	* docs/tutorial/C/figures/entry_completion.png:
@@ -240,8 +247,8 @@
 
 2009-09-15  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: Introduction: Slightly 
-	improve the text and copy into the <abstract>, so it has a sane 
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Introduction: Slightly
+	improve the text and copy into the <abstract>, so it has a sane
 	description on library.gnome.org.
 
 2009-09-14  Daniel Elstner  <danielk@openismus.com>
@@ -347,8 +354,8 @@
 
 	Link to library.gnome.org.
 
-	* docs/tutorial/C/gtkmm-tut.xml: Change reference API links (via 
-	XML entities) to library.gnome.org, though I guess we should discover 
+	* docs/tutorial/C/gtkmm-tut.xml: Change reference API links (via
+	XML entities) to library.gnome.org, though I guess we should discover
 	these somehow at build time via the new mm build system.
 
 2009-08-25  Daniel Elstner  <danielk@openismus.com>
@@ -384,10 +391,10 @@
 
 	Update for Gtk::Builder.
 
-	* docs/tutorial/C/gtkmm-tut.xml: Glade and libglademm chapter: 
-	Change this to a Glade and Gtk::Builder chapter, and change links and 
+	* docs/tutorial/C/gtkmm-tut.xml: Glade and libglademm chapter:
+	Change this to a Glade and Gtk::Builder chapter, and change links and
 	mentions elsewhere. The examples already existed.
-	Use US organize instead of organise. Use cannot instead of can not. 
+	Use US organize instead of organise. Use cannot instead of can not.
 	* examples/book/libglademm: Removed.
 	* configure.ac:
 	* examples/Makefile.am: Adapted.
@@ -495,8 +502,8 @@
 
 2009-06-02  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/C/gtkmm-tut.xml: Clipboard: Paste: Discovering Available 
-	Targets: Corrected the parameter types of the callback slot based on the 
+	* docs/tutorial/C/gtkmm-tut.xml: Clipboard: Paste: Discovering Available
+	Targets: Corrected the parameter types of the callback slot based on the
 	correctly-compiling code in examples/book/clipboard/ideal/examplewindow.cc.
 	Bug #583702 (Jason Curole)
 
@@ -523,7 +530,7 @@
 
 	* examples/book/entry/Makefile.am:
 	* examples/book/entry/icon/:
-	* examples/book/entry/progress/: Added entry/progress and entry/icon 
+	* examples/book/entry/progress/: Added entry/progress and entry/icon
 	examples, just to test that API.
 
 2009-03-09  Murray Cumming  <murrayc@murrayc.com>
@@ -540,23 +547,23 @@
 
 2009-02-27  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/C/gtkmm-tut.xml: Mention pygobject instead of pygtk 
+	* docs/tutorial/C/gtkmm-tut.xml: Mention pygobject instead of pygtk
 	for the codegen stuff such as h2def.py and docextract_to_xml.py.
 	Noticed by Krzesimir Nowak.
 
 2009-02-27  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/C/gtkmm-tut.xml: Use <methodname> instead of <function> 
+	* docs/tutorial/C/gtkmm-tut.xml: Use <methodname> instead of <function>
 	for method names.
 
 2009-02-27  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/C/gtkmm-tut.xml: Notebook: Mention set_current_page() 
-	instead of set_page(), which does not exist. Noticed by Jason Curole. 
+	* docs/tutorial/C/gtkmm-tut.xml: Notebook: Mention set_current_page()
+	instead of set_page(), which does not exist. Noticed by Jason Curole.
 
 2008-12-16  Fabrício Godoy  <skarllot@gmail.com>
 
-	* examples/book/range_widgets/examplewindow.cc: Remove unnecessary 
+	* examples/book/range_widgets/examplewindow.cc: Remove unnecessary
 	casts to int.
 
 2008-12-07  Armin Burgmeier  <armin@openismus.com>
@@ -569,8 +576,8 @@
 2008-11-10  Murray Cumming  <murrayc@murrayc.com>
 
 	* examples/book/builder/basic/main.cc:
-	* examples/book/builder/derived/main.cc: Catch FileError as well as 
-	BuilderError, because that is what the C function actually gives if the 
+	* examples/book/builder/derived/main.cc: Catch FileError as well as
+	BuilderError, because that is what the C function actually gives if the
 	filename is wrong.
 	Bug #548022 (Alexander Shaduri)
 
@@ -581,8 +588,8 @@
 
 2008-10-27  Murray Cumming  <murrayc@murrayc.com>
 
-	* examples/book/dialogs/messagedialog/examplewindow.cc: Include 
-	messagedialog.h here. It is not necessary, but someone (Jody) found that 
+	* examples/book/dialogs/messagedialog/examplewindow.cc: Include
+	messagedialog.h here. It is not necessary, but someone (Jody) found that
 	clearer.
 
 2008-10-21  Armin Burgmeier  <armin@openismus.com>
@@ -614,7 +621,7 @@
 2008-09-21  Murray Cumming  <murrayc@murrayc.com>
 
 	* examples/book/drag_and_drop/dndwindow.cc:
-	* examples/others/dnd/dndwindow.cc: Adapted back to the old 
+	* examples/others/dnd/dndwindow.cc: Adapted back to the old
 	SelectionData API.
 
 2008-09-04  Götz Waschk <waschk@mandriva.org>
@@ -625,7 +632,7 @@
 2008-09-03  Murray Cumming  <murrayc@murrayc.com>
 
 	* examples/book/dialogs/aboutdialog/examplewindow.cc:
-	* examples/book/dialogs/aboutdialog/examplewindow.h: Respond to the Close 
+	* examples/book/dialogs/aboutdialog/examplewindow.h: Respond to the Close
 	button. Bug #550675 (Götz Waschk).
 
 2008-08-06  Deng Xiyue <manphiz@gmail.com>
@@ -651,9 +658,9 @@
 	* docs/tutorial/C/icons/
 	* docs/tutorial/Makefile.am: Moved icons from tutorial/C to tutorial/
 	because it is only used for the html build.
-	Distributed html/ as we did when this was in gtkmm. If we install it then 
+	Distributed html/ as we did when this was in gtkmm. If we install it then
 	we must distribute it.
-	Correct some paths to fix the install and distcheck, though distcheck 
+	Correct some paths to fix the install and distcheck, though distcheck
 	still fails due to files remaining.
 	Bug #545712
 
@@ -666,12 +673,12 @@
 
 	* examples/book/drag_and_drop/dndwindow.cc:
 	* examples/others/dnd/dnd_images.h:
-	* examples/others/dnd/dndwindow.cc: Updated for latest non-deprecated 
+	* examples/others/dnd/dndwindow.cc: Updated for latest non-deprecated
 	SelectionData API.
 
 2008-06-11  Ainsley Pereira <gtkmm@pebble.org.uk>
 
-	* docs/tutorial/C/gtkmm-tut.xml: Fixed text in Chapter 21. Timeouts, 
+	* docs/tutorial/C/gtkmm-tut.xml: Fixed text in Chapter 21. Timeouts,
 	I/O and	Idle Functions - example code was right, but text referred to
 	older versions.
 	Bug #537858
@@ -685,20 +692,20 @@
 2008-08-01  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/Makefile.am:
-	* docs/index.html: Removed index.html. The true copy is in 
+	* docs/index.html: Removed index.html. The true copy is in
 	gnomemm-website (uploaded to gtkmm.org).
-	It does not seem likely that the links could be correct for local 
-	installs, given how varied the installation locations are on various 
+	It does not seem likely that the links could be correct for local
+	installs, given how varied the installation locations are on various
 	distros.
 
 2008-08-01  Deng Xiyue <manphiz@gmail.com>
-	
+
 	* docs/tutorial/Makefile.am: Reinstate rules to install generated
 	html tutorial.
 	* docs/index.html: Fix links to html tutorial.
-	
+
 2008-07-29  Deng Xiyue <manphiz@gmail.com>
-	
+
 	* examples/book/giomm/read_file_async/main.cc:
 	* examples/book/giomm/read_file/main.cc:
 	* examples/book/custom/custom_widget/mywidget.cc: Add missing header
@@ -715,39 +722,39 @@
 
 2008-06-16  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/Makefile.am: Correct the validate target to use the 
+	* docs/tutorial/Makefile.am: Correct the validate target to use the
 	file in C/
-	* examples/book/libglademm/simple/main.cc: Delete the dialog when we 
+	* examples/book/libglademm/simple/main.cc: Delete the dialog when we
 	are finished. The derived example already did this.
 
 2008-06-11  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/Makefile.am: Put the style.css in the html directory, 
-	and use it from there, so it is self contained. This also fixes the 
+	* docs/tutorial/Makefile.am: Put the style.css in the html directory,
+	and use it from there, so it is self contained. This also fixes the
 	upload, because we were assuming that it was there already.
  	Thanks to Gerald Wodni.
 
 2008-06-10  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/style.css: Added italic styling for the guilabel, 
-	guimenu, and guimenuitem DocBook tags. We do not actually use these 
-	in the gtkmm book, but I am using a version of this stylesheet for 
-	Flumotion, and I want this to be the definitive example DocBook HTML 
-	stylesheet. 
+	* docs/tutorial/style.css: Added italic styling for the guilabel,
+	guimenu, and guimenuitem DocBook tags. We do not actually use these
+	in the gtkmm book, but I am using a version of this stylesheet for
+	Flumotion, and I want this to be the definitive example DocBook HTML
+	stylesheet.
 
 2.13.1:
 
 2008-05-31  Murray Cumming  <murrayc@murrayc.com>
 
 	* examples/book/drawingarea/clock/clock.cc
-	* examples/book/drawingarea/clock/clock.h: Cleaned up the formatting 
+	* examples/book/drawingarea/clock/clock.h: Cleaned up the formatting
 	of this example.
-	Added a connect() for when GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED is 
+	Added a connect() for when GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED is
 	disabled.
 
 2008-05-30  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/C/gtkmm-tut.xml: Clarify the new text about non-GType 
+	* docs/tutorial/C/gtkmm-tut.xml: Clarify the new text about non-GType
 	enums.
 
 2008-05-18  Hubert Figuiere  <hub@figuiere.net>
@@ -760,15 +767,15 @@
 
 	* autogen.sh:
 	* configure.in:
-	* docs/tutorial/Makefile.am: Use the gnome-doc-utils structure/build 
+	* docs/tutorial/Makefile.am: Use the gnome-doc-utils structure/build
 	so that the tutorial can be translated easily.
-	We still generate a html directory at the top-level, for uploading 
+	We still generate a html directory at the top-level, for uploading
 	to the website, and maybe for installing like before.
 	* docs/tutorial/gtkmm-tut.xml: moved to:
 	* docs/tutorial/C/gtkmm-tut.xml:
-	* docs/tutorial/figures/: moved to 
+	* docs/tutorial/figures/: moved to
 	* docs/tutorial/C/figures/
-	* docs/tutorial/icons/: moved to 
+	* docs/tutorial/icons/: moved to
 	* docs/tutorial/C/icons/
 
 2008-04-12  Jonathon Jongsma  <jjongsma@gnome.org>
@@ -787,30 +794,30 @@
 
 	* configure.in:
 	* examples/book/giomm/Makefile.am:
-	* examples/book/giomm/write_file/: Added this example, showing how to 
+	* examples/book/giomm/write_file/: Added this example, showing how to
 	create files and how to replace their contents using a stream.
 
 2008-03-06  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/gtkmm-tut.xml: gmmproc appendix: Mention the m4 
+	* docs/tutorial/gtkmm-tut.xml: gmmproc appendix: Mention the m4
 	conversions more explicitly.
 
 2008-03-05  Murray Cumming  <murrayc@murrayc.com>
 
 	* configure.in:
 	* examples/book/giomm/Makefile.am:
-	* examples/book/giomm/read_file_async/: Added a version of the 
+	* examples/book/giomm/read_file_async/: Added a version of the
 	read_file() example that uses the async methods. Seems to work fine.
 
 	* examples/book/giomm/getline/getline.cc:
 	* examples/book/giomm/monitor_directory/monitor_directory.cc:
-	* examples/book/giomm/usage/usage.cc: Whitespace corrections for 
+	* examples/book/giomm/usage/usage.cc: Whitespace corrections for
 	consistency.
 
 2008-03-03  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/index.html: Added links into giomm.
-	This page is a (bad) duplicate of gnomemm-website/documentation.shtml, 
+	This page is a (bad) duplicate of gnomemm-website/documentation.shtml,
 	but I guess we need one for offline installations.
 
 2008-02-21  Deng Xiyue <manphiz@gmail.com>
@@ -854,7 +861,7 @@
 
 2008-02-04  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/gtkmm-tut.xml: gmmproc section: Document _CLASS_INTERFACE(), 
+	* docs/tutorial/gtkmm-tut.xml: gmmproc section: Document _CLASS_INTERFACE(),
 	including documenting the new optional parameters.
 
 2008-01-27  Jonathon Jongsma  <jjongsma@gnome.org>
@@ -876,15 +883,15 @@
 
 2008-01-26  Murray Cumming  <murrayc@murrayc.com>
 
-	* examples/book/giomm/volumes/main.cc: Get the volumes for the drives 
+	* examples/book/giomm/volumes/main.cc: Get the volumes for the drives
 	too, though no drives are reported for some reason.
 
 2008-01-24  Murray Cumming  <murrayc@murrayc.com>
 
 	* configure.in:
 	* examples/book/giomm/Makefile.am:
-	* examples/book/giomm/volumes/main.cc: Added example of the use of 
-	Gio::VolumeMonitor. However, this currently crashes due to 
+	* examples/book/giomm/volumes/main.cc: Added example of the use of
+	Gio::VolumeMonitor. However, this currently crashes due to
 	gio bug #511814. We can work around that in giomm if necessary.
 
 2008-01-23  Murray Cumming  <murrayc@murrayc.com>
@@ -896,12 +903,12 @@
 	* examples/book/giomm/directory_list/Makefile.am:
 	* examples/book/giomm/directory_list/main.cc:
 	* examples/book/giomm/read_file/Makefile.am:
-	* examples/book/giomm/read_file/main.cc: Added two simple giomm 
+	* examples/book/giomm/read_file/main.cc: Added two simple giomm
 	examples. Let's add some more here.
 
 2008-01-11  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/gtkmm-tut.xml: ComboBox section: Correct a typo in 
+	* docs/tutorial/gtkmm-tut.xml: ComboBox section: Correct a typo in
 	a code snippet. Thanks to JJ Harrison.
 
 2007-11-12  Murray Cumming  <murrayc@murrayc.com>
@@ -938,7 +945,7 @@
 
 2007-11-05  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/gtkmm-tut.xml: Added a warning about not making TreeColumnRecords 
+	* docs/tutorial/gtkmm-tut.xml: Added a warning about not making TreeColumnRecords
 	static. Bug #443586 (Robert Pearce).
 
 2007-11-03  Jonathon Jongsma  <jjongsma@gnome.org>
@@ -1002,13 +1009,13 @@
 
 	* configure.in:
 	* examples/Makefile.am:
-	* examples/: Moved non-book examples into an other/ 
-	directory, so that these less-great examples don't 
+	* examples/: Moved non-book examples into an other/
+	directory, so that these less-great examples don't
 	distract from all the good stuff in book/.
 
 2007-10-16  Murray Cumming  <murrayc@murrayc.com>
 
-	* docs/tutorial/Makefile.am: Build and upload the pdf when 
+	* docs/tutorial/Makefile.am: Build and upload the pdf when
 	uploading.
 
 2007-10-16  Murray Cumming  <murrayc@murrayc.com>
@@ -1020,13 +1027,13 @@
 	* configure.in:
 	* docs/tutorial/gtkmm-tut.xml:
 	* examples/book/libglademm/derived/
-	* examples/book/libglademm/simple/: Added the examples from 
-	libglademm and included them inline in the gtkmm book in 
+	* examples/book/libglademm/simple/: Added the examples from
+	libglademm and included them inline in the gtkmm book in
 	the libglademm chapter.
 
 2007-10-03  Murray Cumming  <murrayc@murrayc.com>
 
-	* Makefile.am: Removed mentions of non-existing directories, 
+	* Makefile.am: Removed mentions of non-existing directories,
 	to fix the distcheck.
 
 2007-10-03  Murray Cumming  <murrayc@murrayc.com>
@@ -1037,7 +1044,5 @@
 
 2007-10-03  Murray Cumming  <murrayc@murrayc.com>
 
-	Initial version, moving examples/ and docs/ from the main 
+	Initial version, moving examples/ and docs/ from the main
 	gtkmm module, so that the book can have examples of extra APIs.
-
-

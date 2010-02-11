@@ -91,7 +91,7 @@ name
 
     <abstract>
 
-      <!-- This text is copied from the introduction. --> 
+      <!-- This text is copied from the introduction. -->
       <para>This book explains key concepts of the &gtkmm; C++ API for creating user interfaces. It also introduces the main user interface elements ("widgets").
       </para>
 
@@ -457,6 +457,28 @@ just connecting to the existing &gtkmm; signals, see the <link linkend="chapter-
 
 </para>
 
+</sect1>
+
+<sect1 id="sec-basics-gobj-and-wrap">
+<title>Mixing C and C++ APIs</title>
+<para>You can use C APIs which do not yet have convenient C++ interfaces. It is generally not a problem to use C APIs from C++, and &gtkmm; helps by providing access to the underlying C object, and providing an easy way to create a C++ wrapper object from a C object, provided that the C API is also based on the GObject system.</para>
+
+<para>To use a &gtkmm; instance with a C function that requires a C GObject instance, use the <function>gobj()</function> function to obtain a pointer to the underlying GObject instance. For instance</para>
+
+<para>
+<programlisting>
+Gtk::Button* button = new Gtk::Button("example");
+gtk_button_do_something_new(button-&gt;gobj());
+</programlisting>
+</para>
+
+<para>To obtain a &gtkmm; instance from a C GObject instance, use the Glib::wrap() function. For instance</para>
+<para>
+<programlisting>
+GtkButton* cbutton = get_a_button();
+GtkButton* button = Glib::wrap(cbutton);
+</programlisting>
+</para>
 </sect1>
 
 <sect1 id="sec-helloworld">
@@ -1181,35 +1203,35 @@ visible flags.
 
 <sect2 id="sec-text-entry-completion">
 <title>Entry Completion</title>
-<para>A <classname>Entry</classname> widget can offer a drop-down list of 
-pre-existing choices based on the first few characters typed by the user. For 
-instance, a search dialog could suggest text from previous searches. 
+<para>A <classname>Entry</classname> widget can offer a drop-down list of
+pre-existing choices based on the first few characters typed by the user. For
+instance, a search dialog could suggest text from previous searches.
 </para>
 
-<para>To enable this functionality, you must create a 
-<classname>EntryCompletion</classname> object, and provide it to the 
-<classname>Entry</classname> widget via the 
+<para>To enable this functionality, you must create a
+<classname>EntryCompletion</classname> object, and provide it to the
+<classname>Entry</classname> widget via the
 <methodname>set_completion()</methodname> method.</para>
 
-<para>The <classname>EntryCompletion</classname> may use a 
-<classname>TreeModel</classname> containing possible entries, specified with 
-<methodname>set_model()</methodname>. You should then call 
-<methodname>set_text_column()</methodname> to specify which of your model columns 
+<para>The <classname>EntryCompletion</classname> may use a
+<classname>TreeModel</classname> containing possible entries, specified with
+<methodname>set_model()</methodname>. You should then call
+<methodname>set_text_column()</methodname> to specify which of your model columns
 should be used to match possible text entries.</para>
 
-<para>Alternatively, if a complete list of possible entries 
-would be too large or too inconvenient to generate, a callback slot may instead 
-be specified with <methodname>set_match_func()</methodname>. That callback 
-function. This is also useful if you wish to match on a part of the string other 
+<para>Alternatively, if a complete list of possible entries
+would be too large or too inconvenient to generate, a callback slot may instead
+be specified with <methodname>set_match_func()</methodname>. That callback
+function. This is also useful if you wish to match on a part of the string other
 than the start.</para>
 
 <para><ulink url="&url_refdocs_base_gtk;EntryCompletion.html">Reference</ulink></para>
 
 <sect3 id="entry-completion-example"><title>Entry Completion Example</title>
 <para>
-This example creates a <classname>Gtk::EntryCompletion</classname> and associates 
-it with a <classname>Gtk::Entry</classname> widget. The completion uses a 
-<classname>Gtk::TreeModel</classname> of possible entries, and some additional 
+This example creates a <classname>Gtk::EntryCompletion</classname> and associates
+it with a <classname>Gtk::Entry</classname> widget. The completion uses a
+<classname>Gtk::TreeModel</classname> of possible entries, and some additional
 actions.
 </para>
 
@@ -1227,16 +1249,16 @@ actions.
 
 <sect2 id="sec-text-entry-icons">
 <title>Entry Icons</title>
-<para>An <classname>Entry</classname> widget can show an icon at the start or 
-end of the text area. The icon can be specifed by methods such as 
-<methodname>set_icon_from_pixbuf()</methodname> or 
-<methodname>set_icon_from_stock()</methodname>. An application can respond to the 
-user pressing the icon by handling the 
+<para>An <classname>Entry</classname> widget can show an icon at the start or
+end of the text area. The icon can be specifed by methods such as
+<methodname>set_icon_from_pixbuf()</methodname> or
+<methodname>set_icon_from_stock()</methodname>. An application can respond to the
+user pressing the icon by handling the
 <methodname>signal_icon_press</methodname> signal.</para>
 
 <sect3 id="entry-icon-example"><title>Entry Icon Example</title>
 <para>
-This example shows a <classname>Gtk::Entry</classname> widget with a stock 
+This example shows a <classname>Gtk::Entry</classname> widget with a stock
 search icon, and prints text to the terminal when the icon is pressed.
 </para>
 
@@ -1254,14 +1276,14 @@ search icon, and prints text to the terminal when the icon is pressed.
 
 <sect2 id="sec-text-entry-progress">
 <title>Entry Progress</title>
-<para>An <classname>Entry</classname> widget can show a progress bar inside the 
-text area, under the entered text. The progress bar will be shown if the 
-<methodname>set_progress_fraction()</methodname> or 
+<para>An <classname>Entry</classname> widget can show a progress bar inside the
+text area, under the entered text. The progress bar will be shown if the
+<methodname>set_progress_fraction()</methodname> or
 <methodname>set_progress_pulse_step()</methodname> methods are called.</para>
 
 <sect3 id="entry-progress-example"><title>Entry Progress Example</title>
 <para>
-This example shows a <classname>Gtk::Entry</classname> widget with a progress  
+This example shows a <classname>Gtk::Entry</classname> widget with a progress
 bar.
 </para>
 
@@ -3905,7 +3927,7 @@ signal, which you will need to handle anyway. For instance:
 </para>
 <para>
 <programlisting>
-Gtk::ToolItemGroup* group_brushes = 
+Gtk::ToolItemGroup* group_brushes =
   Gtk::manage(new Gtk::ToolItemGroup("Brushes"));
 m_ToolPalette.add(*group_brushes);
 </programlisting>
@@ -8048,7 +8070,7 @@ server.signal_something().connect(
 <sect1 id="chapter-custom-signals-example"><title>Example</title>
 
 <para>
-This is a full working example that defines and uses custom signal. 
+This is a full working example that defines and uses custom signal.
 </para>
 
 <para><ulink url="&url_examples_base;signals/custom/">Source Code</ulink></para>
@@ -8201,8 +8223,8 @@ practical - and sensible - to subclass a button for that purpose.
         <filename>/opt/gnome2</filename> prefix.  You can choose a different
         prefix, but it is recommended that you keep this prefix different from
         other software that you've installed (don't set it to
-        <filename>/usr</filename>!) If you've followed the jhbuild instructions 
-        then this prefix belongs to your user, so you don't need to run jhbuild 
+        <filename>/usr</filename>!) If you've followed the jhbuild instructions
+        then this prefix belongs to your user, so you don't need to run jhbuild
         as <literal>root</literal>.
       </para>
     </important>
