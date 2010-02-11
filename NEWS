@@ -1,3 +1,12 @@
+2.19.3:
+
+* Basics: Add mixing C and C++ APIs section.
+* Removed Drawing With GDK (deprecated) appendix.
+* Custom Signals appendix: Really show the example.
+* Building from svn chapter: Mention git instead.
+* Remove FAQ - moved to live.gnome.org/gtkmm/FAQ
+(Murray Cumming)
+
 2.19.2:
 
 * Added ToolPalette chapter.
@@ -51,11 +60,11 @@
 
 2.14.2:
 
-* gmmproc appendix: Mention pygobject instead of pygtk  for the codegen stuff 
+* gmmproc appendix: Mention pygobject instead of pygtk  for the codegen stuff
   such as h2def.py and docextract_to_xml.py. Noticed by Krzesimir Nowak.
-* Notebook chapter: Mention set_current_page() instead of set_page(), which does 
+* Notebook chapter: Mention set_current_page() instead of set_page(), which does
   not exist. Noticed by Jason Curole.
-  (Murray Cumming) 
+  (Murray Cumming)
 * examples/book/range_widgets/examplewindow.cc: Remove unnecessary casts to int.
   (Fabrício Godoy)
 * Windows build fixes. (Armin Burgmeier).
@@ -75,7 +84,7 @@
 
 * Timeouts: Updated the inline example code and text.
   (Ainsley Pereira) Bug #537858
-* Add a COPYING.examples and corrected COPYING to GFDL-1.2, as 
+* Add a COPYING.examples and corrected COPYING to GFDL-1.2, as
   used in the documentation text.
   (Deng Xiyue) Bug #545892
 * Install generated html, as we did when this was in the gtkmm tarball.
@@ -100,20 +109,20 @@
 
 Initial release.
 This book and examples were previously in the gtkmm module itself.
-They are now in their own gtkmm-documentation module so that that book may 
+They are now in their own gtkmm-documentation module so that that book may
 contain examples of other libraries such as libgdamm.
 
 Recent Changes:
 * Added full example in the libglademm section.
-* Several new giomm examples in examples/book/giomm, not yet mentioned in the 
+* Several new giomm examples in examples/book/giomm, not yet mentioned in the
   book.
   (Jonathon Jongsma, Murray Cumming)
 * examples/book/custom/custom_widget:
-  make the class name in the .gtkrc file begin with a lower-case 'gtkmm__' 
-  so that the rc file is parsed properly. 
-  Jonathon Jongsma (Bug #396198) 
+  make the class name in the .gtkrc file begin with a lower-case 'gtkmm__'
+  so that the rc file is parsed properly.
+  Jonathon Jongsma (Bug #396198)
 * Additions to the gmmproc chapter, about conversions, _CLASS_INTERFACE(),
   _WRAP_GERROR(), and _MEMBER_GET/SET().
   (Murray Cumming)
-* Added a warning about not making TreeColumnRecords static. 
+* Added a warning about not making TreeColumnRecords static.
   (Murray Cumming) Bug #443586 (Robert Pearce).
