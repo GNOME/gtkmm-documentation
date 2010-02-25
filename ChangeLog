@@ -1,3 +1,10 @@
+2010-02-25  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Remove mentions of the
+	removed gdk-drawing chapter.
+
+2.19.3:
+
 2010-02-11  Murray Cumming  <murrayc@murrayc.com>
 
 	Basics: Add mixing C and C++ APIs section.
@@ -24,10 +31,10 @@
 2010-01-31  Murray Cumming  <murrayc@murrayc.com>
 
   menus_and_toolbars example: Minor improvement.
-  
+
 	* examples/book/menus_and_toolbars/examplewindow.cc: add_stock_item():
   Do not use a null pixbuf, if the icon file can't be loaded.
-  
+
 2010-01-27  Murray Cumming  <murrayc@murrayc.com>
 
 	Remove FAQ - moved to live.gnome.org/gtkmm/FAQ

@@ -4377,17 +4377,11 @@ font.
     most often done by overriding the virtual
     <methodname>on_expose_event()</methodname> member function.
   </para>
-  <note>
+
   <para>
-      Before &gtkmm; version 2.10, drawing was mostly done with Graphics Contexts
-      (<classname>Gdk::GC</classname>) and other GDK drawing functions, but this
-      has been largely superceded by the <ulink
-          url="http://cairographics.org">Cairo</ulink> graphics library and its
-      C++ binding <application>Cairomm</application>. See the <link linkend="chapter-gdk-drawing">Gdk Appendix</link> for a description of the deprecated GDK techniques. In general, the Cairo drawing API is simpler than the GDK one, and it is
-      generally recommended to use the Cairo drawing methods wherever possible
-      in preference to the older GDK drawing methods.
+      GTK+ uses the <ulink url="http://cairographics.org">Cairo</ulink> drawing API.
+      With gtkmm, you may use the <ulink url="http://www.cairographics.org/cairomm/">cairomm</ulink> C++ API for cairo.
   </para>
-  </note>
 
   <para>
       You can draw very sophisticated shapes using Cairo, but the methods to do
@@ -4461,7 +4455,7 @@ myContext->set_line_width(2.0);</programlisting>
         <methodname>set_font_face()</methodname> and others).
         There are many other settings as well, such as transformation matrices,
         fill rules, whether to perform antialiasing, and others.  For further
-        information, see the Cairomm API documentation.
+        information, see the <ulink url="http://www.cairographics.org/cairomm/">cairomm</ulink> API documentation.
     </para>
     <para>
         The current state of a <classname>Cairo::Context</classname> can be
