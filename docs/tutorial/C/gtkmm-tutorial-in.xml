@@ -476,7 +476,7 @@ gtk_button_do_something_new(button-&gt;gobj());
 <para>
 <programlisting>
 GtkButton* cbutton = get_a_button();
-GtkButton* button = Glib::wrap(cbutton);
+Gtk::Button* button = Glib::wrap(cbutton);
 </programlisting>
 </para>
 </sect1>
