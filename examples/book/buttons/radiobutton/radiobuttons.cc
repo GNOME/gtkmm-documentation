@@ -61,7 +61,7 @@ RadioButtons::RadioButtons() :
   m_Box2.pack_start(m_Button_Close);
 
   // Make the button the default widget
-  m_Button_Close.set_flags(Gtk::CAN_DEFAULT);
+  m_Button_Close.set_can_default();
   m_Button_Close.grab_default();
 
   // Connect the clicked signal of the button to

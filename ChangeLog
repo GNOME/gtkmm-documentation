@@ -1,6 +1,29 @@
+2010-03-18  Murray Cumming  <murrayc@murrayc.com>
+
+	Correct use of recently-deprecated API.
+
+	* examples/book/buttons/radiobutton/radiobuttons.cc:
+	* examples/book/custom/custom_container/mycontainer.cc:
+	* examples/book/custom/custom_widget/mywidget.cc:
+	* examples/book/entry/completion/examplewindow.cc:
+	* examples/book/entry/icon/examplewindow.cc:
+	* examples/book/entry/progress/examplewindow.cc:
+	* examples/book/entry/simple/examplewindow.cc:
+	* examples/book/printing/advanced/previewdialog.cc:
+	* examples/book/progressbar/examplewindow.cc:
+	* examples/book/range_widgets/examplewindow.cc:
+	* examples/book/scrolledwindow/examplewindow.cc:
+	* examples/others/calendar/calendar.cc:
+	* examples/others/cellrenderercustom/popupentry.cc:
+    Replace set_flags(Gtk::NO_WINDOW) with set_has_window(false).
+    Replace unset_falgs(Gtk::NO_WINDOW) with set_has_window().
+    Replace set_flags(Gtk::CAN_DEFAULT) with set_can_default().
+    Replace set_flags(Gtk::CAN_FOCUS) with set_can_focus().
+    Replace is_realized() with get_realized().
+
 2010-02-27  Murray Cumming  <murrayc@murrayc.com>
 
-  Fix a typo in the Mixing C and C++ APIs chapter.
+    Fix a typo in the Mixing C and C++ APIs chapter.
   
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Mixing C and C++ APIs chapter:
 	Fix a typo.

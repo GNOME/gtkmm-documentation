@@ -45,7 +45,7 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
   hbox->pack_start(*Gtk::manage(button_), Gtk::PACK_SHRINK);
   button_->add(*Gtk::manage(new Gtk::Arrow(Gtk::ARROW_DOWN, Gtk::SHADOW_OUT)));
 
-  set_flags(Gtk::CAN_FOCUS);
+  set_can_focus();
   add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
 
   show_all_children();

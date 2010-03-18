@@ -51,7 +51,7 @@ ExampleWindow::ExampleWindow()
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
   m_VBox.pack_start(m_Button_Close);
-  m_Button_Close.set_flags(Gtk::CAN_DEFAULT);
+  m_Button_Close.set_can_default();
   m_Button_Close.grab_default();
 
   show_all_children();

@@ -256,7 +256,7 @@ CalendarExample::CalendarExample()
   button = Gtk::manage(new Gtk::Button("Close"));
   button->signal_clicked().connect(&Gtk::Main::quit);
   bbox->add(*button);
-  button->set_flags(Gtk::CAN_DEFAULT);
+  button->set_can_default();
   button->grab_default();
 
   show_all();

@@ -22,7 +22,7 @@
 MyContainer::MyContainer()
 : m_child_one(0), m_child_two(0)
 {
-  set_flags(Gtk::NO_WINDOW);
+  set_has_window(false);
   set_redraw_on_allocate(false);
 }
 

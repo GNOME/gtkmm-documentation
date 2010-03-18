@@ -63,7 +63,7 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::on_button_close));
 
   /* this makes it so the button is the default. */
-  m_Button_Close.set_flags(Gtk::CAN_DEFAULT);
+  m_Button_Close.set_can_default();
 
   Gtk::Box* pBox = get_action_area();
   if(pBox)

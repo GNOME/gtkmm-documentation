@@ -122,12 +122,12 @@ void PreviewDialog::on_popreview_got_page_size(
                        const Glib::RefPtr<Gtk::PrintContext>& print_ctx,
                        const Glib::RefPtr<Gtk::PageSetup>& page_setup)
 {
-  Gtk::PaperSize paper_size = page_setup->get_paper_size();
+  const Gtk::PaperSize paper_size = page_setup->get_paper_size();
 
-  double width = paper_size.get_width(Gtk::UNIT_INCH);
-  double height = paper_size.get_height(Gtk::UNIT_INCH);
+  const double width = paper_size.get_width(Gtk::UNIT_INCH);
+  const double height = paper_size.get_height(Gtk::UNIT_INCH);
 
-  if(m_DrawingArea.is_realized()) //Avoid getting an odd allocation.
+  if(m_DrawingArea.get_realized()) //Avoid getting an odd allocation.
   {
     double dpi_x = m_DrawingArea.get_allocation().get_width() / width;
     double dpi_y = m_DrawingArea.get_allocation().get_height() / height;

@@ -30,7 +30,7 @@ MyWidget::MyWidget() :
   Gtk::Widget(),
   m_scale(1000)
 {
-  set_flags(Gtk::NO_WINDOW);
+  set_has_window(false);
 
   //This shows the GType name, which must be used in the RC file.
   std::cout << "GType name: " << G_OBJECT_TYPE_NAME(gobj()) << std::endl;
@@ -132,7 +132,7 @@ void MyWidget::on_realize()
 
     m_refGdkWindow = Gdk::Window::create(get_window() /* parent */, &attributes,
             GDK_WA_X | GDK_WA_Y);
-    unset_flags(Gtk::NO_WINDOW);
+    set_has_window();
     set_window(m_refGdkWindow);
 
     //set colors
