@@ -1,7 +1,7 @@
 ## This file is part of gtkmm-documentation.
 
 AC_PREREQ([2.59])
-AC_INIT([gtkmm-documentation], [2.19.3],
+AC_INIT([gtkmm-documentation], [2.20.0],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gtkmm],
         [gtkmm-documentation], [http://www.gtkmm.org/])
 
@@ -18,8 +18,8 @@ AC_ARG_VAR([ACLOCAL_FLAGS], [aclocal flags, e.g. -I <macro dir>])
 AC_PROG_CXX
 AC_PATH_PROG([PERL], [perl], [perl])
 
-PKG_CHECK_MODULES([GIOMM], [giomm-2.4 >= 2.16.0])
-PKG_CHECK_MODULES([GTKMM], [gtkmm-2.4 >= 2.19.2])
+PKG_CHECK_MODULES([GIOMM], [giomm-2.4 >= 2.24.0])
+PKG_CHECK_MODULES([GTKMM], [gtkmm-2.4 >= 2.20.0])
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
 
 AC_LANG([C++])
