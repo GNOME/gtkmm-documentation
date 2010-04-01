@@ -152,10 +152,10 @@ using &gtkmm; without purchasing licenses.
 </sect2>
 
 <sect2 id="gtkmm-vs-qt">
-<title>&gtkmm; compared to QT</title>
-<para>Trolltech's QT is the closest competition to &gtkmm;, so it deserves discussion.</para>
+<title>&gtkmm; compared to Qt</title>
+<para>Trolltech's Qt is the closest competition to &gtkmm;, so it deserves discussion.</para>
 
-<para>&gtkmm; developers tend to prefer &gtkmm; to QT because &gtkmm; does things in a more C++ way. QT originates from a time when C++ and the standard library were not standardised or well supported by compilers. It therefore duplicates a lot of stuff that is now in the standard library, such as containers and type information. Most significantly, Trolltech modified the C++ language to provide signals, so that QT classes cannot be used easily with non-QT classes. &gtkmm; was able to use standard C++ to provide signals without changing the C++ language. See the FAQ for more detailed differences.</para>
+<para>&gtkmm; developers tend to prefer &gtkmm; to Qt because &gtkmm; does things in a more C++ way. Qt originates from a time when C++ and the standard library were not standardised or well supported by compilers. It therefore duplicates a lot of stuff that is now in the standard library, such as containers and type information. Most significantly, Trolltech modified the C++ language to provide signals, so that Qt classes cannot be used easily with non-Qt classes. &gtkmm; was able to use standard C++ to provide signals without changing the C++ language. See the FAQ for more detailed differences.</para>
 </sect2>
 
 <sect2 id="gtkmm-is-a-wrapper">
@@ -8079,7 +8079,7 @@ This is a full working example that defines and uses custom signal.
 <appendix id="sec-signals-comparison">
 <title>Comparison with other signalling systems</title>
 <para>
-TODO: Rewrite this paragraph and talk about QT's moc.
+TODO: Rewrite this paragraph and talk about Qt's moc.
 (An aside: <application>GTK+</application> calls this scheme "signalling"; the
 sharp-eyed reader with GUI toolkit experience will note that this same design
 is often
@@ -8096,7 +8096,7 @@ play the role of listeners - sort of.  More on this later.)
 &gtkmm; signal handlers are strongly-typed, whereas
 <application>GTK+</application> C code allows you to connect a callback with
 the wrong number and type of arguments, leading to a segfault at runtime. And,
-unlike <application>QT</application>, &gtkmm; achieves this without modifying
+unlike <application>Qt</application>, &gtkmm; achieves this without modifying
 the C++ language.</para>
 <para>
 Re. Overriding signal handlers: You can do this in the straight-C world of GTK+ too; that's what GTK's

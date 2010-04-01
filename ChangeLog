@@ -1,3 +1,9 @@
+2010-04-01  David King  <davidk@openismus.com>
+
+	Fix capitalisation of Qt in tutorial
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Qt, not QT.
+
 2.20.0:
 
 2010-03-18  Murray Cumming  <murrayc@murrayc.com>
