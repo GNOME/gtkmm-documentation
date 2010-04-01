@@ -1,5 +1,15 @@
 2010-04-01  David King  <davidk@openismus.com>
 
+	Add Gtk::Assistant example and tutorial text
+
+	* docs/tutorial/Makefile.am:
+	* docs/tutorial/C/figures/assistant.png: Add screenshot.
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add tutorial text.
+	* examples/book/assistant/*:
+	* examples/Makefile.am: Add example source code.
+
+2010-04-01  David King  <davidk@openismus.com>
+
 	Fix capitalisation of Qt in tutorial
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Qt, not QT.

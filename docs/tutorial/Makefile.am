@@ -20,6 +20,7 @@ DOC_INCLUDES =
 DOC_FIGURES =					\
 	figures/alignment.png			\
 	figures/aspectframe.png			\
+	figures/assistant.png			\
 	figures/box_packing1.png		\
 	figures/box_packing2.png		\
 	figures/box_packing3.png		\

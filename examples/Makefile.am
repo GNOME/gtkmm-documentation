@@ -9,6 +9,7 @@ LDADD       = $(GTKMM_LIBS)
 check_PROGRAMS =					\
 	book/alignment/example				\
 	book/aspectframe/example			\
+	book/assistant/example				\
 	book/box/example				\
 	book/builder/basic/example			\
 	book/builder/derived/example			\
@@ -137,6 +138,11 @@ book_aspectframe_example_SOURCES =		\
 	book/aspectframe/examplewindow.cc	\
 	book/aspectframe/examplewindow.h	\
 	book/aspectframe/main.cc
+
+book_assistant_example_SOURCES =		\
+	book/assistant/examplewindow.cc		\
+	book/assistant/examplewindow.h		\
+	book/assistant/main.cc
 
 book_box_example_SOURCES =			\
 	book/box/examplewindow.cc		\

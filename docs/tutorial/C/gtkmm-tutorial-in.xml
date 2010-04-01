@@ -2679,6 +2679,46 @@ of the <classname>PageList</classname>:
 
 </sect2>
 
+<sect2 id="sec-assistant">
+<title>Assistant</title>
+
+<para>
+An <classname>Assistant</classname> is used to split a generally complex operation into steps. A step is represented by a page, and each page contains a header, a supplied child widget and an action area. Navigation buttons are provided by the <classname>Assistant</classname> and placed in the action area, and update automatically depending on the type of the page, which can be set with <methodname>set_page_type()</methodname>.
+</para>
+
+<para>
+Use the <methodname>append_page()</methodname>, <methodname>prepend_page</methodname> and <methodname>insert_page()</methodname> methods to add pages to the <classname>Assistant</classname>, supplying the child widget for each page.
+</para>
+
+<para>
+To determine the currently-visible page, use the <methodname>get_current_page()</methodname> method, and pass the result to <methodname>get_nth_page()</methodname>, which returns a pointer to the actual widget. To programmatically change the current page, use the <methodname>set_current_page()</methodname> method.
+</para>
+
+<para>
+To set the title of a page, use the <methodname>set_page_title()</methodname> method. The header and side images of a page can be set with the <methodname>set_page_header_image()</methodname> and <methodname>set_page_side_image()</methodname> methods.
+</para>
+
+<para>
+Widgets can be added to the action area with <methodname>add_action_widget()</methodname>, where they will be packed alongside the buttons provided by the <classname>Assistant</classname>. A widget can be removed with the <methodname>remove_action_widget()</methodname> method.
+</para>
+
+<para><ulink url="&url_refdocs_base_gtk;Assistant.html">Reference</ulink></para>
+
+<sect3 id="assistant-example"><title>Example</title>
+
+<figure id="figure-assistant">
+  <title>Assistant</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;assistant.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;assistant/">Source Code</ulink></para>
+
+</sect3>
+
+</sect2>
+
 </sect1>
 
 </chapter>
