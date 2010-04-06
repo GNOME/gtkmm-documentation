@@ -1519,7 +1519,7 @@ string within its trough, using the <methodname>set_text()</methodname> method.
 <title>InfoBar</title>
 
 <para>
-An <classname>InfoBar</classname> may be used to show small items of information or to ask brief questions. Unlike a <classname>Dialog</classname>, it appears at the top of the current window instead of opening a new window. Its API is very similar to the <link linkend="chapter-dialogs">Gtk::Dialog</link> API.</para>
+An <classname>InfoBar</classname> may show small items of information or to ask brief questions. Unlike a <classname>Dialog</classname>, it appears at the top of the current window instead of opening a new window. Its API is very similar to the <link linkend="chapter-dialogs">Gtk::Dialog</link> API.</para>
 
 <para><ulink url="&url_refdocs_base_gtk;InfoBar.html">Reference</ulink></para>
 
@@ -1661,7 +1661,7 @@ so.
 <title>ScrolledWindow</title>
 
 <para>
-<classname>ScrolledWindow</classname> widgets are used to create a scrollable
+<classname>ScrolledWindow</classname> widgets create a scrollable
 area.  You can insert any type of widget into a
 <classname>ScrolledWindow</classname> window, and it will be accessible
 regardless of its size by using the scrollbars. Note that
@@ -2683,7 +2683,7 @@ of the <classname>PageList</classname>:
 <title>Assistant</title>
 
 <para>
-An <classname>Assistant</classname> is used to split a generally complex operation into steps. A step is represented by a page, and each page contains a header, a supplied child widget and an action area. Navigation buttons are provided by the <classname>Assistant</classname> and placed in the action area, and update automatically depending on the type of the page, which can be set with <methodname>set_page_type()</methodname>.
+An <classname>Assistant</classname> splits a complex operation into steps. Each step is a page, containing a header, a child widget and an action area. The Assistant's action area has navigation buttons which update automatically depending on the type of the page, set with <methodname>set_page_type()</methodname>.
 </para>
 
 <para>
@@ -2699,7 +2699,7 @@ To set the title of a page, use the <methodname>set_page_title()</methodname> me
 </para>
 
 <para>
-Widgets can be added to the action area with <methodname>add_action_widget()</methodname>, where they will be packed alongside the buttons provided by the <classname>Assistant</classname>. A widget can be removed with the <methodname>remove_action_widget()</methodname> method.
+To add widgets to the action area, use the <methodname>add_action_widget()</methodname> method. They will be packed alongside the default buttons. Use the <methodname>remove_action_widget()</methodname> method to remove widgets.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;Assistant.html">Reference</ulink></para>
