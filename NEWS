@@ -1,3 +1,8 @@
+2.20.1:
+
+* Multiple-Item Widgets chapter: Added Assistant sub-section.
+  (David King, Openismus)
+  
 2.20.0:
 
 * Update the code to use only non-deprecated API.
