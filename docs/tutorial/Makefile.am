@@ -87,7 +87,7 @@ DOC_FIGURES =					\
 	figures/treeview_tree.png		\
 	figures/update_ui.png
 
-DOC_LINGUAS = de
+DOC_LINGUAS = de es
 
 MAINTAINERCLEANFILES = html/*.html $(srcdir)/html/*.html
 
