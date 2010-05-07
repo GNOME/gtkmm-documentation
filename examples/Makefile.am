@@ -140,6 +140,8 @@ book_aspectframe_example_SOURCES =		\
 	book/aspectframe/main.cc
 
 book_assistant_example_SOURCES =		\
+	book/assistant/exampleassistant.cc	\
+	book/assistant/exampleassistant.h	\
 	book/assistant/examplewindow.cc		\
 	book/assistant/examplewindow.h		\
 	book/assistant/main.cc

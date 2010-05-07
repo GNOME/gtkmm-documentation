@@ -14,47 +14,35 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include <iostream>
 #include "examplewindow.h"
+#include "exampleassistant.h"
 
 ExampleWindow::ExampleWindow()
-: m_box(false, 12),
-  m_label1("Type text to allow the assistant to continue:"),
-  m_label2("Confirmation page"),
-  m_check("Optional extra information")
+: m_table(3, 2),
+  m_button("Show the assistant"),
+  m_label1("State of assistant checkbutton:"),
+  m_label2("Contents of assistant entry:")
 {
   set_title("Gtk::Assistant example");
   set_border_width(12);
-  set_default_size(400, 300);
 
-  m_box.pack_start(m_label1);
-  m_box.pack_start(m_entry);
+  m_table.attach(m_button, 0, 2, 0, 1, Gtk::FILL, Gtk::EXPAND);
+  m_table.attach(m_label1, 0, 1, 1, 2, Gtk::FILL, Gtk::EXPAND);
+  m_table.attach(m_label2, 0, 1, 2, 3, Gtk::FILL, Gtk::EXPAND);
+  m_table.attach(m_check, 1, 2, 1, 2);
+  m_table.attach(m_entry, 1, 2, 2, 3);
+  add(m_table);
 
-  append_page(m_box);
-  append_page(m_check);
-  append_page(m_label2);
+  m_label1.set_alignment(0.0, 0.5);
+  m_label2.set_alignment(0.0, 0.5);
 
-  set_page_title(*get_nth_page(0), "Page 1");
-  set_page_title(*get_nth_page(1), "Page 2");
-  set_page_title(*get_nth_page(2), "Confirmation");
-
-  set_page_complete(m_check, true);
-  set_page_complete(m_label2, true);
-
-  set_page_type(m_box, Gtk::ASSISTANT_PAGE_INTRO);
-  set_page_type(m_label2, Gtk::ASSISTANT_PAGE_CONFIRM);
-
-  signal_apply().connect(sigc::mem_fun(*this,
+  m_button.signal_clicked().connect(sigc::mem_fun(*this,
+    &ExampleWindow::on_button_clicked));
+  m_assistant.signal_apply().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_assistant_apply));
-  signal_cancel().connect(sigc::mem_fun(*this,
-    &ExampleWindow::on_assistant_cancel));
-  signal_close().connect(sigc::mem_fun(*this,
-    &ExampleWindow::on_assistant_close));
-  signal_prepare().connect(sigc::mem_fun(*this,
-    &ExampleWindow::on_assistant_prepare));
 
-  m_entry.signal_changed().connect(sigc::mem_fun(*this,
-    &ExampleWindow::on_entry_changed));
+  m_check.set_sensitive(false);
+  m_entry.set_sensitive(false);
 
   show_all_children();
 }
@@ -65,40 +53,15 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_assistant_apply()
 {
-  std::cout << "Apply was clicked";
-  print_status();
+  bool check_state;
+  Glib::ustring entry_text;
+
+  m_assistant.get_result(check_state, entry_text);
+  m_check.set_active(check_state);
+  m_entry.set_text(entry_text);
 }
 
-void ExampleWindow::on_assistant_cancel()
+void ExampleWindow::on_button_clicked()
 {
-  std::cout << "Cancel was clicked";
-  print_status();
-}
-
-void ExampleWindow::on_assistant_close()
-{
-  std::cout << "Assistant was closed";
-  print_status();
-}
-
-void ExampleWindow::on_assistant_prepare(Gtk::Widget* /* widget */)
-{
-  set_title(Glib::ustring::compose("Gtk::Assistant example (Page %1 of %2)",
-    get_current_page() + 1, get_n_pages()));
-}
-
-void ExampleWindow::on_entry_changed()
-{
-  // The page is only complete if the entry contains text.
-  if(m_entry.get_text_length())
-    set_page_complete(m_box, true);
-  else
-    set_page_complete(m_box, false);
-}
-
-void ExampleWindow::print_status()
-{
-  std::cout << ", entry contents: \"" << m_entry.get_text()
-    << "\", checkbutton status: " << m_check.get_active() << std::endl;
-  hide();
+  m_assistant.show();
 }

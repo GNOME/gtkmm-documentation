@@ -1,5 +1,13 @@
 2010-05-07  David King  <davidk@openismus.com>
 
+	Improve the Assistant example
+
+	* examples/book/assistant/*: Move examplewindow.[cc|h] to
+	exampleassistant.[cc|h]]. Add another window which opens the assistant
+	and receives the result from it.
+
+2010-05-07  David King  <davidk@openismus.com>
+
 	Recommend non-deprecated Tooltip API in Tooltips chapter
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Remove text that recommended

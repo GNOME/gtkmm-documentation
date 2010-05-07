@@ -14,30 +14,35 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef GTKMM_EXAMPLEWINDOW_H
-#define GTKMM_EXAMPLEWINDOW_H
+#ifndef GTKMM_EXAMPLEASSISTANT_H
+#define GTKMM_EXAMPLEASSISTANT_H
 
-#include "exampleassistant.h"
 #include <gtkmm.h>
 
-class ExampleWindow : public Gtk::Window
+class ExampleAssistant : public Gtk::Assistant
 {
 public:
-  ExampleWindow();
-  virtual ~ExampleWindow();
+  ExampleAssistant();
+  virtual ~ExampleAssistant();
+
+  void get_result(bool& check_state, Glib::ustring& entry_text);
 
 private:
   // Signal handlers:
-  void on_button_clicked();
   void on_assistant_apply();
+  void on_assistant_cancel();
+  void on_assistant_close();
+  void on_assistant_prepare(Gtk::Widget* widget);
+  void on_entry_changed();
+
+  // Member functions:
+  void print_status();
 
   // Child widgets:
-  Gtk::Table m_table;
-  Gtk::Button m_button;
+  Gtk::HBox m_box;
   Gtk::Label m_label1, m_label2;
   Gtk::CheckButton m_check;
   Gtk::Entry m_entry;
-  ExampleAssistant m_assistant;
 };
 
-#endif /* GTKMM_EXAMPLEWINDOW_H */
+#endif /* GTKMM_EXAMPLEASSISTANT_H */
