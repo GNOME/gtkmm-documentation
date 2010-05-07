@@ -1542,20 +1542,17 @@ An <classname>InfoBar</classname> may show small items of information or to ask 
 <title>Tooltips</title>
 
 <para>
-<classname>Tooltips</classname> are the little text strings that pop up when
-you leave your pointer over a widget for a few seconds and the
-<classname>Gtk::Tooltips</classname> object is a group of these tooltips. After
-creating a <classname>Gtk::Tooltips</classname> instance, you can use the
-<methodname>set_tip()</methodname> method to associate some descriptive text with a
-<classname>Widget</classname>.
+Tooltips are the little information windows that pop up when you leave your
+pointer over a widget for a few seconds. Use
+<methodname>set_tooltip_text()</methodname> to set a text string as a tooltip
+on any <classname>Widget</classname>. <classname>Gtk::ToolItem</classname>s are
+not <classname>Widget</classname>s, but have the same method for convenience.
+<classname>Gtk::Tooltip</classname> is used for more advanced tooltip usage,
+such as showing an image as well as text.
 </para>
 
-<para>
-The <methodname>enable()</methodname> and <methodname>disable()</methodname> methods
-allow you to turn a whole group of tooltips on and off.
-</para>
-
-<para><ulink url="&url_refdocs_base_gtk;Tooltips.html">Reference</ulink></para>
+<para><ulink url="&url_refdocs_base_gtk;Widget.html">Widget Reference</ulink></para>
+<para><ulink url="&url_refdocs_base_gtk;Tooltip.html">Tooltip Reference</ulink></para>
 
 </sect1>
 

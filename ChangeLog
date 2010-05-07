@@ -1,5 +1,13 @@
 2010-05-07  David King  <davidk@openismus.com>
 
+	Recommend non-deprecated Tooltip API in Tooltips chapter
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Remove text that recommended
+	use of the deprecated Tooltips API, and suggest the Tooltip API
+	instead.
+
+2010-05-07  David King  <davidk@openismus.com>
+
 	Update copyright years for tutorial
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Update copyright years to
