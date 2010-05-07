@@ -1,3 +1,10 @@
+2010-05-07  David King  <davidk@openismus.com>
+
+	Update copyright years for tutorial
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Update copyright years to
+	include all years, not a range.
+
 2.20.1:
 
 2010-04-06  Murray Cumming  <murrayc@murrayc-desktop>
