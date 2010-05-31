@@ -152,12 +152,7 @@ void ExampleWindow::add_entry(const std::string& filename,
   row[m_Columns.m_col_filename] = filename;
   row[m_Columns.m_col_description] = description;
 
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   row[m_Columns.m_col_pixbuf] = Gdk::Pixbuf::create_from_file(filename);
-  #else
-  std::auto_ptr<Glib::Error> error;
-  row[m_Columns.m_col_pixbuf] = Gdk::Pixbuf::create_from_file(filename, error);
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
 }
 
 

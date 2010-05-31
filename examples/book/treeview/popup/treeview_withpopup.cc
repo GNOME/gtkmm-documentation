@@ -69,7 +69,6 @@ bool TreeView_WithPopup::on_button_press_event(GdkEventButton* event)
 {
   bool return_value = false;
 
-#ifdef GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED
   //Call base class, to allow normal handling,
   //such as allowing the row to be selected by the right-click:
   return_value = TreeView::on_button_press_event(event);

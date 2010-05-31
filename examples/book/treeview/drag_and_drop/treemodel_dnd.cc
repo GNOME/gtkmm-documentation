@@ -51,7 +51,6 @@ TreeModel_Dnd::row_draggable_vfunc(const Gtk::TreeModel::Path& path) const
     return is_draggable;
   }
 
-#ifdef GLIBMM_VFUNCS_ENABLED
   return Gtk::TreeStore::row_draggable_vfunc(path);
 #else
   return false;
@@ -104,7 +103,6 @@ TreeModel_Dnd::row_drop_possible_vfunc(const Gtk::TreeModel::Path& dest,
   //Gtk::TreeModel::Path::get_from_selection_data(selection_data, refThis,
   //path_dragged_row);
 
-#ifdef GLIBMM_VFUNCS_ENABLED
   return Gtk::TreeStore::row_drop_possible_vfunc(dest, selection_data);
 #else
   return false;

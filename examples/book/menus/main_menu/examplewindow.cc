@@ -113,7 +113,6 @@ ExampleWindow::ExampleWindow()
         "  </toolbar>"
         "</ui>";
 
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
   {
     m_refUIManager->add_ui_from_string(ui_info);
@@ -122,14 +121,6 @@ ExampleWindow::ExampleWindow()
   {
     std::cerr << "building menus failed: " <<  ex.what();
   }
-  #else
-  std::auto_ptr<Glib::Error> ex;
-  m_refUIManager->add_ui_from_string(ui_info, ex);
-  if(ex.get())
-  {
-    std::cerr << "building menus failed: " <<  ex->what();
-  }
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
 
   //Get the menubar and toolbar widgets, and add them to a container widget:
   Gtk::Widget* pMenubar = m_refUIManager->get_widget("/MenuBar");

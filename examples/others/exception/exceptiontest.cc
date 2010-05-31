@@ -8,7 +8,6 @@
 #include <gtkmm/box.h>
 
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
 
 namespace
 {
@@ -89,7 +88,6 @@ void handler2()
 
 } // anonymous namespace
 
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 
 int main(int argc, char** argv)
 {
@@ -102,7 +100,6 @@ int main(int argc, char** argv)
   Gtk::Box *const box = new Gtk::VBox(true, 5);
   window.add(*Gtk::manage(box));
 
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
   // New exception handlers are inserted at the front of the per-thread
   // handler list.  Thus, in this example handler2() is executed before
   // handler1().
@@ -129,7 +126,6 @@ int main(int argc, char** argv)
   button5->signal_clicked().connect(sigc::mem_fun(conn_handler1, &sigc::connection::disconnect));
   button6->signal_clicked().connect(sigc::mem_fun(conn_handler2, &sigc::connection::disconnect));
 
-#endif //GLIBMM_EXCEPTIONS_ENABLED
 
   window.show_all_children();
   Gtk::Main::run(window);

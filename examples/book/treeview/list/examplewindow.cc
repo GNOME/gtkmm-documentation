@@ -80,11 +80,7 @@ ExampleWindow::ExampleWindow()
   Gtk::TreeViewColumn* pColumn = m_TreeView.get_column(cols_count - 1);
   if(pColumn)
   {
-#ifdef GLIBMM_PROPERTIES_ENABLED
     pColumn->add_attribute(cell->property_value(), m_Columns.m_col_percentage);
-#else
-    pColumn->add_attribute(*cell, "value", m_Columns.m_col_percentage);
-#endif
   }
 
   //Make all the columns reorderable:

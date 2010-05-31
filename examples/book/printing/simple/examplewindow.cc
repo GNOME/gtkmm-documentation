@@ -128,7 +128,6 @@ void ExampleWindow::build_main_menu()
         "  </toolbar>"
         "</ui>";
 
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
   {
     m_refUIManager->add_ui_from_string(ui_info);
@@ -137,14 +136,6 @@ void ExampleWindow::build_main_menu()
   {
     std::cerr << "building menus failed: " << ex.what();
   }
-  #else
-  std::auto_ptr<Glib::Error> ex;
-  m_refUIManager->add_ui_from_string(ui_info, ex);
-  if(ex.get())
-  {
-    std::cerr << "building menus failed: " << ex->what();
-  }
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
 
   //Get the menubar and toolbar widgets, and add them to a container widget:
   Gtk::Widget* pMenubar = m_refUIManager->get_widget("/MenuBar");
@@ -217,7 +208,6 @@ void ExampleWindow::print_or_preview(Gtk::PrintOperationAction print_action)
 
   print->signal_done().connect(sigc::bind(sigc::mem_fun(*this,
                   &ExampleWindow::on_printoperation_done), print));
-#ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
   {
     print->run(print_action /* print or preview */, *this);
@@ -228,16 +218,6 @@ void ExampleWindow::print_or_preview(Gtk::PrintOperationAction print_action)
     std::cerr << "An error occurred while trying to run a print operation:"
         << ex.what() << std::endl;
   }
-#else
-  std::auto_ptr<Glib::Error> ex;
-  print->run(print_action /* print or preview */, *this, ex);
-
-  if (ex.get())
-  {
-    std::cerr << "An error occurred while trying to run a print operation:"
-              << ex->what() << std::endl;
-  }
-#endif /* !GLIBMM_EXCEPTIONS_ENABLED */
 }
 
 void ExampleWindow::on_menu_file_new()

@@ -82,7 +82,6 @@ ExampleWindow::ExampleWindow()
     "  </toolbar>"
     "</ui>";
 
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
   {
     m_refUIManager->add_ui_from_string(ui_info);
@@ -91,14 +90,6 @@ ExampleWindow::ExampleWindow()
   {
     std::cerr << "building menus and toolbars failed: " <<  ex.what();
   }
-  #else
-  std::auto_ptr<Glib::Error> ex;
-  m_refUIManager->add_ui_from_string(ui_info, ex);
-  if(ex.get())
-  { 
-    std::cerr << "building menus and toolbars failed: " <<  ex->what();
-  }
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
 
   Gtk::Widget* pMenuBar = m_refUIManager->get_widget("/MenuBar") ;
 
@@ -142,7 +133,6 @@ void ExampleWindow::add_stock_item(
   Gtk::IconSource source;
 
   Glib::RefPtr<Gdk::Pixbuf> pixbuf;
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
   {
     //This throws an exception if the file is not found:
@@ -152,14 +142,6 @@ void ExampleWindow::add_stock_item(
   {
     std::cout << ex.what() << std::endl;
   }
-  #else
-  std::auto_ptr<Glib::Error> ex;
-  pixbuf = Gdk::Pixbuf::create_from_file(filepath, ex);
-  if(ex.get())
-  { 
-    std::cerr <<  ex->what();
-  }
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
 
   if(!pixbuf)
     return;

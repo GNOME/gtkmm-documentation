@@ -102,15 +102,9 @@ MyCellRendererToggle::MyCellRendererToggle()
   property_active_      (*this, "active",      false),
   property_radio_       (*this, "radio",       false)
 {
-#ifdef GLIBMM_PROPERTIES_ENABLED
   property_mode() = Gtk::CELL_RENDERER_MODE_ACTIVATABLE;
   property_xpad() = 2;
   property_ypad() = 2;
-#else
-  set_property("mode", Gtk::CELL_RENDERER_MODE_ACTIVATABLE);
-  set_property("xpad", 2);
-  set_property("ypad", 2);
-#endif
 }
 
 MyCellRendererToggle::~MyCellRendererToggle()
@@ -143,17 +137,10 @@ void MyCellRendererToggle::get_size_vfunc(Gtk::Widget&,
 {
   enum { TOGGLE_WIDTH = 12 };
 
-#ifdef GLIBMM_PROPERTIES_ENABLED
   const unsigned int xpad = property_xpad();
   const unsigned int ypad = property_ypad();
   const unsigned int xalign = property_xalign();
   const unsigned int yalign = property_yalign();
-#else
-  const unsigned int xpad = (unsigned int)g_object_get_data(G_OBJECT(gobj()), "xpad");
-  const unsigned int ypad = (unsigned int)g_object_get_data(G_OBJECT(gobj()), "ypad");
-  const unsigned int xalign = (unsigned int)g_object_get_data(G_OBJECT(gobj()), "xalign");
-  const unsigned int yalign = (unsigned int)g_object_get_data(G_OBJECT(gobj()), "yalign");
-#endif 
 
   const int calc_width = xpad * 2 + TOGGLE_WIDTH;
   const int calc_height = ypad * 2 + TOGGLE_WIDTH;
@@ -187,13 +174,8 @@ void MyCellRendererToggle::render_vfunc(const Glib::RefPtr<Gdk::Drawable>& windo
                                         const Gdk::Rectangle&,
                                         Gtk::CellRendererState flags)
 {
-#ifdef GLIBMM_PROPERTIES_ENABLED
   const unsigned int cell_xpad = property_xpad();
   const unsigned int cell_ypad = property_ypad();
-#else
-  const unsigned int cell_xpad = (unsigned int)g_object_get_data(G_OBJECT(gobj()), "xpad");
-  const unsigned int cell_ypad = (unsigned int)g_object_get_data(G_OBJECT(gobj()), "ypad");
-#endif 
 
 
   int x_offset = 0, y_offset = 0, width = 0, height = 0;

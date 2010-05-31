@@ -57,7 +57,6 @@ MyWidget::~MyWidget()
 {
 }
 
-#ifdef GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED
 void MyWidget::on_size_request(Gtk::Requisition* requisition)
 {
   //Initialize the output parameter:
@@ -197,4 +196,3 @@ bool MyWidget::on_expose_event(GdkEventExpose* event)
   }
   return true;
 }
-#endif /* GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED */
