@@ -52,9 +52,6 @@ TreeModel_Dnd::row_draggable_vfunc(const Gtk::TreeModel::Path& path) const
   }
 
   return Gtk::TreeStore::row_draggable_vfunc(path);
-#else
-  return false;
-#endif
 }
 
 bool
@@ -104,8 +101,5 @@ TreeModel_Dnd::row_drop_possible_vfunc(const Gtk::TreeModel::Path& dest,
   //path_dragged_row);
 
   return Gtk::TreeStore::row_drop_possible_vfunc(dest, selection_data);
-#else
-  return false;
-#endif
 }
 

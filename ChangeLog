@@ -1,5 +1,12 @@
 2010-05-31  Murray Cumming  <murrayc@murrayc.com>
 
+	Finish removal of use of reduced API.
+	
+	* examples/book/treeview/drag_and_drop/treemodel_dnd.cc: Removed some 
+	orhpaned #endif lines left from my previous commit.
+
+2010-05-31  Murray Cumming  <murrayc@murrayc.com>
+
 	Remove use of reduced API.
 
 	* examples/*.[h|cc]: Remove all ifdefed code that supported the various 
