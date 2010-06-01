@@ -1,15 +1,22 @@
+2010-06-01  Murray Cumming  <murrayc@murrayc.com>
+
+	Book: Remove the optional API appendix.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Remove the appendix about the
+    reduced API because we no longer offer it in glibmm or gtkmm.
+
 2010-05-31  Murray Cumming  <murrayc@murrayc.com>
 
 	Finish removal of use of reduced API.
-	
-	* examples/book/treeview/drag_and_drop/treemodel_dnd.cc: Removed some 
+
+	* examples/book/treeview/drag_and_drop/treemodel_dnd.cc: Removed some
 	orhpaned #endif lines left from my previous commit.
 
 2010-05-31  Murray Cumming  <murrayc@murrayc.com>
 
 	Remove use of reduced API.
 
-	* examples/*.[h|cc]: Remove all ifdefed code that supported the various 
+	* examples/*.[h|cc]: Remove all ifdefed code that supported the various
 	reduced API, because we no longer support that in latest glibmm and gtkmm.
 
 2010-05-07  David King  <davidk@openismus.com>
@@ -41,7 +48,7 @@
 
     Assistant chapter: Slight improvements to the text.
 
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: Assistant chapter: simplify the 
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Assistant chapter: simplify the
     text, avoiding the passive.
 
 2010-04-01  David King  <davidk@openismus.com>
@@ -88,7 +95,7 @@
 2010-02-27  Murray Cumming  <murrayc@murrayc.com>
 
     Fix a typo in the Mixing C and C++ APIs chapter.
-  
+
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Mixing C and C++ APIs chapter:
 	Fix a typo.
 	Bug #610745 (Wouter Bolsterlee)
