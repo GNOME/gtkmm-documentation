@@ -1,5 +1,12 @@
 2010-06-01  Murray Cumming  <murrayc@murrayc.com>
 
+	Remove orphaned undef.
+
+	* examples/book/treeview/popup/treeview_withpopup.cc: Remove an undef
+    still left over from the removal.
+
+2010-06-01  Murray Cumming  <murrayc@murrayc.com>
+
 	Book: Remove the optional API appendix.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Remove the appendix about the

@@ -72,7 +72,6 @@ bool TreeView_WithPopup::on_button_press_event(GdkEventButton* event)
   //Call base class, to allow normal handling,
   //such as allowing the row to be selected by the right-click:
   return_value = TreeView::on_button_press_event(event);
-#endif
 
   //Then do our custom stuff:
   if( (event->type == GDK_BUTTON_PRESS) && (event->button == 3) )
@@ -98,4 +97,3 @@ void TreeView_WithPopup::on_menu_file_popup_generic()
     }
   }
 }
-
