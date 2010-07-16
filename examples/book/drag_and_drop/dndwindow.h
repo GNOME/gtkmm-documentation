@@ -19,9 +19,9 @@
 #ifndef GTKMM_EXAMPLE_DNDWINDOW_H
 #define GTKMM_EXAMPLE_DNDWINDOW_H
 
+#include <gtkmm/box.h>
 #include <gtkmm/label.h>
 #include <gtkmm/window.h>
-#include <gtkmm/box.h>
 #include <gtkmm/button.h>
 
 class DnDWindow : public Gtk::Window

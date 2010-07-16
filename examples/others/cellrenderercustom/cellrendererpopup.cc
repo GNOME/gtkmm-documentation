@@ -16,12 +16,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
  
+#include <gtkmm.h>
 #include "cellrendererpopup.h"
 #include "popupentry.h"
-
 #include <gdk/gdk.h>
 #include <gtk/gtkmain.h>
-#include <gtkmm.h>
 #include <algorithm>
 #include <memory>
 

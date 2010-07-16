@@ -19,11 +19,7 @@
 #ifndef GTKMM_EXAMPLE_DNDWINDOW_H
 #define GTKMM_EXAMPLE_DNDWINDOW_H
 
-#include <gtkmm/label.h>
-#include <gtkmm/window.h>
-#include <gtkmm/table.h>
-#include <gtkmm/image.h>
-#include <gtkmm/button.h>
+#include <gtkmm.h>
 #include <list>
 
 class DnDWindow : public Gtk::Window

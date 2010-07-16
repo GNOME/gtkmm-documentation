@@ -16,9 +16,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
  
-#include <gdkmm.h>
 #include <gtkmm/cellrenderertext.h>
 #include <gtkmm/window.h>
+#include <gdkmm.h>
 
 class PopupEntry;
 

@@ -3,9 +3,9 @@
 #include <iostream>
 #include <map>
 
+#include <gtkmm/box.h>
 #include <gtkmm/adjustment.h>
 #include <gtkmm/button.h>
-#include <gtkmm/box.h>
 #include <gtkmm/label.h>
 #include <gtkmm/progressbar.h>
 #include <gtkmm/main.h>

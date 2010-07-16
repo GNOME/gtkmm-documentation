@@ -19,9 +19,9 @@
 #ifndef GTKMM_EXAMPLE_RADIOBUTTONS_H
 #define GTKMM_EXAMPLE_RADIOBUTTONS_H
 
+#include <gtkmm/box.h>
 #include <gtkmm/window.h>
 #include <gtkmm/radiobutton.h>
-#include <gtkmm/box.h>
 #include <gtkmm/separator.h>
 
 class RadioButtons : public Gtk::Window

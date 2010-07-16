@@ -1,8 +1,8 @@
-#include <gtkmm/main.h>
 #include <gtkmm/table.h>
 #include <gtkmm/window.h>
 #include <gtkmm/ruler.h>
 #include <gtkmm/drawingarea.h>
+#include <gtkmm/main.h>
 
 // Gtk-- version of the "rulers" example from the gtk+ tutorial
 

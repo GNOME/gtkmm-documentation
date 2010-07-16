@@ -16,11 +16,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
  
+#include <gtkmm.h>
 #include "popupentry.h"
 
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkentry.h> /* see XXX below */
-#include <gtkmm.h>
 
 
 PopupEntry::PopupEntry(const Glib::ustring& path)

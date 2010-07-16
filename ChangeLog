@@ -1,3 +1,10 @@
+2010-07-16  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the build with latest gtkmm-2.22 with --enable-warnings=fatal.
+	
+	Generally include gtkmm/box.h before other gtkmm headers and include 
+	gtkmm/main.h after other gtkmm headers. Not pleasant.
+
 2010-06-01  Murray Cumming  <murrayc@murrayc.com>
 
 	Remove orphaned undef.

@@ -16,10 +16,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
+#include "examplewindow.h"
+#include <gtkmm/main.h>
 #include <iostream>
 #include <cstdlib>
-#include <gtkmm/main.h>
-#include "examplewindow.h"
 
 using std::atoi;
 

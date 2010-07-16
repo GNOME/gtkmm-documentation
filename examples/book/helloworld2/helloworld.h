@@ -19,8 +19,8 @@
 #ifndef GTKMM_EXAMPLE_HELLOWORLD_H
 #define GTKMM_EXAMPLE_HELLOWORLD_H
 
-#include <gtkmm/button.h>
 #include <gtkmm/box.h>
+#include <gtkmm/button.h>
 #include <gtkmm/window.h>
 
 class HelloWorld : public Gtk::Window

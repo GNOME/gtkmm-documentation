@@ -1,13 +1,14 @@
-#include <gtkmm/main.h>
+
+#include <gtkmm/box.h>
 #include <gtkmm/toolbar.h>
 #include <gtkmm/button.h>
-#include <gtkmm/box.h>
 #include <gtkmm/window.h>
 #include <gtkmm/menubar.h>
 #include <gtkmm/menu.h>
 #include <gtkmm/stock.h>
 #include <gtkmm/toolbutton.h>
 #include <gtkmm/separatortoolitem.h>
+#include <gtkmm/main.h>
 
 #include <cstdio>
 //#include <glib.h>

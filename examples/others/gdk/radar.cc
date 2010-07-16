@@ -19,17 +19,16 @@
 */
 
 
-#include <gtkmm/drawingarea.h>
-#include <gdkmm/colormap.h>
-#include <gdkmm/window.h>
-
-
-#include <gtkmm/button.h>
 #include <gtkmm/box.h>
+#include <gtkmm/button.h>
 #include <gtkmm/statusbar.h>
 
 #include <gtkmm/window.h>
 #include <gtkmm/main.h>
+
+#include <gtkmm/drawingarea.h>
+#include <gdkmm/colormap.h>
+#include <gdkmm/window.h>
 
 #include <cmath>
 #include <cmath>

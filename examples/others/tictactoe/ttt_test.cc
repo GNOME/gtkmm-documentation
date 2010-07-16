@@ -1,6 +1,7 @@
-#include <gtkmm/main.h>
-#include <gtkmm/window.h>
 #include "tictactoe.h"
+#include <gtkmm/window.h>
+#include <gtkmm/main.h>
+
 
 void
 win (TicTacToe *ttt)
