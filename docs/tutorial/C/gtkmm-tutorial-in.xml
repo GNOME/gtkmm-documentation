@@ -707,10 +707,6 @@ This example creates a button with a picture and a label.
 
 <para><ulink url="&url_examples_base;buttons/button">Source Code</ulink></para>
 
-<para>
-Note that the <classname>XPMLabelBox</classname> class can be used to place XPMs and
-labels into any widget that can be a container.
-</para>
 </sect2>
 
 <sect2 id="pushbutton-signals"><title>Signals</title>
