@@ -68,7 +68,8 @@ bool Canvas::on_expose_event(GdkEventExpose* event)
    return false;
 
   Cairo::RefPtr<Cairo::Context> cr = window->create_cairo_context();
-  const Gdk::Region region(event->region, true /* copy */);
+  const Cairo::RefPtr<Cairo::Region> region = 
+    Cairo::RefPtr<Cairo::Region>(new Cairo::Region(event->region, true /* take ref */));
   Gdk::Cairo::add_region_to_path(cr, region);
   cr->clip();
 

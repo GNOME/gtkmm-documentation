@@ -19,8 +19,6 @@
 #include <gtkmm.h>
 #include "cellrendererpopup.h"
 #include "popupentry.h"
-#include <gdk/gdk.h>
-#include <gtk/gtkmain.h>
 #include <algorithm>
 #include <memory>
 

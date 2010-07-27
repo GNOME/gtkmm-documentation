@@ -95,23 +95,34 @@ MainWindowClass::MainWindowClass()
     togglebutton->set_label("Convert Toggle");
     toolbar->append(*togglebutton, sigc::bind( sigc::mem_fun(*this, &MainWindowClass::toolbar_cb), "Convert Toggle"));
 
-
-    menubar->items().push_back(MenuElem("Options"));
-    Gtk::MenuItem* pMenuItem = &(menubar->items().back());
+    Gtk::MenuItem* pMenuItem = Gtk::manage(new Gtk::MenuItem("Options"));
+    menubar->append(*pMenuItem);
 
     Gtk::Menu* menu = Gtk::manage(new Gtk::Menu());
     pMenuItem->set_submenu(*menu);
 
-    menu->items()
-        .push_back(MenuElem("Icons", sigc::bind(sigc::mem_fun(*this, &MainWindowClass::toolbar_item_cb), toolbar, Gtk::TOOLBAR_ICONS)));
-    menu->items()
-        .push_back(MenuElem("Text", sigc::bind(sigc::mem_fun(*this, &MainWindowClass::toolbar_item_cb), toolbar, Gtk::TOOLBAR_TEXT)));
-    menu->items()
-        .push_back(MenuElem("Both", sigc::bind(sigc::mem_fun(*this, &MainWindowClass::toolbar_item_cb), toolbar, Gtk::TOOLBAR_BOTH)));
-    menu->items()
-        .push_back(MenuElem("Both (horiz)", sigc::bind(sigc::mem_fun(*this, &MainWindowClass::toolbar_item_cb), toolbar,  Gtk::TOOLBAR_BOTH_HORIZ)));
+    pMenuItem = Gtk::manage(new Gtk::MenuItem("Icons"));
+    pMenuItem->signal_activate().connect(
+      sigc::bind(sigc::mem_fun(*this, &MainWindowClass::toolbar_item_cb), toolbar, Gtk::TOOLBAR_ICONS));
+    menu->append(*pMenuItem);
+    Gtk::MenuItem* pMenuItemIcons = pMenuItem;
     
-    menu->items()[0].activate();
+    pMenuItem = Gtk::manage(new Gtk::MenuItem("Text"));
+    pMenuItem->signal_activate().connect(
+      sigc::bind(sigc::mem_fun(*this, &MainWindowClass::toolbar_item_cb), toolbar, Gtk::TOOLBAR_TEXT));
+    menu->append(*pMenuItem);
+    
+    pMenuItem = Gtk::manage(new Gtk::MenuItem("Both"));
+    pMenuItem->signal_activate().connect(
+      sigc::bind(sigc::mem_fun(*this, &MainWindowClass::toolbar_item_cb), toolbar, Gtk::TOOLBAR_BOTH));
+    menu->append(*pMenuItem);
+    
+    pMenuItem = Gtk::manage(new Gtk::MenuItem("Both (horiz)"));
+    pMenuItem->signal_activate().connect(
+      sigc::bind(sigc::mem_fun(*this, &MainWindowClass::toolbar_item_cb), toolbar, Gtk::TOOLBAR_BOTH_HORIZ));
+    menu->append(*pMenuItem);
+    
+    pMenuItemIcons->activate();
 
     show_all_children();
 }

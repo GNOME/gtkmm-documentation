@@ -1,3 +1,22 @@
+2010-07-27  Murray Cumming  <murrayc@murrayc.com>
+
+	Port to gtkmm-3.0
+
+	* configure.ac: Depend on gtkmm-3.0
+	* examples/book/dialogs/aboutdialog/examplewindow.cc:
+	* examples/book/notebook/examplewindow.[h|cc]:
+	* examples/book/range_widgets/examplewindow.cc:
+	* examples/book/toolpalette/canvas.cc:
+	* examples/book/treeview/popup/treeview_withpopup.cc:
+	* examples/others/cellrenderercustom/cellrendererpopup.cc:
+	* examples/others/cellrenderercustom/popupentry.cc:
+	* examples/others/dnd/dndwindow.cc:
+	* examples/others/stock/stock.cc:
+	* examples/others/treemodelcustom/exampletreemodel.[h|cc]:
+	Replace use of MenuList and NotebookPage.
+	
+This is the master branch. See also the gtkmm-2-22 branch.
+
 2010-07-21  Murray Cumming  <murrayc@murrayc.com>
 
 	Buttons chapter: Remove text about non-existant XPMLabelBox class.

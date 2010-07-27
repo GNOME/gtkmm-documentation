@@ -159,10 +159,10 @@ bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& conte
            "NULL");
 
   typedef std::list<Glib::ustring> type_targets;
-  type_targets targets = context->get_targets();
-  for(type_targets::iterator iter = targets.begin(); iter != targets.end(); ++iter)
+  const type_targets targets = context->list_targets();
+  for(type_targets::const_iterator iter = targets.begin(); iter != targets.end(); ++iter)
   {
-    Glib::ustring name = *iter;
+    const Glib::ustring name = *iter;
     g_print ("%s\n", name.c_str());
   }
 
@@ -184,19 +184,13 @@ bool DnDWindow::on_image_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context
 
   m_Image.set(m_trashcan_closed, m_trashcan_closed_mask);
 
-     
-  if(context->gobj()->targets)
+  std::vector<Glib::ustring> targets = context->list_targets();
+  if(!targets.empty())
   {
-    std::vector<Glib::ustring> targets = context->get_targets();
-    if(targets.size())
-    {
-      drag_get_data( context, targets[0], time );
-    }
-
-    return true;
+    drag_get_data( context, targets[0], time );
   }
 
-  return false;
+  return true;
 }
 
 

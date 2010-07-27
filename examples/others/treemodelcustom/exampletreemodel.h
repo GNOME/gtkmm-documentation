@@ -56,8 +56,6 @@ protected:
    virtual Path get_path_vfunc(const iterator& iter) const;
    virtual bool get_iter_vfunc(const Path& path, iterator& iter) const;
 
-   virtual bool iter_is_valid(const iterator& iter) const;
-
 private:
    typedef std::vector< Glib::ustring> typeRow; //X columns, all of type string.
    typedef std::vector< typeRow > typeListOfRows; //Y rows.

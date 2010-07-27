@@ -20,7 +20,6 @@
 #include "popupentry.h"
 
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtkentry.h> /* see XXX below */
 
 
 PopupEntry::PopupEntry(const Glib::ustring& path)
@@ -39,7 +38,6 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
   entry_ = new Gtk::Entry();
   hbox->pack_start(*Gtk::manage(entry_), Gtk::PACK_EXPAND_WIDGET);
   entry_->set_has_frame(false);
-  entry_->gobj()->is_cell_renderer = true; // XXX
 
   button_ = new Gtk::Button();
   hbox->pack_start(*Gtk::manage(button_), Gtk::PACK_SHRINK);

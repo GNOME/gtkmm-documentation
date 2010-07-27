@@ -88,46 +88,56 @@ ExampleWindow::ExampleWindow()
   m_VBox2.pack_start(m_CheckButton);
 
   //Menus:
-  {
-    using namespace Gtk::Menu_Helpers;
-
-    MenuList& list_vpos = m_Menu_Position.items();
-    list_vpos.push_back(
-      MenuElem("Top", sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_position), Gtk::POS_TOP)));
-    list_vpos.push_back(
-      MenuElem("Bottom", sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_position), Gtk::POS_BOTTOM)));
-    list_vpos.push_back(
-      MenuElem("Left", sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_position), Gtk::POS_LEFT)));
-    list_vpos.push_back(
-      MenuElem("Right", sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_position), Gtk::POS_RIGHT)));
-
-    m_VBox2.pack_start(
+  Gtk::MenuItem* item = Gtk::manage(new Gtk::MenuItem("Top"));
+  item->signal_activate().connect(
+    sigc::bind(sigc::mem_fun(*this,
+      &ExampleWindow::on_menu_position), Gtk::POS_TOP));
+  m_Menu_Position.append(*item);
+  
+  item = Gtk::manage(new Gtk::MenuItem("Bottom"));
+  item->signal_activate().connect(
+    sigc::bind(sigc::mem_fun(*this,
+      &ExampleWindow::on_menu_position), Gtk::POS_BOTTOM));
+  m_Menu_Position.append(*item);
+  
+  item = Gtk::manage(new Gtk::MenuItem("Left"));
+  item->signal_activate().connect(
+    sigc::bind(sigc::mem_fun(*this,
+      &ExampleWindow::on_menu_position), Gtk::POS_LEFT));
+  m_Menu_Position.append(*item);
+  
+  item = Gtk::manage(new Gtk::MenuItem("Right"));
+  item->signal_activate().connect(
+    sigc::bind(sigc::mem_fun(*this,
+      &ExampleWindow::on_menu_position), Gtk::POS_RIGHT));
+  m_Menu_Position.append(*item);
+  
+  m_VBox2.pack_start(
     *Gtk::manage(new LabeledOptionMenu("Scale Value Position:",
       m_Menu_Position)));
 
 
-    MenuList& list_upd = m_Menu_Policy.items();
-    list_upd.push_back(
-      MenuElem("Continuous", sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_policy),
-      Gtk::UPDATE_CONTINUOUS)));
-    list_upd.push_back(
-      MenuElem("Discontinuous", sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_policy),
-      Gtk::UPDATE_DISCONTINUOUS)));
-    list_upd.push_back(
-      MenuElem("Delayed", sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_policy),
-      Gtk::UPDATE_DELAYED)));
+  item = Gtk::manage(new Gtk::MenuItem("Continuous"));
+  item->signal_activate().connect(
+    sigc::bind(sigc::mem_fun(*this,
+      &ExampleWindow::on_menu_policy), Gtk::UPDATE_CONTINUOUS));
+  m_Menu_Policy.append(*item);
+  
+  item = Gtk::manage(new Gtk::MenuItem("Discontinuous"));
+  item->signal_activate().connect(
+    sigc::bind(sigc::mem_fun(*this,
+      &ExampleWindow::on_menu_policy), Gtk::UPDATE_DISCONTINUOUS));
+  m_Menu_Policy.append(*item);
+  
+  item = Gtk::manage(new Gtk::MenuItem("Delayed"));
+  item->signal_activate().connect(
+    sigc::bind(sigc::mem_fun(*this,
+      &ExampleWindow::on_menu_policy), Gtk::UPDATE_DELAYED));
+  m_Menu_Policy.append(*item);
 
-    m_VBox2.pack_start(
-      *Gtk::manage(new LabeledOptionMenu("Scale Update Policy:",
+  m_VBox2.pack_start(
+    *Gtk::manage(new LabeledOptionMenu("Scale Update Policy:",
       m_Menu_Policy)));
-  }
 
   //Digits:
   m_HBox_Digits.pack_start(

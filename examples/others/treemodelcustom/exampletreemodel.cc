@@ -323,14 +323,6 @@ bool ExampleTreeModel::check_treeiter_validity(const iterator& iter) const
   return m_stamp == iter.get_stamp();
 }
 
-bool ExampleTreeModel::iter_is_valid(const iterator& iter) const
-{
-  if(!check_treeiter_validity(iter))
-    return false;
-
-  return Gtk::TreeModel::iter_is_valid(iter);
-}
-
 void ExampleTreeModel::remember_glue_item(GlueItem* item) const
 {
   //Add the GlueItem to the model's GlueList, so that
