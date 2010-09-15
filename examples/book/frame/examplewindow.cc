@@ -33,7 +33,7 @@ ExampleWindow::ExampleWindow()
   m_Frame.set_label("Gtk::Frame Widget");
 
   /* Align the label at the right of the frame */
-  //m_Frame.set_label_align(Gtk::ALIGN_RIGHT, Gtk::ALIGN_TOP);
+  //m_Frame.set_label_align(Gtk::ALIGN_END, Gtk::ALIGN_START);
 
   /* Set the style of the frame */
   m_Frame.set_shadow_type(Gtk::SHADOW_ETCHED_OUT);

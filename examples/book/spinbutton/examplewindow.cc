@@ -60,7 +60,7 @@ ExampleWindow::ExampleWindow()
 
   m_VBox.pack_start(m_HBox_NotAccelerated, Gtk::PACK_EXPAND_WIDGET, 5);
 
-  m_Label_Day.set_alignment(Gtk::ALIGN_LEFT);
+  m_Label_Day.set_alignment(Gtk::ALIGN_START);
   m_VBox_Day.pack_start(m_Label_Day);
 
   m_SpinButton_Day.set_wrap();
@@ -69,7 +69,7 @@ ExampleWindow::ExampleWindow()
 
   m_HBox_NotAccelerated.pack_start(m_VBox_Day, Gtk::PACK_EXPAND_WIDGET, 5);
 
-  m_Label_Month.set_alignment(Gtk::ALIGN_LEFT);
+  m_Label_Month.set_alignment(Gtk::ALIGN_START);
   m_VBox_Month.pack_start(m_Label_Month);
 
   m_SpinButton_Month.set_wrap();
@@ -77,7 +77,7 @@ ExampleWindow::ExampleWindow()
 
   m_HBox_NotAccelerated.pack_start(m_VBox_Month, Gtk::PACK_EXPAND_WIDGET, 5);
 
-  m_Label_Year.set_alignment(Gtk::ALIGN_LEFT);
+  m_Label_Year.set_alignment(Gtk::ALIGN_START);
   m_VBox_Year.pack_start(m_Label_Year);
 
   m_SpinButton_Year.set_wrap();
@@ -96,7 +96,7 @@ ExampleWindow::ExampleWindow()
 
   m_HBox_Accelerated.pack_start(m_VBox_Value, Gtk::PACK_EXPAND_WIDGET, 5);
 
-  m_Label_Value.set_alignment(Gtk::ALIGN_LEFT);
+  m_Label_Value.set_alignment(Gtk::ALIGN_START);
   m_VBox_Value.pack_start(m_Label_Value);
 
   m_SpinButton_Value.set_wrap();
@@ -105,7 +105,7 @@ ExampleWindow::ExampleWindow()
 
   m_HBox_Accelerated.pack_start(m_VBox_Digits, Gtk::PACK_EXPAND_WIDGET, 5);
 
-  m_Label_Digits.set_alignment(Gtk::ALIGN_LEFT);
+  m_Label_Digits.set_alignment(Gtk::ALIGN_START);
   m_VBox_Digits.pack_start(m_Label_Digits);
 
   m_SpinButton_Digits.set_wrap();

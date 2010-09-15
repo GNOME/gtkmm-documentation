@@ -19,7 +19,7 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_Alignment(Gtk::ALIGN_RIGHT, Gtk::ALIGN_CENTER, 0.0, 0.0),
+: m_Alignment(Gtk::ALIGN_END, Gtk::ALIGN_CENTER, 0.0, 0.0),
   m_Button("Close")
 {
   set_title("Gtk::Alignement");

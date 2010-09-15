@@ -1,3 +1,13 @@
+2010-09-15  Murray Cumming  <murrayc@murrayc.com>
+
+	Replace use of ALIGN_LEFT/RIGHT/TOP/BOTTOM with START/END.
+
+	* examples/book/alignment/examplewindow.cc:
+	* examples/book/box/examplewindow.cc:
+	* examples/book/frame/examplewindow.cc:
+	* examples/book/spinbutton/examplewindow.cc: Use only the non-deprecated 
+	enum values.
+
 2010-07-27  Murray Cumming  <murrayc@murrayc.com>
 
 	Port to gtkmm-3.0
