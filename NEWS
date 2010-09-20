@@ -1,8 +1,23 @@
+2.21.8.1:
+
+* Builds with the latest gtkmm-2.4 (2.21.8.1) release.
+  (Murray Cumming)
+* Improve the Assistant example.
+  (David King)
+* Buttons chapter: Remove text about non-existant XPMLabelBox class.
+  (Murray Cumming)
+* Recommend non-deprecated Tooltip API in Tooltips chapter.
+  (David King)
+* Remove the optional API appendix, because it is not supported in
+  recent gtkmm versions.
+* Remove use of reduced API.
+  (Murray Cumming
+
 2.20.1:
 
 * Multiple-Item Widgets chapter: Added Assistant sub-section.
   (David King, Openismus)
-  
+
 2.20.0:
 
 * Update the code to use only non-deprecated API.
