@@ -1,15 +1,25 @@
+2010-09-20  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the build with gtkmm 2.21.8.1.
+
+	* examples/book/alignment/examplewindow.cc:
+	* examples/book/box/examplewindow.cc:
+	* examples/book/frame/examplewindow.cc:
+	* examples/book/spinbutton/examplewindow.cc: Use the non-deprecated
+  ALIGN_START/END.
+
 2010-07-21  Murray Cumming  <murrayc@murrayc.com>
 
 	Buttons chapter: Remove text about non-existant XPMLabelBox class.
 
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: The mention of an XPMLabelBox 
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: The mention of an XPMLabelBox
 	was very odd and probably about a very very old version of the API.
 
 2010-07-16  Murray Cumming  <murrayc@murrayc.com>
 
 	Fix the build with latest gtkmm-2.22 with --enable-warnings=fatal.
-	
-	Generally include gtkmm/box.h before other gtkmm headers and include 
+
+	Generally include gtkmm/box.h before other gtkmm headers and include
 	gtkmm/main.h after other gtkmm headers. Not pleasant.
 
 2010-06-01  Murray Cumming  <murrayc@murrayc.com>
