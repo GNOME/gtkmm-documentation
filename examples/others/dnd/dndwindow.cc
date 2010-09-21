@@ -33,9 +33,9 @@ DnDWindow::DnDWindow()
 
   add(m_Table);
 
-  m_drag_icon = Gdk::Pixmap::create_from_xpm(get_colormap(), m_drag_mask, drag_icon_xpm);
-  m_trashcan_open = Gdk::Pixmap::create_from_xpm(get_colormap(), m_trashcan_open_mask, trashcan_open_xpm);
-  m_trashcan_closed = Gdk::Pixmap::create_from_xpm(get_colormap(), m_trashcan_closed_mask, trashcan_closed_xpm);
+  m_drag_icon = Gdk::Pixbuf::create_from_xpm_data(drag_icon_xpm);
+  m_trashcan_open = Gdk::Pixbuf::create_from_xpm_data(trashcan_open_xpm);
+  m_trashcan_closed = Gdk::Pixbuf::create_from_xpm_data(trashcan_closed_xpm);
 
   //Targets:
   m_listTargets.push_back( Gtk::TargetEntry("STRING", Gtk::TargetFlags(0), TARGET_STRING) );
@@ -62,7 +62,7 @@ DnDWindow::DnDWindow()
   m_Label_Popup.signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_label_popup_drag_motion) );
   m_Label_Popup.signal_drag_leave().connect( sigc::mem_fun(*this, &DnDWindow::on_label_popup_drag_leave) );
 
-  m_Image.set(m_trashcan_closed, m_trashcan_closed_mask);
+  m_Image.set(m_trashcan_closed);
   m_Image.drag_dest_set();
 
   m_Table.attach(m_Image, 1, 2, 0, 1,
@@ -79,7 +79,7 @@ DnDWindow::DnDWindow()
   m_Button.drag_source_set(m_listTargets, Gdk::ModifierType(GDK_BUTTON1_MASK | GDK_BUTTON3_MASK),
                            Gdk::DragAction(GDK_ACTION_COPY | GDK_ACTION_MOVE));
 
-  m_Button.drag_source_set_icon(get_colormap(), m_drag_icon, m_drag_mask);
+  m_Button.drag_source_set_icon(m_drag_icon);
 
   m_Table.attach(m_Button, 0, 1, 1, 2,
                  Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
@@ -150,7 +150,7 @@ bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& conte
   if(!m_have_drag)
   {
     m_have_drag = true;
-    m_Image.set(m_trashcan_open, m_trashcan_open_mask);
+    m_Image.set(m_trashcan_open);
   }
 
   Gtk::Widget* source_widget = Gtk::Widget::drag_get_source_widget(context);
@@ -174,7 +174,7 @@ void DnDWindow::on_image_drag_leave(const Glib::RefPtr<Gdk::DragContext>&, guint
 {
   g_print("leave\n");
   m_have_drag = false;
-  m_Image.set(m_trashcan_closed, m_trashcan_closed_mask);
+  m_Image.set(m_trashcan_closed);
 }
 
 bool DnDWindow::on_image_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int, int, guint time)
@@ -182,7 +182,7 @@ bool DnDWindow::on_image_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context
   g_print("drop\n");
   m_have_drag = false;
 
-  m_Image.set(m_trashcan_closed, m_trashcan_closed_mask);
+  m_Image.set(m_trashcan_closed);
 
   std::vector<Glib::ustring> targets = context->list_targets();
   if(!targets.empty())
@@ -275,7 +275,7 @@ bool DnDWindow::on_popup_button_drag_motion(const Glib::RefPtr<Gdk::DragContext>
 
   return true;
 }
-                
+
 void DnDWindow::on_popup_button_drag_leave(const Glib::RefPtr<Gdk::DragContext>&, guint)
 {
  if(m_in_popup)
@@ -288,4 +288,3 @@ void DnDWindow::on_popup_button_drag_leave(const Glib::RefPtr<Gdk::DragContext>&
    }
  }
 }
-

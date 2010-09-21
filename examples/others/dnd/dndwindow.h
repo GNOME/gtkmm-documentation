@@ -48,7 +48,7 @@ protected:
   bool on_popdown_timeout();
   bool on_popup_timeout();
 
-  bool on_popup_button_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);		
+  bool on_popup_button_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);
   void on_popup_button_drag_leave(const Glib::RefPtr<Gdk::DragContext>& context, guint time);
 
 
@@ -58,14 +58,9 @@ protected:
   Gtk::Image m_Image;
   Gtk::Button m_Button;
 
-  Glib::RefPtr<Gdk::Bitmap> m_drag_mask;
-  Glib::RefPtr<Gdk::Pixmap> m_drag_icon;
-
-  Glib::RefPtr<Gdk::Bitmap> m_trashcan_open_mask;
-  Glib::RefPtr<Gdk::Pixmap> m_trashcan_open;
-
-  Glib::RefPtr<Gdk::Bitmap> m_trashcan_closed_mask;
-  Glib::RefPtr<Gdk::Pixmap> m_trashcan_closed;
+  Glib::RefPtr<Gdk::Pixbuf> m_drag_icon;
+  Glib::RefPtr<Gdk::Pixbuf> m_trashcan_open;
+  Glib::RefPtr<Gdk::Pixbuf> m_trashcan_closed;
 
   bool m_have_drag;
 

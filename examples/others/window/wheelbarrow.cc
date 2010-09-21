@@ -150,21 +150,22 @@ Wheelbarrow::Wheelbarrow()
   set_icon(Gdk::Pixbuf::create_from_xpm_data(wheelbarrow_xpm));
 
   realize(); // the widget must be realized to create the GDK window
-  const Glib::RefPtr<const Gdk::Drawable> drawable = get_window();
+  const Glib::RefPtr<const Gdk::Window> window = get_window();
   const Gdk::Color transparent = Gtk::Widget::get_default_style()->get_bg(Gtk::STATE_NORMAL);
 
-  Glib::RefPtr<Gdk::Bitmap>       mask;
-  const Glib::RefPtr<Gdk::Pixmap> pixmap =
-      Gdk::Pixmap::create_from_xpm(drawable, mask, transparent, wheelbarrow_xpm);
+  const Glib::RefPtr<Gdk::Pixbuf> pixbuf =
+      Gdk::Pixbuf::create_from_xpm_data(drawable, transparent, wheelbarrow_xpm);
 
-  Gtk::Image *const image = new Gtk::Image(pixmap, mask);
+  Gtk::Image *const image = new Gtk::Image(pixbuf);
   add(*Gtk::manage(image));
 
   image->set_size_request(48, 48);
   image->show();
 
   // Mask out transparent parts of the pixmap.
-  shape_combine_mask(mask, 0, 0);
+  //TODO: Use gdk_cairo_region_from_surface() or suchlike when it exists.
+  //TODO: Use a Gtk::Widget::shape_combine_region() when it exists.
+  window->shape_combine_region(shape_region)
 
   add_events(Gdk::BUTTON_PRESS_MASK);
 }
@@ -195,4 +196,3 @@ int main(int argc, char** argv)
 
   return 0;
 }
-

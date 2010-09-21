@@ -103,14 +103,13 @@ check_PROGRAMS =					\
 	others/cellrenderercustom/testpopup		\
 	others/dnd/testdnd				\
 	others/exception/exceptiontest			\
-	others/gdk/radar				\
 	others/idle/idle				\
 	others/rulers/rulers				\
 	others/statusbar/statusbar			\
 	others/stock/stock				\
 	others/tictactoe/ttt_test			\
-	others/treemodelcustom/example			\
-	others/window/wheelbarrow
+	others/treemodelcustom/example
+#Waiting for a gdk_cairo_region_from_surface(): others/window/wheelbarrow
 
 dist_noinst_DATA =				\
 	README					\

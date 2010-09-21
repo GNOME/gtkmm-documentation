@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
- 
+
 /*
  * Example Gtk::CellRendererCustom implementation.  The custom
  * MyCellRendererToggle is functionally equivalent to Gtk::CellRendererToggle.
@@ -178,8 +178,13 @@ void MyCellRendererToggle::render_vfunc(const Glib::RefPtr<Gdk::Drawable>& windo
   const unsigned int cell_ypad = property_ypad();
 
 
-  int x_offset = 0, y_offset = 0, width = 0, height = 0;
-  get_size(widget, cell_area, x_offset, y_offset, width, height);
+  int width = 0, height = 0;
+
+  //TODO: Support natural size.
+  GtkRequisition requisition_min, requisition_natural;
+  get_size(widget, requisition_min, requisition_natural);
+  width = requisition_min.width;
+  height = requisition_min.height;
 
   width  -= cell_xpad * 2;
   height -= cell_ypad * 2;
@@ -206,8 +211,8 @@ void MyCellRendererToggle::render_vfunc(const Glib::RefPtr<Gdk::Drawable>& windo
       widget.get_style()->paint_option(
           window_casted, state, shadow,
           cell_area, widget, "cellradio",
-          cell_area.get_x() + x_offset + cell_xpad,
-          cell_area.get_y() + y_offset + cell_ypad,
+          cell_area.get_x() + cell_xpad,
+          cell_area.get_y() + cell_ypad,
           width - 1, height - 1);
     }
     else
@@ -215,8 +220,8 @@ void MyCellRendererToggle::render_vfunc(const Glib::RefPtr<Gdk::Drawable>& windo
       widget.get_style()->paint_check(
           window_casted, state, shadow,
           cell_area, widget, "cellcheck",
-          cell_area.get_x() + x_offset + cell_xpad,
-          cell_area.get_y() + y_offset + cell_ypad,
+          cell_area.get_x() + cell_xpad,
+          cell_area.get_y() + cell_ypad,
           width - 1, height - 1);
     }
   }
@@ -298,4 +303,3 @@ int main(int argc, char** argv)
 
   return 0;
 }
-

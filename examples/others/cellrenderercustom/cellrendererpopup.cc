@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
- 
+
 #include <gtkmm.h>
 #include "cellrendererpopup.h"
 #include "popupentry.h"
@@ -101,6 +101,8 @@ void CellRendererPopup::hide_popup()
   signal_hide_popup_();
 }
 
+//TODO: Port this to gtkmm 3:
+/*
 void CellRendererPopup::get_size_vfunc(Gtk::Widget& widget,
                                        const Gdk::Rectangle* cell_area,
                                        int* x_offset, int* y_offset,
@@ -115,6 +117,7 @@ void CellRendererPopup::get_size_vfunc(Gtk::Widget& widget,
   if(width)
     *width += button_width_;
 }
+*/
 
 Gtk::CellEditable* CellRendererPopup::start_editing_vfunc(GdkEvent*,
                                                           Gtk::Widget&,
@@ -239,7 +242,7 @@ bool CellRendererPopup::on_button_press_event(GdkEventButton* event)
 
   editing_canceled_ = true;
   signal_hide_popup_();
-  
+
   return false;
 }
 
@@ -247,13 +250,13 @@ bool CellRendererPopup::on_key_press_event(GdkEventKey* event)
 {
   switch(event->keyval)
   {
-    case GDK_Escape:
+    case GDK_KEY_Escape:
       editing_canceled_ = true; break;
 
-    case GDK_Return:
-    case GDK_KP_Enter:
-    case GDK_ISO_Enter:
-    case GDK_3270_Enter:
+    case GDK_KEY_Return:
+    case GDK_KEY_KP_Enter:
+    case GDK_KEY_ISO_Enter:
+    case GDK_KEY_3270_Enter:
       editing_canceled_ = false; break;
 
     default:
@@ -305,4 +308,3 @@ void CellRendererPopup::on_popup_hide()
 {
   popup_entry_ = 0;
 }
-

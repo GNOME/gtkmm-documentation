@@ -25,7 +25,7 @@ ExampleWindow::ExampleWindow()
   m_Table(2, 2, true),
   m_CheckButton_Text("Show text"),
   m_CheckButton_Activity("Activity mode"),
-  m_CheckButton_Orientation("Right to Left"),
+  m_CheckButton_Inverted("Right to Left"),
   m_Button_Close("Close"),
   m_bActivityMode(false)
 {
@@ -58,9 +58,9 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::on_checkbutton_activity) );
 
   //Add a check button to toggle activity mode:
-  m_Table.attach(m_CheckButton_Orientation, 0, 1, 2, 3, Gtk::EXPAND | Gtk::FILL,
+  m_Table.attach(m_CheckButton_Inverted, 0, 1, 2, 3, Gtk::EXPAND | Gtk::FILL,
           Gtk::EXPAND | Gtk::FILL, 5, 5);
-  m_CheckButton_Orientation.signal_clicked().connect(sigc::mem_fun(*this,
+  m_CheckButton_Inverted.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_orientation) );
 
   //Add a button to exit the program.
@@ -99,17 +99,8 @@ void ExampleWindow::on_checkbutton_activity()
 
 void ExampleWindow::on_checkbutton_orientation()
 {
-  switch(m_ProgressBar.get_orientation())
-  {
-    case Gtk::PROGRESS_LEFT_TO_RIGHT:
-      m_ProgressBar.set_orientation(Gtk::PROGRESS_RIGHT_TO_LEFT);
-      break;
-    case Gtk::PROGRESS_RIGHT_TO_LEFT:
-      m_ProgressBar.set_orientation(Gtk::PROGRESS_LEFT_TO_RIGHT);
-      break;
-    default:
-      break; // do nothing	
-  }
+  const bool inverted = m_CheckButton_Inverted.get_active();
+  m_ProgressBar.set_inverted(inverted);
 }
 
 void ExampleWindow::on_button_close()
@@ -138,4 +129,3 @@ bool ExampleWindow::on_timeout()
   //continues to get called
   return true;
 }
-

@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
- 
+
 #include <gtkmm.h>
 #include "popupentry.h"
 
@@ -91,9 +91,11 @@ int PopupEntry::get_button_width()
   window.move(-500, -500);
   window.show_all();
 
-  Gtk::Requisition requisition = window.size_request();
+  //TODO: Support natural-size:
+  Gtk::Requisition requisition_min, requisition_natural;
+  window.Gtk::SizeRequest::get_size(requisition_min, requisition_natural);
 
-  return requisition.width;
+  return requisition_min.width;
 }
 
 PopupEntry::type_signal_arrow_clicked& PopupEntry::signal_arrow_clicked()
@@ -103,7 +105,7 @@ PopupEntry::type_signal_arrow_clicked& PopupEntry::signal_arrow_clicked()
 
 bool PopupEntry::on_key_press_event(GdkEventKey* event)
 {
-  if(event->keyval == GDK_Escape)
+  if(event->keyval == GDK_KEY_Escape)
   {
     editing_canceled_ = true;
 
@@ -154,7 +156,7 @@ void PopupEntry::on_entry_activate()
 
 bool PopupEntry::on_entry_key_press_event(GdkEventKey* event)
 {
-  if(event->keyval == GDK_Escape)
+  if(event->keyval == GDK_KEY_Escape)
   {
     editing_canceled_ = true;
 
@@ -166,4 +168,3 @@ bool PopupEntry::on_entry_key_press_event(GdkEventKey* event)
 
   return false;
 }
-

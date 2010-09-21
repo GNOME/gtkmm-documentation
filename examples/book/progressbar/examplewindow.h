@@ -41,7 +41,7 @@ protected:
   Gtk::Table m_Table;
   Gtk::ProgressBar m_ProgressBar;
   Gtk::HSeparator m_Separator;
-  Gtk::CheckButton m_CheckButton_Text, m_CheckButton_Activity, m_CheckButton_Orientation;
+  Gtk::CheckButton m_CheckButton_Text, m_CheckButton_Activity, m_CheckButton_Inverted;
   Gtk::Button m_Button_Close;
 
   int m_connection_id_timeout;

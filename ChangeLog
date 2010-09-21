@@ -1,3 +1,26 @@
+2010-09-21  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the make check build with gtkmm from git master.
+
+	* examples/Makefile.am: Disable examples/others/gdk/radar because it is
+  just an example of GDK drawing, but people should use cairo now.
+  We might bring it back as a cairo widget example later.
+  Temporarily disable examples/others/window/wheelbarrow because it needs a function that is
+  not yet in GTK+ 3.
+
+	* examples/book/progressbar/examplewindow.[h|cc]: Use set_inverted()
+  instead of set_orientation(), matching the change in the C test code.
+	* examples/others/cellrenderercustom/cellrendererpopup.[h|cc]:
+	* examples/others/cellrenderercustom/cellrenderertoggle.cc:
+	* examples/others/cellrenderercustom/popupentry.cc:
+  Replace use of CellRenderer::get_size() with CellSizeRequest::get_size(),
+  though we should probably do more to really support natural-size.
+	* examples/book/custom/custom_container/mycontainer.cc:
+  Replace use of Widget::size_allocate() with SizeRequest::get_size()
+  though we should probably do more to really support natural-size.
+	* examples/others/dnd/dndwindow.[h|cc]: Replace use of Gdk::Pixmap with
+  Gdk::Pixbuf.
+
 2010-09-15  Murray Cumming  <murrayc@murrayc.com>
 
 	Replace use of ALIGN_LEFT/RIGHT/TOP/BOTTOM with START/END.
@@ -5,7 +28,7 @@
 	* examples/book/alignment/examplewindow.cc:
 	* examples/book/box/examplewindow.cc:
 	* examples/book/frame/examplewindow.cc:
-	* examples/book/spinbutton/examplewindow.cc: Use only the non-deprecated 
+	* examples/book/spinbutton/examplewindow.cc: Use only the non-deprecated
 	enum values.
 
 2010-07-27  Murray Cumming  <murrayc@murrayc.com>
@@ -24,21 +47,21 @@
 	* examples/others/stock/stock.cc:
 	* examples/others/treemodelcustom/exampletreemodel.[h|cc]:
 	Replace use of MenuList and NotebookPage.
-	
+
 This is the master branch. See also the gtkmm-2-22 branch.
 
 2010-07-21  Murray Cumming  <murrayc@murrayc.com>
 
 	Buttons chapter: Remove text about non-existant XPMLabelBox class.
 
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: The mention of an XPMLabelBox 
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: The mention of an XPMLabelBox
 	was very odd and probably about a very very old version of the API.
 
 2010-07-16  Murray Cumming  <murrayc@murrayc.com>
 
 	Fix the build with latest gtkmm-2.22 with --enable-warnings=fatal.
-	
-	Generally include gtkmm/box.h before other gtkmm headers and include 
+
+	Generally include gtkmm/box.h before other gtkmm headers and include
 	gtkmm/main.h after other gtkmm headers. Not pleasant.
 
 2010-06-01  Murray Cumming  <murrayc@murrayc.com>

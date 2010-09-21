@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
- 
+
 #include <gtkmm/cellrenderertext.h>
 #include <gtkmm/window.h>
 #include <gdkmm.h>
@@ -44,10 +44,14 @@ public:
   void hide_popup();
 
 protected:
+
+  //TODO: Port this to gtkmm 3:
+  /*
   virtual void get_size_vfunc(Gtk::Widget& widget,
                               const Gdk::Rectangle* cell_area,
                               int* x_offset, int* y_offset,
                               int* width,    int* height) const;
+  */
 
   virtual Gtk::CellEditable* start_editing_vfunc(GdkEvent* event,
                                                  Gtk::Widget& widget,
@@ -80,4 +84,3 @@ private:
   void on_popup_arrow_clicked();
   void on_popup_hide();
 };
-

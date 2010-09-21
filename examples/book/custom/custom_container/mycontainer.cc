@@ -52,10 +52,18 @@ void MyContainer::on_size_request(Gtk::Requisition* requisition)
    Gtk::Requisition child_requisition_one = {0, 0};
    Gtk::Requisition child_requisition_two = {0, 0};
    if(m_child_one && m_child_one->get_visible())
-     child_requisition_one = m_child_one->size_request();
+   {
+     //TODO: Support natural-size properly:
+     Gtk::Requisition child_requisition_one_natural;
+     m_child_one->get_size(child_requisition_one, child_requisition_one_natural);
+    }
 
    if(m_child_two && m_child_two->get_visible())
-     child_requisition_two = m_child_two->size_request();
+   {
+     //TODO: Support natural-size properly:
+     Gtk::Requisition child_requisition_two_natural;
+     m_child_two->get_size(child_requisition_two, child_requisition_two_natural);
+   }
 
   //See which one has the most width:
   int max_width = MAX(child_requisition_one.width,
@@ -83,7 +91,7 @@ void MyContainer::on_size_allocate(Gtk::Allocation& allocation)
   //Assign sign space to the child:
   Gtk::Allocation child_allocation_one, child_allocation_two;
 
-  //Place the first child at the top-left, 
+  //Place the first child at the top-left,
   child_allocation_one.set_x( allocation.get_x() );
   child_allocation_one.set_y( allocation.get_y() );
 
@@ -176,4 +184,3 @@ GType MyContainer::child_type_vfunc() const
     return G_TYPE_NONE;
   }
 }
-
