@@ -1,3 +1,11 @@
+2010-09-27  Murray Cumming  <murrayc@murrayc.com>
+
+	Wrapping C Libraries with gmmproc: Fix a typo.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Wrapping C Libraries with gmmproc:
+  Correct the skeletonmm directory paths mentioned here. Thanks to Geodebay.
+  Bug #627425.
+
 2010-09-21  Murray Cumming  <murrayc@murrayc.com>
 
 	Fix the make check build with gtkmm from git master.

@@ -8438,8 +8438,8 @@ A number of the skeleton files must still be filled in with project-specific con
 <title>Makefile.am files</title>
 <para>Next we must adapt the various <filename>Makefile.am</filename> files:
   <itemizedlist>
-    <listitem><para>In <filename>skeleton/skeletonmm/Makefile.am</filename> we
-            must mention the correct names in the generic variables that are used
+    <listitem><para>In <filename>skeleton/src/Makefile.am</filename> we
+            must mention the correct values for the generic variables that are used
             elsewhere in the build system:</para>
         <variablelist>
             <varlistentry>
@@ -8457,7 +8457,7 @@ A number of the skeleton files must still be filled in with project-specific con
         </variablelist>
     </listitem>
     <listitem><para>In <filename>skeleton/skeletonmm/Makefile.am</filename> we
-            must mention the correct names in the generic variables that are used
+            must mention the correct values for the generic variables that are used
             elsewhere in the build system:</para>
       <variablelist>
         <varlistentry>
