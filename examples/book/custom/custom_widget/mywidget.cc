@@ -39,9 +39,9 @@ MyWidget::MyWidget() :
   //std::cout << "Gtype is a GtkWidget?:" << GTK_IS_WIDGET(gobj()) << std::endl;
 
   //Install a style so that an aspect of this widget may be themed via an RC
-  //file: 
+  //file:
   gtk_widget_class_install_style_property(GTK_WIDGET_CLASS(
-              G_OBJECT_GET_CLASS(gobj())), 
+              G_OBJECT_GET_CLASS(gobj())),
       g_param_spec_int("example_scale",
         "Scale of Example Drawing",
         "The scale to use when drawing. This is just a silly example.",
@@ -107,7 +107,7 @@ void MyWidget::on_realize()
   //Get the themed style from the RC file:
   get_style_property("example_scale", m_scale);
   std::cout << "m_scale (example_scale from the theme/rc-file) is: "
-      << m_scale << std::endl; 
+      << m_scale << std::endl;
 
   if(!m_refGdkWindow)
   {
@@ -124,7 +124,7 @@ void MyWidget::on_realize()
     attributes.width = allocation.get_width();
     attributes.height = allocation.get_height();
 
-    attributes.event_mask = get_events () | Gdk::EXPOSURE_MASK; 
+    attributes.event_mask = get_events () | Gdk::EXPOSURE_MASK;
     attributes.window_type = GDK_WINDOW_CHILD;
     attributes.wclass = GDK_INPUT_OUTPUT;
 
@@ -151,48 +151,36 @@ void MyWidget::on_unrealize()
   Gtk::Widget::on_unrealize();
 }
 
-bool MyWidget::on_expose_event(GdkEventExpose* event)
+bool MyWidget::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
-  if(m_refGdkWindow)
-  {
-    double scale_x = (double)get_allocation().get_width() / m_scale;
-    double scale_y = (double)get_allocation().get_height() / m_scale;
+  const double scale_x = (double)get_allocation().get_width() / m_scale;
+  const double scale_y = (double)get_allocation().get_height() / m_scale;
 
-    Cairo::RefPtr<Cairo::Context> cr = m_refGdkWindow->create_cairo_context();
-    if(event)
-    {
-      // clip to the area that needs to be re-exposed so we don't draw any
-      // more than we need to.
-      cr->rectangle(event->area.x, event->area.y,
-              event->area.width, event->area.height);
-      cr->clip();
-    }
+  // paint the background
+  Gdk::Cairo::set_source_color(cr, get_style()->get_bg(Gtk::STATE_NORMAL));
+  cr->paint();
 
-    // paint the background
-    Gdk::Cairo::set_source_color(cr, get_style()->get_bg(Gtk::STATE_NORMAL));
-    cr->paint();
+  // draw the foreground
+  Gdk::Cairo::set_source_color(cr, get_style()->get_fg(Gtk::STATE_NORMAL));
+  cr->move_to(155.*scale_x, 165.*scale_y);
+  cr->line_to(155.*scale_x, 838.*scale_y);
+  cr->line_to(265.*scale_x, 900.*scale_y);
+  cr->line_to(849.*scale_x, 564.*scale_y);
+  cr->line_to(849.*scale_x, 438.*scale_y);
+  cr->line_to(265.*scale_x, 100.*scale_y);
+  cr->line_to(155.*scale_x, 165.*scale_y);
+  cr->move_to(265.*scale_x, 100.*scale_y);
+  cr->line_to(265.*scale_x, 652.*scale_y);
+  cr->line_to(526.*scale_x, 502.*scale_y);
+  cr->move_to(369.*scale_x, 411.*scale_y);
+  cr->line_to(633.*scale_x, 564.*scale_y);
+  cr->move_to(369.*scale_x, 286.*scale_y);
+  cr->line_to(369.*scale_x, 592.*scale_y);
+  cr->move_to(369.*scale_x, 286.*scale_y);
+  cr->line_to(849.*scale_x, 564.*scale_y);
+  cr->move_to(633.*scale_x, 564.*scale_y);
+  cr->line_to(155.*scale_x, 838.*scale_y);
+  cr->stroke();
 
-    // draw the foreground
-    Gdk::Cairo::set_source_color(cr, get_style()->get_fg(Gtk::STATE_NORMAL));
-    cr->move_to(155.*scale_x, 165.*scale_y);
-    cr->line_to(155.*scale_x, 838.*scale_y);
-    cr->line_to(265.*scale_x, 900.*scale_y);
-    cr->line_to(849.*scale_x, 564.*scale_y);
-    cr->line_to(849.*scale_x, 438.*scale_y);
-    cr->line_to(265.*scale_x, 100.*scale_y);
-    cr->line_to(155.*scale_x, 165.*scale_y);
-    cr->move_to(265.*scale_x, 100.*scale_y);
-    cr->line_to(265.*scale_x, 652.*scale_y);
-    cr->line_to(526.*scale_x, 502.*scale_y);
-    cr->move_to(369.*scale_x, 411.*scale_y);
-    cr->line_to(633.*scale_x, 564.*scale_y);
-    cr->move_to(369.*scale_x, 286.*scale_y);
-    cr->line_to(369.*scale_x, 592.*scale_y);
-    cr->move_to(369.*scale_x, 286.*scale_y);
-    cr->line_to(849.*scale_x, 564.*scale_y);
-    cr->move_to(633.*scale_x, 564.*scale_y);
-    cr->line_to(155.*scale_x, 838.*scale_y);
-    cr->stroke();
-  }
   return true;
 }

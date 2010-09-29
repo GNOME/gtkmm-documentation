@@ -50,7 +50,7 @@ protected:
   Gtk::Label m_Label_Day, m_Label_Month, m_Label_Year,
     m_Label_Value, m_Label_Digits,
     m_Label_ShowValue;
-  Gtk::Adjustment m_adjustment_day, m_adjustment_month, m_adjustment_year,
+  Glib::RefPtr<Gtk::Adjustment> m_adjustment_day, m_adjustment_month, m_adjustment_year,
     m_adjustment_value, m_adjustment_digits;
   Gtk::SpinButton m_SpinButton_Day, m_SpinButton_Month, m_SpinButton_Year,
     m_SpinButton_Value, m_SpinButton_Digits;

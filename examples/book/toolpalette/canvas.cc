@@ -60,19 +60,8 @@ void Canvas::item_draw(const CanvasItem *item,
     cr->paint();
 }
 
-bool Canvas::on_expose_event(GdkEventExpose* event)
+bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
-  // This is where we draw on the window
-  Glib::RefPtr<Gdk::Window> window = get_window();
-  if(!window)
-   return false;
-
-  Cairo::RefPtr<Cairo::Context> cr = window->create_cairo_context();
-  const Cairo::RefPtr<Cairo::Region> region = 
-    Cairo::RefPtr<Cairo::Region>(new Cairo::Region(event->region, true /* take ref */));
-  Gdk::Cairo::add_region_to_path(cr, region);
-  cr->clip();
-
   cr->set_source_rgb(1.0, 1.0, 1.0);
   const Gtk::Allocation allocation = get_allocation();
   cr->rectangle(0, 0, allocation.get_width(), allocation.get_height());
@@ -97,7 +86,7 @@ bool Canvas::on_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context,
   m_drag_data_requested_for_drop = false; //It's for drag-motion instead.
 
   if(m_drop_item)
-  { 
+  {
     // We already have a drop indicator so just update its position.
 
     m_drop_item->x = x;
@@ -155,7 +144,7 @@ void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context
   if(m_drag_data_requested_for_drop)
   {
     m_canvas_items.push_back(item);
- 
+
     // Signal that the item was accepted and then redraw.
     context->drag_finish(true /* success */, false /* del */, time);
   }
@@ -165,7 +154,7 @@ void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context
 
     // We are getting this data due to a request in drag_motion,
     // rather than due to a request in drag_drop, so we are just
-    // supposed to call gdk_drag_status (), not actually paste in 
+    // supposed to call gdk_drag_status (), not actually paste in
     // the data.
     context->drag_status(Gdk::ACTION_COPY, time);
   }

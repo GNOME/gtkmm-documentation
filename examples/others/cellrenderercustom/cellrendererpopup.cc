@@ -103,12 +103,12 @@ void CellRendererPopup::hide_popup()
 
 //TODO: Port this to gtkmm 3:
 /*
-void CellRendererPopup::get_size_vfunc(Gtk::Widget& widget,
+void CellRendererPopup::get_preferred_size_vfunc(Gtk::Widget& widget,
                                        const Gdk::Rectangle* cell_area,
                                        int* x_offset, int* y_offset,
                                        int* width,    int* height) const
 {
-  Gtk::CellRendererText::get_size_vfunc(widget, cell_area, x_offset, y_offset, width, height);
+  Gtk::CellRendererText::get_preferred_size_vfunc(widget, cell_area, x_offset, y_offset, width, height);
 
   // We cache this because it takes a really long time to get the width.
   if(button_width_ < 0)

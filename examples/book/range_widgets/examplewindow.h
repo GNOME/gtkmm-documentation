@@ -40,7 +40,7 @@ protected:
   Gtk::VBox m_VBox_Top, m_VBox2, m_VBox_HScale;
   Gtk::HBox m_HBox_Scales, m_HBox_Digits, m_HBox_PageSize;
 
-  Gtk::Adjustment m_adjustment, m_adjustment_digits, m_adjustment_pagesize;
+  Glib::RefPtr<Gtk::Adjustment> m_adjustment, m_adjustment_digits, m_adjustment_pagesize;
 
   Gtk::VScale m_VScale;
   Gtk::HScale m_HScale, m_Scale_Digits, m_Scale_PageSize;

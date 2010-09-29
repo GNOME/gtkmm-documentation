@@ -35,7 +35,7 @@ protected:
   void on_close_clicked();
   virtual void on_hide();
 
-  virtual bool on_drawing_area_expose_event(GdkEventExpose* event);
+  virtual bool on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr);
 
   //PrintOperationPreview signal handlers:
   void on_popreview_ready(const Glib::RefPtr<Gtk::PrintContext>& print_ctx);
@@ -49,7 +49,7 @@ protected:
 
   Gtk::VBox m_VBox;
   Gtk::HBox m_HBox;
-  Gtk::Adjustment m_SpinAdjustment;
+  Glib::RefPtr<Gtk::Adjustment> m_SpinAdjustment;
   Gtk::SpinButton m_PageSpin;
   Gtk::Button m_CloseButton;
   Gtk::DrawingArea m_DrawingArea;

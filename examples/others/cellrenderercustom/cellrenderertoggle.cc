@@ -42,17 +42,16 @@ public:
   SignalToggled& signal_toggled();
 
 protected:
-  virtual void get_size_vfunc(Gtk::Widget& widget,
+  virtual void get_preferred_size_vfunc(Gtk::Widget& widget,
                               const Gdk::Rectangle* cell_area,
                               int* x_offset, int* y_offset,
                               int* width,    int* height) const;
 
-  virtual void render_vfunc(const Glib::RefPtr<Gdk::Drawable>& window,
+  virtual void render_vfunc(const Cairo::RefPtr<Cairo::Context>& cr,
                             Gtk::Widget& widget,
                             const Gdk::Rectangle& background_area,
                             const Gdk::Rectangle& cell_area,
-                            const Gdk::Rectangle& expose_area,
-                            Gtk::CellRendererState flags);
+                            Gtk::CellRendererState flag);
 
   virtual bool activate_vfunc(GdkEvent* event,
                               Gtk::Widget& widget,
@@ -130,7 +129,7 @@ MyCellRendererToggle::SignalToggled& MyCellRendererToggle::signal_toggled()
   return signal_toggled_;
 }
 
-void MyCellRendererToggle::get_size_vfunc(Gtk::Widget&,
+void MyCellRendererToggle::get_preferred_size_vfunc(Gtk::Widget&,
                                           const Gdk::Rectangle* cell_area,
                                           int* x_offset, int* y_offset,
                                           int* width,    int* height) const
@@ -167,12 +166,11 @@ void MyCellRendererToggle::get_size_vfunc(Gtk::Widget&,
   }
 }
 
-void MyCellRendererToggle::render_vfunc(const Glib::RefPtr<Gdk::Drawable>& window,
-                                        Gtk::Widget& widget,
-                                        const Gdk::Rectangle&,
-                                        const Gdk::Rectangle& cell_area,
-                                        const Gdk::Rectangle&,
-                                        Gtk::CellRendererState flags)
+void MyCellRendererToggle::render_vfunc(const Cairo::RefPtr<Cairo::Context>& cr,
+  Gtk::Widget& widget,
+  const Gdk::Rectangle& /* background_area */,
+  const Gdk::Rectangle& cell_area,
+  Gtk::CellRendererState flags)
 {
   const unsigned int cell_xpad = property_xpad();
   const unsigned int cell_ypad = property_ypad();
@@ -182,7 +180,7 @@ void MyCellRendererToggle::render_vfunc(const Glib::RefPtr<Gdk::Drawable>& windo
 
   //TODO: Support natural size.
   GtkRequisition requisition_min, requisition_natural;
-  get_size(widget, requisition_min, requisition_natural);
+  get_preferred_size(widget, requisition_min, requisition_natural);
   width = requisition_min.width;
   height = requisition_min.height;
 
@@ -202,28 +200,23 @@ void MyCellRendererToggle::render_vfunc(const Glib::RefPtr<Gdk::Drawable>& windo
 
   const Gtk::ShadowType shadow = (property_active_) ? Gtk::SHADOW_IN : Gtk::SHADOW_OUT;
 
-  //Cast the drawable to a Window. TODO: Maybe paint_option() should take a Drawable? murrayc.
-  Glib::RefPtr<Gdk::Window> window_casted = Glib::RefPtr<Gdk::Window>::cast_dynamic<>(window);
-  if(window_casted)
+  if(property_radio_)
   {
-    if(property_radio_)
-    {
-      widget.get_style()->paint_option(
-          window_casted, state, shadow,
-          cell_area, widget, "cellradio",
-          cell_area.get_x() + cell_xpad,
-          cell_area.get_y() + cell_ypad,
-          width - 1, height - 1);
-    }
-    else
-    {
-      widget.get_style()->paint_check(
-          window_casted, state, shadow,
-          cell_area, widget, "cellcheck",
-          cell_area.get_x() + cell_xpad,
-          cell_area.get_y() + cell_ypad,
-          width - 1, height - 1);
-    }
+    widget.get_style()->paint_option(
+      cr, state, shadow,
+      widget, "cellradio",
+      cell_area.get_x() + cell_xpad,
+      cell_area.get_y() + cell_ypad,
+      width - 1, height - 1);
+  }
+  else
+  {
+    widget.get_style()->paint_check(
+      cr, state, shadow,
+      widget, "cellcheck",
+      cell_area.get_x() + cell_xpad,
+      cell_area.get_y() + cell_ypad,
+      width - 1, height - 1);
   }
 }
 

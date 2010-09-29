@@ -27,7 +27,7 @@ MyArea::~MyArea()
 {
 }
 
-bool MyArea::on_expose_event(GdkEventExpose* event)
+bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
   // This is where we draw on the window
   Glib::RefPtr<Gdk::Window> window = get_window();
@@ -42,14 +42,7 @@ bool MyArea::on_expose_event(GdkEventExpose* event)
     xc = width / 2;
     yc = height / 2;
 
-    Cairo::RefPtr<Cairo::Context> cr = window->create_cairo_context();
     cr->set_line_width(10.0);
-
-    // clip to the area indicated by the expose event so that we only redraw
-    // the portion of the window that needs to be redrawn
-    cr->rectangle(event->area.x, event->area.y,
-            event->area.width, event->area.height);
-    cr->clip();
 
     cr->scale(width, height);
     cr->save();

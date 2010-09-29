@@ -93,7 +93,7 @@ int PopupEntry::get_button_width()
 
   //TODO: Support natural-size:
   Gtk::Requisition requisition_min, requisition_natural;
-  window.Gtk::SizeRequest::get_size(requisition_min, requisition_natural);
+  window.get_preferred_size(requisition_min, requisition_natural);
 
   return requisition_min.width;
 }

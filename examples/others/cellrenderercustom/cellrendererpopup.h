@@ -47,7 +47,7 @@ protected:
 
   //TODO: Port this to gtkmm 3:
   /*
-  virtual void get_size_vfunc(Gtk::Widget& widget,
+  virtual void get_preferred_size_vfunc(Gtk::Widget& widget,
                               const Gdk::Rectangle* cell_area,
                               int* x_offset, int* y_offset,
                               int* width,    int* height) const;

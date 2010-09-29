@@ -21,7 +21,7 @@
 #include <giomm.h>
 #include <iostream>
 
-goffset get_size_recursively(const Glib::RefPtr<Gio::File>& file)
+static goffset get_size_recursively(const Glib::RefPtr<Gio::File>& file)
 {
   goffset total = 0;
   g_return_val_if_fail(file, total);

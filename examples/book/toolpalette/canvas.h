@@ -51,7 +51,7 @@ private:
     const Cairo::RefPtr<Cairo::Context>& cr,
     bool preview);
 
-  virtual bool on_expose_event(GdkEventExpose* event);
+  virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
   virtual void on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, 
     int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time);
   virtual bool on_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);

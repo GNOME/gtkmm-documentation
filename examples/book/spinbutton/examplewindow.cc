@@ -30,11 +30,11 @@ ExampleWindow::ExampleWindow()
   m_Label_Year("Year: "),
   m_Label_Value("Value: "),
   m_Label_Digits("Digits: "),
-  m_adjustment_day(1.0, 1.0, 31.0, 1.0, 5.0, 0.0),
-  m_adjustment_month(1.0, 1.0, 12.0, 1.0, 5.0, 0.0),
-  m_adjustment_year(1998.0, 0.0, 2100.0, 1.0, 100.0, 0.0),
-  m_adjustment_value(0.0, -10000.0, 10000.0, 0.5, 100.0, 0.0),
-  m_adjustment_digits(2.0, 1.0, 5.0, 1.0, 1.0, 0.0),
+  m_adjustment_day( Gtk::Adjustment::create(1.0, 1.0, 31.0, 1.0, 5.0, 0.0) ),
+  m_adjustment_month( Gtk::Adjustment::create(1.0, 1.0, 12.0, 1.0, 5.0, 0.0) ),
+  m_adjustment_year( Gtk::Adjustment::create(1998.0, 0.0, 2100.0, 1.0, 100.0, 0.0) ),
+  m_adjustment_value( Gtk::Adjustment::create(0.0, -10000.0, 10000.0, 0.5, 100.0, 0.0) ),
+  m_adjustment_digits( Gtk::Adjustment::create(2.0, 1.0, 5.0, 1.0, 1.0, 0.0) ),
   m_SpinButton_Day(m_adjustment_day),
   m_SpinButton_Month(m_adjustment_month),
   m_SpinButton_Year(m_adjustment_year),
@@ -109,7 +109,7 @@ ExampleWindow::ExampleWindow()
   m_VBox_Digits.pack_start(m_Label_Digits);
 
   m_SpinButton_Digits.set_wrap();
-  m_adjustment_digits.signal_value_changed().connect( sigc::mem_fun(*this,
+  m_adjustment_digits->signal_value_changed().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_spinbutton_digits_changed) );
 
   m_VBox_Digits.pack_start(m_SpinButton_Digits);

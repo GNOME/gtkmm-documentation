@@ -28,7 +28,7 @@ PreviewDialog::PreviewDialog(
   m_pOperation(pfo),
   m_refPreview(preview),
   m_refPrintContext(print_ctx),
-  m_SpinAdjustment(1, 100, 1), //Used to construct m_PageSpin
+  m_SpinAdjustment( Gtk::Adjustment::create(1, 100, 1) ), //Used to construct m_PageSpin
   m_PageSpin(m_SpinAdjustment, 1, 0),
   m_CloseButton(Gtk::Stock::CLOSE),
   m_Page(1),
@@ -59,8 +59,8 @@ PreviewDialog::PreviewDialog(
   m_DrawingArea.signal_realize().connect(
     sigc::mem_fun(*this, &PreviewDialog::on_drawing_area_realized));
 
-  m_DrawingArea.signal_expose_event().connect(
-    sigc::mem_fun(*this, &PreviewDialog::on_drawing_area_expose_event));
+  m_DrawingArea.signal_draw().connect(
+    sigc::mem_fun(*this, &PreviewDialog::on_drawing_area_draw));
 
   m_CloseButton.signal_clicked().connect(
     sigc::mem_fun(*this, &PreviewDialog::on_close_clicked));
@@ -94,11 +94,13 @@ void PreviewDialog::on_page_number_changed()
   m_DrawingArea.queue_draw();
 }
 
-bool PreviewDialog::on_drawing_area_expose_event(GdkEventExpose* /* event */)
+bool PreviewDialog::on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& /* cr */)
 {
+  /* TODO: Do this with cairo?
   Glib::RefPtr<Gdk::Window> window = m_DrawingArea.get_window();
   if(window)
     window->clear();
+  */
 
   if(m_refPreview)
     m_refPreview->render_page(m_Page - 1);
@@ -155,7 +157,7 @@ void PreviewDialog::on_hide()
 
   //We will not be using these anymore, so null the RefPtrs:
   m_refPreview.clear();
-  m_refPrintContext.clear(); 
+  m_refPrintContext.clear();
 }
 
 void PreviewDialog::on_close_clicked()

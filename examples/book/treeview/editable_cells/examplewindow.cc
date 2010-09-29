@@ -107,7 +107,7 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::cellrenderer_validated_on_edited) );
 
   //If this was a CellRendererSpin then you would have to set the adjustment:
-  //m_cellrenderer_validated.property_adjustment() = &m_spin_adjustment;
+  //m_cellrenderer_validated.property_adjustment() = m_spin_adjustment;
 
   show_all_children();
 }
