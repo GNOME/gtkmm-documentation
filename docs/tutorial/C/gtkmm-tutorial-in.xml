@@ -8059,7 +8059,7 @@ For instance, to create a signal that sends 2 parameters, a <type>bool</type>
 and an <type>int</type>, just declare a <classname>sigc::signal</classname>,
 like so:
 <programlisting>
-sigc::signal&lt;void, bool int&gt; signal_something;
+sigc::signal&lt;void, bool, int&gt; signal_something;
 </programlisting>
 </para>
 <para>

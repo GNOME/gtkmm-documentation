@@ -1,3 +1,11 @@
+2010-09-30  Chris Kühl  <chrisk@openismus.com>
+
+	Added forgotten comma in chapter-custom-signals.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Added comma in
+	chapter-custom-signals.
+
+
 2010-09-29  Murray Cumming  <murrayc@murrayc.com>
 
 	Update the build for the latest gtkmm API.
