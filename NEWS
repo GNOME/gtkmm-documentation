@@ -1,3 +1,77 @@
+2.91.0: (unstable)
+
+* Adapt example code to (unstable) gtkmm-3.0.
+* Wrapping C Libraries with gmmproc:
+  Correct the skeletonmm directory paths.
+  Bug #627425. (Geodebay)
+
+This is the master branch. See also the gtkmm-2-22 branch.
+
+2010-07-21  Murray Cumming  <murrayc@murrayc.com>
+
+	Buttons chapter: Remove text about non-existant XPMLabelBox class.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: The mention of an XPMLabelBox
+	was very odd and probably about a very very old version of the API.
+
+2010-07-16  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the build with latest gtkmm-2.22 with --enable-warnings=fatal.
+
+	Generally include gtkmm/box.h before other gtkmm headers and include
+	gtkmm/main.h after other gtkmm headers. Not pleasant.
+
+2010-06-01  Murray Cumming  <murrayc@murrayc.com>
+
+	Remove orphaned undef.
+
+	* examples/book/treeview/popup/treeview_withpopup.cc: Remove an undef
+    still left over from the removal.
+
+2010-06-01  Murray Cumming  <murrayc@murrayc.com>
+
+	Book: Remove the optional API appendix.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Remove the appendix about the
+    reduced API because we no longer offer it in glibmm or gtkmm.
+
+2010-05-31  Murray Cumming  <murrayc@murrayc.com>
+
+	Finish removal of use of reduced API.
+
+	* examples/book/treeview/drag_and_drop/treemodel_dnd.cc: Removed some
+	orhpaned #endif lines left from my previous commit.
+
+2010-05-31  Murray Cumming  <murrayc@murrayc.com>
+
+	Remove use of reduced API.
+
+	* examples/*.[h|cc]: Remove all ifdefed code that supported the various
+	reduced API, because we no longer support that in latest glibmm and gtkmm.
+
+2010-05-07  David King  <davidk@openismus.com>
+
+	Improve the Assistant example
+
+	* examples/book/assistant/*: Move examplewindow.[cc|h] to
+	exampleassistant.[cc|h]]. Add another window which opens the assistant
+	and receives the result from it.
+
+2010-05-07  David King  <davidk@openismus.com>
+
+	Recommend non-deprecated Tooltip API in Tooltips chapter
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Remove text that recommended
+	use of the deprecated Tooltips API, and suggest the Tooltip API
+	instead.
+
+2010-05-07  David King  <davidk@openismus.com>
+
+	Update copyright years for tutorial
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Update copyright years to
+	include all years, not a range.
+	
 2.20.1:
 
 * Multiple-Item Widgets chapter: Added Assistant sub-section.
