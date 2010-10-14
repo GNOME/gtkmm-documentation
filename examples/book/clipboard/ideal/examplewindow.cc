@@ -64,6 +64,11 @@ ExampleWindow::ExampleWindow()
   m_Button_Paste.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_paste) );
 
+  //Connect a signal handler that will be called when the contents of
+  //the clipboard changes.
+  Gtk::Clipboard::get()->signal_owner_change().connect(sigc::mem_fun(*this,
+              &ExampleWindow::on_clipboard_owner_change) );
+
   show_all_children();
 
   update_paste_status();
@@ -83,9 +88,6 @@ void ExampleWindow::on_button_copy()
   strData += m_ButtonB1.get_active() ? "1" : "0";
   strData += m_ButtonB2.get_active() ? "1" : "0";
 
-  //Store the copied data until it is pasted:
-  m_ClipboardStore = strData;
-
   Glib::RefPtr<Gtk::Clipboard> refClipboard = Gtk::Clipboard::get();
 
   //Targets:
@@ -98,6 +100,11 @@ void ExampleWindow::on_button_copy()
               &ExampleWindow::on_clipboard_get), sigc::mem_fun(*this,
                   &ExampleWindow::on_clipboard_clear) );
 
+  //Store the copied data until it is pasted:
+  //(Must be done after the call to refClipboard->set, because that call
+  //may trigger a call to on_clipboard_clear.)
+  m_ClipboardStore = strData;
+
   update_paste_status();
 }
 
@@ -109,6 +116,11 @@ void ExampleWindow::on_button_paste()
   refClipboard->request_contents(example_target_custom, 
     sigc::mem_fun(*this, &ExampleWindow::on_clipboard_received) );
 
+  update_paste_status();
+}
+
+void ExampleWindow::on_clipboard_owner_change(GdkEventOwnerChange*)
+{
   update_paste_status();
 }
 

@@ -5315,7 +5315,7 @@ type.
 <orderedlist>
 <listitem><simpara>Defines a custom clipboard target, though the format of that target is still text.</simpara></listitem>
 <listitem><simpara>It supports pasting of 2 targets - both the custom one and a text one that creates an arbitrary text representation of the custom data.</simpara></listitem>
-<listitem><simpara>It uses <methodname>request_targets()</methodname> and disables the Paste button if it can't use anything on the clipboard</simpara></listitem>
+<listitem><simpara>It uses <methodname>request_targets()</methodname> and the signal <literal>owner_change</literal> and disables the Paste button if it can't use anything on the clipboard</simpara></listitem>
 </orderedlist>
 </para>
 
