@@ -32,6 +32,7 @@ protected:
   void on_button_copy();
   void on_button_paste();
 
+  void on_clipboard_owner_change(GdkEventOwnerChange* event);
   void on_clipboard_get(Gtk::SelectionData& selection_data, guint info);
   void on_clipboard_clear();
 
