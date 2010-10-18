@@ -3478,7 +3478,7 @@ You might need to react to every change of selection in the ComboBox, for instan
 <sect1 id="sec-comboboxentry">
 <title>ComboBox with an Entry</title>
 
-<para>A <classname>ComboBox</classname> may contain an <classname>Entry</classname> widget for entering of arbitrary text, by specify true for the constructor's <literal>has_entry</literal> parameter.</para>
+<para>A <classname>ComboBox</classname> may contain an <classname>Entry</classname> widget for entering of arbitrary text, by specifying true for the constructor's <literal>has_entry</literal> parameter.</para>
 
 <sect2 id="sec-comboboxentry-text-column">
 <title>The text column</title>

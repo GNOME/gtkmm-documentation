@@ -1,3 +1,9 @@
+2.91.1: (unstable)
+
+* Book: Combo Boxes: Update for the removal of ComboBoxEntry.
+*	Fix the build with latest gtkmm.
+(Murray Cumming)
+
 2.91.0: (unstable)
 
 * Adapt example code to (unstable) gtkmm-3.0.
@@ -71,12 +77,12 @@ This is the master branch. See also the gtkmm-2-22 branch.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Update copyright years to
 	include all years, not a range.
-	
+
 2.20.1:
 
 * Multiple-Item Widgets chapter: Added Assistant sub-section.
   (David King, Openismus)
-  
+
 2.20.0:
 
 * Update the code to use only non-deprecated API.
