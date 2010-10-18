@@ -1,3 +1,11 @@
+2010-10-18  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the build with latest gtkmm.
+
+	* examples/book/comboboxentry/complex/examplewindow.[h|cc]:
+	* examples/book/comboboxentry/text/examplewindow.[h|cc]: Use Gtk::ComboBox
+  with has_entry=true, instead of Gtk::ComboBoxEntry, which was removed.
+
 2.91.0:
 
 2010-09-30  Chris Kühl  <chrisk@openismus.com>

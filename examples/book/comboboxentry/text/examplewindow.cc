@@ -21,8 +21,9 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
+: m_Combo(true /* has_entry */)
 {
-  set_title("ComboBoxEntryText example");
+  set_title("ComboBoxText example");
 
   //Fill the combo:
   m_Combo.append_text("something");
@@ -49,4 +50,3 @@ void ExampleWindow::on_combo_changed()
   if(!(text.empty()))
     std::cout << "Combo changed: " << text << std::endl;
 }
-
