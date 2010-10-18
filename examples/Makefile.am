@@ -24,8 +24,8 @@ check_PROGRAMS =					\
 	book/clipboard/simple/example			\
 	book/combobox/complex/example			\
 	book/combobox/text/example			\
-	book/comboboxentry/complex/example		\
-	book/comboboxentry/text/example			\
+	book/combobox/entry_complex/example		\
+	book/combobox/entry_text/example			\
 	book/custom/custom_container/example		\
 	book/custom/custom_widget/example		\
 	book/dialogs/aboutdialog/example		\
@@ -214,15 +214,15 @@ book_combobox_text_example_SOURCES =		\
 	book/combobox/text/examplewindow.h	\
 	book/combobox/text/main.cc
 
-book_comboboxentry_complex_example_SOURCES =		\
-	book/comboboxentry/complex/examplewindow.cc	\
-	book/comboboxentry/complex/examplewindow.h	\
-	book/comboboxentry/complex/main.cc
+book_combobox_entry_complex_example_SOURCES =		\
+	book/combobox/entry_complex/examplewindow.cc	\
+	book/combobox/entry_complex/examplewindow.h	\
+	book/combobox/entry_complex/main.cc
 
-book_comboboxentry_text_example_SOURCES =		\
-	book/comboboxentry/text/examplewindow.cc	\
-	book/comboboxentry/text/examplewindow.h		\
-	book/comboboxentry/text/main.cc
+book_combobox_entry_text_example_SOURCES =		\
+	book/combobox/entry_text/examplewindow.cc	\
+	book/combobox/entry_text/examplewindow.h		\
+	book/combobox/entry_text/main.cc
 
 book_custom_custom_container_example_SOURCES =		\
 	book/custom/custom_container/examplewindow.cc	\

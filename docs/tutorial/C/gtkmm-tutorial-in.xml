@@ -3409,18 +3409,15 @@ section.
 <chapter id="chapter-combobox">
 <title>Combo Boxes</title>
 
-<para>The <classname>ComboBox</classname> and <classname>ComboBoxEntry</classname> widgets offers a list (or tree) of choices in a dropdown menu. If appropriate, they can show extra information about each item, such as text, a picture, a checkbox, or a progress bar. The <classname>ComboBox</classname> widget restricts the user to the available choices, but the <classname>ComboBoxEntry</classname> contains an <classname>Entry</classname>, allowing the user to enter arbitrary text if the none of the available choices are suitable.
+<para>The <classname>ComboBox</classname> widgets offers a list (or tree) of choices in a dropdown menu. If appropriate, it can show extra information about each item, such as text, a picture, a checkbox, or a progress bar. The <classname>ComboBox</classname> widget usually restricts the user to the available choices, but it can optionally have an <classname>Entry</classname>, allowing the user to enter arbitrary text if the none of the available choices are suitable.
 </para>
 
-<para>For both widgets, the list is provided via a <classname>TreeModel</classname>, and columns from this model are added to the ComboBox's view with the <methodname>ComboBox::pack_start()</methodname>. This provides a great deal of flexibility and compile-time type-safety, but the <classname>ComboBoxText</classname> and <classname>ComboBoxEntryText</classname> classes provide a simple text-based specialisation in case that flexibility is not required.
+<para>The list is provided via a <classname>TreeModel</classname>, and columns from this model are added to the ComboBox's view with the <methodname>ComboBox::pack_start()</methodname> method. This provides flexibility and compile-time type-safety, but the <classname>ComboBoxText</classname> class provides a simpler text-based specialization in case that flexibility is not required.
 </para>
-
-<sect1 id="sec-combobox">
-<title>ComboBox</title>
 
 <para><ulink url="&url_refdocs_base_gtk;ComboBox.html">Reference</ulink></para>
 
-<sect2 id="sec-combobox-model">
+<sect1 id="sec-combobox-model">
 <title>The model</title>
 <para>The model for a ComboBox can be defined and filled exactly as for a <classname>TreeView</classname>. For instance, you might derive a ComboBox class with one integer and one text columns, like so:
 </para>
@@ -3434,9 +3431,9 @@ section.
 ModelColumns m_columns;</programlisting>
 
 <para>After appending rows to this model, you should provide the model to the <classname>ComboBox</classname> with the <methodname>set_model()</methodname> method. Then use the <methodname>pack_start()</methodname> or <methodname>pack_end()</methodname> methods to specify what methods will be displayed in the ComboBox. As with the TreeView you may either use the default cell renderer by passing the <classname>TreeModelColumn</classname> to the pack methods, or you may instantiate a specific <classname>CellRenderer</classname> and specify a particular mapping with either <methodname>add_attribute()</methodname> or <methodname>set_cell_data_func()</methodname>. Note that these methods are in the <classname>CellLayout</classname> base class.</para>
-</sect2>
+</sect1>
 
-<sect2 id="sec-combobox-get">
+<sect1 id="sec-combobox-get">
 <title>The chosen item</title>
 <para>To discover what item, if any, the user has chosen from the ComboBox, call <methodname>ComboBox::get_active()</methodname>. This returns a <classname>TreeModel::iterator</classname> that you can dereference to a <classname>Row</classname> in order to read the values in your columns. For instance, you might read an integer ID value from the model, even though you have chosen only to show the human-readable description in the Combo. For instance:
 </para>
@@ -3452,18 +3449,18 @@ if(iter)
 }
 else
   set_nothing_chosen(); //Your own function.</programlisting>
-</sect2>
+</sect1>
 
-<sect2 id="sec-combobox-changes">
+<sect1 id="sec-combobox-changes">
 <title>Responding to changes</title>
 <para>
 You might need to react to every change of selection in the ComboBox, for instance to update other widgets. To do so, you should handle the &quot;changed&quot; signal. For instance:
 </para>
 <programlisting>m_combo.signal_changed().connect( sigc::mem_fun(*this,
       &amp;ExampleWindow::on_combo_changed) );</programlisting>
-</sect2>
+</sect1>
 
-<sect2 id="combobox-example-full"><title>Full Example</title>
+<sect1 id="combobox-example-full"><title>Full Example</title>
 
 <figure id="figure-combobox-complex">
   <title>ComboBox</title>
@@ -3474,9 +3471,9 @@ You might need to react to every change of selection in the ComboBox, for instan
 
 <para><ulink url="&url_examples_base;combobox/complex">Source Code</ulink></para>
 
-</sect2>
+</sect1>
 
-<sect2 id="combobox-example-simple"><title>Simple Text Example</title>
+<sect1 id="combobox-example-simple"><title>Simple Text Example</title>
 
 <figure id="figure-combobox-text">
   <title>ComboBox</title>
@@ -3487,20 +3484,17 @@ You might need to react to every change of selection in the ComboBox, for instan
 
 <para><ulink url="&url_examples_base;combobox/text">Source Code</ulink></para>
 
-</sect2>
-
 </sect1>
 
 <sect1 id="sec-comboboxentry">
-<title>ComboBoxEntry</title>
+<title>ComboBox with an Entry</title>
 
-<para><ulink url="&url_refdocs_base_gtk;ComboBoxEntry.html">Reference</ulink></para>
+<para>A <classname>ComboBox</classname> may contain an <classname>Entry</classname> widget for entering of arbitrary text, by specify true for the constructor's <literal>has_entry</literal> parameter.</para>
 
 <sect2 id="sec-comboboxentry-text-column">
 <title>The text column</title>
-
-<para>So that the Entry can interact with the drop-down list of choices, you must specify which of your model columns are the text column, with <methodname>set_entry_text_column()</methodname>. For instance:
-<programlisting>m_combo.set_entry_text_column(m_columns.m_col_name);</programlisting>
+<para>So that the Entry can interact with the drop-down list of choices, you must specify which of your model columns are the text column, with <methodname>set_text_column()</methodname>. For instance:
+<programlisting>m_combo.set_text_column(m_columns.m_col_name);</programlisting>
 </para>
 <para>
 When you select a choice from the drop-down menu, the value from this column will be placed in the <classname>Entry</classname>.
@@ -3522,7 +3516,7 @@ When you select a choice from the drop-down menu, the value from this column wil
   </screenshot>
 </figure>
 
-<para><ulink url="&url_examples_base;comboboxentry/complex">Source Code</ulink></para>
+<para><ulink url="&url_examples_base;combobox/entry_complex">Source Code</ulink></para>
 
 </sect2>
 
@@ -3535,7 +3529,7 @@ When you select a choice from the drop-down menu, the value from this column wil
   </screenshot>
 </figure>
 
-<para><ulink url="&url_examples_base;comboboxentry/text">Source Code</ulink></para>
+<para><ulink url="&url_examples_base;combobox/entry_text">Source Code</ulink></para>
 
 </sect2>
 

@@ -1,5 +1,15 @@
 2011-03-31  Murray Cumming  <murrayc@murrayc.com>
 
+  Update for the removal of ComboBoxEntry.
+
+	* examples/Makefile.am:
+	* examples/book/comboboxentry/: Move these text/ and complex/ examples to
+  * examples/book/combobox/entry_text/entry_text/ and entry_complex.
+  * docs/tutorial/C/gtkmm-tutorial-in.xml: Combo Boxes: Update the examples
+  paths and change the ComboBoxEntry section to a has-entry section.
+
+2011-03-31  Murray Cumming  <murrayc@murrayc.com>
+
 	Fix the build.
 
 	* Makefile.am: Don't mention README.SUN because it was removed.
