@@ -1,3 +1,10 @@
+2010-10-27  Murray Cumming  <murrayc@murrayc.com>
+
+	Add an experimental generation of epub format.
+
+	* docs/tutorial/Makefile.am: Try to use the DocBook XSL stylesheets and
+	dbtoepub.
+
 2.91.1:
 
 2010-10-18  Murray Cumming  <murrayc@murrayc.com>
