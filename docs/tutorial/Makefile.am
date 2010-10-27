@@ -9,10 +9,12 @@ gtkmm_docdir = $(datadir)/doc/gtkmm-2.4
 vpath_srclist = $(patsubst $(srcdir)/%,%,$(wildcard $(addprefix $(srcdir)/,$(1))))
 vpath_listall = $(sort $(wildcard $(1)) $(if $(srcdir:.=),$(vpath_srclist)))
 
-DOCBOOK_STYLESHEET ?= http://docbook.sourceforge.net/release/xsl/current/html/chunk.xsl
+DOCBOOK_STYLESHEET_HTML ?= http://docbook.sourceforge.net/release/xsl/current/html/chunk.xsl
 XMLLINT = xmllint
 XSLTPROC = xsltproc
 DB2PDF = docbook2pdf
+
+DOCBOOK_STYLESHEET_EPUB ?= http://docbook.sourceforge.net/release/xsl/current/epub/docbook.xsl
 
 DOC_MODULE = gtkmm-tutorial
 DOC_ENTITIES =
@@ -162,13 +164,26 @@ uninstall-tutorial:
 $(DOC_LINGUAS):
 	@$(MKDIR_P) $@
 
-# Create a html generation of the C locale's version of the DocBook, 
+# Create a html generation of the C locale's version of the DocBook,
 # using our custom stylesheet and graphics:
 html/index.html: $(srcdir)/C/gtkmm-tutorial.xml
 	$(AM_V_at)rm -fr html
 	$(AM_V_at)$(MKDIR_P) html
 	$(AM_V_GEN)$(XSLTPROC) $(xslt_params) -o html/ --xinclude --catalogs \
-		'$(DOCBOOK_STYLESHEET)' $<
+		'$(DOCBOOK_STYLESHEET_HTML)' $<
+
+# TODO: I'm not sure how useful this output is, or what we can do with it. murrayc.
+epub_via_xsl: $(srcdir)/C/gtkmm-tutorial.xml
+	$(AM_V_at)rm -fr epub
+	$(AM_V_at)$(MKDIR_P) epub
+	$(AM_V_GEN)$(XSLTPROC) $(xslt_params) -o epub/ --xinclude --catalogs \
+		'$(DOCBOOK_STYLESHEET_EPUB)' $<
+
+# Create an epub generation of the C locale's version of the DocBook,
+# using our custom stylesheet and graphics.
+# This apparently uses the XSL stylesheets that we try to use in epub_via_xsl above.
+epub: $(srcdir)/C/gtkmm-tutorial.xml
+	dbtoepub $<
 
 # Make sure that the documentation will always have been generated before
 # executing the commands of a rule that depends on files in html/.
@@ -185,15 +200,15 @@ validate: $(srcdir)/C/gtkmm-tutorial.xml
 	$(XMLLINT) --xinclude --postvalid --noout $<
 
 # we need to produce a full examples with all of the XIncludes done so that it
-# can processed for PDF
-C/programming-with-gtkmm-pdf.xml: $(srcdir)/C/gtkmm-tutorial.xml
+# can be processed for PDF
+C/programming-with-gtkmm-onefile.xml: $(srcdir)/C/gtkmm-tutorial.xml
 	$(AM_V_at)$(MKDIR_P) C
 	$(AM_V_GEN)$(XMLLINT) --xinclude --postvalid -o $@ $<
 
 # We have to generate the pdf in a subdirectory (e.g. pdf/) because the tutorial
 # specifies the path to the figures as '../figures' so if we build it in this
 # directory, it won't find the images.
-pdf/programming-with-gtkmm-pdf.pdf: C/programming-with-gtkmm-pdf.xml
+pdf/programming-with-gtkmm-pdf.pdf: C/programming-with-gtkmm-onefile.xml
 	$(AM_V_at)$(MKDIR_P) pdf
 	$(AM_V_GEN)$(DB2PDF) --output pdf/ $<
 
