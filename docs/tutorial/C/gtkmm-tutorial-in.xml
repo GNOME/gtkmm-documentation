@@ -1102,8 +1102,8 @@ for the user.
 <para>
 Labels are the  main method of placing non-editable text in windows, for
 instance to place a title next to a <classname>Entry</classname> widget. You
-can specify the text in the constructor, or with the
-<methodname>set_text()</methodname> method.
+can specify the text in the constructor, or later with the
+<methodname>set_text()</methodname> or set_markup() methods.
 </para>
 
 <para>
@@ -1112,13 +1112,18 @@ The width of the label will be adjusted automatically.  You can produce multi-li
 
 <para>
 The label text can be justified using the <methodname>set_justify()</methodname>
-method. The widget is also capable of word-wrapping - this can be activated
+method. The widget is also capable of word-wrapping, which can be activated
 with <methodname>set_line_wrap()</methodname>.
 </para>
 
 <para>
-TODO: gtkmm2: markup.
-</para>
+Gtk::Label support some simple formatting, for instance allowing you to make some
+text bold, colored, or larger. You can do this by providing a string to
+<methodname>set_markup()</methodname>, using the <ulink url="http://library.gnome.org/devel/pango/unstable/PangoMarkupFormat.html">Pango Markup syntax</ulink>. For instance,
+<code>
+&lt;b&gt;bold text/&lt;b&gt; and &lt;s&gt;strikethrough text/&lt;s&gt;
+</code>
+.</para>
 
 <para><ulink url="&url_refdocs_base_gtk;Label.html">Reference</ulink></para>
 
@@ -1904,34 +1909,33 @@ behaviour. Also, try playing with the options to
 </sect2>
 
 <sect2 id="sec-stl-style">
-<title>STL-style APIs</title>
+<title>C++ Standard Library-style APIs</title>
 
 <para>
-TODO: Use 'Standard Library' instead of STL.
 If you're an accomplished C++ programmer, you'll be happy to hear that most of
-the &gtkmm; <classname>Container</classname> widgets provide STL-style APIs,
+the &gtkmm; <classname>Container</classname> widgets provide C++ Standard Library-style APIs,
 available via accessor methods, such as
 <methodname>Gtk::Box::children()</methodname> or
-<methodname>Gtk::Notebook::pages()</methodname>. They don't use actual STL
+<methodname>Gtk::Notebook::pages()</methodname>. They don't use actual C++ Standard Library
 containers (there are good reasons for this), but they look, feel, and act much
-like STL container classes.
+like regular container classes.
 </para>
 
-<para>These APIs are so similar to STL container APIs that, rather than explaining them in detail, we can refer
-you to the STL documentation for most of their methods. This is all part of &gtkmm;'s policy of reusing existing standards.
+<para>These APIs are so similar to C++ Standard Library container APIs that, rather than explaining them in detail, we can refer
+you to the C++ documentation for most of their methods. This is all part of &gtkmm;'s policy of reusing existing standards.
 </para>
 
 <para>
-However, STL-style APIs can require awkward or lengthy code in some situations,
+However, C++ Standard Library-style APIs can require awkward or lengthy code in some situations,
 so some people prefer not to use them, while other people use them religiously.
 Therefore, you are not forced to use them - most container widgets have a
-simpler non-STL-style API, with methods such as <methodname>append()</methodname>
+simpler API, with methods such as <methodname>append()</methodname>
 and <methodname>prepend()</methodname>.
 </para>
 
 <para>
 At a minimum, &gtkmm; container lists support iterators and the usual insertion, deletion, and addition methods.  You can
-always expect the following methods to be available for &gtkmm; STL-style APIs:
+always expect the following methods to be available for &gtkmm; C++ Standard Library-style APIs:
 <itemizedlist>
 
 <listitem>
@@ -2062,11 +2066,11 @@ the helper namespace for the notebook widget is
 <sect3 id="containers-adding-items">
 <title>Adding items</title>
 <para>
-There is a major difference between &gtkmm; STL-style APIs and real STL
+There is a major difference between &gtkmm; APIs and real C++ Standard Library
 containers.  Normally, when you use a <classname>std::vector</classname>, for
 example, you expect that whatever you put in, you'll get out, unmodified.  You
 wouldn't make a <classname>std::vector&lt;int&gt;</classname> and expect to get
-<literal>double</literal>s out of it.  But, &gtkmm; STL-style APIs don't always
+<literal>double</literal>s out of it.  But, &gtkmm; APIs don't always
 work like that - you will often put one kind of object in, and later get a
 different kind out.  Why this odd behaviour?
 </para>
@@ -2130,15 +2134,15 @@ helper classes, like this:
 Let's see what's
 going on here.  Assume we have a pointer to a <classname>Notebook</classname>
 widget called <literal>notebook</literal>; we go from that to a member method
-called <methodname>pages()</methodname>, which returns an STL-like list object.  On
+called <methodname>pages()</methodname>, which returns a list object.  On
 this we call the method <methodname>push_back()</methodname> (this should be
-familiar to those who know STL).
+familiar to those who know C++).
 </para>
 
 <para>
 The object that the <methodname>pages()</methodname> method returns is called a
 <classname>Notebook_Helpers::PageList</classname>.  It's one of the
-STL-like containers that we keep referring to.  Let's take a look at this class
+containers that we keep referring to.  Let's take a look at this class
 (this has been heavily edited for clarity; see
 <filename>&lt;gtkmm/notebook.h&gt;</filename> for the actual definition):
 </para>
@@ -2345,9 +2349,9 @@ border area to leave around the packed widget.
 
 <para>
 Instead of the <methodname>pack_start()</methodname> and
-<methodname>pack_end()</methodname> methods, you might prefer to use the STL-style
+<methodname>pack_end()</methodname> methods, you might prefer to use the C++ Standard Library-style
 API, available via the <literal>children</literal> method. See the <link
-    linkend="sec-stl-style">STL-style APIs</link> section for more details.
+    linkend="sec-stl-style">C++ Standard Library-style APIs</link> section for more details.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;Box.html">Reference</ulink></para>
@@ -2625,7 +2629,7 @@ To programmatically change the selected page, use the
 <methodname>set_current_page()</methodname> method.
 </para>
 
-<para>There is also an  <link linkend="sec-notebook-stl-style">STL-style API</link> which you might find more obvious.</para>
+<para>There is also an  <link linkend="sec-notebook-stl-style">C++ Standard Library-style API</link> which you might find more obvious.</para>
 
 <para><ulink url="&url_refdocs_base_gtk;Notebook.html">Reference</ulink></para>
 
@@ -2643,11 +2647,11 @@ To programmatically change the selected page, use the
 </sect3>
 
 <sect3 id="sec-notebook-stl-style">
-<title>STL-style API</title>
+<title>C++ Standard Library-style API</title>
 <para>
-The <classname>Gtk::Notebook</classname> widget has an STL-style API, available
+The <classname>Gtk::Notebook</classname> widget has a C++ Standard Library-style API, available
 via the <methodname>pages()</methodname> method,  which you might prefer to use to
-add and access pages. See the <link linkend="sec-stl-style">STL-style
+add and access pages. See the <link linkend="sec-stl-style">C++ Standard Library-style
     APIs</link> section for generic information.</para>
 
 <para><ulink url="&url_refdocs_base_gtk;Notebook__Helpers_1_1PageList.html">PageList Reference</ulink></para>
@@ -2659,7 +2663,7 @@ class, like so:
 <programlisting>m_Notebook.pages().push_back(
     Gtk::Notebook_Helpers::TabElem(m_ChildWidget, "tab 1") );</programlisting>
 
-<para><ulink url="&url_refdocs_base_gtk;Notebook__Helpers_1_1TabElem.html">TabElem Reference</ulink>. TODO: Correct URL.</para>
+<para><ulink url="&url_refdocs_base_gtk_html;structGtk_1_1Notebook__Helpers_1_1TabElem.html">TabElem Reference</ulink>.</para>
 
 <para>
 To access an existing child widget, you can call
@@ -3050,7 +3054,7 @@ store it in the Model if that is appropriate for your application.
 <sect1 id="sec-iterating-over-model-rows">
 <title>Iterating over Model Rows</title>
 <para>
-<classname>Gtk::TreeModel</classname> provides an STL-style container of its
+<classname>Gtk::TreeModel</classname> provides a C++ Standard Library-style container of its
 children, via the <methodname>children()</methodname> method. You can use the
 familiar <methodname>begin()</methodname> and <methodname>end()</methodname> methods
 iterator incrementing, like so:
@@ -3069,8 +3073,7 @@ for(type_children::iterator iter = children.begin();
 <para>
 When using a <classname>Gtk::TreeStore</classname>, the rows can have child
 rows, which can have their own children in turn. Use
-<methodname>Gtk::TreeModel::Row::children()</methodname> to get the STL-style
-container of child <classname>Row</classname>s:
+<methodname>Gtk::TreeModel::Row::children()</methodname> to get the container of child <classname>Row</classname>s:
 <programlisting>Gtk::TreeModel::Children children = row.children();</programlisting>
 </para>
 </sect2>
@@ -4051,7 +4054,7 @@ the two increments by which the user can change the value, while the
 the visible area of a panning widget. The <parameter>upper</parameter> argument
 is used to represent the bottom most or right most coordinate in a panning
 widget's child.
-TODO: Investigate the upper argument properly. There was some unclear stuff about it not always being the upper value.
+<!-- TODO: Investigate the upper argument properly. There was some unclear stuff about it not always being the upper value. -->
 </para>
 
 </sect1>
@@ -4086,15 +4089,14 @@ particular category of widgets create its own adjustments.
 </para>
 
 <para>
-TODO: Text widget is deprecated: Look at GTK+ tutorial for up-to-date example.
-If you share an adjustment object between a Scrollbar and a Text
-widget, manipulating the scrollbar will automagically adjust the Text
+If you share an adjustment object between a Scrollbar and a TextView
+widget, manipulating the scrollbar will automagically adjust the TextView
 widget. You can set it up like this:
 </para>
 <programlisting>// creates its own adjustments
-Gtk::Text text(0, 0);
+Gtk::TextView textview;
 // uses the newly-created adjustment for the scrollbar as well
-Gtk::VScrollbar vscrollbar (*(text.get_vadjustment()));</programlisting>
+Gtk::VScrollbar vscrollbar (*(textview.get_vadjustment()));</programlisting>
 
 </sect1>
 
@@ -4221,9 +4223,11 @@ inside an <classname>EventBox</classname> widget and then call
 <classname>EventBox</classname> emphasises the event-handling method, the
 widget can also be used for clipping (and more; see the example below).
 </para>
+<!--
 <para>TODO: Why don't they have X Windows - explain clipping.
 Also, how does this affect platform such as Windows and MacOS that don't use X.
 </para>
+-->
 
 <para>
 The constructor for <classname>Gtk::EventBox</classname> is:
@@ -4821,7 +4825,7 @@ context->restore();</programlisting>
               <classname>Gdk::Drawable</classname>, which takes a
               <classname>Gdk::GC</classname> object, an x-position, a
               y-position and the layout itself.
-              TODO: Update this section for Cairo instead of Gdk::GC.
+              <!-- TODO: Update this section for Cairo instead of Gdk::GC. -->
           </para>
       </sect2>
 
@@ -5001,7 +5005,7 @@ emitted, telling the signal handlers which
 <itemizedlist>
 <listitem><para>target: A name, such as &quot;STRING&quot;</para></listitem>
 <listitem><para>info: An identifier which will be sent to your signals to tell you which TargetEntry was used.</para></listitem>
-<listitem><para>flags: TODO</para></listitem>
+<listitem><para>flags: Used only for drag and drop, this specifies whether the data may be dragged to other widgets and applications, or only to the same ones.</para></listitem>
 </itemizedlist>
 </para>
 
@@ -5115,10 +5119,12 @@ The destination widget will emit this signal, after the source destination has e
 </para>
 </sect2>
 
+<!--
 <sect2 id="dnd-signal-link">
 <title>Link</title>
 <para>TODO: Find an example or documentation.</para>
 </sect2>
+-->
 </sect1>
 
 <sect1 id="sec-dragcontext">
@@ -7096,7 +7102,7 @@ using <classname>std::string</classname>, so you just need to start using
 </para>
 
 <sect2 id="i18n-ustring-iostreams"><title>Glib::ustring and std::iostreams</title>
-<para>TODO: This section is not clear - it needs to spell things out more clearly and obviously.</para>
+<!-- <para>TODO: This section is not clear - it needs to spell things out more clearly and obviously.</para> -->
 <para>
 Unfortunately, the integration with the standard iostreams is not completely
 foolproof. &gtkmm; converts <classname>Glib::ustring</classname>s to a
@@ -8112,7 +8118,7 @@ This is a full working example that defines and uses custom signal.
 <appendix id="sec-signals-comparison">
 <title>Comparison with other signalling systems</title>
 <para>
-TODO: Rewrite this paragraph and talk about Qt's moc.
+<!-- TODO: Rewrite this paragraph and talk about Qt's moc. -->
 (An aside: <application>GTK+</application> calls this scheme "signalling"; the
 sharp-eyed reader with GUI toolkit experience will note that this same design
 is often
