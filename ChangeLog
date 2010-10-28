@@ -1,3 +1,10 @@
+2010-10-28  Murray Cumming  <murrayc@murrayc.com>
+
+	Remove mentions of removed STL-style APIs such as Notebook::pages().
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Remove mention of STL-style API
+	that has been removed from gtkmm 3 since the C structs were made private.
+
 2010-10-28  Murray Cumming  <murrayc@murrayc.com>>
 
 	Remove credits mention for removed MSVC 2005 Express section.
