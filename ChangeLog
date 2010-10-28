@@ -1,3 +1,5 @@
+2.22.0:
+
 2010-10-28  Murray Cumming  <murrayc@murrayc.com>
 
 	Link to the stable gtkmm API reference and the branch of the example code.
@@ -33,6 +35,8 @@
 
 	* docs/tutorial/Makefile.am: Try to use the DocBook XSL stylesheets and
 	dbtoepub.
+
+2.21.8.1:
 
 2010-09-20  Murray Cumming  <murrayc@murrayc.com>
 

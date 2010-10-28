@@ -1,3 +1,10 @@
+2.22.0:
+
+* Make the API reference links go to /stable instead of /unstable, to
+  avoid sending people to the (different) gtkmm 3 API.
+* Example code links: Use the gtkmm-2-22 branch instead of master,
+  to avoid sending people to the examples for the gtkmm 3 API.
+
 2.21.8.1:
 
 * Builds with the latest gtkmm-2.4 (2.21.8.1) release.
