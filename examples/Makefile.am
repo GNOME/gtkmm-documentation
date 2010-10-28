@@ -10,6 +10,7 @@ check_PROGRAMS =					\
 	book/alignment/example				\
 	book/aspectframe/example			\
 	book/assistant/example				\
+	book/base/base				\
 	book/box/example				\
 	book/builder/basic/example			\
 	book/builder/derived/example			\
@@ -97,7 +98,6 @@ check_PROGRAMS =					\
 	book/update_ui/example				\
 	others/arrow/arrow				\
 	others/arrow/direction				\
-	others/base/base				\
 	others/calendar/calendar			\
 	others/cellrenderercustom/cellrenderertoggle	\
 	others/cellrenderercustom/testpopup		\
@@ -144,6 +144,9 @@ book_assistant_example_SOURCES =		\
 	book/assistant/examplewindow.cc		\
 	book/assistant/examplewindow.h		\
 	book/assistant/main.cc
+
+book_base_base_SOURCES = \
+	book/base/base.cc
 
 book_box_example_SOURCES =			\
 	book/box/examplewindow.cc		\
@@ -585,9 +588,6 @@ others_arrow_arrow_SOURCES = \
 
 others_arrow_direction_SOURCES = \
 	others/arrow/direction.cc
-
-others_base_base_SOURCES = \
-	others/base/base.cc
 
 others_calendar_calendar_SOURCES = \
 	others/calendar/calendar.cc

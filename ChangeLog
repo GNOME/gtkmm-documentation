@@ -1,5 +1,17 @@
 2010-10-28  Murray Cumming  <murrayc@murrayc.com>
 
+	Mark examples as being for gtkmm 3, not gtkmm 2.
+
+	* examples/others/base/: Move this to examples/book/ because it is really
+	used in the book, in the Basics section.
+	* docs/tutorial/insert_example_code.pl: Append the branch parameter
+	(an entity in the .xml file) to the git.gnome.org URL so people see the
+	correct version of the source code, though this is blank for now so that
+	we use master for this branch. Also add a comment that this is for
+	gtkmm 2, not gtkmm 3.
+
+2010-10-28  Murray Cumming  <murrayc@murrayc.com>
+
 	Tutorial: Deal with some TODOs and hide others.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Label section: Describe the use of

@@ -12,14 +12,17 @@
 
     while(<FILE>)
     {
-      print $_;
-
       #Beginning of comment:
       # Look for
       # <para><ulink url="&url_examples_base;helloworld">Source Code</ulink></para>
 
       if(/<para><ulink url=\"&url_examples_base;([\/\w]+)\">Source Code<\/ulink><\/para>/)
       {
+        #Modify the line to add the branch, so people see the correct version.
+        #This is particularly important during major API changes every few years,
+        #when the API might no longer even exist in the new version.
+        print "<para><ulink url=\"&url_examples_base;${1}?h=&url_examples_branchsuffix;\">Source Code<\/ulink><\/para>\n";
+
         #List all the source files in that directory:
         my $directory = $examples_base . $1;
 
@@ -34,7 +37,7 @@
 
         foreach $source_file (@header_files, @source_files)
         {
-           print "<para>File: <filename>${source_file}</filename>\n";
+           print "<para>File: <filename>${source_file}</filename> (For use with gtkmm 3, not gtkmm 2)\n";
            print "</para>\n";
            print "<programlisting>\n";
 
@@ -44,6 +47,11 @@
         }
 
         print "<!-- end inserted example code -->\n";
+      }
+      else
+      {
+        # Just print the line without changes:
+        print $_;
       }
     }
 
@@ -79,4 +87,3 @@ sub process_source_file($)
 
   close(SOURCE_FILE);
 }
-

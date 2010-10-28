@@ -7,8 +7,8 @@
   <!ENTITY url_refdocs_base_gtk "&url_refdocs_base_gtk_html;classGtk_1_1">
   <!ENTITY url_refdocs_base_gtk_namespace "&url_refdocs_base_gtk_html;namespaceGtk_1_1">
   <!ENTITY url_figures_base "figures/">
-  <!ENTITY url_examples_others_base "http://git.gnome.org/cgit/gtkmm-documentation/tree/examples/others/">
-  <!ENTITY url_examples_base "http://git.gnome.org/cgit/gtkmm-documentation/tree/examples/book/">
+  <!ENTITY url_examples_base "http://git.gnome.org/browse/gtkmm-documentation/tree/examples/book/">
+  <!ENTITY url_examples_branchsuffix "">
   <!ENTITY gtkmm "<application>gtkmm</application>">
   <!ENTITY uuml "&#252;" >
   <!ENTITY szlig "&#223;" >
@@ -312,7 +312,7 @@ To begin our introduction to &gtkmm;, we'll start with the simplest
 program possible. This program will create an empty 200 x 200 pixel window.
 </para>
 
-<para><ulink url="&url_examples_others_base;base">Source Code</ulink></para>
+<para><ulink url="&url_examples_base;base">Source Code</ulink></para>
 
 <para>We will now explain each line of the example</para>
 <programlisting>#include &lt;gtkmm.h&gt;</programlisting>
