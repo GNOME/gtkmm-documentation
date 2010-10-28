@@ -179,11 +179,20 @@ epub_via_xsl: $(srcdir)/C/gtkmm-tutorial.xml
 	$(AM_V_GEN)$(XSLTPROC) $(xslt_params) -o epub/ --xinclude --catalogs \
 		'$(DOCBOOK_STYLESHEET_EPUB)' $<
 
+# This epub/mobi generation is experimental. murrayc.
+epub: $(srcdir)/gtkmm-tutorial.epub
+
 # Create an epub generation of the C locale's version of the DocBook,
 # using our custom stylesheet and graphics.
 # This apparently uses the XSL stylesheets that we try to use in epub_via_xsl above.
-epub: $(srcdir)/C/gtkmm-tutorial.xml
+gtkmm-tutorial.epub: $(srcdir)/C/gtkmm-tutorial.xml
 	dbtoepub $<
+
+mobi: $(srcdir)/gtkmm-tutorial.mobi
+
+# ebook-convert is provided by the calibre UI app.
+gtkmm-tutorial.mobi: $(srcdir)/gtkmm-tutorial.epub
+	ebook-convert $< gtkmm-tutorial.mobi
 
 # Make sure that the documentation will always have been generated before
 # executing the commands of a rule that depends on files in html/.

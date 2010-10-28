@@ -1,3 +1,9 @@
+2010-10-28  Murray Cumming  <murrayc@murrayc.com>
+
+	Add experimental generation of mobi format.
+
+	* docs/tutorial/Makefile.am: Use ebook-convert, installed by calibre.
+
 2010-10-27  Murray Cumming  <murrayc@murrayc.com>
 
 	Add an experimental generation of epub format.
