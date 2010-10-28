@@ -1,3 +1,10 @@
+2.91.2: (unstable):
+
+* Book:
+  - Remove mentions of the removed STL-style container APIs.
+  - Fix/Hide remaining TODO comments.
+  - Mark examples as being for gtkmm 3, not gtkmm 2.
+
 2.91.1: (unstable)
 
 * Book: Combo Boxes: Update for the removal of ComboBoxEntry.

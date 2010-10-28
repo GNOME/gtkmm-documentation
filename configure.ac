@@ -1,7 +1,7 @@
 ## This file is part of gtkmm-documentation.
 
 AC_PREREQ([2.59])
-AC_INIT([gtkmm-documentation], [2.91.1],
+AC_INIT([gtkmm-documentation], [2.91.2],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gtkmm],
         [gtkmm-documentation], [http://www.gtkmm.org/])
 
