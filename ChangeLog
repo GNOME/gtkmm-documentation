@@ -1,5 +1,18 @@
 2010-10-28  Murray Cumming  <murrayc@murrayc.com>
 
+	Link to the stable gtkmm API reference and the branch of the example code.
+
+	* examples/others/base/: Move this to examples/book/ because it is really
+	used in the book, in the Basics section.
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Link to stable/ for the API
+	reference to avoid linking to the unstable API, which is different.
+	* docs/tutorial/insert_example_code.pl: Append the branch parameter
+	(an entity in the .xml file) to the git.gnome.org URL so people see the
+	correct version of the source code. Also add a comment that this is for
+	gtkmm 2, not gtkmm 3.
+
+2010-10-28  Murray Cumming  <murrayc@murrayc.com>
+
 	Tutorial: Deal with some TODOs and hide others.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Label section: Describe the use of
