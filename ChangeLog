@@ -1,5 +1,15 @@
 2010-10-28  Murray Cumming  <murrayc@murrayc.com>
 
+	Tutorial: Deal with some TODOs and hide others.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Label section: Describe the use of
+	Pango Markup.
+	Say "C++ Standard Library" instead of "STL", avoiding saying it too often.
+	Correct the TabElem reference documentation link.
+	Hide difficult TODOs in XML comment tags.
+
+2010-10-28  Murray Cumming  <murrayc@murrayc.com>
+
 	Add experimental generation of mobi format.
 
 	* docs/tutorial/Makefile.am: Use ebook-convert, installed by calibre.
