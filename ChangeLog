@@ -1,3 +1,10 @@
+2010-10-28  Murray Cumming  <murrayc@murrayc.com>>
+
+	Remove credits mention for removed MSVC 2005 Express section.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: authorgroup: Remove mention of an
+	appendix that we removed some time ago.
+
 2.22.0:
 
 2010-10-28  Murray Cumming  <murrayc@murrayc.com>

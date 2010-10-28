@@ -53,7 +53,7 @@ name
       <author>
         <firstname>Jason</firstname>
         <surname>M'Sadoques</surname>
-        <contrib>Chapter on &quot;Drawing Area&quot;.</contrib>
+        <contrib>Chapter on &quot;Drawing Area&quot; with GDK.</contrib>
       </author>
       <author>
         <firstname>Ole</firstname>
@@ -75,11 +75,6 @@ name
         <surname>Anastasov</surname>
         <contrib>Chapter on &quot;Printing&quot;.</contrib>
         <contrib>Parts of chapter on &quot;Internationalization&quot;.</contrib>
-      </author>
-      <author>
-        <firstname>Alan</firstname>
-        <surname>Ott</surname>
-        <contrib>Appendix on &quot;Visual Studio 2005&quot;.</contrib>
       </author>
       <author>
         <firstname>Daniel</firstname>
