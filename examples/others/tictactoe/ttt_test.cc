@@ -11,7 +11,7 @@ win (TicTacToe *ttt)
 }
 
 
-int 
+int
 main (int argc, char *argv[])
 {
   Gtk::Main m(argc, argv);
@@ -24,8 +24,8 @@ main (int argc, char *argv[])
   window.set_border_width(10);
   window.add(*ttt);
   window.show_all_children();
-  
+
   Gtk::Main::run(window);
-  
+
   return 0;
 }
