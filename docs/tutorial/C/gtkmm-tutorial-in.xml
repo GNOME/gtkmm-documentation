@@ -7597,7 +7597,7 @@ Handling an X event doesn't affect the Widget's other signals.  If you handle
 <literal>clicked</literal> signal.  They are emitted at (nearly) the same time.
 </para>
 
-<para>Note also that not all widgets recieve all X events by default. To receive additional
+<para>Note also that not all widgets receive all X events by default. To receive additional
 X events, you can use <methodname>Gtk::Widget::set_events()</methodname> before showing the
 widget, or <methodname>Gtk::Widget::add_events()</methodname> after showing the widget. However,
 some widgets must first be placed inside an <classname>EventBox</classname> widget. See
@@ -8704,7 +8704,7 @@ _WRAP_ENUM(WindowType, GdkWindowType)
 <para>If the enum is not a <classname>GType</classname>, you must pass a third parameter NO_GTYPE.
   This is the case when there is no <function>*_get_type()</function> function for the C enum, but
   be careful that you don't just need to include an extra header for that function. You should also
-  file a bug against the C API, because all enums should be regeistered as GTypes.</para>
+  file a bug against the C API, because all enums should be registered as GTypes.</para>
 <para>For example:
 <programlisting>
 _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags)
