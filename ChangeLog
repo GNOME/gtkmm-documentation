@@ -1,5 +1,12 @@
 2010-11-10  Murray Cumming  <murrayc@murrayc.com>
 
+	Removed author credit for the removed GDK drawing section.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: We removed the sub-section on
+	drawing with gdk a while ago, since we now refer to cairomm API instead.
+
+2010-11-10  Murray Cumming  <murrayc@murrayc.com>
+
 	Label section: Fix a /<b> -> </b> typo.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Fix a typo.
