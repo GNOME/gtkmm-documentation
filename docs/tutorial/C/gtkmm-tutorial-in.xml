@@ -1116,7 +1116,7 @@ Gtk::Label support some simple formatting, for instance allowing you to make som
 text bold, colored, or larger. You can do this by providing a string to
 <methodname>set_markup()</methodname>, using the <ulink url="http://library.gnome.org/devel/pango/unstable/PangoMarkupFormat.html">Pango Markup syntax</ulink>. For instance,
 <code>
-&lt;b&gt;bold text/&lt;b&gt; and &lt;s&gt;strikethrough text/&lt;s&gt;
+&lt;b&gt;bold text&lt;/b&gt; and &lt;s&gt;strikethrough text&lt;/s&gt;
 </code>
 .</para>
 
