@@ -65,7 +65,7 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::on_button_paste) );
 
   //Connect a signal handler that will be called when the contents of
-  //the clipboard changes.
+  //the clipboard change.
   Gtk::Clipboard::get()->signal_owner_change().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_clipboard_owner_change) );
 
