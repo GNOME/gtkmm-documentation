@@ -1,3 +1,13 @@
+2.91.4: (unstable):
+
+* Improved the clipboard/ideal example.
+	(Kjell Ahlstedt)
+* Label section: Fix a /<b> -> </b> typo.
+  (Murray Cumming)
+* Rearranged an include to fix the build due to a not-yet-explained 
+  compiler error.
+  (Murray Cumming)
+	
 2.91.2: (unstable):
 
 * Book:
