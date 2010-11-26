@@ -1,3 +1,14 @@
+2010-11-26  Murray Cumming  <murrayc@murrayc.com>
+
+	Remove use of removed widgets.
+
+	* examples/book/dialogs/fileselection:
+	* examples/book/range_widgets/labeledoptionmenu.[h|cc]: Remove use of 
+	removed widgets, which were hidden behind ifdefs. I think I only see this 
+	now because of an ifdef error in recent gtkmm.
+	* examples/others/rulers: Removed because Gtk::Ruler was removed from gtkmm.
+	* examples/Makefile.am: Adapted.
+
 2.91.4:
 
 2010-11-18  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>

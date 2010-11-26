@@ -31,7 +31,6 @@ check_PROGRAMS =					\
 	book/dialogs/aboutdialog/example		\
 	book/dialogs/colorselectiondialog/example	\
 	book/dialogs/filechooserdialog/example		\
-	book/dialogs/fileselection/example		\
 	book/dialogs/fontselectiondialog/example	\
 	book/dialogs/messagedialog/example		\
 	book/dialogs/simple/example			\
@@ -104,7 +103,6 @@ check_PROGRAMS =					\
 	others/dnd/testdnd				\
 	others/exception/exceptiontest			\
 	others/idle/idle				\
-	others/rulers/rulers				\
 	others/statusbar/statusbar			\
 	others/stock/stock				\
 	others/tictactoe/ttt_test			\
@@ -253,11 +251,6 @@ book_dialogs_filechooserdialog_example_SOURCES =	\
 	book/dialogs/filechooserdialog/examplewindow.cc	\
 	book/dialogs/filechooserdialog/examplewindow.h	\
 	book/dialogs/filechooserdialog/main.cc
-
-book_dialogs_fileselection_example_SOURCES =		\
-	book/dialogs/fileselection/examplewindow.cc	\
-	book/dialogs/fileselection/examplewindow.h	\
-	book/dialogs/fileselection/main.cc
 
 book_dialogs_fontselectiondialog_example_SOURCES =		\
 	book/dialogs/fontselectiondialog/examplewindow.cc	\
@@ -457,8 +450,6 @@ book_progressbar_example_SOURCES =		\
 book_range_widgets_example_SOURCES =		\
 	book/range_widgets/examplewindow.cc	\
 	book/range_widgets/examplewindow.h	\
-	book/range_widgets/labeledoptionmenu.cc	\
-	book/range_widgets/labeledoptionmenu.h	\
 	book/range_widgets/main.cc
 
 book_recent_files_example_SOURCES =		\
@@ -618,9 +609,6 @@ others_exception_exceptiontest_SOURCES = \
 
 others_idle_idle_SOURCES = \
 	others/idle/idle.cc
-
-others_rulers_rulers_SOURCES = \
-	others/rulers/rulers.cc
 
 others_statusbar_statusbar_SOURCES = \
 	others/statusbar/statusbar.cc

@@ -17,7 +17,6 @@
  */
 
 #include "examplewindow.h"
-#include "labeledoptionmenu.h"
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
@@ -112,10 +111,6 @@ ExampleWindow::ExampleWindow()
       &ExampleWindow::on_menu_position), Gtk::POS_RIGHT));
   m_Menu_Position.append(*item);
 
-  m_VBox2.pack_start(
-    *Gtk::manage(new LabeledOptionMenu("Scale Value Position:",
-      m_Menu_Position)));
-
 
   item = Gtk::manage(new Gtk::MenuItem("Continuous"));
   item->signal_activate().connect(
@@ -134,10 +129,6 @@ ExampleWindow::ExampleWindow()
     sigc::bind(sigc::mem_fun(*this,
       &ExampleWindow::on_menu_policy), Gtk::UPDATE_DELAYED));
   m_Menu_Policy.append(*item);
-
-  m_VBox2.pack_start(
-    *Gtk::manage(new LabeledOptionMenu("Scale Update Policy:",
-      m_Menu_Policy)));
 
   //Digits:
   m_HBox_Digits.pack_start(
