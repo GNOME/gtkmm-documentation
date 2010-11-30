@@ -1,3 +1,7 @@
+2.91.5: (unstable):
+
+* Removed use of widgets removed from gtkmm.
+
 2.91.4: (unstable):
 
 * Improved the clipboard/ideal example.
