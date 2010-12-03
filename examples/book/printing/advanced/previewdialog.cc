@@ -81,7 +81,7 @@ void PreviewDialog::on_drawing_area_realized()
   if(gdk_window)
   {
     Cairo::RefPtr<Cairo::Context> cairo_ctx =
-        gdk_window->create_cairo_context();
+      gdk_window->create_cairo_context();
 
     if(m_refPrintContext)
       m_refPrintContext->set_cairo_context(cairo_ctx, 72, 72);

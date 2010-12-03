@@ -25,9 +25,9 @@ ExampleWindow::ExampleWindow()
   set_title("ComboBoxText example");
 
   //Fill the combo:
-  m_Combo.append_text("something");
-  m_Combo.append_text("something else");
-  m_Combo.append_text("something or other");
+  m_Combo.append("something");
+  m_Combo.append("something else");
+  m_Combo.append("something or other");
 
   add(m_Combo);
 

@@ -1,3 +1,10 @@
+2010-12-03  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the build with the latest gtkmm from git master.
+
+	* examples/book/combobox/text/examplewindow.cc: Adapted to the append_text() 
+	to append() change.
+
 2.91.5:
 
 2010-11-26  Murray Cumming  <murrayc@murrayc.com>
