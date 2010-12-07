@@ -120,7 +120,7 @@ void CalendarExample::font_selection_ok()
     Glib::ustring font_name = font_dialog_->get_font_name();
     if (!font_name.empty())
     {
-        calendar_->modify_font(Pango::FontDescription(font_name));
+        calendar_->override_font(Pango::FontDescription(font_name));
     }
   }
 }

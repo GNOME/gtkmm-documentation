@@ -36,7 +36,7 @@ protected:
   Gtk::ColorButton m_Button;
   Gtk::DrawingArea m_DrawingArea; //To show the color.
 
-  Gdk::Color m_Color;
+  Gdk::RGBA m_Color;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

@@ -38,6 +38,7 @@ MyWidget::MyWidget() :
   //This show that the GType still derives from GtkWidget:
   //std::cout << "Gtype is a GtkWidget?:" << GTK_IS_WIDGET(gobj()) << std::endl;
 
+
   //Install a style so that an aspect of this widget may be themed via an RC
   //file:
   gtk_widget_class_install_style_property(GTK_WIDGET_CLASS(
@@ -50,7 +51,19 @@ MyWidget::MyWidget() :
         0,
         G_PARAM_READABLE) );
 
-  gtk_rc_parse("custom_gtkrc");
+  m_refStyleProvider = Gtk::CssProvider::get_default();
+  Glib::RefPtr<Gtk::StyleContext> refStyleContext = get_style_context();
+  refStyleContext->add_provider(m_refStyleProvider, 
+    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    
+  try
+  {
+    m_refStyleProvider->load_from_path("custom_gtkrc");
+  }
+  catch(const Glib::Error& ex)
+  {
+    std::cerr << "Gtk::CssProvider::load_from_path() failed: " << ex.what() << std::endl;
+  }
 }
 
 MyWidget::~MyWidget()
@@ -102,8 +115,6 @@ void MyWidget::on_realize()
   //Call base class:
   Gtk::Widget::on_realize();
 
-  ensure_style();
-
   //Get the themed style from the RC file:
   get_style_property("example_scale", m_scale);
   std::cout << "m_scale (example_scale from the theme/rc-file) is: "
@@ -135,8 +146,8 @@ void MyWidget::on_realize()
     set_window(m_refGdkWindow);
 
     //set colors
-    modify_bg(Gtk::STATE_NORMAL , Gdk::Color("red"));
-    modify_fg(Gtk::STATE_NORMAL , Gdk::Color("blue"));
+    override_background_color(Gdk::RGBA("red"));
+    override_color(Gdk::RGBA("blue"));
 
     //make the widget receive expose events
     m_refGdkWindow->set_user_data(gobj());
@@ -157,11 +168,11 @@ bool MyWidget::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
   const double scale_y = (double)get_allocation().get_height() / m_scale;
 
   // paint the background
-  Gdk::Cairo::set_source_color(cr, get_style()->get_bg(Gtk::STATE_NORMAL));
+  Gdk::Cairo::set_source_rgba(cr, get_style_context()->get_background_color());
   cr->paint();
 
   // draw the foreground
-  Gdk::Cairo::set_source_color(cr, get_style()->get_fg(Gtk::STATE_NORMAL));
+  Gdk::Cairo::set_source_rgba(cr, get_style_context()->get_color());
   cr->move_to(155.*scale_x, 165.*scale_y);
   cr->line_to(155.*scale_x, 838.*scale_y);
   cr->line_to(265.*scale_x, 900.*scale_y);

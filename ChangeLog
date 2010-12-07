@@ -1,3 +1,16 @@
+2010-12-07  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the build with the latest gtkmm from git master.
+
+	* examples/book/custom/custom_widget/mywidget.cc:
+	* examples/book/custom/custom_widget/mywidget.h:
+	* examples/book/dialogs/colorselectiondialog/examplewindow.cc:
+	* examples/book/dialogs/colorselectiondialog/examplewindow.h:
+	* examples/others/calendar/calendar.cc:
+	* examples/others/cellrenderercustom/cellrendererpopup.cc:
+	* examples/others/cellrenderercustom/cellrenderertoggle.cc:
+	Adapt to the change from GtkStyle* to GtkStyleContext.
+
 2010-12-03  Murray Cumming  <murrayc@murrayc.com>
 
 	Fix the build with the latest gtkmm from git master.

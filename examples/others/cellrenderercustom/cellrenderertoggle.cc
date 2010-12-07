@@ -190,30 +190,26 @@ void MyCellRendererToggle::render_vfunc(const Cairo::RefPtr<Cairo::Context>& cr,
   if(width <= 0 || height <= 0)
     return;
 
-  Gtk::StateType state = Gtk::STATE_INSENSITIVE;
+  Gtk::StateFlags state = Gtk::STATE_FLAG_INSENSITIVE;
 
   if(property_activatable_)
-    state = Gtk::STATE_NORMAL;
+    state = (Gtk::StateFlags)0;
 
   if((flags & Gtk::CELL_RENDERER_SELECTED) != 0)
-    state = (widget.has_focus()) ? Gtk::STATE_SELECTED : Gtk::STATE_ACTIVE;
-
-  const Gtk::ShadowType shadow = (property_active_) ? Gtk::SHADOW_IN : Gtk::SHADOW_OUT;
+    state = (widget.has_focus()) ? Gtk::STATE_FLAG_SELECTED : Gtk::STATE_FLAG_ACTIVE;
 
   if(property_radio_)
   {
-    widget.get_style()->paint_option(
-      cr, state, shadow,
-      widget, "cellradio",
+    widget.get_style_context()->render_option(
+      cr,
       cell_area.get_x() + cell_xpad,
       cell_area.get_y() + cell_ypad,
       width - 1, height - 1);
   }
   else
   {
-    widget.get_style()->paint_check(
-      cr, state, shadow,
-      widget, "cellcheck",
+    widget.get_style_context()->render_check(
+      cr,
       cell_area.get_x() + cell_xpad,
       cell_area.get_y() + cell_ypad,
       width - 1, height - 1);

@@ -20,6 +20,7 @@
 #define GTKMM_CUSTOM_WIDGET_MYWIDGET_H
 
 #include <gtkmm/widget.h>
+#include <gtkmm/cssprovider.h>
 
 class MyWidget : public Gtk::Widget
 {
@@ -39,6 +40,7 @@ protected:
   virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
 
   Glib::RefPtr<Gdk::Window> m_refGdkWindow;
+  Glib::RefPtr<Gtk::CssProvider> m_refStyleProvider;
 
   int m_scale;
 };
