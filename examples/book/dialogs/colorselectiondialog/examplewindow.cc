@@ -33,7 +33,7 @@ ExampleWindow::ExampleWindow()
 
   //Set start color:
   m_Color.set_red(0);
-  m_Color.set_blue(65535);
+  m_Color.set_blue(1);
   m_Color.set_green(0);
   m_Button.set_rgba(m_Color);
 

@@ -1,3 +1,8 @@
+2.91.6: (unstable):
+
+* Ported to the recent gtkmm API, using Gdk::RGBA and Gtk::StyleContext 
+  and the slightly-changed ComboBoxText API.
+
 2.91.5: (unstable):
 
 * Removed use of widgets removed from gtkmm.
