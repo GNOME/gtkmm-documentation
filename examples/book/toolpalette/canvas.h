@@ -37,8 +37,8 @@ private:
   public:
     CanvasItem(Gtk::Widget* canvas, Gtk::ToolButton* button, double x, double y)
     {
-      const Gtk::StockID stock_id = Gtk::StockID(button->get_stock_id()); 
-      this->pixbuf = canvas->render_icon(stock_id, Gtk::ICON_SIZE_DIALOG);
+      const Gtk::StockID stock_id(button->get_stock_id()); 
+      this->pixbuf = canvas->render_icon_pixbuf(stock_id, Gtk::ICON_SIZE_DIALOG);
       this->x = x;
       this->y = y;
     }

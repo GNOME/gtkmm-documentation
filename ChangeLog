@@ -1,3 +1,10 @@
+2010-12-14  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the build with the latest gtkmm from git master.
+
+	* examples/book/toolpalette/canvas.h: Use Gtk::Widget::render_icon_pixbuf()
+	rather than render_icon().
+
 2.91.6:
 
 2010-12-07  Murray Cumming  <murrayc@murrayc.com>
