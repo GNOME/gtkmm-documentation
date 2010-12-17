@@ -1,3 +1,10 @@
+2010-12-17  Murray Cumming  <murrayc@murrayc.com>
+
+	Remove a drawable.h include, to fix the build.
+
+	* examples/book/custom/custom_widget/mywidget.cc: Do not include 
+	gdkmm/drawable.h because it no longer exists.
+
 2010-12-14  Murray Cumming  <murrayc@murrayc.com>
 
 	Fix the build with the latest gtkmm from git master.

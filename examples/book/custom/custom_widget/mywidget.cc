@@ -17,7 +17,6 @@
  */
 
 #include "mywidget.h"
-#include <gdkmm/drawable.h>
 #include <gdkmm/general.h>  // for cairo helper functions
 #include <iostream>
 //#include <gtk/gtkwidget.h> //For GTK_IS_WIDGET()
