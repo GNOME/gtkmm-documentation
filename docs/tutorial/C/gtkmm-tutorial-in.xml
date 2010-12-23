@@ -8215,7 +8215,7 @@ int main(int, char**)
 <sect1 id="sec-wrapping-hg-files">
     <title>The .hg and .ccg files</title>
     <para>The .hg and .ccg source files are very much like
-        .h anc .cc C++ source files, but they contain extra macros, such as
+        .h and .cc C++ source files, but they contain extra macros, such as
         <function>_CLASS_GOBJECT()</function> and
         <function>_WRAP_METHOD()</function>, from which
         <command>gmmproc</command> generates appropriate C++ source code,
@@ -8723,7 +8723,7 @@ _WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)
 <sect3 id="gmmproc-member-set-get">
     <title>_MEMBER_GET / _MEMBER_SET</title>
   <para>
-    Use these macro if you're wrapping a simple struct or boxed type that provides
+    Use these macros if you're wrapping a simple struct or boxed type that provides
     direct access to its data members, to create getters and setters for the data members.
   </para>
   <para><function>_MEMBER_GET(C++ name, C name, C++ type, C type)</function></para>

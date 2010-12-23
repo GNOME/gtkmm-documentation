@@ -1,8 +1,14 @@
+2010-12-23  Chris Kühl  <chrisk@openismus.com>
+
+	Fixed a couple typos in the tutorial.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml:
+
 2010-12-17  Murray Cumming  <murrayc@murrayc.com>
 
 	Remove a drawable.h include, to fix the build.
 
-	* examples/book/custom/custom_widget/mywidget.cc: Do not include 
+	* examples/book/custom/custom_widget/mywidget.cc: Do not include
 	gdkmm/drawable.h because it no longer exists.
 
 2010-12-14  Murray Cumming  <murrayc@murrayc.com>
@@ -31,7 +37,7 @@
 
 	Fix the build with the latest gtkmm from git master.
 
-	* examples/book/combobox/text/examplewindow.cc: Adapted to the append_text() 
+	* examples/book/combobox/text/examplewindow.cc: Adapted to the append_text()
 	to append() change.
 
 2.91.5:
@@ -41,8 +47,8 @@
 	Remove use of removed widgets.
 
 	* examples/book/dialogs/fileselection:
-	* examples/book/range_widgets/labeledoptionmenu.[h|cc]: Remove use of 
-	removed widgets, which were hidden behind ifdefs. I think I only see this 
+	* examples/book/range_widgets/labeledoptionmenu.[h|cc]: Remove use of
+	removed widgets, which were hidden behind ifdefs. I think I only see this
 	now because of an ifdef error in recent gtkmm.
 	* examples/others/rulers: Removed because Gtk::Ruler was removed from gtkmm.
 	* examples/Makefile.am: Adapted.
@@ -52,7 +58,7 @@
 2010-11-18  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Modified the clipboard/ideal example
-    
+
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Signal owner_change is mentioned
 	in the description of clipboard/ideal.
 	* examples/book/clipboard/ideal/examplewindow.[h|cc]:
