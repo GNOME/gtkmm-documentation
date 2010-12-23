@@ -19,19 +19,21 @@
 
 #include "exampleapplication.h"
 
-void open(const Gio::Application::type_vec_files &files, const Glib::ustring& hint)
+void on_open(const Gio::Application::type_vec_files& /* files */, 
+  const Glib::ustring& /* hint */)
 {
-  std::cout << "signal open received" << std::endl;
+  std::cout << "open signal received" << std::endl;
 }
 
 int main(int argc, char *argv[])
 {
   Gtk::Main kit(argc, argv);
 
-  ExampleApplication application("org.gtkmm.Test.bloatpad",
+  ExampleApplication application(
+    "org.gtkmm.examples.application",
     Gio::APPLICATION_HANDLES_OPEN);
-  application.signal_open().connect(sigc::ptr_fun(open));
-  int status = application.run(argc, argv);
+  application.signal_open().connect( sigc::ptr_fun(on_open) );
 
+  const int status = application.run(argc, argv);
   return status;
 }

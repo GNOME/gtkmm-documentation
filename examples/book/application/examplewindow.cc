@@ -25,7 +25,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gio::File>& file)
   add(scrolled);
   scrolled.add(view);
 
-  if (!file)
+  if(!file)
     return;
 
   try
@@ -33,21 +33,21 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gio::File>& file)
     char* contents = 0;
     gsize length = 0;
 
-    if (file->load_contents(contents, length))
+    if(file->load_contents(contents, length))
     {
       if(contents && length)
       {
         const Glib::ustring text(contents);
-        Glib::RefPtr<Gtk::TextBuffer> buffer;
-        buffer = view.get_buffer();
+        Glib::RefPtr<Gtk::TextBuffer> buffer = view.get_buffer();
         buffer->set_text(text);
       }
       g_free(contents);
     }
-  } catch (const Glib::Error& e)
+  }
+  catch (const Glib::Error& ex)
   {
-    std::cerr << e.what() << std::endl;
-  };
+    std::cerr << ex.what() << std::endl;
+  }
 
   show_all_children();
 }

@@ -1,5 +1,16 @@
 2010-12-23  Murray Cumming  <murrayc@murrayc.com>
 
+	Gtk::Application example: Minor cleanip.
+
+	* examples/book/application/exampleapplication.[h|cc]:
+	* examples/book/application/examplewindow.cc:
+	* examples/book/application/main.cc:
+	Minor formatting changes and some extra comments.
+	on_open(): Call the base class's implementation, which is generally a good 
+	idea.
+
+2010-12-23  Murray Cumming  <murrayc@murrayc.com>
+
 	Fix the build with --enable-warnings=fatal.
 
 	* configure.ac: Use -no-long-long to avoid an (apparently new) compiler 
@@ -10,11 +21,9 @@
 
 	Add Gtk::Application example
 
-	* examples/book/application/exampleapplication.cc: new
-	* examples/book/application/examplewindow.cc: new
+	* examples/book/application/exampleapplication.[h|cc]: new
+	* examples/book/application/examplewindow.[h|cc]: new
 	* examples/book/application/main.cc: new
-	* examples/book/application/exampleapplication.h: new
-	* examples/book/application/examplewindow.h: new
 	* examples/Makefile.am: Adapted.
 	
 2010-12-23  Chris Kühl  <chrisk@openismus.com>
