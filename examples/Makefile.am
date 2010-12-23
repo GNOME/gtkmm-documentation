@@ -8,9 +8,10 @@ LDADD       = $(GTKMM_LIBS)
 
 check_PROGRAMS =					\
 	book/alignment/example				\
+	book/application/example			\
 	book/aspectframe/example			\
 	book/assistant/example				\
-	book/base/base				\
+	book/base/base					\
 	book/box/example				\
 	book/builder/basic/example			\
 	book/builder/derived/example			\
@@ -25,7 +26,7 @@ check_PROGRAMS =					\
 	book/combobox/complex/example			\
 	book/combobox/text/example			\
 	book/combobox/entry_complex/example		\
-	book/combobox/entry_text/example			\
+	book/combobox/entry_text/example		\
 	book/custom/custom_container/example		\
 	book/custom/custom_widget/example		\
 	book/dialogs/aboutdialog/example		\
@@ -125,6 +126,13 @@ dist_noinst_DATA =				\
 	book/iconview/mozilla-firefox.png	\
 	book/iconview/xmms.xpm			\
 	book/menus_and_toolbars/rain.png
+
+book_application_example_SOURCES =		\
+	book/application/exampleapplication.cc	\
+	book/application/exampleapplication.h	\
+	book/application/examplewindow.cc	\
+	book/application/examplewindow.h	\
+	book/application/main.cc
 
 book_alignment_example_SOURCES =		\
 	book/alignment/examplewindow.cc		\

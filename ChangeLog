@@ -1,3 +1,22 @@
+2010-12-23  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the build with --enable-warnings=fatal.
+
+	* configure.ac: Use -no-long-long to avoid an (apparently new) compiler 
+	warning about long long not being supported by C++98. glibmm already had 
+	this option, and now gtkmm does too.
+
+2010-12-23  Yannick Guesnet  <yannick.guesnet@univ-rouen.fr>
+
+	Add Gtk::Application example
+
+	* examples/book/application/exampleapplication.cc: new
+	* examples/book/application/examplewindow.cc: new
+	* examples/book/application/main.cc: new
+	* examples/book/application/exampleapplication.h: new
+	* examples/book/application/examplewindow.h: new
+	* examples/Makefile.am: Adapted.
+	
 2010-12-23  Chris Kühl  <chrisk@openismus.com>
 
 	Fixed a couple typos in the tutorial.
