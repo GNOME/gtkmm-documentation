@@ -28,14 +28,45 @@ namespace
 
 bool grab_on_window(const Glib::RefPtr<Gdk::Window>& window, guint32 activate_time)
 {
-  if(window->pointer_grab(true,
-        Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK | Gdk::POINTER_MOTION_MASK,
-        activate_time) == 0)
+  Glib::RefPtr<Gdk::Device> device (Glib::wrap(gtk_get_current_event_device(), true));
+
+  if(device)
   {
-    if(window->keyboard_grab(true, activate_time) == 0)
-      return true;
+    Glib::RefPtr<Gdk::Device> keyboard_device;
+    Glib::RefPtr<Gdk::Device> pointer_device;
+
+    if (device->get_source() == Gdk::SOURCE_KEYBOARD)
+    {
+      keyboard_device = device;
+      pointer_device = device->get_associated_device();
+    }
     else
-      Gdk::Window::pointer_ungrab(activate_time);
+    {
+      keyboard_device = device->get_associated_device();
+      pointer_device = device;
+    }
+    if(pointer_device && keyboard_device)
+    {
+      if(pointer_device->grab(window,
+            Gdk::OWNERSHIP_NONE,
+            true,
+            Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK | Gdk::POINTER_MOTION_MASK,
+            activate_time) == Gdk::GRAB_SUCCESS)
+      {
+        if(keyboard_device->grab(window,
+              Gdk::OWNERSHIP_NONE,
+              true,
+              Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK,
+              activate_time) == Gdk::GRAB_SUCCESS)
+        {
+          return true;
+        }
+        else
+        {
+          pointer_device->ungrab(activate_time);
+        }
+      }
+    }
   }
 
   return false;

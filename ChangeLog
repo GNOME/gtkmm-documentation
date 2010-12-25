@@ -1,3 +1,11 @@
+2011-01-06  Krzesimir Nowak  <qdlacz@gmail.com>
+
+	Fix compilation of cellrenderercustom example.
+
+	* examples/others/cellrenderercustom/cellrendererpopup.cc: Don't use
+	deprecated {pointer,keyboard}_grab() methods in favor of more
+	complicated Gdk::Device stuff.
+
 2011-01-04  Murray Cumming  <murrayc@murrayc.com>
 
 	Avoid use of deprecated glibmm and giomm API.
@@ -17,7 +25,7 @@
 
 2010-12-23  Murray Cumming  <murrayc@murrayc.com>
 
-	Gtk::Application example: Minor cleanip.
+	Gtk::Application example: Minor cleanup.
 
 	* examples/book/application/exampleapplication.[h|cc]:
 	* examples/book/application/examplewindow.cc:
