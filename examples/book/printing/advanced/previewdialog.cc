@@ -47,8 +47,6 @@ PreviewDialog::PreviewDialog(
 
   m_DrawingArea.set_size_request(200, 300);
   m_VBox.pack_start(m_DrawingArea, Gtk::PACK_EXPAND_WIDGET);
-  m_DrawingArea.set_double_buffered(false);
-
 
   m_refPreview->signal_ready().connect(
     sigc::mem_fun(*this, &PreviewDialog::on_popreview_ready));
@@ -94,16 +92,25 @@ void PreviewDialog::on_page_number_changed()
   m_DrawingArea.queue_draw();
 }
 
-bool PreviewDialog::on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& /* cr */)
+bool PreviewDialog::on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
-  /* TODO: Do this with cairo?
-  Glib::RefPtr<Gdk::Window> window = m_DrawingArea.get_window();
-  if(window)
-    window->clear();
-  */
+  Cairo::RefPtr<Cairo::Context> prev_cairo_ctx;
+  double dpi_x = 72.0;
+  double dpi_y = 72.0;
+
+  if(m_refPrintContext)
+  {
+    prev_cairo_ctx = m_refPrintContext->get_cairo_context();
+    dpi_x = m_refPrintContext->get_dpi_x();
+    dpi_y = m_refPrintContext->get_dpi_y();
+    m_refPrintContext->set_cairo_context(cr, dpi_x, dpi_y);
+  }
 
   if(m_refPreview)
     m_refPreview->render_page(m_Page - 1);
+
+  if(m_refPrintContext)
+    m_refPrintContext->set_cairo_context(prev_cairo_ctx, dpi_x, dpi_y);
 
   return true;
 }
@@ -136,7 +143,6 @@ void PreviewDialog::on_popreview_got_page_size(
     if (fabs(dpi_x - m_DpiX) > 0.001 ||
         fabs(dpi_y - m_DpiY) > 0.001)
     {
-
       print_ctx->set_cairo_context(cairo_ctx, dpi_x, dpi_y);
       m_DpiX = dpi_x;
       m_DpiY = dpi_y;
@@ -156,8 +162,8 @@ void PreviewDialog::on_hide()
   m_refPreview->end_preview();
 
   //We will not be using these anymore, so null the RefPtrs:
-  m_refPreview.clear();
-  m_refPrintContext.clear();
+  m_refPreview.reset();
+  m_refPrintContext.reset();
 }
 
 void PreviewDialog::on_close_clicked()

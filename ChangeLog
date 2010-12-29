@@ -1,3 +1,14 @@
+2010-12-29  Kjell Ahlstedt  <kjell.ahlstedt@bredband.net>
+
+	Fix the print preview dialog in the printing/advanced example.
+
+	* examples/book/printing/advanced/previewdialog.cc:
+	Constructor: Don't turn off double buffering. 
+	on_drawing_area_draw(): Make it similar to preview_draw() in
+	gtk+-3/tests/print-editor.c.
+	on_hide(): Replace the deprecated Glib::RefPtr::clear() with reset().
+	Bug #638264.
+
 2010-12-23  Murray Cumming  <murrayc@murrayc.com>
 
 	Gtk::Application example: Minor cleanip.
