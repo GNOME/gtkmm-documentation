@@ -28,7 +28,7 @@ AC_CHECK_FUNCS([mkfifo])
 MM_ARG_ENABLE_WARNINGS([EXAMPLES_WXXFLAGS],
                        [-Wall],
                        [-pedantic -Wall -Wextra -Wno-long-long],
-                       [G PANGO ATK GDK GDK_PIXBUF GTK GDKMM ATKMM PANGOMM GTKMM])
+                       [G PANGO ATK GDK GDK_PIXBUF GTK GLIBMM GIOMM GDKMM ATKMM PANGOMM GTKMM])
 
 GNOME_DOC_INIT([0.9.0],,
   [AC_MSG_WARN([[gnome-doc-utils not found: tutorial will not be built.]])])
