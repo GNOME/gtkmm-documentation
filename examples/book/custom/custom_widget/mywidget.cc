@@ -155,7 +155,7 @@ void MyWidget::on_realize()
 
 void MyWidget::on_unrealize()
 {
-  m_refGdkWindow.clear();
+  m_refGdkWindow.reset();
 
   //Call base class:
   Gtk::Widget::on_unrealize();
