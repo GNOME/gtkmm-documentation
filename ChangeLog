@@ -1,3 +1,11 @@
+2011-01-12  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Modified the custom_widget example
+    
+	* examples/book/custom/custom_widget/mywidget.cc:
+	Make on_realize() more similar to gtk+ widgets' realize methods.
+	Replace the deprecated Glib::RefPtr::clear() by reset(). Bug 606903.
+
 2011-01-08  Murray Cumming  <murrayc@murrayc.com>
 
 	Use RefPtr::reset() instead of deprecated RefPtr::clear().
