@@ -30,7 +30,7 @@ MyWidget::MyWidget() :
   Gtk::Widget(),
   m_scale(1000)
 {
-  set_has_window(false);
+  set_has_window(true);
 
   //This shows the GType name, which must be used in the RC file.
   std::cout << "GType name: " << G_OBJECT_TYPE_NAME(gobj()) << std::endl;
@@ -99,9 +99,10 @@ void MyWidget::on_unmap()
 
 void MyWidget::on_realize()
 {
-  //Call base class:
-  Gtk::Widget::on_realize();
+  //Do not call base class Gtk::Widget::on_realize().
+  //It's intended only for widgets that set_has_window(false).
 
+  set_realized();
   ensure_style();
 
   //Get the themed style from the RC file:
@@ -128,11 +129,12 @@ void MyWidget::on_realize()
     attributes.window_type = GDK_WINDOW_CHILD;
     attributes.wclass = GDK_INPUT_OUTPUT;
 
-
-    m_refGdkWindow = Gdk::Window::create(get_window() /* parent */, &attributes,
+    m_refGdkWindow = Gdk::Window::create(get_parent_window(), &attributes,
             GDK_WA_X | GDK_WA_Y);
-    set_has_window();
     set_window(m_refGdkWindow);
+
+    //Attach this widget's style to its Gdk::Window.
+    style_attach();
 
     //set colors
     modify_bg(Gtk::STATE_NORMAL , Gdk::Color("red"));
@@ -145,7 +147,7 @@ void MyWidget::on_realize()
 
 void MyWidget::on_unrealize()
 {
-  m_refGdkWindow.clear();
+  m_refGdkWindow.reset();
 
   //Call base class:
   Gtk::Widget::on_unrealize();
