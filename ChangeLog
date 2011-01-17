@@ -1,3 +1,10 @@
+2011-01-17  Murray Cumming  <murrayc@murrayc.com>
+
+	Clipboard example: Fix the build.
+
+	* examples/book/clipboard/ideal/examplewindow.cc: Fix my mistaken change 
+	of clear() to reset(). This one was a ustring, not a RefPtr.
+
 2011-01-12  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Modified the custom_widget example

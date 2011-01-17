@@ -159,7 +159,7 @@ void ExampleWindow::on_clipboard_get(Gtk::SelectionData& selection_data, guint)
 void ExampleWindow::on_clipboard_clear()
 {
   //This isn't really necessary. I guess it might save memory.
-  m_ClipboardStore.reset();
+  m_ClipboardStore.clear();
 }
 
 void ExampleWindow::on_clipboard_received(
