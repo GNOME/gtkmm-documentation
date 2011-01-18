@@ -29,15 +29,15 @@ int main(int argc, char *argv[])
 {
   Gtk::Main kit(argc, argv); //TODO: Make this unnecessary: Put it in Gtk::Application.
 
-  ExampleApplication application(
-    "org.gtkmm.examples.application",
-    Gio::APPLICATION_HANDLES_OPEN);
-  application.signal_open().connect( sigc::ptr_fun(on_open) );
+  Glib::RefPtr<ExampleApplication> application = 
+    ExampleApplication::create("org.gtkmm.examples.application",
+      Gio::APPLICATION_HANDLES_OPEN);
+  application->signal_open().connect( sigc::ptr_fun(on_open) );
 
   // Start the application, showing the initial window, 
   // and opening extra windows for any files that it is asked to open,
   // for instance as a command-line parameter.
   // run() will return when the last window has been closed by the user.
-  const int status = application.run(argc, argv);
+  const int status = application->run(argc, argv);
   return status;
 }

@@ -21,10 +21,14 @@
 
 class ExampleApplication: public Gtk::Application
 {
-public:
-  explicit ExampleApplication(const Glib::ustring& appid, 
+protected:
+  explicit ExampleApplication(const Glib::ustring& application_id, 
     Gio::ApplicationFlags flags = Gio::APPLICATION_FLAGS_NONE);
 
+public:
+  static Glib::RefPtr<ExampleApplication> create(const Glib::ustring& application_id, 
+    Gio::ApplicationFlags flags = Gio::APPLICATION_FLAGS_NONE);
+    
 protected:
   //Overrides of default signal handlers:
   virtual void on_activate();

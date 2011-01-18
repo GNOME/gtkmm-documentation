@@ -1,5 +1,14 @@
 2011-01-18  Murray Cumming  <murrayc@murrayc.com>
 
+	Application example: Use ExampleApplication via RefPtr.
+
+	* examples/book/application/exampleapplication.[h|cc]: Make the constructor 
+	protected and add a create() method.
+	* examples/book/application/main.cc: Use ExampleApplication via RefPtr,
+	because that is how Gtk::Application should be used.
+
+2011-01-18  Murray Cumming  <murrayc@murrayc.com>
+
 	Application example: Added comments.
 
 	* examples/book/application/exampleapplication.cc:

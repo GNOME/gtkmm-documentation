@@ -18,9 +18,15 @@
 #include "examplewindow.h"
 #include <iostream>
 
-ExampleApplication::ExampleApplication(const Glib::ustring& appid, Gio::ApplicationFlags flags)
-: Gtk::Application(appid, flags)
+ExampleApplication::ExampleApplication(const Glib::ustring& application_id, Gio::ApplicationFlags flags)
+: Gtk::Application(application_id, flags)
 {
+}
+
+Glib::RefPtr<ExampleApplication> ExampleApplication::create(const Glib::ustring& application_id, 
+  Gio::ApplicationFlags flags)
+{
+  return Glib::RefPtr<ExampleApplication>( new ExampleApplication(application_id, flags) );
 }
 
 void ExampleApplication::create_window(const Glib::RefPtr<Gio::File>& file)
