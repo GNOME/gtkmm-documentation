@@ -26,7 +26,9 @@ ExampleApplication::ExampleApplication(const Glib::ustring& appid, Gio::Applicat
 void ExampleApplication::create_window(const Glib::RefPtr<Gio::File>& file)
 {
   Gtk::Window* window = new ExampleWindow(file);
-  add_window(*window);
+  
+  //Make sure that the application runs for as long this window is still open:
+  add_window(*window); 
   
   //Delete the window when it is hidden.
   //That's enough for this simple example.

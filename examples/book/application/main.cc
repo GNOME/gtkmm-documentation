@@ -1,4 +1,4 @@
-/* gtkmm example Copyright (C) 2002 gtkmm development team
+/* gtkmm example Copyright (C) 2010 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2
@@ -27,13 +27,17 @@ void on_open(const Gio::Application::type_vec_files& /* files */,
 
 int main(int argc, char *argv[])
 {
-  Gtk::Main kit(argc, argv);
+  Gtk::Main kit(argc, argv); //TODO: Make this unnecessary: Put it in Gtk::Application.
 
   ExampleApplication application(
     "org.gtkmm.examples.application",
     Gio::APPLICATION_HANDLES_OPEN);
   application.signal_open().connect( sigc::ptr_fun(on_open) );
 
+  // Start the application, showing the initial window, 
+  // and opening extra windows for any files that it is asked to open,
+  // for instance as a command-line parameter.
+  // run() will return when the last window has been closed by the user.
   const int status = application.run(argc, argv);
   return status;
 }
