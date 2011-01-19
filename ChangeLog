@@ -1,3 +1,10 @@
+2011-01-19  Murray Cumming  <murrayc@murrayc.com>
+
+	Base example: Try to use Gtk::Application instead of Gtk::Main.
+
+	* examples/book/base/base.cc: Replace Gtk::Main with Gtk::Application,
+	though run() does not seem to return when the window is closed.
+
 2011-01-18  Murray Cumming  <murrayc@murrayc.com>
 
 	Application example: Use ExampleApplication via RefPtr.
