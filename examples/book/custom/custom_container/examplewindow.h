@@ -36,7 +36,7 @@ protected:
   Gtk::VBox m_VBox;
   MyContainer m_MyContainer;
   Gtk::Button m_Button_One;
-  Gtk::Label m_Button_Two;
+  Gtk::Label m_Label_Two;
   Gtk::HButtonBox m_ButtonBox;
   Gtk::Button m_Button_Quit;
 };

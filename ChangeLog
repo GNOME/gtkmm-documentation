@@ -1,3 +1,21 @@
+2011-01-23  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Modified the custom_container and custom_widget examples.
+    
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Updated the Custom Widgets chapter.
+	* examples/book/custom/custom_container/examplewindow.[h|cc]: Renamed
+	m_Button_Two to m_Label_Two. Removed some calls to show().
+	* examples/book/custom/custom_container/mycontainer.[h|cc]: Replaced
+	on_size_request() by get_request_mode_vfunc() and get_preferred_xxx_vfunc().
+	Modified on_size_allocate().
+	* examples/book/custom/custom_widget/custom_gtkrc:
+	* examples/book/custom/custom_widget/custom_gtk.css: Renamed custom_gtkrc
+	to custom_gtk.css. Modified it to suit Gtk::CssProvider.
+	* examples/book/custom/custom_widget/mywidget.[h|cc]: Replaced
+	on_size_request() by get_request_mode_vfunc() and get_preferred_xxx_vfunc().
+	In on_realize(), removed calls to functions that no longer exist in gtkmm 3.
+	Bug 639073.
+
 2011-01-19  Murray Cumming  <murrayc@murrayc.com>
 
 	Base example: Try to use Gtk::Application instead of Gtk::Main.

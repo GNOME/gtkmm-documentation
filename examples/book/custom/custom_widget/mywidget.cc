@@ -31,15 +31,14 @@ MyWidget::MyWidget() :
 {
   set_has_window(true);
 
-  //This shows the GType name, which must be used in the RC file.
+  //This shows the GType name, which must be used in the CSS file.
   std::cout << "GType name: " << G_OBJECT_TYPE_NAME(gobj()) << std::endl;
 
-  //This show that the GType still derives from GtkWidget:
+  //This shows that the GType still derives from GtkWidget:
   //std::cout << "Gtype is a GtkWidget?:" << GTK_IS_WIDGET(gobj()) << std::endl;
 
-
-  //Install a style so that an aspect of this widget may be themed via an RC
-  //file:
+  //Install a style so that an aspect of this widget may be themed via a CSS
+  //style sheet file:
   gtk_widget_class_install_style_property(GTK_WIDGET_CLASS(
               G_OBJECT_GET_CLASS(gobj())),
       g_param_spec_int("example_scale",
@@ -50,14 +49,14 @@ MyWidget::MyWidget() :
         0,
         G_PARAM_READABLE) );
 
-  m_refStyleProvider = Gtk::CssProvider::get_default();
+  m_refStyleProvider = Gtk::CssProvider::create();
   Glib::RefPtr<Gtk::StyleContext> refStyleContext = get_style_context();
   refStyleContext->add_provider(m_refStyleProvider, 
     GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
     
   try
   {
-    m_refStyleProvider->load_from_path("custom_gtkrc");
+    m_refStyleProvider->load_from_path("custom_gtk.css");
   }
   catch(const Glib::Error& ex)
   {
@@ -69,16 +68,52 @@ MyWidget::~MyWidget()
 {
 }
 
-void MyWidget::on_size_request(Gtk::Requisition* requisition)
+Gtk::SizeRequestMode MyWidget::get_request_mode_vfunc() const
 {
-  //Initialize the output parameter:
-  *requisition = Gtk::Requisition();
+  //Accept the default value supplied by the base class.
+  return Gtk::Widget::get_request_mode_vfunc();
+}
 
-  //Discover the total amount of minimum space needed by this widget.
+//Discover the total amount of minimum space and natural space needed by
+//this widget.
+//Let's make this simple example widget always need minimum 60 by 50 and
+//natural 100 by 70.
+void MyWidget::get_preferred_width_vfunc(int* minimum_width, int* natural_width) const
+{
+  if (minimum_width) 
+    *minimum_width = 60;
 
-  //Let's make this simple example widget always need 50 by 50:
-  requisition->height = 50;
-  requisition->width = 50;
+  if (natural_width) 
+    *natural_width = 100;
+}
+
+void MyWidget::get_preferred_height_for_width_vfunc(int /* width */,
+   int* minimum_height, int* natural_height) const
+{
+  if (minimum_height) 
+    *minimum_height = 50;
+
+  if (natural_height) 
+    *natural_height = 70;
+}
+
+void MyWidget::get_preferred_height_vfunc(int* minimum_height, int* natural_height) const
+{
+  if (minimum_height) 
+    *minimum_height = 50;
+
+  if (natural_height) 
+    *natural_height = 70;
+}
+
+void MyWidget::get_preferred_width_for_height_vfunc(int /* height */,
+   int* minimum_width, int* natural_width) const
+{
+  if (minimum_width) 
+    *minimum_width = 60;
+
+  if (natural_width) 
+    *natural_width = 100;
 }
 
 void MyWidget::on_size_allocate(Gtk::Allocation& allocation)
@@ -115,11 +150,10 @@ void MyWidget::on_realize()
   //It's intended only for widgets that set_has_window(false).
 
   set_realized();
-  ensure_style();
 
-  //Get the themed style from the RC file:
+  //Get the themed style from the CSS file:
   get_style_property("example_scale", m_scale);
-  std::cout << "m_scale (example_scale from the theme/rc-file) is: "
+  std::cout << "m_scale (example_scale from the theme/css-file) is: "
       << m_scale << std::endl;
 
   if(!m_refGdkWindow)
@@ -144,9 +178,6 @@ void MyWidget::on_realize()
     m_refGdkWindow = Gdk::Window::create(get_parent_window(), &attributes,
             GDK_WA_X | GDK_WA_Y);
     set_window(m_refGdkWindow);
-
-    //Attach this widget's style to its Gdk::Window.
-    style_attach();
 
     //set colors
     override_background_color(Gdk::RGBA("red"));

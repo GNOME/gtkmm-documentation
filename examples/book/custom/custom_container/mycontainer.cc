@@ -17,6 +17,7 @@
  */
 
 #include <iostream>
+#include <algorithm> // std::max
 #include "mycontainer.h"
 
 MyContainer::MyContainer()
@@ -40,69 +41,169 @@ void MyContainer::set_child_widgets(Gtk::Widget& child_one,
   m_child_two->set_parent(*this);
 }
 
-void MyContainer::on_size_request(Gtk::Requisition* requisition)
+//This example container is a simplified VBox with at most two children.
+Gtk::SizeRequestMode MyContainer::get_request_mode_vfunc() const
 {
-  //Initialize the output parameter:
-  *requisition = Gtk::Requisition();
+  return Gtk::SIZE_REQUEST_HEIGHT_FOR_WIDTH;
+}
 
-  //Discover the total amount of minimum space needed by this container widget,
-  //by examining its child widgets.  The layouts in this custom container will
-  //be arranged vertically, one above the other.
+//Discover the total amount of minimum space and natural space needed by
+//this container and its children.
+void MyContainer::get_preferred_width_vfunc(int* minimum_width, int* natural_width) const
+{
+  int child_minimum_width[2] = {0, 0};
+  int child_natural_width[2] = {0, 0};
 
-   Gtk::Requisition child_requisition_one = {0, 0};
-   Gtk::Requisition child_requisition_two = {0, 0};
-   if(m_child_one && m_child_one->get_visible())
-   {
-     //TODO: Support natural-size properly:
-     Gtk::Requisition child_requisition_one_natural;
-     m_child_one->get_preferred_size(child_requisition_one, child_requisition_one_natural);
-    }
+  if(m_child_one && m_child_one->get_visible())
+    m_child_one->get_preferred_width(child_minimum_width[0], child_natural_width[0]);
 
-   if(m_child_two && m_child_two->get_visible())
-   {
-     //TODO: Support natural-size properly:
-     Gtk::Requisition child_requisition_two_natural;
-     m_child_two->get_preferred_size(child_requisition_two, child_requisition_two_natural);
-   }
+  if(m_child_two && m_child_two->get_visible())
+    m_child_two->get_preferred_width(child_minimum_width[1], child_natural_width[1]);
 
-  //See which one has the most width:
-  int max_width = MAX(child_requisition_one.width,
-          child_requisition_two.width);
+  //Request a width equal to the width of the widest visible child.
+  if(minimum_width) 
+    *minimum_width = std::max(child_minimum_width[0], child_minimum_width[1]);
 
-  //Add the heights together:
-  int total_height = child_requisition_one.height +
-      child_requisition_two.height;
+  if(natural_width) 
+    *natural_width = std::max(child_natural_width[0], child_natural_width[1]);
+}
 
-  //Request the width for this container based on the sizes requested by its
-  //child widgets:
-  requisition->height = total_height;
-  requisition->width = max_width;
+void MyContainer::get_preferred_height_for_width_vfunc(int width,
+   int* minimum_height, int* natural_height) const
+{
+  int child_minimum_height[2] = {0, 0};
+  int child_natural_height[2] = {0, 0};
+  int nvis_children = 0;
+
+  if(m_child_one && m_child_one->get_visible())
+  {
+    ++nvis_children;
+    m_child_one->get_preferred_height_for_width(width, child_minimum_height[0],
+                                                child_natural_height[0]);
+  }
+
+  if(m_child_two && m_child_two->get_visible())
+  {
+    ++nvis_children;
+    m_child_two->get_preferred_height_for_width(width, child_minimum_height[1],
+                                                child_natural_height[1]);
+  }
+
+  //The allocated height will be divided equally among the visible children.
+  //Request a height equal to the number of visible children times the height
+  //of the highest child.
+  if(minimum_height) 
+    *minimum_height = nvis_children * std::max(child_minimum_height[0],
+                                               child_minimum_height[1]);
+
+  if(natural_height) 
+    *natural_height = nvis_children * std::max(child_natural_height[0],
+                                               child_natural_height[1]);
+}
+
+void MyContainer::get_preferred_height_vfunc(int* minimum_height, int* natural_height) const
+{
+  int child_minimum_height[2] = {0, 0};
+  int child_natural_height[2] = {0, 0};
+  int nvis_children = 0;
+
+  if(m_child_one && m_child_one->get_visible())
+  {
+    ++nvis_children;
+    m_child_one->get_preferred_height(child_minimum_height[0], child_natural_height[0]);
+  }
+
+  if(m_child_two && m_child_two->get_visible())
+  {
+    ++nvis_children;
+    m_child_two->get_preferred_height(child_minimum_height[1], child_natural_height[1]);
+  }
+
+  //The allocated height will be divided equally among the visible children.
+  //Request a height equal to the number of visible children times the height
+  //of the highest child.
+  if(minimum_height) 
+    *minimum_height = nvis_children * std::max(child_minimum_height[0],
+                                               child_minimum_height[1]);
+
+  if(natural_height) 
+    *natural_height = nvis_children * std::max(child_natural_height[0],
+                                               child_natural_height[1]);
+}
+
+void MyContainer::get_preferred_width_for_height_vfunc(int height,
+   int* minimum_width, int* natural_width) const
+{
+  int child_minimum_width[2] = {0, 0};
+  int child_natural_width[2] = {0, 0};
+  int nvis_children = 0;
+
+  //Get number of visible children.
+  if(m_child_one && m_child_one->get_visible())
+    ++nvis_children;
+  if(m_child_two && m_child_two->get_visible())
+    ++nvis_children;
+
+  if(nvis_children > 0)
+  {
+    //Divide the height equally among the visible children.
+    const int height_per_child = height / nvis_children;
+
+    if(m_child_one && m_child_one->get_visible())
+      m_child_one->get_preferred_width_for_height(height_per_child,
+                   child_minimum_width[0], child_natural_width[0]);
+
+    if(m_child_two && m_child_two->get_visible())
+      m_child_two->get_preferred_width_for_height(height_per_child,
+                   child_minimum_width[1], child_natural_width[1]);
+  }
+
+  //Request a width equal to the width of the widest child.
+  if(minimum_width) 
+    *minimum_width = std::max(child_minimum_width[0], child_minimum_width[1]);
+
+  if(natural_width) 
+    *natural_width = std::max(child_natural_width[0], child_natural_width[1]);
 }
 
 void MyContainer::on_size_allocate(Gtk::Allocation& allocation)
 {
   //Do something with the space that we have actually been given:
   //(We will not be given heights or widths less than we have requested, though
-  //we might get more)
+  //we might get more.)
 
   //Use the offered allocation for this container:
   set_allocation(allocation);
 
-  //Assign sign space to the child:
-  Gtk::Allocation child_allocation_one, child_allocation_two;
+  //Get number of visible children.
+  int nvis_children = 0;
+  if(m_child_one && m_child_one->get_visible())
+    ++nvis_children;
+  if(m_child_two && m_child_two->get_visible())
+    ++nvis_children;
 
-  //Place the first child at the top-left,
+  if(nvis_children <= 0)
+    return;
+
+  //Assign space to the children:
+  Gtk::Allocation child_allocation_one;
+  Gtk::Allocation child_allocation_two;
+
+  //Place the first child at the top-left:
   child_allocation_one.set_x( allocation.get_x() );
   child_allocation_one.set_y( allocation.get_y() );
 
   //Make it take up the full width available:
   child_allocation_one.set_width( allocation.get_width() );
 
-  //Make it take up half the height available:
-  child_allocation_one.set_height( allocation.get_height() / 2);
-
   if(m_child_one && m_child_one->get_visible())
+  {
+    //Divide the height equally among the visible children.
+    child_allocation_one.set_height( allocation.get_height() / nvis_children);
     m_child_one->size_allocate(child_allocation_one);
+  }
+  else
+    child_allocation_one.set_height(0);
 
   //Place the second child below the first child:
   child_allocation_two.set_x( allocation.get_x() );
@@ -112,7 +213,7 @@ void MyContainer::on_size_allocate(Gtk::Allocation& allocation)
   //Make it take up the full width available:
   child_allocation_two.set_width( allocation.get_width() );
 
-  //Make it take up half the height available:
+  //Make it take up the remaining height:
   child_allocation_two.set_height( allocation.get_height() -
           child_allocation_one.get_height());
 
@@ -139,7 +240,6 @@ void MyContainer::on_add(Gtk::Widget* child)
   else if(!m_child_two)
   {
     m_child_two = child;
-
     m_child_two->set_parent(*this);
   }
 }

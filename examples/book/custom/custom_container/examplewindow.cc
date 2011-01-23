@@ -21,7 +21,7 @@
 
 ExampleWindow::ExampleWindow()
 : m_Button_One("Child One"),
-  m_Button_Two("Child 2"),
+  m_Label_Two("Child 2"),
   m_Button_Quit("Quit")
 {
   set_title("Custom Container example");
@@ -31,15 +31,11 @@ ExampleWindow::ExampleWindow()
   add(m_VBox);
 
   //Add the child widgets to the custom container:
-  m_MyContainer.set_child_widgets(m_Button_One, m_Button_Two);
-  m_Button_One.show();
-  m_Button_Two.show();
+  m_MyContainer.set_child_widgets(m_Button_One, m_Label_Two);
 
-  m_Button_Two.property_xalign() = 1.0f; 
+  m_Label_Two.set_alignment(1.0, 0.5);
 
   m_VBox.pack_start(m_MyContainer, Gtk::PACK_EXPAND_WIDGET);
-  m_MyContainer.show();
-
   m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
 
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
