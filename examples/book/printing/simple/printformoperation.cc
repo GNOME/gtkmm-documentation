@@ -112,15 +112,14 @@ void PrintFormOperation::on_draw_page(
   cairo_ctx->set_source_rgb(0, 0, 0);
 
   //Render Pango LayoutLines over the Cairo context:
-  Pango::LayoutIter iter;
-  m_refLayout->get_iter(iter);
+  Pango::LayoutIter iter = m_refLayout->get_iter();
 
   double start_pos = 0;
   int line_index = 0;
 
   do
   {
-    if (line_index >= start_page_line)
+    if(line_index >= start_page_line)
     {
       Glib::RefPtr<Pango::LayoutLine> layout_line = iter.get_line();
       Pango::Rectangle logical_rect = iter.get_line_logical_extents();
@@ -128,17 +127,17 @@ void PrintFormOperation::on_draw_page(
 
       if (line_index == start_page_line)
       {
-          start_pos = logical_rect.get_y() / 1024.0;
+        start_pos = logical_rect.get_y() / 1024.0;
       }
 
       cairo_ctx->move_to(logical_rect.get_x() / 1024.0,
-              baseline / 1024.0 - start_pos);
+        baseline / 1024.0 - start_pos);
 
       layout_line->show_in_cairo_context(cairo_ctx);
     }
 
     line_index++;
   }
-  while (line_index < end_page_line && iter.next_line());
+  while(line_index < end_page_line && iter.next_line());
 }
 

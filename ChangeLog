@@ -1,5 +1,13 @@
 2011-01-26  Murray Cumming  <murrayc@murrayc.com>
 
+	Adapt to the Pango::Layout::get_iter(iter) deprecation.
+
+	* examples/book/printing/advanced/printformoperation.cc:
+	* examples/book/printing/simple/printformoperation.cc: Use the get_iter() 
+	method that just returns the iter.
+
+2011-01-26  Murray Cumming  <murrayc@murrayc.com>
+
 	Build: Adapt to a filename change.
 
 	* examples/Makefile.am: Mention the new .css file instead of the old rc file.
