@@ -1,5 +1,11 @@
 2011-01-26  Murray Cumming  <murrayc@murrayc.com>
 
+	ListViewText: Adapt to the append_text() change to append().
+
+	* examples/book/treeview/listviewtext/examplewindow.cc: Fix the build.
+
+2011-01-26  Murray Cumming  <murrayc@murrayc.com>
+
 	A build fix.
 
 	* examples/book/treeview/editable_cells/examplewindow.cc:  Fix another of my 

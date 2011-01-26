@@ -51,12 +51,12 @@ ExampleWindow::ExampleWindow() :
   m_ListViewText.set_column_title(1, "Temperature (celsius)");
   m_ListViewText.set_column_title(2, "Forecast");
 
-  guint row_number = m_ListViewText.append_text();
+  guint row_number = m_ListViewText.append();
   m_ListViewText.set_text(row_number, 0, "Madrid");
   m_ListViewText.set_text(row_number, 1, "30");   // degrees for Madrid
   m_ListViewText.set_text(row_number, 2, "cloudy"); // forecast for Madrid
 
-  row_number = m_ListViewText.append_text();
+  row_number = m_ListViewText.append();
   m_ListViewText.set_text(row_number,  0, "Lisbon");
   m_ListViewText.set_text(row_number, 1, "25");   // degrees for Lisbon
   m_ListViewText.set_text(row_number, 2, "rainy");  // forecast for Lisbon
