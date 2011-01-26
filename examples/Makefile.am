@@ -116,7 +116,7 @@ dist_noinst_DATA =				\
 	book/builder/basic/basic.ui		\
 	book/builder/derived/basic.ui		\
 	book/buttons/button/info.xpm		\
-	book/custom/custom_widget/custom_gtkrc	\
+	book/custom/custom_widget/custom_gtk.css	\
 	book/iconview/gnome-dice-1.svg		\
 	book/iconview/gnome-dice-2.svg		\
 	book/iconview/gnome-dice-3.svg		\

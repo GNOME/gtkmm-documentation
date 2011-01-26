@@ -1,3 +1,9 @@
+2011-01-26  Murray Cumming  <murrayc@murrayc.com>
+
+	Build: Adapt to a filename change.
+
+	* examples/Makefile.am: Mention the new .css file instead of the old rc file.
+
 2011-01-23  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Modified the custom_container and custom_widget examples.
