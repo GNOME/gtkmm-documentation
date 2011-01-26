@@ -158,7 +158,7 @@ void ExampleWindow::cellrenderer_validated_on_editing_started(
     {
       pEntry->set_text(m_invalid_text_for_retry);
       m_validate_retry = false;
-      m_invalid_text_for_retry.reset();
+      m_invalid_text_for_retry.clear();
     }
   }
 
