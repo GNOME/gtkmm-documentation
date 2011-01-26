@@ -31,7 +31,6 @@ protected:
   //Signal handlers:
   void on_checkbutton_toggled();
   void on_menu_position(Gtk::PositionType type);
-  void on_menu_policy(Gtk::UpdateType type);
   void on_adjustment1_value_changed();
   void on_adjustment2_value_changed();
   void on_button_quit();
@@ -51,7 +50,7 @@ protected:
 
   Gtk::HScrollbar m_Scrollbar;
 
-  Gtk::Menu m_Menu_Position, m_Menu_Policy;
+  Gtk::Menu m_Menu_Position;
 
   Gtk::Button m_Button_Quit;
 };

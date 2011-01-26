@@ -53,13 +53,11 @@ ExampleWindow::ExampleWindow()
   set_title("range controls");
 
   //VScale:
-  m_VScale.set_update_policy(Gtk::UPDATE_CONTINUOUS);
   m_VScale.set_digits(1);
   m_VScale.set_value_pos(Gtk::POS_TOP);
   m_VScale.set_draw_value();
 
   //HScale:
-  m_HScale.set_update_policy(Gtk::UPDATE_CONTINUOUS);
   m_HScale.set_digits(1);
   m_HScale.set_value_pos(Gtk::POS_TOP);
   m_HScale.set_draw_value();
@@ -77,7 +75,6 @@ ExampleWindow::ExampleWindow()
   m_VBox_HScale.pack_start(m_HScale);
 
   //Scrollbar:
-  m_Scrollbar.set_update_policy(Gtk::UPDATE_CONTINUOUS);
   m_VBox_HScale.pack_start(m_Scrollbar);
 
   //CheckButton:
@@ -110,25 +107,6 @@ ExampleWindow::ExampleWindow()
     sigc::bind(sigc::mem_fun(*this,
       &ExampleWindow::on_menu_position), Gtk::POS_RIGHT));
   m_Menu_Position.append(*item);
-
-
-  item = Gtk::manage(new Gtk::MenuItem("Continuous"));
-  item->signal_activate().connect(
-    sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_policy), Gtk::UPDATE_CONTINUOUS));
-  m_Menu_Policy.append(*item);
-
-  item = Gtk::manage(new Gtk::MenuItem("Discontinuous"));
-  item->signal_activate().connect(
-    sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_policy), Gtk::UPDATE_DISCONTINUOUS));
-  m_Menu_Policy.append(*item);
-
-  item = Gtk::manage(new Gtk::MenuItem("Delayed"));
-  item->signal_activate().connect(
-    sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_policy), Gtk::UPDATE_DELAYED));
-  m_Menu_Policy.append(*item);
 
   //Digits:
   m_HBox_Digits.pack_start(
@@ -175,12 +153,6 @@ void ExampleWindow::on_menu_position(Gtk::PositionType postype)
 {
   m_VScale.set_value_pos(postype);
   m_HScale.set_value_pos(postype);
-}
-
-void ExampleWindow::on_menu_policy(Gtk::UpdateType type)
-{
-  m_VScale.set_update_policy(type);
-  m_HScale.set_update_policy(type);
 }
 
 void ExampleWindow::on_adjustment1_value_changed()
