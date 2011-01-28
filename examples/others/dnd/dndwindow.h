@@ -78,8 +78,8 @@ protected:
   };
 
   //Targets:
-  typedef std::list<Gtk::TargetEntry> type_listTargets;
-  type_listTargets m_listTargets, m_listTargetsNoRoot;
+  typedef std::vector<Gtk::TargetEntry> type_vecTargets;
+  type_vecTargets m_listTargets, m_listTargetsNoRoot;
 };
 
 #endif // GTKMM_EXAMPLE_DNDWINDOW_H

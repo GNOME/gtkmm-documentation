@@ -91,7 +91,7 @@ void ExampleWindow::on_button_copy()
   Glib::RefPtr<Gtk::Clipboard> refClipboard = Gtk::Clipboard::get();
 
   //Targets:
-  std::list<Gtk::TargetEntry> listTargets;
+  std::vector<Gtk::TargetEntry> listTargets;
 
   listTargets.push_back( Gtk::TargetEntry(example_target_custom) );
   listTargets.push_back( Gtk::TargetEntry(example_target_text) );
@@ -199,7 +199,7 @@ void ExampleWindow::on_clipboard_received_targets(
   const Glib::StringArrayHandle& targets_array)
 {
   // Get the list of available clipboard targets:
-  std::list<std::string> targets = targets_array;
+  std::vector<std::string> targets = targets_array;
 
   const bool bPasteIsPossible =
     std::find(targets.begin(), targets.end(),

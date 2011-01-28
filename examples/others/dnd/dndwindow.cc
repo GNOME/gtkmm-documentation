@@ -158,7 +158,7 @@ bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& conte
            G_OBJECT_TYPE_NAME (source_widget) :
            "NULL");
 
-  typedef std::list<Glib::ustring> type_targets;
+  typedef std::vector<std::string> type_targets;
   const type_targets targets = context->list_targets();
   for(type_targets::const_iterator iter = targets.begin(); iter != targets.end(); ++iter)
   {
@@ -184,7 +184,7 @@ bool DnDWindow::on_image_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context
 
   m_Image.set(m_trashcan_closed);
 
-  std::vector<Glib::ustring> targets = context->list_targets();
+  std::vector<std::string> targets = context->list_targets();
   if(!targets.empty())
   {
     drag_get_data( context, targets[0], time );

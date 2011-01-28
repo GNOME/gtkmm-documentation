@@ -43,7 +43,7 @@ ExampleWindow::ExampleWindow()
   m_Dialog.set_website("http://www.gtkmm.org");
   m_Dialog.set_website_label("gtkmm website");
 
-  std::list<Glib::ustring> list_authors;
+  std::vector<Glib::ustring> list_authors;
   list_authors.push_back("Murray Cumming");
   list_authors.push_back("Somebody Else");
   list_authors.push_back("AN Other");

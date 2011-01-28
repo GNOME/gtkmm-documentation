@@ -89,8 +89,8 @@ private:
      ~GlueList();
 
      //This is just a list of stuff to delete later:
-     typedef std::list<GlueItem*> type_listOfGlue;
-     type_listOfGlue m_list;
+     typedef std::vector<GlueItem*> type_vecOfGlue;
+     type_vecOfGlue m_list;
    };
 
    typeListOfRows::iterator get_data_row_iter_from_tree_row_iter(const iterator& iter);

@@ -28,7 +28,7 @@ DnDWindow::DnDWindow()
   add(m_HBox);
 
   //Targets:
-  std::list<Gtk::TargetEntry> listTargets;
+  std::vector<Gtk::TargetEntry> listTargets;
   listTargets.push_back( Gtk::TargetEntry("STRING") );
   listTargets.push_back( Gtk::TargetEntry("text/plain") );
 

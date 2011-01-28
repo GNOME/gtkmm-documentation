@@ -1,3 +1,11 @@
+2011-01-28  Murray Cumming  <murrayc@murrayc.com>
+
+	Adapt to the use of vector instead of *Handle in gtkmm 3.
+
+	* examples/book/: Use std::vector instead of std::list, now that we don't 
+	use *Handle, which allowed both. We made that change because too many people 
+	were confused by the intermediate *Handle type.
+
 2011-01-26  Murray Cumming  <murrayc@murrayc.com>
 
 	ListViewText: Adapt to the append_text() change to append().

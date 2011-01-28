@@ -126,8 +126,8 @@ void ExampleWindow::on_item_activated(const Gtk::TreeModel::Path& path)
 
 void ExampleWindow::on_selection_changed()
 {
-  typedef std::list<Gtk::TreeModel::Path> type_list_paths;
-  type_list_paths selected = m_IconView.get_selected_items();
+  typedef std::vector<Gtk::TreeModel::Path> type_vec_paths;
+  type_vec_paths selected = m_IconView.get_selected_items();
   if(!selected.empty())
   {
     const Gtk::TreeModel::Path& path = *selected.begin();

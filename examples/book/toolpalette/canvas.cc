@@ -30,7 +30,7 @@ Canvas::~Canvas()
 {
   while(!m_canvas_items.empty())
   {
-    type_list_items::iterator iter = m_canvas_items.begin();
+    type_vec_items::iterator iter = m_canvas_items.begin();
     CanvasItem* item = *iter;
     delete item;
     m_canvas_items.erase(iter);
@@ -67,7 +67,7 @@ bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
   cr->rectangle(0, 0, allocation.get_width(), allocation.get_height());
   cr->fill();
 
-  for(type_list_items::iterator iter = m_canvas_items.begin();
+  for(type_vec_items::iterator iter = m_canvas_items.begin();
     iter != m_canvas_items.end(); ++iter )
   {
     item_draw(*iter, cr, false);

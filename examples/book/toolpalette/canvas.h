@@ -61,8 +61,8 @@ private:
   bool m_drag_data_requested_for_drop; //So we know what to do in on_drag_data_received().
   CanvasItem* m_drop_item;
   
-  typedef std::list<CanvasItem*> type_list_items;
-  type_list_items m_canvas_items;
+  typedef std::vector<CanvasItem*> type_vec_items;
+  type_vec_items m_canvas_items;
 };
 
 #endif //GTKMM_EXAMPLE_CANVAS_H
