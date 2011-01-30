@@ -3,8 +3,9 @@
  * The name of the style property must have its canonical form, i.e. characters
  * other than ASCII letters, digits, and hyphens must be replaced by hyphens.
 */
+
 * {
-  /* -<widget class name>-<style property canonical name>: <value>;*/
+  /* -<widget class name>-<style property canonical name>: <value>; */
   -gtkmm__CustomObject_mywidget-example-scale: 920;
 }
 

@@ -49,7 +49,7 @@ Gtk::SizeRequestMode MyContainer::get_request_mode_vfunc() const
 
 //Discover the total amount of minimum space and natural space needed by
 //this container and its children.
-void MyContainer::get_preferred_width_vfunc(int* minimum_width, int* natural_width) const
+void MyContainer::get_preferred_width_vfunc(int& minimum_width, int& natural_width) const
 {
   int child_minimum_width[2] = {0, 0};
   int child_natural_width[2] = {0, 0};
@@ -61,15 +61,12 @@ void MyContainer::get_preferred_width_vfunc(int* minimum_width, int* natural_wid
     m_child_two->get_preferred_width(child_minimum_width[1], child_natural_width[1]);
 
   //Request a width equal to the width of the widest visible child.
-  if(minimum_width) 
-    *minimum_width = std::max(child_minimum_width[0], child_minimum_width[1]);
-
-  if(natural_width) 
-    *natural_width = std::max(child_natural_width[0], child_natural_width[1]);
+  minimum_width = std::max(child_minimum_width[0], child_minimum_width[1]);
+  natural_width = std::max(child_natural_width[0], child_natural_width[1]);
 }
 
 void MyContainer::get_preferred_height_for_width_vfunc(int width,
-   int* minimum_height, int* natural_height) const
+   int& minimum_height, int& natural_height) const
 {
   int child_minimum_height[2] = {0, 0};
   int child_natural_height[2] = {0, 0};
@@ -92,16 +89,13 @@ void MyContainer::get_preferred_height_for_width_vfunc(int width,
   //The allocated height will be divided equally among the visible children.
   //Request a height equal to the number of visible children times the height
   //of the highest child.
-  if(minimum_height) 
-    *minimum_height = nvis_children * std::max(child_minimum_height[0],
-                                               child_minimum_height[1]);
-
-  if(natural_height) 
-    *natural_height = nvis_children * std::max(child_natural_height[0],
-                                               child_natural_height[1]);
+  minimum_height = nvis_children * std::max(child_minimum_height[0],
+                                            child_minimum_height[1]);
+  natural_height = nvis_children * std::max(child_natural_height[0],
+                                            child_natural_height[1]);
 }
 
-void MyContainer::get_preferred_height_vfunc(int* minimum_height, int* natural_height) const
+void MyContainer::get_preferred_height_vfunc(int& minimum_height, int& natural_height) const
 {
   int child_minimum_height[2] = {0, 0};
   int child_natural_height[2] = {0, 0};
@@ -122,17 +116,14 @@ void MyContainer::get_preferred_height_vfunc(int* minimum_height, int* natural_h
   //The allocated height will be divided equally among the visible children.
   //Request a height equal to the number of visible children times the height
   //of the highest child.
-  if(minimum_height) 
-    *minimum_height = nvis_children * std::max(child_minimum_height[0],
-                                               child_minimum_height[1]);
-
-  if(natural_height) 
-    *natural_height = nvis_children * std::max(child_natural_height[0],
-                                               child_natural_height[1]);
+  minimum_height = nvis_children * std::max(child_minimum_height[0],
+                                            child_minimum_height[1]);
+  natural_height = nvis_children * std::max(child_natural_height[0],
+                                            child_natural_height[1]);
 }
 
 void MyContainer::get_preferred_width_for_height_vfunc(int height,
-   int* minimum_width, int* natural_width) const
+   int& minimum_width, int& natural_width) const
 {
   int child_minimum_width[2] = {0, 0};
   int child_natural_width[2] = {0, 0};
@@ -159,11 +150,8 @@ void MyContainer::get_preferred_width_for_height_vfunc(int height,
   }
 
   //Request a width equal to the width of the widest child.
-  if(minimum_width) 
-    *minimum_width = std::max(child_minimum_width[0], child_minimum_width[1]);
-
-  if(natural_width) 
-    *natural_width = std::max(child_natural_width[0], child_natural_width[1]);
+  minimum_width = std::max(child_minimum_width[0], child_minimum_width[1]);
+  natural_width = std::max(child_natural_width[0], child_natural_width[1]);
 }
 
 void MyContainer::on_size_allocate(Gtk::Allocation& allocation)

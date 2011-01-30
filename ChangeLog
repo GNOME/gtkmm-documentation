@@ -1,3 +1,15 @@
+2011-02-12  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Modify the custom_container and custom_widget examples.
+
+	* .gitignore: Add *~ (gedit's backup files).
+	* autogen.sh: Add test that mm-common is installed.
+	* examples/book/custom/custom_widget/mycontainer.[h|cc]:
+	* examples/book/custom/custom_container/mywidget.[h|cc]: Change int* to
+	int& in get_preferred_xxx_vfunc().
+	* examples/book/custom/custom_widget/custom_gtk.css: Minor change in comment.
+	Bug 639073, comment 19. Bug 628713 (autogen.sh).
+
 2.99.3:
 
 2011-02-02  Murray Cumming  <murrayc@murrayc.com>
@@ -66,7 +78,7 @@
 2011-01-23  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Modified the custom_container and custom_widget examples.
-    
+
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Updated the Custom Widgets chapter.
 	* examples/book/custom/custom_container/examplewindow.[h|cc]: Renamed
 	m_Button_Two to m_Label_Two. Removed some calls to show().

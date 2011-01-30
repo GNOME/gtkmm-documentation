@@ -1,6 +1,8 @@
 Makefile
 Makefile.in
 stamp-h?
+*~
+
 /INSTALL
 /aclocal.m4
 /autom4te.cache/

@@ -46,7 +46,7 @@ MyWidget::MyWidget() :
         "The scale to use when drawing. This is just a silly example.",
         G_MININT,
         G_MAXINT,
-        0,
+        500,
         G_PARAM_READABLE) );
 
   m_refStyleProvider = Gtk::CssProvider::create();
@@ -78,42 +78,30 @@ Gtk::SizeRequestMode MyWidget::get_request_mode_vfunc() const
 //this widget.
 //Let's make this simple example widget always need minimum 60 by 50 and
 //natural 100 by 70.
-void MyWidget::get_preferred_width_vfunc(int* minimum_width, int* natural_width) const
+void MyWidget::get_preferred_width_vfunc(int& minimum_width, int& natural_width) const
 {
-  if (minimum_width) 
-    *minimum_width = 60;
-
-  if (natural_width) 
-    *natural_width = 100;
+  minimum_width = 60;
+  natural_width = 100;
 }
 
 void MyWidget::get_preferred_height_for_width_vfunc(int /* width */,
-   int* minimum_height, int* natural_height) const
+   int& minimum_height, int& natural_height) const
 {
-  if (minimum_height) 
-    *minimum_height = 50;
-
-  if (natural_height) 
-    *natural_height = 70;
+  minimum_height = 50;
+  natural_height = 70;
 }
 
-void MyWidget::get_preferred_height_vfunc(int* minimum_height, int* natural_height) const
+void MyWidget::get_preferred_height_vfunc(int& minimum_height, int& natural_height) const
 {
-  if (minimum_height) 
-    *minimum_height = 50;
-
-  if (natural_height) 
-    *natural_height = 70;
+  minimum_height = 50;
+  natural_height = 70;
 }
 
 void MyWidget::get_preferred_width_for_height_vfunc(int /* height */,
-   int* minimum_width, int* natural_width) const
+   int& minimum_width, int& natural_width) const
 {
-  if (minimum_width) 
-    *minimum_width = 60;
-
-  if (natural_width) 
-    *natural_width = 100;
+  minimum_width = 60;
+  natural_width = 100;
 }
 
 void MyWidget::on_size_allocate(Gtk::Allocation& allocation)
