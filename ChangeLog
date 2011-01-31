@@ -1,3 +1,10 @@
+2011-01-31  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+  Build: Check for mm-common.
+
+  * autogen.sh: Add test that mm-common is installed.
+  This fixes bug #628713 (Patricia Santana Cruz)
+  
 2011-01-28  Murray Cumming  <murrayc@murrayc.com>
 
 	Adapt to the use of vector instead of *Handle in gtkmm 3.
