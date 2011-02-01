@@ -150,8 +150,8 @@ void ExampleWindow::add_stock_item(
   source.set_size(Gtk::ICON_SIZE_SMALL_TOOLBAR);
   source.set_size_wildcarded(); //Icon may be scaled.
 
-  Gtk::IconSet icon_set;
-  icon_set.add_source(source); //More than one source per set is allowed.
+  Glib::RefPtr<Gtk::IconSet> icon_set = Gtk::IconSet::create();
+  icon_set->add_source(source); //More than one source per set is allowed.
 
   const Gtk::StockID stock_id(id);
   factory->add(stock_id, icon_set);

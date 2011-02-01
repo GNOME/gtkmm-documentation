@@ -1,3 +1,10 @@
+2011-02-01  Murray Cumming  <murrayc@murrayc.com>
+
+	Use Gtk::IconSet via RefPtr.
+	
+	* examples/book/menus_and_toolbars/examplewindow.cc: Adapt to the API change 
+	in gtkmm.
+
 2011-01-31  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
   Build: Check for mm-common.
