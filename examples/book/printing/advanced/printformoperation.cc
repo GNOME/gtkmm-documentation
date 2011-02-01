@@ -120,8 +120,7 @@ void PrintFormOperation::on_draw_page(
   cairo_ctx->set_source_rgb(0, 0, 0);
 
   //Render Pango LayoutLines over the Cairo context:
-  Pango::LayoutIter iter;
-  m_refLayout->get_iter(iter);
+  Pango::LayoutIter iter = m_refLayout->get_iter();
 
   double start_pos = 0;
   int line_index = 0;

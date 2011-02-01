@@ -1,3 +1,13 @@
+2011-02-01  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the build with --enable-warnings=fatal.
+
+	* examples/book/combobox/text/examplewindow.cc:
+	* examples/book/comboboxentry/complex/examplewindow.[h|cc]:
+	* examples/book/comboboxentry/text/examplewindow.[h|cc]: Use ComboBox instead 
+	of ComboBoxEntry. Use ComboBoxText instead of ComboBoxEntryText.
+	Use append() instead of append_text().
+
 2011-01-12  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Modified the custom_widget example

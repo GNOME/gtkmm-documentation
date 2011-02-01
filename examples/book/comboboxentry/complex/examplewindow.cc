@@ -21,6 +21,7 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
+: m_Combo(true /* has_entry */)
 {
   set_title("ComboBoxEntry example");
 
@@ -64,7 +65,7 @@ ExampleWindow::ExampleWindow()
   //m_Combo.pack_start(m_Columns.m_col_id);
   m_Combo.pack_start(m_Columns.m_col_name);
 
-  m_Combo.set_text_column(m_Columns.m_col_id);
+  m_Combo.set_entry_text_column(m_Columns.m_col_id);
 
   //Add the ComboBox to the window.
   add(m_Combo);

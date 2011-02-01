@@ -20,7 +20,7 @@
 #define GTKMM_EXAMPLEWINDOW_H
 
 #include <gtkmm/window.h>
-#include <gtkmm/comboboxentrytext.h>
+#include <gtkmm/combobox.h>
 #include <gtkmm/liststore.h>
 
 class ExampleWindow : public Gtk::Window
@@ -48,7 +48,7 @@ protected:
   ModelColumns m_Columns;
 
   //Child widgets:
-  Gtk::ComboBoxEntry m_Combo;
+  Gtk::ComboBox m_Combo;
   Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
 };
 

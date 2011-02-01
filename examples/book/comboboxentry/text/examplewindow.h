@@ -20,7 +20,7 @@
 #define GTKMM_EXAMPLEWINDOW_H
 
 #include <gtkmm/window.h>
-#include <gtkmm/comboboxentrytext.h>
+#include <gtkmm/comboboxtext.h>
 
 class ExampleWindow : public Gtk::Window
 {
@@ -33,7 +33,7 @@ protected:
   void on_combo_changed();
 
   //Child widgets:
-  Gtk::ComboBoxEntryText m_Combo;
+  Gtk::ComboBoxText m_Combo;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H
