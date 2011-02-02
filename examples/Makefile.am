@@ -104,7 +104,6 @@ check_PROGRAMS =					\
 	others/dnd/testdnd				\
 	others/exception/exceptiontest			\
 	others/idle/idle				\
-	others/rulers/rulers				\
 	others/statusbar/statusbar			\
 	others/stock/stock				\
 	others/tictactoe/ttt_test			\
@@ -618,9 +617,6 @@ others_exception_exceptiontest_SOURCES = \
 
 others_idle_idle_SOURCES = \
 	others/idle/idle.cc
-
-others_rulers_rulers_SOURCES = \
-	others/rulers/rulers.cc
 
 others_statusbar_statusbar_SOURCES = \
 	others/statusbar/statusbar.cc

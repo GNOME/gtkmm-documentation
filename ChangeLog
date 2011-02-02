@@ -1,5 +1,12 @@
 2011-02-02  Murray Cumming  <murrayc@murrayc.com>
 
+	Remove the Ruler examples.
+
+	* examples/others/rulers/rulers.cc: Remove this because Gtk::Ruler (and 
+	GtkRuler) is deprecated without any real replacement.
+
+2011-02-02  Murray Cumming  <murrayc@murrayc.com>
+
   Disable the gdk drawing example, because it uses deprecated API.
   
 	* examples/Makefile.am: Disable examples/others/gdk/radar because it is just 
