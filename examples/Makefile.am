@@ -103,7 +103,6 @@ check_PROGRAMS =					\
 	others/cellrenderercustom/testpopup		\
 	others/dnd/testdnd				\
 	others/exception/exceptiontest			\
-	others/gdk/radar				\
 	others/idle/idle				\
 	others/rulers/rulers				\
 	others/statusbar/statusbar			\
@@ -614,8 +613,8 @@ others_dnd_testdnd_SOURCES =	\
 others_exception_exceptiontest_SOURCES = \
 	others/exception/exceptiontest.cc
 
-others_gdk_radar_SOURCES = \
-	others/gdk/radar.cc
+#others_gdk_radar_SOURCES = \
+#	others/gdk/radar.cc
 
 others_idle_idle_SOURCES = \
 	others/idle/idle.cc

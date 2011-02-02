@@ -1,3 +1,11 @@
+2011-02-02  Murray Cumming  <murrayc@murrayc.com>
+
+  Disable the gdk drawing example, because it uses deprecated API.
+  
+	* examples/Makefile.am: Disable examples/others/gdk/radar because it is just 
+	an example of GDK drawing, but people should use cairo now. We might bring 
+	it back as a cairo widget example later. 
+
 2011-02-01  Murray Cumming  <murrayc@murrayc.com>
 
 	Adapt to append_text()->append() deprecation in ListViewText.
