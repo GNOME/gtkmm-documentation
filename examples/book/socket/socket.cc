@@ -31,7 +31,7 @@ class MySocketWindow : public Gtk::Window
         add(*socket);
         socket->signal_plug_added().connect(sigc::ptr_fun(plug_added));
         socket->signal_plug_removed().connect(sigc::ptr_fun(plug_removed));
-        Gdk::NativeWindow plug_id;
+        ::Window plug_id = 0;
         infile >> plug_id;
         infile.close();
         socket->add_id(plug_id);

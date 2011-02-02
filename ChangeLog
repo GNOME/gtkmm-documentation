@@ -1,3 +1,9 @@
+2011-02-02  Murray Cumming  <murrayc@murrayc.com>
+
+	Adapt to the Socket API change.
+
+	* examples/book/socket/socket.cc: Use ::Window instead of Gdk::NativeWindow.
+
 2011-02-01  Murray Cumming  <murrayc@murrayc.com>
 
 	Use Gtk::IconSet via RefPtr.
