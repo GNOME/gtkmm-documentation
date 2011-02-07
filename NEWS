@@ -1,3 +1,17 @@
+2.99.3: (ustable):
+
+* Ported to the latest gtkmm API.
+  (Murray Cumming, Krzesimir Nowak)
+* Modified the custom_container and custom_widget examples to use 
+  the extended layout API.
+  (Kjell Ahlstedt)
+* Fix the print preview dialog in the printing/advanced example.
+  (Kjell Ahlstedt)
+* Build: Check for mm-common.
+  (Kjell Ahlstedt) Bug #628713 (Patricia Santana Cruz)
+* Book: Fix some typos.
+  (Chris Kühl)
+
 2.91.6: (unstable):
 
 * Ported to the recent gtkmm API, using Gdk::RGBA and Gtk::StyleContext 
