@@ -1,3 +1,10 @@
+2011-02-14  David King  <davidk@openismus.com>
+
+	Install the documentation into a gtkmm-3.0 path
+
+	* docs/tutorial/Makefile.am: Use gtkmm-3.0 rather than gtkmm-2.4 for
+	the documentation path.
+
 2011-02-12  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Modify the custom_container and custom_widget examples.

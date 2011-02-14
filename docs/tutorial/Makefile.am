@@ -1,6 +1,6 @@
 ## This file is part of gtkmm-documentation.
 
-gtkmm_docdir = $(datadir)/doc/gtkmm-2.4
+gtkmm_docdir = $(datadir)/doc/gtkmm-3.0
 
 # Function: $(call vpath_listall,PATTERN ...)
 # Get all filenames which match a PATTERN from the list.  Look for files
