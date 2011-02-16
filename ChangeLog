@@ -1,3 +1,11 @@
+2011-02-16  David King  <davidk@openismus.com>
+
+	Update AUTHORS, README and remove README.SUN
+
+	* AUTHORS, README: Update.
+	* README.SUN: Remove, as it refers only to an old version of gtkmm,
+	not gtkmm-documentation.
+
 2011-02-14  David King  <davidk@openismus.com>
 
 	Install the documentation into a gtkmm-3.0 path
