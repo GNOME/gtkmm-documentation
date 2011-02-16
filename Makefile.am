@@ -10,5 +10,5 @@ doc_subdirs =
 endif
 SUBDIRS = examples $(doc_subdirs)
 
-dist_noinst_DATA = COPYING.examples README.SUN
+dist_noinst_DATA = COPYING.examples
 dist_noinst_SCRIPTS = autogen.sh
