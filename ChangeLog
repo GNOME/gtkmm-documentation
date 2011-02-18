@@ -1,3 +1,10 @@
+2011-02-18  David King  <davidk@openismus.com>
+
+	Minor documentation updates for gtkmm 3
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Replace gtkmm 2.4 information
+	with gtkmm 3.0.
+
 2011-02-16  David King  <davidk@openismus.com>
 
 	Update AUTHORS, README and remove README.SUN
