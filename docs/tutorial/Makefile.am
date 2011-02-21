@@ -56,6 +56,7 @@ DOC_FIGURES =					\
 	figures/expander.png			\
 	figures/filechooserbutton.png		\
 	figures/frame.png			\
+	figures/grid.png			\
 	figures/helloworld.png			\
 	figures/helloworld2.png			\
 	figures/idle.png			\

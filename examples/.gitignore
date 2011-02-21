@@ -5,6 +5,7 @@
 .libs/
 example
 !example/
+/book/base/base
 /book/buttons/button/buttons
 /book/buttons/radiobutton/radiobuttons
 /book/drag_and_drop/drag_and_drop
@@ -16,6 +17,7 @@ example
 /book/giomm/getline/getline
 /book/giomm/monitor_directory/monitor_directory
 /book/giomm/usage/usage
+/boox/grid/example
 /book/helloworld/helloworld
 /book/helloworld2/helloworld2
 /book/idle/idle
@@ -26,7 +28,6 @@ example
 /book/timeout/timeout
 /others/arrow/arrow
 /others/arrow/direction
-/others/base/base
 /others/calendar/calendar
 /others/cellrenderercustom/cellrenderertoggle
 /others/cellrenderercustom/testpopup

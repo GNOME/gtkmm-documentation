@@ -382,10 +382,10 @@ Openismus has more <ulink url="http://www.openismus.com/documents/linux/automake
 <sect1 id="sec-widgets-overview">
 <title>Widgets</title>
 <para>&gtkmm; applications consist of windows containing widgets, such as buttons and text boxes. In some other systems, widgets are called "controls". For each widget in your application's windows, there is a C++ object in your application's code. So you just need to call a method of the widget's class to affect the visible widget.</para>
- <para>Widgets are arranged inside container widgets such as frames and notebooks, in a hierarchy of widgets within widgets. Some of these container widgets, such as Gtk::VBox, are not visible - they exist only to arrange other widgets. Here is some example code that adds 2 Gtk::Button widgets to a Gtk::VBox container widgets:
+ <para>Widgets are arranged inside container widgets such as frames and notebooks, in a hierarchy of widgets within widgets. Some of these container widgets, such as <classname>Gtk::Grid</classname>, are not visible - they exist only to arrange other widgets. Here is some example code that adds 2 <classname>Gtk::Button</classname> widgets to a <classname>Gtk::VBox</classname> container widgets:
 <programlisting>m_box.pack_start(m_Button1);
 m_box.pack_start(m_Button2);</programlisting>
-and here is how to add the Gtk::VBox, containing those buttons, to a Gtk::Frame, which has a visible frame and title:
+and here is how to add the <classname>Gtk::VBox</classname>, containing those buttons, to a <classname>Gtk::Frame</classname>, which has a visible frame and title:
 <programlisting>m_frame.add(m_box);</programlisting>
 </para>
 <para>
@@ -1836,12 +1836,21 @@ in &gtkmm; are descendants of <classname>Gtk::Bin</classname>, including
 Yes, that's correct: a Window can contain at most one widget.  How, then, can
 we use a window for anything useful?  By placing a multiple-child container in
 the window. The most useful container widgets are
-<classname>Gtk:VBox</classname>, <classname>Gtk::HBox</classname>, and
-<classname>Gtk::Table</classname>.
+<classname>Gtk:Grid</classname>, <classname>Gtk:VBox</classname>,
+<classname>Gtk::HBox</classname>, and <classname>Gtk::Table</classname>.
 </para>
 
 
 <itemizedlist>
+
+<listitem>
+<para>
+<classname>Gtk::Grid</classname> arranges its child widgets in rows and
+columns. Use <methodname>attach()</methodname>,
+<methodname>attach_next_to()</methodname> and <methodname>add()</methodname> to
+insert child widgets.
+</para>
+</listitem>
 
 <listitem>
 <para>
@@ -2065,11 +2074,52 @@ changed using <methodname>get_layout()</methodname> and
 
 </sect2>
 
+<sect2 id="sec-grid">
+<title>Grid</title>
+
+<para>
+<classname>Grid</classname> allows us to place widgets in a grid. The grid
+dynamically lays out child widgets, so the dimensions of the grid do not need
+to be specified in the constructor.
+</para>
+
+<para>
+Children can span multiple rows or columns, using
+<methodname>attach()</methodname>, or added next to an existing widget inside
+the grid with <methodname>attach_next_to()</methodname>. Individual rows and columns of the grid can be set to have uniform height or width with
+<methodname>set_row_homogeneous()</methodname> and
+<methodname>set_column_homogeneous()</methodname>. Set the
+<emphasis>margin</emphasis> and <emphasis>expand</emphasis> properties of the
+<classname>Widget</classname>s that are added to the grid, in order to control
+the geometry management.
+</para>
+
+<sect3 id="grid-example"><title>Example</title>
+<para>
+In the following example, we make a window with three buttons in a grid.
+The first two buttons will be placed in the upper row, from left to right. A
+third button is attached underneath the first buttion, in a new lower row,
+spanning two columns.
+</para>
+
+<figure id="figure-grid">
+  <title>Grid</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;grid.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;grid">Source Code</ulink></para>
+
+</sect3>
+
+</sect2>
+
 <sect2 id="sec-table">
 <title>Table</title>
 
 <para>
-Tables allows us to place widgets in a grid.
+Tables allows us to place widgets in a grid, similar to <classname>Gtk::Grid</classname>.
 </para>
 
 <sect3 id="table-constructor"><title>Constructor</title>

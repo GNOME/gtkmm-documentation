@@ -1,3 +1,17 @@
+2011-02-21  David King  <davidk@openismus.com>
+
+	Add basic information on Gtk::Grid
+
+	* docs/tutorial/C/figures/grid.png: Add new screenshot.
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add section in multi-widget
+	container chapter on Gtk::Grid.
+	* docs/tutorial/Makefile.am:
+	* examples/.gitignore:
+	* examples/Makefile.am: Update.
+	* examples/book/grid/examplewindow.cc:
+	* examples/book/grid/examplewindow.h:
+	* examples/book/grid/main.cc: Add example code for Gtk::Grid.
+
 2011-02-18  David King  <davidk@openismus.com>
 
 	Minor documentation updates for gtkmm 3
