@@ -1550,6 +1550,19 @@ such as showing an image as well as text.
 <para><ulink url="&url_refdocs_base_gtk;Widget.html">Widget Reference</ulink></para>
 <para><ulink url="&url_refdocs_base_gtk;Tooltip.html">Tooltip Reference</ulink></para>
 
+<sect2 id="tooltip-example"><title>Example</title>
+
+<figure id="figure-tooltip">
+  <title>Tooltip</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;tooltip.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;tooltip">Source Code</ulink></para>
+
+</sect2>
+
 </sect1>
 
 </chapter>
