@@ -1,3 +1,10 @@
+2011-02-22  Murray Cumming  <murrayc@murrayc.com>
+
+	Code-style changes.
+
+	* examples/book/grid/examplewindow.[h|cc]: Slight style changes, for 
+	consistency with the other examples.
+
 2011-02-22  David King  <davidk@openismus.com>
 
 	Add Gtk::Tooltip example to the tutorial

@@ -29,12 +29,11 @@ public:
 private:
   // Signal handlers:
   void on_button_quit();
-  void on_button_numbered(Glib::ustring data);
+  void on_button_numbered(const Glib::ustring& data);
 
   // Child widgets:
-  Gtk::Grid grid_;
-  Gtk::Button button_1_, button_2_, button_quit_;
-
+  Gtk::Grid m_grid;
+  Gtk::Button m_button_1, m_button_2, m_button_quit;
 };
 
 #endif /* GTKMM_EXAMPLEWINDOW_H */
