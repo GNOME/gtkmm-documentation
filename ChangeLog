@@ -1,3 +1,12 @@
+2011-02-22  David King  <davidk@openismus.com>
+
+	Add Gtk::Tooltip example to the tutorial
+
+	* docs/tutorial/C/figures/tooltip.png:
+	* docs/tutorial/C/gtkmm-tutorial-in.xml:
+	* docs/tutorial/Makefile.am: Add an example for Gtk::Tooltip to the
+	tutorial.
+
 2011-02-21  David King  <davidk@openismus.com>
 
 	Add basic information on Gtk::Grid

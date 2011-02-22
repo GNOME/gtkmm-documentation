@@ -82,6 +82,7 @@ DOC_FIGURES =					\
 	figures/textview.png			\
 	figures/toolbar.png			\
 	figures/toolpalette.png			\
+	figures/tooltip.png			\
 	figures/treeview_combo_renderer.png	\
 	figures/treeview_draganddrop.png	\
 	figures/treeview_editablecells.png	\
