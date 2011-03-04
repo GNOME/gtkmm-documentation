@@ -3,8 +3,7 @@
 	Added Gtk::Application example.
 
 	* examples/Makefile.am:
-	* examples/book/application/: Added an example of Gtk::Application, opening 
-	text files and doing some command-line parsing.
+	* examples/book/application/: Show how to do command-line parsing.
 	
 	There is still a warning at the end which we should deal with:
 	(example:17496): Gtk-CRITICAL **: gtk_main_quit: assertion `main_loops != NULL' failed
