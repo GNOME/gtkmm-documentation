@@ -22,18 +22,17 @@
 class ExampleApplication: public Gtk::Application
 {
 protected:
-  explicit ExampleApplication(const Glib::ustring& application_id, 
-    Gio::ApplicationFlags flags = Gio::APPLICATION_FLAGS_NONE);
+  ExampleApplication();
 
 public:
-  static Glib::RefPtr<ExampleApplication> create(const Glib::ustring& application_id, 
-    Gio::ApplicationFlags flags = Gio::APPLICATION_FLAGS_NONE);
+  static Glib::RefPtr<ExampleApplication> create();
     
 protected:
   //Overrides of default signal handlers:
   virtual void on_activate();
   virtual void on_open(const Gio::Application::type_vec_files& files,
     const Glib::ustring& hint);
+  virtual int on_command_line(const Glib::RefPtr<Gio::ApplicationCommandLine>& command_line);
 
 private:
   void create_window(const Glib::RefPtr<Gio::File>& file = Glib::RefPtr<Gio::File>());

@@ -22,11 +22,17 @@
 class ExampleWindow: public Gtk::Window
 {
 public:
-  explicit ExampleWindow(const Glib::RefPtr<Gio::File>& file);
+
+  //We do not take the file as a constructor parameter,
+  //so we can separate window creation and hiding of the window
+  //when loading fails.
+  explicit ExampleWindow();
+  
+  bool load_file(const Glib::RefPtr<Gio::File>& file);
 
 private:
-  Gtk::ScrolledWindow scrolled;
-  Gtk::TextView view;
+  Gtk::ScrolledWindow m_scrolledwindow;
+  Gtk::TextView m_view;
 };
 
 #endif /* GTKMM_EXAMPLEWINDOW_H */

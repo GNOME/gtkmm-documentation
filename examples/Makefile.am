@@ -131,6 +131,8 @@ dist_noinst_DATA =				\
 book_application_example_SOURCES =		\
 	book/application/exampleapplication.cc	\
 	book/application/exampleapplication.h	\
+	book/application/exampleoptiongroup.cc	\
+	book/application/exampleoptiongroup.h	\
 	book/application/examplewindow.cc	\
 	book/application/examplewindow.h	\
 	book/application/main.cc

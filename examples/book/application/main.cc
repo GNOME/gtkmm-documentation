@@ -19,20 +19,12 @@
 
 #include "exampleapplication.h"
 
-void on_open(const Gio::Application::type_vec_files& /* files */, 
-  const Glib::ustring& /* hint */)
-{
-  std::cout << "open signal received" << std::endl;
-}
-
 int main(int argc, char *argv[])
 {
   Gtk::Main kit(argc, argv); //TODO: Make this unnecessary: Put it in Gtk::Application.
 
   Glib::RefPtr<ExampleApplication> application = 
-    ExampleApplication::create("org.gtkmm.examples.application",
-      Gio::APPLICATION_HANDLES_OPEN);
-  application->signal_open().connect( sigc::ptr_fun(on_open) );
+    ExampleApplication::create();
 
   // Start the application, showing the initial window, 
   // and opening extra windows for any files that it is asked to open,

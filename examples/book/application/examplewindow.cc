@@ -18,15 +18,18 @@
 
 #include "examplewindow.h"
 
-ExampleWindow::ExampleWindow(const Glib::RefPtr<Gio::File>& file)
+ExampleWindow::ExampleWindow()
 {
   set_title("Gio::Application example");
 
-  add(scrolled);
-  scrolled.add(view);
+  add(m_scrolledwindow);
+  m_scrolledwindow.add(m_view);
+}
 
+bool ExampleWindow::load_file(const Glib::RefPtr<Gio::File>& file)
+{    
   if(!file)
-    return;
+    return false;
 
   try
   {
@@ -38,7 +41,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gio::File>& file)
       if(contents && length)
       {
         const Glib::ustring text(contents);
-        Glib::RefPtr<Gtk::TextBuffer> buffer = view.get_buffer();
+        Glib::RefPtr<Gtk::TextBuffer> buffer = m_view.get_buffer();
         buffer->set_text(text);
       }
       g_free(contents);
@@ -46,8 +49,18 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gio::File>& file)
   }
   catch (const Glib::Error& ex)
   {
-    std::cerr << ex.what() << std::endl;
+    std::cerr << G_STRFUNC << ": exception while opening file: " << file->get_uri() <<  std::endl <<
+      "  exception: " << ex.what() << std::endl;
+    
+    //Tell the application that this window can no longer be useful to 
+    //this application, so it can forget about it. The instance might then exit 
+    //if this is its last open window.
+    //Note that we must be careful that the caller only calls this method _after_ 
+    //calling show(), or this would be useless: 
+    hide();
+    return false;
   }
 
   show_all_children();
+  return true;
 }

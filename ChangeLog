@@ -1,3 +1,14 @@
+2011-03-04  Murray Cumming  <murrayc@murrayc.com>
+
+	Added Gtk::Application example.
+
+	* examples/Makefile.am:
+	* examples/book/application/: Added an example of Gtk::Application, opening 
+	text files and doing some command-line parsing.
+	
+	There is still a warning at the end which we should deal with:
+	(example:17496): Gtk-CRITICAL **: gtk_main_quit: assertion `main_loops != NULL' failed
+	
 2011-02-22  Murray Cumming  <murrayc@murrayc.com>
 
 	Code-style changes.
