@@ -10,7 +10,6 @@
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
-  <property name="has_separator">True</property>
 
   <child internal-child="vbox">
     <object class="GtkVBox" id="dialog-vbox2">
@@ -34,7 +33,7 @@
 	      <property name="label">gtk-quit</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
-	      
+
 	    </object>
 	  </child>
 	</object>

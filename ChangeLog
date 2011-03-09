@@ -1,18 +1,27 @@
+2011-03-09  Murray Cumming  <murrayc@murrayc.com>
+
+	Gtk::Builder example: Remove a now non-existent property.
+
+	* examples/book/builder/basic/basic.ui:
+	* examples/book/builder/derived/basic.ui: The glade files mentioned the old
+	GtkDialog::has-separator property which has now been removed. This caused a
+	harmless stderr warning.
+
 2011-03-04  Murray Cumming  <murrayc@murrayc.com>
 
 	Added Gtk::Application example.
 
 	* examples/Makefile.am:
 	* examples/book/application/: Show how to do command-line parsing.
-	
+
 	There is still a warning at the end which we should deal with:
 	(example:17496): Gtk-CRITICAL **: gtk_main_quit: assertion `main_loops != NULL' failed
-	
+
 2011-02-22  Murray Cumming  <murrayc@murrayc.com>
 
 	Code-style changes.
 
-	* examples/book/grid/examplewindow.[h|cc]: Slight style changes, for 
+	* examples/book/grid/examplewindow.[h|cc]: Slight style changes, for
 	consistency with the other examples.
 
 2011-02-22  David King  <davidk@openismus.com>
@@ -83,8 +92,8 @@
 2011-02-01  Murray Cumming  <murrayc@murrayc.com>
 
 	Use Gtk::IconSet via RefPtr.
-	
-	* examples/book/menus_and_toolbars/examplewindow.cc: Adapt to the API change 
+
+	* examples/book/menus_and_toolbars/examplewindow.cc: Adapt to the API change
 	in gtkmm.
 
 2011-01-31  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
@@ -93,13 +102,13 @@
 
   * autogen.sh: Add test that mm-common is installed.
   This fixes bug #628713 (Patricia Santana Cruz)
-  
+
 2011-01-28  Murray Cumming  <murrayc@murrayc.com>
 
 	Adapt to the use of vector instead of *Handle in gtkmm 3.
 
-	* examples/book/: Use std::vector instead of std::list, now that we don't 
-	use *Handle, which allowed both. We made that change because too many people 
+	* examples/book/: Use std::vector instead of std::list, now that we don't
+	use *Handle, which allowed both. We made that change because too many people
 	were confused by the intermediate *Handle type.
 
 2011-01-26  Murray Cumming  <murrayc@murrayc.com>
@@ -112,7 +121,7 @@
 
 	A build fix.
 
-	* examples/book/treeview/editable_cells/examplewindow.cc:  Fix another of my 
+	* examples/book/treeview/editable_cells/examplewindow.cc:  Fix another of my
 	mistaken changes of clear() to reset(). This one was a ustring, not a RefPtr.
 
 2011-01-26  Murray Cumming  <murrayc@murrayc.com>
@@ -120,7 +129,7 @@
 	Adapt to removal of the Gtk::Range update_policy.
 
 	* examples/book/range_widgets/examplewindow.cc:
-	* examples/book/range_widgets/examplewindow.h: Just remove UI that showed 
+	* examples/book/range_widgets/examplewindow.h: Just remove UI that showed
 	the use of this API.
 
 2011-01-26  Murray Cumming  <murrayc@murrayc.com>
@@ -128,7 +137,7 @@
 	Adapt to the Pango::Layout::get_iter(iter) deprecation.
 
 	* examples/book/printing/advanced/printformoperation.cc:
-	* examples/book/printing/simple/printformoperation.cc: Use the get_iter() 
+	* examples/book/printing/simple/printformoperation.cc: Use the get_iter()
 	method that just returns the iter.
 
 2011-01-26  Murray Cumming  <murrayc@murrayc.com>
@@ -166,7 +175,7 @@
 
 	Application example: Use ExampleApplication via RefPtr.
 
-	* examples/book/application/exampleapplication.[h|cc]: Make the constructor 
+	* examples/book/application/exampleapplication.[h|cc]: Make the constructor
 	protected and add a create() method.
 	* examples/book/application/main.cc: Use ExampleApplication via RefPtr,
 	because that is how Gtk::Application should be used.
@@ -176,21 +185,21 @@
 	Application example: Added comments.
 
 	* examples/book/application/exampleapplication.cc:
-	* examples/book/application/main.cc: Added some comments now that I think I 
-	know what this does. Add a TODO suggesting that we move Gtk::Main inside 
+	* examples/book/application/main.cc: Added some comments now that I think I
+	know what this does. Add a TODO suggesting that we move Gtk::Main inside
 	Application, removing the Gtk::Main API.
 
 2011-01-17  Murray Cumming  <murrayc@murrayc.com>
 
 	Clipboard example: Fix the build.
 
-	* examples/book/clipboard/ideal/examplewindow.cc: Fix my mistaken change 
+	* examples/book/clipboard/ideal/examplewindow.cc: Fix my mistaken change
 	of clear() to reset(). This one was a ustring, not a RefPtr.
 
 2011-01-12  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Modified the custom_widget example
-    
+
 	* examples/book/custom/custom_widget/mywidget.cc:
 	Make on_realize() more similar to gtk+ widgets' realize methods.
 	Replace the deprecated Glib::RefPtr::clear() by reset(). Bug 606903.
@@ -201,7 +210,7 @@
 
 	* examples/book/clipboard/ideal/examplewindow.cc:
 	* examples/book/custom/custom_widget/mywidget.cc:
-	* examples/book/treeview/editable_cells/examplewindow.cc: These were causing 
+	* examples/book/treeview/editable_cells/examplewindow.cc: These were causing
 	build errors now that we build with deprecated glibmm API disabled.
 
 2011-01-06  Krzesimir Nowak  <qdlacz@gmail.com>
@@ -223,7 +232,7 @@
 	Fix the print preview dialog in the printing/advanced example.
 
 	* examples/book/printing/advanced/previewdialog.cc:
-	Constructor: Don't turn off double buffering. 
+	Constructor: Don't turn off double buffering.
 	on_drawing_area_draw(): Make it similar to preview_draw() in
 	gtk+-3/tests/print-editor.c.
 	on_hide(): Replace the deprecated Glib::RefPtr::clear() with reset().
@@ -237,15 +246,15 @@
 	* examples/book/application/examplewindow.cc:
 	* examples/book/application/main.cc:
 	Minor formatting changes and some extra comments.
-	on_open(): Call the base class's implementation, which is generally a good 
+	on_open(): Call the base class's implementation, which is generally a good
 	idea.
 
 2010-12-23  Murray Cumming  <murrayc@murrayc.com>
 
 	Fix the build with --enable-warnings=fatal.
 
-	* configure.ac: Use -no-long-long to avoid an (apparently new) compiler 
-	warning about long long not being supported by C++98. glibmm already had 
+	* configure.ac: Use -no-long-long to avoid an (apparently new) compiler
+	warning about long long not being supported by C++98. glibmm already had
 	this option, and now gtkmm does too.
 
 2010-12-23  Yannick Guesnet  <yannick.guesnet@univ-rouen.fr>
@@ -256,7 +265,7 @@
 	* examples/book/application/examplewindow.[h|cc]: new
 	* examples/book/application/main.cc: new
 	* examples/Makefile.am: Adapted.
-	
+
 2010-12-23  Chris Kühl  <chrisk@openismus.com>
 
 	Fixed a couple typos in the tutorial.
