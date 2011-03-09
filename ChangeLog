@@ -1,3 +1,10 @@
+2011-03-09  Murray Cumming  <murrayc@murrayc/cp,>
+
+	Gtk::Application example: open an empty document if none is specified.
+
+	* examples/book/application/exampleapplication.cc: Do not fail if no file
+	was specified.
+
 2011-03-09  Murray Cumming  <murrayc@murrayc.com>
 
 	Gtk::Builder example: Remove a now non-existent property.
