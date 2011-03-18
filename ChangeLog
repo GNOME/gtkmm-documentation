@@ -1,3 +1,12 @@
+2011-03-18  Kalev Lember <kalev@smartlink.ee>
+
+    ComboBox: Use set_entry_text_column() instead of set_text_column()
+    
+    * docs/tutorial/C/gtkmm-tutorial-in.xml:
+    * examples/book/combobox/entry_complex/examplewindow.cc: Updated the
+    files to use set_entry_text_column() instead of set_text_column() which
+    was a leftover from ComboBoxEntry's removal.
+
 2011-03-09  Murray Cumming  <murrayc@murrayc/cp,>
 
 	Gtk::Application example: open an empty document if none is specified.
