@@ -1,3 +1,13 @@
+2011-03-19  Murray Cumming  <murrayc@murrayc-x61>
+
+	Split the Gtk::Application example into two.
+
+	* examples/book/application/: Split this into:
+	* examples/book/application/simple/ with no command-line handling, and:
+	* examples/book/application/command_line_handling/ because custom 
+	handling of the command line makes the open signal (and maybe others) useless.
+	As planned on bug #637445.
+	
 2011-03-18  Kalev Lember <kalev@smartlink.ee>
 
     ComboBox: Use set_entry_text_column() instead of set_text_column()

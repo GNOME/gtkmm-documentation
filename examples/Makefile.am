@@ -8,7 +8,8 @@ LDADD       = $(GTKMM_LIBS)
 
 check_PROGRAMS =					\
 	book/alignment/example				\
-	book/application/example			\
+	book/application/simple/example \
+	book/application/command_line_handling/example \
 	book/aspectframe/example			\
 	book/assistant/example				\
 	book/base/base					\
@@ -128,14 +129,21 @@ dist_noinst_DATA =				\
 	book/iconview/xmms.xpm			\
 	book/menus_and_toolbars/rain.png
 
-book_application_example_SOURCES =		\
-	book/application/exampleapplication.cc	\
-	book/application/exampleapplication.h	\
-	book/application/exampleoptiongroup.cc	\
-	book/application/exampleoptiongroup.h	\
-	book/application/examplewindow.cc	\
-	book/application/examplewindow.h	\
-	book/application/main.cc
+book_application_simple_example_SOURCES =		\
+	book/application/simple/exampleapplication.cc	\
+	book/application/simple/exampleapplication.h	\
+	book/application/simple/examplewindow.cc	\
+	book/application/simple/examplewindow.h	\
+	book/application/simple/main.cc
+
+book_application_command_line_handling_example_SOURCES =		\
+	book/application/command_line_handling/exampleapplication.cc	\
+	book/application/command_line_handling/exampleapplication.h	\
+	book/application/command_line_handling/exampleoptiongroup.cc	\
+	book/application/command_line_handling/exampleoptiongroup.h	\
+	book/application/command_line_handling/examplewindow.cc	\
+	book/application/command_line_handling/examplewindow.h	\
+	book/application/command_line_handling/main.cc
 
 book_alignment_example_SOURCES =		\
 	book/alignment/examplewindow.cc		\
