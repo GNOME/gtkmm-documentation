@@ -1,17 +1,25 @@
+2011-03-24  Murray Cumming  <murrayc@murrayc.com>
+
+	Remove use of Gtk::Application because it was removed from gtkmm 3.0.
+
+	* examples/book/application/: Removed.
+	* examples/Makefile.am: Remove mention of these examples.
+	* examples/book/base/base.cc: Use Gtk::Main again instead of Gtk::Application.
+
 2011-03-19  Murray Cumming  <murrayc@murrayc-x61>
 
 	Split the Gtk::Application example into two.
 
 	* examples/book/application/: Split this into:
 	* examples/book/application/simple/ with no command-line handling, and:
-	* examples/book/application/command_line_handling/ because custom 
+	* examples/book/application/command_line_handling/ because custom
 	handling of the command line makes the open signal (and maybe others) useless.
 	As planned on bug #637445.
-	
+
 2011-03-18  Kalev Lember <kalev@smartlink.ee>
 
     ComboBox: Use set_entry_text_column() instead of set_text_column()
-    
+
     * docs/tutorial/C/gtkmm-tutorial-in.xml:
     * examples/book/combobox/entry_complex/examplewindow.cc: Updated the
     files to use set_entry_text_column() instead of set_text_column() which
