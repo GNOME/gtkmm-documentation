@@ -3493,7 +3493,7 @@ You might need to react to every change of selection in the ComboBox, for instan
 
 <sect2 id="sec-comboboxentry-text-column">
 <title>The text column</title>
-<para>So that the Entry can interact with the drop-down list of choices, you must specify which of your model columns are the text column, with <methodname>set_text_column()</methodname>. For instance:
+<para>So that the Entry can interact with the drop-down list of choices, you must specify which of your model columns is the text column, with <methodname>set_text_column()</methodname>. For instance:
 <programlisting>m_combo.set_text_column(m_columns.m_col_name);</programlisting>
 </para>
 <para>

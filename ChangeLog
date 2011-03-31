@@ -1,5 +1,11 @@
 2011-03-31  Murray Cumming  <murrayc@murrayc.com>
 
+	Fix a minor grammatical mistake in the ComboBox section.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: is, not are.
+
+2011-03-31  Murray Cumming  <murrayc@murrayc.com>
+
   Update for the removal of ComboBoxEntry.
 
 	* examples/Makefile.am:
