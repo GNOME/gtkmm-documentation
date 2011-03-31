@@ -1,3 +1,12 @@
+2.24.0:
+
+* Replace mentions of the deprecated ComboBoxEntry with CombBox plus has-entry.
+  (Murray Cumming, Kalev Lember)
+* Add Gtk::Tooltip example.
+  (David King)
+* Build: Check for mm-common.
+  (Kjell Ahlstedt)
+
 2.23.0:
 
 * Adapted to recent API deprecations in gtkmm 2.23/24.
