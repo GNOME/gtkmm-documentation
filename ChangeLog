@@ -1,6 +1,12 @@
+2011-03-31  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix a minor grammatical mistake in the ComboBox section.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: is, not are.
+
 2011-03-24  Murray Cumming  <murrayc@murrayc.com>
 
-	Remove use of Gtk::Application because it was removed from gtkmm 3.0.
+  Remove use of Gtk::Application because it was removed from gtkmm 3.0.
 
 	* examples/book/application/: Removed.
 	* examples/Makefile.am: Remove mention of these examples.
@@ -18,12 +24,12 @@
 
 2011-03-18  Kalev Lember <kalev@smartlink.ee>
 
-    ComboBox: Use set_entry_text_column() instead of set_text_column()
+  ComboBox: Use set_entry_text_column() instead of set_text_column()
 
-    * docs/tutorial/C/gtkmm-tutorial-in.xml:
-    * examples/book/combobox/entry_complex/examplewindow.cc: Updated the
-    files to use set_entry_text_column() instead of set_text_column() which
-    was a leftover from ComboBoxEntry's removal.
+  * docs/tutorial/C/gtkmm-tutorial-in.xml:
+  * examples/book/combobox/entry_complex/examplewindow.cc: Updated the
+  files to use set_entry_text_column() instead of set_text_column() which
+  was a leftover from ComboBoxEntry's removal.
 
 2011-03-09  Murray Cumming  <murrayc@murrayc/cp,>
 
