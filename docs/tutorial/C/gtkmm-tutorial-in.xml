@@ -20,7 +20,7 @@
 <!--
 NOTE TO TUTORIAL DOCUMENTATION AUTHORS:
 When referring to the gtkmm project in this document, please use the form
-&gtkmm; so that the name is consistent throughout the document.  This will wrap
+&gtkmm; so that the name is consistent throughout the document. This will wrap
 gtkmm with <application></application> tags which can then be styled by CSS if
 desired (e.g. boldface, monospace, etc) to make it stand out as the project
 name
@@ -192,9 +192,9 @@ applications and libraries:
 
 <para>
     Recent versions of &gtkmm; are packaged by nearly every major Linux
-    distribution these days.  So, if you use Linux, you can probably get
+    distribution these days. So, if you use Linux, you can probably get
     started with &gtkmm; by installing the package from the official repository
-    for your distribution.  Distributions that include &gtkmm; in their
+    for your distribution. Distributions that include &gtkmm; in their
     repositories include Debian, Ubuntu, Red Hat, Fedora, Mandriva, Suse, and
     many others.
 </para>
@@ -221,7 +221,7 @@ surprised, for instance, to find &gtkmm; 2.8 supplied by Debian's
 <para>
 If your distribution does not provide a pre-built &gtkmm; package, or if you
 want to install a different version than the one provided by your distribution,
-you can also install &gtkmm; from source.  The source code for &gtkmm; can
+you can also install &gtkmm; from source. The source code for &gtkmm; can
 be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
 </para>
 <para>
@@ -244,13 +244,13 @@ be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
 </note>
 <para>
     The <filename>configure</filename> script will check to make sure all of
-    the required dependencies are already installed.  If you are missing any
+    the required dependencies are already installed. If you are missing any
     dependencies, it will exit and display an error.
 </para>
 <para>
     By default, &gtkmm; will be installed under the
     <filename>/usr/local</filename> directory. On some systems you may need to
-    install to a different location.  For instance, on Red Hat Linux systems
+    install to a different location. For instance, on Red Hat Linux systems
     you might use the <literal>--prefix</literal> option with configure, like
     so:
 <screen>
@@ -263,13 +263,13 @@ be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
         such as <filename>/usr</filename>. Linux distributions install software
         packages to <filename>/usr</filename>, so installing a source package
         to this prefix could corrupt or conflict with software installed using
-        your distribution's package-management system.  Ideally, you should use
+        your distribution's package-management system. Ideally, you should use
         a separate prefix for all software you install from source.
     </para>
 </warning>
 <para>
   If you want to help develop &gtkmm; or experiment with new features, you can
-  also install &gtkmm; from git.  Most users will never need to do this, but if
+  also install &gtkmm; from git. Most users will never need to do this, but if
   you're interested in helping with &gtkmm; development, see the <link
     linkend="chapter-working-with-source">Working with gtkmm's Source Code</link> appendix.
 </para>
@@ -279,7 +279,7 @@ be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
 
 <sect1 id="sec-packages-windows">
 <title>Microsoft Windows</title>
-<para>GTK+ and &gtkmm; were designed to work well with Microsoft Windows, and the developers encourage its use on the win32 platform.  However, Windows has no standard installation system for development libraries. Please see the <ulink url="http://live.gnome.org/gtkmm/MSWindows">Windows Installation</ulink>
+<para>GTK+ and &gtkmm; were designed to work well with Microsoft Windows, and the developers encourage its use on the win32 platform. However, Windows has no standard installation system for development libraries. Please see the <ulink url="http://live.gnome.org/gtkmm/MSWindows">Windows Installation</ulink>
 page for Windows-specific installation instructions and notes.</para>
 </sect1>
 
@@ -319,11 +319,11 @@ The next line:
 
 <programlisting>Gtk::Main kit(argc, argv);</programlisting>
 
-creates a <classname>Gtk::Main</classname> object.  This is needed in all &gtkmm;
+creates a <classname>Gtk::Main</classname> object. This is needed in all &gtkmm;
 applications. The constructor for this object initializes &gtkmm;,  and checks the
 arguments passed to your application on the command line, looking for
 standard options such as <literal>-display</literal>. It takes these from the argument list, leaving anything it does not
-recognize for your application to parse or ignore.  This ensures
+recognize for your application to parse or ignore. This ensures
 that all &gtkmm; applications accept the same set of standard arguments.
 </para>
 
@@ -354,9 +354,9 @@ Although we have shown the compilation command for the simple example, you reall
 </para>
 <para>
 To simplify compilation, we use <literal>pkg-config</literal>, which
-is present in all (properly installed) &gtkmm; installations.  This
+is present in all (properly installed) &gtkmm; installations. This
 program 'knows' what compiler switches are needed to compile programs
-that use &gtkmm;.  The <literal>--cflags</literal> option causes
+that use &gtkmm;. The <literal>--cflags</literal> option causes
 <literal>pkg-config</literal> to output a list of include directories for the
 compiler to look in; the <literal>--libs</literal> option requests the
 list of libraries for the compiler to link with and the directories to
@@ -476,7 +476,7 @@ Gtk::Button* button = Glib::wrap(cbutton);
 <title>Hello World in &gtkmm;</title>
 
 <para>
-We've now learned enough to look at a real example.  In accordance with an ancient
+We've now learned enough to look at a real example. In accordance with an ancient
 tradition of computer science, we now introduce Hello World, a la &gtkmm;:
 </para>
 
@@ -494,7 +494,7 @@ Try to compile and run it before going on. You should see something like this:
 </figure>
 
 <para>
-Pretty thrilling, eh?  Let's examine the code.  First, the
+Pretty thrilling, eh?  Let's examine the code. First, the
 <classname>HelloWorld</classname> class:
 </para>
 
@@ -514,11 +514,11 @@ protected:
 };</programlisting>
 
 <para>
-This class implements the "Hello World" window.  It's derived from
+This class implements the "Hello World" window. It's derived from
 <classname>Gtk::Window</classname>, and has a single <classname>Gtk::Button</classname> as a member.
 We've chosen to use the
 constructor to do all of the initialisation work for the window,
-including setting up the signals.  Here it is, with the comments
+including setting up the signals. Here it is, with the comments
 omitted:
 </para>
 
@@ -539,7 +539,7 @@ object the label &quot;Hello World&quot;.
 </para>
 
 <para>
-Next we call the Window's <methodname>set_border_width()</methodname> method.  This sets
+Next we call the Window's <methodname>set_border_width()</methodname> method. This sets
 the amount of space between the sides of the window and the widget it
 contains.
 </para>
@@ -551,16 +551,16 @@ This prints our friendly greeting to <literal>stdout</literal>.
 
 <para>
 Next, we use the Window's <methodname>add()</methodname> method to put <literal>m_button</literal> in
-the Window.  (<methodname>add()</methodname> comes from <classname>Gtk::Container</classname>, which is
+the Window. (<methodname>add()</methodname> comes from <classname>Gtk::Container</classname>, which is
 described in the chapter on container widgets.)  The <methodname>add()</methodname> method
 places the Widget in the Window, but it doesn't display
-the widget.  &gtkmm; widgets are always invisible when you create them - to display them, you must call their <methodname>show()</methodname> method, which
+the widget. &gtkmm; widgets are always invisible when you create them - to display them, you must call their <methodname>show()</methodname> method, which
 is what we do in the next line.
 </para>
 
 
 <para>
-Now let's look at our program's <function>main()</function> function.  Here it is,
+Now let's look at our program's <function>main()</function> function. Here it is,
 without comments:
 </para>
 
@@ -576,7 +576,7 @@ without comments:
 
 <para>
 First we instantiate an object called <literal>kit</literal>. This is of type
-<classname>Gtk::Main</classname>.  Every &gtkmm; program must have one of these.  We pass
+<classname>Gtk::Main</classname>. Every &gtkmm; program must have one of these. We pass
 our command-line arguments to its constructor. It takes the arguments
 it wants, and leaves you the rest, as we described earlier.
 </para>
@@ -604,7 +604,7 @@ takes no arguments, but it isn't visible yet. When we call Gtk::Main::run(), giv
 <listitem>
 <para>
 <ulink url="&url_refdocs_base_gtk;Button.html"><classname>Gtk::Button</classname></ulink>. Standard buttons, usually
-marked with a label or picture. Pushing one triggers an action.  See the <link linkend="sec-pushbuttons">Button</link> section.
+marked with a label or picture. Pushing one triggers an action. See the <link linkend="sec-pushbuttons">Button</link> section.
 </para>
 </listitem>
 </varlistentry>
@@ -614,7 +614,7 @@ marked with a label or picture. Pushing one triggers an action.  See the <link l
 <para>
 <ulink url="&url_refdocs_base_gtk;ToggleButton.html"><classname>Gtk::ToggleButton</classname></ulink>.
 Unlike a normal Button, which springs back up, a ToggleButton stays down until you
-press it again. It might be useful as an on/off switch.  See the <link linkend="sec-toggle-buttons">ToggleButton</link> section.
+press it again. It might be useful as an on/off switch. See the <link linkend="sec-toggle-buttons">ToggleButton</link> section.
 </para>
 </listitem>
 </varlistentry>
@@ -638,7 +638,7 @@ See the <link linkend="sec-checkboxes">CheckBox</link> section.
 Named after the station selectors on old car
 radios, these buttons are used in groups for options which are
 mutually exclusive. Pressing one causes all the
-others in its group to turn off.  They are similar to
+others in its group to turn off. They are similar to
 CheckBoxes (a small widget with a label at the side), but usually
 look different.
 See the <link linkend="sec-radio-buttons">RadioButton</link> section.
@@ -649,7 +649,7 @@ See the <link linkend="sec-radio-buttons">RadioButton</link> section.
 
 <para>
 Note that, due to GTK+'s theming system, the appearance of these
-widgets will vary.  In the case of checkboxes and radio buttons, they
+widgets will vary. In the case of checkboxes and radio buttons, they
 may vary considerably.
 </para>
 
@@ -764,7 +764,7 @@ Emitted when the mouse pointer leaves the button's window.
 To retrieve the state of the <classname>ToggleButton</classname>, you can use the
 <methodname>get_active()</methodname> method. This returns <literal>true</literal> if the button
 is "down". You can also set the toggle button's state, with <methodname>set_active()</methodname>. Note that, if you do this, and the state actually changes, it causes the
-"clicked" signal to be emitted.  This is usually what you want.
+"clicked" signal to be emitted. This is usually what you want.
 </para>
 
 <para>
@@ -787,7 +787,7 @@ forcing it to be up or down: This switches the button's state, and causes the <l
 
 <para>
 <classname>Gtk::CheckButton</classname> inherits from
-<classname>Gtk::ToggleButton</classname>.  The only real difference between the
+<classname>Gtk::ToggleButton</classname>. The only real difference between the
 two is <classname>Gtk::CheckButton</classname>'s
 appearance. You can check, set, and toggle a checkbox using the same
 member methods as for <classname>Gtk::ToggleButton</classname>.
@@ -820,9 +820,9 @@ one RadioButton in a group can be selected at any one time.
 
 <sect2 id="radiobutton-groups"><title>Groups</title>
 <para>
-There are two ways to set up a group of radio buttons.  The first way
-is to create the buttons, and set up their groups afterwards.  Only
-the first two constructors are used.  In the following example, we
+There are two ways to set up a group of radio buttons. The first way
+is to create the buttons, and set up their groups afterwards. Only
+the first two constructors are used. In the following example, we
 make a new window class called <classname>RadioButtons</classname>, and then
 put three radio buttons in it:
 </para>
@@ -862,7 +862,7 @@ non-const.
 
 <para>
 The second way to set up radio buttons is to make a group first, and
-then add radio buttons to it.  Here's an example:
+then add radio buttons to it. Here's an example:
 </para>
 <programlisting>class RadioButtons : public Gtk::Window
 {
@@ -883,7 +883,7 @@ RadioButtons::RadioButtons()
 
 <para>
 We made a new group by simply declaring a variable, <literal>group</literal>,
-of type <classname>Gtk::RadioButton::Group</classname>.  Then we made three radio
+of type <classname>Gtk::RadioButton::Group</classname>. Then we made three radio
 buttons, using a constructor to make each of them part of
 <literal>group</literal>.
 </para>
@@ -1098,7 +1098,7 @@ can specify the text in the constructor, or later with the
 </para>
 
 <para>
-The width of the label will be adjusted automatically.  You can produce multi-line labels by putting line breaks ("\n") in the label string.
+The width of the label will be adjusted automatically. You can produce multi-line labels by putting line breaks ("\n") in the label string.
 </para>
 
 <para>
@@ -1151,7 +1151,7 @@ and read the current contents with the <methodname>get_text()</methodname> metho
 
 <para>
 Occasionally you might want to make an <classname>Entry</classname> widget
-read-only.  This can be done by passing <literal>false</literal> to the
+read-only. This can be done by passing <literal>false</literal> to the
 <methodname>set_editable()</methodname> method.
 </para>
 
@@ -1165,9 +1165,9 @@ echoed on the screen, calling <methodname>set_visibility()</methodname> with
 You might want to be notified whenever the user types in a text entry widget.
 <classname>Gtk::Entry</classname> provides two signals,
 <literal>activate</literal> and <literal>changed</literal>, for just this
-purpose.  <literal>activate</literal> is emitted when the user presses the
+purpose. <literal>activate</literal> is emitted when the user presses the
 enter key in a text-entry widget; <literal>changed</literal> is emitted when
-the text in the widget changes.  You can use these, for instance, to validate
+the text in the widget changes. You can use these, for instance, to validate
 or filter the text the user types.
 </para>
 
@@ -1175,7 +1175,7 @@ or filter the text the user types.
 
 <sect3 id="entry-example"><title>Simple Entry Example</title>
 <para>
-This example uses <classname>Gtk::Entry</classname>.  It also has two
+This example uses <classname>Gtk::Entry</classname>. It also has two
 <classname>CheckButton</classname>s, with which you can toggle the editable and
 visible flags.
 </para>
@@ -1412,7 +1412,7 @@ You can modify the update policy using the
 <literal>Gtk::UPDATE_IF_VALID</literal>.
 <literal>Gtk::UPDATE_ALWAYS</literal> causes the
 <classname>SpinButton</classname> to ignore errors encountered while converting
-the text in the entry box to a numeric value.  This setting also therefore
+the text in the entry box to a numeric value. This setting also therefore
 allows the <classname>SpinButton</classname> to accept non-numeric values. You
 can force an immediate update using the <methodname>update()</methodname> method.
 </para>
@@ -1472,9 +1472,9 @@ but you can change it to a vertical progress bar by using the
 <para>
 Besides indicating the amount of progress that has occured, the
 progress bar can also be used to indicate that there is some activity;
-this is done by placing the progress bar in <emphasis>activity mode</emphasis>.  In
+this is done by placing the progress bar in <emphasis>activity mode</emphasis>. In
 this mode, the progress bar displays a small rectangle which moves
-back and forth.  Activity mode is useful in situations where the
+back and forth. Activity mode is useful in situations where the
 progress of an operation cannot be calculated as a value range (e.g.,
 receiving a file of unknown length).
 </para>
@@ -1570,7 +1570,7 @@ such as showing an image as well as text.
 All container widgets derive from <classname>Gtk::Container</classname>, not
 always directly. Some container widgets, such as
 <classname>Gtk::Table</classname> can hold many child widgets, so these
-typically have more complex interfaces.  Others, such as
+typically have more complex interfaces. Others, such as
 <classname>Gtk::Frame</classname> contain only one child widget.
 </para>
 
@@ -1587,7 +1587,7 @@ we have discussed them already elsewhere.
 
 <para>
 We also discuss the <classname>Gtk::Paned</classname> widget, which allows you
-to divide a window into two separate "panes".  This widget actually contains
+to divide a window into two separate "panes". This widget actually contains
 two child widgets, but the number is fixed so it seems appropriate.
 </para>
 
@@ -1623,9 +1623,9 @@ title. For instance, you might place a group of
 <title>Paned</title>
 
 <para>
-Panes divide a widget into two halves, separated by a moveable divider.  There
+Panes divide a widget into two halves, separated by a moveable divider. There
 are two such widgets: <classname>Gtk::HPaned</classname> adds a horizontal
-divider, and <classname>Gtk::VPaned</classname> adds a vertical one.  Other
+divider, and <classname>Gtk::VPaned</classname> adds a vertical one. Other
 than the names and the orientations, there's no difference between the two.
 </para>
 
@@ -1664,7 +1664,7 @@ so.
 
 <para>
 <classname>ScrolledWindow</classname> widgets create a scrollable
-area.  You can insert any type of widget into a
+area. You can insert any type of widget into a
 <classname>ScrolledWindow</classname> window, and it will be accessible
 regardless of its size by using the scrollbars. Note that
 <classname>ScrolledWindow</classname> is not a
@@ -1679,7 +1679,7 @@ one of <literal>Gtk::POLICY_AUTOMATIC</literal> or
 <literal>Gtk::POLICY_ALWAYS</literal>.
 <literal>Gtk::POLICY_AUTOMATIC</literal> will cause the scrolled window
 to display the scrollbar only if the contained widget is larger than the
-visible area.  <literal>Gtk::POLICY_ALWAYS</literal> will cause the
+visible area. <literal>Gtk::POLICY_ALWAYS</literal> will cause the
 scrollbar to be displayed always.
 </para>
 
@@ -1745,7 +1745,7 @@ resizes the top-level window.
 <para>
 The <classname>Alignment</classname> widget allows you to place a widget at a
 position and size relative to the size of the <classname>Alignment</classname>
-widget itself.  For instance, it might be used to center a widget.
+widget itself. For instance, it might be used to center a widget.
 </para>
 
 <para>
@@ -1800,7 +1800,7 @@ takes an argument, specifiying which widget to remove.
 <sect2 id="container-packing">
 <title>Packing</title>
 <para>
-You've probably noticed that &gtkmm; windows seem "elastic" - they can usually be stretched in many  different ways.  This is due to the <emphasis>widget packing</emphasis>
+You've probably noticed that &gtkmm; windows seem "elastic" - they can usually be stretched in many  different ways. This is due to the <emphasis>widget packing</emphasis>
 system.
 </para>
 
@@ -1826,7 +1826,7 @@ Changing the layout of a window "on the fly", to make some extra widgets appear,
 </itemizedlist>
 
 <para>
-&gtkmm; uses the packing system to solve these problems.  Rather than specifying the position and size of each widget in the window,
+&gtkmm; uses the packing system to solve these problems. Rather than specifying the position and size of each widget in the window,
 you can arrange your widgets in rows, columns,
 and/or tables. &gtkmm; can size your window automatically, based on the
 sizes of the widgets it contains. And the sizes of the widgets are, in turn, determined by the amount of text they contain, or the minimum and maximum sizes that you specify, and/or how you have requested that the available space should be shared between sets of widgets.
@@ -1836,17 +1836,17 @@ all this information to resize and reposition everything sensibly and smoothly w
 
 <para>
 &gtkmm; arranges widgets hierarchically, using <emphasis>containers</emphasis>.
-A Container widget contains other widgets.  Most &gtkmm; widgets are
+A Container widget contains other widgets. Most &gtkmm; widgets are
 containers. Windows, Notebook tabs, and Buttons are all container widgets.
 There are two flavours of containers: single-child containers, which are all
 descendants of <classname>Gtk::Bin</classname>, and multiple-child containers,
-which are descendants of <classname>Gtk::Container</classname>.  Most widgets
+which are descendants of <classname>Gtk::Container</classname>. Most widgets
 in &gtkmm; are descendants of <classname>Gtk::Bin</classname>, including
 <classname>Gtk::Window</classname>.
 </para>
 
 <para>
-Yes, that's correct: a Window can contain at most one widget.  How, then, can
+Yes, that's correct: a Window can contain at most one widget. How, then, can
 we use a window for anything useful?  By placing a multiple-child container in
 the window. The most useful container widgets are
 <classname>Gtk:Grid</classname>, <classname>Gtk:VBox</classname>,
@@ -1889,7 +1889,7 @@ child widgets.
 
 <para>
 If you've never used a packing toolkit before, it can take some
-getting used to.  You'll probably find, however, that you don't
+getting used to. You'll probably find, however, that you don't
 need to rely on visual form editors quite as much as you might with
 other toolkits.
 </para>
@@ -2064,7 +2064,7 @@ Buttons are added to a <classname>ButtonBox</classname> with the
 </para>
 
 <para>
-Button boxes support several layout styles.  The style can be retrieved and
+Button boxes support several layout styles. The style can be retrieved and
 changed using <methodname>get_layout()</methodname> and
 <methodname>set_layout()</methodname>.
 </para>
@@ -2143,13 +2143,13 @@ The grid's dimensions need to be specified in the constructor:
 
 <para>
 The first argument is the number of rows to make in the table, while the
-second, obviously, is the number of columns.  If
+second, obviously, is the number of columns. If
 <parameter>homogeneous</parameter> is <literal>true</literal>, the table cells
 will all be the same size (the size of the largest widget in the table).
 </para>
 
 <para>
-The rows and columns are indexed starting at 0.  If you specify
+The rows and columns are indexed starting at 0. If you specify
 <parameter>rows</parameter> = 2 and <parameter>columns</parameter> = 2, the
 layout would look something like this:
 </para>
@@ -2185,12 +2185,12 @@ The first argument is the widget you wish to place in the table.
 <para>
 The <parameter>left_attach</parameter> and
 <parameter>right_attach</parameter> arguments specify where to place the
-widget, and how many boxes to use.  For example, if you want a button in the
+widget, and how many boxes to use. For example, if you want a button in the
 lower-right cell of a 2 x 2 table, and want it to occupy that cell
 <emphasis>only</emphasis>, then <parameter>left_attach</parameter> would
 be 1, <parameter>right_attach</parameter> 2,
 <parameter>top_attach</parameter> 1, and
-<parameter>bottom_attach</parameter> 2.  If, on the other hand, you
+<parameter>bottom_attach</parameter> 2. If, on the other hand, you
 wanted a widget to take up the entire top row of our 2 x 2 table, you'd set
 <parameter>left_attach</parameter> = 0,
 <parameter>right_attach</parameter> = 2,
@@ -2201,7 +2201,7 @@ wanted a widget to take up the entire top row of our 2 x 2 table, you'd set
 <para>
 <parameter>xoptions</parameter> and <parameter>yoptions</parameter> are used to
 specify packing options and may be bitwise ORed together to allow multiple
-options.  These options are:
+options. These options are:
 </para>
 
 <para>
@@ -2270,7 +2270,7 @@ row and last column do not get any spacing.
 <sect3 id="table-example"><title>Example</title>
 <para>
 In the following example, we make a window with three buttons in a 2 x 2
-table.  The first two buttons will be placed in the upper row.  A
+table. The first two buttons will be placed in the upper row. A
 third button is placed in the lower row, spanning both columns.
 </para>
 
@@ -2292,7 +2292,7 @@ third button is placed in the lower row, spanning both columns.
 
 <para>
 A <classname>Notebook</classname> has a set of stacked
-<literal>pages</literal>, each of which contains widgets.  Labelled
+<literal>pages</literal>, each of which contains widgets. Labelled
 <literal>tabs</literal> allow the user to select the pages.
 <classname>Notebook</classname>s allow several sets of widgets to be placed in a
 small space, by only showing one page at a time. For instance, they are often
@@ -2573,10 +2573,10 @@ When using this simple <methodname>append_column()</methodname> override, the
 <classname>CellRenderer</classname>. For instance, strings and numbers are
 shown in a simple <classname>Gtk::Entry</classname> widget, and booleans are
 shown in a <classname>Gtk::CheckButton</classname>. This is usually what you
-need.  For other column types you must either connect a callback that converts
+need. For other column types you must either connect a callback that converts
 your type into a string representation, with
 <methodname>TreeViewColumn::set_cell_data_func()</methodname>, or derive a custom
-<classname>CellRenderer</classname>.  Note that (unsigned) short is not
+<classname>CellRenderer</classname>. Note that (unsigned) short is not
 supported by default - You could use (unsigned) int or (unsigned) long as the
 column type instead.
 </para>
@@ -3667,7 +3667,7 @@ group_brushes->insert(*button);
 <para>
 &gtkmm; has various widgets that can be visually adjusted using the mouse or
 the keyboard, such as the <classname>Range</classname> widgets (described in
-the <link linkend="chapter-range-widgets">Range Widgets</link> section).  There are
+the <link linkend="chapter-range-widgets">Range Widgets</link> section). There are
 also a few widgets that display some adjustable part of a larger area, such as
 the <classname>Viewport</classname> widget. These widgets have
 <classname>Gtk::Adjustment</classname> objects that express this common part of
@@ -3700,10 +3700,10 @@ The <parameter>value</parameter> argument is the initial value of the
 adjustment, usually corresponding to the topmost or leftmost position of an
 adjustable widget. The <parameter>lower</parameter> and
 <parameter>upper</parameter> arguments specifies the possible range of values
-which the adjustment can hold.  The
+which the adjustment can hold. The
 <parameter>step_increment</parameter> argument specifies the smaller of
 the two increments by which the user can change the value, while the
-<parameter>page_increment</parameter> is the larger one.  The
+<parameter>page_increment</parameter> is the larger one. The
 <parameter>page_size</parameter> argument usually corresponds somehow to
 the visible area of a panning widget. The <parameter>upper</parameter> argument
 is used to represent the bottom most or right most coordinate in a panning
@@ -3737,7 +3737,7 @@ adjustment as a range within which the user can manipulate the adjustment's
 The other group includes the <classname>Viewport</classname> widget and the
 <classname>ScrolledWindow</classname> widget. All of these widgets use pixel
 values for their adjustments. These are also typically adjusted indirectly
-using scrollbars.  While all widgets which use adjustments can either create
+using scrollbars. While all widgets which use adjustments can either create
 their own adjustments or use ones you supply, you'll generally want to let this
 particular category of widgets create its own adjustments.
 </para>
@@ -3760,7 +3760,7 @@ Gtk::VScrollbar vscrollbar (*(textview.get_vadjustment()));</programlisting>
 <para>
 OK, you say, that's nice, but what if I want to create my own handlers to
 respond when the user adjusts a <classname>Range</classname> widget or a
-<classname>SpinButton</classname>.  To access the value of a
+<classname>SpinButton</classname>. To access the value of a
 <classname>Gtk::Adjustment</classname>, you can use the
 <methodname>get_value()</methodname> and <methodname>set_value()</methodname> methods:
 </para>
@@ -3867,7 +3867,7 @@ to capture events on them. They are intended to have no X-Window in order to imp
 
 <para>
 Some &gtkmm; widgets don't have associated X windows; they draw on
-their parents' windows.  Because of this, they cannot receive events.
+their parents' windows. Because of this, they cannot receive events.
 Also, if they are incorrectly sized, they don't clip, so you can get
 messy overwriting etc. To receive events on one of these widgets, you can it
 inside an <classname>EventBox</classname> widget and then call
@@ -3932,7 +3932,7 @@ blocks until the user dismisses the dialog.
 
 <para>
 There are several derived <classname>Dialog</classname> classes which you might
-find useful.  <classname>Gtk::MessageDialog</classname> is used for most simple
+find useful. <classname>Gtk::MessageDialog</classname> is used for most simple
 notifications. But at other times you might need to derive your own dialog
 class to provide more complex functionality.
 </para>
@@ -3940,7 +3940,7 @@ class to provide more complex functionality.
 <para>
 To pack widgets into a custom dialog, you should pack them into the
 <classname>Gtk::VBox</classname>, available via
-<methodname>get_vbox()</methodname>.  To just add a <classname>Button</classname>
+<methodname>get_vbox()</methodname>. To just add a <classname>Button</classname>
 to the bottom of the <classname>Dialog</classname>, you could use the
 <methodname>add_button()</methodname> method.
 </para>
@@ -4064,7 +4064,7 @@ font.
     widget is first shown, or when it is covered and then uncovered again it
     needs to redraw itself. Most widgets have code to do this, but the
     DrawingArea  does not, allowing you to write your own expose event signal
-    handler to determine how the contents of the widget will be drawn.  This is
+    handler to determine how the contents of the widget will be drawn. This is
     most often done by overriding the virtual
     <methodname>on_expose_event()</methodname> member function.
   </para>
@@ -4076,18 +4076,18 @@ font.
 
   <para>
       You can draw very sophisticated shapes using Cairo, but the methods to do
-      so are quite basic.  Cairo provides methods for drawing straight lines,
-      curved lines, and arcs (including circles).  These basic shapes can be
+      so are quite basic. Cairo provides methods for drawing straight lines,
+      curved lines, and arcs (including circles). These basic shapes can be
       combined to create more complex shapes and paths which can be filled with
-      solid colors, gradients, patterns, and other things.  In addition, Cairo
+      solid colors, gradients, patterns, and other things. In addition, Cairo
       can perform complex transformations, do compositing of images, and render
       antialiased text.
   </para>
   <note>
       <title>Cairo and Pango</title>
       <para>Although Cairo can render text, it's not meant to be a replacement for
-      Pango.  Pango is a better choice if you need to perform more advanced
-      text rendering such as wrapping or ellipsizing text.  Drawing text with
+      Pango. Pango is a better choice if you need to perform more advanced
+      text rendering such as wrapping or ellipsizing text. Drawing text with
       Cairo should only be done if the text is part of a graphic.</para>
   </note>
   <para>
@@ -4105,10 +4105,10 @@ font.
     <para>
         To do any drawing in &gtkmm; with Cairo, you must first create a
         <classname>Cairo::Context</classname> object. This class holds all of the graphics state parameters that
-        describe how drawing is to be done.  This includes information such as
-        line width, color, the surface to draw to, and many other things.  This
+        describe how drawing is to be done. This includes information such as
+        line width, color, the surface to draw to, and many other things. This
         allows the actual drawing functions to take fewer arguments to simplify
-        the interface.  In &gtkmm;, a <classname>Cairo::Context</classname> is
+        the interface. In &gtkmm;, a <classname>Cairo::Context</classname> is
         created by calling the
         <methodname>Gdk::Window::create_cairo_context()</methodname> function.
         Since Cairo context are reference-counted objects, this function
@@ -4117,7 +4117,7 @@ font.
     </para>
     <para>
         The following example shows  how to set up a Cairo context with a
-        foreground color of red and a width of 2.  Any drawing functions that
+        foreground color of red and a width of 2. Any drawing functions that
         use this context will use these settings.
     </para>
     <programlisting>Gtk::DrawingArea myArea;
@@ -4130,12 +4130,12 @@ myContext->set_line_width(2.0);</programlisting>
         above example creates a <classname>Gtk::DrawingArea</classname> widget
         and the second line uses its associated
         <classname>Gdk::Window</classname> to create a
-        <classname>Cairo::Context</classname> object.  The final two lines
+        <classname>Cairo::Context</classname> object. The final two lines
         change the graphics state of the context.
     </para>
     <para>
         There are a number of graphics state variables that can be set for a
-        Cairo context.  The most common context attributes are color (using
+        Cairo context. The most common context attributes are color (using
         <methodname>set_source_rgb()</methodname> or
         <methodname>set_source_rgba()</methodname> for translucent colors), line
         width (using <methodname>set_line_width()</methodname>), line dash pattern
@@ -4145,22 +4145,22 @@ myContext->set_line_width(2.0);</programlisting>
         <methodname>set_font_size()</methodname>,
         <methodname>set_font_face()</methodname> and others).
         There are many other settings as well, such as transformation matrices,
-        fill rules, whether to perform antialiasing, and others.  For further
+        fill rules, whether to perform antialiasing, and others. For further
         information, see the <ulink url="http://www.cairographics.org/cairomm/">cairomm</ulink> API documentation.
     </para>
     <para>
         The current state of a <classname>Cairo::Context</classname> can be
         saved to an internal stack of saved states and later be restored to the
-        state it was in when you saved it.  To do this, use the
+        state it was in when you saved it. To do this, use the
         <methodname>save()</methodname>
-        method and the <methodname>restore()</methodname> method.  This can be
+        method and the <methodname>restore()</methodname> method. This can be
         useful if you need to temporarily change the line width and color (or
         any other graphics setting) in order to draw something and then return
-        to the previous settings.  In this situation, you could call
+        to the previous settings. In this situation, you could call
         <methodname>Cairo::Context::save()</methodname>, change the graphics
         settings, draw the lines, and then call
         <methodname>Cairo::Context::restore()</methodname> to restore the original
-        graphics state.  Multiple calls to <methodname>save()</methodname> and
+        graphics state. Multiple calls to <methodname>save()</methodname> and
         <methodname>restore()</methodname> can be nested; each call to
         <methodname>restore()</methodname> restores the state from the
         matching paired <methodname>save()</methodname>.
@@ -4185,16 +4185,16 @@ myContext->set_line_width(2.0);</programlisting>
     <title>Drawing Straight Lines</title>
     <para>
         Now that we understand the basics of the Cairo graphics library, we're
-        almost ready to start drawing.  We'll start with the simplest of
-        drawing elements: the straight line.  But first you need to know a
-        little bit about Cairo's coordinate system.  The origin of the Cairo
+        almost ready to start drawing. We'll start with the simplest of
+        drawing elements: the straight line. But first you need to know a
+        little bit about Cairo's coordinate system. The origin of the Cairo
         coordinate system is located in the upper-left corner of the window
         with positive x values to the right and positive y values going down.
         <tip>
             <para>Since the Cairo graphics library was written with support for
             multiple output targets (the X window system, PNG images, OpenGL,
             etc), there is a distinction between user-space and device-space
-            coordinates.  The mapping between these two coordinate systems
+            coordinates. The mapping between these two coordinate systems
             defaults to one-to-one so that integer values map roughly to pixels
             on the screen, but this setting can be adjusted if desired.
             Sometimes it may be useful to scale the coordinates so that the
@@ -4208,29 +4208,29 @@ myContext->set_line_width(2.0);</programlisting>
     <sect2 id="cairo-example-lines"><title>Example</title>
     <para>
         In this example, we'll construct a small but fully functional &gtkmm;
-        program and draw some lines into the window.  The lines are drawn by
-        creating a path and then stroking it.  A path is created using the
+        program and draw some lines into the window. The lines are drawn by
+        creating a path and then stroking it. A path is created using the
         functions <methodname>Cairo::Context::move_to()</methodname> and
         <methodname>Cairo::Context::line_to()</methodname>. The function
         <methodname>move_to()</methodname> is similar to the act of lifting your
         pen off of the paper and placing it somewhere else -- no line is drawn
-        between the point you were at and the point you moved to.  To draw a
+        between the point you were at and the point you moved to. To draw a
         line between two points, use the <methodname>line_to()</methodname>
         function.
     </para>
     <para>
         After you've finished creating your path, you still haven't
-        drawn anything visible yet.  To make the path visible, you must use the
+        drawn anything visible yet. To make the path visible, you must use the
         function <methodname>stroke()</methodname> which will stroke the current
         path with the line width and style specified in your
-        <classname>Cairo::Context</classname> object.  After stroking, the
+        <classname>Cairo::Context</classname> object. After stroking, the
         current path will be cleared so that you can start on your next path.
     </para>
         <tip>
             <para>Many Cairo drawing functions have a <methodname>_preserve()</methodname>
-            variant.  Normally drawing functions such as
+            variant. Normally drawing functions such as
             <methodname>clip()</methodname>, <methodname>fill()</methodname>, or
-            <methodname>stroke()</methodname> will clear the current path.  If you
+            <methodname>stroke()</methodname> will clear the current path. If you
             use the <methodname>_preserve()</methodname> variant, the current path
             will be retained so that you can use the same path with the next
             drawing function.</para>
@@ -4250,12 +4250,12 @@ myContext->set_line_width(2.0);</programlisting>
         which is a subclass of <classname>Gtk::DrawingArea</classname> and
         contains an <methodname>on_expose_event()</methodname> member function.
         This method is called whenever the image in the drawing area needs to
-        be redrawn.  This function is passed a pointer to a
+        be redrawn. This function is passed a pointer to a
         <classname>GdkEventExpose</classname> structure which defines the area
-        that needs to be redrawn.  We use these values to create a rectangle
+        that needs to be redrawn. We use these values to create a rectangle
         path in Cairo (using the <methodname>rectangle()</methodname> function) and
-        then <methodname>clip()</methodname> to this path.  The
-        <methodname>clip()</methodname> function sets a clip region.  The current
+        then <methodname>clip()</methodname> to this path. The
+        <methodname>clip()</methodname> function sets a clip region. The current
         clip region affects all drawing operations by effectively masking out
         any changes to the surface that are outside the current clip region.
         This allows us to limit our redrawing to only the area that needs to be
@@ -4263,15 +4263,15 @@ myContext->set_line_width(2.0);</programlisting>
         The actual drawing code sets the color we want to use for drawing by
         using <methodname>set_source_rgb()</methodname> which takes arguments
         defining the Red, Green, and Blue components of the desired color
-        (valid values are between 0 and 1).  After setting the color, we
+        (valid values are between 0 and 1). After setting the color, we
         created a new path using the functions <methodname>move_to()</methodname>
         and <methodname>line_to()</methodname>, and then stroked this path with
         <methodname>stroke()</methodname>.
     </para>
     <tip>
         <title>Drawing with relative coordinates</title>
-        <para>In the example above we drew everything using absolute coordinates.  You can also draw using
-        relative coordinates.  For a straight line, this is done with the
+        <para>In the example above we drew everything using absolute coordinates. You can also draw using
+        relative coordinates. For a straight line, this is done with the
         function <methodname>Cairo::Context::rel_line_to()</methodname>.</para>
     </tip>
     </sect2>
@@ -4279,15 +4279,15 @@ myContext->set_line_width(2.0);</programlisting>
         <title>Line styles</title>
         <para>
             In addition to drawing basic straight lines, there are a number of
-            things that you can customize about a line.  You've already seen
+            things that you can customize about a line. You've already seen
             examples of setting a line's color and width, but there are others
             as well.
         </para>
         <para>
             If you've drawn a series of lines that form a path, you may
-            want them to join together in a certain way.  Cairo offers
+            want them to join together in a certain way. Cairo offers
             three different ways to join lines together: Miter, Bevel, and
-            Round.  These are show below:
+            Round. These are show below:
         </para>
         <figure id="figure-cairo-joins">
             <title>Different join types in Cairo</title>
@@ -4300,18 +4300,18 @@ myContext->set_line_width(2.0);</programlisting>
             <methodname>Cairo::Context::set_line_join()</methodname>.
         </para>
         <para>
-            Line ends can have different styles as well.  The default style
+            Line ends can have different styles as well. The default style
             is for the line to start and stop exactly at the destination
-            points of the line.  This is called a Butt cap.  The other
+            points of the line. This is called a Butt cap. The other
             options are Round (uses a round ending, with the center of the
             circle at the end point) or Square (uses a squared ending, with
-            the center of the square at the end point).  This setting is set
+            the center of the square at the end point). This setting is set
             using the function
             <methodname>Cairo::Context::set_line_cap()</methodname>.
         </para>
         <para>
             There are other things you can customize as well, including
-            creating dashed lines and other things.  For more information , see
+            creating dashed lines and other things. For more information , see
             the Cairo API documentation.
         </para>
     </sect2>
@@ -4324,7 +4324,7 @@ myContext->set_line_width(2.0);</programlisting>
             <methodname>Cairo::Context::curve_to()</methodname> and
             <methodname>Cairo::Context::rel_curve_to()</methodname> functions.
             These functions take coordinates for a destination point as well as
-            coordinates for two 'control' points.  This is best explained using
+            coordinates for two 'control' points. This is best explained using
             an example, so let's dive in.
         </para>
         <sect2 id="cairo-example-curves">
@@ -4349,26 +4349,26 @@ myContext->set_line_width(2.0);</programlisting>
         </para>
         <para>
             Note that we clip to the area that needs re-exposing just as we did
-            in the last example.  After clipping, however, we make a call to
+            in the last example. After clipping, however, we make a call to
             <methodname>Cairo::Context::scale()</methodname>, passing in the width
-            and height of the drawing area.  This scales the user-space
+            and height of the drawing area. This scales the user-space
             coordinate system such that the the width and height of the widget
-            are both equal to 1.0 'units'.  There's no particular reason to
+            are both equal to 1.0 'units'. There's no particular reason to
             scale the coordinate system in this case, but sometimes it can make
             drawing operations easier.
         </para>
         <para>
             The call to <methodname>Cairo::Context::curve_to()</methodname> should
-            be fairly self-explanatory.  The first pair of coordinates define
-            the control point for the beginning of the curve.  The second set
+            be fairly self-explanatory. The first pair of coordinates define
+            the control point for the beginning of the curve. The second set
             of coordinates define the control point for the end of the curve,
-            and the last set of coordinates define the destination point.  To
+            and the last set of coordinates define the destination point. To
             make the concept of control points a bit easier to visualize, a
             line has been draw from each control point to the end-point on the
-            curve that it is associated with.  Note that these control point
-            lines are both translucent.  This is achieved with a variant of
+            curve that it is associated with. Note that these control point
+            lines are both translucent. This is achieved with a variant of
             <methodname>set_source_rgb()</methodname> called
-            <methodname>set_source_rgba()</methodname>.  This function takes a
+            <methodname>set_source_rgba()</methodname>. This function takes a
             fourth argument specifying the alpha value of the color (valid
             values are between 0 and 1).
         </para>
@@ -4378,11 +4378,11 @@ myContext->set_line_width(2.0);</programlisting>
       <title>Drawing Arcs and Circles</title>
       <para>
           With Cairo, the same function is used to draw arcs, circles, or
-          ellipses: <methodname>Cairo::Context::arc()</methodname>.  This function
-          takes five arguments.  The first two are the coordinates of the
+          ellipses: <methodname>Cairo::Context::arc()</methodname>. This function
+          takes five arguments. The first two are the coordinates of the
           center point of the arc, the third argument is the radius of the arc,
           and the final two arguments define the start and end angle of the
-          arc.  All angles are defined in radians, so drawing a circle is the
+          arc. All angles are defined in radians, so drawing a circle is the
           same as drawing an arc from 0 to 2 * M_PI radians.
           An angle of 0 is in the direction of the positive X axis (in user-space). An
           angle of M_PI/2 radians (90 degrees) is in the direction of the positive Y axis
@@ -4427,28 +4427,28 @@ context->restore();</programlisting>
               There are a couple of things to note about this example code.
               Again, the only real difference between this example and the
               previous ones is the <methodname>on_expose_event()</methodname>
-              function, so we'll limit our focus to that function.  In
+              function, so we'll limit our focus to that function. In
               addition, the first part of the function is nearly identical to
               the previous examples, so we'll skip that portion.
           </para>
           <para>
               Note that in this case, we've expressed nearly everything in
               terms of the height and width of the window, including the width
-              of the lines.  Because of this, when you resize the window,
-              everything scales with the window.  Also note that there are
+              of the lines. Because of this, when you resize the window,
+              everything scales with the window. Also note that there are
               three drawing sections in the function and each is wrapped with a
               <methodname>save()</methodname>/<methodname>restore()</methodname> pair
               so that we're back at a known state after each drawing.
           </para>
           <para>
               The section for drawing an arc introduces one new function,
-              <methodname>close_path()</methodname>.  This function will in effect
+              <methodname>close_path()</methodname>. This function will in effect
               draw a straight line from the current point back to the first
-              point in the path.  There is a significant difference between
+              point in the path. There is a significant difference between
               calling <methodname>close_path()</methodname> and manually drawing a
-              line back to the starting point, however.  If you use
+              line back to the starting point, however. If you use
               <methodname>close_path()</methodname>, the lines will be nicely
-              joined together.  If you use <methodname>line_to()</methodname>
+              joined together. If you use <methodname>line_to()</methodname>
               instead, the lines will end at the same point, but Cairo won't do
               any special joining.
           </para>
@@ -4498,7 +4498,7 @@ context->restore();</programlisting>
               There are a couple of drawing methods for putting image data into
               a drawing area. <methodname>draw_pixmap()</methodname> can copy the
               contents of a <classname>Gdk::Drawable</classname> (the window of
-              a drawing area is one) into the drawing area.  There is also
+              a drawing area is one) into the drawing area. There is also
               <methodname>draw_bitmap()</methodname> for drawing a two-color image
               into the drawing area, and <methodname>draw_image()</methodname> for
               drawing an image with more than two colors.
@@ -4581,8 +4581,8 @@ return true;
       <para>
           Now that we've covered the basics of drawing with Cairo, let's try to
           put it all together and create a simple application that actually
-          does something.  The following example uses Cairo to create a custom
-          <classname>Clock</classname> widget.  The clock has a second hand, a
+          does something. The following example uses Cairo to create a custom
+          <classname>Clock</classname> widget. The clock has a second hand, a
           minute hand, and an hour hand, and updates itself every second.
       </para>
       <screenshot>
@@ -4592,13 +4592,13 @@ return true;
       <para><ulink url="&url_examples_base;drawingarea/clock">Source Code</ulink></para>
       <para>
           As before, almost all of the interesting stuff is done in the expose
-          event handler <methodname>on_expose_event()</methodname>.  Before we dig
+          event handler <methodname>on_expose_event()</methodname>. Before we dig
           into the expose event handler, notice that the constructor for the
           <classname>Clock</classname> widget connects a handler function
           <methodname>onSecondElapsed()</methodname> to a timer with a timeout
-          period of 1000 milliseconds (1 second).  This means that
+          period of 1000 milliseconds (1 second). This means that
           <methodname>onSecondElapsed()</methodname> will get called once per
-          second.  The sole responsibility of this function is to invalidate
+          second. The sole responsibility of this function is to invalidate
           the window so that &gtkmm; will be forced to redraw it.
       </para>
       <para>
@@ -4607,18 +4607,18 @@ return true;
           pretty familiar by now as it's mostly 'boilerplate' code for getting
           the <classname>Gdk::Window</classname>, creating a
           <classname>Cairo::Context</classname>, and clipping to the area that
-          we want to re-draw.  This example again scales the coordinate system
+          we want to re-draw. This example again scales the coordinate system
           to be a unit square so that it's easier to draw the clock as a
           percentage of window size so that it will automatically scale when
-          the window size is adjusted.  Furthermore, the coordinate system is
+          the window size is adjusted. Furthermore, the coordinate system is
           scaled over and down so that the (0, 0) coordinate is in the very
           center of the window.
       </para>
       <para>
           The function <methodname>Cairo::Context::paint()</methodname> is used here
-          to set the background color of the window.  This function takes no
+          to set the background color of the window. This function takes no
           arguments and fills the current surface (or the clipped portion of
-          the surface) with the source color currently active.  After setting
+          the surface) with the source color currently active. After setting
           the background color of the window, we draw a circle for the clock
           outline, fill it with white, and then stroke the outline in black.
           Notice that both of these actions use the
@@ -4650,7 +4650,7 @@ Things are dragged from <literal>sources</literal> to be dropped on
 about the data formats that it can send or receive, provided by
 <classname>Gtk::TargetEntry</classname> items. A drop destination will only
 accept a dragged item if they both share a compatible
-<classname>Gtk::TargetEntry</classname> item.  Appropriate signals will then be
+<classname>Gtk::TargetEntry</classname> item. Appropriate signals will then be
 emitted, telling the signal handlers which
 <classname>Gtk::TargetEntry</classname> was used.
 </para>
@@ -4849,7 +4849,7 @@ For instance, gedit can supply and receive the <literal>&quot;UTF8_STRING&quot;<
 A target can be in a variety of binary formats. This chapter, and the examples,
 assume that the data is 8-bit text. This would allow us to use an XML format
 for the clipboard data. However this would probably not be appropriate for
-binary data such as images.  <classname>Gtk::Clipboard</classname> provides
+binary data such as images. <classname>Gtk::Clipboard</classname> provides
 overloads that allow you to specify the format in more detail if
 necessary.
 </para>
@@ -5378,7 +5378,7 @@ and update the print settings.
       later</para>
   </note>
   <para>
-    &gtkmm; provides an easy way to manage recently used documents.  The classes
+    &gtkmm; provides an easy way to manage recently used documents. The classes
     involved in implementing this functionality are
     <classname>RecentManager</classname>,
     <classname>RecentChooserDialog</classname>,
@@ -5388,7 +5388,7 @@ and update the print settings.
   </para>
   <para>
     Each item in the list of recently used files is identified by its URI, and
-    can have associated metadata.  The metadata can be used to specify how the
+    can have associated metadata. The metadata can be used to specify how the
     file should be displayed, a description of the file, its mime type, which
     application registered it, whether it's private to the registering
     application, and several other things.
@@ -5397,12 +5397,12 @@ and update the print settings.
     <title>RecentManager</title>
     <para>
       <classname>RecentManager</classname> acts as the central database of
-      recently used files.  You use this class to register new files, remove
+      recently used files. You use this class to register new files, remove
       files from the list, or look up recently used files.
     </para>
     <para>
       You can create a new <classname>RecentManager</classname>, but you'll most
-      likely just want to use the default one.  You can get a reference to the
+      likely just want to use the default one. You can get a reference to the
       default <classname>RecentManager</classname> with
       <methodname>get_default()</methodname>.
       </para>
@@ -5410,20 +5410,20 @@ and update the print settings.
       <title>Adding Items to the List of Recent Files</title>
       <para>
         To add a new file to the list of recent documents, in the simplest case,
-        you only need to provide the URI.  For example:
+        you only need to provide the URI. For example:
       </para>
       <programlisting>Glib::RefPtr&lt;Gtk::RecentManager&gt; recent_manager = Gtk::RecentManager::get_default();
 recent_manager->add_item(uri);</programlisting>
       <para>
         If you want to register a file with metadata, you can pass a
         <classname>RecentManager::Data</classname> parameter to
-        <methodname>add_item()</methodname>.  The metadata that can be set on a
+        <methodname>add_item()</methodname>. The metadata that can be set on a
         particular file item is as follows:
       </para>
       <itemizedlist>
         <listitem>
           <para><varname>app_exec</varname>: The command line to be used to launch
-            this resource.  This string may contain the "f" and "u" escape
+            this resource. This string may contain the "f" and "u" escape
             characters which will be expanded to the resource file path and URI
             respectively</para>
         </listitem>
@@ -5441,8 +5441,8 @@ recent_manager->add_item(uri);</programlisting>
         </listitem>
         <listitem>
           <para><varname>groups</varname>: A list of groups associated with this
-            item.  Groups are essentially arbitrary strings associated with a
-            particular resource.  They can be thought of as 'categories' (such
+            item. Groups are essentially arbitrary strings associated with a
+            particular resource. They can be thought of as 'categories' (such
             as "email", "graphics", etc) or tags for the resource.</para>
         </listitem>
         <listitem>
@@ -5462,14 +5462,14 @@ recent_manager->add_item(uri);</programlisting>
       <title>Looking up Items in the List of Recent Files</title>
       <para>
         To look up recently used files, <classname>RecentManager</classname>
-        provides several functions.  To look up a specific item by its URI, you
+        provides several functions. To look up a specific item by its URI, you
         can use the <methodname>lookup_item()</methodname> function, which will
-        return a <classname>RecentInfo</classname> class.  If the specified URI
+        return a <classname>RecentInfo</classname> class. If the specified URI
         did not exist in the list of recent files, the
         <classname>RecentInfo</classname> object will be invalid.
         <classname>RecentInfo</classname> provides an implementation for
         <methodname>operator bool()</methodname> which can be used to test for
-        validity.  For example:
+        validity. For example:
       </para>
 <programlisting>Gtk::RecentInfo info = recent_manager-&gt;lookup_item(uri);
 if (info)
@@ -5478,19 +5478,19 @@ if (info)
 }</programlisting>
       <para>
         A <classname>RecentInfo</classname> object is essentially an object
-        containing all of the metadata about a single recently-used file.  You
+        containing all of the metadata about a single recently-used file. You
         can use this object to look up any of the properties listed above. FIXME
         - add cross-reference.
       </para>
       <para>
         If you don't want to look for a specific URI, but instead want to get a
         list of all recently used items, <classname>RecentManager</classname>
-        provides the <methodname>get_items()</methodname> function.  The return
+        provides the <methodname>get_items()</methodname> function. The return
         value of this function can be assigned to any standard C++ container
         (e.g. <classname>std::vector</classname>,
         <classname>std::list</classname>, etc) and contains a list of all
         recently-used files up to a user-defined limit (FIXME: what's the
-        default limit?).  The following code demonstrates how you might get a
+        default limit?). The following code demonstrates how you might get a
         list of recently-used files:
       </para>
       <programlisting>std::vector&lt;Gtk::RecentInfo&gt; info_list = recent_manager-&gt;get_items();</programlisting>
@@ -5506,12 +5506,12 @@ if (info)
         There may be times when you need to modify the list of recent files.
         For instance, if a file is moved or renamed, you may need to update the
         file's location in the recent files list so that it doesn't point to an
-        incorrect location.  You can update an item's location by using
+        incorrect location. You can update an item's location by using
         <methodname>move_item()</methodname>.
       </para>
       <para>
         In addition to changing a file's URI, you can also remove items from the
-        list, either one at a time or by clearint them all at once.  The former
+        list, either one at a time or by clearint them all at once. The former
         is accomplished with <methodname>remove_item()</methodname>, the latter with
         <methodname>purge_items()</methodname>.
       </para>
@@ -5550,14 +5550,14 @@ if (info)
     </para>
     <para>
       The last class that implements the <classname>RecentChooser</classname>
-      interface is <classname>RecentChooserMenu</classname>.  This class allows
+      interface is <classname>RecentChooserMenu</classname>. This class allows
       you to list recently used files as a menu.
     </para>
     <sect2 id="recenchooserwidget-example">
       <title>Simple RecentChooserWidget example</title>
       <para>
         Shown below is a simple example of how to use the
-        <classname>RecentChooserDialog</classname> class in a program.  This
+        <classname>RecentChooserDialog</classname> class in a program. This
         simple program has a menubar with a "Recent Files Dialog" menu item.
         When you select this menu item, a dialog pops up showing the list of
         recently used files.
@@ -5565,7 +5565,7 @@ if (info)
       <note>
         <para>
           If this is the first time you're using a program that uses the Recent
-          Files framework, the dialog may be empty at first.  Otherwise it
+          Files framework, the dialog may be empty at first. Otherwise it
           should show the list of recently used documents registered by other
           applications.
         </para>
@@ -5582,7 +5582,7 @@ if (info)
       <para>
         The constructor for <classname>ExampleWindow</classname> creates the
         menu using <classname>UIManager</classname> (see <xref
-          linkend="chapter-menus-and-toolbars"/> for more information).  It then adds
+          linkend="chapter-menus-and-toolbars"/> for more information). It then adds
         the menu and the toolbar to the window.
       </para>
     </sect2>
@@ -5591,13 +5591,13 @@ if (info)
       <para>
         For any of the <classname>RecentChooser</classname> classes, if you
         don't wish to display all of the items in the list of recent files, you
-        can filter the list to show only those that you want.  You can filter
+        can filter the list to show only those that you want. You can filter
         the list with the help of the <classname>RecentFilter</classname> class.
         This class allows you to filter recent files by their name
         (<methodname>add_pattern()</methodname>), their mime type
         (<methodname>add_mime_type()</methodname>), the application that registered
         them (<methodname>add_application()</methodname>), or by a custom filter
-        function (<methodname>add_custom()</methodname>).  It also provides the
+        function (<methodname>add_custom()</methodname>). It also provides the
         ability to filter based on how long ago the file was modified and which
         groups it belongs to.
       </para>
@@ -5616,9 +5616,9 @@ if (info)
     <title>Overview</title>
     <para>
       From time to time, it may be useful to be able to embed a widget from
-      another application within your application.  &gtkmm; allows you to do
+      another application within your application. &gtkmm; allows you to do
       this with the <classname>Gtk::Socket</classname> and
-      <classname>Gtk::Plug</classname> classes.  It is not anticipated that very
+      <classname>Gtk::Plug</classname> classes. It is not anticipated that very
       many applications will need this functionality, but in the rare case that
       you need to display a widget that is running in a completely different
       process, these classes can be very helpful.
@@ -5634,7 +5634,7 @@ if (info)
       <classname>Plugs</classname> work together is through their window ids.
       Both a <classname>Socket</classname> and a <classname>Plug</classname>
       have IDs that can be retrieved with their <methodname>get_id()</methodname>
-      member functions.  The use of these IDs will be explained below in <xref
+      member functions. The use of these IDs will be explained below in <xref
           linkend="sec-connecting-plugs-sockets"/>.
     </para>
     <sect2 id="sec-sockets">
@@ -5649,7 +5649,7 @@ if (info)
       <title>Plugs</title>
       <para>
         A <classname>Plug</classname> is a special kind of Window that can be
-        plugged into a <classname>Socket</classname>.  Besides the normal
+        plugged into a <classname>Socket</classname>. Besides the normal
         properties and methods of <classname>Gtk::Window</classname>, a
         <classname>Plug</classname> provides a constructor that takes the ID of
         a <classname>Socket</classname>, which will automatically embed the
@@ -5667,7 +5667,7 @@ if (info)
       <para>
         After a <classname>Socket</classname> or <classname>Plug</classname>
         object is realized, you can obtain its ID with its
-        <methodname>get_id()</methodname> function.  This ID can then be shared with
+        <methodname>get_id()</methodname> function. This ID can then be shared with
         other processes so that other processes know how to connect to
         eachother.
       </para>
@@ -5680,7 +5680,7 @@ if (info)
               pass the ID of that <classname>Socket</classname> to another
               process so that it can create a <classname>Plug</classname> object
               by specifying the given <classname>Socket</classname> ID in its
-              constructor.  There is no way to assign a
+              constructor. There is no way to assign a
               <classname>Plug</classname> to a particular
               <classname>Socket</classname> after creation, so you must pass the
               <classname>Socket</classname> ID to the
@@ -5692,9 +5692,9 @@ if (info)
               Create a <classname>Plug</classname> independantly from any
               particular <classname>Socket</classname> and pass the ID of the
               <classname>Plug</classname> to other processes that need to use
-              it.  The ID of the <classname>Plug</classname> can be associated
+              it. The ID of the <classname>Plug</classname> can be associated
               with a particular <classname>Socket</classname> object using the
-              <methodname>Socket::add_id()</methodname> function.  This is the
+              <methodname>Socket::add_id()</methodname> function. This is the
               approach used in the example below.
             </para>
           </listitem>
@@ -5705,21 +5705,21 @@ if (info)
   <sect1 id="sec-plugs-sockets-example">
     <title>Plugs and Sockets Example</title>
     <para>
-      The following is a simple example of using sockets and plugs.  The method
+      The following is a simple example of using sockets and plugs. The method
       of communication between processes is deliberately kept very simple: The
       <classname>Plug</classname> writes its ID out to a text file named
       <filename>plug.id</filename> and the process with the socket reads the ID
-      from this files.  In a real program, you may want to use a more
+      from this files. In a real program, you may want to use a more
       sophisticated method of inter-process communication.
     </para>
     <para><ulink url="&url_examples_base;socket/">Source Code</ulink></para>
     <para>
       This example creates two executable programs: <filename>socket</filename>
-      and <filename>plug</filename>.  The idea is that
+      and <filename>plug</filename>. The idea is that
       <filename>socket</filename> has an application window that will embed a
-      widget from the <filename>plug</filename> program.  The way this example
+      widget from the <filename>plug</filename> program. The way this example
       is designed, <filename>plug</filename> must be running first before
-      starting <filename>socket</filename>.  To see the example in action,
+      starting <filename>socket</filename>. To see the example in action,
       execute the following commands in order from within the example directory:
     </para>
     <para>
@@ -5742,7 +5742,7 @@ A plug was added</screen>
     <para>
       The first line of output is from <filename>plug</filename>, after it has
       been notified that it has been embedded inside of a
-      <classname>Socket</classname>.  The second line was emitted by
+      <classname>Socket</classname>. The second line was emitted by
       <filename>socket</filename> in response to its
       <methodname>plug_added</methodname> signal. If everything was done as
       described above, the <filename>socket</filename> window should look
@@ -5769,8 +5769,8 @@ A plug was added</screen>
 
 <para>
 You may be wondering how to make &gtkmm; do useful work while it's idling along
-(well, sleeping actually) in <methodname>Gtk::Main::run()</methodname>.  Happily,
-you have several options.  Using the following methods you can create a timeout
+(well, sleeping actually) in <methodname>Gtk::Main::run()</methodname>. Happily,
+you have several options. Using the following methods you can create a timeout
 method that will be called every few milliseconds.
 </para>
 
@@ -5810,7 +5810,7 @@ bool MyCallback() { std::cout &lt;&lt; "Hello World!\n" &lt;&lt; std::endl; retu
 
 <para>
 You can stop the timeout method by returning <literal>false</literal> from
-your signal handler.  Therefore, if you want your
+your signal handler. Therefore, if you want your
 method to be called repeatedly, it should return <literal>true</literal>.
 </para>
 
@@ -5828,7 +5828,7 @@ Here's an example of this technique:
 <para>
 A nifty feature of Glib (one of the libraries underlying
 &gtkmm;) is the ability to have it check for data on a file descriptor
-for you.  This is especially useful for networking applications. The
+for you. This is especially useful for networking applications. The
 following method is used to do this:
 </para>
 
@@ -5889,7 +5889,7 @@ Glib::IO_HUP - Call your method when hung up (the connection has been broken usu
 
 <para>
     The return value is a <classname>sigc::connection</classname> that may be used to stop monitoring
-this file descriptor using its <methodname>disconnect()</methodname> method.  The
+this file descriptor using its <methodname>disconnect()</methodname> method. The
 <parameter>slot</parameter> signal handler should be declared as follows:
 </para>
 
@@ -5907,8 +5907,8 @@ specified above. As usual the slot is created with
 </para>
 
 <para>
-A little example follows.  To use the example just execute it from a terminal;
-it doesn't create a window.  It will create a pipe named
+A little example follows. To use the example just execute it from a terminal;
+it doesn't create a window. It will create a pipe named
 <literal>testfifo</literal> in the current directory. Then start another shell
 and execute <literal>echo "Hello" &#62; testfifo</literal>. The example will
 print each line you enter until you execute <literal>echo "Q" &#62;
@@ -5956,7 +5956,7 @@ be sufficient to understand what's going on. However, here's a little example:
 
 <para>
 This example points out the difference of idle and timeout methods a
-little.  If you need methods that are called periodically, and speed
+little. If you need methods that are called periodically, and speed
 is not very important, then you want timeout methods. If
 you want methods that are called as often as possible (like
 calculating a fractal in background), then use idle methods.
@@ -5987,7 +5987,7 @@ This flexibility allows you to use <literal>new</literal> and
 <literal>delete</literal> to create and destroy objects dynamically
 or to use regular class members (that are destroyed automatically when the
 class is destroyed) or to use local instances (that are destroyed when the
-instance goes out of scope).  This flexibility is not present in some C++ GUI
+instance goes out of scope). This flexibility is not present in some C++ GUI
 toolkits, which restrict the programmer to only a subset of C++'s memory
 management features.
 </para>
@@ -5999,14 +5999,14 @@ management features.
 
 <para>
 If a programmer does not need dynamic memory allocation, automatic widgets in class
-scope may be used.  One advantage of automatic widgets in class scope is that
-memory management is grouped in one place.  The programmer does not
+scope may be used. One advantage of automatic widgets in class scope is that
+memory management is grouped in one place. The programmer does not
 risk memory leaks from failing to <literal>delete</literal> a widget.
 </para>
 
 <para>
 The primary disadvantages of using class scope widgets are revealing
-the class implementation rather than the class interface in the class header.  Class
+the class implementation rather than the class interface in the class header. Class
 scope widgets also require Automatic widgets in class scope suffer the same disadvantages as
 any other class scope automatic variable.
 </para>
@@ -6029,7 +6029,7 @@ private:
 
 <para>
 If a programmer does not need a class scope widget, a function scope widget
-may also be used.  The advantages to function scope over class scope are the
+may also be used. The advantages to function scope over class scope are the
 increased data hiding and reduced dependencies.
 
 
@@ -6076,10 +6076,10 @@ Here, the programmer deletes pButton to prevent a memory leak.
 
 <para>
 Alternatively, you can let a widget's container control when the widget is
-destroyed.  In most cases, you want a widget to last only as long as the
-container it is in.  To delegate the management of a widget's lifetime to its
+destroyed. In most cases, you want a widget to last only as long as the
+container it is in. To delegate the management of a widget's lifetime to its
 container, first create it with <function>manage()</function> and
-pack it into its container with <methodname>add()</methodname>.  Now, the
+pack it into its container with <methodname>add()</methodname>. Now, the
 widget will be destroyed whenever its container is destroyed.
 </para>
 
@@ -6088,9 +6088,9 @@ widget will be destroyed whenever its container is destroyed.
 
 <para>
 &gtkmm; provides the <function>manage()</function> function and
-<methodname>add()</methodname> methods to create and destroy widgets.  Every widget
+<methodname>add()</methodname> methods to create and destroy widgets. Every widget
 except a top-level window must be added or packed into a container in order to
-be displayed.  The <function>manage()</function> function marks a packed widget
+be displayed. The <function>manage()</function> function marks a packed widget
 so that when the widget is added to a container, the container becomes
 responsible for deleting the widget.
 </para>
@@ -6105,14 +6105,14 @@ MyWidget::MyWidget()
 </programlisting>
 
 Now, when objects of type <classname>MyWidget</classname> are destroyed, the
-button will also be deleted.  It is no longer necessary to delete pButton to
+button will also be deleted. It is no longer necessary to delete pButton to
 free the button's memory; its deletion has been delegated to the
 <classname>MyWidget</classname> object.
 </para>
 
 <para>
 &gtkmm; also provides the <methodname>set_manage()</methodname> method for
-all widgets.  This can be used to generate the same result as
+all widgets. This can be used to generate the same result as
 <function>manage()</function>, but is more tedious:
 </para>
 
@@ -6129,7 +6129,7 @@ foo.add( manage(new Gtk::Label("Hello")) );
 </para>
 
 <para>
-Of course, a top level container will not be added to another container.  The
+Of course, a top level container will not be added to another container. The
 programmer is responsible for destroying the top level container using one of
 the traditional C++ techniques. For instance, your top-level Window might just
 be an instance in your <function>main()</function> function..
@@ -6335,7 +6335,7 @@ All relevant classes of &gtkmm; typedef their underlying C type as
 typedefs <classname>BaseObjectType</classname> as <type>GtkDialog</type>, for instance).
 </para>
 <para>
-You must call the base class's constructor in the initialization list, providing the C pointer.  For
+You must call the base class's constructor in the initialization list, providing the C pointer. For
 instance,
 <programlisting>
 DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)
@@ -6412,7 +6412,7 @@ This example shows how to load a <application>Glade</application> file at runtim
 
   <para>
     String literals should be typed in the source code in English, but
-    surrounded by a macro.  The <application>gettext</application> (or intltool)
+    surrounded by a macro. The <application>gettext</application> (or intltool)
     utility can then extract the marked strings for tramslation, and substitute
     the translated text at runtime.
   </para>
@@ -6448,8 +6448,8 @@ This example shows how to load a <application>Glade</application> file at runtim
     <para>
       Create a sub-directory named <literal>po</literal> in your project's root
       directory. This directory will eventually contain all of your
-      translations.  Within it, create a file named <literal>LINGUAS</literal>
-      and a file named <literal>POTFILES.in</literal>.  It is common practice to
+      translations. Within it, create a file named <literal>LINGUAS</literal>
+      and a file named <literal>POTFILES.in</literal>. It is common practice to
       also create a <literal>ChangeLog</literal> file in the
       <literal>po</literal> directory so that translators can keep track of
       translation changes.
@@ -6460,7 +6460,7 @@ This example shows how to load a <application>Glade</application> file at runtim
       identifying the languages for which your program is translated (comment
       lines starting with a <literal>#</literal> are ignored). Each language
       code listed in the <literal>LINGUAS</literal> file must have a
-      corresponding <literal>.po</literal> file.  So, if your program has German
+      corresponding <literal>.po</literal> file. So, if your program has German
       and Japanese translations, your <literal>LINGUAS</literal> file would
       look like this:
     </para>
@@ -6477,7 +6477,7 @@ ja</programlisting>
     <para>
       <literal>POTFILES.in</literal> is a list of paths to all files which
       contain strings marked up for translation, starting from the project root
-      directory.  So for example, if your project sources were located in a
+      directory. So for example, if your project sources were located in a
       subdirectory named <literal>src</literal>, and you had two files that
       contained strings that should be translated, your
       <literal>POTFILES.in</literal> file might look like this:
@@ -6488,12 +6488,12 @@ src/other.cc</programlisting>
 
     <para>
       If you are using <application>gettext</application> directly, you can only
-      mark strings for translation if they are in source code file.  However, if
+      mark strings for translation if they are in source code file. However, if
       you use <application>intltool</application>, you can mark strings for
       translation in a variety of other file formats, including
       <application>Glade</application> UI files, xml, <ulink
         url="http://standards.freedesktop.org/desktop-entry-spec/latest/">.desktop
-        files</ulink> and several more.  So, if you have designed some of the
+        files</ulink> and several more. So, if you have designed some of the
       application UI in <application>Glade</application> then also add your
       <filename>.glade</filename> files to the list in
       <literal>POTFILES.in</literal>.
@@ -6529,7 +6529,7 @@ AC_SUBST(PROGRAMNAME_LOCALEDIR)</programlisting>
       <itemizedlist>
         <listitem>
           <para>Add <literal>po</literal> to the <literal>SUBDIRS</literal>
-            variable.  Without this, your translations won't get built and
+            variable. Without this, your translations won't get built and
             installed when you build the program</para>
         </listitem>
         <listitem>
@@ -6543,7 +6543,7 @@ AC_SUBST(PROGRAMNAME_LOCALEDIR)</programlisting>
         <listitem>
           <para>
             Add <literal>INTLTOOL_FILES</literal> to the
-            <literal>EXTRA_DIST</literal> list of files.  This ensures that when
+            <literal>EXTRA_DIST</literal> list of files. This ensures that when
             you do a <command>make dist</command>, these commands will be
             included in the source tarball.
           </para>
@@ -6827,7 +6827,7 @@ label.set_text(_("Really delete ") + filename + _(" now?"));</programlisting>
 
 <para>
 So you should either avoid this situation or revert to the C-style
-<function>sprintf()</function>.  One possible solution is the <ulink
+<function>sprintf()</function>. One possible solution is the <ulink
     url="http://www.cs.auc.dk/~olau/compose/">compose library</ulink> which
 supports syntax such as:
 </para>
@@ -7119,7 +7119,7 @@ and hints for creating &gtkmm; applications.
     <methodname>Gtk::Main::run(Gtk::Window&amp;)</methodname> overload. It shows
     the window and returns when the window has been hidden. This might happen
     when the user closes the window, or when your code decides to
-    <methodname>hide()</methodname> the window.  You can prevent the user from
+    <methodname>hide()</methodname> the window. You can prevent the user from
     closing the window (for instance, if there are unsaved changes) by
     overriding <methodname>Gtk::Window::on_delete_event()</methodname>.</para>
 <para>Most of our examples use this technique.</para>
@@ -7183,7 +7183,7 @@ finished setting the attributes of the widget, and that it is ready to be
 displayed. You can use <methodname>Gtk::Widget::hide()</methodname> to make it
 disappear again. The order in which you show the widgets is not important, but
 we do suggest that you show the top-level window last; this way, the whole
-window will appear with its contents already drawn.  Otherwise, the user will
+window will appear with its contents already drawn. Otherwise, the user will
 first see a blank window, into which the widgets will be gradually drawn.
 </para>
 
@@ -7195,19 +7195,19 @@ first see a blank window, into which the widgets will be gradually drawn.
 
 <para>
 This document, like so much other great software out there, was
-created for free by volunteers.  If you are at all knowledgeable about
+created for free by volunteers. If you are at all knowledgeable about
 any aspect of &gtkmm; that does not already have documentation, please
 consider contributing to this document.
 </para>
 <para>
 Ideally, we would like you to <ulink url="http://www.gtkmm.org/bugs.shtml">provide a patch</ulink> to the
-<filename>docs/tutorial/C/gtkmm-tutorial-in.xml</filename> file.  This file is currently
+<filename>docs/tutorial/C/gtkmm-tutorial-in.xml</filename> file. This file is currently
 in the <literal>gtkmm-documentation</literal> module in GNOME git.
 </para>
 
 <para>
 If you do decide to contribute, please post your contribution to the
-&gtkmm; mailing list at <ulink url="mailto:gtkmm-list@gnome.org">&#60;gtkmm-list@gnome.org&#62;</ulink>.  Also, be aware that
+&gtkmm; mailing list at <ulink url="mailto:gtkmm-list@gnome.org">&#60;gtkmm-list@gnome.org&#62;</ulink>. Also, be aware that
 the entirety of this document is free, and any addition you provide
 must also be free. That is, people must be able to use any portion of
 your examples in their programs, and copies of this document
@@ -7436,7 +7436,7 @@ Now let's look at the connection again:
 
 <para>
 Note that we don't pass a pointer to <methodname>on_button_clicked()</methodname>
-directly to the signal's <methodname>connect()</methodname> method.  Instead, we
+directly to the signal's <methodname>connect()</methodname> method. Instead, we
 call <function>sigc::ptr_fun()</function>, and pass the result to
 <methodname>connect()</methodname>.
 </para>
@@ -7444,7 +7444,7 @@ call <function>sigc::ptr_fun()</function>, and pass the result to
 <para>
 <function>sigc::ptr_fun()</function>  generates a <classname>sigc::slot</classname>.
 A slot is an object which
-looks and feels like a function, but is actually an object.  These are also
+looks and feels like a function, but is actually an object. These are also
 known as function objects, or functors.
 <function>sigc::ptr_fun()</function> generates a slot for a standalone function or static method.
 <function>sigc::mem_fun()</function> generates a slot for a member method of a particular instance.
@@ -7478,7 +7478,7 @@ main()
 The first call to <methodname>connect()</methodname> is just like the one we saw
 last time; nothing new here.</para>
 <para>The next is more interesting.
-<function>sigc::mem_fun()</function> is called with two arguments.  The first
+<function>sigc::mem_fun()</function> is called with two arguments. The first
 argument is <parameter>some_object</parameter>, which is the object that our
 new slot will be pointing at. The second argument is a pointer to one of its
 methods. This particular version of <function>sigc::mem_fun()</function>
@@ -7489,17 +7489,17 @@ specified object, in this case
 
 <para>
 Another thing to note about this example is that we made the call to
-<methodname>connect()</methodname> twice for the same signal object.  This is
+<methodname>connect()</methodname> twice for the same signal object. This is
 perfectly fine - when the button is clicked, both signal handlers will be
 called.
 </para>
 
 <para>
 We just told you that the button's <literal>clicked</literal> signal is expecting
-to call a method with no arguments.  All signals have
+to call a method with no arguments. All signals have
 requirements like this - you can't hook a function with two arguments
 to a signal expecting none (unless you use an adapter, such as
-<function>sigc::bind()</function>, of course).  Therefore, it's important to
+<function>sigc::bind()</function>, of course). Therefore, it's important to
 know what type of signal handler you'll be expected to connect to a given
 signal.
 </para>
@@ -7524,7 +7524,7 @@ Glib::SignalProxy1&lt;bool, Gtk::DirectionType&gt; signal_focus()
 Other than the signal's name (<literal>focus</literal>), two things are
 important to note here: the number following the word
 <classname>SignalProxy</classname> at the beginning (1, in this case), and the
-types in the list (<type>bool</type> and <type>Gtk::DirectionType</type>).  The
+types in the list (<type>bool</type> and <type>Gtk::DirectionType</type>). The
 number indicates how many arguments the signal handler should have; the first
 type, <type>bool</type>, is the type that the signal handler should return; and
 the next type, <type>Gtk::DirectionType</type>, is the type of this signal's
@@ -7533,7 +7533,7 @@ see the names of the arguments too.
 </para>
 
 <para>
-The same principles apply for signals which have more arguments.  Here's one
+The same principles apply for signals which have more arguments. Here's one
 with three (taken from <filename>&lt;gtkmm/editable.h&gt;</filename>):
 </para>
 
@@ -7545,8 +7545,8 @@ Glib::SignalProxy3&lt;void, const Glib::ustring&amp;, int, int*&gt; signal_inser
 </para>
 
 <para>
-It follows the same form.  The number 3 at the end of the type's name indicates
-that our signal handler will need three arguments.  The first type in the type
+It follows the same form. The number 3 at the end of the type's name indicates
+that our signal handler will need three arguments. The first type in the type
 list is <type>void</type>, so that should be our signal handler's return type.
 The following three types are the argument types, in order. Our signal
 handler's prototype could look like this:
@@ -7574,7 +7574,7 @@ sigc::signal&lt;void,int&gt;::iterator signal&lt;void,int&gt;::connect( const si
 
 <para>
 Notice that the return value is of type
-<classname>sigc::signal&lt;void,int&gt;::iterator</classname>.  This can be
+<classname>sigc::signal&lt;void,int&gt;::iterator</classname>. This can be
 implicitely converted into a <classname>sigc::connection</classname> which in
 turn can be used to control the connection. By keeping a connection object you
 can disconnect its associated signal handler using the method
@@ -7595,7 +7595,7 @@ way.
 <para>
 Instead of laboriously connecting signal handlers to signals,
 you can simply make a new class which inherits from a widget - say, a
-Button - and then override the default signal handler, such as Button::on_clicked().  This can be a
+Button - and then override the default signal handler, such as Button::on_clicked(). This can be a
 lot simpler than hooking up signal handlers for everything.
 </para>
 
@@ -7635,10 +7635,10 @@ void OverriddenButton::on_clicked()
 
 <para>
 Here  we define a new class called <classname>OverriddenButton</classname>,
-which inherits from <classname>Gtk::Button</classname>.  The only thing we
+which inherits from <classname>Gtk::Button</classname>. The only thing we
 change is the <methodname>on_clicked()</methodname> method, which is called
 whenever <classname>Gtk::Button</classname> emits the
-<literal>clicked</literal> signal.  This method prints "Hello World" to
+<literal>clicked</literal> signal. This method prints "Hello World" to
 <literal>stdout</literal>, and then calls the original, overridden method, to
 let <classname>Gtk::Button</classname> do what it would have done had we not
 overridden.
@@ -7646,10 +7646,10 @@ overridden.
 
 <para>
 You don't always need to call the parent's method; there are times
-when you might not want to.  Note that we called the parent method
+when you might not want to. Note that we called the parent method
 <emphasis>after</emphasis> writing "Hello World", but we could have called it before.
 In this simple example, it hardly matters much, but there are times
-when it will.  With signals, it's not quite so easy to change details
+when it will. With signals, it's not quite so easy to change details
 like this, and you can do something here which you can't do at all
 with connected signal handlers: you can call the parent method in the <emphasis>middle</emphasis> of
 your custom code.
@@ -7671,7 +7671,7 @@ m_button1.signal_clicked().connect( sigc::bind&lt;Glib::ustring&gt;( sigc::mem_f
 </programlisting>
 This says that we want the signal to send an extra
 <classname>Glib::ustring</classname> argument to the signal handler, and that
-the value of that argument should be "button 1".  Of course we will need to add
+the value of that argument should be "button 1". Of course we will need to add
 that extra argument to the declaration of our signal handler:
 <programlisting>
 virtual void on_button_clicked(Glib::ustring data);
@@ -7685,7 +7685,7 @@ programming then you have probably noticed that this is similar to the extra
 <literal>gpointer data</literal> arguments which all GTK+ callbacks have. This
 is generally overused in <application>GTK+</application> to pass information
 that should be stored as member data in a derived widget, but widget derivation
-is very difficult in C.  We have far less need of this hack in &gtkmm;.
+is very difficult in C. We have far less need of this hack in &gtkmm;.
 </para>
 </sect1>
 
@@ -7703,19 +7703,19 @@ you can't accomplish with normal signals. <classname>Gtk::Button</classname>,
 for example, does not send mouse-pointer coordinates with its
 <literal>clicked</literal> signal, but you could handle
 <literal>button_pressed_event</literal> if you needed this
-information.  X events are also often used to handle key-presses.
+information. X events are also often used to handle key-presses.
 </para>
 
 <para>
-These signals behave slightly differently.  The value returned from the signal handler indicates whether it has fully "handled"
-the event.  If the value is <literal>false</literal> then &gtkmm; will pass the event on to the next signal handler.  If the value is <literal>true</literal> then no other signal handlers will need to be called.
+These signals behave slightly differently. The value returned from the signal handler indicates whether it has fully "handled"
+the event. If the value is <literal>false</literal> then &gtkmm; will pass the event on to the next signal handler. If the value is <literal>true</literal> then no other signal handlers will need to be called.
 </para>
 
 <para>
-Handling an X event doesn't affect the Widget's other signals.  If you handle
+Handling an X event doesn't affect the Widget's other signals. If you handle
 <literal>button_pressed_event</literal> for
 <classname>Gtk::Button</classname>, you'll still be able to get the
-<literal>clicked</literal> signal.  They are emitted at (nearly) the same time.
+<literal>clicked</literal> signal. They are emitted at (nearly) the same time.
 </para>
 
 <para>Note also that not all widgets receive all X events by default. To receive additional
@@ -7741,7 +7741,7 @@ When the mouse is over the button and a mouse button is pressed,
 <para>
 <type>GdkEventButton</type> is a structure containing the event's parameters,
 such as the coordinates of the mouse pointer at the time the button was
-pressed.  There are several different types of <type>GdkEvent</type> structures
+pressed. There are several different types of <type>GdkEvent</type> structures
 for the various events.
 </para>
 
@@ -7839,13 +7839,13 @@ This is a full working example that defines and uses custom signal.
 sharp-eyed reader with GUI toolkit experience will note that this same design
 is often
 seen under the name of "broadcaster-listener" (e.g., in Metrowerks'
-PowerPlant framework for the Macintosh).  It works in much the same
+PowerPlant framework for the Macintosh). It works in much the same
 way: one sets up <literal>broadcasters</literal>, and then connects
 <literal>listeners</literal> to them; the broadcaster keeps a list of the
 objects listening to it, and when someone gives the broadcaster a
-message, it calls all of its objects in its list with the message.  In
+message, it calls all of its objects in its list with the message. In
 &gtkmm;, signal objects play the role of broadcasters, and slots
-play the role of listeners - sort of.  More on this later.)
+play the role of listeners - sort of. More on this later.)
 </para>
 <para>
 &gtkmm; signal handlers are strongly-typed, whereas
@@ -7855,16 +7855,16 @@ unlike <application>Qt</application>, &gtkmm; achieves this without modifying
 the C++ language.</para>
 <para>
 Re. Overriding signal handlers: You can do this in the straight-C world of GTK+ too; that's what GTK's
-object system is for.  But in GTK+, you have to go through some
+object system is for. But in GTK+, you have to go through some
 complicated procedures to get object-oriented features like
-inheritance and overloading.  In C++, it's simple, since those
+inheritance and overloading. In C++, it's simple, since those
 features are supported in the language itself; you can let the
 compiler do the dirty work.
 </para>
 <para>
 This is one of the places where the beauty of C++ really comes out.
 One wouldn't think of subclassing a GTK+ widget simply to override its
-action method; it's just too much trouble.  In GTK+, you almost always
+action method; it's just too much trouble. In GTK+, you almost always
 use signals to get things done, unless you're writing a new widget.
 But because overriding methods is so easy in C++, it's entirely
 practical - and sensible - to subclass a button for that purpose.
@@ -7902,7 +7902,7 @@ practical - and sensible - to subclass a button for that purpose.
   <para>
     If you are interested in helping out with the development of &gtkmm;, or
     fixing a bug in &gtkmm;, you'll probably need to build the development
-    version of &gtkmm;.  However, you should not to install a development version over
+    version of &gtkmm;. However, you should not to install a development version over
     your stable version. Instead, you should install it alongside your existing &gtkmm;
     installation, in a separate path.
   </para>
@@ -7911,8 +7911,8 @@ practical - and sensible - to subclass a button for that purpose.
       url="http://library.gnome.org/devel/jhbuild/unstable/">jhbuild</ulink>.
     <application>jhbuild</application> is a program that makes building GNOME
     software much easier by calculating dependencies and building things in the
-    correct order.  This section will give a brief explanation of how to set up
-    jhbuild to build and install &gtkmm; from the source repository (git).  For up-to-date information
+    correct order. This section will give a brief explanation of how to set up
+    jhbuild to build and install &gtkmm; from the source repository (git). For up-to-date information
     on <application>jhbuild</application>, please refer to the <ulink
       url="http://library.gnome.org/devel/jhbuild/unstable/">jhbuild manual</ulink>.
     If you need assistance using <application>jhbuild</application>, you should
@@ -7923,7 +7923,7 @@ practical - and sensible - to subclass a button for that purpose.
   <note>
     <para>
     Note that to build &gtkmm; from git, you'll often need to build all of its
-    dependencies from git as well.  <application>jhbuild</application> makes
+    dependencies from git as well. <application>jhbuild</application> makes
     this easier than it would normally be, but it will take quite a while to
     build and install them all. You will probably encounter build problems, though these will usually be corrected quickly if you report them.
     </para>
@@ -7949,7 +7949,7 @@ practical - and sensible - to subclass a button for that purpose.
     </para>
     <para>
       After setting the correct moduleset, you need to tell
-      <application>jhbuild</application> which module or modules to build.  To
+      <application>jhbuild</application> which module or modules to build. To
       build &gtkmm; and all of its dependencies, set <varname>modules</varname>
       like so: <programlisting>modules = [ 'gtkmm', ]</programlisting>
     </para>
@@ -7957,11 +7957,11 @@ practical - and sensible - to subclass a button for that purpose.
       You can build all GNOME C++ modules by setting the
       <varname>modules</varname> variable to the meta-package named
       <literal>meta-gnome-c++</literal> or build all of the core GNOME modules
-      with <literal>meta-gnome-desktop</literal>.  The
+      with <literal>meta-gnome-desktop</literal>. The
       <varname>modules</varname> variable specifies which modules that will be
-      built when you don't explicitly specify anything on the command line.  You
+      built when you don't explicitly specify anything on the command line. You
       can always build a different moduleset later by specifying it on the
-      commandline (e.g.  <command>jhbuild build gtkmm</command>).
+      commandline (e.g. <command>jhbuild build gtkmm</command>).
     </para>
     <important>
       <title>Setting a prefix</title>
@@ -7969,7 +7969,7 @@ practical - and sensible - to subclass a button for that purpose.
         By default, <application>jhbuild</application>'s configuration is
         configured to install all software built with
         <application>jhbuild</application> under the
-        <filename>/opt/gnome2</filename> prefix.  You can choose a different
+        <filename>/opt/gnome2</filename> prefix. You can choose a different
         prefix, but it is recommended that you keep this prefix different from
         other software that you've installed (don't set it to
         <filename>/usr</filename>!) If you've followed the jhbuild instructions
@@ -7982,7 +7982,7 @@ practical - and sensible - to subclass a button for that purpose.
     <title>Installing and Using the git version of &gtkmm;</title>
     <para>
       Once you've configured <application>jhbuild</application> as described
-      above, building &gtkmm; should be relatively straightforward.  The first
+      above, building &gtkmm; should be relatively straightforward. The first
       time you run <application>jhbuild</application>, you should run the
       following sequence of commands to ensure that
       <application>jhbuild</application> has the required tools and verify that
@@ -8001,9 +8001,9 @@ $ jhbuild sanitycheck</screen>
       </para>
       <para>
         This command will build and install a series of modules and will probably
-        take quite a long time the first time through.  After the first time,
+        take quite a long time the first time through. After the first time,
         however, it should go quite a bit faster since it only needs to rebuild
-        files than changed since the last build.  Alternatively, after you've
+        files than changed since the last build. Alternatively, after you've
         built and installed &gtkmm; the first time, you can rebuild &gtkmm; by
         itself (without rebuilding all of its dependencies) with the command
         <command>jhbuild buildone gtkmm</command>.
@@ -8013,26 +8013,26 @@ $ jhbuild sanitycheck</screen>
       <title>Using the git version of &gtkmm;</title>
       <para>
         After you've installed the git version of &gtkmm;, you're ready to start
-        using and experimenting with it.  In order to use the new version of
+        using and experimenting with it. In order to use the new version of
         &gtkmm; you've just installed, you need to set some environment
         variables so that your <filename>configure</filename> script knows where
-        to find the new libraries.  Fortunately,
+        to find the new libraries. Fortunately,
         <application>jhbuild</application> offers an easy solution to this
-        problem.  Executing the command <command>jhbuild shell</command> will
+        problem. Executing the command <command>jhbuild shell</command> will
         start a new shell with all of the correct environment variables set.
         Now if you re-configure and build your project just as you usually do,
-        it should link against the newly installed libraries.  To return to your
+        it should link against the newly installed libraries. To return to your
         previous environment, simply exit the <application>jhbuild</application>
         shell.
       </para>
       <para>
         Once you've built your software, you'll need to run your program within
-        the jhbuild environment as well.  To do this, you can again use the
+        the jhbuild environment as well. To do this, you can again use the
         <command>jhbuild shell</command> command to start a new shell with the
-        <application>jhbuild</application> environment set up.  Alternatively,
+        <application>jhbuild</application> environment set up. Alternatively,
         you can execute a one-off command in the
         <application>jhbuild</application> environment using the following
-        command: <command>jhbuild run command-name</command>.  In this case,
+        command: <command>jhbuild run command-name</command>. In this case,
         the command will be run with the correct environment variables set, but
         will return to your previous environment after the program exits.
       </para>
@@ -8212,7 +8212,7 @@ A number of the skeleton files must still be filled in with project-specific con
 <title>Creating .hg and .ccg files</title>
 <para>We should now create our first <filename>.hg</filename> and <filename>.ccg</filename> files,
   to wrap one of the objects in the C library. One pair of example source files already exists:
-  <filename>skeleton.ccg</filename> and <filename>skeleton.hg</filename>.  Create copies of these
+  <filename>skeleton.ccg</filename> and <filename>skeleton.hg</filename>. Create copies of these
   files as necessary.</para>
 <para>We must mention all of our <filename>.hg</filename> and
   <filename>.ccg</filename> files in the
@@ -8345,7 +8345,7 @@ int main(int, char**)
         <function>_CLASS_GOBJECT()</function> and
         <function>_WRAP_METHOD()</function>, from which
         <command>gmmproc</command> generates appropriate C++ source code,
-        usually at the same position in the header.  Any additional C++ source
+        usually at the same position in the header. Any additional C++ source
         code will be copied verbatim into the corresponding
         .h or .cc file.</para>
     <para>A .hg file will typically include some headers
@@ -8634,7 +8634,7 @@ public:
     function does more than call <function>g_object_new()</function>, the
     <function>_CONSTRUCT()</function> macro may be used in the
     .ccg file to save some work. The <function>_CONSTRUCT</function> macro takes
-    a series of property names and values.  For instance, from
+    a series of property names and values. For instance, from
     <filename>button.ccg</filename>:
 <programlisting>
 Button::Button(const Glib::ustring&amp; label, bool mnemonic)
@@ -8662,7 +8662,7 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
 <para>The C function (e.g. <function>gtk_entry_set_text</function>) is described
     more fully in the .defs file, and the <filename>convert*.m4</filename> files
     contain the necessary conversion from the C++ parameter type to the C
-    parameter type.  This macro also generates doxygen documentation comments
+    parameter type. This macro also generates doxygen documentation comments
     based on the <filename>*_docs.xml</filename> and
     <filename>*_docs_override.xml</filename> files.</para>
 <para>There are some optional extra arguments:
@@ -8863,7 +8863,7 @@ _WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)
   <title>_MEMBER_GET_PTR / _MEMBER_SET_PTR</title>
   <para>
     Use these macros to automatically provide getters and setters for a data
-    member that is a pointer type.  For the getter function, it will
+    member that is a pointer type. For the getter function, it will
     create two methods, one const and one non-const.
   </para>
   <para><function>_MEMBER_GET_PTR(C++ name, C name, C++ type, C type)</function></para>
@@ -8894,7 +8894,7 @@ _MEMBER_GET_GOBJECT(offscreen_pixmap, offscreen_pixmap, Gdk::Pixmap, GdkPixmap*)
   <title>Basic Types</title>
   <para>Some of the basic types that are used in C APIs have better alternatives
     in C++. For example, there's no need for a <type>gboolean</type> type since
-    C++ has <type>bool</type>.  The following list shows some commonly-used
+    C++ has <type>bool</type>. The following list shows some commonly-used
     types in C APIs and what you might convert them to in a C++ wrapper library.
   </para>
   <segmentedlist><title>Basic Type equivalents</title>

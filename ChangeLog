@@ -1,5 +1,11 @@
 2011-03-31  Murray Cumming  <murrayc@murrayc.com>
 
+	Double spaces after .s are unnecessary.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Remove unnecessary spaces.
+
+2011-03-31  Murray Cumming  <murrayc@murrayc.com>
+
 	Fix a minor grammatical mistake in the ComboBox section.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: is, not are.
