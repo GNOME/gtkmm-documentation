@@ -1,48 +1,18 @@
-<<<<<<< HEAD
-=======
+2011-03-31  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the build.
+
+	* Makefile.am: Don't mention README.SUN because it was removed.
+
 2011-03-18  Kalev Lember <kalev@smartlink.ee>
 
     ComboBox: Use set_entry_text_column() instead of set_text_column()
-    
+
     * docs/tutorial/C/gtkmm-tutorial-in.xml:
     * examples/book/combobox/entry_complex/examplewindow.cc: Updated the
     files to use set_entry_text_column() instead of set_text_column() which
     was a leftover from ComboBoxEntry's removal.
 
-2011-03-09  Murray Cumming  <murrayc@murrayc/cp,>
-
-	Gtk::Application example: open an empty document if none is specified.
-
-	* examples/book/application/exampleapplication.cc: Do not fail if no file
-	was specified.
-
-2011-03-09  Murray Cumming  <murrayc@murrayc.com>
-
-	Gtk::Builder example: Remove a now non-existent property.
-
-	* examples/book/builder/basic/basic.ui:
-	* examples/book/builder/derived/basic.ui: The glade files mentioned the old
-	GtkDialog::has-separator property which has now been removed. This caused a
-	harmless stderr warning.
-
-2011-03-04  Murray Cumming  <murrayc@murrayc.com>
-
-	Added Gtk::Application example.
-
-	* examples/Makefile.am:
-	* examples/book/application/: Show how to do command-line parsing.
-
-	There is still a warning at the end which we should deal with:
-	(example:17496): Gtk-CRITICAL **: gtk_main_quit: assertion `main_loops != NULL' failed
-
-2011-02-22  Murray Cumming  <murrayc@murrayc.com>
-
-	Code-style changes.
-
-	* examples/book/grid/examplewindow.[h|cc]: Slight style changes, for
-	consistency with the other examples.
-
->>>>>>> 5b59d99... Correct ChangeLog
 2011-02-22  David King  <davidk@openismus.com>
 
 	Add Gtk::Tooltip example to the tutorial
