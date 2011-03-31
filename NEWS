@@ -1,3 +1,8 @@
+2.23.0:
+
+* Adapted to recent API deprecations in gtkmm 2.23/24.
+  (Murray Cumming)
+
 2.22.0:
 
 * Make the API reference links go to /stable instead of /unstable, to

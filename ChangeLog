@@ -21,21 +21,23 @@
 
   * autogen.sh: Add test that mm-common is installed.
   This fixes bug #628713 (Patricia Santana Cruz)
-  
+
+2.23.0
+
 2011-02-02  Murray Cumming  <murrayc@murrayc.com>
 
 	Remove the Ruler examples.
 
-	* examples/others/rulers/rulers.cc: Remove this because Gtk::Ruler (and 
+	* examples/others/rulers/rulers.cc: Remove this because Gtk::Ruler (and
 	GtkRuler) is deprecated without any real replacement.
 
 2011-02-02  Murray Cumming  <murrayc@murrayc.com>
 
   Disable the gdk drawing example, because it uses deprecated API.
-  
-	* examples/Makefile.am: Disable examples/others/gdk/radar because it is just 
-	an example of GDK drawing, but people should use cairo now. We might bring 
-	it back as a cairo widget example later. 
+
+	* examples/Makefile.am: Disable examples/others/gdk/radar because it is just
+	an example of GDK drawing, but people should use cairo now. We might bring
+	it back as a cairo widget example later.
 
 2011-02-01  Murray Cumming  <murrayc@murrayc.com>
 
@@ -48,15 +50,15 @@
   Adapt to removal of the Gtk::Range update_policy.
 
 	* examples/book/range_widgets/examplewindow.cc:
-	* examples/book/range_widgets/examplewindow.h: Just remove UI that showed 
+	* examples/book/range_widgets/examplewindow.h: Just remove UI that showed
 	the use of this API.
-	
+
 2011-01-01  Murray Cumming  <murrayc@murrayc.com>
 
 	Adapt to the Pango::Layout::get_iter(iter) deprecation.
 
 	* examples/book/printing/advanced/printformoperation.cc:
-	* examples/book/printing/simple/printformoperation.cc: Use the get_iter() 
+	* examples/book/printing/simple/printformoperation.cc: Use the get_iter()
 	method that just returns the iter.
 
 2011-02-01  Murray Cumming  <murrayc@murrayc.com>
@@ -64,14 +66,14 @@
 	Fix the build with --enable-warnings=fatal.
 	* examples/book/combobox/text/examplewindow.cc:
 	* examples/book/comboboxentry/complex/examplewindow.[h|cc]:
-	* examples/book/comboboxentry/text/examplewindow.[h|cc]: Use ComboBox instead 
+	* examples/book/comboboxentry/text/examplewindow.[h|cc]: Use ComboBox instead
 	of ComboBoxEntry. Use ComboBoxText instead of ComboBoxEntryText.
 	Use append() instead of append_text().
 
 2011-01-12  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Modified the custom_widget example
-    
+
 	* examples/book/custom/custom_widget/mywidget.cc:
 	Make on_realize() more similar to gtk+ widgets' realize methods.
 	Replace the deprecated Glib::RefPtr::clear() by reset(). Bug 606903.
@@ -79,7 +81,7 @@
 2010-11-18  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Modified the clipboard/ideal example
-    
+
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Signal owner_change is mentioned
 	in the description of clipboard/ideal.
 	* examples/book/clipboard/ideal/examplewindow.[h|cc]:
