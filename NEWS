@@ -1,8 +1,25 @@
+2.99.4: (unstable):
+
+* Remove use of Gtk::Application because it was removed from gtkmm 3.0.
+  (Murray Cumming)
+* Builder section: Remove a now non-existent property.
+  (Murray Cumming)
+* ComboBox section: Mention set_entry_text_column() instead of set_text_column().
+  (Kalev Lember)
+* Add basic information on Gtk::Grid.
+  (David King)
+* Modify the custom_container and custom_widget examples.
+  (Kjell Ahlstedt)
+* Replace gtkmm-2.24 mentions with gtkmm-3.0.
+  (David King)
+* Build: Fix the installation path.
+  (David King)
+
 2.99.3: (ustable):
 
 * Ported to the latest gtkmm API.
   (Murray Cumming, Krzesimir Nowak)
-* Modified the custom_container and custom_widget examples to use 
+* Modified the custom_container and custom_widget examples to use
   the extended layout API.
   (Kjell Ahlstedt)
 * Fix the print preview dialog in the printing/advanced example.
@@ -14,7 +31,7 @@
 
 2.91.6: (unstable):
 
-* Ported to the recent gtkmm API, using Gdk::RGBA and Gtk::StyleContext 
+* Ported to the recent gtkmm API, using Gdk::RGBA and Gtk::StyleContext
   and the slightly-changed ComboBoxText API.
 
 2.91.5: (unstable):
@@ -27,10 +44,10 @@
 	(Kjell Ahlstedt)
 * Label section: Fix a /<b> -> </b> typo.
   (Murray Cumming)
-* Rearranged an include to fix the build due to a not-yet-explained 
+* Rearranged an include to fix the build due to a not-yet-explained
   compiler error.
   (Murray Cumming)
-	
+
 2.91.2: (unstable):
 
 * Book:
