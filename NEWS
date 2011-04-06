@@ -1,3 +1,7 @@
+3.0.0 (stable):
+
+Just a version increase.
+
 2.99.4: (unstable):
 
 * Remove use of Gtk::Application because it was removed from gtkmm 3.0.
