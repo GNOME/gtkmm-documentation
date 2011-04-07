@@ -1,3 +1,12 @@
+2011-04-07  Murray Cumming  <murrayc@murrayc.com>
+
+	Correct mentions of gtkmm-2.4 to gtkmm-3.0.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: And adjust any text that mentions
+	the history/future of the version numbers.
+	Also remove notes about when API was added in gtkmm 2, because that is old
+	news.
+
 3.0.0:
 
 Increase the version to make this show up as stable/ on library.gnome.org

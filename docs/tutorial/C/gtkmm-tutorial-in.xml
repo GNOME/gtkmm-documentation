@@ -162,13 +162,15 @@ using &gtkmm; without purchasing licenses.
 <sect1 id="sec-installation-dependencies">
 <title>Dependencies</title>
 <para>
-  Before attempting to install &gtkmm; 2.4, you might first need to install these other
+  Before attempting to install &gtkmm; 3.0, you might first need to install these other
   packages.
 </para>
 <itemizedlist>
   <listitem><para><application>libsigc++ 2.0</application></para></listitem>
   <listitem><para><application>GTK+ 3.0</application></para></listitem>
   <listitem><para><application>cairomm</application></para></listitem>
+  <listitem><para><application>pangomm</application></para></listitem>
+  <listitem><para><application>atkmm</application></para></listitem>
 </itemizedlist>
 <para>
 These dependencies have their own dependencies, including the following
@@ -209,8 +211,8 @@ applications and libraries:
 <para>
 The package names will not change when new API/ABI-compatible versions of &gtkmm;
 are released. Otherwise they would not be API/ABI-compatible. So don't be
-surprised, for instance, to find &gtkmm; 2.8 supplied by Debian's
-<application>libgtkmm2.4-dev</application> package.
+surprised, for instance, to find &gtkmm; 3.2 supplied by Debian's
+<application>libgtkmm3.0-dev</application> package.
 </para>
 </note>
 </sect2>
@@ -339,7 +341,7 @@ The last line shows the window and enters the &gtkmm; main processing loop, whic
 
 <para>
 After putting the source code in <literal>simple.cc</literal> you can compile the above program with gcc using:
-<programlisting>g++ simple.cc -o simple `pkg-config gtkmm-2.4 --cflags --libs`</programlisting>
+<programlisting>g++ simple.cc -o simple `pkg-config gtkmm-3.0 --cflags --libs`</programlisting>
 Note that you must surround
 the <literal>pkg-config</literal> invocation with backquotes.
 Backquotes cause the shell to execute the command inside them, and to use
@@ -365,13 +367,13 @@ find them in. Try running it from your shell-prompt to see the results on your s
 <para>
 However, this is even simpler when using the <function>PKG_CHECK_MODULES()</function> macro in a standard configure.ac file with autoconf and automake.
 For instance:
-<programlisting>PKG_CHECK_MODULES([MYAPP], [gtkmm-2.4 >= 2.8.0])</programlisting>
+<programlisting>PKG_CHECK_MODULES([MYAPP], [gtkmm-3.0 >= 3.0.0])</programlisting>
 This checks for the presence of gtkmm and defines MYAPP_LIBS and MYAPP_CFLAGS for use in your Makefile.am files.
 </para>
-<para>gtkmm-2.4 is the name of the current stable API. There was an older API called gtkmm-2-0 which installs in parallel when it is available. There are several versions of gtkmm-2.4, such as gtkmm 2.10. Note that the API name does not change for every version because that would be an incompatible API and ABI break. Theoretically, there might be a future gtkmm-3.0 API which would install in parallel with gtkmm-2.4 without affecting existing applications.
+<para>gtkmm-3.0 is the name of the current stable API. There was an older API called gtkmm-2-4 which installs in parallel when it is available. There were several versions of gtkmm-2.4, such as gtkmm 2.10 and there will be several versions of the gtkmm-3.0 API. Note that the API name does not change for every version because that would be an incompatible API and ABI break. Theoretically, there might be a future gtkmm-4.0 API which would install in parallel with gtkmm-3.0 without affecting existing applications.
 </para>
 
-<para>Note that if you mention extra modules in addition to gtkmm-2.4, they should be separated by spaces, not commas.
+<para>Note that if you mention extra modules in addition to gtkmm-3.0, they should be separated by spaces, not commas.
 </para>
 <para>
 Openismus has more <ulink url="http://www.openismus.com/documents/linux/automake/automake.shtml">basic help with automake and autoconf</ulink>.
@@ -4997,10 +4999,6 @@ type.
 <chapter id="chapter-printing">
 <title>Printing</title>
 
-<note>
-  <para>Printing support is available in &gtkmm; version 2.10 and later.</para>
-</note>
-
 <para>
 At the application development level, &gtkmm;'s printing API
 provides dialogs that are consistent across applications and allows us of Cairo's common drawing API, with Pango-driven text rendering. In the implementation of this common API, platform-specific backends and printer-specific drivers are used.
@@ -5373,10 +5371,7 @@ and update the print settings.
 
 <chapter id="chapter-recent-documents">
   <title>Recently Used Documents</title>
-  <note>
-    <para>Recent Files support is available in &gtkmm; version 2.10 and
-      later</para>
-  </note>
+
   <para>
     &gtkmm; provides an easy way to manage recently used documents. The classes
     involved in implementing this functionality are
@@ -5529,10 +5524,6 @@ if (info)
 
   <sect1 id="sec-recentchooser">
     <title>RecentChooser</title>
-    <note>
-      <para>Recent Files support is available in &gtkmm; version 2.10 and
-        later</para>
-    </note>
     <para>
       <classname>RecentChooser</classname> is an interface that can be
       implemented by widgets displaying the list of recently used files.
