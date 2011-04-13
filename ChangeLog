@@ -1,5 +1,12 @@
 2011-04-13  Murray Cumming  <murrayc@murrayc.com>
 
+	Grid section: Slight rewording and add reference API link.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: I had not actually reviewed this
+	until now.
+
+2011-04-13  Murray Cumming  <murrayc@murrayc.com>
+
 	Rename the book to Programming with gtkmm 3.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: This should avoid some confusion.

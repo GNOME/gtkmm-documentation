@@ -2093,27 +2093,28 @@ changed using <methodname>get_layout()</methodname> and
 <title>Grid</title>
 
 <para>
-<classname>Grid</classname> allows us to place widgets in a grid. The grid
-dynamically lays out child widgets, so the dimensions of the grid do not need
-to be specified in the constructor.
+A <classname>Grid</classname> dynamically lays out child widgets in rows and
+columns. The dimensions of the grid do not need to be specified in the constructor.
 </para>
 
 <para>
-Children can span multiple rows or columns, using
+Child widgets can span multiple rows or columns, using
 <methodname>attach()</methodname>, or added next to an existing widget inside
 the grid with <methodname>attach_next_to()</methodname>. Individual rows and columns of the grid can be set to have uniform height or width with
 <methodname>set_row_homogeneous()</methodname> and
-<methodname>set_column_homogeneous()</methodname>. Set the
-<emphasis>margin</emphasis> and <emphasis>expand</emphasis> properties of the
-<classname>Widget</classname>s that are added to the grid, in order to control
-the geometry management.
+<methodname>set_column_homogeneous()</methodname>.
 </para>
+<para>You can set the <emphasis>margin</emphasis> and <emphasis>expand</emphasis> properties of the
+child <classname>Widget</classname>s to control their spacing and their behaviour when the Grid is resized.
+</para>
+
+<para><ulink url="&url_refdocs_base_gtk;Grid.html">Reference</ulink></para>
 
 <sect3 id="grid-example"><title>Example</title>
 <para>
-In the following example, we make a window with three buttons in a grid.
-The first two buttons will be placed in the upper row, from left to right. A
-third button is attached underneath the first buttion, in a new lower row,
+This example creates a window with three buttons in a grid.
+The first two buttons are in the upper row, from left to right. A
+third button is attached underneath the first button, in a new lower row,
 spanning two columns.
 </para>
 
