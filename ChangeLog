@@ -1,3 +1,9 @@
+2011-04-13  Murray Cumming  <murrayc@murrayc.com>
+
+	Rename the book to Programming with gtkmm 2.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: This should avoid some confusion.
+
 2.24.0:
 
 2011-03-31  Murray Cumming  <murrayc@murrayc.com>
