@@ -1,3 +1,7 @@
+3.0.2 (stable):
+
+* Put a 2 in the name, so this is now Programming with gtkmm 2.
+
 3.0.1 (stable):
 
 * Correct mentions of version numbers.
