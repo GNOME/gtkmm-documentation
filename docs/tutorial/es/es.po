@@ -3,15 +3,16 @@
 # Copyright (C) 2010 gtkmm-documentation's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gtkmm-documentation package.
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
-# 
+#
 # Fidel Sanchez-Bueno <axl456@axl456.com.ve>, 2011.
+# José Zambrano <jozaol@gmail.com>, 2011.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2011-04-13 13:18+0000\n"
-"PO-Revision-Date: 2011-04-29 16:45+0200\n"
+"POT-Creation-Date: 2011-04-29 17:44+0000\n"
+"PO-Revision-Date: 2011-05-04 16:45+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +22,6 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 
 #: C/gtkmm-tutorial-in.xml:34(title)
-#| msgid "Programming with <application>gtkmm</application>"
 msgid "Programming with <application>gtkmm</application> 3"
 msgstr "Programar con <application>gtkmm</application> 3"
 
@@ -355,13 +355,14 @@ msgid ""
 "Before attempting to install <application>gtkmm</application> 3.0, you might "
 "first need to install these other packages."
 msgstr ""
+"Antes de intentar instalar <application>gtkmm</ application> 3.0, "
+"probablemente deba instalar primer estos otros paquetes."
 
 #: C/gtkmm-tutorial-in.xml:169(application)
 msgid "libsigc++ 2.0"
 msgstr "libsigc++ 2.0"
 
 #: C/gtkmm-tutorial-in.xml:170(application)
-#| msgid "GTK+ 2.4"
 msgid "GTK+ 3.0"
 msgstr "GTK+ 3.0"
 
@@ -370,12 +371,10 @@ msgid "cairomm"
 msgstr "cairomm"
 
 #: C/gtkmm-tutorial-in.xml:172(application)
-#| msgid "Pango"
 msgid "pangomm"
 msgstr "pangomm"
 
 #: C/gtkmm-tutorial-in.xml:173(application)
-#| msgid "gtkmm"
 msgid "atkmm"
 msgstr "atkmm"
 
@@ -384,6 +383,8 @@ msgid ""
 "These dependencies have their own dependencies, including the following "
 "applications and libraries:"
 msgstr ""
+"Estas dependencias tienen sus propias dependencias, incluyendo las "
+"siguientes aplicaciones y bibliotecas:"
 
 #: C/gtkmm-tutorial-in.xml:180(application)
 msgid "pkg-config"
@@ -645,7 +646,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:332(para)
 msgid "The next two lines of code create and display a window:"
-msgstr ""
+msgstr "Las dos siguientes líneas de código crean y muestran una ventana:"
 
 #: C/gtkmm-tutorial-in.xml:335(programlisting)
 #, no-wrap
@@ -658,6 +659,8 @@ msgid ""
 "application> main processing loop, which will finish when the window is "
 "closed."
 msgstr ""
+"La última línea muestra la ventana y entra al bucle principal de "
+"<application>gtkmm</application>, que terminará cuando la ventana se cierre."
 
 #: C/gtkmm-tutorial-in.xml:340(programlisting)
 #, no-wrap
@@ -708,7 +711,6 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:370(programlisting)
 #, no-wrap
-#| msgid "PKG_CHECK_MODULES([MYAPP], [gtkmm-2.4 &gt;= 2.8.0])"
 msgid "PKG_CHECK_MODULES([MYAPP], [gtkmm-3.0 &gt;= 3.0.0])"
 msgstr "PKG_CHECK_MODULES([MYAPP], [gtkmm-3.0 &gt;= 3.0.0])"
 
@@ -736,12 +738,16 @@ msgid ""
 "Note that if you mention extra modules in addition to gtkmm-3.0, they should "
 "be separated by spaces, not commas."
 msgstr ""
+"Tenga en cuenta que si menciona módulos adicionales, además de gtkmm-3.0, "
+"deben estar separados por espacios, no por comas."
 
 #: C/gtkmm-tutorial-in.xml:378(para)
 msgid ""
 "Openismus has more <ulink url=\"http://www.openismus.com/documents/linux/"
 "automake/automake.shtml\">basic help with automake and autoconf</ulink>."
 msgstr ""
+"Openismus tiene más <ulink url=\"http://www.openismus.com/documents/linux/"
+"automake/automake.shtml\">ayuda básica con automake y autoconf</ulink>"
 
 #: C/gtkmm-tutorial-in.xml:385(title) C/gtkmm-tutorial-in.xml:5970(title)
 msgid "Widgets"
@@ -951,6 +957,9 @@ msgid ""
 "See the <link linkend=\"chapter-internationalization\">Internationalization</"
 "link> section for information about providing the UTF-8 string literals."
 msgstr ""
+"Consulte la sección <link linkend=\"chapter-internationalization"
+"\">Internacionalización</link> para obtener información sobre cómo "
+"proporcionar cadenas UTF-8 literales."
 
 #: C/gtkmm-tutorial-in.xml:443(title)
 msgid "Intermediate types"
@@ -1168,6 +1177,8 @@ msgid ""
 "Now let's look at our program's <function>main()</function> function. Here "
 "it is, without comments:"
 msgstr ""
+"Ahora eche un vistazo a la función <function>main()</function> del  "
+"programa. Aquí está, sin comentarios:"
 
 #: C/gtkmm-tutorial-in.xml:569(programlisting)
 #, no-wrap
@@ -1220,10 +1231,12 @@ msgstr "Botones"
 #: C/gtkmm-tutorial-in.xml:598(para)
 msgid "<application>gtkmm</application> provides four basic types of buttons:"
 msgstr ""
+"<application> gtkmm </application> proporciona cuatro tipos básicos de "
+"botones:"
 
 #: C/gtkmm-tutorial-in.xml:605(term)
 msgid "Push-Buttons"
-msgstr ""
+msgstr "Pulsadores"
 
 #: C/gtkmm-tutorial-in.xml:607(para)
 msgid ""
@@ -1236,7 +1249,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:614(term)
 msgid "Toggle buttons"
-msgstr ""
+msgstr "Botones conmutables"
 
 #: C/gtkmm-tutorial-in.xml:616(para)
 msgid ""
@@ -1353,11 +1366,11 @@ msgstr "Ejemplo"
 
 #: C/gtkmm-tutorial-in.xml:690(para)
 msgid "This example creates a button with a picture and a label."
-msgstr ""
+msgstr "Este ejemplo crea un botón con una imagen y una etiqueta."
 
 #: C/gtkmm-tutorial-in.xml:695(title)
 msgid "buttons example"
-msgstr ""
+msgstr "botones de ejemplo"
 
 #: C/gtkmm-tutorial-in.xml:707(para)
 msgid ""
@@ -1367,43 +1380,44 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:715(literal)
 msgid "pressed"
-msgstr "pulsado"
+msgstr "pressed"
 
 #: C/gtkmm-tutorial-in.xml:717(para)
 msgid "Emitted when the button is pressed."
-msgstr ""
+msgstr "Emitida cuando se pulsa el botón."
 
 #: C/gtkmm-tutorial-in.xml:723(literal)
 msgid "released"
-msgstr ""
+msgstr "released"
 
 #: C/gtkmm-tutorial-in.xml:725(para)
 msgid "Emitted when the button is released."
-msgstr ""
+msgstr "Emitida cuando se suelta el botón."
 
 #: C/gtkmm-tutorial-in.xml:731(literal)
 msgid "clicked"
-msgstr ""
+msgstr "clicked"
 
 #: C/gtkmm-tutorial-in.xml:733(para)
 msgid "Emitted when the button is pressed and released."
-msgstr ""
+msgstr "Emitida cuando el botón se pulsa y se suelta."
 
 #: C/gtkmm-tutorial-in.xml:739(literal)
 msgid "enter"
-msgstr ""
+msgstr "enter"
 
 #: C/gtkmm-tutorial-in.xml:741(para)
 msgid "Emitted when the mouse pointer moves over the button's window."
 msgstr ""
+"Emitida cuando se mueve el puntero del ratón sobre el botón de la ventana."
 
 #: C/gtkmm-tutorial-in.xml:747(literal)
 msgid "leave"
-msgstr ""
+msgstr "leave"
 
 #: C/gtkmm-tutorial-in.xml:749(para)
 msgid "Emitted when the mouse pointer leaves the button's window."
-msgstr ""
+msgstr "Emitida cuando el puntero del ratón sale del botón de la ventana."
 
 #: C/gtkmm-tutorial-in.xml:761(title)
 msgid "ToggleButton"
@@ -1609,7 +1623,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:928(title) C/gtkmm-tutorial-in.xml:1077(title)
 msgid "Range Widgets"
-msgstr ""
+msgstr "Widgets de Rango"
 
 #: C/gtkmm-tutorial-in.xml:930(para)
 msgid ""
@@ -1658,7 +1672,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:978(title)
 msgid "Scale Widgets"
-msgstr ""
+msgstr "Widgets de Escala"
 
 #: C/gtkmm-tutorial-in.xml:980(para)
 msgid ""
@@ -1706,7 +1720,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1025(title)
 msgid "Update Policies"
-msgstr ""
+msgstr "Políticas de Actualización"
 
 #: C/gtkmm-tutorial-in.xml:1037(para)
 msgid ""
@@ -1749,7 +1763,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1090(title)
 msgid "Miscellaneous Widgets"
-msgstr "Widgets de miscelánea"
+msgstr "Widgets varios"
 
 #: C/gtkmm-tutorial-in.xml:1093(title) C/gtkmm-tutorial-in.xml:1131(title)
 msgid "Label"
@@ -1795,7 +1809,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1144(title) C/gtkmm-tutorial-in.xml:1186(title)
 msgid "Entry"
-msgstr ""
+msgstr "Entry"
 
 #: C/gtkmm-tutorial-in.xml:1147(title)
 msgid "Simple Use"
@@ -1835,7 +1849,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1178(title)
 msgid "Simple Entry Example"
-msgstr ""
+msgstr "Ejemplo simple de «Entry»"
 
 #: C/gtkmm-tutorial-in.xml:1179(para)
 msgid ""
@@ -1846,7 +1860,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1199(title) C/gtkmm-tutorial-in.xml:1233(title)
 msgid "Entry Completion"
-msgstr "Entrada de autocompletado"
+msgstr "Completado de «Entry»"
 
 #: C/gtkmm-tutorial-in.xml:1200(para)
 msgid ""
@@ -1882,7 +1896,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1224(title)
 msgid "Entry Completion Example"
-msgstr ""
+msgstr "Ejemplo de completado de «Entry»"
 
 #: C/gtkmm-tutorial-in.xml:1225(para)
 msgid ""
@@ -1894,7 +1908,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1245(title)
 msgid "Entry Icons"
-msgstr ""
+msgstr "Iconos de «Entry»"
 
 #: C/gtkmm-tutorial-in.xml:1246(para)
 msgid ""
@@ -1908,7 +1922,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1253(title)
 msgid "Entry Icon Example"
-msgstr ""
+msgstr "Iconos de ejemplo de «Entry»"
 
 #: C/gtkmm-tutorial-in.xml:1254(para)
 msgid ""
@@ -1918,11 +1932,11 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1260(title)
 msgid "Entry with Icon"
-msgstr ""
+msgstr "«Entry» con icono"
 
 #: C/gtkmm-tutorial-in.xml:1272(title)
 msgid "Entry Progress"
-msgstr ""
+msgstr "«Entry» de progreso"
 
 #: C/gtkmm-tutorial-in.xml:1273(para)
 msgid ""
@@ -1934,7 +1948,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1278(title)
 msgid "Entry Progress Example"
-msgstr ""
+msgstr "Ejemplo de «Entry» de progreso"
 
 #: C/gtkmm-tutorial-in.xml:1279(para)
 msgid ""
@@ -1944,11 +1958,11 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1285(title)
 msgid "Entry with Progress Bar"
-msgstr ""
+msgstr "«Entry» con barra de progreso"
 
 #: C/gtkmm-tutorial-in.xml:1299(title) C/gtkmm-tutorial-in.xml:1433(title)
 msgid "SpinButton"
-msgstr "Botón contador"
+msgstr "SpinButton"
 
 #: C/gtkmm-tutorial-in.xml:1301(para)
 msgid ""
@@ -2168,7 +2182,6 @@ msgid "Tooltip Reference"
 msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1554(title)
-#| msgid "Tooltips"
 msgid "Tooltip"
 msgstr "Consejo"
 
@@ -2187,7 +2200,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1580(title)
 msgid "Single-item Containers"
-msgstr ""
+msgstr "Contenedor de un sólo elemento"
 
 #: C/gtkmm-tutorial-in.xml:1582(para)
 msgid ""
@@ -2220,7 +2233,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1625(title) C/gtkmm-tutorial-in.xml:1652(title)
 msgid "Paned"
-msgstr "En panel de ventana"
+msgstr "Con paneles"
 
 #: C/gtkmm-tutorial-in.xml:1627(para)
 msgid ""
@@ -2299,7 +2312,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1745(title) C/gtkmm-tutorial-in.xml:1771(title)
 msgid "Alignment"
-msgstr "Alineación"
+msgstr "Alignment"
 
 #: C/gtkmm-tutorial-in.xml:1747(para)
 msgid ""
@@ -2527,7 +2540,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:1969(title)
 msgid "Box Packing 1"
-msgstr ""
+msgstr "Caja de empaquetado 1"
 
 #: C/gtkmm-tutorial-in.xml:1975(para)
 msgid ""
@@ -2617,7 +2630,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2029(title)
 msgid "Box Packing 2"
-msgstr ""
+msgstr "Caja de empaquetado 2"
 
 #: C/gtkmm-tutorial-in.xml:2040(para)
 msgid ""
@@ -2628,7 +2641,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2049(title)
 msgid "ButtonBoxes"
-msgstr ""
+msgstr "Cajas de Botones"
 
 #: C/gtkmm-tutorial-in.xml:2051(para)
 msgid ""
@@ -2985,7 +2998,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2414(title)
 msgid "ListStore, for rows"
-msgstr ""
+msgstr "ListStore, para filas"
 
 #: C/gtkmm-tutorial-in.xml:2415(para)
 msgid ""
@@ -3013,7 +3026,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2450(title)
 msgid "Model Columns"
-msgstr ""
+msgstr "Columnas del modelo"
 
 #: C/gtkmm-tutorial-in.xml:2451(para)
 msgid ""
@@ -3079,7 +3092,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2486(title)
 msgid "Adding Rows"
-msgstr ""
+msgstr "Añadir filas"
 
 #: C/gtkmm-tutorial-in.xml:2487(para)
 msgid ""
@@ -3095,7 +3108,7 @@ msgstr "Gtk::TreeModel::iterator iter = m_refListStore-&gt;append();"
 
 #: C/gtkmm-tutorial-in.xml:2492(para)
 msgid "You can dereference the iterator to get the Row:"
-msgstr ""
+msgstr "Puede eliminar la referencia al iterador para obtener la fila:"
 
 #: C/gtkmm-tutorial-in.xml:2494(programlisting)
 #, no-wrap
@@ -3104,7 +3117,7 @@ msgstr "Gtk::TreeModel::Row row = *iter;"
 
 #: C/gtkmm-tutorial-in.xml:2495(title)
 msgid "Adding child rows"
-msgstr ""
+msgstr "Añadiendo filas secundarias"
 
 #: C/gtkmm-tutorial-in.xml:2496(para)
 msgid ""
@@ -3124,7 +3137,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2508(title)
 msgid "Setting values"
-msgstr ""
+msgstr "Configurar los valores"
 
 #: C/gtkmm-tutorial-in.xml:2509(para)
 msgid ""
@@ -3140,7 +3153,7 @@ msgstr "row[m_Columns.m_col_text] = \"texto\";"
 
 #: C/gtkmm-tutorial-in.xml:2518(title)
 msgid "Getting values"
-msgstr ""
+msgstr "Obtener los valores"
 
 #: C/gtkmm-tutorial-in.xml:2519(para)
 msgid ""
@@ -3173,7 +3186,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2535(title)
 msgid "\"Hidden\" Columns"
-msgstr ""
+msgstr "Columnas «ocultas»"
 
 #: C/gtkmm-tutorial-in.xml:2536(para)
 msgid ""
@@ -3211,7 +3224,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2566(title)
 msgid "Adding View Columns"
-msgstr ""
+msgstr "Añadir columnas a la vista"
 
 #: C/gtkmm-tutorial-in.xml:2567(para)
 msgid ""
@@ -3362,7 +3375,7 @@ msgstr "Celdas editables"
 
 #: C/gtkmm-tutorial-in.xml:2658(title)
 msgid "Automatically-stored editable cells."
-msgstr ""
+msgstr "Celdas editables guardadas automáticamente."
 
 #: C/gtkmm-tutorial-in.xml:2659(para)
 msgid ""
@@ -3379,7 +3392,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2673(title)
 msgid "Implementing custom logic for editable cells."
-msgstr ""
+msgstr "Implementación de la lógica personalizada para celdas editables."
 
 #: C/gtkmm-tutorial-in.xml:2674(para)
 msgid ""
@@ -3440,7 +3453,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2717(title)
 msgid "Iterating over Model Rows"
-msgstr ""
+msgstr "Iterar sobre las filas del modelo"
 
 #: C/gtkmm-tutorial-in.xml:2718(para)
 msgid ""
@@ -3465,7 +3478,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2734(title)
 msgid "Row children"
-msgstr ""
+msgstr "Fila hija"
 
 #: C/gtkmm-tutorial-in.xml:2739(programlisting)
 #, no-wrap
@@ -3482,7 +3495,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2746(title)
 msgid "The Selection"
-msgstr ""
+msgstr "La selección"
 
 #: C/gtkmm-tutorial-in.xml:2747(para)
 msgid ""
@@ -3502,7 +3515,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2756(title)
 msgid "Single or multiple selection"
-msgstr ""
+msgstr "Selección única o múltiple"
 
 #: C/gtkmm-tutorial-in.xml:2760(programlisting)
 #, no-wrap
@@ -3517,7 +3530,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2765(title)
 msgid "The selected rows"
-msgstr ""
+msgstr "Las filas seleccionadas"
 
 #: C/gtkmm-tutorial-in.xml:2766(para)
 msgid ""
@@ -3575,7 +3588,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2796(title)
 msgid "The \"changed\" signal"
-msgstr ""
+msgstr "La señal «changed»"
 
 #: C/gtkmm-tutorial-in.xml:2797(para)
 msgid ""
@@ -3596,7 +3609,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2807(title)
 msgid "Preventing row selection"
-msgstr ""
+msgstr "Evitar la selección de la fila"
 
 #: C/gtkmm-tutorial-in.xml:2808(para)
 msgid ""
@@ -3623,7 +3636,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2820(para)
 msgid "and then"
-msgstr ""
+msgstr "Y luego"
 
 #: C/gtkmm-tutorial-in.xml:2823(programlisting)
 #, no-wrap
@@ -3810,7 +3823,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2916(title)
 msgid "Reorderable rows"
-msgstr ""
+msgstr "Filas reordenables"
 
 #: C/gtkmm-tutorial-in.xml:2917(para)
 msgid ""
@@ -3834,11 +3847,11 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2923(para)
 msgid "This is demonstrated in the drag_and_drop example."
-msgstr ""
+msgstr "Esto se demuestra en el ejemplo «drag_and_drop»."
 
 #: C/gtkmm-tutorial-in.xml:2929(title) C/gtkmm-tutorial-in.xml:3035(title)
 msgid "Popup Context Menu"
-msgstr ""
+msgstr "Menú contextual emergente"
 
 #: C/gtkmm-tutorial-in.xml:2930(para)
 msgid ""
@@ -3868,7 +3881,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2950(para)
 msgid "This is demonstrated in the Popup Custom Menu example."
-msgstr ""
+msgstr "Esto queda demostrado en el ejemplo del menú emergente personalizado."
 
 #: C/gtkmm-tutorial-in.xml:2955(title) C/gtkmm-tutorial-in.xml:3406(title)
 #: C/gtkmm-tutorial-in.xml:3581(title) C/gtkmm-tutorial-in.xml:4954(title)
@@ -3905,7 +3918,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:3003(title)
 msgid "TreeView - Editable Cells"
-msgstr ""
+msgstr "TreeView: celdas editables"
 
 #: C/gtkmm-tutorial-in.xml:3015(para)
 msgid ""
@@ -3919,7 +3932,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:3025(title)
 msgid "TreeView - Drag And Drop"
-msgstr ""
+msgstr "TreeView: arrastrar y soltar"
 
 #: C/gtkmm-tutorial-in.xml:3037(para)
 msgid ""
@@ -3932,7 +3945,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:3047(title)
 msgid "TreeView - Popup Context Menu"
-msgstr ""
+msgstr "TreeView: menú de contexto emergente"
 
 #: C/gtkmm-tutorial-in.xml:3064(title)
 msgid "Combo Boxes"
@@ -3961,7 +3974,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:3075(title)
 msgid "The model"
-msgstr ""
+msgstr "El modelo"
 
 #: C/gtkmm-tutorial-in.xml:3076(para)
 msgid ""
@@ -4040,7 +4053,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:3109(title)
 msgid "Responding to changes"
-msgstr ""
+msgstr "Responder a los cambios"
 
 #: C/gtkmm-tutorial-in.xml:3110(para)
 msgid ""
@@ -4324,7 +4337,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:3357(title)
 msgid "Default formatting"
-msgstr ""
+msgstr "Formato predeterminado"
 
 #: C/gtkmm-tutorial-in.xml:3358(para)
 msgid ""
@@ -4436,7 +4449,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:3465(para)
 msgid "For instance:"
-msgstr ""
+msgstr "Por ejemplo:"
 
 #: C/gtkmm-tutorial-in.xml:3467(programlisting)
 #, no-wrap
@@ -4475,7 +4488,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:3491(para) C/gtkmm-tutorial-in.xml:4872(para)
 msgid "For instance,"
-msgstr ""
+msgstr "Por ejemplo,"
 
 #: C/gtkmm-tutorial-in.xml:3493(programlisting)
 #, no-wrap
@@ -4617,7 +4630,7 @@ msgstr "Menú principal"
 
 #: C/gtkmm-tutorial-in.xml:3596(title)
 msgid "Popup Menu example"
-msgstr ""
+msgstr "Ejemplo de menú emergente"
 
 #: C/gtkmm-tutorial-in.xml:3599(title)
 msgid "Popup Menu"
@@ -4759,7 +4772,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:3688(title)
 msgid "Creating an Adjustment"
-msgstr ""
+msgstr "Crear un ajuste"
 
 #: C/gtkmm-tutorial-in.xml:3690(para)
 msgid "The <classname>Gtk::Adjustment</classname> constructor is as follows:"
@@ -5427,7 +5440,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:4282(title)
 msgid "Line styles"
-msgstr ""
+msgstr "Estilos de línea"
 
 #: C/gtkmm-tutorial-in.xml:4283(para)
 msgid ""
@@ -11951,6 +11964,7 @@ msgstr ""
 #: C/gtkmm-tutorial-in.xml:0(None)
 msgid "translator-credits"
 msgstr ""
+"José Zambrano <jozaol@gmail.com>, 2011\n"
 "Daniel Mustieles <daniel.mustieles@gmail.com>, 2011\n"
 "Jorge González <jorgegonz@svn.gnome.org>, 2010"
 
