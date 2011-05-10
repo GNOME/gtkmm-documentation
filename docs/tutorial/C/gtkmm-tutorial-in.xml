@@ -441,7 +441,8 @@ just connecting to the existing &gtkmm; signals, see the <link linkend="chapter-
 
 <sect1 id="sec-intermediate-types">
 <title>Intermediate types</title>
-<para>Some parts of the &gtkmm; API use intermediate data containers, such as <classname>Glib::StringArrayHandle</classname> instead of a specific Standard C++ container such as <classname>std::vector</classname> or <classname>std::list</classname>. You should not declare these types yourself -- you should use whatever Standard C++ container you prefer instead. &gtkmm; will do the conversion for you. Here are some of these intermediate types:
+<para>Some API related to gtkmm uses intermediate data containers, such as <classname>Glib::StringArrayHandle</classname>, instead of a specific Standard C++ container such as <classname>std::vector</classname> or <classname>std::list</classname>, though &gtkmm; itself now uses just <classname>std::vector</classname> since &gtkmm; 3.0.</para>
+<para>You should not declare these types yourself. You should instead use whatever Standard C++ container you prefer. glibmm will do the conversion for you. Here are some of these intermediate types:
 <itemizedlist>
     <listitem><para><classname>Glib::StringArrayHandle</classname> or <classname>Glib::ArrayHandle&lt;Glib::ustring&gt;</classname>: Use <classname>std::vector&lt;Glib::ustring&gt;</classname>, <classname>std::list&lt;Glib::ustring&gt;</classname>, <type>const char*[]</type>, etc.</para></listitem>
     <listitem><para><classname>Glib::ListHandle&lt;Gtk::Widget*&gt;</classname>: Use <classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::list&lt;Gtk::Widget*&gt;</classname>, etc.</para></listitem>
@@ -8705,12 +8706,10 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
         <classname>GSList*</classname> parameters: First, you need to discover
         what objects are contained in the list's data field for each item,
         usually by reading the documentation for the C function. The list can
-        then be wrapped by an appropriate intermediate type, such as
-        <classname>Glib::ListHandle</classname> or
-        <classname>Glib::SListHandle</classname>. These are templates, so you
-        can specify the item type. For instance, <code>Glib::ListHandle&lt;
-        Glib::RefPtr&lt;Action&gt; &gt;</code>. Existing typedefs exist for some common
-        list types. You may need to define a Traits type to specify how the C
+        then be wrapped by a <classname>std::vector</classname> type.
+        For instance, <code>std::vector&lt;
+        Glib::RefPtr&lt;Action&gt; &gt;</code>.
+        You may need to define a Traits type to specify how the C
         and C++ types should be converted.</para></listitem>
 <listitem><para>Wrapping <classname>GList*</classname> and
         <classname>GSList*</classname> return types: You must discover whether
@@ -8720,7 +8719,7 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
         for the m4 conversion rule, which you should probably put directly into
         the .hg file because the ownership depends on the
         function rather than the type. For instance:
-<programlisting>#m4 _CONVERSION(`GSList*', `Glib::SListHandle&lt;Widget*&gt;', `$2($3, Glib::OWNERSHIP_NONE)')</programlisting></para></listitem>
+<programlisting>#m4 _CONVERSION(`GSList*',`std::vector&lt;Widget*&gt;',`Glib::SListHandler&lt;Widget*&gt;::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')</programlisting></para></listitem>
 </itemizedlist>
 </para>
 </sect3>

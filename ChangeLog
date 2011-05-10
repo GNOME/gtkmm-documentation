@@ -1,3 +1,13 @@
+2011-05-10  Murray Cumming  <murrayc@murrayc.com>
+
+	Update for the change from intermediate types to std::vector.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Basics: Intermediate types: Mention
+	that gtkmm does not use this anymore, though we must still mention it because
+	it is used by glibmm, pangomm, and atkmm, which have not done an ABI break.
+	Wrapping C Libraries with gmmproc: Update the mention of the intermediate
+	types here too.
+
 3.0.2:
 
 2011-04-13  Murray Cumming  <murrayc@murrayc.com>
