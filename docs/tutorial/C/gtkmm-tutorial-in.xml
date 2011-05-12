@@ -592,6 +592,60 @@ takes no arguments, but it isn't visible yet. When we call Gtk::Main::run(), giv
 </sect1>
 </chapter>
 
+<chapter id="changes-gtkmm3">
+<title>Changes in &gtkmm; 3</title>
+
+<para>&gtkmm;-3.0 is a new version of the &gtkmm; API that installs in parallel with the older &gtkmm;-2.4 API. The last version of the &gtkmm;-2.4 API was &gtkmm; 2.24. &gtkmm; 3 has no major fundamental differences to &gtkmm; 2 but does make several small changes that were not possible while maintaining binary compatibility. If you never used the &gtkmm;-2.4 API then you can safely ignore this chapter.</para>
+
+<para>&gtkmm; 3's library is called <literal>libgtkmm-3.0</literal> rather than <literal>libgtkmm-2.4</literal> and installs its headers in a similarly-versioned directory, so your pkg-config check should ask for <literal>gtkmm-3.0</literal>  rather than <literal>gtkmm-2.4</literal>.</para>
+
+
+<para>&gtkmm; 3 added some new classes:</para>
+
+<orderedlist>
+<!-- TODO: The AppChooser content-type is not documented properly: https://bugzilla.gnome.org/show_bug.cgi?id=650012 -->
+<listitem><simpara><classname>Gtk::AppChooser</classname>, <classname>Gtk::AppChooserButton</classname>, <classname>Gtk::AppChooserDialog</classname> allow the user to select an installed application to open a particularl type of content.</simpara></listitem>
+
+<listitem><simpara><classname>Gtk::Grid</classname> is a new container widget that will eventually replace <classname>Gtk::Box</classname>. It arranges its children according to properties of those children rather than its own layout details.</simpara></listitem>
+<listitem><simpara><classname>Gtk::Switch</classname> displays On/Off states more explictly than <classname>Gtk::CheckBox</classname>. It may be useful, for instance, when allowing users to activate hardware.</simpara></listitem>
+</orderedlist>
+
+<para>&gtkmm; 3 also made several small changes to the API, which you will probably encounter when porting code that used &gtkmm;-2.4. Here is a short list:</para>
+
+<para>
+<orderedlist>
+
+<listitem><simpara><classname>Gtk::CellLayout</classname>, used by <classname>Gtk::IconView</classname>, <classname>Gtk::TreeView::Column</classname> and <classname>Gtk::ComboBox</classname>, now has a <classname>Gtk::CellArea</classname> which can be used to specify more details of how the <classname>CellRenderer</classname>s are arranged and aligned.</simpara></listitem>
+
+<listitem><simpara>Gtk::ComboBox now derives from CellLayout, allowing easier layout and alignment of its <classname>Gtk::CellRenderer</classname>s.</simpara></listitem>
+
+<listitem><simpara><classname>Gtk::Adjustment</classname> and <classname>IconSet</classname> and <classname>Gdk::Cursor</classname> are now used via <classname>Glib::RefPtr</classname>.</simpara></listitem>
+
+<listitem><simpara><classname>Gtk::Box</classname>, <classname>Gtk::ButtonBox</classname>, <classname>Gtk::IconView</classname>, <classname>Gtk::Paned</classname>, <classname>Gtk::ProgressBar</classname>, <classname>Gtk::ScaleButton</classname>, <classname>Gtk::ScrollBar</classname> and <classname>Gtk::Separator</classname> now derive from <classname>Gtk::Orientable</classname>, allowing their
+orientation (vertical or horizontal) to be specified without requiring the use of a derived class such as <classname>Gtk::HBox</classname>.</simpara></listitem>
+
+<listitem><simpara><classname>Gtk::IconView</classname>, <classname>Gtk::TextView</classname>, <classname>Gtk::TreeView</classname> and other widgets derive from Scrollable instead of having their own methods such as <methodname>get_vadjustment()</methodname> and instead of having their won set_scroll_adjustments signal.</simpara></listitem>
+
+<listitem><simpara><classname>Gtk::Style</classname> and <classname>Gtk::Rc</classname> were removed, replaced by <classname>Gtk::StyleContext</classname>, and <classname>Gtk::StyleProvider</classname>s, such as <classname>Gtk::CssProvider</classname>.</simpara></listitem>
+
+<listitem><simpara>Widget::on_expose_event() was replaced by Widget::on_draw(), which assumes that cairomm is used for drawing, via the provided <classname>Cairo::Context</classname> and does not require you to call <methodname>Cairo::Context::clip()</methodname>.</simpara></listitem>
+
+<listitem><simpara><classname>Gdk::RGBA</classname> replaces <classname>Color</classname>, adding an alpha component for opacity. <classname>Colormap</classname> was removed, along with its awkward use to allocate colors.</simpara></listitem>
+
+<listitem><simpara><classname>Gdk::Pixmap</classname> and <classname>Gdk::Bitmap</classname> were removed in favour of <classname>Gdk::Pixbuf</classname>.</simpara></listitem>
+
+<listitem><simpara><classname>Gdk::Drawable</classname> was removed, with its methods moving into <classname>Gdk::Window</classname>.</simpara></listitem>
+
+<listitem><simpara>We now use std::vector in several methods instead of the intermediate *Handle types to make the API clearer.</simpara></listitem>
+
+</orderedlist>
+</para>
+
+<para>All deprecated API was removed in &gtkmm; 3.0, though there will be new deprecations in future versions.</para>
+
+<para>As a first step to porting your source code to &gtkmm;-3.0; you should probably ensure that your application builds with the deprecated &gtkmm;-2.4; API disabled, by defining macro such as GTK_DISABLE_DEPRECATED. There are some autotools macros that can help with this by defining them optionally at build time. See the <ulink url="https://live.gnome.org/gtkmm/PortingToGtkmm3">gtkmm 3 porting wiki page</ulink> for more details.</para>
+
+</chapter>
 
 <chapter id="chapter-button-widget">
 <title>Buttons</title>

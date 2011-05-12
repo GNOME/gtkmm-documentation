@@ -1,3 +1,9 @@
+2011-05-12  Murray Cumming  <murrayc@murrayc.com>
+
+	Added a Changes In gtkmm 3 chapter.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Briefly describe what is different.
+
 2011-05-10  Murray Cumming  <murrayc@murrayc.com>
 
 	Update for the change from intermediate types to std::vector.
