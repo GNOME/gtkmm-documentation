@@ -77,6 +77,11 @@ name
         <contrib>Section &quot;Build Structure&quot; of chapter
           on &quot;Wrapping C Libraries with gmmproc&quot;.</contrib>
       </author>
+      <author>
+        <firstname>David</firstname>
+        <surname>King</surname>
+        <contrib>Section on Gtk::Grid.</contrib>
+      </author>
     </authorgroup>
 
     <abstract>
