@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
   "http://docbook.org/docbook/xml/4.5/docbookx.dtd" [
-  <!ENTITY url_refdocs_base_glib_html "http://library.gnome.org/devel/glibmm/unstable/">
+  <!ENTITY url_refdocs_base_glib_html "http://developer.gnome.org/glibmm/unstable/">
   <!ENTITY url_refdocs_base_glib "&url_refdocs_base_glib_html;classGlib_1_1">
-  <!ENTITY url_refdocs_base_gtk_html "http://library.gnome.org/devel/gtkmm/unstable/">
+  <!ENTITY url_refdocs_base_gtk_html "http://developer.gnome.org/gtkmm/unstable/">
   <!ENTITY url_refdocs_base_gtk "&url_refdocs_base_gtk_html;classGtk_1_1">
   <!ENTITY url_refdocs_base_gtk_namespace "&url_refdocs_base_gtk_html;namespaceGtk_1_1">
   <!ENTITY url_figures_base "figures/">
@@ -26,7 +26,7 @@ desired (e.g. boldface, monospace, etc) to make it stand out as the project
 name
 -->
 
-<!-- The XSL for library.gnome.org requires this id. -->
+<!-- The XSL for developer.gnome.org requires this id. -->
 <book id="index">
 
   <bookinfo>
@@ -1167,7 +1167,7 @@ with <methodname>set_line_wrap()</methodname>.
 <para>
 Gtk::Label support some simple formatting, for instance allowing you to make some
 text bold, colored, or larger. You can do this by providing a string to
-<methodname>set_markup()</methodname>, using the <ulink url="http://library.gnome.org/devel/pango/unstable/PangoMarkupFormat.html">Pango Markup syntax</ulink>. For instance,
+<methodname>set_markup()</methodname>, using the <ulink url="http://developer.gnome.org/pango/unstable/PangoMarkupFormat.html">Pango Markup syntax</ulink>. For instance,
 <code>
 &lt;b&gt;bold text&lt;/b&gt; and &lt;s&gt;strikethrough text&lt;/s&gt;
 </code>
@@ -7955,13 +7955,13 @@ practical - and sensible - to subclass a button for that purpose.
   </para>
   <para>
     The easiest way to do this is using <ulink
-      url="http://library.gnome.org/devel/jhbuild/unstable/">jhbuild</ulink>.
+      url="http://developer.gnome.org/jhbuild/unstable/">jhbuild</ulink>.
     <application>jhbuild</application> is a program that makes building GNOME
     software much easier by calculating dependencies and building things in the
     correct order. This section will give a brief explanation of how to set up
     jhbuild to build and install &gtkmm; from the source repository (git). For up-to-date information
     on <application>jhbuild</application>, please refer to the <ulink
-      url="http://library.gnome.org/devel/jhbuild/unstable/">jhbuild manual</ulink>.
+      url="http://developer.gnome.org/jhbuild/unstable/">jhbuild manual</ulink>.
     If you need assistance using <application>jhbuild</application>, you should
     ask for help on the <ulink
       url="http://mail.gnome.org/mailman/listinfo/gnome-love">gnome-love
@@ -7980,7 +7980,7 @@ practical - and sensible - to subclass a button for that purpose.
     <para>
       To set up <application>jhbuild</application>, follow the basic
       installation instructions from the <ulink
-        url="http://library.gnome.org/devel/jhbuild/unstable/">jhbuild manual</ulink>.
+        url="http://developer.gnome.org/jhbuild/unstable/">jhbuild manual</ulink>.
       After you've have installd <application>jhbuild</application>, you
       should copy the sample <application>jhbuild</application> configuration
       file into your home directory by executing the following command from the

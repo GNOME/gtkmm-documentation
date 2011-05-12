@@ -1,5 +1,12 @@
 2011-05-12  Murray Cumming  <murrayc@murrayc.com>
 
+	Update library.gnome.org/devel links to developer.gnome.org.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: library.gnome.org moved its devel
+	documentation to developer.gnome.org so we have updated the links.
+
+2011-05-12  Murray Cumming  <murrayc@murrayc.com>
+
 	Added a Changes In gtkmm 3 chapter.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Briefly describe what is different.
