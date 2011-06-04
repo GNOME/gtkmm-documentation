@@ -1,3 +1,13 @@
+2011-06-04  Murray Cumming  <murrayc@murrayc.com>
+
+	Dialogs chapter: get_vbox() returns a Box, not a VBox.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: And more importantly,
+	we forgot to rename this to get_content_area(). We will deprecate 
+	get_vbox() and add get_content_area() for gtkmm 3.2.
+
+	Bug #651846 (Jean-Yves Pellé)
+
 2011-05-12  Murray Cumming  <murrayc@murrayc.com>
 
 	Abstract: Mention David King as an author.

@@ -4001,8 +4001,9 @@ class to provide more complex functionality.
 </para>
 
 <para>
+<!-- TODO: Mention get_content_area() instead of get_vbox() for gtkmm 3.2 -->
 To pack widgets into a custom dialog, you should pack them into the
-<classname>Gtk::VBox</classname>, available via
+<classname>Gtk::Box</classname>, available via
 <methodname>get_vbox()</methodname>. To just add a <classname>Button</classname>
 to the bottom of the <classname>Dialog</classname>, you could use the
 <methodname>add_button()</methodname> method.
