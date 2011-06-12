@@ -1,3 +1,14 @@
+2011-06-12  José Alburquerque  <jaalburqu@svn.gnome.org>
+
+	Wrapping Section: Describe gmmproc's new parameter processing caps.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Describe gmmproc's new
+	capabilities to allow optional parameters, reorder the parameters and
+	include optional output parameters when wrapping constructors and
+	methods.
+
+	Bug #651523.
+
 2011-06-04  Murray Cumming  <murrayc@murrayc.com>
 
 	Dialogs chapter: get_vbox() returns a Box, not a VBox.
