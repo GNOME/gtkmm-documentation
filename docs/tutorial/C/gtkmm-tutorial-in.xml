@@ -8531,7 +8531,9 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
 <para>
   <literal>$3</literal> will be replaced by the output parameter name of the
   C++ method and <literal>$4</literal> will be replaced by the return of the C
-  function when this initialization is used by gmmproc.
+  function when this initialization is used by gmmproc.  For convinience,
+  <literal>$1</literal> will also be replaced by the C++ type without the
+  ampersand (&amp;) and <literal>$2</literal> will be replaced by the C type.
 </para>
 </sect2>
 
@@ -8831,9 +8833,9 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
   <programlisting>
     WRAP_METHOD(void get_preferred_size(Requisition&amp; minimum_size, Requisition&amp; natural_size{?}) const, gtk_widget_get_preferred_size)
   </programlisting>
-  Would indicate that the <parameter>natural_size</parameter> is optional
-  because its name ends with <literal>{?}</literal>.  In this case, gmmproc
-  would generate a method overload without that parameter.
+  Would indicate that the <parameter>natural_size</parameter> parameter is
+  optional because its name ends with <literal>{?}</literal>.  In this case,
+  gmmproc would generate a method overload without that parameter.
 </para>
 <para>
   Also, as with <function>_WRAP_CTOR()</function>, it is possible to reorder
@@ -8882,6 +8884,10 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
   specified:
   <programlisting>
     _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = (SizeRequestMode)($4)')
+  </programlisting>
+  Which could also be written as:
+  <programlisting>
+    _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')
   </programlisting>
 </para>
 <para>Though it's usually obvious what C++ types should be used in the C++ method, here are some hints:

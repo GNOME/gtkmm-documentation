@@ -1,3 +1,11 @@
+2011-06-13  José Alburquerque  <jaalburqu@svn.gnome.org>
+
+	Wrapping Section: Initializations: Add comment about type substitution.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml (Wrapping Section): Add a
+	comment in the m4 Initializations section about substituting the C++
+	and the C type by using $1 and $2 respectively.
+
 2011-06-12  José Alburquerque  <jaalburqu@svn.gnome.org>
 
 	Wrapping Section: Also mention gmmproc's new caps for _WRAP_CREATE().
