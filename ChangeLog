@@ -1,5 +1,13 @@
 2011-06-12  José Alburquerque  <jaalburqu@svn.gnome.org>
 
+	Wrapping Section: Also mention gmmproc's new caps for _WRAP_CREATE().
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Include a sentence about
+	_WRAP_CREATE() also being able to process optional parameters and
+	reordering of parameters like _WRAP_CTOR() and _WRAP_METHOD().
+
+2011-06-12  José Alburquerque  <jaalburqu@svn.gnome.org>
+
 	Wrapping Section: Describe gmmproc's new parameter processing caps.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Describe gmmproc's new
