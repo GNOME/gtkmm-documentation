@@ -43,9 +43,9 @@ protected:
 
   //Child widgets:
   Gtk::Frame m_Frame_NotAccelerated, m_Frame_Accelerated;
-  Gtk::HBox m_HBox_NotAccelerated, m_HBox_Accelerated,
+  Gtk::Box m_HBox_NotAccelerated, m_HBox_Accelerated,
     m_HBox_Buttons;
-  Gtk::VBox m_VBox_Main, m_VBox, m_VBox_Day, m_VBox_Month, m_VBox_Year,
+  Gtk::Box m_VBox_Main, m_VBox, m_VBox_Day, m_VBox_Month, m_VBox_Year,
     m_VBox_Accelerated, m_VBox_Value, m_VBox_Digits;
   Gtk::Label m_Label_Day, m_Label_Month, m_Label_Year,
     m_Label_Value, m_Label_Digits,

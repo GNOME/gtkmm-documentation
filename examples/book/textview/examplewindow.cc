@@ -19,7 +19,8 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_Button_Quit(Gtk::Stock::QUIT),
+: m_VBox(Gtk::ORIENTATION_VERTICAL),
+  m_Button_Quit(Gtk::Stock::QUIT),
   m_Button_Buffer1("Use buffer 1"),
   m_Button_Buffer2("Use buffer 2")
 {

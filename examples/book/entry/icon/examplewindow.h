@@ -33,7 +33,7 @@ protected:
   void on_button_close();
 
   //Child widgets:
-  Gtk::VBox m_VBox;
+  Gtk::Box m_VBox;
   Gtk::Entry m_Entry;
   Gtk::Button m_Button_Close;
 };

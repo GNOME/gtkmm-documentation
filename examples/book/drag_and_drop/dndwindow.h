@@ -41,7 +41,7 @@ protected:
           const Gtk::SelectionData& selection_data, guint info, guint time);
 
   //Member widgets:
-  Gtk::HBox m_HBox;
+  Gtk::Box m_HBox;
   Gtk::Button m_Button_Drag;
   Gtk::Label m_Label_Drop;
 };

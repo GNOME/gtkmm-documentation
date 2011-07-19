@@ -33,9 +33,9 @@ protected:
   void on_button_quit();
 
   //Child widgets:
-  Gtk::VBox m_VBox;
+  Gtk::Box m_VBox;
   MyWidget m_MyWidget;
-  Gtk::HButtonBox m_ButtonBox;
+  Gtk::ButtonBox m_ButtonBox;
   Gtk::Button m_Button_Quit;
 };
 

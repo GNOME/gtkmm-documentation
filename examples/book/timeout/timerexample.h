@@ -39,7 +39,7 @@ protected:
 
   // Member data:
 
-  Gtk::HBox m_Box;
+  Gtk::Box m_Box;
   Gtk::Button m_ButtonAddTimer, m_ButtonDeleteTimer, m_ButtonQuit;
 
   // Keep track of the timers being added:

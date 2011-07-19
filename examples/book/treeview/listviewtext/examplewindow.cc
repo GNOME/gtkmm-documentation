@@ -19,9 +19,10 @@
 #include <iostream>
 #include "examplewindow.h"
 
-ExampleWindow::ExampleWindow() :
-    m_ListViewText(3),
-    m_Button_Quit("Quit")
+ExampleWindow::ExampleWindow()
+: m_VBox(Gtk::ORIENTATION_VERTICAL),
+  m_ListViewText(3),
+  m_Button_Quit("Quit")
 {
   set_title("Gtk::ListViewText example");
   set_border_width(6);

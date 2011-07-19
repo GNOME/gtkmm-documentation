@@ -40,7 +40,7 @@ protected:
   bool on_button_query_tooltip(int x, int y, bool keyboard_tooltip, const Glib::RefPtr<Gtk::Tooltip>& tooltip);
 
   //Child widgets:
-  Gtk::VBox m_vbox;
+  Gtk::Box m_vbox;
 
   Gtk::CheckButton m_checkbutton;
   Gtk::Label m_label;

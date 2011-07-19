@@ -21,8 +21,8 @@
 
 ExampleWindow::ExampleWindow()
 :
-  m_HBox(false, 5),
-  m_VBox(false, 5),
+  m_HBox(Gtk::ORIENTATION_HORIZONTAL, 5),
+  m_VBox(Gtk::ORIENTATION_VERTICAL, 5),
   m_Frame_Normal("Normal Label"),
   m_Frame_Multi("Multi-line Label"),
   m_Frame_Left("Left Justified Label"),

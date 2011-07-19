@@ -33,7 +33,7 @@ protected:
   void on_button_question_clicked();
 
   //Child widgets:
-  Gtk::VButtonBox m_ButtonBox;
+  Gtk::ButtonBox m_ButtonBox;
   Gtk::Button m_Button_Info, m_Button_Question;
 };
 

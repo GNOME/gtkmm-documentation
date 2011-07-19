@@ -22,7 +22,8 @@
 
 
 ExampleWindow::ExampleWindow()
-: m_Button("Show AboutDialog")
+: m_ButtonBox(Gtk::ORIENTATION_VERTICAL),
+  m_Button("Show AboutDialog")
 {
   set_title("Gtk::AboutDialog example");
 

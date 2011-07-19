@@ -30,9 +30,9 @@ ExampleButtonBox::ExampleButtonBox(bool horizontal,
   Gtk::ButtonBox* bbox = 0;
 
   if(horizontal)
-    bbox = Gtk::manage( new Gtk::HButtonBox() );
+    bbox = Gtk::manage( new Gtk::ButtonBox(Gtk::ORIENTATION_HORIZONTAL) );
   else
-    bbox = Gtk::manage( new Gtk::VButtonBox() );
+    bbox = Gtk::manage( new Gtk::ButtonBox(Gtk::ORIENTATION_VERTICAL) );
 
   bbox->set_border_width(5);
 

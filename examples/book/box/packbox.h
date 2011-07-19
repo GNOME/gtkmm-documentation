@@ -21,7 +21,7 @@
 
 #include <gtkmm.h>
 
-class PackBox : public Gtk::HBox
+class PackBox : public Gtk::Box
 {
 public:
   PackBox(bool homogeneous, int spacing, Gtk::PackOptions, int padding = 0);

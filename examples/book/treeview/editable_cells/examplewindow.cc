@@ -25,7 +25,8 @@ using std::sprintf;
 using std::strtol;
 
 ExampleWindow::ExampleWindow()
-: m_Button_Quit("Quit"),
+: m_VBox(Gtk::ORIENTATION_VERTICAL),
+  m_Button_Quit("Quit"),
   m_validate_retry(false)
 {
   set_title("Gtk::TreeView Editable Cells example");

@@ -20,7 +20,8 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_Button_Start("Start"),
+: m_VBox(Gtk::ORIENTATION_VERTICAL),
+  m_Button_Start("Start"),
   m_Button_Quit(Gtk::Stock::QUIT)
 {
   set_title("update-ui example");

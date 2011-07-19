@@ -20,7 +20,9 @@
 #include "examplebuttonbox.h"
 
 ExampleWindow::ExampleWindow()
-: m_Frame_Horizontal("Horizontal Button Boxes"),
+: m_VBox_Main(Gtk::ORIENTATION_VERTICAL),
+  m_VBox(Gtk::ORIENTATION_VERTICAL),
+  m_Frame_Horizontal("Horizontal Button Boxes"),
   m_Frame_Vertical("Vertical Button Boxes")
 {
   set_title("Gtk::ButtonBox");

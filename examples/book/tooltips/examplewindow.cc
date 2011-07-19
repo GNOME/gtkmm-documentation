@@ -26,7 +26,7 @@ const Glib::ustring markedup_tip = "<i>Markup</i> in a tooltip.";
 
 ExampleWindow::ExampleWindow()
   :
-  m_vbox(false, 3),
+  m_vbox(Gtk::ORIENTATION_VERTICAL, 3),
   m_checkbutton("Click to alternate markup in tooltip"),
   m_label("A label"),
   m_button("Custom widget in tooltip window"),

@@ -20,7 +20,8 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_Button_Quit("Quit")
+: m_VBox(Gtk::ORIENTATION_VERTICAL),
+  m_Button_Quit("Quit")
 {
   set_title("Gtk::TreeView (custom TreeModel) example");
   set_border_width(5);

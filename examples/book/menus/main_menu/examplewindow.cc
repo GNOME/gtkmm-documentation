@@ -21,6 +21,7 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
+: m_Box(Gtk::ORIENTATION_VERTICAL)
 {
   set_title("main menu example");
   set_default_size(200, 200);

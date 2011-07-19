@@ -64,7 +64,7 @@ protected:
   ModelColumnsCombo m_ColumnsCombo;
 
   //Child widgets:
-  Gtk::VBox m_VBox;
+  Gtk::Box m_VBox;
 
   Gtk::ScrolledWindow m_ScrolledWindow;
   Gtk::TreeView m_TreeView;
@@ -72,7 +72,7 @@ protected:
 
   Glib::RefPtr<Gtk::ListStore> m_refTreeModelCombo1, m_refTreeModelCombo2;
     
-  Gtk::HButtonBox m_ButtonBox;
+  Gtk::ButtonBox m_ButtonBox;
   Gtk::Button m_Button_Quit;
 };
 

@@ -24,10 +24,10 @@ PreviewDialog::PreviewDialog(
                const Glib::RefPtr<Gtk::PrintOperationPreview>& preview,
                const Glib::RefPtr<Gtk::PrintContext>& print_ctx,
                Gtk::Window& parent)
-  :
-  m_pOperation(pfo),
+: m_pOperation(pfo),
   m_refPreview(preview),
   m_refPrintContext(print_ctx),
+  m_VBox(Gtk::ORIENTATION_VERTICAL),
   m_SpinAdjustment( Gtk::Adjustment::create(1, 100, 1) ), //Used to construct m_PageSpin
   m_PageSpin(m_SpinAdjustment, 1, 0),
   m_CloseButton(Gtk::Stock::CLOSE),

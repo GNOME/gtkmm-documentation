@@ -22,7 +22,8 @@
 
 
 ExampleWindow::ExampleWindow()
-: m_Button_Info("Show Info MessageDialog"),
+: m_ButtonBox(Gtk::ORIENTATION_VERTICAL),
+  m_Button_Info("Show Info MessageDialog"),
   m_Button_Question("Show Question MessageDialog")
 {
   set_title("Gtk::MessageDialog example");

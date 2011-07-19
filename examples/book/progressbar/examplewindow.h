@@ -36,11 +36,11 @@ protected:
   void on_button_close();
 
   //Child widgets:
-  Gtk::VBox m_VBox;
+  Gtk::Box m_VBox;
   Gtk::Alignment m_Alignment;
   Gtk::Table m_Table;
   Gtk::ProgressBar m_ProgressBar;
-  Gtk::HSeparator m_Separator;
+  Gtk::Separator m_Separator;
   Gtk::CheckButton m_CheckButton_Text, m_CheckButton_Activity, m_CheckButton_Inverted;
   Gtk::Button m_Button_Close;
 

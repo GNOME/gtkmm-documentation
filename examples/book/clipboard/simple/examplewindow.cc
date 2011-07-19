@@ -19,7 +19,8 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_Label("Select cells in the table, click Copy, then open a second "
+: m_VBox(Gtk::ORIENTATION_VERTICAL),
+  m_Label("Select cells in the table, click Copy, then open a second "
         "instance of this example to try pasting the copied data."),
   m_Table(2, 2, true),
   m_ButtonA1("A1"), m_ButtonA2("A2"), m_ButtonB1("B1"), m_ButtonB2("B2"),

@@ -157,16 +157,16 @@ CalendarExample::CalendarExample()
 
   set_resizable(false);
 
-  Gtk::VBox* vbox = Gtk::manage(new Gtk::VBox(false, DEF_PAD));
+  Gtk::Box* vbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD));
   add(*vbox);
 
   /*
    * The top part of the CalendarExample, flags and fontsel.
    */
 
-  Gtk::HBox* hbox = Gtk::manage(new Gtk::HBox(false, DEF_PAD));
+  Gtk::Box* hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, DEF_PAD));
   vbox->pack_start(*hbox, Gtk::PACK_EXPAND_WIDGET, DEF_PAD);
-  Gtk::HButtonBox* hbbox = Gtk::manage(new Gtk::HButtonBox());
+  Gtk::ButtonBox* hbbox = Gtk::manage(new Gtk::ButtonBox());
   hbox->pack_start(*hbbox, Gtk::PACK_SHRINK, DEF_PAD);
   hbbox->set_layout(Gtk::BUTTONBOX_SPREAD);
   hbbox->set_spacing(5);
@@ -182,17 +182,17 @@ CalendarExample::CalendarExample()
   calendar_->signal_day_selected().connect(sigc::mem_fun(*this, &CalendarExample::day_selected));
   calendar_->signal_day_selected_double_click().connect(sigc::mem_fun(*this, &CalendarExample::day_selected_double_click));
 
-  Gtk::VSeparator* separator = Gtk::manage(new Gtk::VSeparator());
+  Gtk::Separator* separator = Gtk::manage(new Gtk::Separator(Gtk::ORIENTATION_VERTICAL));
   hbox->pack_start (*separator, Gtk::PACK_SHRINK);
 
-  Gtk::VBox* vbox2 = Gtk::manage(new Gtk::VBox(false, DEF_PAD));
+  Gtk::Box* vbox2 = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD));
   hbox->pack_start(*vbox2, Gtk::PACK_SHRINK, DEF_PAD);
   
   /* Build the Right frame with the flags in */ 
 
   Gtk::Frame* frameFlags = Gtk::manage(new Gtk::Frame("Flags"));
   vbox2->pack_start(*frameFlags, Gtk::PACK_EXPAND_WIDGET, DEF_PAD);
-  Gtk::VBox* vbox3 = Gtk::manage(new Gtk::VBox(true, DEF_PAD_SMALL));
+  Gtk::Box* vbox3 = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD_SMALL));
   frameFlags->add(*vbox3);
 
   struct {
@@ -225,31 +225,31 @@ CalendarExample::CalendarExample()
 
   frame = Gtk::manage(new Gtk::Frame("Signal events"));
   vbox->pack_start(*frame, Gtk::PACK_EXPAND_WIDGET, DEF_PAD);
-  vbox2 = Gtk::manage(new Gtk::VBox(true, DEF_PAD_SMALL));
+  vbox2 = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD_SMALL));
   frame->add(*vbox2);
   
-  hbox = Gtk::manage(new Gtk::HBox(false, 5));
+  hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 5));
   vbox2->pack_start (*hbox, Gtk::PACK_SHRINK);
   Gtk::Label* label = Gtk::manage(new Gtk::Label("Day selected:"));
   hbox->pack_start (*label, Gtk::PACK_SHRINK);
   label_selected_ = new Gtk::Label("");
   hbox->pack_start (*label_selected_, Gtk::PACK_SHRINK);
 
-  hbox = Gtk::manage(new Gtk::HBox(false, 5));
+  hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 5));
   vbox2->pack_start (*hbox, Gtk::PACK_SHRINK);
   label = Gtk::manage(new Gtk::Label("Day selected double click:"));
   hbox->pack_start (*label, Gtk::PACK_SHRINK);
   label_selected_double_click_ = new Gtk::Label("");
   hbox->pack_start (*label_selected_double_click_, Gtk::PACK_SHRINK);
 
-  hbox = Gtk::manage(new Gtk::HBox(false, 5));
+  hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 5));
   vbox2->pack_start (*hbox, Gtk::PACK_SHRINK);
   label = Gtk::manage(new Gtk::Label("Month change:")); 
   hbox->pack_start (*label, Gtk::PACK_SHRINK);
   label_month_ = new Gtk::Label("");
   hbox->pack_start(*label_month_, Gtk::PACK_SHRINK);
   
-  Gtk::HButtonBox* bbox = Gtk::manage(new Gtk::HButtonBox());
+  Gtk::ButtonBox* bbox = Gtk::manage(new Gtk::ButtonBox());
   vbox->pack_start(*bbox, Gtk::PACK_SHRINK);
   bbox->set_layout(Gtk::BUTTONBOX_END);
 

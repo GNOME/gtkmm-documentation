@@ -30,7 +30,8 @@ const char example_target_text[]   = "UTF8_STRING";
 
 
 ExampleWindow::ExampleWindow()
-: m_Label("Select cells in the table, click Copy, then open a second instance "
+: m_VBox(Gtk::ORIENTATION_VERTICAL),
+  m_Label("Select cells in the table, click Copy, then open a second instance "
           "of this example to try pasting the copied data.\nOr try pasting the "
           "text representation into gedit."),
   m_Table(2, 2, true),

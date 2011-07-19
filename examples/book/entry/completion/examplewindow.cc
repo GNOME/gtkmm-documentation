@@ -19,9 +19,10 @@
 #include "examplewindow.h"
 #include <iostream>
 
-ExampleWindow::ExampleWindow() :
-    m_Label("Press a or b to see a list of possible completions and actions."),
-    m_Button_Close("Close")
+ExampleWindow::ExampleWindow()
+: m_VBox(Gtk::ORIENTATION_VERTICAL),
+  m_Label("Press a or b to see a list of possible completions and actions."),
+  m_Button_Close("Close")
 {
   //set_size_request(200, 100);
   set_title("Gtk::EntryCompletion");

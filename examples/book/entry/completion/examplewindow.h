@@ -55,8 +55,8 @@ protected:
   type_actions_map m_CompletionActions;
   
   //Child widgets:
-  Gtk::HBox m_HBox;
-  Gtk::VBox m_VBox;
+  Gtk::Box m_HBox;
+  Gtk::Box m_VBox;
   Gtk::Entry m_Entry;
   Gtk::Label m_Label;
   Gtk::Button m_Button_Close;

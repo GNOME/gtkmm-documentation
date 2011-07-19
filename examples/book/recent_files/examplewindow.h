@@ -34,7 +34,7 @@ protected:
   void on_menu_file_new();
 
   //Child widgets:
-  Gtk::VBox m_Box;
+  Gtk::Box m_Box;
 
   Glib::RefPtr<Gtk::UIManager> m_refUIManager;
   Glib::RefPtr<Gtk::ActionGroup> m_refActionGroup;

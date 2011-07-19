@@ -20,7 +20,8 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_Button_Close("Close"),
+: m_VBox(Gtk::ORIENTATION_VERTICAL),
+  m_Button_Close("Close"),
   m_CheckButton_Editable("Editable"),
   m_CheckButton_Visible("Visible")
 {

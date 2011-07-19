@@ -17,7 +17,7 @@ protected:
   void pop_item(unsigned int context_id) { m_status_bar.pop(context_id); }
 
   unsigned int m_context_id, m_count;
-  Gtk::VBox m_vbox;
+  Gtk::Box m_vbox;
   Gtk::Button m_bPush, m_bPop;
   Gtk::Statusbar m_status_bar;
 };
@@ -26,7 +26,7 @@ protected:
 StatusBarExample::StatusBarExample()
 :
   m_count(1),
-  m_vbox(false, 1),
+  m_vbox(Gtk::ORIENTATION_VERTICAL, 1),
   m_bPush("push item"),
   m_bPop("pop last item")
 {

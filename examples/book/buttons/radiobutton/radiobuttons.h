@@ -35,9 +35,9 @@ protected:
   void on_button_clicked();
 
   //Child widgets:
-  Gtk::VBox m_Box_Top, m_Box1, m_Box2;
+  Gtk::Box m_Box_Top, m_Box1, m_Box2;
   Gtk::RadioButton m_RadioButton1, m_RadioButton2, m_RadioButton3;
-  Gtk::HSeparator m_Separator;
+  Gtk::Separator m_Separator;
   Gtk::Button m_Button_Close;
 };
 

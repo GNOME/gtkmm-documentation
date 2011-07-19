@@ -1,3 +1,10 @@
+2011-07-19  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the build with --enable-warnings=fatal.
+
+	* examples/: Replace all H/V classes with the base classes, specifying 
+	the orientation. This is tedious.
+
 2011-06-13  José Alburquerque  <jaalburqu@svn.gnome.org>
 
 	Wrapping Section: Initializations: Add comment about type substitution.

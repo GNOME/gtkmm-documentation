@@ -32,8 +32,8 @@ protected:
   void on_button_clicked();
 
   //Child widgets:
-  Gtk::VBox m_VBox_Main, m_VBox;
-  Gtk::HBox m_HBox;
+  Gtk::Box m_VBox_Main, m_VBox;
+  Gtk::Box m_HBox;
   Gtk::Frame m_Frame_Horizontal, m_Frame_Vertical;
 };
 

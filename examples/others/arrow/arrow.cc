@@ -34,7 +34,7 @@ public:
 AppWindow::AppWindow()
 {
   ArrowButton *button;
-  Gtk::HBox    *box;
+  Gtk::Box    *box;
 
   set_title ("Arrow Buttons");
 
@@ -42,7 +42,7 @@ AppWindow::AppWindow()
   set_border_width (10);
   
   /* Create a box to hold the arrows/buttons */
-  box=Gtk::manage (new Gtk::HBox (false, 0));
+  box = Gtk::manage (new Gtk::Box (Gtk::ORIENTATION_HORIZONTAL));
   box->set_border_width (2);
 
   /* Pack and show all our widgets */

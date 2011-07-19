@@ -34,7 +34,7 @@ protected:
   void on_button_clicked();
 
   // Member data:
-  Gtk::VBox m_Box;
+  Gtk::Box m_Box;
   Gtk::Button m_ButtonQuit;
   Gtk::ProgressBar m_ProgressBar_c;
   Gtk::ProgressBar m_ProgressBar_d;

@@ -33,7 +33,7 @@ protected:
   void on_menu_file_popup_generic();
 
   //Child widgets:
-  Gtk::VBox m_Box;
+  Gtk::Box m_Box;
   Gtk::EventBox m_EventBox;
   Gtk::Label m_Label;
 

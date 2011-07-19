@@ -20,7 +20,8 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_Button_One("Child One"),
+: m_VBox(Gtk::ORIENTATION_VERTICAL),
+  m_Button_One("Child One"),
   m_Label_Two("Child 2"),
   m_Button_Quit("Quit")
 {

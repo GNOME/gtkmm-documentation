@@ -34,8 +34,8 @@ protected:
   void on_button_close();
 
   //Child widgets:
-  Gtk::HBox m_HBox;
-  Gtk::VBox m_VBox;
+  Gtk::Box m_HBox;
+  Gtk::Box m_VBox;
   Gtk::Entry m_Entry;
   Gtk::Button m_Button_Close;
   Gtk::CheckButton m_CheckButton_Editable, m_CheckButton_Visible;

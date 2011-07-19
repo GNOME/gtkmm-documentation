@@ -68,8 +68,8 @@ private:
 
 
   //Child widgets:
-  Gtk::VBox m_VBox;
-  Gtk::HBox m_HBox;
+  Gtk::Box m_VBox;
+  Gtk::Box m_HBox;
   Gtk::ComboBox m_ComboOrientation;
   Glib::RefPtr<Gtk::ListStore> m_refTreeModelOrientation;
   Gtk::ComboBox m_ComboStyle;

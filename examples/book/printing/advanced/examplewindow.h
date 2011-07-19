@@ -56,7 +56,7 @@ protected:
   Glib::RefPtr<Gtk::PrintSettings> m_refSettings;
 
   //Child widgets:
-  Gtk::VBox m_VBox;
+  Gtk::Box m_VBox;
   Gtk::Table m_Table;
 
   Gtk::Label m_NameLabel;

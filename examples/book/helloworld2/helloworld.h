@@ -36,7 +36,7 @@ protected:
   void on_button_clicked(Glib::ustring data);
 
   // Child widgets:
-  Gtk::HBox m_box1;
+  Gtk::Box m_box1;
   Gtk::Button m_button1, m_button2;
 };
 

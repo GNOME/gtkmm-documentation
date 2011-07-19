@@ -154,10 +154,10 @@ Gtk::Widget* PrintFormOperation::on_create_custom_widget()
   //Create a custom tab in the print dialog titled "Other"
   set_custom_tab_label("Other");
 
-  Gtk::VBox* vbox = Gtk::manage(new Gtk::VBox());
+  Gtk::Box* vbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
   vbox->set_border_width(12);
 
-  Gtk::HBox* hbox = Gtk::manage(new Gtk::HBox(false, 8));
+  Gtk::Box* hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 8));
   vbox->pack_start(*hbox, false, false);
   hbox->set_border_width(6);
   hbox->show();

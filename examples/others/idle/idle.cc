@@ -39,7 +39,7 @@ IdleExample::IdleExample() :
   m_quit.signal_pressed().connect(sigc::mem_fun(*this, &Gtk::Widget::hide));
 
   // put buttons into container
-  Gtk::VBox *vbox = manage( new Gtk::VBox(false,5));
+  Gtk::Box *vbox = manage( new Gtk::Box(Gtk::ORIENTATION_VERTICAL,5));
 
   // adding a few widgets
   vbox->pack_start(* manage(new Gtk::Label("Formatting windows drive C:")));
@@ -52,7 +52,7 @@ IdleExample::IdleExample() :
   vbox->pack_start(* manage(new Gtk::Label("5000 MB")));
   vbox->pack_start(m_progressbar_d);
 
-  Gtk::HBox *hbox = manage( new Gtk::HBox(false,10));
+  Gtk::Box *hbox = manage( new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL,10));
   hbox->pack_start(m_quit, Gtk::PACK_EXPAND_PADDING);
   vbox->pack_start(*hbox);
 

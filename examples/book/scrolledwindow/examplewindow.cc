@@ -36,7 +36,7 @@ ExampleWindow::ExampleWindow()
    * the vertical. */
   m_ScrolledWindow.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_ALWAYS);
 
-  get_vbox()->pack_start(m_ScrolledWindow);
+  get_content_area()->pack_start(m_ScrolledWindow);
 
   /* set the spacing to 10 on x and 10 on y */
   m_Table.set_row_spacings(10);

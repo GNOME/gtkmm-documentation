@@ -19,7 +19,7 @@
 #include "timerexample.h"
 
 TimerExample::TimerExample() :
-  m_Box(true, 10),
+  m_Box(Gtk::ORIENTATION_HORIZONTAL, 10),
     // use Gtk::Stock wherever possible for buttons, etc.
   m_ButtonAddTimer(Gtk::Stock::ADD),
   m_ButtonDeleteTimer(Gtk::Stock::REMOVE),

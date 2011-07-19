@@ -39,7 +39,7 @@ private:
   void print_status();
 
   // Child widgets:
-  Gtk::HBox m_box;
+  Gtk::Box m_box;
   Gtk::Label m_label1, m_label2;
   Gtk::CheckButton m_check;
   Gtk::Entry m_entry;

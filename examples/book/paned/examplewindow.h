@@ -32,7 +32,7 @@ public:
 protected:
 
   //Child widgets:
-  Gtk::VPaned m_VPaned;
+  Gtk::Paned m_VPaned;
   MessagesList m_MessagesList;
   MessageText m_MessageText;
 };

@@ -17,7 +17,7 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_VBox(false, 6),
+: m_VBox(Gtk::ORIENTATION_VERTICAL, 6),
   m_Button_Quit(Gtk::Stock::QUIT),
   m_Button_Clear("Clear")
 {

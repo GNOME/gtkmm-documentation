@@ -47,8 +47,8 @@ protected:
   Glib::RefPtr<Gtk::PrintContext> m_refPrintContext;
   Glib::RefPtr<Pango::Layout> m_refLayout;
 
-  Gtk::VBox m_VBox;
-  Gtk::HBox m_HBox;
+  Gtk::Box m_VBox;
+  Gtk::Box m_HBox;
   Glib::RefPtr<Gtk::Adjustment> m_SpinAdjustment;
   Gtk::SpinButton m_PageSpin;
   Gtk::Button m_CloseButton;

@@ -30,8 +30,8 @@ public:
 protected:
 
   //Child widgets:
-  Gtk::HBox m_HBox;
-  Gtk::VBox m_VBox, m_VBox2;
+  Gtk::Box m_HBox;
+  Gtk::Box m_VBox, m_VBox2;
   Gtk::Frame m_Frame_Normal, m_Frame_Multi, m_Frame_Left, m_Frame_Right,
     m_Frame_LineWrapped, m_Frame_FilledWrapped, m_Frame_Underlined;
   Gtk::Label m_Label_Normal, m_Label_Multi, m_Label_Left, m_Label_Right,

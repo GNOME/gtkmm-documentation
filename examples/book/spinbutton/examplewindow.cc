@@ -24,7 +24,7 @@ ExampleWindow::ExampleWindow()
 :
   m_Frame_NotAccelerated("Not accelerated"),
   m_Frame_Accelerated("Accelerated"),
-  m_VBox_Main(false, 5),
+  m_VBox_Main(Gtk::ORIENTATION_VERTICAL, 5),
   m_Label_Day("Day: "),
   m_Label_Month("Month: "),
   m_Label_Year("Year: "),

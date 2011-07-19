@@ -21,7 +21,8 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_refRecentManager(Gtk::RecentManager::get_default())
+: m_Box(Gtk::ORIENTATION_VERTICAL),
+  m_refRecentManager(Gtk::RecentManager::get_default())
 {
   set_title("recent files example");
   set_default_size(200, 200);

@@ -32,7 +32,7 @@ protected:
   void on_button_color_set();
 
   //Child widgets:
-  Gtk::VBox m_VBox;
+  Gtk::Box m_VBox;
   Gtk::ColorButton m_Button;
   Gtk::DrawingArea m_DrawingArea; //To show the color.
 

@@ -20,7 +20,8 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_Button_Close("Close")
+: m_VBox(Gtk::ORIENTATION_VERTICAL),
+  m_Button_Close("Close")
 {
   set_title("Gtk::Entry");
 

@@ -21,11 +21,11 @@
 
 ExampleWindow::ExampleWindow()
 :
-  m_VBox2(false, 20),
-  m_VBox_HScale(false, 10),
-  m_HBox_Scales(false, 10),
-  m_HBox_Digits(false, 10),
-  m_HBox_PageSize(false, 10),
+  m_VBox2(Gtk::ORIENTATION_VERTICAL, 20),
+  m_VBox_HScale(Gtk::ORIENTATION_HORIZONTAL, 10),
+  m_HBox_Scales(Gtk::ORIENTATION_HORIZONTAL, 10),
+  m_HBox_Digits(Gtk::ORIENTATION_HORIZONTAL, 10),
+  m_HBox_PageSize(Gtk::ORIENTATION_HORIZONTAL, 10),
 
   // Value, lower, upper, step_increment, page_increment, page_size:
   // Note that the page_size value only makes a difference for
@@ -35,8 +35,8 @@ ExampleWindow::ExampleWindow()
   m_adjustment_digits( Gtk::Adjustment::create(1.0, 0.0, 5.0) ),
   m_adjustment_pagesize( Gtk::Adjustment::create(1.0, 1.0, 101.0) ),
 
-  m_VScale(m_adjustment),
-  m_HScale(m_adjustment),
+  m_VScale(m_adjustment, Gtk::ORIENTATION_VERTICAL),
+  m_HScale(m_adjustment, Gtk::ORIENTATION_HORIZONTAL),
   m_Scale_Digits(m_adjustment_digits),
   m_Scale_PageSize(m_adjustment_pagesize),
 

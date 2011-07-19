@@ -48,7 +48,7 @@ MainWindowClass::MainWindowClass()
 
     set_size_request(350, -1);
   
-    Gtk::VBox* vbox = Gtk::manage(new Gtk::VBox(false, 0));
+    Gtk::Box* vbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, 0));
     add(*vbox);
 
     Gtk::MenuBar* menubar = Gtk::manage(new Gtk::MenuBar());

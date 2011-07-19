@@ -23,23 +23,23 @@
 #include <gtkmm/togglebutton.h>
 #include <gdkmm.h>
 
-class TicTacToe: public Gtk::VBox
+class TicTacToe: public Gtk::Box
 {
-  private:
-    Gtk::ToggleButton *buttons[3][3];
-    bool frozen;
-    void toggle(Gtk::ToggleButton*);
+private:
+  Gtk::ToggleButton* buttons[3][3];
+  bool frozen;
+  void toggle(Gtk::ToggleButton*);
 
-  public:
-    void freeze() {frozen=true;}
-    void thaw() {frozen=false;}
+public:
+  void freeze() {frozen=true;}
+  void thaw() {frozen=false;}
 
-    void clear();
+  void clear();
 
-    sigc::signal<void> tictactoe;
+  sigc::signal<void> tictactoe;
 
-    TicTacToe();
-    ~TicTacToe();
+  TicTacToe();
+  ~TicTacToe();
 };
 
 #endif /* __TICTACTOE_H__ */

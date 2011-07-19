@@ -180,8 +180,8 @@ void ExampleWindow::load_special_items()
 }
 
 ExampleWindow::ExampleWindow()
-: m_VBox(false, 6),
-  m_HBox(false, 6)
+: m_VBox(Gtk::ORIENTATION_VERTICAL, 6),
+  m_HBox(Gtk::ORIENTATION_HORIZONTAL, 6)
 {
   set_title("Gtk::ToolPalette example");
   set_size_request(600, 600);

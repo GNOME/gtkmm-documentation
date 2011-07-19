@@ -47,14 +47,14 @@ protected:
   ModelColumns m_Columns;
 
   //Child widgets:
-  Gtk::VBox m_VBox;
+  Gtk::Box m_VBox;
 
   Gtk::ScrolledWindow m_ScrolledWindow1, m_ScrolledWindow2;
   Gtk::TreeView m_TreeView1, m_TreeView2;
   Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
   Glib::RefPtr<Gtk::TreeModelSort> m_refTreeModelSort1, m_refTreeModelSort2;
 
-  Gtk::HButtonBox m_ButtonBox;
+  Gtk::ButtonBox m_ButtonBox;
   Gtk::Button m_Button_Quit;
 };
 

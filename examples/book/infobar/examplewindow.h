@@ -33,7 +33,7 @@ protected:
   void on_textbuffer_changed();
 
   //Child widgets:
-  Gtk::VBox m_VBox;
+  Gtk::Box m_VBox;
 
   Gtk::ScrolledWindow m_ScrolledWindow;
   Gtk::TextView m_TextView;
@@ -43,7 +43,7 @@ protected:
   Gtk::InfoBar m_InfoBar;
   Gtk::Label m_Message_Label;
 
-  Gtk::HButtonBox m_ButtonBox;
+  Gtk::ButtonBox m_ButtonBox;
   Gtk::Button m_Button_Quit, m_Button_Clear;
 };
 

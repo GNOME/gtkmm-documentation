@@ -33,8 +33,8 @@ protected:
   void on_toolbar_item();
 
   //Child widgets:
-  Gtk::VBox m_VBox;
-  Gtk::HButtonBox m_ButtonBox;
+  Gtk::Box m_VBox;
+  Gtk::ButtonBox m_ButtonBox;
   Gtk::Toolbar m_Toolbar;
   Gtk::Button m_Button_Close;
 };

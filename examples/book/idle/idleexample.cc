@@ -19,7 +19,7 @@
 #include "idleexample.h"
 
 IdleExample::IdleExample() :
-  m_Box(false, 5),
+  m_Box(Gtk::ORIENTATION_VERTICAL, 5),
   m_ButtonQuit(Gtk::Stock::QUIT)
 {
   set_border_width(5);
@@ -38,7 +38,7 @@ IdleExample::IdleExample() :
   m_Box.pack_start( *Gtk::manage(new Gtk::Label("5000 MB")) );
   m_Box.pack_start(m_ProgressBar_d);
 
-  Gtk::HBox* hbox = Gtk::manage( new Gtk::HBox(false,10));
+  Gtk::Box* hbox = Gtk::manage( new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL,10));
   m_Box.pack_start(*hbox);
   hbox->pack_start(m_ButtonQuit, Gtk::PACK_EXPAND_PADDING);
 

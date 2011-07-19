@@ -21,6 +21,7 @@
 
 
 ExampleWindow::ExampleWindow()
+: m_VBox(Gtk::ORIENTATION_VERTICAL)
 {
   set_title("Gtk::ColorButton example");
   set_default_size(200, 200);

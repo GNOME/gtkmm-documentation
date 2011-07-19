@@ -21,7 +21,8 @@
 
 
 ExampleWindow::ExampleWindow()
-: m_Button_File("Choose File"),
+: m_ButtonBox(Gtk::ORIENTATION_VERTICAL),
+  m_Button_File("Choose File"),
   m_Button_Folder("Choose Folder")
 {
   set_title("Gtk::FileSelection example");

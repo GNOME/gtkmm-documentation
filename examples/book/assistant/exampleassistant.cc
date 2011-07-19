@@ -18,7 +18,7 @@
 #include "exampleassistant.h"
 
 ExampleAssistant::ExampleAssistant()
-: m_box(false, 12),
+: m_box(Gtk::ORIENTATION_HORIZONTAL, 12),
   m_label1("Type text to allow the assistant to continue:"),
   m_label2("Confirmation page"),
   m_check("Optional extra information")

@@ -33,11 +33,11 @@ protected:
   void on_notebook_switch_page(Gtk::Widget* page, guint page_num);
 
   //Child widgets:
-  Gtk::VBox m_VBox;
+  Gtk::Box m_VBox;
   Gtk::Notebook m_Notebook;
   Gtk::Label m_Label1, m_Label2;
 
-  Gtk::HButtonBox m_ButtonBox;
+  Gtk::ButtonBox m_ButtonBox;
   Gtk::Button m_Button_Quit;
 };
 

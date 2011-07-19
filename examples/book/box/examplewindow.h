@@ -34,13 +34,13 @@ protected:
 
   //Child widgets:
   Gtk::Button m_button;
-  Gtk::VBox m_box1;
-  Gtk::HBox m_boxQuit;
+  Gtk::Box m_box1;
+  Gtk::Box m_boxQuit;
   Gtk::Button m_buttonQuit;
 
   Gtk::Label m_Label1, m_Label2;
 
-  Gtk::HSeparator m_seperator1, m_seperator2, m_seperator3, m_seperator4, m_seperator5;
+  Gtk::Separator m_seperator1, m_seperator2, m_seperator3, m_seperator4, m_seperator5;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

@@ -24,7 +24,7 @@
 const Glib::ustring app_title = "gtkmm Printing Example";
 
 ExampleWindow::ExampleWindow()
-  :
+: m_VBox(Gtk::ORIENTATION_VERTICAL),
   m_Table(3, 2),
   m_NameLabel("Name"),
   m_SurnameLabel("Surname"),

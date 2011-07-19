@@ -20,7 +20,7 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_VBox(false, 5),
+: m_VBox(Gtk::ORIENTATION_VERTICAL, 5),
   m_Alignment(0.5, 0.5, 0, 0),
   m_Table(2, 2, true),
   m_CheckButton_Text("Show text"),
