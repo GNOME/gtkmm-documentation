@@ -1,3 +1,10 @@
+2011-08-03  Murray Cumming  <murrayc@murrayc.com>
+
+	Simple application example: Fix a typo.
+
+	* examples/book/application/simple/exampleapplication.cc: on_open():
+	Use the i iterator, instead of 0.
+
 2011-03-24  Murray Cumming  <murrayc@murrayc.com>
 
   Add back use of Gtk::Application so we can finish it.

@@ -44,7 +44,7 @@ void ExampleApplication::create_window(const Glib::RefPtr<Gio::File>& file)
 
   if(!file)
   {
-    //This is probably an new empty file, as a result of an activation rather
+    //This is probably a new empty file, as a result of an activation rather
     //than an open.
     return;
   }
@@ -76,7 +76,7 @@ void ExampleApplication::on_open(const Gio::Application::type_vec_files& files,
   //std::cout << "debug: files.size()=" << files.size() << std::endl;
   for(guint i = 0; i < files.size(); i++)
   {
-    Glib::RefPtr<Gio::File> file = files[0];
+    Glib::RefPtr<Gio::File> file = files[i];
     if(!file)
     {
       std::cerr << G_STRFUNC << ": file is null." << std::endl;
