@@ -8,6 +8,8 @@ LDADD       = $(GTKMM_LIBS)
 
 check_PROGRAMS =					\
 	book/alignment/example				\
+	book/application/simple/example \
+	book/application/command_line_handling/example \
 	book/aspectframe/example			\
 	book/assistant/example				\
 	book/base/base					\

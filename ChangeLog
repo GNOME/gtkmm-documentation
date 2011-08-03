@@ -1,3 +1,11 @@
+2011-03-24  Murray Cumming  <murrayc@murrayc.com>
+
+  Add back use of Gtk::Application so we can finish it.
+  
+	* examples/book/application/: Added.
+	* examples/Makefile.am: Mention of these examples.
+	* examples/book/base/base.cc: Use Gtk::Application instead of Gtk::Main.
+	
 2011-07-19  Murray Cumming  <murrayc@murrayc.com>
 
 	Fix the build with --enable-warnings=fatal.
