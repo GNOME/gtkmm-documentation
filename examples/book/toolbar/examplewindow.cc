@@ -33,7 +33,7 @@ ExampleWindow::ExampleWindow()
   m_VBox.pack_start(m_Toolbar, Gtk::PACK_SHRINK);
   m_ButtonBox.set_border_width(5);
   m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
-  m_VBox.pack_end(m_ButtonBox);
+  m_VBox.pack_end(m_ButtonBox, Gtk::PACK_SHRINK);
 
   m_ButtonBox.pack_start(m_Button_Close, Gtk::PACK_SHRINK);
 
