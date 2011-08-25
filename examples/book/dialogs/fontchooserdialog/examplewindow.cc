@@ -20,10 +20,11 @@
 #include <iostream>
 
 
+//TODO: This is not actually a FontChooserDialog example.
 ExampleWindow::ExampleWindow()
 : m_Button("sans")
 {
-  set_title("Gtk::FontSelectionDialog example");
+  set_title("Gtk::FontChooserDialog example");
 
   add(m_Button);
   m_Button.signal_font_set().connect(sigc::mem_fun(*this,

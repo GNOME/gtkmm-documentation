@@ -1,3 +1,17 @@
+2011-08-25  Murray Cumming  <murrayc@murrayc.com>
+
+	Replace use of deprecated FontSelectionDialog.
+
+	* examples/Makefile.am:
+	* examples/book/dialogs/fontchooserdialog/: Rename to fontchooserdialog/,
+	though this is really just an example of FontChooserButton.
+  * examples/others/calendar/calendar.cc: Use FontButton instead of 
+  FontSelectionDialog.
+  * docs/tutorial/Makefile.am
+  * docs/tutorial/C/figures/: Rename the screenshot, though we should retake 
+  it. Let's redo them all soon.
+  * docs/tutorial/C/gtkmm-tutorial-in.xml: Update for this change too.
+	
 2011-08-05  Murray Cumming  <murrayc@murrayc.com>
 
 	Toolbar, Tooltips examples: Fix packing.

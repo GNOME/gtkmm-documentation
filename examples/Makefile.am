@@ -33,7 +33,7 @@ check_PROGRAMS =					\
 	book/dialogs/aboutdialog/example		\
 	book/dialogs/colorselectiondialog/example	\
 	book/dialogs/filechooserdialog/example		\
-	book/dialogs/fontselectiondialog/example	\
+	book/dialogs/fontchooserdialog/example	\
 	book/dialogs/messagedialog/example		\
 	book/dialogs/simple/example			\
 	book/drag_and_drop/drag_and_drop		\
@@ -271,10 +271,10 @@ book_dialogs_filechooserdialog_example_SOURCES =	\
 	book/dialogs/filechooserdialog/examplewindow.h	\
 	book/dialogs/filechooserdialog/main.cc
 
-book_dialogs_fontselectiondialog_example_SOURCES =		\
-	book/dialogs/fontselectiondialog/examplewindow.cc	\
-	book/dialogs/fontselectiondialog/examplewindow.h	\
-	book/dialogs/fontselectiondialog/main.cc
+book_dialogs_fontchooserdialog_example_SOURCES =		\
+	book/dialogs/fontchooserdialog/examplewindow.cc	\
+	book/dialogs/fontchooserdialog/examplewindow.h	\
+	book/dialogs/fontchooserdialog/main.cc
 
 book_dialogs_messagedialog_example_SOURCES =		\
 	book/dialogs/messagedialog/examplewindow.cc	\

@@ -25,6 +25,7 @@ enum { DEF_PAD_SMALL = 5 };
 
 enum { TM_YEAR_BASE = 1900 };
 
+//TODO: This whole example is not very good and needs review.
 class CalendarExample : public Gtk::Window
 {
 
@@ -34,7 +35,6 @@ public:
 
   void set_flags();
   void font_selection_ok();
-  void select_font();
   void toggle_flag(Gtk::CheckButton *toggle);
 
   void month_changed();
@@ -42,10 +42,12 @@ public:
   void day_selected_double_click();
 
 protected:
+  void on_font_button_font_set();
+ 
   Gtk::CheckButton* flag_checkboxes_[5];
   bool settings_[5];
 
-  Gtk::FontSelectionDialog* font_dialog_;
+  Gtk::FontButton* font_button_;
   Gtk::Calendar* calendar_;
   Gtk::Label* label_selected_;
   Gtk::Label* label_selected_double_click_;
@@ -113,42 +115,18 @@ void CalendarExample::toggle_flag(Gtk::CheckButton *toggle)
   set_flags();
 }
 
-void CalendarExample::font_selection_ok()
+void CalendarExample::on_font_button_font_set()
 {
-  if(calendar_)
+  const Glib::ustring font_name = font_button_->get_font_name();
+  if(!font_name.empty())
   {
-    Glib::ustring font_name = font_dialog_->get_font_name();
-    if (!font_name.empty())
-    {
-        calendar_->override_font(Pango::FontDescription(font_name));
-    }
+    calendar_->override_font(Pango::FontDescription(font_name));
   }
 }
 
-
-void CalendarExample::select_font()
-{
-  if (!font_dialog_)
-  {
-    font_dialog_  = new Gtk::FontSelectionDialog("Font Selection Dialog");
-    font_dialog_->set_position(Gtk::WIN_POS_MOUSE);
-    font_dialog_->get_ok_button()->signal_clicked().connect(sigc::mem_fun(*this, &CalendarExample::font_selection_ok));
-    //font_dialog_->get_cancel_button()->signal_clicked.connect(sigc::bind(sigc::mem_fun(this, &CalendarExample::destroy_widget), font_dialog_));
-  }
-
-  if (!font_dialog_->get_visible())
-    font_dialog_->show();
-  else
-  {
-    delete font_dialog_;
-    font_dialog_ = 0;
-  }
-}
 
 CalendarExample::CalendarExample()
 {
-  font_dialog_ = NULL;
-
   for (int i = 0; i < 5; i++) {
     settings_[i] = 0;
   }
@@ -215,9 +193,9 @@ CalendarExample::CalendarExample()
   }
 
   /* Build the right font-button */ 
-  Gtk::Button* button = Gtk::manage(new Gtk::Button("Font..."));
-  button->signal_clicked().connect(sigc::mem_fun(*this, &CalendarExample::select_font));
-  vbox2->pack_start (*button, Gtk::PACK_SHRINK);
+  font_button_ = Gtk::manage(new Gtk::FontButton());
+  font_button_->signal_font_set().connect(sigc::mem_fun(*this, &CalendarExample::on_font_button_font_set));
+  vbox2->pack_start(*font_button_, Gtk::PACK_SHRINK);
 
   /*
    *  Build the Signal-event part.
@@ -253,7 +231,7 @@ CalendarExample::CalendarExample()
   vbox->pack_start(*bbox, Gtk::PACK_SHRINK);
   bbox->set_layout(Gtk::BUTTONBOX_END);
 
-  button = Gtk::manage(new Gtk::Button("Close"));
+  Gtk::Button* button = Gtk::manage(new Gtk::Button("Close"));
   button->signal_clicked().connect(&Gtk::Main::quit);
   bbox->add(*button);
   button->set_can_default();

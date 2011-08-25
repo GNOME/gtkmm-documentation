@@ -42,7 +42,7 @@ DOC_FIGURES =					\
 	figures/dialogs_about.png		\
 	figures/dialogs_colorselectiondialog.png\
 	figures/dialogs_filechooser.png		\
-	figures/dialogs_fontselectiondialog.png	\
+	figures/dialogs_fontchooserdialog.png	\
 	figures/dialogs_messagedialog.png	\
 	figures/dialogs_simple.png		\
 	figures/drag_and_drop.png		\

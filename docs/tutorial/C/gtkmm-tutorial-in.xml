@@ -4101,17 +4101,17 @@ font.
 
 <para><ulink url="&url_refdocs_base_gtk;FontSelectionDialog.html">Reference</ulink></para>
 
-<sect2 id="fontselectiondialog-example">
+<sect2 id="fontchooserdialog-example">
 <title>Example</title>
 
-<figure id="figure-dialogs-fontselectiondialog">
+<figure id="figure-dialogs-fontchooserdialog">
   <title>FontSelectionDialog</title>
   <screenshot>
-    <graphic format="PNG" fileref="&url_figures_base;dialogs_fontselectiondialog.png"/>
+    <graphic format="PNG" fileref="&url_figures_base;dialogs_fontchooserdialog.png"/>
   </screenshot>
 </figure>
 
-<para><ulink url="&url_examples_base;dialogs/fontselectiondialog">Source Code</ulink></para>
+<para><ulink url="&url_examples_base;dialogs/fontchooserdialog">Source Code</ulink></para>
 </sect2>
 
 </sect1>
