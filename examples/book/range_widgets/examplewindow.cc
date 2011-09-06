@@ -21,8 +21,9 @@
 
 ExampleWindow::ExampleWindow()
 :
+  m_VBox_Top(Gtk::ORIENTATION_VERTICAL, 0),
   m_VBox2(Gtk::ORIENTATION_VERTICAL, 20),
-  m_VBox_HScale(Gtk::ORIENTATION_HORIZONTAL, 10),
+  m_VBox_HScale(Gtk::ORIENTATION_VERTICAL, 10),
   m_HBox_Scales(Gtk::ORIENTATION_HORIZONTAL, 10),
   m_HBox_Digits(Gtk::ORIENTATION_HORIZONTAL, 10),
   m_HBox_PageSize(Gtk::ORIENTATION_HORIZONTAL, 10),
@@ -32,7 +33,7 @@ ExampleWindow::ExampleWindow()
   // scrollbar widgets, and the highest value you'll get is actually
   // (upper - page_size).
   m_adjustment( Gtk::Adjustment::create(0.0, 0.0, 101.0, 0.1, 1.0, 1.0) ),
-  m_adjustment_digits( Gtk::Adjustment::create(1.0, 0.0, 5.0) ),
+  m_adjustment_digits( Gtk::Adjustment::create(1.0, 0.0, 5.0, 1.0, 2.0) ),
   m_adjustment_pagesize( Gtk::Adjustment::create(1.0, 1.0, 101.0) ),
 
   m_VScale(m_adjustment, Gtk::ORIENTATION_VERTICAL),
@@ -51,17 +52,18 @@ ExampleWindow::ExampleWindow()
   m_Button_Quit("Quit")
 {
   set_title("range controls");
+  set_default_size(300, 350);
 
   //VScale:
   m_VScale.set_digits(1);
   m_VScale.set_value_pos(Gtk::POS_TOP);
   m_VScale.set_draw_value();
+  m_VScale.set_inverted(); // highest value at top
 
   //HScale:
   m_HScale.set_digits(1);
   m_HScale.set_value_pos(Gtk::POS_TOP);
   m_HScale.set_draw_value();
-  m_HScale.set_size_request(200, 30);
 
   add(m_VBox_Top);
   m_VBox_Top.pack_start(m_VBox2);
@@ -81,7 +83,7 @@ ExampleWindow::ExampleWindow()
   m_CheckButton.set_active();
   m_CheckButton.signal_toggled().connect( sigc::mem_fun(*this,
     &ExampleWindow::on_checkbutton_toggled) );
-  m_VBox2.pack_start(m_CheckButton);
+  m_VBox2.pack_start(m_CheckButton, Gtk::PACK_SHRINK);
 
   //Menus:
   Gtk::MenuItem* item = Gtk::manage(new Gtk::MenuItem("Top"));
@@ -125,8 +127,8 @@ ExampleWindow::ExampleWindow()
     &ExampleWindow::on_adjustment2_value_changed));
   m_HBox_PageSize.pack_start(m_Scale_PageSize);
 
-  m_VBox2.pack_start(m_HBox_Digits);
-  m_VBox2.pack_start(m_HBox_PageSize);
+  m_VBox2.pack_start(m_HBox_Digits, Gtk::PACK_SHRINK);
+  m_VBox2.pack_start(m_HBox_PageSize, Gtk::PACK_SHRINK);
   m_VBox_Top.pack_start(m_Separator, Gtk::PACK_SHRINK);
   m_VBox_Top.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
 

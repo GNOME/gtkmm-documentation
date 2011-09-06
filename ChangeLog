@@ -1,3 +1,10 @@
+2011-09-06  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Range Widgets example: Fix size and orientation of widgets.
+
+	* examples/book/range_widgets/examplewindow.cc: Fix the orientation of some
+	boxes and the size of the vertical scale widget. Bug #658265.
+
 2011-08-25  Murray Cumming  <murrayc@murrayc.com>
 
 	Replace use of deprecated FontSelectionDialog.
