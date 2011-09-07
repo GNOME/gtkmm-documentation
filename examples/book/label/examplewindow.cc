@@ -23,6 +23,7 @@ ExampleWindow::ExampleWindow()
 :
   m_HBox(Gtk::ORIENTATION_HORIZONTAL, 5),
   m_VBox(Gtk::ORIENTATION_VERTICAL, 5),
+  m_VBox2(Gtk::ORIENTATION_VERTICAL, 5),
   m_Frame_Normal("Normal Label"),
   m_Frame_Multi("Multi-line Label"),
   m_Frame_Left("Left Justified Label"),
@@ -33,8 +34,7 @@ ExampleWindow::ExampleWindow()
   m_Label_Normal("_This is a Normal label", true),
   m_Label_Multi("This is a Multi-line label.\nSecond line\nThird line"),
   m_Label_Left("This is a Left-Justified\nMulti-line label.\nThird line"),
-  m_Label_Right("This is a Right-Justified\n"
-          "Multi-line label.\nFourth line, (j/k)"),
+  m_Label_Right("This is a Right-Justified\nMulti-line label.\nThird line"),
   m_Label_Underlined("This label is underlined!\n"
           "This one is underlined in quite a funky fashion")
 {
@@ -62,31 +62,31 @@ ExampleWindow::ExampleWindow()
   m_HBox.pack_start(m_VBox2, Gtk::PACK_SHRINK);
 
   m_Label_LineWrapped.set_text(
-          "This is an example of a line-wrapped label.  It " \
-          /* add a big space to the next line to test spacing */ \
+          "This is an example of a line-wrapped label.  It "
+          /* add a big space to the next line to test spacing */
           "should not be taking up the entire             "
-          "width allocated to it, but automatically " \
-          "wraps the words to fit.  " \
-          "The time has come, for all good men, to come to " \
-          "the aid of their party.  " \
-          "The sixth sheik's six sheep's sick.\n" \
-          "     It supports multiple paragraphs correctly, " \
-          "and  correctly   adds " \
+          "width allocated to it, but automatically "
+          "wraps the words to fit.  "
+          "The time has come, for all good men, to come to "
+          "the aid of their party.  "
+          "The sixth sheik's six sheep's sick.\n"
+          "     It supports multiple paragraphs correctly, "
+          "and  correctly   adds "
           "many          extra  spaces. ");
   m_Label_LineWrapped.set_line_wrap();
   m_Frame_LineWrapped.add(m_Label_LineWrapped);
   m_VBox2.pack_start(m_Frame_LineWrapped, Gtk::PACK_SHRINK);
 
   m_Label_FilledWrapped.set_text(
-          "This is an example of a line-wrapped, filled label.  " \
-          "It should be taking " \
-          "up the entire              width allocated to it.  " \
-          "Here is a sentence to prove " \
-          "my point.  Here is another sentence. " \
-          "Here comes the sun, do de do de do.\n" \
-          "    This is a new paragraph.\n" \
-          "    This is another newer, longer, better " \
-          "paragraph.  It is coming to an end, " \
+          "This is an example of a line-wrapped, filled label.  "
+          "It should be taking "
+          "up the entire              width allocated to it.  "
+          "Here is a sentence to prove "
+          "my point.  Here is another sentence. "
+          "Here comes the sun, do de do de do.\n"
+          "    This is a new paragraph.\n"
+          "    This is another newer, longer, better "
+          "paragraph.  It is coming to an end, "
           "unfortunately.");
   m_Label_FilledWrapped.set_justify(Gtk::JUSTIFY_FILL);
   m_Label_FilledWrapped.set_line_wrap();

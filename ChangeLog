@@ -1,3 +1,15 @@
+2011-09-07  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Label and ProgressBar examples: Fix text. Fix orientation of a Box.
+
+	* examples/book/label/examplewindow.cc: Fix the orientation of m_VBox2.
+	Correct the text in the right-justified frame. Remove unneccessary
+	backslashes.
+	* examples/book/progressbar/examplewindow.[h|cc]: Use
+	ProgressBar::set_show_text() to control the text (new in gtkmm 3.0).
+	Rename on_checkbutton_orientation() to on_checkbutton_inverted().
+	Correct some comments. Bug #658265.
+
 2011-09-06  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Range Widgets example: Fix size and orientation of widgets.

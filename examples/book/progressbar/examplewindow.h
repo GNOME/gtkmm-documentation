@@ -31,7 +31,7 @@ protected:
   //Signal handlers:
   void on_checkbutton_text();
   void on_checkbutton_activity();
-  void on_checkbutton_orientation();
+  void on_checkbutton_inverted();
   virtual bool on_timeout();
   void on_button_close();
 

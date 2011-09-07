@@ -37,6 +37,8 @@ ExampleWindow::ExampleWindow()
 
   m_VBox.pack_start(m_Alignment, Gtk::PACK_SHRINK, 5);
   m_Alignment.add(m_ProgressBar);
+  m_ProgressBar.set_text("some text");
+  m_ProgressBar.set_show_text(false);
 
   //Add a timer callback to update the value of the progress bar:
   m_connection_id_timeout = Glib::signal_timeout().connect(sigc::mem_fun(*this,
@@ -51,17 +53,17 @@ ExampleWindow::ExampleWindow()
   m_CheckButton_Text.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_text) );
 
-  //Add a check button to select displaying of the trough text:
+  //Add a check button to toggle activity mode:
   m_Table.attach(m_CheckButton_Activity, 0, 1, 1, 2, Gtk::EXPAND | Gtk::FILL,
           Gtk::EXPAND | Gtk::FILL, 5, 5);
   m_CheckButton_Activity.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_activity) );
 
-  //Add a check button to toggle activity mode:
+  //Add a check button to select growth from left to right or from right to left:
   m_Table.attach(m_CheckButton_Inverted, 0, 1, 2, 3, Gtk::EXPAND | Gtk::FILL,
           Gtk::EXPAND | Gtk::FILL, 5, 5);
   m_CheckButton_Inverted.signal_clicked().connect(sigc::mem_fun(*this,
-              &ExampleWindow::on_checkbutton_orientation) );
+              &ExampleWindow::on_checkbutton_inverted) );
 
   //Add a button to exit the program.
   m_VBox.pack_start(m_Button_Close, Gtk::PACK_SHRINK);
@@ -79,12 +81,8 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_checkbutton_text()
 {
-  const Glib::ustring text = m_ProgressBar.get_text();
-
-  if(!text.empty())
-    m_ProgressBar.set_text("");
-  else
-    m_ProgressBar.set_text("some text");
+  const bool show_text = m_CheckButton_Text.get_active();
+  m_ProgressBar.set_show_text(show_text);
 }
 
 void ExampleWindow::on_checkbutton_activity()
@@ -97,7 +95,7 @@ void ExampleWindow::on_checkbutton_activity()
     m_ProgressBar.set_fraction(0.0);
 }
 
-void ExampleWindow::on_checkbutton_orientation()
+void ExampleWindow::on_checkbutton_inverted()
 {
   const bool inverted = m_CheckButton_Inverted.get_active();
   m_ProgressBar.set_inverted(inverted);
