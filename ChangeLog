@@ -1,3 +1,10 @@
+2011-09-11  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	TreeView Popup example: Make sure the menu items are shown.
+
+	* examples/book/treeview/popup/treeview_withpopup.cc: Add a call to
+	m_Menu_Popup.show_all(). Bug #658265.
+
 2011-09-07  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Label and ProgressBar examples: Fix text. Fix orientation of a Box.

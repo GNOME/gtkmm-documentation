@@ -43,22 +43,23 @@ TreeView_WithPopup::TreeView_WithPopup()
   append_column("Name", m_Columns.m_col_name);
 
   //Fill popup menu:
-  Gtk::MenuItem* item = Gtk::manage(new Gtk::MenuItem("_Edit"));
+  Gtk::MenuItem* item = Gtk::manage(new Gtk::MenuItem("_Edit", true));
   item->signal_activate().connect(
     sigc::mem_fun(*this, &TreeView_WithPopup::on_menu_file_popup_generic) );
   m_Menu_Popup.append(*item);
     
-  item = Gtk::manage(new Gtk::MenuItem("_Process"));
+  item = Gtk::manage(new Gtk::MenuItem("_Process", true));
   item->signal_activate().connect(
     sigc::mem_fun(*this, &TreeView_WithPopup::on_menu_file_popup_generic) );
   m_Menu_Popup.append(*item);
     
-  item = Gtk::manage(new Gtk::MenuItem("_Remove"));
+  item = Gtk::manage(new Gtk::MenuItem("_Remove", true));
   item->signal_activate().connect(
     sigc::mem_fun(*this, &TreeView_WithPopup::on_menu_file_popup_generic) );
   m_Menu_Popup.append(*item);
 
   m_Menu_Popup.accelerate(*this);
+  m_Menu_Popup.show_all(); //Show all menu items when the menu pops up
 
 #ifndef GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED
   signal_button_press_event()
