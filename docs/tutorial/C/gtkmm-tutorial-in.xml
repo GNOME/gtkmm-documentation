@@ -4001,10 +4001,9 @@ class to provide more complex functionality.
 </para>
 
 <para>
-<!-- TODO: Mention get_content_area() instead of get_vbox() for gtkmm 3.2 -->
 To pack widgets into a custom dialog, you should pack them into the
 <classname>Gtk::Box</classname>, available via
-<methodname>get_vbox()</methodname>. To just add a <classname>Button</classname>
+<methodname>get_content_area()</methodname>. To just add a <classname>Button</classname>
 to the bottom of the <classname>Dialog</classname>, you could use the
 <methodname>add_button()</methodname> method.
 </para>
@@ -4073,7 +4072,8 @@ Most of the useful member methods for this class are actually in the
 <sect1 id="sec-color-selection-dialog"><title>ColorSelectionDialog</title>
 <para>
 The <classname>ColorSelectionDialog</classname> allows the user to choose a
-color.
+color. The <classname>ColorButton</classname> opens a color selection dialog
+when it is clicked.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;ColorSelectionDialog.html">Reference</ulink></para>
@@ -4093,19 +4093,20 @@ color.
 
 </sect1>
 
-<sect1 id="sec-font-selection-dialog"><title>FontSelectionDialog</title>
+<sect1 id="sec-font-chooser-dialog"><title>FontChooserDialog</title>
 <para>
-The <classname>FontSelectionDialog</classname> allows the user to choose a
-font.
+The <classname>FontChooserDialog</classname> allows the user to choose a
+font. The <classname>FontButton</classname> opens a font chooser dialog
+when it is clicked.
 </para>
 
-<para><ulink url="&url_refdocs_base_gtk;FontSelectionDialog.html">Reference</ulink></para>
+<para><ulink url="&url_refdocs_base_gtk;FontChooserDialog.html">Reference</ulink></para>
 
 <sect2 id="fontchooserdialog-example">
 <title>Example</title>
 
 <figure id="figure-dialogs-fontchooserdialog">
-  <title>FontSelectionDialog</title>
+  <title>FontChooserDialog</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;dialogs_fontchooserdialog.png"/>
   </screenshot>

@@ -1,3 +1,15 @@
+2011-09-19  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Dialogs chapter and examples: Finish replacement of FontSelectionDialog.
+
+	* examples/book/dialogs/colorselectiondialog/examplewindow.[h|cc]:
+	Add a plain Button that opens a ColorSelectionDialog.
+	* examples/book/dialogs/fontchooserdialog/examplewindow.[h|cc]:
+	Add a plain Button that opens a FontChooserDialog.
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Replace get_vbox() by
+	get_content_area(). Replace all references to FontSelectionDialog by
+	FontChooserDialog. Bug #658265.
+
 2011-09-11  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	TreeView Popup example: Make sure the menu items are shown.

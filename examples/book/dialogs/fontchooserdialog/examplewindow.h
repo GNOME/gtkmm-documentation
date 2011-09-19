@@ -29,10 +29,13 @@ public:
 
 protected:
   //Signal handlers:
-  void on_button_font_set();
+  void on_font_button_font_set();
+  void on_button_dialog_clicked();
 
   //Child widgets:
-  Gtk::FontButton m_Button;
+  Gtk::ButtonBox m_ButtonBox;
+  Gtk::FontButton m_FontButton;
+  Gtk::Button m_Button_Dialog;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H
