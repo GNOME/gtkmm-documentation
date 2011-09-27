@@ -4125,13 +4125,13 @@ when it is clicked.
   <para>
     The <classname>DrawingArea</classname> widget is a blank window that gives
     you the freedom to create any graphic you desire. Along with that freedom
-    comes the responsibility to handle expose events on the widget. When a
+    comes the responsibility to handle draw signals on the widget. When a
     widget is first shown, or when it is covered and then uncovered again it
     needs to redraw itself. Most widgets have code to do this, but the
-    DrawingArea  does not, allowing you to write your own expose event signal
+    DrawingArea does not, allowing you to write your own draw signal
     handler to determine how the contents of the widget will be drawn. This is
     most often done by overriding the virtual
-    <methodname>on_expose_event()</methodname> member function.
+    <methodname>on_draw()</methodname> member function.
   </para>
 
   <para>
@@ -4176,7 +4176,7 @@ when it is clicked.
         the interface. In &gtkmm;, a <classname>Cairo::Context</classname> is
         created by calling the
         <methodname>Gdk::Window::create_cairo_context()</methodname> function.
-        Since Cairo context are reference-counted objects, this function
+        Since Cairo contexts are reference-counted objects, this function
         returns a <classname>Cairo::RefPtr&lt;Cairo::Context&gt;</classname>
         object.
     </para>
@@ -4236,7 +4236,7 @@ myContext->set_line_width(2.0);</programlisting>
             <classname>Cairo::Context</classname> reference as an argument, you
             might implement it as follows:
           </para>
-          <programlisting>void doSomething(Cairo::RefPtr&lt;Cairo::Context&gt; context, int x)
+          <programlisting>void doSomething(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; context, int x)
 {
     context->save();
     // change graphics state
@@ -4244,6 +4244,12 @@ myContext->set_line_width(2.0);</programlisting>
     context->restore();
 }</programlisting>
         </tip>
+    </para>
+    <para>
+        The virtual <methodname>on_draw()</methodname> method provides a
+        Cairo context that you shall use for drawing in the
+        <classname>Gtk::DrawingArea</classname> widget. It is not necessary to
+        save and restore this Cairo context in <methodname>on_draw()</methodname>.
     </para>
   </sect1>
   <sect1 id="sec-cairo-drawing-lines">
@@ -4265,7 +4271,7 @@ myContext->set_line_width(2.0);</programlisting>
             Sometimes it may be useful to scale the coordinates so that the
             full width and height of a window both range from 0 to 1 (the 'unit
             square') or some other mapping that works for your application.
-            this can be done with the
+            This can be done with the
             <methodname>Cairo::Context::scale()</methodname> function.</para>
         </tip>
     </para>
@@ -4313,18 +4319,11 @@ myContext->set_line_width(2.0);</programlisting>
     <para>
         This program contains a single class, <classname>MyArea</classname>,
         which is a subclass of <classname>Gtk::DrawingArea</classname> and
-        contains an <methodname>on_expose_event()</methodname> member function.
-        This method is called whenever the image in the drawing area needs to
-        be redrawn. This function is passed a pointer to a
-        <classname>GdkEventExpose</classname> structure which defines the area
-        that needs to be redrawn. We use these values to create a rectangle
-        path in Cairo (using the <methodname>rectangle()</methodname> function) and
-        then <methodname>clip()</methodname> to this path. The
-        <methodname>clip()</methodname> function sets a clip region. The current
-        clip region affects all drawing operations by effectively masking out
-        any changes to the surface that are outside the current clip region.
-        This allows us to limit our redrawing to only the area that needs to be
-        redrawn.
+        contains an <methodname>on_draw()</methodname> member function.
+        This function is called whenever the image in the drawing area needs to
+        be redrawn. It is passed a <classname>Cairo::RefPtr</classname>
+        pointer to a <classname>Cairo::Context</classname> that we use
+        for the drawing.
         The actual drawing code sets the color we want to use for drawing by
         using <methodname>set_source_rgb()</methodname> which takes arguments
         defining the Red, Green, and Blue components of the desired color
@@ -4376,7 +4375,7 @@ myContext->set_line_width(2.0);</programlisting>
         </para>
         <para>
             There are other things you can customize as well, including
-            creating dashed lines and other things. For more information , see
+            creating dashed lines and other things. For more information, see
             the Cairo API documentation.
         </para>
     </sect2>
@@ -4408,16 +4407,15 @@ myContext->set_line_width(2.0);</programlisting>
         <para><ulink url="&url_examples_base;drawingarea/curve">Source Code</ulink></para>
         <para>
             The only difference between this example and the straight line
-            example is in the <methodname>on_expose_event()</methodname> function,
+            example is in the <methodname>on_draw()</methodname> function,
             but there are a few new concepts and functions introduced here, so
             let's examine them briefly.
         </para>
         <para>
-            Note that we clip to the area that needs re-exposing just as we did
-            in the last example. After clipping, however, we make a call to
+            We make a call to
             <methodname>Cairo::Context::scale()</methodname>, passing in the width
             and height of the drawing area. This scales the user-space
-            coordinate system such that the the width and height of the widget
+            coordinate system such that the width and height of the widget
             are both equal to 1.0 'units'. There's no particular reason to
             scale the coordinate system in this case, but sometimes it can make
             drawing operations easier.
@@ -4453,24 +4451,20 @@ myContext->set_line_width(2.0);</programlisting>
           angle of M_PI/2 radians (90 degrees) is in the direction of the positive Y axis
           (in user-space). Angles increase in the direction from the positive X axis
           toward the positive Y axis. So with the default transformation matrix, angles
-          increase in a clockwise direction.
+          increase in a clockwise direction. (Remember that the positive Y axis
+          points downwards.)
       </para>
       <para>
           To draw an ellipse, you can scale the current transformation matrix
           by different amounts in the X and Y directions. For example, to draw
-          an ellipse in the box given by <varname>x</varname>,
-          <varname>y</varname>, <varname>width</varname>,
-          <varname>height</varname>:
+          an ellipse with center at <varname>x</varname>, <varname>y</varname>
+          and size <varname>width</varname>, <varname>height</varname>:
 
           <programlisting>context->save();
 context->translate(x, y);
 context->scale(width / 2.0, height / 2.0);
 context->arc(0.0, 0.0, 1.0, 0.0, 2 * M_PI);
 context->restore();</programlisting>
-          Note that this contradicts the <ulink
-              url="http://www.cairographics.org/manual/cairo-Paths.html#cairo-arc">advice
-              given in the official Cairo documentation</ulink>, but it seems
-          to work.
       </para>
       <sect2 id="cairo-example-arcs">
           <title>Example</title>
@@ -4491,7 +4485,7 @@ context->restore();</programlisting>
           <para>
               There are a couple of things to note about this example code.
               Again, the only real difference between this example and the
-              previous ones is the <methodname>on_expose_event()</methodname>
+              previous ones is the <methodname>on_draw()</methodname>
               function, so we'll limit our focus to that function. In
               addition, the first part of the function is nearly identical to
               the previous examples, so we'll skip that portion.
@@ -4537,14 +4531,15 @@ context->restore();</programlisting>
           <para>
               Text is drawn via Pango Layouts. The easiest way to create a
               <classname>Pango::Layout</classname> is to use
-              <methodname>create_pango_layout</methodname>. Once created, the layout
-              can be manipulated in various ways, including changing the text,
-              font, etc. Finally, the layout can be rendered using the
-              <methodname>draw_layout</methodname> method of
-              <classname>Gdk::Drawable</classname>, which takes a
-              <classname>Gdk::GC</classname> object, an x-position, a
-              y-position and the layout itself.
-              <!-- TODO: Update this section for Cairo instead of Gdk::GC. -->
+              <methodname>Gtk::Widget::create_pango_layout()</methodname>.
+              Once created, the layout can be manipulated in various ways,
+              including changing the text, font, etc. Finally, the layout can
+              be rendered using the
+              <methodname>Pango::Layout::show_in_cairo_context()</methodname> method.
+          </para>
+          <para>
+              The Printing chapter contains an
+              <link linkend="sec-printing-example">example</link> of drawing text.
           </para>
       </sect2>
 
@@ -4656,23 +4651,20 @@ return true;
       </screenshot>
       <para><ulink url="&url_examples_base;drawingarea/clock">Source Code</ulink></para>
       <para>
-          As before, almost all of the interesting stuff is done in the expose
-          event handler <methodname>on_expose_event()</methodname>. Before we dig
-          into the expose event handler, notice that the constructor for the
+          As before, almost all of the interesting stuff is done in the draw
+          signal handler <methodname>on_draw()</methodname>. Before we dig
+          into the draw signal handler, notice that the constructor for the
           <classname>Clock</classname> widget connects a handler function
-          <methodname>onSecondElapsed()</methodname> to a timer with a timeout
+          <methodname>on_timeout()</methodname> to a timer with a timeout
           period of 1000 milliseconds (1 second). This means that
-          <methodname>onSecondElapsed()</methodname> will get called once per
+          <methodname>on_timeout()</methodname> will get called once per
           second. The sole responsibility of this function is to invalidate
           the window so that &gtkmm; will be forced to redraw it.
       </para>
       <para>
           Now let's take a look at the code that performs the actual drawing.
-          The first section of <methodname>on_expose_event()</methodname> should be
-          pretty familiar by now as it's mostly 'boilerplate' code for getting
-          the <classname>Gdk::Window</classname>, creating a
-          <classname>Cairo::Context</classname>, and clipping to the area that
-          we want to re-draw. This example again scales the coordinate system
+          The first section of <methodname>on_draw()</methodname> should be
+          pretty familiar by now. This example again scales the coordinate system
           to be a unit square so that it's easier to draw the clock as a
           percentage of window size so that it will automatically scale when
           the window size is adjusted. Furthermore, the coordinate system is

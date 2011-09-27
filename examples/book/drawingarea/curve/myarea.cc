@@ -38,12 +38,7 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
          x2=0.6, y2=0.1,  // control point #2
          x3=0.9, y3=0.5;  // end point
 
-  // clip to the area indicated by the expose event so that we only redraw
-  // the portion of the window that needs to be redrawn
-  cr->rectangle(0, 0, width, height);
-  cr->clip();
-
-  // scale to unit square (0 to 1 with and height)
+  // scale to unit square (0 to 1 width and height)
   cr->scale(width, height);
 
   cr->set_line_width(0.05);
