@@ -12,6 +12,7 @@ example
 /book/drawingarea/arcs/drawingareaarcs
 /book/drawingarea/clock/cairoclock
 /book/drawingarea/curve/drawingareacurve
+/book/drawingarea/image/drawingareaimage
 /book/drawingarea/joins/cairojoins
 /book/drawingarea/simple/drawingarea
 /book/giomm/getline/getline

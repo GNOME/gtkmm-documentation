@@ -1,5 +1,22 @@
 2011-09-27  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
+	Replace Bitmap and Pixmap by Pixbuf.
+
+	* examples/book/drawingarea/image/fractal_image.png:
+	* examples/book/drawingarea/image/main.cc:
+	* examples/book/drawingarea/image/myarea.[h|cc]: New example.
+	* examples/Makefile.am: Mention the new files.
+	* examples/.gitignore: Ignore the executable file drawingareaimage.
+	* docs/tutorial/C/figures/drawingarea_image.png: New screenshot.
+	* docs/tutorial/Makefile.am: Mention the new file.
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Replace all talk about the removed
+	classes Gdk::Bitmap and Pixmap by Pixbuf. Update the Drawing Images section
+	in the Drawing Area Widget chapter to gtkmm3 status. Remove removed and
+	deprecated classes from the list in the Widgets Without X-Windows chapter.
+	Bug #658265.
+
+2011-09-27  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
 	Drawing Area Widget chapter: Replace on_expose_event() by on_draw().
 
 	* examples/book/drawingarea/curve/myarea.cc: Remove some unnecessary code.

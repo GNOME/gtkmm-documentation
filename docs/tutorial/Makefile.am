@@ -48,6 +48,7 @@ DOC_FIGURES =					\
 	figures/drag_and_drop.png		\
 	figures/drawingarea_arcs.png		\
 	figures/drawingarea_curve.png		\
+	figures/drawingarea_image.png		\
 	figures/drawingarea_lines.png		\
 	figures/drawingarea_text.png		\
 	figures/entry.png			\

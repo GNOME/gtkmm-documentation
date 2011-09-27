@@ -38,6 +38,7 @@ check_PROGRAMS =					\
 	book/drawingarea/arcs/drawingareaarcs		\
 	book/drawingarea/clock/cairoclock		\
 	book/drawingarea/curve/drawingareacurve		\
+	book/drawingarea/image/drawingareaimage		\
 	book/drawingarea/joins/cairojoins		\
 	book/drawingarea/simple/drawingarea		\
 	book/entry/completion/example			\
@@ -117,6 +118,7 @@ dist_noinst_DATA =				\
 	book/builder/derived/basic.ui		\
 	book/buttons/button/info.xpm		\
 	book/custom/custom_widget/custom_gtk.css	\
+	book/drawingarea/image/fractal_image.png	\
 	book/iconview/gnome-dice-1.svg		\
 	book/iconview/gnome-dice-2.svg		\
 	book/iconview/gnome-dice-3.svg		\
@@ -287,6 +289,11 @@ book_drawingarea_curve_drawingareacurve_SOURCES =	\
 	book/drawingarea/curve/main.cc			\
 	book/drawingarea/curve/myarea.cc		\
 	book/drawingarea/curve/myarea.h
+
+book_drawingarea_image_drawingareaimage_SOURCES =	\
+	book/drawingarea/image/main.cc			\
+	book/drawingarea/image/myarea.cc		\
+	book/drawingarea/image/myarea.h
 
 book_drawingarea_joins_cairojoins_SOURCES =	\
 	book/drawingarea/joins/main.cc		\

@@ -3895,30 +3895,25 @@ Here is a list of some of these Widgets:
 </para>
 <programlisting>Gtk::Alignment
 Gtk::Arrow
+Gtk::AspectFrame
 Gtk::Bin
 Gtk::Box
 Gtk::Button
 Gtk::CheckButton
 Gtk::Fixed
+Gtk::Frame
+Gtk::Grid
 Gtk::Image
-Gtk::Item
 Gtk::Label
 Gtk::MenuItem
 Gtk::Notebook
 Gtk::Paned
-Gtk::Pixmap
 Gtk::RadioButton
 Gtk::Range
 Gtk::ScrolledWindow
 Gtk::Separator
 Gtk::Table
-Gtk::Toolbar
-Gtk::AspectFrame
-Gtk::Frame
-Gtk::VBox
-Gtk::HBox
-Gtk::VSeparator
-Gtk::HSeparator</programlisting>
+Gtk::Toolbar</programlisting>
 
 <para>
 These widgets are mainly used for decoration or layout, so you won't often need
@@ -4552,32 +4547,10 @@ context->restore();</programlisting>
   </sect1>
   <sect1 id="sec-draw-images">
       <title>Drawing Images</title>
-      <sect2 id="drawing-images-gdk">
-          <title>Drawing Images with Gdk</title>
           <para>
-              There are a couple of drawing methods for putting image data into
-              a drawing area. <methodname>draw_pixmap()</methodname> can copy the
-              contents of a <classname>Gdk::Drawable</classname> (the window of
-              a drawing area is one) into the drawing area. There is also
-              <methodname>draw_bitmap()</methodname> for drawing a two-color image
-              into the drawing area, and <methodname>draw_image()</methodname> for
-              drawing an image with more than two colors.
-          </para>
-          <para>
-              For all of these methods, the first argument is the
-              <classname>Gdk::GC</classname>. The second argument is the object
-              of the appropriate type to copy in:
-              <classname>Gdk::Drawable</classname>,
-              <classname>Gdk::Bitmap</classname>,
-              <classname>Gdk::Image</classname>. The next two arguments are the
-              x and y points in the image to begin copying from. Then come the
-              x and y points in the drawing area to copy to. The final two
-              arguments are the width and height of the area to copy.
-          </para>
-          <para>
-              There is also a method for drawing from a
-              <classname>Gdk::Pixbuf</classname>. A
-              <classname>Gdk::Pixbuf</classname> buffer is a useful wrapper
+              There is a method for drawing from a
+              <classname>Gdk::Pixbuf</classname> to a <classname>Cairo::Context</classname>.
+              A <classname>Gdk::Pixbuf</classname> buffer is a useful wrapper
               around a collection of pixels, which can be read from files, and
               manipulated in various ways.
           </para>
@@ -4589,42 +4562,44 @@ context->restore();</programlisting>
               rendering.
           </para>
           <para>
-              The <classname>Gdk::Pixbuf</classname> can be rendered with
-              <methodname>render_to_drawable</methodname>, which takes quite a few
-              parameters. The <methodname>render_to_drawable</methodname> is a
-              member of <classname>Gdk::Pixbuf</classname> rather than
-              <classname>Gdk::Drawable</classname>, which is unlike the
-              <methodname>draw_*</methodname> functions described earlier. As such,
-              its first parameter is the drawable to render to. The second
-              parameter is still the <classname>Gdk::GC</classname>. The next
-              two parameters are the point in the pixbuf to start drawing from.
-              This is followed by the point in the drawable to draw it at, and
-              by the width and height to actually draw (which may not be the
-              whole image, especially if you're only responding to an expose
-              event for part of the window). Finally, there are the dithering
-              parameters. If you use Gdk::RGB_DITHER_NONE as the dither type,
-              then the dither offset parameters can both be 0.
+              The <classname>Gdk::Pixbuf</classname> can be rendered by setting
+              it as the source pattern of the Cairo context with
+              <methodname>Gdk::Cairo::set_source_pixbuf()</methodname>.
+              Then draw the image with either <methodname>Cairo::Context::paint()</methodname>
+              (to draw the whole image), or <methodname>Cairo::Context::rectangle()</methodname>
+              and <methodname>Cairo::Context::fill()</methodname> (to fill the
+              specified rectangle). <methodname>set_source_pixbuf()</methodname>
+              is not a member of <classname>Cairo::Context</classname>. It takes
+              a <classname>Cairo::Context</classname> as its first parameter.
           </para>
           <para>
               Here is a small bit of code to tie it all together: (Note that
-              usually you wouldn't load the image every time in the expose
-              event handler! It's just shown here to keep it all together)
+              usually you wouldn't load the image every time in the draw
+              signal handler! It's just shown here to keep it all together.)
           </para>
-          <programlisting>bool myarea::on_expose_event(GdkEventExpose* ev)
+          <programlisting>bool MyArea::on_draw(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; cr)
 {
-Glib::RefPtr&lt;Gdk::Pixbuf&gt; image = Gdk::Pixbuf::create_from_file("myimage.png");
-image-&gt;render_to_drawable(get_window(), get_style()-&gt;get_black_gc(),
-0, 0, 100, 80, image-&gt;get_width(), image-&gt;get_height(), // draw the whole image (from 0,0 to the full width,height) at 100,80 in the window
-Gdk::RGB_DITHER_NONE, 0, 0);
-return true;
+  Glib::RefPtr&lt;Gdk::Pixbuf&gt; image = Gdk::Pixbuf::create_from_file("myimage.png");
+  // Draw the image at 110, 90, except for the outermost 10 pixels.
+  Gdk::Cairo::set_source_pixbuf(cr, image, 100, 80);
+  cr-&gt;rectangle(110, 90, image-&gt;get_width()-20, image-&gt;get_height()-20);
+  cr-&gt;fill();
+  return true;
 }</programlisting>
-      </sect2>
-      <!--
-      <sect2 id="drawing-images-cairo">
-          <title>Drawing images with Cairo</title>
-          <warning>TODO: Add Cairo content.</warning>
-      </sect2>
-      -->
+        <sect2 id="cairo-example-image">
+            <title>Example</title>
+            <para>
+                Here is an example of a simple program that draws an image.
+            </para>
+        <figure id="figure-drawingarea-image">
+            <title>Drawing Area - Image</title>
+            <screenshot>
+                <graphic format="PNG" fileref="&url_figures_base;drawingarea_image.png"/>
+            </screenshot>
+        </figure>
+
+        <para><ulink url="&url_examples_base;drawingarea/image">Source Code</ulink></para>
+        </sect2>
   </sect1>
   <!--
   <sect1 id="sec-drawing-fill">
@@ -6189,36 +6164,38 @@ be an instance in your <function>main()</function> function..
 <title>Shared resources</title>
 
 <para>
-Some objects, such as <classname>Gdk::Pixmap</classname>s and
+Some objects, such as <classname>Gdk::Pixbuf</classname>s and
 <classname>Pango::Font</classname>s, are obtained from a shared store.
 Therefore you cannot instantiate your own instances. These classes typically
 inherit from <classname>Glib::Object</classname>. Rather than requiring you to
 reference and unreference these objects, &gtkmm; uses the
-<classname>RefPtr&lt;&gt;</classname> smartpointer.
+<classname>Glib::RefPtr&lt;&gt;</classname> smartpointer. Cairomm has its own
+smartpointer, <classname>Cairo::RefPtr&lt;&gt;</classname>.
 </para>
 
 <para>
-Objects such as <classname>Gdk::Bitmap</classname> can only be instantiated
+Objects such as <classname>Gdk::Pixbuf</classname> can only be instantiated
 with a <methodname>create()</methodname> function. For instance,
 <programlisting>
-Glib::RefPtr&lt;Gdk::Bitmap&gt; bitmap = Gdk::Bitmap::create(window, data, width, height);
+Glib::RefPtr&lt;Gdk::Pixbuf&gt; pixbuf = Gdk::Pixbuf::create_from_file(filename);
 </programlisting>
 </para>
 
 <para>
-You have no way of getting a bare <classname>Gdk::Bitmap</classname>. In the
-example, <varname>bitmap</varname> is a smart pointer, so you can do this, much
+You have no way of getting a bare <classname>Gdk::Pixbuf</classname>. In the
+example, <varname>pixbuf</varname> is a smart pointer, so you can do this, much
 like a normal pointer:
 <programlisting>
-if(bitmap)
+int width = 0;
+if(pixbuf)
 {
-  int depth = bitmap-&gt;get_depth().
+  width = pixbuf-&gt;get_width();
 }
 </programlisting>
 </para>
 
 <para>
-When <varname>bitmap</varname> goes out of scope an
+When <varname>pixbuf</varname> goes out of scope an
 <methodname>unref()</methodname> will happen in the background and you don't need
 to worry about it anymore. There's no <literal>new</literal> so there's no
 <literal>delete</literal>.
@@ -6226,7 +6203,7 @@ to worry about it anymore. There's no <literal>new</literal> so there's no
 <para>
 If you copy a <classname>RefPtr</classname>, for instance
 <programlisting>
-Glib::RefPtr&lt;Gdk::Bitmap&gt; bitmap2 = bitmap.
+Glib::RefPtr&lt;Gdk::Pixbuf&gt; pixbuf2 = pixbuf;
 </programlisting>
 , or if you pass it as a method argument or a return type, then
 <classname>RefPtr</classname> will do any necessary referencing to ensure that
@@ -7285,21 +7262,19 @@ instance.
 </para>
 <para>
 <programlisting>
-Glib::RefPtr&lt;Gdk::Bitmap&gt; refBitmap = Gdk::Bitmap::create(window,
-data, width, height);
-Glib::RefPtr&lt;Gdk::Bitmap&gt; refBitmap2 = refBitmap;
+Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf = Gdk::Pixbuf::create_from_file(filename);
+Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf2 = refPixbuf;
 </programlisting>
 </para>
 <para>
-Of course this means that you can store <classname>RefPtrs</classname> in
+Of course this means that you can store <classname>RefPtr</classname>s in
 standard containers, such as <classname>std::vector</classname> or
 <classname>std::list</classname>.</para>
 <para>
 <programlisting>
-std::list&lt; Glib::RefPtr&lt;Gdk::Pixmap&gt; &gt; listPixmaps;
-Glib::RefPtr&lt;Gdk::Pixmap&gt; refPixmap = Gdk::Pixmap::create(window,
-width, height, depth);
-listPixmaps.push_back(refPixmap);
+std::list&lt; Glib::RefPtr&lt;Gdk::Pixbuf&gt; &gt; listPixbufs;
+Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf = Gdk::Pixbuf::create_from_file(filename);
+listPixbufs.push_back(refPixbuf);
 </programlisting>
 </para>
 </sect1>
@@ -7310,9 +7285,8 @@ call the methods of the underlying instance, just like a normal pointer.
 </para>
 <para>
 <programlisting>
-Glib::RefPtr&lt;Gdk::Bitmap&gt; refBitmap = Gdk::Bitmap::create(window,
-data, width, height);
-int depth = refBitmap-&gt;get_depth();
+Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf = Gdk::Pixbuf::create_from_file(filename);
+int width = refPixbuf-&gt;get_width();
 </programlisting>
 </para>
 <para>But unlike most smartpointers, you can't use the * operator to
@@ -7320,9 +7294,8 @@ access the underlying instance.
 </para>
 <para>
 <programlisting>
-Glib::RefPtr&lt;Gdk::Bitmap&gt; refBitmap = Gdk::Bitmap::create(window,
-data, width, height);
-Gdk::Bitmap* underlying = *refBitmap; //Syntax error - will not compile.
+Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf = Gdk::Pixbuf::create_from_file(filename);
+Gdk::Pixbuf&amp; underlying = *refPixbuf; //Syntax error - will not compile.
 </programlisting>
 </para>
 </sect1>
@@ -9060,15 +9033,15 @@ _MEMBER_GET_PTR(vbox, vbox, VBox*, GtkWidget*)
 <sect3 id="gmmproc-member-get-set-gobject">
   <title>_MEMBER_GET_GOBJECT / _MEMBER_SET_GOBJECT</title>
   <para>
-    Use this macro to provide getters and setters for a data member that is a
+    Use these macros to provide getters and setters for a data member that is a
     <classname>GObject</classname> type that must be referenced before being
     returned.
   </para>
   <para><function>_MEMBER_GET_GOBJECT(C++ name, C name, C++ type, C type)</function></para>
   <para><function>_MEMBER_SET_GOBJECT(C++ name, C name, C++ type, C type)</function></para>
-  <para>For example, in <filename>progress.hg</filename>:
+  <para>For example, in Pangomm, <filename>layoutline.hg</filename>:
 <programlisting>
-_MEMBER_GET_GOBJECT(offscreen_pixmap, offscreen_pixmap, Gdk::Pixmap, GdkPixmap*)
+_MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
 </programlisting>
   </para>
 </sect3>
