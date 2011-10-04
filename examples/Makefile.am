@@ -114,8 +114,8 @@ check_PROGRAMS =					\
 dist_noinst_DATA =				\
 	README					\
 	book/README				\
-	book/builder/basic/basic.ui		\
-	book/builder/derived/basic.ui		\
+	book/builder/basic/basic.glade		\
+	book/builder/derived/derived.glade	\
 	book/buttons/button/info.xpm		\
 	book/custom/custom_widget/custom_gtk.css	\
 	book/drawingarea/image/fractal_image.png	\

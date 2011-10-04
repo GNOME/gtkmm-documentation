@@ -27,11 +27,16 @@ int main (int argc, char **argv)
   Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
   try
   {
-    refBuilder->add_from_file("basic.ui");
+    refBuilder->add_from_file("derived.glade");
   }
   catch(const Glib::FileError& ex)
   {
     std::cerr << "FileError: " << ex.what() << std::endl;
+    return 1;
+  }
+  catch(const Glib::MarkupError& ex)
+  {
+    std::cerr << "MarkupError: " << ex.what() << std::endl;
     return 1;
   }
   catch(const Gtk::BuilderError& ex)
@@ -42,7 +47,7 @@ int main (int argc, char **argv)
 
   //Get the GtkBuilder-instantiated dialog::
   DerivedDialog* pDialog = 0;
-  refBuilder->get_widget_derived("DialogBasic", pDialog);
+  refBuilder->get_widget_derived("DialogDerived", pDialog);
   if(pDialog)
   {
     //Start:
@@ -50,7 +55,6 @@ int main (int argc, char **argv)
   }
 
   delete pDialog;
-    
 
   return 0;
 }

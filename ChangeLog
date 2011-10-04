@@ -1,5 +1,18 @@
 2011-10-04  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
+	Gtk::Builder examples: Update the Glade files.
+
+	* examples/book/builder/basic/basic.glade:
+	* examples/book/builder/derived/derived.glade: Rename from basic.ui.
+	Replace "libglademm" in the label text with "Glade and Gtk::Builder".
+	* examples/Makefile.am: Change the file names of the Glade files.
+	* examples/book/builder/basic/main.cc:
+	* examples/book/builder/derived/main.cc: Change name of loaded Glade file.
+	Catch Glib::MarkupError exceptions from Gtk::Builder::add_from_file().
+	Bug #658265.
+
+2011-10-04  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
 	Update the Recently Used Documents chapter to gtkmm3 status.
 
 	* examples/book/recent_files/examplewindow.[h|cc]: Remove obsolete comments.
