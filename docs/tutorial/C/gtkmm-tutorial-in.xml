@@ -8,7 +8,7 @@
   <!ENTITY url_refdocs_base_gtk_namespace "&url_refdocs_base_gtk_html;namespaceGtk_1_1">
   <!ENTITY url_figures_base "figures/">
   <!ENTITY url_examples_base "http://git.gnome.org/browse/gtkmm-documentation/tree/examples/book/">
-  <!ENTITY url_examples_branchsuffix "">
+  <!ENTITY url_examples_branchsuffix "master">
   <!ENTITY gtkmm "<application>gtkmm</application>">
   <!ENTITY uuml "&#252;" >
   <!ENTITY szlig "&#223;" >

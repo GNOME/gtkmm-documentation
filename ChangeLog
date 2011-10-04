@@ -1,3 +1,10 @@
+2011-10-04  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Update branch name in links to the git repository.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Change branch name of example code
+	from "" to "master". Bug #658265.
+
 2011-09-27  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Replace Bitmap and Pixmap by Pixbuf.
