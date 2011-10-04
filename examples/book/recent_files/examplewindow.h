@@ -29,6 +29,7 @@ public:
 
 protected:
   //Signal handlers:
+  void on_menu_file_recent_files_item();
   void on_menu_file_recent_files_dialog();
   void on_menu_file_quit();
   void on_menu_file_new();
@@ -38,6 +39,7 @@ protected:
 
   Glib::RefPtr<Gtk::UIManager> m_refUIManager;
   Glib::RefPtr<Gtk::ActionGroup> m_refActionGroup;
+  Glib::RefPtr<Gtk::RecentAction> m_refRecentAction;
 
   Glib::RefPtr<Gtk::RecentManager> m_refRecentManager;
 };

@@ -36,23 +36,22 @@ ExampleWindow::ExampleWindow()
   //File menu:
   m_refActionGroup->add( Gtk::Action::create("FileMenu", "_File") );
   m_refActionGroup->add( Gtk::Action::create("FileNew", Gtk::Stock::NEW),
-          sigc::mem_fun(*this, &ExampleWindow::on_menu_file_new));
+    sigc::mem_fun(*this, &ExampleWindow::on_menu_file_new));
 
-  /* A recent-files sub-menu: */
-  //TODO: Shouldn't this have a default constructor?: 
-  //See bug #450032.
-  //m_refActionGroup->add( Gtk::RecentAction::create() );
-  m_refActionGroup->add( Gtk::RecentAction::create("FileRecentFiles",
-              "_Recent Files"));
+  //A recent-files submenu:
+  m_refRecentAction = Gtk::RecentAction::create("FileRecentFiles", "_Recent Files");
+  m_refActionGroup->add(m_refRecentAction);
+  //Connect to RecentChooser's item_activated signal
+  //instead of Action's activate signal:
+  m_refRecentAction->signal_item_activated().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_menu_file_recent_files_item) );
 
-  /* A menu item to open the recent-files dialog: */
-  m_refActionGroup->add( Gtk::Action::create("FileRecentDialog",
-              "Recent Files _Dialog"), sigc::mem_fun(*this,
-                  &ExampleWindow::on_menu_file_recent_files_dialog) );
+  //A menu item to open the recent-files dialog:
+  m_refActionGroup->add( Gtk::Action::create("FileRecentDialog", "Recent Files _Dialog"),
+    sigc::mem_fun(*this, &ExampleWindow::on_menu_file_recent_files_dialog) );
 
   m_refActionGroup->add( Gtk::Action::create("FileQuit", Gtk::Stock::QUIT),
-          sigc::mem_fun(*this, &ExampleWindow::on_menu_file_quit) );
-
+    sigc::mem_fun(*this, &ExampleWindow::on_menu_file_quit) );
 
   m_refUIManager = Gtk::UIManager::create();
   m_refUIManager->insert_action_group(m_refActionGroup);
@@ -91,7 +90,7 @@ ExampleWindow::ExampleWindow()
   if(pMenubar)
     m_Box.pack_start(*pMenubar, Gtk::PACK_SHRINK);
 
-  Gtk::Widget* pToolbar = m_refUIManager->get_widget("/ToolBar") ;
+  Gtk::Widget* pToolbar = m_refUIManager->get_widget("/ToolBar");
   if(pToolbar)
     m_Box.pack_start(*pToolbar, Gtk::PACK_SHRINK);
 
@@ -104,12 +103,17 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_menu_file_new()
 {
-    std::cout << " New File" << std::endl;
+  std::cout << " New File" << std::endl;
 }
 
 void ExampleWindow::on_menu_file_quit()
 {
   hide(); //Closes the main window to stop the Gtk::Main::run().
+}
+
+void ExampleWindow::on_menu_file_recent_files_item()
+{
+  std::cout << "URI selected = " << m_refRecentAction->get_current_uri() << std::endl;
 }
 
 void ExampleWindow::on_menu_file_recent_files_dialog()
@@ -122,7 +126,7 @@ void ExampleWindow::on_menu_file_recent_files_dialog()
   dialog.hide();
   if(response == Gtk::RESPONSE_OK)
   {
-     std::cout << "URI selected = " << dialog.get_current_uri() << std::endl;
+    std::cout << "URI selected = " << dialog.get_current_uri() << std::endl;
   }
 }
 

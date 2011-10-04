@@ -5408,7 +5408,8 @@ and update the print settings.
     <classname>RecentManager</classname>,
     <classname>RecentChooserDialog</classname>,
     <classname>RecentChooserMenu</classname>,
-    <classname>RecentChooserWidget</classname>, and
+    <classname>RecentChooserWidget</classname>,
+    <classname>RecentAction</classname>, and
     <classname>RecentFilter</classname>.
   </para>
   <para>
@@ -5421,16 +5422,22 @@ and update the print settings.
   <sect1 id="sec-recentmanager">
     <title>RecentManager</title>
     <para>
-      <classname>RecentManager</classname> acts as the central database of
+      <classname>RecentManager</classname> acts as a database of
       recently used files. You use this class to register new files, remove
-      files from the list, or look up recently used files.
+      files from the list, or look up recently used files. There is one list
+      of recently used files per user.
     </para>
     <para>
       You can create a new <classname>RecentManager</classname>, but you'll most
       likely just want to use the default one. You can get a reference to the
       default <classname>RecentManager</classname> with
       <methodname>get_default()</methodname>.
-      </para>
+    </para>
+    <para>
+      <classname>RecentManager</classname> is the model of a model-view pattern,
+      where the view is a class that implements the
+      <classname>RecentChooser</classname> interface.
+    </para>
     <sect2 id="recent-files-adding">
       <title>Adding Items to the List of Recent Files</title>
       <para>
@@ -5445,7 +5452,7 @@ recent_manager->add_item(uri);</programlisting>
         <methodname>add_item()</methodname>. The metadata that can be set on a
         particular file item is as follows:
       </para>
-      <itemizedlist>
+      <itemizedlist id="list-file-metadata">
         <listitem>
           <para><varname>app_exec</varname>: The command line to be used to launch
             this resource. This string may contain the "f" and "u" escape
@@ -5490,13 +5497,19 @@ recent_manager->add_item(uri);</programlisting>
         provides several functions. To look up a specific item by its URI, you
         can use the <methodname>lookup_item()</methodname> function, which will
         return a <classname>RecentInfo</classname> class. If the specified URI
-        did not exist in the list of recent files, the
-        <classname>RecentInfo</classname> object will be invalid.
-        <classname>RecentInfo</classname> provides an implementation for
-        <methodname>operator bool()</methodname> which can be used to test for
-        validity. For example:
+        did not exist in the list of recent files,
+        <methodname>lookup_item()</methodname> throws a
+        <classname>RecentManagerError</classname> exception. For example:
       </para>
-<programlisting>Gtk::RecentInfo info = recent_manager-&gt;lookup_item(uri);
+<programlisting>Glib::RefPtr&lt;Gtk::RecentInfo&gt; info;
+try
+{
+  info = recent_manager-&gt;lookup_item(uri);
+}
+catch(const Gtk::RecentManagerError&amp; ex)
+{
+  std::cerr &lt;&lt; "RecentManagerError: " &lt;&lt; ex.what() &lt;&lt; std::endl;
+}
 if (info)
 {
   // item was found
@@ -5504,25 +5517,22 @@ if (info)
       <para>
         A <classname>RecentInfo</classname> object is essentially an object
         containing all of the metadata about a single recently-used file. You
-        can use this object to look up any of the properties listed above. FIXME
-        - add cross-reference.
+        can use this object to look up any of the properties listed
+        <link linkend="list-file-metadata">above</link>.
       </para>
       <para>
         If you don't want to look for a specific URI, but instead want to get a
         list of all recently used items, <classname>RecentManager</classname>
         provides the <methodname>get_items()</methodname> function. The return
-        value of this function can be assigned to any standard C++ container
-        (e.g. <classname>std::vector</classname>,
-        <classname>std::list</classname>, etc) and contains a list of all
-        recently-used files up to a user-defined limit (FIXME: what's the
-        default limit?). The following code demonstrates how you might get a
-        list of recently-used files:
+        value of this function is a <classname>std::vector</classname> of all
+        recently used files. The following code demonstrates how you might get a
+        list of recently used files:
       </para>
-      <programlisting>std::vector&lt;Gtk::RecentInfo&gt; info_list = recent_manager-&gt;get_items();</programlisting>
+      <programlisting>std::vector&lt; Glib::RefPtr&lt;Gtk::RecentInfo&gt; &gt; info_list = recent_manager-&gt;get_items();</programlisting>
       <para>
-        The limit on the number of items returned can be set
-        by <methodname>set_limit()</methodname>, and queried with
-        <methodname>get_limit()</methodname>.
+        The maximum age of items in the recently used files list can be set with
+        <methodname>Gtk::Settings::property_gtk_recent_files_max_age()</methodname>.
+        Default value: 30 days.
       </para>
     </sect2>
     <sect2 id="recent-files-modifying">
@@ -5536,7 +5546,7 @@ if (info)
       </para>
       <para>
         In addition to changing a file's URI, you can also remove items from the
-        list, either one at a time or by clearint them all at once. The former
+        list, either one at a time or by clearing them all at once. The former
         is accomplished with <methodname>remove_item()</methodname>, the latter with
         <methodname>purge_items()</methodname>.
       </para>
@@ -5557,10 +5567,11 @@ if (info)
     <para>
       <classname>RecentChooser</classname> is an interface that can be
       implemented by widgets displaying the list of recently used files.
-      &gtkmm; provides three built-in implementations for choosing recent files:
+      &gtkmm; provides four built-in implementations for choosing recent files:
       <classname>RecentChooserWidget</classname>,
-      <classname>RecentChooserDialog</classname>, and
-      <classname>RecentChooserMenu</classname>.
+      <classname>RecentChooserDialog</classname>,
+      <classname>RecentChooserMenu</classname>, and
+      <classname>RecentAction</classname>.
     </para>
     <para>
       <classname>RecentChooserWidget</classname> is a simple widget for
@@ -5570,16 +5581,18 @@ if (info)
       user interface if you want to.
     </para>
     <para>
-      The last class that implements the <classname>RecentChooser</classname>
-      interface is <classname>RecentChooserMenu</classname>. This class allows
-      you to list recently used files as a menu.
+      <classname>RecentChooserMenu</classname> and
+      <classname>RecentAction</classname> allow you to list recently used files
+      as a menu.
     </para>
-    <sect2 id="recenchooserwidget-example">
-      <title>Simple RecentChooserWidget example</title>
+    <sect2 id="recentchooserdialog-example">
+      <title>Simple RecentChooserDialog example</title>
       <para>
         Shown below is a simple example of how to use the
-        <classname>RecentChooserDialog</classname> class in a program. This
-        simple program has a menubar with a "Recent Files Dialog" menu item.
+        <classname>RecentChooserDialog</classname> and the
+        <classname>RecentAction</classname> classes in a program.
+        This simple program has a menubar with a
+        <guimenuitem>Recent Files Dialog</guimenuitem> menu item.
         When you select this menu item, a dialog pops up showing the list of
         recently used files.
       </para>

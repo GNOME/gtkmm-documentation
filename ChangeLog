@@ -1,5 +1,14 @@
 2011-10-04  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
+	Update the Recently Used Documents chapter to gtkmm3 status.
+
+	* examples/book/recent_files/examplewindow.[h|cc]: Remove obsolete comments.
+	Add on_menu_file_recent_files_item().
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Update the Recently Used Documents
+	chapter to gtkmm3 status. Bug #658265.
+
+2011-10-04  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
 	Update branch name in links to the git repository.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Change branch name of example code
