@@ -1,3 +1,12 @@
+2011-10-09  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Update Appendix F and G to gtkmm3 status.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Update Appendix F (Working with
+	gtkmm's Source Code) and G (Wrapping C Libraries with gmmproc) to gtkmm3
+	status. Add description of some of gmmproc's macros that were missing in
+	Appendix G. Bug #658265.
+
 2011-10-04  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Gtk::Builder examples: Update the Glade files.

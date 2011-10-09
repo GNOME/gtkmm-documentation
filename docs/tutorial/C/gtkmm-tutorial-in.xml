@@ -7934,7 +7934,7 @@ practical - and sensible - to subclass a button for that purpose.
   <para>
     If you are interested in helping out with the development of &gtkmm;, or
     fixing a bug in &gtkmm;, you'll probably need to build the development
-    version of &gtkmm;. However, you should not to install a development version over
+    version of &gtkmm;. However, you should not install a development version over
     your stable version. Instead, you should install it alongside your existing &gtkmm;
     installation, in a separate path.
   </para>
@@ -7944,7 +7944,8 @@ practical - and sensible - to subclass a button for that purpose.
     <application>jhbuild</application> is a program that makes building GNOME
     software much easier by calculating dependencies and building things in the
     correct order. This section will give a brief explanation of how to set up
-    jhbuild to build and install &gtkmm; from the source repository (git). For up-to-date information
+    <application>jhbuild</application> to build and install &gtkmm; from the
+    source repository (git). For up-to-date information
     on <application>jhbuild</application>, please refer to the <ulink
       url="http://developer.gnome.org/jhbuild/unstable/">jhbuild manual</ulink>.
     If you need assistance using <application>jhbuild</application>, you should
@@ -7957,7 +7958,8 @@ practical - and sensible - to subclass a button for that purpose.
     Note that to build &gtkmm; from git, you'll often need to build all of its
     dependencies from git as well. <application>jhbuild</application> makes
     this easier than it would normally be, but it will take quite a while to
-    build and install them all. You will probably encounter build problems, though these will usually be corrected quickly if you report them.
+    build and install them all. You will probably encounter build problems,
+    though these will usually be corrected quickly if you report them.
     </para>
   </note>
   <sect1 id="sec-setting-up-jhbuild">
@@ -7966,31 +7968,31 @@ practical - and sensible - to subclass a button for that purpose.
       To set up <application>jhbuild</application>, follow the basic
       installation instructions from the <ulink
         url="http://developer.gnome.org/jhbuild/unstable/">jhbuild manual</ulink>.
-      After you've have installd <application>jhbuild</application>, you
+      After you have installed <application>jhbuild</application>, you
       should copy the sample <application>jhbuild</application> configuration
       file into your home directory by executing the following command from the
       <application>jhbuild</application> directory:
-      <command>$ cp sample.jhbuildrc ~/.jhbuildrc</command>
+      <screen>$ cp examples/sample.jhbuildrc ~/.jhbuildrc</screen>
     </para>
     <para>
-      The &gtkmm; module is defined in the GNOME moduleset (i.e.
-      <filename>gnome-2.xx.modules</filename>, so edit your
+      The &gtkmm; module is defined in the
+      <filename>gnome-suites-core-deps-3.x.modules</filename> moduleset, so edit your
       <filename>.jhbuildrc</filename> file and set your moduleset setting to the
-      latest version of GNOME like so:
-      <programlisting>moduleset = 'gnome-2.30'</programlisting>
+      latest version e.g. like so:
+      <programlisting>moduleset = 'gnome-suites-core-deps-3.4'</programlisting>
     </para>
     <para>
       After setting the correct moduleset, you need to tell
       <application>jhbuild</application> which module or modules to build. To
       build &gtkmm; and all of its dependencies, set <varname>modules</varname>
-      like so: <programlisting>modules = [ 'gtkmm', ]</programlisting>
+      like so:
+      <programlisting>modules = [ 'gtkmm' ]</programlisting>
     </para>
     <para>
-      You can build all GNOME C++ modules by setting the
-      <varname>modules</varname> variable to the meta-package named
-      <literal>meta-gnome-c++</literal> or build all of the core GNOME modules
-      with <literal>meta-gnome-desktop</literal>. The
-      <varname>modules</varname> variable specifies which modules that will be
+      You can build several modules by setting the
+      <varname>modules</varname> variable to a meta-package, e.g.
+      <literal>meta-gnome-core</literal>, or listing more than one module name.
+      The <varname>modules</varname> variable specifies which modules that will be
       built when you don't explicitly specify anything on the command line. You
       can always build a different moduleset later by specifying it on the
       commandline (e.g. <command>jhbuild build gtkmm</command>).
@@ -8001,7 +8003,7 @@ practical - and sensible - to subclass a button for that purpose.
         By default, <application>jhbuild</application>'s configuration is
         configured to install all software built with
         <application>jhbuild</application> under the
-        <filename>/opt/gnome2</filename> prefix. You can choose a different
+        <filename>/opt/gnome</filename> prefix. You can choose a different
         prefix, but it is recommended that you keep this prefix different from
         other software that you've installed (don't set it to
         <filename>/usr</filename>!) If you've followed the jhbuild instructions
@@ -8009,6 +8011,15 @@ practical - and sensible - to subclass a button for that purpose.
         as <literal>root</literal>.
       </para>
     </important>
+    <para>
+      When you downloaded <application>jhbuild</application> from the git repository,
+      you got a number of <filename>.modules</filename> files, specifying
+      dependencies between modules. By default <application>jhbuild</application>
+      does not use the downloaded versions of these files, but reads the
+      latest versions in the git repository. This is usually what you want.
+      If you don't want it, use the <varname>use_local_modulesets</varname>
+      variable in <filename>.jhbuildrc</filename>.
+    </para>
   </sect1>
   <sect1 id="sec-installing-jhbuild">
     <title>Installing and Using the git version of &gtkmm;</title>
@@ -8035,7 +8046,7 @@ $ jhbuild sanitycheck</screen>
         This command will build and install a series of modules and will probably
         take quite a long time the first time through. After the first time,
         however, it should go quite a bit faster since it only needs to rebuild
-        files than changed since the last build. Alternatively, after you've
+        files that changed since the last build. Alternatively, after you've
         built and installed &gtkmm; the first time, you can rebuild &gtkmm; by
         itself (without rebuilding all of its dependencies) with the command
         <command>jhbuild buildone gtkmm</command>.
@@ -8148,7 +8159,7 @@ A number of the skeleton files must still be filled in with project-specific con
 <sect2 id="modifying-build-files">
 <title>Modifying build files</title>
 
-<para>Now we edit the files to adapt them to to our needs. You might prefer to use a multiple-file
+<para>Now we edit the files to adapt them to our needs. You might prefer to use a multiple-file
   search-replace utility for this, such as <command>regexxer</command>. Note that nearly all of the
   files provided with the skeleton source tree contain placeholder text. Thus, the substitutions
   should be performed globally, and not be limited to the Automake and Autoconf files.</para>
@@ -8264,7 +8275,7 @@ A number of the skeleton files must still be filled in with project-specific con
 
 <sect1 id="sec-wrapping-defs-files">
 <title>Generating the .defs files.</title>
-<para>The <filename>.defs</filename> file are text files, in a lisp format, that describe the API
+<para>The <filename>.defs</filename> files are text files, in a lisp format, that describe the API
   of a C library, including its
 <itemizedlist>
   <listitem><para>objects (GObjects, widgets, interfaces, boxed-types and plain structs)</para></listitem>
@@ -8307,9 +8318,9 @@ A number of the skeleton files must still be filled in with project-specific con
 <title>Generating the methods .defs</title>
 <para>This <filename>.defs</filename> file describes objects and their functions.
   It is generated by the <command>h2def.py</command> script which you can find in
-  pygobject's <filename>codegen</filename> directory. For instance,
+  glibmm's <filename>tools/defs_gen</filename> directory. For instance,
 <programlisting>
-$ ./h2def.py /usr/include/gtk-2.0/gtk/*.h &gt; gtk_methods.defs
+$ ./h2def.py /usr/include/gtk-3.0/gtk/*.h &gt; gtk_methods.defs
 </programlisting>
 </para>
 </sect2>
@@ -8320,7 +8331,7 @@ $ ./h2def.py /usr/include/gtk-2.0/gtk/*.h &gt; gtk_methods.defs
   values. It is generated by the <filename>enum.pl</filename> script which you can
   find in glibmm's <filename>tools</filename> directory. For instance,
 <programlisting>
-$ ./enum.pl /usr/include/gtk-2.0/gtk/*.h &gt; gtk_enums.defs
+$ ./enum.pl /usr/include/gtk-3.0/gtk/*.h &gt; gtk_enums.defs
 </programlisting>
 </para>
 </sect2>
@@ -8363,8 +8374,9 @@ int main(int, char**)
 <sect2 id="writing-defs-vfuncs">
 <title>Writing the vfuncs .defs</title>
 <para>
-<programlisting>
-</programlisting>
+  This <filename>.defs</filename> file describes virtual functions (vfuncs).
+  It must be written by hand. There is no skeleton to start from. You can look
+  at &gtkmm;'s <filename>gtk/src/gtk_vfuncs.defs</filename> file.
 </para>
 </sect2>
 
@@ -8387,6 +8399,7 @@ int main(int, char**)
 
 <programlisting>
 #include &lt;gtkmm/bin.h&gt;
+#include &lt;gtkmm/activatable.h&gt;
 #include &lt;gtkmm/stockid.h&gt;
 _DEFS(gtkmm,gtk)
 _PINCLUDE(gtkmm/private/bin_p.h)
@@ -8394,9 +8407,12 @@ _PINCLUDE(gtkmm/private/bin_p.h)
 namespace Gtk
 {
 
-class Button : public Bin
+class Button
+  : public Bin,
+    public Activatable
 {
   _CLASS_GTKOBJECT(Button,GtkButton,GTK_BUTTON,Gtk::Bin,GtkBin)
+  _IMPLEMENTS_INTERFACE(Activatable)
 public:
 
   _CTOR_DEFAULT
@@ -8421,7 +8437,7 @@ public:
 <variablelist>
     <varlistentry>
         <term><function>_DEFS()</function></term>
-        <listitem><para>Specifies the destination directry for generated sources, and the name of the main .defs file that <command>gmmproc</command> should parse.</para></listitem>
+        <listitem><para>Specifies the destination directory for generated sources, and the name of the main .defs file that <command>gmmproc</command> should parse.</para></listitem>
     </varlistentry>
     <varlistentry>
         <term><function>_PINCLUDE()</function></term>
@@ -8429,7 +8445,15 @@ public:
     </varlistentry>
     <varlistentry>
         <term><function>_CLASS_GTKOBJECT()</function></term>
-        <listitem><para>Tells <command>gmmproc</command> to add some typedefs, constructors, and standard methods to this class, as appropriate when wrapping a GtkObject-derived type.</para></listitem>
+        <listitem><para>Tells <command>gmmproc</command> to add some typedefs, constructors, and standard methods to this class, as appropriate when wrapping a widget.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+        <term><function>_IMPLEMENTS_INTERFACE()</function></term>
+        <listitem><para>Tells <command>gmmproc</command> to add initialization code for the interface.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+        <term><function>_CTOR_DEFAULT</function></term>
+        <listitem><para>Add a default constructor.</para></listitem>
     </varlistentry>
     <varlistentry>
         <term><function>_WRAP_METHOD()</function>,
@@ -8503,14 +8527,14 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
   widget in a specified output parameter, an initialization macro such as the
   following would be necessary:
 <programlisting>
-  _INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')
+_INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')
 </programlisting>
 </para>
 
 <para>
   <literal>$3</literal> will be replaced by the output parameter name of the
   C++ method and <literal>$4</literal> will be replaced by the return of the C
-  function when this initialization is used by gmmproc.  For convinience,
+  function when this initialization is used by gmmproc.  For convenience,
   <literal>$1</literal> will also be replaced by the C++ type without the
   ampersand (&amp;) and <literal>$2</literal> will be replaced by the C type.
 </para>
@@ -8525,14 +8549,14 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
     accessors, type registration, and the <function>Glib::wrap()</function>
     method, among other things.</para>
 <para>Other macros, such as <function>_WRAP_METHOD()</function> and
-    <function>_SIGNAL()</function> may only be used after a call to a
+    <function>_WRAP_SIGNAL()</function> may only be used after a call to a
     <function>_CLASS_*</function> macro.</para>
 
 <sect3 id="gmmproc-class-gobject">
 <title>_CLASS_GOBJECT</title>
 <para>This macro declares a wrapper for a type that is derived from
-    <classname>GObject</classname>, but which is not derived from
-    <classname>GtkObject</classname>.</para>
+    <classname>GObject</classname>, but whose wrapper is not derived from
+    <classname>Gtk::Object</classname>.</para>
 <para><function>_CLASS_GOBJECT( C++ class, C class, C casting macro, C++ base class, C base class )</function></para>
 <para>For instance, from <filename>accelgroup.hg</filename>:
 <programlisting>
@@ -8543,14 +8567,18 @@ _CLASS_GOBJECT(AccelGroup, GtkAccelGroup, GTK_ACCEL_GROUP, Glib::Object, GObject
 
 <sect3 id="gmmproc-class-gtkobject">
 <title>_CLASS_GTKOBJECT</title>
-<para>This macro declares a wrapper for a type that is derived from
-    <classname>GtkObject</classname>, such as a widget or dialog.</para>
+<para>This macro declares a wrapper for a type whose wrapper is derived from
+    <classname>Gtk::Object</classname>, such as a widget or dialog.</para>
 <para><function>_CLASS_GTKOBJECT( C++ class, C class, C casting macro, C++ base class, C base class )</function></para>
 <para>For instance, from <filename>button.hg</filename>:
 <programlisting>
 _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)
 </programlisting>
 </para>
+<para>In GTK+2 there is a type <classname>GtkObject</classname>, which is wrapped
+    by <classname>Gtk::Object</classname>. In GTK+3 <classname>GtkObject</classname>
+    has been removed. <classname>Gtk::Object</classname> remains, because only
+    <classname>Gtk::Object</classname>s can be used with <function>Gtk::manage()</function>.</para>
 </sect3>
 
 <sect3 id="gmmproc-class-boxedtype">
@@ -8586,9 +8614,9 @@ _CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle)
     functions. The new, copy and free functions will be used to instantiate the
     default constructor, copy constructor and destructor.</para>
 <para><function>_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, copy function, free function )</function></para>
-<para>For instance, for <classname>Gdk::Region</classname>:
+<para>For instance, from <filename>stockitem.hg</filename>:
 <programlisting>
-_CLASS_OPAQUE_COPYABLE(Region, GdkRegion, gdk_region_new, gdk_region_copy, gdk_region_destroy)
+_CLASS_OPAQUE_COPYABLE(StockItem, GtkStockItem, NONE, gtk_stock_item_copy, gtk_stock_item_free)
 </programlisting>
 </para>
 </sect3>
@@ -8598,7 +8626,7 @@ _CLASS_OPAQUE_COPYABLE(Region, GdkRegion, gdk_region_new, gdk_region_copy, gdk_r
 <para>This macro declares a wrapper for a reference-counted opaque struct. The
     C++ wrapper cannot be directly instantiated and can only be used with
     <classname>Glib::RefPtr</classname>.</para>
-<para><function>_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, ref function, unref function )</function></para>
+<para><function>_CLASS_OPAQUE_REFCOUNTED( C++ class, C class, new function, ref function, unref function )</function></para>
 <para>For instance, for <classname>Pango::Coverage</classname>:
 <programlisting>
 _CLASS_OPAQUE_REFCOUNTED(Coverage, PangoCoverage, pango_coverage_new, pango_coverage_ref, pango_coverage_unref)
@@ -8621,25 +8649,23 @@ _CLASS_GENERIC(AttrIter, PangoAttrIterator)
 <sect3 id="gmmproc-class-interface">
 <title>_CLASS_INTERFACE</title>
 <para>This macro declares a wrapper for a type that is derived from
-    <classname>GObject</classname>, but which is not derived from
-    <classname>GtkObject</classname>.
+    <classname>GTypeInterface</classname>.
 </para>
 <para><function>_CLASS_INTERFACE( C++ class, C class, C casting macro, C interface struct, Base C++ class (optional), Base C class (optional) )</function></para>
 <para>
 For instance, from <filename>celleditable.hg</filename>:
 <programlisting>
-  _CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)
+_CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)
 </programlisting>
 </para>
 <para>Two extra parameters are optional, for the case that the interface derives from another interface,
 which should be the case when the GInterface has another GInterface as a prerequisitite.
 For instance, from <filename>loadableicon.hg</filename>:
 <programlisting>
-  _CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)
+_CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)
 </programlisting>
 </para>
 </sect3>
-
 
 </sect2>
 
@@ -8694,9 +8720,9 @@ public:
   parameters).  For instance, to specify if a parameter is optional, the
   <function>_WRAP_CTOR()</function> macro would look something like the
   following: 
-  <programlisting>
-    _WRAP_CTOR(ToolButton(Widget&amp; icon_widget, const Glib::ustring&amp; label{?}, gtk_tool_button_new)
-  </programlisting>
+<programlisting>
+_WRAP_CTOR(ToolButton(Widget&amp; icon_widget, const Glib::ustring&amp; label{?}), gtk_tool_button_new)
+</programlisting>
   The <literal>{?}</literal> following the name of the
   <parameter>label</parameter> parameter means that that parameter is optional.
   In this case, gmmproc will generate an extra constructor without that
@@ -8706,24 +8732,24 @@ public:
   It is also possible to have the order of the parameters of the constructor
   different from that of the C function by using gmmproc's C++ to C parameter
   mapping functionality.   Using this functionality, it is possible to map a
-  C++ parameter to a C paramter by specifying the C parameter name.  For
+  C++ parameter to a C parameter by specifying the C parameter name.  For
   instance, assuming that the declaration of the
   <function>gtk_tool_button_new()</function> function is the following:
-  <programlisting>
-    GtkToolItem* gtk_tool_button_new(GtkWidget* icon_widget, const gchar* label);
-  </programlisting>
+<programlisting>
+GtkToolItem* gtk_tool_button_new(GtkWidget* icon_widget, const gchar* label);
+</programlisting>
   The parameters of the wrapped constructor could be reordered using the
   following:
-  <programlisting>
-    WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{label}, Widget&amp; icon_widget{icon_widget}), gtk_tool_button_new)
-  </programlisting>
+<programlisting>
+_WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{label}, Widget&amp; icon_widget{icon_widget}), gtk_tool_button_new)
+</programlisting>
   The <literal>{param_name}</literal> following each of the names of the
   parameters tells gmmproc to map those C++ parameters to the C parameters with
   the given names.  Since the C++ parameter names correspond to the C ones, the
   above could be re-written as:
-  <programlisting>
-    WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{.}, Widget&amp; icon_widget{.}), gtk_tool_button_new)
-  </programlisting>
+<programlisting>
+_WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{.}, Widget&amp; icon_widget{.}), gtk_tool_button_new)
+</programlisting>
 </para>
 <para>
   This same optional parameter syntax and parameter reordering is available for
@@ -8777,8 +8803,8 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
     <varlistentry>
         <term>refreturn</term>
         <listitem>
-            <para>Do an extra reference() on the return value, in case the C
-                function does not provide a reference.</para>
+            <para>Do an extra <function>reference()</function> on the return value,
+                in case the C function does not provide a reference.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
@@ -8803,15 +8829,21 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
                 instead of generating almost duplicate code.</para>
         </listitem>
     </varlistentry>
+    <varlistentry>
+        <term>ifdef</term>
+        <listitem>
+            <para>Puts the generated code in #ifdef blocks.</para>
+        </listitem>
+    </varlistentry>
 </variablelist>
 </para>
 <para>
   As with <function>_WRAP_CTOR()</function> it is possible to specify if there
   are any optional parameters.  If that is the case, gmmproc will generate
   convenience overload methods without those parameters.  For example:
-  <programlisting>
-    WRAP_METHOD(void get_preferred_size(Requisition&amp; minimum_size, Requisition&amp; natural_size{?}) const, gtk_widget_get_preferred_size)
-  </programlisting>
+<programlisting>
+_WRAP_METHOD(void get_preferred_size(Requisition&amp; minimum_size, Requisition&amp; natural_size{?}) const, gtk_widget_get_preferred_size)
+</programlisting>
   Would indicate that the <parameter>natural_size</parameter> parameter is
   optional because its name ends with <literal>{?}</literal>.  In this case,
   gmmproc would generate a method overload without that parameter.
@@ -8820,24 +8852,24 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
   Also, as with <function>_WRAP_CTOR()</function>, it is possible to reorder
   the parameters of the C++ method by using gmmproc's C++ to C parameter
   mapping functionality.  Using this functionality, it is possible to map a C++
-  parameter to a C paramter by specifying the C parameter name.  For example,
+  parameter to a C parameter by specifying the C parameter name.  For example,
   if the <function>gtk_widget_set_device_events()</function> declaration is the
   following:
-  <programlisting>
-    void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device, GdkEventMask events);
-  </programlisting>
+<programlisting>
+void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device, GdkEventMask events);
+</programlisting>
   Something like the following would change the order of the parameters in the
   C++ method:
-  <programlisting>
-    _WRAP_METHOD(void set_device_events(Gdk::EventMask events{events}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{device}), gtk_widget_set_device_events)
-  </programlisting>
+<programlisting>
+_WRAP_METHOD(void set_device_events(Gdk::EventMask events{events}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{device}), gtk_widget_set_device_events)
+</programlisting>
   The <literal>{param_name}</literal> following each of the names of the
   parameters tells gmmproc to map those C++ parameters to the C parameters with
   the given names.  Since the C++ parameter names correspond to the C ones, the
   above could be re-written as:
-  <programlisting>
-    _WRAP_METHOD(void set_device_events(Gdk::EventMask events{.}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{.}), gtk_widget_set_device_events)
-  </programlisting>
+<programlisting>
+_WRAP_METHOD(void set_device_events(Gdk::EventMask events{.}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{.}), gtk_widget_set_device_events)
+</programlisting>
 </para>
 <para>
   With <function>_WRAP_METHOD()</function> it is also possible to include an
@@ -8847,27 +8879,27 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
   declaration appending a <literal>{RET}</literal> to the output parameter
   name.  For example, if <function>gtk_widget_get_request_mode()</function> is
   declared as the following:
-  <programlisting>
-    GtkSizeRequestMode gtk_widget_get_request_mode(GtkWidget* widget);
-  </programlisting>
+<programlisting>
+GtkSizeRequestMode gtk_widget_get_request_mode(GtkWidget* widget);
+</programlisting>
   And having the C++ method set an output parameter is desired instead of
   returning a <type>SizeRequestMode</type>, something like the following could
   be used:
-  <programlisting>
-    _WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{RET}) const, gtk_widget_get_request_mode)
-  </programlisting>
+<programlisting>
+_WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{RET}) const, gtk_widget_get_request_mode)
+</programlisting>
   the <literal>{RET}</literal> appended to the name of the
   <parameter>mode</parameter> output parameter tells gmmproc to place the
   return of the C function in that output parameter.  In this case, however, a
   necessary initialization macro like the following would also have to be
   specified:
-  <programlisting>
-    _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = (SizeRequestMode)($4)')
-  </programlisting>
+<programlisting>
+_INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = (SizeRequestMode)($4)')
+</programlisting>
   Which could also be written as:
-  <programlisting>
-    _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')
-  </programlisting>
+<programlisting>
+_INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')
+</programlisting>
 </para>
 <para>Though it's usually obvious what C++ types should be used in the C++ method, here are some hints:
 <itemizedlist>
@@ -8917,16 +8949,17 @@ _WRAP_METHOD_DOCS_ONLY(gtk_container_remove)
 </sect3>
 
 <sect3 id="gmmproc-ignore">
-<title>_IGNORE()</title>
-<para><command>gmmproc</command> will warn you on stdout about functions that
+<title>_IGNORE / _IGNORE_SIGNAL</title>
+<para><command>gmmproc</command> will warn you on stdout about functions and signals that
     you have forgotten to wrap, helping to ensure that you are wrapping the
-    complete API. Buf if you don't want to wrap some functions or if you chose
-    to hand-code some methods then you can use the _IGNORE() macro the make
+    complete API. But if you don't want to wrap some functions or signals, or if you chose
+    to hand-code some methods then you can use the _IGNORE() or _IGNORE_SIGNAL() macro to make
     <command>gmmproc</command> stop complaining.</para>
 <para><function>_IGNORE(C function name 1, C function name2, etc)</function></para>
+<para><function>_IGNORE_SIGNAL(C signal name 1, C signal name2, etc)</function></para>
 <para>For instance, from <filename>buttonbox.hg</filename>:
 <programlisting>
-_IGNORE(gtk_button_box_set_spacing, gtk_button_box_get_spacing,
+_IGNORE(gtk_button_box_set_spacing, gtk_button_box_get_spacing)
 </programlisting>
 </para>
 </sect3>
@@ -8960,6 +8993,36 @@ _WRAP_SIGNAL(void clicked(),"clicked")
                 virtual function table.</para>
         </listitem>
     </varlistentry>
+    <varlistentry>
+        <term>custom_default_handler</term>
+        <listitem>
+            <para>Generate a declaration of the <function>on_something()</function>
+                virtual method in the <filename>.h</filename> file, but do not
+                generate a definition in the <filename>.cc</filename> file.
+                Use this when you must generate the definition by hand.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>custom_c_callback</term>
+        <listitem>
+            <para>Do not generate a C callback function for the signal.
+                Use this when you must generate the callback function by hand.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>refreturn</term>
+        <listitem>
+            <para>Do an extra <function>reference()</function> on the return value
+                of the <function>on_something()</function> virtual method, in
+                case the C function does not provide a reference.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>ifdef</term>
+        <listitem>
+            <para>Puts the generated code in #ifdef blocks.</para>
+        </listitem>
+    </varlistentry>
 </variablelist>
 </para>
 </sect3>
@@ -8978,10 +9041,94 @@ _WRAP_PROPERTY("label", Glib::ustring)
 </para>
 </sect3>
 
+<sect3 id="gmmproc-wrap-vfunc">
+<title>_WRAP_VFUNC</title>
+<para>This macro generates the C++ method to wrap a virtual C function.</para>
+<para><function>_WRAP_VFUNC( C++ method signature, C function name)</function></para>
+<para>For instance, from <filename>widget.hg</filename>:
+<programlisting>
+_WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
+</programlisting>
+</para>
+<para>The C function (e.g. <function>get_request_mode</function>) is described
+    more fully in the <filename>*_vfuncs.defs</filename> file, and the
+    <filename>convert*.m4</filename> files contain the necessary conversion from
+    the C++ parameter type to the C parameter type.</para>
+<para>There are some optional extra arguments:
+<variablelist>
+    <varlistentry>
+        <term>refreturn</term>
+        <listitem>
+            <para>Do an extra <function>reference()</function> on the return value
+                of the <function>something_vfunc()</function> function,
+                in case the virtual C function does not provide a reference.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>refreturn_ctype</term>
+        <listitem>
+            <para>Do an extra <function>reference()</function> on the return value
+                of an overridden <function>something_vfunc()</function> function
+                in the C callback function, in case the calling C function
+                expects it to provide a reference.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>custom_vfunc</term>
+        <listitem>
+            <para>Do not generate a definition of the vfunc in the
+               <filename>.cc</filename> file. Use this when you must generate
+               the vfunc by hand.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>custom_vfunc_callback</term>
+        <listitem>
+            <para>Do not generate a C callback function for the vfunc.
+                Use this when you must generate the callback function by hand.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>ifdef</term>
+        <listitem>
+            <para>Puts the generated code in #ifdef blocks.</para>
+        </listitem>
+    </varlistentry>
+</variablelist>
+</para>
+<para>A rule to which there may be exceptions: If the virtual C function returns
+    a pointer to an object derived from <classname>GObject</classname>, i.e. a
+    reference-counted object, then the virtual C++ function shall return a
+    <classname>Glib::RefPtr&lt;&gt;</classname> object. One of the extra
+    arguments <parameter>refreturn</parameter> or
+    <parameter>refreturn_ctype</parameter> is required.</para>
+</sect3>
+
 </sect2>
 
 <sect2 id="gmmproc-other-macros">
 <title>Other macros</title>
+<sect3 id="gmmproc-implements-interface">
+<title>_IMPLEMENTS_INTERFACE</title>
+<para>This macro generates initialization code for the interface.</para>
+<para><function>_IMPLEMENTS_INTERFACE(C++ interface name)</function></para>
+<para>For instance, from <filename>button.hg</filename>:
+<programlisting>
+_IMPLEMENTS_INTERFACE(Activatable)
+</programlisting>
+</para>
+<para>There is one optional extra argument:
+<variablelist>
+    <varlistentry>
+        <term>ifdef</term>
+        <listitem>
+            <para>Puts the generated code in #ifdef blocks.</para>
+        </listitem>
+    </varlistentry>
+</variablelist>
+</para>
+</sect3>
+
 <sect3 id="gmmproc-wrap-enum">
 <title>_WRAP_ENUM</title>
 <para>This macro generates a C++ enum to wrap a C enum. You must specify the desired C++ name and
@@ -8995,9 +9142,9 @@ _WRAP_ENUM(WindowType, GdkWindowType)
   This is the case when there is no <function>*_get_type()</function> function for the C enum, but
   be careful that you don't just need to include an extra header for that function. You should also
   file a bug against the C API, because all enums should be registered as GTypes.</para>
-<para>For example:
+<para>For example, from <filename>icontheme.hg</filename>:
 <programlisting>
-_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags)
+_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
 </programlisting>
 </para>
 </sect3>
@@ -9037,9 +9184,10 @@ _WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)
   </para>
   <para><function>_MEMBER_GET_PTR(C++ name, C name, C++ type, C type)</function></para>
   <para><function>_MEMBER_SET_PTR(C++ name, C name, C++ type, C type)</function></para>
-  <para>For example, in <filename>dialog.hg</filename>:
+  <para>For example, for <classname>Pango::Analysis</classname> in <filename>item.hg</filename>:
 <programlisting>
-_MEMBER_GET_PTR(vbox, vbox, VBox*, GtkWidget*)
+// _MEMBER_GET_PTR(engine_lang, lang_engine, EngineLang*, PangoEngineLang*)
+// It's just a comment. It's difficult to find a real-world example.
 </programlisting>
   </para>
 </sect3>
@@ -9133,7 +9281,11 @@ struct _ExampleWidget
 };
 </programlisting>
 </para>
-<para>The extra typedef allows the struct to be used in a header without including its full defintion, simply by predeclaring it, by repeating that typedef. This means that you don't have to include the C library's header in your C++ header, thus keeping it out of your public API. <command>gmmproc</command> assumes that this technique was used, so you will see compiler errors if that is not the case.</para>
+<para>The extra typedef allows the struct to be used in a header without including
+  its full definition, simply by predeclaring it, by repeating that typedef.
+  This means that you don't have to include the C library's header in your C++ header,
+  thus keeping it out of your public API. <command>gmmproc</command> assumes that
+  this technique was used, so you will see compiler errors if that is not the case.</para>
 <para>
 This compiler error might look like this:
 <programlisting>
@@ -9206,10 +9358,17 @@ void example_widget_construct(ExampleWidget* widget, int something, const char* 
 
 <sect2 id="wrapping-reusing-c-documentation">
 <title>Reusing C documentation</title>
-<para>You might wish to reuse documentation that exists for the C library that you are wrapping. GTK-style C libraries typically use gtk-doc and therefore have source code comments formatted for gtk-doc and some extra documentation in .tmpl files. The docextract_to_xml.py script, from pygobject's codegen directory, can read these files and generate an .xml file that <command>gmmproc</command> can use to generate doxygen comments. <command>gmmproc</command> will even try to transform the documentation to make it more appropriate for a C++ API.</para>
+<para>You might wish to reuse documentation that exists for the C library that
+  you are wrapping. GTK-style C libraries typically use gtk-doc and therefore
+  have source code comments formatted for gtk-doc and some extra documentation
+  in .sgml and .xml files. The docextract_to_xml.py script, from glibmm's
+  <filename>tools/defs_gen</filename> directory, can read these files and
+  generate an .xml file that <command>gmmproc</command> can use to generate
+  doxygen comments. <command>gmmproc</command> will even try to transform the
+  documentation to make it more appropriate for a C++ API.</para>
 <para>
 For instance,
-<programlisting>./docextract_to_xml.py -s /gnome/head/cvs/gtk+/gtk/ -s /gnome/head/cvs/gtk+/docs/reference/gtk/tmpl/ > gtk_docs.xml
+<programlisting>./docextract_to_xml.py -s ~/checkout/gnome/gtk+/gtk/ -s ~/checkout/gnome/gtk+/docs/reference/gtk/ > gtk_docs.xml
 </programlisting>
 </para>
 <para>Because this automatic transformation is not always appropriate, you might
