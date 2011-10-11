@@ -1,3 +1,11 @@
+2011-10-11  José Alburquerque  <jaalburqu@svn.gnome.org>
+
+	Wrapping Section: Use {OUT} instead of {RET} for output params.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml (_WRAP_METHOD): Explain that
+	{OUT} appended to a parameter name (instead of {RET}) signifies that
+	it is an output parameter because it is probably be more intuitive.
+
 2011-10-09  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Update Appendix F and G to gtkmm3 status.

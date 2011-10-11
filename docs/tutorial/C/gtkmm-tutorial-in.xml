@@ -8876,7 +8876,7 @@ _WRAP_METHOD(void set_device_events(Gdk::EventMask events{.}, const Glib::RefPtr
   output parameter in the C++ method declaration in which the return of the C
   function would be placed and to have the C++ method return <type>void</type>.
   To do that, simply include the output parameter declaration in the C++ method
-  declaration appending a <literal>{RET}</literal> to the output parameter
+  declaration appending a <literal>{OUT}</literal> to the output parameter
   name.  For example, if <function>gtk_widget_get_request_mode()</function> is
   declared as the following:
 <programlisting>
@@ -8886,9 +8886,9 @@ GtkSizeRequestMode gtk_widget_get_request_mode(GtkWidget* widget);
   returning a <type>SizeRequestMode</type>, something like the following could
   be used:
 <programlisting>
-_WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{RET}) const, gtk_widget_get_request_mode)
+_WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{OUT}) const, gtk_widget_get_request_mode)
 </programlisting>
-  the <literal>{RET}</literal> appended to the name of the
+  the <literal>{OUT}</literal> appended to the name of the
   <parameter>mode</parameter> output parameter tells gmmproc to place the
   return of the C function in that output parameter.  In this case, however, a
   necessary initialization macro like the following would also have to be
