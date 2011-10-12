@@ -1,3 +1,10 @@
+2011-10-12  Murray Cumming  <murrayc@murrayc.com>
+
+	gmmproc appendix. More about Gtk::Object
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: _CLASS_GTKOBJECT: Add a little
+	more explanatory text abot when this should be used.
+
 2011-10-11  José Alburquerque  <jaalburqu@svn.gnome.org>
 
 	Wrapping Section: Use {OUT} instead of {RET} for output params.

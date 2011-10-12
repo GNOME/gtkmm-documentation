@@ -8575,10 +8575,8 @@ _CLASS_GOBJECT(AccelGroup, GtkAccelGroup, GTK_ACCEL_GROUP, Glib::Object, GObject
 _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)
 </programlisting>
 </para>
-<para>In GTK+2 there is a type <classname>GtkObject</classname>, which is wrapped
-    by <classname>Gtk::Object</classname>. In GTK+3 <classname>GtkObject</classname>
-    has been removed. <classname>Gtk::Object</classname> remains, because only
-    <classname>Gtk::Object</classname>s can be used with <function>Gtk::manage()</function>.</para>
+<para>You will typically use this macro when the class already derives from Gtk::Object. For instance, you will use it when wrapping a GTK+ Widget, because Gtk::Widget derives from Gtk::Object.</para>
+<para>You might also derive non-widget classes from Gtk::Object so they can be used without <classname>Glib::RefPtr</classname>. For isntance, they could then be instantiated with <function>Gtk::manage()</function> or on the stack as a member variable. This is convenient, but you should use this only when you are sure that true reference-counting is not needed. We consider it useful for widgets.</para>
 </sect3>
 
 <sect3 id="gmmproc-class-boxedtype">
