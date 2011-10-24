@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2011-10-04 15:29+0000\n"
-"PO-Revision-Date: 2011-10-05 17:57+0200\n"
+"POT-Creation-Date: 2011-10-12 16:02+0000\n"
+"PO-Revision-Date: 2011-10-24 17:26+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -910,7 +910,7 @@ msgid ""
 "<link linkend=\"chapter-custom-signals\">appendix</link>."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:432(title) C/gtkmm-tutorial-in.xml:9078(classname)
+#: C/gtkmm-tutorial-in.xml:432(title) C/gtkmm-tutorial-in.xml:9224(classname)
 msgid "Glib::ustring"
 msgstr "Glib::ustring"
 
@@ -6614,7 +6614,7 @@ msgid ""
 msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5162(para) C/gtkmm-tutorial-in.xml:5227(para)
-#: C/gtkmm-tutorial-in.xml:9210(para)
+#: C/gtkmm-tutorial-in.xml:9367(para)
 msgid "For instance, <placeholder-1/>"
 msgstr "Por ejemplo, <placeholder-1/>"
 
@@ -7078,7 +7078,7 @@ msgstr ""
 #: C/gtkmm-tutorial-in.xml:5531(programlisting)
 #, no-wrap
 msgid "std::vector&lt; Glib::RefPtr&lt;Gtk::RecentInfo&gt; &gt; info_list = recent_manager-&gt;get_items();"
-msgstr ""
+msgstr "std::vector&lt; Glib::RefPtr&lt;Gtk::RecentInfo&gt; &gt; info_list = recent_manager-&gt;get_items();"
 
 #: C/gtkmm-tutorial-in.xml:5532(para)
 msgid ""
@@ -7145,10 +7145,9 @@ msgid ""
 msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5589(title)
-#, fuzzy
 #| msgid "Simple RecentChooserWidget example"
 msgid "Simple RecentChooserDialog example"
-msgstr "Ejemplo de RecentChooserWidget"
+msgstr "Ejemplo de RecentChooserDialog"
 
 #: C/gtkmm-tutorial-in.xml:5590(para)
 msgid ""
@@ -10130,7 +10129,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:7907(title)
 msgid "<application>gtkmm</application> and Win32"
-msgstr ""
+msgstr "<application>gtkmm</application> y Win32"
 
 #: C/gtkmm-tutorial-in.xml:7908(para)
 msgid ""
@@ -10153,7 +10152,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:7925(title)
 msgid "Building <application>gtkmm</application> on Win32"
-msgstr ""
+msgstr "Construir aplicaciones <application>gtkmm</application> en Win32"
 
 #: C/gtkmm-tutorial-in.xml:7926(para)
 msgid ""
@@ -10167,14 +10166,14 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:7933(title)
 msgid "Working with gtkmm's Source Code"
-msgstr ""
+msgstr "Trabajar con el código fuente de gtkmm"
 
 #: C/gtkmm-tutorial-in.xml:7934(para)
 msgid ""
 "If you are interested in helping out with the development of "
 "<application>gtkmm</application>, or fixing a bug in <application>gtkmm</"
 "application>, you'll probably need to build the development version of "
-"<application>gtkmm</application>. However, you should not to install a "
+"<application>gtkmm</application>. However, you should not install a "
 "development version over your stable version. Instead, you should install it "
 "alongside your existing <application>gtkmm</application> installation, in a "
 "separate path."
@@ -10186,16 +10185,17 @@ msgid ""
 "jhbuild/unstable/\">jhbuild</ulink>. <application>jhbuild</application> is a "
 "program that makes building GNOME software much easier by calculating "
 "dependencies and building things in the correct order. This section will "
-"give a brief explanation of how to set up jhbuild to build and install "
-"<application>gtkmm</application> from the source repository (git). For up-to-"
-"date information on <application>jhbuild</application>, please refer to the "
-"<ulink url=\"http://developer.gnome.org/jhbuild/unstable/\">jhbuild manual</"
-"ulink>. If you need assistance using <application>jhbuild</application>, you "
-"should ask for help on the <ulink url=\"http://mail.gnome.org/mailman/"
-"listinfo/gnome-love\">gnome-love mailing list</ulink>."
+"give a brief explanation of how to set up <application>jhbuild</application> "
+"to build and install <application>gtkmm</application> from the source "
+"repository (git). For up-to-date information on <application>jhbuild</"
+"application>, please refer to the <ulink url=\"http://developer.gnome.org/"
+"jhbuild/unstable/\">jhbuild manual</ulink>. If you need assistance using "
+"<application>jhbuild</application>, you should ask for help on the <ulink "
+"url=\"http://mail.gnome.org/mailman/listinfo/gnome-love\">gnome-love mailing "
+"list</ulink>."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:7956(para)
+#: C/gtkmm-tutorial-in.xml:7957(para)
 msgid ""
 "Note that to build <application>gtkmm</application> from git, you'll often "
 "need to build all of its dependencies from git as well. "
@@ -10205,40 +10205,43 @@ msgid ""
 "quickly if you report them."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:7964(title)
+#: C/gtkmm-tutorial-in.xml:7966(title)
 msgid "Setting up jhbuild"
 msgstr "Configurar JHBuild"
 
-#: C/gtkmm-tutorial-in.xml:7965(para)
+#: C/gtkmm-tutorial-in.xml:7967(para)
 msgid ""
 "To set up <application>jhbuild</application>, follow the basic installation "
 "instructions from the <ulink url=\"http://developer.gnome.org/jhbuild/"
-"unstable/\">jhbuild manual</ulink>. After you've have installd "
+"unstable/\">jhbuild manual</ulink>. After you have installed "
 "<application>jhbuild</application>, you should copy the sample "
 "<application>jhbuild</application> configuration file into your home "
 "directory by executing the following command from the <application>jhbuild</"
-"application> directory: <command>$ cp sample.jhbuildrc ~/.jhbuildrc</command>"
+"application> directory: <screen>$ cp examples/sample.jhbuildrc ~/.jhbuildrc</"
+"screen>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:7980(programlisting)
+#: C/gtkmm-tutorial-in.xml:7982(programlisting)
 #, no-wrap
-msgid "moduleset = 'gnome-2.30'"
-msgstr "moduleset = 'gnome-2.30'"
+#| msgid "moduleset = 'gnome-2.30'"
+msgid "moduleset = 'gnome-suites-core-deps-3.4'"
+msgstr "moduleset = 'gnome-suites-core-deps-3.4'"
 
-#: C/gtkmm-tutorial-in.xml:7975(para)
+#: C/gtkmm-tutorial-in.xml:7977(para)
 msgid ""
-"The <application>gtkmm</application> module is defined in the GNOME "
-"moduleset (i.e. <filename>gnome-2.xx.modules</filename>, so edit your "
-"<filename>.jhbuildrc</filename> file and set your moduleset setting to the "
-"latest version of GNOME like so: <placeholder-1/>"
+"The <application>gtkmm</application> module is defined in the "
+"<filename>gnome-suites-core-deps-3.x.modules</filename> moduleset, so edit "
+"your <filename>.jhbuildrc</filename> file and set your moduleset setting to "
+"the latest version e.g. like so: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:7986(programlisting)
+#: C/gtkmm-tutorial-in.xml:7989(programlisting)
 #, no-wrap
-msgid "modules = [ 'gtkmm', ]"
-msgstr "modules = [ 'gtkmm', ]"
+#| msgid "modules = [ 'gtkmm', ]"
+msgid "modules = [ 'gtkmm' ]"
+msgstr "modules = [ 'gtkmm' ]"
 
-#: C/gtkmm-tutorial-in.xml:7982(para)
+#: C/gtkmm-tutorial-in.xml:7984(para)
 msgid ""
 "After setting the correct moduleset, you need to tell <application>jhbuild</"
 "application> which module or modules to build. To build <application>gtkmm</"
@@ -10246,38 +10249,49 @@ msgid ""
 "like so: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:7988(para)
+#: C/gtkmm-tutorial-in.xml:7991(para)
 msgid ""
-"You can build all GNOME C++ modules by setting the <varname>modules</"
-"varname> variable to the meta-package named <literal>meta-gnome-c++</"
-"literal> or build all of the core GNOME modules with <literal>meta-gnome-"
-"desktop</literal>. The <varname>modules</varname> variable specifies which "
-"modules that will be built when you don't explicitly specify anything on the "
-"command line. You can always build a different moduleset later by specifying "
-"it on the commandline (e.g. <command>jhbuild build gtkmm</command>)."
+"You can build several modules by setting the <varname>modules</varname> "
+"variable to a meta-package, e.g. <literal>meta-gnome-core</literal>, or "
+"listing more than one module name. The <varname>modules</varname> variable "
+"specifies which modules that will be built when you don't explicitly specify "
+"anything on the command line. You can always build a different moduleset "
+"later by specifying it on the commandline (e.g. <command>jhbuild build "
+"gtkmm</command>)."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:7999(title)
+#: C/gtkmm-tutorial-in.xml:8001(title)
 msgid "Setting a prefix"
 msgstr "Establecer un prefijo"
 
-#: C/gtkmm-tutorial-in.xml:8000(para)
+#: C/gtkmm-tutorial-in.xml:8002(para)
 msgid ""
 "By default, <application>jhbuild</application>'s configuration is configured "
 "to install all software built with <application>jhbuild</application> under "
-"the <filename>/opt/gnome2</filename> prefix. You can choose a different "
+"the <filename>/opt/gnome</filename> prefix. You can choose a different "
 "prefix, but it is recommended that you keep this prefix different from other "
 "software that you've installed (don't set it to <filename>/usr</filename>!) "
 "If you've followed the jhbuild instructions then this prefix belongs to your "
 "user, so you don't need to run jhbuild as <literal>root</literal>."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8014(title)
+#: C/gtkmm-tutorial-in.xml:8014(para)
+msgid ""
+"When you downloaded <application>jhbuild</application> from the git "
+"repository, you got a number of <filename>.modules</filename> files, "
+"specifying dependencies between modules. By default <application>jhbuild</"
+"application> does not use the downloaded versions of these files, but reads "
+"the latest versions in the git repository. This is usually what you want. If "
+"you don't want it, use the <varname>use_local_modulesets</varname> variable "
+"in <filename>.jhbuildrc</filename>."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:8025(title)
 msgid ""
 "Installing and Using the git version of <application>gtkmm</application>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8015(para)
+#: C/gtkmm-tutorial-in.xml:8026(para)
 msgid ""
 "Once you've configured <application>jhbuild</application> as described "
 "above, building <application>gtkmm</application> should be relatively "
@@ -10288,13 +10302,15 @@ msgid ""
 "$ jhbuild sanitycheck</screen>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8026(title)
+#: C/gtkmm-tutorial-in.xml:8037(title)
 msgid ""
 "Installing <application>gtkmm</application> with <application>jhbuild</"
 "application>"
 msgstr ""
+"Instalar <application>gtkmm</application> con <application>jhbuild</"
+"application>"
 
-#: C/gtkmm-tutorial-in.xml:8027(para)
+#: C/gtkmm-tutorial-in.xml:8038(para)
 msgid ""
 "If everything worked correctly, you should be able to build "
 "<application>gtkmm</application> and all of its dependencies from git by "
@@ -10303,23 +10319,23 @@ msgid ""
 "with the command <command>jhbuild build gtkmm</command>)."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8034(para)
+#: C/gtkmm-tutorial-in.xml:8045(para)
 msgid ""
 "This command will build and install a series of modules and will probably "
 "take quite a long time the first time through. After the first time, "
 "however, it should go quite a bit faster since it only needs to rebuild "
-"files than changed since the last build. Alternatively, after you've built "
+"files that changed since the last build. Alternatively, after you've built "
 "and installed <application>gtkmm</application> the first time, you can "
 "rebuild <application>gtkmm</application> by itself (without rebuilding all "
 "of its dependencies) with the command <command>jhbuild buildone gtkmm</"
 "command>."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8045(title)
+#: C/gtkmm-tutorial-in.xml:8056(title)
 msgid "Using the git version of <application>gtkmm</application>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8046(para)
+#: C/gtkmm-tutorial-in.xml:8057(para)
 msgid ""
 "After you've installed the git version of <application>gtkmm</application>, "
 "you're ready to start using and experimenting with it. In order to use the "
@@ -10334,7 +10350,7 @@ msgid ""
 "environment, simply exit the <application>jhbuild</application> shell."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8060(para)
+#: C/gtkmm-tutorial-in.xml:8071(para)
 msgid ""
 "Once you've built your software, you'll need to run your program within the "
 "jhbuild environment as well. To do this, you can again use the "
@@ -10347,11 +10363,11 @@ msgid ""
 "program exits."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8077(title)
+#: C/gtkmm-tutorial-in.xml:8088(title)
 msgid "Wrapping C Libraries with gmmproc"
 msgstr "Envolver bibliotecas C con gmmproc"
 
-#: C/gtkmm-tutorial-in.xml:8078(para)
+#: C/gtkmm-tutorial-in.xml:8089(para)
 msgid ""
 "<application>gtkmm</application> uses the <command>gmmproc</command> tool to "
 "generate most of its source code, using .defs files that define the APIs of "
@@ -10359,17 +10375,17 @@ msgid ""
 "additional gtkmm-style wrappers of other glib/GObject-based libraries."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8083(para)
+#: C/gtkmm-tutorial-in.xml:8094(para)
 msgid ""
 "This involves a variety of tools, some of them crufty, but it does at least "
 "work, and has been used successfully by several projects."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8088(title)
+#: C/gtkmm-tutorial-in.xml:8099(title)
 msgid "The build structure"
 msgstr "La estructura de construcción"
 
-#: C/gtkmm-tutorial-in.xml:8089(para)
+#: C/gtkmm-tutorial-in.xml:8100(para)
 msgid ""
 "Generation of the source code for a gtkmm-style wrapper API requires use of "
 "tools such as <command>gmmproc</command> and <filename>generate_wrap_init."
@@ -10379,7 +10395,7 @@ msgid ""
 "lot to pick an existing binding module as an example to look at."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8096(para)
+#: C/gtkmm-tutorial-in.xml:8107(para)
 msgid ""
 "For instance, let's pretend that we are wrapping a C library called "
 "libexample. It provides a <classname>GObject</classname>-based API with "
@@ -10387,11 +10403,11 @@ msgid ""
 "<classname>ExampleStuff</classname>."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8102(title)
+#: C/gtkmm-tutorial-in.xml:8113(title)
 msgid "Copying the skeleton project"
-msgstr ""
+msgstr "Copiar el esqueleto del proyecto"
 
-#: C/gtkmm-tutorial-in.xml:8107(programlisting)
+#: C/gtkmm-tutorial-in.xml:8118(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -10402,7 +10418,7 @@ msgstr ""
 "  $ git clone git://git.gnome.org/mm-common\n"
 "  $ cp -a mm-common/skeletonmm libalgomm\n"
 
-#: C/gtkmm-tutorial-in.xml:8104(para)
+#: C/gtkmm-tutorial-in.xml:8115(para)
 msgid ""
 "Typically our wrapper library would be called libsomethingmm. We can start "
 "by copying the <ulink url=\"http://git.gnome.org/cgit/mm-common/tree/"
@@ -10410,33 +10426,33 @@ msgid ""
 "<placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8117(para)
+#: C/gtkmm-tutorial-in.xml:8128(para)
 msgid "<filename>libsomethingmm</filename>: The top-level directory."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8119(para)
+#: C/gtkmm-tutorial-in.xml:8130(para)
 msgid ""
 "<filename>libsomething</filename>: Contains the main include file and the "
 "pkg-config .pc file."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8121(para)
+#: C/gtkmm-tutorial-in.xml:8132(para)
 msgid "<filename>src</filename>: Contains .hg and .ccg source files."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8122(para)
+#: C/gtkmm-tutorial-in.xml:8133(para)
 msgid ""
 "<filename>libsomethingmm</filename>: Contains generated and hand-written .h "
 "and .cc files."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8124(para)
+#: C/gtkmm-tutorial-in.xml:8135(para)
 msgid ""
 "<filename>private</filename>: Contains generated <filename>*_p.h</filename> "
 "files."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8112(para)
+#: C/gtkmm-tutorial-in.xml:8123(para)
 msgid ""
 "This provides a directory structure for the source .hg and .ccg files and "
 "the generated .h and .cc files, with <filename>filelist.am</filename> "
@@ -10445,7 +10461,7 @@ msgid ""
 "this, after we have renamed the directories appropriately: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8136(programlisting)
+#: C/gtkmm-tutorial-in.xml:8147(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -10458,34 +10474,34 @@ msgstr ""
 "    d=\"${f%/*}\"; b=\"${f##*/}\"; mv \"$f\" \"$d/${b//skeleton/libalgo}\"; \\\n"
 "  done\n"
 
-#: C/gtkmm-tutorial-in.xml:8134(para)
+#: C/gtkmm-tutorial-in.xml:8145(para)
 msgid ""
 "As well as renaming the directories, we should rename some of the source "
 "files. For instance: <placeholder-1/> A number of the skeleton files must "
 "still be filled in with project-specific content later."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8143(para)
+#: C/gtkmm-tutorial-in.xml:8154(para)
 msgid ""
 "Note that files ending in <filename>.in</filename> will be used to generate "
 "files with the same name but without the <filename>.in</filename> suffix, by "
 "replacing some variables with actual values during the configure stage."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8149(title)
+#: C/gtkmm-tutorial-in.xml:8160(title)
 msgid "Modifying build files"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8151(para)
+#: C/gtkmm-tutorial-in.xml:8162(para)
 msgid ""
-"Now we edit the files to adapt them to to our needs. You might prefer to use "
-"a multiple-file search-replace utility for this, such as <command>regexxer</"
+"Now we edit the files to adapt them to our needs. You might prefer to use a "
+"multiple-file search-replace utility for this, such as <command>regexxer</"
 "command>. Note that nearly all of the files provided with the skeleton "
 "source tree contain placeholder text. Thus, the substitutions should be "
 "performed globally, and not be limited to the Automake and Autoconf files."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8155(para)
+#: C/gtkmm-tutorial-in.xml:8166(para)
 msgid ""
 "All mentions of <varname>skeleton</varname> should be replaced by the "
 "correct name of the C library you are wrapping, such as \"something\" or "
@@ -10494,25 +10510,25 @@ msgid ""
 "occurrences of <varname>Skeleton</varname> changed to \"Something\"."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8159(para)
+#: C/gtkmm-tutorial-in.xml:8170(para)
 msgid ""
 "Likewise, replace all instances of <varname>Joe Hacker</varname> by the name "
 "of the intended copyright holder, which is probably you. Do the same for the "
 "<varname>joe@example.com</varname> email address."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8164(title)
+#: C/gtkmm-tutorial-in.xml:8175(title)
 msgid "configure.ac"
 msgstr "configure.ac"
 
-#: C/gtkmm-tutorial-in.xml:8167(para)
+#: C/gtkmm-tutorial-in.xml:8178(para)
 msgid ""
 "The <function>AC_CONFIG_SRCDIR()</function> line must mention a file in our "
 "source tree. We can edit this later if we don't yet know the names of any of "
 "the files that we will create."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8170(para)
+#: C/gtkmm-tutorial-in.xml:8181(para)
 msgid ""
 "It is common for binding modules to track the version number of the library "
 "they are wrapping. So, for instance, if the C library is at version 1.23.4, "
@@ -10521,7 +10537,7 @@ msgid ""
 "stable release."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8175(para)
+#: C/gtkmm-tutorial-in.xml:8186(para)
 msgid ""
 "The <function>AC_CONFIG_HEADERS()</function> line is used to generate two or "
 "more configuration header files. The first header file in the list contains "
@@ -10533,63 +10549,63 @@ msgid ""
 "visible macros."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8183(para)
+#: C/gtkmm-tutorial-in.xml:8194(para)
 msgid ""
 "The <function>AC_SUBST([SOMETHINGMM_MODULES], ['...'])</function> line may "
 "need to be modified to check for the correct dependencies."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8185(para)
+#: C/gtkmm-tutorial-in.xml:8196(para)
 msgid ""
 "The <function>AC_CONFIG_FILES()</function> block must mention the correct "
 "directory names, as described above."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8165(para)
+#: C/gtkmm-tutorial-in.xml:8176(para)
 msgid "In <filename>configure.ac</filename>, <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8192(title)
+#: C/gtkmm-tutorial-in.xml:8203(title)
 msgid "Makefile.am files"
 msgstr "Archivos Makefile.am"
 
-#: C/gtkmm-tutorial-in.xml:8195(para)
+#: C/gtkmm-tutorial-in.xml:8206(para)
 msgid ""
 "In <filename>skeleton/src/Makefile.am</filename> we must mention the correct "
 "values for the generic variables that are used elsewhere in the build system:"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8200(varname)
+#: C/gtkmm-tutorial-in.xml:8211(varname)
 msgid "binding_name"
 msgstr "binding_name"
 
-#: C/gtkmm-tutorial-in.xml:8201(para)
+#: C/gtkmm-tutorial-in.xml:8212(para)
 msgid "The name of the library, such as libsomethingmm."
-msgstr ""
+msgstr "El nombre de la biblioteca, por ejemplo libalgomm."
 
-#: C/gtkmm-tutorial-in.xml:8205(varname)
+#: C/gtkmm-tutorial-in.xml:8216(varname)
 msgid "wrap_init_flags"
 msgstr "wrap_init_flags"
 
-#: C/gtkmm-tutorial-in.xml:8206(para)
+#: C/gtkmm-tutorial-in.xml:8217(para)
 msgid ""
 "Additional command-line flags passed to the <filename>generate_wrap_init.pl</"
 "filename> script, such as the C++ namespace and the parent directory prefix "
 "of include files."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8213(para)
+#: C/gtkmm-tutorial-in.xml:8224(para)
 msgid ""
 "In <filename>skeleton/skeletonmm/Makefile.am</filename> we must mention the "
 "correct values for the generic variables that are used elsewhere in the "
 "build system:"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8218(varname)
+#: C/gtkmm-tutorial-in.xml:8229(varname)
 msgid "lib_LTLIBRARIES"
 msgstr "lib_LTLIBRARIES"
 
-#: C/gtkmm-tutorial-in.xml:8219(para)
+#: C/gtkmm-tutorial-in.xml:8230(para)
 msgid ""
 "This variable must mention the correct library name, and this library name "
 "must be used to form the <varname>_SOURCES</varname>, <varname>_LDFLAGS</"
@@ -10598,33 +10614,33 @@ msgid ""
 "<varname>@SOMETHINGMM_API_VERSION@</varname> as part of the variable names."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8228(varname)
+#: C/gtkmm-tutorial-in.xml:8239(varname)
 msgid "AM_CPPFLAGS"
 msgstr "AM_CPPFLAGS"
 
-#: C/gtkmm-tutorial-in.xml:8229(para)
+#: C/gtkmm-tutorial-in.xml:8240(para)
 msgid "The command line options passed to the C preprocessor."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8233(varname)
+#: C/gtkmm-tutorial-in.xml:8244(varname)
 msgid "AM_CXXFLAGS"
 msgstr "AM_CXXFLAGS"
 
-#: C/gtkmm-tutorial-in.xml:8234(para)
+#: C/gtkmm-tutorial-in.xml:8245(para)
 msgid "The command line options passed to the C++ compiler."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8193(para)
+#: C/gtkmm-tutorial-in.xml:8204(para)
 msgid ""
 "Next we must adapt the various <filename>Makefile.am</filename> files: "
 "<placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8244(title)
+#: C/gtkmm-tutorial-in.xml:8255(title)
 msgid "Creating .hg and .ccg files"
 msgstr "Crear archivos .hg y .ccg"
 
-#: C/gtkmm-tutorial-in.xml:8245(para)
+#: C/gtkmm-tutorial-in.xml:8256(para)
 msgid ""
 "We should now create our first <filename>.hg</filename> and <filename>.ccg</"
 "filename> files, to wrap one of the objects in the C library. One pair of "
@@ -10632,14 +10648,14 @@ msgid ""
 "<filename>skeleton.hg</filename>. Create copies of these files as necessary."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8249(para)
+#: C/gtkmm-tutorial-in.xml:8260(para)
 msgid ""
 "We must mention all of our <filename>.hg</filename> and <filename>.ccg</"
 "filename> files in the <filename>skeleton/src/filelist.am</filename> file, "
 "typically in the <varname>files_hg</varname> variable."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8253(para)
+#: C/gtkmm-tutorial-in.xml:8264(para)
 msgid ""
 "Any additional non-generated <filename>.h</filename> and <filename>.cc</"
 "filename> source files may be placed in <filename>skeleton/skeletonmm/</"
@@ -10648,87 +10664,87 @@ msgid ""
 "<varname>files_extra_cc</varname> variables."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8259(para)
+#: C/gtkmm-tutorial-in.xml:8270(para)
 msgid ""
 "In the <link linkend=\"sec-wrapping-hg-files\">.hg and .ccg files</link> "
 "section you can learn about the syntax used in these files."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8266(title)
+#: C/gtkmm-tutorial-in.xml:8277(title)
 msgid "Generating the .defs files."
-msgstr ""
+msgstr "Generar los archivos .defs."
 
-#: C/gtkmm-tutorial-in.xml:8270(para)
+#: C/gtkmm-tutorial-in.xml:8281(para)
 msgid "objects (GObjects, widgets, interfaces, boxed-types and plain structs)"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8271(para)
+#: C/gtkmm-tutorial-in.xml:8282(para)
 msgid "functions"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8272(para)
+#: C/gtkmm-tutorial-in.xml:8283(para)
 msgid "enums"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8273(para)
+#: C/gtkmm-tutorial-in.xml:8284(para)
 msgid "signals"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8274(para)
+#: C/gtkmm-tutorial-in.xml:8285(para)
 msgid "properties"
 msgstr "propiedades"
 
-#: C/gtkmm-tutorial-in.xml:8275(para)
+#: C/gtkmm-tutorial-in.xml:8286(para)
 msgid "vfuncs"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8267(para)
+#: C/gtkmm-tutorial-in.xml:8278(para)
 msgid ""
-"The <filename>.defs</filename> file are text files, in a lisp format, that "
+"The <filename>.defs</filename> files are text files, in a lisp format, that "
 "describe the API of a C library, including its <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8284(filename)
+#: C/gtkmm-tutorial-in.xml:8295(filename)
 msgid "gtk.defs"
 msgstr "gtk.defs"
 
-#: C/gtkmm-tutorial-in.xml:8285(para)
+#: C/gtkmm-tutorial-in.xml:8296(para)
 msgid "Includes the other files."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8288(filename)
+#: C/gtkmm-tutorial-in.xml:8299(filename)
 msgid "gtk_methods.defs"
 msgstr "gtk_methods.defs"
 
-#: C/gtkmm-tutorial-in.xml:8289(para)
+#: C/gtkmm-tutorial-in.xml:8300(para)
 msgid "Objects and functions."
 msgstr "Objetos y funciones."
 
-#: C/gtkmm-tutorial-in.xml:8292(filename)
+#: C/gtkmm-tutorial-in.xml:8303(filename)
 msgid "gtk_enums.defs"
 msgstr "gtk_enums.defs"
 
-#: C/gtkmm-tutorial-in.xml:8293(para)
+#: C/gtkmm-tutorial-in.xml:8304(para)
 msgid "Enumerations."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8296(filename)
+#: C/gtkmm-tutorial-in.xml:8307(filename)
 msgid "gtk_signals.defs"
 msgstr "gtk_signals.defs"
 
-#: C/gtkmm-tutorial-in.xml:8297(para)
+#: C/gtkmm-tutorial-in.xml:8308(para)
 msgid "Signals and properties."
 msgstr "Señales y propiedades."
 
-#: C/gtkmm-tutorial-in.xml:8300(filename)
+#: C/gtkmm-tutorial-in.xml:8311(filename)
 msgid "gtk_vfuncs.defs"
 msgstr "gtk_vfuncs.defs"
 
-#: C/gtkmm-tutorial-in.xml:8301(para)
+#: C/gtkmm-tutorial-in.xml:8312(para)
 msgid "vfuncs (function pointer member fields in structs), written by hand."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8278(para)
+#: C/gtkmm-tutorial-in.xml:8289(para)
 msgid ""
 "At the moment, we have separate tools for generating different parts of "
 "these <filename>.defs</filename>, so we split them up into separate files. "
@@ -10737,41 +10753,47 @@ msgid ""
 "<placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8307(title)
-msgid "Generating the methods .defs"
-msgstr ""
-
-#: C/gtkmm-tutorial-in.xml:8311(programlisting)
-#, no-wrap
-msgid ""
-"\n"
-"$ ./h2def.py /usr/include/gtk-2.0/gtk/*.h &gt; gtk_methods.defs\n"
-msgstr ""
-"\n"
-"$ ./h2def.py /usr/include/gtk-2.0/gtk/*.h &gt; gtk_methods.defs\n"
-
-#: C/gtkmm-tutorial-in.xml:8308(para)
-msgid ""
-"This <filename>.defs</filename> file describes objects and their functions. "
-"It is generated by the <command>h2def.py</command> script which you can find "
-"in pygobject's <filename>codegen</filename> directory. For instance, "
-"<placeholder-1/>"
-msgstr ""
-
 #: C/gtkmm-tutorial-in.xml:8318(title)
-msgid "Generating the enums .defs"
+msgid "Generating the methods .defs"
 msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:8322(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "$ ./h2def.py /usr/include/gtk-2.0/gtk/*.h &gt; gtk_methods.defs\n"
 msgid ""
 "\n"
-"$ ./enum.pl /usr/include/gtk-2.0/gtk/*.h &gt; gtk_enums.defs\n"
+"$ ./h2def.py /usr/include/gtk-3.0/gtk/*.h &gt; gtk_methods.defs\n"
 msgstr ""
 "\n"
-"$ ./enum.pl /usr/include/gtk-2.0/gtk/*.h &gt; gtk_enums.defs\n"
+"$ ./h2def.py /usr/include/gtk-3.0/gtk/*.h &gt; gtk_methods.defs\n"
 
 #: C/gtkmm-tutorial-in.xml:8319(para)
+msgid ""
+"This <filename>.defs</filename> file describes objects and their functions. "
+"It is generated by the <command>h2def.py</command> script which you can find "
+"in glibmm's <filename>tools/defs_gen</filename> directory. For instance, "
+"<placeholder-1/>"
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:8329(title)
+msgid "Generating the enums .defs"
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:8333(programlisting)
+#, no-wrap
+#| msgid ""
+#| "\n"
+#| "$ ./enum.pl /usr/include/gtk-2.0/gtk/*.h &gt; gtk_enums.defs\n"
+msgid ""
+"\n"
+"$ ./enum.pl /usr/include/gtk-3.0/gtk/*.h &gt; gtk_enums.defs\n"
+msgstr ""
+"\n"
+"$ ./enum.pl /usr/include/gtk-3.0/gtk/*.h &gt; gtk_enums.defs\n"
+
+#: C/gtkmm-tutorial-in.xml:8330(para)
 msgid ""
 "This <filename>.defs</filename> file describes enum types and their possible "
 "values. It is generated by the <filename>enum.pl</filename> script which you "
@@ -10779,11 +10801,11 @@ msgid ""
 "<placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8329(title)
+#: C/gtkmm-tutorial-in.xml:8340(title)
 msgid "Generating the signals and properties .defs"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8334(programlisting)
+#: C/gtkmm-tutorial-in.xml:8345(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -10794,7 +10816,7 @@ msgstr ""
 "$ cd tools/extra_defs_gen\n"
 "$ ./generate_extra_defs &gt; gtk_signals.defs\n"
 
-#: C/gtkmm-tutorial-in.xml:8330(para)
+#: C/gtkmm-tutorial-in.xml:8341(para)
 msgid ""
 "This <filename>.defs</filename> file describes signals and properties. It is "
 "generated by the special <filename>extra_defs</filename> utility that is in "
@@ -10802,7 +10824,7 @@ msgid ""
 "filename>. For instance <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8339(para)
+#: C/gtkmm-tutorial-in.xml:8350(para)
 msgid ""
 "You must edit the source code of your own <filename>generate_extra_defs</"
 "filename> tool in order to generate the <filename>.defs</filename> for the "
@@ -10814,7 +10836,7 @@ msgid ""
 "filename> file should also mention the new source filename."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8348(programlisting)
+#: C/gtkmm-tutorial-in.xml:8359(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -10841,22 +10863,30 @@ msgstr ""
 "  return 0;\n"
 "}\n"
 
-#: C/gtkmm-tutorial-in.xml:8346(para)
+#: C/gtkmm-tutorial-in.xml:8357(para)
 msgid ""
 "Then edit the <filename>.cc</filename> file to specify the correct types. "
 "For instance, your <function>main()</function> function might look like "
 "this: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8364(title)
+#: C/gtkmm-tutorial-in.xml:8375(title)
 msgid "Writing the vfuncs .defs"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8374(title)
+#: C/gtkmm-tutorial-in.xml:8376(para)
+msgid ""
+"This <filename>.defs</filename> file describes virtual functions (vfuncs). "
+"It must be written by hand. There is no skeleton to start from. You can look "
+"at <application>gtkmm</application>'s <filename>gtk/src/gtk_vfuncs.defs</"
+"filename> file."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:8386(title)
 msgid "The .hg and .ccg files"
 msgstr "Los archivos .hg y .ccg"
 
-#: C/gtkmm-tutorial-in.xml:8375(para)
+#: C/gtkmm-tutorial-in.xml:8387(para)
 msgid ""
 "The .hg and .ccg source files are very much like .h and .cc C++ source "
 "files, but they contain extra macros, such as <function>_CLASS_GOBJECT()</"
@@ -10866,11 +10896,43 @@ msgid ""
 "copied verbatim into the corresponding .h or .cc file."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8388(programlisting)
+#: C/gtkmm-tutorial-in.xml:8400(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "#include &lt;gtkmm/bin.h&gt;\n"
+#| "#include &lt;gtkmm/stockid.h&gt;\n"
+#| "_DEFS(gtkmm,gtk)\n"
+#| "_PINCLUDE(gtkmm/private/bin_p.h)\n"
+#| "\n"
+#| "namespace Gtk\n"
+#| "{\n"
+#| "\n"
+#| "class Button : public Bin\n"
+#| "{\n"
+#| "  _CLASS_GTKOBJECT(Button,GtkButton,GTK_BUTTON,Gtk::Bin,GtkBin)\n"
+#| "public:\n"
+#| "\n"
+#| "  _CTOR_DEFAULT\n"
+#| "  explicit Button(const Glib::ustring&amp; label, bool mnemonic = false);\n"
+#| "  explicit Button(const StockID&amp; stock_id);\n"
+#| "\n"
+#| "  _WRAP_METHOD(void set_label(const Glib::ustring&amp; label), gtk_button_set_label)\n"
+#| "\n"
+#| "  ...\n"
+#| "\n"
+#| "  _WRAP_SIGNAL(void clicked(), \"clicked\")\n"
+#| "\n"
+#| "  ...\n"
+#| "\n"
+#| "  _WRAP_PROPERTY(\"label\", Glib::ustring)\n"
+#| "};\n"
+#| "\n"
+#| "} // namespace Gtk\n"
 msgid ""
 "\n"
 "#include &lt;gtkmm/bin.h&gt;\n"
+"#include &lt;gtkmm/activatable.h&gt;\n"
 "#include &lt;gtkmm/stockid.h&gt;\n"
 "_DEFS(gtkmm,gtk)\n"
 "_PINCLUDE(gtkmm/private/bin_p.h)\n"
@@ -10878,9 +10940,12 @@ msgid ""
 "namespace Gtk\n"
 "{\n"
 "\n"
-"class Button : public Bin\n"
+"class Button\n"
+"  : public Bin,\n"
+"    public Activatable\n"
 "{\n"
 "  _CLASS_GTKOBJECT(Button,GtkButton,GTK_BUTTON,Gtk::Bin,GtkBin)\n"
+"  _IMPLEMENTS_INTERFACE(Activatable)\n"
 "public:\n"
 "\n"
 "  _CTOR_DEFAULT\n"
@@ -10902,6 +10967,7 @@ msgid ""
 msgstr ""
 "\n"
 "#include &lt;gtkmm/bin.h&gt;\n"
+"#include &lt;gtkmm/activatable.h&gt;\n"
 "#include &lt;gtkmm/stockid.h&gt;\n"
 "_DEFS(gtkmm,gtk)\n"
 "_PINCLUDE(gtkmm/private/bin_p.h)\n"
@@ -10909,9 +10975,12 @@ msgstr ""
 "namespace Gtk\n"
 "{\n"
 "\n"
-"class Button : public Bin\n"
+"class Button\n"
+"  : public Bin,\n"
+"    public Activatable\n"
 "{\n"
 "  _CLASS_GTKOBJECT(Button,GtkButton,GTK_BUTTON,Gtk::Bin,GtkBin)\n"
+"  _IMPLEMENTS_INTERFACE(Activatable)\n"
 "public:\n"
 "\n"
 "  _CTOR_DEFAULT\n"
@@ -10929,9 +10998,9 @@ msgstr ""
 "  _WRAP_PROPERTY(\"label\", Glib::ustring)\n"
 "};\n"
 "\n"
-"} // espacio de nombres de GTK\n"
+"} // namespace Gtk\n"
 
-#: C/gtkmm-tutorial-in.xml:8383(para)
+#: C/gtkmm-tutorial-in.xml:8395(para)
 msgid ""
 "A .hg file will typically include some headers and then declare a class, "
 "using some macros to add API or behaviour to this class. For instance, "
@@ -10939,52 +11008,70 @@ msgid ""
 "1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8423(function)
+#: C/gtkmm-tutorial-in.xml:8439(function)
 msgid "_DEFS()"
 msgstr "_DEFS()"
 
-#: C/gtkmm-tutorial-in.xml:8424(para)
+#: C/gtkmm-tutorial-in.xml:8440(para)
 msgid ""
-"Specifies the destination directry for generated sources, and the name of "
+"Specifies the destination directory for generated sources, and the name of "
 "the main .defs file that <command>gmmproc</command> should parse."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8427(function)
+#: C/gtkmm-tutorial-in.xml:8443(function)
 msgid "_PINCLUDE()"
 msgstr "_PINCLUDE()"
 
-#: C/gtkmm-tutorial-in.xml:8428(para)
+#: C/gtkmm-tutorial-in.xml:8444(para)
 msgid ""
 "Tells <command>gmmproc</command> to include a header from the generated "
 "private/button_p.h file."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8431(function)
+#: C/gtkmm-tutorial-in.xml:8447(function)
 msgid "_CLASS_GTKOBJECT()"
 msgstr "_CLASS_GTKOBJECT()"
 
-#: C/gtkmm-tutorial-in.xml:8432(para)
+#: C/gtkmm-tutorial-in.xml:8448(para)
 msgid ""
 "Tells <command>gmmproc</command> to add some typedefs, constructors, and "
-"standard methods to this class, as appropriate when wrapping a GtkObject-"
-"derived type."
+"standard methods to this class, as appropriate when wrapping a widget."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8435(term)
+#: C/gtkmm-tutorial-in.xml:8451(function)
+#| msgid "_CLASS_INTERFACE"
+msgid "_IMPLEMENTS_INTERFACE()"
+msgstr "_IMPLEMENTS_INTERFACE()"
+
+#: C/gtkmm-tutorial-in.xml:8452(para)
+msgid ""
+"Tells <command>gmmproc</command> to add initialization code for the "
+"interface."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:8455(function) C/gtkmm-tutorial-in.xml:8701(title)
+msgid "_CTOR_DEFAULT"
+msgstr "_CTOR_DEFAULT"
+
+#: C/gtkmm-tutorial-in.xml:8456(para)
+msgid "Add a default constructor."
+msgstr "Añadir un constructor predeterminado."
+
+#: C/gtkmm-tutorial-in.xml:8459(term)
 msgid ""
 "<function>_WRAP_METHOD()</function>, <function>_WRAP_SIGNAL()</function>, "
 "and <function>_WRAP_PROPERTY()</function>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8438(para)
+#: C/gtkmm-tutorial-in.xml:8462(para)
 msgid "Add methods to wrap parts of the C API."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8420(para)
+#: C/gtkmm-tutorial-in.xml:8436(para)
 msgid "The macros in this example do the following: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8445(programlisting)
+#: C/gtkmm-tutorial-in.xml:8469(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -10995,21 +11082,21 @@ msgstr ""
 "$ cd gtk/src\n"
 "$ /usr/lib/glibmm-2.4/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtkmm\n"
 
-#: C/gtkmm-tutorial-in.xml:8442(para)
+#: C/gtkmm-tutorial-in.xml:8466(para)
 msgid ""
 "The .h and .cc files will be generated from the .hg and .ccg files by "
 "processing them with <command>gmmproc</command> like so, though this happens "
 "automatically when using the above build structure: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8450(para)
+#: C/gtkmm-tutorial-in.xml:8474(para)
 msgid ""
 "Notice that we provided <command>gmmproc</command> with the path to the .m4 "
 "convert files, the path to the .defs file, the name of a .hg file, the "
 "source directory, and the destination directory."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8453(para)
+#: C/gtkmm-tutorial-in.xml:8477(para)
 msgid ""
 "You should avoid including the C header from your C++ header, to avoid "
 "polluting the global namespace, and to avoid exporting unnecessary public "
@@ -11017,15 +11104,15 @@ msgid ""
 "file."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8458(para)
+#: C/gtkmm-tutorial-in.xml:8482(para)
 msgid "The macros are explained in more detail in the following sections."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8461(title)
+#: C/gtkmm-tutorial-in.xml:8485(title)
 msgid "m4 Conversions"
-msgstr ""
+msgstr "Conversiones m4"
 
-#: C/gtkmm-tutorial-in.xml:8468(programlisting)
+#: C/gtkmm-tutorial-in.xml:8492(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11034,7 +11121,7 @@ msgstr ""
 "\n"
 "_CONVERSION(`GtkTreeView*',`TreeView*',`Glib::wrap($3)')\n"
 
-#: C/gtkmm-tutorial-in.xml:8462(para)
+#: C/gtkmm-tutorial-in.xml:8486(para)
 msgid ""
 "The macros that you use in the .hg and .ccg files often need to know how to "
 "convert a C++ type to a C type, or vice-versa. gmmproc takes this "
@@ -11045,13 +11132,13 @@ msgid ""
 "pointer: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8473(para)
+#: C/gtkmm-tutorial-in.xml:8497(para)
 msgid ""
 "<literal>$3</literal> will be replaced by the parameter name when this "
 "conversion is used by gmmproc."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8480(programlisting)
+#: C/gtkmm-tutorial-in.xml:8504(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11064,17 +11151,17 @@ msgstr ""
 "_CONVERSION(`const PrintSettings&amp;',`GtkPrintSettings*',__FCR2P)\n"
 "_CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REFPTR_TO_P($3))\n"
 
-#: C/gtkmm-tutorial-in.xml:8477(para)
+#: C/gtkmm-tutorial-in.xml:8501(para)
 msgid ""
 "Some extra macros make this easier and consistent. Look in gtkmm's .m4 files "
 "for examples. For instance: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8489(title)
+#: C/gtkmm-tutorial-in.xml:8513(title)
 msgid "m4 Initializations"
 msgstr "inicializaciones de m4"
 
-#: C/gtkmm-tutorial-in.xml:8490(para)
+#: C/gtkmm-tutorial-in.xml:8514(para)
 msgid ""
 "Often when wrapping methods, it is desirable to store the return of the C "
 "function in what is called an output parameter. In this case, the C++ method "
@@ -11085,16 +11172,19 @@ msgid ""
 "the return of the C function."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8505(programlisting)
+#: C/gtkmm-tutorial-in.xml:8529(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "  _INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')\n"
 msgid ""
 "\n"
-"  _INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')\n"
+"_INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')\n"
 msgstr ""
 "\n"
-"  _INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')\n"
+"_INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')\n"
 
-#: C/gtkmm-tutorial-in.xml:8499(para)
+#: C/gtkmm-tutorial-in.xml:8523(para)
 msgid ""
 "For example, if there was a C function that returned a <type>GtkWidget*</"
 "type> and for some reason, instead of having the C++ method also return the "
@@ -11103,20 +11193,20 @@ msgid ""
 "would be necessary: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8510(para)
+#: C/gtkmm-tutorial-in.xml:8534(para)
 msgid ""
 "<literal>$3</literal> will be replaced by the output parameter name of the C+"
 "+ method and <literal>$4</literal> will be replaced by the return of the C "
-"function when this initialization is used by gmmproc. For convinience, "
+"function when this initialization is used by gmmproc. For convenience, "
 "<literal>$1</literal> will also be replaced by the C++ type without the "
 "ampersand (&amp;) and <literal>$2</literal> will be replaced by the C type."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8521(title)
+#: C/gtkmm-tutorial-in.xml:8545(title)
 msgid "Class macros"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8522(para)
+#: C/gtkmm-tutorial-in.xml:8546(para)
 msgid ""
 "The class macro declares the class itself and its relationship with the "
 "underlying C type. It generates some internal constructors, the member "
@@ -11125,25 +11215,25 @@ msgid ""
 "method, among other things."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8527(para)
+#: C/gtkmm-tutorial-in.xml:8551(para)
 msgid ""
 "Other macros, such as <function>_WRAP_METHOD()</function> and "
-"<function>_SIGNAL()</function> may only be used after a call to a "
+"<function>_WRAP_SIGNAL()</function> may only be used after a call to a "
 "<function>_CLASS_*</function> macro."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8532(title)
+#: C/gtkmm-tutorial-in.xml:8556(title)
 msgid "_CLASS_GOBJECT"
 msgstr "_CLASS_GOBJECT"
 
-#: C/gtkmm-tutorial-in.xml:8533(para) C/gtkmm-tutorial-in.xml:8623(para)
+#: C/gtkmm-tutorial-in.xml:8557(para)
 msgid ""
 "This macro declares a wrapper for a type that is derived from "
-"<classname>GObject</classname>, but which is not derived from "
-"<classname>GtkObject</classname>."
+"<classname>GObject</classname>, but whose wrapper is not derived from "
+"<classname>Gtk::Object</classname>."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8536(function)
+#: C/gtkmm-tutorial-in.xml:8560(function)
 msgid ""
 "_CLASS_GOBJECT( C++ class, C class, C casting macro, C++ base class, C base "
 "class )"
@@ -11151,7 +11241,7 @@ msgstr ""
 "_CLASS_GOBJECT( C++ class, C class, C casting macro, C++ base class, C base "
 "class )"
 
-#: C/gtkmm-tutorial-in.xml:8538(programlisting)
+#: C/gtkmm-tutorial-in.xml:8562(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11160,21 +11250,21 @@ msgstr ""
 "\n"
 "_CLASS_GOBJECT(AccelGroup, GtkAccelGroup, GTK_ACCEL_GROUP, Glib::Object, GObject)\n"
 
-#: C/gtkmm-tutorial-in.xml:8537(para)
+#: C/gtkmm-tutorial-in.xml:8561(para)
 msgid "For instance, from <filename>accelgroup.hg</filename>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8545(title)
+#: C/gtkmm-tutorial-in.xml:8569(title)
 msgid "_CLASS_GTKOBJECT"
 msgstr "_CLASS_GTKOBJECT"
 
-#: C/gtkmm-tutorial-in.xml:8546(para)
+#: C/gtkmm-tutorial-in.xml:8570(para)
 msgid ""
-"This macro declares a wrapper for a type that is derived from "
-"<classname>GtkObject</classname>, such as a widget or dialog."
+"This macro declares a wrapper for a type whose wrapper is derived from "
+"<classname>Gtk::Object</classname>, such as a widget or dialog."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8548(function)
+#: C/gtkmm-tutorial-in.xml:8572(function)
 msgid ""
 "_CLASS_GTKOBJECT( C++ class, C class, C casting macro, C++ base class, C "
 "base class )"
@@ -11182,7 +11272,7 @@ msgstr ""
 "_CLASS_GTKOBJECT( C++ class, C class, C casting macro, C++ base class, C "
 "base class )"
 
-#: C/gtkmm-tutorial-in.xml:8550(programlisting)
+#: C/gtkmm-tutorial-in.xml:8574(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11191,28 +11281,45 @@ msgstr ""
 "\n"
 "_CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)\n"
 
-#: C/gtkmm-tutorial-in.xml:8549(para) C/gtkmm-tutorial-in.xml:8943(para)
-#: C/gtkmm-tutorial-in.xml:8974(para)
+#: C/gtkmm-tutorial-in.xml:8573(para) C/gtkmm-tutorial-in.xml:8974(para)
+#: C/gtkmm-tutorial-in.xml:9035(para) C/gtkmm-tutorial-in.xml:9113(para)
 msgid "For instance, from <filename>button.hg</filename>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8557(title)
+#: C/gtkmm-tutorial-in.xml:8578(para)
+msgid ""
+"You will typically use this macro when the class already derives from Gtk::"
+"Object. For instance, you will use it when wrapping a GTK+ Widget, because "
+"Gtk::Widget derives from Gtk::Object."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:8579(para)
+msgid ""
+"You might also derive non-widget classes from Gtk::Object so they can be "
+"used without <classname>Glib::RefPtr</classname>. For isntance, they could "
+"then be instantiated with <function>Gtk::manage()</function> or on the stack "
+"as a member variable. This is convenient, but you should use this only when "
+"you are sure that true reference-counting is not needed. We consider it "
+"useful for widgets."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:8583(title)
 msgid "_CLASS_BOXEDTYPE"
 msgstr "_CLASS_BOXEDTYPE"
 
-#: C/gtkmm-tutorial-in.xml:8558(para)
+#: C/gtkmm-tutorial-in.xml:8584(para)
 msgid ""
 "This macro declares a wrapper for a non-<classname>GObject</classname> "
 "struct, registered with <function>g_boxed_type_register_static()</function>."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8561(function)
+#: C/gtkmm-tutorial-in.xml:8587(function)
 msgid ""
 "_CLASS_BOXEDTYPE( C++ class, C class, new function, copy function, free "
 "function )"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8563(programlisting)
+#: C/gtkmm-tutorial-in.xml:8589(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11221,15 +11328,15 @@ msgstr ""
 "\n"
 "_CLASS_BOXEDTYPE(Color, GdkColor, NONE, gdk_color_copy, gdk_color_free)\n"
 
-#: C/gtkmm-tutorial-in.xml:8562(para)
+#: C/gtkmm-tutorial-in.xml:8588(para)
 msgid "For instance, for <classname>Gdk::Color</classname>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8570(title)
+#: C/gtkmm-tutorial-in.xml:8596(title)
 msgid "_CLASS_BOXEDTYPE_STATIC"
 msgstr "_CLASS_BOXEDTYPE_STATIC"
 
-#: C/gtkmm-tutorial-in.xml:8571(para)
+#: C/gtkmm-tutorial-in.xml:8597(para)
 msgid ""
 "This macro declares a wrapper for a simple assignable struct such as "
 "<classname>GdkRectangle</classname>. It is similar to "
@@ -11237,11 +11344,11 @@ msgid ""
 "dynamically."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8575(function)
+#: C/gtkmm-tutorial-in.xml:8601(function)
 msgid "_CLASS_BOXEDTYPE_STATIC( C++ class, C class )"
 msgstr "_CLASS_BOXEDTYPE_STATIC( C++ class, C class )"
 
-#: C/gtkmm-tutorial-in.xml:8577(programlisting)
+#: C/gtkmm-tutorial-in.xml:8603(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11250,59 +11357,58 @@ msgstr ""
 "\n"
 "_CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle)\n"
 
-#: C/gtkmm-tutorial-in.xml:8576(para)
+#: C/gtkmm-tutorial-in.xml:8602(para)
 msgid ""
 "For instance, for <classname>Gdk::Rectangle</classname>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8584(title)
+#: C/gtkmm-tutorial-in.xml:8610(title)
 msgid "_CLASS_OPAQUE_COPYABLE"
 msgstr "_CLASS_OPAQUE_COPYABLE"
 
-#: C/gtkmm-tutorial-in.xml:8585(para)
+#: C/gtkmm-tutorial-in.xml:8611(para)
 msgid ""
 "This macro declares a wrapper for an opaque struct that has copy and free "
 "functions. The new, copy and free functions will be used to instantiate the "
 "default constructor, copy constructor and destructor."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8588(function)
+#: C/gtkmm-tutorial-in.xml:8614(function)
 msgid ""
 "_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, copy function, "
 "free function )"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8590(programlisting)
+#: C/gtkmm-tutorial-in.xml:8616(programlisting)
 #, no-wrap
 msgid ""
 "\n"
-"_CLASS_OPAQUE_COPYABLE(Region, GdkRegion, gdk_region_new, gdk_region_copy, gdk_region_destroy)\n"
-msgstr ""
-"\n"
-"_CLASS_OPAQUE_COPYABLE(Region, GdkRegion, gdk_region_new, gdk_region_copy, gdk_region_destroy)\n"
-
-#: C/gtkmm-tutorial-in.xml:8589(para)
-msgid "For instance, for <classname>Gdk::Region</classname>: <placeholder-1/>"
+"_CLASS_OPAQUE_COPYABLE(StockItem, GtkStockItem, NONE, gtk_stock_item_copy, gtk_stock_item_free)\n"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8597(title)
+#: C/gtkmm-tutorial-in.xml:8615(para)
+#| msgid "For instance, <placeholder-1/>"
+msgid "For instance, from <filename>stockitem.hg</filename>: <placeholder-1/>"
+msgstr "Por ejemplo, desde <filename>stockitem.hg</filename>: <placeholder-1/>"
+
+#: C/gtkmm-tutorial-in.xml:8623(title)
 msgid "_CLASS_OPAQUE_REFCOUNTED"
 msgstr "_CLASS_OPAQUE_REFCOUNTED"
 
-#: C/gtkmm-tutorial-in.xml:8598(para)
+#: C/gtkmm-tutorial-in.xml:8624(para)
 msgid ""
 "This macro declares a wrapper for a reference-counted opaque struct. The C++ "
 "wrapper cannot be directly instantiated and can only be used with "
 "<classname>Glib::RefPtr</classname>."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8601(function)
+#: C/gtkmm-tutorial-in.xml:8627(function)
 msgid ""
-"_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, ref function, "
+"_CLASS_OPAQUE_REFCOUNTED( C++ class, C class, new function, ref function, "
 "unref function )"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8603(programlisting)
+#: C/gtkmm-tutorial-in.xml:8629(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11311,26 +11417,26 @@ msgstr ""
 "\n"
 "_CLASS_OPAQUE_REFCOUNTED(Coverage, PangoCoverage, pango_coverage_new, pango_coverage_ref, pango_coverage_unref)\n"
 
-#: C/gtkmm-tutorial-in.xml:8602(para)
+#: C/gtkmm-tutorial-in.xml:8628(para)
 msgid ""
 "For instance, for <classname>Pango::Coverage</classname>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8610(title)
+#: C/gtkmm-tutorial-in.xml:8636(title)
 msgid "_CLASS_GENERIC"
 msgstr "_CLASS_GENERIC"
 
-#: C/gtkmm-tutorial-in.xml:8611(para)
+#: C/gtkmm-tutorial-in.xml:8637(para)
 msgid ""
 "This macro can be used to wrap structs which don't fit into any specialized "
 "category."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8613(function)
+#: C/gtkmm-tutorial-in.xml:8639(function)
 msgid "_CLASS_GENERIC( C++ class, C class )"
 msgstr "_CLASS_GENERIC( C++ class, C class )"
 
-#: C/gtkmm-tutorial-in.xml:8615(programlisting)
+#: C/gtkmm-tutorial-in.xml:8641(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11339,45 +11445,57 @@ msgstr ""
 "\n"
 "_CLASS_GENERIC(AttrIter, PangoAttrIterator)\n"
 
-#: C/gtkmm-tutorial-in.xml:8614(para)
+#: C/gtkmm-tutorial-in.xml:8640(para)
 msgid ""
 "For instance, for <classname>Pango::AttrIter</classname>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8622(title)
+#: C/gtkmm-tutorial-in.xml:8648(title)
 msgid "_CLASS_INTERFACE"
 msgstr "_CLASS_INTERFACE"
 
-#: C/gtkmm-tutorial-in.xml:8627(function)
+#: C/gtkmm-tutorial-in.xml:8649(para)
+msgid ""
+"This macro declares a wrapper for a type that is derived from "
+"<classname>GTypeInterface</classname>."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:8652(function)
 msgid ""
 "_CLASS_INTERFACE( C++ class, C class, C casting macro, C interface struct, "
 "Base C++ class (optional), Base C class (optional) )"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8630(programlisting)
+#: C/gtkmm-tutorial-in.xml:8655(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "  _CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)\n"
 msgid ""
 "\n"
-"  _CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)\n"
+"_CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)\n"
 msgstr ""
 "\n"
-"  _CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)\n"
+"_CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)\n"
 
-#: C/gtkmm-tutorial-in.xml:8628(para)
+#: C/gtkmm-tutorial-in.xml:8653(para)
 msgid ""
 "For instance, from <filename>celleditable.hg</filename>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8637(programlisting)
+#: C/gtkmm-tutorial-in.xml:8662(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "  _CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)\n"
 msgid ""
 "\n"
-"  _CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)\n"
+"_CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)\n"
 msgstr ""
 "\n"
-"  _CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)\n"
+"_CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)\n"
 
-#: C/gtkmm-tutorial-in.xml:8634(para)
+#: C/gtkmm-tutorial-in.xml:8659(para)
 msgid ""
 "Two extra parameters are optional, for the case that the interface derives "
 "from another interface, which should be the case when the GInterface has "
@@ -11385,11 +11503,11 @@ msgid ""
 "<filename>loadableicon.hg</filename>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8647(title)
+#: C/gtkmm-tutorial-in.xml:8671(title)
 msgid "Constructor macros"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8648(para)
+#: C/gtkmm-tutorial-in.xml:8672(para)
 msgid ""
 "The <function>_CTOR_DEFAULT()</function> and <function>_WRAP_CTOR()</"
 "function> macros add constructors, wrapping the specified <function>*_new()</"
@@ -11402,7 +11520,7 @@ msgid ""
 "convenience functions for C programmers."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8663(programlisting)
+#: C/gtkmm-tutorial-in.xml:8687(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11427,7 +11545,7 @@ msgstr ""
 "public:\n"
 "  _WRAP_CREATE(const Glib::ustring&amp; name = Glib::ustring())\n"
 
-#: C/gtkmm-tutorial-in.xml:8658(para)
+#: C/gtkmm-tutorial-in.xml:8682(para)
 msgid ""
 "When using <function>_CLASS_GOBJECT()</function>, the constructors should be "
 "protected (rather than public) and each constructor should have a "
@@ -11436,19 +11554,15 @@ msgid ""
 "<classname>RefPtr</classname>. For instance: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8677(title)
-msgid "_CTOR_DEFAULT"
-msgstr "_CTOR_DEFAULT"
-
-#: C/gtkmm-tutorial-in.xml:8678(para)
+#: C/gtkmm-tutorial-in.xml:8702(para)
 msgid "This macro creates a default constructor with no arguments."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8683(title)
+#: C/gtkmm-tutorial-in.xml:8707(title)
 msgid "_WRAP_CTOR"
 msgstr "_WRAP_CTOR"
 
-#: C/gtkmm-tutorial-in.xml:8684(para)
+#: C/gtkmm-tutorial-in.xml:8708(para)
 msgid ""
 "This macro creates a constructor with arguments, equivalent to a "
 "<function>*_new()</function> C function. It won't actually call the "
@@ -11457,18 +11571,20 @@ msgid ""
 "signature, and a C function name."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8697(programlisting)
+#: C/gtkmm-tutorial-in.xml:8721(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "    _WRAP_CTOR(ToolButton(Widget&amp; icon_widget, const Glib::ustring&amp; label{?}, gtk_tool_button_new)\n"
+#| "  "
 msgid ""
 "\n"
-"    _WRAP_CTOR(ToolButton(Widget&amp; icon_widget, const Glib::ustring&amp; label{?}, gtk_tool_button_new)\n"
-"  "
+"_WRAP_CTOR(ToolButton(Widget&amp; icon_widget, const Glib::ustring&amp; label{?}), gtk_tool_button_new)\n"
 msgstr ""
 "\n"
-"    _WRAP_CTOR(ToolButton(Widget&amp; icon_widget, const Glib::ustring&amp; label{?}, gtk_tool_button_new)\n"
-"  "
+"_WRAP_CTOR(ToolButton(Widget&amp; icon_widget, const Glib::ustring&amp; label{?}), gtk_tool_button_new)\n"
 
-#: C/gtkmm-tutorial-in.xml:8690(para)
+#: C/gtkmm-tutorial-in.xml:8714(para)
 msgid ""
 "When wrapping constructors, it is possible for gmmproc to generate "
 "convenience overloads of the wrapped constructors if the C function has "
@@ -11481,45 +11597,51 @@ msgid ""
 "that parameter."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8712(programlisting)
+#: C/gtkmm-tutorial-in.xml:8736(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "    GtkToolItem* gtk_tool_button_new(GtkWidget* icon_widget, const gchar* label);\n"
+#| "  "
 msgid ""
 "\n"
-"    GtkToolItem* gtk_tool_button_new(GtkWidget* icon_widget, const gchar* label);\n"
-"  "
+"GtkToolItem* gtk_tool_button_new(GtkWidget* icon_widget, const gchar* label);\n"
 msgstr ""
 "\n"
-"    GtkToolItem* gtk_tool_button_new(GtkWidget* icon_widget, const gchar* label);\n"
-"  "
+"GtkToolItem* gtk_tool_button_new(GtkWidget* icon_widget, const gchar* label);\n"
 
-#: C/gtkmm-tutorial-in.xml:8717(programlisting)
+#: C/gtkmm-tutorial-in.xml:8741(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "    WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{label}, Widget&amp; icon_widget{icon_widget}), gtk_tool_button_new)\n"
+#| "  "
 msgid ""
 "\n"
-"    WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{label}, Widget&amp; icon_widget{icon_widget}), gtk_tool_button_new)\n"
-"  "
+"_WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{label}, Widget&amp; icon_widget{icon_widget}), gtk_tool_button_new)\n"
 msgstr ""
 "\n"
-"    WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{label}, Widget&amp; icon_widget{icon_widget}), gtk_tool_button_new)\n"
-"  "
+"_WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{label}, Widget&amp; icon_widget{icon_widget}), gtk_tool_button_new)\n"
 
-#: C/gtkmm-tutorial-in.xml:8724(programlisting)
+#: C/gtkmm-tutorial-in.xml:8748(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "    WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{.}, Widget&amp; icon_widget{.}), gtk_tool_button_new)\n"
+#| "  "
 msgid ""
 "\n"
-"    WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{.}, Widget&amp; icon_widget{.}), gtk_tool_button_new)\n"
-"  "
+"_WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{.}, Widget&amp; icon_widget{.}), gtk_tool_button_new)\n"
 msgstr ""
 "\n"
-"    WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{.}, Widget&amp; icon_widget{.}), gtk_tool_button_new)\n"
-"  "
+"_WRAP_CTOR(ToolButton(const Glib::ustring&amp; label{.}, Widget&amp; icon_widget{.}), gtk_tool_button_new)\n"
 
-#: C/gtkmm-tutorial-in.xml:8705(para)
+#: C/gtkmm-tutorial-in.xml:8729(para)
 msgid ""
 "It is also possible to have the order of the parameters of the constructor "
 "different from that of the C function by using gmmproc's C++ to C parameter "
 "mapping functionality. Using this functionality, it is possible to map a C++ "
-"parameter to a C paramter by specifying the C parameter name. For instance, "
+"parameter to a C parameter by specifying the C parameter name. For instance, "
 "assuming that the declaration of the <function>gtk_tool_button_new()</"
 "function> function is the following: <placeholder-1/> The parameters of the "
 "wrapped constructor could be reordered using the following: <placeholder-2/> "
@@ -11529,7 +11651,7 @@ msgid ""
 "ones, the above could be re-written as: <placeholder-3/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8728(para)
+#: C/gtkmm-tutorial-in.xml:8752(para)
 msgid ""
 "This same optional parameter syntax and parameter reordering is available "
 "for <function>_WRAP_CREATE()</function>. Additional <function>create()</"
@@ -11537,11 +11659,11 @@ msgid ""
 "optional parameters."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8737(title)
+#: C/gtkmm-tutorial-in.xml:8761(title)
 msgid "Hand-coding constructors"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8746(programlisting)
+#: C/gtkmm-tutorial-in.xml:8770(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11556,7 +11678,7 @@ msgstr ""
 "  _CONSTRUCT(\"label\", label.c_str(), \"use_underline\", gboolean(mnemonic))\n"
 "{}\n"
 
-#: C/gtkmm-tutorial-in.xml:8738(para)
+#: C/gtkmm-tutorial-in.xml:8762(para)
 msgid ""
 "When a constructor must be partly hand written because, for instance, the "
 "<function>*_new()</function> C function's parameters do not correspond "
@@ -11568,23 +11690,23 @@ msgid ""
 "filename>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8758(title)
+#: C/gtkmm-tutorial-in.xml:8782(title)
 msgid "Method macros"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8761(title)
+#: C/gtkmm-tutorial-in.xml:8785(title)
 msgid "_WRAP_METHOD"
 msgstr "_WRAP_METHOD"
 
-#: C/gtkmm-tutorial-in.xml:8762(para)
+#: C/gtkmm-tutorial-in.xml:8786(para)
 msgid "This macro generates the C++ method to wrap a C function."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8763(function)
+#: C/gtkmm-tutorial-in.xml:8787(function)
 msgid "_WRAP_METHOD( C++ method signature, C function name)"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8765(programlisting)
+#: C/gtkmm-tutorial-in.xml:8789(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11593,11 +11715,11 @@ msgstr ""
 "\n"
 "_WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)\n"
 
-#: C/gtkmm-tutorial-in.xml:8764(para)
+#: C/gtkmm-tutorial-in.xml:8788(para)
 msgid "For instance, from <filename>entry.hg</filename>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8769(para)
+#: C/gtkmm-tutorial-in.xml:8793(para)
 msgid ""
 "The C function (e.g. <function>gtk_entry_set_text</function>) is described "
 "more fully in the .defs file, and the <filename>convert*.m4</filename> files "
@@ -11607,60 +11729,74 @@ msgid ""
 "xml</filename> files."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8778(term)
+#: C/gtkmm-tutorial-in.xml:8802(term) C/gtkmm-tutorial-in.xml:9011(term)
+#: C/gtkmm-tutorial-in.xml:9058(term)
 msgid "refreturn"
 msgstr "refreturn"
 
-#: C/gtkmm-tutorial-in.xml:8780(para)
+#: C/gtkmm-tutorial-in.xml:8804(para)
 msgid ""
-"Do an extra reference() on the return value, in case the C function does not "
-"provide a reference."
+"Do an extra <function>reference()</function> on the return value, in case "
+"the C function does not provide a reference."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8785(term)
+#: C/gtkmm-tutorial-in.xml:8809(term)
 msgid "errthrow"
 msgstr "errthrow"
 
-#: C/gtkmm-tutorial-in.xml:8787(para)
+#: C/gtkmm-tutorial-in.xml:8811(para)
 msgid "Use the last GError* parameter of the C function to throw an exception."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8792(term)
+#: C/gtkmm-tutorial-in.xml:8816(term)
 msgid "deprecated"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8794(para)
+#: C/gtkmm-tutorial-in.xml:8818(para)
 msgid ""
 "Puts the generated code in #ifdef blocks. Text about the deprecation can be "
 "specified as an optional parameter."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8800(term)
+#: C/gtkmm-tutorial-in.xml:8824(term)
 msgid "constversion"
 msgstr "constversion"
 
-#: C/gtkmm-tutorial-in.xml:8802(para)
+#: C/gtkmm-tutorial-in.xml:8826(para)
 msgid ""
 "Just call the non-const version of the same function, instead of generating "
 "almost duplicate code."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8775(para) C/gtkmm-tutorial-in.xml:8951(para)
+#: C/gtkmm-tutorial-in.xml:8831(term) C/gtkmm-tutorial-in.xml:9019(term)
+#: C/gtkmm-tutorial-in.xml:9090(term) C/gtkmm-tutorial-in.xml:9121(term)
+msgid "ifdef"
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:8833(para) C/gtkmm-tutorial-in.xml:9021(para)
+#: C/gtkmm-tutorial-in.xml:9092(para) C/gtkmm-tutorial-in.xml:9123(para)
+msgid "Puts the generated code in #ifdef blocks."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:8799(para) C/gtkmm-tutorial-in.xml:8982(para)
+#: C/gtkmm-tutorial-in.xml:9055(para)
 msgid "There are some optional extra arguments: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8812(programlisting)
+#: C/gtkmm-tutorial-in.xml:8842(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "    WRAP_METHOD(void get_preferred_size(Requisition&amp; minimum_size, Requisition&amp; natural_size{?}) const, gtk_widget_get_preferred_size)\n"
+#| "  "
 msgid ""
 "\n"
-"    WRAP_METHOD(void get_preferred_size(Requisition&amp; minimum_size, Requisition&amp; natural_size{?}) const, gtk_widget_get_preferred_size)\n"
-"  "
+"_WRAP_METHOD(void get_preferred_size(Requisition&amp; minimum_size, Requisition&amp; natural_size{?}) const, gtk_widget_get_preferred_size)\n"
 msgstr ""
 "\n"
-"    WRAP_METHOD(void get_preferred_size(Requisition&amp; minimum_size, Requisition&amp; natural_size{?}) const, gtk_widget_get_preferred_size)\n"
-"  "
+"_WRAP_METHOD(void get_preferred_size(Requisition&amp; minimum_size, Requisition&amp; natural_size{?}) const, gtk_widget_get_preferred_size)\n"
 
-#: C/gtkmm-tutorial-in.xml:8808(para)
+#: C/gtkmm-tutorial-in.xml:8838(para)
 msgid ""
 "As with <function>_WRAP_CTOR()</function> it is possible to specify if there "
 "are any optional parameters. If that is the case, gmmproc will generate "
@@ -11670,45 +11806,51 @@ msgid ""
 "this case, gmmproc would generate a method overload without that parameter."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8826(programlisting)
+#: C/gtkmm-tutorial-in.xml:8856(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "    void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device, GdkEventMask events);\n"
+#| "  "
 msgid ""
 "\n"
-"    void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device, GdkEventMask events);\n"
-"  "
+"void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device, GdkEventMask events);\n"
 msgstr ""
 "\n"
-"    void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device, GdkEventMask events);\n"
-"  "
+"void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device, GdkEventMask events);\n"
 
-#: C/gtkmm-tutorial-in.xml:8831(programlisting)
+#: C/gtkmm-tutorial-in.xml:8861(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "    _WRAP_METHOD(void set_device_events(Gdk::EventMask events{events}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{device}), gtk_widget_set_device_events)\n"
+#| "  "
 msgid ""
 "\n"
-"    _WRAP_METHOD(void set_device_events(Gdk::EventMask events{events}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{device}), gtk_widget_set_device_events)\n"
-"  "
+"_WRAP_METHOD(void set_device_events(Gdk::EventMask events{events}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{device}), gtk_widget_set_device_events)\n"
 msgstr ""
 "\n"
-"    _WRAP_METHOD(void set_device_events(Gdk::EventMask events{events}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{device}), gtk_widget_set_device_events)\n"
-"  "
+"_WRAP_METHOD(void set_device_events(Gdk::EventMask events{events}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{device}), gtk_widget_set_device_events)\n"
 
-#: C/gtkmm-tutorial-in.xml:8838(programlisting)
+#: C/gtkmm-tutorial-in.xml:8868(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "    _WRAP_METHOD(void set_device_events(Gdk::EventMask events{.}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{.}), gtk_widget_set_device_events)\n"
+#| "  "
 msgid ""
 "\n"
-"    _WRAP_METHOD(void set_device_events(Gdk::EventMask events{.}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{.}), gtk_widget_set_device_events)\n"
-"  "
+"_WRAP_METHOD(void set_device_events(Gdk::EventMask events{.}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{.}), gtk_widget_set_device_events)\n"
 msgstr ""
 "\n"
-"    _WRAP_METHOD(void set_device_events(Gdk::EventMask events{.}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{.}), gtk_widget_set_device_events)\n"
-"  "
+"_WRAP_METHOD(void set_device_events(Gdk::EventMask events{.}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{.}), gtk_widget_set_device_events)\n"
 
-#: C/gtkmm-tutorial-in.xml:8819(para)
+#: C/gtkmm-tutorial-in.xml:8849(para)
 msgid ""
 "Also, as with <function>_WRAP_CTOR()</function>, it is possible to reorder "
 "the parameters of the C++ method by using gmmproc's C++ to C parameter "
 "mapping functionality. Using this functionality, it is possible to map a C++ "
-"parameter to a C paramter by specifying the C parameter name. For example, "
+"parameter to a C parameter by specifying the C parameter name. For example, "
 "if the <function>gtk_widget_set_device_events()</function> declaration is "
 "the following: <placeholder-1/> Something like the following would change "
 "the order of the parameters in the C++ method: <placeholder-2/> The <literal>"
@@ -11718,73 +11860,78 @@ msgid ""
 "could be re-written as: <placeholder-3/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8850(programlisting)
+#: C/gtkmm-tutorial-in.xml:8880(programlisting)
 #, no-wrap
 msgid ""
 "\n"
-"    GtkSizeRequestMode gtk_widget_get_request_mode(GtkWidget* widget);\n"
-"  "
+"GtkSizeRequestMode gtk_widget_get_request_mode(GtkWidget* widget);\n"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8856(programlisting)
+#: C/gtkmm-tutorial-in.xml:8886(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "    _WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{RET}) const, gtk_widget_get_request_mode)\n"
+#| "  "
 msgid ""
 "\n"
-"    _WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{RET}) const, gtk_widget_get_request_mode)\n"
-"  "
+"_WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{OUT}) const, gtk_widget_get_request_mode)\n"
 msgstr ""
 "\n"
-"    _WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{RET}) const, gtk_widget_get_request_mode)\n"
-"  "
+"_WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{OUT}) const, gtk_widget_get_request_mode)\n"
 
-#: C/gtkmm-tutorial-in.xml:8864(programlisting)
+#: C/gtkmm-tutorial-in.xml:8894(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "    _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = (SizeRequestMode)($4)')\n"
+#| "  "
 msgid ""
 "\n"
-"    _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = (SizeRequestMode)($4)')\n"
-"  "
+"_INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = (SizeRequestMode)($4)')\n"
 msgstr ""
 "\n"
-"    _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = (SizeRequestMode)($4)')\n"
-"  "
+"_INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = (SizeRequestMode)($4)')\n"
 
-#: C/gtkmm-tutorial-in.xml:8868(programlisting)
+#: C/gtkmm-tutorial-in.xml:8898(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "    _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')\n"
+#| "  "
 msgid ""
 "\n"
-"    _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')\n"
-"  "
+"_INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')\n"
 msgstr ""
 "\n"
-"    _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')\n"
-"  "
+"_INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')\n"
 
-#: C/gtkmm-tutorial-in.xml:8842(para)
+#: C/gtkmm-tutorial-in.xml:8872(para)
 msgid ""
 "With <function>_WRAP_METHOD()</function> it is also possible to include an "
 "output parameter in the C++ method declaration in which the return of the C "
 "function would be placed and to have the C++ method return <type>void</"
 "type>. To do that, simply include the output parameter declaration in the C+"
-"+ method declaration appending a <literal>{RET}</literal> to the output "
+"+ method declaration appending a <literal>{OUT}</literal> to the output "
 "parameter name. For example, if <function>gtk_widget_get_request_mode()</"
 "function> is declared as the following: <placeholder-1/> And having the C++ "
 "method set an output parameter is desired instead of returning a "
 "<type>SizeRequestMode</type>, something like the following could be used: "
-"<placeholder-2/> the <literal>{RET}</literal> appended to the name of the "
+"<placeholder-2/> the <literal>{OUT}</literal> appended to the name of the "
 "<parameter>mode</parameter> output parameter tells gmmproc to place the "
 "return of the C function in that output parameter. In this case, however, a "
 "necessary initialization macro like the following would also have to be "
 "specified: <placeholder-3/> Which could also be written as: <placeholder-4/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8874(para)
+#: C/gtkmm-tutorial-in.xml:8904(para)
 msgid ""
 "Objects used via <classname>RefPtr</classname>: Pass the <classname>RefPtr</"
 "classname> as a const reference. For instance, <code>const Glib::RefPtr&lt;"
 "Gtk::Action&gt;&amp; action</code>."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8878(para)
+#: C/gtkmm-tutorial-in.xml:8908(para)
 msgid ""
 "Const Objects used via <classname>RefPtr</classname>: If the object should "
 "not be changed by the function, then make sure that the object is const, "
@@ -11792,7 +11939,7 @@ msgid ""
 "<code>const Glib::RefPtr&lt;const Gtk::Action&gt;&amp; action</code>."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8883(para)
+#: C/gtkmm-tutorial-in.xml:8913(para)
 msgid ""
 "Wrapping <classname>GList*</classname> and <classname>GSList*</classname> "
 "parameters: First, you need to discover what objects are contained in the "
@@ -11803,12 +11950,12 @@ msgid ""
 "the C and C++ types should be converted."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8900(programlisting)
+#: C/gtkmm-tutorial-in.xml:8930(programlisting)
 #, no-wrap
 msgid "#m4 _CONVERSION(`GSList*',`std::vector&lt;Widget*&gt;',`Glib::SListHandler&lt;Widget*&gt;::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')"
 msgstr "#m4 _CONVERSION(`GSList*',`std::vector&lt;Widget*&gt;',`Glib::SListHandler&lt;Widget*&gt;::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')"
 
-#: C/gtkmm-tutorial-in.xml:8892(para)
+#: C/gtkmm-tutorial-in.xml:8922(para)
 msgid ""
 "Wrapping <classname>GList*</classname> and <classname>GSList*</classname> "
 "return types: You must discover whether the caller should free the list and "
@@ -11819,17 +11966,17 @@ msgid ""
 "on the function rather than the type. For instance: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8872(para)
+#: C/gtkmm-tutorial-in.xml:8902(para)
 msgid ""
 "Though it's usually obvious what C++ types should be used in the C++ method, "
 "here are some hints: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8906(title)
+#: C/gtkmm-tutorial-in.xml:8936(title)
 msgid "_WRAP_METHOD_DOCS_ONLY"
 msgstr "_WRAP_METHOD_DOCS_ONLY"
 
-#: C/gtkmm-tutorial-in.xml:8907(para)
+#: C/gtkmm-tutorial-in.xml:8937(para)
 msgid ""
 "This macro is like <function>_WRAP_METHOD()</function>, but it generates "
 "only the documentation for a C++ method that wraps a C function. Use this "
@@ -11837,11 +11984,11 @@ msgid ""
 "that would be generated if the method was generated."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8911(function)
+#: C/gtkmm-tutorial-in.xml:8941(function)
 msgid "_WRAP_METHOD_DOCS_ONLY(C function name)"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8913(programlisting)
+#: C/gtkmm-tutorial-in.xml:8943(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11850,45 +11997,53 @@ msgstr ""
 "\n"
 "_WRAP_METHOD_DOCS_ONLY(gtk_container_remove)\n"
 
-#: C/gtkmm-tutorial-in.xml:8912(para)
+#: C/gtkmm-tutorial-in.xml:8942(para)
 msgid "For instance, from <filename>container.hg</filename>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8920(title)
-msgid "_IGNORE()"
-msgstr "_IGNORE()"
+#: C/gtkmm-tutorial-in.xml:8950(title)
+msgid "_IGNORE / _IGNORE_SIGNAL"
+msgstr "_IGNORE / _IGNORE_SIGNAL"
 
-#: C/gtkmm-tutorial-in.xml:8921(para)
+#: C/gtkmm-tutorial-in.xml:8951(para)
 msgid ""
-"<command>gmmproc</command> will warn you on stdout about functions that you "
-"have forgotten to wrap, helping to ensure that you are wrapping the complete "
-"API. Buf if you don't want to wrap some functions or if you chose to hand-"
-"code some methods then you can use the _IGNORE() macro the make "
-"<command>gmmproc</command> stop complaining."
+"<command>gmmproc</command> will warn you on stdout about functions and "
+"signals that you have forgotten to wrap, helping to ensure that you are "
+"wrapping the complete API. But if you don't want to wrap some functions or "
+"signals, or if you chose to hand-code some methods then you can use the "
+"_IGNORE() or _IGNORE_SIGNAL() macro to make <command>gmmproc</command> stop "
+"complaining."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8926(function)
+#: C/gtkmm-tutorial-in.xml:8956(function)
 msgid "_IGNORE(C function name 1, C function name2, etc)"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8928(programlisting)
+#: C/gtkmm-tutorial-in.xml:8957(function)
+msgid "_IGNORE_SIGNAL(C signal name 1, C signal name2, etc)"
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:8959(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "_IGNORE(gtk_button_box_set_spacing, gtk_button_box_get_spacing,\n"
 msgid ""
 "\n"
-"_IGNORE(gtk_button_box_set_spacing, gtk_button_box_get_spacing,\n"
+"_IGNORE(gtk_button_box_set_spacing, gtk_button_box_get_spacing)\n"
 msgstr ""
 "\n"
-"_IGNORE(gtk_button_box_set_spacing, gtk_button_box_get_spacing,\n"
+"_IGNORE(gtk_button_box_set_spacing, gtk_button_box_get_spacing)\n"
 
-#: C/gtkmm-tutorial-in.xml:8927(para)
+#: C/gtkmm-tutorial-in.xml:8958(para)
 msgid "For instance, from <filename>buttonbox.hg</filename>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8935(title)
+#: C/gtkmm-tutorial-in.xml:8966(title)
 msgid "_WRAP_SIGNAL"
 msgstr "_WRAP_SIGNAL"
 
-#: C/gtkmm-tutorial-in.xml:8936(para)
+#: C/gtkmm-tutorial-in.xml:8967(para)
 msgid ""
 "This macro generates the C++ libsigc++-style signal to wrap a C GObject "
 "signal. It actually generates a public accessor method, such as "
@@ -11897,11 +12052,11 @@ msgid ""
 "types and the .m4 convert files to discover appropriate type conversions."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8942(function)
+#: C/gtkmm-tutorial-in.xml:8973(function)
 msgid "_WRAP_SIGNAL( C++ signal handler signature, C signal name)"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8944(programlisting)
+#: C/gtkmm-tutorial-in.xml:8975(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11910,18 +12065,18 @@ msgstr ""
 "\n"
 "_WRAP_SIGNAL(void clicked(),\"clicked\")\n"
 
-#: C/gtkmm-tutorial-in.xml:8948(para)
+#: C/gtkmm-tutorial-in.xml:8979(para)
 msgid ""
 "Signals usually have function pointers in the GTK struct, with a "
 "corresponding enum value. and a <function>g_signal_new()</function> in the ."
 "c file."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8954(term)
+#: C/gtkmm-tutorial-in.xml:8985(term)
 msgid "no_default_handler"
-msgstr ""
+msgstr "no_default_handler"
 
-#: C/gtkmm-tutorial-in.xml:8956(para)
+#: C/gtkmm-tutorial-in.xml:8987(para)
 msgid ""
 "Do not generate an <function>on_something()</function> virtual method to "
 "allow easy overriding of the default signal handler. Use this when adding a "
@@ -11929,11 +12084,40 @@ msgid ""
 "size of the class's virtual function table."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8968(title)
+#: C/gtkmm-tutorial-in.xml:8995(term)
+msgid "custom_default_handler"
+msgstr "custom_default_handler"
+
+#: C/gtkmm-tutorial-in.xml:8997(para)
+msgid ""
+"Generate a declaration of the <function>on_something()</function> virtual "
+"method in the <filename>.h</filename> file, but do not generate a definition "
+"in the <filename>.cc</filename> file. Use this when you must generate the "
+"definition by hand."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9004(term)
+msgid "custom_c_callback"
+msgstr "custom_c_callback"
+
+#: C/gtkmm-tutorial-in.xml:9006(para)
+msgid ""
+"Do not generate a C callback function for the signal. Use this when you must "
+"generate the callback function by hand."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9013(para)
+msgid ""
+"Do an extra <function>reference()</function> on the return value of the "
+"<function>on_something()</function> virtual method, in case the C function "
+"does not provide a reference."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9029(title)
 msgid "_WRAP_PROPERTY"
 msgstr "_WRAP_PROPERTY"
 
-#: C/gtkmm-tutorial-in.xml:8969(para)
+#: C/gtkmm-tutorial-in.xml:9030(para)
 msgid ""
 "This macro generates the C++ method to wrap a C GObject property. You must "
 "specify the property name and the wanted C++ type for the property. "
@@ -11941,11 +12125,11 @@ msgid ""
 "the .m4 convert files to discover appropriate type conversions."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8973(function)
+#: C/gtkmm-tutorial-in.xml:9034(function)
 msgid "_WRAP_PROPERTY(C property name, C++ type)"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8975(programlisting)
+#: C/gtkmm-tutorial-in.xml:9036(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11954,21 +12138,135 @@ msgstr ""
 "\n"
 "_WRAP_PROPERTY(\"etiqueta\", Glib::ustring)\n"
 
-#: C/gtkmm-tutorial-in.xml:8984(title)
+#: C/gtkmm-tutorial-in.xml:9043(title)
+#| msgid "_WRAP_CTOR"
+msgid "_WRAP_VFUNC"
+msgstr "_WRAP_VFUNC"
+
+#: C/gtkmm-tutorial-in.xml:9044(para)
+msgid "This macro generates the C++ method to wrap a virtual C function."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9045(function)
+msgid "_WRAP_VFUNC( C++ method signature, C function name)"
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9047(programlisting)
+#, no-wrap
+#| msgid ""
+#| "\n"
+#| "    _WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{RET}) const, gtk_widget_get_request_mode)\n"
+#| "  "
+msgid ""
+"\n"
+"_WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)\n"
+msgstr ""
+"\n"
+"_WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)\n"
+
+#: C/gtkmm-tutorial-in.xml:9046(para) C/gtkmm-tutorial-in.xml:9134(para)
+msgid "For instance, from <filename>widget.hg</filename>: <placeholder-1/>"
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9051(para)
+msgid ""
+"The C function (e.g. <function>get_request_mode</function>) is described "
+"more fully in the <filename>*_vfuncs.defs</filename> file, and the "
+"<filename>convert*.m4</filename> files contain the necessary conversion from "
+"the C++ parameter type to the C parameter type."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9060(para)
+msgid ""
+"Do an extra <function>reference()</function> on the return value of the "
+"<function>something_vfunc()</function> function, in case the virtual C "
+"function does not provide a reference."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9066(term)
+#| msgid "refreturn"
+msgid "refreturn_ctype"
+msgstr "refreturn_ctype"
+
+#: C/gtkmm-tutorial-in.xml:9068(para)
+msgid ""
+"Do an extra <function>reference()</function> on the return value of an "
+"overridden <function>something_vfunc()</function> function in the C callback "
+"function, in case the calling C function expects it to provide a reference."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9075(term)
+msgid "custom_vfunc"
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9077(para)
+msgid ""
+"Do not generate a definition of the vfunc in the <filename>.cc</filename> "
+"file. Use this when you must generate the vfunc by hand."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9083(term)
+msgid "custom_vfunc_callback"
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9085(para)
+msgid ""
+"Do not generate a C callback function for the vfunc. Use this when you must "
+"generate the callback function by hand."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9097(para)
+msgid ""
+"A rule to which there may be exceptions: If the virtual C function returns a "
+"pointer to an object derived from <classname>GObject</classname>, i.e. a "
+"reference-counted object, then the virtual C++ function shall return a "
+"<classname>Glib::RefPtr&lt;&gt;</classname> object. One of the extra "
+"arguments <parameter>refreturn</parameter> or <parameter>refreturn_ctype</"
+"parameter> is required."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9108(title)
 msgid "Other macros"
 msgstr "Otras macros"
 
-#: C/gtkmm-tutorial-in.xml:8986(title)
+#: C/gtkmm-tutorial-in.xml:9110(title)
+#| msgid "_CLASS_INTERFACE"
+msgid "_IMPLEMENTS_INTERFACE"
+msgstr "_IMPLEMENTS_INTERFACE"
+
+#: C/gtkmm-tutorial-in.xml:9111(para)
+msgid "This macro generates initialization code for the interface."
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9112(function)
+msgid "_IMPLEMENTS_INTERFACE(C++ interface name)"
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9114(programlisting)
+#, no-wrap
+msgid ""
+"\n"
+"_IMPLEMENTS_INTERFACE(Activatable)\n"
+msgstr ""
+"\n"
+"_IMPLEMENTS_INTERFACE(Activatable)\n"
+
+#: C/gtkmm-tutorial-in.xml:9118(para)
+#| msgid "For example: <placeholder-1/>"
+msgid "There is one optional extra argument: <placeholder-1/>"
+msgstr "Hay un argumento opcional adicional: <placeholder-1/>"
+
+#: C/gtkmm-tutorial-in.xml:9131(title)
 msgid "_WRAP_ENUM"
 msgstr "_WRAP_ENUM"
 
-#: C/gtkmm-tutorial-in.xml:8987(para)
+#: C/gtkmm-tutorial-in.xml:9132(para)
 msgid ""
 "This macro generates a C++ enum to wrap a C enum. You must specify the "
 "desired C++ name and the name of the underlying C enum."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8990(programlisting)
+#: C/gtkmm-tutorial-in.xml:9135(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -11977,11 +12275,7 @@ msgstr ""
 "\n"
 "_WRAP_ENUM(WindowType, GdkWindowType)\n"
 
-#: C/gtkmm-tutorial-in.xml:8989(para)
-msgid "For instance, from <filename>widget.hg</filename>: <placeholder-1/>"
-msgstr ""
-
-#: C/gtkmm-tutorial-in.xml:8994(para)
+#: C/gtkmm-tutorial-in.xml:9139(para)
 msgid ""
 "If the enum is not a <classname>GType</classname>, you must pass a third "
 "parameter NO_GTYPE. This is the case when there is no <function>*_get_type()"
@@ -11990,37 +12284,40 @@ msgid ""
 "against the C API, because all enums should be registered as GTypes."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:8999(programlisting)
+#: C/gtkmm-tutorial-in.xml:9144(programlisting)
 #, no-wrap
+#| msgid ""
+#| "\n"
+#| "_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags)\n"
 msgid ""
 "\n"
-"_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags)\n"
+"_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)\n"
 msgstr ""
 "\n"
-"_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags)\n"
+"_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)\n"
 
-#: C/gtkmm-tutorial-in.xml:8998(para)
-msgid "For example: <placeholder-1/>"
-msgstr "Por ejemplo: <placeholder-1/>"
+#: C/gtkmm-tutorial-in.xml:9143(para)
+msgid "For example, from <filename>icontheme.hg</filename>: <placeholder-1/>"
+msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9006(title)
+#: C/gtkmm-tutorial-in.xml:9151(title)
 msgid "_WRAP_GERROR"
 msgstr "_WRAP_GERROR"
 
-#: C/gtkmm-tutorial-in.xml:9007(para)
+#: C/gtkmm-tutorial-in.xml:9152(para)
 msgid ""
 "This macro generates a C++ exception class, derived from Glib::Error, with a "
 "Code enum and a code() method. You must specify the desired C++ name, the "
 "name of the corresponding C enum, and the prefix for the C enum values."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9010(para)
+#: C/gtkmm-tutorial-in.xml:9155(para)
 msgid ""
 "This exception can then be thrown by methods which are generated from "
 "_WRAP_METHOD() with the errthrow option."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9012(programlisting)
+#: C/gtkmm-tutorial-in.xml:9157(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -12029,90 +12326,91 @@ msgstr ""
 "\n"
 "_WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)\n"
 
-#: C/gtkmm-tutorial-in.xml:9011(para)
+#: C/gtkmm-tutorial-in.xml:9156(para)
 msgid "For instance, from <filename>pixbuf.hg</filename>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9019(title)
+#: C/gtkmm-tutorial-in.xml:9164(title)
 msgid "_MEMBER_GET / _MEMBER_SET"
 msgstr "_MEMBER_GET / _MEMBER_SET"
 
-#: C/gtkmm-tutorial-in.xml:9020(para)
+#: C/gtkmm-tutorial-in.xml:9165(para)
 msgid ""
 "Use these macros if you're wrapping a simple struct or boxed type that "
 "provides direct access to its data members, to create getters and setters "
 "for the data members."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9024(function)
+#: C/gtkmm-tutorial-in.xml:9169(function)
 msgid "_MEMBER_GET(C++ name, C name, C++ type, C type)"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9025(function)
+#: C/gtkmm-tutorial-in.xml:9170(function)
 msgid "_MEMBER_SET(C++ name, C name, C++ type, C type)"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9028(programlisting)
+#: C/gtkmm-tutorial-in.xml:9173(programlisting)
 #, no-wrap
 msgid "_MEMBER_GET(x, x, int, int)"
 msgstr "_MEMBER_GET(x, x, int, int)"
 
-#: C/gtkmm-tutorial-in.xml:9026(para)
+#: C/gtkmm-tutorial-in.xml:9171(para)
 msgid "For example, in <filename>rectangle.hg</filename>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9032(title)
+#: C/gtkmm-tutorial-in.xml:9177(title)
 msgid "_MEMBER_GET_PTR / _MEMBER_SET_PTR"
 msgstr "_MEMBER_GET_PTR / _MEMBER_SET_PTR"
 
-#: C/gtkmm-tutorial-in.xml:9033(para)
+#: C/gtkmm-tutorial-in.xml:9178(para)
 msgid ""
 "Use these macros to automatically provide getters and setters for a data "
 "member that is a pointer type. For the getter function, it will create two "
 "methods, one const and one non-const."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9038(function)
+#: C/gtkmm-tutorial-in.xml:9183(function)
 msgid "_MEMBER_GET_PTR(C++ name, C name, C++ type, C type)"
 msgstr "_MEMBER_GET_PTR(C++ name, C name, C++ type, C type)"
 
-#: C/gtkmm-tutorial-in.xml:9039(function)
+#: C/gtkmm-tutorial-in.xml:9184(function)
 msgid "_MEMBER_SET_PTR(C++ name, C name, C++ type, C type)"
 msgstr "_MEMBER_SET_PTR(C++ name, C name, C++ type, C type)"
 
-#: C/gtkmm-tutorial-in.xml:9041(programlisting)
+#: C/gtkmm-tutorial-in.xml:9186(programlisting)
 #, no-wrap
 msgid ""
 "\n"
-"_MEMBER_GET_PTR(vbox, vbox, VBox*, GtkWidget*)\n"
-msgstr ""
-"\n"
-"_MEMBER_GET_PTR(vbox, vbox, VBox*, GtkWidget*)\n"
-
-#: C/gtkmm-tutorial-in.xml:9040(para)
-msgid "For example, in <filename>dialog.hg</filename>: <placeholder-1/>"
+"// _MEMBER_GET_PTR(engine_lang, lang_engine, EngineLang*, PangoEngineLang*)\n"
+"// It's just a comment. It's difficult to find a real-world example.\n"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9047(title)
+#: C/gtkmm-tutorial-in.xml:9185(para)
+msgid ""
+"For example, for <classname>Pango::Analysis</classname> in <filename>item."
+"hg</filename>: <placeholder-1/>"
+msgstr ""
+
+#: C/gtkmm-tutorial-in.xml:9193(title)
 msgid "_MEMBER_GET_GOBJECT / _MEMBER_SET_GOBJECT"
 msgstr "_MEMBER_GET_GOBJECT / _MEMBER_SET_GOBJECT"
 
-#: C/gtkmm-tutorial-in.xml:9048(para)
+#: C/gtkmm-tutorial-in.xml:9194(para)
 msgid ""
 "Use these macros to provide getters and setters for a data member that is a "
 "<classname>GObject</classname> type that must be referenced before being "
 "returned."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9053(function)
+#: C/gtkmm-tutorial-in.xml:9199(function)
 msgid "_MEMBER_GET_GOBJECT(C++ name, C name, C++ type, C type)"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9054(function)
+#: C/gtkmm-tutorial-in.xml:9200(function)
 msgid "_MEMBER_SET_GOBJECT(C++ name, C name, C++ type, C type)"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9056(programlisting)
+#: C/gtkmm-tutorial-in.xml:9202(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -12121,16 +12419,16 @@ msgstr ""
 "\n"
 "_MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)\n"
 
-#: C/gtkmm-tutorial-in.xml:9055(para)
+#: C/gtkmm-tutorial-in.xml:9201(para)
 msgid ""
 "For example, in Pangomm, <filename>layoutline.hg</filename>: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9063(title)
+#: C/gtkmm-tutorial-in.xml:9209(title)
 msgid "Basic Types"
 msgstr "Tipos básicos"
 
-#: C/gtkmm-tutorial-in.xml:9064(para)
+#: C/gtkmm-tutorial-in.xml:9210(para)
 msgid ""
 "Some of the basic types that are used in C APIs have better alternatives in C"
 "++. For example, there's no need for a <type>gboolean</type> type since C++ "
@@ -12138,67 +12436,67 @@ msgid ""
 "C APIs and what you might convert them to in a C++ wrapper library."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9069(title)
+#: C/gtkmm-tutorial-in.xml:9215(title)
 msgid "Basic Type equivalents"
 msgstr "Tipos básicos equivalentes"
 
-#: C/gtkmm-tutorial-in.xml:9071(segtitle)
+#: C/gtkmm-tutorial-in.xml:9217(segtitle)
 msgid "C type"
 msgstr "Tipo C"
 
-#: C/gtkmm-tutorial-in.xml:9072(segtitle)
+#: C/gtkmm-tutorial-in.xml:9218(segtitle)
 msgid "C++ type"
 msgstr "Tipo C++"
 
-#: C/gtkmm-tutorial-in.xml:9073(type)
+#: C/gtkmm-tutorial-in.xml:9219(type)
 msgid "gboolean"
 msgstr "gboolean"
 
-#: C/gtkmm-tutorial-in.xml:9073(type)
+#: C/gtkmm-tutorial-in.xml:9219(type)
 msgid "bool"
 msgstr "bool"
 
-#: C/gtkmm-tutorial-in.xml:9074(type)
+#: C/gtkmm-tutorial-in.xml:9220(type)
 msgid "gint"
 msgstr "gint"
 
-#: C/gtkmm-tutorial-in.xml:9074(type)
+#: C/gtkmm-tutorial-in.xml:9220(type)
 msgid "int"
 msgstr "int"
 
-#: C/gtkmm-tutorial-in.xml:9075(type)
+#: C/gtkmm-tutorial-in.xml:9221(type)
 msgid "guint"
 msgstr "guint"
 
-#: C/gtkmm-tutorial-in.xml:9076(type)
+#: C/gtkmm-tutorial-in.xml:9222(type)
 msgid "gdouble"
 msgstr "gdouble"
 
-#: C/gtkmm-tutorial-in.xml:9076(type)
+#: C/gtkmm-tutorial-in.xml:9222(type)
 msgid "double"
 msgstr "doble"
 
-#: C/gtkmm-tutorial-in.xml:9077(type)
+#: C/gtkmm-tutorial-in.xml:9223(type)
 msgid "gunichar"
 msgstr "gunichar"
 
-#: C/gtkmm-tutorial-in.xml:9078(type)
+#: C/gtkmm-tutorial-in.xml:9224(type)
 msgid "gchar*"
 msgstr "gchar*"
 
-#: C/gtkmm-tutorial-in.xml:9078(classname)
+#: C/gtkmm-tutorial-in.xml:9224(classname)
 msgid "std::string"
 msgstr "std::string"
 
-#: C/gtkmm-tutorial-in.xml:9078(seg)
+#: C/gtkmm-tutorial-in.xml:9224(seg)
 msgid "<placeholder-1/> (or <placeholder-2/> for filenames)"
 msgstr "<placeholder-1/> (o <placeholder-2/> para nombres de archivos)"
 
-#: C/gtkmm-tutorial-in.xml:9085(title)
+#: C/gtkmm-tutorial-in.xml:9231(title)
 msgid "Hand-coded source files"
 msgstr "Archivos de código fuente programados a mano"
 
-#: C/gtkmm-tutorial-in.xml:9086(para)
+#: C/gtkmm-tutorial-in.xml:9232(para)
 msgid ""
 "You might want to include additional source files that will not be generated "
 "by <command>gmmproc</command> from <filename>.hg</filename> and <filename>."
@@ -12208,11 +12506,11 @@ msgid ""
 "varname> and <varname>files_extra_cc</varname> variables."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9096(title)
+#: C/gtkmm-tutorial-in.xml:9242(title)
 msgid "Initialization"
 msgstr "Inicialización"
 
-#: C/gtkmm-tutorial-in.xml:9105(programlisting)
+#: C/gtkmm-tutorial-in.xml:9251(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -12229,7 +12527,7 @@ msgstr ""
 "  wrap_init(); //Informa a la tabla Glib::wrap() sobre las clases de libalgomm.\n"
 "}\n"
 
-#: C/gtkmm-tutorial-in.xml:9097(para)
+#: C/gtkmm-tutorial-in.xml:9243(para)
 msgid ""
 "Your library must be initialized before it can be used, to register the new "
 "types that it makes available. Also, the C library that you are wrapping "
@@ -12241,7 +12539,7 @@ msgid ""
 "<function>wrap_init()</function> function. For instance: <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9113(para)
+#: C/gtkmm-tutorial-in.xml:9259(para)
 msgid ""
 "The implementation of the <function>wrap_init()</function> method in "
 "<filename>wrap_init.cc</filename> is generated by "
@@ -12251,22 +12549,22 @@ msgid ""
 "function appears in the correct C++ namespace."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9122(title)
+#: C/gtkmm-tutorial-in.xml:9268(title)
 msgid "Problems in the C API."
 msgstr "Problemas en la API de C."
 
-#: C/gtkmm-tutorial-in.xml:9123(para)
+#: C/gtkmm-tutorial-in.xml:9269(para)
 msgid ""
 "You are likely to encounter some problems in the library that you are "
 "wrapping, particularly if it is a new project. Here are some common "
 "problems, with solutions."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9125(title)
+#: C/gtkmm-tutorial-in.xml:9271(title)
 msgid "Unable to predeclare structs"
 msgstr "No se pueden predeclarar estructuras"
 
-#: C/gtkmm-tutorial-in.xml:9127(programlisting)
+#: C/gtkmm-tutorial-in.xml:9273(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -12285,7 +12583,7 @@ msgstr ""
 "  ...\n"
 "};\n"
 
-#: C/gtkmm-tutorial-in.xml:9126(para)
+#: C/gtkmm-tutorial-in.xml:9272(para)
 msgid ""
 "By convention, structs are declared in glib/GTK+-style headers like so: "
 "<placeholder-1/>"
@@ -12293,17 +12591,17 @@ msgstr ""
 "Por convenio, las estructuras se declaran en los encabezados de Glib/GTK+ "
 "igual que en: <placeholder-1/>"
 
-#: C/gtkmm-tutorial-in.xml:9136(para)
+#: C/gtkmm-tutorial-in.xml:9282(para)
 msgid ""
 "The extra typedef allows the struct to be used in a header without including "
-"its full defintion, simply by predeclaring it, by repeating that typedef. "
+"its full definition, simply by predeclaring it, by repeating that typedef. "
 "This means that you don't have to include the C library's header in your C++ "
 "header, thus keeping it out of your public API. <command>gmmproc</command> "
 "assumes that this technique was used, so you will see compiler errors if "
 "that is not the case."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9139(programlisting)
+#: C/gtkmm-tutorial-in.xml:9289(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -12312,7 +12610,7 @@ msgid ""
 "make[4]: *** [example-widget.lo] Error 1\n"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9145(programlisting)
+#: C/gtkmm-tutorial-in.xml:9295(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -12320,7 +12618,7 @@ msgid ""
 "../../libexample/libexamplemm/example-widget.h:34: error: previous declaration of 'typedef struct _ExampleWidget ExampleWidget'\n"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9137(para)
+#: C/gtkmm-tutorial-in.xml:9287(para)
 msgid ""
 "This compiler error might look like this: <placeholder-1/> or this: "
 "<placeholder-2/>"
@@ -12328,7 +12626,7 @@ msgstr ""
 "Este error del compilador podría tener este aspecto: <placeholder-1/> o "
 "este: <placeholder-2/>"
 
-#: C/gtkmm-tutorial-in.xml:9150(para)
+#: C/gtkmm-tutorial-in.xml:9300(para)
 msgid ""
 "This is easy to correct in the C library, so do send a patch to the relevant "
 "maintainer."
@@ -12336,11 +12634,11 @@ msgstr ""
 "Esto es fácil de corregir en la biblioteca de C, así que envíe un parche al "
 "mantenedor pertinentes."
 
-#: C/gtkmm-tutorial-in.xml:9154(title)
+#: C/gtkmm-tutorial-in.xml:9304(title)
 msgid "Lack of properties"
 msgstr "Falta de propiedades"
 
-#: C/gtkmm-tutorial-in.xml:9161(programlisting)
+#: C/gtkmm-tutorial-in.xml:9311(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -12355,7 +12653,7 @@ msgstr ""
 "        return g_object_new (EXAMPLE_TYPE_WIDGET, \"something\", something, \"thing\", thing, NULL);\n"
 "}\n"
 
-#: C/gtkmm-tutorial-in.xml:9155(para)
+#: C/gtkmm-tutorial-in.xml:9305(para)
 msgid ""
 "By convention, glib/GTK+-style objects have <function>*_new()</function> "
 "functions, such as <function>example_widget_new()</function> that do nothing "
@@ -12365,7 +12663,7 @@ msgid ""
 "instance, <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9168(para)
+#: C/gtkmm-tutorial-in.xml:9318(para)
 msgid ""
 "This allows language bindings to implement their own equivalents (such as C+"
 "+ constructors), without using the <function>*_new()</function> function. "
@@ -12373,7 +12671,7 @@ msgid ""
 "GType, to add their own hooks for signal handlers and vfuncs."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9172(para)
+#: C/gtkmm-tutorial-in.xml:9322(para)
 msgid ""
 "At the least, the <function>_new()</function> function should not use any "
 "private API (functions that are only in a .c file). Even when there are no "
@@ -12382,7 +12680,7 @@ msgid ""
 "that is available to us."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9180(programlisting)
+#: C/gtkmm-tutorial-in.xml:9330(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -12401,53 +12699,54 @@ msgid ""
 "}\n"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9177(para)
+#: C/gtkmm-tutorial-in.xml:9327(para)
 msgid ""
 "Another workaround is to add a <function>*_construct()</function> function "
 "that the C++ constructor can call after instantiating its own type. For "
 "instance, <placeholder-1/>"
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9196(para)
+#: C/gtkmm-tutorial-in.xml:9346(para)
 msgid ""
 "Adding properties, and ensuring that they interact properly with each other, "
 "is relatively difficult to correct in the C library, but it is possible, so "
 "do file a bug and try to send a patch to the relevant maintainer."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9204(title)
+#: C/gtkmm-tutorial-in.xml:9354(title)
 msgid "Documentation"
 msgstr "Documentación"
 
-#: C/gtkmm-tutorial-in.xml:9205(para)
+#: C/gtkmm-tutorial-in.xml:9355(para)
 msgid ""
 "In general, gtkmm-style projects use Doxygen, which reads specially "
 "formatted C++ comments and generates HTML documentation. You may write these "
 "doxygen comments directly in the header files."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9208(title)
+#: C/gtkmm-tutorial-in.xml:9358(title)
 msgid "Reusing C documentation"
 msgstr "Reutilizar la documentación de C"
 
-#: C/gtkmm-tutorial-in.xml:9209(para)
+#: C/gtkmm-tutorial-in.xml:9359(para)
 msgid ""
 "You might wish to reuse documentation that exists for the C library that you "
 "are wrapping. GTK-style C libraries typically use gtk-doc and therefore have "
 "source code comments formatted for gtk-doc and some extra documentation in ."
-"tmpl files. The docextract_to_xml.py script, from pygobject's codegen "
-"directory, can read these files and generate an .xml file that "
-"<command>gmmproc</command> can use to generate doxygen comments. "
-"<command>gmmproc</command> will even try to transform the documentation to "
-"make it more appropriate for a C++ API."
+"sgml and .xml files. The docextract_to_xml.py script, from glibmm's "
+"<filename>tools/defs_gen</filename> directory, can read these files and "
+"generate an .xml file that <command>gmmproc</command> can use to generate "
+"doxygen comments. <command>gmmproc</command> will even try to transform the "
+"documentation to make it more appropriate for a C++ API."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9212(programlisting)
+#: C/gtkmm-tutorial-in.xml:9369(programlisting)
 #, no-wrap
-msgid "./docextract_to_xml.py -s /gnome/head/cvs/gtk+/gtk/ -s /gnome/head/cvs/gtk+/docs/reference/gtk/tmpl/ &gt; gtk_docs.xml\n"
-msgstr "./docextract_to_xml.py -s /gnome/head/cvs/gtk+/gtk/ -s /gnome/head/cvs/gtk+/docs/reference/gtk/tmpl/ &gt; gtk_docs.xml\n"
+#| msgid "./docextract_to_xml.py -s /gnome/head/cvs/gtk+/gtk/ -s /gnome/head/cvs/gtk+/docs/reference/gtk/tmpl/ &gt; gtk_docs.xml\n"
+msgid "./docextract_to_xml.py -s ~/checkout/gnome/gtk+/gtk/ -s ~/checkout/gnome/gtk+/docs/reference/gtk/ &gt; gtk_docs.xml\n"
+msgstr "./docextract_to_xml.py -s ~/checkout/gnome/gtk+/gtk/ -s ~/checkout/gnome/gtk+/docs/reference/gtk/ &gt; gtk_docs.xml\n"
 
-#: C/gtkmm-tutorial-in.xml:9215(para)
+#: C/gtkmm-tutorial-in.xml:9372(para)
 msgid ""
 "Because this automatic transformation is not always appropriate, you might "
 "want to provide hand-written text for a particular method. You can do this "
@@ -12456,11 +12755,11 @@ msgid ""
 "file and changing the contents."
 msgstr ""
 
-#: C/gtkmm-tutorial-in.xml:9224(title)
+#: C/gtkmm-tutorial-in.xml:9381(title)
 msgid "Documentation build structure"
 msgstr "Estructura de construcción de la documentación"
 
-#: C/gtkmm-tutorial-in.xml:9225(para)
+#: C/gtkmm-tutorial-in.xml:9382(para)
 msgid ""
 "If you copied the skeleton source tree in mm-common and substituted the "
 "placeholder text, then you will already have suitable <filename>Makefile.am</"
@@ -12479,6 +12778,25 @@ msgstr ""
 "José Zambrano <jozaol@gmail.com>, 2011\n"
 "Daniel Mustieles <daniel.mustieles@gmail.com>, 2011\n"
 "Jorge González <jorgegonz@svn.gnome.org>, 2010"
+
+#~ msgid ""
+#~ "\n"
+#~ "_CLASS_OPAQUE_COPYABLE(Region, GdkRegion, gdk_region_new, "
+#~ "gdk_region_copy, gdk_region_destroy)\n"
+#~ msgstr ""
+#~ "\n"
+#~ "_CLASS_OPAQUE_COPYABLE(Region, GdkRegion, gdk_region_new, "
+#~ "gdk_region_copy, gdk_region_destroy)\n"
+
+#~ msgid "_IGNORE()"
+#~ msgstr "_IGNORE()"
+
+#~ msgid ""
+#~ "\n"
+#~ "_MEMBER_GET_PTR(vbox, vbox, VBox*, GtkWidget*)\n"
+#~ msgstr ""
+#~ "\n"
+#~ "_MEMBER_GET_PTR(vbox, vbox, VBox*, GtkWidget*)\n"
 
 #~ msgid ""
 #~ "Gtk::RecentInfo info = recent_manager-&gt;lookup_item(uri);\n"
