@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation master\n"
-"POT-Creation-Date: 2011-10-12 16:02+0000\n"
-"PO-Revision-Date: 2011-10-23 00:02-0200\n"
+"POT-Creation-Date: 2011-10-26 15:49+0000\n"
+"PO-Revision-Date: 2011-10-28 14:01-0200\n"
 "Last-Translator: Rodolfo Ribeiro Gomes <rodolforg@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -892,6 +892,11 @@ msgid ""
 "a C++ object in your application's code. So you just need to call a method "
 "of the widget's class to affect the visible widget."
 msgstr ""
+"Os aplicativos <application>gtkmm</application> consistem de janelas "
+"contendo widgets (componentes), como botões e caixas de texto. Em alguns "
+"outros sistemas, widgets são chamados de \"controles\". Para cada widget em "
+"janelas do seu aplicativo, há um objeto C++ em seu código. Então você "
+"precisa chamar um método da classe do widget para afetar o widget visível."
 
 #: C/gtkmm-tutorial-in.xml:393(programlisting)
 #, no-wrap
@@ -899,11 +904,13 @@ msgid ""
 "m_box.pack_start(m_Button1);\n"
 "m_box.pack_start(m_Button2);"
 msgstr ""
+"m_caixa.pack_start(m_Botao1);\n"
+"m_caixa.pack_start(m_Botao2);"
 
 #: C/gtkmm-tutorial-in.xml:396(programlisting)
 #, no-wrap
 msgid "m_frame.add(m_box);"
-msgstr ""
+msgstr "m_moldura.add(m_caixa);"
 
 #: C/gtkmm-tutorial-in.xml:392(para)
 msgid ""
@@ -917,6 +924,15 @@ msgid ""
 "<classname>Gtk::Frame</classname>, which has a visible frame and title: "
 "<placeholder-2/>"
 msgstr ""
+"Widgets são organizados dentro de widgets contêneires tais como molduras "
+"(frames) e cadernos (notebooks), em uma hierarquia com widgets dentro de "
+"widgets. Alguns widgets contêineres, como o <classname>Gtk::Grid</"
+"classname>, não são visíveis, eles só existem para organizar outros widgets. "
+"Aqui está um código de exemplo que adicionar 2 widgets <classname>Gtk::"
+"Button</classname> a um widget contêiner <classname>Gtk::VBox</classname>: "
+"<placeholder-1/> e aqui está como adicionar o <classname>Gtk::VBox</"
+"classname>, que contém esses botões, a um <classname>Gtk::Frame</classname>, "
+"que tem uma moldura e um título visíveis: <placeholder-2/>"
 
 #: C/gtkmm-tutorial-in.xml:398(para)
 msgid ""
@@ -924,6 +940,9 @@ msgid ""
 "linkend=\"chapter-container-widgets\">Container Widgets</link> section for "
 "more details about adding widgets to container widgets."
 msgstr ""
+"A maioria dos capítulos deste livro trata de widgets específicos. Veja a "
+"seção <link linkend=\"chapter-container-widgets\">Widgets contêineres</link> "
+"para mais detalhes sobre a adição de widgets a widgets contêineres."
 
 #: C/gtkmm-tutorial-in.xml:402(para)
 msgid ""
@@ -933,6 +952,11 @@ msgid ""
 "<literal>Gtk::Builder</literal>. See the <link linkend=\"chapter-builder"
 "\">Glade and Gtk::Builder</link> chapter."
 msgstr ""
+"Embora você possa especificar a disposição e a aparência das janelas e "
+"widgets com o código C++, você provavelmente achará mais conveniente "
+"projetar suas interfaces com o usuário com <literal>Glade</literal> e "
+"carregá-las em tempo de execução com o <literal>Gtk::Builder</literal>. Veja "
+"o capítulo <link linkend=\"chapter-builder\">Glade e Gtk::Builder</link>."
 
 #: C/gtkmm-tutorial-in.xml:405(para)
 msgid ""
@@ -946,12 +970,21 @@ msgid ""
 "application> memory management techniques in the <link linkend=\"chapter-"
 "memory\">Memory Management chapter</link>."
 msgstr ""
+"Embora as instâncias de widgets <application>gtkmm</application> tenham "
+"tempo de vida e escopo como qualquer outra classe C++, o <application>gtkmm</"
+"application> tem um recurso poupador de tempo opcional que você verá em "
+"alguns exemplos. <function>Gtk::manage()</function> permite que você diga "
+"que um widget filho pertence ao contêiner em que você o colocou. Isso "
+"permite que você crie um novo (<function>new</function>) widget, adicione-o "
+"ao contêiner e esqueça sobre sua exclusão. Você pode aprender mais sobre as "
+"técnicas de gerenciamento de memória do <application>gtkmm</application> no "
+"<link linkend=\"chapter-memory\">capítulo de Gerenciamento de memória</link>."
 
 #: C/gtkmm-tutorial-in.xml:411(title) C/gtkmm-tutorial-in.xml:765(title)
 #: C/gtkmm-tutorial-in.xml:4758(title) C/gtkmm-tutorial-in.xml:5049(title)
 #: C/gtkmm-tutorial-in.xml:7393(title)
 msgid "Signals"
-msgstr ""
+msgstr "Sinais"
 
 #: C/gtkmm-tutorial-in.xml:413(para)
 msgid ""
@@ -962,6 +995,13 @@ msgid ""
 "can emit. To make a button click result in an action, we set up a "
 "<emphasis>signal handler</emphasis> to catch the button's \"clicked\" signal."
 msgstr ""
+"O <application>gtkmm</application>, como a maioria dos kits de ferramentas "
+"para GUI, é <emphasis>orientado a eventos</emphasis>. Quando um evento "
+"ocorre, como o pressionar de botão do mouse, o sinal apropriado será "
+"<emphasis>emitido</emphasis> pelo widget que foi pressionado. Cada widget "
+"tem um conjunto de sinais diferente que pode emitir. Para fazer um clique de "
+"botão resultar em uma ação, nós configuramos um <emphasis>manipulador de "
+"sinais</emphasis> para capturar o sinal \"clicked\" do botão."
 
 #: C/gtkmm-tutorial-in.xml:421(programlisting)
 #, no-wrap
@@ -969,6 +1009,8 @@ msgid ""
 "m_button1.signal_clicked().connect( sigc::mem_fun(*this,\n"
 "  &amp;HelloWorld::on_button_clicked) );"
 msgstr ""
+"m_botao1.signal_clicked().connect( sigc::mem_fun(*this,\n"
+"  &amp;OlaMundo::ao_clicar_botao) );"
 
 #: C/gtkmm-tutorial-in.xml:420(para)
 msgid ""
@@ -977,12 +1019,18 @@ msgid ""
 "\"clicked\" signal with a signal handler called \"on_button_clicked\": "
 "<placeholder-1/>"
 msgstr ""
+"O <application>gtkmm</application> usa a biblioteca libsigc++ para "
+"implementar sinais. Aqui está uma linha de código de exemplo que conecta um "
+"sinal \"clicked\" de um Gtk::Button com um manipulador de eventos chamado "
+"\"ao_clicar_botao\": <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:425(para)
 msgid ""
 "For more detailed information about signals, see the <link linkend=\"chapter-"
 "signals\">appendix</link>."
 msgstr ""
+"Para informações mais detalhadas sobre sinais, veja o <link linkend="
+"\"chapter-signals\">apêndice</link>."
 
 #: C/gtkmm-tutorial-in.xml:426(para)
 msgid ""
@@ -990,10 +1038,13 @@ msgid ""
 "connecting to the existing <application>gtkmm</application> signals, see the "
 "<link linkend=\"chapter-custom-signals\">appendix</link>."
 msgstr ""
+"Para informações sobre como implementar seus próprios sinais em vez de "
+"apenas conectar os sinais <application>gtkmm</application> existentes, veja "
+"o <link linkend=\"chapter-custom-signals\">apêndice</link>."
 
 #: C/gtkmm-tutorial-in.xml:432(title) C/gtkmm-tutorial-in.xml:9224(classname)
 msgid "Glib::ustring"
-msgstr ""
+msgstr "Glib::ustring"
 
 #: C/gtkmm-tutorial-in.xml:433(para)
 msgid ""
@@ -1004,6 +1055,13 @@ msgid ""
 "<classname>std::string</classname> and ignore the rest of this section. But "
 "read on if you want to use languages other than English in your application."
 msgstr ""
+"Você talvez fique surpreso ao aprender que <application>gtkmm</application> "
+"não usa <classname>std::string</classname> em suas interfaces. Em vez disso, "
+"utiliza <classname>Glib::ustring</classname>, que é bem similar e não "
+"obstrusivo que você poderia fingir que cada <classname>Glib::ustring</"
+"classname> é uma <classname>std::string</classname> e ignorar o resto desta "
+"seção. Mas continue lendo se quiser usar idiomas que não seja o inglês no "
+"seu aplicativo."
 
 #: C/gtkmm-tutorial-in.xml:434(para)
 msgid ""
@@ -1015,6 +1073,14 @@ msgid ""
 "Glib::ustring. It provides almost exactly the same interface as std::string, "
 "along with automatic conversions to and from std::string."
 msgstr ""
+"std::string usa 8 bits por caractere, mas essa quantidade não é suficiente "
+"para codificar idiomas como árabe, chinês e japonês. Embora as codificações "
+"para esses idiomas agora estejam especificadas pelo Consórcio Unicode, as "
+"linguagens C e C++ ainda não oferecem suporte a Unicode de forma "
+"padronizada. GTK+ e GNOME escolheram implementar Unicode usando o UTF-8, e o "
+"Glib::ustring é um wrap justamente para isso. Ele fornece praticamente a "
+"mesma interface que std::string, juntamente com conversões automáticas de e "
+"para std::string."
 
 #: C/gtkmm-tutorial-in.xml:435(para)
 msgid ""
@@ -1026,6 +1092,13 @@ msgid ""
 "Then all you need to do is start using <classname>Glib::ustring</classname> "
 "instead."
 msgstr ""
+"Um dos benefícios do UTF-8 é que você não precisa usá-lo a menos que queira, "
+"então não precisa mexer no seu código todo de uma vez. <classname>std::"
+"string</classname> funcionará também com textos ASCII 7 bits. Porém, quando "
+"você tentar fazer a localização do seu aplicativo para idiomas como chinês, "
+"por exemplo, você comerçará a ver uns erros estranhos, e possivelmente uns "
+"travamentos. Então, tudo que você precisa fazer é começar a usar "
+"<classname>Glib::ustring</classname> no lugar."
 
 #: C/gtkmm-tutorial-in.xml:436(para)
 msgid ""
@@ -1035,6 +1108,11 @@ msgid ""
 "have to convert them to UTF-8 (e.g. the Bavarian greeting \"Grüß Gott\" "
 "would be \"Gr\\xC3\\xBC\\xC3\\x9F Gott\")."
 msgstr ""
+"Note que UTF-8 não é compatível com codificações de 8 bits como ISO-8859-1. "
+"Por exemplo, os tremas alemães (umlaut) não estão na faixa ASCII e precisam "
+"de mais que 1 byte na codificação UTF-8. Se seu código contém textos "
+"constantes em 8 bits, você tem que convertê-los para UTF-8 (exemplo: o "
+"cumprimento da Bavária \"Grüß Gott\" seria \"Gr\\xC3\\xBC\\xC3\\x9F Gott\")."
 
 #: C/gtkmm-tutorial-in.xml:437(para)
 msgid ""
@@ -1045,6 +1123,12 @@ msgid ""
 "methods such as Glib::ustring::substr() while still thinking in terms of "
 "characters instead of bytes."
 msgstr ""
+"Você deveria evitar aritmética de ponteiros no estilo C e funções como strlen"
+"(). Em UTF-8, cada caractere pode precisar em algum lugar de 1 a 6 bytes, "
+"então não é possível assumir que o próximo byte é outro caractere. "
+"<classname>Glib::ustring</classname> se preocupa com esses detalhes para "
+"você para que possa usar métodos tais como Glib::ustring::substr() enquanto "
+"ainda raciocina em termos de caracteres em vez de bytes."
 
 #: C/gtkmm-tutorial-in.xml:439(para)
 msgid ""
@@ -1052,6 +1136,10 @@ msgid ""
 "compiler options to process string literals, and it does not result in "
 "Unicode executables and libraries which are incompatible with ASCII ones."
 msgstr ""
+"Ao contrário da solução Unicode UCS-2 do Windows, ele não exige quaisquer "
+"opções especiais do compilador para processar textos contantes, além de não "
+"gerar executáveis e biblioteca Unicode que sejam incompatíveis com os em "
+"ASCII."
 
 #: C/gtkmm-tutorial-in.xml:441(ulink) C/gtkmm-tutorial-in.xml:745(ulink)
 #: C/gtkmm-tutorial-in.xml:843(ulink) C/gtkmm-tutorial-in.xml:858(ulink)
@@ -1077,17 +1165,20 @@ msgstr ""
 #: C/gtkmm-tutorial-in.xml:4868(ulink) C/gtkmm-tutorial-in.xml:5139(ulink)
 #: C/gtkmm-tutorial-in.xml:5171(ulink) C/gtkmm-tutorial-in.xml:7265(ulink)
 msgid "Reference"
-msgstr ""
+msgstr "Referência"
 
 #: C/gtkmm-tutorial-in.xml:443(para)
 msgid ""
 "See the <link linkend=\"chapter-internationalization\">Internationalization</"
 "link> section for information about providing the UTF-8 string literals."
 msgstr ""
+"Veja a seção <link linkend=\"chapter-internationalization"
+"\">Internacionalização</link> para informações sobre como fornecer textos "
+"constantes em UTF-8."
 
 #: C/gtkmm-tutorial-in.xml:448(title)
 msgid "Intermediate types"
-msgstr ""
+msgstr "Tipos intermediários"
 
 #: C/gtkmm-tutorial-in.xml:449(para)
 msgid ""
@@ -1098,6 +1189,12 @@ msgid ""
 "itself now uses just <classname>std::vector</classname> since "
 "<application>gtkmm</application> 3.0."
 msgstr ""
+"Algumas API relacionadas ao gtkmm usam contêneires de dados intermediários, "
+"como a <classname>Glib::StringArrayHandle</classname>, em vez de usar um "
+"contêiner especificamente no padrão C++ como <classname>std::vector</"
+"classname> or <classname>std::list</classname>, embora o próprio "
+"<application>gtkmm</application> agora use apenas <classname>std::vector</"
+"classname> desde a versão <application>gtkmm</application> 3.0."
 
 #: C/gtkmm-tutorial-in.xml:452(para)
 msgid ""
@@ -1106,6 +1203,10 @@ msgid ""
 "Glib::ustring&gt;</classname>, <classname>std::list&lt;Glib::ustring&gt;</"
 "classname>, <type>const char*[]</type>, etc."
 msgstr ""
+"<classname>Glib::StringArrayHandle</classname> ou <classname>Glib::"
+"ArrayHandle&lt;Glib::ustring&gt;</classname>: Use <classname>std::vector&lt;"
+"Glib::ustring&gt;</classname>, <classname>std::list&lt;Glib::ustring&gt;</"
+"classname>, <type>const char*[]</type>, etc."
 
 #: C/gtkmm-tutorial-in.xml:453(para)
 msgid ""
@@ -1113,6 +1214,9 @@ msgid ""
 "<classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::"
 "list&lt;Gtk::Widget*&gt;</classname>, etc."
 msgstr ""
+"<classname>Glib::ListHandle&lt;Gtk::Widget*&gt;</classname>: Use "
+"<classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::"
+"list&lt;Gtk::Widget*&gt;</classname>, etc."
 
 #: C/gtkmm-tutorial-in.xml:454(para)
 msgid ""
@@ -1120,6 +1224,9 @@ msgid ""
 "<classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::"
 "list&lt;Gtk::Widget*&gt;</classname>, etc."
 msgstr ""
+"<classname>Glib::SListHandle&lt;Gtk::Widget*&gt;</classname>: Use "
+"<classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::"
+"list&lt;Gtk::Widget*&gt;</classname>, etc."
 
 #: C/gtkmm-tutorial-in.xml:450(para)
 msgid ""
@@ -1127,10 +1234,13 @@ msgid ""
 "Standard C++ container you prefer. glibmm will do the conversion for you. "
 "Here are some of these intermediate types: <placeholder-1/>"
 msgstr ""
+"Você não deveria declarar esses tipos. Em vez disso, use qualquer contêiner "
+"do C++ padrão que preferir. glibmm fará a conversão para você. Aqui estão "
+"alguns desses tipos intermediários: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:462(title)
 msgid "Mixing C and C++ APIs"
-msgstr ""
+msgstr "Misturando APIs C e C++"
 
 #: C/gtkmm-tutorial-in.xml:463(para)
 msgid ""
@@ -1140,6 +1250,11 @@ msgid ""
 "providing an easy way to create a C++ wrapper object from a C object, "
 "provided that the C API is also based on the GObject system."
 msgstr ""
+"Você pode usar APIs C que ainda não tenham interfaces C++ convenientes. "
+"Geralmente não há problema usar APIs C no C++, e o <application>gtkmm</"
+"application> ajuda a prover acesso ao objeto C que está por trás, e a prover "
+"uma maneira fácil de criar um objeto C++ de wrap para um objeto C, desde que "
+"a API C também seja baseada no sistema GObject."
 
 #: C/gtkmm-tutorial-in.xml:465(para)
 msgid ""
@@ -1147,6 +1262,9 @@ msgid ""
 "requires a C GObject instance, use the <function>gobj()</function> function "
 "to obtain a pointer to the underlying GObject instance. For instance"
 msgstr ""
+"Para passar um objeto <application>gtkmm</application> para uma função C que "
+"exija um objeto GObject C, use a função <function>gobj()</function> para "
+"obter um ponteiro para o objeto GObject escondido. Por exemplo,"
 
 #: C/gtkmm-tutorial-in.xml:468(programlisting)
 #, no-wrap
@@ -1155,12 +1273,17 @@ msgid ""
 "Gtk::Button* button = new Gtk::Button(\"example\");\n"
 "gtk_button_do_something_new(button-&gt;gobj());\n"
 msgstr ""
+"\n"
+"Gtk::Button* botao = new Gtk::Button(\"exemplo\");\n"
+"gtk_button_faca_algo_novo(botao-&gt;gobj());\n"
 
 #: C/gtkmm-tutorial-in.xml:474(para)
 msgid ""
 "To obtain a <application>gtkmm</application> instance from a C GObject "
 "instance, use the Glib::wrap() function. For instance"
 msgstr ""
+"Para obter um objeto <application>gtkmm</application> a partir de um GObject "
+"C, use a função Glib::wrap(). Por exemplo,"
 
 #: C/gtkmm-tutorial-in.xml:476(programlisting)
 #, no-wrap
@@ -1169,10 +1292,13 @@ msgid ""
 "GtkButton* cbutton = get_a_button();\n"
 "Gtk::Button* button = Glib::wrap(cbutton);\n"
 msgstr ""
+"\n"
+"GtkButton* botao_c = pegar_um_botao();\n"
+"Gtk::Button* botao = Glib::wrap(botao_c);\n"
 
 #: C/gtkmm-tutorial-in.xml:484(title)
 msgid "Hello World in <application>gtkmm</application>"
-msgstr ""
+msgstr "Olá mundo em <application>gtkmm</application>"
 
 #: C/gtkmm-tutorial-in.xml:486(para)
 msgid ""
@@ -1180,22 +1306,29 @@ msgid ""
 "ancient tradition of computer science, we now introduce Hello World, a la "
 "<application>gtkmm</application>:"
 msgstr ""
+"Agora já aprendemos o suficiente para dar uma olhada em um exemplo real. "
+"Conforme uma antiga tradição da ciência da computação, apresentaremos um "
+"Olá, mundo, à la <application>gtkmm</application>:"
 
 #: C/gtkmm-tutorial-in.xml:493(para)
 msgid ""
 "Try to compile and run it before going on. You should see something like "
 "this:"
 msgstr ""
+"Tente compilá-lo e executá-lo antes de continuar. Você deveria ver algo "
+"assim:"
 
 #: C/gtkmm-tutorial-in.xml:498(title)
 msgid "Hello World"
-msgstr ""
+msgstr "Olá, Mundo"
 
 #: C/gtkmm-tutorial-in.xml:504(para)
 msgid ""
 "Pretty thrilling, eh? Let's examine the code. First, the "
 "<classname>HelloWorld</classname> class:"
 msgstr ""
+"Bem empolgante, hein? Vamos examinar o código. Primeiro, a classe "
+"<classname>HelloWorld</classname>:"
 
 #: C/gtkmm-tutorial-in.xml:509(programlisting)
 #, no-wrap
@@ -1215,6 +1348,20 @@ msgid ""
 "  Gtk::Button m_button;\n"
 "};"
 msgstr ""
+"class HelloWorld : public Gtk::Window\n"
+"{\n"
+"\n"
+"public:\n"
+"  HelloWorld();\n"
+"  virtual ~HelloWorld();\n"
+"\n"
+"protected:\n"
+"  //Signal handlers:\n"
+"  virtual void on_button_clicked();\n"
+"\n"
+"  //Member widgets:\n"
+"  Gtk::Button m_button;\n"
+"};"
 
 #: C/gtkmm-tutorial-in.xml:524(para)
 msgid ""
@@ -1224,6 +1371,11 @@ msgid ""
 "initialisation work for the window, including setting up the signals. Here "
 "it is, with the comments omitted:"
 msgstr ""
+"Esta classe implementa a janela \"Hello World\". Ela é derivada de "
+"<classname>Gtk::Window</classname> e tem um único <classname>Gtk::Button</"
+"classname> como membro. Optamos por usar o construtor para fazer todo o "
+"trabalho de iniciação para a janela, incluindo a configuração dos sinais. "
+"Aqui está, com os comentários omitidos:"
 
 #: C/gtkmm-tutorial-in.xml:533(programlisting)
 #, no-wrap
@@ -1239,12 +1391,24 @@ msgid ""
 "  m_button.show();\n"
 "}"
 msgstr ""
+"HelloWorld::HelloWorld()\n"
+":\n"
+"  m_button (\"Hello World\")\n"
+"{\n"
+"  set_border_width(10);\n"
+"  m_button.signal_clicked().connect(sigc::mem_fun(*this,\n"
+"    &amp;HelloWorld::on_button_clicked));\n"
+"  add(m_button);.\n"
+"  m_button.show();\n"
+"}"
 
 #: C/gtkmm-tutorial-in.xml:544(para)
 msgid ""
 "Notice that we've used an initialiser statement to give the "
 "<literal>m_button</literal> object the label \"Hello World\"."
 msgstr ""
+"Note que usamos uma declaração iniciadora para dar ao objeto "
+"<literal>m_button</literal> o rótulo \"Hello World\"."
 
 #: C/gtkmm-tutorial-in.xml:549(para)
 msgid ""
@@ -1252,6 +1416,9 @@ msgid ""
 "method. This sets the amount of space between the sides of the window and "
 "the widget it contains."
 msgstr ""
+"Em seguida, chamamos o método <methodname>set_border_width()</methodname> da "
+"janela. Isso define a quantidade de espaço entre as laterais da janela e o "
+"widget que ela contém."
 
 #: C/gtkmm-tutorial-in.xml:555(para)
 msgid ""
@@ -1259,6 +1426,9 @@ msgid ""
 "<literal>clicked</literal> signal. This prints our friendly greeting to "
 "<literal>stdout</literal>."
 msgstr ""
+"Depois, associamos um manipulador para o sinal <literal>clicked</literal> de "
+"<literal>m_button</literal>. Ele emitirá nosso cumprimento amistoso para "
+"<literal>stdout</literal>."
 
 #: C/gtkmm-tutorial-in.xml:560(para)
 msgid ""
@@ -1271,12 +1441,22 @@ msgid ""
 "create them - to display them, you must call their <methodname>show()</"
 "methodname> method, which is what we do in the next line."
 msgstr ""
+"Em seguida, usamos o método <methodname>add()</methodname> da janela para "
+"colocar o <literal>m_button</literal> nela (<methodname>add()</methodname> "
+"vem de um <classname>Gtk::Container</classname>, que é descrito no capítulo "
+"sobre widgets contêineres). O método <methodname>add()</methodname> põe o "
+"widget na janela, mas não o exibe. Os widgets <application>gtkmm</"
+"application> são sempre invisíveis ao serem criados: para exibi-los, você "
+"tem que chamar o método <methodname>show()</methodname>, que é o que fazemos "
+"na linha seguinte."
 
 #: C/gtkmm-tutorial-in.xml:570(para)
 msgid ""
 "Now let's look at our program's <function>main()</function> function. Here "
 "it is, without comments:"
 msgstr ""
+"Agora vamos olhar para a função <function>main()</function> do nosso "
+"programa. Aqui está, sem os comentários:"
 
 #: C/gtkmm-tutorial-in.xml:575(programlisting)
 #, no-wrap
@@ -1291,6 +1471,15 @@ msgid ""
 "  return 0;\n"
 "}"
 msgstr ""
+"int main(int argc, char** argv)\n"
+"{\n"
+"  Gtk::Main kit(argc, argv);\n"
+"\n"
+"  HelloWorld helloworld;\n"
+"  Gtk::Main::run(helloworld);\n"
+"\n"
+"  return 0;\n"
+"}"
 
 #: C/gtkmm-tutorial-in.xml:585(para)
 msgid ""
@@ -1300,6 +1489,11 @@ msgid ""
 "arguments to its constructor. It takes the arguments it wants, and leaves "
 "you the rest, as we described earlier."
 msgstr ""
+"Primeiro, instanciamos um objeto chamado <literal>kit</literal>. Ele é do "
+"tipo <classname>Gtk::Main</classname>. Todo programa <application>gtkmm</"
+"application> deve ter um desses. Nós passamos nossos argumentos de linha de "
+"comando para o seu construtor. Ele pega aqueles que quiser/entende e deixa "
+"para você os demais, como descrevemos anteriormente."
 
 #: C/gtkmm-tutorial-in.xml:592(para)
 msgid ""
@@ -1312,6 +1506,15 @@ msgid ""
 "Window, run() will return, causing the final line of our main() function be "
 "to executed. The application will then finish."
 msgstr ""
+"Em seguida, fazemos um objeto da nossa classe <classname>HelloWorld</"
+"classname>, cujo construtor não recebe argumentos, mas ainda não está "
+"visível. Quando chamamos Gtk::Main::run(), lhe dando a janela helloworld, "
+"ele a exibe e começa o <emphasis>laço de eventos</emphasis> do "
+"<application>gtkmm</application>. Nos momentos de ociosidade do laço de "
+"eventos do <application>gtkmm</application>, ele espera por ações do usuário "
+"e os reponde apropriadamente. Quando o usuário fecha a janela, run() irá "
+"retornar, fazendo com que a última linha de nossa função main() seja "
+"executada. O aplicativo então termina."
 
 #: C/gtkmm-tutorial-in.xml:601(title)
 msgid "Changes in <application>gtkmm</application> 3"
@@ -1474,15 +1677,15 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:656(title)
 msgid "Buttons"
-msgstr ""
+msgstr "Botões"
 
 #: C/gtkmm-tutorial-in.xml:658(para)
 msgid "<application>gtkmm</application> provides four basic types of buttons:"
-msgstr ""
+msgstr "<application>gtkmm</application> provẽ quatro tipos básicos de botões:"
 
 #: C/gtkmm-tutorial-in.xml:665(term)
 msgid "Push-Buttons"
-msgstr ""
+msgstr "Botões de pressão"
 
 #: C/gtkmm-tutorial-in.xml:667(para)
 msgid ""
@@ -1491,10 +1694,14 @@ msgid ""
 "marked with a label or picture. Pushing one triggers an action. See the "
 "<link linkend=\"sec-pushbuttons\">Button</link> section."
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1Button."
+"html\"><classname>Gtk::Button</classname></ulink>. Os botões padrões, "
+"normalmente marcados com um rótulo ou imagem. Pressioná-los dispara uma "
+"ação. Veja a seção <link linkend=\"sec-pushbuttons\">Botão</link>."
 
 #: C/gtkmm-tutorial-in.xml:674(term)
 msgid "Toggle buttons"
-msgstr ""
+msgstr "Botões de alternância"
 
 #: C/gtkmm-tutorial-in.xml:676(para)
 msgid ""
@@ -1504,10 +1711,16 @@ msgid ""
 "down until you press it again. It might be useful as an on/off switch. See "
 "the <link linkend=\"sec-toggle-buttons\">ToggleButton</link> section."
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1ToggleButton.html\"><classname>Gtk::ToggleButton</classname></"
+"ulink>. Ao contrário de um botão normal, que volta à sua posição para cima, "
+"um botão de alternância fica pressionado para baixo até que você o pressione "
+"novamente. Isso pode ser útil como um interruptor liga/desliga. Veja a seção "
+"<link linkend=\"sec-toggle-buttons\">Botão de alternância</link>."
 
 #: C/gtkmm-tutorial-in.xml:684(term)
 msgid "Checkboxes"
-msgstr ""
+msgstr "Botão de seleção"
 
 #: C/gtkmm-tutorial-in.xml:686(para)
 msgid ""
@@ -1518,10 +1731,16 @@ msgid ""
 "require an on/off setting. See the <link linkend=\"sec-checkboxes"
 "\">CheckBox</link> section."
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1CheckButton.html\"><classname>Gtk::CheckButton</classname></"
+"ulink>. Este agem como botões de alternância, mas eles mostram seu estado em "
+"quadrados pequenos, com seus rótulos ao lado. Eles deveriam ser usado na "
+"maioria das situações que exigem uma configuração liga/desliga. Veja a seção "
+"<link linkend=\"sec-checkboxes\">Botão de seleção</link>."
 
 #: C/gtkmm-tutorial-in.xml:696(term)
 msgid "Radio buttons"
-msgstr ""
+msgstr "Botões de opção"
 
 #: C/gtkmm-tutorial-in.xml:698(para)
 msgid ""
@@ -1534,6 +1753,14 @@ msgid ""
 "different. See the <link linkend=\"sec-radio-buttons\">RadioButton</link> "
 "section."
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1RadioButton.html\"><classname>Gtk::RadioButton</classname></"
+"ulink>. Com o seu nome baseado nos seletores de estação em aparelhos antigos "
+"de carro, estes botões são usados em grupos para opções que sejam mutuamente "
+"exclusivas. Pressinar um deles faz com que todos os outros do seu grupo "
+"sejam desativados. Eles são similares aos botões de seleção (um pequeno "
+"widget com um rótulo ao lado), mas normalmente tem uma aparência distinta. "
+"Veja a seção <link linkend=\"sec-radio-buttons\">Botão de opção</link>."
 
 #: C/gtkmm-tutorial-in.xml:712(para)
 msgid ""
@@ -1541,14 +1768,17 @@ msgid ""
 "will vary. In the case of checkboxes and radio buttons, they may vary "
 "considerably."
 msgstr ""
+"Note que, devido ao sistema de temas do GTK+, a aparência desses widgets irá "
+"variar. No caso dos botões de seleção e de opção, eles podem variar "
+"consideravelmente."
 
 #: C/gtkmm-tutorial-in.xml:719(title)
 msgid "Button"
-msgstr ""
+msgstr "Botão"
 
 #: C/gtkmm-tutorial-in.xml:721(title)
 msgid "Constructors"
-msgstr ""
+msgstr "Construtores"
 
 #: C/gtkmm-tutorial-in.xml:723(para)
 msgid ""
@@ -1556,6 +1786,9 @@ msgid ""
 "<classname>Gtk::Button</classname> constructor, or set it later with "
 "<methodname>set_label()</methodname>."
 msgstr ""
+"Existem duas formas de criar um Botão. Você pode especificar um texto de "
+"rótulo no construtor <classname>Gtk::Button</classname> ou defini-lo mais "
+"tarde com <methodname>set_label()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:729(para)
 msgid ""
@@ -1563,16 +1796,19 @@ msgid ""
 "before one of the label's characters and specify <literal>true</literal> for "
 "the optional <literal>mnemonic</literal> parameter. For instance:"
 msgstr ""
+"Para definir uma tecla aceleradora para navegação por teclado, coloque uma "
+"sublinha antes de um dos caracteres do rótulo e especifique <literal>true</"
+"literal> para o parâmetro opcional <literal>mnemonic</literal>. Por exemplo:"
 
 #: C/gtkmm-tutorial-in.xml:731(programlisting)
 #, no-wrap
 msgid "Gtk::Button* pButton = new Gtk::Button(\"_Something\", true);"
-msgstr ""
+msgstr "Gtk::Button* pButton = new Gtk::Button(\"_Algo\", true);"
 
 #: C/gtkmm-tutorial-in.xml:735(programlisting)
 #, no-wrap
 msgid "Gtk::Button* pButton = new Gtk::Button(Gtk::Stock::OK);"
-msgstr ""
+msgstr "Gtk::Button* pButton = new Gtk::Button(Gtk::Stock::OK);"
 
 #: C/gtkmm-tutorial-in.xml:733(para)
 msgid ""
@@ -1581,12 +1817,20 @@ msgid ""
 "using icons. For instance, <placeholder-1/> This will use standard text, in "
 "all languages, with standard keyboard accelerators, with a standard icon."
 msgstr ""
+"Sempre que possível, você deveria usar itens predefinidos, para garantir "
+"consistência com outros aplicativos e para melhorar a aparência dos seus "
+"usando ícones. Por exemplo, <placeholder-1/> nesse caso, ele usará o texto "
+"padrão, em todos os idiomas, com os aceleradores padrões, com um ícone "
+"padrão."
 
 #: C/gtkmm-tutorial-in.xml:739(para)
 msgid ""
 "<classname>Gtk::Button</classname> is also a container so you could put any "
 "other widget, such as a <classname>Gtk::Image</classname> into it."
 msgstr ""
+"<classname>Gtk::Button</classname> é também um contêiner, então você pode "
+"colocar qualquer outro widget nele, como um <classname>Gtk::Image</"
+"classname>."
 
 #: C/gtkmm-tutorial-in.xml:748(title) C/gtkmm-tutorial-in.xml:860(title)
 #: C/gtkmm-tutorial-in.xml:965(title) C/gtkmm-tutorial-in.xml:1126(title)
@@ -1607,65 +1851,68 @@ msgstr ""
 #: C/gtkmm-tutorial-in.xml:6405(title) C/gtkmm-tutorial-in.xml:7042(title)
 #: C/gtkmm-tutorial-in.xml:7101(title) C/gtkmm-tutorial-in.xml:7851(title)
 msgid "Example"
-msgstr ""
+msgstr "Exemplo"
 
 #: C/gtkmm-tutorial-in.xml:750(para)
 msgid "This example creates a button with a picture and a label."
-msgstr ""
+msgstr "Este exemplo cria um botão com uma figura e um rótulo."
 
 #: C/gtkmm-tutorial-in.xml:755(title)
 msgid "buttons example"
-msgstr ""
+msgstr "exemplo de botões"
 
 #: C/gtkmm-tutorial-in.xml:767(para)
 msgid ""
 "The <classname>Gtk::Button</classname> widget has the following signals, but "
 "most of the time you will just handle the <literal>clicked</literal> signal:"
 msgstr ""
+"O widget <classname>Gtk::Button</classname> tem os seguintes sinais, mas a "
+"maioria das vezes você só precisará manipular o sinal <literal>clicked</"
+"literal>:"
 
 #: C/gtkmm-tutorial-in.xml:775(literal)
 msgid "pressed"
-msgstr ""
+msgstr "pressed"
 
 #: C/gtkmm-tutorial-in.xml:777(para)
 msgid "Emitted when the button is pressed."
-msgstr ""
+msgstr "Emitido quando o botão é pressionado."
 
 #: C/gtkmm-tutorial-in.xml:783(literal)
 msgid "released"
-msgstr ""
+msgstr "released"
 
 #: C/gtkmm-tutorial-in.xml:785(para)
 msgid "Emitted when the button is released."
-msgstr ""
+msgstr "Emitido quando o botão é solto."
 
 #: C/gtkmm-tutorial-in.xml:791(literal)
 msgid "clicked"
-msgstr ""
+msgstr "clicked"
 
 #: C/gtkmm-tutorial-in.xml:793(para)
 msgid "Emitted when the button is pressed and released."
-msgstr ""
+msgstr "Emitido quando o botão é pressionado e depois liberado."
 
 #: C/gtkmm-tutorial-in.xml:799(literal)
 msgid "enter"
-msgstr ""
+msgstr "enter"
 
 #: C/gtkmm-tutorial-in.xml:801(para)
 msgid "Emitted when the mouse pointer moves over the button's window."
-msgstr ""
+msgstr "Emitido quando o ponteiro do mouse se move sobre a janela do botão."
 
 #: C/gtkmm-tutorial-in.xml:807(literal)
 msgid "leave"
-msgstr ""
+msgstr "leave"
 
 #: C/gtkmm-tutorial-in.xml:809(para)
 msgid "Emitted when the mouse pointer leaves the button's window."
-msgstr ""
+msgstr "Emitido quando o ponteiro do mouse sai da janela do botão."
 
 #: C/gtkmm-tutorial-in.xml:821(title)
 msgid "ToggleButton"
-msgstr ""
+msgstr "Botão de alternância"
 
 #: C/gtkmm-tutorial-in.xml:823(para)
 msgid ""
@@ -1673,6 +1920,9 @@ msgid ""
 "classname>s, but when clicked they remain activated, or pressed, until "
 "clicked again."
 msgstr ""
+"Um <classname>ToggleButton</classname> é como um <classname>Button</"
+"classname> normal, só que uma vez  clicados, eles permanecem ativados, ou "
+"pressionados, até que sejam clicados de novo."
 
 #: C/gtkmm-tutorial-in.xml:825(para)
 msgid ""
@@ -1683,6 +1933,13 @@ msgid ""
 "that, if you do this, and the state actually changes, it causes the \"clicked"
 "\" signal to be emitted. This is usually what you want."
 msgstr ""
+"para obter o estado do <classname>ToggleButton</classname>, você pode usar o "
+"método <methodname>get_active()</methodname>. Ele retorna <literal>true</"
+"literal> se o botão está \"para baixo\". Você também pode definir o estado "
+"do botão de alternância, para isso use <methodname>set_active()</"
+"methodname>. Note que, se você fizer isso e o estado mudar de fato, isso faz "
+"com que o sinal <literal>clicked</literal> seja emitido. Isso é o que você "
+"quer normalmente."
 
 #: C/gtkmm-tutorial-in.xml:832(para)
 msgid ""
@@ -1690,6 +1947,9 @@ msgid ""
 "button, rather than forcing it to be up or down: This switches the button's "
 "state, and causes the <literal>toggled</literal> signal to be emitted."
 msgstr ""
+"Você pode usar o método <methodname>toggled()</methodname> para alternar o "
+"botão, em vez de forçá-lo para cima ou para baixo: isso troca o estado do "
+"botão e faz com que o sinal <literal>toggled</literal> seja emitido."
 
 #: C/gtkmm-tutorial-in.xml:837(para)
 msgid ""
@@ -1697,10 +1957,13 @@ msgid ""
 "the <classname>Gtk::CheckButton</classname> and <classname>Gtk::RadioButton</"
 "classname> classes."
 msgstr ""
+"<classname>Gtk::ToggleButton</classname> é mais útil como uma base para as "
+"classes <classname>Gtk::CheckButton</classname> e <classname>Gtk::"
+"RadioButton</classname>."
 
 #: C/gtkmm-tutorial-in.xml:848(title) C/gtkmm-tutorial-in.xml:863(title)
 msgid "CheckButton"
-msgstr ""
+msgstr "Botão de seleção"
 
 #: C/gtkmm-tutorial-in.xml:850(para)
 msgid ""
@@ -1710,10 +1973,15 @@ msgid ""
 "and toggle a checkbox using the same member methods as for <classname>Gtk::"
 "ToggleButton</classname>."
 msgstr ""
+"<classname>Gtk::CheckButton</classname> é derivado de <classname>Gtk::"
+"ToggleButton</classname>. A única diferença real entre os dois é a aparência "
+"de <classname>Gtk::CheckButton</classname>. Você pode selecionar, definir e "
+"alternar um botão de seleção usando os mesmos métodos membros de um "
+"<classname>Gtk::ToggleButton</classname>."
 
 #: C/gtkmm-tutorial-in.xml:875(title) C/gtkmm-tutorial-in.xml:972(title)
 msgid "RadioButton"
-msgstr ""
+msgstr "Botão de opção"
 
 #: C/gtkmm-tutorial-in.xml:877(para)
 msgid ""
@@ -1721,10 +1989,13 @@ msgid ""
 "ToggleButton</classname>, but these work in groups, and only one RadioButton "
 "in a group can be selected at any one time."
 msgstr ""
+"Como os de seleção, botões de opção também é uma classe filho de "
+"<classname>Gtk::ToggleButton</classname>, mas eles trabalham em grupos, e só "
+"um botão de opção em um grupo pode estar selecionado por vez."
 
 #: C/gtkmm-tutorial-in.xml:883(title)
 msgid "Groups"
-msgstr ""
+msgstr "Grupos"
 
 #: C/gtkmm-tutorial-in.xml:884(para)
 msgid ""
@@ -1734,6 +2005,11 @@ msgid ""
 "called <classname>RadioButtons</classname>, and then put three radio buttons "
 "in it:"
 msgstr ""
+"Existem duas maneiras de definir um grupo de botões de opção. A primeira é "
+"criar os botões e configurar os seus grupos em seguida. Somente os dois "
+"primeiros construtores são usados. No exemplo a seguir, fazemos uma nova "
+"classe janela chamada <classname>RadioButtons</classname>, e então colocamos "
+"três botões nela:"
 
 #: C/gtkmm-tutorial-in.xml:892(programlisting)
 #, no-wrap
@@ -1757,6 +2033,24 @@ msgid ""
 "    m_rb3.set_group(group);\n"
 "}"
 msgstr ""
+"class RadioButtons : public Gtk::Window\n"
+"{\n"
+"public:\n"
+"    RadioButtons();\n"
+"\n"
+"protected:\n"
+"    Gtk::RadioButton m_rb1, m_rb2, m_rb3;\n"
+"};\n"
+"\n"
+"RadioButtons::RadioButtons()\n"
+"  : m_rb1(\"botão1\"),\n"
+"    m_rb2(\"botão2\"),\n"
+"    m_rb3(\"botão3\")\n"
+"{\n"
+"    Gtk::RadioButton::Group grupo = m_rb1.get_group();\n"
+"    m_rb2.set_group(grupo);\n"
+"    m_rb3.set_group(grupo);\n"
+"}"
 
 #: C/gtkmm-tutorial-in.xml:910(para)
 msgid ""
@@ -11990,4 +12284,4 @@ msgstr ""
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
 #: C/gtkmm-tutorial-in.xml:0(None)
 msgid "translator-credits"
-msgstr ""
+msgstr "Rodolfo R. Gomes <rodolforg@gmail.com>, 2011"
