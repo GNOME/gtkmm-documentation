@@ -1,3 +1,19 @@
+2011-11-01  Pedro Ferreira <darkiiiiii@gmail.com>
+
+	New chapter: Keyboard Events
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add new chapter "Keyboard Events".
+	Add a paragraph on event propagation in Appendix B "Signals".
+	* docs/tutorial/C/figures/keyboardevents_propagation.png:
+	* docs/tutorial/C/figures/keyboardevents_simple.png: New screenshots.
+	* docs/tutorial/Makefile.am: Add the new files.
+	* examples/book/keyboard_events/propagation/event_propagation.[h|cc]:
+	* examples/book/keyboard_events/propagation/main.cc:
+	* examples/book/keyboard_events/simple/keyboard_events.[h|cc]:
+	* examples/book/keyboard_events/simple/main.cc: New example programs.
+	* examples/Makefile.am: Add the new files.
+	Bug #661857.
+
 2011-10-12  Murray Cumming  <murrayc@murrayc.com>
 
 	gmmproc appendix. More about Gtk::Object

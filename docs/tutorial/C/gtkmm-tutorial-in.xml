@@ -5795,6 +5795,128 @@ A plug was added</screen>
   </sect1>
 </chapter>
 
+<chapter id="chapter-keyboardevents">
+  <title>Keyboard Events</title>
+  <para>
+    X events differ in some ways from other signals. These differences are described
+    in the <link linkend="sec-xeventsignals">X Event signals</link> section in
+    the appendix. Here we will use keyboard events to show how X events can be
+    used in a program.
+  </para>
+  <sect1 id="sec-keyboardevents-overview">
+    <title>Overview</title>
+    <para>
+      Whenever you press or release a key, an event is emitted. You can connect
+      a signal handler to handle such events.
+    </para>
+    <para>
+      To receive the keyboard events, you must first call the
+      <methodname>Gtk::Widget::add_events()</methodname> function with a bit
+      mask of the events you're interested in. The event signal handler will
+      receive an argument that depends on the type of event. For keyboard
+      events it's a <type>GdkEventKey*</type>. As discribed in the
+      <link linkend="sec-xeventsignals">appendix</link>, the event signal handler
+      returns a <type>bool</type> value, to indicate that the signal is fully
+      handled (<literal>true</literal>) or allow event propagation
+      (<literal>false</literal>).
+    </para>
+    <para>
+      To determine which key was pressed or released, you read the value of
+      <varname>GdkEventKey::keyval</varname> and compare it with a constant in the
+      <filename>&lt;gdk/gdkkeysyms.h&gt;</filename> header file. The states of
+      modifier keys (shift, ctrl, etc.) are available as bit-flags in
+      <varname>GdkEventKey::state</varname>.
+    </para>
+    <para>
+      Here's a simple example:
+<programlisting>
+bool on_key_press_or_release_event(GdkEventKey* event)
+{
+  if (event->type == GDK_KEY_PRESS &amp;&amp;
+    event->keyval == GDK_KEY_1 &amp;&amp;
+    (event->state &amp; (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK)) == GDK_MOD1_MASK)
+  {
+    handle_alt_1_press(); // GDK_MOD1_MASK is normally the Alt key
+    return true;
+  }
+  return false;
+}
+
+Gtk::Entry m_entry; // in a class definition
+
+// in the class constructor
+m_entry.signal_key_press_event().connect( sigc::ptr_fun(&amp;on_key_press_or_release_event) );
+m_entry.signal_key_release_event().connect( sigc::ptr_fun(&amp;on_key_press_or_release_event) );
+m_entry.add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
+</programlisting>
+    </para>
+
+    <sect2 id="keyboardevents-simple-example">
+    <title>Example</title>
+      <para>
+        In this example there are three keyboard shortcuts:
+        <keycap>Alt</keycap>+<keycap>1</keycap> selects the first radio button,
+        <keycap>Alt</keycap>+<keycap>2</keycap> selects the second one, and the
+        <keycap>Esc</keycap> key hides (closes) the window.
+      </para>
+
+      <figure id="figure-keyboardevents-simple">
+        <title>Keyboard Events - Simple</title>
+        <screenshot>
+          <graphic format="PNG" fileref="&url_figures_base;keyboardevents_simple.png"/>
+        </screenshot>
+      </figure>
+
+      <para><ulink url="&url_examples_base;keyboard_events/simple/">Source Code</ulink></para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="sec-keyboardevents-propagation">
+    <title>Event Propagation</title>
+    <para>
+      Event propagation means that, when an event is emitted on a particular
+      widget, it can be passed to its parent widget (and that widget can pass
+      it to its parent, and so on) and, if the parent has an event handler,
+      that handler will be called. 
+    </para>
+    <para>
+      The event will propagate until it reaches the top-level widget, or until
+      you stop the propagation by returning <literal>true</literal> from an
+      event handler.
+    </para>
+    <para>
+      Notice, that after canceling an event, no other function will be called
+      (even if it is from the same widget).
+    </para>
+
+    <sect2 id="keyboardevents-propagation-example">
+    <title>Example</title>
+      <para>
+        In this example there are three event handlers, one in the
+        <classname>Gtk::Entry</classname>, one in the <classname>Gtk::Grid</classname>
+        and one in the <classname>Gtk::Window</classname>.
+      </para>
+      <para>
+        When you write in the entry, a key release event will be emitted first
+        in the <classname>Entry</classname> and, depending on whether we let
+        it propagate, it can reach the <classname>Grid</classname>'s and the
+        <classname>Window</classname>'s event handlers. If it propagates,
+        the text you're writing will appear in the <classname>Label</classname>
+        above the <classname>Entry</classname>.
+      </para>
+
+      <figure id="figure-keyboardevents-propagation">
+        <title>Keyboard Events - Event Propagation</title>
+        <screenshot>
+          <graphic format="PNG" fileref="&url_figures_base;keyboardevents_propagation.png"/>
+        </screenshot>
+      </figure>
+
+      <para><ulink url="&url_examples_base;keyboard_events/propagation/">Source Code</ulink></para>
+    </sect2>
+  </sect1>
+</chapter>
+
 <chapter id="chapter-chapter-timeouts">
 <title>Timeouts, I/O and Idle Functions </title>
 
@@ -7779,12 +7901,23 @@ for the various events.
 
 <sect2 id="signal-handler-sequence">
 <title>Signal Handler sequence</title>
-<para>By default, your signal handlers are called after any previously-connected signal handlers. However, this can be a problem with the X Event signals. For instance, the existing signal handlers, or the default signal handler, might return true to stop other signal handlers from being called. To specify that your signal handler should be called before the other signal handlers, so that will always be called, you can specify <literal>false</literal> for the optional <literal>after</literal> parameter. For instance,
+<para>By default, your signal handlers are called after any previously-connected
+signal handlers. However, this can be a problem with the X Event signals. For instance,
+the existing signal handlers, or the default signal handler, might return <literal>true</literal>
+to stop other signal handlers from being called. To specify that your signal handler
+should be called before the other signal handlers, so that it will always be called,
+you can specify <literal>false</literal> for the optional <literal>after</literal>
+parameter. For instance,
 <programlisting>
 button.signal_button_press_event().connect( sigc::ptr_fun(&amp;on_mywindow_button_press), false );
 </programlisting>
 </para>
-
+<para>The event is delivered first to the widget the event occurred in. If all
+signal handlers in that widget return <literal>false</literal> (indicating that
+the event has not been handled), then the signal will be propagated to the parent
+widget and emitted there. This continues all the way up to the top-level widget
+if no one handles the event. 
+</para>
 </sect2>
 
 </sect1>

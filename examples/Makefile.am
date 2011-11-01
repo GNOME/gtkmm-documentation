@@ -63,6 +63,8 @@ check_PROGRAMS =					\
 	book/idle/idle					\
 	book/infobar/example				\
 	book/input/example				\
+	book/keyboard_events/simple/example	\
+	book/keyboard_events/propagation/example	\
 	book/label/example				\
 	book/menus/main_menu/main_menu			\
 	book/menus/popup/popup				\
@@ -404,6 +406,16 @@ book_infobar_example_SOURCES =		\
 
 book_input_example_SOURCES = \
 	book/input/main.cc
+
+book_keyboard_events_simple_example_SOURCES =		\
+	book/keyboard_events/simple/keyboard_events.cc	\
+	book/keyboard_events/simple/keyboard_events.h	\
+	book/keyboard_events/simple/main.cc
+
+book_keyboard_events_propagation_example_SOURCES =		\
+	book/keyboard_events/propagation/event_propagation.cc	\
+	book/keyboard_events/propagation/event_propagation.h	\
+	book/keyboard_events/propagation/main.cc
 
 book_label_example_SOURCES =		\
 	book/label/examplewindow.cc	\
