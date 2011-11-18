@@ -6,7 +6,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -14,33 +14,26 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifndef GTKMM_KEYBOARD_EVENTS_H
-#define GTKMM_KEYBOARD_EVENTS_H
+#ifndef GTKMM_EXAMPLEWINDOW_H
+#define GTKMM_EXAMPLEWINDOW_H
 
 #include <gtkmm.h>
 
 
-class KeyboardEvents : public Gtk::Window
+class ExampleWindow : public Gtk::Window
 {
-  public:
+public:
 
-    KeyboardEvents();
-    virtual ~KeyboardEvents();
+  ExampleWindow();
+  virtual ~ExampleWindow();
 
+private:
+  bool on_key_press_event(GdkEventKey *event);
 
-  private:
-
-    bool onKeyPress (GdkEventKey *event);
-
-
-        //ui related elements
-
-    Gtk::Grid m_container;
-
-    Gtk::RadioButton m_first;
-    Gtk::RadioButton m_second;
-
+  Gtk::Grid m_container;
+  Gtk::RadioButton m_first;
+  Gtk::RadioButton m_second;
 };
 
 
-#endif //GTKMM_KEYBOARD_EVENTS_H
+#endif //GTKMM_EXAMPLEWINDOW_H

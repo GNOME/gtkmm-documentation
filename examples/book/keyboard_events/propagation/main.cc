@@ -11,20 +11,20 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#include "event_propagation.h"
+#include "examplewindow.h"
+#include <gtkmm/main.h>
 
-
-int main (int argc, char** argv)
+int main(int argc, char *argv[])
 {
-  Gtk::Main kit (argc, argv);
+  Gtk::Main kit(argc, argv);
 
+  ExampleWindow window;
 
-  EventPropagation mainWindow;
-
-  Gtk::Main::run (mainWindow);
+  //Shows the window and returns when it is closed.
+  Gtk::Main::run(window);
 
   return 0;
 }

@@ -20,30 +20,25 @@
 #include <gtkmm.h>
 #include <iostream>
 
-class EventPropagation : public Gtk::Window
+class ExampleWindow : public Gtk::Window
 {
-  public:
+public:
 
-    EventPropagation();
-    virtual ~EventPropagation();
+  ExampleWindow();
+  virtual ~ExampleWindow();
 
 
-  private:
+private:
 
-    bool entryKeyRelease (GdkEventKey *event);
+  bool entryKeyRelease(GdkEventKey *event);
+  bool gridKeyRelease(GdkEventKey *event);
+  bool windowKeyRelease(GdkEventKey *event);
 
-    bool gridKeyRelease (GdkEventKey *event);
+  Gtk::Grid m_container;
 
-    bool windowKeyRelease (GdkEventKey *event);
-
-        //ui elements
-
-    Gtk::Grid m_container;
-
-    Gtk::Label m_label;
-    Gtk::Entry m_entry;
-    Gtk::CheckButton m_canPropagate;
-
+  Gtk::Label m_label;
+  Gtk::Entry m_entry;
+  Gtk::CheckButton m_checkbutton_can_propagate;
 };
 
 
