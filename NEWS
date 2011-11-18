@@ -1,5 +1,48 @@
+3.2.0 (stable):
+
+* New chapter: Keyboard Events
+	(Pedro Ferreira, Kjell Ahlstedt)
+	Bug #661857.
+* "Working with gtkmm's Source Code" appendix,
+  "Recently Used Documents" chapter,
+  "Drawing Area Widget chapter" chapter,
+  "Dialogs" chapter:
+  Update for gtkmm 3
+	(Kjell Ahlstedt) Bug #658265.
+* Various examples:
+  Correct orientation and packing, which were wrong since we ported to these
+  examples to gtkmm 3.
+  (Kjell Ahlstedt) Bug #658265.
+* Use the new FontChooserDialog instead of FontSelectionDialog.
+  (Murray Cumming, Kjell Ahlstedt)
+* Use Gtk::Box instead of the now-deprecated Gtk::HBox and Gtk::VBox.
+  Likewise for other H and V classes.
+  (Murray Cumming)
+* Gtk::Builder examples: Update the Glade files.
+  (Kjell Ahlstedt)
+* gmmproc appendix
+  - More about Gtk::Object.
+    (Murray Cumming)
+  - Use {OUT} instead of {RET} for output params.
+	  (José Alburquerque)
+	- Initializations: Add comment about type substitution.
+	  (José Alburquerque)
+	- Mention new support for optional parameters.
+	  (José Alburquerque)
+	- Update for gtkmm 3
+	  (Kjell Ahlstedt) Bug #658265.
+* Replace Bitmap and Pixmap by Pixbuf.
+  (Kjell Ahlstedt) Bug #658265
+* Update links to the git repository.
+  (Kjell Ahlstedt) Bug #658265.
+
 3.0.3 (stable):
 
+* Update library.gnome.org/devel links to developer.gnome.org.
+* Added a Changes In gtkmm 3 chapter.
+* Update for the change from intermediate types to std::vector.
+  (Murray Cumming)
+	
 3.0.2 (stable):
 
 * Put a 2 in the name, so this is now Programming with gtkmm 2.
