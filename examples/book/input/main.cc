@@ -1,5 +1,7 @@
 #include <build/config.h>
 #include <gtkmm/main.h>
+#include <glibmm/main.h>
+#include <glibmm/iochannel.h>
 #include <fcntl.h>
 #include <iostream>
 

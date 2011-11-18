@@ -17,6 +17,7 @@
 #include "myarea.h"
 #include <cairomm/context.h>
 #include <gdkmm/general.h> // set_source_pixbuf()
+#include <glibmm/fileutils.h>
 #include <iostream>
 
 MyArea::MyArea()

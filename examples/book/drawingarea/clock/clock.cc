@@ -19,6 +19,7 @@
 #include <ctime>
 #include <cmath>
 #include <cairomm/context.h>
+#include <glibmm/main.h>
 #include "clock.h"
 
 Clock::Clock()

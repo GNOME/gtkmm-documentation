@@ -10,6 +10,7 @@
 #include <gtkmm/progressbar.h>
 #include <gtkmm/main.h>
 #include <gtkmm/window.h>
+#include <glibmm/main.h>
 
 
 class IdleExample : public Gtk::Window

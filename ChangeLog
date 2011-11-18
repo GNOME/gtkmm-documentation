@@ -1,5 +1,14 @@
 2011-11-18  Murray Cumming  <murrayc@murrayc.com>
 
+	Add includes needed for latest glibmm and gtkmm.
+
+	* examples/book/drawingarea/clock/clock.cc:
+	* examples/book/drawingarea/image/myarea.cc:
+	* examples/book/input/main.cc:
+	* examples/others/idle/idle.cc: Added some glibmm includes.
+
+2011-11-18  Murray Cumming  <murrayc@murrayc.com>
+
 	Add Pedro Ferreira to the authors list.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Added an author tag.
