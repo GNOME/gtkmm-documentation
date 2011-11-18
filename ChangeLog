@@ -1,5 +1,11 @@
 2011-11-18  Murray Cumming  <murrayc@murrayc.com>
 
+	Add Pedro Ferreira to the authors list.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Added an author tag.
+
+2011-11-18  Murray Cumming  <murrayc@murrayc.com>
+
 	Code style changes to the new keyboard events examples.
 
 	* examples/book/keyboard_events: Rename files and change them to be consistent

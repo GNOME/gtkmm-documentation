@@ -82,6 +82,11 @@ name
         <surname>King</surname>
         <contrib>Section on Gtk::Grid.</contrib>
       </author>
+      <author>
+        <firstname>Pedro</firstname>
+        <surname>Ferreira</surname>
+        <contrib>Chapter on Keyboard Events.</contrib>
+      </author>
     </authorgroup>
 
     <abstract>
