@@ -1,3 +1,9 @@
+2011-11-20  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Add Kjell Ahlstedt to the authors list.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Added an author tag.
+
 2011-11-18  Murray Cumming  <murrayc@murrayc.com>
 
 	Add includes needed for latest glibmm and gtkmm.

@@ -87,6 +87,11 @@ name
         <surname>Ferreira</surname>
         <contrib>Chapter on Keyboard Events.</contrib>
       </author>
+      <author>
+        <firstname>Kjell</firstname>
+        <surname>Ahlstedt</surname>
+        <contrib>Parts of the update from &gtkmm; 2 to &gtkmm; 3.</contrib>
+      </author>
     </authorgroup>
 
     <abstract>
