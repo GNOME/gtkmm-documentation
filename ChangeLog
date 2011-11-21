@@ -1,3 +1,5 @@
+3.2.1:
+
 2011-11-21  Murray Cumming  <murrayc@murrayc.com>
 
 	Added kindle cover files.
@@ -19,6 +21,8 @@
 	Add Kjell Ahlstedt to the authors list.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Added an author tag.
+
+3.2.0:
 
 2011-11-18  Murray Cumming  <murrayc@murrayc.com>
 

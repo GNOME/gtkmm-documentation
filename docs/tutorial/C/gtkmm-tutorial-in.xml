@@ -80,7 +80,7 @@ name
       <author>
         <firstname>Kjell</firstname>
         <surname>Ahlstedt</surname>
-        <contrib>Parts of the update from &gtkmm; 2 to &gtkmm; 3.</contrib>
+        <contrib>Parts of the update from gtkmm 2 to gtkmm 3.</contrib>
       </author>
     </authorgroup>
 
