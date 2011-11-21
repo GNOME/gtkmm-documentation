@@ -1,3 +1,9 @@
+2011-11-21  Murray Cumming  <murrayc@murrayc.com>
+
+	Authors: Remove authors of the now-removed Windows Installation section.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Removed 2 authors tags.
+
 2011-11-20  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Add Kjell Ahlstedt to the authors list.
