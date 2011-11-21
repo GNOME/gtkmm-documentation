@@ -1,5 +1,15 @@
 2011-11-21  Murray Cumming  <murrayc@murrayc.com>
 
+	Added kindle cover files.
+
+	* docs/tutorial/kindle_cover.jpg:
+	* docs/tutorial/kindle_cover.svg: Added these files, though calibre's 
+	ebook-convert, used in docs/tutorial/Makefile.am,
+	fails when we try to use it (the UI does the same), with:
+	Exception: no decode delegate for this image format `' @ error/blob.c/BlobToImage/348
+
+2011-11-21  Murray Cumming  <murrayc@murrayc.com>
+
 	Authors: Remove authors of the now-removed Windows Installation section.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Removed 2 authors tags.

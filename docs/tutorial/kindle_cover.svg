@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="600"
+   height="800"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="kindle_cover.svg"
+   inkscape:export-filename="/home/murrayc/checkouts/gnome30/gtkmm-documentation/docs/tutorial/kindle_cover.jpg.png"
+   inkscape:export-xdpi="75.037498"
+   inkscape:export-ydpi="75.037498">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="591.99396"
+     inkscape:cy="381.97198"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1215"
+     inkscape:window-height="955"
+     inkscape:window-x="57"
+     inkscape:window-y="169"
+     inkscape:window-maximized="0"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3048"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="40,580"
+       id="guide3858" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="50,40"
+       id="guide3860" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="464.28571,242.85714"
+       id="guide3882" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="132.85714,196.78571"
+       id="guide3884" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="170,750"
+       id="guide3888" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="560,770"
+       id="guide3890" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-252.36218)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1"
+       id="rect3886"
+       width="761.65509"
+       height="949.5434"
+       x="-84.852814"
+       y="149.28577" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3004"
+       style="font-size:11.38623142px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:129.99999523%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans"
+       transform="matrix(1.3577833,0,0,2.7495073,-56.996644,-22.52274)"><flowRegion
+         id="flowRegion3006"><rect
+           id="rect3008"
+           width="417.14285"
+           height="322.85715"
+           x="71.428574"
+           y="334.28571"
+           style="font-size:11.38623142px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:129.99999523%;writing-mode:lr-tb;text-anchor:start;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans" /></flowRegion><flowPara
+         id="flowPara3023">Murray Cumming, Bernhard Rieder, Jonathon Jongsma, Marko Anastasov, Daniel Elstner, David King, Pedro Ferreira,</flowPara><flowPara
+         id="flowPara3027">Kjell Ahlstedt</flowPara><flowPara
+         id="flowPara3024" /><flowPara
+         id="flowPara3026" /></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3036"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Bitstream Vera Sans;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion3038"><rect
+           id="rect3040"
+           width="52.527931"
+           height="86.873116"
+           x="14.142136"
+           y="375.73593" /></flowRegion><flowPara
+         id="flowPara3042" /></flowRoot>    <rect
+       style="fill:#800000;fill-opacity:1"
+       id="rect3066"
+       width="978.18274"
+       height="181.10657"
+       x="-160"
+       y="230.54495" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3058"
+       style="font-size:13.2625885px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Bold"
+       transform="matrix(2.4924302,0,0,3.9143105,-74.156033,59.036218)"><flowRegion
+         id="flowRegion3060"><rect
+           id="rect3062"
+           width="542.85712"
+           height="200"
+           x="45.714287"
+           y="58.571426"
+           style="font-size:13.2625885px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;font-family:DejaVu Sans;-inkscape-font-specification:DejaVu Sans Bold" /></flowRegion><flowPara
+         id="flowPara3064">Programming with gtkmm 3</flowPara><flowPara
+         id="flowPara3018" /></flowRoot>    <g
+       id="g3851"
+       transform="translate(-0.94243,25.758004)">
+      <path
+         style="fill:#729fcf;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2.12364459;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+         d="M 38.88413,771.18914 71.816977,795.88989 125.33282,779.42272 88.587303,757.53994 38.88413,771.18914 z"
+         id="path6976"
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:#e40000;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2.12364459;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+         d="m 40.94243,822.6493 -2.0583,-51.46016 32.932847,24.70075 0,55.57715 L 40.94243,822.6493 z"
+         id="path6978"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:#7fe719;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2.12364459;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+         d="m 71.816977,851.46704 49.399213,-20.58416 4.11663,-51.46016 -53.515843,16.46717 0,55.57715 z"
+         id="path6980"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="M 41.216626,821.68166 88.48573,807.72362 121.38422,830.8067"
+         id="path6982"
+         sodipodi:nodetypes="ccc"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:#babdb6;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 88.434539,758.23777 0,49.10929"
+         id="path6984"
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0" />
+    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3870"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       transform="translate(106,462.64789)"><flowRegion
+         id="flowRegion3872"><rect
+           id="rect3874"
+           width="507.14285"
+           height="104.28571"
+           x="44.285713"
+           y="352.85715" /></flowRegion><flowPara
+         id="flowPara3876">GTK+ with C++</flowPara></flowRoot>    <rect
+       style="fill:#aa0000;fill-opacity:1"
+       id="rect3880"
+       width="865.71429"
+       height="61.428574"
+       x="-120.00002"
+       y="406.64792" />
+  </g>
+</svg>

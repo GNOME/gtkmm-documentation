@@ -196,8 +196,10 @@ gtkmm-tutorial.epub: $(srcdir)/C/gtkmm-tutorial.xml
 mobi: $(srcdir)/gtkmm-tutorial.mobi
 
 # ebook-convert is provided by the calibre UI app.
-gtkmm-tutorial.mobi: $(srcdir)/gtkmm-tutorial.epub
-	ebook-convert $< gtkmm-tutorial.mobi
+# TODO: Use --cover kindle_cover.jpg when this ImageMagik problem is fixed:
+# Exception: no decode delegate for this image format `' @ error/blob.c/BlobToImage/348
+gtkmm-tutorial.mobi: $(srcdir)/gtkmm-tutorial.epub $(srcdir)/kindle_cover.jpg
+	ebook-convert $< gtkmm-tutorial.mobi --input-profile=kindle
 
 # Make sure that the documentation will always have been generated before
 # executing the commands of a rule that depends on files in html/.
