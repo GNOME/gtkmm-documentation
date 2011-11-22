@@ -1,3 +1,13 @@
+2011-11-22  Murray Cumming  <murrayc@murrayc.com>
+
+	Add back use of Gtk::Application, though it is not ready yet.
+    
+	* examples/Makefile.am:
+	* examples/book/application/:
+	* examples/book/base/base.cc: Use Gtk::Application. See bug #637445#c29 .
+
+This is the master branch. See also the gtkmm-3-2 branch.
+
 3.2.1:
 
 2011-11-21  Murray Cumming  <murrayc@murrayc.com>
