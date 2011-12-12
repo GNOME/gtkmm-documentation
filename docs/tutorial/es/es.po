@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2011-11-21 10:20+0000\n"
-"PO-Revision-Date: 2011-11-21 17:47+0100\n"
+"POT-Creation-Date: 2011-11-22 09:14+0000\n"
+"PO-Revision-Date: 2011-12-12 16:35+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -140,7 +140,7 @@ msgstr "Ahlstedt"
 
 #: C/gtkmm-tutorial-in.xml:83(contrib)
 msgid "Parts of the update from gtkmm 2 to gtkmm 3."
-msgstr ""
+msgstr "Partes de la actualización de gtkmm 2 a gtkmm 3."
 
 #. This text is copied from the introduction.
 #: C/gtkmm-tutorial-in.xml:90(para)
@@ -872,6 +872,13 @@ msgid ""
 "Theoretically, there might be a future gtkmm-4.0 API which would install in "
 "parallel with gtkmm-3.0 without affecting existing applications."
 msgstr ""
+"gtkmm-3.0 es el nombre de la API estable actual. Hubo una API más antigua "
+"llamada gtkmm-2-4 que se instalará en paralelo cuando está disponible. Hubo "
+"varias versiones de gtkmm-2.4, tales como gtkmm 2.10 y habrá varias "
+"versiones de la API gtkmm-3.0. Tenga en cuenta que el nombre de la API no "
+"cambia para todas las versiones, porque esto implicaría una API incompatible "
+"y una ABI rota. Teóricamente, podría haber un futura API gtkmm-4.0 que se "
+"instalaría en paralelo con gtkmm-3.0 sin afectar las aplicaciones existentes."
 
 #: C/gtkmm-tutorial-in.xml:381(para)
 msgid ""
@@ -1137,6 +1144,10 @@ msgid ""
 "Glib::ustring&gt;</classname>, <classname>std::list&lt;Glib::ustring&gt;</"
 "classname>, <type>const char*[]</type>, etc."
 msgstr ""
+"<classname>Glib::StringArrayHandle</classname> o <classname>Glib::"
+"ArrayHandle&lt;Glib::ustring&gt;</classname>: usa <classname>std::vector&lt;"
+"Glib::ustring&gt;</classname>, <classname>std::list&lt;Glib::ustring&gt;</"
+"classname>, <type>const char*[]</type>, etc."
 
 #: C/gtkmm-tutorial-in.xml:453(para)
 msgid ""
@@ -1144,6 +1155,9 @@ msgid ""
 "<classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::"
 "list&lt;Gtk::Widget*&gt;</classname>, etc."
 msgstr ""
+"<classname>Glib::ListHandle&lt;Gtk::Widget*&gt;</classname>: usa "
+"<classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::"
+"list&lt;Gtk::Widget*&gt;</classname>, etc."
 
 #: C/gtkmm-tutorial-in.xml:454(para)
 msgid ""
@@ -1151,6 +1165,9 @@ msgid ""
 "<classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::"
 "list&lt;Gtk::Widget*&gt;</classname>, etc."
 msgstr ""
+"<classname>Glib::SListHandle&lt;Gtk::Widget*&gt;</classname>: usa "
+"<classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::"
+"list&lt;Gtk::Widget*&gt;</classname>, etc."
 
 #: C/gtkmm-tutorial-in.xml:450(para)
 msgid ""
@@ -1424,6 +1441,10 @@ msgid ""
 "classname>, <classname>Gtk::AppChooserDialog</classname> allow the user to "
 "select an installed application to open a particularl type of content."
 msgstr ""
+"<classname>Gtk::AppChooser</classname>, <classname>Gtk::AppChooserButton</"
+"classname>, <classname>Gtk::AppChooserDialog</classname> permiten al usuario "
+"seleccionar una aplicación instalada para abrir un determinado tipo de "
+"contenido."
 
 #: C/gtkmm-tutorial-in.xml:614(simpara)
 msgid ""
@@ -1438,6 +1459,9 @@ msgid ""
 "than <classname>Gtk::CheckBox</classname>. It may be useful, for instance, "
 "when allowing users to activate hardware."
 msgstr ""
+"<classname>Gtk::Switch</classname> muestra los estados Encendido/Apagado más "
+"explícitamente que <classname>Gtk::CheckBox</classname>. Puede ser útil, por "
+"ejemplo, al permitir a los usuarios activar hardware."
 
 #: C/gtkmm-tutorial-in.xml:618(para)
 msgid ""
@@ -1500,7 +1524,7 @@ msgid ""
 "CssProvider</classname>."
 msgstr ""
 "<classname>Gtk::Style</classname> y <classname>Gtk::Rc</classname> se "
-"quitaron y se rremplazaron por <classname>Gtk::StyleContext</classname>, y "
+"quitaron y se reemplazaron por <classname>Gtk::StyleContext</classname>, y "
 "<classname>Gtk::StyleProvider</classname>, así como <classname>Gtk::"
 "CssProvider</classname>."
 
@@ -1518,18 +1542,25 @@ msgid ""
 "adding an alpha component for opacity. <classname>Colormap</classname> was "
 "removed, along with its awkward use to allocate colors."
 msgstr ""
+"<classname>Gdk::RGBA</classname> reemplaza a <classname>Color</classname>, "
+"añadiendo un componente alfa para la opacidad. <classname>Colormap</"
+"classname> se eliminó, junto con su molesto uso para asignar colores."
 
 #: C/gtkmm-tutorial-in.xml:640(simpara)
 msgid ""
 "<classname>Gdk::Pixmap</classname> and <classname>Gdk::Bitmap</classname> "
 "were removed in favour of <classname>Gdk::Pixbuf</classname>."
 msgstr ""
+"<classname>Gdk::Pixmap</classname> y <classname>Gdk::Bitmap</classname> se "
+"eliminaron en favor de  <classname>Gdk::Pixbuf</classname>."
 
 #: C/gtkmm-tutorial-in.xml:642(simpara)
 msgid ""
 "<classname>Gdk::Drawable</classname> was removed, with its methods moving "
 "into <classname>Gdk::Window</classname>."
 msgstr ""
+"<classname>Gdk::Drawable</classname> se quitó, y sus métodos se movieron a "
+"<classname>Gdk::Window</classname>."
 
 #: C/gtkmm-tutorial-in.xml:644(simpara)
 msgid ""
@@ -1561,8 +1592,7 @@ msgstr "Botones"
 #: C/gtkmm-tutorial-in.xml:658(para)
 msgid "<application>gtkmm</application> provides four basic types of buttons:"
 msgstr ""
-"<application> gtkmm </application> proporciona cuatro tipos básicos de "
-"botones:"
+"<application>gtkmm</application> proporciona cuatro tipos básicos de botones:"
 
 #: C/gtkmm-tutorial-in.xml:665(term)
 msgid "Push-Buttons"
@@ -2211,6 +2241,10 @@ msgid ""
 "existing choices based on the first few characters typed by the user. For "
 "instance, a search dialog could suggest text from previous searches."
 msgstr ""
+"Un widget <classname>Entry</classname> puede ofrecer una lista desplegable "
+"de opciones pre-existentes sobre la base de los primeros caracteres escritos "
+"por el usuario. Por ejemplo, un cuadro de diálogo de búsqueda podría sugerir "
+"el texto de búsquedas anteriores."
 
 #: C/gtkmm-tutorial-in.xml:1265(para)
 msgid ""
@@ -2315,6 +2349,12 @@ msgid ""
 "down across the range of possible values. The <classname>Entry</classname> "
 "widget may also be used to enter a value directly."
 msgstr ""
+"Un <classname>SpinButton</ classname> permite al usuario seleccionar un "
+"valor de un rango de valores numéricos. Este tiene un widget «Entry» con "
+"botones de flechas en un lado. Al pulsar en los botones hace que el valor "
+"del «spin» suba y baje en toda la gama de valores posibles. El widget "
+"<classname>Entry</classname> también puede utilizarse para introducir un "
+"valor directamente."
 
 #: C/gtkmm-tutorial-in.xml:1369(para)
 msgid ""
@@ -2365,6 +2405,8 @@ msgid ""
 "Additionally, mouse button 3 can be used to jump directly to the "
 "<literal>upper</literal> or <literal>lower</literal> values."
 msgstr ""
+"Además, el botón 3 del ratón se puede usar para saltar directamente a los "
+"valores <literal>upper</literal> o <literal>lower</literal>."
 
 #: C/gtkmm-tutorial-in.xml:1428(para)
 msgid ""
@@ -2459,6 +2501,10 @@ msgid ""
 "default, but you can change it to a vertical progress bar by using the "
 "<methodname>set_orientation()</methodname> method."
 msgstr ""
+"Una <classname>ProgressBar</classname> es horizontal y de izquierda a "
+"derecha de manera predeterminada, pero se puede cambiar a una barra de "
+"progreso vertical mediante el uso del método <methodname>set_orientation()</"
+"methodname>."
 
 #: C/gtkmm-tutorial-in.xml:1533(title)
 msgid "Activity Mode"
@@ -2798,6 +2844,8 @@ msgid ""
 "<classname>Gtk::Table</classname> arranges its widgets in a grid. Use "
 "<methodname>attach()</methodname> to insert widgets."
 msgstr ""
+"<classname>Gtk::Table</classname> organiza sus widgets en una cuadrícula. "
+"Use <methodname>attach()</methodname> para insertar widgets."
 
 #: C/gtkmm-tutorial-in.xml:1948(para)
 msgid "There are several other containers, which we will also discuss."
@@ -3028,6 +3076,9 @@ msgid ""
 "columns. The dimensions of the grid do not need to be specified in the "
 "constructor."
 msgstr ""
+"Un <classname>Grid</classname> establece dinámicamente widgets hijos en "
+"filas y columnas. No es necesario especificar las dimensiones de la red en "
+"el constructor."
 
 #: C/gtkmm-tutorial-in.xml:2160(para)
 msgid ""
@@ -3240,6 +3291,12 @@ msgid ""
 "several sets of widgets to be placed in a small space, by only showing one "
 "page at a time. For instance, they are often used in preferences dialogs."
 msgstr ""
+"Un <classname>Notebook</classname> tiene un conjunto de <literal>páginas</"
+"literal> apiladas, cada una de ellas contiene widgets. Las "
+"<literal>pestañas</literal> etiquetadas permiten al usuario seleccionar las "
+"páginas. Los <classname>Notebook</classname> permiten colocar varios "
+"conjuntos de widgets en un espacio reducido, mostrando sólo una página a la "
+"vez. Por ejemplo, se utilizan a menudo en los diálogos de preferencias."
 
 #: C/gtkmm-tutorial-in.xml:2365(para)
 msgid ""
@@ -4438,6 +4495,10 @@ msgid ""
 "classname> widget for entering of arbitrary text, by specifying true for the "
 "constructor's <literal>has_entry</literal> parameter."
 msgstr ""
+"Un <classname>ComboBox</classname> puede contener una widget "
+"<classname>Entry</classname> para la entrada de texto arbitrario, mediante "
+"la especificación de verdad para el parámetro <literal>has_entry</literal> "
+"del constructor."
 
 #: C/gtkmm-tutorial-in.xml:3209(title)
 msgid "The text column"
@@ -5003,6 +5064,11 @@ msgid ""
 "user may hide or expand each group. As in a toolbar, the items may be "
 "displayed as only icons, as only text, or as icons with text."
 msgstr ""
+"Una <classname>ToolPalette</classname> es similar a una <classname>Toolbar</"
+"classname>, pero puede contener una rejilla de elementos categorizados en "
+"grupos. El usuario puede ocultar o expandir cada grupo. Al igual que en una "
+"barra de herramientas, los elementos pueden aparecer sólo como iconos, como "
+"sólo texto, o en forma de iconos con el texto."
 
 #: C/gtkmm-tutorial-in.xml:3678(para)
 msgid ""
@@ -5410,6 +5476,7 @@ msgstr "Gtk::EventBox();"
 msgid ""
 "A child widget can be added to the <classname>EventBox</classname> using:"
 msgstr ""
+"se puede agregar un widget hijo a <classname>EventBox</classname> utilizando:"
 
 #: C/gtkmm-tutorial-in.xml:3954(programlisting)
 #, no-wrap
@@ -6164,6 +6231,8 @@ msgid ""
 "<classname>Gtk::TargetEntry</classname> objects contain this information: "
 "<placeholder-1/>"
 msgstr ""
+"Los objetos <classname>Gtk::TargetEntry</classname> contienen esta "
+"información: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:4702(para)
 msgid ""
@@ -7181,6 +7250,10 @@ msgid ""
 "use this object to look up any of the properties listed <link linkend=\"list-"
 "file-metadata\">above</link>."
 msgstr ""
+"Un objeto <classname>RecentInfo</classname> es esencialmente un objeto que "
+"contiene todos los metadatos de un solo archivo utilizado recientemente. "
+"Puede utilizar este objeto para buscar cualquiera de las propiedades "
+"enumeradas <link linkend=\"list-file-metadata\">anteriormente</link>."
 
 #: C/gtkmm-tutorial-in.xml:5523(para)
 msgid ""
@@ -7367,6 +7440,9 @@ msgid ""
 "provides the ability to embed widgets from one process into another process "
 "in a way that is transparent to the user."
 msgstr ""
+"Un <classname>Socket</classname> es un tipo especial de widget contenedor "
+"que ofrece la posibilidad de incorporar widgets de un proceso en otro "
+"proceso de manera que sea transparente para el usuario."
 
 #: C/gtkmm-tutorial-in.xml:5683(title)
 msgid "Plugs"
@@ -7381,6 +7457,13 @@ msgid ""
 "classname>, which will automatically embed the <classname>Plug</classname> "
 "into the <classname>Socket</classname> that matches that ID."
 msgstr ""
+"Un <classname>Plug</classname> es un tipo especial de ventana que se puede "
+"conectar a un <classname>Socket</classname>. Además de las propiedades y los "
+"métodos normales de <classname>Gtk::Window</classname>, un <classname>Plug</"
+"classname> proporciona un constructor que toma el ID de un "
+"<classname>Socket</classname>, lo que automáticamente incrusta el "
+"<classname>Plug</classname> en el <classname>Socket</classname> que coincide "
+"con el ID."
 
 #: C/gtkmm-tutorial-in.xml:5693(para)
 msgid ""
@@ -7511,7 +7594,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5799(title)
 msgid "Keyboard Events"
-msgstr ""
+msgstr "Eventos de teclado"
 
 #: C/gtkmm-tutorial-in.xml:5800(para)
 msgid ""
@@ -7593,7 +7676,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5830(para) C/gtkmm-tutorial-in.xml:7882(para)
 msgid "Here's a simple example: <placeholder-1/>"
-msgstr ""
+msgstr "Un ejemplo sencillo: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:5856(para)
 msgid ""
@@ -7608,10 +7691,9 @@ msgid "Keyboard Events - Simple"
 msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5875(title)
-#, fuzzy
 #| msgid "Entry Completion"
 msgid "Event Propagation"
-msgstr "Completado de «Entry»"
+msgstr "Propagación de eventos"
 
 #: C/gtkmm-tutorial-in.xml:5876(para)
 msgid ""
@@ -7635,7 +7717,6 @@ msgid ""
 msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5894(para)
-#, fuzzy
 #| msgid ""
 #| "<classname>Gtk::Adjustment</classname> and <classname>IconSet</classname> "
 #| "and <classname>Gdk::Cursor</classname> are now used via <classname>Glib::"
@@ -7645,9 +7726,9 @@ msgid ""
 "Entry</classname>, one in the <classname>Gtk::Grid</classname> and one in "
 "the <classname>Gtk::Window</classname>."
 msgstr ""
-"<classname>Gtk::Adjustment</classname>, <classname>IconSet</classname> y "
-"<classname>Gdk::Cursor</classname> se usan ahora a través de "
-"<classname>Glib::RefPtr</classname>."
+"En este ejemplo hay tres manejadores de eventos, uno en la <classname>Gtk::"
+"Entry</classname>, uno en el <classname>Gtk::Grid</classname> y uno en la "
+"<classname>Gtk::Window</classname>."
 
 #: C/gtkmm-tutorial-in.xml:5899(para)
 msgid ""
@@ -7661,7 +7742,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5909(title)
 msgid "Keyboard Events - Event Propagation"
-msgstr ""
+msgstr "Eventos de teclado: propagación de eventos"
 
 #: C/gtkmm-tutorial-in.xml:5921(title)
 msgid "Timeouts, I/O and Idle Functions"
@@ -7734,7 +7815,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5973(para)
 msgid "Here's an example of this technique:"
-msgstr ""
+msgstr "Un ejemplo de esta técnica:"
 
 #: C/gtkmm-tutorial-in.xml:5982(title)
 msgid "Monitoring I/O"
@@ -7899,7 +7980,7 @@ msgstr "Gestión de la memoria"
 
 #: C/gtkmm-tutorial-in.xml:6137(title)
 msgid "Normal C++ memory management"
-msgstr ""
+msgstr "Gestión normal de la memoria en C++"
 
 #: C/gtkmm-tutorial-in.xml:6139(para)
 msgid ""
@@ -7916,7 +7997,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:6151(para)
 msgid "Here are some examples of normal C++ memory management:"
-msgstr ""
+msgstr "Algunos ejemplos de gestión normal de la memoria en C++:"
 
 #: C/gtkmm-tutorial-in.xml:6154(title)
 msgid "Class Scope widgets"
@@ -8286,7 +8367,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:6416(title)
 msgid "Accessing widgets"
-msgstr ""
+msgstr "Acceso a widgets"
 
 #: C/gtkmm-tutorial-in.xml:6424(programlisting)
 #, no-wrap
