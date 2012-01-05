@@ -151,6 +151,8 @@ Wheelbarrow::Wheelbarrow()
 
   realize(); // the widget must be realized to create the GDK window
   const Glib::RefPtr<const Gdk::Window> window = get_window();
+
+  //TODO: Use get_style_context() and Gdk::RGBA instead?
   const Gdk::Color transparent = Gtk::Widget::get_default_style()->get_bg(Gtk::STATE_NORMAL);
 
   const Glib::RefPtr<Gdk::Pixbuf> pixbuf =
