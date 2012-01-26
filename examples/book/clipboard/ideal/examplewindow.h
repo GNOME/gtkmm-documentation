@@ -46,7 +46,7 @@ protected:
 
   Gtk::Label m_Label;
   
-  Gtk::Table m_Table;
+  Gtk::Grid m_Grid;
   Gtk::ToggleButton m_ButtonA1, m_ButtonA2, m_ButtonB1, m_ButtonB2;
 
   Gtk::ButtonBox m_ButtonBox;

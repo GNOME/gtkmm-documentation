@@ -1,7 +1,7 @@
 /* example-start arrow arrow.c */
 
 #include <gtkmm/arrow.h>
-#include <gtkmm/table.h>
+#include <gtkmm/grid.h>
 #include <gtkmm/button.h>
 #include <gtkmm/window.h>
 #include <gtkmm/main.h>
@@ -36,37 +36,36 @@ public:
 AppWindow::AppWindow()
 {
   ArrowButton* button = 0;
-  Gtk::Table* table = 0;
+  Gtk::Grid* grid = 0;
 
   set_title ("Arrow Buttons");
 
   /* Sets the border width of the window. */
   set_border_width (10);
   
-  /* Create a box to hold the arrows/buttons */
-  table= Gtk::manage (new Gtk::Table (3, 3, true));
-  table->set_border_width (2);
+  /* Create a grid to hold the arrows/buttons */
+  grid = Gtk::manage (new Gtk::Grid ());
+  grid->set_row_homogeneous(true);
+  grid->set_column_homogeneous(true);
+  grid->set_border_width (2);
 
   /* Pack and show all our widgets */
   button = Gtk::manage (new ArrowButton (Gtk::ARROW_UP, Gtk::SHADOW_ETCHED_IN));
-  table->attach (*button, 1, 2, 0, 1);
+  grid->attach (*button, 1, 0, 1, 1);
 
   button = Gtk::manage (new ArrowButton (Gtk::ARROW_LEFT, Gtk::SHADOW_ETCHED_IN));
-  table->attach (*button, 0, 1, 1, 2);
+  grid->attach (*button, 0, 1, 1, 1);
 
   button = Gtk::manage (new ArrowButton (Gtk::ARROW_RIGHT, Gtk::SHADOW_ETCHED_IN));
-  table->attach (*button, 2, 3, 1, 2);
+  grid->attach (*button, 2, 1, 1, 1);
 
   button = Gtk::manage (new ArrowButton (Gtk::ARROW_DOWN, Gtk::SHADOW_ETCHED_IN));
-  table->attach (*button, 1, 2, 2, 3);
+  grid->attach (*button, 1, 2, 1, 1);
 
-  table->set_row_spacing(0, 5);
-  table->set_row_spacing(1, 5);
-
-  table->set_col_spacing(0, 5);
-  table->set_col_spacing(1, 5);
+  grid->set_row_spacing(5);
+  grid->set_column_spacing(5);
  
-  add (*table);
+  add (*grid);
   show_all ();
 }
 

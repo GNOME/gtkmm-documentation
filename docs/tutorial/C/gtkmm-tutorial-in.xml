@@ -389,10 +389,10 @@ Openismus has more <ulink url="http://www.openismus.com/documents/linux/automake
 <sect1 id="sec-widgets-overview">
 <title>Widgets</title>
 <para>&gtkmm; applications consist of windows containing widgets, such as buttons and text boxes. In some other systems, widgets are called "controls". For each widget in your application's windows, there is a C++ object in your application's code. So you just need to call a method of the widget's class to affect the visible widget.</para>
- <para>Widgets are arranged inside container widgets such as frames and notebooks, in a hierarchy of widgets within widgets. Some of these container widgets, such as <classname>Gtk::Grid</classname>, are not visible - they exist only to arrange other widgets. Here is some example code that adds 2 <classname>Gtk::Button</classname> widgets to a <classname>Gtk::VBox</classname> container widgets:
+ <para>Widgets are arranged inside container widgets such as frames and notebooks, in a hierarchy of widgets within widgets. Some of these container widgets, such as <classname>Gtk::Grid</classname>, are not visible - they exist only to arrange other widgets. Here is some example code that adds 2 <classname>Gtk::Button</classname> widgets to a <classname>Gtk::Box</classname> container widget:
 <programlisting>m_box.pack_start(m_Button1);
 m_box.pack_start(m_Button2);</programlisting>
-and here is how to add the <classname>Gtk::VBox</classname>, containing those buttons, to a <classname>Gtk::Frame</classname>, which has a visible frame and title:
+and here is how to add the <classname>Gtk::Box</classname>, containing those buttons, to a <classname>Gtk::Frame</classname>, which has a visible frame and title:
 <programlisting>m_frame.add(m_box);</programlisting>
 </para>
 <para>
@@ -626,7 +626,7 @@ takes no arguments, but it isn't visible yet. When we call Gtk::Main::run(), giv
 
 <listitem><simpara><classname>Gtk::Adjustment</classname> and <classname>IconSet</classname> and <classname>Gdk::Cursor</classname> are now used via <classname>Glib::RefPtr</classname>.</simpara></listitem>
 
-<listitem><simpara><classname>Gtk::Box</classname>, <classname>Gtk::ButtonBox</classname>, <classname>Gtk::IconView</classname>, <classname>Gtk::Paned</classname>, <classname>Gtk::ProgressBar</classname>, <classname>Gtk::ScaleButton</classname>, <classname>Gtk::ScrollBar</classname> and <classname>Gtk::Separator</classname> now derive from <classname>Gtk::Orientable</classname>, allowing their
+<listitem><simpara><classname>Gtk::Box</classname>, <classname>Gtk::ButtonBox</classname>, <classname>Gtk::IconView</classname>, <classname>Gtk::Paned</classname>, <classname>Gtk::ProgressBar</classname>, <classname>Gtk::ScaleButton</classname>, <classname>Gtk::Scrollbar</classname> and <classname>Gtk::Separator</classname> now derive from <classname>Gtk::Orientable</classname>, allowing their
 orientation (vertical or horizontal) to be specified without requiring the use of a derived class such as <classname>Gtk::HBox</classname>.</simpara></listitem>
 
 <listitem><simpara><classname>Gtk::IconView</classname>, <classname>Gtk::TextView</classname>, <classname>Gtk::TreeView</classname> and other widgets derive from Scrollable instead of having their own methods such as <methodname>get_vadjustment()</methodname> and instead of having their won set_scroll_adjustments signal.</simpara></listitem>
@@ -1025,9 +1025,8 @@ widget, such as, a <classname>Gtk::Entry</classname>, or a
 </para>
 
 <para>
-There are horizontal and vertical scrollbar classes -
-<classname>Gtk::HScrollbar</classname> and
-<classname>Gtk::VScrollbar</classname>.
+The orientation of a <classname>Gtk::Scrollbar</classname> can be either
+horizontal or vertical.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;Scrollbar.html">Reference</ulink></para>
@@ -1047,9 +1046,8 @@ inactivity before a screensaver takes over the screen.
 </para>
 
 <para>
-As with <classname>Scrollbar</classname>s, there are separate widget types for
-horizontal and vertical widgets - <classname>Gtk::HScale</classname> and
-<classname>Gtk::VScale</classname>. The default constructors create an
+As with <classname>Scrollbar</classname>s, the orientation can be either
+horizontal or vertical. The default constructor creates an
 <classname>Adjustment</classname> with all of its values set to
 <literal>0.0</literal>. This isn't useful so you will need to set some
 <classname>Adjustment</classname> details to get meaningful behaviour.
@@ -1631,7 +1629,7 @@ such as showing an image as well as text.
 <para>
 All container widgets derive from <classname>Gtk::Container</classname>, not
 always directly. Some container widgets, such as
-<classname>Gtk::Table</classname> can hold many child widgets, so these
+<classname>Gtk::Grid</classname> can hold many child widgets, so these
 typically have more complex interfaces. Others, such as
 <classname>Gtk::Frame</classname> contain only one child widget.
 </para>
@@ -1685,14 +1683,13 @@ title. For instance, you might place a group of
 <title>Paned</title>
 
 <para>
-Panes divide a widget into two halves, separated by a moveable divider. There
-are two such widgets: <classname>Gtk::HPaned</classname> adds a horizontal
-divider, and <classname>Gtk::VPaned</classname> adds a vertical one. Other
-than the names and the orientations, there's no difference between the two.
+Panes divide a widget into two halves, separated by a moveable divider.
+The two halves (panes) can be oriented either horizontally (side by side) or
+vertically (one above the other).
 </para>
 
 <para>
-Unlike the other widgets in this chapter, pane widgets contain not one but two
+Unlike the other widgets in this section, pane widgets contain not one but two
 child widgets, one in each pane. Therefore, you should use
 <methodname>add1()</methodname> and <methodname>add2()</methodname> instead of the
 <methodname>add()</methodname> method.
@@ -1911,8 +1908,7 @@ in &gtkmm; are descendants of <classname>Gtk::Bin</classname>, including
 Yes, that's correct: a Window can contain at most one widget. How, then, can
 we use a window for anything useful?  By placing a multiple-child container in
 the window. The most useful container widgets are
-<classname>Gtk:Grid</classname>, <classname>Gtk:VBox</classname>,
-<classname>Gtk::HBox</classname>, and <classname>Gtk::Table</classname>.
+<classname>Gtk:Grid</classname> and <classname>Gtk:Box</classname>.
 </para>
 
 
@@ -1929,17 +1925,9 @@ insert child widgets.
 
 <listitem>
 <para>
-<classname>Gtk::VBox</classname> and <classname>Gtk::HBox</classname> arrange
-their child widgets vertically and horizontally, respectively. Use
+<classname>Gtk::Box</classname> arranges its child widgets vertically or horizontally. Use
 <methodname>pack_start()</methodname> and <methodname>pack_end()</methodname> to insert
 child widgets.
-</para>
-</listitem>
-
-<listitem>
-<para>
-<classname>Gtk::Table</classname> arranges its widgets in a grid. Use
-<methodname>attach()</methodname> to insert widgets.
 </para>
 </listitem>
 
@@ -2003,11 +1991,10 @@ boxes to create the desired effect.
 The <methodname>pack_start()</methodname> and
 <methodname>pack_end()</methodname> methods place widgets inside these
 containers. The <methodname>pack_start()</methodname> method will start at
-the top and work its way down in a <classname>VBox</classname>, or pack left to
-right in an <classname>HBox</classname>.
-<methodname>pack_end()</methodname> will do the opposite, packing from
-bottom to top in a <classname>VBox</classname>, or right to left in an
-<classname>HBox</classname>. Using these methods allows us to right justify or
+the top and work its way down in a <classname>Box</classname> with vertical
+orientation, or pack left to right in a <classname>Box</classname> with horizontal
+orientation. <methodname>pack_end()</methodname> will do the opposite, packing from
+bottom to top or from right to left. Using these methods allows us to right justify or
 left justify our widgets. We will use <methodname>pack_start()</methodname>
 in most of our examples.
 </para>
@@ -2033,9 +2020,9 @@ different styles, as shown in this picture:
 </figure>
 
 <para>
-Each line contains one horizontal box (<classname>HBox</classname>) with
+Each line contains one horizontal <classname>Box</classname> with
 several buttons. Each of the buttons on a line is packed into the
-<classname>HBox</classname> with the same arguments to the
+<classname>Box</classname> with the same arguments to the
 <methodname>pack_start()</methodname> method).
 </para>
 
@@ -2109,10 +2096,8 @@ Here is the source code for the example that produced the screenshots above. Whe
 <title>ButtonBoxes</title>
 
 <para>
-Button boxes are a convenient way to quickly arrange a group of buttons. They
-come in both horizontal (<classname>Gtk::HButtonBox</classname>) and vertical
-(<classname>Gtk::VButtonBox</classname>) flavours. They are exactly alike,
-except in name and orientation.
+Button boxes are a convenient way to quickly arrange a group of buttons. Their
+orientation can be either horizontal or vertical.
 </para>
 
 <para>
@@ -2195,159 +2180,13 @@ spanning two columns.
 <title>Table</title>
 
 <para>
-Tables allows us to place widgets in a grid, similar to <classname>Gtk::Grid</classname>.
+<classname>Gtk::Table</classname> allows us to place widgets in a grid,
+similar to <classname>Gtk::Grid</classname>.
 </para>
-
-<sect3 id="table-constructor"><title>Constructor</title>
 <para>
-The grid's dimensions need to be specified in the constructor:
+<classname>Gtk::Table</classname> is deprecated from &gtkmm; version 3.4 and should
+not be used in newly-written code. Use <classname>Gtk::Grid</classname> instead.
 </para>
-<programlisting>Gtk::Table(int rows = 1, int columns = 1, bool homogeneous = false);</programlisting>
-
-<para>
-The first argument is the number of rows to make in the table, while the
-second, obviously, is the number of columns. If
-<parameter>homogeneous</parameter> is <literal>true</literal>, the table cells
-will all be the same size (the size of the largest widget in the table).
-</para>
-
-<para>
-The rows and columns are indexed starting at 0. If you specify
-<parameter>rows</parameter> = 2 and <parameter>columns</parameter> = 2, the
-layout would look something like this:
-</para>
-
-<programlisting>
- 0          1          2
-0+----------+----------+
- |          |          |
-1+----------+----------+
- |          |          |
-2+----------+----------+
-</programlisting>
-
-<para>
-Note that the coordinate system starts in the upper left hand corner.
-</para>
-</sect3>
-
-<sect3 id="table-adding-widgets"><title>Adding widgets</title>
-<para>
-To place a widget into a box, use the following method:
-</para>
-<programlisting>void Gtk::Table::attach(Gtk::Widget&amp; child,
-                        guint left_attach, guint right_attach,
-                        guint top_attach, guint bottom_attach,
-                        guint xoptions = Gtk::FILL | Gtk::EXPAND,
-                        guint yoptions = Gtk::FILL | Gtk::EXPAND,
-                        guint xpadding = 0, guint ypadding = 0);</programlisting>
-<para>
-The first argument is the widget you wish to place in the table.
-</para>
-
-<para>
-The <parameter>left_attach</parameter> and
-<parameter>right_attach</parameter> arguments specify where to place the
-widget, and how many boxes to use. For example, if you want a button in the
-lower-right cell of a 2 x 2 table, and want it to occupy that cell
-<emphasis>only</emphasis>, then <parameter>left_attach</parameter> would
-be 1, <parameter>right_attach</parameter> 2,
-<parameter>top_attach</parameter> 1, and
-<parameter>bottom_attach</parameter> 2. If, on the other hand, you
-wanted a widget to take up the entire top row of our 2 x 2 table, you'd set
-<parameter>left_attach</parameter> = 0,
-<parameter>right_attach</parameter> = 2,
-<parameter>top_attach</parameter> = 0, and
-<parameter>bottom_attach</parameter> = 1.
-</para>
-
-<para>
-<parameter>xoptions</parameter> and <parameter>yoptions</parameter> are used to
-specify packing options and may be bitwise ORed together to allow multiple
-options. These options are:
-</para>
-
-<para>
-<variablelist>
-
-<varlistentry>
-<term><literal>Gtk::FILL</literal></term>
-<listitem>
-<para>
-If the table box is larger than the widget, and
-<literal>Gtk::FILL</literal> is specified, the widget will expand to use all the room available.
-</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><literal>Gtk::SHRINK</literal></term>
-<listitem>
-<para>
-If the table widget is allocated less
-space than it requested (because the user resized the window),
-then the widgets will normally just disappear off the bottom of the
-window. If <literal>Gtk::SHRINK</literal> is specified, the widgets
-will shrink with the table.
-</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term><literal>Gtk::EXPAND</literal></term>
-<listitem>
-<para>This will cause the table to expand to use up anyremaining space in the window.
-</para>
-</listitem>
-</varlistentry>
-
-</variablelist>
-</para>
-
-<para>
-The padding arguments work just as they do for
-<methodname>pack_start()</methodname>.
-</para>
-</sect3>
-
-<sect3 id="table-other-methods"><title>Other methods</title>
-
-<para>
-<methodname>set_row_spacing()</methodname> and
-<methodname>set_col_spacing()</methodname> set the spacing between
-the rows at the specified row or column. Note that for columns, the space goes
-to the right of the column, and for rows, the space goes below the row.
-</para>
-
-<para>
-You can also set a consistent spacing for all rows and/or columns with
-<methodname>set_row_spacings()</methodname> and
-<methodname>set_col_spacings()</methodname>. Note that with these calls, the last
-row and last column do not get any spacing.
-</para>
-
-<para><ulink url="&url_refdocs_base_gtk;Table.html">Reference</ulink></para>
-
-</sect3>
-
-<sect3 id="table-example"><title>Example</title>
-<para>
-In the following example, we make a window with three buttons in a 2 x 2
-table. The first two buttons will be placed in the upper row. A
-third button is placed in the lower row, spanning both columns.
-</para>
-
-<figure id="figure-table">
-  <title>Table</title>
-  <screenshot>
-    <graphic format="PNG" fileref="&url_figures_base;table.png"/>
-  </screenshot>
-</figure>
-
-<para><ulink url="&url_examples_base;table">Source Code</ulink></para>
-
-</sect3>
-
 </sect2>
 
 <sect2 id="sec-notebook">
@@ -3786,9 +3625,9 @@ arbitrary numbers.
 </para>
 <para>
 The group which treats the values as arbitrary numbers includes the
-<classname>Range</classname> widgets (<classname>Scrollbars</classname> and
-<classname>Scales</classname>, the <classname>Progressbar</classname> widget,
-and the <classname>SpinButton</classname> widget). These widgets  are typically
+<classname>Range</classname> widgets (<classname>Scrollbar</classname> and
+<classname>Scale</classname>), the <classname>ScaleButton</classname> widget,
+and the <classname>SpinButton</classname> widget. These widgets  are typically
 "adjusted" directly by the user with the mouse or keyboard. They will treat the
 <parameter>lower</parameter> and <parameter>upper</parameter> values of an
 adjustment as a range within which the user can manipulate the adjustment's
@@ -3813,7 +3652,7 @@ widget. You can set it up like this:
 <programlisting>// creates its own adjustments
 Gtk::TextView textview;
 // uses the newly-created adjustment for the scrollbar as well
-Gtk::VScrollbar vscrollbar (*(textview.get_vadjustment()));</programlisting>
+Gtk::Scrollbar vscrollbar (textview.get_vadjustment(), Gtk::ORIENTATION_VERTICAL);</programlisting>
 
 </sect1>
 
@@ -3912,7 +3751,7 @@ Gtk::RadioButton
 Gtk::Range
 Gtk::ScrolledWindow
 Gtk::Separator
-Gtk::Table
+Gtk::Table (deprecated from &gtkmm; version 3.4)
 Gtk::Toolbar</programlisting>
 
 <para>
@@ -4840,7 +4679,7 @@ the drop was successful.
 <para><ulink url="&url_examples_base;drag_and_drop">Source Code</ulink></para>
 
 <para>
-There is a more complex example in examples/dnd.
+There is a more complex example in examples/others/dnd.
 </para>
 
 </sect1>
@@ -5319,7 +5158,7 @@ Gtk::Widget* CustomPrintOperation::on_create_custom_widget()
 {
   set_custom_tab_label(&quot;My custom tab&quot;);
 
-  Gtk::HBox* hbox = new Gtk::HBox(false, 8);
+  Gtk::Box* hbox = new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 8);
   hbox-&gt;set_border_width(6);
 
   Gtk::Label* label = Gtk::manage(new Gtk::Label("Enter some text: "));
@@ -7165,7 +7004,7 @@ instance, you cannot use the copyright sign (&copy;).
 
     <para>This example implements a container with two child widgets, one above
         the other. Of course, in this case it would be far simpler just to use
-        a <classname>Gtk::VBox</classname>.</para>
+        a vertical <classname>Gtk::Box</classname>.</para>
 
 <figure id="figure-custom-container">
   <title>Custom Container</title>

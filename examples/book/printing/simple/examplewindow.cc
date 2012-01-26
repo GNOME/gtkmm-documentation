@@ -25,7 +25,6 @@ const Glib::ustring app_title = "gtkmm Printing Example";
 
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::ORIENTATION_VERTICAL),
-  m_Table(3, 2),
   m_NameLabel("Name"),
   m_SurnameLabel("Surname"),
   m_CommentsLabel("Comments")
@@ -42,23 +41,27 @@ ExampleWindow::ExampleWindow()
 
   build_main_menu();
 
-  m_VBox.pack_start(m_Table);
+  m_VBox.pack_start(m_Grid);
 
-  //Arrange the widgets inside the table:
-  m_Table.attach(m_NameLabel, 0, 1, 0, 1);
-  m_Table.attach(m_NameEntry, 1, 2, 0, 1);
+  //Arrange the widgets inside the grid:
+  m_Grid.set_row_spacing(5);
+  m_Grid.set_column_spacing(5);
+  m_Grid.attach(m_NameLabel, 0, 0, 1, 1);
+  m_Grid.attach(m_NameEntry, 1, 0, 1, 1);
 
-  m_Table.attach(m_SurnameLabel, 0, 1, 1, 2, Gtk::SHRINK);
-  m_Table.attach(m_SurnameEntry, 1, 2, 1, 2);
+  m_Grid.attach(m_SurnameLabel, 0, 1, 1, 1);
+  m_Grid.attach(m_SurnameEntry, 1, 1, 1, 1);
 
-  //Add the TreeView, inside a ScrolledWindow:
+  //Add the TextView, inside a ScrolledWindow:
   m_ScrolledWindow.add(m_TextView);
 
   //Only show the scrollbars when they are necessary:
   m_ScrolledWindow.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
 
-  m_Table.attach(m_CommentsLabel, 0, 1, 2, 3, Gtk::SHRINK);
-  m_Table.attach(m_ScrolledWindow, 1, 2, 2, 3);
+  m_Grid.attach(m_CommentsLabel, 0, 2, 1, 1);
+  m_Grid.attach(m_ScrolledWindow, 1, 2, 1, 1);
+  m_ScrolledWindow.set_hexpand(true);
+  m_ScrolledWindow.set_vexpand(true);
 
   m_refTextBuffer = Gtk::TextBuffer::create();
   m_TextView.set_buffer(m_refTextBuffer);

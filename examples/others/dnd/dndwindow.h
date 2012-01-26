@@ -53,7 +53,7 @@ protected:
 
 
   //Member widgets:
-  Gtk::Table m_Table;
+  Gtk::Grid m_Grid;
   Gtk::Label m_Label_Drop, m_Label_Popup;
   Gtk::Image m_Image;
   Gtk::Button m_Button;

@@ -20,9 +20,8 @@
 
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::ORIENTATION_VERTICAL),
-  m_Label("Select cells in the table, click Copy, then open a second "
+  m_Label("Select cells in the grid, click Copy, then open a second "
         "instance of this example to try pasting the copied data."),
-  m_Table(2, 2, true),
   m_ButtonA1("A1"), m_ButtonA2("A2"), m_ButtonB1("B1"), m_ButtonB2("B2"),
   m_Button_Copy(Gtk::Stock::COPY), m_Button_Paste(Gtk::Stock::PASTE)
 {
@@ -33,12 +32,14 @@ ExampleWindow::ExampleWindow()
 
   m_VBox.pack_start(m_Label, Gtk::PACK_SHRINK);
 
-  //Fill Table:
-  m_VBox.pack_start(m_Table);
-  m_Table.attach(m_ButtonA1, 0, 1, 0, 1);
-  m_Table.attach(m_ButtonA2, 1, 2, 0, 1);
-  m_Table.attach(m_ButtonB1, 0, 1, 1, 2);
-  m_Table.attach(m_ButtonB2, 1, 2, 1, 2);
+  //Fill Grid:
+  m_VBox.pack_start(m_Grid);
+  m_Grid.set_row_homogeneous(true);
+  m_Grid.set_column_homogeneous(true);
+  m_Grid.attach(m_ButtonA1, 0, 0, 1, 1);
+  m_Grid.attach(m_ButtonA2, 1, 0, 1, 1);
+  m_Grid.attach(m_ButtonB1, 0, 1, 1, 1);
+  m_Grid.attach(m_ButtonB2, 1, 1, 1, 1);
 
   //Add ButtonBox to bottom:
   m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);

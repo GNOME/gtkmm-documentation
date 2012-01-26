@@ -22,7 +22,6 @@
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::ORIENTATION_VERTICAL, 5),
   m_Alignment(0.5, 0.5, 0, 0),
-  m_Table(2, 2, true),
   m_CheckButton_Text("Show text"),
   m_CheckButton_Activity("Activity mode"),
   m_CheckButton_Inverted("Right to Left"),
@@ -45,23 +44,24 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::on_timeout), 50 );
 
   m_VBox.pack_start(m_Separator, Gtk::PACK_SHRINK);
-  m_VBox.pack_start(m_Table);
+  m_VBox.pack_start(m_Grid);
+  m_Grid.set_row_homogeneous(true);
 
   //Add a check button to select displaying of the trough text:
-  m_Table.attach(m_CheckButton_Text, 0, 1, 0, 1, Gtk::EXPAND | Gtk::FILL,
-          Gtk::EXPAND | Gtk::FILL, 5, 5);
+  m_Grid.attach(m_CheckButton_Text, 0, 0, 1, 1);
+  m_CheckButton_Text.property_margin() = 5;
   m_CheckButton_Text.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_text) );
 
   //Add a check button to toggle activity mode:
-  m_Table.attach(m_CheckButton_Activity, 0, 1, 1, 2, Gtk::EXPAND | Gtk::FILL,
-          Gtk::EXPAND | Gtk::FILL, 5, 5);
+  m_Grid.attach(m_CheckButton_Activity, 0, 1, 1, 1);
+  m_CheckButton_Activity.property_margin() = 5;
   m_CheckButton_Activity.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_activity) );
 
   //Add a check button to select growth from left to right or from right to left:
-  m_Table.attach(m_CheckButton_Inverted, 0, 1, 2, 3, Gtk::EXPAND | Gtk::FILL,
-          Gtk::EXPAND | Gtk::FILL, 5, 5);
+  m_Grid.attach(m_CheckButton_Inverted, 0, 2, 1, 1);
+  m_CheckButton_Inverted.property_margin() = 5;
   m_CheckButton_Inverted.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_inverted) );
 

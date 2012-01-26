@@ -17,10 +17,6 @@
 #ifndef GTKMM_EXAMPLEWINDOW_H
 #define GTKMM_EXAMPLEWINDOW_H
 
-#include <memory>
-#include <vector>
-
-#include <pangomm.h>
 #include <gtkmm.h>
 
 class PrintFormOperation;
@@ -57,7 +53,7 @@ protected:
 
   //Child widgets:
   Gtk::Box m_VBox;
-  Gtk::Table m_Table;
+  Gtk::Grid m_Grid;
 
   Gtk::Label m_NameLabel;
   Gtk::Entry m_NameEntry;

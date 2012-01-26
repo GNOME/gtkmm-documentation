@@ -22,8 +22,7 @@
 #include <iostream>
 
 DnDWindow::DnDWindow()
-: m_Table(2, 2),
-  m_Label_Drop("Drop here\n"), m_Label_Popup("Popup\n"),
+: m_Label_Drop("Drop here\n"), m_Label_Popup("Popup\n"),
   m_Button("Drag Here\n"),
   m_have_drag(false),
   m_PopupWindow(Gtk::WINDOW_POPUP)
@@ -31,7 +30,7 @@ DnDWindow::DnDWindow()
   m_popped_up = false;
   m_in_popup = false;
 
-  add(m_Table);
+  add(m_Grid);
 
   m_drag_icon = Gdk::Pixbuf::create_from_xpm_data(drag_icon_xpm);
   m_trashcan_open = Gdk::Pixbuf::create_from_xpm_data(trashcan_open_xpm);
@@ -49,15 +48,15 @@ DnDWindow::DnDWindow()
 
   m_Label_Drop.signal_drag_data_received().connect( sigc::mem_fun(*this, &DnDWindow::on_label_drop_drag_data_received) );
 
-  m_Table.attach(m_Label_Drop, 0, 1, 0, 1,
-                 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-                 0, 0);
+  m_Grid.attach(m_Label_Drop, 0, 0, 1, 1);
+  m_Label_Drop.set_hexpand(true);
+  m_Label_Drop.set_vexpand(true);
 
   m_Label_Popup.drag_dest_set(m_listTargetsNoRoot, Gtk::DEST_DEFAULT_ALL, Gdk::DragAction(GDK_ACTION_COPY | GDK_ACTION_MOVE));
 
-  m_Table.attach(m_Label_Popup, 1, 2, 1, 2,
-                 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-                 0, 0);
+  m_Grid.attach(m_Label_Popup, 1, 1, 1, 1);
+  m_Label_Popup.set_hexpand(true);
+  m_Label_Popup.set_vexpand(true);
 
   m_Label_Popup.signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_label_popup_drag_motion) );
   m_Label_Popup.signal_drag_leave().connect( sigc::mem_fun(*this, &DnDWindow::on_label_popup_drag_leave) );
@@ -65,9 +64,9 @@ DnDWindow::DnDWindow()
   m_Image.set(m_trashcan_closed);
   m_Image.drag_dest_set();
 
-  m_Table.attach(m_Image, 1, 2, 0, 1,
-                 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-                 0, 0);
+  m_Grid.attach(m_Image, 1, 0, 1, 1);
+  m_Image.set_hexpand(true);
+  m_Image.set_vexpand(true);
 
   m_Image.signal_drag_leave().connect( sigc::mem_fun(*this, &DnDWindow::on_image_drag_leave) );
   m_Image.signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_image_drag_motion) );
@@ -81,9 +80,9 @@ DnDWindow::DnDWindow()
 
   m_Button.drag_source_set_icon(m_drag_icon);
 
-  m_Table.attach(m_Button, 0, 1, 1, 2,
-                 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-                 0, 0);
+  m_Grid.attach(m_Button, 0, 1, 1, 1);
+  m_Button.set_hexpand(true);
+  m_Button.set_vexpand(true);
 
   m_Button.signal_drag_data_get().connect( sigc::mem_fun(*this, &DnDWindow::on_button_drag_data_get));
   m_Button.signal_drag_data_delete().connect( sigc::mem_fun(*this, &DnDWindow::on_button_drag_data_delete));
@@ -238,8 +237,8 @@ void DnDWindow::create_popup()
 {
   m_PopupWindow.set_position(Gtk::WIN_POS_MOUSE);
 
-  //Create Table and fill it:
-  Gtk::Table* pTable = Gtk::manage(new Gtk::Table(3, 3, false));
+  //Create Grid and fill it:
+  Gtk::Grid* pGrid = Gtk::manage(new Gtk::Grid());
 
   for(int i = 0; i < 3; i++)
   {
@@ -248,17 +247,15 @@ void DnDWindow::create_popup()
       char buffer[128];
       g_snprintf(buffer, sizeof(buffer), "%d,%d", i, j);
       Gtk::Button* pButton = Gtk::manage(new Gtk::Button(buffer));
-      pTable->attach(*pButton, i, i+1, j, j+1,
-                     Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-                     0, 0);
+      pGrid->attach(*pButton, i, j, 1, 1);
 
       pButton->drag_dest_set(m_listTargetsNoRoot, Gtk::DEST_DEFAULT_ALL, Gdk::DragAction(GDK_ACTION_COPY | GDK_ACTION_MOVE));
       pButton->signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_button_drag_motion) );                      pButton->signal_drag_leave().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_button_drag_leave) );
     }
   }
 
-  pTable->show_all();
-  m_PopupWindow.add(*pTable);
+  pGrid->show_all();
+  m_PopupWindow.add(*pGrid);
 }
 
 bool DnDWindow::on_popup_button_drag_motion(const Glib::RefPtr<Gdk::DragContext>&, int, int, guint)

@@ -1,3 +1,27 @@
+2012-01-26  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Remove Table and other deprecated classes.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Remove the description of Table.
+	Replace Table by Grid. Replace the deprecated HX and VX classes (HBox etc.)
+	by the corresponding X classes (Box etc.).
+	* docs/tutorial/C/figures/table.png: Deleted screenshot
+	* docs/tutorial/Makefile.am: Don't mention the deleted file.
+	* examples/book/assistant/examplewindow.[h|cc]:
+	* examples/book/clipboard/ideal/examplewindow.[h|cc]:
+	* examples/book/clipboard/simple/examplewindow.[h|cc]:
+	* examples/book/printing/advanced/examplewindow.[h|cc]:
+	* examples/book/printing/simple/examplewindow.[h|cc]:
+	* examples/book/progressbar/examplewindow.[h|cc]:
+	* examples/book/scrolledwindow/examplewindow.[h|cc]:
+	* examples/others/arrow/direction.cc:
+	* examples/others/dnd/dndwindow.[h|cc]:
+	* examples/others/tictactoe/tictactoe.cc: Replace Table by Grid.
+	* examples/book/drawingarea/joins/myarea.cc: Remove unused variable.
+	* examples/others/cellrenderercustom/cellrenderertoggle.cc: Use all variables.
+	* examples/book/table: Delete directory and all files in it.
+	* examples/Makefile.am: Don't mention the deleted files.
+
 2011-11-22  Murray Cumming  <murrayc@murrayc.com>
 
 	Add back use of Gtk::Application, though it is not ready yet.

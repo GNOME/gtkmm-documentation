@@ -84,7 +84,6 @@ check_PROGRAMS =					\
 	book/socket/socket				\
 	book/spinbutton/example				\
 	book/statusicon/example				\
-	book/table/example				\
 	book/textview/example				\
 	book/timeout/timeout				\
 	book/toolbar/example				\
@@ -525,11 +524,6 @@ book_spinbutton_example_SOURCES =		\
 
 book_statusicon_example_SOURCES = \
 	book/statusicon/main.cc
-
-book_table_example_SOURCES =		\
-	book/table/examplewindow.cc	\
-	book/table/examplewindow.h	\
-	book/table/main.cc
 
 book_textview_example_SOURCES =		\
 	book/textview/examplewindow.cc	\

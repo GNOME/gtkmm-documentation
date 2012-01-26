@@ -81,7 +81,6 @@ DOC_FIGURES =					\
 	figures/socket-fail.png			\
 	figures/socket.png			\
 	figures/spinbutton.png			\
-	figures/table.png			\
 	figures/textview.png			\
 	figures/toolbar.png			\
 	figures/toolpalette.png			\

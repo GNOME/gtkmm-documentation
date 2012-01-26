@@ -20,8 +20,7 @@
 #include <cstdio>
 
 ExampleWindow::ExampleWindow()
-: m_Table(10, 10),
-  m_Button_Close("Close")
+: m_Button_Close("Close")
 {
   set_title("Gtk::ScrolledWindow example");
   set_border_width(0);
@@ -39,13 +38,13 @@ ExampleWindow::ExampleWindow()
   get_content_area()->pack_start(m_ScrolledWindow);
 
   /* set the spacing to 10 on x and 10 on y */
-  m_Table.set_row_spacings(10);
-  m_Table.set_col_spacings(10);
+  m_Grid.set_row_spacing(10);
+  m_Grid.set_column_spacing(10);
 
-  /* pack the table into the scrolled window */
-  m_ScrolledWindow.add(m_Table);
+  /* pack the grid into the scrolled window */
+  m_ScrolledWindow.add(m_Grid);
 
-  /* this simply creates a grid of toggle buttons on the table
+  /* this simply creates a grid of toggle buttons
    * to demonstrate the scrolled window. */
   for(int i = 0; i < 10; i++)
   {
@@ -54,7 +53,7 @@ ExampleWindow::ExampleWindow()
         char buffer[32];
         sprintf(buffer, "button (%d,%d)\n", i, j);
         Gtk::Button* pButton = Gtk::manage(new Gtk::ToggleButton(buffer));
-        m_Table.attach(*pButton, i, i + 1, j, j + 1);
+        m_Grid.attach(*pButton, i, j, 1, 1);
      }
   }
 

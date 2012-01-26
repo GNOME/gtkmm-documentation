@@ -37,13 +37,9 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     const int width = allocation.get_width();
     const int height = allocation.get_height();
 
-    // coordinates for the center of the window
-    int xc, yc;
-    xc = width / 2;
-    yc = height / 2;
-
     cr->set_line_width(10.0);
 
+    // Scale to unit square
     cr->scale(width, height);
     cr->save();
     cr->set_source_rgb(1, 1, 1);
@@ -53,7 +49,7 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     cr->move_to(0.3, 0.3);
     cr->rel_line_to(0.2, -0.2);
     cr->rel_line_to(0.2, 0.2);
-    cr->set_line_join(Cairo::LINE_JOIN_MITER); /* def ault */
+    cr->set_line_join(Cairo::LINE_JOIN_MITER); /* default */
     cr->stroke();
     cr->move_to(0.3, 0.6);
     cr->rel_line_to(0.2, -0.2);

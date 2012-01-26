@@ -32,7 +32,7 @@ private:
   void on_assistant_apply();
 
   // Child widgets:
-  Gtk::Table m_table;
+  Gtk::Grid m_grid;
   Gtk::Button m_button;
   Gtk::Label m_label1, m_label2;
   Gtk::CheckButton m_check;

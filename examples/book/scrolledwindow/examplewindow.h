@@ -33,7 +33,7 @@ protected:
 
   //Child widgets:
   Gtk::ScrolledWindow m_ScrolledWindow;
-  Gtk::Table m_Table;
+  Gtk::Grid m_Grid;
   Gtk::Button m_Button_Close;
 };
 

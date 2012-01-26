@@ -19,15 +19,17 @@
  * Boston, MA 02111-1307, USA.
  */
 #include <gtkmm.h>
-#include <gtkmm/table.h>
+#include <gtkmm/grid.h>
 #include <gtkmm/togglebutton.h>
 #include "tictactoe.h"
 
 TicTacToe::TicTacToe()
 : Gtk::Box(Gtk::ORIENTATION_VERTICAL)
 {
-  Gtk::Table* table = Gtk::manage( new Gtk::Table(3, 3, true) );
-  add( *table);
+  Gtk::Grid* grid = Gtk::manage( new Gtk::Grid() );
+  grid->set_row_homogeneous(true);
+  grid->set_column_homogeneous(true);
+  add( *grid);
 
   for(int i=0;i<3; i++)
   {
@@ -35,7 +37,7 @@ TicTacToe::TicTacToe()
     {
       Gtk::ToggleButton* button = 0;
       buttons[i][j] = button = Gtk::manage( new Gtk::ToggleButton());
-      table->attach(*button, i, i+1, j, j+1);
+      grid->attach(*button, i, j, 1, 1);
       button->signal_toggled().connect( sigc::bind(
                                      sigc::mem_fun(*this, &TicTacToe::toggle), 
                                      button));
@@ -43,7 +45,7 @@ TicTacToe::TicTacToe()
     }
   }
 
-  table->show_all();
+  grid->show_all();
 }
 
 TicTacToe::~TicTacToe()

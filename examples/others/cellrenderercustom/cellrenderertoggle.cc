@@ -198,6 +198,8 @@ void MyCellRendererToggle::render_vfunc(const Cairo::RefPtr<Cairo::Context>& cr,
   if((flags & Gtk::CELL_RENDERER_SELECTED) != 0)
     state = (widget.has_focus()) ? Gtk::STATE_FLAG_SELECTED : Gtk::STATE_FLAG_ACTIVE;
 
+  widget.get_style_context()->set_state(state);
+
   if(property_radio_)
   {
     widget.get_style_context()->render_option(
