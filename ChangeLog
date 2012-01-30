@@ -1,3 +1,20 @@
+2012-01-30  Pedro Ferreira <darkiiiiii@gmail.com>
+
+	New example programs in the DrawingArea chapter.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add a section on drawing thin lines.
+	Add an example program that draws text.
+	* docs/tutorial/C/figures/drawingarea_thin_lines.png:
+	* docs/tutorial/C/figures/drawingarea_pango_text.png: New screenshots.
+	* docs/tutorial/Makefile.am: Add the new files.
+	* examples/book/drawingarea/thin_lines/main.cc:
+	* examples/book/drawingarea/thin_lines/examplewindow.[h|cc]:
+	* examples/book/drawingarea/thin_lines/myarea.[h|cc]:
+	* examples/book/drawingarea/pango_text/main.cc:
+	* examples/book/drawingarea/pango_text/myarea.[h|cc]: New example programs.
+	* examples/Makefile.am: Add the new files.
+	Bug #666885.
+
 2012-01-26  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Remove Table and other deprecated classes.

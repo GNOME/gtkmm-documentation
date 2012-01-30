@@ -50,7 +50,9 @@ DOC_FIGURES =					\
 	figures/drawingarea_curve.png		\
 	figures/drawingarea_image.png		\
 	figures/drawingarea_lines.png		\
+	figures/drawingarea_pango_text.png		\
 	figures/drawingarea_text.png		\
+	figures/drawingarea_thin_lines.png		\
 	figures/entry.png			\
 	figures/entry_completion.png		\
 	figures/eventbox.png			\

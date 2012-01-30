@@ -4213,7 +4213,35 @@ myContext->set_line_width(2.0);</programlisting>
             the Cairo API documentation.
         </para>
     </sect2>
-</sect1>
+    <sect2 id="sec-cairo-thin-lines">
+      <title>Drawing thin lines</title>
+      <para>
+        If you try to draw one pixel wide lines, you may notice that the line
+        sometimes comes up blurred and wider than it ought to be.
+        This happens because Cairo will try to draw from the selected position,
+        to both sides (half to each), so if you're positioned right on the
+        intersection of the pixels, and want a one pixel wide line, Cairo will try
+        to use half of each adjacent pixel, which isn't possible (a pixel is the
+        smallest unit possible). This happens when the width of the line is an
+        odd number of pixels (not just one pixel).
+      </para>
+      <para>
+        The trick is to position in the middle of the pixel where you want the
+        line to be drawn, and thus guaranteeing you get the desired results.
+        See <ulink url="http://cairographics.org/FAQ/#sharp_lines">Cairo FAQ</ulink>.
+      </para>
+
+      <figure id="figure-drawingarea-thin-lines">
+        <title>Drawing Area - Thin Lines</title>
+        <screenshot>
+          <graphic format="PNG" fileref="&url_figures_base;drawingarea_thin_lines.png"/>
+        </screenshot>
+      </figure>
+
+      <para><ulink url="&url_examples_base;drawingarea/thin_lines">Source Code</ulink></para>
+    </sect2>
+  </sect1>
+
     <sect1 id="sec-cairo-curved-lines">
         <title>Drawing Curved Lines</title>
         <para>
@@ -4371,10 +4399,22 @@ context->restore();</programlisting>
               be rendered using the
               <methodname>Pango::Layout::show_in_cairo_context()</methodname> method.
           </para>
-          <para>
-              The Printing chapter contains an
-              <link linkend="sec-printing-example">example</link> of drawing text.
-          </para>
+      </sect2>
+      <sect2 id="pango-text-example">
+        <title>Example</title>
+        <para>
+           Here is an example of a program that draws some text, some of it
+           upside-down. The Printing chapter contains another
+           <link linkend="sec-printing-example">example</link> of drawing text.
+        </para>
+        <figure id="figure-drawingarea-pango-text">
+            <title>Drawing Area - Text</title>
+            <screenshot>
+                <graphic format="PNG" fileref="&url_figures_base;drawingarea_pango_text.png"/>
+            </screenshot>
+        </figure>
+
+        <para><ulink url="&url_examples_base;drawingarea/pango_text">Source Code</ulink></para>
       </sect2>
 
       <!--

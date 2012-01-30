@@ -42,7 +42,9 @@ check_PROGRAMS =					\
 	book/drawingarea/curve/drawingareacurve		\
 	book/drawingarea/image/drawingareaimage		\
 	book/drawingarea/joins/cairojoins		\
+	book/drawingarea/pango_text/example		\
 	book/drawingarea/simple/drawingarea		\
+	book/drawingarea/thin_lines/example		\
 	book/entry/completion/example			\
 	book/entry/icon/example				\
 	book/entry/progress/example			\
@@ -319,10 +321,22 @@ book_drawingarea_joins_cairojoins_SOURCES =	\
 	book/drawingarea/joins/myarea.cc	\
 	book/drawingarea/joins/myarea.h
 
+book_drawingarea_pango_text_example_SOURCES =	\
+	book/drawingarea/pango_text/main.cc		\
+	book/drawingarea/pango_text/myarea.cc	\
+	book/drawingarea/pango_text/myarea.h
+
 book_drawingarea_simple_drawingarea_SOURCES =	\
 	book/drawingarea/simple/main.cc		\
 	book/drawingarea/simple/myarea.cc	\
 	book/drawingarea/simple/myarea.h
+
+book_drawingarea_thin_lines_example_SOURCES =	\
+	book/drawingarea/thin_lines/main.cc		\
+	book/drawingarea/thin_lines/examplewindow.cc	\
+	book/drawingarea/thin_lines/examplewindow.h  \
+	book/drawingarea/thin_lines/myarea.cc	\
+	book/drawingarea/thin_lines/myarea.h
 
 book_entry_completion_example_SOURCES =		\
 	book/entry/completion/examplewindow.cc	\
