@@ -15,6 +15,7 @@
  */
 
 #include "examplewindow.h"
+#include <iostream>
 
 ExampleWindow::ExampleWindow()
 {
@@ -41,6 +42,11 @@ ExampleWindow::ExampleWindow()
   m_container.signal_key_release_event().connect(
     sigc::mem_fun(*this, &ExampleWindow::gridKeyRelease));
 
+  // Called before the default event signal handler.
+  signal_key_release_event().connect(
+    sigc::mem_fun(*this, &ExampleWindow::windowKeyReleaseBefore), false);
+
+  // Called after the default event signal handler.
   signal_key_release_event().connect(
     sigc::mem_fun(*this, &ExampleWindow::windowKeyRelease));
 
@@ -68,17 +74,33 @@ bool ExampleWindow::gridKeyRelease(GdkEventKey* /* event */ )
   return false;
 }
 
+bool ExampleWindow::windowKeyReleaseBefore(GdkEventKey* /* event */ )
+{
+  std::cout << "Window before" << std::endl;
+  return false;
+}
+
+bool ExampleWindow::on_key_release_event(GdkEventKey* event)
+{
+  std::cout << "Window overridden" << std::endl;
+
+  // call base class function (to get the normal behaviour)
+  return Gtk::Window::on_key_release_event(event);
+}
+
 // This will set the entry's text in the label, every time a key is pressed.
 bool ExampleWindow::windowKeyRelease(GdkEventKey* /* event */ )
 {
-  std::cout << "Window" << std::endl;
+  std::cout << "Window after";
 
   //checking if the entry is on focus, otherwise the label would get changed by pressing keys
-  //on the window (when the entry is not on focus), even if canPropagate wasn't active
+  //on the window (when the entry is not on focus), even if m_checkbutton_can_propagate wasn't active
   if(m_entry.has_focus())
   {
     m_label.set_text(m_entry.get_text());
+    std::cout << ", " << m_entry.get_text();
   }
+  std::cout << std::endl;
 
   return true;
 }

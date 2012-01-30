@@ -19,7 +19,6 @@
 
 #include <gtkmm.h>
 
-
 class ExampleWindow : public Gtk::Window
 {
 public:
@@ -28,12 +27,12 @@ public:
   virtual ~ExampleWindow();
 
 private:
-  bool on_key_press_event(GdkEventKey *event);
+  //Override default signal handler:
+  virtual bool on_key_press_event(GdkEventKey* event);
 
   Gtk::Grid m_container;
   Gtk::RadioButton m_first;
   Gtk::RadioButton m_second;
 };
-
 
 #endif //GTKMM_EXAMPLEWINDOW_H

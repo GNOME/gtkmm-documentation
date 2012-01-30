@@ -1,5 +1,17 @@
 2012-01-30  Pedro Ferreira <darkiiiiii@gmail.com>
 
+	Keyboard Events chapter: Clarify keyboard event propagation.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Mention that keyboard events are
+	first tested for keyboard shortcut keys.
+	* examples/book/keyboard_events/simple/keyboard_events.[h|cc]:
+	on_key_press_event() is an overridden default handler. Don't call connect().
+	* examples/book/keyboard_events/propagation/event_propagation.[h|cc]:
+	Add on_key_release_event() and windowKeyReleaseBefore().
+	Bug #661857, comment 22.
+
+2012-01-30  Pedro Ferreira <darkiiiiii@gmail.com>
+
 	New example programs in the DrawingArea chapter.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add a section on drawing thin lines.

@@ -5737,6 +5737,9 @@ m_entry.add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
         <keycap>Alt</keycap>+<keycap>1</keycap> selects the first radio button,
         <keycap>Alt</keycap>+<keycap>2</keycap> selects the second one, and the
         <keycap>Esc</keycap> key hides (closes) the window.
+        The default event signal handler is overridden, as described in the
+        <link linkend="sec-overriding-default-signal-handlers">Overriding default signal handlers</link>
+        section in the appendix.
       </para>
 
       <figure id="figure-keyboardevents-simple">
@@ -5759,6 +5762,14 @@ m_entry.add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
       that handler will be called. 
     </para>
     <para>
+      Contrary to other events, keyboard events are first sent to the toplevel window
+      (<classname>Gtk::Window</classname>), where it will be checked
+      for any keyboard shortcuts that may be set (accelerator keys and mnemonics,
+      used for selecting menu items from the keyboard). After this (and assuming
+      the event wasn't handled), it is sent to the widget which has focus,
+      and the propagation begins from there.
+    </para>
+    <para>
       The event will propagate until it reaches the top-level widget, or until
       you stop the propagation by returning <literal>true</literal> from an
       event handler.
@@ -5771,13 +5782,28 @@ m_entry.add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
     <sect2 id="keyboardevents-propagation-example">
     <title>Example</title>
       <para>
-        In this example there are three event handlers, one in the
+        In this example there are three event handlers that are called after
+        <classname>Gtk::Window</classname>'s default event handler, one in the
         <classname>Gtk::Entry</classname>, one in the <classname>Gtk::Grid</classname>
         and one in the <classname>Gtk::Window</classname>.
       </para>
       <para>
-        When you write in the entry, a key release event will be emitted first
-        in the <classname>Entry</classname> and, depending on whether we let
+        In the <classname>Gtk::Window</classname>, we have also the default handler
+        overridden (<methodname>on_key_release_event()</methodname>), and
+        another handler being called before the default handler
+        (<methodname>windowKeyReleaseBefore()</methodname>).
+      </para>
+      <para>
+        The purpose of this example is to show the steps the event takes when it is emitted.
+      </para>
+      <para>
+        When you write in the entry, a key release event will be emitted,
+        which will go first to the toplevel window (<classname>Gtk::Window</classname>),
+        since we have one event handler set to be called before, that's what is
+        called first (<methodname>windowKeyReleaseBefore()</methodname>).
+        Then the default handler is called (which we have overridden), and after
+        that the event is sent to the widget that has focus,
+        the <classname>Entry</classname> in our example and, depending on whether we let
         it propagate, it can reach the <classname>Grid</classname>'s and the
         <classname>Window</classname>'s event handlers. If it propagates,
         the text you're writing will appear in the <classname>Label</classname>

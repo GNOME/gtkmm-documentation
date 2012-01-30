@@ -18,7 +18,6 @@
 #define GTKMM_EVENT_PROPAGATION_H
 
 #include <gtkmm.h>
-#include <iostream>
 
 class ExampleWindow : public Gtk::Window
 {
@@ -27,12 +26,14 @@ public:
   ExampleWindow();
   virtual ~ExampleWindow();
 
-
 private:
+  //Override default signal handler:
+  virtual bool on_key_release_event(GdkEventKey* event);
 
-  bool entryKeyRelease(GdkEventKey *event);
-  bool gridKeyRelease(GdkEventKey *event);
-  bool windowKeyRelease(GdkEventKey *event);
+  bool entryKeyRelease(GdkEventKey* event);
+  bool gridKeyRelease(GdkEventKey* event);
+  bool windowKeyReleaseBefore(GdkEventKey* event);
+  bool windowKeyRelease(GdkEventKey* event);
 
   Gtk::Grid m_container;
 
@@ -40,6 +41,5 @@ private:
   Gtk::Entry m_entry;
   Gtk::CheckButton m_checkbutton_can_propagate;
 };
-
 
 #endif //GTKMM_EVENT_PROPAGATION_H
