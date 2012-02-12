@@ -8,13 +8,14 @@
 # José Zambrano <jozaol@gmail.com>, 2011.
 # Rafael Angel <rafo424@gmail.com>, 2011.
 # Rafael Chunga <rafo424@gmail.com>, 2012.
+# Nicolás Satragno <nsatragno@gmail.com>, 2012.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2011, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-01-30 17:53+0000\n"
-"PO-Revision-Date: 2012-02-10 13:26+0100\n"
+"POT-Creation-Date: 2012-02-10 12:28+0000\n"
+"PO-Revision-Date: 2012-02-12 20:14+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -104,8 +105,8 @@ msgid ""
 "Section \"Build Structure\" of chapter on \"Wrapping C Libraries with gmmproc"
 "\"."
 msgstr ""
-"Sección «Construir la estructura» del capítulo acerca de «Envolver bibliotecas "
-"de C con gmmproc»."
+"Sección «Construir la estructura» del capítulo acerca de «Envolver "
+"bibliotecas de C con gmmproc»."
 
 #: C/gtkmm-tutorial-in.xml:71(firstname)
 msgid "David"
@@ -178,8 +179,8 @@ msgstr ""
 "para el Software Libre; sin Secciones Invariantes, sin Textos de Portada y "
 "sin Textos de Contraportada. Puede conseguir una copia de la Licencia de "
 "Documentación Libre de GNU, visitando la página oficial o escribiendo a: "
-"Free Software Fundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-"
-"1307, EE. UU."
+"Free Software Fundation, Inc., 59 Temple Place - Suite 330, Boston, MA "
+"02111-1307, EE. UU."
 
 #: C/gtkmm-tutorial-in.xml:113(title)
 msgid "Introduction"
@@ -534,7 +535,7 @@ msgid ""
 "installed with the following sequence of commands:"
 msgstr ""
 "Después de haber instalado todas las dependencias, descargue el código "
-"fuente de <application>gtkmm</application>, descomprímalo y caḿbiese a la "
+"fuente de <application>gtkmm</application>, descomprímalo y cámbiese a la "
 "carpeta creada. <application>gtkmm</application> se puede construir e "
 "instalar con la siguiente secuencia de comandos:"
 
@@ -832,6 +833,14 @@ msgid ""
 "You'll just need to find the appropriate directory and type <literal>make</"
 "literal>."
 msgstr ""
+"A pesar de que hemos mostrado el comando de compilación para el ejemplo "
+"simple, en realidad debería usar las herramientas automake y autoconf, como "
+"se describe en «Autoconf, Automake, Libtool», por  G. V. Vaughan y otros. "
+"Los ejemplos utilizados en este libro se incluyen en el paquete "
+"<application>gtkmm</application>, con archivos de construcción apropiados, "
+"por lo que no mostraremos los comandos de construcción en el futuro. Sólo "
+"tendrá que encontrar la carpeta adecuada e introducir <literal>make</"
+"literal>."
 
 #: C/gtkmm-tutorial-in.xml:362(para)
 msgid ""
@@ -845,6 +854,16 @@ msgid ""
 "link with and the directories to find them in. Try running it from your "
 "shell-prompt to see the results on your system."
 msgstr ""
+"Para simplificar la compilación, se usa <literal>pkg-config</literal>, que "
+"está presente en todas las instalaciones correctas de <application>gtkmm</"
+"application>. Este programa «sabe» qué opciones de compilación son "
+"necesarias para compilar los programas que usan <application>gtkmm</"
+"application>. La opción <literal>--cflags</literal> hace que <literal>pkg-"
+"config</literal> devuelva la lista de carpetas en las que el compilador "
+"buscará los archivos de cabecera; la opción <literal>--libs</literal> "
+"solicita la lista de bibliotecas a las que el compilador enlazará y las "
+"carpetas en las que encontrarlas. Intente ejecutarlo desde su intérprete de "
+"comandos para ver los resultados en su sistema."
 
 #: C/gtkmm-tutorial-in.xml:375(programlisting)
 #, no-wrap
@@ -943,6 +962,15 @@ msgid ""
 "<classname>Gtk::Frame</classname>, which has a visible frame and title: "
 "<placeholder-2/>"
 msgstr ""
+"Los widgets se ordenan dentro de widgets contenedores como marcos y "
+"cuardenos de notas, en una jerarquía de widgets dentro de widgets. Algunos "
+"de estos widgets contenedores, como <classname>Gtk::Grid</classname> no son "
+"visibles: sólo existen para ordenar otros widgets. Aquí hay un código de "
+"ejemplo que añade dos widgets <classname>Gtk::Button</classname> a un widget "
+"contenedor <classname>Gtk::Box</classname>: <placeholder-1/> y aquí se "
+"muestra cómo agregar el <classname>Gtk::Box</classname>, conteniendo esos "
+"botones, a un <classname>Gtk::Frame</classname>, que tiene un cuadro y "
+"título visibles: <placeholder-2/>"
 
 #: C/gtkmm-tutorial-in.xml:398(para)
 msgid ""
@@ -981,6 +1009,16 @@ msgid ""
 "application> memory management techniques in the <link linkend=\"chapter-"
 "memory\">Memory Management chapter</link>."
 msgstr ""
+"A pesar de que las instancias de widgets <application>gtkmm</application> "
+"tienen ámbito y duración de la misma manera que otras clases de C++, "
+"<application>gtkmm</application> tiene una característica opcional para "
+"ahorrar tiempo que verá en algunos de los ejemplos. <function>Gtk::manage()</"
+"function> le permite decir que un widget hijo es propiedad del contenedor en "
+"el que lo ubica. Esto le permite utilizar <function>new</function> en el "
+"widget, añadirlo al contenedor, y olvidarse de eliminarlo. Puede aprender "
+"más de las técnicas de gestión de memoria de <application>gtkmm</"
+"application> en el <link linkend=\"chapter-memory\">capítulo de gestión de "
+"memoria</link>."
 
 #: C/gtkmm-tutorial-in.xml:411(title) C/gtkmm-tutorial-in.xml:765(title)
 #: C/gtkmm-tutorial-in.xml:4637(title) C/gtkmm-tutorial-in.xml:4928(title)
@@ -988,6 +1026,7 @@ msgstr ""
 msgid "Signals"
 msgstr "Señales"
 
+#
 #: C/gtkmm-tutorial-in.xml:413(para)
 msgid ""
 "<application>gtkmm</application>, like most GUI toolkits, is <emphasis>event-"
@@ -997,6 +1036,13 @@ msgid ""
 "can emit. To make a button click result in an action, we set up a "
 "<emphasis>signal handler</emphasis> to catch the button's \"clicked\" signal."
 msgstr ""
+"<application>gtkmm</application>, como la mayoría de kits de herramientas de "
+"la IGU, está <emphasis>dirigido por eventos</emphasis>. Cuando ocurre un "
+"evento, como la pulsación de un botón del ratón sobre un widget, éste "
+"emitirá la señal apropiada. Cada widget puede emitir un conjunto de señales "
+"diferente. Para hacer que la pulsación de un botón resulte en una acción, "
+"establecemos un <emphasis>manejador de señales</emphasis> para atrapar la "
+"señal «clicked» del botón."
 
 #: C/gtkmm-tutorial-in.xml:421(programlisting)
 #, no-wrap
@@ -1014,12 +1060,18 @@ msgid ""
 "\"clicked\" signal with a signal handler called \"on_button_clicked\": "
 "<placeholder-1/>"
 msgstr ""
+"<application>gtkmm</application> usa la biblioteca libsigc++ para "
+"implementar señales. Aquí hay una línea de código de ejemplo que conecta una "
+"señal «clicked» de Gtk::Button a un manejador de señales llamado "
+"«on_button_clicked»: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:425(para)
 msgid ""
 "For more detailed information about signals, see the <link linkend=\"chapter-"
 "signals\">appendix</link>."
 msgstr ""
+"Para obtener información más detallada acerca de señales, consulte el <link "
+"linkend=\"chapter-signals\">apéndice</link>."
 
 #: C/gtkmm-tutorial-in.xml:426(para)
 msgid ""
@@ -1027,6 +1079,10 @@ msgid ""
 "connecting to the existing <application>gtkmm</application> signals, see the "
 "<link linkend=\"chapter-custom-signals\">appendix</link>."
 msgstr ""
+"Para obtener información acerca de la implementación de sus propias señales "
+"en vez de sólo conectar a las señales existentes de <application>gtkmm</"
+"application>, consulte el <link linkend=\"chapter-custom-signals\">apéndice</"
+"link>."
 
 #: C/gtkmm-tutorial-in.xml:432(title) C/gtkmm-tutorial-in.xml:9262(classname)
 msgid "Glib::ustring"
@@ -1041,7 +1097,14 @@ msgid ""
 "<classname>std::string</classname> and ignore the rest of this section. But "
 "read on if you want to use languages other than English in your application."
 msgstr ""
+"Puede sorprenderle aprender que <application>gtkmm</application> no utiliza "
+"<classname>std::string</classname> en sus interfaces. En cambio, usa "
+"<classname>Glib::ustring</classname>, que es tan similar y discreto que en "
+"realidad puede pretender que cada Glib::ustring es un <classname>std::"
+"string</classname> e ignorar el resto de esta sección. Pero siga leyendo si "
+"quiere aplicar otros lenguajes además del inglés en su aplicación."
 
+#
 #: C/gtkmm-tutorial-in.xml:434(para)
 msgid ""
 "std::string uses 8 bit per character, but 8 bits aren't enough to encode "
@@ -1052,6 +1115,14 @@ msgid ""
 "Glib::ustring. It provides almost exactly the same interface as std::string, "
 "along with automatic conversions to and from std::string."
 msgstr ""
+"std::string utiliza 8 bits por caracter, pero 8 bits no son suficientes para "
+"codificar lenguajes como árabe, chino y japonés. A pesar de que las "
+"codificaciones de estos lenguajes ahora las ha especificado el Consorcio "
+"Unicode, los lenguajes C y C++ todavía no proporcionan ningún soporte "
+"Unicode estándar. GTK+ y GNOME eligen implementar Unicode usando UTF-8, y "
+"eso es lo que está envuelto en Glib::ustring. Proporciona casi exactamente "
+"la misma interfaz que std::string, además de conversiones automáticas desde "
+"y hacia std::string."
 
 #: C/gtkmm-tutorial-in.xml:435(para)
 msgid ""
@@ -1063,6 +1134,13 @@ msgid ""
 "Then all you need to do is start using <classname>Glib::ustring</classname> "
 "instead."
 msgstr ""
+"Uno de los beneficios de UTF-8 es que no necesita usarlo a menos que quiera, "
+"por lo que no necesita reconvertir todo su código de una vez. "
+"<classname>std::string</classname> todavía funcionará para cadenas de 7 bits "
+"ASCII. Pero cuando intente localizar su aplicación para lenguajes como "
+"chino, por ejemplo, empezará a ver errores extraños y posibles fallos. "
+"Entonces, todo lo que necesitará hacer es empezar a utilizar "
+"<classname>Glib::ustring</classname> en su lugar."
 
 #: C/gtkmm-tutorial-in.xml:436(para)
 msgid ""
@@ -1072,6 +1150,11 @@ msgid ""
 "have to convert them to UTF-8 (e.g. the Bavarian greeting \"Grüß Gott\" "
 "would be \"Gr\\xC3\\xBC\\xC3\\x9F Gott\")."
 msgstr ""
+"tenga en cuenta que UTF-8 no es compatible con codificaciones de 8 bits como "
+"ISO-8859-1. Por ejemplo, las diéresis alemanas no están en el rango ASCII y "
+"necesitan más de un byte en la codificación UTF-8. Si su código contiene "
+"cadenas literales de 8 bits, debe convertirlas a UTF-8 (por ejemplo, el "
+"saludo bávaro «Grüß Gott» sería «Gr\\xC3\\xBC\\xC3\\x9F Gott»)."
 
 #: C/gtkmm-tutorial-in.xml:437(para)
 msgid ""
@@ -1082,6 +1165,12 @@ msgid ""
 "methods such as Glib::ustring::substr() while still thinking in terms of "
 "characters instead of bytes."
 msgstr ""
+"Evite la aritmética de punteros al estilo C, y funciones como strlen(). En "
+"UTF-8, cada caracter podría necesitar entre 1 y 6 bytes, por lo que no es "
+"posible asumir que el próximo byte es otro carácter. <classname>Glib::"
+"ustring</classname> se ocupa de estos detalles, por lo que puede usar "
+"métodos como Glib::ustring::substr() y seguir pensando en términos de "
+"caracteres en vez de bytes."
 
 #: C/gtkmm-tutorial-in.xml:439(para)
 msgid ""
@@ -1089,6 +1178,10 @@ msgid ""
 "compiler options to process string literals, and it does not result in "
 "Unicode executables and libraries which are incompatible with ASCII ones."
 msgstr ""
+"A diferencia de la solución Unicode de Windows UCS-2, esto no requiere "
+"ninguna opción especial de compilación para procesar cadenas literales, y no "
+"resulta en que los ejecutables y bibliotecas Unicode sean incompatibles con "
+"las ASCII."
 
 #: C/gtkmm-tutorial-in.xml:441(ulink) C/gtkmm-tutorial-in.xml:745(ulink)
 #: C/gtkmm-tutorial-in.xml:843(ulink) C/gtkmm-tutorial-in.xml:858(ulink)
@@ -1121,8 +1214,8 @@ msgid ""
 "See the <link linkend=\"chapter-internationalization\">Internationalization</"
 "link> section for information about providing the UTF-8 string literals."
 msgstr ""
-"Para obtener más información acerca de cómo proporcionar cadenas UTF-8 "
-"literales, consulte la sección <link linkend=\"chapter-internationalization"
+"Para obtener más información acerca de cómo proporcionar cadenas literales "
+"UTF-8, consulte la sección <link linkend=\"chapter-internationalization"
 "\">Internacionalización</link>."
 
 #: C/gtkmm-tutorial-in.xml:448(title)
@@ -1138,6 +1231,12 @@ msgid ""
 "itself now uses just <classname>std::vector</classname> since "
 "<application>gtkmm</application> 3.0."
 msgstr ""
+"Algunas API relacionadas con gtkmm utilizan contenedores de datos "
+"intermedios, como <classname>Glib::StringArrayHandle</classname>, en vez de "
+"un contenedor específico estándar de C++ como <classname>std::vector</"
+"classname> o <classname>std::list</classname>, a pesar de que "
+"<application>gtkmm</application> en sí mismo ahora sólo usa <classname>std::"
+"vector</classname> desde <application>gtkmm</application> 3.0."
 
 #: C/gtkmm-tutorial-in.xml:452(para)
 msgid ""
@@ -1177,6 +1276,9 @@ msgid ""
 "Standard C++ container you prefer. glibmm will do the conversion for you. "
 "Here are some of these intermediate types: <placeholder-1/>"
 msgstr ""
+"No declare estos tipos usted mismo. Utilice, en cambio, el contenedor "
+"estándar C++ que prefiera. glibmm hará la conversión. Aquí hay algunos de "
+"estos tipos intermedios: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:462(title)
 msgid "Mixing C and C++ APIs"
@@ -1190,6 +1292,11 @@ msgid ""
 "providing an easy way to create a C++ wrapper object from a C object, "
 "provided that the C API is also based on the GObject system."
 msgstr ""
+"Puede usar las API de C que no tengan todavía interfaces C++ convenientes. "
+"Generalmente no es un problema usar las API de C desde C++, y "
+"<application>gtkmm</application> le ayuda proporcionándole acceso al objeto "
+"C subyacente y una forma fácil de crear un objeto C++ envoltorio desde un "
+"objeto C, si la API de C también está basada en el sistema GObject."
 
 #: C/gtkmm-tutorial-in.xml:465(para)
 msgid ""
@@ -1197,6 +1304,10 @@ msgid ""
 "requires a C GObject instance, use the <function>gobj()</function> function "
 "to obtain a pointer to the underlying GObject instance. For instance"
 msgstr ""
+"Para usar una instancia de <application>gtkmm</application> con una función "
+"C que requiere una instancia GObject C, use la función <function>gobj()</"
+"function> para obtener un puntero a la instancia GObject subyacente. Por "
+"ejemplo"
 
 #: C/gtkmm-tutorial-in.xml:468(programlisting)
 #, no-wrap
@@ -1228,7 +1339,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:484(title)
 msgid "Hello World in <application>gtkmm</application>"
-msgstr "«Hola mundo en» <application>gtkmm</application>"
+msgstr "«Hola mundo» en <application>gtkmm</application>"
 
 #: C/gtkmm-tutorial-in.xml:486(para)
 msgid ""
@@ -1236,8 +1347,8 @@ msgid ""
 "ancient tradition of computer science, we now introduce Hello World, a la "
 "<application>gtkmm</application>:"
 msgstr ""
-"Ahora hemos aprendido lo suficiente para ver un ejemplo real. De acuerdo con "
-"una antigua tradición de la informática, introduciremos la aplicación Hola "
+"Ahora ha aprendido lo suficiente para ver un ejemplo real. De acuerdo con "
+"una antigua tradición de la informática, se introducirá la aplicación Hola "
 "Mundo en <application>gtkmm</application>:"
 
 #: C/gtkmm-tutorial-in.xml:493(para)
@@ -1245,6 +1356,7 @@ msgid ""
 "Try to compile and run it before going on. You should see something like "
 "this:"
 msgstr ""
+"Intente compilarla y ejecutarla antes de continuar. Debería ver algo así:"
 
 #: C/gtkmm-tutorial-in.xml:498(title)
 msgid "Hello World"
@@ -1255,6 +1367,8 @@ msgid ""
 "Pretty thrilling, eh? Let's examine the code. First, the "
 "<classname>HelloWorld</classname> class:"
 msgstr ""
+"Fascinante, ¿verdad? Examinemos el código. Primero, la clase "
+"<classname>HolaMundo</classname>:"
 
 #: C/gtkmm-tutorial-in.xml:509(programlisting)
 #, no-wrap
@@ -1426,11 +1540,11 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:605(para)
 msgid ""
-"<application>gtkmm</application> 3's library is called <literal>libgtkmm-"
-"3.0</literal> rather than <literal>libgtkmm-2.4</literal> and installs its "
-"headers in a similarly-versioned directory, so your pkg-config check should "
-"ask for <literal>gtkmm-3.0</literal> rather than <literal>gtkmm-2.4</"
-"literal>."
+"<application>gtkmm</application> 3's library is called "
+"<literal>libgtkmm-3.0</literal> rather than <literal>libgtkmm-2.4</literal> "
+"and installs its headers in a similarly-versioned directory, so your pkg-"
+"config check should ask for <literal>gtkmm-3.0</literal> rather than "
+"<literal>gtkmm-2.4</literal>."
 msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:608(para)
@@ -7150,8 +7264,8 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5346(para)
 msgid ""
-"<varname>description</varname>: A short description of the resource as a UTF-"
-"8 encoded string"
+"<varname>description</varname>: A short description of the resource as a "
+"UTF-8 encoded string"
 msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5350(para)
@@ -9031,8 +9145,8 @@ msgstr ""
 msgid ""
 "Unfortunately, the integration with the standard iostreams is not completely "
 "foolproof. <application>gtkmm</application> converts <classname>Glib::"
-"ustring</classname>s to a locale-specific encoding (which usually is not UTF-"
-"8) if you output them to an <classname>ostream</classname> with "
+"ustring</classname>s to a locale-specific encoding (which usually is not "
+"UTF-8) if you output them to an <classname>ostream</classname> with "
 "<function>operator&lt;&lt;</function>. Likewise, retrieving <classname>Glib::"
 "ustrings</classname> from <classname>istream</classname> with "
 "<function>operator&gt;&gt;</function> causes a conversion in the opposite "
@@ -9043,8 +9157,8 @@ msgid ""
 "characters and the current locale is not UTF-8 encoded, the result is a "
 "corrupted <classname>Glib::ustring</classname>. You can work around this "
 "with a manual conversion. For instance, to retrieve the <classname>std::"
-"string</classname> from a <classname>ostringstream</classname>: <placeholder-"
-"1/>"
+"string</classname> from a <classname>ostringstream</classname>: "
+"<placeholder-1/>"
 msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:6848(title)
@@ -9071,9 +9185,9 @@ msgstr ""
 #: C/gtkmm-tutorial-in.xml:6859(para)
 msgid ""
 "In these cases, you should add extra characters to the strings. For "
-"instance, use <literal>\"jumps[noun]\"</literal> and <literal>\"jumps[verb]"
-"\"</literal> instead of just <literal>\"jumps\"</literal>) and strip them "
-"again outside the <function>gettext</function> call. If you add extra "
+"instance, use <literal>\"jumps[noun]\"</literal> and <literal>\"jumps"
+"[verb]\"</literal> instead of just <literal>\"jumps\"</literal>) and strip "
+"them again outside the <function>gettext</function> call. If you add extra "
 "characters you should also add a comment for the translators before the "
 "<function>gettext</function> call. Such comments will be shown in the "
 "<filename>.po</filename> files. For instance:"
@@ -11384,8 +11498,8 @@ msgstr ""
 msgid ""
 "A .hg file will typically include some headers and then declare a class, "
 "using some macros to add API or behaviour to this class. For instance, "
-"gtkmm's <filename>button.hg</filename> looks roughly like this: <placeholder-"
-"1/>"
+"gtkmm's <filename>button.hg</filename> looks roughly like this: "
+"<placeholder-1/>"
 msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:8477(function)
@@ -13095,6 +13209,7 @@ msgstr ""
 #: C/gtkmm-tutorial-in.xml:0(None)
 msgid "translator-credits"
 msgstr ""
+"Nicolás Satragno <nsatrasgno@gmail.com>, 2012\n"
 "José Zambrano <jozaol@gmail.com>, 2011\n"
 "Daniel Mustieles <daniel.mustieles@gmail.com>, 2011\n"
 "Jorge González <jorgegonz@svn.gnome.org>, 2010"
