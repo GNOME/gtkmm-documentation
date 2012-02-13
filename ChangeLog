@@ -1,5 +1,15 @@
 2012-02-13  Murray Cumming  <murrayc@murrayc.com>
 
+	Application examples: Minor clarification.
+
+	* examples/book/application/command_line_handling/exampleapplication.cc:
+	* examples/book/application/simple/exampleapplication.cc: on_open():
+	When calling the base class implementation, specify Gtk::Applicaition in 
+	full, to avoid ambiguity when people take this example and rename the class
+	to their own namespaces Application class.
+
+2012-02-13  Murray Cumming  <murrayc@murrayc.com>
+
 	Application examples: Remove the need for Gtk::Main.
 
 	* examples/book/application/command_line_handling/exampleapplication.cc:

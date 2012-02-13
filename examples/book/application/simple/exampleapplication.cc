@@ -87,5 +87,6 @@ void ExampleApplication::on_open(const Gio::Application::type_vec_files& files,
       create_window(file);
   }
 
-  Application::on_open(files, hint);
+  //Call the base class's implementation:
+  Gtk::Application::on_open(files, hint);
 }
