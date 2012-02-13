@@ -21,8 +21,6 @@
 
 int main(int argc, char *argv[])
 {
-  Gtk::Main kit(argc, argv); //TODO: Make this unnecessary: Put it in Gtk::Application.
-
   Glib::RefPtr<ExampleApplication> application = 
     ExampleApplication::create();
 

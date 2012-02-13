@@ -1,3 +1,13 @@
+2012-02-13  Murray Cumming  <murrayc@murrayc.com>
+
+	Application examples: Remove the need for Gtk::Main.
+
+	* examples/book/application/command_line_handling/exampleapplication.cc:
+	* examples/book/application/command_line_handling/main.cc:
+	* examples/book/application/simple/exampleapplication.cc:
+	* examples/book/application/simple/main.cc: Use the new init_gtkmm() method
+	in the create() methods, and remove the calls to Gtk::Main() from main().
+
 2012-01-30  Pedro Ferreira <darkiiiiii@gmail.com>
 
 	Keyboard Events chapter: Clarify keyboard event propagation.
