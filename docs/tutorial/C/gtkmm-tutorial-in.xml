@@ -609,7 +609,7 @@ takes no arguments, but it isn't visible yet. When we call Gtk::Main::run(), giv
 
 <orderedlist>
 <!-- TODO: The AppChooser content-type is not documented properly: https://bugzilla.gnome.org/show_bug.cgi?id=650012 -->
-<listitem><simpara><classname>Gtk::AppChooser</classname>, <classname>Gtk::AppChooserButton</classname>, <classname>Gtk::AppChooserDialog</classname> allow the user to select an installed application to open a particularl type of content.</simpara></listitem>
+<listitem><simpara><classname>Gtk::AppChooser</classname>, <classname>Gtk::AppChooserButton</classname>, <classname>Gtk::AppChooserDialog</classname> allow the user to select an installed application to open a particular type of content.</simpara></listitem>
 
 <listitem><simpara><classname>Gtk::Grid</classname> is a new container widget that will eventually replace <classname>Gtk::Box</classname>. It arranges its children according to properties of those children rather than its own layout details.</simpara></listitem>
 <listitem><simpara><classname>Gtk::Switch</classname> displays On/Off states more explictly than <classname>Gtk::CheckBox</classname>. It may be useful, for instance, when allowing users to activate hardware.</simpara></listitem>
