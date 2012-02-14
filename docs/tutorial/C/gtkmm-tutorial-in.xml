@@ -629,7 +629,7 @@ takes no arguments, but it isn't visible yet. When we call Gtk::Main::run(), giv
 <listitem><simpara><classname>Gtk::Box</classname>, <classname>Gtk::ButtonBox</classname>, <classname>Gtk::IconView</classname>, <classname>Gtk::Paned</classname>, <classname>Gtk::ProgressBar</classname>, <classname>Gtk::ScaleButton</classname>, <classname>Gtk::Scrollbar</classname> and <classname>Gtk::Separator</classname> now derive from <classname>Gtk::Orientable</classname>, allowing their
 orientation (vertical or horizontal) to be specified without requiring the use of a derived class such as <classname>Gtk::HBox</classname>.</simpara></listitem>
 
-<listitem><simpara><classname>Gtk::IconView</classname>, <classname>Gtk::TextView</classname>, <classname>Gtk::TreeView</classname> and other widgets derive from Scrollable instead of having their own methods such as <methodname>get_vadjustment()</methodname> and instead of having their won set_scroll_adjustments signal.</simpara></listitem>
+<listitem><simpara><classname>Gtk::IconView</classname>, <classname>Gtk::TextView</classname>, <classname>Gtk::TreeView</classname> and other widgets derive from Scrollable instead of having their own methods such as <methodname>get_vadjustment()</methodname> and instead of having their own set_scroll_adjustments signal.</simpara></listitem>
 
 <listitem><simpara><classname>Gtk::Style</classname> and <classname>Gtk::Rc</classname> were removed, replaced by <classname>Gtk::StyleContext</classname>, and <classname>Gtk::StyleProvider</classname>s, such as <classname>Gtk::CssProvider</classname>.</simpara></listitem>
 
