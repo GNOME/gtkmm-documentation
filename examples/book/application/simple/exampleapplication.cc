@@ -25,8 +25,6 @@ ExampleApplication::ExampleApplication()
 
 Glib::RefPtr<ExampleApplication> ExampleApplication::create()
 {
-  init_gtkmm();
-
   return Glib::RefPtr<ExampleApplication>( new ExampleApplication() );
 }
 

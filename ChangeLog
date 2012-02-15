@@ -1,3 +1,11 @@
+2012-02-15  Murray Cumming  <murrayc@murrayc.com>
+
+	Application examples: Remove now-unnecessary calls to init_gtkmm(). 
+
+	* examples/book/application/command_line_handling/exampleapplication.cc:
+	* examples/book/application/simple/exampleapplication.cc:
+	The latest gtkmm in git master makes these calls unnecessary.
+
 2012-02-13  Murray Cumming  <murrayc@murrayc.com>
 
 	Application examples: Minor clarification.
