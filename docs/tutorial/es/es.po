@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-02-14 11:51+0000\n"
-"PO-Revision-Date: 2012-02-14 12:53+0100\n"
+"POT-Creation-Date: 2012-02-14 11:54+0000\n"
+"PO-Revision-Date: 2012-02-16 13:06+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1603,10 +1603,6 @@ msgid "<application>gtkmm</application> 3 added some new classes:"
 msgstr "<application>gtkmm</application> 3 añadió algunas clases nuevas:"
 
 #: C/gtkmm-tutorial-in.xml:612(simpara)
-#| msgid ""
-#| "<classname>Gtk::AppChooser</classname>, <classname>Gtk::AppChooserButton</"
-#| "classname>, <classname>Gtk::AppChooserDialog</classname> allow the user "
-#| "to select an installed application to open a particularl type of content."
 msgid ""
 "<classname>Gtk::AppChooser</classname>, <classname>Gtk::AppChooserButton</"
 "classname>, <classname>Gtk::AppChooserDialog</classname> allow the user to "
@@ -1703,12 +1699,6 @@ msgstr ""
 # Esta mal el inglés, «instead of having their won...» debería ser «their own...».
 # Nicolás.
 #: C/gtkmm-tutorial-in.xml:632(simpara)
-#| msgid ""
-#| "<classname>Gtk::IconView</classname>, <classname>Gtk::TextView</"
-#| "classname>, <classname>Gtk::TreeView</classname> and other widgets derive "
-#| "from Scrollable instead of having their own methods such as "
-#| "<methodname>get_vadjustment()</methodname> and instead of having their "
-#| "won set_scroll_adjustments signal."
 msgid ""
 "<classname>Gtk::IconView</classname>, <classname>Gtk::TextView</classname>, "
 "<classname>Gtk::TreeView</classname> and other widgets derive from "
@@ -1826,6 +1816,11 @@ msgid ""
 "marked with a label or picture. Pushing one triggers an action. See the "
 "<link linkend=\"sec-pushbuttons\">Button</link> section."
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1Button."
+"html\"><classname>Gtk::Button</classname></ulink>. Botones estándar, "
+"normalmente marcados con una etiqueta o imagen. Presionar uno desencadena "
+"una acción. Consulte la sección <link linkend=\"sec-pushbuttons\">botón</"
+"link>."
 
 #: C/gtkmm-tutorial-in.xml:674(term)
 msgid "Toggle buttons"
@@ -1839,6 +1834,13 @@ msgid ""
 "down until you press it again. It might be useful as an on/off switch. See "
 "the <link linkend=\"sec-toggle-buttons\">ToggleButton</link> section."
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1ToggleButton.html\"><classname>Gtk::ToggleButton</classname></"
+"ulink>. A diferencia de un botón normal, que baja y sube en la misma "
+"pulsación, un botón conmutable se queda abajo hasta que lo vuelve a "
+"presionar. Puede ser útil como conmutador de encendido/apagado. Consulte la "
+"sección <ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1ToggleButton.html\">botón conmutador<classname>."
 
 #: C/gtkmm-tutorial-in.xml:684(term)
 msgid "Checkboxes"
@@ -1853,6 +1855,13 @@ msgid ""
 "require an on/off setting. See the <link linkend=\"sec-checkboxes"
 "\">CheckBox</link> section."
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1CheckButton.html\"><classname>Gtk::CheckButton</classname></"
+"ulink>. Estos actúan como botones conmutadores, pero muestran su estado en "
+"pequeños cuadrados, con su etiqueta a un lado. Los puede usar en la mayoría "
+"de las situaciones que requieren una configuración de encendido/apagado. "
+"Consulte la sección<link linkend=\"sec-checkboxes\">casilla de verificación</"
+"link>."
 
 #: C/gtkmm-tutorial-in.xml:696(term)
 msgid "Radio buttons"
@@ -1869,6 +1878,15 @@ msgid ""
 "different. See the <link linkend=\"sec-radio-buttons\">RadioButton</link> "
 "section."
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1RadioButton.html\"><classname>Gtk::RadioButton</classname></"
+"ulink>. Su nombre proviene de los selectores de estación en las antiguas "
+"radios de coches. Estos botones se usan en grupos para opciones que se "
+"excluyen mutuamente. Pulsar uno de ellos hace que los otros botones de su "
+"grupo se apaguen. Son similares a las casillas de verificación (un pequeño "
+"widget con una etiqueta a un lado), pero normalmente se ven diferentes. "
+"Consulte la sección <link linkend=\"sec-radio-buttons\">botón de radio</"
+"link>."
 
 #: C/gtkmm-tutorial-in.xml:712(para)
 msgid ""
@@ -1904,6 +1922,9 @@ msgid ""
 "before one of the label's characters and specify <literal>true</literal> for "
 "the optional <literal>mnemonic</literal> parameter. For instance:"
 msgstr ""
+"Para definir un atajo para la navegación por teclado, ponga un guión bajo "
+"antes de uno de los caracteres y especifique <literal>true</literal> para el "
+"parámetro opcional <literal>mnemonic</literal>. Por ejemplo:"
 
 #: C/gtkmm-tutorial-in.xml:731(programlisting)
 #, no-wrap
@@ -1922,6 +1943,11 @@ msgid ""
 "using icons. For instance, <placeholder-1/> This will use standard text, in "
 "all languages, with standard keyboard accelerators, with a standard icon."
 msgstr ""
+"Siempre que sea posible, debe usar elementos del almacén («stock»), para "
+"asegurar la consistencia con otras aplicaciones, y mejorar la apariencia de "
+"sus aplicaciones mediante los iconos. Por ejemplo, <placeholder-1/>. Esto "
+"usará texto estándar, en todos los lenguajes, con atajos estándar, con un "
+"icono estándar."
 
 #: C/gtkmm-tutorial-in.xml:739(para)
 msgid ""
@@ -1960,7 +1986,7 @@ msgstr "Este ejemplo crea un botón con una imagen y una etiqueta."
 
 #: C/gtkmm-tutorial-in.xml:755(title)
 msgid "buttons example"
-msgstr "botones de ejemplo"
+msgstr "ejemplo de botones"
 
 #: C/gtkmm-tutorial-in.xml:767(para)
 msgid ""
@@ -2022,6 +2048,9 @@ msgid ""
 "classname>s, but when clicked they remain activated, or pressed, until "
 "clicked again."
 msgstr ""
+"Los <classname>ToggleButton</classname> son como los <classname>Button</"
+"classname> normales, pero cuando se pulsan quedan activados, o presionados, "
+"hasta que se vuelvan a pulsar."
 
 #: C/gtkmm-tutorial-in.xml:825(para)
 msgid ""
@@ -2032,6 +2061,12 @@ msgid ""
 "that, if you do this, and the state actually changes, it causes the \"clicked"
 "\" signal to be emitted. This is usually what you want."
 msgstr ""
+"Para recuperar el estado de un <classname>ToggleButton</classname>, puede "
+"usar el método <methodname>get_active()</methodname>. Esto devuelve "
+"<literal>true</literal> si el botón está «abajo». También puede establecer el "
+"estado del botón conmutador con <methodname>set_active()</methodname>. Tenga "
+"en cuenta que, si hace esto, y el estado efectivamente cambia, hace que se "
+"emita la señal «clicked». Esto normalmente será lo que quiera."
 
 #: C/gtkmm-tutorial-in.xml:832(para)
 msgid ""
@@ -2039,6 +2074,9 @@ msgid ""
 "button, rather than forcing it to be up or down: This switches the button's "
 "state, and causes the <literal>toggled</literal> signal to be emitted."
 msgstr ""
+"Puede usar el método <methodname>toggled()</methodname> para conmutar el "
+"botón, en vez de forzarlo a estar arriba o abajo: esto conmuta el estado del "
+"botón, y hace que se emita la señal <literal>toggled</literal>."
 
 #: C/gtkmm-tutorial-in.xml:837(para)
 msgid ""
@@ -2046,10 +2084,13 @@ msgid ""
 "the <classname>Gtk::CheckButton</classname> and <classname>Gtk::RadioButton</"
 "classname> classes."
 msgstr ""
+"<classname>Gtk::ToggleButton</classname> es más útil como clase base para "
+"las clases <classname>Gtk::CheckButton</classname> y <classname>Gtk::"
+"RadioButton</classname>."
 
 #: C/gtkmm-tutorial-in.xml:848(title) C/gtkmm-tutorial-in.xml:863(title)
 msgid "CheckButton"
-msgstr "CheckButton"
+msgstr "Casilla de verificación"
 
 #: C/gtkmm-tutorial-in.xml:850(para)
 msgid ""
@@ -2059,6 +2100,11 @@ msgid ""
 "and toggle a checkbox using the same member methods as for <classname>Gtk::"
 "ToggleButton</classname>."
 msgstr ""
+"<classname>Gtk::CheckButton</classname> hereda de <classname>Gtk::"
+"ToggleButton</classname>. La única diferencia real entre ambos es la "
+"apariencia de <classname>Gtk::CheckButton</classname>. Puede verificar, "
+"establecer, y conmutar una casilla de verificación utilizando los mismos "
+"métodos miembro que para <classname>Gtk::ToggleButton</classname>."
 
 #: C/gtkmm-tutorial-in.xml:875(title) C/gtkmm-tutorial-in.xml:972(title)
 msgid "RadioButton"
@@ -2070,6 +2116,10 @@ msgid ""
 "ToggleButton</classname>, but these work in groups, and only one RadioButton "
 "in a group can be selected at any one time."
 msgstr ""
+"Al igual que las casillas de verificación, los botones de radio también "
+"heredan de <classname>Gtk::ToggleButton</classname>, pero trabajan en "
+"grupos, y sólo se puede seleccionar un un botón de radio en un grupo a la "
+"vez."
 
 #: C/gtkmm-tutorial-in.xml:883(title)
 msgid "Groups"
@@ -2083,6 +2133,11 @@ msgid ""
 "called <classname>RadioButtons</classname>, and then put three radio buttons "
 "in it:"
 msgstr ""
+"Hay dos maneras de establecer un grupo de botones de radio. La primera "
+"manera es crear los botones, y establecer sus grupos luego. Sólo los dos "
+"primeros constructores se usan. En el siguiente ejemplo, se crea una clase "
+"de ventana nueva llamada <classname>RadioButtons</classname> y luego se "
+"ubican tres botones de radio en ella:"
 
 #: C/gtkmm-tutorial-in.xml:892(programlisting)
 #, no-wrap
@@ -2133,6 +2188,11 @@ msgid ""
 "methodname> to tell the other <classname>RadioButton</classname>s to share "
 "that group."
 msgstr ""
+"Se indicó a <application>gtkmm</application> que colocase los tres "
+"<classname>RadioButton</classname> en el mismo grupo obteniéndolo con "
+"<methodname>get_group()</methodname> y usando <methodname>set_group()</"
+"methodname> para indicarle a los otros <classname>RadioButton</classname> "
+"que compartan ese grupo."
 
 #: C/gtkmm-tutorial-in.xml:919(programlisting)
 #, no-wrap
@@ -2144,12 +2204,17 @@ msgid ""
 "Note that you can't just do <placeholder-1/> because the group is modified "
 "by <methodname>set_group()</methodname> and therefore non-const."
 msgstr ""
+"Tenga en cuenta que no puede simplemente hacer <placeholder-1/> porque se "
+"modifica al grupo mediante <methodname>set_group()</methodname>, y por lo "
+"tanto, no es constante."
 
 #: C/gtkmm-tutorial-in.xml:925(para)
 msgid ""
 "The second way to set up radio buttons is to make a group first, and then "
 "add radio buttons to it. Here's an example:"
 msgstr ""
+"La segunda manera de establecer botones de radio es hacer primero un grupo y "
+"luego añadirle los botones a él. Aquí hay un ejemplo:"
 
 #: C/gtkmm-tutorial-in.xml:929(programlisting)
 #, no-wrap
@@ -2195,6 +2260,10 @@ msgid ""
 "made three radio buttons, using a constructor to make each of them part of "
 "<literal>group</literal>."
 msgstr ""
+"Se creó un grupo nuevo simplemente declarando una variable, <literal>group</"
+"literal>, del tipo <classname>Gtk::RadioButton::Group</classname>. Luego, se "
+"hicieron tres botones de radio, usando un constructor para hacer que cada "
+"uno sea parte de <literal>group</literal>."
 
 #: C/gtkmm-tutorial-in.xml:954(title) C/gtkmm-tutorial-in.xml:1434(title)
 #: C/gtkmm-tutorial-in.xml:4580(title)
@@ -2207,6 +2276,10 @@ msgid ""
 "that when you first make a group of them, they will all be off. Don't forget "
 "to turn one of them on using <methodname>set_active()</methodname>:"
 msgstr ""
+"Los <classname>RadioButtons</classname> están «apagados» cuando se crean; "
+"esto significa que cuando hace un grupo de ellos, primero estarán todos "
+"apagados. No olvide encender uno de ellos usando <methodname>set_active()</"
+"methodname>:"
 
 #: C/gtkmm-tutorial-in.xml:966(para)
 msgid ""
@@ -2230,7 +2303,17 @@ msgid ""
 "designated amount, depending on which mouse button is used. This should be "
 "familiar scrollbar behaviour."
 msgstr ""
+"<classname>Gtk::Scale</classname> y <classname>Gtk::Scrollbar</classname> "
+"heredan de <classname>Gtk::Range</classname> y comparten mucha "
+"funcionalidad. Contienen un «canal» y un «control deslizante» (a veces llamado "
+"«rueda» en otros entornos IGU). Deslizar el control con el puntero lo mueve "
+"dentro del canal, mientras que pulsar en el canal avanza al control "
+"deslizante hacia la ubicación de la pulsación, completamente o en una "
+"cantidad definida dependiendo del botón que se use. Este es el "
+"comportamiento normal de las barras de desplazamiento."
 
+# La dejo fuzzy... me parece que hay mucha confusión entre clases que están entre etiquetas <classname> (sin traducir) y las que no (traducidas).
+# Nicolás.
 #: C/gtkmm-tutorial-in.xml:1001(para)
 msgid ""
 "As will be explained in the <link linkend=\"chapter-adjustment\">Adjustment</"
@@ -2245,6 +2328,17 @@ msgid ""
 "See the <link linkend=\"chapter-adjustment\">Adjustments</link> section for "
 "further details."
 msgstr ""
+"Como se explicará en la sección <link linkend=\"chapter-adjustment\">ajuste</"
+"link>, todos los widgets del rango están asociados a un objeto "
+"<classname>Adjustment</classname>. Para cambiar los valores inferior, "
+"superior y actual del widget debe usar los métodos de su "
+"<classname>Adjustment</classname>, que puede obtenerlos con el método "
+"<methodname>get_adjustment()</methodname>. Los constructores predeterminados "
+"de los widgets <classname>Range</classname> crean un <classname>Adjustment</"
+"classname> automáticamente, o puede especificar un <classname>Adjustment</"
+"classname> existente, tal vez para compartirlo con otro widget. Consulte la "
+"sección <link linkend=\"chapter-adjustment\">ajuste</link> para obtener más "
+"detalles."
 
 #: C/gtkmm-tutorial-in.xml:1018(title)
 msgid "Scrollbar Widgets"
