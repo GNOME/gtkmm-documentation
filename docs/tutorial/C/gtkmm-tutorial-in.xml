@@ -1154,7 +1154,7 @@ for the user.
 Labels are the  main method of placing non-editable text in windows, for
 instance to place a title next to a <classname>Entry</classname> widget. You
 can specify the text in the constructor, or later with the
-<methodname>set_text()</methodname> or set_markup() methods.
+<methodname>set_text()</methodname> or <methodname>set_markup()</methodname> methods.
 </para>
 
 <para>
