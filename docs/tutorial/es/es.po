@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-02-20 12:00+0000\n"
-"PO-Revision-Date: 2012-02-20 13:01+0100\n"
+"POT-Creation-Date: 2012-02-20 12:02+0000\n"
+"PO-Revision-Date: 2012-02-23 12:19+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -2506,11 +2506,6 @@ msgid "Label"
 msgstr "Etiqueta"
 
 #: C/gtkmm-tutorial-in.xml:1153(para)
-#| msgid ""
-#| "Labels are the main method of placing non-editable text in windows, for "
-#| "instance to place a title next to a <classname>Entry</classname> widget. "
-#| "You can specify the text in the constructor, or later with the "
-#| "<methodname>set_text()</methodname> or set_markup() methods."
 msgid ""
 "Labels are the main method of placing non-editable text in windows, for "
 "instance to place a title next to a <classname>Entry</classname> widget. You "
@@ -2619,6 +2614,13 @@ msgid ""
 "the text in the widget changes. You can use these, for instance, to validate "
 "or filter the text the user types."
 msgstr ""
+"Quizás quiera recibir una notificación cuando el usuario escriba en un "
+"widget de entrada de texto. <classname>Gtk::Entry</classname> proporciona "
+"dos señales, <literal>activate</literal> y <literal>changed</literal>, sólo "
+"para este propósito. Cuando el usuario pulsa la tecla «Intro» en un widget de "
+"entrada de texto se emite <literal>activate</literal>; cuando el texto en el "
+"widget cambia se emite <literal>changed</literal>. Puede usarlas para, por "
+"ejemplo, validar o filtrar el texto que el usuario introduce."
 
 #: C/gtkmm-tutorial-in.xml:1236(title)
 msgid "Simple Entry Example"
@@ -2630,6 +2632,9 @@ msgid ""
 "<classname>CheckButton</classname>s, with which you can toggle the editable "
 "and visible flags."
 msgstr ""
+"Este ejemplo usa <classname>Gtk::Entry</classname>. También tiene dos "
+"<classname>CheckButton</classname>, con los que puede conmutar las opciones "
+"«editable» y «visible»."
 
 #: C/gtkmm-tutorial-in.xml:1257(title) C/gtkmm-tutorial-in.xml:1291(title)
 msgid "Entry Completion"
@@ -2652,6 +2657,9 @@ msgid ""
 "classname> object, and provide it to the <classname>Entry</classname> widget "
 "via the <methodname>set_completion()</methodname> method."
 msgstr ""
+"Para activar esta funcionalidad, cree un objeto <classname>EntryCompletion</"
+"classname> y proporcióneselo al widget <classname>Entry</classname> mediante "
+"el método <methodname>set_completion()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:1268(para)
 msgid ""
@@ -2661,8 +2669,16 @@ msgid ""
 "methodname> to specify which of your model columns should be used to match "
 "possible text entries."
 msgstr ""
+"El <classname>EntryCompletion</classname> puede usar un "
+"<classname>TreeModel</classname> que contenga las entradas posibles, "
+"especificadas por <methodname>set_model()</methodname>. Luego llame a "
+"<methodname>set_text_column()</methodname> para especificar cuál de las "
+"columnas de su modelo debe usarse para las posibles entradas de texto."
 
+# No estoy seguro de si la traducción está bien, pero además, el inglés está mal: «That callback function.» está colgado...
+# Nicolás.
 #: C/gtkmm-tutorial-in.xml:1274(para)
+#, fuzzy
 msgid ""
 "Alternatively, if a complete list of possible entries would be too large or "
 "too inconvenient to generate, a callback slot may instead be specified with "
@@ -2670,6 +2686,10 @@ msgid ""
 "also useful if you wish to match on a part of the string other than the "
 "start."
 msgstr ""
+"Alternativamente, si una lista completa de entradas posibles fuera muy larga "
+"o demasiado incómoda para generar, puede especificar en su lugar un espacio "
+"para una retrollamada con <methodname>set_match_func()</methodname>. Esto "
+"también es útil si no desea usar el principio de la cadena."
 
 #: C/gtkmm-tutorial-in.xml:1282(title)
 msgid "Entry Completion Example"
@@ -2682,6 +2702,10 @@ msgid ""
 "completion uses a <classname>Gtk::TreeModel</classname> of possible entries, "
 "and some additional actions."
 msgstr ""
+"Este ejemplo crea un <classname>Gtk::EntryCompletion</classname> y lo asocia "
+"a un widget <classname>Gtk::Entry</classname>. Se usan un <classname>Gtk::"
+"TreeModel</classname> de entradas posibles para el completado y algunas "
+"acciones adicionales."
 
 #: C/gtkmm-tutorial-in.xml:1303(title)
 msgid "Entry Icons"
@@ -2696,16 +2720,25 @@ msgid ""
 "to the user pressing the icon by handling the <methodname>signal_icon_press</"
 "methodname> signal."
 msgstr ""
+"Un widget <classname>Entry</classname> puede mostrar un icono al principio o "
+"al final del área del texto. Este icono se puede especificar por métodos "
+"como <methodname>set_icon_from_pixbuf()</methodname> o "
+"<methodname>set_icon_from_stock()</methodname>. Una aplicación puede "
+"responder al usuario que pulsa el icono manejando la señal "
+"<methodname>signal_icon_press</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:1311(title)
 msgid "Entry Icon Example"
-msgstr "Iconos de ejemplo de «Entry»"
+msgstr "Ejemplo de icono de «Entry»"
 
 #: C/gtkmm-tutorial-in.xml:1312(para)
 msgid ""
 "This example shows a <classname>Gtk::Entry</classname> widget with a stock "
 "search icon, and prints text to the terminal when the icon is pressed."
 msgstr ""
+"Este ejemplo muestra un widget <classname>Gtk::Entry</classname> con un "
+"icono de búsqueda del almacén, e imprime texto en la terminal cuando se "
+"pulsa el icono."
 
 #: C/gtkmm-tutorial-in.xml:1318(title)
 msgid "Entry with Icon"
@@ -2722,6 +2755,10 @@ msgid ""
 "<methodname>set_progress_fraction()</methodname> or "
 "<methodname>set_progress_pulse_step()</methodname> methods are called."
 msgstr ""
+"Un widget <classname>Entry</classname> puede mostrar una barra de progreso "
+"dentro del área del texto, bajo el texto introducido. La barra de progreso "
+"se mostrará si se llama a los métodos <methodname>set_progress_fraction()</"
+"methodname> o <methodname>set_progress_pulse_step()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:1336(title)
 msgid "Entry Progress Example"
@@ -2732,6 +2769,8 @@ msgid ""
 "This example shows a <classname>Gtk::Entry</classname> widget with a "
 "progress bar."
 msgstr ""
+"Este ejemplo muestra un widget <classname>Gtk::Entry</classname> con una "
+"barra de progreso."
 
 #: C/gtkmm-tutorial-in.xml:1343(title)
 msgid "Entry with Progress Bar"
@@ -2762,34 +2801,43 @@ msgid ""
 "feature as well: holding down one of the arrows can optionally cause the "
 "value to change more quickly the longer the arrow is held down."
 msgstr ""
+"El valor puede tener un número ajustable de decimales, y el tamaño del paso "
+"es configurable. Los <classname>SpinButton</classname> también tienen una "
+"característica de «auto-repetición»: mantener pulsada una de las flechas "
+"puede, opcionalmente, causar que el valor cambie más rápidamente cuanto más "
+"tiempo se mantenga pulsada la flecha."
 
 #: C/gtkmm-tutorial-in.xml:1382(para)
 msgid "<literal>value</literal>: value for the Spin Button"
-msgstr ""
+msgstr "<literal>value</literal>: valor del «SpinButton»"
 
 #: C/gtkmm-tutorial-in.xml:1388(para)
 msgid "<literal>lower</literal>: lower range value"
-msgstr ""
+msgstr "<literal>lower</literal>: valor mínimo del rango"
 
 #: C/gtkmm-tutorial-in.xml:1394(para)
 msgid "<literal>upper</literal>: upper range value"
-msgstr ""
+msgstr "<literal>upper</literal>: valor máximo del rango"
 
 #: C/gtkmm-tutorial-in.xml:1399(para)
 msgid ""
 "<literal>step_increment</literal>: value to increment/decrement when "
 "pressing mouse button 1 on a button"
 msgstr ""
+"<literal>step_increment</literal>: valor en el que se incrementa/decrementa "
+"cuando se presiona un botón con el botón 1 del ratón"
 
 #: C/gtkmm-tutorial-in.xml:1406(para)
 msgid ""
 "<literal>page_increment</literal>: value to increment/decrement when "
 "pressing mouse button 2 on a button"
 msgstr ""
+"<literal>page_increment</literal>: valor en el que se incrementa/decrementa "
+"cuando se presiona un botón con el botón 2 del ratón"
 
 #: C/gtkmm-tutorial-in.xml:1413(para)
 msgid "<literal>page_size</literal>: unused"
-msgstr ""
+msgstr "<literal>page_size</literal>: no se usa"
 
 #: C/gtkmm-tutorial-in.xml:1374(para)
 msgid ""
@@ -2798,6 +2846,10 @@ msgid ""
 "These Adjustment attributes are used by the Spin Button like so: "
 "<placeholder-1/>"
 msgstr ""
+"Los <classname>SpinButton</classname> usan un objeto <link linkend=\"chapter-"
+"adjustment\">Adjustment</link> para mantener la información del rango de "
+"valores. Los «SpinButton» usan estos atributos del «Adjustment» así: "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:1421(para)
 msgid ""
@@ -2814,12 +2866,18 @@ msgid ""
 "<methodname>get_adjustment()</methodname> method, or you can specify an "
 "existing <classname>Adjustment</classname> in the constructor."
 msgstr ""
+"El <classname>SpinButton</classname> puede crear un <classname>Adjustment</"
+"classname> predeterminado, al que puede acceder mediante el método "
+"<methodname>get_adjustment()</methodname>, o puede especificar un "
+"<classname>Adjustment</classname> existente en el constructor."
 
 #: C/gtkmm-tutorial-in.xml:1436(para)
 msgid ""
 "The number of decimal places can be altered using the <methodname>set_digits"
 "()</methodname> method."
 msgstr ""
+"La cantidad de lugares decimales se puede alterar usando el método "
+"<methodname>set_digits()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:1441(para)
 msgid ""
