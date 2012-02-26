@@ -1571,7 +1571,7 @@ string within its trough, using the <methodname>set_text()</methodname> method.
 <title>InfoBar</title>
 
 <para>
-An <classname>InfoBar</classname> may show small items of information or to ask brief questions. Unlike a <classname>Dialog</classname>, it appears at the top of the current window instead of opening a new window. Its API is very similar to the <link linkend="chapter-dialogs">Gtk::Dialog</link> API.</para>
+An <classname>InfoBar</classname> may show small items of information or ask brief questions. Unlike a <classname>Dialog</classname>, it appears at the top of the current window instead of opening a new window. Its API is very similar to the <link linkend="chapter-dialogs">Gtk::Dialog</link> API.</para>
 
 <para><ulink url="&url_refdocs_base_gtk;InfoBar.html">Reference</ulink></para>
 
