@@ -1842,8 +1842,7 @@ msgstr ""
 "ulink>. A diferencia de un botón normal, que baja y sube en la misma "
 "pulsación, un botón conmutable se queda abajo hasta que lo vuelve a "
 "presionar. Puede ser útil como conmutador de encendido/apagado. Consulte la "
-"sección <link url=\"http://developer.gnome.org/gtkmm/unstable/"
-"classGtk_1_1ToggleButton.html\">botón conmutador</link>."
+"sección <link linkend=\"sec-toggle-buttons\">botón conmutador</link>."
 
 #: C/gtkmm-tutorial-in.xml:684(term)
 msgid "Checkboxes"
@@ -3079,8 +3078,8 @@ msgstr ""
 "su puntero sobre un widget por unos segundos. Use "
 "<methodname>set_tooltip_text()</methodname> para establecer una cadena nueva "
 "como consejo en cualquier <classname>Widget</classname>. Los <classname>Gtk::"
-"ToolItem</classname> no son <methodname>Widget<classname>s, pero tienen el "
-"mismo método por convenio. </classname>Gtk::Tooltip<classname> es para un "
+"ToolItem</classname> no son <classname>Widget</classname>s, pero tienen el "
+"mismo método por convenio. <classname>Gtk::Tooltip</classname> es para un "
 "uso de los consejos más avanzado, como mostrar una imagen junto al texto."
 
 #: C/gtkmm-tutorial-in.xml:1606(ulink)

@@ -1,3 +1,9 @@
+2012-02-28  Murray Cumming  <murrayc@murrayc.com>
+
+	Spanish translation: Correct some markup.
+
+	* docs/tutorial/es/es.po: Correct markup errors that broke make check.
+
 2012-02-15  Murray Cumming  <murrayc@murrayc.com>
 
 	Application examples: Remove now-unnecessary calls to init_gtkmm(). 
