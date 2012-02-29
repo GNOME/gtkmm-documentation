@@ -19,7 +19,7 @@
 
 #include <gtkmm.h>
 
-class ExampleWindow: public Gtk::Window
+class ExampleWindow: public Gtk::ApplicationWindow
 {
 public:
 

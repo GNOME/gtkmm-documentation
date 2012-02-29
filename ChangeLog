@@ -1,3 +1,12 @@
+2012-02-29  Murray Cumming  <murrayc@murrayc.com>
+
+	Use Gtk::ApplicationWindow.
+
+	* examples/book/application/command_line_handling/examplewindow.h:
+	* examples/book/application/simple/examplewindow.h:
+	* examples/book/base/base.cc: Use ApplicationWindow instead of 
+	Window.
+
 2012-02-28  Murray Cumming  <murrayc@murrayc.com>
 
 	Spanish translation: Correct some markup.
