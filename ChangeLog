@@ -1,3 +1,16 @@
+2012-03-02  Murray Cumming  <murrayc@murrayc.com>
+
+	Use ColorChooserDialog instead of deprecated ColorSelectionDialog.
+
+	* docs/tutorial/Makefile.am:
+	* docs/tutorial/C/figures/dialogs_colorselectiondialog.png: Move to
+	* docs/tutorial/C/figures/dialogs_colorchooserdialog.png: though we 
+	still need to actually update the image.
+	* examples/Makefile.am:
+	* examples/book/dialogs/colorselectiondialog/: Move to:
+	* examples/book/dialogs/colorchooserdialog/: And change the code
+	appropriately.
+
 2012-02-29  Murray Cumming  <murrayc@murrayc.com>
 
 	Use Gtk::ApplicationWindow.

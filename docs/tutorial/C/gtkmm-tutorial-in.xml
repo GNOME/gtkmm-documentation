@@ -3903,26 +3903,26 @@ Most of the useful member methods for this class are actually in the
 </sect2>
 </sect1>
 
-<sect1 id="sec-color-selection-dialog"><title>ColorSelectionDialog</title>
+<sect1 id="sec-color-selection-dialog"><title>ColorChooserDialog</title>
 <para>
-The <classname>ColorSelectionDialog</classname> allows the user to choose a
+The <classname>ColorChooserDialog</classname> allows the user to choose a
 color. The <classname>ColorButton</classname> opens a color selection dialog
 when it is clicked.
 </para>
 
-<para><ulink url="&url_refdocs_base_gtk;ColorSelectionDialog.html">Reference</ulink></para>
+<para><ulink url="&url_refdocs_base_gtk;ColorChooserDialog.html">Reference</ulink></para>
 
-<sect2 id="colorselectiondialog-example">
+<sect2 id="colorchooserdialog-example">
 <title>Example</title>
 
-<figure id="figure-dialogs-colorselectiondialog">
-  <title>ColorSelectionDialog</title>
+<figure id="figure-dialogs-colorchooserdialog">
+  <title>ColorChooserDialog</title>
   <screenshot>
-    <graphic format="PNG" fileref="&url_figures_base;dialogs_colorselectiondialog.png"/>
+    <graphic format="PNG" fileref="&url_figures_base;dialogs_colorchooserdialog.png"/>
   </screenshot>
 </figure>
 
-<para><ulink url="&url_examples_base;dialogs/colorselectiondialog">Source Code</ulink></para>
+<para><ulink url="&url_examples_base;dialogs/colorchooserdialog">Source Code</ulink></para>
 </sect2>
 
 </sect1>

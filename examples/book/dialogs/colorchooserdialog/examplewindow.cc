@@ -23,7 +23,7 @@ ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::ORIENTATION_VERTICAL, 5),
   m_Button_Dialog("Choose Color")
 {
-  set_title("Gtk::ColorSelectionDialog example");
+  set_title("Gtk::ColorChooserDialog example");
   set_default_size(200, 200);
 
   add(m_VBox);
@@ -63,13 +63,13 @@ void ExampleWindow::on_color_button_color_set()
 
 void ExampleWindow::on_button_dialog_clicked()
 {
-  Gtk::ColorSelectionDialog dialog("Please choose a color");
+  Gtk::ColorChooserDialog dialog("Please choose a color");
   dialog.set_transient_for(*this);
 
   //Get the previously selected color:
-  dialog.get_color_selection()->set_current_rgba(m_Color);
+  dialog.set_rgba(m_Color);
 
-  int result = dialog.run();
+  const int result = dialog.run();
 
   //Handle the response:
   switch(result)
@@ -77,7 +77,7 @@ void ExampleWindow::on_button_dialog_clicked()
     case Gtk::RESPONSE_OK:
     {
       //Store the chosen color, and show it:
-      m_Color = dialog.get_color_selection()->get_current_rgba();
+      m_Color = dialog.get_rgba();
       m_ColorButton.set_rgba(m_Color);
       m_DrawingArea.override_background_color(m_Color);
       break;

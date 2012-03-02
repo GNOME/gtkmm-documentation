@@ -31,7 +31,7 @@ check_PROGRAMS =					\
 	book/custom/custom_container/example		\
 	book/custom/custom_widget/example		\
 	book/dialogs/aboutdialog/example		\
-	book/dialogs/colorselectiondialog/example	\
+	book/dialogs/colorchooserdialog/example	\
 	book/dialogs/filechooserdialog/example		\
 	book/dialogs/fontchooserdialog/example	\
 	book/dialogs/messagedialog/example		\
@@ -266,10 +266,10 @@ book_dialogs_aboutdialog_example_SOURCES =		\
 	book/dialogs/aboutdialog/examplewindow.h	\
 	book/dialogs/aboutdialog/main.cc
 
-book_dialogs_colorselectiondialog_example_SOURCES =		\
-	book/dialogs/colorselectiondialog/examplewindow.cc	\
-	book/dialogs/colorselectiondialog/examplewindow.h	\
-	book/dialogs/colorselectiondialog/main.cc
+book_dialogs_colorchooserdialog_example_SOURCES =		\
+	book/dialogs/colorchooserdialog/examplewindow.cc	\
+	book/dialogs/colorchooserdialog/examplewindow.h	\
+	book/dialogs/colorchooserdialog/main.cc
 
 book_dialogs_filechooserdialog_example_SOURCES =	\
 	book/dialogs/filechooserdialog/examplewindow.cc	\

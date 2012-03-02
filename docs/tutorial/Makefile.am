@@ -40,7 +40,7 @@ DOC_FIGURES =					\
 	figures/comboboxentry_text.png		\
 	figures/custom_container.png		\
 	figures/dialogs_about.png		\
-	figures/dialogs_colorselectiondialog.png\
+	figures/dialogs_colorchooserdialog.png\
 	figures/dialogs_filechooser.png		\
 	figures/dialogs_fontchooserdialog.png	\
 	figures/dialogs_messagedialog.png	\
