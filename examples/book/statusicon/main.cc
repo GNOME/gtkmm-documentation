@@ -20,7 +20,7 @@
 
 int main(int argc, char *argv[])
 {
-  Gtk::Main kit(argc, argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   //Use your own icon in real life.
   Glib::RefPtr<Gtk::StatusIcon> status_icon =
@@ -33,7 +33,5 @@ int main(int argc, char *argv[])
   Gtk::Window window;
   window.set_title("gtkmm StatusIcon example.");
   window.set_default_size(300, 300);
-  Gtk::Main::run(window); //Shows the window and returns when it is closed.
-
-  return 0;
+  return app->run(window); //Shows the window and returns when it is closed.
 }

@@ -17,14 +17,12 @@
  */
 
 #include "examplewindow.h"
-#include <gtkmm/main.h>
+#include <gtkmm/application.h>
 
 int main(int argc, char *argv[])
 {
-  Gtk::Main kit(argc, argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   ExampleWindow window;
-  Gtk::Main::run(window); //Shows the window and returns when it is closed.
-
-  return 0;
+  return app->run(window); //Shows the window and returns when it is closed.
 }

@@ -1,6 +1,6 @@
 #include "tictactoe.h"
 #include <gtkmm/window.h>
-#include <gtkmm/main.h>
+#include <gtkmm/application.h>
 
 
 void
@@ -14,7 +14,7 @@ win (TicTacToe *ttt)
 int
 main (int argc, char *argv[])
 {
-  Gtk::Main m(argc, argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   TicTacToe* ttt = manage( new TicTacToe );
   ttt->tictactoe.connect( sigc::bind (sigc::ptr_fun(&win), ttt) );
@@ -25,7 +25,5 @@ main (int argc, char *argv[])
   window.add(*ttt);
   window.show_all_children();
 
-  Gtk::Main::run(window);
-
-  return 0;
+  return app->run(window);
 }

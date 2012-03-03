@@ -108,7 +108,7 @@ void ExampleWindow::on_menu_file_new()
 
 void ExampleWindow::on_menu_file_quit()
 {
-  hide(); //Closes the main window to stop the Gtk::Main::run().
+  hide(); //Closes the main window to stop the app->run().
 }
 
 void ExampleWindow::on_menu_file_recent_files_item()

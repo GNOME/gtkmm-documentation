@@ -1,5 +1,5 @@
 #include <build/config.h>
-#include <gtkmm/main.h>
+#include <gtkmm/application.h>
 #include <glibmm/main.h>
 #include <glibmm/iochannel.h>
 #include <fcntl.h>
@@ -10,6 +10,8 @@
 //The SUN Forte compiler needs these for mkfifo:
 #include <sys/types.h>
 #include <sys/stat.h>
+
+Glib::RefPtr<Gtk::Application> app;
 
 int read_fd;
 Glib::RefPtr<Glib::IOChannel> iochannel;
@@ -37,7 +39,7 @@ bool MyCallback(Glib::IOCondition io_condition)
    iochannel->read_line(buf);
    std::cout << buf;
    if (buf == "Q\n")
-       Gtk::Main::quit ();
+     app->quit();
 
   }
   return true;
@@ -46,8 +48,7 @@ bool MyCallback(Glib::IOCondition io_condition)
 
 int main(int argc, char *argv[])
 {
-  // the usual Gtk::Main object
-  Gtk::Main app(argc, argv);
+  app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   if (access("testfifo", F_OK) == -1) {
     // fifo doesn't exit - create it
@@ -76,7 +77,7 @@ int main(int argc, char *argv[])
   iochannel = Glib::IOChannel::create_from_fd(read_fd);
 
   // and last but not least - run the application main loop
-  app.run();
+  app->run();
 
   // now remove the temporary fifo
   if(unlink("testfifo"))

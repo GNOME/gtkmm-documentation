@@ -4,7 +4,7 @@
 
 #include <gdkmm.h>
 #include <gtkmm/image.h>
-#include <gtkmm/main.h>
+#include <gtkmm/application.h>
 #include <gtkmm/window.h>
 
 
@@ -191,10 +191,9 @@ bool Wheelbarrow::on_button_press_event(GdkEventButton* event)
 
 int main(int argc, char** argv)
 {
-  Gtk::Main myapp (&argc, &argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+
 
   Wheelbarrow wheelbarrow;
-  Gtk::Main::run(wheelbarrow);
-
-  return 0;
+  return app->run(wheelbarrow);
 }

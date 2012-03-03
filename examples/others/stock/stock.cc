@@ -8,7 +8,7 @@
 #include <gtkmm/stock.h>
 #include <gtkmm/toolbutton.h>
 #include <gtkmm/separatortoolitem.h>
-#include <gtkmm/main.h>
+#include <gtkmm/application.h>
 
 #include <cstdio>
 //#include <glib.h>
@@ -137,10 +137,8 @@ void MainWindowClass::quit_pressed_cb()
 
 int main(gint argc, gchar **argv)
 {
-    Gtk::Main kit(argc, argv);
+    Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
     MainWindowClass main_window;
   
-    Gtk::Main::run(main_window);
-
-    return 0;
+    return app->run(main_window);
 }

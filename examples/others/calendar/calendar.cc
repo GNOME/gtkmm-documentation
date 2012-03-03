@@ -43,6 +43,7 @@ public:
 
 protected:
   void on_font_button_font_set();
+  void on_button_close();
  
   Gtk::CheckButton* flag_checkboxes_[5];
   bool settings_[5];
@@ -124,6 +125,10 @@ void CalendarExample::on_font_button_font_set()
   }
 }
 
+void CalendarExample::on_button_close()
+{
+  hide();
+}
 
 CalendarExample::CalendarExample()
 {
@@ -232,7 +237,8 @@ CalendarExample::CalendarExample()
   bbox->set_layout(Gtk::BUTTONBOX_END);
 
   Gtk::Button* button = Gtk::manage(new Gtk::Button("Close"));
-  button->signal_clicked().connect(&Gtk::Main::quit);
+  button->signal_clicked().connect(
+    sigc::mem_fun(*this, &CalendarExample::on_button_close));
   bbox->add(*button);
   button->set_can_default();
   button->grab_default();
@@ -252,9 +258,8 @@ Glib::Date CalendarExample::get_date() const
 
 int main(int argc, char** argv)
 {
-  Gtk::Main myapp(&argc, &argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
   CalendarExample calendar;
-  Gtk::Main::run(calendar);
-  return 0;
+  return app->run(calendar);
 }
 

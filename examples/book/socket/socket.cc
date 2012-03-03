@@ -50,8 +50,8 @@ class MySocketWindow : public Gtk::Window
 
 int main(int argc, char** argv)
 {
-  Gtk::Main app(argc, argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
   MySocketWindow win;
-  app.run(win);
+  app->run(win);
   return 0;
 }

@@ -15,12 +15,12 @@
  */
 
 #include "myarea.h"
-#include <gtkmm/main.h>
+#include <gtkmm/application.h>
 #include <gtkmm/window.h>
 
 int main(int argc, char* argv[])
 {
-  Gtk::Main kit(argc, argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   Gtk::Window window;
   window.set_title("Drawing text example");
@@ -29,7 +29,5 @@ int main(int argc, char* argv[])
   window.add(area);
   area.show();
 
-  Gtk::Main::run(window);
-
-  return 0;
+  return app->run(window);
 }

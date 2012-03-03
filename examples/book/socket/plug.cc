@@ -23,7 +23,7 @@ class MyPlug : public Gtk::Plug
     set_size_request(150, 100);
     add(m_label);
     signal_embedded().connect(sigc::ptr_fun(on_embed));
-    show_all();
+    show_all_children();
   }
 
   private:
@@ -33,15 +33,16 @@ class MyPlug : public Gtk::Plug
 
 int main(int argc, char** argv)
 {
-  Gtk::Main app(argc, argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
   MyPlug plug;
+  plug.show();
 
   ofstream out(id_filename);
   out << plug.get_id();
   out.close();
   cout << "The window ID is: " << plug.get_id() << endl;
 
-  app.run(plug);
+  app->run(plug);
 
   // remove the ID file when the program exits
   g_remove(id_filename);

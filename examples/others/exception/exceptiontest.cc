@@ -3,7 +3,7 @@
 #include <gtkmm/box.h>
 #include <glibmm/convert.h>
 #include <glibmm/exceptionhandler.h>
-#include <gtkmm/main.h>
+#include <gtkmm/application.h>
 #include <gtkmm/window.h>
 #include <gtkmm/button.h>
 
@@ -92,7 +92,8 @@ void handler2()
 
 int main(int argc, char** argv)
 {
-  Gtk::Main main_instance (&argc, &argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+
 
   Gtk::Window window;
   window.set_title("Exception Handlers");
@@ -129,8 +130,6 @@ int main(int argc, char** argv)
 
 
   window.show_all_children();
-  Gtk::Main::run(window);
-
-  return 0;
+  return app->run(window);
 }
 

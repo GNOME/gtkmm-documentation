@@ -17,15 +17,14 @@
  */
 
 #include "dndwindow.h"
-#include <gtkmm/main.h>
+#include <gtkmm/application.h>
 
 int main (int argc, char *argv[])
 {
-  Gtk::Main kit(argc, argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   DnDWindow dndWindow;
-  //Shows the window and returns when it is closed.
-  Gtk::Main::run(dndWindow);
 
-  return 0;
+  //Shows the window and returns when it is closed.
+  return app->run(dndWindow);
 }

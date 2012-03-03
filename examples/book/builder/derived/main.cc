@@ -21,7 +21,7 @@
 
 int main (int argc, char **argv)
 {
-  Gtk::Main kit(argc, argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   //Load the Glade file and instiate its widgets:
   Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
@@ -51,7 +51,7 @@ int main (int argc, char **argv)
   if(pDialog)
   {
     //Start:
-    kit.run(*pDialog);
+    app->run(*pDialog);
   }
 
   delete pDialog;

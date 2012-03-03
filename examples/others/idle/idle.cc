@@ -8,7 +8,7 @@
 #include <gtkmm/button.h>
 #include <gtkmm/label.h>
 #include <gtkmm/progressbar.h>
-#include <gtkmm/main.h>
+#include <gtkmm/application.h>
 #include <gtkmm/window.h>
 #include <glibmm/main.h>
 
@@ -60,7 +60,7 @@ IdleExample::IdleExample() :
   // set border and display all
   set_border_width(5);
   add(*vbox);
-  show_all();
+  show_all_children();
 
   // formatting drive c in timeout callback ;-)
   Glib::signal_timeout().connect(sigc::mem_fun(*this, &IdleExample::timer_callback), 50);
@@ -95,13 +95,12 @@ bool IdleExample::idle_callback()
   return (fraction < 1.0);
 }
 
-int main (int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-  Gtk::Main app(argc, argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   IdleExample example;
 
-  Gtk::Main::run(example);
-  return 0;
+  return app->run(example);
 }
 

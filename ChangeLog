@@ -1,3 +1,10 @@
+2012-03-03  Murray Cumming  <murrayc@murrayc.com>
+
+	Use Gtk::Application instead of Gtk::Main.
+
+	* examples/: Use Gtk::Application instead of Gtk::Main, which will
+	probably be deprecated.
+
 2012-03-02  Murray Cumming  <murrayc@murrayc.com>
 
 	Use ColorChooserDialog instead of deprecated ColorSelectionDialog.

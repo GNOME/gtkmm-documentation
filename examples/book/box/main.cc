@@ -17,7 +17,7 @@
  */
 
 #include "examplewindow.h"
-#include <gtkmm/main.h>
+#include <gtkmm/application.h>
 #include <iostream>
 #include <cstdlib>
 
@@ -25,7 +25,7 @@ using std::atoi;
 
 int main(int argc, char *argv[])
 {
-  Gtk::Main main_instance(argc, argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   if(argc != 2)
   {
@@ -34,7 +34,5 @@ int main(int argc, char *argv[])
   }
 
   ExampleWindow window( atoi(argv[1]) );
-  Gtk::Main::run(window); //Shows the window and returns when it is closed.
-
-  return 0;
+  return app->run(window); //Shows the window and returns when it is closed.
 }

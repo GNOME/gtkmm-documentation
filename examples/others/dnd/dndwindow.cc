@@ -18,7 +18,7 @@
 
 #include "dndwindow.h"
 #include "dnd_images.h"
-#include <gtkmm/main.h>
+#include <gtkmm/application.h>
 #include <iostream>
 
 DnDWindow::DnDWindow()

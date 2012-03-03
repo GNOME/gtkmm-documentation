@@ -4,7 +4,7 @@
 #include <gtkmm/grid.h>
 #include <gtkmm/button.h>
 #include <gtkmm/window.h>
-#include <gtkmm/main.h>
+#include <gtkmm/application.h>
 
 class ArrowButton : public Gtk::Button
 {
@@ -74,11 +74,10 @@ AppWindow::~AppWindow()
 
 int main (int argc, char *argv[])
 {
-  Gtk::Main myapp(&argc, &argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
   AppWindow arrows;
 
-  Gtk::Main::run(arrows);
-  return 0;
+  return app->run(arrows);
 }
 
 /* example-end */

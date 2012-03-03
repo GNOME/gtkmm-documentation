@@ -1,6 +1,6 @@
 #include <gtkmm/box.h>
 #include <gtkmm/button.h>
-#include <gtkmm/main.h>
+#include <gtkmm/application.h>
 #include <gtkmm/window.h>
 #include <gtkmm/statusbar.h>
 
@@ -59,11 +59,10 @@ StatusBarExample::push_item(unsigned int context_id)
 
 int main (int argc, char *argv[])
 {
-  Gtk::Main myapp(argc, argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   StatusBarExample exampleWindow;
 
-  Gtk::Main::run(exampleWindow);
-  return 0;
+  return app->run(exampleWindow);
 }
 

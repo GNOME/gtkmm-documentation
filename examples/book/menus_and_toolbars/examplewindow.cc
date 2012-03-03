@@ -112,7 +112,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_action_file_quit()
 {
-  hide(); //Closes the main window to stop the Gtk::Main::run().
+  hide(); //Closes the main window to stop the app->run().
 }
 
 void ExampleWindow::on_action_file_new()

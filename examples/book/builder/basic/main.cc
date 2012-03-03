@@ -12,7 +12,7 @@ void on_button_clicked()
 
 int main (int argc, char **argv)
 {
-  Gtk::Main kit(argc, argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   //Load the GtkBuilder file and instantiate its widgets:
   Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
@@ -48,7 +48,7 @@ int main (int argc, char **argv)
       pButton->signal_clicked().connect( sigc::ptr_fun(on_button_clicked) );
     }
 
-    kit.run(*pDialog);
+    app->run(*pDialog);
   }
 
   delete pDialog;

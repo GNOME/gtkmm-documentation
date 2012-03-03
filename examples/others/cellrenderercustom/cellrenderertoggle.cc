@@ -287,10 +287,10 @@ void AppWindow::on_cell_toggled(const Glib::ustring& path_string)
 
 int main(int argc, char** argv)
 {
-  Gtk::Main main_instance (&argc, &argv);
+  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   AppWindow window;
-  Gtk::Main::run(window);
+  app->run(window);
 
   return 0;
 }

@@ -69,8 +69,8 @@ void ExampleWindow::on_button_start()
 
      // Allow GTK+ to perform all updates for us. Without this, the progress bar
      // will appear to do nothing and then suddenly fill completely.
-     while(Gtk::Main::instance()->events_pending())
-         Gtk::Main::instance()->iteration();
+     while(Gtk::Main::events_pending())
+         Gtk::Main::iteration();
   }
 }
 
