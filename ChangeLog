@@ -1,5 +1,12 @@
 2012-03-03  Murray Cumming  <murrayc@murrayc.com>
 
+	Tutorial: Mention Gtk::Application instead of Gtk::Main.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Change code snippets and 
+	descriptions to use Gtk::Application.
+
+2012-03-03  Murray Cumming  <murrayc@murrayc.com>
+
 	Use Gtk::Application instead of Gtk::Main.
 
 	* examples/: Use Gtk::Application instead of Gtk::Main, which will
