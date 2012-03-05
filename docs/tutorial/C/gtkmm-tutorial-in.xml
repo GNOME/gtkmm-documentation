@@ -2021,7 +2021,7 @@ different styles, as shown in this picture:
 Each line contains one horizontal <classname>Box</classname> with
 several buttons. Each of the buttons on a line is packed into the
 <classname>Box</classname> with the same arguments to the
-<methodname>pack_start()</methodname> method).
+<methodname>pack_start()</methodname> method.
 </para>
 
 <para>
