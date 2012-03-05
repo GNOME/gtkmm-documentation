@@ -1906,7 +1906,7 @@ in &gtkmm; are descendants of <classname>Gtk::Bin</classname>, including
 Yes, that's correct: a Window can contain at most one widget. How, then, can
 we use a window for anything useful?  By placing a multiple-child container in
 the window. The most useful container widgets are
-<classname>Gtk:Grid</classname> and <classname>Gtk:Box</classname>.
+<classname>Gtk::Grid</classname> and <classname>Gtk::Box</classname>.
 </para>
 
 
