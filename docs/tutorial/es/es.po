@@ -6,6 +6,7 @@
 #
 #
 #
+#
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
 # Fidel Sanchez-Bueno <axl456@axl456.com.ve>, 2011.
 # José Zambrano <jozaol@gmail.com>, 2011.
@@ -17,8 +18,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-03-05 16:12+0000\n"
-"PO-Revision-Date: 2012-03-05 17:14+0100\n"
+"POT-Creation-Date: 2012-03-05 16:15+0000\n"
+"PO-Revision-Date: 2012-03-08 10:21+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -3493,11 +3494,6 @@ msgstr ""
 # Acá hay un pequeño error cuando se nombran a Gtk::Grid y Gtk::Box: tienen sólo un signo «:», cuando el operador de C++ es «::».
 # Nicolás.
 #: C/gtkmm-tutorial-in.xml:1905(para)
-#| msgid ""
-#| "Yes, that's correct: a Window can contain at most one widget. How, then, "
-#| "can we use a window for anything useful? By placing a multiple-child "
-#| "container in the window. The most useful container widgets are "
-#| "<classname>Gtk:Grid</classname> and <classname>Gtk:Box</classname>."
 msgid ""
 "Yes, that's correct: a Window can contain at most one widget. How, then, can "
 "we use a window for anything useful? By placing a multiple-child container "
@@ -3650,11 +3646,6 @@ msgid "Box Packing 1"
 msgstr "Caja de empaquetado 1"
 
 #: C/gtkmm-tutorial-in.xml:2020(para)
-#| msgid ""
-#| "Each line contains one horizontal <classname>Box</classname> with several "
-#| "buttons. Each of the buttons on a line is packed into the <classname>Box</"
-#| "classname> with the same arguments to the <methodname>pack_start()</"
-#| "methodname> method)."
 msgid ""
 "Each line contains one horizontal <classname>Box</classname> with several "
 "buttons. Each of the buttons on a line is packed into the <classname>Box</"
@@ -3736,7 +3727,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2056(title)
 msgid "Per-container packing options"
-msgstr ""
+msgstr "Opciones de empaquetado por contenedor"
 
 #: C/gtkmm-tutorial-in.xml:2059(programlisting)
 #, no-wrap
@@ -3750,6 +3741,10 @@ msgid ""
 "all of the contained widgets to be the same size. <parameter>spacing</"
 "parameter> is a (minimum) number of pixels to leave between each widget."
 msgstr ""
+"Aquí está el constructor de los widgets de caja: <placeholder-1/> Pasarle "
+"<literal>true</literal> a <parameter>homogeneous</parameter> hará que todos "
+"los widgets contenidos sean del mismo tamaño. <parameter>spacing</parameter> "
+"es el número (mínimo) de píxeles que dejar entre cada widget."
 
 #: C/gtkmm-tutorial-in.xml:2066(para)
 msgid ""
@@ -3758,6 +3753,10 @@ msgid ""
 "and padding is added on either side of a widget. The following figure should "
 "make it clearer:"
 msgstr ""
+"¿Cuál es la diferencia entre el espaciado (establecido cuando se crea la "
+"caja) y el relleno (establecido cuando se empaquetan los elementos)? El "
+"espaciado se añade entre objetos, y el relleno a cada lado del widget. La "
+"siguiente figura debería aclararlo:"
 
 #: C/gtkmm-tutorial-in.xml:2074(title)
 msgid "Box Packing 2"
@@ -3769,6 +3768,10 @@ msgid ""
 "When you run this example, provide a number between 1 and 3 as a command-"
 "line option, to see different packing options in use."
 msgstr ""
+"Aquí está el código fuente del ejemplo que produjo las capturas de pantalla "
+"anteriores. Cuando ejecute este ejemplo, proporcione un número entre 1 y 3 "
+"como opción de línea de comandos, para ver las diferentes opciones de "
+"empaquetado en acción."
 
 #: C/gtkmm-tutorial-in.xml:2094(title)
 msgid "ButtonBoxes"
@@ -3779,6 +3782,8 @@ msgid ""
 "Button boxes are a convenient way to quickly arrange a group of buttons. "
 "Their orientation can be either horizontal or vertical."
 msgstr ""
+"Las cajas de botones son una manera conveniente de ordenar rápidamente un "
+"grupo de botones. Su orientación puede ser tanto horizontal como vertical."
 
 #: C/gtkmm-tutorial-in.xml:2101(para)
 msgid ""
@@ -3786,12 +3791,17 @@ msgid ""
 "consistent because they use standard settings, such as inter-button spacing "
 "and packing."
 msgstr ""
+"Las <classname>ButtonBox</classname> ayudan a hacer que las aplicaciones "
+"aparezcan consistentes porque usan opciones estándar, como espaciado entre "
+"botones y empaquetado."
 
 #: C/gtkmm-tutorial-in.xml:2106(para)
 msgid ""
 "Buttons are added to a <classname>ButtonBox</classname> with the "
 "<methodname>add()</methodname> method."
 msgstr ""
+"Los botones se añaden a una <classname>ButtonBox</classname> con el método "
+"<methodname>add()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:2111(para)
 msgid ""
@@ -3799,6 +3809,9 @@ msgid ""
 "changed using <methodname>get_layout()</methodname> and "
 "<methodname>set_layout()</methodname>."
 msgstr ""
+"Las cajas de botones soportan varios estilos de disposición. Puede obtener y "
+"modificar el estilo usando <methodname>get_layout()</methodname> y "
+"<methodname>set_layout()</methodname>. "
 
 #: C/gtkmm-tutorial-in.xml:2123(title)
 msgid "ButtonBox"
@@ -3827,6 +3840,12 @@ msgid ""
 "<methodname>set_row_homogeneous()</methodname> and "
 "<methodname>set_column_homogeneous()</methodname>."
 msgstr ""
+"Los widgets hijos pueden abarcar múltiples filas o columnas, usando "
+"<methodname>attach()</methodname>, o añadirse a un widget existente dentro "
+"de la cuadrícula con <methodname>attach_next_to()</methodname>. Se puede "
+"establecer que las filas o columnas individuales de la cuadrícula tengan una "
+"altura o ancho uniforme con <methodname>set_row_homogeneous()</methodname> y "
+"<methodname>set_column_homogeneous()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:2150(para)
 msgid ""
@@ -3834,6 +3853,9 @@ msgid ""
 "properties of the child <classname>Widget</classname>s to control their "
 "spacing and their behaviour when the Grid is resized."
 msgstr ""
+"Puede establecer las propiedades <emphasis>margin</emphasis> y "
+"<emphasis>expand</emphasis> de los <classname>Widget</classname> hijos para "
+"controlar su espaciado y comportamiento cuando se redimensiona la cuadrícula."
 
 #: C/gtkmm-tutorial-in.xml:2157(para)
 msgid ""
@@ -3841,36 +3863,32 @@ msgid ""
 "buttons are in the upper row, from left to right. A third button is attached "
 "underneath the first button, in a new lower row, spanning two columns."
 msgstr ""
+"Este ejemplo crea una ventana con tres botones en una cuadrícula. Los dos "
+"primeros botones están en la fila superior, de izquierda a derecha. Se ha "
+"añadido un tercer botón bajo el primer botón, en una nueva fila más abajo, "
+"abarcando dos columnas."
 
 #: C/gtkmm-tutorial-in.xml:2178(title)
 msgid "Table"
 msgstr "Tabla"
 
 #: C/gtkmm-tutorial-in.xml:2180(para)
-#, fuzzy
-#| msgid ""
-#| "<classname>Gdk::Drawable</classname> was removed, with its methods moving "
-#| "into <classname>Gdk::Window</classname>."
 msgid ""
 "<classname>Gtk::Table</classname> allows us to place widgets in a grid, "
 "similar to <classname>Gtk::Grid</classname>."
 msgstr ""
-"<classname>Gdk::Drawable</classname> se quitó, y sus métodos se movieron a "
-"<classname>Gdk::Window</classname>."
+"<classname>Gtk::Table</classname> permite poner widgets en una cuadrícula, "
+"de manera similar a <classname>Gtk::Grid</classname>."
 
 #: C/gtkmm-tutorial-in.xml:2184(para)
-#, fuzzy
-#| msgid ""
-#| "<classname>Gtk::Button</classname> is also a container so you could put "
-#| "any other widget, such as a <classname>Gtk::Image</classname> into it."
 msgid ""
 "<classname>Gtk::Table</classname> is deprecated from <application>gtkmm</"
 "application> version 3.4 and should not be used in newly-written code. Use "
 "<classname>Gtk::Grid</classname> instead."
 msgstr ""
-"<classname>Gtk::Button</classname> también es un contenedor, por lo que "
-"puede poner otro widget, como un <classname>Gtk::Image</classname> dentro de "
-"él."
+"<classname>Gtk::Table</classname> se marcó como obsoleto en "
+"<application>gtkmm</application> 3.4 y no se debe usar en el código nuevo. "
+"Use <classname>Gtk::Grid</classname> en su lugar."
 
 #: C/gtkmm-tutorial-in.xml:2191(title) C/gtkmm-tutorial-in.xml:2226(title)
 msgid "Notebook"
@@ -3898,6 +3916,10 @@ msgid ""
 "pages to the <literal>Notebook</literal>, supplying the child widget and the "
 "name for the tab."
 msgstr ""
+"Use los métodos <methodname>append_page()</methodname>, "
+"<methodname>prepend_page()</methodname> e <methodname>insert_page()</"
+"methodname> para añadir páginas con pestañas al <literal>Notebook</literal>, "
+"proporcionándoles el widget hijo y el nombre de la pestaña."
 
 #: C/gtkmm-tutorial-in.xml:2209(para)
 msgid ""
@@ -3906,12 +3928,18 @@ msgid ""
 "<methodname>get_nth_page()</methodname> with that number will give you a "
 "pointer to the actual child widget."
 msgstr ""
+"Para descubrir la página visible actual, use el método "
+"<methodname>get_current_page()</methodname>. Esto devuelve el número de "
+"página. Después llame a <methodname>get_nth_page()</methodname> con ese "
+"número le dará un puntero al widget hijo en sí."
 
 #: C/gtkmm-tutorial-in.xml:2216(para)
 msgid ""
 "To programmatically change the selected page, use the "
 "<methodname>set_current_page()</methodname> method."
 msgstr ""
+"Para cambiar la página seleccionada mediante programación, use el método "
+"<methodname>set_current_page()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:2239(title) C/gtkmm-tutorial-in.xml:2266(title)
 msgid "Assistant"
@@ -3925,6 +3953,11 @@ msgid ""
 "automatically depending on the type of the page, set with "
 "<methodname>set_page_type()</methodname>."
 msgstr ""
+"Un <classname>Assistant</classname> divide una operación compleja en pasos. "
+"Cada paso es una página, conteniendo una cabecera, un widget hijo, y un área "
+"de acción. El área de acción del asistente tiene botones de navegación que "
+"se actualizan automáticamente dependiendo del tipo de la página, establecido "
+"con <methodname>set_page_type()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:2245(para)
 msgid ""
@@ -3933,6 +3966,10 @@ msgid ""
 "to the <classname>Assistant</classname>, supplying the child widget for each "
 "page."
 msgstr ""
+"Use los métodos <methodname>append_page()</methodname>, "
+"<methodname>prepend_page</methodname> e <methodname>insert_page()</"
+"methodname> para añadirle páginas al <classname>Assistant</classname>, "
+"proporcionándole el widget hijo por cada página."
 
 #: C/gtkmm-tutorial-in.xml:2249(para)
 msgid ""
@@ -3942,6 +3979,11 @@ msgid ""
 "programmatically change the current page, use the "
 "<methodname>set_current_page()</methodname> method."
 msgstr ""
+"Para determinar la página actualmente visible, use el método "
+"<methodname>get_current_page()</methodname> y pásele el resultado a "
+"<methodname>get_nth_page()</methodname>, que le devuelve un puntero al "
+"widget en sí. Para cambiar mediante programación la página actual, use el "
+"método <methodname>set_current_page()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:2253(para)
 msgid ""
@@ -3950,6 +3992,11 @@ msgid ""
 "<methodname>set_page_header_image()</methodname> and "
 "<methodname>set_page_side_image()</methodname> methods."
 msgstr ""
+"Para establecer el título de una página, use el método "
+"<methodname>set_page_title()</methodname>. Las imágenes de cabecera y de "
+"lado de una página se pueden establecer con los métodos "
+"<methodname>set_page_header_image()</methodname> y "
+"<methodname>set_page_side_image()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:2257(para)
 msgid ""
@@ -3957,6 +4004,10 @@ msgid ""
 "methodname> method. They will be packed alongside the default buttons. Use "
 "the <methodname>remove_action_widget()</methodname> method to remove widgets."
 msgstr ""
+"Para añadir widgets al área de acción, use el método "
+"<methodname>add_action_widget()</methodname>. Serán empaquetados junto a los "
+"botones por defecto. Use el método <methodname>remove_action_widget()</"
+"methodname> para borrar los widgets."
 
 #: C/gtkmm-tutorial-in.xml:2284(title)
 msgid "The TreeView widget"
@@ -3967,6 +4018,8 @@ msgid ""
 "The <classname>Gtk::TreeView</classname> widget can contain lists or trees "
 "of data, in columns."
 msgstr ""
+"El widget <classname>Gtk::TreeView</classname> puede contener listas o "
+"árboles de datos, en columnas."
 
 #: C/gtkmm-tutorial-in.xml:2291(title)
 msgid "The Model"
@@ -3983,6 +4036,14 @@ msgid ""
 "columns from the same Model data, in the same way that 2 SQL queries (or "
 "\"views\") might show different fields from the same database table."
 msgstr ""
+"Cada <classname>Gtk::TreeView</classname> tiene un <classname>Gtk::Model</"
+"classname> asociado que contiene los datos mostrados por el "
+"<classname>TreeView</classname> Varios <classname>Gtk::TreeView</classname> "
+"puede usar el mismo <classname>Gtk::TreeModel</classname>. Por ejemplo, esto "
+"le permite mostrar y editar los mismos datos de 2 formas diferentes al mismo "
+"tiempo. O las 2 vistas pueden mostrar diferentes columnas de los mismos "
+"modelos de datos, de la misma manera que dos consultas SQL (o «vistas») "
+"pueden mostrar diferentes campos de la misma tabla de la base de datos."
 
 #: C/gtkmm-tutorial-in.xml:2302(para)
 msgid ""
