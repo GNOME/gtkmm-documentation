@@ -7,6 +7,7 @@
 #
 #
 #
+#
 # Jorge González <jorgegonz@svn.gnome.org>, 2010.
 # Fidel Sanchez-Bueno <axl456@axl456.com.ve>, 2011.
 # José Zambrano <jozaol@gmail.com>, 2011.
@@ -18,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-03-05 16:15+0000\n"
-"PO-Revision-Date: 2012-03-08 10:21+0100\n"
+"POT-Creation-Date: 2012-03-08 09:23+0000\n"
+"PO-Revision-Date: 2012-03-13 10:39+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -4051,6 +4052,9 @@ msgid ""
 "use either the <classname>ListStore</classname> or <classname>TreeStore</"
 "classname> model classes."
 msgstr ""
+"A pesar de que, teóricamente, puede implementar su propio modelo, "
+"normalmente usará las clases de los modelos <classname>ListStore</classname> "
+"o <classname>TreeStore</classname>."
 
 #: C/gtkmm-tutorial-in.xml:2311(title)
 msgid "ListStore, for rows"
@@ -4061,6 +4065,8 @@ msgid ""
 "The <classname>ListStore</classname> contains simple rows of data, and each "
 "row has no children."
 msgstr ""
+"El <classname>ListStore</classname> contiene filas simples de datos, y "
+"ninguna fila tiene hijos."
 
 #: C/gtkmm-tutorial-in.xml:2318(title) C/gtkmm-tutorial-in.xml:2862(title)
 msgid "TreeView - ListStore"
@@ -4075,6 +4081,8 @@ msgid ""
 "The <classname>TreeStore</classname> contains rows of data, and each row may "
 "have child rows."
 msgstr ""
+"El <classname>TreeStore</classname> contiene filas de datos, y cada fila "
+"puede tener filas hijas."
 
 #: C/gtkmm-tutorial-in.xml:2336(title) C/gtkmm-tutorial-in.xml:2881(title)
 msgid "TreeView - TreeStore"
@@ -4094,6 +4102,14 @@ msgid ""
 "<classname>TreeModelColumnRecord</classname> which has your "
 "<classname>TreeModelColumn</classname> instances as member data."
 msgstr ""
+"La clase <classname>TreeModelColumnRecord</classname> se usa para rastrear a "
+"las columnas y sus tipos de datos. Añádale instancias "
+"<classname>TreeModelColumn</classname> al <classname>ColumnRecord</"
+"classname> y luego use esas <classname>TreeModelColumn</classname> cuando "
+"establezca u obtenga los datos en las filas del modelo. Probablemente "
+"encuentre conveniente derivar un <classname>TreeModelColumnRecord</"
+"classname> que tenga a sus instancias <classname>TreeModelColumn</classname> "
+"como datos miembro."
 
 #: C/gtkmm-tutorial-in.xml:2359(programlisting)
 #, no-wrap
@@ -4129,6 +4145,8 @@ msgid ""
 "You specify the <classname>ColumnRecord</classname> when creating the Model, "
 "like so:"
 msgstr ""
+"Especifique el <classname>ColumnRecord</classname> cuando cree el modelo, "
+"así:"
 
 #: C/gtkmm-tutorial-in.xml:2376(programlisting)
 #, no-wrap
@@ -4145,6 +4163,9 @@ msgid ""
 "static, because it often needs to be instantiated after glibmm has been "
 "instantiated."
 msgstr ""
+"Tenga en cuenta que la instancia (como m_Columns aquí) normalmente no debe "
+"ser estática, porque a menudo se necesita instanciarla después de haber "
+"instanciado a glibmm."
 
 #: C/gtkmm-tutorial-in.xml:2383(title)
 msgid "Adding Rows"
@@ -4166,7 +4187,7 @@ msgstr "Gtk::TreeModel::iterator iter = m_refListStore-&gt;append();"
 
 #: C/gtkmm-tutorial-in.xml:2389(para)
 msgid "You can dereference the iterator to get the Row:"
-msgstr "Puede eliminar la referencia al iterador para obtener la fila:"
+msgstr "Puede desreferenciar al iterador para obtener la fila:"
 
 #: C/gtkmm-tutorial-in.xml:2391(programlisting)
 #, no-wrap
@@ -4183,6 +4204,9 @@ msgid ""
 "with the <methodname>append()</methodname>, <methodname>prepend()</"
 "methodname>, or <methodname>insert()</methodname> methods, like so:"
 msgstr ""
+"Los modelos <classname>Gtk::TreeStore</classname> pueden tener elementos "
+"hijos. Añádalos con los métodos <methodname>append()</methodname>, "
+"<methodname>prepend()</methodname>, o <methodname>insert()</methodname>, así:"
 
 #: C/gtkmm-tutorial-in.xml:2398(programlisting)
 #, no-wrap
@@ -4203,11 +4227,14 @@ msgid ""
 "for a particular column in the row, specifying the "
 "<classname>TreeModelColumn</classname> used to create the model."
 msgstr ""
+"Puede usar la sobrecarga de <methodname>operator[]</methodname> para "
+"establecer los datos de una columna particular en la fila, especificando la "
+"<classname>TreeModelColumn</classname> que se usó para crear el modelo."
 
 #: C/gtkmm-tutorial-in.xml:2411(programlisting)
 #, no-wrap
 msgid "row[m_Columns.m_col_text] = \"sometext\";"
-msgstr "row[m_Columns.m_col_text] = \"texto\";"
+msgstr "row[m_Columns.m_col_text] = \"sometext\";"
 
 #: C/gtkmm-tutorial-in.xml:2415(title)
 msgid "Getting values"
@@ -4219,6 +4246,9 @@ msgid ""
 "in a particular column in a row, specifiying the <classname>TreeModelColumn</"
 "classname> used to create the model."
 msgstr ""
+"Puede usar la sobrecarga <methodname>operator[]</methodname> para obtener "
+"los datos de una columna particular en una fila, especificando la "
+"<classname>TreeModelColumn</classname> que se usó para crear el modelo."
 
 #: C/gtkmm-tutorial-in.xml:2421(programlisting)
 #, no-wrap
@@ -4234,6 +4264,8 @@ msgid ""
 "The compiler will complain if you use an inappropriate type. For instance, "
 "this would generate a compiler error:"
 msgstr ""
+"El compilador le hará saber si usa un tipo inapropiado. Por ejemplo, esto "
+"generaría un error de compilación:"
 
 #: C/gtkmm-tutorial-in.xml:2427(programlisting)
 #, no-wrap
@@ -4253,6 +4285,8 @@ msgid ""
 "You might want to associate extra data with each row. If so, just add it as "
 "a Model column, but don't add it to the View."
 msgstr ""
+"Puede querer asociar datos adicionales a cada fila. Si es así, sólo añádalos "
+"como una columa del modelo, pero no se los añada a la vista."
 
 #: C/gtkmm-tutorial-in.xml:2442(title) C/gtkmm-tutorial-in.xml:3236(title)
 msgid "The View"
@@ -4265,6 +4299,10 @@ msgid ""
 "the user to interact with it. The View can show all of the model's columns, "
 "or just some, and it can show them in various ways."
 msgstr ""
+"La vista es el widget en sí (<classname>Gtk::TreeView</classname>) que "
+"muestra los datos del modelo (<classname>Gtk::TreeModel</classname>) y le "
+"permite al usuario interactuar con él. La vista puede mostrar todas las "
+"columnas del modelo, o sólo algunas, y puede mostrarlas de varias maneras."
 
 #: C/gtkmm-tutorial-in.xml:2453(title)
 msgid "Using a Model"
@@ -4276,6 +4314,9 @@ msgid ""
 "the <classname>Gtk::TreeView</classname>, or you can use the "
 "<methodname>set_model()</methodname> method, like so:"
 msgstr ""
+"Puede especificar un <classname>Gtk::TreeModel</classname> cuando construye "
+"la <classname>Gtk::TreeView</classname>, o puede usar el método "
+"<methodname>set_model()</methodname>, así:"
 
 #: C/gtkmm-tutorial-in.xml:2459(programlisting)
 #, no-wrap
@@ -4292,6 +4333,9 @@ msgid ""
 "View that it should display certain Model columns, in a certain order, with "
 "a certain column title."
 msgstr ""
+"Puede usar el método <methodname>append_column()</methodname> para decirle a "
+"la vista que debe mostrar ciertas columnas del modelo, en cierto orden, con "
+"un cierto título de columna."
 
 #: C/gtkmm-tutorial-in.xml:2469(programlisting)
 #, no-wrap
@@ -4312,10 +4356,22 @@ msgid ""
 "not supported by default - You could use (unsigned) int or (unsigned) long "
 "as the column type instead."
 msgstr ""
+"Cuando use esta simple sobrecarga <methodname>append_column()</methodname>, "
+"el <classname>TreeView</classname> mostrará los datos del modelo con un "
+"<classname>CellRenderer</classname> apropiado. Por ejemplo, las cadenas y "
+"los números se muestran en un simple widget <classname>Gtk::Entry</"
+"classname>, y los booleanos en un <classname>Gtk::CheckButton</classname>. "
+"Esto es normalmente lo que necesita. Para otros tipos de columnas, debe "
+"conectar un retorno de llamada que convierta su tipo en una cadena "
+"representativa, con <methodname>TreeViewColumn::set_cell_data_func()</"
+"methodname>; o derivar un <classname>CellRenderer</classname> personalizado. "
+"Tenga en cuenta que no se soporta el tipo «(unsigned) short» de manera "
+"predeterminada: puede usar como tipo de columna «(unsigned) int» o «(unsigned) "
+"long» en su lugar."
 
 #: C/gtkmm-tutorial-in.xml:2486(title)
 msgid "More than one Model Column per View Column"
-msgstr ""
+msgstr "Más de una columna del modelo por columna de la vista"
 
 #: C/gtkmm-tutorial-in.xml:2487(para)
 msgid ""
@@ -4323,6 +4379,10 @@ msgid ""
 "the <classname>TreeView::Column</classname> widget manually, and use "
 "<methodname>pack_start()</methodname> to add the model columns to it."
 msgstr ""
+"Para reproducir más de una columna del modelo en una columna de vista, "
+"necesita crear el widget <classname>TreeView::Column</classname> "
+"manualmente, y usar <methodname>pack_start()</methodname> para añadirle las "
+"columnas del modelo."
 
 #: C/gtkmm-tutorial-in.xml:2493(para)
 msgid ""
@@ -4333,12 +4393,23 @@ msgid ""
 "which it generates an appropriate <classname>Gtk::View::Column</classname> "
 "widget."
 msgstr ""
+"Entonces, use <methodname>append_column()</methodname> para añadirle la "
+"columna de vista a la vista. Tenga en cuenta que <methodname>Gtk::View::"
+"append_column()</methodname> se sobrecarga para aceptar un widget "
+"<classname>Gtk::View::Column</classname>, o sólo el "
+"<classname>TreeModelColumn</classname> del cual genera un widget "
+"<classname>Gtk::View::Column</classname> apropiado."
 
+# No le encuentro el sentido a «text name», y por lo tanto no se si su traducción es apropiada.
+# Nicolás.
 #: C/gtkmm-tutorial-in.xml:2500(para)
 msgid ""
 "Here is some example code from <filename>demos/gtk-demo/example_stockbrowser."
 "cc</filename>, which has a pixbuf icon and a text name in the same column:"
 msgstr ""
+"Aquí hay algo de código de ejemplo de <filename>demos/gtk-demo/"
+"example_stockbrowser.cc</filename>, que tiene un icono pixbuf y un nombre de "
+"texto en la misma columna:"
 
 #: C/gtkmm-tutorial-in.xml:2505(programlisting)
 #, no-wrap
@@ -4365,7 +4436,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:2517(title)
 msgid "Specifying CellRenderer details"
-msgstr ""
+msgstr "Especificar los detalles del CellRenderer"
 
 #: C/gtkmm-tutorial-in.xml:2518(para)
 msgid ""
