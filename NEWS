@@ -1,3 +1,16 @@
+3.3.18:
+
+* Remove Table and other deprecated classes.
+  (Kjell Ahlstedt)
+* Use and mention Gtk::Application instead of Gtk::Main.
+* Use Gtk::ApplicationWindow.
+* Use ColorChooserDialog instead of deprecated ColorSelectionDialog.
+  (Murray Cumming)
+* Keyboard Events chapter: Clarify keyboard event propagation.
+  (Pedro Ferreira) Bug #661857
+* New example programs in the DrawingArea chapter.
+  (Pedro Ferreira) Bug #666885
+
 3.2.1 (stable):
 
 * Corrected the list of authors.
