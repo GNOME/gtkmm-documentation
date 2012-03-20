@@ -326,7 +326,7 @@ The next line:
 
 <programlisting>Glib::RefPtr&lt;Gtk::Application&gt; app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");</programlisting>
 
-creates a <classname>Gtk::Applicaiton</classname> object, stored in a <classname>RefPtr</classname> smartpointer. This is needed in all &gtkmm;
+creates a <classname>Gtk::Application</classname> object, stored in a <classname>RefPtr</classname> smartpointer. This is needed in all &gtkmm;
 applications. The create() method for this object initializes &gtkmm;, and checks the
 arguments passed to your application on the command line, looking for
 standard options such as <literal>-display</literal>. It takes these from the argument list, leaving anything it does not
