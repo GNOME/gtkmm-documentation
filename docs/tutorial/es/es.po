@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-03-08 09:23+0000\n"
-"PO-Revision-Date: 2012-03-13 10:39+0100\n"
+"POT-Creation-Date: 2012-03-13 09:42+0000\n"
+"PO-Revision-Date: 2012-03-20 17:08+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -760,10 +760,9 @@ msgstr ""
 #: C/gtkmm-tutorial-in.xml:327(programlisting)
 #, no-wrap
 msgid "Glib::RefPtr&lt;Gtk::Application&gt; app = Gtk::Application::create(argc, argv, \"org.gtkmm.examples.base\");"
-msgstr ""
+msgstr "Glib::RefPtr&lt;Gtk::Application&gt; app = Gtk::Application::create(argc, argv, \"org.gtkmm.examples.base\");"
 
 #: C/gtkmm-tutorial-in.xml:324(para)
-#, fuzzy
 #| msgid ""
 #| "The next line: <placeholder-1/> creates a <classname>Gtk::Main</"
 #| "classname> object. This is needed in all <application>gtkmm</application> "
@@ -786,15 +785,16 @@ msgid ""
 "<application>gtkmm</application> applications accept the same set of "
 "standard arguments."
 msgstr ""
-"La siguiente línea: <placeholder-1/> crea un objeto <classname>Gtk::Main</"
-"classname>. Esto es necesario en todas las aplicaciones <application>gtkmm</"
-"application>. El constructor de este objeto inicializa <application>gtkmm</"
-"application>, y comprueba los argumentos pasados ​​a la aplicación en la línea "
-"de comandos, en busca de opciones estándar tales como <literal>-display </"
-"literal>. Toma estos de la lista de argumentos, dejando cualquier cosa que "
-"no reconoce a su aplicación para analizarla u omitirla. Esto asegura que "
-"todas las aplicaciones <application>gtkmm</application> acepten el mismo "
-"conjunto de argumentos estándar."
+"La siguiente línea: <placeholder-1/> crea un objeto <classname>Gtk::"
+"Application</classname>, almacenado en un puntero inteligente "
+"<classname>RefPtr</classname>. Esto es necesario en todas las aplicaciones "
+"<application>gtkmm</application>. El método «create()» de este objeto "
+"inicializa <application>gtkmm</application> y verifica los argumentos "
+"pasados a su aplicación en la línea de comandos, buscando opciones estándar "
+"tales como <literal>-display</literal>. Toma estos argumentos de la lista, "
+"dejándole cualquier cosa que no reconozca para que su aplicación la procese "
+"o la ignore. Esto asegura que todas las aplicaciones <application>gtkmm</"
+"application> acepten el mismo conjunto de argumentos estándar."
 
 #: C/gtkmm-tutorial-in.xml:337(para)
 msgid "The next two lines of code create and display a window:"
@@ -806,11 +806,6 @@ msgid "Gtk::Window window;"
 msgstr "Gtk::Window window;"
 
 #: C/gtkmm-tutorial-in.xml:341(para)
-#, fuzzy
-#| msgid ""
-#| "The last line shows the window and enters the <application>gtkmm</"
-#| "application> main processing loop, which will finish when the window is "
-#| "closed."
 msgid ""
 "The last line shows the window and enters the <application>gtkmm</"
 "application> main processing loop, which will finish when the window is "
@@ -818,12 +813,14 @@ msgid ""
 "error code."
 msgstr ""
 "La última línea muestra la ventana y entra al bucle principal de "
-"<application>gtkmm</application>, que terminará cuando la ventana se cierre."
+"<application>gtkmm</application>, que terminará cuando la ventana se cierre. "
+"Su función «main()» entonces retornará con un éxito apropiado o un código de "
+"error."
 
 #: C/gtkmm-tutorial-in.xml:345(programlisting)
 #, no-wrap
 msgid "return app-&gt;run(window);"
-msgstr ""
+msgstr "return app-&gt;run(window);"
 
 #: C/gtkmm-tutorial-in.xml:349(programlisting)
 #, no-wrap
@@ -1526,17 +1523,7 @@ msgstr ""
 "Aquí está, sin comentarios:"
 
 #: C/gtkmm-tutorial-in.xml:575(programlisting)
-#, fuzzy, no-wrap
-#| msgid ""
-#| "int main(int argc, char** argv)\n"
-#| "{\n"
-#| "  Gtk::Main kit(argc, argv);\n"
-#| "\n"
-#| "  HelloWorld helloworld;\n"
-#| "  Gtk::Main::run(helloworld);\n"
-#| "\n"
-#| "  return 0;\n"
-#| "}"
+#, no-wrap
 msgid ""
 "int main(int argc, char** argv)\n"
 "{\n"
@@ -1548,22 +1535,13 @@ msgid ""
 msgstr ""
 "int main(int argc, char** argv)\n"
 "{\n"
-"  Gtk::Main kit(argc, argv);\n"
+"  Glib::RefPtr&lt;Gtk::Application&gt; app = Gtk::Application::create(argc, argv, \"org.gtkmm.example\");\n"
 "\n"
 "  HelloWorld helloworld;\n"
-"  Gtk::Main::run(helloworld);\n"
-"\n"
-"  return 0;\n"
+"  return app-&gt;run(helloworld);\n"
 "}"
 
 #: C/gtkmm-tutorial-in.xml:583(para)
-#, fuzzy
-#| msgid ""
-#| "First we instantiate an object called <literal>kit</literal>. This is of "
-#| "type <classname>Gtk::Main</classname>. Every <application>gtkmm</"
-#| "application> program must have one of these. We pass our command-line "
-#| "arguments to its constructor. It takes the arguments it wants, and leaves "
-#| "you the rest, as we described earlier."
 msgid ""
 "First we instantiate an object stored in a <classname>RefPtr</classname> "
 "smartpointer called <literal>app</literal>. This is of type <classname>Gtk::"
@@ -1572,24 +1550,14 @@ msgid ""
 "method. It takes the arguments it wants, and leaves you the rest, as we "
 "described earlier."
 msgstr ""
-"Primero, creamos una instancia de un objeto llamado <literal>kit</literal>. "
-"Este es del tipo <classname>Gtk::Main</classname>. Cada programa de "
-"<application>gtkmm</application> debe tener uno de estos. Se le pasan los "
-"argumentos de línea de comandos a su constructor. Toma los argumentos que "
-"quiere, y le deja el resto, como se describió anteriormente."
+"Primero, se instancia un objeto almacenado en un puntero inteligente "
+"<classname>RefPtr</classname> llamado <literal>app</literal>. Éste es del "
+"tipo <classname>Gtk::Application</classname>. Cada programa de "
+"<application>gtkmm</application> debe tener uno de estos. Le pasamos "
+"nuestros argumentos de línea de comandos a su método «create()». Toma los "
+"argumentos que quiere, y le deja el resto, como se ha descrito anteriormente."
 
 #: C/gtkmm-tutorial-in.xml:590(para)
-#, fuzzy
-#| msgid ""
-#| "Next we make an object of our <classname>HelloWorld</classname> class, "
-#| "whose constructor takes no arguments, but it isn't visible yet. When we "
-#| "call Gtk::Main::run(), giving it the helloworld Window, it shows the "
-#| "Window and starts the <application>gtkmm</application><emphasis>event "
-#| "loop</emphasis>. During the event loop <application>gtkmm</application> "
-#| "idles, waiting for actions from the user, and responding appropriately. "
-#| "When the user closes the Window, run() will return, causing the final "
-#| "line of our main() function be to executed. The application will then "
-#| "finish."
 msgid ""
 "Next we make an object of our <classname>HelloWorld</classname> class, whose "
 "constructor takes no arguments, but it isn't visible yet. When we "
@@ -1601,14 +1569,14 @@ msgid ""
 "return, causing the final line of our main() function be to executed. The "
 "application will then finish."
 msgstr ""
-"A continuación, creamos un objeto de nuestra clase <classname>HelloWorld</"
+"A continuación, se crea un objeto de la clase <classname>HelloWorld</"
 "classname>, cuyo constructor no toma argumentos, pero todavía no es visible. "
-"Cuando se llama a Gtk::Main::run(), pasándole la ventana «helloworld», la "
-"muestra y comienza la <emphasis>iteración de eventos</emphasis> de "
-"<application>gtkmm</application>. Durante la iteración, <application>gtkmm</"
+"Cuando se llama a Gtk::Application::run(), pasándole la ventana «helloworld», "
+"la muestra y comienza el <emphasis>bucle de eventos</emphasis> de "
+"<application>gtkmm</application>. Durante el bucle, <application>gtkmm</"
 "application> espera las acciones del usuario, y responde apropiadamente. "
-"Cuando el usuario cierre la ventana, run() retornará, haciendo que la última "
-"línea de nuestra función main() se ejecute. La aplicación, entonces, "
+"Cuando el usuario cierre la ventana, «run()» retornará, haciendo que la "
+"última línea de nuestra función «main()» se ejecute. Entonces, la aplicación "
 "finalizará."
 
 #: C/gtkmm-tutorial-in.xml:599(title)
@@ -4007,7 +3975,7 @@ msgid ""
 msgstr ""
 "Para añadir widgets al área de acción, use el método "
 "<methodname>add_action_widget()</methodname>. Serán empaquetados junto a los "
-"botones por defecto. Use el método <methodname>remove_action_widget()</"
+"botones predeterminados. Use el método <methodname>remove_action_widget()</"
 "methodname> para borrar los widgets."
 
 #: C/gtkmm-tutorial-in.xml:2284(title)
@@ -4447,6 +4415,13 @@ msgid ""
 "classname> widget and instructs it to render the data from various model "
 "columns through various aspects of its appearance."
 msgstr ""
+"Los <classname>CellRenderer</classname> predeterminados y su comportamiento "
+"predeterminado normalmente serán suficientes, pero quizás necesite "
+"ocasionalmente un control más preciso. Por ejemplo, este código de ejemplo "
+"de <filename>demos/gtk-demo/example_treestore.cc</filename> construye "
+"manualmente un widget <classname>Gtk::CellRenderer</classname> y le indica "
+"que procese los datos de varias columnas de modelo a través de varios "
+"aspectos de su apariencia."
 
 #: C/gtkmm-tutorial-in.xml:2526(programlisting)
 #, no-wrap
@@ -4482,6 +4457,8 @@ msgid ""
 "You can also connect to <classname>CellRenderer</classname> signals to "
 "detect user actions. For instance:"
 msgstr ""
+"También puede conectarle señales a un <classname>CellRenderer</classname> "
+"para detectar las acciones del usuario. Por ejemplo:"
 
 #: C/gtkmm-tutorial-in.xml:2543(programlisting)
 #, no-wrap
@@ -4520,6 +4497,15 @@ msgid ""
 "only be instantiated for simple column types such as <classname>Glib::"
 "ustring</classname>, int, and long."
 msgstr ""
+"El usuario puede editar las celdas en una <classname>TreeView</classname> "
+"directamente. Para permitir esto, use los métodos <classname>Gtk::TreeView</"
+"classname> <methodname>insert_column_editable()</methodname> y "
+"<methodname>append_column_editable()</methodname> en lugar de "
+"<methodname>insert_column()</methodname> y <methodname>append_column()</"
+"methodname>. Cuando estas celdas se editen, los nuevos valores se guardarán "
+"inmediatamente en el modelo. Tenga en cuenta que estos métodos son "
+"plantillas que sólo se pueden instanciar para tipos de columnas simples como "
+"<classname>Glib::ustring</classname>, int, y long."
 
 #: C/gtkmm-tutorial-in.xml:2570(title)
 msgid "Implementing custom logic for editable cells."
@@ -4531,6 +4517,9 @@ msgid ""
 "instance, maybe you want to restrict the input to certain characters or "
 "ranges of values."
 msgstr ""
+"Sin embargo, tal vez no quiera que se almacenen los valores nuevos "
+"inmediatamente. Por ejemplo, tal vez quiera restringir la entrada a ciertos "
+"caracteres o rangos de valores."
 
 #: C/gtkmm-tutorial-in.xml:2576(para)
 msgid ""
@@ -4540,6 +4529,11 @@ msgid ""
 "<methodname>get_column_cell_renderer()</methodname> to get the "
 "<classname>Gtk::CellRenderer</classname> used by that column."
 msgstr ""
+"Para lograr esto, debe usar los métodos <classname>Gtk::TreeView</classname> "
+"<methodname>insert_column()</methodname> y <methodname>append_column()</"
+"methodname> normales, y luego usar <methodname>get_column_cell_renderer()</"
+"methodname> para obtener el <classname>Gtk::CellRenderer</classname> que usa "
+"esa columna."
 
 #: C/gtkmm-tutorial-in.xml:2582(para)
 msgid ""
@@ -4547,12 +4541,17 @@ msgid ""
 "specific <classname>CellRenderer</classname> that you expect, so you can use "
 "specific API."
 msgstr ""
+"Entonces, convierta ese <classname>Gtk::CellRenderer*</classname> al "
+"<classname>CellRenderer</classname> específico que espera, para que pueda "
+"usar la API específica."
 
 #: C/gtkmm-tutorial-in.xml:2586(para)
 msgid ""
 "For instance, for a CellRendererText, you would set the cell's "
 "<emphasis>editable</emphasis> property to true, like so:"
 msgstr ""
+"Por ejemplo, para un CellRendererText, establecería la propiedad "
+"<emphasis>editable</emphasis> de la celda a «true», así:"
 
 #: C/gtkmm-tutorial-in.xml:2589(programlisting)
 #, no-wrap
@@ -4564,6 +4563,8 @@ msgid ""
 "For a CellRendererToggle, you would set the <emphasis>activatable</emphasis> "
 "property instead."
 msgstr ""
+"Para un CellRendererToggle, establecería la propiedad <emphasis>activable</"
+"emphasis> en su lugar."
 
 #: C/gtkmm-tutorial-in.xml:2594(para)
 msgid ""
@@ -4575,12 +4576,21 @@ msgid ""
 "and then call <methodname>get_cell_renderers()</methodname> on that view "
 "Column."
 msgstr ""
+"Entonces, puede conectar la señal «edited» apropiada. Por ejemplo, conectarlo "
+"a <methodname>Gtk::CellRendererText::signal_edited()</methodname>, o a "
+"<methodname>Gtk::CellRendererToggle::signal_toggled()</methodname>. Si la "
+"columna contiene más de un <classname>CellRenderer</classname>, entonces "
+"tendrá que usar <methodname>Gtk::TreeView::get_column()</methodname> y luego "
+"llamar a <methodname>get_cell_renderers()</methodname> en esa columna de la "
+"vista."
 
 #: C/gtkmm-tutorial-in.xml:2602(para)
 msgid ""
 "In your signal handler, you should examine the new value and then store it "
 "in the Model if that is appropriate for your application."
 msgstr ""
+"En su manejador de señales, debe examinar el valor nuevo y luego almacenarlo "
+"en el modelo, si eso es lo apropiado para su aplicación."
 
 #: C/gtkmm-tutorial-in.xml:2614(title)
 msgid "Iterating over Model Rows"
@@ -4593,6 +4603,11 @@ msgid ""
 "method. You can use the familiar <methodname>begin()</methodname> and "
 "<methodname>end()</methodname> methods iterator incrementing, like so:"
 msgstr ""
+"<classname>Gtk::TreeModel</classname> proporciona un contenedor de sus hijos "
+"al estilo de las bibliotecas C++ estándar, a través del método "
+"<methodname>children()</methodname>. Puede usar los incrementos del iterador "
+"familiares de los métodos <methodname>begin()</methodname> y <methodname>end"
+"()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:2621(programlisting)
 #, no-wrap
@@ -4631,6 +4646,10 @@ msgid ""
 "TreeModel::Row::children()</methodname> to get the container of child "
 "<classname>Row</classname>s: <placeholder-1/>"
 msgstr ""
+"Cuando usa un <classname>Gtk::TreeStore</classname>, las filas pueden tener "
+"filas hijas, que a su vez pueden tener sus propios hijos. Use "
+"<methodname>Gtk::TreeModel::Row::children()</methodname> para obtener el "
+"contenedor de las <classname>Row</classname> hijas: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:2643(title)
 msgid "The Selection"
@@ -4642,6 +4661,9 @@ msgid ""
 "TreeView::Selection</classname> object from the <classname>TreeView</"
 "classname>, like so:"
 msgstr ""
+"Para descubrir qué filas ha seleccionado el usuario, obtenga el objeto "
+"<classname>Gtk::TreeView::Selection</classname> del <classname>TreeView</"
+"classname>, así:"
 
 #: C/gtkmm-tutorial-in.xml:2649(programlisting)
 #, no-wrap
@@ -4666,6 +4688,9 @@ msgid ""
 "By default, only single rows can be selected, but you can allow multiple "
 "selection by setting the mode, like so: <placeholder-1/>"
 msgstr ""
+"De manera predeterminada, sólo se pueden seleccionar filas únicas, pero "
+"puede permitir la selección múltiple estableciendo el modo, así: "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:2662(title)
 msgid "The selected rows"
@@ -4676,6 +4701,8 @@ msgid ""
 "For single-selection, you can just call <methodname>get_selected()</"
 "methodname>, like so:"
 msgstr ""
+"Para la selección simple, puede simplemente llamar <methodname>get_selected()"
+"</methodname>, así:"
 
 #: C/gtkmm-tutorial-in.xml:2667(programlisting)
 #, no-wrap
@@ -4701,6 +4728,10 @@ msgid ""
 "<methodname>selected_foreach_path()</methodname>, or "
 "<methodname>selected_foreach_iter()</methodname>, like so:"
 msgstr ""
+"Para la selección múltiple, debe definir una devolución de llamada, y "
+"pasársela a <methodname>selected_foreach()</methodname>, "
+"<methodname>selected_foreach_path()</methodname>, o "
+"<methodname>selected_foreach_iter()</methodname>, así:"
 
 #: C/gtkmm-tutorial-in.xml:2680(programlisting)
 #, no-wrap
@@ -4734,6 +4765,8 @@ msgid ""
 "To respond to the user clicking on a row or range of rows, connect to the "
 "signal like so:"
 msgstr ""
+"Para responder a la pulsación del usuario en una fila o un rango de filas, "
+"conéctese a la señal así:"
 
 #: C/gtkmm-tutorial-in.xml:2698(programlisting)
 #, no-wrap
@@ -4756,6 +4789,10 @@ msgid ""
 "For instance, in the gtk-demo, you can select a demo to see the source code, "
 "but it doesn't make any sense to select a demo category."
 msgstr ""
+"Tal vez, el usuario no deba ser capaz de seleccionar todos los elementos en "
+"su lista o árbol. Por ejemplo, en gtk-demo, puede seleccionar una "
+"demostración para ver su código fuente, pero no tiene ningún sentido "
+"seleccionar una categoría de demostraciones."
 
 #: C/gtkmm-tutorial-in.xml:2710(para)
 msgid ""
@@ -4763,6 +4800,9 @@ msgid ""
 "<methodname>set_select_function()</methodname> method, providing a "
 "<classname>sigc::slot</classname> callback. For instance:"
 msgstr ""
+"Para controlar qué filas pueden seleccionarse, use el método "
+"<methodname>set_select_function()</methodname>, proporcionándole una "
+"devolución de llamada <classname>sigc::slot</classname>. Por ejemplo:"
 
 #: C/gtkmm-tutorial-in.xml:2715(programlisting)
 #, no-wrap
