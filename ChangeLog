@@ -1,3 +1,15 @@
+2012-03-22  Murray Cumming  <murrayc@murrayc.com>
+
+	Application examples: Add an AppMenu example.
+
+	* examples/Makefile.am:
+	* examples/book/application/app_menu/: This is based on the simple
+	example, without the document handling, and is meant to show the 
+	use of set_app_menu(), using Gio::Menu, Gio::SimpleAction, and the
+	base Gio::ActionMap API.
+	However, I just get lots of these errors:
+	GLib-GIO-CRITICAL **: g_dbus_connection_register_object: assertion `G_IS_DBUS_CONNECTION (connection)' failed
+
 3.3.18:
 
 2012-03-03  Murray Cumming  <murrayc@murrayc.com>
