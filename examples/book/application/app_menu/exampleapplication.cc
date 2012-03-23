@@ -21,6 +21,8 @@
 ExampleApplication::ExampleApplication()
 : Gtk::Application("org.gtkmm.examples.application")
 {
+  Glib::set_application_name("Gtk::Application Example");
+
   m_action = Gio::SimpleAction::create("app.something");
   m_action->signal_activate().connect(
     sigc::mem_fun(*this, &ExampleApplication::on_action_something) );

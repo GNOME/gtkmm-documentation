@@ -1,3 +1,14 @@
+2012-03-23  Murray Cumming  <murrayc@murrayc.com>
+
+	Gtk::Application examples: Use Glib::set_application_name().
+
+	* examples/book/application/app_menu/exampleapplication.cc:
+	* examples/book/application/command_line_handling/exampleapplication.cc:
+	* examples/book/application/simple/exampleapplication.cc:
+	Call Glib::set_application_name() because the GtkApplication example
+	code calls g_set_application_name().
+	This will apparently make it appear correctly in the task list,
+	and will be used in error messages.
 2012-03-23  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Fix 'make check' with --enable-warnings=fatal.
