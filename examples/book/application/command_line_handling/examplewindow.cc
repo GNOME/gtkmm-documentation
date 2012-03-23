@@ -20,7 +20,7 @@
 
 ExampleWindow::ExampleWindow()
 {
-  set_title("Gio::Application example");
+  set_title("Gtk::Application example");
 
   add(m_scrolledwindow);
   m_scrolledwindow.add(m_view);

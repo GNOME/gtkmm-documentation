@@ -20,5 +20,5 @@
 
 ExampleWindow::ExampleWindow()
 {
-  set_title("Gio::Application example");
+  set_title("Gtk::Application example");
 }
