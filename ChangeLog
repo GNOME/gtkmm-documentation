@@ -1,3 +1,10 @@
+2012-03-23  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Fix 'make check' with --enable-warnings=fatal.
+
+	* examples/others/cellrenderercustom/popupentry.[h|cc]: Replace the deprecated
+	Gtk::Entry::signal_activate() by signal_key_press_event(). Bug #655489.
+
 2012-03-22  Murray Cumming  <murrayc@murrayc.com>
 
 	Application examples: Add an AppMenu example.

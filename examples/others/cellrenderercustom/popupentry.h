@@ -50,7 +50,6 @@ protected:
 private:
   typedef PopupEntry Self;
 
-  void on_entry_activate();
   bool on_entry_key_press_event(GdkEventKey* event);
   void on_button_clicked();
 
