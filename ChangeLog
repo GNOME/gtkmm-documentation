@@ -9,6 +9,7 @@
 	code calls g_set_application_name().
 	This will apparently make it appear correctly in the task list,
 	and will be used in error messages.
+
 2012-03-23  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Fix 'make check' with --enable-warnings=fatal.
