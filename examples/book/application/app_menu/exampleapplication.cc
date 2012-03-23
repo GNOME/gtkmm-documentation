@@ -22,6 +22,17 @@ ExampleApplication::ExampleApplication()
 : Gtk::Application("org.gtkmm.examples.application")
 {
   Glib::set_application_name("Gtk::Application Example");
+}
+
+Glib::RefPtr<ExampleApplication> ExampleApplication::create()
+{
+  return Glib::RefPtr<ExampleApplication>( new ExampleApplication() );
+}
+
+void ExampleApplication::on_startup()
+{
+  //Call the base class's implementation:
+  Gtk::Application::on_startup();
 
   m_action = Gio::SimpleAction::create("app.something");
   m_action->signal_activate().connect(
@@ -32,11 +43,6 @@ ExampleApplication::ExampleApplication()
   m_menu->append("Something", "app.something");
 
   set_app_menu(m_menu);
-}
-
-Glib::RefPtr<ExampleApplication> ExampleApplication::create()
-{
-  return Glib::RefPtr<ExampleApplication>( new ExampleApplication() );
 }
 
 void ExampleApplication::create_window()

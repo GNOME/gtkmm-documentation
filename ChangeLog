@@ -1,5 +1,13 @@
 2012-03-23  Murray Cumming  <murrayc@murrayc.com>
 
+	Gtk:Application app_menu example: Add the menu in on_startup().
+
+	* examples/book/application/app_menu/exampleapplication.[h|cc]: This
+	is what the C example code does, and it avoids the null D-Bus connection
+	issue, though there are now new problems.
+
+2012-03-23  Murray Cumming  <murrayc@murrayc.com>
+
 	Gtk::Application examples: Use Glib::set_application_name().
 
 	* examples/book/application/app_menu/exampleapplication.cc:

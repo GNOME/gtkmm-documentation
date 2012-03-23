@@ -30,6 +30,7 @@ public:
 protected:
   //Overrides of default signal handlers:
   virtual void on_activate();
+  virtual void on_startup();
 
 private:
   void create_window();
