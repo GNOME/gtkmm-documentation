@@ -1271,8 +1271,8 @@ should be used to match possible text entries.</para>
 
 <para>Alternatively, if a complete list of possible entries
 would be too large or too inconvenient to generate, a callback slot may instead
-be specified with <methodname>set_match_func()</methodname>. That callback
-function. This is also useful if you wish to match on a part of the string other
+be specified with <methodname>set_match_func()</methodname>.
+This is also useful if you wish to match on a part of the string other
 than the start.</para>
 
 <para><ulink url="&url_refdocs_base_gtk;EntryCompletion.html">Reference</ulink></para>
@@ -2750,7 +2750,7 @@ if(iter)
 <sect1 id="sec-treeview-sort">
 <title>Sorting</title>
 <para>
-The standard tree models (<classname>TreeStore</classname> and <classname>ListStore</classname> derive from <classname>TreeSortable</classname>, so they offer sorting functionality. For instance, call <methodname>set_sort_column()</methodname>, to sort the model by the specified column. Or supply a callback function to <methodname>set_sort_func()</methodname> to implement a more complicated sorting algorithm.
+The standard tree models (<classname>TreeStore</classname> and <classname>ListStore</classname>) derive from <classname>TreeSortable</classname>, so they offer sorting functionality. For instance, call <methodname>set_sort_column()</methodname>, to sort the model by the specified column. Or supply a callback function to <methodname>set_sort_func()</methodname> to implement a more complicated sorting algorithm.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;TreeSortable.html">TreeSortable Reference</ulink></para>
@@ -2816,7 +2816,7 @@ If you call <methodname>Gtk::TreeView::set_reorderable()</methodname> then your
 TreeView's items can be moved within the treeview itself. This is demonstrated
 in the <classname>TreeStore</classname> example.
 </para>
-<para>However, this does not allow you any control of which items can be dragged, and where they can be dropped. If you need that extra control then you might create a derived <literal>Gtk::TreeModel</literal> from <literal>Gtk::TreeStore</literal> or <literal>Gtk::ListStore</literal> and override the <literal>Gtk::TreeDragSource::row_draggable()</literal> and <literal>Gdk::TreeDragDest::row_drop_possible()</literal> virtual methods. You can examine the <literal>Gtk::TreeModel::Path</literal>s provided and allow or disallow dragging or dropping by return <literal>true</literal> or <literal>false</literal>.</para>
+<para>However, this does not allow you any control of which items can be dragged, and where they can be dropped. If you need that extra control then you might create a derived <literal>Gtk::TreeModel</literal> from <literal>Gtk::TreeStore</literal> or <literal>Gtk::ListStore</literal> and override the <literal>Gtk::TreeDragSource::row_draggable()</literal> and <literal>Gdk::TreeDragDest::row_drop_possible()</literal> virtual methods. You can examine the <literal>Gtk::TreeModel::Path</literal>s provided and allow or disallow dragging or dropping by returning <literal>true</literal> or <literal>false</literal>.</para>
 <para>This is demonstrated in the drag_and_drop example.</para>
 </sect2>
 
