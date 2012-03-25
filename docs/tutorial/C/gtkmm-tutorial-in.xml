@@ -2915,7 +2915,7 @@ This example is much like the <classname>TreeStore</classname> example, but has
 receive drag-and-dropped rows. It uses a derived
 <classname>Gtk::TreeStore</classname> which overrides the virtual functions as
 described in the <link linkend="sec-treeview-draganddrop">TreeView Drag and
-    Drop</link> section..
+    Drop</link> section.
 </para>
 
 <figure id="figure-treeview-draganddrop">
