@@ -37,7 +37,7 @@ IdleExample::IdleExample() :
   m_progressbar_d()
 {
   // connect the callbacks
-  m_quit.signal_pressed().connect(sigc::mem_fun(*this, &Gtk::Widget::hide));
+  m_quit.signal_clicked().connect(sigc::mem_fun(*this, &Gtk::Widget::hide));
 
   // put buttons into container
   Gtk::Box *vbox = manage( new Gtk::Box(Gtk::ORIENTATION_VERTICAL,5));

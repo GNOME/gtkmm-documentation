@@ -1,3 +1,10 @@
+2012-03-26  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix the --enable-warnings=fatal build with latest gtkmm.
+
+	* examples/others/idle/idle.cc: Use signal_clicked() instead
+	of signal_pressed().
+
 2012-03-23  Murray Cumming  <murrayc@murrayc.com>
 
 	Gtk::Application examples: Correct the window titles.
