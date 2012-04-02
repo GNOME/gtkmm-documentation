@@ -39,6 +39,7 @@ DOC_FIGURES =					\
 	figures/comboboxentry_complex.png	\
 	figures/comboboxentry_text.png		\
 	figures/custom_container.png		\
+	figures/custom_widget.png		\
 	figures/dialogs_about.png		\
 	figures/dialogs_colorchooserdialog.png\
 	figures/dialogs_filechooser.png		\
@@ -55,6 +56,8 @@ DOC_FIGURES =					\
 	figures/drawingarea_thin_lines.png		\
 	figures/entry.png			\
 	figures/entry_completion.png		\
+	figures/entry_icon.png		\
+	figures/entry_progress.png		\
 	figures/eventbox.png			\
 	figures/expander.png			\
 	figures/filechooserbutton.png		\

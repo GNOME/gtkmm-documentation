@@ -1,5 +1,12 @@
 2012-04-02  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
+	Install all screenshots used in the tutorial.
+
+	* docs/tutorial/Makefile.am: Add figures/custom_widget.png, entry_icon.png,
+	and entry_progress.png to the list of installed figures. Bug #655489.
+
+2012-04-02  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
 	Improve the Entry and ComboBox with Entry sections.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Don't mention the deprecated
