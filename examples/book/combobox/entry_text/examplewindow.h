@@ -31,6 +31,11 @@ public:
 protected:
   //Signal handlers:
   void on_combo_changed();
+  bool on_entry_key_press_event(GdkEventKey* event);
+  bool on_entry_focus_out_event(GdkEventFocus* event);
+
+  //Signal connection:
+  sigc::connection m_ConnectionFocusOut;
 
   //Child widgets:
   Gtk::ComboBoxText m_Combo;

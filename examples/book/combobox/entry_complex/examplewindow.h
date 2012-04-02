@@ -31,7 +31,12 @@ public:
 
 protected:
   //Signal handlers:
-  void on_combo_changed();
+  void on_entry_changed();
+  bool on_entry_key_press_event(GdkEventKey* event);
+  bool on_entry_focus_out_event(GdkEventFocus* event);
+
+  //Signal connection:
+  sigc::connection m_ConnectionFocusOut;
 
   //Tree model columns:
   class ModelColumns : public Gtk::TreeModel::ColumnRecord

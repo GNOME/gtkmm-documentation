@@ -70,26 +70,71 @@ ExampleWindow::ExampleWindow()
   //Add the ComboBox to the window.
   add(m_Combo);
 
-  //Connect signal handler:
-  m_Combo.signal_changed().connect(sigc::mem_fun(*this,
-              &ExampleWindow::on_combo_changed) );
+  //Connect signal handlers:
+  Gtk::Entry* entry = m_Combo.get_entry();
+  if (entry)
+  {
+    // The Entry shall receive key-press events and focus-out events.
+    entry->add_events(Gdk::KEY_PRESS_MASK | Gdk::FOCUS_CHANGE_MASK);
+    // Alternatively you can connect to m_Combo.signal_changed().
+    entry->signal_changed().connect(sigc::mem_fun(*this,
+      &ExampleWindow::on_entry_changed) );
+    // This signal handler must be called before the default signal handler,
+    // or else it will not be called, if the default signal handler returns true.
+    entry->signal_key_press_event().connect(sigc::mem_fun(*this,
+      &ExampleWindow::on_entry_key_press_event), false );
+    m_ConnectionFocusOut = entry->signal_focus_out_event().
+      connect(sigc::mem_fun(*this, &ExampleWindow::on_entry_focus_out_event) );
+  }
+  else
+    std::cout << "No Entry ???" << std::endl;
 
   show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()
 {
+  // The focus_out signal may be emitted while m_Combo is being destructed.
+  // The signal handler can generate critical messages, if it's called when
+  // m_Combo has been partly destructed.
+  m_ConnectionFocusOut.disconnect();
 }
 
-void ExampleWindow::on_combo_changed()
+void ExampleWindow::on_entry_changed()
 {
   Gtk::Entry* entry = m_Combo.get_entry();
-  //Note: to get changes only when the entry has been completed,
-  //instead of on every key press, connect to Entry::signal_changed()
-  //instead of ComboBoxEntry::signal_changed.
-
-  if(entry)
+  if (entry)
   {
-    std::cout << " ID=" << entry->get_text() << std::endl;
+    std::cout << "on_entry_changed(): Row=" << m_Combo.get_active_row_number()
+      << ", ID=" << entry->get_text() << std::endl;
   }
+}
+
+bool ExampleWindow::on_entry_key_press_event(GdkEventKey* event)
+{
+  Gtk::Entry* entry = m_Combo.get_entry();
+  if (entry)
+  {
+    if (event->keyval == GDK_KEY_Return ||
+        event->keyval == GDK_KEY_ISO_Enter ||
+        event->keyval == GDK_KEY_KP_Enter)
+    {
+      std::cout << "on_entry_key_press_event(): Row=" << m_Combo.get_active_row_number()
+      << ", ID=" << entry->get_text() << std::endl;
+      return true;
+    }
+  }
+  return false;
+}
+
+bool ExampleWindow::on_entry_focus_out_event(GdkEventFocus* /* event */)
+{
+  Gtk::Entry* entry = m_Combo.get_entry();
+  if (entry)
+  {
+    std::cout << "on_entry_focus_out_event(): Row=" << m_Combo.get_active_row_number()
+      << ", ID=" << entry->get_text() << std::endl;
+    return true;
+  }
+  return false;
 }

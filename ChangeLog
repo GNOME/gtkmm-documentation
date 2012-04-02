@@ -1,3 +1,14 @@
+2012-04-02  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Improve the Entry and ComboBox with Entry sections.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Don't mention the deprecated
+	Entry::signal_activate(). Add description of Entry::signal_key_press_event()
+	and Entry::signal_focus_out_event().
+	* examples/book/combobox/entry_complex/examplewindow.[h|cc]:
+	* examples/book/combobox/entry_text/examplewindow.[h|cc]:
+	Add on_entry_key_press_event() and on_entry_focus_out_event(). Bug #655489.
+
 2012-03-26  Murray Cumming  <murrayc@murrayc.com>
 
 	Fix the --enable-warnings=fatal build with latest gtkmm.

@@ -1221,12 +1221,31 @@ echoed on the screen, calling <methodname>set_visibility()</methodname> with
 
 <para>
 You might want to be notified whenever the user types in a text entry widget.
-<classname>Gtk::Entry</classname> provides two signals,
-<literal>activate</literal> and <literal>changed</literal>, for just this
-purpose. <literal>activate</literal> is emitted when the user presses the
-enter key in a text-entry widget; <literal>changed</literal> is emitted when
-the text in the widget changes. You can use these, for instance, to validate
-or filter the text the user types.
+<classname>Gtk::Entry</classname> provides the <literal>changed</literal> signal
+for this purpose. It is emitted when the text in the widget changes.
+You can use it, for instance, to validate or filter the text the user types.
+</para>
+
+<para>
+The <literal>changed</literal> signal is not emitted when the user presses the
+Enter key. If a pressed Enter key signals that the user has finished entering text,
+you probably want to be notified. For this purpose, use the
+<literal>key_press_event</literal> signal that <classname>Gtk::Entry</classname>
+inherits from <classname>Gtk::Widget</classname>. Moving the keyboard focus to
+another widget may also signal that the user has finished entering text. The
+<literal>focus_out_event</literal> signal can notify you when that happens.
+The <link linkend="sec-comboboxentry">ComboBox with an Entry</link> section
+contains example programs that use these signals.
+</para>
+
+<para>
+If you pass <literal>true</literal> to the <methodname>set_activates_default()</methodname>
+method, pressing Enter in the <classname>Gtk::Entry</classname> will activate
+the default widget for the window containing the <classname>Gtk::Entry</classname>.
+This is especially useful in dialog boxes. The default widget is usually one of
+the dialog buttons, which e.g. will close the dialog box. To set a widget as the
+default widget, use <methodname>Gtk::Widget::set_can_default()</methodname> and
+<methodname>Gtk::Widget::grab_default()</methodname>.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;Entry.html">Reference</ulink></para>
@@ -2960,7 +2979,7 @@ section.
 <chapter id="chapter-combobox">
 <title>Combo Boxes</title>
 
-<para>The <classname>ComboBox</classname> widgets offers a list (or tree) of choices in a dropdown menu. If appropriate, it can show extra information about each item, such as text, a picture, a checkbox, or a progress bar. The <classname>ComboBox</classname> widget usually restricts the user to the available choices, but it can optionally have an <classname>Entry</classname>, allowing the user to enter arbitrary text if the none of the available choices are suitable.
+<para>The <classname>ComboBox</classname> widget offers a list (or tree) of choices in a dropdown menu. If appropriate, it can show extra information about each item, such as text, a picture, a checkbox, or a progress bar. The <classname>ComboBox</classname> widget usually restricts the user to the available choices, but it can optionally have an <classname>Entry</classname>, allowing the user to enter arbitrary text if none of the available choices are suitable.
 </para>
 
 <para>The list is provided via a <classname>TreeModel</classname>, and columns from this model are added to the ComboBox's view with the <methodname>ComboBox::pack_start()</methodname> method. This provides flexibility and compile-time type-safety, but the <classname>ComboBoxText</classname> class provides a simpler text-based specialization in case that flexibility is not required.
@@ -2970,7 +2989,7 @@ section.
 
 <sect1 id="sec-combobox-model">
 <title>The model</title>
-<para>The model for a ComboBox can be defined and filled exactly as for a <classname>TreeView</classname>. For instance, you might derive a ComboBox class with one integer and one text columns, like so:
+<para>The model for a ComboBox can be defined and filled exactly as for a <classname>TreeView</classname>. For instance, you might derive a ComboBox class with one integer and one text column, like so:
 </para>
 <programlisting>ModelColumns()
 { add(m_col_id); add(m_col_name); }
@@ -2981,7 +3000,7 @@ section.
 
 ModelColumns m_columns;</programlisting>
 
-<para>After appending rows to this model, you should provide the model to the <classname>ComboBox</classname> with the <methodname>set_model()</methodname> method. Then use the <methodname>pack_start()</methodname> or <methodname>pack_end()</methodname> methods to specify what methods will be displayed in the ComboBox. As with the TreeView you may either use the default cell renderer by passing the <classname>TreeModelColumn</classname> to the pack methods, or you may instantiate a specific <classname>CellRenderer</classname> and specify a particular mapping with either <methodname>add_attribute()</methodname> or <methodname>set_cell_data_func()</methodname>. Note that these methods are in the <classname>CellLayout</classname> base class.</para>
+<para>After appending rows to this model, you should provide the model to the <classname>ComboBox</classname> with the <methodname>set_model()</methodname> method. Then use the <methodname>pack_start()</methodname> or <methodname>pack_end()</methodname> methods to specify what columns will be displayed in the ComboBox. As with the TreeView you may either use the default cell renderer by passing the <classname>TreeModelColumn</classname> to the pack methods, or you may instantiate a specific <classname>CellRenderer</classname> and specify a particular mapping with either <methodname>add_attribute()</methodname> or <methodname>set_cell_data_func()</methodname>. Note that these methods are in the <classname>CellLayout</classname> base class.</para>
 </sect1>
 
 <sect1 id="sec-combobox-get">
@@ -3005,7 +3024,7 @@ else
 <sect1 id="sec-combobox-changes">
 <title>Responding to changes</title>
 <para>
-You might need to react to every change of selection in the ComboBox, for instance to update other widgets. To do so, you should handle the &quot;changed&quot; signal. For instance:
+You might need to react to every change of selection in the ComboBox, for instance to update other widgets. To do so, you should handle the <literal>changed</literal> signal. For instance:
 </para>
 <programlisting>m_combo.signal_changed().connect( sigc::mem_fun(*this,
       &amp;ExampleWindow::on_combo_changed) );</programlisting>
@@ -3027,7 +3046,7 @@ You might need to react to every change of selection in the ComboBox, for instan
 <sect1 id="combobox-example-simple"><title>Simple Text Example</title>
 
 <figure id="figure-combobox-text">
-  <title>ComboBox</title>
+  <title>ComboBoxText</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;combobox_text.png"/>
   </screenshot>
@@ -3040,12 +3059,12 @@ You might need to react to every change of selection in the ComboBox, for instan
 <sect1 id="sec-comboboxentry">
 <title>ComboBox with an Entry</title>
 
-<para>A <classname>ComboBox</classname> may contain an <classname>Entry</classname> widget for entering of arbitrary text, by specifying true for the constructor's <literal>has_entry</literal> parameter.</para>
+<para>A <classname>ComboBox</classname> may contain an <classname>Entry</classname> widget for entering of arbitrary text, by specifying <literal>true</literal> for the constructor's <literal>has_entry</literal> parameter.</para>
 
 <sect2 id="sec-comboboxentry-text-column">
 <title>The text column</title>
-<para>So that the Entry can interact with the drop-down list of choices, you must specify which of your model columns is the text column, with <methodname>set_text_column()</methodname>. For instance:
-<programlisting>m_combo.set_text_column(m_columns.m_col_name);</programlisting>
+<para>So that the <classname>Entry</classname> can interact with the drop-down list of choices, you must specify which of your model columns is the text column, with <methodname>set_entry_text_column()</methodname>. For instance:
+<programlisting>m_combo.set_entry_text_column(m_columns.m_col_name);</programlisting>
 </para>
 <para>
 When you select a choice from the drop-down menu, the value from this column will be placed in the <classname>Entry</classname>.
@@ -3054,14 +3073,72 @@ When you select a choice from the drop-down menu, the value from this column wil
 
 <sect2 id="sec-comboboxentry-model">
 <title>The entry</title>
-<para>Because the user may enter arbitrary text, an active model row isn't enough to tell us what text the user has inputted. Therefore, you should retrieve the <classname>Entry</classname> widget with the <methodname>ComboBoxEntry::get_entry()</methodname> method and call <methodname>get_text()</methodname> on that.
+<para>Because the user may enter arbitrary text, an active model row isn't enough to tell us what text the user has entered. Therefore, you should retrieve the <classname>Entry</classname> widget with the <methodname>ComboBox::get_entry()</methodname> method and call <methodname>get_text()</methodname> on that.
+</para>
+</sect2>
+
+<sect2 id="sec-comboboxentry-changes">
+<title>Responding to changes</title>
+<para>
+When the user enters arbitrary text, it may not be enough to connect to the
+<literal>changed</literal> signal, which is emitted for every typed character.
+It is not emitted when the user presses the Enter key. Pressing the Enter key or
+moving the keyboard focus to another widget may signal that the user has finished
+entering text. To be notified of these events, connect to the
+<classname>Entry</classname>'s <literal>key_press_event</literal> and
+<literal>focus_out_event</literal> signals, like so
+<programlisting>Gtk::Entry* entry = m_Combo.get_entry();
+if (entry)
+{
+  // The Entry shall receive key-press events and focus-out events.
+  entry->add_events(Gdk::KEY_PRESS_MASK | Gdk::FOCUS_CHANGE_MASK);
+
+  // Alternatively you can connect to m_Combo.signal_changed().
+  entry->signal_changed().connect(sigc::mem_fun(*this,
+    &amp;ExampleWindow::on_entry_changed) );
+
+  // This signal handler must be called before the default signal handler,
+  // or else it will not be called, if the default signal handler returns true.
+  entry->signal_key_press_event().connect(sigc::mem_fun(*this,
+    &amp;ExampleWindow::on_entry_key_press_event), /* after= */ false );
+
+  entry->signal_focus_out_event().connect(sigc::mem_fun(*this,
+    &amp;ExampleWindow::on_entry_focus_out_event) );
+}</programlisting>
+The <literal>changed</literal> signals of <classname>ComboBox</classname> and
+<classname>Entry</classname> are both emitted for every change. It doesn't matter
+which one you connect to. But only <classname>Entry</classname>'s
+<literal>key_press_event</literal> and <literal>focus_out_event</literal> signals
+are useful here.
+</para>
+<para>
+In <literal>key_press_event</literal>'s signal handler you must check which key
+has been pressed, e.g. like so
+<programlisting>bool ExampleWindow::on_entry_key_press_event(GdkEventKey* event)
+{
+  Gtk::Entry* entry = m_Combo.get_entry();
+  if (entry)
+  {
+    if (event->keyval == GDK_KEY_Return ||
+        event->keyval == GDK_KEY_ISO_Enter ||
+        event->keyval == GDK_KEY_KP_Enter)
+    {
+      input_finished(); //Your own function.
+      return true;
+    }
+  }
+  return false;
+}</programlisting>
+X events are described in more detail in the
+<link linkend="chapter-keyboardevents">Keyboard Events</link> chapter and the
+<link linkend="sec-xeventsignals">X Event signals</link> section in the appendix.
 </para>
 </sect2>
 
 <sect2 id="comboboxentry-example-full"><title>Full Example</title>
 
 <figure id="figure-comboboxentry-complex">
-  <title>ComboBoxEntry</title>
+  <title>ComboBox with Entry</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;comboboxentry_complex.png"/>
   </screenshot>
@@ -3074,7 +3151,7 @@ When you select a choice from the drop-down menu, the value from this column wil
 <sect2 id="comboboxentry-example-simple"><title>Simple Text Example</title>
 
 <figure id="figure-comboboxentry-text">
-  <title>ComboBoxEntryText</title>
+  <title>ComboBoxText with Entry</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;comboboxentry_text.png"/>
   </screenshot>
