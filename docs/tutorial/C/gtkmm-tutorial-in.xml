@@ -3402,7 +3402,7 @@ Then, to add a widget at that position, use
 <para>
 There are specific APIs for Menus and toolbars, but you should usually deal
 with them together, using the <classname>UIManager</classname> to define
-<classname>Action</classname>s which you can then arrange in menu and toolbars.
+<classname>Action</classname>s which you can then arrange in menus and toolbars.
 In this way you can handle activation of the action instead of responding to
 the menu and toolbar items separately. And you can enable or disable both the
 menu and toolbar item via the action.
