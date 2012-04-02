@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-04-02 08:31+0000\n"
-"PO-Revision-Date: 2012-04-02 11:38+0200\n"
+"POT-Creation-Date: 2012-04-02 09:40+0000\n"
+"PO-Revision-Date: 2012-04-02 11:41+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -5451,10 +5451,9 @@ msgid "Simple Text Example"
 msgstr "Ejemplo de texto simple"
 
 #: C/gtkmm-tutorial-in.xml:3049(title)
-#, fuzzy
 #| msgid "ComboBoxEntryText"
 msgid "ComboBoxText"
-msgstr "ComboBoxEntryText"
+msgstr "ComboBoxText"
 
 # Cambio este a «ComboBox» para mantener la concordancia con las menciones anteriores.
 # Nicolás.
@@ -5484,10 +5483,10 @@ msgid "The text column"
 msgstr "La columna de texto"
 
 #: C/gtkmm-tutorial-in.xml:3067(programlisting)
-#, fuzzy, no-wrap
+#, no-wrap
 #| msgid "m_combo.set_text_column(m_columns.m_col_name);"
 msgid "m_combo.set_entry_text_column(m_columns.m_col_name);"
-msgstr "m_combo.set_text_column(m_columns.m_col_name);"
+msgstr "m_combo.set_entry_text_column(m_columns.m_col_name);"
 
 #: C/gtkmm-tutorial-in.xml:3066(para)
 #, fuzzy
@@ -5609,7 +5608,6 @@ msgstr ""
 # Cambio este a «ComboBox» para mantener la concordancia con las menciones anteriores.
 # Nicolás.
 #: C/gtkmm-tutorial-in.xml:3141(title)
-#, fuzzy
 #| msgid "ComboBox with an Entry"
 msgid "ComboBox with Entry"
 msgstr "«ComboBox» con una entrada"
@@ -5617,10 +5615,9 @@ msgstr "«ComboBox» con una entrada"
 # Cambio este a «ComboBox» para mantener la concordancia con las menciones anteriores.
 # Nicolás.
 #: C/gtkmm-tutorial-in.xml:3154(title)
-#, fuzzy
 #| msgid "ComboBox with an Entry"
 msgid "ComboBoxText with Entry"
-msgstr "«ComboBox» con una entrada"
+msgstr "«ComboBoxText» con una entrada"
 
 #: C/gtkmm-tutorial-in.xml:3173(title) C/gtkmm-tutorial-in.xml:3385(title)
 msgid "TextView"
@@ -5967,10 +5964,17 @@ msgstr "Menús y barras de herramientas"
 # En el inglés, cuando dice «you can arrange in menu...» debería decir «menus».
 # Nicolás.
 #: C/gtkmm-tutorial-in.xml:3402(para)
+#| msgid ""
+#| "There are specific APIs for Menus and toolbars, but you should usually "
+#| "deal with them together, using the <classname>UIManager</classname> to "
+#| "define <classname>Action</classname>s which you can then arrange in menu "
+#| "and toolbars. In this way you can handle activation of the action instead "
+#| "of responding to the menu and toolbar items separately. And you can "
+#| "enable or disable both the menu and toolbar item via the action."
 msgid ""
 "There are specific APIs for Menus and toolbars, but you should usually deal "
 "with them together, using the <classname>UIManager</classname> to define "
-"<classname>Action</classname>s which you can then arrange in menu and "
+"<classname>Action</classname>s which you can then arrange in menus and "
 "toolbars. In this way you can handle activation of the action instead of "
 "responding to the menu and toolbar items separately. And you can enable or "
 "disable both the menu and toolbar item via the action."
