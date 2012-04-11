@@ -1,3 +1,14 @@
+3.4.0:
+
+* Application examples: Add an AppMenu example.
+  (Murray Cumming)
+* Improve the Entry and ComboBox with Entry sections.
+  (Kjell Ahlstedt) Bug #655489
+* Replace the deprecated Gtk::Entry::signal_activate() by signal_key_press_event().
+  (Kjell Ahlstedt) Bug #655489.
+* Install all screenshots used in the tutorial.
+  (Kjell Ahlstedt) Bug #655489.
+
 3.3.18:
 
 * Remove Table and other deprecated classes.
