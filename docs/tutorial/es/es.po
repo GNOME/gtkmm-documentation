@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-04-02 09:42+0000\n"
-"PO-Revision-Date: 2012-04-11 13:42+0200\n"
+"POT-Creation-Date: 2012-04-11 11:47+0000\n"
+"PO-Revision-Date: 2012-04-14 18:44+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -5600,11 +5600,10 @@ msgid ""
 "signals</link> section in the appendix."
 msgstr ""
 "En el manejador de señales de <literal>key_press_event</literal>, debe "
-"verificar qué tecla se ha presionado, por ejemplo, así <placeholder-1/> "
-"Los eventos de X se describen en mayor detalle en el capítulo <link "
-"linkend=\"chapter-keyboardevents\">Eventos de teclado</link> y en la sección "
-"<link linkend=\"sec-xeventsignals\">Señales de eventos de X</link> en el "
-"apéndice."
+"verificar qué tecla se ha presionado, por ejemplo, así <placeholder-1/> Los "
+"eventos de X se describen en mayor detalle en el capítulo <link linkend="
+"\"chapter-keyboardevents\">Eventos de teclado</link> y en la sección <link "
+"linkend=\"sec-xeventsignals\">Señales de eventos de X</link> en el apéndice."
 
 # Cambio este a «ComboBox» para mantener la concordancia con las menciones anteriores.
 # Nicolás.
@@ -6346,6 +6345,9 @@ msgid ""
 "via the base class's <function>Gtk::Container::add()</function> method, for "
 "instance like so:"
 msgstr ""
+"Los <classname>ToolItemGroup</classname> deben añadirse a la paleta de "
+"herramientas a través del método <function>Gtk::Container::add()</function> "
+"de la clase base, por ejemplo, así:"
 
 #: C/gtkmm-tutorial-in.xml:3596(programlisting)
 #, no-wrap
@@ -6365,6 +6367,8 @@ msgid ""
 "<classname>Gtk::ToolItem</classname>s can then be added to the group. For "
 "instance, like so:"
 msgstr ""
+"Entonces podrá añadir varios <classname>Gtk::ToolItem</classname> al grupo. "
+"Por ejemplo, así:"
 
 #: C/gtkmm-tutorial-in.xml:3606(programlisting)
 #, no-wrap
@@ -6388,6 +6392,12 @@ msgid ""
 "get_drag_item()</methodname> in the other widget's "
 "<literal>drag_data_received</literal> signal handler."
 msgstr ""
+"Entonces podrá manejar la señal <literal>clicked</literal> del "
+"<classname>ToolButton</classname>. Alternativamente puede permitir que se "
+"arrastre el elemento a otro widget, llamando a <methodname>Gtk::ToolPalette::"
+"add_drag_dest()</methodname> y después usando <methodname>Gtk::ToolPalette::"
+"get_drag_item()</methodname> en el manejador de la señal "
+"<literal>drag_data_received</literal> del otro widget."
 
 #: C/gtkmm-tutorial-in.xml:3614(ulink)
 msgid "ToolPalette Reference"
@@ -6411,12 +6421,23 @@ msgid ""
 "might use this in your <literal>drag_data_received</literal> signal handler, "
 "to add a dropped item, or to show a suitable icon while dragging."
 msgstr ""
+"Llame a <methodname>add_drag_dest()</methodname> para permitir arrastrar "
+"elementos o grupos de la paleta de herramientas un widget particular de "
+"destino. Entonces podrá usar <methodname>get_drag_item()</methodname> para "
+"descubrir qué «ToolItem» o «ToolItemGroup» se está arrastrando. Después "
+"podrá usar <literal>dynamic_cast</literal> para descubrir si es un elemento "
+"o un grupo. Por ejemplo, podría usar esto en su manejador de la señal "
+"<literal>drag_data_received</literal>, para añadir un elemento soltado, o "
+"para mostrar un icono adecuado mientras se arrastra."
 
 #: C/gtkmm-tutorial-in.xml:3621(para)
 msgid ""
 "See the <link linkend=\"chapter-draganddrop\">Drag and Drop</link> chapter "
 "for general advice about Drag and Drop with gtkmm."
 msgstr ""
+"Consulte el capítulo <link linkend=\"chapter-draganddrop\">Arrastrar y "
+"soltar</link> para obtener información general acerca de arrastrar y soltar "
+"con gtkmm."
 
 #: C/gtkmm-tutorial-in.xml:3624(title)
 msgid "ToolPalette Example"
@@ -6430,6 +6451,12 @@ msgid ""
 "several groups of items. The combo boxes allow the user to change the style "
 "and orientation of the tool palette."
 msgstr ""
+"Este ejemplo añade una <classname>ToolPalette</classname> y una "
+"<classname>DrawingArea</classname> a una ventana y le permite al usuario "
+"arrastrar iconos de la paleta de herramientas al área de dibujo. La paleta "
+"de herramientas contiene varios grupos de elementos. Las cajas combinadas le "
+"permiten al usuario cambiar el estilo y la orientación de la paleta de "
+"herramientas."
 
 #: C/gtkmm-tutorial-in.xml:3642(title)
 msgid "Adjustments"
@@ -6445,6 +6472,13 @@ msgid ""
 "classname> widget. These widgets have <classname>Gtk::Adjustment</classname> "
 "objects that express this common part of their API."
 msgstr ""
+"<application>gtkmm</application> tiene varios widgets que pueden ajustarse "
+"visualmente usando el ratón o el teclado, como los widgets <classname>Range</"
+"classname> (descritos en la sección <link linkend=\"chapter-range-widgets"
+"\">Widgets de rango</link>). También hay algunos widgets que muestran una "
+"parte ajustable de un área más grande, como el widget <classname>Viewport</"
+"classname>. Estos widgets tienen objetos <classname>Gtk::Adjustment</"
+"classname> que expresan esta parte común de sus API."
 
 #: C/gtkmm-tutorial-in.xml:3654(para)
 msgid ""
@@ -6453,6 +6487,11 @@ msgid ""
 "literal> signal. You can then use the <methodname>get_changed()</methodname> "
 "method to discover the new value."
 msgstr ""
+"Para que las aplicaciones puedan reaccionar a los cambios, por ejemplo, "
+"cuando un usuario mueve una barra de desplazamiento, <classname>Gtk::"
+"Adjustment</classname> tiene una señal <literal>changed</literal>.Entonces, "
+"usar el método <methodname>get_changed()</methodname> para descubrir el "
+"valor nuevo."
 
 #: C/gtkmm-tutorial-in.xml:3662(title)
 msgid "Creating an Adjustment"
@@ -6460,7 +6499,7 @@ msgstr "Crear un ajuste"
 
 #: C/gtkmm-tutorial-in.xml:3664(para)
 msgid "The <classname>Gtk::Adjustment</classname> constructor is as follows:"
-msgstr ""
+msgstr "El constructor de <classname>Gtk::Adjustment</classname> es así:"
 
 #: C/gtkmm-tutorial-in.xml:3668(programlisting)
 #, no-wrap
@@ -6493,10 +6532,21 @@ msgid ""
 "argument is used to represent the bottom most or right most coordinate in a "
 "panning widget's child."
 msgstr ""
+"El argumento <parameter>value</parameter> es el valor inicial del ajuste, "
+"normalmente correspondiente a la posición más alta o más a la izquierda del "
+"widget ajustable. Los argumentos <parameter>lower</parameter> y "
+"<parameter>upper</parameter> especifican el rango posible de valores que "
+"puede mantener el ajuste. El argumento <parameter>step_increment</parameter> "
+"especifica el menor de los dos incrementos por los cuáles el usuario puede "
+"cambiar el valor, mientras que el <parameter>page_increment</parameter> es "
+"el más grande. El argumento <parameter>page_size</parameter> normalmente "
+"corresponde de alguna manera al área visible de un widget panorámico. El "
+"argumento <parameter>upper</parameter> se usa para representar la coordenada "
+"de más abajo o de más a la derecha en el hijo de un widget panorámico."
 
 #: C/gtkmm-tutorial-in.xml:3694(title)
 msgid "Using Adjustments the Easy Way"
-msgstr ""
+msgstr "Usar ajustes de la manera fácil"
 
 #: C/gtkmm-tutorial-in.xml:3696(para)
 msgid ""
@@ -6504,6 +6554,9 @@ msgid ""
 "require specific units for these values, and those which treat them as "
 "arbitrary numbers."
 msgstr ""
+"Los widgets ajustables pueden dividirse en aquellos que usan y requieren "
+"unidades específicas para estos valores, y aquellos que los tratan como "
+"números arbitrarios."
 
 #: C/gtkmm-tutorial-in.xml:3701(para)
 msgid ""
@@ -6517,6 +6570,16 @@ msgid ""
 "adjustment's <parameter>value</parameter>. By default, they will only modify "
 "the <parameter>value</parameter> of an adjustment."
 msgstr ""
+"El grupo que trata los valores como números arbitrarios incluye los widgets "
+"<classname>Range</classname> (<classname>Scrollbar</classname> y "
+"<classname>Scale</classname>), el widget <classname>ScaleButton</classname> "
+"y el widget <classname>SpinButton</classname>. Típicamente, el usuario "
+"«ajusta» directamente a estos widgets mediante el teclado o el ratón. "
+"Tratarán a los valores <parameter>lower</parameter> y <parameter>upper</"
+"parameter> de un ajuste como un rango dentro del cual el usuario podrá "
+"manipular el <parameter>value</parameter> del ajuste. De manera "
+"predeterminada, sólo modificarán el <parameter>value</parameter> de un "
+"ajuste."
 
 #: C/gtkmm-tutorial-in.xml:3713(para)
 msgid ""
@@ -6527,6 +6590,13 @@ msgid ""
 "their own adjustments or use ones you supply, you'll generally want to let "
 "this particular category of widgets create its own adjustments."
 msgstr ""
+"El otro grupo incluye al widget <classname>Viewport</classname> y al widget "
+"<classname>ScrolledWindow</classname>. Todos estos widgets usan valores de "
+"píxel para sus ajustes. Típicamente, estos también se ajustan indirectamente "
+"usando barras de desplazamiento. A pesar de que todos los widgets que usan "
+"ajustes pueden crear los suyos o usar los que se les proporcionan, "
+"generalmente querrá dejarle a esta categoría particular de widgets crear sus "
+"propios ajustes."
 
 #: C/gtkmm-tutorial-in.xml:3722(para)
 msgid ""
@@ -6534,6 +6604,9 @@ msgid ""
 "manipulating the scrollbar will automagically adjust the TextView widget. "
 "You can set it up like this:"
 msgstr ""
+"Si comparte un objeto de ajuste entre una barra de desplazamiento y un "
+"widget «TextView», manipular la barra de desplazamiento ajustará "
+"automágicamente al widget «TextView». Puede establecerlo así:"
 
 #: C/gtkmm-tutorial-in.xml:3727(programlisting)
 #, no-wrap
@@ -6550,7 +6623,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:3735(title)
 msgid "Adjustment Internals"
-msgstr ""
+msgstr "Interioridades del ajuste"
 
 #: C/gtkmm-tutorial-in.xml:3737(para)
 msgid ""
@@ -6560,6 +6633,11 @@ msgid ""
 "Adjustment</classname>, you can use the <methodname>get_value()</methodname> "
 "and <methodname>set_value()</methodname> methods:"
 msgstr ""
+"Hasta aquí está todo bien, pero ¿y si quiere crear sus propios manejadores "
+"para responder cuando el usuario ajusta un widget <classname>Range</"
+"classname> o un <classname>SpinButton</classname>? Para acceder al valor de "
+"un <classname>Gtk::Adjustment</classname>, puede usar los métodos "
+"<methodname>get_value()</methodname> y <methodname>set_value()</methodname>:"
 
 #: C/gtkmm-tutorial-in.xml:3745(para)
 msgid ""
@@ -6570,6 +6648,13 @@ msgid ""
 "signal handlers to their adjustment's <literal>value_changed</literal> "
 "signal, as can your program."
 msgstr ""
+"Como se mencionó anteriormente, <classname>Gtk::Adjustment</classname> puede "
+"emitir señales. Así es, por supuesto, cómo suceden las actualizaciones "
+"automáticamente cuando comparte un objeto <classname>Adjustment</classname> "
+"entre una <classname>Scrollbar</classname> y otro widget ajustable; todos "
+"los widgets ajustables conectan manejadores de señales a la señal "
+"<literal>value_changed</literal> de sus ajustes, como también puede su "
+"programa."
 
 #: C/gtkmm-tutorial-in.xml:3754(para)
 msgid ""
@@ -6577,6 +6662,9 @@ msgid ""
 "want to change the rotation of a picture whenever its value changes, you "
 "would create a signal handler like this:"
 msgstr ""
+"Entonces, por ejemplo, si tiene un widget <classname>Scale</classname>, y "
+"quiere cambiar la rotación de una imagen cuando su valor cambia, podría "
+"crear un manejador de señales de esta forma:"
 
 #: C/gtkmm-tutorial-in.xml:3759(programlisting)
 #, no-wrap
@@ -6593,7 +6681,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:3763(para)
 msgid "and connect it to the scale widget's adjustment like this:"
-msgstr ""
+msgstr "y conectarlo al ajuste del widget de escala así:"
 
 #: C/gtkmm-tutorial-in.xml:3766(programlisting)
 #, no-wrap
@@ -6611,6 +6699,10 @@ msgid ""
 "classname>, such as when a user adds more text to a text widget? In this "
 "case, it emits the <literal>changed</literal> signal."
 msgstr ""
+"¿Qué pasa si un widget reconfigura los campos <parameter>upper</parameter> o "
+"<parameter>lower</parameter> de su <classname>Adjustment</classname>, como "
+"cuando un usuario le añade más texto a un widget de texto? En este caso, "
+"emite la señal <literal>changed</literal>."
 
 #: C/gtkmm-tutorial-in.xml:3776(para)
 msgid ""
