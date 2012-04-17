@@ -30,14 +30,14 @@ public:
 protected:
   //Signal handlers:
   void on_checkbutton_toggled();
-  void on_menu_position(Gtk::PositionType type);
+  void on_menu_position();
   void on_adjustment1_value_changed();
   void on_adjustment2_value_changed();
   void on_button_quit();
 
   //Child widgets:
   Gtk::Box m_VBox_Top, m_VBox2, m_VBox_HScale;
-  Gtk::Box m_HBox_Scales, m_HBox_Digits, m_HBox_PageSize;
+  Gtk::Box m_HBox_Scales, m_HBox_Combo, m_HBox_Digits, m_HBox_PageSize;
 
   Glib::RefPtr<Gtk::Adjustment> m_adjustment, m_adjustment_digits, m_adjustment_pagesize;
 
@@ -50,7 +50,23 @@ protected:
 
   Gtk::Scrollbar m_Scrollbar;
 
-  Gtk::Menu m_Menu_Position;
+  //Tree model columns:
+  class ModelColumns : public Gtk::TreeModel::ColumnRecord
+  {
+  public:
+
+    ModelColumns()
+    { add(m_col_position_type); add(m_col_title); }
+
+    Gtk::TreeModelColumn<Gtk::PositionType> m_col_position_type;
+    Gtk::TreeModelColumn<Glib::ustring> m_col_title;
+  };
+
+  ModelColumns m_Columns;
+
+  //Child widgets:
+  Gtk::ComboBox m_ComboBox_Position;
+  Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
 
   Gtk::Button m_Button_Quit;
 };

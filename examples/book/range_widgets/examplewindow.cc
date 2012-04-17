@@ -25,6 +25,7 @@ ExampleWindow::ExampleWindow()
   m_VBox2(Gtk::ORIENTATION_VERTICAL, 20),
   m_VBox_HScale(Gtk::ORIENTATION_VERTICAL, 10),
   m_HBox_Scales(Gtk::ORIENTATION_HORIZONTAL, 10),
+  m_HBox_Combo(Gtk::ORIENTATION_HORIZONTAL, 10),
   m_HBox_Digits(Gtk::ORIENTATION_HORIZONTAL, 10),
   m_HBox_PageSize(Gtk::ORIENTATION_HORIZONTAL, 10),
 
@@ -85,30 +86,33 @@ ExampleWindow::ExampleWindow()
     &ExampleWindow::on_checkbutton_toggled) );
   m_VBox2.pack_start(m_CheckButton, Gtk::PACK_SHRINK);
 
-  //Menus:
-  Gtk::MenuItem* item = Gtk::manage(new Gtk::MenuItem("Top"));
-  item->signal_activate().connect(
-    sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_position), Gtk::POS_TOP));
-  m_Menu_Position.append(*item);
+  //Position ComboBox:
+  //Create the Tree model:
+  m_refTreeModel = Gtk::ListStore::create(m_Columns);
+  m_ComboBox_Position.set_model(m_refTreeModel);
+  m_ComboBox_Position.pack_start(m_Columns.m_col_title);
 
-  item = Gtk::manage(new Gtk::MenuItem("Bottom"));
-  item->signal_activate().connect(
-    sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_position), Gtk::POS_BOTTOM));
-  m_Menu_Position.append(*item);
+  //Fill the ComboBox's Tree Model:
+  Gtk::TreeModel::Row row = *(m_refTreeModel->append());
+  row[m_Columns.m_col_position_type] = Gtk::POS_TOP;
+  row[m_Columns.m_col_title] = "Top";
+  row = *(m_refTreeModel->append());
+  row[m_Columns.m_col_position_type] = Gtk::POS_BOTTOM;
+  row[m_Columns.m_col_title] = "Bottom";
+  row = *(m_refTreeModel->append());
+  row[m_Columns.m_col_position_type] = Gtk::POS_LEFT;
+  row[m_Columns.m_col_title] = "Left";
+  row = *(m_refTreeModel->append());
+  row[m_Columns.m_col_position_type] = Gtk::POS_RIGHT;
+  row[m_Columns.m_col_title] = "Right";
 
-  item = Gtk::manage(new Gtk::MenuItem("Left"));
-  item->signal_activate().connect(
-    sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_position), Gtk::POS_LEFT));
-  m_Menu_Position.append(*item);
 
-  item = Gtk::manage(new Gtk::MenuItem("Right"));
-  item->signal_activate().connect(
-    sigc::bind(sigc::mem_fun(*this,
-      &ExampleWindow::on_menu_position), Gtk::POS_RIGHT));
-  m_Menu_Position.append(*item);
+  m_VBox2.pack_start(m_HBox_Combo, Gtk::PACK_SHRINK);
+  m_HBox_Combo.pack_start(
+    *Gtk::manage(new Gtk::Label("Scale Value Position:", 0)), Gtk::PACK_SHRINK);
+  m_HBox_Combo.pack_start(m_ComboBox_Position);
+  m_ComboBox_Position.signal_changed().connect( sigc::mem_fun(*this, &ExampleWindow::on_menu_position) );
+
 
   //Digits:
   m_HBox_Digits.pack_start(
@@ -151,8 +155,18 @@ void ExampleWindow::on_checkbutton_toggled()
   m_HScale.set_draw_value(m_CheckButton.get_active());
 }
 
-void ExampleWindow::on_menu_position(Gtk::PositionType postype)
+void ExampleWindow::on_menu_position()
 {
+  Gtk::TreeModel::iterator iter = m_ComboBox_Position.get_active();
+  if(!iter)
+    return;
+
+  Gtk::TreeModel::Row row = *iter;
+  if(!row)
+    return;
+
+  const Gtk::PositionType postype = row[m_Columns.m_col_position_type];
+
   m_VScale.set_value_pos(postype);
   m_HScale.set_value_pos(postype);
 }

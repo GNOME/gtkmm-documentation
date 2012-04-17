@@ -1,3 +1,11 @@
+2012-04-17  Murray Cumming  <murrayc@murrayc.com>
+
+	Range Widgets example: Really show a Position combo.
+
+	* examples/book/range_widgets/examplewindow.[h|cc]:
+	Convert the menu (which was once put in a deprecated OptionMenu)
+	to a ComboBox and actually show it and handle it.
+
 3.4.0:
 
 2012-04-02  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
