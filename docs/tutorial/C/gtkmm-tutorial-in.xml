@@ -3920,7 +3920,7 @@ to the bottom of the <classname>Dialog</classname>, you could use the
 <para>
 The <methodname>run()</methodname> method returns an <literal>int</literal>. This
 may be a value from the <literal>Gtk::ResponseType</literal> if the user
-closed the button by clicking a standard button, or it could be the custom
+closed the dialog by clicking a standard button, or it could be the custom
 response value that you specified when using <methodname>add_button()</methodname>.
 </para>
 
