@@ -3841,7 +3841,7 @@ to capture events on them. They are intended to have no X-Window in order to imp
 Some &gtkmm; widgets don't have associated X windows; they draw on
 their parents' windows. Because of this, they cannot receive events.
 Also, if they are incorrectly sized, they don't clip, so you can get
-messy overwriting etc. To receive events on one of these widgets, you can it
+messy overwriting etc. To receive events on one of these widgets, you can place it
 inside an <classname>EventBox</classname> widget and then call
 <methodname>Gtk::Widget::set_events()</methodname> on the EventBox before showing it.</para>
 
