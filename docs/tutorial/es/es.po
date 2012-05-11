@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-05-03 08:29+0000\n"
-"PO-Revision-Date: 2012-05-04 12:02+0200\n"
+"POT-Creation-Date: 2012-05-04 10:14+0000\n"
+"PO-Revision-Date: 2012-05-11 12:54+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -8067,6 +8067,9 @@ msgid ""
 "<literal>start_button_mask</literal> is an ORed combination of values, which "
 "specify which modifier key or mouse button must be pressed to start the drag."
 msgstr ""
+"<literal>start_button_mask</literal> es una combinación de valores "
+"complementarios, que especifica qué tecla modificadora o botón del ratón "
+"debe presionarse para empezar a arrastrar."
 
 #: C/gtkmm-tutorial-in.xml:4681(para)
 msgid ""
@@ -8077,6 +8080,12 @@ msgid ""
 "<literal>copy</literal> to <literal>move</literal>, and this will be shown "
 "by a different cursor."
 msgstr ""
+"<literal>actions</literal> es una combinación de valores complementarios, "
+"que especifican qué operaciones de arrastrar y soltar serán posibles desde "
+"este origen: por ejemplo, copiar, mover, o enlazar. El usuario puede elegir "
+"entre las acciones usando teclas modificadoras, como <keycap>Mayús</keycap> "
+"para cambiar de <literal>copiar</literal> a <literal>mover</literal>, y esto "
+"se mostrará con un cursor diferente."
 
 #: C/gtkmm-tutorial-in.xml:4692(programlisting)
 #, no-wrap
@@ -8092,12 +8101,17 @@ msgid ""
 "<literal>flags</literal> is an ORed combination of values which indicates "
 "how the widget will respond visually to Drag and Drop items."
 msgstr ""
+"<literal>flags</literal> es una combinación de valores complementarios que "
+"indica cómo responderá el widget visualmente a los objetos que se arrastran "
+"y sueltan."
 
 #: C/gtkmm-tutorial-in.xml:4703(para)
 msgid ""
 "<literal>actions</literal> indicates the Drag and Drop actions which this "
 "destination can receive - see the description above."
 msgstr ""
+"<literal>actions</literal> indica las acciones de arrastrar y soltar que "
+"este destino puede recibir: consulte la descripción arriba."
 
 #: C/gtkmm-tutorial-in.xml:4713(para)
 msgid ""
@@ -8109,6 +8123,13 @@ msgid ""
 "to <methodname>drag_dest_set()</methodname> and <methodname>drag_source_set()"
 "</methodname>."
 msgstr ""
+"Cuando un destino acepta un elemento arrastrado, se emiten ciertas señales, "
+"dependiendo de qué acción se ha seleccionado. Por ejemplo, el usuario podría "
+"haber mantenido presionada la tecla <keycap>Mayús</keycap> para especificar "
+"un <literal>movimiento</literal> en vez de una <literal>copia</literal>. "
+"Recuerde que el usuario sólo puede seleccionar las acciones que ha "
+"especificado en sus llamadas a <methodname>drag_dest_set()</methodname> y "
+"<methodname>drag_source_set()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:4724(title) C/gtkmm-tutorial-in.xml:4847(title)
 msgid "Copy"
@@ -8124,6 +8145,9 @@ msgid ""
 "can call the drag_status() method of the DragContext to indicate which "
 "target will be accepted."
 msgstr ""
+"<literal>drag_motion</literal>: proporciona DragContext y coordenadas. Puede "
+"llamar al método drag_status() del DragContext para indicar qué objetivo se "
+"aceptará."
 
 #: C/gtkmm-tutorial-in.xml:4730(para)
 msgid ""
@@ -8131,10 +8155,13 @@ msgid ""
 "dragged data format, and a <literal>GtkSelectionData</literal> structure, in "
 "which you should put the requested data."
 msgstr ""
+"<literal>drag_set</literal>: proporciona <literal>info</literal> acerca del "
+"formato de datos arrastrado, y una estructura <literal>GtkSelectionData</"
+"literal>, en la que debe poner los datos pedidos."
 
 #: C/gtkmm-tutorial-in.xml:4731(para)
 msgid "<literal>drag_drop</literal>: Provides DragContext and coordinates."
-msgstr ""
+msgstr "<literal>drag_drop</literal>: proporciona DragContext y coordenadas."
 
 #: C/gtkmm-tutorial-in.xml:4732(para)
 msgid "<literal>drag_end</literal>: Provides DragContext."
@@ -8144,6 +8171,7 @@ msgstr "<literal>drag_end</literal>: proporciona DragContext."
 msgid ""
 "The source widget will emit these signals, in this order: <placeholder-1/>"
 msgstr ""
+"El widget origen emitirá estas señales, en este orden: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:4739(para)
 msgid ""
@@ -8153,12 +8181,19 @@ msgid ""
 "<methodname>drag_finish()</methodname> method of the <literal>DragContext</"
 "literal> to indicate whether the operation was successful."
 msgstr ""
+"<literal>drag_data_received</literal>: proporciona <literal>info</literal> "
+"acerca del formato de datos arrastrado, y una estructura "
+"<literal>GtkSelectionData</literal> que contiene los datos soltados. Debe "
+"llamar al método <methodname>drag_finish()</methodname> del "
+"<literal>DragContext</literal> para indicar si la operación tuvo éxito."
 
 #: C/gtkmm-tutorial-in.xml:4735(para)
 msgid ""
 "The destination widget will emit this signal, after the source destination "
 "has emitted the <literal>drag_get</literal> signal: <placeholder-1/>"
 msgstr ""
+"El widget de destino emitirá esta señal, después de que el destino de origen "
+"haya emitido la señal <literal>drag_get</literal>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:4754(title)
 msgid "Move"
@@ -8169,6 +8204,8 @@ msgid ""
 "<literal>drag_delete</literal>: Gives the source the opportunity to delete "
 "the original data if that's appropriate."
 msgstr ""
+"<literal>drag_delete</literal>: le da al origen la oportunidad de eliminar "
+"los datos originales si es lo apropiado."
 
 #: C/gtkmm-tutorial-in.xml:4755(para)
 msgid ""
@@ -8192,16 +8229,26 @@ msgid ""
 "methodname> method from your <literal>drag_data_received</literal> signal "
 "handler to indicate whether the drop was successful."
 msgstr ""
+"Las señales de arrastrar y soltar proporcionan un DragContext, que contiene "
+"información acerca de la esta operación y puede usarse para influir en el "
+"proceso. Por ejemplo, puede descubrir el widget de origen, o cambiar el "
+"icono de arrastrar y soltar, usando el método <methodname>set_icon()</"
+"methodname>. Aún más importante, debe llamar al método "
+"<methodname>drag_finish()</methodname> desde su manejador de señal "
+"<literal>drag_data_received</literal> para indicar si la operación tuvo "
+"éxito."
 
 #: C/gtkmm-tutorial-in.xml:4785(para)
 msgid ""
 "Here is a very simple example, demonstrating a drag and drop <literal>Copy</"
 "literal> operation:"
 msgstr ""
+"Aquí hay un ejemplo muy simple, demostrando arrastrar y soltar en una "
+"operación de <literal>copia</literal>:"
 
 #: C/gtkmm-tutorial-in.xml:4796(para)
 msgid "There is a more complex example in examples/others/dnd."
-msgstr ""
+msgstr "Hay un ejemplo más complejo en examples/others/dnd."
 
 #: C/gtkmm-tutorial-in.xml:4805(title)
 msgid "The Clipboard"
@@ -8214,12 +8261,19 @@ msgid ""
 "your own data formats. For instance, a drawing program would need special "
 "code to allow copy and paste within a view, or between documents."
 msgstr ""
+"Widgets libres como Gtk::Entry y Gtk::TextView proporcionan una función de "
+"copiar y pegar texto simple, pero tal vez necesite código especial para "
+"manejar sus propios formatos de datos. Por ejemplo, un programa de dibujo "
+"necesitaría código especial para permitir copiar y pegar dentro de una "
+"vista, o entre documentos."
 
 #: C/gtkmm-tutorial-in.xml:4808(para)
 msgid ""
 "<classname>Gtk::Clipboard</classname> is a singleton. You can get the one "
 "and only instance with <methodname>Gtk::Clipboard::get()</methodname>."
 msgstr ""
+"<classname>Gtk::Clipboard</classname> es un «singleton». Puede obtener su "
+"única instancia con <methodname>Gtk::Clipboard::get()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:4813(para)
 msgid ""
@@ -8230,6 +8284,13 @@ msgid ""
 "<classname>Gtk::Clipboard</classname> is ready, it will call these methods, "
 "either providing the requested data, or asking for data."
 msgstr ""
+"Para que su aplicación no necesite esperar a operaciones de portapapeles, "
+"particularmente en el tiempo en el que el usuario elige «copiar» y luego "
+"«pegar», la mayoría de los métodos de <classname>Gtk::Clipboard</classname> "
+"toman <classname>sigc::slot</classname> que especifican métodos de "
+"devolución de llamada. Cuando <classname>Gtk::Clipboard</classname> esté "
+"listo, llamará a estos métodos, proporcionándoles los datos o bien "
+"pidiéndolos."
 
 #: C/gtkmm-tutorial-in.xml:4825(title)
 msgid "Targets"
@@ -8241,6 +8302,9 @@ msgid ""
 "that data available in a variety of formats. <application>gtkmm</"
 "application> calls these data types <literal>target</literal>s."
 msgstr ""
+"Diferentes aplicaciones contienen diferentes tipos de datos, y podrían hacer "
+"esos datos disponibles en una variedad de formatos. <application>gtkmm</"
+"application> llama a estos tipos de datos <literal>objetivos</literal>."
 
 #: C/gtkmm-tutorial-in.xml:4830(para)
 msgid ""
@@ -8251,6 +8315,13 @@ msgid ""
 "application can receive one of the targets that the other supplies then you "
 "will be able to copy data from one to the other."
 msgstr ""
+"Por ejemplo, gedit puede proporcionar y recibir el objetivo <literal>"
+"\"UTF8_STRING\"</literal>, para que pueda pegar datos en gedit desde "
+"cualquier aplicación que proporcione ese objetivo. O bien, dos aplicaciones "
+"de edición de imágenes diferentes podrían proporcionar y recibir una "
+"variedad de formatos de imágenes como objetivos. Mientras que una aplicación "
+"pueda recibir uno de los objetivos que la otra proporciona, entonces podrá "
+"copiar los datos de una a la otra."
 
 #: C/gtkmm-tutorial-in.xml:4834(para)
 msgid ""
