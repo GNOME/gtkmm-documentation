@@ -1,3 +1,10 @@
+2012-05-28  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	SpinButton example: Fix orientation of vertical boxes.
+
+	* examples/book/spinbutton/examplewindow.cc: Fix the orientation of the
+	boxes that shall be vertical.
+
 2012-04-17  Murray Cumming  <murrayc@murrayc.com>
 
 	Range Widgets example: Really show a Position combo.
