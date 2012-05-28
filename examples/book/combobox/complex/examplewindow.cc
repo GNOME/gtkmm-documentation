@@ -33,6 +33,7 @@ ExampleWindow::ExampleWindow()
   Gtk::TreeModel::Row row = *(m_refTreeModel->append());
   row[m_Columns.m_col_id] = 1;
   row[m_Columns.m_col_name] = "Billy Bob";
+  m_Combo.set_active(row);
   /*
   Gtk::TreeModel::Row childrow = *(m_refTreeModel->append(row.children()));
   childrow[m_Columns.m_col_id] = 11;

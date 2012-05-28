@@ -48,7 +48,6 @@ ExampleWindow::ExampleWindow()
   row[m_Columns.m_col_id] = "2";
   row[m_Columns.m_col_name] = "Joey Jojo";
 
-
   row = *(m_refTreeModel->append());
   row[m_Columns.m_col_id] = "3";
   row[m_Columns.m_col_name] = "Rob McRoberts";
@@ -66,6 +65,7 @@ ExampleWindow::ExampleWindow()
   m_Combo.pack_start(m_Columns.m_col_name);
 
   m_Combo.set_entry_text_column(m_Columns.m_col_id);
+  m_Combo.set_active(1);
 
   //Add the ComboBox to the window.
   add(m_Combo);

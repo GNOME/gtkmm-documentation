@@ -106,13 +106,12 @@ ExampleWindow::ExampleWindow()
   row[m_Columns.m_col_position_type] = Gtk::POS_RIGHT;
   row[m_Columns.m_col_title] = "Right";
 
-
   m_VBox2.pack_start(m_HBox_Combo, Gtk::PACK_SHRINK);
   m_HBox_Combo.pack_start(
     *Gtk::manage(new Gtk::Label("Scale Value Position:", 0)), Gtk::PACK_SHRINK);
   m_HBox_Combo.pack_start(m_ComboBox_Position);
-  m_ComboBox_Position.signal_changed().connect( sigc::mem_fun(*this, &ExampleWindow::on_menu_position) );
-
+  m_ComboBox_Position.signal_changed().connect( sigc::mem_fun(*this, &ExampleWindow::on_combo_position) );
+  m_ComboBox_Position.set_active(0); // Top
 
   //Digits:
   m_HBox_Digits.pack_start(
@@ -155,7 +154,7 @@ void ExampleWindow::on_checkbutton_toggled()
   m_HScale.set_draw_value(m_CheckButton.get_active());
 }
 
-void ExampleWindow::on_menu_position()
+void ExampleWindow::on_combo_position()
 {
   Gtk::TreeModel::iterator iter = m_ComboBox_Position.get_active();
   if(!iter)

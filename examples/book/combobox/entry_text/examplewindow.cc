@@ -29,6 +29,7 @@ ExampleWindow::ExampleWindow()
   m_Combo.append("something");
   m_Combo.append("something else");
   m_Combo.append("something or other");
+  m_Combo.set_active(0);
 
   add(m_Combo);
 

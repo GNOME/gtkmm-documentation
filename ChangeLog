@@ -1,5 +1,18 @@
 2012-05-28  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
+	ComboBox and Range widgets examples: Set an active ComboBox entry.
+
+	* examples/book/combobox/complex/examplewindow.cc:
+	* examples/book/combobox/entry_complex/examplewindow.cc:
+	* examples/book/combobox/entry_text/examplewindow.cc:
+	* examples/book/combobox/text/examplewindow.cc: Make a ComboBox entry active
+	in the ExampleWindow constructor.
+	* examples/book/range_widgets/examplewindow.[h|cc]: Make a ComboBox entry
+	active in the ExampleWindow constructor. Rename on_menu_position() to
+	on_combo_position().
+
+2012-05-28  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
 	SpinButton example: Fix orientation of vertical boxes.
 
 	* examples/book/spinbutton/examplewindow.cc: Fix the orientation of the

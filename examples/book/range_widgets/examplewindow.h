@@ -30,7 +30,7 @@ public:
 protected:
   //Signal handlers:
   void on_checkbutton_toggled();
-  void on_menu_position();
+  void on_combo_position();
   void on_adjustment1_value_changed();
   void on_adjustment2_value_changed();
   void on_button_quit();
