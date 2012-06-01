@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-05-28 08:59+0000\n"
-"PO-Revision-Date: 2012-05-30 16:28+0200\n"
+"POT-Creation-Date: 2012-05-30 14:30+0000\n"
+"PO-Revision-Date: 2012-06-01 10:46+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -9086,10 +9086,16 @@ msgid ""
 "literal> as a member of your <classname>CustomPrintOperation</classname> "
 "class: <placeholder-1/>"
 msgstr ""
+"A pesar de que la señal <literal>custom_widget_apply</literal> proporciona "
+"al widget que creó previamente, para simplificar las cosas puede mantener a "
+"los widgets que espera que contengan entrada del usuario como miembros de "
+"clase. Por ejemplo, si tiene un <classname>Gtk::Entry</classname> llamado "
+"<literal>m_Entry</literal> como miembro de su clase "
+"<classname>CustomPrintOperation</classname>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:5298(para)
 msgid "The example in examples/book/printing/advanced demonstrates this."
-msgstr ""
+msgstr "El ejemplo en examples/book/printing/advanced demuestra esto."
 
 #: C/gtkmm-tutorial-in.xml:5305(title)
 msgid "Preview"
@@ -9115,6 +9121,9 @@ msgid ""
 "The native GTK+ print dialog has a preview button, but you may also start a "
 "preview directly from an application: <placeholder-1/>"
 msgstr ""
+"El diálogo de impresión nativo de GTK+ tiene un botón de previsualización, "
+"pero también puede comenzar una previsualización directamente desde una "
+"aplicación: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:5319(para)
 msgid ""
@@ -9123,6 +9132,11 @@ msgid ""
 "override this behaviour and provide a custom preview dialog. See the example "
 "located in /examples/book/printing/advanced."
 msgstr ""
+"En Unix, el manejador de previsualización predeterminado usa un programa "
+"visor externo. En Windows, se mostrará el diálogo nativo de "
+"previsualización. Si es necesario, puede modificar este comportamiento y "
+"proporcionar un diálogo de previsualización personalizado. Consulte el "
+"ejemplo en /examples/book/printing/advanced."
 
 #: C/gtkmm-tutorial-in.xml:5334(para)
 msgid ""
@@ -9131,10 +9145,14 @@ msgid ""
 "<literal>on_draw_page</literal>, as well as how to track print status and "
 "update the print settings."
 msgstr ""
+"El siguiente ejemplo demuestra cómo imprimir entrada desde una interfaz de "
+"usuario. Muestra cómo implementar <literal>on_begin_print</literal> y "
+"<literal>on_draw_page</literal>, como también cómo rastrear el estado de la "
+"impresión y actualizar sus opciones."
 
 #: C/gtkmm-tutorial-in.xml:5342(title)
 msgid "Printing - Simple"
-msgstr ""
+msgstr "Impresión simple"
 
 #: C/gtkmm-tutorial-in.xml:5357(title)
 msgid "Recently Used Documents"
@@ -9149,6 +9167,13 @@ msgid ""
 "<classname>RecentChooserWidget</classname>, <classname>RecentAction</"
 "classname>, and <classname>RecentFilter</classname>."
 msgstr ""
+"<application>gtkmm</application> proporciona una manera fácil de gestionar "
+"documentos usados recientemente. Las clases involucradas en la "
+"implementación de esta funcionalidad son <classname>RecentManager</"
+"classname>, <classname>RecentChooserDialog</classname>, "
+"<classname>RecentChooserMenu</classname>, <classname>RecentChooserWidget</"
+"classname>, <classname>RecentAction</classname>, y <classname>RecentFilter</"
+"classname>."
 
 #: C/gtkmm-tutorial-in.xml:5369(para)
 msgid ""
@@ -9158,6 +9183,11 @@ msgid ""
 "application registered it, whether it's private to the registering "
 "application, and several other things."
 msgstr ""
+"Cada elemento de la lista de archivos usados recientemente se identifica "
+"mediante su URI, y puede tener metadatos asociados. Los metadatos pueden "
+"usarse para especificar cómo se mostrará el archivo, su descripción, su tipo "
+"MIME, qué aplicación lo registró, si es privado de esta aplicación y muchas "
+"otras cosas."
 
 #: C/gtkmm-tutorial-in.xml:5377(title)
 msgid "RecentManager"
@@ -9170,6 +9200,10 @@ msgid ""
 "or look up recently used files. There is one list of recently used files per "
 "user."
 msgstr ""
+"<classname>RecentManager</classname> actúa como una base de datos de "
+"archivos usados recientemente. Use esta clase para registrar archivos "
+"nuevos, eliminarlos o buscarlos. Hay una lista de archivos usados "
+"recientemente por cada usuario."
 
 #: C/gtkmm-tutorial-in.xml:5384(para)
 msgid ""
@@ -9178,6 +9212,10 @@ msgid ""
 "default <classname>RecentManager</classname> with <methodname>get_default()</"
 "methodname>."
 msgstr ""
+"Puede crear un <classname>RecentManager</classname> nuevo, pero es muy "
+"probable que prefiera usar el predeterminado. Puede obtener una referencia "
+"del <classname>RecentManager</classname> predeterminado con "
+"<methodname>get_default()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:5390(para)
 msgid ""
@@ -9185,6 +9223,9 @@ msgid ""
 "where the view is a class that implements the <classname>RecentChooser</"
 "classname> interface."
 msgstr ""
+"<classname>RecentManager</classname> es el modelo de un patrón modelo-vista "
+"cuya vista es la clase que implementa la interfaz <classname>RecentChooser</"
+"classname>."
 
 #: C/gtkmm-tutorial-in.xml:5396(title)
 msgid "Adding Items to the List of Recent Files"
@@ -9195,6 +9236,8 @@ msgid ""
 "To add a new file to the list of recent documents, in the simplest case, you "
 "only need to provide the URI. For example:"
 msgstr ""
+"Para añadir un archivo nuevo a la lista de documentos recientes, en el caso "
+"más simple, sólo necesita proporcionar su URI. Por ejemplo:"
 
 #: C/gtkmm-tutorial-in.xml:5401(programlisting)
 #, no-wrap
@@ -9212,6 +9255,10 @@ msgid ""
 "()</methodname>. The metadata that can be set on a particular file item is "
 "as follows:"
 msgstr ""
+"Si quiere registrar un archivo con metadatos, puede pasar un parámetro "
+"<classname>RecentManager::Data</classname> al <methodname>add_item()</"
+"methodname>. Los metadatos que pueden establecerse en un elemento archivo "
+"particular son los siguientes:"
 
 #: C/gtkmm-tutorial-in.xml:5411(para)
 msgid ""
@@ -9219,24 +9266,33 @@ msgid ""
 "resource. This string may contain the \"f\" and \"u\" escape characters "
 "which will be expanded to the resource file path and URI respectively"
 msgstr ""
+"<varname>app_exec</varname>: la línea de comandos que se usará para lanzar "
+"este recurso. La cadena puede contener los caracteres de escape «f» y «u» que "
+"se expandirán en la ruta del archivo de recursos y el URI respectivamente"
 
 #: C/gtkmm-tutorial-in.xml:5417(para)
 msgid ""
 "<varname>app_name</varname>: The name of the application that registered the "
 "resource"
 msgstr ""
+"<varname>app_name</varname>: el nombre de la aplicación que registró el "
+"recurso"
 
 #: C/gtkmm-tutorial-in.xml:5421(para)
 msgid ""
 "<varname>description</varname>: A short description of the resource as a UTF-"
 "8 encoded string"
 msgstr ""
+"<varname>description</varname>: una descripción corta del recurso en una "
+"cadena codificada en UTF-8"
 
 #: C/gtkmm-tutorial-in.xml:5425(para)
 msgid ""
 "<varname>display_name</varname>: The name of the resource to be used for "
 "display as a UTF-8 encoded string"
 msgstr ""
+"<varname>display_name</varname>: el nombre del recurso que se mostrará como "
+"una cadena codificada en UTF-8"
 
 #: C/gtkmm-tutorial-in.xml:5429(para)
 msgid ""
@@ -9245,16 +9301,22 @@ msgid ""
 "resource. They can be thought of as 'categories' (such as \"email\", "
 "\"graphics\", etc) or tags for the resource."
 msgstr ""
+"<varname>groups</varname>: una lista de grupos asociada con este elemento. "
+"Los grupos son esencialmente cadenas arbitrarias asociadas con un recurso en "
+"particular. Puede pensar en ellos como «categorías» (como «correo-e», "
+"«gráficos», etc), o etiquetas del recurso"
 
 #: C/gtkmm-tutorial-in.xml:5435(para)
 msgid ""
 "<varname>is_private</varname>: Whether this resource should be visible only "
 "to applications that have registered it or not"
 msgstr ""
+"<varname>is_private</varname>: determina si el recurso debe ser visible sólo "
+"a las aplicaciones que lo han registrado o no"
 
 #: C/gtkmm-tutorial-in.xml:5439(para)
 msgid "<varname>mime_type</varname>: The MIME type of the resource"
-msgstr ""
+msgstr "<varname>mime_type</varname>: el tipo MIME del recurso"
 
 #: C/gtkmm-tutorial-in.xml:5442(para)
 msgid ""
