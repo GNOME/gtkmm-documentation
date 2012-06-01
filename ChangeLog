@@ -1,3 +1,16 @@
+2012-06-01  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Update some screenshots.
+
+	* docs/tutorial/C/figures/custom_container.png:
+	* docs/tutorial/C/figures/custom_widget.png:
+	* docs/tutorial/C/figures/dialogs_colorchooserdialog.png:
+	* docs/tutorial/C/figures/dialogs_filechooser.png:
+	* docs/tutorial/C/figures/dialogs_fontchooserdialog.png:
+	* docs/tutorial/C/figures/range_widgets.png:
+	* docs/tutorial/C/figures/recentchooserdialog.png:
+	Update these screenshots to gtkmm3 status.
+
 2012-05-28  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	ComboBox and Range widgets examples: Set an active ComboBox entry.
