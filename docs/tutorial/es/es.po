@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-05-30 14:30+0000\n"
-"PO-Revision-Date: 2012-06-01 10:46+0200\n"
+"POT-Creation-Date: 2012-06-01 14:23+0000\n"
+"PO-Revision-Date: 2012-06-04 13:27+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -9390,6 +9390,12 @@ msgid ""
 "The following code demonstrates how you might get a list of recently used "
 "files:"
 msgstr ""
+"Si no quiere buscar un URI específico, sino obtener una lista de todos los "
+"elementos usados recientemente, <classname>RecentManager</classname> "
+"proporciona la función <methodname>get_items()</methodname>. El valor que "
+"devuelve esta función es un <classname>std::vector</classname> de todos los "
+"archivos usados recientemente. El siguiente código demuestra cómo puede "
+"obtener una lista de todos los archivos usados recientemente:"
 
 #: C/gtkmm-tutorial-in.xml:5485(programlisting)
 #, no-wrap
@@ -9402,6 +9408,10 @@ msgid ""
 "<methodname>Gtk::Settings::property_gtk_recent_files_max_age()</methodname>. "
 "Default value: 30 days."
 msgstr ""
+"La edad máxima de los elementos de la lista de archivos usados recientemente "
+"puede establecerse con <methodname>Gtk::Settings::"
+"property_gtk_recent_files_max_age()</methodname>. El valor predeterminado es "
+"30 días."
 
 #: C/gtkmm-tutorial-in.xml:5493(title)
 msgid "Modifying the List of Recent Files"
@@ -9415,6 +9425,12 @@ msgid ""
 "location. You can update an item's location by using <methodname>move_item()"
 "</methodname>."
 msgstr ""
+"Podría existir alguna ocasión en la que necesite modificar la lista de "
+"archivos usados recientemente. Por ejemplo, si un archivo se borra o "
+"renombra, necesitará actualizar la localización del archivo en la lista de "
+"archivos recientes para que no apunte a un lugar incorrecto. Puede "
+"actualizar la localización de un elemento usando <methodname>move_item()</"
+"methodname>."
 
 #: C/gtkmm-tutorial-in.xml:5501(para)
 msgid ""
@@ -9423,6 +9439,10 @@ msgid ""
 "accomplished with <methodname>remove_item()</methodname>, the latter with "
 "<methodname>purge_items()</methodname>."
 msgstr ""
+"Además de cambiar el URI de un archivo, también puede eliminar archivos de "
+"la lista uno a uno o todos juntos. Realice lo primero con "
+"<methodname>remove_item()</methodname>, y lo último con "
+"<methodname>purge_items()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:5508(para)
 msgid ""
@@ -9431,6 +9451,10 @@ msgid ""
 "the actual files that are referred to by the URIs, they only modify the list "
 "of recent files."
 msgstr ""
+"Las funciones <methodname>move_item()</methodname>, <methodname>remove_item()"
+"</methodname> y <methodname>purge_items()</methodname> no tienen efecto en "
+"los archivos en sí a los que se refieren los URI, sólo modifican la lista de "
+"archivos recientes."
 
 #: C/gtkmm-tutorial-in.xml:5520(title)
 msgid "RecentChooser"
@@ -9445,6 +9469,13 @@ msgid ""
 "<classname>RecentChooserDialog</classname>, <classname>RecentChooserMenu</"
 "classname>, and <classname>RecentAction</classname>."
 msgstr ""
+"<classname>RecentChooser</classname> es una interfaz que pueden implementar "
+"los widgets que muestran la lista de archivos usados recientemente. "
+"<application>gtkmm</application> proporciona cuatro implementaciones "
+"incorporadas para elegir archivos recientes: <classname>RecentChooserWidget</"
+"classname>, <classname>RecentChooserDialog</classname>, "
+"<classname>RecentChooserMenu</classname>, y <classname>RecentAction</"
+"classname>."
 
 #: C/gtkmm-tutorial-in.xml:5530(para)
 msgid ""
@@ -9453,12 +9484,19 @@ msgid ""
 "the basic building block for <classname>RecentChooserDialog</classname>, but "
 "you can embed it into your user interface if you want to."
 msgstr ""
+"<classname>RecentChooserWidget</classname> es un widget simple para mostrar "
+"una lista de archivos usados recientemente. <classname>RecentChooserWidget</"
+"classname> es el bloque de construcción básico de "
+"<classname>RecentChooserDialog</classname>, pero puede empotrarlo en su "
+"interfaz de usuario si quiere."
 
 #: C/gtkmm-tutorial-in.xml:5537(para)
 msgid ""
 "<classname>RecentChooserMenu</classname> and <classname>RecentAction</"
 "classname> allow you to list recently used files as a menu."
 msgstr ""
+"<classname>RecentChooserMenu</classname> y <classname>RecentAction</"
+"classname> le permiten listar archivos usados recientemente en un menú."
 
 #: C/gtkmm-tutorial-in.xml:5543(title)
 msgid "Simple RecentChooserDialog example"
@@ -9472,6 +9510,12 @@ msgid ""
 "<guimenuitem>Recent Files Dialog</guimenuitem> menu item. When you select "
 "this menu item, a dialog pops up showing the list of recently used files."
 msgstr ""
+"Se muestra a continuación un ejemplo simple de cómo usar las clases "
+"<classname>RecentChooserDialog</classname> y <classname>RecentAction</"
+"classname> en un programa. Este programa simple tiene una barra de menú con "
+"un elemento de menú <guimenuitem>Recent Files Dialog</guimenuitem>. Cuando "
+"seleccione este elemento, aparecerá un diálogo mostrando la lista de "
+"archivos recientemente usados."
 
 #: C/gtkmm-tutorial-in.xml:5554(para)
 msgid ""
@@ -9479,12 +9523,18 @@ msgid ""
 "framework, the dialog may be empty at first. Otherwise it should show the "
 "list of recently used documents registered by other applications."
 msgstr ""
+"Si esta es la primera vez que usa un programa que utiliza el sistema de "
+"archivos recientes, el diálogo podría estar vacío. De lo contrario, debería "
+"mostrar la lista de documentos recientemente usados registrados por otras "
+"aplicaciones."
 
 #: C/gtkmm-tutorial-in.xml:5561(para)
 msgid ""
 "After selecting the <guimenuitem>Recent Files Dialog</guimenuitem> menu "
 "item, you should see something similar to the following window."
 msgstr ""
+"Después de haber seleccionado el elemento del menú <guimenuitem>Recent Files "
+"Dialog</guimenuitem>, debería ver algo similar a la siguiente ventana."
 
 #: C/gtkmm-tutorial-in.xml:5570(para)
 msgid ""
@@ -9493,6 +9543,10 @@ msgid ""
 "and-toolbars\"/> for more information). It then adds the menu and the "
 "toolbar to the window."
 msgstr ""
+"El constructor de <classname>ExampleWindow</classname> crea el menú usando "
+"<classname>UIManager</classname> (consulte la <xref linkend=\"chapter-menus-"
+"and-toolbars\"/> para obtener más información). Luego, añade el menú y la "
+"barra de herramientas a la ventana."
 
 #: C/gtkmm-tutorial-in.xml:5578(title)
 msgid "Filtering Recent Files"
@@ -9511,6 +9565,16 @@ msgid ""
 "methodname>). It also provides the ability to filter based on how long ago "
 "the file was modified and which groups it belongs to."
 msgstr ""
+"Para cualquiera de las clases <classname>RecentChooser</classname>, si no "
+"quiere mostrar todos los elementos en la lista de archivos recientes, puede "
+"filtrarlos para mostrar sólo aquellos que quiere. Puede realizar esto con "
+"ayuda de la clase <classname>RecentFilter</classname>. Esta clase le permite "
+"filtrar los archivos recientes por su nombre (<methodname>add_pattern()"
+"<methodname/>), su tipo MIME (<methodname>add_mime_type()</methodname>), la "
+"aplicación que los registró (<methodname>add_application()</methodname>), o "
+"una función de filtrado personalizada (<methodname>add_custom()</"
+"methodname>). También proporciona la posibilidad de filtrar de acuerdo a "
+"cuánto tiempo pasó desde que el archivo se modificó y a qué grupo pertenece."
 
 #: C/gtkmm-tutorial-in.xml:5592(para)
 msgid ""
@@ -9518,10 +9582,13 @@ msgid ""
 "you can apply a filter to a chooser widget with the "
 "<methodname>RecentChooser::add_filter()</methodname> function."
 msgstr ""
+"Después de que haya creado y configurado el filtro para seleccionar sólo los "
+"elementos que quiera, podrá aplicárselo a un widget selector con la función "
+"<methodname>RecentChooser::add_filter()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:5602(title)
 msgid "Plugs and Sockets"
-msgstr ""
+msgstr "«Plugs» y «Sockets»"
 
 #: C/gtkmm-tutorial-in.xml:5604(title) C/gtkmm-tutorial-in.xml:5761(title)
 msgid "Overview"
@@ -9537,6 +9604,13 @@ msgid ""
 "the rare case that you need to display a widget that is running in a "
 "completely different process, these classes can be very helpful."
 msgstr ""
+"De vez en cuando, puede ser útil incrustar un widget de otra aplicación "
+"dentro de la suya. <application>gtkmm</application> le permite hacer esto "
+"con las clases <classname>Gtk::Socket</classname> y <classname>Gtk::Plug</"
+"classname>. Se anticipa que no muchas aplicaciones necesitan esta "
+"funcionalidad, pero en los raros casos en los que necesite mostrar un widget "
+"que esté ejecutándose en un proceso completamente diferente, estas clases "
+"pueden resultar muy útiles."
 
 #: C/gtkmm-tutorial-in.xml:5614(para)
 msgid ""
@@ -9545,6 +9619,11 @@ msgid ""
 "also been implemented in other toolkits (e.g. Qt), which allows the same "
 "level of integration when embedding a Qt widget in GTK+ or vice versa."
 msgstr ""
+"La comunicación entre un <classname>Socket</classname> y un <classname>Plug</"
+"classname> sigue el protocolo «XEmbed». Este protocolo, que también se ha "
+"implementado en otros kits de herramientas (por ejemplo, «Qt»), permite el "
+"mismo nivel de integración cuando se incrusta un widget Qt en uno GTK+ o "
+"viceversa."
 
 #: C/gtkmm-tutorial-in.xml:5620(para)
 msgid ""
@@ -9555,10 +9634,16 @@ msgid ""
 "these IDs will be explained below in <xref linkend=\"sec-connecting-plugs-"
 "sockets\"/>."
 msgstr ""
+"La manera en la que los <classname>Sockets</classname> y los "
+"<classname>Plugs</classname> trabajan juntos es a través de sus ID de "
+"ventana. Tanto un <classname>Socket</classname> como un <classname>Plug</"
+"classname> tienen ID que pueden obtenerse con sus funciones miembro "
+"<methodname>get_id()</methodname>. El uso de estos ID se explicará a "
+"continuación en la <xref linkend=\"sec-connecting-plugs-sockets\"/>."
 
 #: C/gtkmm-tutorial-in.xml:5629(title)
 msgid "Sockets"
-msgstr "Sockets"
+msgstr "«Sockets»"
 
 #: C/gtkmm-tutorial-in.xml:5630(para)
 msgid ""
@@ -9572,7 +9657,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5637(title)
 msgid "Plugs"
-msgstr "Plugs"
+msgstr "«Plugs»"
 
 #: C/gtkmm-tutorial-in.xml:5638(para)
 msgid ""
@@ -9597,18 +9682,27 @@ msgid ""
 "<classname>Gtk::Window</classname> class, you can add containers or widgets "
 "to it like you would to any other window."
 msgstr ""
+"Dado que un <classname>Plug</classname> es sólo un tipo especial de la clase "
+"<classname>Gtk::Window</classname>, puede añadirle contenedores o widgets "
+"como si fuera cualquier otra ventana."
 
 #: C/gtkmm-tutorial-in.xml:5654(title)
 msgid "Connecting Plugs and Sockets"
-msgstr ""
+msgstr "Conectar «plugs» y «sockets»"
 
+# Error tipográfico en el inglés: «eachother».
+# Nicolás.
 #: C/gtkmm-tutorial-in.xml:5655(para)
 msgid ""
 "After a <classname>Socket</classname> or <classname>Plug</classname> object "
 "is realized, you can obtain its ID with its <methodname>get_id()</"
 "methodname> function. This ID can then be shared with other processes so "
-"that other processes know how to connect to eachother."
+"that other processes know how to connect to each other."
 msgstr ""
+"Luego de que se crea un objeto <classname>Socket</classname> o "
+"<classname>Plug</classname>, puede obtener su ID con su función "
+"<methodname>get_id()</methodname>. Este ID puede entonces compartirse con "
+"otros procesos para que estos sepan cómo conectarse entre sí."
 
 #: C/gtkmm-tutorial-in.xml:5666(para)
 msgid ""
