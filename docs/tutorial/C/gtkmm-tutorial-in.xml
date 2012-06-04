@@ -5657,7 +5657,7 @@ if (info)
         object is realized, you can obtain its ID with its
         <methodname>get_id()</methodname> function. This ID can then be shared with
         other processes so that other processes know how to connect to
-        eachother.
+        each other.
       </para>
       <para>
         There are two basic strategies that can be used:
