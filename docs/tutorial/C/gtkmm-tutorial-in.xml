@@ -5697,7 +5697,7 @@ if (info)
       of communication between processes is deliberately kept very simple: The
       <classname>Plug</classname> writes its ID out to a text file named
       <filename>plug.id</filename> and the process with the socket reads the ID
-      from this files. In a real program, you may want to use a more
+      from this file. In a real program, you may want to use a more
       sophisticated method of inter-process communication.
     </para>
     <para><ulink url="&url_examples_base;socket/">Source Code</ulink></para>
