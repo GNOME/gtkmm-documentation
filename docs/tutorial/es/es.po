@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-06-01 14:23+0000\n"
-"PO-Revision-Date: 2012-06-04 13:27+0200\n"
+"POT-Creation-Date: 2012-06-04 11:31+0000\n"
+"PO-Revision-Date: 2012-06-05 13:33+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -9323,10 +9323,12 @@ msgid ""
 "In addition to adding items to the list, you can also look up items from the "
 "list and modify or remove items."
 msgstr ""
+"Además de añadir elementos a la lista, puede buscarlos y modificarlos o "
+"eliminarlos."
 
 #: C/gtkmm-tutorial-in.xml:5448(title)
 msgid "Looking up Items in the List of Recent Files"
-msgstr ""
+msgstr "Buscar elementos en la lista de archivos recientes"
 
 #: C/gtkmm-tutorial-in.xml:5449(para)
 msgid ""
@@ -9337,6 +9339,13 @@ msgid ""
 "in the list of recent files, <methodname>lookup_item()</methodname> throws a "
 "<classname>RecentManagerError</classname> exception. For example:"
 msgstr ""
+"Para buscar archivos usados recientemente, <classname>RecentManager</"
+"classname> proporciona varias funciones. Para buscar un elemento específico "
+"por su URI, puede usar la función <methodname>lookup_item()</methodname>, "
+"que devolverá una clase <classname>RecentInfo</classname>. Si el URI "
+"especificado no existe en la lista de archivos recientes, "
+"<methodname>lookup_item()</methodname> arroja una excepción "
+"<classname>RecentManagerError</classname>. Por ejemplo:"
 
 #: C/gtkmm-tutorial-in.xml:5458(programlisting)
 #, no-wrap
@@ -9714,6 +9723,13 @@ msgid ""
 "classname> after creation, so you must pass the <classname>Socket</"
 "classname> ID to the <classname>Plug</classname>'s constructor."
 msgstr ""
+"Cree un objeto <classname>Socket</classname> en un proceso y pásele el ID de "
+"ese <classname>Socket</classname> a otro proceso para que pueda crear un "
+"objeto <classname>Plug</classname> mediante la especificación del ID del "
+"<classname>Socket</classname> dado en su constructor. No hay manera de "
+"asignar un <classname>Plug</classname> a un <classname>Socket</classname> "
+"particular después de su creación, por lo que le debe pasar el ID del "
+"<classname>Socket</classname> al constructor del <classname>Plug</classname>."
 
 #: C/gtkmm-tutorial-in.xml:5679(para)
 msgid ""
@@ -9724,14 +9740,20 @@ msgid ""
 "<classname>Socket</classname> object using the <methodname>Socket::add_id()</"
 "methodname> function. This is the approach used in the example below."
 msgstr ""
+"Cree un <classname>Plug</classname> independiente de cualquier "
+"<classname>Socket</classname> particular y pásele el ID del <classname>Plug</"
+"classname> a otros procesos que necesiten usarlo. El ID del <classname>Plug</"
+"classname> puede asociarse con un objeto <classname>Socket</classname> "
+"particular usando la función <methodname>Socket::add_id()</methodname>. Este "
+"es el enfoque utilizado en el siguiente ejemplo."
 
 #: C/gtkmm-tutorial-in.xml:5662(para)
 msgid "There are two basic strategies that can be used: <placeholder-1/>"
-msgstr ""
+msgstr "Existen dos estrategias básicas que pueden usarse: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:5694(title)
 msgid "Plugs and Sockets Example"
-msgstr ""
+msgstr "Ejemplo de «Plugs» y «Sockets»."
 
 #: C/gtkmm-tutorial-in.xml:5695(para)
 msgid ""
@@ -9739,9 +9761,15 @@ msgid ""
 "communication between processes is deliberately kept very simple: The "
 "<classname>Plug</classname> writes its ID out to a text file named "
 "<filename>plug.id</filename> and the process with the socket reads the ID "
-"from this files. In a real program, you may want to use a more sophisticated "
+"from this file. In a real program, you may want to use a more sophisticated "
 "method of inter-process communication."
 msgstr ""
+"El siguiente es un ejemplo simple del uso de «sockets» y «plugs». El método de "
+"comunicación entre los procesos se mantiene simple deliberadamente: el "
+"<classname>Plug</classname> escribe su ID en un archivo de texto llamado "
+"<filename>plug.id</filename> y el proceso con el «socket» lee el ID de este "
+"archivo. En un programa real, probablemente quiera usar un método más "
+"sofisticado de comunicación entre procesos."
 
 #: C/gtkmm-tutorial-in.xml:5704(para)
 msgid ""
@@ -9753,12 +9781,21 @@ msgid ""
 "To see the example in action, execute the following commands in order from "
 "within the example directory:"
 msgstr ""
+"Este ejemplo crea dos programas ejecutables: <filename>socket</filename> y "
+"<filename>plug</filename>. La idea es que <filename>socket</filename> tenga "
+"una ventana de aplicación en la que se empotre un widget del programa "
+"<filename>plug</filename>. Dada la manera en la que este ejemplo está "
+"diseñado, <filename>plug</filename> debe estar en ejecución antes de iniciar "
+"<filename>socket</filename>. Para ver el ejemplo en acción, ejecute los "
+"siguientes comandos en orden desde la carpeta de ejemplos:"
 
 #: C/gtkmm-tutorial-in.xml:5713(para)
 msgid ""
 "Start the <filename>plug</filename> program and send it to the background "
 "(or just use a different terminal)."
 msgstr ""
+"Ejecute el programa <filename>plug</filename> y envíelo a segundo plano (o "
+"simplemente use otra terminal)."
 
 #: C/gtkmm-tutorial-in.xml:5717(screen)
 #, no-wrap
@@ -9767,16 +9804,16 @@ msgstr "$ ./plug &amp;"
 
 #: C/gtkmm-tutorial-in.xml:5718(para)
 msgid "After which you should see something like the following:"
-msgstr ""
+msgstr "Después de esto debería ver algo así:"
 
 #: C/gtkmm-tutorial-in.xml:5721(screen)
 #, no-wrap
 msgid "The window ID is: 69206019"
-msgstr "El ID de la ventana es: 69206019"
+msgstr "The window ID is: 69206019"
 
 #: C/gtkmm-tutorial-in.xml:5722(para)
 msgid "Then start the <filename>socket</filename> program:"
-msgstr ""
+msgstr "Entonces, ejecute el programa <filename>socket</filename>:"
 
 #: C/gtkmm-tutorial-in.xml:5723(screen)
 #, no-wrap
@@ -9788,6 +9825,8 @@ msgid ""
 "After starting <filename>socket</filename>, you should see the following "
 "output in the terminal:"
 msgstr ""
+"Después de haber ejecutado <filename>socket</filename>, debería ver la "
+"siguiente salida en la terminal:"
 
 #: C/gtkmm-tutorial-in.xml:5728(screen)
 #, no-wrap
@@ -9795,6 +9834,8 @@ msgid ""
 "I've been embedded.\n"
 "A plug was added"
 msgstr ""
+"I've been embedded.\n"
+"A plug was added"
 
 #: C/gtkmm-tutorial-in.xml:5730(para)
 msgid ""
@@ -9805,12 +9846,20 @@ msgid ""
 "was done as described above, the <filename>socket</filename> window should "
 "look roughly like the following:"
 msgstr ""
+"La primera línea de la salida es de <filename>plug</filename>, después de "
+"que se le ha notificado que se empotró en un <classname>Socket</classname>. "
+"La segunda línea la emite <filename>socket</filename> en respuesta a su "
+"señal <methodname>plug_added</methodname>. Si todo se realizó como se "
+"describió anteriormente, la ventana <filename>socket</filename> debería "
+"verse más o menos así:"
 
 #: C/gtkmm-tutorial-in.xml:5742(para)
 msgid ""
 "If for some reason the <classname>Socket</classname> couldn't attach the "
 "<classname>Plug</classname>, the window would look something like this:"
 msgstr ""
+"Si, por alguna razón, el <classname>Socket</classname> no pudiera adjuntar "
+"el <classname>Plug</classname>, la ventana se vería más o menos así:"
 
 #: C/gtkmm-tutorial-in.xml:5753(title)
 msgid "Keyboard Events"
@@ -9823,12 +9872,18 @@ msgid ""
 "section in the appendix. Here we will use keyboard events to show how X "
 "events can be used in a program."
 msgstr ""
+"Los eventos de X difieren un poco de otras señales. Estas diferencias se "
+"describen en la sección <link linkend=\"sec-xeventsignals\">Señales de "
+"eventos de X</link> en el apéndice. Aquí se usarán los eventos del teclado "
+"para mostrar cómo pueden usarse en un programa los eventos de X."
 
 #: C/gtkmm-tutorial-in.xml:5762(para)
 msgid ""
 "Whenever you press or release a key, an event is emitted. You can connect a "
 "signal handler to handle such events."
 msgstr ""
+"Siempre que presiona o suelta una tecla, se emite un evento. Puede conectar "
+"un manejador de señales para manejar tales eventos."
 
 #: C/gtkmm-tutorial-in.xml:5766(para)
 msgid ""
@@ -9841,6 +9896,15 @@ msgid ""
 "indicate that the signal is fully handled (<literal>true</literal>) or allow "
 "event propagation (<literal>false</literal>)."
 msgstr ""
+"Para recibir los eventos del teclado, primero debe llamar a la función "
+"<methodname>Gtk::Widget::add_events()</methodname> con una máscara de bits "
+"de los eventos en los que esté interesado. El manejador de señales de "
+"eventos recibirá un argumento que dependerá del tipo de evento. Para eventos "
+"del teclado, es un <type>GdkEventKey*</type>. Como de describe en el <link "
+"linkend=\"sec-xeventsignals\">apéndice</link>, el manejador de señales de "
+"eventos devuelve un valor <type>bool</type> para indicar que se maneja "
+"completamente la señal (<literal>true</literal>) o permitir la propagación "
+"del evento (<literal>false</literal>)."
 
 #: C/gtkmm-tutorial-in.xml:5777(para)
 msgid ""
@@ -9850,6 +9914,11 @@ msgid ""
 "modifier keys (shift, ctrl, etc.) are available as bit-flags in "
 "<varname>GdkEventKey::state</varname>."
 msgstr ""
+"Para determinar qué tecla se presionó o soltó, lea el valor de "
+"<varname>GdkEventKey::keyval</varname> y compárelo con una constante en el "
+"archivo de cabecera <filename>&lt;gdk/gdkkeysyms.h&gt;</filename>. Los "
+"estados de las teclas modificadoras (mayús, control, etc.) están disponibles "
+"como banderas de bits en <varname>GdkEventKey::state</varname>."
 
 #: C/gtkmm-tutorial-in.xml:5786(programlisting)
 #, no-wrap
