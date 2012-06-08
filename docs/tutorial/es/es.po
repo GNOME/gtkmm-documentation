@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-06-04 11:31+0000\n"
-"PO-Revision-Date: 2012-06-05 13:33+0200\n"
+"POT-Creation-Date: 2012-06-05 11:36+0000\n"
+"PO-Revision-Date: 2012-06-08 12:09+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -278,7 +278,7 @@ msgstr ""
 "<application>gtkmm</application> le permite escribir código usando técnicas "
 "normales de C++ tales como encapsulación, derivación y polimorfismo. Como "
 "programador de C++, probablemente ya se habrá dado cuenta de que esto "
-"conlleva a un código mas limpio y mejor organizado."
+"conlleva a un código más limpio y mejor organizado."
 
 #: C/gtkmm-tutorial-in.xml:143(para)
 msgid ""
@@ -9976,10 +9976,17 @@ msgid ""
 "as described in the <link linkend=\"sec-overriding-default-signal-handlers"
 "\">Overriding default signal handlers</link> section in the appendix."
 msgstr ""
+"En este ejemplo hay tres combinaciones de teclas: <keycap>Alt</keycap>"
+"+<keycap>1</keycap> selecciona el primer botón de radio, <keycap>Alt</keycap>"
+"+<keycap>2</keycap> selecciona el segundo, y la tecla <keycap>Escape</"
+"keycap> oculta (cierra) la ventana. El manejador de eventos predeterminado "
+"se sobrecarga, como se describe en la sección <link linkend=\"sec-overriding-"
+"default-signal-handlers\">Sobrecargar los manejadores de señales "
+"predeterminados</link> en el apéndice."
 
 #: C/gtkmm-tutorial-in.xml:5821(title)
 msgid "Keyboard Events - Simple"
-msgstr ""
+msgstr "Eventos del teclado: simple"
 
 #: C/gtkmm-tutorial-in.xml:5832(title)
 msgid "Event Propagation"
@@ -9992,6 +9999,10 @@ msgid ""
 "to its parent, and so on) and, if the parent has an event handler, that "
 "handler will be called."
 msgstr ""
+"Propagación de eventos significa que, cuando se emite un evento en un widget "
+"particular, puede pasarse a su widget padre (y ese widget puede pasárselo a "
+"su padre, y así sucesivamente) y, si el padre tiene un manejador de eventos, "
+"se llamará."
 
 #: C/gtkmm-tutorial-in.xml:5839(para)
 msgid ""
@@ -10002,6 +10013,12 @@ msgid ""
 "event wasn't handled), it is sent to the widget which has focus, and the "
 "propagation begins from there."
 msgstr ""
+"Al contrario que otros eventos, los eventos del teclado primero se envían a "
+"la ventana de nivel superior (<classname>Gtk::Window</classname>), donde se "
+"verifican los atajos del teclado establecidos (teclas aceleradoras y "
+"combinaciones, utilizadas para seleccionar elementos del menú desde el "
+"teclado). Después de esto (y asumuiendo que no se manejó el evento), se "
+"envía al widget que tiene el foco, y la propagación comienza desde allí."
 
 #: C/gtkmm-tutorial-in.xml:5847(para)
 msgid ""
@@ -10009,28 +10026,29 @@ msgid ""
 "stop the propagation by returning <literal>true</literal> from an event "
 "handler."
 msgstr ""
+"El evento se propagará hasta que alcance el widget de mayor nivel, o hasta "
+"que detenga la propagación devolviendo <literal>true</literal> desde un "
+"manejador de eventos."
 
 #: C/gtkmm-tutorial-in.xml:5852(para)
 msgid ""
 "Notice, that after canceling an event, no other function will be called "
 "(even if it is from the same widget)."
 msgstr ""
+"Tenga en cuenta que, después de haber cancelado un evento, no se llamará a "
+"ninguna otra función (incluso si es del mismo widget)."
 
 #: C/gtkmm-tutorial-in.xml:5859(para)
-#, fuzzy
-#| msgid ""
-#| "In this example there are three event handlers, one in the "
-#| "<classname>Gtk::Entry</classname>, one in the <classname>Gtk::Grid</"
-#| "classname> and one in the <classname>Gtk::Window</classname>."
 msgid ""
 "In this example there are three event handlers that are called after "
 "<classname>Gtk::Window</classname>'s default event handler, one in the "
 "<classname>Gtk::Entry</classname>, one in the <classname>Gtk::Grid</"
 "classname> and one in the <classname>Gtk::Window</classname>."
 msgstr ""
-"En este ejemplo hay tres manejadores de eventos, uno en la <classname>Gtk::"
-"Entry</classname>, uno en el <classname>Gtk::Grid</classname> y uno en la "
-"<classname>Gtk::Window</classname>."
+"En este ejemplo hay tres manejadores de eventos que se llaman después del "
+"manejador de eventos predeterminado de <classname>Gtk::Window</classname>, "
+"uno en la <classname>Gtk::Entry</classname>, uno en el <classname>Gtk::Grid</"
+"classname> y uno en la <classname>Gtk::Window</classname>."
 
 #: C/gtkmm-tutorial-in.xml:5865(para)
 msgid ""
@@ -10039,12 +10057,18 @@ msgid ""
 "handler being called before the default handler "
 "(<methodname>windowKeyReleaseBefore()</methodname>)."
 msgstr ""
+"En la <classname>Gtk::Window</classname>, también está la sobrecarga del "
+"manejador predeterminado (<methodname>on_key_release_event()</methodname>), "
+"y otro manejador que se llama antes del predeterminado "
+"(<methodname>windowKeyReleaseBefore()</methodname>)."
 
 #: C/gtkmm-tutorial-in.xml:5871(para)
 msgid ""
 "The purpose of this example is to show the steps the event takes when it is "
 "emitted."
 msgstr ""
+"El propósito de este ejemplo es mostrar los pasos que el evento sigue cuando "
+"se emite."
 
 #: C/gtkmm-tutorial-in.xml:5874(para)
 msgid ""
@@ -10059,6 +10083,17 @@ msgid ""
 "handlers. If it propagates, the text you're writing will appear in the "
 "<classname>Label</classname> above the <classname>Entry</classname>."
 msgstr ""
+"Cuando escriba en el «entry», se emitirá un evento de liberación de tecla, "
+"que primero irá a la ventana superior (<classname>Gtk::Window</classname>), "
+"dado que hay un manejador de eventos establecido para que se llame antes, y "
+"ese es el que se llama primero (<methodname>windowKeyReleaseBefore()</"
+"methodname>). Después se llama al manejador de eventos predeterminado (al "
+"que se ha sobrecargado), y luego se envía el evento al widget que tiene el "
+"foco, el <classname>Entry</classname> en el ejemplo y, dependiendo de si lo "
+"dejamos propagar o no, puede alcanzar los manejadores de eventos del "
+"<classname>Grid</classname> y la <classname>Window</classname>. Si se "
+"propaga, el texto que esté escribiendo aparecerá en el <classname>Label</"
+"classname> arriba del <classname>Entry</classname>."
 
 #: C/gtkmm-tutorial-in.xml:5889(title)
 msgid "Keyboard Events - Event Propagation"
@@ -10066,11 +10101,11 @@ msgstr "Eventos de teclado: propagación de eventos"
 
 #: C/gtkmm-tutorial-in.xml:5901(title)
 msgid "Timeouts, I/O and Idle Functions"
-msgstr ""
+msgstr "Tiempos de espera, E/S y funciones en espera"
 
 #: C/gtkmm-tutorial-in.xml:5904(title)
 msgid "Timeouts"
-msgstr ""
+msgstr "Tiempos de espera"
 
 #: C/gtkmm-tutorial-in.xml:5906(para)
 msgid ""
@@ -10079,6 +10114,10 @@ msgid ""
 "following methods you can create a timeout method that will be called every "
 "few milliseconds."
 msgstr ""
+"Puede preguntarse cómo hacer que <application>gtkmm</application> haga "
+"trabajo útil mientras está en espera. Afortunadamente, cuenta con varias "
+"opciones. Usando los siguientes métodos puede crear un método de tiempo de "
+"espera que se llamará cada una cierta cantidad de milisegundos."
 
 #: C/gtkmm-tutorial-in.xml:5913(programlisting)
 #, no-wrap
@@ -10097,6 +10136,11 @@ msgid ""
 "classname> object that can be used to deactivate the connection using its "
 "<methodname>disconnect()</methodname> method:"
 msgstr ""
+"El primer argumento es un <classname>slot</classname> al que quiere que se "
+"llame cuando pase el período de espera. El segundo argumento es el número de "
+"milisegundos entre llamadas a ese método. Recibirá un objeto "
+"<classname>sigc::connection</classname> que podrá usar para desactivar la "
+"conexión utilizando su método <methodname>disconnect()</methodname>:"
 
 #: C/gtkmm-tutorial-in.xml:5928(programlisting)
 #, no-wrap
@@ -10124,6 +10168,11 @@ msgid ""
 "<literal>bool</literal>. A definition of a sample method might look like "
 "this: <placeholder-1/>"
 msgstr ""
+"Otra manera de destruir la conexión es su manejador de señales. Tiene que "
+"ser del tipo <classname>sigc::slot&lt;bool&gt;</classname>. Como puede "
+"observar en la definición, su manejador de señales tiene que devolver un "
+"valor del tipo <literal>bool</literal>. Una definición de un método de "
+"ejemplo podría verse así: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:5946(para)
 msgid ""
@@ -10131,6 +10180,10 @@ msgid ""
 "your signal handler. Therefore, if you want your method to be called "
 "repeatedly, it should return <literal>true</literal>."
 msgstr ""
+"Puede detener el método del período de espera mediante la devolución de "
+"<literal>false</literal> desde su manejador de señales. Por lo tanto, si "
+"quiere que su método se llame repetidamente, debe devolver <literal>true</"
+"literal>."
 
 #: C/gtkmm-tutorial-in.xml:5952(para)
 msgid "Here's an example of this technique:"
@@ -10138,7 +10191,7 @@ msgstr "Un ejemplo de esta técnica:"
 
 #: C/gtkmm-tutorial-in.xml:5961(title)
 msgid "Monitoring I/O"
-msgstr ""
+msgstr "Monitorizar E/S"
 
 #: C/gtkmm-tutorial-in.xml:5963(para)
 msgid ""
@@ -10147,6 +10200,10 @@ msgid ""
 "for you. This is especially useful for networking applications. The "
 "following method is used to do this:"
 msgstr ""
+"Una característica elegante de Glib (una de las bibliotecas subyacentes de "
+"<application>gtkmm</application>) es la capacidad de verificar los datos en "
+"un descriptor de archivos. Esto es especialmente útil para aplicaciones de "
+"red. Se usa el siguiente método para lograrlo:"
 
 #: C/gtkmm-tutorial-in.xml:5971(programlisting)
 #, no-wrap
@@ -10168,18 +10225,26 @@ msgid ""
 "argument two. Argument three may be one or more (using <literal>|</literal>) "
 "of:"
 msgstr ""
+"El primer argumento es un «slot» al que desea que se llame cuando ocurra el "
+"evento especificado (vea el tercer argumento) en el descriptor de archivo "
+"que especifica usando el segundo argumento. El tercer argumento puede ser "
+"uno o más (usando <literal>|</literal>) de:"
 
 #: C/gtkmm-tutorial-in.xml:5988(para)
 msgid ""
 "Glib::IO_IN - Call your method when there is data ready for reading on your "
 "file descriptor."
 msgstr ""
+"Glib::IO_IN: llame a su método cuando haya datos listos para leerse en su "
+"descriptor de archivos."
 
 #: C/gtkmm-tutorial-in.xml:5996(para)
 msgid ""
 "Glib::IO_OUT - Call your method when the file descriptor is ready for "
 "writing."
 msgstr ""
+"Glib::IO_OUT: llame a su método cuando el descriptor de archivos esté listo "
+"para la escritura."
 
 #: C/gtkmm-tutorial-in.xml:6004(para)
 msgid ""
