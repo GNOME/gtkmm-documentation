@@ -1,0 +1,31 @@
+gtkmm-documentation/tools/make_screenshots/README
+
+2012-06-09 Kjell Ahlstedt
+
+See also bug https://bugzilla.gnome.org/show_bug.cgi?id=677292
+"Semi-automatic generation of screenshots for the gtkmm tutorial"
+
+-- make_screenshots.pl is a Perl script which is a first attempt at an automatic
+screenshot generator. It's not fully automatic, though. It generates
+screenshots by starting an example program and saving a screenshot of the
+program's window as it looks just after start-up.
+
+63 screenshots are shown in the tutorial. 47 of them will be correctly
+generated in this simple way. The other 16 screenshots require some kind of
+user input or a specific location of the cursor before they are saved.
+
+Most example programs must be built before make_screenshots.pl is executed.
+'make check' does that.
+
+The screenshots are saved by gnome-screenshot.
+The gnome-screenshot bugs https://bugzilla.gnome.org/show_bug.cgi?id=129768 and
+https://bugzilla.gnome.org/show_bug.cgi?id=594141 must have been implemented
+(added in the git repository 2012-05-23 and 2012-05-24).
+
+-- make_screenshots.sh is a shell script that calls make_screenshots.pl with
+appropriate parameters.
+
+-- progs-and-figs.txt is input data to make_screenshots.pl.
+
+At present make_screenshots.sh is not called from any Makefile.
+

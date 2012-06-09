@@ -1,3 +1,12 @@
+2012-06-09  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Add make_screenshots.
+
+	* tools/make_screenshots/make_screenshots.sh:
+	* tools/make_screenshots/make_screenshots.pl:
+	* tools/make_screenshots/progs-and-figs.txt:
+	* tools/make_screenshots/README: New files. Bug #677292.
+
 2012-06-01  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Update some screenshots.
