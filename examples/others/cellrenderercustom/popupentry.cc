@@ -134,6 +134,8 @@ void PopupEntry::start_editing_vfunc(GdkEvent*)
 {
   entry_->select_region(0, -1);
 
+  // Although this is a key-binding signal, it's acceptable to use it in applications.
+  entry_->signal_activate().connect(sigc::mem_fun(*this, &Self::on_entry_activate));
   entry_->signal_key_press_event().connect(sigc::mem_fun(*this, &Self::on_entry_key_press_event), false);
 
   //TODO: Doesn't this mean that we have multiple connection, because this is never disconnected?
@@ -145,18 +147,14 @@ void PopupEntry::on_button_clicked()
   signal_arrow_clicked_.emit();
 }
 
+void PopupEntry::on_entry_activate()
+{
+  editing_done();
+  //remove_widget(); // TODO: this line causes the widget to be removed twice -- dunno why
+}
+
 bool PopupEntry::on_entry_key_press_event(GdkEventKey* event)
 {
-  if(event->keyval == GDK_KEY_Return ||
-     event->keyval == GDK_KEY_ISO_Enter ||
-     event->keyval == GDK_KEY_KP_Enter)
-  {
-    editing_done();
-    //remove_widget(); // TODO: this line causes the widget to be removed twice -- dunno why
-
-    return true;
-  }
-
   if(event->keyval == GDK_KEY_Escape)
   {
     editing_canceled_ = true;

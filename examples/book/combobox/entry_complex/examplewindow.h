@@ -32,7 +32,7 @@ public:
 protected:
   //Signal handlers:
   void on_entry_changed();
-  bool on_entry_key_press_event(GdkEventKey* event);
+  void on_entry_activate();
   bool on_entry_focus_out_event(GdkEventFocus* event);
 
   //Signal connection:

@@ -1221,19 +1221,15 @@ echoed on the screen, calling <methodname>set_visibility()</methodname> with
 
 <para>
 You might want to be notified whenever the user types in a text entry widget.
-<classname>Gtk::Entry</classname> provides the <literal>changed</literal> signal
-for this purpose. It is emitted when the text in the widget changes.
-You can use it, for instance, to validate or filter the text the user types.
-</para>
-
-<para>
-The <literal>changed</literal> signal is not emitted when the user presses the
-Enter key. If a pressed Enter key signals that the user has finished entering text,
-you probably want to be notified. For this purpose, use the
-<literal>key_press_event</literal> signal that <classname>Gtk::Entry</classname>
-inherits from <classname>Gtk::Widget</classname>. Moving the keyboard focus to
-another widget may also signal that the user has finished entering text. The
-<literal>focus_out_event</literal> signal can notify you when that happens.
+<classname>Gtk::Entry</classname> provides two signals,
+<literal>activate</literal> and <literal>changed</literal>, for this purpose.
+<literal>activate</literal> is emitted when the user presses the Enter key in
+a text-entry widget; <literal>changed</literal> is emitted when the text in
+the widget changes. You can use these, for instance, to validate or filter
+the text the user types. Moving the keyboard focus to another widget may also
+signal that the user has finished entering text. The <literal>focus_out_event</literal>
+signal that <classname>Gtk::Entry</classname> inherits from
+<classname>Gtk::Widget</classname> can notify you when that happens.
 The <link linkend="sec-comboboxentry">ComboBox with an Entry</link> section
 contains example programs that use these signals.
 </para>
@@ -3085,22 +3081,20 @@ When the user enters arbitrary text, it may not be enough to connect to the
 It is not emitted when the user presses the Enter key. Pressing the Enter key or
 moving the keyboard focus to another widget may signal that the user has finished
 entering text. To be notified of these events, connect to the
-<classname>Entry</classname>'s <literal>key_press_event</literal> and
+<classname>Entry</classname>'s <literal>activate</literal> and
 <literal>focus_out_event</literal> signals, like so
 <programlisting>Gtk::Entry* entry = m_Combo.get_entry();
 if (entry)
 {
-  // The Entry shall receive key-press events and focus-out events.
-  entry->add_events(Gdk::KEY_PRESS_MASK | Gdk::FOCUS_CHANGE_MASK);
+  // The Entry shall receive focus-out events.
+  entry->add_events(Gdk::FOCUS_CHANGE_MASK);
 
   // Alternatively you can connect to m_Combo.signal_changed().
   entry->signal_changed().connect(sigc::mem_fun(*this,
     &amp;ExampleWindow::on_entry_changed) );
 
-  // This signal handler must be called before the default signal handler,
-  // or else it will not be called, if the default signal handler returns true.
-  entry->signal_key_press_event().connect(sigc::mem_fun(*this,
-    &amp;ExampleWindow::on_entry_key_press_event), /* after= */ false );
+  entry->signal_activate().connect(sigc::mem_fun(*this,
+    &amp;ExampleWindow::on_entry_activate) );
 
   entry->signal_focus_out_event().connect(sigc::mem_fun(*this,
     &amp;ExampleWindow::on_entry_focus_out_event) );
@@ -3108,29 +3102,10 @@ if (entry)
 The <literal>changed</literal> signals of <classname>ComboBox</classname> and
 <classname>Entry</classname> are both emitted for every change. It doesn't matter
 which one you connect to. But only <classname>Entry</classname>'s
-<literal>key_press_event</literal> and <literal>focus_out_event</literal> signals
-are useful here.
+<literal>focus_out_event</literal> signal is useful here.
 </para>
 <para>
-In <literal>key_press_event</literal>'s signal handler you must check which key
-has been pressed, e.g. like so
-<programlisting>bool ExampleWindow::on_entry_key_press_event(GdkEventKey* event)
-{
-  Gtk::Entry* entry = m_Combo.get_entry();
-  if (entry)
-  {
-    if (event->keyval == GDK_KEY_Return ||
-        event->keyval == GDK_KEY_ISO_Enter ||
-        event->keyval == GDK_KEY_KP_Enter)
-    {
-      input_finished(); //Your own function.
-      return true;
-    }
-  }
-  return false;
-}</programlisting>
 X events are described in more detail in the
-<link linkend="chapter-keyboardevents">Keyboard Events</link> chapter and the
 <link linkend="sec-xeventsignals">X Event signals</link> section in the appendix.
 </para>
 </sect2>

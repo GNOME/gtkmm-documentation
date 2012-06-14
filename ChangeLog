@@ -1,3 +1,16 @@
+2012-06-14  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Entry and ComboBox with Entry sections: key_press_event -> activate.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Entry::signal_activate() has been
+	undeprecated. Describe Entry::signal_activate() instead of
+	signal_key_press_event() for detecting a pressed Enter key.
+	* examples/book/combobox/entry_complex/examplewindow.[h|cc]:
+	* examples/book/combobox/entry_text/examplewindow.[h|cc]:
+	* examples/others/cellrenderercustom/popupentry.[h|cc]: Replace
+	signal_key_press_event() by Entry::signal_activate() where an Enter key press
+	shall be detected. Bug #655489, comment 21.
+
 2012-06-09  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Add make_screenshots.
