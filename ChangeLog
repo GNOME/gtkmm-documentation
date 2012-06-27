@@ -1,3 +1,11 @@
+2012-06-27  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Improve the Memory management chapter, Widgets section.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Remove a strange sentence on the
+	disadvantages of class scope widgets. Don't mention Gtk::Object::set_manage().
+	Bug #678566.
+
 2012-06-14  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Entry and ComboBox with Entry sections: key_press_event -> activate.

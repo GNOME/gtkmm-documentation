@@ -6115,16 +6115,15 @@ risk memory leaks from failing to <literal>delete</literal> a widget.
 </para>
 
 <para>
-The primary disadvantages of using class scope widgets are revealing
-the class implementation rather than the class interface in the class header. Class
-scope widgets also require Automatic widgets in class scope suffer the same disadvantages as
-any other class scope automatic variable.
+The primary disadvantage of using class scope widgets is revealing
+the class implementation rather than the class interface in the class header.
 </para>
 
 <para>
 <programlisting>
 #include &lt;gtkmm/button.h&gt;
-class Foo
+#include &lt;gtkmm/window.h&gt;
+class Foo : public Gtk::Window
 {
 private:
   Gtk::Button theButton;
@@ -6141,14 +6140,12 @@ private:
 If a programmer does not need a class scope widget, a function scope widget
 may also be used. The advantages to function scope over class scope are the
 increased data hiding and reduced dependencies.
-
-
 <programlisting>
 {
   Gtk::Button aButton;
   aButton.show();
   ...
-  kit.run();
+  app-&gt;run();
 }
 </programlisting>
 </para>
@@ -6159,14 +6156,10 @@ increased data hiding and reduced dependencies.
 
 <para>
 Although, in most cases, the programmer will prefer to allow containers to
-automatically destroy their children using <function>manage()</function> (see
-below), the programmer is not required to use <function>manage()</function>.
+automatically destroy their children using <function>Gtk::manage()</function> (see
+below), the programmer is not required to use <function>Gtk::manage()</function>.
 The traditional <literal>new</literal> and <literal>delete</literal> operators
 may also be used.
-</para>
-
-<para>
-
 <programlisting>
 Gtk::Button* pButton = new Gtk::Button("Test");
 
@@ -6174,8 +6167,7 @@ Gtk::Button* pButton = new Gtk::Button("Test");
 
 delete pButton;
 </programlisting>
-
-Here, the programmer deletes pButton to prevent a memory leak.
+Here, the programmer deletes <varname>pButton</varname> to prevent a memory leak.
 </para>
 </sect3>
 
@@ -6188,8 +6180,9 @@ Here, the programmer deletes pButton to prevent a memory leak.
 Alternatively, you can let a widget's container control when the widget is
 destroyed. In most cases, you want a widget to last only as long as the
 container it is in. To delegate the management of a widget's lifetime to its
-container, first create it with <function>manage()</function> and
-pack it into its container with <methodname>add()</methodname>. Now, the
+container, first create it with <function>Gtk::manage()</function> and
+pack it into its container with <methodname>Gtk::Container::add()</methodname>,
+<methodname>Gtk::Box::pack_start()</methodname>, or a similar method. Now the
 widget will be destroyed whenever its container is destroyed.
 </para>
 
@@ -6200,49 +6193,30 @@ widget will be destroyed whenever its container is destroyed.
 &gtkmm; provides the <function>manage()</function> function and
 <methodname>add()</methodname> methods to create and destroy widgets. Every widget
 except a top-level window must be added or packed into a container in order to
-be displayed. The <function>manage()</function> function marks a packed widget
+be displayed. The <function>manage()</function> function marks a widget
 so that when the widget is added to a container, the container becomes
 responsible for deleting the widget.
 </para>
 
 <para>
 <programlisting>
-MyWidget::MyWidget()
+MyContainer::MyContainer()
 {
-  Gtk::Button* pButton = manage(new Gtk::Button("Test"));
-  add(*pButton); //add aButton to MyWidget
+  Gtk::Button* pButton = Gtk::manage(new Gtk::Button("Test"));
+  add(*pButton); //add *pButton to MyContainer
 }
 </programlisting>
-
-Now, when objects of type <classname>MyWidget</classname> are destroyed, the
-button will also be deleted. It is no longer necessary to delete pButton to
-free the button's memory; its deletion has been delegated to the
-<classname>MyWidget</classname> object.
+Now, when objects of type <classname>MyContainer</classname> are destroyed, the
+button will also be deleted. It is no longer necessary to delete <varname>pButton</varname>
+to free the button's memory; its deletion has been delegated to the
+<classname>MyContainer</classname> object.
 </para>
 
 <para>
-&gtkmm; also provides the <methodname>set_manage()</methodname> method for
-all widgets. This can be used to generate the same result as
-<function>manage()</function>, but is more tedious:
-</para>
-
-<para>
-foo.add( (w=new Gtk::Label("Hello"), w-&gt;set_manage(), &amp;w) );
-</para>
-
-<para>
-is the same as
-</para>
-
-<para>
-foo.add( manage(new Gtk::Label("Hello")) );
-</para>
-
-<para>
-Of course, a top level container will not be added to another container. The
-programmer is responsible for destroying the top level container using one of
+Of course, a top-level container will not be added to another container. The
+programmer is responsible for destroying the top-level container using one of
 the traditional C++ techniques. For instance, your top-level Window might just
-be an instance in your <function>main()</function> function..
+be an instance in your <function>main()</function> function.
 </para>
 
 </sect3>
