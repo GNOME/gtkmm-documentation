@@ -4124,7 +4124,7 @@ myContext->set_line_width(2.0);</programlisting>
 {
     context->save();
     // change graphics state
-    // peform drawing operations
+    // perform drawing operations
     context->restore();
 }</programlisting>
         </tip>
@@ -8637,7 +8637,7 @@ _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)
 </programlisting>
 </para>
 <para>You will typically use this macro when the class already derives from Gtk::Object. For instance, you will use it when wrapping a GTK+ Widget, because Gtk::Widget derives from Gtk::Object.</para>
-<para>You might also derive non-widget classes from Gtk::Object so they can be used without <classname>Glib::RefPtr</classname>. For isntance, they could then be instantiated with <function>Gtk::manage()</function> or on the stack as a member variable. This is convenient, but you should use this only when you are sure that true reference-counting is not needed. We consider it useful for widgets.</para>
+<para>You might also derive non-widget classes from Gtk::Object so they can be used without <classname>Glib::RefPtr</classname>. For instance, they could then be instantiated with <function>Gtk::manage()</function> or on the stack as a member variable. This is convenient, but you should use this only when you are sure that true reference-counting is not needed. We consider it useful for widgets.</para>
 </sect3>
 
 <sect3 id="gmmproc-class-boxedtype">
