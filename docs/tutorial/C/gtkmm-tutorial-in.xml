@@ -7850,8 +7850,140 @@ if no one handles the event.
 
 </sect1>
 
-</appendix>
+<sect1 id="sec-exceptions-in-signal-handlers">
+<title>Exceptions in signal handlers</title>
+<para>
+When a program is aborted because of an unhandled C++ exception, it's sometimes
+possible to use a debugger to find the location where the exception was thrown.
+This is more difficult than usual if the exception was thrown from a signal handler.
+</para>
+<para>
+This section describes primarily what you can expect on a Linux system, when you
+use <ulink url="http://www.gnu.org/software/gdb/">the gdb debugger</ulink>.
+</para>
+<para>
+First, let's look at a simple example where an exception is thrown from a normal
+function (no signal handler).
+<programlisting>
+// without_signal.cc
+#include &lt;gtkmm.h&gt;
 
+bool throwSomething()
+{
+  throw "Something";
+  return true;
+}
+
+int main(int argc, char** argv)
+{
+  throwSomething();
+  Glib::RefPtr&lt;Gtk::Application&gt; app =
+    Gtk::Application::create(argc, argv, "org.gtkmm.without_signal");
+  return app->run();
+}
+</programlisting>
+</para>
+<para>
+Here is an excerpt from a <application>gdb</application> session. Only the most
+interesting parts of the output are shown.
+<programlisting>
+&gt; gdb without_signal
+(gdb) run
+terminate called after throwing an instance of 'char const*'
+
+Program received signal SIGABRT, Aborted.
+(gdb) backtrace
+#7  0x08048864 in throwSomething () at without_signal.cc:6
+#8  0x0804887d in main (argc=1, argv=0xbfffecd4) at without_signal.cc:12
+</programlisting>
+You can see that the exception was thrown from <filename>without_signal.cc</filename>,
+line 6 (<code>throw "Something";</code>).
+</para>
+<para>
+Now let's see what happens when an exception is thrown from a signal handler.
+Here's the source code.
+<programlisting>
+// with_signal.cc
+#include &lt;gtkmm.h&gt;
+
+bool throwSomething()
+{
+  throw "Something";
+  return true;
+}
+
+int main(int argc, char** argv)
+{
+  Glib::signal_timeout().connect(sigc::ptr_fun(throwSomething), 500);
+  Glib::RefPtr&lt;Gtk::Application&gt; app =
+    Gtk::Application::create(argc, argv, "org.gtkmm.with_signal");
+  app->hold();
+  return app->run();
+}
+</programlisting>
+</para>
+<para>
+And here's an excerpt from a <application>gdb</application> session.
+<programlisting>
+&gt; gdb with_signal
+(gdb) run
+(with_signal:2703): glibmm-ERROR **:
+unhandled exception (type unknown) in signal handler
+
+Program received signal SIGTRAP, Trace/breakpoint trap.
+(gdb) backtrace
+#2  0x0063c6ab in glibmm_unexpected_exception () at exceptionhandler.cc:77
+#3  Glib::exception_handlers_invoke () at exceptionhandler.cc:150
+#4  0x0063d370 in glibmm_source_callback (data=0x804d620) at main.cc:212
+#13 0x002e1b31 in Gtk::Application::run (this=0x804f300) at application.cc:178
+#14 0x08048ccc in main (argc=1, argv=0xbfffecd4) at with_signal.cc:16
+</programlisting>
+The exception is caught in <application>glibmm</application>, and the program
+ends with a call to <function>g_error()</function>. Other exceptions may result
+in different behaviour, but in any case the exception from a signal handler is
+caught in <application>glibmm</application> or &gtkmm;, and
+<application>gdb</application> can't see where it was thrown.
+</para>
+<para>
+To see where the exception is thrown, you can use the <application>gdb</application>
+command <userinput>catch throw</userinput>.
+<programlisting>
+&gt; gdb with_signal
+(gdb) catch throw
+Catchpoint 1 (throw)
+(gdb) run
+Catchpoint 1 (exception thrown), 0x00714ff0 in __cxa_throw ()
+(gdb) backtrace
+#0  0x00714ff0 in __cxa_throw () from /usr/lib/i386-linux-gnu/libstdc++.so.6
+#1  0x08048bd4 in throwSomething () at with_signal.cc:6
+(gdb) continue
+Continuing.
+(with_signal:2375): glibmm-ERROR **
+unhandled exception (type unknown) in signal handler
+
+Program received signal SIGTRAP, Trace/breakpoint trap.
+</programlisting>
+</para>
+<para>
+If there are many caught exceptions before the interesting uncaught one, this
+method can be tedious. It can be automated with the following
+<application>gdb</application> commands.
+<programlisting>
+(gdb) catch throw
+(gdb) commands
+(gdb)   backtrace
+(gdb)   continue
+(gdb)   end
+(gdb) set pagination off
+(gdb) run
+</programlisting>
+These commands will print a backtrace from each <code>throw</code> and continue.
+The backtrace from the last (or possibly the last but one) <code>throw</code>
+before the program stops, is the interesting one.
+</para>
+</sect1>
+
+</appendix>
 
 
 <appendix id="chapter-custom-signals">

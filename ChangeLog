@@ -1,3 +1,10 @@
+2012-07-07  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Appendix B: Add Exceptions in signal handlers.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add a new section, "Exceptions in
+	signal handlers" in Appendix B, "Signals". Bug #677104.
+
 2012-06-27  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Improve the Memory management chapter, Widgets section.
