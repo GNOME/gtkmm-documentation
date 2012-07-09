@@ -6499,7 +6499,7 @@ This example shows how to load a <application>Glade</application> file at runtim
   <para>
     String literals should be typed in the source code in English, but
     surrounded by a macro. The <application>gettext</application> (or intltool)
-    utility can then extract the marked strings for tramslation, and substitute
+    utility can then extract the marked strings for translation, and substitute
     the translated text at runtime.
   </para>
 
