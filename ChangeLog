@@ -1,3 +1,10 @@
+2012-07-16  Murray Cumming  <murrayc@murrayc.com>
+
+	Fix a markup typo in the Spanish translation.
+
+	* docs/tutorial/es/es.po: This was breaking the 
+	make check build.
+
 2012-07-07  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Appendix B: Add Exceptions in signal handlers.
