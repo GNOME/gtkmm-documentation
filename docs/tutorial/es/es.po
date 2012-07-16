@@ -19,15 +19,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-07-09 14:07+0000\n"
-"PO-Revision-Date: 2012-07-09 16:17+0200\n"
+"POT-Creation-Date: 2012-07-09 14:17+0000\n"
+"PO-Revision-Date: 2012-07-16 12:58+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Gtranslator 2.91.5\n"
 
 #: C/gtkmm-tutorial-in.xml:34(title)
@@ -9585,7 +9585,7 @@ msgstr ""
 "filtrarlos para mostrar sólo aquellos que quiere. Puede realizar esto con "
 "ayuda de la clase <classname>RecentFilter</classname>. Esta clase le permite "
 "filtrar los archivos recientes por su nombre (<methodname>add_pattern()"
-"</methodname>), su tipo MIME (<methodname>add_mime_type()</methodname>), la "
+"<methodname/>), su tipo MIME (<methodname>add_mime_type()</methodname>), la "
 "aplicación que los registró (<methodname>add_application()</methodname>), o "
 "una función de filtrado personalizada (<methodname>add_custom()</"
 "methodname>). También proporciona la posibilidad de filtrar de acuerdo a "
@@ -11233,6 +11233,13 @@ msgid ""
 "<literal>.po</literal> file. So, if your program has German and Japanese "
 "translations, your <literal>LINGUAS</literal> file would look like this:"
 msgstr ""
+"<literal>LINGUAS</literal> contiene una lista ordenada alfabéticamente de "
+"códigos que identifican los idiomas a los que se traduce su programa (las "
+"líneas de comentarios que comienzan con <literal>#</literal> se ignoran). "
+"Cada código de idioma listado en el archivo <literal>LINGUAS</literal> debe "
+"tener un archivo <literal>.po</literal> correspondiente. Entonces, si su "
+"programa estuviera traducido al alemán y al japonés, su archivo "
+"<literal>LINGUAS</literal> se vería así:"
 
 #: C/gtkmm-tutorial-in.xml:6553(programlisting)
 #, no-wrap
@@ -11251,6 +11258,9 @@ msgid ""
 "po</literal> in your <literal>po</literal> directory which contain the "
 "German and Japanese translations, respectively.)"
 msgstr ""
+"(Además, tendría los archivos <literal>ja.po</literal> y <literal>de.po</"
+"literal> en su carpeta <literal>po</literal> que contendrían las "
+"traducciones al alemán y al japonés, respectivamente)."
 
 #: C/gtkmm-tutorial-in.xml:6563(para)
 msgid ""
@@ -11261,6 +11271,12 @@ msgid ""
 "should be translated, your <literal>POTFILES.in</literal> file might look "
 "like this:"
 msgstr ""
+"<literal>POTFILES.in</literal> es una lista de rutas a todos los archivos "
+"que contienen cadenas marcadas para traducción, comenzando desde la carpeta "
+"raíz del proyecto. Entonces, por ejemplo, si el código fuente de su proyecto "
+"estuviera en una subcarpeta llamda <literal>src</literal>, y si tuviera dos "
+"archivos conteniendo cadenas que deben traducirse, su archivo "
+"<literal>POTFILES.in</literal> se vería así:"
 
 #: C/gtkmm-tutorial-in.xml:6572(programlisting)
 #, no-wrap
@@ -11283,6 +11299,16 @@ msgid ""
 "in <application>Glade</application> then also add your <filename>.glade</"
 "filename> files to the list in <literal>POTFILES.in</literal>."
 msgstr ""
+"Si está usando <application>gettext</application> directamente, sólo puede "
+"marcar cadenas para traducir si están en el archivo de código fuente. Sin "
+"embargo, si usa <application>intltool</application>, puede marcar cadenas "
+"para traducir en una variedad de otros formatos de archivo, incluyendo "
+"archivos de IU de <application>Glade</application>, xml, <ulink url=\"http://"
+"standards.freedesktop.org/desktop-entry-spec/latest/\">archivos .desktop</"
+"ulink> y muchos más. Por lo tanto, si ha diseñado parte de la IU de la "
+"aplicación en <application>Glade</application>, entonces también añada sus "
+"archivos <filename>.glade</filename> a la lista en <literal>POTFILES.in</"
+"literal>."
 
 #: C/gtkmm-tutorial-in.xml:6588(para)
 msgid ""
@@ -11291,6 +11317,10 @@ msgid ""
 "Add the following code to your <literal>configure.ac</literal>, substituting "
 "'programname' with the name of your program:"
 msgstr ""
+"Ahora que hay un lugar en el que poner sus traducciones, necesita "
+"inicializar <application>intltool</application> y <application>gettext</"
+"application>. Añádale el siguiente código a su <literal>configure.ac</"
+"literal>, substituyendo «programname» con el nombre de su programa:"
 
 #: C/gtkmm-tutorial-in.xml:6595(programlisting)
 #, no-wrap
@@ -11323,6 +11353,9 @@ msgid ""
 "the <literal>Makefile.am</literal> file, to define a macro that will be used "
 "when you initialize <application>gettext</application> in your source code."
 msgstr ""
+"Esta variable <varname>PROGRAMNAME_LOCALEDIR</varname> se usará luego en el "
+"archivo <literal>Makefile.am</literal>, para definir una macro que se usará "
+"cuando inicialice <application>gettext</application> en su código fuente."
 
 #: C/gtkmm-tutorial-in.xml:6617(para)
 msgid ""
@@ -11346,7 +11379,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:6622(para)
 msgid "Define <literal>INTLTOOL_FILES</literal> as: <placeholder-1/>"
-msgstr ""
+msgstr "Defina <literal>INTLTOOL_FILES</literal> como: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:6630(para)
 msgid ""
@@ -11355,7 +11388,7 @@ msgid ""
 "these commands will be included in the source tarball."
 msgstr ""
 "Añada <literal>INTLTOOL_FILES</literal> a la lista de archivos "
-"<literal>EXTRA_DIST</literal>. Esto asegura que cuando hace un <command>make "
+"<literal>EXTRA_DIST</literal>. Esto asegura que cuando haga un <command>make "
 "dist</command>, este comando se incluya en el archivo fuente."
 
 #: C/gtkmm-tutorial-in.xml:6640(programlisting)
@@ -11373,11 +11406,11 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:6638(para)
 msgid "Update your <literal>DISTCLEANFILES</literal>: <placeholder-1/>"
-msgstr ""
+msgstr "Actualice su <literal>DISTCLEANFILES</literal>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:6613(para)
 msgid "In the top-level Makefile.am: <placeholder-1/>"
-msgstr ""
+msgstr "En el Makefile.am de nivel superior: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:6649(para)
 msgid ""
@@ -11385,6 +11418,8 @@ msgid ""
 "<literal>AM_CPPFLAGS</literal> to add the following preprocessor macro "
 "definition:"
 msgstr ""
+"En su <literal>src/Makefile.am</literal>, actualice su <literal>AM_CPPFLAGS</"
+"literal> para añadir la siguiente definición de macro de preprocesador:"
 
 #: C/gtkmm-tutorial-in.xml:6654(programlisting)
 #, no-wrap
@@ -11396,6 +11431,8 @@ msgid ""
 "This macro will be used when you initialize <literal>gettext</literal> in "
 "your source code."
 msgstr ""
+"Esta macro se usará cuando inicialice <literal>gettext</literal> en su "
+"código fuente."
 
 #: C/gtkmm-tutorial-in.xml:6662(title)
 msgid "Marking strings for translation"
@@ -11408,6 +11445,10 @@ msgid ""
 "function. These strings will be extracted for translation and the "
 "translations may be used at runtime instead of the original English strings."
 msgstr ""
+"Las cadenas literales deben introducirse en el código fuente en inglés, pero "
+"deben rodearse por una llamada a la función <function>gettext()</function>. "
+"Estas cadenas se extraerán para traducción y las traducciones podrán usarse "
+"en tiempo de ejecución en lugar de las cadenas originales en inglés."
 
 #: C/gtkmm-tutorial-in.xml:6672(para)
 msgid ""
@@ -11415,6 +11456,9 @@ msgid ""
 "strings in source code, extract those strings for translation, and use the "
 "translated strings in your application."
 msgstr ""
+"El paquete <application>GNU gettext</application> le permite marcar cadenas "
+"en el código fuente, extraer esas cadenas para su traducción, y usar las "
+"cadenas traducidas en su aplicación."
 
 #: C/gtkmm-tutorial-in.xml:6684(programlisting)
 #, no-wrap
@@ -11433,6 +11477,11 @@ msgid ""
 "To use these macros, include <literal>&lt;glibmm/i18n.h&gt;</literal>, and "
 "then, for example, substitute: <placeholder-1/> with: <placeholder-2/>"
 msgstr ""
+"Sin embargo, <application>Glib</application> define macros de soporte de "
+"<function>gettext()</function> que son contenedores más pequeños en una "
+"forma fácil de usar. Para usar estas macros, incluya <literal>&lt;glibmm/"
+"i18n.h&gt;</literal>, y luego, por ejemplo, substituya <placeholder-1/> con: "
+"<placeholder-2/>"
 
 #: C/gtkmm-tutorial-in.xml:6697(programlisting)
 #, no-wrap
@@ -11447,6 +11496,12 @@ msgid ""
 "named <literal>my-strings</literal>, execute the following command, within "
 "the source code directory: <placeholder-1/>"
 msgstr ""
+"A manera de referencia, es posible generar un archivo que contenga todas las "
+"cadenas que aparecen en su código, incluso si no están marcadas para "
+"traducción, junto con las referencias al nombre de archivo y al número de "
+"línea. Para generar un archivo así llamado <literal>my-strings</literal>, "
+"ejecute el siguiente comando, dentro de la carpeta del código fuente: "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:6704(programlisting)
 #, no-wrap
@@ -11465,6 +11520,9 @@ msgid ""
 "this code to the beginning of your <filename>main.cc</filename> file, to "
 "initialize gettext. <placeholder-1/>"
 msgstr ""
+"Finalmente, para dejar que su programa use la traducción de la localización "
+"actual, añádale este código al inicio de su archivo <filename>main.cc</"
+"filename>, para inicializar gettext. <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:6710(title)
 msgid "How gettext works"
@@ -11482,6 +11540,16 @@ msgid ""
 "literal> script is used to update the <filename>localename.po</filename> "
 "files from the regenerated <filename>.pot</filename> file."
 msgstr ""
+"El script <application>intltool</application> / <application>xgettext</"
+"application> extrae las cadenas y las pone en un archivo <filename>mypackage."
+"pot</filename>. Los traductores de su aplicación crean sus traducciones "
+"primero copiando este archivo <filename>.pot</filename> a un archivo "
+"<filename>localename.po</filename>. Una localización identifica a un "
+"lenguaje y una codificación para ese lenguaje, incluyendo formatos de fecha "
+"y numéricos. Más tarde, cuando el texto en su código fuente haya cambiado, "
+"el script <literal>msmerge</literal> se usará para actualizar los archivos "
+"<filename>localename.po</filename> del archivo <filename>.pot</filename> "
+"regenerado."
 
 #: C/gtkmm-tutorial-in.xml:6726(para)
 msgid ""
@@ -11490,6 +11558,10 @@ msgid ""
 "system-wide directory for locale files, for example <filename>/usr/share/"
 "locale/</filename>."
 msgstr ""
+"En tiempo de instalación, los archivos <filename>.po</filename> se "
+"convierten a formato binario (con la extensión <filename>.mo</filename>) y "
+"se ponen en una carpeta de sistema para archivos de localización, por "
+"ejemplo <filename>/usr/share/locale/</filename>."
 
 #: C/gtkmm-tutorial-in.xml:6733(para)
 msgid ""
@@ -11501,6 +11573,13 @@ msgid ""
 "translation of a particular string. If none is found, the original string is "
 "used."
 msgstr ""
+"Cuando la aplicación se ejecuta, la biblioteca <application>gettext</"
+"application> verifica la carpeta de sistema para comprobar si hay un archivo "
+"<filename>.mo</filename> para el entorno de localización del usuario (puede "
+"establecer la localización, por ejemplo, con «export LANG=de_DE.UTF-8» desde "
+"una consola bash). Más tarde, cuando el programa alcance una llamada a "
+"<literal>gettext</literal>, buscará la traducción de la cadena particular. "
+"Si no encuentra ninguna, usará la cadena original."
 
 #: C/gtkmm-tutorial-in.xml:6745(title)
 msgid "Testing and adding translations"
@@ -11518,6 +11597,10 @@ msgid ""
 "filename> subdirectory of your project and execute the following command: "
 "<placeholder-1/>"
 msgstr ""
+"Para convencerse de que ha hecho lo correcto, tal vez quiera añadir una "
+"traducción para una localización nueva. Para hacer eso, vaya a la subcarpeta "
+"<filename>po</filename> de su proyecto y ejecute el siguiente comando: "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:6755(para)
 msgid ""
