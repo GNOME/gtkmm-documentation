@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-07-09 14:17+0000\n"
-"PO-Revision-Date: 2012-07-16 12:58+0200\n"
+"POT-Creation-Date: 2012-07-23 08:57+0000\n"
+"PO-Revision-Date: 2012-07-23 12:25+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -11613,6 +11613,14 @@ msgid ""
 "filename> file (specified in the header, but also as content) to "
 "<literal>UTF-8</literal>."
 msgstr ""
+"Eso creará un archivo llamado <filename>programname.pot</filename>. Ahora, "
+"copie ese archivo a <filename>languagecode.po</filename>, como por ejemplo "
+"<filename>de.po</filename> o <filename>hu.po</filename>. También añada ese "
+"código de lenguaje a <literal>LINGUAS</literal>. El archivo <filename>.po</"
+"filename> contiene una cabecera y una lista de cadenas en inglés, con "
+"espacios para introducir las cadenas traducidas. Asegúrese de establecer la "
+"codificación del archivo <filename>.po</filename> (especificada en la "
+"cabecera, pero también en el contenido) a <literal>UTF-8</literal>."
 
 #: C/gtkmm-tutorial-in.xml:6768(para)
 msgid ""
@@ -11621,6 +11629,10 @@ msgid ""
 "substitute the original string. To make them appear, simply remove the "
 "<literal>fuzzy</literal> tag."
 msgstr ""
+"Es posible que ciertas cadenas se marquen como <literal>fuzzy</literal> en "
+"el archivo <filename>.po</filename>. Estas traducciones no sustituirán la "
+"cadena original. Para hacerlas aparecer, simplemente elimine la etiqueta "
+"<literal>fuzzy</literal>."
 
 #: C/gtkmm-tutorial-in.xml:6778(title)
 msgid "Resources"
@@ -11636,7 +11648,7 @@ msgstr "README de intltool"
 
 #: C/gtkmm-tutorial-in.xml:6800(ulink)
 msgid "How to use GNOME CVS as a Translator"
-msgstr ""
+msgstr "Cómo usar GNOME CVS como traductor"
 
 #: C/gtkmm-tutorial-in.xml:6806(ulink)
 msgid "gettext manual"
@@ -11659,10 +11671,12 @@ msgid ""
 "More information about what lies behind the internationalization and "
 "localization process is presented and demonstrated in: <placeholder-1/>"
 msgstr ""
+"Se presenta y demuestra más información sobre lo que subyace al proceso de "
+"internacionalización y localización en: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:6828(title)
 msgid "Expecting UTF8"
-msgstr ""
+msgstr "Esperar UTF8"
 
 #: C/gtkmm-tutorial-in.xml:6829(para)
 msgid ""
@@ -11672,6 +11686,11 @@ msgid ""
 "shouldn't use <classname>std::string</classname> or standard C functions "
 "such as <function>strlen()</function> because they make the same assumption."
 msgstr ""
+"Una aplicación adecuadamente internacionalizada no asumirá nada sobre el "
+"número de bytes en un carácter. Eso significa que no debe usar aritmética de "
+"punteros para avanzar sobre los caracteres en una cadena, y significa que no "
+"debe usar <classname>std::string</classname> o funciones estándar de C como "
+"<function>strlen()</function> porque asumen lo mismo."
 
 #: C/gtkmm-tutorial-in.xml:6836(para)
 msgid ""
@@ -11681,6 +11700,11 @@ msgid ""
 "basics-ustring\">Basics</link> chapter about <classname>Glib::ustring</"
 "classname>."
 msgstr ""
+"Sin embargo, probablemente ya evite matrices char* simples y aritmética de "
+"punteros usando <classname>std::string</classname>, por lo que sólo necesita "
+"comenzar a usar <classname>Glib::ustring</classname> en su lugar. Consulte "
+"el capítulo <link linkend=\"sec-basics-ustring\">Conceptos básicos</link> "
+"acerca de <classname>Glib::ustring</classname>."
 
 #: C/gtkmm-tutorial-in.xml:6844(title)
 msgid "Glib::ustring and std::iostreams"
@@ -11719,20 +11743,38 @@ msgid ""
 "string</classname> from a <classname>ostringstream</classname>: <placeholder-"
 "1/>"
 msgstr ""
+"Desafortunadamente, la integración con iostreams estándar no es "
+"completamente infalible. <application>gtkmm</application> convierte "
+"<classname>Glib::ustring</classname> a una codificación específica de la "
+"localización (que generalmente no es UTF-8) si las dirige a un "
+"<classname>ostream</classname> con <function>operator&lt;&lt;</function>. De "
+"igual manera, recuperar <classname>Glib::ustring</classname> de "
+"<classname>istream</classname> con <function>operator&gt;&gt;</function> "
+"causa una conversión en la dirección opuesta. Pero este esquema se rompe si "
+"usa una <classname>std::string</classname>, por ejemplo introduciendo texto "
+"desde un flujo a una <classname>std::string</classname> y luego "
+"convirtiéndola implícitamente a una <classname>Glib::ustring</classname>. Si "
+"la cadena contenía caracteres no ASCII y la localización actual no está "
+"codificada en UTF-8, el resultado es una <classname>Glib::ustring</"
+"classname> corrupta. Puede solucionar temporalmente esto con una conversión "
+"manual. Por ejemplo, para recuperar la <classname>std::string</classname> de "
+"un <classname>ostringstream</classname>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:6871(title)
 msgid "Pitfalls"
-msgstr ""
+msgstr "Errores comunes"
 
 #: C/gtkmm-tutorial-in.xml:6873(para)
 msgid ""
 "There are a few common mistakes that you would discover eventually yourself. "
 "But this section might help you to avoid them."
 msgstr ""
+"Hay algunos errores comunes que eventualmente descubriría por sí mismo. Pero "
+"esta sección le ayudará a evitarlos."
 
 #: C/gtkmm-tutorial-in.xml:6876(title)
 msgid "Same strings, different semantics"
-msgstr ""
+msgstr "Mismas cadenas, semánticas diferentes"
 
 #: C/gtkmm-tutorial-in.xml:6878(para)
 msgid ""
@@ -11740,17 +11782,30 @@ msgid ""
 "different contexts, so they would probably not be identical when translated. "
 "Since the English strings are used as look-up keys, this causes problems."
 msgstr ""
+"A veces, dos cadenas en inglés son idénticas pero tienen distintos "
+"significados en distintos contextos, por lo que probablemente no serían "
+"idénticas al traducirlas. Dado que las cadenas en inglés se usan como claves "
+"de búsqueda, esto causa problemas."
 
+# Falta un paréntesis inicial en la cadena en inglés (o sobra).
+# Nicolás.
 #: C/gtkmm-tutorial-in.xml:6882(para)
 msgid ""
 "In these cases, you should add extra characters to the strings. For "
 "instance, use <literal>\"jumps[noun]\"</literal> and <literal>\"jumps[verb]"
-"\"</literal> instead of just <literal>\"jumps\"</literal>) and strip them "
+"\"</literal> instead of just <literal>\"jumps\"</literal> and strip them "
 "again outside the <function>gettext</function> call. If you add extra "
 "characters you should also add a comment for the translators before the "
 "<function>gettext</function> call. Such comments will be shown in the "
 "<filename>.po</filename> files. For instance:"
 msgstr ""
+"En estos casos, debe agregar caracteres adicionales a las cadenas. Por "
+"ejemplo, use <literal>\"jumps[noun]\"</literal> y <literal>\"jumps[verb]\"</"
+"literal> en lugar de sólo <literal>\"jumps\"</literal> y límpielas de nuevo "
+"fuera de la llamada a <function>gettext</function>. Si añade caracteres "
+"adicionales también debe añadir un comentario para los traductores antes de "
+"la llamada a <function>gettext</function>. Tales comentarios se mostrarán en "
+"los archivos <filename>.po</filename>. Por ejemplo:"
 
 #: C/gtkmm-tutorial-in.xml:6892(programlisting)
 #, no-wrap
@@ -11775,6 +11830,11 @@ msgid ""
 "separately, without allowing the translators to rearrange them according to "
 "the grammar of the language."
 msgstr ""
+"Los programadores de C usan <function>sprintf()</function> para componer y "
+"concatenar cadenas. C++ favorece los flujos, pero desafortunadamente, este "
+"enfoque hace la traducción difícil, porque cada fragmento de texto se "
+"traduce separadamente, sin permitirle a los traductores reordenarlos de "
+"acuerdo a la gramática del lenguaje."
 
 #: C/gtkmm-tutorial-in.xml:6907(para)
 msgid "For instance, this code would be problematic:"
@@ -11800,6 +11860,10 @@ msgid ""
 "\"http://www.cs.auc.dk/~olau/compose/\">compose library</ulink> which "
 "supports syntax such as:"
 msgstr ""
+"Entonces debe evitar esta situación o bien volver al estilo de C con "
+"<function>sprintf()</function>. Una solución posible es la <ulink url="
+"\"http://www.cs.auc.dk/~olau/compose/\">biblioteca de composición</ulink> "
+"que soporta sintaxis como:"
 
 #: C/gtkmm-tutorial-in.xml:6921(programlisting)
 #, no-wrap
@@ -11808,7 +11872,7 @@ msgstr "label.set_text(compose(_(\"Really delete %1 now?\"), filename));"
 
 #: C/gtkmm-tutorial-in.xml:6925(title)
 msgid "Assuming the displayed size of strings"
-msgstr ""
+msgstr "Asumir el tamaño de las cadenas mostradas"
 
 #: C/gtkmm-tutorial-in.xml:6927(para)
 msgid ""
@@ -11817,6 +11881,10 @@ msgid ""
 "Luckily, most <application>gtkmm</application> widgets will expand at "
 "runtime to the required size."
 msgstr ""
+"Nunca sabe cuánto espacio ocupará una cadena en la pantalla cuando se haya "
+"traducido. Bien podría duplicar el tamaño de la cadena original en inglés. "
+"Afortunadamente, la mayoría de los widgets de <application>gtkmm</"
+"application> se expandirán en tiempo de ejecución al tamaño requerido."
 
 #: C/gtkmm-tutorial-in.xml:6931(title)
 msgid "Unusual words"
@@ -11828,10 +11896,14 @@ msgid ""
 "difficult to translate, and are often difficult for even native speakers to "
 "understand. For instance, prefer \"application\" to \"app\""
 msgstr ""
+"Debe evitar abreviaciones crípticas, lenguaje vulgar o técnico. Estos son "
+"generalmente difíciles de traducir e incluso les pueden resultar difíciles "
+"de entender a los hablantes nativos. Por ejemplo, es preferible «application» "
+"antes que «app»."
 
 #: C/gtkmm-tutorial-in.xml:6939(title)
 msgid "Using non-ASCII characters in strings"
-msgstr ""
+msgstr "Usar caracteres no ASCII en cadenas"
 
 #: C/gtkmm-tutorial-in.xml:6941(para)
 msgid ""
@@ -11839,15 +11911,25 @@ msgid ""
 "characters (i.e. any characters with a code above 127) in source code. For "
 "instance, you cannot use the copyright sign (©)."
 msgstr ""
+"Actualmente, <application>gettext</application> no soporta caracteres no "
+"ASCII (es decir, cualquier carácter con un código superior a 127) en el "
+"código fuente. Por ejemplo, no puede usar el signo de derechos de autor (©)."
 
+# Typo en la cadena original: «charactger» al final.
+# Nicolás.
 #: C/gtkmm-tutorial-in.xml:6947(para)
 msgid ""
 "To work around this, you could write a comment in the source code just "
 "before the string, telling the translators to use the special character if "
 "it is available in their languages. For english, you could then make an "
 "American English <filename>en_US.po</filename> translation which used that "
-"special charactger."
+"special character."
 msgstr ""
+"Para solucionar temporalmente esto, puede escribir un comentario en el "
+"código fuente justo antes de la cadena, diciéndole a los traductores que "
+"usen el carácter especial si está disponible en sus lenguajes. Para el "
+"inglés, después puede hacer una traducción a inglés americano "
+"<filename>en_US.po</filename> que use ese carácter especial."
 
 #: C/gtkmm-tutorial-in.xml:6955(title)
 msgid "Getting help with translations"
