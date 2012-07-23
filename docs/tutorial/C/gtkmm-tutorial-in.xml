@@ -6882,7 +6882,7 @@ different contexts, so they would probably not be identical when translated. Sin
 <para>
 In these cases, you should add extra characters to the strings. For instance,
 use <literal>"jumps[noun]"</literal> and <literal>"jumps[verb]"</literal>
-instead of just <literal>"jumps"</literal>) and strip them again outside the
+instead of just <literal>"jumps"</literal> and strip them again outside the
 <function>gettext</function> call. If you add extra characters you should also
 add a comment for the translators before the <function>gettext</function> call.
 Such comments will be shown in the <filename>.po</filename> files. For
@@ -6947,7 +6947,7 @@ instance, you cannot use the copyright sign (&copy;).
         <para>To work around this, you could write a comment in the
           source code just before the string, telling the translators to
           use the special character if it is available in their languages. For english, you could then make an American English
-          <filename>en_US.po</filename> translation which used that special charactger.</para>
+          <filename>en_US.po</filename> translation which used that special character.</para>
       </sect2>
     </sect1>
 
