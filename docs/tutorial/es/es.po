@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-07-23 10:26+0000\n"
-"PO-Revision-Date: 2012-07-24 16:16+0200\n"
+"POT-Creation-Date: 2012-07-24 14:18+0000\n"
+"PO-Revision-Date: 2012-07-25 11:13+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -2322,8 +2322,6 @@ msgstr ""
 "cantidad definida dependiendo del botón que se use. Este es el "
 "comportamiento normal de las barras de desplazamiento."
 
-# La dejo fuzzy... me parece que hay mucha confusión entre clases que están entre etiquetas <classname> (sin traducir) y las que no (traducidas).
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:999(para)
 msgid ""
 "As will be explained in the <link linkend=\"chapter-adjustment\">Adjustment</"
@@ -9584,8 +9582,8 @@ msgstr ""
 "quiere mostrar todos los elementos en la lista de archivos recientes, puede "
 "filtrarlos para mostrar sólo aquellos que quiere. Puede realizar esto con "
 "ayuda de la clase <classname>RecentFilter</classname>. Esta clase le permite "
-"filtrar los archivos recientes por su nombre (<methodname>add_pattern()"
-"</methodname>), su tipo MIME (<methodname>add_mime_type()</methodname>), la "
+"filtrar los archivos recientes por su nombre (<methodname>add_pattern()</"
+"methodname>), su tipo MIME (<methodname>add_mime_type()</methodname>), la "
 "aplicación que los registró (<methodname>add_application()</methodname>), o "
 "una función de filtrado personalizada (<methodname>add_custom()</"
 "methodname>). También proporciona la posibilidad de filtrar de acuerdo a "
@@ -12220,6 +12218,10 @@ msgid ""
 "instance, <methodname>show_all_children()</methodname> uses this to find all "
 "the child widgets and show them."
 msgstr ""
+"Reemplazar <methodname>forall_vfunc()</methodname> puede permitirle a las "
+"aplicaciones operar en todos los widgets hijos de los contenedores. Por "
+"ejemplo, <methodname>show_all_children()</methodname> usa esto para "
+"encontrar a todos los widgets hijos y mostrarlos."
 
 #: C/gtkmm-tutorial-in.xml:7076(para)
 msgid ""
@@ -12229,6 +12231,11 @@ msgid ""
 "base class, so that the add() and remove() methods will do something "
 "appropriate if they are called."
 msgstr ""
+"A pesar de que su contenedor puede tener su propio método para establecer "
+"widgets hijos, aún así debe proporcionar una implementación para los métodos "
+"virtuales <methodname>on_add()</methodname> y <methodname>on_remove()</"
+"methodname> de la clase base, para que los métodos add() y remove() hagan "
+"algo apropiado si se llaman."
 
 #: C/gtkmm-tutorial-in.xml:7082(para)
 msgid ""
@@ -12240,6 +12247,13 @@ msgid ""
 "any more widgets, then this method should return <literal>G_TYPE_NONE</"
 "literal>."
 msgstr ""
+"Su implementación del método <methodname>child_type_vfunc()</methodname> "
+"debe reportar el tipo de widget que puede añadírsele a su contenedor, si "
+"todavía no está lleno. Esto es generalmente <methodname>Gtk::Widget::get_type"
+"()</methodname> para indicar que el contenedor puede contener cualquier "
+"clase derivada de <classname>Gtk::Widget</classname>. Si el contenedor no "
+"puede contener más widgets, entonces este método debe devolver "
+"<literal>G_TYPE_NONE</literal>."
 
 #: C/gtkmm-tutorial-in.xml:7094(para)
 msgid ""
@@ -12247,6 +12261,9 @@ msgid ""
 "other. Of course, in this case it would be far simpler just to use a "
 "vertical <classname>Gtk::Box</classname>."
 msgstr ""
+"Este ejemplo implementa un contenedor con dos widgets hijos, uno encima del "
+"otro. Por supuesto, en este caso sería mucho más simple usar sólo una "
+"<classname>Gtk::Box</classname> vertical."
 
 #: C/gtkmm-tutorial-in.xml:7099(title)
 msgid "Custom Container"
@@ -12259,24 +12276,34 @@ msgid ""
 "widgets. For instance, a <classname>Gtk::Label</classname> draws the text of "
 "the label, but does not do this by using other widgets."
 msgstr ""
+"Derivando directamente de <classname>Gtk::Widget</classname> puede hacer "
+"todo el dibujo de su widget directamente, en lugar de sólo ordenar widgets "
+"hijos. Por ejemplo, una <classname>Gtk::Label</classname> dibuja el texto de "
+"la etiqueta, pero no hace esto usando a otros widgets."
 
 #: C/gtkmm-tutorial-in.xml:7123(para)
 msgid ""
 "<methodname>get_request_mode_vfunc()</methodname>: (optional) Return what "
 "<literal>Gtk::SizeRequestMode</literal> is preferred by the widget."
 msgstr ""
+"<methodname>get_request_mode_vfunc()</methodname>: (opcional) devuelve qué "
+"<literal>Gtk::SizeRequestMode</literal> prefiere el widget."
 
 #: C/gtkmm-tutorial-in.xml:7124(para)
 msgid ""
 "<methodname>get_preferred_width_vfunc()</methodname>: Calculate the minimum "
 "and natural width of the widget."
 msgstr ""
+"<methodname>get_preferred_width_vfunc()</methodname>: calcula la anchura "
+"mínima y natural del widget."
 
 #: C/gtkmm-tutorial-in.xml:7125(para)
 msgid ""
 "<methodname>get_preferred_height_vfunc()</methodname>: Calculate the minimum "
 "and natural height of the widget."
 msgstr ""
+"<methodname>get_preferred_height_vfunc()</methodname>: calcula la altura "
+"mínima y natural del widget."
 
 #: C/gtkmm-tutorial-in.xml:7126(para)
 msgid ""
@@ -12284,6 +12311,8 @@ msgid ""
 "the minimum and natural width of the widget, if it would be given the "
 "specified height."
 msgstr ""
+"<methodname>get_preferred_width_for_height_vfunc()</methodname>: calcula la "
+"anchura mínima y natural del widget, si se le da la altura especificada."
 
 #: C/gtkmm-tutorial-in.xml:7127(para)
 msgid ""
@@ -12291,24 +12320,32 @@ msgid ""
 "the minimum and natural height of the widget, if it would be given the "
 "specified width."
 msgstr ""
+"<methodname>get_preferred_height_for_width_vfunc()</methodname>: calcula la "
+"altura mínima y natural del widget, si se le da la anchura especificada."
 
 #: C/gtkmm-tutorial-in.xml:7128(para)
 msgid ""
 "<methodname>on_size_allocate()</methodname>: Position the widget, given the "
 "height and width that it has actually been given."
 msgstr ""
+"<methodname>on_size_allocate()</methodname>: posiciona al widget de acuerdo "
+"a la altura y anchura que se le ha dado."
 
 #: C/gtkmm-tutorial-in.xml:7129(para)
 msgid ""
 "<methodname>on_realize()</methodname>: Associate a <classname>Gdk::Window</"
 "classname> with the widget."
 msgstr ""
+"<methodname>on_realize()</methodname>: asocia una <methodname>Gdk::Window</"
+"methodname> al widget."
 
 #: C/gtkmm-tutorial-in.xml:7130(para)
 msgid ""
 "<methodname>on_unrealize()</methodname>: (optional) Break the association "
 "with the <classname>Gdk::Window</classname>."
 msgstr ""
+"<methodname>on_unrealize()</methodname>: (opcional) rompe la asociación con "
+"la <methodname>Gdk::Window</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:7131(para)
 msgid "<methodname>on_map()</methodname>: (optional)"
@@ -12323,6 +12360,8 @@ msgid ""
 "<methodname>on_draw()</methodname>: Draw on the supplied <classname>Cairo::"
 "Context</classname>."
 msgstr ""
+"<methodname>on_draw()</methodname>: dibuja en el <methodname>Cairo::Context</"
+"methodname> proporcionado."
 
 #: C/gtkmm-tutorial-in.xml:7118(para)
 msgid ""
@@ -12331,6 +12370,10 @@ msgid ""
 "overridden in all custom widgets. The base class's methods may be "
 "appropriate. <placeholder-1/>"
 msgstr ""
+"Cuando derive de <classname>Gtk::Widget</classname>, debe remplazar los "
+"siguientes métodos virtuales. No necesita remplazar los métodos marcados "
+"como (opcional) en todos los widgets personalizados. Los métodos de la clase "
+"base pueden ser apropiados. <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:7137(para)
 msgid ""
@@ -12338,6 +12381,9 @@ msgid ""
 "containers. They are briefly described in the <link linkend=\"sec-custom-"
 "containers\">Custom Containers</link> section."
 msgstr ""
+"Los 6 primeros métodos en la tabla anterior también se remplazan en los "
+"contenedores personalizados. Se describen brevemente en la sección <link "
+"linkend=\"sec-custom-containers\">Contenedores personalizados</link>."
 
 #: C/gtkmm-tutorial-in.xml:7142(para)
 msgid ""
@@ -12349,10 +12395,17 @@ msgid ""
 "set_realized()</methodname> and <methodname>Gtk::Widget::set_window()</"
 "methodname> from there."
 msgstr ""
+"La mayoría de los widgets personalizados necesitan su propia <classname>Gdk::"
+"Window</classname> sobre la que dibujar. Después podrá llamar a "
+"<methodname>Gtk::Widget::set_has_window(true)</methodname> en su constructor "
+"(este es el valor predeterminado). Si no llama a <methodname>set_has_window"
+"(false)</methodname>, debe remplazar a <methodname>on_realize()</methodname> "
+"y llamar a <methodname>Gtk::Widget::set_realized()</methodname> y a "
+"<methodname>Gtk::Widget::set_window()</methodname> desde allí."
 
 #: C/gtkmm-tutorial-in.xml:7153(para)
 msgid "This example implements a widget which draws a Penrose triangle."
-msgstr ""
+msgstr "Este ejemplo implementa un widget que dibuja un triángulo de Penrose."
 
 #: C/gtkmm-tutorial-in.xml:7156(title)
 msgid "Custom Widget"
@@ -12367,7 +12420,12 @@ msgid ""
 "This section is simply a gathering of wisdom, general style guidelines and "
 "hints for creating <application>gtkmm</application> applications."
 msgstr ""
+"Esta sección es simplemente un acopio de sabiduría, pautas generales de "
+"estilo y consejos para crear aplicaciones en <application>gtkmm</"
+"application>."
 
+# Typo: sobra un punto al final.
+# Nicolás.
 #: C/gtkmm-tutorial-in.xml:7178(para)
 msgid ""
 "Use GNU <application>autoconf</application> and <application>automake</"
@@ -12376,8 +12434,15 @@ msgid ""
 "<filename>Makefile</filename> so the files can be compiled in the correct "
 "order. <application>Autoconf</application> permits automatic configuration "
 "of software installation, handling a large number of system quirks to "
-"increase portability.."
+"increase portability."
 msgstr ""
+"Use <application>autoconf</application> y <application>automake</"
+"application> de GNU. Son sus amigos :). <application>Automake</application> "
+"examina archivos de C, determina cómo dependen entre sí, y genera un "
+"<filename>Makefile</filename> para que los archivos puedan compilarse en el "
+"orden correcto. <application>Autoconf</application> permite la configuración "
+"automática de la instalación de software, manipulando un gran número de "
+"peculiaridades de cada sistema para incrementar la portabilidad."
 
 #: C/gtkmm-tutorial-in.xml:7188(para)
 msgid ""
