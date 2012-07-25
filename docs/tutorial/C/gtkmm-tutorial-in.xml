@@ -7182,7 +7182,7 @@ and hints for creating &gtkmm; applications.
     files can be compiled in the correct order.
     <application>Autoconf</application> permits automatic configuration of
     software installation, handling a large number of system quirks to increase
-    portability..
+    portability.
 </para>
 
 <para>Subclass Widgets to better organize your code. You should probably
