@@ -1,3 +1,12 @@
+2012-07-27  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	I18n and L10n chapter: Fix broken links.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Fix 1 obsolete and 5 broken
+	links in the "Internationalization and Localization" chapter. Recommend
+	Glib::ustring::compose(). Minor modification of how to contact the Gnome
+	Translation Project. Bug #680546.
+
 3.4.1:
 
 2012-07-16  Murray Cumming  <murrayc@murrayc.com>

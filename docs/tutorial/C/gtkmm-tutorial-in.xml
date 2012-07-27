@@ -6523,7 +6523,7 @@ This example shows how to load a <application>Glade</application> file at runtim
         <application>automake</application> and
         <application>autoconf</application>) to build your project, and
         that you are using <ulink
-          url="http://svn.gnome.org/viewcvs/gnome-common/trunk/autogen.sh?view=markup">
+          url="http://git.gnome.org/browse/gnome-common/tree/autogen.sh">
           <literal>./autogen.sh</literal> from
           <application>gnome-common</application></ulink>, which, among other
         things, takes care of some <application>intltool</application>
@@ -6791,13 +6791,13 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
 
         <listitem>
           <para>
-            <ulink url="http://svn.gnome.org/viewcvs/intltool/trunk/README?view=markup">Intltool README</ulink>
+            <ulink url="http://bazaar.launchpad.net/~intltool/intltool/trunk/view/head:/README">Intltool README</ulink>
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <ulink url="http://developer.gnome.org/doc/tutorials/gnome-i18n/translator.html">How to use GNOME CVS as a Translator</ulink>
+            <ulink url="https://live.gnome.org/TranslationProject/GitHowTo">How to use Git for GNOME translators</ulink>
           </para>
         </listitem>
 
@@ -6912,13 +6912,14 @@ the language.</para>
 label.set_text(_("Really delete ") + filename + _(" now?"));</programlisting>
 
 <para>
-So you should either avoid this situation or revert to the C-style
-<function>sprintf()</function>. One possible solution is the <ulink
-    url="http://www.cs.auc.dk/~olau/compose/">compose library</ulink> which
-supports syntax such as:
-</para>
+So you should either avoid this situation or use
+<ulink url="&url_refdocs_base_glib;ustring.html"><function>Glib::ustring::compose()</function></ulink>
+which supports syntax such as:
+<programlisting>std::cout &lt;&lt; Glib::ustring::compose(
+             _("Current amount: %1 Future: %2"), amount, future) &lt;&lt; std::endl;
 
-<programlisting>label.set_text(compose(_("Really delete %1 now?"), filename));</programlisting>
+label.set_text(Glib::ustring::compose(_("Really delete %1 now?"), filename));</programlisting>
+</para>
 </sect2>
 
 <sect2 id="i18n-display-size">
@@ -6956,15 +6957,13 @@ instance, you cannot use the copyright sign (&copy;).
 
       <para>If your program is free software, there is a whole <literal>GNOME</literal>
         subproject devoted to helping you make translations, the
-        <ulink url="http://developer.gnome.org/projects/gtp/"><literal>GNOME</literal>
+        <ulink url="https://live.gnome.org/TranslationProject/"><literal>GNOME</literal>
         Translation Project</ulink>.</para>
 
-      <para>The way it works is that you contact the gnome-i18n
-        mailing list to find out how the translators can access your
-        <filename>po/</filename> subdirectory, and to add your project
-        to the big <ulink
-        url="http://developer.gnome.org/projects/gtp/status/">status
-        tables</ulink>.</para>
+      <para>The way it works is that you upload your source code to a git
+        repository where translators can access it, then contact the gnome-i18n
+        mailing list and ask to have your program added to the
+        <ulink url="http://l10n.gnome.org/module/">list of modules to translate</ulink>.</para>
 
       <para>Then you make sure you update the file
         <filename>POTFILES.in</filename> in the
