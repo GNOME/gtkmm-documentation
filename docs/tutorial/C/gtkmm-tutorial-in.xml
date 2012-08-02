@@ -7417,7 +7417,7 @@ initialized to null so you don't need to remember to do that yourself.
 <para>
 The use of the <literal>const</literal> keyword in C++ is not always clear. You
 might not realise that <type>const Something*</type> declares a pointer to a
-<type>const Something</type>, The pointer can be changed, but not the
+<type>const Something</type>. The pointer can be changed, but not the
 <type>Something</type> that it points to.
 </para>
 <para>
