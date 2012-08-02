@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-07-27 12:56+0000\n"
-"PO-Revision-Date: 2012-07-30 10:28+0200\n"
+"POT-Creation-Date: 2012-07-30 08:31+0000\n"
+"PO-Revision-Date: 2012-08-02 20:58+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -2724,7 +2724,6 @@ msgstr ""
 "columnas de su modelo debe usarse para las posibles entradas de texto."
 
 #: C/gtkmm-tutorial-in.xml:1287(para)
-#, fuzzy
 msgid ""
 "Alternatively, if a complete list of possible entries would be too large or "
 "too inconvenient to generate, a callback slot may instead be specified with "
@@ -5495,26 +5494,7 @@ msgstr ""
 "<methodname>get_text()</methodname> sobre él."
 
 #: C/gtkmm-tutorial-in.xml:3086(programlisting)
-#, fuzzy, no-wrap
-#| msgid ""
-#| "Gtk::Entry* entry = m_Combo.get_entry();\n"
-#| "if (entry)\n"
-#| "{\n"
-#| "  // The Entry shall receive key-press events and focus-out events.\n"
-#| "  entry-&gt;add_events(Gdk::KEY_PRESS_MASK | Gdk::FOCUS_CHANGE_MASK);\n"
-#| "\n"
-#| "  // Alternatively you can connect to m_Combo.signal_changed().\n"
-#| "  entry-&gt;signal_changed().connect(sigc::mem_fun(*this,\n"
-#| "    &amp;ExampleWindow::on_entry_changed) );\n"
-#| "\n"
-#| "  // This signal handler must be called before the default signal handler,\n"
-#| "  // or else it will not be called, if the default signal handler returns true.\n"
-#| "  entry-&gt;signal_key_press_event().connect(sigc::mem_fun(*this,\n"
-#| "    &amp;ExampleWindow::on_entry_key_press_event), /* after= */ false );\n"
-#| "\n"
-#| "  entry-&gt;signal_focus_out_event().connect(sigc::mem_fun(*this,\n"
-#| "    &amp;ExampleWindow::on_entry_focus_out_event) );\n"
-#| "}"
+#, no-wrap
 msgid ""
 "Gtk::Entry* entry = m_Combo.get_entry();\n"
 "if (entry)\n"
@@ -5536,17 +5516,15 @@ msgstr ""
 "Gtk::Entry* entry = m_Combo.get_entry();\n"
 "if (entry)\n"
 "{\n"
-"  // The Entry shall receive key-press events and focus-out events.\n"
-"  entry-&gt;add_events(Gdk::KEY_PRESS_MASK | Gdk::FOCUS_CHANGE_MASK);\n"
+"  // The Entry shall receive focus-out events.\n"
+"  entry-&gt;add_events(Gdk::FOCUS_CHANGE_MASK);\n"
 "\n"
 "  // Alternatively you can connect to m_Combo.signal_changed().\n"
 "  entry-&gt;signal_changed().connect(sigc::mem_fun(*this,\n"
 "    &amp;ExampleWindow::on_entry_changed) );\n"
 "\n"
-"  // This signal handler must be called before the default signal handler,\n"
-"  // or else it will not be called, if the default signal handler returns true.\n"
-"  entry-&gt;signal_key_press_event().connect(sigc::mem_fun(*this,\n"
-"    &amp;ExampleWindow::on_entry_key_press_event), /* after= */ false );\n"
+"  entry-&gt;signal_activate().connect(sigc::mem_fun(*this,\n"
+"    &amp;ExampleWindow::on_entry_activate) );\n"
 "\n"
 "  entry-&gt;signal_focus_out_event().connect(sigc::mem_fun(*this,\n"
 "    &amp;ExampleWindow::on_entry_focus_out_event) );\n"
@@ -7219,15 +7197,7 @@ msgstr ""
 "como sigue:"
 
 #: C/gtkmm-tutorial-in.xml:4123(programlisting)
-#, fuzzy, no-wrap
-#| msgid ""
-#| "void doSomething(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; context, int x)\n"
-#| "{\n"
-#| "    context-&gt;save();\n"
-#| "    // change graphics state\n"
-#| "    // peform drawing operations\n"
-#| "    context-&gt;restore();\n"
-#| "}"
+#, no-wrap
 msgid ""
 "void doSomething(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; context, int x)\n"
 "{\n"
@@ -7241,7 +7211,7 @@ msgstr ""
 "{\n"
 "    context-&gt;save();\n"
 "    // change graphics state\n"
-"    // peform drawing operations\n"
+"    // perform drawing operations\n"
 "    context-&gt;restore();\n"
 "}"
 
@@ -11190,15 +11160,6 @@ msgstr ""
 "<application>gettext</application><filename>.pot/.po</filename> estándar."
 
 #: C/gtkmm-tutorial-in.xml:6521(para)
-#, fuzzy
-#| msgid ""
-#| "We also assume that you are using autotools (e.g. <application>automake</"
-#| "application> and <application>autoconf</application>) to build your "
-#| "project, and that you are using <ulink url=\"http://svn.gnome.org/viewcvs/"
-#| "gnome-common/trunk/autogen.sh?view=markup\"><literal>./autogen.sh</"
-#| "literal> from <application>gnome-common</application></ulink>, which, "
-#| "among other things, takes care of some <application>intltool</"
-#| "application> initialization."
 msgid ""
 "We also assume that you are using autotools (e.g. <application>automake</"
 "application> and <application>autoconf</application>) to build your project, "
@@ -11209,11 +11170,11 @@ msgid ""
 msgstr ""
 "También se asume que está usando autotools (por ejemplo, "
 "<application>automake</application> y <application>autoconf</application>) "
-"para construir su proyecto, y que está usando <ulink url=\"http://svn.gnome."
-"org/viewcvs/gnome-common/trunk/autogen.sh?view=markup\"><literal>./autogen."
-"sh</literal> desde <application>gnome-common</application></ulink>, que, "
-"entre otras cosas, se ocupa de parte de la inicialización de "
-"<application>intltool</application>."
+"para construir su proyecto, y que está usando <ulink url=\"http://git.gnome."
+"org/browse/gnome-common/tree/autogen.sh\"><literal>./autogen.sh</literal> "
+"desde <application>gnome-common</application></ulink>, que, entre otras "
+"cosas, se ocupa de parte de la inicialización de <application>intltool</"
+"application>."
 
 #: C/gtkmm-tutorial-in.xml:6534(para)
 msgid ""
@@ -11654,10 +11615,8 @@ msgid "Intltool README"
 msgstr "README de intltool"
 
 #: C/gtkmm-tutorial-in.xml:6800(ulink)
-#, fuzzy
-#| msgid "How to use GNOME CVS as a Translator"
 msgid "How to use Git for GNOME translators"
-msgstr "Cómo usar GNOME CVS como traductor"
+msgstr "Cómo usar Git para traductores de GNOME"
 
 #: C/gtkmm-tutorial-in.xml:6806(ulink)
 msgid "gettext manual"
@@ -11863,22 +11822,17 @@ msgstr ""
 "label.set_text(_(\"Really delete \") + filename + _(\" now?\"));"
 
 #: C/gtkmm-tutorial-in.xml:6918(programlisting)
-#, fuzzy, no-wrap
-#| msgid ""
-#| "std::cout &lt;&lt; _(\"Current amount: \") &lt;&lt; amount\n"
-#| "          &lt;&lt; _(\" Future: \") &lt;&lt; future &lt;&lt; std::endl;\n"
-#| "\n"
-#| "label.set_text(_(\"Really delete \") + filename + _(\" now?\"));"
+#, no-wrap
 msgid ""
 "std::cout &lt;&lt; Glib::ustring::compose(\n"
 "             _(\"Current amount: %1 Future: %2\"), amount, future) &lt;&lt; std::endl;\n"
 "\n"
 "label.set_text(Glib::ustring::compose(_(\"Really delete %1 now?\"), filename));"
 msgstr ""
-"std::cout &lt;&lt; _(\"Current amount: \") &lt;&lt; amount\n"
-"          &lt;&lt; _(\" Future: \") &lt;&lt; future &lt;&lt; std::endl;\n"
+"std::cout &lt;&lt; Glib::ustring::compose(\n"
+"             _(\"Current amount: %1 Future: %2\"), amount, future) &lt;&lt; std::endl;\n"
 "\n"
-"label.set_text(_(\"Really delete \") + filename + _(\" now?\"));"
+"label.set_text(Glib::ustring::compose(_(\"Really delete %1 now?\"), filename));"
 
 #: C/gtkmm-tutorial-in.xml:6914(para)
 msgid ""
@@ -11887,6 +11841,10 @@ msgid ""
 "\"><function>Glib::ustring::compose()</function></ulink> which supports "
 "syntax such as: <placeholder-1/>"
 msgstr ""
+"Por lo que debe evitar esta situación o usar <ulink url=\"http://developer."
+"gnome.org/glibmm/unstable/classGlib_1_1ustring.html\"><function>Glib::"
+"ustring::compose()</function></ulink> que soporta sintaxis como: "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:6926(title)
 msgid "Assuming the displayed size of strings"
@@ -11954,12 +11912,6 @@ msgid "Getting help with translations"
 msgstr "Obtener ayuda con las traducciones"
 
 #: C/gtkmm-tutorial-in.xml:6958(para)
-#, fuzzy
-#| msgid ""
-#| "If your program is free software, there is a whole <literal>GNOME</"
-#| "literal> subproject devoted to helping you make translations, the <ulink "
-#| "url=\"http://developer.gnome.org/projects/gtp/\"><literal>GNOME</literal> "
-#| "Translation Project</ulink>."
 msgid ""
 "If your program is free software, there is a whole <literal>GNOME</literal> "
 "subproject devoted to helping you make translations, the <ulink url="
@@ -11968,13 +11920,12 @@ msgid ""
 msgstr ""
 "Si su programa es software libre, entonces hay todo un subproyecto de "
 "<literal>GNOME</literal> dedicado a ayudarle a hacer traducciones, el <ulink "
-"url=\"http://developer.gnome.org/projects/gtp/\">Proyecto de traducción de "
+"url=\"https://live.gnome.org/TranslationProject/\">Proyecto de traducción de "
 "<literal>GNOME</literal></ulink>."
 
 # Este enlace está roto. Sugiero abrir un bug.
 # Nicolás.
 #: C/gtkmm-tutorial-in.xml:6963(para)
-#, fuzzy
 msgid ""
 "The way it works is that you upload your source code to a git repository "
 "where translators can access it, then contact the gnome-i18n mailing list "
@@ -11983,8 +11934,8 @@ msgid ""
 msgstr ""
 "Consiste en que contacte a la lista de correo gnome-i18n para descubrir cómo "
 "los traductores pueden acceder a su subcarpeta <filename>po/</filename>, y "
-"añadir su proyecto a las grandes <ulink url=\"http://developer.gnome.org/"
-"projects/gtp/status/\">tablas de estado</ulink>."
+"añadir su proyecto a la <ulink url=\"http://l10n.gnome.org/module/\">lista "
+"de módulos para traducir</ulink>."
 
 #: C/gtkmm-tutorial-in.xml:6968(para)
 msgid ""
@@ -12779,6 +12730,8 @@ msgid ""
 "You can cast <classname>RefPtrs</classname> to base types, just like normal "
 "pointers."
 msgstr ""
+"Puede convertir <classname>RefPtr</classname> a tipos base, al igual que a "
+"los punteros normales."
 
 #: C/gtkmm-tutorial-in.xml:7371(programlisting)
 #, no-wrap
@@ -12798,12 +12751,18 @@ msgid ""
 "DerivedType&gt;</type>. The cast is implicit, just as it would be for a "
 "normal pointer."
 msgstr ""
+"Esto significa que cualquier método que tome un argumento <type>const Glib::"
+"RefPtr&lt;BaseType&gt;</type> también puede tomar un <type>const Glib::"
+"RefPtr&lt;DerivedType&gt;</type>. La conversión es implícita, al igual que "
+"lo sería con un puntero normal."
 
 #: C/gtkmm-tutorial-in.xml:7380(para)
 msgid ""
 "You can also cast to a derived type, but the syntax is a little different "
 "than with a normal pointer."
 msgstr ""
+"También puede convertir a un tipo derivado, pero la sintaxis es un poco "
+"diferente que con un puntero normal."
 
 #: C/gtkmm-tutorial-in.xml:7384(programlisting)
 #, no-wrap
@@ -12822,13 +12781,15 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:7394(title)
 msgid "Checking for null"
-msgstr ""
+msgstr "Verificar si es nulo"
 
 #: C/gtkmm-tutorial-in.xml:7395(para)
 msgid ""
 "Just like normal pointers, you can check whether a <classname>RefPtr</"
 "classname> points to anything."
 msgstr ""
+"Al igual que con los punteros normales, puede verificar si un "
+"<classname>RefPtr</classname> apunta a algo."
 
 #: C/gtkmm-tutorial-in.xml:7400(programlisting)
 #, no-wrap
@@ -12854,18 +12815,25 @@ msgid ""
 "But unlike normal pointers, <classname>RefPtr</classname>s are automatically "
 "initialized to null so you don't need to remember to do that yourself."
 msgstr ""
+"Pero, a diferencia de los punteros normales, los <classname>RefPtr</"
+"classname> se inicializan automáticamente a nulo, por lo que no necesita "
+"recordar hacerlo."
 
 #: C/gtkmm-tutorial-in.xml:7416(title)
 msgid "Constness"
-msgstr ""
+msgstr "Constancia"
 
 #: C/gtkmm-tutorial-in.xml:7417(para)
 msgid ""
 "The use of the <literal>const</literal> keyword in C++ is not always clear. "
 "You might not realise that <type>const Something*</type> declares a pointer "
-"to a <type>const Something</type>, The pointer can be changed, but not the "
+"to a <type>const Something</type>. The pointer can be changed, but not the "
 "<type>Something</type> that it points to."
 msgstr ""
+"El uso de la palabra reservada <literal>const</literal> en C++ no siempre es "
+"claro. Puede no darse cuenta de que <type>const Algo*</type> declara un "
+"puntero a un <type>const Algo</type>. El puntero puede cambiarse, pero no el "
+"<type>Algo</type> al que apunta."
 
 #: C/gtkmm-tutorial-in.xml:7423(para)
 msgid ""
@@ -12874,7 +12842,13 @@ msgid ""
 "&amp;</type>, and the equivalent of <type>const Something*</type> is "
 "<type>const Glib::RefPtr&lt;const Something&gt;&amp;</type>."
 msgstr ""
+"Por lo tanto, el equivalente <classname>RefPtr</classname> de <type>Algo*</"
+"type> para un parámetro de un método es <type>const Glib::RefPtr&lt;"
+"Something&gt;&amp;</type>, y el equivalente de <type>const Algo*</type> es "
+"<type>const Glib::RefPtr&lt;const Something&gt;&amp;</type>."
 
+# Dejo los tres puntos separados porque está dentro de etiquetas <literal>.
+# Nicolás.
 #: C/gtkmm-tutorial-in.xml:7430(para)
 msgid ""
 "The <literal>const ... &amp;</literal> around both is just for efficiency, "
@@ -12882,10 +12856,14 @@ msgid ""
 "<classname>std::string</classname> for a method parameter to avoid "
 "unnecessary copying."
 msgstr ""
+"El <literal>const ... &amp;</literal> que los rodea está sólo por "
+"eficiencia, como usar <literal>const std::string&amp;</literal> en lugar de "
+"<classname>std::string</classname> como método de parámetro para evitar una "
+"copia innecesaria."
 
 #: C/gtkmm-tutorial-in.xml:7445(title)
 msgid "Connecting signal handlers"
-msgstr ""
+msgstr "Conectar manejadores de señales"
 
 #: C/gtkmm-tutorial-in.xml:7446(para)
 msgid ""
@@ -12898,10 +12876,20 @@ msgid ""
 "<application>GTK+</application> C coders, these signal handlers are often "
 "named callbacks."
 msgstr ""
+"Las clases de widgets de <application>gtkmm</application> tienen métodos de "
+"acceso a señales, como <methodname>Gtk::Button::signal_clicked()</"
+"methodname>, que le permiten conectar su manejador de señales. Gracias a la "
+"flexibilidad de <application>libsigc++</application>, la biblioteca de "
+"retornos de llamada usada por <application>gtkmm</application>, el manejador "
+"de señales puede ser casi cualquier tipo de función, pero probablemente "
+"quiera usar un método de clase. Entre los programadores de C de "
+"<application>GTK+</application>, estos manejadores de señales a menudo se "
+"llaman retornos de llamada."
 
 #: C/gtkmm-tutorial-in.xml:7456(para)
 msgid "Here's an example of a signal handler being connected to a signal:"
 msgstr ""
+"Aquí hay un ejemplo de un manejador de señales que se conecta a una señal:"
 
 #: C/gtkmm-tutorial-in.xml:7461(programlisting)
 #, no-wrap
@@ -12939,26 +12927,33 @@ msgid ""
 "There's rather a lot to think about in this (non-functional) code. First "
 "let's identify the parties involved:"
 msgstr ""
+"Hay mucho para pensar en este código no funcional. Primero, identifique a "
+"los grupos involucrados:"
 
 #: C/gtkmm-tutorial-in.xml:7485(para)
 msgid "The signal handler is <methodname>on_button_clicked()</methodname>."
 msgstr ""
+"El manejador de señales es <methodname>on_button_clicked()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:7491(para)
 msgid ""
 "We're hooking it up to the <classname>Gtk::Button</classname> object called "
 "<varname>button</varname>."
 msgstr ""
+"Se engancha al objeto <classname>Gtk::Button</classname> llamado "
+"<varname>button</varname>."
 
 #: C/gtkmm-tutorial-in.xml:7498(para)
 msgid ""
 "When the Button emits its <literal>clicked</literal> signal, "
 "<methodname>on_button_clicked()</methodname> will be called."
 msgstr ""
+"Cuando el botón emita su señal <literal>clicked</literal>, se llamará a "
+"<methodname>on_button_clicked()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:7506(para)
 msgid "Now let's look at the connection again:"
-msgstr ""
+msgstr "Ahora, mire la conexión nuevamente:"
 
 #: C/gtkmm-tutorial-in.xml:7511(programlisting)
 #, no-wrap
@@ -12980,6 +12975,10 @@ msgid ""
 "method. Instead, we call <function>sigc::ptr_fun()</function>, and pass the "
 "result to <methodname>connect()</methodname>."
 msgstr ""
+"Tenga en cuenta que no se le pasa un puntero a <methodname>on_button_clicked"
+"()</methodname> directamente al método de la señal <methodname>connect()</"
+"methodname>. En su lugar, se llama a <function>sigc::ptr_fun()</function>, y "
+"se le pasa el resultado a <methodname>connect()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:7525(para)
 msgid ""
@@ -12990,10 +12989,16 @@ msgid ""
 "standalone function or static method. <function>sigc::mem_fun()</function> "
 "generates a slot for a member method of a particular instance."
 msgstr ""
+"<function>sigc::ptr_fun()</function> genera un <classname>sigc::slot</"
+"classname>. Un slot es un objeto que se comporta como una función, pero en "
+"realidad es un objeto. Estos también se llaman objetos función, o funtores. "
+"<function>sigc::ptr_fun()</function> genera un slot para una función "
+"independiente o un método estático. <function>sigc::mem_fun()</function> "
+"genera un slot para un método miembro de una instancia particular."
 
 #: C/gtkmm-tutorial-in.xml:7534(para)
 msgid "Here's a slightly larger example of slots in action:"
-msgstr ""
+msgstr "Aquí hay un ejemplo ligeramente más amplio de los slots en acción:"
 
 #: C/gtkmm-tutorial-in.xml:7539(programlisting)
 #, no-wrap
@@ -13037,6 +13042,8 @@ msgid ""
 "The first call to <methodname>connect()</methodname> is just like the one we "
 "saw last time; nothing new here."
 msgstr ""
+"La primera llamada a <methodname>connect()</methodname> es igual a la que "
+"vio la última vez; no hay nada nuevo aquí."
 
 #: C/gtkmm-tutorial-in.xml:7561(para)
 msgid ""
