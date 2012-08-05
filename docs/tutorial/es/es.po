@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-07-30 08:31+0000\n"
-"PO-Revision-Date: 2012-08-02 20:58+0200\n"
+"POT-Creation-Date: 2012-08-02 19:03+0000\n"
+"PO-Revision-Date: 2012-08-05 13:10+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -1631,7 +1631,7 @@ msgid ""
 "according to properties of those children rather than its own layout details."
 msgstr ""
 "<classname>Gtk::Grid</classname> es un widget contenedor nuevo que "
-"eventualmente remplazará a <classname>Gtk::Box</classname>. Ordena a sus "
+"eventualmente reemplazará a <classname>Gtk::Box</classname>. Ordena a sus "
 "hijos de acuerdo a sus propiedades en lugar de sus propios detalles de "
 "disposición."
 
@@ -8406,7 +8406,7 @@ msgid ""
 "when the clipboard replaces its data with something else."
 msgstr ""
 "El retorno de llamada «clear» le permite liberar la memoria que sus datos "
-"almacenados usan cuando el portapapeles remplaza sus datos con otra cosa."
+"almacenados usan cuando el portapapeles reemplaza sus datos con otra cosa."
 
 #: C/gtkmm-tutorial-in.xml:4863(title)
 msgid "Paste"
@@ -10767,7 +10767,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:6309(simpara)
 msgid "Less C++ code is required."
-msgstr "Se requiere menos código en C++"
+msgstr "Se requiere menos código en C++."
 
 #: C/gtkmm-tutorial-in.xml:6310(simpara)
 msgid "UI changes can be seen more quickly, so UIs are able to improve."
@@ -12080,7 +12080,7 @@ msgid ""
 "When deriving from <classname>Gtk::Container</classname>, you should "
 "override the following virtual methods: <placeholder-1/>"
 msgstr ""
-"Cuando derive de un <classname>Gtk::Container</classname>, debe remplazar "
+"Cuando derive de un <classname>Gtk::Container</classname>, debe reemplazar "
 "los siguientes métodos virtuales: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:7017(para)
@@ -12181,7 +12181,7 @@ msgstr ""
 "diferencia entre <classname>Gtk::Window</classname> y <classname>Gdk::"
 "Window</classname>). Si su contenedor no necesita su propia  <classname>Gdk::"
 "Window</classname>, y no deriva de <classname>Gtk::Window</classname>, "
-"también debe remplazar el método <methodname>on_realize()</methodname> como "
+"también debe reemplazar el método <methodname>on_realize()</methodname> como "
 "se describe en la sección <link linkend=\"sec-custom-widgets\">Widgets "
 "personalizados</link>. Y, a menos que su contenedor dibuje directamente "
 "sobre la <classname>Gdk::Window</classname> subyacente, probablemente deba "
@@ -12347,8 +12347,8 @@ msgid ""
 "overridden in all custom widgets. The base class's methods may be "
 "appropriate. <placeholder-1/>"
 msgstr ""
-"Cuando derive de <classname>Gtk::Widget</classname>, debe remplazar los "
-"siguientes métodos virtuales. No necesita remplazar los métodos marcados "
+"Cuando derive de <classname>Gtk::Widget</classname>, debe reemplazar los "
+"siguientes métodos virtuales. No necesita reemplazar los métodos marcados "
 "como (opcional) en todos los widgets personalizados. Los métodos de la clase "
 "base pueden ser apropiados. <placeholder-1/>"
 
@@ -12358,7 +12358,7 @@ msgid ""
 "containers. They are briefly described in the <link linkend=\"sec-custom-"
 "containers\">Custom Containers</link> section."
 msgstr ""
-"Los 6 primeros métodos en la tabla anterior también se remplazan en los "
+"Los 6 primeros métodos en la tabla anterior también se reemplazan en los "
 "contenedores personalizados. Se describen brevemente en la sección <link "
 "linkend=\"sec-custom-containers\">Contenedores personalizados</link>."
 
@@ -12376,9 +12376,9 @@ msgstr ""
 "Window</classname> sobre la que dibujar. Después podrá llamar a "
 "<methodname>Gtk::Widget::set_has_window(true)</methodname> en su constructor "
 "(este es el valor predeterminado). Si no llama a <methodname>set_has_window"
-"(false)</methodname>, debe remplazar a <methodname>on_realize()</methodname> "
-"y llamar a <methodname>Gtk::Widget::set_realized()</methodname> y a "
-"<methodname>Gtk::Widget::set_window()</methodname> desde allí."
+"(false)</methodname>, debe reemplazar a <methodname>on_realize()</"
+"methodname> y llamar a <methodname>Gtk::Widget::set_realized()</methodname> "
+"y a <methodname>Gtk::Widget::set_window()</methodname> desde allí."
 
 #: C/gtkmm-tutorial-in.xml:7152(para)
 msgid "This example implements a widget which draws a Penrose triangle."
@@ -12990,15 +12990,15 @@ msgid ""
 "generates a slot for a member method of a particular instance."
 msgstr ""
 "<function>sigc::ptr_fun()</function> genera un <classname>sigc::slot</"
-"classname>. Un slot es un objeto que se comporta como una función, pero en "
+"classname>. Un «slot» es un objeto que se comporta como una función, pero en "
 "realidad es un objeto. Estos también se llaman objetos función, o funtores. "
-"<function>sigc::ptr_fun()</function> genera un slot para una función "
+"<function>sigc::ptr_fun()</function> genera un «slot» para una función "
 "independiente o un método estático. <function>sigc::mem_fun()</function> "
-"genera un slot para un método miembro de una instancia particular."
+"genera un «slot» para un método miembro de una instancia particular."
 
 #: C/gtkmm-tutorial-in.xml:7534(para)
 msgid "Here's a slightly larger example of slots in action:"
-msgstr "Aquí hay un ejemplo ligeramente más amplio de los slots en acción:"
+msgstr "Aquí hay un ejemplo ligeramente más amplio de los «slots» en acción:"
 
 #: C/gtkmm-tutorial-in.xml:7539(programlisting)
 #, no-wrap
@@ -13055,6 +13055,13 @@ msgid ""
 "\"called\", call the pointed-to method of the specified object, in this case "
 "<methodname>some_object.on_button_clicked()</methodname>."
 msgstr ""
+"La siguiente es más interesante. <function>sigc::mem_fun()</function> se "
+"llama con dos argumentos. El primero es <parameter>some_object</parameter>, "
+"que es el objeto al que su nuevo «slot» apuntará. El segundo argumento es un "
+"puntero a uno de sus métodos. Esta versión particular de <function>sigc::"
+"mem_fun()</function> crea un «slot» que, cuando se «llame», llamará al "
+"método al que apunta del objeto especificado, en este caso, "
+"<methodname>some_object.on_button_clicked()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:7571(para)
 msgid ""
@@ -13063,6 +13070,10 @@ msgid ""
 "perfectly fine - when the button is clicked, both signal handlers will be "
 "called."
 msgstr ""
+"Otra cosa notable acerca de este ejemplo es que se ha hecho la llamada a "
+"<methodname>connect()</methodname> dos veces para el mismo objeto de señal. "
+"Esto está perfectamente bien: cuando se pulse el botón, se llamará a ambos "
+"manejadores de señales."
 
 #: C/gtkmm-tutorial-in.xml:7578(para)
 msgid ""
@@ -13073,10 +13084,17 @@ msgid ""
 "function>, of course). Therefore, it's important to know what type of signal "
 "handler you'll be expected to connect to a given signal."
 msgstr ""
+"Como se mencionó, la señal <literal>clicked</literal> del botón está "
+"esperando llamar a un método sin argumentos. Todas las señales tienen "
+"requerimientos como este: no puede enganchar una función con dos argumentos "
+"a una señal que no espera ninguno (a menos que use un adaptador, como "
+"<function>sigc::bind()</function>, por supuesto). Por lo tanto, es "
+"importante saber qué tipo de manejador de señales se esperará que conecte a "
+"una señal dada."
 
 #: C/gtkmm-tutorial-in.xml:7590(title)
 msgid "Writing signal handlers"
-msgstr ""
+msgstr "Escribir manejadores de señales"
 
 #: C/gtkmm-tutorial-in.xml:7592(para)
 msgid ""
@@ -13085,6 +13103,10 @@ msgid ""
 "example of a signal declaration you might see in the <application>gtkmm</"
 "application> headers:"
 msgstr ""
+"Para descubrir qué tipo de manejador de señales puede conectar a una señal, "
+"puede buscarlo en la documentación de referencia en el archivo de cabecera. "
+"Aquí hay un ejemplo de una declaración de señal que puede ver en las "
+"cabeceras de <application>gtkmm</application>:"
 
 #: C/gtkmm-tutorial-in.xml:7599(programlisting)
 #, no-wrap
@@ -13107,12 +13129,24 @@ msgid ""
 "type of this signal's first, and only, argument. By looking at the reference "
 "documentation, you can see the names of the arguments too."
 msgstr ""
+"Aparte del nombre de la señal (<literal>focus</literal>), hay otras dos "
+"cosas importantes que tener en cuenta aquí: el número que sigue a la palabra "
+"<classname>SignalProxy</classname> en el principio (1, en este caso), y los "
+"tipos en la lista (<type>bool</type> y <type>Gtk::DirectionType</type>). El "
+"número indica cuántos argumentos debe tener el manejador de señales; el "
+"primer tipo, <type>bool</type>, es el tipo que el manejador de señales debe "
+"devolver; y el tipo siguiente, <type>Gtk::DirectionType</type>, es el tipo "
+"del primer y único argumento de esta señal. Mirando la documentación de "
+"referencia, también puede ver los nombres de los argumentos."
 
 #: C/gtkmm-tutorial-in.xml:7616(para)
 msgid ""
 "The same principles apply for signals which have more arguments. Here's one "
 "with three (taken from <filename>&lt;gtkmm/editable.h&gt;</filename>):"
 msgstr ""
+"Los mismos principios se aplican a las señales que tienen más argumentos. "
+"Aquí hay una con tres (tomada de <filename>&lt;gtkmm/editable.h&gt;</"
+"filename>):"
 
 #: C/gtkmm-tutorial-in.xml:7622(programlisting)
 #, no-wrap
@@ -13133,6 +13167,11 @@ msgid ""
 "handler's return type. The following three types are the argument types, in "
 "order. Our signal handler's prototype could look like this:"
 msgstr ""
+"Sigue la misma forma. El número 3 al final del nombre del tipo indica que el "
+"manejador de señales necesitará tres argumentos. El primer tipo en la lista "
+"es <type>void</type>, por lo que ese será el tipo que devolverá el manejador "
+"de señales. Los tres tipos siguientes son los de los argumentos, en orden. "
+"El prototipo de manejador de señales se podría ver así:"
 
 #: C/gtkmm-tutorial-in.xml:7637(programlisting)
 #, no-wrap
@@ -13145,12 +13184,12 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:7644(title)
 msgid "Disconnecting signal handlers"
-msgstr ""
+msgstr "Desconectar manejadores de señales"
 
 #: C/gtkmm-tutorial-in.xml:7646(para)
 msgid ""
 "Let's take another look at a Signal's <literal>connect</literal> method:"
-msgstr ""
+msgstr "Eche otro vistazo al método <literal>connect</literal> de la señal:"
 
 #: C/gtkmm-tutorial-in.xml:7651(programlisting)
 #, no-wrap
@@ -13170,10 +13209,16 @@ msgid ""
 "associated signal handler using the method <methodname>sigc::connection::"
 "disconnect()</methodname>."
 msgstr ""
+"Tenga en cuenta que el valor de retorno es del tipo <classname>sigc::"
+"signal&lt;void,int&gt;::iterator</classname>. Este se puede convertir "
+"implícitamente a una <classname>sigc::connection</classname> que a su vez "
+"puede usarse para controlar la conexión. Manteniendo un objeto de conexión "
+"puede desconectar su manejador de señales asociado usando el método "
+"<methodname>sigc::connection::disconnect()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:7667(title)
 msgid "Overriding default signal handlers"
-msgstr ""
+msgstr "Reemplazar manejadores de señales predeterminados"
 
 #: C/gtkmm-tutorial-in.xml:7669(para)
 msgid ""
@@ -13181,6 +13226,9 @@ msgid ""
 "the like by handling signals. That's certainly a good way to do things, but "
 "it's not the only way."
 msgstr ""
+"Hasta ahora se la ha enseñado a realizar acciones en respuesta a pulsaciones "
+"de botones o eventos similares manejando señales. Esa es seguramente una "
+"buena manera de hacer las cosas, pero no es la única."
 
 #: C/gtkmm-tutorial-in.xml:7676(para)
 msgid ""
@@ -13189,6 +13237,11 @@ msgid ""
 "override the default signal handler, such as Button::on_clicked(). This can "
 "be a lot simpler than hooking up signal handlers for everything."
 msgstr ""
+"En lugar de conectar manejadores de señales a señales laboriosamente, puede "
+"simplemente hacer una clase nueva que herede de un widget (por ejemplo, un "
+"botón) y luego reemplazar el manejador de señales predeterminado, como "
+"Button::on_clicked(). Esto puede ser mucho más simple que enganchar "
+"manejadores de señales para todo."
 
 #: C/gtkmm-tutorial-in.xml:7683(para)
 msgid ""
@@ -13199,6 +13252,12 @@ msgid ""
 "handle the same signal, or if you want one signal handler to respond to the "
 "same signal from different objects."
 msgstr ""
+"La herencia no es siempre la mejor manera de realizar cosas. Sólo es útil "
+"cuando quiere que el widget maneje su propia señal por sí mismo. Si quiere "
+"que alguna otra clase maneje la señal entonces necesitará conectar un "
+"manejador separado. Esto es aún más cierto si quiere que varios objetos "
+"manejen la misma señal, o si quiere que un manejador de señales responda a "
+"la misma señal desde diferentes objetos."
 
 #: C/gtkmm-tutorial-in.xml:7688(para)
 msgid ""
@@ -13206,10 +13265,13 @@ msgid ""
 "mind; they contain virtual member methods specifically intended to be "
 "overridden."
 msgstr ""
+"Las clases de <application>gtkmm</application> se diseñaron con los "
+"reemplazos en mente; contienen métodos miembro virtuales específicamente "
+"pensados para reemplazarse."
 
 #: C/gtkmm-tutorial-in.xml:7693(para)
 msgid "Let's look at an example of overriding:"
-msgstr ""
+msgstr "Eche un vistazo a un ejemplo de reemplazo:"
 
 #: C/gtkmm-tutorial-in.xml:7698(programlisting)
 #, no-wrap
@@ -13259,6 +13321,14 @@ msgid ""
 "<classname>Gtk::Button</classname> do what it would have done had we not "
 "overridden."
 msgstr ""
+"Aquí se define una clase nueva llamada <classname>OverridenButton</"
+"classname>, que hereda de <classname>Gtk::Button</classname>. Lo único que "
+"se cambia es el método <methodname>on_clicked()</methodname>, que se llama "
+"siempre que <classname>Gtk::Button</classname> emite la señal "
+"<literal>clicked</literal>. Este método imprime «Hello World» a "
+"<literal>stdout</literal> y después llama al método original, reemplazado, "
+"para dejarle a <classname>Gtk::Button</classname> hacer lo que hubiera hecho "
+"si no se hubiera reemplazado."
 
 #: C/gtkmm-tutorial-in.xml:7728(para)
 msgid ""
