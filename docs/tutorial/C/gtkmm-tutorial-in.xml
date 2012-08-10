@@ -8043,7 +8043,7 @@ server.signal_something().connect(
 <sect1 id="chapter-custom-signals-example"><title>Example</title>
 
 <para>
-This is a full working example that defines and uses custom signal.
+This is a full working example that defines and uses custom signals.
 </para>
 
 <para><ulink url="&url_examples_base;signals/custom/">Source Code</ulink></para>
