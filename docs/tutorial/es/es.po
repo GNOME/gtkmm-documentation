@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-08-05 11:12+0000\n"
-"PO-Revision-Date: 2012-08-08 10:20+0200\n"
+"POT-Creation-Date: 2012-08-08 08:23+0000\n"
+"PO-Revision-Date: 2012-08-10 10:31+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -11891,7 +11891,6 @@ msgstr ""
 "ASCII (es decir, cualquier carácter con un código superior a 127) en el "
 "código fuente. Por ejemplo, no puede usar el signo de derechos de autor (©)."
 
-# Typo en la cadena original: «charactger» al final.
 # Nicolás.
 #: C/gtkmm-tutorial-in.xml:6948(para)
 msgid ""
@@ -12401,7 +12400,6 @@ msgstr ""
 "estilo y consejos para crear aplicaciones en <application>gtkmm</"
 "application>."
 
-# Typo: sobra un punto al final.
 # Nicolás.
 #: C/gtkmm-tutorial-in.xml:7177(para)
 msgid ""
@@ -13802,12 +13800,29 @@ msgid ""
 "\n"
 "Program received signal SIGTRAP, Trace/breakpoint trap.\n"
 msgstr ""
+"\n"
+"&gt; gdb with_signal\n"
+"(gdb) catch throw\n"
+"Catchpoint 1 (throw)\n"
+"(gdb) run\n"
+"Catchpoint 1 (exception thrown), 0x00714ff0 in __cxa_throw ()\n"
+"(gdb) backtrace\n"
+"#0  0x00714ff0 in __cxa_throw () from /usr/lib/i386-linux-gnu/libstdc++.so.6\n"
+"#1  0x08048bd4 in throwSomething () at with_signal.cc:6\n"
+"(gdb) continue\n"
+"Continuing.\n"
+"(with_signal:2375): glibmm-ERROR **\n"
+"unhandled exception (type unknown) in signal handler\n"
+"\n"
+"Program received signal SIGTRAP, Trace/breakpoint trap.\n"
 
 #: C/gtkmm-tutorial-in.xml:7946(para)
 msgid ""
 "To see where the exception is thrown, you can use the <application>gdb</"
 "application> command <userinput>catch throw</userinput>. <placeholder-1/>"
 msgstr ""
+"Para ver dónde se lanza la excepción, puede usar el comando <userinput>catch "
+"throw</userinput> de <application>gdb</application>. <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:7970(programlisting)
 #, no-wrap
@@ -13821,6 +13836,14 @@ msgid ""
 "(gdb) set pagination off\n"
 "(gdb) run\n"
 msgstr ""
+"\n"
+"(gdb) catch throw\n"
+"(gdb) commands\n"
+"(gdb)   backtrace\n"
+"(gdb)   continue\n"
+"(gdb)   end\n"
+"(gdb) set pagination off\n"
+"(gdb) run\n"
 
 #: C/gtkmm-tutorial-in.xml:7966(para)
 msgid ""
@@ -13831,10 +13854,16 @@ msgid ""
 "backtrace from the last (or possibly the last but one) <code>throw</code> "
 "before the program stops, is the interesting one."
 msgstr ""
+"Si se atrapan muchas excepciones antes de la que interesa, este método puede "
+"ser tedioso. Puede automatizarse con los siguientes comandos de "
+"<application>gdb</application>. <placeholder-1/> Estos comandos imprimirán "
+"una traza inversa de cada <code>throw</code> y continuará. La traza inversa "
+"del último (o posiblemente del penúltimo) <code>throw</code> antes de que el "
+"programa se detenga, es la interesante."
 
 #: C/gtkmm-tutorial-in.xml:7989(title)
 msgid "Creating your own signals"
-msgstr ""
+msgstr "Crear sus propias señales"
 
 #: C/gtkmm-tutorial-in.xml:7990(para)
 msgid ""
@@ -13843,6 +13872,10 @@ msgid ""
 "between your own classes. That's actually very simple by using the "
 "<application>libsigc++</application> library directly."
 msgstr ""
+"Ahora que ha visto señales y manejadores de señales en <application>gtkmm</"
+"application>, tal vez quiera usar la misma técnica para permitir interacción "
+"entre sus propias clases. Eso es realmente muy simple usando la biblioteca "
+"<application>libsigc++</application> directamente."
 
 #: C/gtkmm-tutorial-in.xml:7996(para)
 msgid ""
@@ -13852,6 +13885,12 @@ msgid ""
 "signal system, but for new, non-GTK+ signals, you can create pure C++ "
 "signals, using the <classname>sigc::signal&lt;&gt;</classname> template."
 msgstr ""
+"Esto no es un asunto único de <application>gtkmm</application> o de IGU. "
+"<application>gtkmm</application> usa <application>libsigc++</application> "
+"para implementar sus envoltorios de proxy para el sistema de señales de "
+"<application>GTK+</application>, pero para las señales nuevas que no son de "
+"GTK+, puede crear señales de C++ puras, usando la plantilla <classname>sigc::"
+"signal&lt;&gt;</classname>."
 
 #: C/gtkmm-tutorial-in.xml:8007(programlisting)
 #, no-wrap
@@ -13868,6 +13907,9 @@ msgid ""
 "type> and an <type>int</type>, just declare a <classname>sigc::signal</"
 "classname>, like so: <placeholder-1/>"
 msgstr ""
+"Por ejemplo, para crear una señal que envíe 2 parámetros, un <type>bool</"
+"type> y un <type>int</type>, simplemente declare una <classname>sigc::"
+"signal</classname>, así: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8015(programlisting)
 #, no-wrap
@@ -13912,6 +13954,9 @@ msgid ""
 "people find that distasteful and prefer to make it available via an accessor "
 "method, like so: <placeholder-1/>"
 msgstr ""
+"También podría simplemente declarar esa señal como una variable miembro "
+"pública, pero algunas personas lo encuentran desastroso y prefieren hacerla "
+"disponible mediante un método de acceso, así: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8037(programlisting)
 #, no-wrap
@@ -13930,14 +13975,20 @@ msgid ""
 "connecting to <application>gtkmm</application> signals. For instance, "
 "<placeholder-1/>"
 msgstr ""
+"Puede entonces conectar a la señal usando la misma sintaxis que usaba cuando "
+"conectaba a señales de <application>gtkmm</application>. Por ejemplo, "
+"<placeholder-1/>"
 
+# Nicolás.
 #: C/gtkmm-tutorial-in.xml:8045(para)
-msgid "This is a full working example that defines and uses custom signal."
+msgid "This is a full working example that defines and uses custom signals."
 msgstr ""
+"Este es un ejemplo funcional completo que define y usa señales "
+"personalizadas."
 
 #: C/gtkmm-tutorial-in.xml:8059(title)
 msgid "Comparison with other signalling systems"
-msgstr ""
+msgstr "Comparación con otros sistemas de señales"
 
 #: C/gtkmm-tutorial-in.xml:8060(para)
 msgid ""
@@ -13953,6 +14004,17 @@ msgid ""
 "broadcasters, and slots play the role of listeners - sort of. More on this "
 "later.)"
 msgstr ""
+"(Nota aparte: <application>GTK+</application> llama a este esquema "
+"«señalización»; el lector perspicaz con experiencia en kits de herramientas "
+"de IGU notará que este mismo diseño se ve a menudo bajo el nombre de «emisor-"
+"receptor» (por ejemplo, en la plataforma de Metrowerks PowerPlant para los "
+"Macintosh). Funciona casi de la misma manera: uno establece "
+"<literal>emisores</literal>, y después les conecta <literal>receptores</"
+"literal>; el emisor tiene una lista de los objetos que lo están recibiendo, "
+"y cuando alguien le envía un mensaje al emisor, llama a todos sus objetos en "
+"su lista con el mensaje. En <application>gtkmm</application>, los objetos de "
+"señales hacen de emisores, y los «slots» de receptores, o algo así. Se "
+"hablará de este tema más adelante)."
 
 #: C/gtkmm-tutorial-in.xml:8074(para)
 msgid ""
@@ -13962,6 +14024,12 @@ msgid ""
 "And, unlike <application>Qt</application>, <application>gtkmm</application> "
 "achieves this without modifying the C++ language."
 msgstr ""
+"Los manejadores de señales de <application>gtkmm</application> son de «tipado "
+"fuerte», mientras que el código C de <application>GTK+</application> le "
+"permite conectar un retorno de llamada con el número y tipo incorrecto de "
+"argumentos, llevando a una violación de acceso en tiempo de ejecución. Y, a "
+"diferencia de <application>Qt</application>, <application>gtkmm</"
+"application> logra esto sin modificar el lenguaje C++."
 
 #: C/gtkmm-tutorial-in.xml:8080(para)
 msgid ""
@@ -13971,6 +14039,12 @@ msgid ""
 "inheritance and overloading. In C++, it's simple, since those features are "
 "supported in the language itself; you can let the compiler do the dirty work."
 msgstr ""
+"Acerca de reemplazar manejadores de señales: puede hacer esto en el mundo de "
+"C plano de GTK+, también; para eso existe el sistema de objetos de GTK+. "
+"Pero en GTK+, hay que realizar algunos procedimientos complicados para "
+"obtener características orientadas a objetos como herencia y sobrecarga. En C"
+"++, es simple, dado que esas características se soportan en el lenguaje en "
+"sí; puede dejarle el trabajo pesado al compilador."
 
 #: C/gtkmm-tutorial-in.xml:8088(para)
 msgid ""
@@ -13981,6 +14055,12 @@ msgid ""
 "overriding methods is so easy in C++, it's entirely practical - and sensible "
 "- to subclass a button for that purpose."
 msgstr ""
+"Este es uno de los lugares en los que se muestra realmente la belleza de C+"
+"+. Uno no consideraría heredar un widget de GTK+ simplemente para reemplazar "
+"a su método de acción; es mucho problema. En GTK+, casi siempre se usan "
+"señales para realizar las tareas, a menos que se estuviera escribiendo un "
+"widget nuevo. Pero, dado que reemplazar métodos es tan fácil en C++, es "
+"enteramente práctico (y razonable) heredar de un botón para ese propósito."
 
 #: C/gtkmm-tutorial-in.xml:8099(title)
 msgid "<application>gtkmm</application> and Win32"
@@ -13993,6 +14073,10 @@ msgid ""
 "platforms such as GNU/Linux can generally be transferred to Windows (and "
 "vice versa) with few modifications to the source."
 msgstr ""
+"Una de las mayores ventajas de <application>gtkmm</application> es que es "
+"multiplataforma. Los programas de <application>gtkmm</application> escritos "
+"en otras plataformas como GNU/Linux generalmente pueden transferirse a "
+"Windows (y viceversa) con pocas modificaciones al código fuente."
 
 #: C/gtkmm-tutorial-in.xml:8105(para)
 msgid ""
@@ -14004,6 +14088,14 @@ msgid ""
 "Windows. Refer to <ulink url=\"http://live.gnome.org/gtkmm/MSWindows/\"> "
 "http://live.gnome.org/gtkmm/MSWindows</ulink> for instructions how to use it."
 msgstr ""
+"<application>gtkmm</application> actualmente funciona con el <ulink url="
+"\"http://mingw.org/\">compilador MingW/GCC3.4</ulink> y Microsoft Visual C++ "
+"2005 o posterior (incluyendo las ediciones disponibles gratuitamente o "
+"«express») en la plataforma Windows. Hay un <ulink url=\"ftp://ftp.gnome.org/"
+"pub/GNOME/binaries/win32/gtkmm\">instalador</ulink> disponible para gtkmm en "
+"Microsoft Windows. Consulte <ulink url=\"http://live.gnome.org/gtkmm/"
+"MSWindows/\">http://live.gnome.org/gtkmm/MSWindows</ulink></ulink> para ver "
+"instrucciones sobre su uso."
 
 #: C/gtkmm-tutorial-in.xml:8117(title)
 msgid "Building <application>gtkmm</application> on Win32"
@@ -14033,6 +14125,13 @@ msgid ""
 "alongside your existing <application>gtkmm</application> installation, in a "
 "separate path."
 msgstr ""
+"Si está interesado o interesada en ayudar con el desarrollo de "
+"<application>gtkmm</application>, o arreglar un error en <application>gtkmm</"
+"application>, probablemente necesite construir la versión de desarrollo de "
+"<application>gtkmm</application>. Sin embargo, no debe instalar una versión "
+"de desarrollo sobre su versión estable. En su lugar, debe instalarla junto a "
+"su instalación de <application>gtkmm</application> existente, en una ruta "
+"separada."
 
 #: C/gtkmm-tutorial-in.xml:8133(para)
 msgid ""
@@ -14049,6 +14148,19 @@ msgid ""
 "url=\"http://mail.gnome.org/mailman/listinfo/gnome-love\">gnome-love mailing "
 "list</ulink>."
 msgstr ""
+"La manera más fácil de hacerlo es usar <ulink url=\"http://developer.gnome."
+"org/jhbuild/unstable/\">jhbuild</ulink>. <application>jhbuild</application> "
+"es un programa que hace la construcción de software de GNOME mucho más fácil "
+"mediante el cálculo de dependencias y la construcción de los elementos en el "
+"orden correcto. Esta sección le dará una breve explicación sobre cómo "
+"configurar <application>jhbuild</application> para construir e instalar "
+"<application>gtkmm</application> desde el repositorio de código fuente "
+"(git). Para obtener información actualizada sobre <application>jhbuild</"
+"application>, por favor consulte el <ulink url=\"http://developer.gnome.org/"
+"jhbuild/unstable/\">manual de jhbuild</ulink>. Si necesita asistencia usando "
+"<application>jhbuild</application>, pida ayuda en la <ulink url=\"http://"
+"mail.gnome.org/mailman/listinfo/gnome-love\">lista de correo-e gnome-love</"
+"ulink>."
 
 #: C/gtkmm-tutorial-in.xml:8149(para)
 msgid ""
