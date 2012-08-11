@@ -8283,8 +8283,8 @@ $ jhbuild sanitycheck</screen>
     <classname>GObject</classname>-based libraries. So it's quite easy to create
     additional gtkmm-style wrappers of other glib/GObject-based
     libraries.</para>
-<para>This involves a variety of tools, some of them crufty, but it does at
-    least work, and has been used successfully by several
+<para>This involves a variety of tools, some of them crufty, but at least
+    they work, and has been used successfully by several
     projects.</para>
 
 <sect1 id="sec-wrapping-build-structure">
