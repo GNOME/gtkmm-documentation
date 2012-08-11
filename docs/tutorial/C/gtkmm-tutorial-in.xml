@@ -8184,7 +8184,7 @@ practical - and sensible - to subclass a button for that purpose.
       You can build several modules by setting the
       <varname>modules</varname> variable to a meta-package, e.g.
       <literal>meta-gnome-core</literal>, or listing more than one module name.
-      The <varname>modules</varname> variable specifies which modules that will be
+      The <varname>modules</varname> variable specifies which modules will be
       built when you don't explicitly specify anything on the command line. You
       can always build a different moduleset later by specifying it on the
       commandline (e.g. <command>jhbuild build gtkmm</command>).
