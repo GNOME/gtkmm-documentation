@@ -19,15 +19,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-08-08 08:23+0000\n"
-"PO-Revision-Date: 2012-08-10 10:31+0200\n"
+"POT-Creation-Date: 2012-08-10 08:34+0000\n"
+"PO-Revision-Date: 2012-08-11 10:16+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Gtranslator 2.91.5\n"
 
 #: C/gtkmm-tutorial-in.xml:34(title)
@@ -111,8 +111,8 @@ msgid ""
 "Section \"Build Structure\" of chapter on \"Wrapping C Libraries with gmmproc"
 "\"."
 msgstr ""
-"Sección «Construir la estructura» del capítulo acerca de «Envolver bibliotecas "
-"de C con gmmproc»."
+"Sección «Construir la estructura» del capítulo acerca de «Envolver "
+"bibliotecas de C con gmmproc»."
 
 #: C/gtkmm-tutorial-in.xml:71(firstname)
 msgid "David"
@@ -185,8 +185,8 @@ msgstr ""
 "para el Software Libre; sin Secciones Invariantes, sin Textos de Portada y "
 "sin Textos de Contraportada. Puede conseguir una copia de la Licencia de "
 "Documentación Libre de GNU, visitando la página oficial o escribiendo a: "
-"Free Software Fundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-"
-"1307, EE. UU."
+"Free Software Fundation, Inc., 59 Temple Place - Suite 330, Boston, MA "
+"02111-1307, EE. UU."
 
 #: C/gtkmm-tutorial-in.xml:113(title)
 msgid "Introduction"
@@ -868,14 +868,14 @@ msgid ""
 msgstr ""
 "Para simplificar la compilación, se usa <literal>pkg-config</literal>, que "
 "está presente en todas las instalaciones correctas de <application>gtkmm</"
-"application>. Este programa «sabe» qué opciones de compilación son necesarias "
-"para compilar los programas que usan <application>gtkmm</application>. La "
-"opción <literal>--cflags</literal> hace que <literal>pkg-config</literal> "
-"devuelva la lista de carpetas en las que el compilador buscará los archivos "
-"de cabecera; la opción <literal>--libs</literal> solicita la lista de "
-"bibliotecas a las que el compilador enlazará y las carpetas en las que "
-"encontrarlas. Intente ejecutarlo desde su intérprete de comandos para ver "
-"los resultados en su sistema."
+"application>. Este programa «sabe» qué opciones de compilación son "
+"necesarias para compilar los programas que usan <application>gtkmm</"
+"application>. La opción <literal>--cflags</literal> hace que <literal>pkg-"
+"config</literal> devuelva la lista de carpetas en las que el compilador "
+"buscará los archivos de cabecera; la opción <literal>--libs</literal> "
+"solicita la lista de bibliotecas a las que el compilador enlazará y las "
+"carpetas en las que encontrarlas. Intente ejecutarlo desde su intérprete de "
+"comandos para ver los resultados en su sistema."
 
 #: C/gtkmm-tutorial-in.xml:375(programlisting)
 #, no-wrap
@@ -1561,9 +1561,9 @@ msgid ""
 msgstr ""
 "A continuación, se crea un objeto de la clase <classname>HelloWorld</"
 "classname>, cuyo constructor no toma argumentos, pero todavía no es visible. "
-"Cuando se llama a Gtk::Application::run(), pasándole la ventana «helloworld», "
-"la muestra y comienza el <emphasis>bucle de eventos</emphasis> de "
-"<application>gtkmm</application>. Durante el bucle, <application>gtkmm</"
+"Cuando se llama a Gtk::Application::run(), pasándole la ventana "
+"«helloworld», la muestra y comienza el <emphasis>bucle de eventos</emphasis> "
+"de <application>gtkmm</application>. Durante el bucle, <application>gtkmm</"
 "application> espera las acciones del usuario, y responde apropiadamente. "
 "Cuando el usuario cierre la ventana, «run()» retornará, haciendo que la "
 "última línea de nuestra función «main()» se ejecute. Entonces, la aplicación "
@@ -1597,11 +1597,11 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:603(para)
 msgid ""
-"<application>gtkmm</application> 3's library is called <literal>libgtkmm-"
-"3.0</literal> rather than <literal>libgtkmm-2.4</literal> and installs its "
-"headers in a similarly-versioned directory, so your pkg-config check should "
-"ask for <literal>gtkmm-3.0</literal> rather than <literal>gtkmm-2.4</"
-"literal>."
+"<application>gtkmm</application> 3's library is called "
+"<literal>libgtkmm-3.0</literal> rather than <literal>libgtkmm-2.4</literal> "
+"and installs its headers in a similarly-versioned directory, so your pkg-"
+"config check should ask for <literal>gtkmm-3.0</literal> rather than "
+"<literal>gtkmm-2.4</literal>."
 msgstr ""
 "La biblioteca de <application>gtkmm</application> 3 se llama "
 "<literal>libgtkmm-3.0</literal>, en vez de <literal>libgtkmm-2.4</literal> e "
@@ -1707,8 +1707,6 @@ msgstr ""
 "sin requerir el uso de una clase derivada como <classname>Gtk::HBox</"
 "classname>."
 
-# Esta mal el inglés, «instead of having their won...» debería ser «their own...».
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:630(simpara)
 msgid ""
 "<classname>Gtk::IconView</classname>, <classname>Gtk::TextView</classname>, "
@@ -2073,10 +2071,10 @@ msgid ""
 msgstr ""
 "Para recuperar el estado de un <classname>ToggleButton</classname>, puede "
 "usar el método <methodname>get_active()</methodname>. Esto devuelve "
-"<literal>true</literal> si el botón está «abajo». También puede establecer el "
-"estado del botón conmutador con <methodname>set_active()</methodname>. Tenga "
-"en cuenta que, si hace esto, y el estado efectivamente cambia, hace que se "
-"emita la señal «clicked». Esto normalmente será lo que quiera."
+"<literal>true</literal> si el botón está «abajo». También puede establecer "
+"el estado del botón conmutador con <methodname>set_active()</methodname>. "
+"Tenga en cuenta que, si hace esto, y el estado efectivamente cambia, hace "
+"que se emita la señal «clicked». Esto normalmente será lo que quiera."
 
 #: C/gtkmm-tutorial-in.xml:830(para)
 msgid ""
@@ -2315,9 +2313,9 @@ msgid ""
 msgstr ""
 "<classname>Gtk::Scale</classname> y <classname>Gtk::Scrollbar</classname> "
 "heredan de <classname>Gtk::Range</classname> y comparten mucha "
-"funcionalidad. Contienen un «canal» y un «control deslizante» (a veces llamado "
-"«rueda» en otros entornos IGU). Deslizar el control con el puntero lo mueve "
-"dentro del canal, mientras que pulsar en el canal avanza al control "
+"funcionalidad. Contienen un «canal» y un «control deslizante» (a veces "
+"llamado «rueda» en otros entornos IGU). Deslizar el control con el puntero "
+"lo mueve dentro del canal, mientras que pulsar en el canal avanza al control "
 "deslizante hacia la ubicación de la pulsación, completamente o en una "
 "cantidad definida dependiendo del botón que se use. Este es el "
 "comportamiento normal de las barras de desplazamiento."
@@ -2587,9 +2585,9 @@ msgid ""
 "the <methodname>set_text()</methodname> method, and read the current "
 "contents with the <methodname>get_text()</methodname> method."
 msgstr ""
-"Los widgets de «entry» le permiten al usuario introducir texto. Puede cambiar "
-"el contenido con el método <methodname>set_text()</methodname>, y leer el "
-"contenido actual con el método <methodname>get_text()</methodname>."
+"Los widgets de «entry» le permiten al usuario introducir texto. Puede "
+"cambiar el contenido con el método <methodname>set_text()</methodname>, y "
+"leer el contenido actual con el método <methodname>get_text()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:1210(para)
 msgid ""
@@ -2646,8 +2644,8 @@ msgstr ""
 "classname>. Mover el foco del teclado a otro widget también puede indicar "
 "que el usuario terminó de introducir texto. La señal "
 "<literal>focus_out_event</literal> puede notificarle cuando eso sucede. La "
-"sección <link linkend=\"sec-comboboxentry\">«ComboBox» con una entrada</link> "
-"contiene programas de ejemplo que usan estas señales."
+"sección <link linkend=\"sec-comboboxentry\">«ComboBox» con una entrada</"
+"link> contiene programas de ejemplo que usan estas señales."
 
 #: C/gtkmm-tutorial-in.xml:1237(para)
 msgid ""
@@ -2833,8 +2831,8 @@ msgid ""
 "widget may also be used to enter a value directly."
 msgstr ""
 "Un <classname>SpinButton</classname> permite al usuario seleccionar un valor "
-"de un rango de valores numéricos. Este tiene un widget «Entry» con botones de "
-"flechas en un lado. Al pulsar en los botones hace que el valor del «spin» "
+"de un rango de valores numéricos. Este tiene un widget «Entry» con botones "
+"de flechas en un lado. Al pulsar en los botones hace que el valor del «spin» "
 "suba y baje en toda la gama de valores posibles. El widget <classname>Entry</"
 "classname> también puede utilizarse para introducir un valor directamente."
 
@@ -3429,8 +3427,8 @@ msgid ""
 "appear, for instance, is complex. It requires tedious recalculation of every "
 "widget's position."
 msgstr ""
-"Cambiar la disposición de una ventana «al vuelo» para, por ejemplo, hacer que "
-"algunos widgets adicionales aparezcan, es complejo. Requiere un cálculo "
+"Cambiar la disposición de una ventana «al vuelo» para, por ejemplo, hacer "
+"que algunos widgets adicionales aparezcan, es complejo. Requiere un cálculo "
 "tedioso de la posición de cada widget."
 
 #: C/gtkmm-tutorial-in.xml:1900(para)
@@ -3485,8 +3483,6 @@ msgstr ""
 "<classname>Gtk::Bin</classname>, incluyendo <classname>Gtk::Window</"
 "classname>."
 
-# Acá hay un pequeño error cuando se nombran a Gtk::Grid y Gtk::Box: tienen sólo un signo «:», cuando el operador de C++ es «::».
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:1920(para)
 msgid ""
 "Yes, that's correct: a Window can contain at most one widget. How, then, can "
@@ -4359,8 +4355,8 @@ msgstr ""
 "representativa, con <methodname>TreeViewColumn::set_cell_data_func()</"
 "methodname>; o derivar un <classname>CellRenderer</classname> personalizado. "
 "Tenga en cuenta que no se soporta el tipo «(unsigned) short» de manera "
-"predeterminada: puede usar como tipo de columna «(unsigned) int» o «(unsigned) "
-"long» en su lugar."
+"predeterminada: puede usar como tipo de columna «(unsigned) int» o "
+"«(unsigned) long» en su lugar."
 
 #: C/gtkmm-tutorial-in.xml:2501(title)
 msgid "More than one Model Column per View Column"
@@ -4393,8 +4389,6 @@ msgstr ""
 "<classname>TreeModelColumn</classname> del cual genera un widget "
 "<classname>Gtk::View::Column</classname> apropiado."
 
-# No le encuentro el sentido a «text name», y por lo tanto no se si su traducción es apropiada.
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:2515(para)
 msgid ""
 "Here is some example code from <filename>demos/gtk-demo/example_stockbrowser."
@@ -4601,13 +4595,13 @@ msgid ""
 "and then call <methodname>get_cell_renderers()</methodname> on that view "
 "Column."
 msgstr ""
-"Entonces, puede conectar la señal «edited» apropiada. Por ejemplo, conectarlo "
-"a <methodname>Gtk::CellRendererText::signal_edited()</methodname>, o a "
-"<methodname>Gtk::CellRendererToggle::signal_toggled()</methodname>. Si la "
-"columna contiene más de un <classname>CellRenderer</classname>, entonces "
-"tendrá que usar <methodname>Gtk::TreeView::get_column()</methodname> y luego "
-"llamar a <methodname>get_cell_renderers()</methodname> en esa columna de la "
-"vista."
+"Entonces, puede conectar la señal «edited» apropiada. Por ejemplo, "
+"conectarlo a <methodname>Gtk::CellRendererText::signal_edited()</"
+"methodname>, o a <methodname>Gtk::CellRendererToggle::signal_toggled()</"
+"methodname>. Si la columna contiene más de un <classname>CellRenderer</"
+"classname>, entonces tendrá que usar <methodname>Gtk::TreeView::get_column()"
+"</methodname> y luego llamar a <methodname>get_cell_renderers()</methodname> "
+"en esa columna de la vista."
 
 #: C/gtkmm-tutorial-in.xml:2617(para)
 msgid ""
@@ -5197,8 +5191,6 @@ msgstr ""
 msgid "TreeView - Editable Cells"
 msgstr "TreeView: celdas editables"
 
-# En el original, hay un punto adicional al final.
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:2927(para)
 msgid ""
 "This example is much like the <classname>TreeStore</classname> example, but "
@@ -5352,8 +5344,8 @@ msgid ""
 "have chosen only to show the human-readable description in the Combo. For "
 "instance:"
 msgstr ""
-"Para descubrir si qué elemento seleccionó el usuario, de un «ComboBox», llame "
-"a <methodname>ComboBox::get_active()</methodname>. Esto devuelve un "
+"Para descubrir si qué elemento seleccionó el usuario, de un «ComboBox», "
+"llame a <methodname>ComboBox::get_active()</methodname>. Esto devuelve un "
 "<classname>TreeModel::iterator</classname> que puede desreferenciar a una "
 "<classname>Row</classname> para leer los valores de sus columnas. Por "
 "ejemplo, puede leer el valor de ID de un entero del modelo, incluso a pesar "
@@ -5428,8 +5420,6 @@ msgstr "Ejemplo de texto simple"
 msgid "ComboBoxText"
 msgstr "ComboBoxText"
 
-# Cambio este a «ComboBox» para mantener la concordancia con las menciones anteriores.
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:3056(title)
 msgid "ComboBox with an Entry"
 msgstr "«ComboBox» con una entrada"
@@ -5587,14 +5577,10 @@ msgstr ""
 "eventos de X</link> en el apéndice. Aquí se usarán los eventos del teclado "
 "para mostrar cómo pueden usarse en un programa los eventos de X."
 
-# Cambio este a «ComboBox» para mantener la concordancia con las menciones anteriores.
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:3116(title)
 msgid "ComboBox with Entry"
 msgstr "«ComboBox» con una entrada"
 
-# Cambio este a «ComboBox» para mantener la concordancia con las menciones anteriores.
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:3129(title)
 msgid "ComboBoxText with Entry"
 msgstr "«ComboBoxText» con una entrada"
@@ -5941,8 +5927,6 @@ msgstr "m_TextView.add_child_at_anchor(m_Button, refAnchor);"
 msgid "Menus and Toolbars"
 msgstr "Menús y barras de herramientas"
 
-# En el inglés, cuando dice «you can arrange in menu...» debería decir «menus».
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:3377(para)
 msgid ""
 "There are specific APIs for Menus and toolbars, but you should usually deal "
@@ -6101,8 +6085,8 @@ msgid ""
 msgstr ""
 "Luego, puede definir la distribución visible real de los menús y las barras "
 "de herramientas, y añadírsela al <classname>UIManager</classname>. Esta "
-"«cadena de IU» usa un formato XML, en el que debe mencionar los nombre de las "
-"acciones que ya ha creado. Por ejemplo:"
+"«cadena de IU» usa un formato XML, en el que debe mencionar los nombre de "
+"las acciones que ya ha creado. Por ejemplo:"
 
 #: C/gtkmm-tutorial-in.xml:3452(programlisting)
 #, no-wrap
@@ -6406,9 +6390,9 @@ msgstr ""
 "Llame a <methodname>add_drag_dest()</methodname> para permitir arrastrar "
 "elementos o grupos de la paleta de herramientas un widget particular de "
 "destino. Entonces podrá usar <methodname>get_drag_item()</methodname> para "
-"descubrir qué «ToolItem» o «ToolItemGroup» se está arrastrando. Después podrá "
-"usar <literal>dynamic_cast</literal> para descubrir si es un elemento o un "
-"grupo. Por ejemplo, podría usar esto en su manejador de la señal "
+"descubrir qué «ToolItem» o «ToolItemGroup» se está arrastrando. Después "
+"podrá usar <literal>dynamic_cast</literal> para descubrir si es un elemento "
+"o un grupo. Por ejemplo, podría usar esto en su manejador de la señal "
 "<literal>drag_data_received</literal>, para añadir un elemento soltado, o "
 "para mostrar un icono adecuado mientras se arrastra."
 
@@ -6799,8 +6783,6 @@ msgstr ""
 msgid "EventBox"
 msgstr "EventBox"
 
-# Al inglés supongo que le falta un put o place en «you can it inside...»
-# Nicolás
 #: C/gtkmm-tutorial-in.xml:3815(para)
 msgid ""
 "Some <application>gtkmm</application> widgets don't have associated X "
@@ -6909,8 +6891,6 @@ msgstr ""
 "<classname>Button</classname> a la parte inferior del <classname>Dialog</"
 "classname>, puede usar el método <methodname>add_button()</methodname>."
 
-# El inglés original dice «if the user closed the button by clicking...» debería ser «closed the dialog...»
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:3895(para)
 msgid ""
 "The <methodname>run()</methodname> method returns an <literal>int</literal>. "
@@ -8964,10 +8944,10 @@ msgid ""
 "need for extra implementation. However, it is sometimes useful to generate a "
 "pdf file directly from code. For instance, <placeholder-1/>"
 msgstr ""
-"La opción «imprimir a un archivo» está disponible en el diálogo de impresión, "
-"sin la necesidad de implementación adicional. Sin embargo, a veces es útil "
-"generar un archivo pdf directamente desde el código. Por ejemplo, "
-"<placeholder-1/>"
+"La opción «imprimir a un archivo» está disponible en el diálogo de "
+"impresión, sin la necesidad de implementación adicional. Sin embargo, a "
+"veces es útil generar un archivo pdf directamente desde el código. Por "
+"ejemplo, <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:5214(title)
 msgid "Extending the print dialog"
@@ -8997,8 +8977,8 @@ msgstr ""
 #: C/gtkmm-tutorial-in.xml:5216(para)
 msgid "You may add a custom tab to the print dialog: <placeholder-1/>"
 msgstr ""
-"Puede añadir una pestaña personalizada al diálogo de impresión: <placeholder-"
-"1/>"
+"Puede añadir una pestaña personalizada al diálogo de impresión: "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:5246(programlisting)
 #, no-wrap
@@ -9241,8 +9221,8 @@ msgid ""
 "which will be expanded to the resource file path and URI respectively"
 msgstr ""
 "<varname>app_exec</varname>: la línea de comandos que se usará para lanzar "
-"este recurso. La cadena puede contener los caracteres de escape «f» y «u» que "
-"se expandirán en la ruta del archivo de recursos y el URI respectivamente"
+"este recurso. La cadena puede contener los caracteres de escape «f» y «u» "
+"que se expandirán en la ruta del archivo de recursos y el URI respectivamente"
 
 #: C/gtkmm-tutorial-in.xml:5392(para)
 msgid ""
@@ -9254,8 +9234,8 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5396(para)
 msgid ""
-"<varname>description</varname>: A short description of the resource as a UTF-"
-"8 encoded string"
+"<varname>description</varname>: A short description of the resource as a "
+"UTF-8 encoded string"
 msgstr ""
 "<varname>description</varname>: una descripción corta del recurso en una "
 "cadena codificada en UTF-8"
@@ -9673,8 +9653,6 @@ msgstr ""
 msgid "Connecting Plugs and Sockets"
 msgstr "Conectar «plugs» y «sockets»"
 
-# Error tipográfico en el inglés: «eachother».
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:5630(para)
 msgid ""
 "After a <classname>Socket</classname> or <classname>Plug</classname> object "
@@ -9738,8 +9716,8 @@ msgid ""
 "from this file. In a real program, you may want to use a more sophisticated "
 "method of inter-process communication."
 msgstr ""
-"El siguiente es un ejemplo simple del uso de «sockets» y «plugs». El método de "
-"comunicación entre los procesos se mantiene simple deliberadamente: el "
+"El siguiente es un ejemplo simple del uso de «sockets» y «plugs». El método "
+"de comunicación entre los procesos se mantiene simple deliberadamente: el "
 "<classname>Plug</classname> escribe su ID en un archivo de texto llamado "
 "<filename>plug.id</filename> y el proceso con el «socket» lee el ID de este "
 "archivo. En un programa real, probablemente quiera usar un método más "
@@ -11696,8 +11674,8 @@ msgstr ""
 msgid ""
 "Unfortunately, the integration with the standard iostreams is not completely "
 "foolproof. <application>gtkmm</application> converts <classname>Glib::"
-"ustring</classname>s to a locale-specific encoding (which usually is not UTF-"
-"8) if you output them to an <classname>ostream</classname> with "
+"ustring</classname>s to a locale-specific encoding (which usually is not "
+"UTF-8) if you output them to an <classname>ostream</classname> with "
 "<function>operator&lt;&lt;</function>. Likewise, retrieving <classname>Glib::"
 "ustrings</classname> from <classname>istream</classname> with "
 "<function>operator&gt;&gt;</function> causes a conversion in the opposite "
@@ -11708,8 +11686,8 @@ msgid ""
 "characters and the current locale is not UTF-8 encoded, the result is a "
 "corrupted <classname>Glib::ustring</classname>. You can work around this "
 "with a manual conversion. For instance, to retrieve the <classname>std::"
-"string</classname> from a <classname>ostringstream</classname>: <placeholder-"
-"1/>"
+"string</classname> from a <classname>ostringstream</classname>: "
+"<placeholder-1/>"
 msgstr ""
 "Desafortunadamente, la integración con iostreams estándar no es "
 "completamente infalible. <application>gtkmm</application> convierte "
@@ -11755,14 +11733,12 @@ msgstr ""
 "idénticas al traducirlas. Dado que las cadenas en inglés se usan como claves "
 "de búsqueda, esto causa problemas."
 
-# Falta un paréntesis inicial en la cadena en inglés (o sobra).
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:6882(para)
 msgid ""
 "In these cases, you should add extra characters to the strings. For "
-"instance, use <literal>\"jumps[noun]\"</literal> and <literal>\"jumps[verb]"
-"\"</literal> instead of just <literal>\"jumps\"</literal> and strip them "
-"again outside the <function>gettext</function> call. If you add extra "
+"instance, use <literal>\"jumps[noun]\"</literal> and <literal>\"jumps"
+"[verb]\"</literal> instead of just <literal>\"jumps\"</literal> and strip "
+"them again outside the <function>gettext</function> call. If you add extra "
 "characters you should also add a comment for the translators before the "
 "<function>gettext</function> call. Such comments will be shown in the "
 "<filename>.po</filename> files. For instance:"
@@ -11874,8 +11850,8 @@ msgid ""
 msgstr ""
 "Debe evitar abreviaciones crípticas, lenguaje vulgar o técnico. Estos son "
 "generalmente difíciles de traducir e incluso les pueden resultar difíciles "
-"de entender a los hablantes nativos. Por ejemplo, es preferible «application» "
-"antes que «app»."
+"de entender a los hablantes nativos. Por ejemplo, es preferible "
+"«application» antes que «app»."
 
 #: C/gtkmm-tutorial-in.xml:6940(title)
 msgid "Using non-ASCII characters in strings"
@@ -11891,7 +11867,6 @@ msgstr ""
 "ASCII (es decir, cualquier carácter con un código superior a 127) en el "
 "código fuente. Por ejemplo, no puede usar el signo de derechos de autor (©)."
 
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:6948(para)
 msgid ""
 "To work around this, you could write a comment in the source code just "
@@ -11922,8 +11897,6 @@ msgstr ""
 "url=\"https://live.gnome.org/TranslationProject/\">Proyecto de traducción de "
 "<literal>GNOME</literal></ulink>."
 
-# Este enlace está roto. Sugiero abrir un bug.
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:6963(para)
 msgid ""
 "The way it works is that you upload your source code to a git repository "
@@ -12400,7 +12373,6 @@ msgstr ""
 "estilo y consejos para crear aplicaciones en <application>gtkmm</"
 "application>."
 
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:7177(para)
 msgid ""
 "Use GNU <application>autoconf</application> and <application>automake</"
@@ -12845,8 +12817,6 @@ msgstr ""
 "Something&gt;&amp;</type>, y el equivalente de <type>const Algo*</type> es "
 "<type>const Glib::RefPtr&lt;const Something&gt;&amp;</type>."
 
-# Dejo los tres puntos separados porque está dentro de etiquetas <literal>.
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:7430(para)
 msgid ""
 "The <literal>const ... &amp;</literal> around both is just for efficiency, "
@@ -13057,9 +13027,9 @@ msgstr ""
 "llama con dos argumentos. El primero es <parameter>some_object</parameter>, "
 "que es el objeto al que su nuevo «slot» apuntará. El segundo argumento es un "
 "puntero a uno de sus métodos. Esta versión particular de <function>sigc::"
-"mem_fun()</function> crea un «slot» que, cuando se «llame», llamará al método "
-"al que apunta del objeto especificado, en este caso, <methodname>some_object."
-"on_button_clicked()</methodname>."
+"mem_fun()</function> crea un «slot» que, cuando se «llame», llamará al "
+"método al que apunta del objeto especificado, en este caso, "
+"<methodname>some_object.on_button_clicked()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:7571(para)
 msgid ""
@@ -13979,7 +13949,6 @@ msgstr ""
 "conectaba a señales de <application>gtkmm</application>. Por ejemplo, "
 "<placeholder-1/>"
 
-# Nicolás.
 #: C/gtkmm-tutorial-in.xml:8045(para)
 msgid "This is a full working example that defines and uses custom signals."
 msgstr ""
@@ -14024,9 +13993,9 @@ msgid ""
 "And, unlike <application>Qt</application>, <application>gtkmm</application> "
 "achieves this without modifying the C++ language."
 msgstr ""
-"Los manejadores de señales de <application>gtkmm</application> son de «tipado "
-"fuerte», mientras que el código C de <application>GTK+</application> le "
-"permite conectar un retorno de llamada con el número y tipo incorrecto de "
+"Los manejadores de señales de <application>gtkmm</application> son de "
+"«tipado fuerte», mientras que el código C de <application>GTK+</application> "
+"le permite conectar un retorno de llamada con el número y tipo incorrecto de "
 "argumentos, llevando a una violación de acceso en tiempo de ejecución. Y, a "
 "diferencia de <application>Qt</application>, <application>gtkmm</"
 "application> logra esto sin modificar el lenguaje C++."
@@ -14171,6 +14140,12 @@ msgid ""
 "probably encounter build problems, though these will usually be corrected "
 "quickly if you report them."
 msgstr ""
+"Tenga en cuenta que para construir <application>gtkmm</application> desde "
+"git, a menudo también necesitará construir todas sus dependencias también "
+"desde git. <application>jhbuild</application> hace esto más fácil de lo que "
+"normalmente sería, pero tomará un buen rato hasta que construya e instale "
+"todo. Probablemente encontrará problemas en la construcción, aunque "
+"normalmente se corregirán rápidamente si los reporta."
 
 #: C/gtkmm-tutorial-in.xml:8158(title)
 msgid "Setting up jhbuild"
@@ -14187,6 +14162,13 @@ msgid ""
 "application> directory: <screen>$ cp examples/sample.jhbuildrc ~/.jhbuildrc</"
 "screen>"
 msgstr ""
+"Para configurar <application>jhbuild</application>, siga las instrucciones "
+"básicas de instalación del <ulink url=\"http://developer.gnome.org/jhbuild/"
+"unstable/\">manual de jhbuild</ulink>. Después de que lo haya instalado, "
+"deberá copiar la configuración de ejemplo de <application>jhbuild</"
+"application> a su carpeta personal ejecutando el siguiente comando desde la "
+"carpeta de <application>jhbuild</application>: <screen>$ cp examples/sample."
+"jhbuildrc ~/.jhbuildrc</screen>"
 
 #: C/gtkmm-tutorial-in.xml:8174(programlisting)
 #, no-wrap
@@ -14200,6 +14182,11 @@ msgid ""
 "your <filename>.jhbuildrc</filename> file and set your moduleset setting to "
 "the latest version e.g. like so: <placeholder-1/>"
 msgstr ""
+"El módulo de <application>gtkmm</application> se define en el conjunto de "
+"módulos <filename>gnome-suites-core-deps-3.x.modules</filename>, así que "
+"edite su archivo <filename>.jhbuildrc</filename> y establezca la "
+"configuración de su conjunto de módulos a la última versión, por ejemplo, "
+"así: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8181(programlisting)
 #, no-wrap
@@ -14213,17 +14200,28 @@ msgid ""
 "application> and all of its dependencies, set <varname>modules</varname> "
 "like so: <placeholder-1/>"
 msgstr ""
+"Después de haber configurado el conjunto de módulos correcto, necesitará "
+"decirle a <application>jhbuild</application> qué módulo o módulos construir. "
+"Para construir a <application>gtkmm</application> y a todas sus "
+"dependencias, asigne <varname>modules</varname> así: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8183(para)
 msgid ""
 "You can build several modules by setting the <varname>modules</varname> "
 "variable to a meta-package, e.g. <literal>meta-gnome-core</literal>, or "
 "listing more than one module name. The <varname>modules</varname> variable "
-"specifies which modules that will be built when you don't explicitly specify "
+"specifies which modules will be built when you don't explicitly specify "
 "anything on the command line. You can always build a different moduleset "
 "later by specifying it on the commandline (e.g. <command>jhbuild build "
 "gtkmm</command>)."
 msgstr ""
+"Puede construir varios módulos estableciendo la variable <varname>modules</"
+"varname> a un metapaquete, como por ejemplo <literal>meta-gnome-core</"
+"literal>, o listando más de un nombre de módulo. La variable "
+"<varname>modules</varname> especifica qué módulos se construirán cuando no "
+"especifique explícitamente nada en la línea de comandos. Puede construir un "
+"conjunto de módulos diferente más tarde especificándolo en la línea de "
+"comandos (por ejemplo, <command>jhbuild build gtkmm</command>)."
 
 #: C/gtkmm-tutorial-in.xml:8193(title)
 msgid "Setting a prefix"
@@ -14239,6 +14237,14 @@ msgid ""
 "If you've followed the jhbuild instructions then this prefix belongs to your "
 "user, so you don't need to run jhbuild as <literal>root</literal>."
 msgstr ""
+"De manera predeterminada, <application>jhbuild</application> está "
+"configurado para instalar todo el software construido con "
+"<application>jhbuild</application> bajo el prefijo <filename>/opt/gnome</"
+"filename>. Puede elegir un prefijo diferente, pero se recomienda que lo "
+"mantenga diferente de otro software que haya instalado (no lo establezca a "
+"<filename>/usr</filename>). Si ha seguido las instrucciones de jhbuild, "
+"entonces este prefijo le corresponde a su usuario, por lo que no necesitará "
+"ejecutar jhbuild como <literal>root</literal>."
 
 #: C/gtkmm-tutorial-in.xml:8206(para)
 msgid ""
@@ -14250,11 +14256,19 @@ msgid ""
 "you don't want it, use the <varname>use_local_modulesets</varname> variable "
 "in <filename>.jhbuildrc</filename>."
 msgstr ""
+"Cuando descarga <application>jhbuild</application> desde el repositorio git, "
+"obtiene varios archivos <filename>.module</filename>, especificando las "
+"dependencias entre módulos. De manera predeterminada, <application>jhbuild</"
+"application> no usa las versiones descargadas de estos archivos, sino que "
+"lee las últimas en el repositorio git. Esto generalmente es lo que quiere. "
+"Si no es así, use la variable <varname>use_local_modulesets</varname> en "
+"<filename>.jhbuildrc</filename>."
 
 #: C/gtkmm-tutorial-in.xml:8217(title)
 msgid ""
 "Installing and Using the git version of <application>gtkmm</application>"
 msgstr ""
+"Instalar y utilizar la versión de git de <application>gtkmm</application>"
 
 #: C/gtkmm-tutorial-in.xml:8218(para)
 msgid ""
@@ -14266,6 +14280,14 @@ msgid ""
 "is set up correctly: <screen>$ jhbuild bootstrap\n"
 "$ jhbuild sanitycheck</screen>"
 msgstr ""
+"Una vez que ha configurado <application>jhbuild</application> como se "
+"describió anteriormente, construir <application>gtkmm</application> debería "
+"ser relativamente directo. La primera vez que ejecute <application>jhbuild</"
+"application>, debe ejecutar la siguiente secuencia de comandos para "
+"asegurase que <application>jhbuild</application> tiene las herramientas "
+"adecuadas y verificar que está configurado correctamente: <screen>$ jhbuild "
+"bootstrap\n"
+"$ jhbuild sanitycheck</screen>"
 
 #: C/gtkmm-tutorial-in.xml:8229(title)
 msgid ""
@@ -14283,6 +14305,11 @@ msgid ""
 "<application>gtkmm</application> in the <varname>modules</varname> variable, "
 "with the command <command>jhbuild build gtkmm</command>)."
 msgstr ""
+"Si todo funcionó correctamente, podrá construir <application>gtkmm</"
+"application> y a todas sus dependencias desde git ejecutando "
+"<command>jhbuild build</command> (o, si no especificó <application>gtkmm</"
+"application> en la variable <varname>modules</varname>, con el comando "
+"<command>jhbuild build gtkmm</command>)."
 
 #: C/gtkmm-tutorial-in.xml:8237(para)
 msgid ""
@@ -14295,10 +14322,17 @@ msgid ""
 "of its dependencies) with the command <command>jhbuild buildone gtkmm</"
 "command>."
 msgstr ""
+"Este comando construirá e instalará una serie de módulos y probablemente "
+"tarde mucho tiempo la primera vez. Después de la primera vez, sin embargo, "
+"debería ir mucho más rápido dado que sólo tendrá que reconstruir los "
+"archivos que han cambiado desde la última vez. Alternativamente, después de "
+"haber construido e instalado <application>gtkmm</application> por primera "
+"vez, lo podrá reconstruir por sí mismo (sin reconstruir todas sus "
+"dependencias) con el comando <command>jhbuild buildone gtkmm</command>."
 
 #: C/gtkmm-tutorial-in.xml:8248(title)
 msgid "Using the git version of <application>gtkmm</application>"
-msgstr ""
+msgstr "Usar la versión de git de <application>gtkmm</application>"
 
 #: C/gtkmm-tutorial-in.xml:8249(para)
 msgid ""
@@ -14314,6 +14348,18 @@ msgid ""
 "against the newly installed libraries. To return to your previous "
 "environment, simply exit the <application>jhbuild</application> shell."
 msgstr ""
+"Después de que haya instalado la versión de git de <application>gtkmm</"
+"application>, ya estará listo para comenzar a usarlo y a experimentar con "
+"él. Para usar la versión nueva de <application>gtkmm</application> que ha "
+"acabado de instalar, necesitará establecer algunas variables de entorno para "
+"que su script <filename>configure</filename> sepa dónde encontrar las "
+"bibliotecas nuevas. Afortunadamente, <application>jhbuild</application> "
+"ofrece una solución fácil a este problema. Ejecutar el comando "
+"<command>jhbuild shell</command> arrancará un intérprete nuevo con todas las "
+"variables de entorno correctas establecidas. Ahora, si reconfigura y "
+"construye su proyecto como hace siempre, debería enlazarse con las "
+"bibliotecas recientemente instaladas. Para volver a su entorno previo, "
+"simplemente salga del intérprete de <application>jhbuild</application>."
 
 #: C/gtkmm-tutorial-in.xml:8263(para)
 msgid ""
@@ -14327,6 +14373,15 @@ msgid ""
 "variables set, but will return to your previous environment after the "
 "program exits."
 msgstr ""
+"Una vez que haya construido su software, también necesitará ejecutar su "
+"programa dentro del entorno de jhbuild. Para hacerlo, puede usar de nuevo el "
+"comando <command>jhbuild shell</command> para arrancar un intérprete nuevo "
+"con el entorno de <application>jhbuild</application> configurado. "
+"Alternativamente, puede ejecutar un solo comando en el entorno de "
+"<application>jhbuild</application> usando el siguiente comando: "
+"<command>jhbuild run nombre-de-comando</command>. En este caso, el comando "
+"se ejecutará con las variables de entorno correctas establecidas, pero "
+"retornará a su entorno previo después de que el programa salga."
 
 #: C/gtkmm-tutorial-in.xml:8280(title)
 msgid "Wrapping C Libraries with gmmproc"
@@ -14339,12 +14394,20 @@ msgid ""
 "<classname>GObject</classname>-based libraries. So it's quite easy to create "
 "additional gtkmm-style wrappers of other glib/GObject-based libraries."
 msgstr ""
+"<application>gtkmm</application> usa la herramienta <command>gmmproc</"
+"command> para generar la mayor parte de su código fuente, usando archivos ."
+"defs que definen las API de las bibliotecas basadas en <classname>GObject</"
+"classname>. Es por esto que es bastante fácil crear envoltorios con el "
+"estilo de gtkmm adicionales de otras bibliotecas basadas en glib/GObject."
 
 #: C/gtkmm-tutorial-in.xml:8286(para)
+#, fuzzy
 msgid ""
-"This involves a variety of tools, some of them crufty, but it does at least "
+"This involves a variety of tools, some of them crufty, but at least they "
 "work, and has been used successfully by several projects."
 msgstr ""
+"Esto involucra una variedad de herramientas, algunas de ellas obsoletas, "
+"pero que al menos funcionan, y que varios proyectos han usado exitosamente."
 
 #: C/gtkmm-tutorial-in.xml:8291(title)
 msgid "The build structure"
@@ -14359,6 +14422,13 @@ msgid ""
 "infrastructure provided by the mm-common module. To get started, it helps a "
 "lot to pick an existing binding module as an example to look at."
 msgstr ""
+"La generación del código fuente para una API envoltorio del estilo de gtkmm "
+"requiere el uso de herramientas como <command>gmmproc</command> y "
+"<filename>generate_wrap_init.pl</filename>. En teoría, podría escribir sus "
+"propios archivos de construcción para usarlas apropiadamente, pero una "
+"opción mucho mejor es hacer uso de la infraestructura de construcción "
+"proporcionada por el módulo mm-common. Para empezar, ayuda mucho escoger un "
+"módulo de enlace existente como un ejemplo para consultar."
 
 #: C/gtkmm-tutorial-in.xml:8299(para)
 msgid ""
@@ -14367,6 +14437,10 @@ msgid ""
 "types named, for instance, <classname>ExampleThing</classname> and "
 "<classname>ExampleStuff</classname>."
 msgstr ""
+"Por ejemplo, imagine que se quiere envolver una biblioteca de C llamada "
+"libexample. Proporciona una API basada en <classname>GObject</classname> con "
+"tipos nombrados, por ejemplo, <classname>ExampleThing</classname> y "
+"<classname>ExampleStuff</classname>."
 
 #: C/gtkmm-tutorial-in.xml:8305(title)
 msgid "Copying the skeleton project"
@@ -14390,10 +14464,14 @@ msgid ""
 "skeletonmm\">skeleton source tree</ulink> from the mm-common module. "
 "<placeholder-1/>"
 msgstr ""
+"Típicamente la biblioteca envoltorio se llamaría libsomethingmm. Se puede "
+"empezar copiando el <ulink url=\"http://git.gnome.org/cgit/mm-common/tree/"
+"skeletonmm\">esqueleto del árbol de código fuente</ulink> desde el módulo mm-"
+"common. <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8320(para)
 msgid "<filename>libsomethingmm</filename>: The top-level directory."
-msgstr ""
+msgstr "<filename>libsomethingmm</filename>: la carpeta de nivel superior."
 
 #: C/gtkmm-tutorial-in.xml:8322(para)
 msgid ""
@@ -14936,8 +15014,8 @@ msgstr ""
 msgid ""
 "A .hg file will typically include some headers and then declare a class, "
 "using some macros to add API or behaviour to this class. For instance, "
-"gtkmm's <filename>button.hg</filename> looks roughly like this: <placeholder-"
-"1/>"
+"gtkmm's <filename>button.hg</filename> looks roughly like this: "
+"<placeholder-1/>"
 msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:8631(function)
