@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-08-11 08:18+0000\n"
-"PO-Revision-Date: 2012-08-13 16:25+0200\n"
+"POT-Creation-Date: 2012-08-13 14:26+0000\n"
+"PO-Revision-Date: 2012-08-16 10:58+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -14749,6 +14749,8 @@ msgid ""
 "Next we must adapt the various <filename>Makefile.am</filename> files: "
 "<placeholder-1/>"
 msgstr ""
+"A continuación se deben adaptar los archivos <filename>Makefile.am</"
+"filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8447(title)
 msgid "Creating .hg and .ccg files"
@@ -14761,6 +14763,11 @@ msgid ""
 "example source files already exists: <filename>skeleton.ccg</filename> and "
 "<filename>skeleton.hg</filename>. Create copies of these files as necessary."
 msgstr ""
+"Ahora se deben crear los primeros archivos <filename>.hg</filename> y "
+"<filename>.ccg</filename>, para envolver uno de los objetos en la biblioteca "
+"de C. Ya existen un par de archivos de fuentes de ejemplo: "
+"<filename>skeleton.ccg</filename> y <filename>skeleton.hg</filename>. Cree "
+"copias de estos archivos si es necesario."
 
 #: C/gtkmm-tutorial-in.xml:8452(para)
 msgid ""
@@ -14768,6 +14775,9 @@ msgid ""
 "filename> files in the <filename>skeleton/src/filelist.am</filename> file, "
 "typically in the <varname>files_hg</varname> variable."
 msgstr ""
+"Se deben mencionar todos los archivos <filename>.hg</filename> y <filename>."
+"ccg</filename> en el archivo <filename>skeleton/src/filelist.am</filename>, "
+"típicamente en la variable <varname>files_hg</varname>."
 
 #: C/gtkmm-tutorial-in.xml:8456(para)
 msgid ""
@@ -14777,12 +14787,19 @@ msgid ""
 "filename>, typically in the <varname>files_extra_h</varname> and "
 "<varname>files_extra_cc</varname> variables."
 msgstr ""
+"Cualquier archivo de fuentes <filename>.h</filename> y <filename>.cc</"
+"filename> adicional no generado se puede poner en <filename>skeleton/"
+"skeletonmm/</filename> y listar en <filename>skeleton/skeletonmm/filelist."
+"am</filename>, típicamente en las variables <varname>files_extra_h</varname> "
+"y <varname>files_extra_cc</varname>."
 
 #: C/gtkmm-tutorial-in.xml:8462(para)
 msgid ""
 "In the <link linkend=\"sec-wrapping-hg-files\">.hg and .ccg files</link> "
 "section you can learn about the syntax used in these files."
 msgstr ""
+"En la sección <link linkend=\"sec-wrapping-hg-files\">archivos .hg y .ccg</"
+"link> puede aprender acerca de la sintaxis usada en estos archivos."
 
 #: C/gtkmm-tutorial-in.xml:8469(title)
 msgid "Generating the .defs files."
@@ -14791,6 +14808,7 @@ msgstr "Generar los archivos .defs."
 #: C/gtkmm-tutorial-in.xml:8473(para)
 msgid "objects (GObjects, widgets, interfaces, boxed-types and plain structs)"
 msgstr ""
+"objetos (GObjects, widgets, interfaces, tipos en caja y estructuras planas)"
 
 #: C/gtkmm-tutorial-in.xml:8474(para)
 msgid "functions"
@@ -14802,7 +14820,7 @@ msgstr "enums"
 
 #: C/gtkmm-tutorial-in.xml:8476(para)
 msgid "signals"
-msgstr ""
+msgstr "señales"
 
 #: C/gtkmm-tutorial-in.xml:8477(para)
 msgid "properties"
@@ -14810,13 +14828,16 @@ msgstr "propiedades"
 
 #: C/gtkmm-tutorial-in.xml:8478(para)
 msgid "vfuncs"
-msgstr ""
+msgstr "«vfuncs»"
 
 #: C/gtkmm-tutorial-in.xml:8470(para)
 msgid ""
 "The <filename>.defs</filename> files are text files, in a lisp format, that "
 "describe the API of a C library, including its <placeholder-1/>"
 msgstr ""
+"Los archivos <filename>.defs</filename> son archivos de texto, en formato "
+"«lisp», que describen la API de la biblioteca de C, incluyendo sus "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8487(filename)
 msgid "gtk.defs"
@@ -14824,7 +14845,7 @@ msgstr "gtk.defs"
 
 #: C/gtkmm-tutorial-in.xml:8488(para)
 msgid "Includes the other files."
-msgstr ""
+msgstr "Incluye a los otros archivos."
 
 #: C/gtkmm-tutorial-in.xml:8491(filename)
 msgid "gtk_methods.defs"
@@ -14840,7 +14861,7 @@ msgstr "gtk_enums.defs"
 
 #: C/gtkmm-tutorial-in.xml:8496(para)
 msgid "Enumerations."
-msgstr ""
+msgstr "Enumeraciones."
 
 #: C/gtkmm-tutorial-in.xml:8499(filename)
 msgid "gtk_signals.defs"
@@ -14857,6 +14878,8 @@ msgstr "gtk_vfuncs.defs"
 #: C/gtkmm-tutorial-in.xml:8504(para)
 msgid "vfuncs (function pointer member fields in structs), written by hand."
 msgstr ""
+"«vfuncs» (campos miembro de punteros de funciones en estructuras), escritas a "
+"mano."
 
 #: C/gtkmm-tutorial-in.xml:8481(para)
 msgid ""
@@ -14866,10 +14889,15 @@ msgid ""
 "<application>gtkmm</application> sources, you will find these files: "
 "<placeholder-1/>"
 msgstr ""
+"Por el momento, existen herramientas separadas para generar partes "
+"diferentes de estos <filename>.defs</filename>, por lo que se parten en "
+"archivos separados. Por ejemplo, en la carpeta <filename>gtk/src</filename> "
+"de las fuentes de <application>gtkmm</application>, encontrará estos "
+"archivos: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8510(title)
 msgid "Generating the methods .defs"
-msgstr ""
+msgstr "Generar los .defs de métodos"
 
 #: C/gtkmm-tutorial-in.xml:8514(programlisting)
 #, no-wrap
@@ -14887,10 +14915,14 @@ msgid ""
 "in glibmm's <filename>tools/defs_gen</filename> directory. For instance, "
 "<placeholder-1/>"
 msgstr ""
+"Este archivo <filename>.defs</filename> describe a los objetos y a sus "
+"funciones. Se genera mediante el script <command>h2def.py</command> que "
+"puede encontrar en la carpeta <filename>tools/defs_gen</filename> de glibmm. "
+"Por ejemplo, <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8521(title)
 msgid "Generating the enums .defs"
-msgstr ""
+msgstr "Generar los .defs de enumeraciones"
 
 #: C/gtkmm-tutorial-in.xml:8525(programlisting)
 #, no-wrap
@@ -14908,10 +14940,14 @@ msgid ""
 "can find in glibmm's <filename>tools</filename> directory. For instance, "
 "<placeholder-1/>"
 msgstr ""
+"Este archivo <filename>.defs</filename> describe a los tipos de "
+"enumeraciones y a sus valores posibles. Se genera mediante el script "
+"<filename>enum.pl</filename> que puede encontrar en la carpeta "
+"<filename>tools</filename> de glibmm. Por ejemplo, <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8532(title)
 msgid "Generating the signals and properties .defs"
-msgstr ""
+msgstr "Generar los .defs de señales y propiedades"
 
 #: C/gtkmm-tutorial-in.xml:8537(programlisting)
 #, no-wrap
@@ -14931,6 +14967,10 @@ msgid ""
 "every wrapping project, such as <filename>gtkmm/tools/extra_defs_gen/</"
 "filename>. For instance <placeholder-1/>"
 msgstr ""
+"Este archivo <filename>.defs</filename> describe las señales y propiedades. "
+"Se genera mediante la utilidad especial <filename>extra_defs</filename> que "
+"está en todos los proyectos de envoltorios, como <filename>gtkmm/tools/"
+"extra_defs_gen/</filename>. Por ejemplo, <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8542(para)
 msgid ""
@@ -14943,6 +14983,15 @@ msgid ""
 "<varname>skeleton</varname> placeholder. The <filename>codegen/Makefile.am</"
 "filename> file should also mention the new source filename."
 msgstr ""
+"Debe editar el código fuente de su herramienta "
+"<filename>generate_extra_defs</filename> para generar los <filename>.defs</"
+"filename> para los tipos GObject de C que desea envolver. En el árbol de "
+"fuentes esqueleto, el archivo de fuentes se llama <filename>codegen/"
+"extradefs/generate_extra_defs_skeleton.cc</filename>. Si no lo ha hecho "
+"todavía, debe renombrar el archivo, con el nombre de base de su enlace nuevo "
+"sustituyendo a la marca de posición <varname>skeleton</varname>. El archivo "
+"<filename>codegen/Makefile.am</filename> también debe mencionar el nombre "
+"del archivo de fuentes nuevo."
 
 #: C/gtkmm-tutorial-in.xml:8551(programlisting)
 #, no-wrap
@@ -14977,10 +15026,13 @@ msgid ""
 "For instance, your <function>main()</function> function might look like "
 "this: <placeholder-1/>"
 msgstr ""
+"Después edite el archivo <filename>.cc</filename> para especificar los tipos "
+"correctos. Por ejemplo, su función <function>main()</function> podría verse "
+"así: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8567(title)
 msgid "Writing the vfuncs .defs"
-msgstr ""
+msgstr "Escribir los .defs de las «vfuncs»"
 
 #: C/gtkmm-tutorial-in.xml:8568(para)
 msgid ""
@@ -14989,6 +15041,10 @@ msgid ""
 "at <application>gtkmm</application>'s <filename>gtk/src/gtk_vfuncs.defs</"
 "filename> file."
 msgstr ""
+"Este archivo <filename>.defs</filename> describe a las funciones virtuales "
+"(«vfuncs»). Debe escribirse a mano. No hay un esqueleto del que empezar. "
+"Puede echar un vistazo al archivo <filename>gtk/src/gtk_vfuncs.defs</"
+"filename> de <application>gtkmm</application>."
 
 #: C/gtkmm-tutorial-in.xml:8578(title)
 msgid "The .hg and .ccg files"
@@ -15003,6 +15059,13 @@ msgid ""
 "the same position in the header. Any additional C++ source code will be "
 "copied verbatim into the corresponding .h or .cc file."
 msgstr ""
+"Los archivos de fuentes .hg y .ccg se parecen mucho a los archivos de "
+"fuentes .h y .cc de C++, pero contienen macros adicionales, como "
+"<function>_CLASS_GOBJECT()</function> y <function>_WRAP_METHOD()</function>, "
+"desde las que <command>gmmproc</command> genera código fuente de C++ "
+"apropiado, generalmente en la misma posición en la cabecera. Cualquier "
+"código fuente adicional de C++ se copiará tal cual en el archivo .h o .cc "
+"correspondiente."
 
 #: C/gtkmm-tutorial-in.xml:8592(programlisting)
 #, no-wrap
@@ -15084,6 +15147,10 @@ msgid ""
 "gtkmm's <filename>button.hg</filename> looks roughly like this: <placeholder-"
 "1/>"
 msgstr ""
+"Un archivo .hg típicamente incluirá algunas cabeceras y luego declarará una "
+"clase, usando algunas macros para añadir una API o comportamiento a esta "
+"clase. Por ejemplo, el <filename>button.hg</filename> de gtkmm se ve más o "
+"menos así: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8631(function)
 msgid "_DEFS()"
