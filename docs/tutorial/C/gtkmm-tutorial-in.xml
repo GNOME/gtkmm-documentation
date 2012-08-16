@@ -322,35 +322,39 @@ suffices.
 </para>
 
 <para>
-The next line:
+The next statement:
 
 <programlisting>Glib::RefPtr&lt;Gtk::Application&gt; app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");</programlisting>
 
 creates a <classname>Gtk::Application</classname> object, stored in a <classname>RefPtr</classname> smartpointer. This is needed in all &gtkmm;
-applications. The create() method for this object initializes &gtkmm;, and checks the
+applications. The <methodname>create()</methodname> method for this object initializes &gtkmm;, and checks the
 arguments passed to your application on the command line, looking for
-standard options such as <literal>-display</literal>. It takes these from the argument list, leaving anything it does not
+standard options such as <literal>--display</literal>. It takes these from the argument list, leaving anything it does not
 recognize for your application to parse or ignore. This ensures
 that all &gtkmm; applications accept the same set of standard arguments.
 </para>
 
 <para>
-The next two lines of code create and display a window:
+The next two lines of code create a window and set its default (initial) size:
 </para>
-<programlisting>Gtk::Window window;</programlisting>
+<programlisting>Gtk::Window window;
+window.set_default_size(200, 200);</programlisting>
 <para>
-The last line shows the window and enters the &gtkmm; main processing loop, which will finish when the window is closed. Your main() function will then return with an appropriate success or error code.
+The last line shows the window and enters the &gtkmm; main processing loop, which will finish when the window is closed.
+Your <function>main()</function> function will then return with an appropriate success or error code.
 </para>
 
 <programlisting>return app->run(window);</programlisting>
 
 <para>
-After putting the source code in <literal>simple.cc</literal> you can compile the above program with gcc using:
+After putting the source code in <literal>simple.cc</literal> you can compile
+the above program with <application>gcc</application> using:
 <programlisting>g++ simple.cc -o simple `pkg-config gtkmm-3.0 --cflags --libs`</programlisting>
-Note that you must surround
-the <literal>pkg-config</literal> invocation with backquotes.
+Note that you must surround the <literal>pkg-config</literal> invocation with backquotes.
 Backquotes cause the shell to execute the command inside them, and to use
 the command's output as part of the command line.
+Note also that <literal>simple.cc</literal> must come before the <literal>pkg-config</literal>
+invocation on the command line.
 </para>
 </sect1>
 

@@ -6,7 +6,8 @@ int main(int argc, char *argv[])
     Gtk::Application::create(argc, argv,
       "org.gtkmm.examples.base");
 
-  Gtk::ApplicationWindow window;
+  Gtk::Window window;
+  window.set_default_size(200, 200);
 
   return app->run(window);
 }

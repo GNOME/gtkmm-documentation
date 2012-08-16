@@ -1,3 +1,12 @@
+2012-08-16  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Basics, Simple Example: Synchronize code and description.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Minor changes in the Basics chapter,
+	Simple Example section to make it a correct description of the code.
+	* examples/book/base/base.cc: Use Gtk::Window instead of ApplicationWindow.
+	Set the size as the description says. Bug #681323.
+
 2012-07-27  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	I18n and L10n chapter: Fix broken links.
