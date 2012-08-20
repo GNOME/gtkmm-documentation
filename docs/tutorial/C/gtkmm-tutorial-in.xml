@@ -8712,7 +8712,7 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
   function in what is called an output parameter.  In this case, the C++ method
   returns <type>void</type> but an output parameter in which to store the value
   of the C function is included in the argument list of the C++ method.
-  gmmproc allows such functionality, but appropriate inizialization macros must
+  gmmproc allows such functionality, but appropriate initialization macros must
   be included to tell gmmproc how to initialize the C++ parameter from the
   return of the C function.
 </para>
