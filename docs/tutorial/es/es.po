@@ -14096,7 +14096,7 @@ msgstr ""
 "«express») en la plataforma Windows. Hay un <ulink url=\"ftp://ftp.gnome.org/"
 "pub/GNOME/binaries/win32/gtkmm\">instalador</ulink> disponible para gtkmm en "
 "Microsoft Windows. Consulte <ulink url=\"http://live.gnome.org/gtkmm/"
-"MSWindows/\">http://live.gnome.org/gtkmm/MSWindows</ulink></ulink> para ver "
+"MSWindows/\">http://live.gnome.org/gtkmm/MSWindows</ulink> para ver "
 "instrucciones sobre su uso."
 
 #: C/gtkmm-tutorial-in.xml:8121(title)
