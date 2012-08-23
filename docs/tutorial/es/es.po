@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-08-20 09:24+0000\n"
-"PO-Revision-Date: 2012-08-20 11:37+0200\n"
+"POT-Creation-Date: 2012-08-20 09:40+0000\n"
+"PO-Revision-Date: 2012-08-23 09:24+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -15440,8 +15440,8 @@ msgid ""
 "accessors, type registration, and the <function>Glib::wrap()</function> "
 "method, among other things."
 msgstr ""
-"Las macros de clases declaran a la clase en sí y su relación con el tipo de "
-"C subyacente. Genera algunos constructores internos, el miembro "
+"Las macros de clases declaran la clase en sí y su relación con el tipo de C "
+"subyacente. Generan algunos constructores internos, el miembro "
 "<varname>gobject_</varname>, «typedefs», los <function>gobj()</function> de "
 "acceso, registro de tipos, y el método <function>Glib::wrap()</function>, "
 "entre otras cosas."
@@ -15467,7 +15467,7 @@ msgid ""
 "<classname>Gtk::Object</classname>."
 msgstr ""
 "Esta macro declara un envoltorio de un tipo que deriva de "
-"<classname>GObjecti</classname>, pero cuyo envoltorio no deriva de "
+"<classname>GObject</classname>, pero cuyo envoltorio no deriva de "
 "<classname>Gtk::Object</classname>."
 
 #: C/gtkmm-tutorial-in.xml:8756(function)
@@ -15500,6 +15500,8 @@ msgid ""
 "This macro declares a wrapper for a type whose wrapper is derived from "
 "<classname>Gtk::Object</classname>, such as a widget or dialog."
 msgstr ""
+"Esta macro declara un envoltorio para un tipo cuyo envoltorio deriva de "
+"<classname>Gtk::Object</classname>, como un widget o un diálogo."
 
 #: C/gtkmm-tutorial-in.xml:8768(function)
 msgid ""
@@ -15521,7 +15523,7 @@ msgstr ""
 #: C/gtkmm-tutorial-in.xml:8769(para) C/gtkmm-tutorial-in.xml:9170(para)
 #: C/gtkmm-tutorial-in.xml:9231(para) C/gtkmm-tutorial-in.xml:9309(para)
 msgid "For instance, from <filename>button.hg</filename>: <placeholder-1/>"
-msgstr ""
+msgstr "Por ejemplo, de <filename>button.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8774(para)
 msgid ""
@@ -15529,6 +15531,9 @@ msgid ""
 "Object. For instance, you will use it when wrapping a GTK+ Widget, because "
 "Gtk::Widget derives from Gtk::Object."
 msgstr ""
+"Típicamente usará esta macro cuando la clase ya derive de Gtk::Object. Por "
+"ejemplo, la usará cuando envuelva un widget de GTK+, porque Gtk::Widget "
+"deriva de Gtk::Object."
 
 #: C/gtkmm-tutorial-in.xml:8775(para)
 msgid ""
@@ -15539,6 +15544,12 @@ msgid ""
 "you are sure that true reference-counting is not needed. We consider it "
 "useful for widgets."
 msgstr ""
+"También podrá derivar clases que no sean widgets de Gtk::Object para que "
+"puedan usarse sin <classname>Glib::RefPtr</classname>. Por ejemplo, podrían "
+"instanciarse con <function>Gtk::manage()</function> o en la pila como una "
+"variable miembro. Esto es cómodo, pero sólo debe usarlo cuando esté seguro "
+"de que no se necesita conteo de referencias real. Se considera de utilidad "
+"para los widgets."
 
 #: C/gtkmm-tutorial-in.xml:8779(title)
 msgid "_CLASS_BOXEDTYPE"
@@ -15549,6 +15560,9 @@ msgid ""
 "This macro declares a wrapper for a non-<classname>GObject</classname> "
 "struct, registered with <function>g_boxed_type_register_static()</function>."
 msgstr ""
+"Esta macro declara un envoltorio para una estructura que no es "
+"<classname>GObject</classname>, registrada con "
+"<function>g_boxed_type_register_static()</function>."
 
 #: C/gtkmm-tutorial-in.xml:8783(function)
 msgid ""
@@ -15569,7 +15583,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:8784(para)
 msgid "For instance, for <classname>Gdk::Color</classname>: <placeholder-1/>"
-msgstr ""
+msgstr "Por ejemplo, para <classname>Gdk::Color</classname>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8792(title)
 msgid "_CLASS_BOXEDTYPE_STATIC"
@@ -15582,6 +15596,10 @@ msgid ""
 "<function>_CLASS_BOXEDTYPE</function>, but the C struct is not allocated "
 "dynamically."
 msgstr ""
+"Esta macro declara un envoltorio para una estructura asignable simple como "
+"<classname>GdkRectangle</classname>. Es similar a "
+"<function>_CLASS_BOXEDTYPE</function>, pero la estructura de C no se asigna "
+"dinámicamente."
 
 #: C/gtkmm-tutorial-in.xml:8797(function)
 msgid "_CLASS_BOXEDTYPE_STATIC( C++ class, C class )"
@@ -15600,6 +15618,7 @@ msgstr ""
 msgid ""
 "For instance, for <classname>Gdk::Rectangle</classname>: <placeholder-1/>"
 msgstr ""
+"Por ejemplo, para <classname>Gdk::Rectangle</classname>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8806(title)
 msgid "_CLASS_OPAQUE_COPYABLE"
@@ -15611,6 +15630,10 @@ msgid ""
 "functions. The new, copy and free functions will be used to instantiate the "
 "default constructor, copy constructor and destructor."
 msgstr ""
+"Esta macro declara un envoltorio para una estructura opaca que tiene "
+"funciones «copy» y «free». Las funciones «new», «copy» y «free» se usarán "
+"para instanciar el constructor predeterminado, copiar el constructor y el "
+"destructor."
 
 #: C/gtkmm-tutorial-in.xml:8810(function)
 msgid ""
@@ -15631,7 +15654,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:8811(para)
 msgid "For instance, from <filename>stockitem.hg</filename>: <placeholder-1/>"
-msgstr "Por ejemplo, desde <filename>stockitem.hg</filename>: <placeholder-1/>"
+msgstr "Por ejemplo, de <filename>stockitem.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8819(title)
 msgid "_CLASS_OPAQUE_REFCOUNTED"
@@ -15643,6 +15666,9 @@ msgid ""
 "wrapper cannot be directly instantiated and can only be used with "
 "<classname>Glib::RefPtr</classname>."
 msgstr ""
+"Esta macro declara un envoltorio para una estructura opaca con conteo de "
+"referencias. El envoltorio de C++ no puede instanciarse directamente y sólo "
+"lo puede usar <classname>Glib::RefPtr</classname>."
 
 #: C/gtkmm-tutorial-in.xml:8823(function)
 msgid ""
@@ -15665,6 +15691,7 @@ msgstr ""
 msgid ""
 "For instance, for <classname>Pango::Coverage</classname>: <placeholder-1/>"
 msgstr ""
+"Por ejemplo, para <classname>Pango::Coverage</classname>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8832(title)
 msgid "_CLASS_GENERIC"
@@ -15675,6 +15702,8 @@ msgid ""
 "This macro can be used to wrap structs which don't fit into any specialized "
 "category."
 msgstr ""
+"Esta macro puede usarse para envolver estructuras que no se ajustan a "
+"ninguna categoría especializada."
 
 #: C/gtkmm-tutorial-in.xml:8835(function)
 msgid "_CLASS_GENERIC( C++ class, C class )"
@@ -15693,6 +15722,7 @@ msgstr ""
 msgid ""
 "For instance, for <classname>Pango::AttrIter</classname>: <placeholder-1/>"
 msgstr ""
+"Por ejemplo, para <classname>Pango::AttrIter</classname>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8844(title)
 msgid "_CLASS_INTERFACE"
@@ -15703,6 +15733,8 @@ msgid ""
 "This macro declares a wrapper for a type that is derived from "
 "<classname>GTypeInterface</classname>."
 msgstr ""
+"Esta macro declara un envoltorio para un tipo que deriva de "
+"<classname>GTypeInterface</classname>."
 
 #: C/gtkmm-tutorial-in.xml:8848(function)
 msgid ""
@@ -15724,7 +15756,7 @@ msgstr ""
 #: C/gtkmm-tutorial-in.xml:8849(para)
 msgid ""
 "For instance, from <filename>celleditable.hg</filename>: <placeholder-1/>"
-msgstr ""
+msgstr "Por ejemplo, de <filename>celleditable.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8858(programlisting)
 #, no-wrap
@@ -15742,10 +15774,14 @@ msgid ""
 "another GInterface as a prerequisitite. For instance, from "
 "<filename>loadableicon.hg</filename>: <placeholder-1/>"
 msgstr ""
+"Hay dos parámetros adicionales opcionales, para el caso de que la interfaz "
+"derive de otra interfaz, que debe ser cuando la «GInterface» tenga otra "
+"«GInterface» como requisito previo. Por ejemplo, de <filename>loadableicon."
+"hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8867(title)
 msgid "Constructor macros"
-msgstr ""
+msgstr "Macros de constructores"
 
 #: C/gtkmm-tutorial-in.xml:8868(para)
 msgid ""
@@ -15759,6 +15795,16 @@ msgid ""
 "GTypes, and the <function>*_new()</function> C functions are meant only as "
 "convenience functions for C programmers."
 msgstr ""
+"Las macros <function>_CTOR_DEFAULT()</function> y <function>_WRAP_CTOR()</"
+"function> añaden constructores, envolviendo las funciones de C "
+"<function>*_new()</function> especificadas. Estas macros asumen que el "
+"objeto de C tiene propiedades con los mismos nombres que los parámetros de "
+"función, como es usual, para que pueda proporcionar los parámetros "
+"directamente a una llamada de <function>g_object_new()</function>. Estos "
+"constructores nunca llaman realmente a funciones de C <function>*_new()</"
+"function>, porque gtkmm debe en realidad instanciar «GTypes» derivados, y "
+"las funciones <function>*_new()</function> de C sólo están pensadas como "
+"funciones cómodas para programadores de C."
 
 #: C/gtkmm-tutorial-in.xml:8883(programlisting)
 #, no-wrap
@@ -15793,10 +15839,15 @@ msgid ""
 "This prevents the class from being instantiated without using a "
 "<classname>RefPtr</classname>. For instance: <placeholder-1/>"
 msgstr ""
+"Cuando use <function>_CLASS_GOBJECT()</function>, los constructores deben "
+"declararse protegidos (en lugar de públicos) y cada constructor debe tener "
+"un <function>_WRAP_CREATE()</function> correspondiente en la sección "
+"pública. Esto evita que la clase se instancie sin usar un <classname>RefPtr</"
+"classname>. Por ejemplo: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8898(para)
 msgid "This macro creates a default constructor with no arguments."
-msgstr ""
+msgstr "Esta macro crea un constructor predeterminado sin argumentos."
 
 #: C/gtkmm-tutorial-in.xml:8903(title)
 msgid "_WRAP_CTOR"
