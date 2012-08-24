@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-08-20 09:40+0000\n"
-"PO-Revision-Date: 2012-08-23 09:24+0200\n"
+"POT-Creation-Date: 2012-08-23 07:26+0000\n"
+"PO-Revision-Date: 2012-08-24 17:57+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -763,18 +763,6 @@ msgid "Glib::RefPtr&lt;Gtk::Application&gt; app = Gtk::Application::create(argc,
 msgstr "Glib::RefPtr&lt;Gtk::Application&gt; app = Gtk::Application::create(argc, argv, \"org.gtkmm.examples.base\");"
 
 #: C/gtkmm-tutorial-in.xml:324(para)
-#, fuzzy
-#| msgid ""
-#| "The next line: <placeholder-1/> creates a <classname>Gtk::Application</"
-#| "classname> object, stored in a <classname>RefPtr</classname> "
-#| "smartpointer. This is needed in all <application>gtkmm</application> "
-#| "applications. The create() method for this object initializes "
-#| "<application>gtkmm</application>, and checks the arguments passed to your "
-#| "application on the command line, looking for standard options such as "
-#| "<literal>-display</literal>. It takes these from the argument list, "
-#| "leaving anything it does not recognize for your application to parse or "
-#| "ignore. This ensures that all <application>gtkmm</application> "
-#| "applications accept the same set of standard arguments."
 msgid ""
 "The next statement: <placeholder-1/> creates a <classname>Gtk::Application</"
 "classname> object, stored in a <classname>RefPtr</classname> smartpointer. "
@@ -793,18 +781,18 @@ msgstr ""
 "<application>gtkmm</application>. El método «create()» de este objeto "
 "inicializa <application>gtkmm</application> y verifica los argumentos "
 "pasados a su aplicación en la línea de comandos, buscando opciones estándar "
-"tales como <literal>-display</literal>. Toma estos argumentos de la lista, "
+"tales como <literal>--display</literal>. Toma estos argumentos de la lista, "
 "dejándole cualquier cosa que no reconozca para que su aplicación la procese "
 "o la ignore. Esto asegura que todas las aplicaciones <application>gtkmm</"
 "application> acepten el mismo conjunto de argumentos estándar."
 
 #: C/gtkmm-tutorial-in.xml:337(para)
-#, fuzzy
-#| msgid "The next two lines of code create and display a window:"
 msgid ""
 "The next two lines of code create a window and set its default (initial) "
 "size:"
-msgstr "Las dos siguientes líneas de código crean y muestran una ventana:"
+msgstr ""
+"Las dos siguientes líneas de código crean una ventana y establecen su tamaño "
+"(inicial) predeterminado:"
 
 #: C/gtkmm-tutorial-in.xml:340(programlisting)
 #, no-wrap
@@ -812,14 +800,10 @@ msgid ""
 "Gtk::Window window;\n"
 "window.set_default_size(200, 200);"
 msgstr ""
+"Gtk::Window window;\n"
+"window.set_default_size(200, 200);"
 
 #: C/gtkmm-tutorial-in.xml:342(para)
-#, fuzzy
-#| msgid ""
-#| "The last line shows the window and enters the <application>gtkmm</"
-#| "application> main processing loop, which will finish when the window is "
-#| "closed. Your main() function will then return with an appropriate success "
-#| "or error code."
 msgid ""
 "The last line shows the window and enters the <application>gtkmm</"
 "application> main processing loop, which will finish when the window is "
@@ -828,8 +812,8 @@ msgid ""
 msgstr ""
 "La última línea muestra la ventana y entra al bucle principal de "
 "<application>gtkmm</application>, que terminará cuando la ventana se cierre. "
-"Su función «main()» entonces retornará con un éxito apropiado o un código de "
-"error."
+"Su función <function>main()</function> entonces retornará con un éxito "
+"apropiado o un código de error."
 
 #: C/gtkmm-tutorial-in.xml:347(programlisting)
 #, no-wrap
@@ -842,13 +826,6 @@ msgid "g++ simple.cc -o simple `pkg-config gtkmm-3.0 --cflags --libs`"
 msgstr "g++ simple.cc -o simple `pkg-config gtkmm-3.0 --cflags --libs`"
 
 #: C/gtkmm-tutorial-in.xml:349(para)
-#, fuzzy
-#| msgid ""
-#| "After putting the source code in <literal>simple.cc</literal> you can "
-#| "compile the above program with gcc using: <placeholder-1/> Note that you "
-#| "must surround the <literal>pkg-config</literal> invocation with "
-#| "backquotes. Backquotes cause the shell to execute the command inside "
-#| "them, and to use the command's output as part of the command line."
 msgid ""
 "After putting the source code in <literal>simple.cc</literal> you can "
 "compile the above program with <application>gcc</application> using: "
@@ -861,8 +838,10 @@ msgstr ""
 "Después de poner el código fuente en <literal>simple.cc</literal> puede "
 "compilar el programa anterior con gcc usando: <placeholder-1/> Tenga en "
 "cuenta que debe poner la invocación <literal>pkg-config</literal> entre "
-"apóstrofes. Los apóstrofes permite a la shell ejecutar el comando dentro de "
-"ellos, y utilizar la salida de comando como parte de la línea de comando."
+"apóstrofes. Los apóstrofes permiten a la shell ejecutar el comando dentro de "
+"ellos, y utilizar la salida de comando como parte de la línea de comandos. "
+"También tenga en cuenta que <literal>simple.cc</literal> debe venir antes de "
+"la invocación de <literal>pkg-config</literal> en la línea de comandos."
 
 #: C/gtkmm-tutorial-in.xml:362(title)
 msgid "Headers and Linking"
@@ -2643,18 +2622,6 @@ msgstr ""
 "methodname> con <literal>false</literal> hará que el texto permanezca oculto."
 
 #: C/gtkmm-tutorial-in.xml:1226(para)
-#, fuzzy
-#| msgid ""
-#| "The <literal>changed</literal> signal is not emitted when the user "
-#| "presses the Enter key. If a pressed Enter key signals that the user has "
-#| "finished entering text, you probably want to be notified. For this "
-#| "purpose, use the <literal>key_press_event</literal> signal that "
-#| "<classname>Gtk::Entry</classname> inherits from <classname>Gtk::Widget</"
-#| "classname>. Moving the keyboard focus to another widget may also signal "
-#| "that the user has finished entering text. The <literal>focus_out_event</"
-#| "literal> signal can notify you when that happens. The <link linkend=\"sec-"
-#| "comboboxentry\">ComboBox with an Entry</link> section contains example "
-#| "programs that use these signals."
 msgid ""
 "You might want to be notified whenever the user types in a text entry "
 "widget. <classname>Gtk::Entry</classname> provides two signals, "
@@ -2669,16 +2636,19 @@ msgid ""
 "when that happens. The <link linkend=\"sec-comboboxentry\">ComboBox with an "
 "Entry</link> section contains example programs that use these signals."
 msgstr ""
-"La señal <literal>changed</literal> no se emite cuando el usuario pulsa la "
-"tecla Intro. Si pulsar la tecla Intro indica que el usuario ha terminado de "
-"introducir texto, probablemente quiera recibir una notificación. Para este "
-"propósito, use la señal <literal>key_press_event</literal> que "
+"Tal vez quiera que se le notifique cuando el usuario escribe en un widget de "
+"entrada de texto. <classname>Gtk::Entry</classname> proporciona dos señales, "
+"<literal>activate</literal> y <literal>changed</literal> para este "
+"propósito. <literal>activate</literal> se emite cuando el usuario pulsa la "
+"tecla Intro en un widget de entrada de texto; <literal>changed</literal> se "
+"emite cuando el texto en el widget cambia. Puede usarlas, por ejemplo, para "
+"validar o filtrar el texto que el usuario introduce. Mover el foco del "
+"teclado a otro widget también podría señalar que el usuario ha terminado de "
+"introducir texto. La señal <literal>focus_out_event</literal> que "
 "<classname>Gtk::Entry</classname> hereda de <classname>Gtk::Widget</"
-"classname>. Mover el foco del teclado a otro widget también puede indicar "
-"que el usuario terminó de introducir texto. La señal "
-"<literal>focus_out_event</literal> puede notificarle cuando eso sucede. La "
-"sección <link linkend=\"sec-comboboxentry\">«ComboBox» con una entrada</"
-"link> contiene programas de ejemplo que usan estas señales."
+"classname> puede notificarle cuando esto sucede. La sección <link linkend="
+"\"sec-comboboxentry\">«ComboBox» con una entrada</link> contiene programas "
+"de ejemplo que usan estas señales."
 
 #: C/gtkmm-tutorial-in.xml:1241(para)
 msgid ""
@@ -5554,20 +5524,6 @@ msgstr ""
 "}"
 
 #: C/gtkmm-tutorial-in.xml:3082(para)
-#, fuzzy
-#| msgid ""
-#| "When the user enters arbitrary text, it may not be enough to connect to "
-#| "the <literal>changed</literal> signal, which is emitted for every typed "
-#| "character. It is not emitted when the user presses the Enter key. "
-#| "Pressing the Enter key or moving the keyboard focus to another widget may "
-#| "signal that the user has finished entering text. To be notified of these "
-#| "events, connect to the <classname>Entry</classname>'s "
-#| "<literal>key_press_event</literal> and <literal>focus_out_event</literal> "
-#| "signals, like so <placeholder-1/> The <literal>changed</literal> signals "
-#| "of <classname>ComboBox</classname> and <classname>Entry</classname> are "
-#| "both emitted for every change. It doesn't matter which one you connect "
-#| "to. But only <classname>Entry</classname>'s <literal>key_press_event</"
-#| "literal> and <literal>focus_out_event</literal> signals are useful here."
 msgid ""
 "When the user enters arbitrary text, it may not be enough to connect to the "
 "<literal>changed</literal> signal, which is emitted for every typed "
@@ -5590,25 +5546,17 @@ msgstr ""
 "<literal>focus_out_event</literal> del <classname>Entry</classname>, así "
 "<placeholder-1/> Se emiten tanto las señales <literal>Changed</literal> del "
 "<classname>ComboBox</classname> como del <classname>Entry</classname> por "
-"cada cambio. No importa a cuál se conecta. Pero sólo las señales "
-"<literal>key_press_event</literal> y <literal>focus_out_event</literal> del "
-"<classname>Entry</classname> son útiles aquí."
+"cada cambio. No importa a cuál se conecta. Pero sólo la señal "
+"<literal>focus_out_event</literal> del <classname>Entry</classname> es útil "
+"aquí."
 
 #: C/gtkmm-tutorial-in.xml:3111(para)
-#, fuzzy
-#| msgid ""
-#| "X events differ in some ways from other signals. These differences are "
-#| "described in the <link linkend=\"sec-xeventsignals\">X Event signals</"
-#| "link> section in the appendix. Here we will use keyboard events to show "
-#| "how X events can be used in a program."
 msgid ""
 "X events are described in more detail in the <link linkend=\"sec-"
 "xeventsignals\">X Event signals</link> section in the appendix."
 msgstr ""
-"Los eventos de X difieren un poco de otras señales. Estas diferencias se "
-"describen en la sección <link linkend=\"sec-xeventsignals\">Señales de "
-"eventos de X</link> en el apéndice. Aquí se usarán los eventos del teclado "
-"para mostrar cómo pueden usarse en un programa los eventos de X."
+"Los eventos de X se describen con mayor detalle en la sección <link linkend="
+"\"sec-xeventsignals\">Señales de eventos de X</link> en el apéndice."
 
 #: C/gtkmm-tutorial-in.xml:3120(title)
 msgid "ComboBox with Entry"
@@ -14434,7 +14382,6 @@ msgstr ""
 "estilo de gtkmm adicionales de otras bibliotecas basadas en glib/GObject."
 
 #: C/gtkmm-tutorial-in.xml:8290(para)
-#, fuzzy
 msgid ""
 "This involves a variety of tools, some of them crufty, but at least they "
 "work, and has been used successfully by several projects."
@@ -15861,6 +15808,11 @@ msgid ""
 "constructor with the same argument types. It takes a C++ constructor "
 "signature, and a C function name."
 msgstr ""
+"Esta macro crea un constructor con argumentos, equivalente a una función de "
+"C <function>*_new()</function>. En realidad no llamará a la función "
+"<function>*_new()</function>, sino que simplemente creará un constructor "
+"equivalente con los mismos tipos de argumentos. Toma una firma de "
+"constructor de C++ y un nombre de función de C."
 
 #: C/gtkmm-tutorial-in.xml:8917(programlisting)
 #, no-wrap
@@ -15883,6 +15835,14 @@ msgid ""
 "optional. In this case, gmmproc will generate an extra constructor without "
 "that parameter."
 msgstr ""
+"Cuando envuelve constructores, es posible que gmmproc genere sobrecargas "
+"cómodas de los constructores envueltos si la función de C tiene parámetros "
+"que son opcionales (esto significa que la API de C permite asignar «null» a "
+"esos parámetros). Por ejemplo, para especificar si un parámetro es opcional, "
+"la macro <function>_WRAP_CTOR()</function> sería similar a la que se muestra "
+"a continuación: <placeholder-1/> El <literal>{?}</literal> que sigue al "
+"nombre del parámetro <parameter>label</parameter> significa que es opcional. "
+"En este caso, gmmproc generará un constructor adicional sin el parámetro."
 
 #: C/gtkmm-tutorial-in.xml:8932(programlisting)
 #, no-wrap
@@ -15925,6 +15885,18 @@ msgid ""
 "with the given names. Since the C++ parameter names correspond to the C "
 "ones, the above could be re-written as: <placeholder-3/>"
 msgstr ""
+"También es posible tener un orden de los parámetros del constructor distinto "
+"a los de la función de C usando la función de mapeo de parámetros de C++ a C "
+"de gmmproc. El uso de esta función hace posible mapear un parámetro de C++ a "
+"uno de C mediante la especificación del nombre del parámetro de C. Por "
+"ejemplo, si se asume que la declaración de la función "
+"<function>gtk_tool_button_new()</function> es la siguiente: <placeholder-1/> "
+"Los parámetros del constructor envuelto podrían reordenarse usando el "
+"siguiente código: <placeholder-2/> El <literal>{param_name}</literal> que "
+"sigue a cada uno de los nombres de los parámetros le dice a gmmproc que "
+"mapee esos parámetros de C++ a los de C con los nombres dados. Dado que los "
+"nombres de los parámetros de C++ corresponden a los de C, se podría "
+"reescribir lo anterior así: <placeholder-3/>"
 
 #: C/gtkmm-tutorial-in.xml:8948(para)
 msgid ""
@@ -15933,10 +15905,14 @@ msgid ""
 "function> overloads would be generated by gmmproc without the specified "
 "optional parameters."
 msgstr ""
+"Esta misma sintaxis de parámetro opcional y reordenamiento de parámetros "
+"están disponibles para <function>_WRAP_CREATE()</function>. gmmproc "
+"generaría sobrecargas de <function>create()</function> adicionales sin los "
+"parámetros opcionales especificados."
 
 #: C/gtkmm-tutorial-in.xml:8957(title)
 msgid "Hand-coding constructors"
-msgstr ""
+msgstr "Escribir constructores a mano"
 
 #: C/gtkmm-tutorial-in.xml:8966(programlisting)
 #, no-wrap
@@ -15964,10 +15940,19 @@ msgid ""
 "property names and values. For instance, from <filename>button.ccg</"
 "filename>: <placeholder-1/>"
 msgstr ""
+"Cuando un constructor debe escribirse a mano parcialmente porque, por "
+"ejemplo, los parámetros de la función de C <function>*_new()</function> no "
+"corresponden directamente a las propiedades del objeto, o porque la función "
+"de C <function>*_new()</function> hace más que llamar a "
+"<function>g_object_new()</function>, la macro <function>_CONSTRUCT()</"
+"function> se puede usar en el archivo .ccg para ahorrar trabajo. La macro "
+"<function>_CONSTRUCT()</function> toma una serie de nombres y valores de "
+"propiedades. Por ejemplo, de <filename>button.ccg</filename>: <placeholder-1/"
+">"
 
 #: C/gtkmm-tutorial-in.xml:8978(title)
 msgid "Method macros"
-msgstr ""
+msgstr "Macros de métodos"
 
 #: C/gtkmm-tutorial-in.xml:8981(title)
 msgid "_WRAP_METHOD"
@@ -15975,7 +15960,7 @@ msgstr "_WRAP_METHOD"
 
 #: C/gtkmm-tutorial-in.xml:8982(para)
 msgid "This macro generates the C++ method to wrap a C function."
-msgstr ""
+msgstr "Esta macro genera el método de C++ para envolver una función de C."
 
 #: C/gtkmm-tutorial-in.xml:8983(function)
 msgid "_WRAP_METHOD( C++ method signature, C function name)"
@@ -15992,7 +15977,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:8984(para)
 msgid "For instance, from <filename>entry.hg</filename>: <placeholder-1/>"
-msgstr ""
+msgstr "Por ejemplo, de <filename>entry.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8989(para)
 msgid ""
@@ -16003,6 +15988,12 @@ msgid ""
 "based on the <filename>*_docs.xml</filename> and <filename>*_docs_override."
 "xml</filename> files."
 msgstr ""
+"La función de C (por ejemplo, <function>gtk_entry_set_text</function>) se "
+"describe en mayor detalle en el archivo .defs, y los archivos "
+"<filename>convert*.m4</filename> contienen la conversión necesaria del tipo "
+"de parámetro de C++ al tipo de C. Esta macro también genera comentarios de "
+"documentación de doxygen basados en los archivos <filename>*_docs.xml</"
+"filename> y <filename>*_docs_override.xml</filename>."
 
 #: C/gtkmm-tutorial-in.xml:8998(term) C/gtkmm-tutorial-in.xml:9207(term)
 #: C/gtkmm-tutorial-in.xml:9254(term)
@@ -16014,6 +16005,8 @@ msgid ""
 "Do an extra <function>reference()</function> on the return value, in case "
 "the C function does not provide a reference."
 msgstr ""
+"Hace una <function>reference()</function> adicional en el valor de retorno, "
+"en el caso de que la función de C no proporcione una referencia."
 
 #: C/gtkmm-tutorial-in.xml:9005(term)
 msgid "errthrow"
@@ -16022,16 +16015,19 @@ msgstr "errthrow"
 #: C/gtkmm-tutorial-in.xml:9007(para)
 msgid "Use the last GError* parameter of the C function to throw an exception."
 msgstr ""
+"Usa el último parámetro GError* de la función de C para lanzar una excepción."
 
 #: C/gtkmm-tutorial-in.xml:9012(term)
 msgid "deprecated"
-msgstr ""
+msgstr "obsoleto"
 
 #: C/gtkmm-tutorial-in.xml:9014(para)
 msgid ""
 "Puts the generated code in #ifdef blocks. Text about the deprecation can be "
 "specified as an optional parameter."
 msgstr ""
+"Pone el código generado en bloques #ifdef. El texto que explica por qué se "
+"marca como obsoleto puede especificarse como un parámetro opcional."
 
 #: C/gtkmm-tutorial-in.xml:9020(term)
 msgid "constversion"
@@ -16042,6 +16038,8 @@ msgid ""
 "Just call the non-const version of the same function, instead of generating "
 "almost duplicate code."
 msgstr ""
+"Sólo llama a la versión no constante de la misma función, en lugar de "
+"generar código casi duplicado."
 
 #: C/gtkmm-tutorial-in.xml:9027(term) C/gtkmm-tutorial-in.xml:9215(term)
 #: C/gtkmm-tutorial-in.xml:9286(term) C/gtkmm-tutorial-in.xml:9317(term)
@@ -16051,12 +16049,12 @@ msgstr "ifdef"
 #: C/gtkmm-tutorial-in.xml:9029(para) C/gtkmm-tutorial-in.xml:9217(para)
 #: C/gtkmm-tutorial-in.xml:9288(para) C/gtkmm-tutorial-in.xml:9319(para)
 msgid "Puts the generated code in #ifdef blocks."
-msgstr ""
+msgstr "Pone el código generado en bloques #ifdef."
 
 #: C/gtkmm-tutorial-in.xml:8995(para) C/gtkmm-tutorial-in.xml:9178(para)
 #: C/gtkmm-tutorial-in.xml:9251(para)
 msgid "There are some optional extra arguments: <placeholder-1/>"
-msgstr ""
+msgstr "Hay algunos argumentos opcionales adicionales: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9038(programlisting)
 #, no-wrap
@@ -16076,6 +16074,12 @@ msgid ""
 "parameter is optional because its name ends with <literal>{?}</literal>. In "
 "this case, gmmproc would generate a method overload without that parameter."
 msgstr ""
+"Al igual que con <function>_WRAP_CTOR()</function> es posible especificar si "
+"hay parámetros opcionales. Si este es el caso, gmmproc generará métodos de "
+"sobrecarga cómodos sin esos parámetros. Por ejemplo: <placeholder-1/> "
+"Indicaría que el parámetro <parameter>natural_size</parameter> es opcional "
+"porque su nombre termina con <literal>{?}</literal>. En este caso, gmmproc "
+"generaría una sobrecarga de método sin ese parámetro."
 
 #: C/gtkmm-tutorial-in.xml:9052(programlisting)
 #, no-wrap
@@ -16118,6 +16122,17 @@ msgid ""
 "names. Since the C++ parameter names correspond to the C ones, the above "
 "could be re-written as: <placeholder-3/>"
 msgstr ""
+"Además, al igual que con <function>_WRAP_CTOR()</function>, es posible "
+"reordenar los parámetros del método de C++ usando la función de mapeo de C++ "
+"a C de gmmproc. El uso de esta función hace posible mapear un parámetro de C+"
+"+ a uno de C mediante la especificación del nombre del parámetro de C. Por "
+"ejemplo, si la declaración de <function>gtk_widget_set_device_events()</"
+"function> es la siguiete: <placeholder-1/> Algo así cambiaría el orden de "
+"los parámetros en el método de C++: <placeholder-2/> El <literal>"
+"{param_name} que sigue a cada uno de los nombres de los parámetros le dice a "
+"gmmproc que mapee esos parámetros de C++ a los de C con los nombres dados. "
+"Ya que que los nombres de los parámetros de C++ corresponden a los de C, lo "
+"anterior podría reescribirse así: <placeholder-3/>"
 
 #: C/gtkmm-tutorial-in.xml:9076(programlisting)
 #, no-wrap
