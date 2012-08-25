@@ -9173,7 +9173,7 @@ _WRAP_SIGNAL(void clicked(),"clicked")
 </programlisting>
 </para>
 <para>Signals usually have function pointers in the GTK struct, with a
-    corresponding enum value. and a <function>g_signal_new()</function> in the
+    corresponding enum value and a <function>g_signal_new()</function> in the
     .c file.</para>
 <para>There are some optional extra arguments:
 <variablelist>
