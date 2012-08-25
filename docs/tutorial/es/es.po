@@ -13,16 +13,16 @@
 # José Zambrano <jozaol@gmail.com>, 2011.
 # Rafael Angel <rafo424@gmail.com>, 2011.
 # Rafael Chunga <rafo424@gmail.com>, 2012.
-# Nicolás Satragno <nsatragno@gmail.com>, 2012.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2011, 2012.
+# Nicolás Satragno <nsatragno@gmail.com>, 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2012-08-23 07:26+0000\n"
-"PO-Revision-Date: 2012-08-24 17:57+0200\n"
-"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
-"Language-Team: Español <gnome-es-list@gnome.org>\n"
+"POT-Creation-Date: 2012-08-25 09:33+0000\n"
+"PO-Revision-Date: 2012-08-24 15:49-0300\n"
+"Last-Translator: Nicolás Satragno <nsatragno@gmail.com>\n"
+"Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16019,7 +16019,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9012(term)
 msgid "deprecated"
-msgstr "obsoleto"
+msgstr "deprecated"
 
 #: C/gtkmm-tutorial-in.xml:9014(para)
 msgid ""
@@ -16187,6 +16187,21 @@ msgid ""
 "necessary initialization macro like the following would also have to be "
 "specified: <placeholder-3/> Which could also be written as: <placeholder-4/>"
 msgstr ""
+"Con <function>_WRAP_METHOD()</function> también es posible incluir un "
+"parámetro de salida en la declaración del método de C++ en el que se pone el "
+"valor de retorno de la función de C, y que el método de C++ devuelva "
+"<type>void</type>. Para hacer esto, simplemente incluya la declaración del "
+"parámetro de salida en la declaración del método de C++ adjuntando <literal>"
+"{OUT}</literal> al nombre del parámetro de salida. Por ejemplo, si "
+"<function>gtk_widget_get_request_mode()</function> se declara como sigue: "
+"<placeholder-1/> Y se quiere que el método de C++ establezca un parámetro de "
+"salida en lugar de devolver un <type>SizeRequestMode</type>, algo como lo "
+"siguiente podría usarse: <placeholder-2/> el <literal>{OUT}</literal> "
+"adjunto al nombre del parámetro de salida <parameter>mode</parameter> le "
+"dice a gmmproc que ponga el valor de retorno de la función de C en ese "
+"parámetro de salida. En este caso, sin embargo, una macro de inicialización "
+"necesaria como la que sigue también tendría que especificarse: "
+"<placeholder-3/> Lo que también podría reescribirse así: <placeholder-4/>"
 
 #: C/gtkmm-tutorial-in.xml:9100(para)
 msgid ""
@@ -16194,6 +16209,9 @@ msgid ""
 "classname> as a const reference. For instance, <code>const Glib::RefPtr&lt;"
 "Gtk::Action&gt;&amp; action</code>."
 msgstr ""
+"Objetos usados a través de <classname>RefPtr</classname>: pase el "
+"<classname>RefPtr</classname> como una referencia constante. Por ejemplo, "
+"<code>const Glib::RefPtr&lt;Gtk::Action&gt;&amp; action</code>."
 
 #: C/gtkmm-tutorial-in.xml:9104(para)
 msgid ""
@@ -16202,6 +16220,10 @@ msgid ""
 "even if the <classname>RefPtr</classname> is already const. For instance, "
 "<code>const Glib::RefPtr&lt;const Gtk::Action&gt;&amp; action</code>."
 msgstr ""
+"Objetos constantes usados a través de <classname>RefPtr</classname>: si la "
+"función no debe cambiar el objeto, asegúrese de que el objeto es constante, "
+"incluso si el <classname>RefPtr</classname> ya lo es. Por ejemplo, "
+"<code>const Glib::RefPtr&lt;const Gtk::Action&gt;&amp; action</code>."
 
 #: C/gtkmm-tutorial-in.xml:9109(para)
 msgid ""
@@ -16213,6 +16235,14 @@ msgid ""
 "Action&gt; &gt;</code>. You may need to define a Traits type to specify how "
 "the C and C++ types should be converted."
 msgstr ""
+"Envolver parámetros <classname>GList*</classname> y <classname>GSList*</"
+"classname>: primero, necesita descubrir qué objetos están contenidos en los "
+"campos de datos de la lista por cada elemento, generalmente mediante la "
+"lectura de la documentación de la función de C. Un tipo <classname>std::"
+"vector</classname> podrá entonces envolver la lista. Por ejemplo, <code>std::"
+"vector&lt; Glib::RefPtr&lt;Action&gt; &gt;</code>. Tal vez necesite definir "
+"un tipo «Traits» para especificar cómo deben convertirse los tipos de C y C+"
+"+."
 
 #: C/gtkmm-tutorial-in.xml:9126(programlisting)
 #, no-wrap
@@ -16229,12 +16259,22 @@ msgid ""
 "should probably put directly into the .hg file because the ownership depends "
 "on the function rather than the type. For instance: <placeholder-1/>"
 msgstr ""
+"Envolver los tipos de retorno de <classname>GList*</classname> y "
+"<classname>GSList*</classname>: debe descubrir si el llamador debe liberar "
+"la lista y si debe liberar sus elementos, también mediante la lectura de la "
+"documentación de la función de C. Con esta información puede elegir la "
+"posesión (ninguna, superficial o profunda) para la regla de conversión m4, "
+"la que probablemente deba poner directamente en el archivo .hg porque la "
+"posesión depende de la función en lugar del tipo. Por ejemplo: "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9098(para)
 msgid ""
 "Though it's usually obvious what C++ types should be used in the C++ method, "
 "here are some hints: <placeholder-1/>"
 msgstr ""
+"A pesar de que generalmente es obvio qué tipos de C++ deben usarse en el "
+"método de C++, aquí hay algunos consejos: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9132(title)
 msgid "_WRAP_METHOD_DOCS_ONLY"
@@ -16247,6 +16287,10 @@ msgid ""
 "when you must hand-code the method, but you want to use the documentation "
 "that would be generated if the method was generated."
 msgstr ""
+"Esta macro es similar a <function>_WRAP_METHOD()</function>, pero sólo "
+"genera la documentación de un método de C++ que envuelve una función de C. "
+"Úsela cuando debe escribir el método a mano, pero quiere usar la "
+"documentación que se crearía si el método se generara."
 
 #: C/gtkmm-tutorial-in.xml:9137(function)
 msgid "_WRAP_METHOD_DOCS_ONLY(C function name)"
@@ -16263,7 +16307,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9138(para)
 msgid "For instance, from <filename>container.hg</filename>: <placeholder-1/>"
-msgstr ""
+msgstr "Por ejemplo, de <filename>container.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9146(title)
 msgid "_IGNORE / _IGNORE_SIGNAL"
@@ -16278,6 +16322,11 @@ msgid ""
 "_IGNORE() or _IGNORE_SIGNAL() macro to make <command>gmmproc</command> stop "
 "complaining."
 msgstr ""
+"<command>gmmproc</command> le advertirá en stdout de funciones y señales que "
+"haya olvidado envolver, ayudándole a asegurarse que está envolviendo la API "
+"completa. Pero si no quiere envolver algunas funciones o señales, o si elige "
+"escribir a mano algunos métodos entonces puede usar las macros _IGNORE() o "
+"_IGNORE_SIGNAL() para hacer que <command>gmmproc</command> deje de quejarse."
 
 #: C/gtkmm-tutorial-in.xml:9152(function)
 msgid "_IGNORE(C function name 1, C function name2, etc)"
@@ -16298,7 +16347,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9154(para)
 msgid "For instance, from <filename>buttonbox.hg</filename>: <placeholder-1/>"
-msgstr ""
+msgstr "Por ejemplo, de <filename>buttonbox.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9162(title)
 msgid "_WRAP_SIGNAL"
@@ -16312,6 +16361,12 @@ msgid ""
 "<command>gmmproc</command> uses the .defs file to discover the C parameter "
 "types and the .m4 convert files to discover appropriate type conversions."
 msgstr ""
+"Esta macro genera la señal de C++ con el estilo de libsigc++ para envolver "
+"una señal GObject de C. En realidad genera un método de acceso público, como "
+"<function>signal_clicked()</function>, que devuelve un objeto sustituto. "
+"<function>gmmproc</function> usa el archivo .defs para descubrir los tipos "
+"de parámetro de C y los archivos de conversión .m4 para descubrir "
+"conversiones de tipo adecuadas."
 
 #: C/gtkmm-tutorial-in.xml:9169(function)
 msgid "_WRAP_SIGNAL( C++ signal handler signature, C signal name)"
@@ -16326,12 +16381,22 @@ msgstr ""
 "\n"
 "_WRAP_SIGNAL(void clicked(),\"clicked\")\n"
 
+# Typo en el original: después de «value» debería ir una coma, no un punto.
+# Nicolás.
 #: C/gtkmm-tutorial-in.xml:9175(para)
+#, fuzzy
+#| msgid ""
+#| "Signals usually have function pointers in the GTK struct, with a "
+#| "corresponding enum value. and a <function>g_signal_new()</function> in "
+#| "the .c file."
 msgid ""
 "Signals usually have function pointers in the GTK struct, with a "
-"corresponding enum value. and a <function>g_signal_new()</function> in the ."
-"c file."
+"corresponding enum value and a <function>g_signal_new()</function> in the .c "
+"file."
 msgstr ""
+"Las señales generalmente tienen punteros de funciones en la estructura de "
+"GTK, con un valor de enum correspondiente, y un <function>g_signal_new()</"
+"function> en el archivo .c."
 
 #: C/gtkmm-tutorial-in.xml:9181(term)
 msgid "no_default_handler"
@@ -16344,6 +16409,10 @@ msgid ""
 "signal with a default signal handler would break the ABI by increasing the "
 "size of the class's virtual function table."
 msgstr ""
+"No genera un método virtual <function>on_something()</function> para "
+"permitir reemplazar fácilmente el manejador de señales predeterminado. Use "
+"esto si añadir una señal con un manejador de señales predeterminado rompe la "
+"ABI incrementando el tamaño de la tabla de funciones virtuales de la clase."
 
 #: C/gtkmm-tutorial-in.xml:9191(term)
 msgid "custom_default_handler"
@@ -16356,6 +16425,10 @@ msgid ""
 "in the <filename>.cc</filename> file. Use this when you must generate the "
 "definition by hand."
 msgstr ""
+"Genera una declaración del método virtual <function>on_something</function> "
+"en el archivo <filename>.h</filename>, pero no genera una definición en el "
+"archivo <filename>.cc</filename>. Use esto cuando deba generar la definición "
+"a mano."
 
 #: C/gtkmm-tutorial-in.xml:9200(term)
 msgid "custom_c_callback"
@@ -16366,6 +16439,8 @@ msgid ""
 "Do not generate a C callback function for the signal. Use this when you must "
 "generate the callback function by hand."
 msgstr ""
+"No genera una devolución de llamada de C para la señal. Use esto cuando debe "
+"generar la función de devolución de llamada a mano."
 
 #: C/gtkmm-tutorial-in.xml:9209(para)
 msgid ""
@@ -16373,6 +16448,9 @@ msgid ""
 "<function>on_something()</function> virtual method, in case the C function "
 "does not provide a reference."
 msgstr ""
+"Hace una <function>reference()</function> adicional en el valor de retorno "
+"del método virtual <function>on_something()</function>, en caso de que la "
+"función de C no proporcione una referencia."
 
 #: C/gtkmm-tutorial-in.xml:9225(title)
 msgid "_WRAP_PROPERTY"
@@ -16385,6 +16463,11 @@ msgid ""
 "<command>gmmproc</command> uses the .defs file to discover the C type and "
 "the .m4 convert files to discover appropriate type conversions."
 msgstr ""
+"Esta macro genera el método de C++ que envuelve una propiedad GObject de C. "
+"Debe especificar el nombre de la propiedad y el tipo de C++ que quiere para "
+"la propiedad. <command>gmmproc</command> usa el archivo .defs para descubrir "
+"el tipo de C y el archivo de conversión .m4 para descubrir conversiones de "
+"tipo apropiadas."
 
 #: C/gtkmm-tutorial-in.xml:9230(function)
 msgid "_WRAP_PROPERTY(C property name, C++ type)"
@@ -16406,6 +16489,7 @@ msgstr "_WRAP_VFUNC"
 #: C/gtkmm-tutorial-in.xml:9240(para)
 msgid "This macro generates the C++ method to wrap a virtual C function."
 msgstr ""
+"Esta macro genera el método de C++ que envuelve una función virtual de C."
 
 #: C/gtkmm-tutorial-in.xml:9241(function)
 msgid "_WRAP_VFUNC( C++ method signature, C function name)"
@@ -16422,7 +16506,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9242(para) C/gtkmm-tutorial-in.xml:9330(para)
 msgid "For instance, from <filename>widget.hg</filename>: <placeholder-1/>"
-msgstr ""
+msgstr "Por ejemplo, de <filename>widget.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9247(para)
 msgid ""
@@ -16431,6 +16515,10 @@ msgid ""
 "<filename>convert*.m4</filename> files contain the necessary conversion from "
 "the C++ parameter type to the C parameter type."
 msgstr ""
+"La función de C (por ejemplo, <function>get_request_mode</function>) se "
+"describe en mayor detalle en el archivo <filename>*_vfuncs.defs</filename>, "
+"y los archivos <filename>convert*.m4</filename> contienen las conversiones "
+"necesarias del tipo de parámetro de C++ al tipo de parámetro de C."
 
 #: C/gtkmm-tutorial-in.xml:9256(para)
 msgid ""
@@ -16438,6 +16526,9 @@ msgid ""
 "<function>something_vfunc()</function> function, in case the virtual C "
 "function does not provide a reference."
 msgstr ""
+"Hace una <function>reference()</function> adicional en el valor de retorno "
+"de la función <function>something_vfunc()</function>, en caso de que la "
+"función virtual de C no proporcione una referencia."
 
 #: C/gtkmm-tutorial-in.xml:9262(term)
 msgid "refreturn_ctype"
@@ -16449,6 +16540,10 @@ msgid ""
 "overridden <function>something_vfunc()</function> function in the C callback "
 "function, in case the calling C function expects it to provide a reference."
 msgstr ""
+"Hace una <function>reference()</function> adicional en el valor de retorno "
+"de una función <function>something_vfunc()</function> reemplazada en la "
+"función de devolución de llamada de C, en caso de que la función de C que "
+"llama espere que proporcione una referencia."
 
 #: C/gtkmm-tutorial-in.xml:9271(term)
 msgid "custom_vfunc"
