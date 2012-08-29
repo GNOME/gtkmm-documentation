@@ -33,7 +33,10 @@ class MyPlug : public Gtk::Plug
 
 int main(int argc, char** argv)
 {
-  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  // The plug and the socket have different application ids, so they can run
+  // simultaneously.
+  Glib::RefPtr<Gtk::Application> app =
+    Gtk::Application::create(argc, argv, "org.gtkmm.example.plug");
   MyPlug plug;
   plug.show();
 

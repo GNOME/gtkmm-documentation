@@ -50,7 +50,10 @@ class MySocketWindow : public Gtk::Window
 
 int main(int argc, char** argv)
 {
-  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  // The plug and the socket have different application ids, so they can run
+  // simultaneously.
+  Glib::RefPtr<Gtk::Application> app =
+    Gtk::Application::create(argc, argv, "org.gtkmm.example.socket");
   MySocketWindow win;
   app->run(win);
   return 0;

@@ -1,3 +1,15 @@
+2012-08-29  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Clipboard and Socket examples: Make them non-unique.
+
+	* examples/book/clipboard/ideal/main.cc:
+	* examples/book/clipboard/simple/main.cc: Add Gio::APPLICATION_NON_UNIQUE to
+	the calls to Gtk::Application::create(), so several instances can run
+	simultaneously.
+	* examples/book/socket/plug.cc:
+	* examples/book/socket/socket.cc: Give plug and socket different application
+	ids, so they can run simultaneously. Bug #681323.
+
 2012-08-16  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Basics, Simple Example: Synchronize code and description.
