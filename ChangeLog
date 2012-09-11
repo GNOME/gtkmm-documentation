@@ -1,3 +1,11 @@
+2012-09-11  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Fix the book/application/app_menu example.
+
+	* examples/book/application/app_menu/exampleapplication.cc: Change the name
+	of the Gio::SimpleAction from "app.something" to "something".
+	Bug #683645 (Tom Jaeger)
+
 2012-08-29  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Clipboard and Socket examples: Make them non-unique.

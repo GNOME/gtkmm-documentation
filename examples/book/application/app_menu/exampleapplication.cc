@@ -34,7 +34,7 @@ void ExampleApplication::on_startup()
   //Call the base class's implementation:
   Gtk::Application::on_startup();
 
-  m_action = Gio::SimpleAction::create("app.something");
+  m_action = Gio::SimpleAction::create("something");
   m_action->signal_activate().connect(
     sigc::mem_fun(*this, &ExampleApplication::on_action_something) );
   add_action(m_action);
@@ -48,6 +48,7 @@ void ExampleApplication::on_startup()
 void ExampleApplication::create_window()
 {
   ExampleWindow* window = new ExampleWindow();
+  window->set_default_size(300, 100);
 
   //Make sure that the application runs for as long this window is still open:
   add_window(*window);
