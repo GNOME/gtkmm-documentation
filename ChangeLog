@@ -1,3 +1,11 @@
+2012-10-04  José Alburquerque  <jaalburquerque@gmail.com>
+
+	_WRAP_VFUNC: Add the errthrow optional parameter documentation.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Document the new errthrow
+	parameter of _WRAP_VFUNC so that it is clear in the documentation how
+	to use it.
+
 2012-09-11  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Fix the book/application/app_menu example.

@@ -9268,6 +9268,13 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
         </listitem>
     </varlistentry>
     <varlistentry>
+        <term>errthrow</term>
+        <listitem>
+            <para>Use the last GError* parameter of the C virtual function (if
+              there is one) to throw an exception.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
         <term>custom_vfunc</term>
         <listitem>
             <para>Do not generate a definition of the vfunc in the
