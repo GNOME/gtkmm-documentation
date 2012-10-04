@@ -1,5 +1,13 @@
 2012-10-04  José Alburquerque  <jaalburquerque@gmail.com>
 
+	_WRAP_METHOD: Document gmmproc's output parameter functionality.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add documentation describing
+	how to use gmmproc's output parameter functionality when wrapping
+	methods.
+
+2012-10-04  José Alburquerque  <jaalburquerque@gmail.com>
+
 	_WRAP_VFUNC: Add the errthrow optional parameter documentation.
 
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Document the new errthrow

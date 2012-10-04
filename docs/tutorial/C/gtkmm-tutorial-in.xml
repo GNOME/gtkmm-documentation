@@ -9095,7 +9095,41 @@ _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = (SizeRequestMo
 _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')
 </programlisting>
 </para>
-<para>Though it's usually obvious what C++ types should be used in the C++ method, here are some hints:
+<para>
+  <function>_WRAP_METHOD()</function> also supports setting C++ output
+  parameters from C output parameters if the C function being wrapped has any.
+  Suppose, for example, that we want to wrap the following C function that
+  returns a value in its C output parameter <parameter>rect</parameter>:
+  <programlisting>
+    gboolean gtk_icon_view_get_cell_rect(GtkIconView* icon_view, GtkTreePath*
+    path, GtkCellRenderer* cell, GdkRectangle* rect);
+  </programlisting>
+  To have <command>gmmproc</command> place the value returned in the C++
+  <parameter>rect</parameter> output parameter once the C function returns,
+  something like the following <function>_WRAP_METHOD()</function> directive
+  could be used:
+  <programlisting>
+    _WRAP_METHOD(bool get_cell_rect(const TreeModel::Path&amp; path, const
+    CellRenderer&amp; cell, Gdk::Rectangle&amp; rect{>>}) const,
+    gtk_icon_view_get_cell_rect)
+  </programlisting>
+  The <literal>{>>}</literal> following the <parameter>rect</parameter>
+  parameter name indicates that the C++ output parameter should be set from the
+  value returned in the C parameter from the C function.
+  <command>gmmproc</command> will generate a declaration of a tempoorary
+  variable in wich to store the value of the C output parameter and a statement
+  that sets the C++ output parameter from the temporary variable.  In this case
+  it may be necessary to have an <function>_INITIALIZATION()</function>
+  describing how to set a <classname>Gdk::Rectangle&amp;</classname> from a
+  <classname>GdkRectangle*</classname> such as the following:
+  <programlisting>
+    _INITIALIZATION(`Gdk::Rectangle&amp;',`GdkRectangle', `$3 =
+    Glib::wrap(&amp;($4))')
+  </programlisting>
+</para>
+<para>Selecting which C++ types should be used is also important when wrapping
+  C API.  Though it's usually obvious what C++ types should be used in the C++
+  method, here are some hints:
 <itemizedlist>
     <listitem><para>Objects used via <classname>RefPtr</classname>: Pass the
             <classname>RefPtr</classname> as a const reference. For instance,
