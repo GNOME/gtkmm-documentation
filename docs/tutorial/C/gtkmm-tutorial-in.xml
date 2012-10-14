@@ -9116,8 +9116,8 @@ _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')
   The <literal>{>>}</literal> following the <parameter>rect</parameter>
   parameter name indicates that the C++ output parameter should be set from the
   value returned in the C parameter from the C function.
-  <command>gmmproc</command> will generate a declaration of a tempoorary
-  variable in wich to store the value of the C output parameter and a statement
+  <command>gmmproc</command> will generate a declaration of a temporary
+  variable in which to store the value of the C output parameter and a statement
   that sets the C++ output parameter from the temporary variable.  In this case
   it may be necessary to have an <function>_INITIALIZATION()</function>
   describing how to set a <classname>Gdk::Rectangle&amp;</classname> from a
