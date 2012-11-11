@@ -8907,6 +8907,18 @@ public:
   constructor with the same argument types. It takes a C++ constructor
   signature, and a C function name.
 </para>
+
+<para>It also takes an optional extra argument:
+  <variablelist>
+    <varlistentry>
+        <term>errthrow</term>
+        <listitem>
+          <para>This tells gmmproc that the C <function>*_new()</function> has
+            a final GError** parameter which should be ignored.</para>
+        </listitem>
+    </varlistentry>
+  </variablelist>
+</para>
 <para>
   When wrapping constructors, it is possible for gmmproc to generate
   convenience overloads of the wrapped constructors if the C function has

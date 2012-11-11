@@ -1,3 +1,10 @@
+2012-11-11  José Alburquerque  <jaalburquerque@gmail.com>
+
+	_WRAP_CTOR: Document the new "errthrow" extra argument option.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml (_WRAP_CTOR): Add
+	documentation describing what the extra "errthrow" option is used for.
+
 2012-10-04  José Alburquerque  <jaalburquerque@gmail.com>
 
 	_WRAP_METHOD: Document gmmproc's output parameter functionality.
