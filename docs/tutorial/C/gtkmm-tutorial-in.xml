@@ -9041,6 +9041,38 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
             <para>Puts the generated code in #ifdef blocks.</para>
         </listitem>
     </varlistentry>
+    <varlistentry>
+        <term>slot_name</term>
+        <listitem>
+          <para>Tells <function>_WRAP_METHOD()</function> the name of the slot
+            parameter of the method, if it has one.  This enables gmmproc to
+            generate code to copy the slot and pass the copy on to the C
+            function in its final <literal>gpointer user_data</literal>
+            parameter.  The <literal>slot_callback</literal> option must also
+            be used to specify the name of the glue callback function to also
+            pass on to the C function.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>slot_callback</term>
+        <listitem>
+          <para>Used in conjunction with the <literal>slot_name</literal>
+            option to tell <function>_WRAP_METHOD()</function> the name of the
+            glue callback function that handles extracting the slot and then
+            calling it.  The address of this callback is also passed on to the
+            C function that the method wraps.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>no_slot_copy</term>
+        <listitem>
+          <para>Tells gmmproc not to pass a copy of the slot to the C function,
+            if the method has one.  Instead the slot itself is passed.  The
+            slot parameter name and the glue callback function must have been
+            specified with the <literal>slot_name</literal> and
+            <literal>slot_callbback</literal> options respectively.</para>
+        </listitem>
+    </varlistentry>
 </variablelist>
 </para>
 <para>

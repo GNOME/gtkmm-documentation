@@ -1,3 +1,13 @@
+2012-11-19  José Alburquerque  <jaalburquerque@gmail.com>
+
+	gmmproc: _WRAP_METHOD: Include docs on wrapping methods with slots.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Document the new
+	'slot_name', 'slot_callback' and 'no_slot_copy' options of
+	_WRAP_METHOD().
+
+	Bug #688587.
+
 2012-11-11  José Alburquerque  <jaalburquerque@gmail.com>
 
 	_WRAP_CTOR: Document the new "errthrow" extra argument option.
