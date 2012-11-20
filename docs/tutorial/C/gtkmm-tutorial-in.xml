@@ -2099,6 +2099,37 @@ figure should make it clearer:
 </sect4>
 </sect3>
 
+<sect3 id="boxes-command-line-options">
+<title>Gtk::Application and command-line options</title>
+<para>The following example program requires a command-line option.
+The source code shows two ways of handling command-line options in combination
+with <classname>Gtk::Application</classname>.
+</para>
+
+<itemizedlist>
+<listitem><para>
+Handle the options in <function>main()</function> and hide them from
+<classname>Gtk::Application</classname> by setting <literal>argc = 1</literal>
+in the call to <methodname>Gtk::Application::create()</methodname>.
+</para></listitem>
+
+<listitem><para>
+Give all command-line options to <methodname>Gtk::Application::create()</methodname>
+and add the flag <literal>Gio::APPLICATION_HANDLES_COMMAND_LINE</literal>.
+Connect a signal handler to the <literal>command_line</literal> signal, and
+handle the command-line options in the signal handler.</para>
+
+<para>You must set the optional parameter <literal>after = false</literal> in
+the call to <literal>signal_command_line().connect()</literal>, because your signal
+handler must be called before the default signal handler. You must also call
+<methodname>Gio::Application::activate()</methodname> in the signal handler,
+unless you want your application to exit without showing its main window.
+(<classname>Gio::Application</classname> is a base class of
+<classname>Gtk::Application</classname>.)
+</para></listitem>
+</itemizedlist>
+</sect3>
+
 <sect3 id="box-packing-example">
 <title>Example</title>
 <para>

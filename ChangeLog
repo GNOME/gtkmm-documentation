@@ -1,3 +1,12 @@
+2012-11-20  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Fix the book/box example.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Describe how to handle command-line
+	options with Gtk::Application.
+	* examples/book/box/main.cc: Handle the command-line option in a way that
+	Gtk::Application accepts.
+
 2012-11-19  José Alburquerque  <jaalburquerque@gmail.com>
 
 	gmmproc: _WRAP_METHOD: Include docs on wrapping methods with slots.
