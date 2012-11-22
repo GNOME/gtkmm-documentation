@@ -20,7 +20,6 @@
 #define GTKMM_EXAMPLEWINDOW_H
 
 #include <gtkmm.h>
-#include "packbox.h"
 
 class ExampleWindow : public Gtk::Window
 {
@@ -40,7 +39,7 @@ protected:
 
   Gtk::Label m_Label1, m_Label2;
 
-  Gtk::Separator m_seperator1, m_seperator2, m_seperator3, m_seperator4, m_seperator5;
+  Gtk::Separator m_separator1, m_separator2;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

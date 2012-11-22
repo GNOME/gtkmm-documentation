@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include "examplewindow.h"
+#include "packbox.h"
 
 ExampleWindow::ExampleWindow(int which)
 : m_box1(Gtk::ORIENTATION_VERTICAL),
@@ -31,7 +32,7 @@ ExampleWindow::ExampleWindow(int which)
   {
     case 1:
     {
-      m_Label1.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0);");
+      m_Label1.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0); set_homogeneous(false);");
 
       // Align the label to the left side.  We'll discuss this function and
       // others in the section on Widget Attributes.
@@ -60,10 +61,10 @@ ExampleWindow::ExampleWindow(int which)
       // pack the separator into the vbox.  Remember each of these
       // widgets are being packed into a vbox, so they'll be stacked
       // vertically.
-      m_box1.pack_start(m_seperator1, Gtk::PACK_SHRINK, 5);
+      m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK, 5);
 
       // create another new label, and show it.
-      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0);");
+      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0); set_homogeneous(true);");
       m_Label2.set_alignment(Gtk::ALIGN_START, Gtk::ALIGN_START);
       m_box1.pack_start(m_Label2, Gtk::PACK_SHRINK);
 
@@ -75,7 +76,7 @@ ExampleWindow::ExampleWindow(int which)
       pPackBox5 = Gtk::manage(new PackBox(true, 0, Gtk::PACK_EXPAND_WIDGET));
       m_box1.pack_start(*pPackBox5, Gtk::PACK_SHRINK);
 
-      m_box1.pack_start(m_seperator2, Gtk::PACK_SHRINK, 5);
+      m_box1.pack_start(m_separator2, Gtk::PACK_SHRINK, 5);
 
       break;
     }
@@ -83,7 +84,7 @@ ExampleWindow::ExampleWindow(int which)
     case 2:
     {
 
-      m_Label1.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 10);");
+      m_Label1.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 10); set_homogeneous(false);");
       m_Label1.set_alignment(Gtk::ALIGN_START, Gtk::ALIGN_START);
       m_box1.pack_start(m_Label1, Gtk::PACK_SHRINK);
 
@@ -93,10 +94,9 @@ ExampleWindow::ExampleWindow(int which)
       pPackBox2 = Gtk::manage(new PackBox(false, 10, Gtk::PACK_EXPAND_WIDGET));
       m_box1.pack_start(*pPackBox2, Gtk::PACK_SHRINK);
 
-      m_box1.pack_start(m_seperator1, Gtk::PACK_SHRINK, 5);
+      m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK, 5);
 
-
-      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0);");
+      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0); set_homogeneous(false);");
       m_Label2.set_alignment(Gtk::ALIGN_START, Gtk::ALIGN_START);
       m_box1.pack_start(m_Label2, Gtk::PACK_SHRINK);
 
@@ -106,7 +106,7 @@ ExampleWindow::ExampleWindow(int which)
       pPackBox4 = Gtk::manage(new PackBox(false, 0, Gtk::PACK_EXPAND_WIDGET, 10));
       m_box1.pack_start(*pPackBox4, Gtk::PACK_SHRINK);
 
-      m_box1.pack_start(m_seperator2, Gtk::PACK_SHRINK, 5);
+      m_box1.pack_start(m_separator2, Gtk::PACK_SHRINK, 5);
 
       break;
     }
@@ -126,15 +126,15 @@ ExampleWindow::ExampleWindow(int which)
 
       m_box1.pack_start(*pPackBox1, Gtk::PACK_SHRINK);
 
-      // this explicitly sets the separator to 400 pixels wide by 5 pixels
-      // high.  This is so the hbox we created will also be 400 pixels wide,
+      // this explicitly sets the separator to 500 pixels wide by 5 pixels
+      // high.  This is so the hbox we created will also be 500 pixels wide,
       // and the "end" label will be separated from the other labels in the
       // hbox.  Otherwise, all the widgets in the hbox would be packed as
       // close together as possible.
-      m_seperator1.set_size_request(400, 5);
+      m_separator1.set_size_request(500, 5);
 
-      // pack the separator into ourselves
-      m_box1.pack_start(m_seperator1, Gtk::PACK_SHRINK, 5);
+      // pack the separator into the vbox.
+      m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK, 5);
 
       break;
     }

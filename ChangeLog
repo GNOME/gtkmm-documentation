@@ -1,3 +1,15 @@
+2012-11-22  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Update the description of Box to gtkmm3 status.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Update the description of the Box
+	constructor. Mention set_homogeneous().
+	* docs/tutorial/C/figures/box_packing[1|2|3].png:
+	* examples/book/box/examplewindow.[h|cc]: Show set_homogeneous(true|false)
+	in the windows.
+	* examples/book/box/packbox.[h|cc]: Use Glib::ustring::format() instead of
+	sprintf().
+
 2012-11-20  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Fix the book/box example.

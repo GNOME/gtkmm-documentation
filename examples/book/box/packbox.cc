@@ -17,7 +17,6 @@
  */
 
 #include "packbox.h"
-#include <cstdio> //For sprintf().
 
 PackBox::PackBox(bool homogeneous, int spacing, Gtk::PackOptions options,
         int padding)
@@ -34,9 +33,7 @@ PackBox::PackBox(bool homogeneous, int spacing, Gtk::PackOptions options,
   pack_start(m_button2, options, padding);
   pack_start(m_button3, options, padding);
 
-  sprintf(padstr, "%d);", padding);
-
-  m_pbutton4 = new Gtk::Button(padstr);
+  m_pbutton4 = new Gtk::Button(Glib::ustring::format(padding) + ");");
   pack_start(*m_pbutton4, options, padding);
 }
 

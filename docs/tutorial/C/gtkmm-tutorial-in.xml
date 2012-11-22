@@ -2047,7 +2047,7 @@ several buttons. Each of the buttons on a line is packed into the
 This is the declaration of the <methodname>pack_start()</methodname> method:
 </para>
 <programlisting>void pack_start(Gtk::Widget&amp; child,
-                PackOptions options = PACK_EXPAND_WIDGET,
+                Gtk::PackOptions options = Gtk::PACK_EXPAND_WIDGET,
                 guint padding = 0);</programlisting>
 
 <para>
@@ -2057,9 +2057,9 @@ The first argument is the widget you're packing. In our example these are all <c
 <para>
 The <parameter>options</parameter> argument can take one of these three options:
 <itemizedlist>
-<listitem><para><literal>PACK_SHRINK</literal>: Space is contracted to the child widget size. The widget will take up just-enough space and never expand.</para></listitem>
-<listitem><para><literal>PACK_EXPAND_PADDING</literal>: Extra space is filled with padding. The widgets will be spaced out evenly, but their sizes won't change - there will be empty space between the widgets instead. </para></listitem>
-<listitem><para><literal>PACK_EXPAND_WIDGET</literal>: Extra space is taken up by increasing the child widget size, without changing the amount of space between widgets.</para></listitem>
+<listitem><para><literal>Gtk::PACK_SHRINK</literal>: Space is contracted to the child widget size. The widget will take up just-enough space and never expand.</para></listitem>
+<listitem><para><literal>Gtk::PACK_EXPAND_PADDING</literal>: Extra space is filled with padding. The widgets will be spaced out evenly, but their sizes won't change - there will be empty space between the widgets instead. </para></listitem>
+<listitem><para><literal>Gtk::PACK_EXPAND_WIDGET</literal>: Extra space is taken up by increasing the child widget size, without changing the amount of space between widgets.</para></listitem>
 </itemizedlist>
 </para>
 
@@ -2074,9 +2074,12 @@ border area to leave around the packed widget.
 
 <sect4 id="per-container-packing-options"><title>Per-container packing options</title>
 <para>
-Here's the constructor for the box widgets:
-<programlisting>Gtk::Box(bool homogeneous = false, int spacing = 0);</programlisting>
-Passing <literal>true</literal> for <parameter>homogeneous</parameter> will
+Here's the constructor for the <classname>Box</classname> widget,
+and methods that set per-container packing options:
+<programlisting>Gtk::Box(Gtk::Orientation orientation = Gtk::ORIENTATION_HORIZONTAL, int spacing = 0);
+void set_spacing(int spacing);
+void set_homogeneous(bool homogeneous = true);</programlisting>
+Passing <literal>true</literal> to <methodname>set_homogeneous()</methodname> will
 cause all of the contained widgets to be the same size.
 <parameter>spacing</parameter> is a (minimum) number of pixels to leave between
 each widget.
