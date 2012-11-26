@@ -1,3 +1,10 @@
+2012-11-26  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Builder examples: Update the Glade files to gtkmm3 status.
+
+	* examples/book/builder/basic/basic.glade:
+	* examples/book/builder/derived/derived.glade: Don't use deprecated widgets.
+
 2012-11-22  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Update the description of Box to gtkmm3 status.
