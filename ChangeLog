@@ -1,3 +1,10 @@
+2013-02-17  Chris Vine  <chris@cvine.freeserve.co.uk>
+
+	Add "Multi-threaded programs" chapter.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add chapter on writing
+	multi-threaded programs using gtkmm. Bug #512348.
+
 2012-11-26  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Builder examples: Update the Glade files to gtkmm3 status.

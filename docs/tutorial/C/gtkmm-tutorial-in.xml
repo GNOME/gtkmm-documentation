@@ -68,6 +68,11 @@ name
           on &quot;Wrapping C Libraries with gmmproc&quot;.</contrib>
       </author>
       <author>
+        <firstname>Chris</firstname>
+        <surname>Vine</surname>
+        <contrib>Chapter on &quot;Multi-threaded programs&quot;.</contrib>
+      </author>
+      <author>
         <firstname>David</firstname>
         <surname>King</surname>
         <contrib>Section on Gtk::Grid.</contrib>
@@ -7202,6 +7207,228 @@ instance, you cannot use the copyright sign (&copy;).
     </sect1>
 
 
+
+</chapter>
+
+<chapter id="chapter-multi-threaded-programs">
+<title>Multi-threaded programs</title>
+
+<sect1 id="sec-the-constraints">
+<title>The constraints</title>
+
+<para>
+<application>glibmm</application> provides the normal set of thread
+launching functions, mutexes, condition variables and scoped locking
+classes required for writing multi-threaded programs using C++.
+</para>
+
+<para>
+However, care is required when writing programs based on &gtkmm; using
+multiple threads of execution, arising from the fact that
+<application>libsigc++</application>, and in particular
+<classname>sigc::trackable</classname>, are not thread-safe. That's
+because none of the complex interactions that occur behind the scenes
+when using <application>libsigc++</application> are protected by a
+mutex or other means of synchronization.
+<footnote>
+<para>
+These interactions arise from the fact that, amongst other things, a
+class inheriting from <classname>sigc::trackable</classname> will, via
+that inheritance, have a <classname>std::list</classname> object
+keeping track of slots representing any of its non-static methods
+(more particularly it keeps a list of callbacks which will null the
+connected slots on its destruction). Each
+<classname>sigc::slot</classname> object also keeps, via
+<classname>sigc::slot_rep</classname>, its own
+<classname>sigc::trackable</classname> object to track any
+<classname>sigc::connection</classname> objects which it needs to
+inform about its demise, and also has a function to deregister itself
+from any <classname>sigc::trackable</classname> on disconnection or
+destruction. <classname>sigc::signal</classname> objects also keep
+lists of slots, which will be updated by a call to their
+<methodname>connect()</methodname> method or calls to any
+<classname>sigc::connection</classname> object relating to such a
+connection.
+</para>
+</footnote>
+</para>
+
+<sect2 id="the-rules">
+<title>The rules</title>
+
+<para>
+This requires a number of rules to be observed when writing
+multi-threaded programs using &gtkmm;. These are set out below, but
+one point to note is that extra care is required when deriving classes
+from <classname>sigc::trackable</classname>, because the effects are
+unintuitive (see particularly points 4 and 5 below).
+</para>
+
+<para>
+The rules for non-static methods apply also for static methods, if
+<function>sigc::mem_fun()</function> is used. It is better to use
+<function>sigc::ptr_fun()</function> for static methods.
+</para>
+
+<orderedlist>
+
+<listitem>
+<para>
+Use <classname>Glib::Dispatcher</classname> to invoke &gtkmm; functions
+from worker threads (this is dealt with in more detail in the next
+section).
+</para>
+</listitem>
+
+<listitem>
+<para>
+A <classname>sigc::signal</classname> object should be regarded as
+owned by the thread which created it. Only that thread should connect
+a <classname>sigc::slot</classname> object to the signal object, and
+only that thread should <methodname>emit()</methodname> or call
+<methodname>operator()()</methodname> on the signal, or null any
+connected <classname>sigc::slot</classname> object. It follows
+(amongst other things) that any signal object provided by a &gtkmm;
+widget should only be operated on in the main GUI thread and any
+object deriving from <classname>sigc::trackable</classname> having its
+non-static methods referenced by slots connected to the signal object
+should only be destroyed in that thread.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Any <classname>sigc::connection</classname> object should be regarded
+as owned by the thread in which the method returning the
+<classname>sigc::connection</classname> object was called. Only that
+thread should call <classname>sigc::connection</classname> methods on
+the object.
+</para>
+</listitem>
+
+<listitem>
+<para>
+A <classname>sigc::slot</classname> object which references a
+non-static method of a class deriving from
+<classname>sigc::trackable</classname> should never be copied to
+another thread, nor destroyed by a different thread than the one which
+created it (one consequence of this is that
+<methodname>Glib::Threads::Thread::create()</methodname> should not be called
+with a slot argument which represents a non-static method of such a
+class).
+</para>
+</listitem>
+
+<listitem>
+<para>
+If a particular class object derives from
+<classname>sigc::trackable</classname>, only one thread should create
+<classname>sigc::slot</classname> objects representing any of the
+class's non-static methods, that is, create slots with
+<function>sigc::mem_fun()</function>. The first thread to create such
+a slot should be regarded as owning the relevant object for the
+purpose of creating further slots referencing <emphasis>any</emphasis>
+of its non-static methods or nulling those slots by disconnecting them
+or destroying the trackable object.
+</para>
+</listitem>
+
+<listitem>
+<para>
+Although <application>glib</application> is itself thread-safe, any
+<application>glibmm</application> wrappers which use
+<application>libsigc++</application> will not be. So for example, only
+the thread in which a main loop runs should call
+<methodname>Glib::SignalIdle::connect()</methodname>,
+<methodname>Glib::SignalIO::connect()</methodname>,
+<methodname>Glib::SignalTimeout::connect()</methodname>,
+<methodname>Glib::SignalTimeout::connect_seconds</methodname>
+for that main loop, or manipulate any
+<classname>sigc::connection</classname> object returned by them.
+</para>
+<para>
+The connect*_once() variants,
+<methodname>Glib::SignalIdle::connect_once()</methodname>,
+<methodname>Glib::SignalTimeout::connect_once()</methodname>,
+<methodname>Glib::SignalTimeout::connect_seconds_once()</methodname>,
+are thread-safe for any case where the slot does not relate to a non-static
+method of a class deriving from <classname>sigc::trackable</classname>.
+</para>
+</listitem>
+
+</orderedlist>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="sec-using-glib-dispatcher">
+<title>Using Glib::Dispatcher</title>
+
+<para>
+The slots connected to <classname>sigc::signal</classname> objects
+execute in the thread which calls <methodname>emit()</methodname> or
+<methodname>operator()()</methodname> on the signal.
+<classname>Glib::Dispatcher</classname> does not behave this way:
+instead its connected slots execute in the thread in which the
+<classname>Glib::Dispatcher</classname> object was constructed (which
+must have a glib main loop). If a
+<classname>Glib::Dispatcher</classname> object is constructed in the
+main GUI thread (which will therefore be the receiver thread), any
+worker thread can emit on it and have the connected slots safely
+execute &gtkmm; functions.
+</para>
+
+<para>
+Some thread safety rules on the use of
+<classname>Glib::Dispatcher</classname> still apply. As mentioned, a
+<classname>Glib::Dispatcher</classname> object must be constructed in
+the receiver thread (the thread in whose main loop it will execute its
+connected slots). By default this is the main program thread, although
+there is a <classname>Glib::Dispatcher</classname> constructor which
+can take the <classname>Glib::MainContext</classname> object of any
+thread which has a main loop. Only the receiver thread should call
+<methodname>connect()</methodname> on the
+<classname>Glib::Dispatcher</classname> object, or manipulate any
+related <classname>sigc::connection</classname> object, unless
+additional synchronization is employed. However, any worker thread can
+safely emit on the <classname>Glib::Dispatcher</classname> object
+without any locking once the receiver thread has connected the slots,
+provided that it is constructed before the worker thread is started
+(if it is constructed after the thread has started, additional
+synchronization will normally be required to ensure visibility).
+</para>
+
+<para>
+Aside from the fact that connected slots always execute in the
+receiver thread, <classname>Glib::Dispatcher</classname> objects are
+similar to <classname>sigc::signal&lt;void&gt;</classname> objects.
+They therefore cannot pass unbound arguments nor return a value. The
+best way to pass unbound arguments is with a thread-safe
+(asynchronous) queue. At the time of writing
+<application>glibmm</application> does not have one, although most
+people writing multi-threaded code will have one available to them
+(they are relatively easy to write although there are subtleties in
+combining thread safety with strong exception safety).
+</para>
+
+<para>
+A <classname>Glib::Dispatcher</classname> object can be emitted on by
+the receiver thread as well as by a worker thread, although this
+should be done within reasonable bounds. On unix-like systems
+<classname>Glib::Dispatcher</classname> objects share a single common
+pipe, which could in theory at least fill up on a very heavily loaded
+system running a program with a very large number of
+<classname>Dispatcher</classname> objects in use. Were the pipe to
+fill up before the receiver thread's main loop has had an opportunity
+to read from it to empty it, and the receiver thread attempt to emit
+and so write to it when it is in that condition, the receiver thread
+would block on the write, so deadlocking. Where the receiver thread is
+to emit, a normal <classname>sigc::signal&lt;void&gt;</classname>
+object could of course be used instead.
+</para>
+
+</sect1>
 
 </chapter>
 
