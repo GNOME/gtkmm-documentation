@@ -1,3 +1,11 @@
+2013-02-19  Chris Vine  <chris@cvine.freeserve.co.uk>
+
+	Amend the "Multi-threaded programs" chapter.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Cover the use of std::bind(),
+	boost::bind() and C++11 lambda expressions to safely call
+	Glib::Threads::Thread::create(). Bug #512348.
+
 2013-02-17  Chris Vine  <chris@cvine.freeserve.co.uk>
 
 	Add "Multi-threaded programs" chapter.
