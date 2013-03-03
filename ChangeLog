@@ -1,5 +1,14 @@
 2013-03-03  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
+	Add some info to the custom/custom_container example.
+
+	* examples/book/custom/custom_container/mycontainer.cc: Add some comments and
+	commented-out code to the destructor. The code can be necessary, but it
+	should not be activated unless a version of gtkmm is used where bug 605728
+	has been fixed.
+
+2013-03-03  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
 	Fix 'make check' with the latest versions of glib and glibmm.
 
 	* examples/book/printing/simple/printformoperation.h: Put #include <gtkmm.h>
