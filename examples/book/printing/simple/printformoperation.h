@@ -17,8 +17,8 @@
 #ifndef GTKMM_PRINT_FORM_OPERATION_H
 #define GTKMM_PRINT_FORM_OPERATION_H
 
-#include <pangomm.h>
 #include <gtkmm.h>
+#include <pangomm.h>
 #include <vector>
 
 //We derive our own class from PrintOperation,

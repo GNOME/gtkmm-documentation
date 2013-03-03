@@ -1,3 +1,11 @@
+2013-03-03  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Fix 'make check' with the latest versions of glib and glibmm.
+
+	* examples/book/printing/simple/printformoperation.h: Put #include <gtkmm.h>
+	before <pangomm.h>. Necessary because <glib.h> must be included when
+	G_DISABLE_DEPRECATED is undefined. glibmm/threads.h uses deprecated stuff.
+
 2013-02-19  Chris Vine  <chris@cvine.freeserve.co.uk>
 
 	Amend the "Multi-threaded programs" chapter.
