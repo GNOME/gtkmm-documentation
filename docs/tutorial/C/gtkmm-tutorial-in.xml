@@ -4821,16 +4821,21 @@ There is a more complex example in examples/others/dnd.
 
 <chapter id="chapter-clipboard">
 <title>The Clipboard</title>
-<para>Simple text copy-paste functionality is provided for free by widgets such as Gtk::Entry and Gtk::TextView, but you might need special code to deal with your own data formats. For instance, a drawing program would need special code to allow copy and paste within a view, or between documents.</para>
+<para>Simple text copy-paste functionality is provided for free by widgets such as
+<classname>Gtk::Entry</classname> and <classname>Gtk::TextView</classname>,
+but you might need special code to deal with your own data formats. For instance,
+a drawing program would need special code to allow copy and paste within a view,
+or between documents.</para>
 
 <para>
-<classname>Gtk::Clipboard</classname> is a singleton. You can get the one and
-only instance with <methodname>Gtk::Clipboard::get()</methodname>.
+You can usually pretend that <classname>Gtk::Clipboard</classname> is a singleton.
+You can get the default clipboard instance with <methodname>Gtk::Clipboard::get()</methodname>.
+This is probably the only clipboard you will ever need.
 </para>
 
 <para>
-So your application doesn't need to wait for clipboard operations, particularly
-between the time when the user chooses Copy and then later chooses Paste, most
+Your application doesn't need to wait for clipboard operations, particularly
+between the time when the user chooses Copy and then later chooses Paste. Most
 <classname>Gtk::Clipboard</classname> methods take
 <classname>sigc::slot</classname>s which specify callback methods. When
 <classname>Gtk::Clipboard</classname> is ready, it will call these methods,
@@ -4846,7 +4851,10 @@ Different applications contain different types of data, and they might make that
 a variety of formats. &gtkmm; calls these data types <literal>target</literal>s.</para>
 
 <para>
-For instance, gedit can supply and receive the <literal>&quot;UTF8_STRING&quot;</literal> target, so you can paste data into gedit from any application that supplies that target. Or two different image editing applications might supply and receive a variety of image formats as targets. As long as one application can receive one of the targets that the other supplies then you will be able to copy data from one to the other.
+For instance, <application>gedit</application> can supply and receive the <literal>&quot;UTF8_STRING&quot;</literal>
+target, so you can paste data into <application>gedit</application> from any application that supplies that target.
+Or two different image editing applications might supply and receive a variety of image formats as targets.
+As long as one application can receive one of the targets that the other supplies then you will be able to copy data from one to the other.
 </para>
 
 <para>
@@ -4858,7 +4866,8 @@ overloads that allow you to specify the format in more detail if
 necessary.
 </para>
 
-<para>The <link linkend="chapter-draganddrop">Drag and Drop</link> API uses the same mechanism. You should probably use the same data targets and formats for both Clipboard and Drag and Drap operations.</para>
+<para>The <link linkend="chapter-draganddrop">Drag and Drop</link> API uses the same mechanism.
+You should probably use the same data targets and formats for both Clipboard and Drag and Drop operations.</para>
 </sect1>
 
 <sect1 id="sec-clipboard-copy">
@@ -4868,27 +4877,27 @@ When the user asks to copy some data, you should tell the
 <classname>Clipboard</classname> what targets are available, and provide the
 callback methods that it can use to get the data. At this point you should
 store a copy of the data, to be provided when the clipboard calls your callback
-method in repsonse to a paste.
+method in response to a paste.
 </para>
 <para>For instance,
 </para>
 <programlisting>Glib::RefPtr&lt;Gtk::Clipboard&gt; refClipboard = Gtk::Clipboard::get();
 
 //Targets:
-std::list&lt;Gtk::TargetEntry&gt; listTargets;
-listTargets.push_back( Gtk::TargetEntry(&quot;example_custom_target&quot;) );
-listTargets.push_back( Gtk::TargetEntry("UTF8_STRING") );
+std::vector&lt;Gtk::TargetEntry&gt; targets;
+targets.push_back( Gtk::TargetEntry(&quot;example_custom_target&quot;) );
+targets.push_back( Gtk::TargetEntry("UTF8_STRING") );
 
-refClipboard-&gt;set( listTargets,
+refClipboard-&gt;set( targets,
     sigc::mem_fun(*this, &amp;ExampleWindow::on_clipboard_get),
     sigc::mem_fun(*this, &amp;ExampleWindow::on_clipboard_clear) );</programlisting>
 
-<para>Your callback will then provide the store data when the user chooses to paste the data. For instance:
+<para>Your callback will then provide the stored data when the user chooses to paste the data. For instance:
 </para>
 <programlisting>void ExampleWindow::on_clipboard_get(
-    Gtk::SelectionData&amp; selection_data, guint info)
+    Gtk::SelectionData&amp; selection_data, guint /* info */)
 {
-  const Glib::ustring target = selection_data.get_target();
+  const std::string target = selection_data.get_target();
 
   if(target == &quot;example_custom_target&quot;)
     selection_data.set(&quot;example_custom_target&quot;, m_ClipboardStore);
@@ -4933,14 +4942,11 @@ with the information. For instance:
     &amp;ExampleWindow::on_clipboard_received_targets) );</programlisting>
 
 <para>
-In your callback, compare the list of available targets with those that your application supports for pasting. You could enable or disable a Paste menu item, depending on whether pasting is currently possible. For instance:
+In your callback, compare the vector of available targets with those that your application supports for pasting. You could enable or disable a Paste menu item, depending on whether pasting is currently possible. For instance:
 </para>
 <programlisting>void ExampleWindow::on_clipboard_received_targets(
-  const Glib::StringArrayHandle&amp; targets_array)
+  const std::vector&lt;Glib::ustring&gt;&amp; targets)
 {
-  // Get the list of available clipboard targets:
-  std::list&lt;std::string&gt; targets = targets_array;
-
   const bool bPasteIsPossible =
     std::find(targets.begin(), targets.end(),
       example_target_custom) != targets.end();

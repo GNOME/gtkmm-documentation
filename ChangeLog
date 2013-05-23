@@ -1,3 +1,13 @@
+2013-05-23  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Fix some details in the Clipboard chapter.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Fix some typos. Change std::list
+	and Glib::StringArrayHandle to std::vector in code snippets.
+	* examples/book/clipboard/ideal/examplewindow.[h|cc]: In gtkmm3
+	on_clipboard_received_targets() takes a std::vector.
+	Was a Glib::StringArrayHandle.
+
 2013-03-03  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Add some info to the custom/custom_container example.
