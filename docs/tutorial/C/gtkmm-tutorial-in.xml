@@ -4044,6 +4044,37 @@ when it is clicked.
 
 </sect1>
 
+<sect1 id="sec-about-dialog"><title>Non-modal AboutDialog</title>
+<para>
+The <classname>AboutDialog</classname> offers a simple way to display information
+about a program, like its logo, name, copyright, website and license.
+</para>
+<para>
+Most dialogs in this chapter are modal, that is, they freeze the rest of
+the application while they are shown. It's also possible to create a non-modal
+dialog, which does not freeze other windows in the application.
+The following example shows a non-modal <classname>AboutDialog</classname>. This is
+perhaps not the kind of dialog you would normally make non-modal, but non-modal
+dialogs can be useful in other cases. E.g. <application>gedit</application>'s
+search-and-replace dialog is non-modal.
+</para>
+
+<para><ulink url="&url_refdocs_base_gtk;AboutDialog.html">Reference</ulink></para>
+
+<sect2 id="aboutdialog-example">
+<title>Example</title>
+
+<figure id="figure-dialogs-about">
+  <title>AboutDialog</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;dialogs_about.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;dialogs/aboutdialog">Source Code</ulink></para>
+</sect2>
+
+</sect1>
 
 </chapter>
 

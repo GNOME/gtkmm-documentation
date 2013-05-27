@@ -33,6 +33,8 @@ protected:
   void on_about_dialog_response(int response_id);
 
   //Child widgets:
+  Gtk::Box m_VBox;
+  Gtk::Label m_Label;
   Gtk::ButtonBox m_ButtonBox;
   Gtk::Button m_Button;
   Gtk::AboutDialog m_Dialog;

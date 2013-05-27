@@ -1,3 +1,12 @@
+2013-05-27  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
+
+	Dialogs chapter: Add Non-modal AboutDialog section.
+
+	* docs/tutorial/C/gtkmm-tutorial-in.xml: Add a section that describes a
+	non-modal dialog, using Gtk::AboutDialog as an example.
+	* docs/tutorial/C/figures/dialogs_about.png: Update this figure.
+	* examples/book/dialogs/aboutdialog/examplewindow.[h|cc]: Add a label.
+
 2013-05-23  Kjell Ahlstedt <kjell.ahlstedt@bredband.net>
 
 	Fix some details in the Clipboard chapter.
