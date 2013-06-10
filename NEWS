@@ -1,3 +1,39 @@
+3.8.0:
+
+* Dialogs chapter: Add Non-modal AboutDialog section.
+  (Kjell Ahlstedt)
+* Fix some details in the Clipboard chapter.
+  (Kjell Ahlstedt)
+* Add some info to the custom/custom_container example.
+  (Kjell Ahlstedt)
+* Add "Multi-threaded programs" chapter.
+  (Chris Vine) Bug #512348
+* Builder examples: Update the Glade files to gtkmm3 status.
+  (Kjell Ahlstedt)
+* Update the description of Box to gtkmm3 status.
+  (Kjell Ahlstedt)
+* Fix the box example.
+  (Kjell Ahlstedt)
+* Fix the book/application/app_menu example.
+  (Kjell Ahlstedt) Bug #683645 (Tom Jaeger)
+* Clipboard and Socket examples: Make them non-unique.
+  (Kjell Ahlstedt) Bug #681323.
+* Basics, Simple Example: Synchronize code and description.
+  (Kjell Ahlstedt) Bug #681323.
+* I18n and L10n chapter: Fix broken links.
+  (Kjell Ahlstedt) Bug #680546.
+* gmmproc: _WRAP_METHOD: Include docs on wrapping methods with slots.
+  (José Alburquerque) Bug #688587
+* gmmproc: _WRAP_CTOR: Document the new "errthrow" extra argument option.
+  (José Alburquerque)
+* gmmproc: _WRAP_METHOD: Document gmmproc's output parameter functionality.
+  (José Alburquerque)
+* gmmproc: _WRAP_VFUNC: Add the errthrow optional parameter documentation.
+  (José Alburquerque)
+* Fix 'make check' with the latest versions of glib and glibmm.
+  (Kjell Ahlstedt)
+
+
 3.4.1:
 
 * Entry, ComboBox sections: Adapt because
