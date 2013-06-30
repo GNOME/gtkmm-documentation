@@ -9776,10 +9776,10 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
     <title>Output Parameter Processing</title>
     <para>
       With <function>_WRAP_METHOD()</function> it is also possible for the
-      return of the wrapped C function (if it has one) to be placed in output
-      paramter of the C++ method instead of having the C++ method also return a
-      value like the C function does.  To do that, simply include the output
-      parameter declaration in the C++ method declaration appending a
+      return of the wrapped C function (if it has one) to be placed in an
+      output paramter of the C++ method instead of having the C++ method also
+      return a value like the C function does.  To do that, simply include the
+      output parameter in the C++ method parameter list appending a
       <literal>{OUT}</literal> to the output parameter name.  For example, if
       <function>gtk_widget_get_request_mode()</function> is declared as the
       following:
