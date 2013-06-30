@@ -9728,6 +9728,19 @@ _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
 </para>
 </sect3>
 
+<sect3 id="gmmproc-wrap-enum-docs-only">
+<title>_WRAP_ENUM_DOCS_ONLY</title>
+<para>This macro just generates a Doxygen documentationn block for the enum.
+  This is useful for enums that can't be wrapped with
+  <function>_WRAP_ENUM()</function> because they are complexly defined (maybe
+  using C macros) but including the generated enum documentation is still
+  desired.  It is used with the same syntax as
+  <function>_WRAP_ENUM()</function> and also process the same options (though
+  NO_GTYPE is just ignored because it makes no differene when just generating
+  the enumm's documentation).
+</para>
+</sect3>
+
 <sect3 id="gmmproc-wrap-gerror">
 <title>_WRAP_GERROR</title>
 <para>This macro generates a C++ exception class, derived from Glib::Error, with
