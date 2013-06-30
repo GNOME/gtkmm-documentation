@@ -9731,6 +9731,16 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
         gtk_widget_set_device_events)
       </programlisting>
     </para>
+    <warning>
+      <para>
+        Please note that when reording parameters for a
+        <function>_WRAP_SIGNAL()</function> method signature, the C parameter
+        names would always be <literal>p0</literal>, <literal>p1</literal>,
+        etc. because the <filename>extra_defs</filename> utility uses those
+        parameter names no matter what the C API's parameter names may be.
+        It's how the utility is written presently.
+      </para>
+    </warning>
   </sect3>
 
   <sect3 id="gmmproc-optional-parameter-processing">
