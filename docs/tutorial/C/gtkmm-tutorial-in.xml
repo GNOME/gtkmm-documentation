@@ -9629,7 +9629,7 @@ _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
   desired.  It is used with the same syntax as
   <function>_WRAP_ENUM()</function> and also process the same options (though
   NO_GTYPE is just ignored because it makes no differene when just generating
-  the enumm's documentation).
+  the enum's documentation).
 </para>
 </sect3>
 
@@ -9713,7 +9713,7 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
         GdkEventMask events);
       </programlisting>
       However, changing the order of the C++ method's two parameters is
-      necessary.  Something like the following would wrap the function as C++
+      necessary.  Something like the following would wrap the function as a C++
       method with a different order for the two parameters:
       <programlisting>
         _WRAP_METHOD(void set_device_events(Gdk::EventMask events{events},
@@ -9772,7 +9772,7 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
     </para>
   </sect3>
 
-  <sect3 id="gmmproc-output-parameters">
+  <sect3 id="gmmproc-output-parameter-processing">
     <title>Output Parameter Processing</title>
     <para>
       With <function>_WRAP_METHOD()</function> it is also possible for the
@@ -9819,9 +9819,8 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
         GtkTreePath* path, GtkCellRenderer* cell, GdkRectangle* rect);
       </programlisting>
       To have <command>gmmproc</command> place the value returned in the C++
-      <parameter>rect</parameter> output parameter once the C function returns,
-      something like the following <function>_WRAP_METHOD()</function>
-      directive could be used:
+      <parameter>rect</parameter> output parameter, something like the
+      following <function>_WRAP_METHOD()</function> directive could be used:
       <programlisting>
         _WRAP_METHOD(bool get_cell_rect(const TreeModel::Path&amp; path, const
         CellRenderer&amp; cell, Gdk::Rectangle&amp; rect{>>}) const,
