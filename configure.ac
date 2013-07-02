@@ -17,6 +17,7 @@ AC_ARG_VAR([ACLOCAL_FLAGS], [aclocal flags, e.g. -I <macro dir>])
 
 AC_PROG_CXX
 AC_PATH_PROG([PERL], [perl], [perl])
+AC_PROG_SED
 
 PKG_CHECK_MODULES([GIOMM], [giomm-2.4 >= 2.32.0])
 PKG_CHECK_MODULES([GTKMM], [gtkmm-3.0 >= 3.4.0])
