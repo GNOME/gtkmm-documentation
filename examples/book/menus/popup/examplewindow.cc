@@ -1,6 +1,4 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
-/* gtkmm example Copyright (C) 2002 gtkmm development team
+/* gtkmm example Copyright (C) 2002-2013 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2
@@ -42,49 +40,52 @@ ExampleWindow::ExampleWindow()
 
   //Fill menu:
 
-  m_refActionGroup = Gtk::ActionGroup::create();
+  Glib::RefPtr<Gio::SimpleActionGroup> refActionGroup =
+    Gio::SimpleActionGroup::create();
 
   //File|New sub menu:
   //These menu actions would normally already exist for a main menu, because a
   //context menu should not normally contain menu items that are only available
   //via a context menu.
-  m_refActionGroup->add(Gtk::Action::create("ContextMenu", "Context Menu"));
 
-  m_refActionGroup->add(Gtk::Action::create("ContextEdit", "Edit"),
-          sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
+  refActionGroup->add_action("edit",
+    sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
 
-  m_refActionGroup->add(Gtk::Action::create("ContextProcess", "Process"),
-          Gtk::AccelKey("<control>P"),
-          sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
+  refActionGroup->add_action("process", //TODO: How to specify "<control>P" as an accelerator. 
+    sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
 
-  m_refActionGroup->add(Gtk::Action::create("ContextRemove", "Remove"),
-          sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
+  refActionGroup->add_action("remove",
+    sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
 
-  //TODO:
-  /*
-    //Add a ImageMenuElem:
-    menulist.push_back( Gtk::Menu_Helpers::ImageMenuElem("_Something", m_Image,
-      sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic) ) ) ;
-  */
+  insert_action_group("examplepopup", refActionGroup);
 
-  m_refUIManager = Gtk::UIManager::create();
-  m_refUIManager->insert_action_group(m_refActionGroup);
 
-  add_accel_group(m_refUIManager->get_accel_group());
+  m_refBuilder = Gtk::Builder::create();
 
   //Layout the actions in a menubar and toolbar:
   Glib::ustring ui_info =
-        "<ui>"
-        "  <popup name='PopupMenu'>"
-        "    <menuitem action='ContextEdit'/>"
-        "    <menuitem action='ContextProcess'/>"
-        "    <menuitem action='ContextRemove'/>"
-        "  </popup>"
-        "</ui>";
+    "<interface>"
+    "  <menu id='menu-examplepopup'>"
+    "    <section>"
+    "      <item>"
+    "        <attribute name='label' translatable='yes'>Edit</attribute>"
+    "        <attribute name='action'>examplepopup.edit</attribute>"
+    "      </item>"
+    "      <item>"
+    "        <attribute name='label' translatable='yes'>Process</attribute>"
+    "        <attribute name='action'>examplepopup.process</attribute>"
+    "      </item>"
+    "      <item>"
+    "        <attribute name='label' translatable='yes'>Remove</attribute>"
+    "        <attribute name='action'>examplepopup.remove</attribute>"
+    "      </item>"
+    "    </section>"
+    "  </menu>"
+    "</interface>";
 
   try
   {
-    m_refUIManager->add_ui_from_string(ui_info);
+    m_refBuilder->add_from_string(ui_info);
   }
   catch(const Glib::Error& ex)
   {
@@ -92,10 +93,14 @@ ExampleWindow::ExampleWindow()
   }
 
   //Get the menu:
-  m_pMenuPopup = dynamic_cast<Gtk::Menu*>(
-          m_refUIManager->get_widget("/PopupMenu")); 
-  if(!m_pMenuPopup)
-    g_warning("menu not found");
+  Glib::RefPtr<Glib::Object> object =
+    m_refBuilder->get_object("menu-examplepopup");
+  Glib::RefPtr<Gio::Menu> gmenu =
+    Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+  if(!gmenu)
+    g_warning("GMenu not found");
+
+  m_pMenuPopup = new Gtk::Menu(gmenu);
 
   show_all_children();
 }
@@ -113,8 +118,14 @@ bool ExampleWindow::on_button_press_event(GdkEventButton* event)
 {
   if( (event->type == GDK_BUTTON_PRESS) && (event->button == 3) )
   {
+    if(!m_pMenuPopup->get_attach_widget())
+    {
+      m_pMenuPopup->attach_to_widget(*this);
+    }
+
     if(m_pMenuPopup)
       m_pMenuPopup->popup(event->button, event->time);
+
 
     return true; //It has been handled.
   }

@@ -33,15 +33,19 @@ protected:
   void on_menu_file_quit();
   void on_menu_others();
 
-  void on_menu_choices_one();
-  void on_menu_choices_two();
+  void on_menu_choices(const Glib::ustring& parameter);
+  void on_menu_choices_other(int parameter);
+  void on_menu_toggle();
 
   //Child widgets:
   Gtk::Box m_Box;
 
-  Glib::RefPtr<Gtk::UIManager> m_refUIManager;
-  Glib::RefPtr<Gtk::ActionGroup> m_refActionGroup;
-  Glib::RefPtr<Gtk::RadioAction> m_refChoiceOne, m_refChoiceTwo;
+  Glib::RefPtr<Gtk::Builder> m_refBuilder;
+
+  //Two sets of choices:
+  Glib::RefPtr<Gio::SimpleAction> m_refChoice, m_refChoiceOther;
+
+  Glib::RefPtr<Gio::SimpleAction> m_refToggle;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

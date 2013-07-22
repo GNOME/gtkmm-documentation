@@ -77,62 +77,67 @@ ExampleWindow::~ExampleWindow()
 void ExampleWindow::build_main_menu()
 {
   //Create actions for menus and toolbars:
-  m_refActionGroup = Gtk::ActionGroup::create();
+  Glib::RefPtr<Gio::SimpleActionGroup> refActionGroup =
+   Gio::SimpleActionGroup::create();
 
   //File menu:
-  m_refActionGroup->add(
-    Gtk::Action::create("FileMenu", "_File"));
-
-  m_refActionGroup->add(
-    Gtk::Action::create("New", Gtk::Stock::NEW),
+  refActionGroup->add_action("new",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_new));
 
-  m_refActionGroup->add(
-    Gtk::Action::create("PageSetup", "Page _Setup"),
+  refActionGroup->add_action("pagesetup",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_page_setup));
 
-  m_refActionGroup->add(
-    Gtk::Action::create("PrintPreview", "Print Preview"),
+  refActionGroup->add_action("printpreview",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_print_preview));
 
-  m_refActionGroup->add(
-    Gtk::Action::create("Print", Gtk::Stock::PRINT),
+  refActionGroup->add_action("print",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_print));
 
-  m_refActionGroup->add(
-    Gtk::Action::create("Quit", Gtk::Stock::QUIT),
+  refActionGroup->add_action("quit",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_quit));
 
-  m_refUIManager = Gtk::UIManager::create();
-  m_refUIManager->insert_action_group(m_refActionGroup);
+  insert_action_group("example", refActionGroup);
+
+  m_refBuilder = Gtk::Builder::create();
  
-  add_accel_group(m_refUIManager->get_accel_group());
+  //TODO: add_accel_group(m_refBuilder->get_accel_group());
 
   //Layout the actions in a menubar and toolbar:
   
   Glib::ustring ui_info = 
-        "<ui>"
-        "  <menubar name='MenuBar'>"
-        "    <menu action='FileMenu'>"
-        "      <menuitem action='New'/>"
-        "      <menuitem action='PageSetup'/>"
-        "      <menuitem action='PrintPreview'/>"
-        "      <menuitem action='Print'/>"
-        "      <separator/>"
-        "      <menuitem action='Quit'/>"
-        "    </menu>"
-        "  </menubar>"
-        "  <toolbar  name='ToolBar'>"
+   "<interface>"
+    "  <menu id='menu-example'>"
+    "    <submenu>"
+    "      <attribute name='label' translatable='yes'>_File</attribute>"
+    "      <section>"
+    "        <item>"
+    "          <attribute name='label' translatable='yes'>Page _Setup</attribute>"
+    "          <attribute name='action'>example.pagesetup</attribute>"
+    "        </item>"
+    "        <item>"
+    "          <attribute name='label' translatable='yes'>Print Preview</attribute>"
+    "          <attribute name='action'>example.printpreview</attribute>"
+    "        </item>"
+    "        <item>"
+    "          <attribute name='label' translatable='yes'>_Print</attribute>"
+    "          <attribute name='action'>example.print</attribute>"
+    "        </item>"
+    "      </section>"
+    "    </submenu>"
+    "  </menu>"
+/* TODO:
+      "  <toolbar  name='ToolBar'>"
         "    <toolitem action='New'/>"
         "    <toolitem action='Print'/>"
         "      <separator/>"
         "    <toolitem action='Quit'/>"
         "  </toolbar>"
-        "</ui>";
+*/
+    "</interface>";
 
   try
   {      
-    m_refUIManager->add_ui_from_string(ui_info);
+    m_refBuilder->add_from_string(ui_info);
   }
   catch(const Glib::Error& ex)
   {
@@ -141,13 +146,21 @@ void ExampleWindow::build_main_menu()
 
 
   //Get the menubar and toolbar widgets, and add them to a container widget:
-  Gtk::Widget* pMenubar = m_refUIManager->get_widget("/MenuBar");
-  if(pMenubar)
-    m_VBox.pack_start(*pMenubar, Gtk::PACK_SHRINK);
+  Glib::RefPtr<Glib::Object> object =
+    m_refBuilder->get_object("menu-example");
+  Glib::RefPtr<Gio::Menu> gmenu =
+    Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+  if(!gmenu)
+    g_warning("GMenu not found");
 
-  Gtk::Widget* pToolbar = m_refUIManager->get_widget("/ToolBar") ;
+  Gtk::MenuBar* pMenubar = new Gtk::MenuBar(gmenu);
+  m_VBox.pack_start(*pMenubar, Gtk::PACK_SHRINK);
+
+/* TODO:
+  Gtk::Widget* pToolbar = m_refBuilder->get_widget("/ToolBar") ;
   if(pToolbar)
     m_VBox.pack_start(*pToolbar, Gtk::PACK_SHRINK);
+*/
 }
 
 void

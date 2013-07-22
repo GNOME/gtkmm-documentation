@@ -37,8 +37,7 @@ protected:
   Gtk::EventBox m_EventBox;
   Gtk::Label m_Label;
 
-  Glib::RefPtr<Gtk::UIManager> m_refUIManager;
-  Glib::RefPtr<Gtk::ActionGroup> m_refActionGroup;
+  Glib::RefPtr<Gtk::Builder> m_refBuilder;
 
   Gtk::Menu* m_pMenuPopup;
 };
