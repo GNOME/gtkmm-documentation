@@ -30,15 +30,15 @@ public:
 protected:
   //Signal handlers:
   virtual bool on_button_press_event(GdkEventButton* event);
-  void on_menu_file_popup_generic();
+  void on_menu_file_popup_generic(const Glib::VariantBase& /* parameter */);
 
   //Child widgets:
   Gtk::Box m_Box;
   Gtk::EventBox m_EventBox;
   Gtk::Label m_Label;
 
-  Glib::RefPtr<Gtk::UIManager> m_refUIManager;
-  Glib::RefPtr<Gtk::ActionGroup> m_refActionGroup;
+  Glib::RefPtr<Gtk::Builder> m_refBuilder;
+  Glib::RefPtr<Gio::SimpleActionGroup> m_refActionGroup;
 
   Gtk::Menu* m_pMenuPopup;
 };
