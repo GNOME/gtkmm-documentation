@@ -50,13 +50,13 @@ ExampleWindow::ExampleWindow()
   m_refActionGroup->add_action("edit",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
 
-  m_refActionGroup->add_action("edit", //TODO: How to specify "<control>P" as an accelerator. 
+  m_refActionGroup->add_action("process", //TODO: How to specify "<control>P" as an accelerator. 
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
 
   m_refActionGroup->add_action("remove",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
 
-  insert_action_group("menu-examplepopup", m_refActionGroup);
+  insert_action_group("examplepopup", m_refActionGroup);
 
 
   m_refBuilder = Gtk::Builder::create();
