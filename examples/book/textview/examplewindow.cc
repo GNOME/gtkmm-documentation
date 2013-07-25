@@ -20,14 +20,13 @@
 
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::ORIENTATION_VERTICAL),
-  m_Button_Quit(Gtk::Stock::QUIT),
+  m_Button_Quit("_Quit", true),
   m_Button_Buffer1("Use buffer 1"),
   m_Button_Buffer2("Use buffer 2")
 {
   set_title("Gtk::TextView example");
   set_border_width(5);
   set_default_size(400, 200);
-
 
   add(m_VBox);
 

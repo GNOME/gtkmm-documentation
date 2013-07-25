@@ -21,11 +21,11 @@
 
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::ORIENTATION_VERTICAL),
-  m_Button_Close("Close")
+  m_Button_Close("_Close", true)
 {
   set_title("Gtk::Toolbar example");
   //The toolbar will not demand any size, because it has an overflow menu.
-  set_size_request(300, 300);
+  set_size_request(300, 200);
 
   add(m_VBox);
 
@@ -42,10 +42,11 @@ ExampleWindow::ExampleWindow()
 
   //Add the toolbar items:
   {
-    //You would normally use the UIManager, and Actions, to create the menus and
+    //You would normally use the Builder and Gio::Actions to create the menus and
     //toolbars together, because toolbar items should just be a way to do what
-    //is also in a menu.  TODO: Use UIManager instead here. See the demo for an
-    //example.:
+    //is also in a menu.
+
+    m_Toolbar.set_toolbar_style(Gtk::TOOLBAR_BOTH);
 
     Gtk::ToolButton* item = Gtk::manage(new Gtk::ToolButton("Click me"));
     //item.set_tooltips(*tooltips, "Toolbar item");
@@ -55,7 +56,10 @@ ExampleWindow::ExampleWindow()
 
     m_Toolbar.append( *(Gtk::manage(new Gtk::SeparatorToolItem)) );
 
-    item = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::SAVE));
+    item = Gtk::manage(new Gtk::ToolButton("_Save"));
+    item->set_use_underline();
+    item->set_icon_name("document-save");
+    item->set_homogeneous(false);
     m_Toolbar.append(*item);
     item->signal_clicked().connect( sigc::mem_fun(*this,
                 &ExampleWindow::on_toolbar_item) );
@@ -66,7 +70,6 @@ ExampleWindow::ExampleWindow()
     item->signal_clicked().connect( sigc::mem_fun(*this,
                 &ExampleWindow::on_toolbar_item) );
 
-    //TODO: These don't actually seem to work:
     Gtk::RadioButtonGroup group;
     m_Toolbar.append( *Gtk::manage(
                 new Gtk::RadioToolButton(group, "Radio 1")) );

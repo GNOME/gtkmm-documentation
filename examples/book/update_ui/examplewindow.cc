@@ -22,7 +22,7 @@
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::ORIENTATION_VERTICAL),
   m_Button_Start("Start"),
-  m_Button_Quit(Gtk::Stock::QUIT)
+  m_Button_Quit("_Quit", true)
 {
   set_title("update-ui example");
   set_border_width(6);
