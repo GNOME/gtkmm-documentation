@@ -40,47 +40,48 @@ ExampleWindow::ExampleWindow()
 
   //Fill menu:
 
-  m_refActionGroup = Gio::SimpleActionGroup::create();
+  Glib::RefPtr<Gio::SimpleActionGroup> refActionGroup =
+    Gio::SimpleActionGroup::create();
 
   //File|New sub menu:
   //These menu actions would normally already exist for a main menu, because a
   //context menu should not normally contain menu items that are only available
   //via a context menu.
 
-  m_refActionGroup->add_action("edit",
+  refActionGroup->add_action("edit",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
 
-  m_refActionGroup->add_action("process", //TODO: How to specify "<control>P" as an accelerator. 
+  refActionGroup->add_action("process", //TODO: How to specify "<control>P" as an accelerator. 
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
 
-  m_refActionGroup->add_action("remove",
+  refActionGroup->add_action("remove",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
 
-  insert_action_group("examplepopup", m_refActionGroup);
+  insert_action_group("examplepopup", refActionGroup);
 
 
   m_refBuilder = Gtk::Builder::create();
 
   //Layout the actions in a menubar and toolbar:
   Glib::ustring ui_info =
-        "<interface>"
-        "  <menu id='menu-examplepopup'>"
-        "    <section>"
-        "      <item>"
-        "        <attribute name='label' translatable='yes'>Edit</attribute>"
-        "        <attribute name='action'>examplepopup.edit</attribute>"
-        "      </item>"
-        "      <item>"
-        "        <attribute name='label' translatable='yes'>Process</attribute>"
-        "        <attribute name='action'>examplepopup.process</attribute>"
-        "      </item>"
-        "      <item>"
-        "        <attribute name='label' translatable='yes'>Remove</attribute>"
-        "        <attribute name='action'>examplepopup.remove</attribute>"
-        "      </item>"
-        "    </section>"
-        "  </menu>"
-        "</interface>";
+    "<interface>"
+    "  <menu id='menu-examplepopup'>"
+    "    <section>"
+    "      <item>"
+    "        <attribute name='label' translatable='yes'>Edit</attribute>"
+    "        <attribute name='action'>examplepopup.edit</attribute>"
+    "      </item>"
+    "      <item>"
+    "        <attribute name='label' translatable='yes'>Process</attribute>"
+    "        <attribute name='action'>examplepopup.process</attribute>"
+    "      </item>"
+    "      <item>"
+    "        <attribute name='label' translatable='yes'>Remove</attribute>"
+    "        <attribute name='action'>examplepopup.remove</attribute>"
+    "      </item>"
+    "    </section>"
+    "  </menu>"
+    "</interface>";
 
   try
   {

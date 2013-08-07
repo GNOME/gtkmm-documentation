@@ -38,7 +38,6 @@ protected:
   Gtk::Label m_Label;
 
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
-  Glib::RefPtr<Gio::SimpleActionGroup> m_refActionGroup;
 
   Gtk::Menu* m_pMenuPopup;
 };
