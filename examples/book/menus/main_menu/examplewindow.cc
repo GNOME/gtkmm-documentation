@@ -65,6 +65,10 @@ ExampleWindow::ExampleWindow()
     sigc::mem_fun(*this, &ExampleWindow::on_menu_choices_other),
     1);
 
+  m_refToggle = refActionGroup->add_action_bool("sometoggle",
+    sigc::mem_fun(*this, &ExampleWindow::on_menu_toggle),
+    false);
+
 
   //Help menu:
   refActionGroup->add_action("about",
@@ -147,6 +151,12 @@ ExampleWindow::ExampleWindow()
     "          <attribute name='label' translatable='yes'>Choice 2</attribute>"
     "          <attribute name='action'>example.choiceother</attribute>"
     "          <attribute name='target' type='i'>2</attribute>"
+    "        </item>"
+    "      </section>"
+    "      <section>"
+    "        <item>"
+    "          <attribute name='label' translatable='yes'>Some Toggle</attribute>"
+    "          <attribute name='action'>example.sometoggle</attribute>"
     "        </item>"
     "      </section>"
     "    </submenu>"
@@ -235,6 +245,7 @@ void ExampleWindow::on_menu_choices(const Glib::ustring& parameter)
 
 void ExampleWindow::on_menu_choices_other(int parameter)
 {
+  //The radio action's state does not change automatically:
   m_refChoice->set_state(
    Glib::Variant<int>::create(parameter) );
 
@@ -243,6 +254,25 @@ void ExampleWindow::on_menu_choices_other(int parameter)
     message = "Choice 1 was selected.";
   else
     message = "Choice 2 was selected";
+
+  std::cout << message << std::endl;
+}
+
+void ExampleWindow::on_menu_toggle()
+{
+  bool active = false;
+  m_refToggle->get_state(active);
+
+  //The toggle action's state does not change automatically:
+  m_refToggle->set_state(
+   Glib::Variant<bool>::create(!active) );
+  active = !active;
+
+  Glib::ustring message;
+  if(active)
+    message = "Toggle is active.";
+  else
+    message = "Toggle is not active";
 
   std::cout << message << std::endl;
 }
