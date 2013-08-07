@@ -18,8 +18,8 @@
 
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::ORIENTATION_VERTICAL, 6),
-  m_Button_Quit(Gtk::Stock::QUIT),
-  m_Button_Clear("Clear")
+  m_Button_Quit("_Quit", true),
+  m_Button_Clear("_Clear", true)
 {
   set_title("Gtk::InfoBar example");
   set_border_width(6);
@@ -34,7 +34,7 @@ ExampleWindow::ExampleWindow()
     infoBarContainer->add(m_Message_Label);
 
   // Add an ok button to the InfoBar:
-  m_InfoBar.add_button(Gtk::Stock::OK, 0);
+  m_InfoBar.add_button("_OK", 0);
 
   // Add the InfoBar to the vbox:
   m_VBox.pack_start(m_InfoBar, Gtk::PACK_SHRINK);

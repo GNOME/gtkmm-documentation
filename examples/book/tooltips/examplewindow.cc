@@ -99,7 +99,7 @@ void ExampleWindow::prepare_textview()
   m_ref_text_buffer->insert_with_tags(iter, "in bold", tags);
 
   iter = m_ref_text_buffer->end();
-  m_ref_text_buffer->insert(iter, " to see its' tooltip");
+  m_ref_text_buffer->insert(iter, " to see its tooltip");
 
   m_text_view.set_buffer(m_ref_text_buffer);
 
@@ -158,7 +158,7 @@ bool ExampleWindow::on_textview_query_tooltip(int x, int y, bool keyboard_toolti
   if (iter.has_tag(m_ref_bold_tag))
   {
     tooltip->set_markup("<b>Information</b> attached to a text tag");
-    tooltip->set_icon_from_stock (Gtk::Stock::INFO, Gtk::ICON_SIZE_MENU);
+    tooltip->set_icon_from_icon_name("dialog-information", Gtk::ICON_SIZE_MENU);
   }
   else
   {

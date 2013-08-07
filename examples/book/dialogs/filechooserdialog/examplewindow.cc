@@ -51,7 +51,7 @@ void ExampleWindow::on_button_folder_clicked()
   dialog.set_transient_for(*this);
 
   //Add response buttons the the dialog:
-  dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+  dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
   dialog.add_button("Select", Gtk::RESPONSE_OK);
 
   int result = dialog.run();
@@ -86,8 +86,8 @@ void ExampleWindow::on_button_file_clicked()
   dialog.set_transient_for(*this);
 
   //Add response buttons the the dialog:
-  dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
-  dialog.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
+  dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
+  dialog.add_button("_Open", Gtk::RESPONSE_OK);
 
   //Add filters, so that only certain file types can be selected:
 

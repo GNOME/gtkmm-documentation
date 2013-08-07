@@ -20,7 +20,7 @@
 
 IdleExample::IdleExample() :
   m_Box(Gtk::ORIENTATION_VERTICAL, 5),
-  m_ButtonQuit(Gtk::Stock::QUIT)
+  m_ButtonQuit("_Quit", true)
 {
   set_border_width(5);
 

@@ -31,7 +31,7 @@ ExampleWindow::ExampleWindow()
   m_Entry.set_text("Hello world");
   m_VBox.pack_start(m_Entry, Gtk::PACK_SHRINK);
 
-  m_Entry.set_icon_from_stock(Gtk::Stock::FIND);
+  m_Entry.set_icon_from_icon_name("edit-find");
   m_Entry.signal_icon_press().connect( sigc::mem_fun(*this, &ExampleWindow::on_icon_pressed) );
  
 

@@ -74,6 +74,7 @@ check_PROGRAMS =					\
 	book/menus/main_menu/main_menu			\
 	book/menus/popup/popup				\
 	book/menus_and_toolbars/example			\
+	book/multithread/example			\
 	book/notebook/example				\
 	book/paned/example				\
 	book/printing/advanced/example			\
@@ -475,6 +476,13 @@ book_menus_and_toolbars_example_SOURCES =	\
 	book/menus_and_toolbars/examplewindow.cc\
 	book/menus_and_toolbars/examplewindow.h	\
 	book/menus_and_toolbars/main.cc
+
+book_multithread_example_SOURCES =	\
+	book/multithread/examplewindow.cc\
+	book/multithread/examplewindow.h	\
+	book/multithread/exampleworker.cc\
+	book/multithread/exampleworker.h	\
+	book/multithread/main.cc
 
 book_notebook_example_SOURCES =		\
 	book/notebook/examplewindow.cc	\

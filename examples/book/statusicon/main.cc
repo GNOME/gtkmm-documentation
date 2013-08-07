@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 
   //Use your own icon in real life.
   Glib::RefPtr<Gtk::StatusIcon> status_icon =
-      Gtk::StatusIcon::create(Gtk::Stock::HELP);
+      Gtk::StatusIcon::create("help-browser");
   status_icon->set_tooltip_text("gtkmm StatusIcon example tooltip.");
 
   //Show a window:

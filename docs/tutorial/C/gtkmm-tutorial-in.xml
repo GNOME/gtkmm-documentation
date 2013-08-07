@@ -7469,6 +7469,35 @@ object could of course be used instead.
 
 </sect1>
 
+<sect1 id="sec-multithread-example">
+<title>Example</title>
+<para>
+This is an example program with two threads, one GUI thread, like in all
+&gtkmm; programs, and one worker thread. The worker thread is created when you
+press the <literal>Start work</literal> button. It is deleted when the work is
+finished, when you press the <literal>Stop work</literal> button, or when you
+press the <literal>Quit</literal> button.
+</para>
+
+<para>
+A <classname>Glib::Dispatcher</classname> is used for sending notifications
+from the worker thread to the GUI thread. The <classname>ExampleWorker</classname>
+class contains data which is accessed by both threads. This data is protected
+by a <classname>Glib::Threads::Mutex</classname>.
+Only the GUI thread updates the GUI.
+</para>
+
+<figure id="figure-multithread">
+  <title>Multi-Threaded Program</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;multithread.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;multithread">Source Code</ulink></para>
+
+</sect1>
+
 </chapter>
 
 <chapter id="chapter-recommended-techniques">

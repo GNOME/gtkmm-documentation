@@ -23,7 +23,7 @@ ExampleWindow::ExampleWindow()
   m_Label("Select cells in the grid, click Copy, then open a second "
         "instance of this example to try pasting the copied data."),
   m_ButtonA1("A1"), m_ButtonA2("A2"), m_ButtonB1("B1"), m_ButtonB2("B2"),
-  m_Button_Copy(Gtk::Stock::COPY), m_Button_Paste(Gtk::Stock::PASTE)
+  m_Button_Copy("_Copy", /* mnemonic= */ true), m_Button_Paste("_Paste", true)
 {
   set_title("Gtk::Clipboard example");
   set_border_width(12);

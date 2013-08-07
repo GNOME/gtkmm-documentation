@@ -21,9 +21,9 @@
 TimerExample::TimerExample() :
   m_Box(Gtk::ORIENTATION_HORIZONTAL, 10),
     // use Gtk::Stock wherever possible for buttons, etc.
-  m_ButtonAddTimer(Gtk::Stock::ADD),
-  m_ButtonDeleteTimer(Gtk::Stock::REMOVE),
-  m_ButtonQuit(Gtk::Stock::QUIT),
+  m_ButtonAddTimer("_Add", true),
+  m_ButtonDeleteTimer("_Remove", true),
+  m_ButtonQuit("_Quit", true),
   m_timer_number(0), // start numbering the timers at 0
   count_value(5), // each timer will count down 5 times before disconnecting
   timeout_value(1500) // 1500 ms = 1.5 seconds
