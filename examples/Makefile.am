@@ -82,6 +82,7 @@ check_PROGRAMS =					\
 	book/progressbar/example			\
 	book/range_widgets/example			\
 	book/recent_files/example			\
+	book/revealer/example				\
 	book/scrolledwindow/example			\
 	book/signals/custom/example			\
 	book/socket/plug				\
@@ -528,6 +529,11 @@ book_recent_files_example_SOURCES =		\
 	book/recent_files/examplewindow.cc	\
 	book/recent_files/examplewindow.h	\
 	book/recent_files/main.cc
+
+book_revealer_example_SOURCES =		\
+	book/revealer/examplewindow.cc	\
+	book/revealer/examplewindow.h	\
+	book/revealer/main.cc
 
 book_scrolledwindow_example_SOURCES =		\
 	book/scrolledwindow/examplewindow.cc	\
