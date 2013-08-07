@@ -14,16 +14,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef GTKMM_REVEALERWINDOW_H
-#define GTKMM_REVEALERWINDOW_H
+#ifndef GTKMM_EXAMPLEWINDOW_H
+#define GTKMM_EXAMPLEWINDOW_H
 
 #include <gtkmm.h>
 
-class RevealerWindow : public Gtk::Window
+class ExampleWindow : public Gtk::Window
 {
 public:
-  RevealerWindow();
-  virtual ~RevealerWindow();
+  ExampleWindow();
+  virtual ~ExampleWindow();
 
 protected:
   // Slots
@@ -50,5 +50,5 @@ private:
   Gtk::RevealerTransitionType get_selected_transition_type();
 };
 
-#endif // GTKMM_REVEALERWINDOW_H
+#endif // GTKMM_EXAMPLEWINDOW_H
 
