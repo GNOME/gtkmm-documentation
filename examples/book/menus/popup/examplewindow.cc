@@ -108,7 +108,7 @@ ExampleWindow::~ExampleWindow()
 {
 }
 
-void ExampleWindow::on_menu_file_popup_generic(const Glib::VariantBase& /* parameter */)
+void ExampleWindow::on_menu_file_popup_generic()
 {
    std::cout << "A popup menu item was selected." << std::endl;
 }
