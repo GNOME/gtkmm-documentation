@@ -75,6 +75,7 @@ DOC_FIGURES =					\
 	figures/menus_and_toolbars.png		\
 	figures/menus_menu.png			\
 	figures/menus_menubar.png		\
+	figures/multithread.png		\
 	figures/notebook.png			\
 	figures/paned.png			\
 	figures/printing.png			\
