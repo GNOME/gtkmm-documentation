@@ -70,8 +70,7 @@ protected:
   unsigned m_ContextId;
   Gtk::Statusbar m_Statusbar;
 
-  Glib::RefPtr<Gtk::UIManager> m_refUIManager;
-  Glib::RefPtr<Gtk::ActionGroup> m_refActionGroup;
+  Glib::RefPtr<Gtk::Builder> m_refBuilder;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H
