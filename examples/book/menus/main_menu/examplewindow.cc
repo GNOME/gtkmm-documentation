@@ -231,8 +231,7 @@ void ExampleWindow::on_menu_others()
 void ExampleWindow::on_menu_choices(const Glib::ustring& parameter)
 {
   //The radio action's state does not change automatically:
-  m_refChoice->change_state(
-    Glib::Variant<Glib::ustring>::create(parameter) );
+  m_refChoice->change_state(parameter);
   
   Glib::ustring message;
   if(parameter == "a")
@@ -246,8 +245,7 @@ void ExampleWindow::on_menu_choices(const Glib::ustring& parameter)
 void ExampleWindow::on_menu_choices_other(int parameter)
 {
   //The radio action's state does not change automatically:
-  m_refChoice->change_state(
-   Glib::Variant<int>::create(parameter) );
+  m_refChoice->change_state(parameter);
 
   Glib::ustring message;
   if(parameter == 1)
@@ -264,8 +262,7 @@ void ExampleWindow::on_menu_toggle()
   m_refToggle->get_state(active);
 
   //The toggle action's state does not change automatically:
-  m_refToggle->change_state(
-   Glib::Variant<bool>::create(!active) );
+  m_refToggle->change_state(!active);
   active = !active;
 
   Glib::ustring message;
