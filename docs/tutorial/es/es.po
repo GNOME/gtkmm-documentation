@@ -19,8 +19,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation.tutorial.master\n"
-"POT-Creation-Date: 2013-08-07 08:02+0000\n"
-"PO-Revision-Date: 2013-09-05 13:07+0200\n"
+"POT-Creation-Date: 2013-09-05 11:16+0000\n"
+"PO-Revision-Date: 2013-09-09 12:39+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -7038,7 +7038,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:4047(title)
 msgid "Non-modal AboutDialog"
-msgstr ""
+msgstr "AboutDialog no modal"
 
 #: C/gtkmm-tutorial-in.xml:4048(para)
 msgid ""
@@ -7046,6 +7046,9 @@ msgid ""
 "information about a program, like its logo, name, copyright, website and "
 "license."
 msgstr ""
+"La clase <classname>AboutDialog</classname> ofrece una manera sencilla de "
+"mostrar información sobre el programa, como su logo, nombre, copyright, "
+"página web y licencia."
 
 #: C/gtkmm-tutorial-in.xml:4052(para)
 msgid ""
@@ -7059,10 +7062,9 @@ msgid ""
 msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:4068(title)
-#, fuzzy
 #| msgid "Dialogs"
 msgid "AboutDialog"
-msgstr "Diálogos"
+msgstr "AboutDialog"
 
 #: C/gtkmm-tutorial-in.xml:4082(title)
 msgid "The Drawing Area Widget"
@@ -8298,11 +8300,6 @@ msgid "The Clipboard"
 msgstr "El portapapeles"
 
 #: C/gtkmm-tutorial-in.xml:4855(para)
-#| msgid ""
-#| "Simple text copy-paste functionality is provided for free by widgets such "
-#| "as Gtk::Entry and Gtk::TextView, but you might need special code to deal "
-#| "with your own data formats. For instance, a drawing program would need "
-#| "special code to allow copy and paste within a view, or between documents."
 msgid ""
 "Simple text copy-paste functionality is provided for free by widgets such as "
 "<classname>Gtk::Entry</classname> and <classname>Gtk::TextView</classname>, "
@@ -8317,9 +8314,6 @@ msgstr ""
 "permitir copiar y pegar dentro de una vista, o entre documentos."
 
 #: C/gtkmm-tutorial-in.xml:4861(para)
-#| msgid ""
-#| "<classname>Gtk::Clipboard</classname> is a singleton. You can get the one "
-#| "and only instance with <methodname>Gtk::Clipboard::get()</methodname>."
 msgid ""
 "You can usually pretend that <classname>Gtk::Clipboard</classname> is a "
 "singleton. You can get the default clipboard instance with <methodname>Gtk::"
@@ -8332,13 +8326,6 @@ msgstr ""
 "necesitará."
 
 #: C/gtkmm-tutorial-in.xml:4867(para)
-#| msgid ""
-#| "So your application doesn't need to wait for clipboard operations, "
-#| "particularly between the time when the user chooses Copy and then later "
-#| "chooses Paste, most <classname>Gtk::Clipboard</classname> methods take "
-#| "<classname>sigc::slot</classname>s which specify callback methods. When "
-#| "<classname>Gtk::Clipboard</classname> is ready, it will call these "
-#| "methods, either providing the requested data, or asking for data."
 msgid ""
 "Your application doesn't need to wait for clipboard operations, particularly "
 "between the time when the user chooses Copy and then later chooses Paste. "
@@ -8369,13 +8356,6 @@ msgstr ""
 "application> llama a estos tipos de datos <literal>objetivos</literal>."
 
 #: C/gtkmm-tutorial-in.xml:4884(para)
-#| msgid ""
-#| "For instance, gedit can supply and receive the <literal>\"UTF8_STRING\"</"
-#| "literal> target, so you can paste data into gedit from any application "
-#| "that supplies that target. Or two different image editing applications "
-#| "might supply and receive a variety of image formats as targets. As long "
-#| "as one application can receive one of the targets that the other supplies "
-#| "then you will be able to copy data from one to the other."
 msgid ""
 "For instance, <application>gedit</application> can supply and receive the "
 "<literal>\"UTF8_STRING\"</literal> target, so you can paste data into "
@@ -8411,10 +8391,6 @@ msgstr ""
 "permiten especificar el formato en mayor detalle si es necesario."
 
 #: C/gtkmm-tutorial-in.xml:4900(para)
-#| msgid ""
-#| "The <link linkend=\"chapter-draganddrop\">Drag and Drop</link> API uses "
-#| "the same mechanism. You should probably use the same data targets and "
-#| "formats for both Clipboard and Drag and Drap operations."
 msgid ""
 "The <link linkend=\"chapter-draganddrop\">Drag and Drop</link> API uses the "
 "same mechanism. You should probably use the same data targets and formats "
@@ -8426,12 +8402,6 @@ msgstr ""
 "portapapeles."
 
 #: C/gtkmm-tutorial-in.xml:4906(para)
-#| msgid ""
-#| "When the user asks to copy some data, you should tell the "
-#| "<classname>Clipboard</classname> what targets are available, and provide "
-#| "the callback methods that it can use to get the data. At this point you "
-#| "should store a copy of the data, to be provided when the clipboard calls "
-#| "your callback method in repsonse to a paste."
 msgid ""
 "When the user asks to copy some data, you should tell the "
 "<classname>Clipboard</classname> what targets are available, and provide the "
@@ -8448,17 +8418,6 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:4915(programlisting)
 #, no-wrap
-#| msgid ""
-#| "Glib::RefPtr&lt;Gtk::Clipboard&gt; refClipboard = Gtk::Clipboard::get();\n"
-#| "\n"
-#| "//Targets:\n"
-#| "std::list&lt;Gtk::TargetEntry&gt; listTargets;\n"
-#| "listTargets.push_back( Gtk::TargetEntry(\"example_custom_target\") );\n"
-#| "listTargets.push_back( Gtk::TargetEntry(\"UTF8_STRING\") );\n"
-#| "\n"
-#| "refClipboard-&gt;set( listTargets,\n"
-#| "    sigc::mem_fun(*this, &amp;ExampleWindow::on_clipboard_get),\n"
-#| "    sigc::mem_fun(*this, &amp;ExampleWindow::on_clipboard_clear) );"
 msgid ""
 "Glib::RefPtr&lt;Gtk::Clipboard&gt; refClipboard = Gtk::Clipboard::get();\n"
 "\n"
@@ -8483,9 +8442,6 @@ msgstr ""
 "    sigc::mem_fun(*this, &amp;ExampleWindow::on_clipboard_clear) );"
 
 #: C/gtkmm-tutorial-in.xml:4926(para)
-#| msgid ""
-#| "Your callback will then provide the store data when the user chooses to "
-#| "paste the data. For instance:"
 msgid ""
 "Your callback will then provide the stored data when the user chooses to "
 "paste the data. For instance:"
@@ -8495,15 +8451,6 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:4928(programlisting)
 #, no-wrap
-#| msgid ""
-#| "void ExampleWindow::on_clipboard_get(\n"
-#| "    Gtk::SelectionData&amp; selection_data, guint info)\n"
-#| "{\n"
-#| "  const Glib::ustring target = selection_data.get_target();\n"
-#| "\n"
-#| "  if(target == \"example_custom_target\")\n"
-#| "    selection_data.set(\"example_custom_target\", m_ClipboardStore);\n"
-#| "}"
 msgid ""
 "void ExampleWindow::on_clipboard_get(\n"
 "    Gtk::SelectionData&amp; selection_data, guint /* info */)\n"
@@ -8609,11 +8556,6 @@ msgstr ""
 "    &amp;ExampleWindow::on_clipboard_received_targets) );"
 
 #: C/gtkmm-tutorial-in.xml:4975(para)
-#| msgid ""
-#| "In your callback, compare the list of available targets with those that "
-#| "your application supports for pasting. You could enable or disable a "
-#| "Paste menu item, depending on whether pasting is currently possible. For "
-#| "instance:"
 msgid ""
 "In your callback, compare the vector of available targets with those that "
 "your application supports for pasting. You could enable or disable a Paste "
@@ -8626,20 +8568,6 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:4978(programlisting)
 #, no-wrap
-#| msgid ""
-#| "void ExampleWindow::on_clipboard_received_targets(\n"
-#| "  const Glib::StringArrayHandle&amp; targets_array)\n"
-#| "{\n"
-#| "  // Get the list of available clipboard targets:\n"
-#| "  std::list&lt;std::string&gt; targets = targets_array;\n"
-#| "\n"
-#| "  const bool bPasteIsPossible =\n"
-#| "    std::find(targets.begin(), targets.end(),\n"
-#| "      example_target_custom) != targets.end();\n"
-#| "\n"
-#| "  // Enable/Disable the Paste button appropriately:\n"
-#| "  m_Button_Paste.set_sensitive(bPasteIsPossible);\n"
-#| "}"
 msgid ""
 "void ExampleWindow::on_clipboard_received_targets(\n"
 "  const std::vector&lt;Glib::ustring&gt;&amp; targets)\n"
@@ -12881,9 +12809,13 @@ msgid ""
 "is protected by a <classname>Glib::Threads::Mutex</classname>. Only the GUI "
 "thread updates the GUI."
 msgstr ""
+"Se usa un <classname>Glib::Dispatcher</classname> para enviar notificaciones "
+"desde el hilo activo al hilo de la IGU. La clase <classname>ExampleWorker</"
+"classname> contiene datos a los que acceden ambos hilos. Estos datos están "
+"protegidos por una clase <classname>Glib::Threads::Mutex</classname>. Sólo "
+"el hilo de la IGU actualiza la propia IGU."
 
 #: C/gtkmm-tutorial-in.xml:7491(title)
-#| msgid "Multi-threaded programs"
 msgid "Multi-Threaded Program"
 msgstr "Programa con múltiples hilos"
 
@@ -16518,13 +16450,6 @@ msgid "slot_name"
 msgstr "slot_name"
 
 #: C/gtkmm-tutorial-in.xml:9332(para) C/gtkmm-tutorial-in.xml:9568(para)
-#| msgid ""
-#| "Tells <function>_WRAP_METHOD()</function> the name of the slot parameter "
-#| "of the method, if it has one. This enables gmmproc to generate code to "
-#| "copy the slot and pass the copy on to the C function in its final "
-#| "<literal>gpointer user_data</literal> parameter. The "
-#| "<literal>slot_callback</literal> option must also be used to specify the "
-#| "name of the glue callback function to also pass on to the C function."
 msgid ""
 "Specifies the name of the slot parameter of the method, if it has one. This "
 "enables <command>gmmproc</command> to generate code to copy the slot and "
@@ -16545,12 +16470,6 @@ msgid "slot_callback"
 msgstr "slot_callback"
 
 #: C/gtkmm-tutorial-in.xml:9344(para) C/gtkmm-tutorial-in.xml:9580(para)
-#| msgid ""
-#| "Used in conjunction with the <literal>slot_name</literal> option to tell "
-#| "<function>_WRAP_METHOD()</function> the name of the glue callback "
-#| "function that handles extracting the slot and then calling it. The "
-#| "address of this callback is also passed on to the C function that the "
-#| "method wraps."
 msgid ""
 "Used in conjunction with the <literal>slot_name</literal> option to specify "
 "the name of the glue callback function that handles extracting the slot and "
@@ -16567,12 +16486,6 @@ msgid "no_slot_copy"
 msgstr "no_slot_copy"
 
 #: C/gtkmm-tutorial-in.xml:9354(para) C/gtkmm-tutorial-in.xml:9590(para)
-#| msgid ""
-#| "Tells gmmproc not to pass a copy of the slot to the C function, if the "
-#| "method has one. Instead the slot itself is passed. The slot parameter "
-#| "name and the glue callback function must have been specified with the "
-#| "<literal>slot_name</literal> and <literal>slot_callbback</literal> "
-#| "options respectively."
 msgid ""
 "Tells <command>gmmproc</command> not to pass a copy of the slot to the C "
 "function, if the method has one. Instead the slot itself is passed. The slot "
@@ -17055,7 +16968,6 @@ msgid "For example, from <filename>icontheme.hg</filename>: <placeholder-1/>"
 msgstr "Por ejemplo, de <filename>icontheme.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9653(title)
-#| msgid "_WRAP_METHOD_DOCS_ONLY"
 msgid "_WRAP_ENUM_DOCS_ONLY"
 msgstr "_WRAP_ENUM_DOCS_ONLY"
 
@@ -17233,9 +17145,6 @@ msgstr "Reordenación de parámetros"
 
 #: C/gtkmm-tutorial-in.xml:9740(programlisting)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device, GdkEventMask events);\n"
 msgid ""
 "\n"
 "        void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device,\n"
@@ -17249,9 +17158,6 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9747(programlisting)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "_WRAP_METHOD(void set_device_events(Gdk::EventMask events{events}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{device}), gtk_widget_set_device_events)\n"
 msgid ""
 "\n"
 "        _WRAP_METHOD(void set_device_events(Gdk::EventMask events{events},\n"
@@ -17267,9 +17173,6 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9757(programlisting)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "_WRAP_METHOD(void set_device_events(Gdk::EventMask events{.}, const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{.}), gtk_widget_set_device_events)\n"
 msgid ""
 "\n"
 "        _WRAP_METHOD(void set_device_events(Gdk::EventMask events{.}, const\n"
@@ -17340,9 +17243,6 @@ msgstr "Procesado de parámetros opcionales"
 
 #: C/gtkmm-tutorial-in.xml:9785(programlisting)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "GtkToolItem* gtk_tool_button_new(GtkWidget* icon_widget, const gchar* label);\n"
 msgid ""
 "\n"
 "        GtkToolItem* gtk_tool_button_new(GtkWidget* icon_widget, const gchar*\n"
@@ -17356,9 +17256,6 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9795(programlisting)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "_WRAP_CTOR(ToolButton(Widget&amp; icon_widget, const Glib::ustring&amp; label{?}), gtk_tool_button_new)\n"
 msgid ""
 "\n"
 "        _WRAP_CTOR(ToolButton(Widget&amp; icon_widget, const Glib::ustring&amp;\n"
@@ -17393,9 +17290,6 @@ msgstr "Procesado de parámetros de salida"
 
 #: C/gtkmm-tutorial-in.xml:9815(programlisting)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "GtkSizeRequestMode gtk_widget_get_request_mode(GtkWidget* widget);\n"
 msgid ""
 "\n"
 "        GtkSizeRequestMode gtk_widget_get_request_mode(GtkWidget* widget);\n"
@@ -17407,9 +17301,6 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9821(programlisting)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "_WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{OUT}) const, gtk_widget_get_request_mode)\n"
 msgid ""
 "\n"
 "        _WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{OUT})\n"
@@ -17423,9 +17314,6 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9830(programlisting)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "_INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = (SizeRequestMode)($4)')\n"
 msgid ""
 "\n"
 "        _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 =\n"
@@ -17439,9 +17327,6 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9835(programlisting)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "_INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')\n"
 msgid ""
 "\n"
 "        _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 =\n"
@@ -17506,11 +17391,6 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9846(programlisting)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "    gboolean gtk_icon_view_get_cell_rect(GtkIconView* icon_view, GtkTreePath*\n"
-#| "    path, GtkCellRenderer* cell, GdkRectangle* rect);\n"
-#| "  "
 msgid ""
 "\n"
 "        gboolean gtk_icon_view_get_cell_rect(GtkIconView* icon_view,\n"
@@ -17524,12 +17404,6 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9853(programlisting)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "    _WRAP_METHOD(bool get_cell_rect(const TreeModel::Path&amp; path, const\n"
-#| "    CellRenderer&amp; cell, Gdk::Rectangle&amp; rect{&gt;&gt;}) const,\n"
-#| "    gtk_icon_view_get_cell_rect)\n"
-#| "  "
 msgid ""
 "\n"
 "        _WRAP_METHOD(bool get_cell_rect(const TreeModel::Path&amp; path, const\n"
@@ -17545,11 +17419,6 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9868(programlisting)
 #, no-wrap
-#| msgid ""
-#| "\n"
-#| "    _INITIALIZATION(`Gdk::Rectangle&amp;',`GdkRectangle', `$3 =\n"
-#| "    Glib::wrap(&amp;($4))')\n"
-#| "  "
 msgid ""
 "\n"
 "        _INITIALIZATION(`Gdk::Rectangle&amp;',`GdkRectangle', `$3 =\n"
@@ -17562,7 +17431,6 @@ msgstr ""
 "      "
 
 #: C/gtkmm-tutorial-in.xml:9840(para)
-#, fuzzy
 #| msgid ""
 #| "<function>_WRAP_METHOD()</function> also supports setting C++ output "
 #| "parameters from C output parameters if the C function being wrapped has "
