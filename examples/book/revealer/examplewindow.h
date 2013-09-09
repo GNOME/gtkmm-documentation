@@ -31,24 +31,22 @@ protected:
 
   // Containers 
   Gtk::Box m_vbox;
-  Gtk::Frame m_transition_selector_frame;
-  Gtk::Frame m_transition_duration_frame;
-  Gtk::VBox m_transition_type_selector;
+  Gtk::Grid m_controls;
 
   // Widgets
   Gtk::Revealer m_revealer;
   Gtk::Label m_label;
   Gtk::Separator m_separator;
-  Gtk::RadioButton m_transition_type_buttons[6];
+  Gtk::ComboBoxText m_transition_type;
+  Gtk::Label m_transition_type_label;
   Gtk::SpinButton m_transition_duration;
+  Gtk::Label m_transition_duration_label;
   Gtk::Switch m_switch;
+  Gtk::Label m_switch_label;
 
 private:
-  void group_transition_type_buttons();
-  void format_transition_labels();
   void compose_transition_selector();
   Gtk::RevealerTransitionType get_selected_transition_type();
 };
 
 #endif // GTKMM_EXAMPLEWINDOW_H
-

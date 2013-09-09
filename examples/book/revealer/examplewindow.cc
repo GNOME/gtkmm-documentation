@@ -19,39 +19,42 @@
 ExampleWindow::ExampleWindow()
 : m_vbox(Gtk::ORIENTATION_VERTICAL),
   m_label("A child widget."),
-  m_transition_duration(1.0, 0)
+  m_transition_type_label("Transition type:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER),
+  m_transition_duration(1.0, 0),
+  m_transition_duration_label("Duration (in ms):", Gtk::ALIGN_END, Gtk::ALIGN_CENTER),
+  m_switch_label("Reveal child:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER)
 {
   // Window properties
   set_title("Revealer Example");
-  set_border_width(6);
+  set_border_width(12);
   set_resizable(false);
 
   // Transition type selector
-  group_transition_type_buttons();
-  format_transition_labels();
   compose_transition_selector();
-  m_transition_selector_frame.set_label("Transition type");
-  m_transition_selector_frame.add(m_transition_type_selector);
+  m_controls.attach(m_transition_type_label, 0, 0, 1, 1);
+  m_controls.attach(m_transition_type, 1, 0, 1, 1);
 
-  // Duration selector
+  // Transition duration selector
   m_transition_duration.set_range(10.0, 10000.0); // Up to 10 secs
   m_transition_duration.set_value(1000.0);
-  m_transition_duration_frame.set_label("Transition duration (in ms)");
-  m_transition_duration_frame.add(m_transition_duration);
+  m_controls.attach(m_transition_duration_label, 0, 1, 1, 1);
+  m_controls.attach(m_transition_duration, 1, 1, 1, 1);
 
   // Switch
   m_switch.set_active(true);
   m_switch.property_active().signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_switch_active_changed));
+  m_controls.attach(m_switch_label, 0, 2, 1, 1);
+  m_controls.attach(m_switch, 1, 2, 1, 1);
 
   // Revealer
   m_revealer.add(m_label);
   m_revealer.set_reveal_child(true);
 
   // Layout
-  m_vbox.pack_start(m_transition_selector_frame, Gtk::PACK_SHRINK, 6);
-  m_vbox.pack_start(m_transition_duration_frame, Gtk::PACK_SHRINK, 6);
-  m_vbox.pack_start(m_switch, Gtk::PACK_SHRINK, 6);
-  m_vbox.pack_start(m_separator, Gtk::PACK_SHRINK, 6);
+  m_controls.set_row_spacing(6);
+  m_controls.set_column_spacing(12);
+  m_vbox.pack_start(m_controls, Gtk::PACK_SHRINK, 0);
+  m_vbox.pack_start(m_separator, Gtk::PACK_SHRINK, 12);
   m_vbox.pack_start(m_revealer, Gtk::PACK_EXPAND_WIDGET, 6);
   add(m_vbox);
 
@@ -62,33 +65,16 @@ ExampleWindow::~ExampleWindow()
 {
 }
 
-void ExampleWindow::group_transition_type_buttons()
-{
-  m_transition_type_buttons[1].join_group(m_transition_type_buttons[0]);
-  m_transition_type_buttons[2].join_group(m_transition_type_buttons[0]);
-  m_transition_type_buttons[3].join_group(m_transition_type_buttons[0]);
-  m_transition_type_buttons[4].join_group(m_transition_type_buttons[0]);
-  m_transition_type_buttons[5].join_group(m_transition_type_buttons[0]);
-}
-
-void ExampleWindow::format_transition_labels()
-{
-  m_transition_type_buttons[0].set_label("None (NONE)");
-  m_transition_type_buttons[1].set_label("Fade in (CROSSFADE)");
-  m_transition_type_buttons[2].set_label("Slide in from the left (SLIDE_RIGHT)");
-  m_transition_type_buttons[3].set_label("Slide in from the right (SLIDE_LEFT)");
-  m_transition_type_buttons[4].set_label("Slide in from the bottom (SLIDE_UP)");
-  m_transition_type_buttons[5].set_label("Slide in from the top (SLIDE_DOWN)");
-}
-
 void ExampleWindow::compose_transition_selector()
 {
-  m_transition_type_selector.pack_start(m_transition_type_buttons[0]);
-  m_transition_type_selector.pack_start(m_transition_type_buttons[1]);
-  m_transition_type_selector.pack_start(m_transition_type_buttons[2]);
-  m_transition_type_selector.pack_start(m_transition_type_buttons[3]);
-  m_transition_type_selector.pack_start(m_transition_type_buttons[4]);
-  m_transition_type_selector.pack_start(m_transition_type_buttons[5]);
+  m_transition_type.append("None (NONE)");
+  m_transition_type.append("Fade in (CROSSFADE)");
+  m_transition_type.append("Slide in from the left (SLIDE_RIGHT)");
+  m_transition_type.append("Slide in from the right (SLIDE_LEFT)");
+  m_transition_type.append("Slide in from the bottom (SLIDE_UP)");
+  m_transition_type.append("Slide in from the top (SLIDE_DOWN)");
+
+  m_transition_type.set_active(0);
 }
 
 void ExampleWindow::on_switch_active_changed()
@@ -105,32 +91,30 @@ void ExampleWindow::on_switch_active_changed()
 Gtk::RevealerTransitionType ExampleWindow::get_selected_transition_type()
 {
   Gtk::RevealerTransitionType transition_type = Gtk::REVEALER_TRANSITION_TYPE_NONE;
+  const int active_row = m_transition_type.get_active_row_number();
 
-  if (m_transition_type_buttons[0].get_active())
+  switch (active_row)
   {
-    transition_type = Gtk::REVEALER_TRANSITION_TYPE_NONE;
-  }
-  else if (m_transition_type_buttons[1].get_active())
-  {
-    transition_type = Gtk::REVEALER_TRANSITION_TYPE_CROSSFADE;
-  }
-  else if (m_transition_type_buttons[2].get_active())
-  {
-    transition_type = Gtk::REVEALER_TRANSITION_TYPE_SLIDE_RIGHT;
-  }
-  else if (m_transition_type_buttons[3].get_active())
-  {
-    transition_type = Gtk::REVEALER_TRANSITION_TYPE_SLIDE_LEFT;
-  }
-  else if (m_transition_type_buttons[4].get_active())
-  {
-    transition_type = Gtk::REVEALER_TRANSITION_TYPE_SLIDE_UP;
-  }
-  else if (m_transition_type_buttons[5].get_active())
-  {
-    transition_type = Gtk::REVEALER_TRANSITION_TYPE_SLIDE_DOWN;
+    case 0:
+    default:
+      transition_type = Gtk::REVEALER_TRANSITION_TYPE_NONE;
+      break;
+    case 1:
+      transition_type = Gtk::REVEALER_TRANSITION_TYPE_CROSSFADE;
+      break;
+    case 2:
+      transition_type = Gtk::REVEALER_TRANSITION_TYPE_SLIDE_RIGHT;
+      break;
+    case 3:
+      transition_type = Gtk::REVEALER_TRANSITION_TYPE_SLIDE_LEFT;
+      break;
+    case 4:
+      transition_type = Gtk::REVEALER_TRANSITION_TYPE_SLIDE_UP;
+      break;
+    case 5:
+      transition_type = Gtk::REVEALER_TRANSITION_TYPE_SLIDE_DOWN;
+      break;
   }
 
   return transition_type;
 }
-
