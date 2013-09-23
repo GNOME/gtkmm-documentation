@@ -40,7 +40,7 @@ ExampleWindow::ExampleWindow()
 
   m_places_sidebar.signal_open_location().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_open_location));
   m_places_sidebar.signal_populate_popup().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_populate_popup));
-  m_places_sidebar.signal_drag_action_requested().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_drag_action_requested));
+  //m_places_sidebar.signal_drag_action_requested().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_drag_action_requested));
 
   m_controls.attach(m_show_desktop_check, 0, 0, 1, 1);
   m_controls.attach(m_show_connect_to_server_check, 0, 1, 1, 1);
