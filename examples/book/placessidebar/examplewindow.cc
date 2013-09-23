@@ -80,7 +80,7 @@ void ExampleWindow::on_show_connect_to_server_toggled()
   m_places_sidebar.set_show_connect_to_server(show_connect_to_server);
 }
 
-void ExampleWindow::on_open_location(const Glib::RefPtr<Gio::File>& location, Gtk::PlacesOpenFlags open_flags)
+void ExampleWindow::on_open_location(const Glib::RefPtr<Gio::File>& location, Gtk::PlacesOpenFlags /* open_flags */)
 {
   Gtk::MessageDialog dialog(*this, "<b>open-location</b> event triggered", true);
   Gtk::Grid location_information_grid;
@@ -110,7 +110,7 @@ void ExampleWindow::on_open_location(const Glib::RefPtr<Gio::File>& location, Gt
   dialog.run();
 }
 
-void ExampleWindow::on_populate_popup(Gtk::Menu* menu, const Glib::RefPtr<Gio::File>& selected_item, const Glib::RefPtr<Gio::Volume>& selected_volume)
+void ExampleWindow::on_populate_popup(Gtk::Menu* menu, const Glib::RefPtr<Gio::File>& /* selected_item */, const Glib::RefPtr<Gio::Volume>& /* selected_volume */)
 {
   Gtk::MenuItem* properties_menu_item = new Gtk::MenuItem("Properties...");
 
@@ -128,7 +128,8 @@ void ExampleWindow::on_properties_activate()
 }
 
 
-int ExampleWindow::on_drag_action_requested(const Glib::RefPtr<Gdk::DragContext>& context, const Glib::RefPtr<Gio::File>& dest_file, const std::vector< Glib::RefPtr<Gio::File> >& source_file_list)
+int ExampleWindow::on_drag_action_requested(const Glib::RefPtr<Gdk::DragContext>& /* context */, const Glib::RefPtr<Gio::File>& /* dest_file */, const std::vector< Glib::RefPtr<Gio::File> >& /* source_file_list */)
 {
+  return false;
 }
 
