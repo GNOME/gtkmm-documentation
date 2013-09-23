@@ -33,30 +33,31 @@ ExampleWindow::ExampleWindow()
   m_alignment.set_padding(6, 0, 12, 0);
 
   m_show_desktop_check.signal_toggled().connect(sigc::mem_fun(*this, &ExampleWindow::on_show_desktop_toggled));
-  m_show_desktop_check.set_active(true);
+  m_show_desktop_check.set_active();
 
   m_show_connect_to_server_check.signal_toggled().connect(sigc::mem_fun(*this, &ExampleWindow::on_show_connect_to_server_toggled));
-  m_show_connect_to_server_check.set_active(true);
+  m_show_connect_to_server_check.set_active();
 
-  m_places_sidebar.signal_open_location().connect(sigc::mem_fun(*this, &ExampleWindow::on_open_location));
-  m_places_sidebar.signal_populate_popup().connect(sigc::mem_fun(*this, &ExampleWindow::on_populate_popup));
-  m_places_sidebar.signal_drag_action_requested().connect(sigc::mem_fun(*this, &ExampleWindow::on_drag_action_requested));
+  m_places_sidebar.signal_open_location().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_open_location));
+  m_places_sidebar.signal_populate_popup().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_populate_popup));
+  m_places_sidebar.signal_drag_action_requested().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_drag_action_requested));
 
   m_controls.attach(m_show_desktop_check, 0, 0, 1, 1);
   m_controls.attach(m_show_connect_to_server_check, 0, 1, 1, 1);
 
   std::cout << "Shortcuts:" << std::endl;
   std::vector<Glib::RefPtr<Gio::File > > shortcuts = m_places_sidebar.list_shortcuts();
-  for (std::vector<Glib::RefPtr<Gio::File > >::const_iterator it = shortcuts.begin();
-          it != shortcuts.end(); ++it) {
-      std::cout << "basename: " << (*it)->get_basename() << std::endl;
+  for(std::vector<Glib::RefPtr<Gio::File > >::const_iterator it = shortcuts.begin();
+    it != shortcuts.end(); ++it)
+  {
+    std::cout << "basename: " << (*it)->get_basename() << std::endl;
   }
 
   // Layout
   m_controls_frame.add(m_alignment);
   m_alignment.add(m_controls);
-  m_hbox.pack_start(m_places_sidebar, true, true, 0);
-  m_hbox.pack_start(m_controls_frame, false, false, 0);
+  m_hbox.pack_start(m_places_sidebar, Gtk::PACK_EXPAND_WIDGET);
+  m_hbox.pack_start(m_controls_frame, Gtk::PACK_SHRINK);
   add(m_hbox);
 
   show_all_children();
@@ -68,19 +69,19 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_show_desktop_toggled()
 {
-  bool show_desktop = m_show_desktop_check.get_active();
+  const bool show_desktop = m_show_desktop_check.get_active();
 
   m_places_sidebar.set_show_desktop(show_desktop);
 }
 
 void ExampleWindow::on_show_connect_to_server_toggled()
 {
-  bool show_connect_to_server = m_show_connect_to_server_check.get_active();
+  const bool show_connect_to_server = m_show_connect_to_server_check.get_active();
 
   m_places_sidebar.set_show_connect_to_server(show_connect_to_server);
 }
 
-void ExampleWindow::on_open_location(const Glib::RefPtr<Gio::File>& location, Gtk::PlacesOpenFlags /* open_flags */)
+void ExampleWindow::on_placessidebar_open_location(const Glib::RefPtr<Gio::File>& location, Gtk::PlacesOpenFlags /* open_flags */)
 {
   Gtk::MessageDialog dialog(*this, "<b>open-location</b> event triggered", true);
   Gtk::Grid location_information_grid;
@@ -110,25 +111,25 @@ void ExampleWindow::on_open_location(const Glib::RefPtr<Gio::File>& location, Gt
   dialog.run();
 }
 
-void ExampleWindow::on_populate_popup(Gtk::Menu* menu, const Glib::RefPtr<Gio::File>& /* selected_item */, const Glib::RefPtr<Gio::Volume>& /* selected_volume */)
+void ExampleWindow::on_placessidebar_populate_popup(Gtk::Menu* menu, const Glib::RefPtr<Gio::File>& /* selected_item */, const Glib::RefPtr<Gio::Volume>& /* selected_volume */)
 {
   Gtk::MenuItem* properties_menu_item = new Gtk::MenuItem("Properties...");
 
-  properties_menu_item->signal_activate().connect(sigc::mem_fun(*this, &ExampleWindow::on_properties_activate));
+  properties_menu_item->signal_activate().connect(sigc::mem_fun(*this, &ExampleWindow::on_menu_properties_activate));
   properties_menu_item->show();
 
   menu->attach(*properties_menu_item, 0, 1, 0, 1);
 }
 
-void ExampleWindow::on_properties_activate()
+void ExampleWindow::on_menu_properties_activate()
 {
-  Glib::RefPtr< Gio::File> selected_item = m_places_sidebar.get_location();
+  Glib::RefPtr<Gio::File> selected_item = m_places_sidebar.get_location();
 
-  on_open_location(selected_item, Gtk::PLACES_OPEN_NORMAL);
+  on_placessidebar_open_location(selected_item, Gtk::PLACES_OPEN_NORMAL);
 }
 
 
-int ExampleWindow::on_drag_action_requested(const Glib::RefPtr<Gdk::DragContext>& /* context */, const Glib::RefPtr<Gio::File>& /* dest_file */, const std::vector< Glib::RefPtr<Gio::File> >& /* source_file_list */)
+int ExampleWindow::on_placessidebar_drag_action_requested(const Glib::RefPtr<Gdk::DragContext>& /* context */, const Glib::RefPtr<Gio::File>& /* dest_file */, const std::vector< Glib::RefPtr<Gio::File> >& /* source_file_list */)
 {
   return false;
 }
