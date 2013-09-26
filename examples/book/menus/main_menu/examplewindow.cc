@@ -194,7 +194,7 @@ ExampleWindow::ExampleWindow()
     g_warning("GMenu not found");
 
   //Menubar:
-  Gtk::MenuBar* pMenubar = new Gtk::MenuBar(gmenu);
+  Gtk::MenuBar* pMenubar = Gtk::manage(new Gtk::MenuBar(gmenu));
   m_Box.pack_start(*pMenubar, Gtk::PACK_SHRINK);
 
 
