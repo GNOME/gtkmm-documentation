@@ -30,7 +30,7 @@ public:
 
 private:
 
-  void load_stock_items();
+  void load_icon_items();
   void load_toggle_items();
   void load_special_items();
 

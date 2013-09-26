@@ -18,75 +18,44 @@
 
 #include "examplewindow.h"
 
-static bool sort_predicate(const Gtk::StockID& a, const Gtk::StockID& b)
+
+void ExampleWindow::load_icon_items()
 {
-  return a.get_string() < b.get_string();
-}
+  Glib::RefPtr<Gtk::IconTheme> icon_theme = Gtk::IconTheme::get_for_screen(get_screen());
 
+  typedef std::vector<Glib::ustring> type_stringvec;
+  type_stringvec icon_names = icon_theme->list_icons();
 
-void ExampleWindow::load_stock_items()
-{
-  Gtk::ToolItemGroup* group_af = 
-    Gtk::manage(new Gtk::ToolItemGroup("Stock Icons (A-F)"));
-  m_ToolPalette.add(*group_af);
-  Gtk::ToolItemGroup* group_gn = 
-    Gtk::manage(new Gtk::ToolItemGroup("Stock Icons (G-N)"));
-  m_ToolPalette.add(*group_gn);
-  Gtk::ToolItemGroup* group_or = 
-    Gtk::manage(new Gtk::ToolItemGroup("Stock Icons (O-R)"));
-  m_ToolPalette.add(*group_or);
-  Gtk::ToolItemGroup* group_sz = 
-    Gtk::manage(new Gtk::ToolItemGroup("Stock Icons (S-Z)"));
-  m_ToolPalette.add(*group_sz);
+  // Obtain the names of all contexts, and the icon names per context.
+  const type_stringvec contexts = icon_theme->list_contexts();
 
-  // Obtain the IDs of all stock items:
-  typedef std::vector<Gtk::StockID> type_vecIDs;
-  type_vecIDs vecIDs = Gtk::Stock::get_ids();
-
-  std::sort(vecIDs.begin(), vecIDs.end(), &sort_predicate);
-
-  Gtk::ToolItemGroup* group = 0;
-
-  // Iterate through them, populating the ListStore as appropriate:
-  for(type_vecIDs::const_iterator iterIDs = vecIDs.begin(); iterIDs != vecIDs.end(); ++iterIDs)
+  for (type_stringvec::const_iterator iter = contexts.begin(); iter != contexts.end(); ++iter)
   {
-    const Gtk::StockID& stockid = *iterIDs;
-    const Glib::ustring str = stockid.get_string();
-    if(str.size() < 4)
-      continue;
+    const Glib::ustring context_name = *iter;
+    Gtk::ToolItemGroup* group =
+      Gtk::manage(new Gtk::ToolItemGroup(context_name));
+    m_ToolPalette.add(*group);
 
-    switch(str[4])
+    // Iterate through the icon names, populating the ListStore as appropriate.
+    type_stringvec icon_names = icon_theme->list_icons(context_name);
+    std::sort(icon_names.begin(), icon_names.end());
+    const guint max_icons = 10;
+    guint icons_count = 0;
+    for (type_stringvec::const_iterator iconiter = icon_names.begin(); iconiter != icon_names.end(); ++iconiter)
     {
-      case 'a':
-        group = group_af;
-        break;
-      case 'g':
-        group = group_gn;
-        break;
-      case 'o':
-        group = group_or;
-        break;
-      case 's':
-        group = group_sz;
-        break;
-      default:
-        //Use the previous group
-        //(They are sorted.)
+      const Glib::ustring id = *iconiter;
+      Gtk::ToolButton* button = Gtk::manage(new Gtk::ToolButton());
+      button->set_icon_name(id);
+      button->set_tooltip_text(id);
+      button->set_is_important();
+      group->insert(*button);
+
+      /* Prevent us having an insane number of icons: */
+      ++icons_count;
+      if(icons_count >= max_icons)
         break;
     }
-
-    if(!group)
-      continue;
-
-    Gtk::ToolButton* button = Gtk::manage(new Gtk::ToolButton(stockid));
-    button->set_tooltip_text(str);
-    button->set_is_important();
-    group->insert(*button);
-
-    Gtk::StockItem stockitem;
-    if(!Gtk::StockItem::lookup(stockid, stockitem) || 
-      stockitem.get_label().empty())
-        button->set_label(str);
+      
   }
 }
 
@@ -156,27 +125,38 @@ void ExampleWindow::load_special_items()
                            "homogeneous", FALSE, "expand", TRUE,
                            "new-row", TRUE, NULL);
 
-  item = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::GO_UP));
-  item->set_tooltip_text("Show on vertical palettes only");
-  group->insert(*item);
-  item->set_visible_horizontal(false);
+  Gtk::ToolButton *button = Gtk::manage(new Gtk::ToolButton());
+  button->set_icon_name("go-up");
+  button->set_tooltip_text("Show on vertical palettes only");
+  group->insert(*button);
+  button->set_visible_horizontal(false);
 
-  item = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::GO_FORWARD));
-  item->set_tooltip_text("Show on horizontal palettes only");
-  group->insert(*item);
-  item->set_visible_vertical(false);
+  button = Gtk::manage(new Gtk::ToolButton());
+  button->set_icon_name("go-next");
+  button->set_tooltip_text("Show on horizontal palettes only");
+  group->insert(*button);
+  button->set_visible_vertical(false);
 
-  item = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::FULLSCREEN));
-  item->set_tooltip_text("Expanded this item");
-  group->insert(*item);
-  gtk_container_child_set (GTK_CONTAINER (group->gobj()), GTK_WIDGET (item->gobj()),
+  button = Gtk::manage(new Gtk::ToolButton());
+  button->set_icon_name("edit-delete");
+  button->set_tooltip_text("Do not show at all");
+  button->set_no_show_all();
+  group->insert(*button);
+  button->set_visible_vertical(false);
+
+  button = Gtk::manage(new Gtk::ToolButton());
+  button->set_icon_name("view-fullscreen");
+  button->set_tooltip_text("Expanded this item");
+  group->insert(*button);
+  gtk_container_child_set (GTK_CONTAINER (group->gobj()), GTK_WIDGET (button->gobj()),
                            "homogeneous", FALSE,
                            "expand", TRUE,
                            NULL);
 
-  item = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::HELP));
-  item->set_tooltip_text("A regular item");
-  group->insert(*item);
+  button = Gtk::manage(new Gtk::ToolButton());
+  button->set_icon_name("help-browser");
+  button->set_tooltip_text("A regular item");
+  group->insert(*button);
 }
 
 ExampleWindow::ExampleWindow()
@@ -229,7 +209,7 @@ ExampleWindow::ExampleWindow()
   m_ComboStyle.set_active(row);
 
   //Add and fill the ToolPalette:
-  load_stock_items();
+  load_icon_items();
   load_toggle_items();
   load_special_items();
 

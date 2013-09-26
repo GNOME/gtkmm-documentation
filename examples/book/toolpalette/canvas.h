@@ -37,8 +37,13 @@ private:
   public:
     CanvasItem(Gtk::Widget* canvas, Gtk::ToolButton* button, double x, double y)
     {
-      const Gtk::StockID stock_id(button->get_stock_id()); 
-      this->pixbuf = canvas->render_icon_pixbuf(stock_id, Gtk::ICON_SIZE_DIALOG);
+      const Glib::ustring icon_name(button->get_icon_name());
+
+      Glib::RefPtr<Gtk::IconTheme> icon_theme = Gtk::IconTheme::get_for_screen(canvas->get_screen());
+      int width = 0;
+      int height = 0; //ignored
+      Gtk::IconSize::lookup(Gtk::ICON_SIZE_DIALOG, width, height);
+      this->pixbuf = icon_theme->load_icon(icon_name, width, Gtk::ICON_LOOKUP_GENERIC_FALLBACK);
       this->x = x;
       this->y = y;
     }
