@@ -37,9 +37,8 @@ protected:
   //Child widgets:
   Gtk::Box m_Box;
 
-  Glib::RefPtr<Gtk::UIManager> m_refUIManager;
-  Glib::RefPtr<Gtk::ActionGroup> m_refActionGroup;
-  Glib::RefPtr<Gtk::RecentAction> m_refRecentAction;
+  Glib::RefPtr<Gtk::Builder> m_refBuilder;
+  Glib::RefPtr<Gio::SimpleActionGroup> m_refActionGroup;
 
   Glib::RefPtr<Gtk::RecentManager> m_refRecentManager;
 };

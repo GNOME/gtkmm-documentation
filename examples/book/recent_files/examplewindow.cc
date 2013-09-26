@@ -31,54 +31,61 @@ ExampleWindow::ExampleWindow()
   add(m_Box);
 
   //Create actions for menus and toolbars:
-  m_refActionGroup = Gtk::ActionGroup::create();
+  m_refActionGroup = Gio::SimpleActionGroup::create();
 
   //File menu:
-  m_refActionGroup->add( Gtk::Action::create("FileMenu", "_File") );
-  m_refActionGroup->add( Gtk::Action::create("FileNew", Gtk::Stock::NEW),
+  m_refActionGroup->add_action("new",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_new));
 
-  //A recent-files submenu:
-  m_refRecentAction = Gtk::RecentAction::create("FileRecentFiles", "_Recent Files");
-  m_refActionGroup->add(m_refRecentAction);
-  //Connect to RecentChooser's item_activated signal
-  //instead of Action's activate signal:
-  m_refRecentAction->signal_item_activated().connect(
-    sigc::mem_fun(*this, &ExampleWindow::on_menu_file_recent_files_item) );
-
   //A menu item to open the recent-files dialog:
-  m_refActionGroup->add( Gtk::Action::create("FileRecentDialog", "Recent Files _Dialog"),
+  m_refActionGroup->add_action("recent-files-dialog",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_recent_files_dialog) );
 
-  m_refActionGroup->add( Gtk::Action::create("FileQuit", Gtk::Stock::QUIT),
+  m_refActionGroup->add_action("quit",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_quit) );
 
-  m_refUIManager = Gtk::UIManager::create();
-  m_refUIManager->insert_action_group(m_refActionGroup);
+  insert_action_group("example", m_refActionGroup);
 
-  add_accel_group(m_refUIManager->get_accel_group());
+
+  m_refBuilder = Gtk::Builder::create();
+
+  //TODO: add_accel_group(m_refBuilder->get_accel_group());
 
   //Layout the actions in a menubar and toolbar:
-  Glib::ustring ui_info =
-        "<ui>"
-        "  <menubar name='MenuBar'>"
-        "    <menu action='FileMenu'>"
-        "      <menuitem action='FileNew'/>"
-        "      <menuitem action='FileRecentFiles'/>"
-        "      <menuitem action='FileRecentDialog'/>"
-        "      <separator/>"
-        "      <menuitem action='FileQuit'/>"
-        "    </menu>"
-        "  </menubar>"
+  const char* ui_info =
+    "<interface>"
+    "  <menu id='menubar'>"
+    "    <submenu>"
+    "      <attribute name='label' translatable='yes'>_File</attribute>"
+    "      <item>"
+    "        <attribute name='label' translatable='yes'>_New</attribute>"
+    "        <attribute name='action'>example.new</attribute>"
+    "        <attribute name='accel'>&lt;Primary&gt;n</attribute>"
+    "      </item>"
+    "      <item>"
+    "        <attribute name='label' translatable='yes'>Recent Files _Dialog</attribute>"
+    "        <attribute name='action'>example.recent-files-dialog</attribute>"
+    "        <attribute name='accel'>&lt;Primary&gt;o</attribute>"
+    "      </item>"
+    "      <item>"
+    "        <attribute name='label' translatable='yes'>_Quit</attribute>"
+    "        <attribute name='action'>example.quit</attribute>"
+    "        <attribute name='accel'>&lt;Primary&gt;q</attribute>"
+    "      </item>"
+    "    </submenu>"
+    "  </menu>";
+
+/* TODO: 
         "  <toolbar  name='ToolBar'>"
         "    <toolitem action='FileNew'/>"
         "    <toolitem action='FileQuit'/>"
         "  </toolbar>"
         "</ui>";
+*/
 
   try
   {
-    m_refUIManager->add_ui_from_string(ui_info);
+    m_refBuilder->add_from_string(ui_info);
   }
   catch(const Glib::Error& ex)
   {
@@ -86,13 +93,22 @@ ExampleWindow::ExampleWindow()
   }
 
   //Get the menubar and toolbar widgets, and add them to a container widget:
-  Gtk::Widget* pMenubar = m_refUIManager->get_widget("/MenuBar");
-  if(pMenubar)
-    m_Box.pack_start(*pMenubar, Gtk::PACK_SHRINK);
+  Glib::RefPtr<Glib::Object> object =
+    m_refBuilder->get_object("menubar");
+  Glib::RefPtr<Gio::Menu> gmenu =
+    Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+  if(!gmenu)
+    g_warning("GMenu not found");
 
-  Gtk::Widget* pToolbar = m_refUIManager->get_widget("/ToolBar");
+  //Menubar:
+  Gtk::MenuBar* pMenubar = new Gtk::MenuBar(gmenu);
+  m_Box.pack_start(*pMenubar, Gtk::PACK_SHRINK);
+
+/* TODO:
+  Gtk::Widget* pToolbar = m_refBuilder->get_widget("/ToolBar");
   if(pToolbar)
     m_Box.pack_start(*pToolbar, Gtk::PACK_SHRINK);
+*/
 
   show_all_children();
 }
@@ -111,16 +127,11 @@ void ExampleWindow::on_menu_file_quit()
   hide(); //Closes the main window to stop the app->run().
 }
 
-void ExampleWindow::on_menu_file_recent_files_item()
-{
-  std::cout << "URI selected = " << m_refRecentAction->get_current_uri() << std::endl;
-}
-
 void ExampleWindow::on_menu_file_recent_files_dialog()
 {
   Gtk::RecentChooserDialog dialog(*this, "Recent Files", m_refRecentManager);
   dialog.add_button("Select File", Gtk::RESPONSE_OK);
-  dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+  dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
 
   const int response = dialog.run();
   dialog.hide();
