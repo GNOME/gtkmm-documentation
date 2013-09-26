@@ -176,13 +176,6 @@ ExampleWindow::ExampleWindow()
     "  </menu>"
     "</interface>";
 
-/* TODO:
-        "  <toolbar  name='ToolBar'>"
-        "    <toolitem action='FileNewStandard'/>"
-        "    <toolitem action='FileQuit'/>"
-        "  </toolbar>"
-*/
-
   try
   {
     m_refBuilder->add_from_string(ui_info);
@@ -192,7 +185,7 @@ ExampleWindow::ExampleWindow()
     std::cerr << "building menus failed: " <<  ex.what();
   }
 
-  //Get the menubar and toolbar widgets, and add them to a container widget:
+  //Get the menubar and add it to a container widget:
   Glib::RefPtr<Glib::Object> object =
     m_refBuilder->get_object("menu-example");
   Glib::RefPtr<Gio::Menu> gmenu =
@@ -204,11 +197,22 @@ ExampleWindow::ExampleWindow()
   Gtk::MenuBar* pMenubar = new Gtk::MenuBar(gmenu);
   m_Box.pack_start(*pMenubar, Gtk::PACK_SHRINK);
 
-/* TODO:
-  Gtk::Widget* pToolbar = m_refBuilder->get_widget("/ToolBar") ;
-  if(pToolbar)
-    m_Box.pack_start(*pToolbar, Gtk::PACK_SHRINK);
-*/
+
+  //Create the toolbar and add it to a container widget:
+  Gtk::Toolbar* toolbar = Gtk::manage(new Gtk::Toolbar());
+  Gtk::ToolButton* button = Gtk::manage(new Gtk::ToolButton());
+  button->set_icon_name("document-new");
+  //We can't do this until we can break the ToolButton ABI: button->set_detailed_action_name("example.new");
+  gtk_actionable_set_detailed_action_name (GTK_ACTIONABLE (button->gobj()), "example.newstandard");
+  toolbar->add(*button);
+
+  button = Gtk::manage(new Gtk::ToolButton());
+  button->set_icon_name("application-exit");
+  //We can't do this until we can break the ToolButton ABI: button->set_detailed_action_name("example.quit");
+  gtk_actionable_set_detailed_action_name (GTK_ACTIONABLE (button->gobj()), "example.quit");
+  toolbar->add(*button);
+
+  m_Box.pack_start(*toolbar, Gtk::PACK_SHRINK);
 
   show_all_children();
 }

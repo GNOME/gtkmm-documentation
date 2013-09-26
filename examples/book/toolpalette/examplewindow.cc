@@ -55,7 +55,6 @@ void ExampleWindow::load_icon_items()
       if(icons_count >= max_icons)
         break;
     }
-      
   }
 }
 
