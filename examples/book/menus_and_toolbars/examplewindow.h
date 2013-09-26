@@ -27,22 +27,19 @@ public:
   ExampleWindow();
   virtual ~ExampleWindow();
 
-protected:
-  virtual void register_stock_items();
-  virtual void add_stock_item(const Glib::RefPtr<Gtk::IconFactory>& factory,
-                      const std::string& filepath,
-                      const Glib::ustring& id, const Glib::ustring& label);
-
+private:
   //Signal handlers:
   void on_action_file_new();
   void on_action_file_quit();
   void on_action_others();
+  void on_action_toggle();
 
   //Child widgets:
   Gtk::Box m_Box;
 
-  Glib::RefPtr<Gtk::UIManager> m_refUIManager;
-  Glib::RefPtr<Gtk::ActionGroup> m_refActionGroup;
+  Glib::RefPtr<Gtk::Builder> m_refBuilder;
+  Glib::RefPtr<Gio::SimpleActionGroup> m_refActionGroup;
+  Glib::RefPtr<Gio::SimpleAction> m_refActionRain;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

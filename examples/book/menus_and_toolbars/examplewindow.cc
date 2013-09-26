@@ -29,79 +29,114 @@ ExampleWindow::ExampleWindow()
   add(m_Box); //We can put a MenuBar at the top of the box and other stuff below it.
 
   //Define the actions:
-  m_refActionGroup = Gtk::ActionGroup::create();
+  m_refActionGroup = Gio::SimpleActionGroup::create();
 
-  m_refActionGroup->add( Gtk::Action::create("MenuFile", "_File") );
-  m_refActionGroup->add( Gtk::Action::create("New", Gtk::Stock::NEW),
+  m_refActionGroup->add_action("new",
     sigc::mem_fun(*this, &ExampleWindow::on_action_file_new) );
-  m_refActionGroup->add( Gtk::Action::create("Open", Gtk::Stock::OPEN),
+  m_refActionGroup->add_action("open",
     sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
 
-  register_stock_items(); //Makes the "example_stock_rain" stock item available.
-  m_refActionGroup->add( Gtk::ToggleAction::create("Rain",
-    Gtk::StockID("example_stock_rain") ),
-    sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
 
-  m_refActionGroup->add( Gtk::Action::create("Quit", Gtk::Stock::QUIT),
+  m_refActionRain = m_refActionGroup->add_action_bool("rain",
+    sigc::mem_fun(*this, &ExampleWindow::on_action_toggle),
+    false);
+
+  m_refActionGroup->add_action("quit",
     sigc::mem_fun(*this, &ExampleWindow::on_action_file_quit) );
 
-  m_refActionGroup->add( Gtk::Action::create("MenuEdit", "_Edit") );
-  m_refActionGroup->add( Gtk::Action::create("Cut", Gtk::Stock::CUT),
+  m_refActionGroup->add_action("cut",
     sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
-  m_refActionGroup->add( Gtk::Action::create("Copy", Gtk::Stock::COPY),
+  m_refActionGroup->add_action("copy",
     sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
-  m_refActionGroup->add( Gtk::Action::create("Paste", Gtk::Stock::PASTE),
+  m_refActionGroup->add_action("paste",
     sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
+
+  insert_action_group("example", m_refActionGroup);
 
   //Define how the actions are presented in the menus and toolbars:
-  Glib::RefPtr<Gtk::UIManager> m_refUIManager = Gtk::UIManager::create();
-  m_refUIManager->insert_action_group(m_refActionGroup);
-  add_accel_group(m_refUIManager->get_accel_group());
+  Glib::RefPtr<Gtk::Builder> m_refBuilder = Gtk::Builder::create();
+  //TODO? add_accel_group(m_refBuilder->get_accel_group());
 
   //Layout the actions in a menubar and toolbar:
-  Glib::ustring ui_info =
-    "<ui>"
-    "  <menubar name='MenuBar'>"
-    "    <menu action='MenuFile'>"
-    "      <menuitem action='New'/>"
-    "      <menuitem action='Open'/>"
-    "      <separator/>"
-    "      <menuitem action='Rain'/>"
-    "      <separator/>"
-    "      <menuitem action='Quit'/>"
-    "    </menu>"
-    "    <menu action='MenuEdit'>"
-    "      <menuitem action='Cut'/>"
-    "      <menuitem action='Copy'/>"
-    "      <menuitem action='Paste'/>"
-    "    </menu>"
-    "  </menubar>"
-    "  <toolbar  name='ToolBar'>"
-    "    <toolitem action='Open'/>"
-    "    <toolitem action='Rain'/>"
-    "    <toolitem action='Quit'/>"
-    "  </toolbar>"
-    "</ui>";
+  const char* ui_info =
+    "<interface>"
+    "  <menu id='menubar'>"
+    "    <submenu>"
+    "      <attribute name='label' translatable='yes'>_File</attribute>"
+    "      <section>"
+    "        <item>"
+    "          <attribute name='label' translatable='yes'>_New</attribute>"
+    "          <attribute name='action'>example.new</attribute>"
+    "          <attribute name='accel'>&lt;Primary&gt;n</attribute>"
+    "        </item>"
+    "        <item>"
+    "          <attribute name='label' translatable='yes'>_Open</attribute>"
+    "          <attribute name='action'>example.open</attribute>"
+    "          <attribute name='accel'>&lt;Primary&gt;o</attribute>"
+    "        </item>"
+    "      </section>"
+    "      <section>"
+    "        <item>"
+    "          <attribute name='label' translatable='yes'>Rain</attribute>"
+    "          <attribute name='action'>example.rain</attribute>"
+    "        </item>"
+    "      </section>"
+    "      <section>"
+    "        <item>"
+    "          <attribute name='label' translatable='yes'>_Quit</attribute>"
+    "          <attribute name='action'>example.quit</attribute>"
+    "          <attribute name='accel'>&lt;Primary&gt;q</attribute>"
+    "        </item>"
+    "      </section>"
+    "    </submenu>"
+    "    <submenu>"
+    "      <attribute name='label' translatable='yes'>_Edit</attribute>"
+    "      <item>"
+    "        <attribute name='label' translatable='yes'>_Cut</attribute>"
+    "        <attribute name='action'>example.cut</attribute>"
+    "      </item>"
+    "      <item>"
+    "        <attribute name='label' translatable='yes'>_Copy</attribute>"
+    "        <attribute name='action'>example.copy</attribute>"
+    "        <attribute name='accel'>&lt;Primary&gt;c</attribute>"
+    "      </item>"
+    "      <item>"
+    "        <attribute name='label' translatable='yes'>_Paste</attribute>"
+    "        <attribute name='action'>example.paste</attribute>"
+    "        <attribute name='accel'>&lt;Primary&gt;v</attribute>"
+    "      </item>"
+    "    </submenu>"
+    "  </menu>";
 
   try
   {
-    m_refUIManager->add_ui_from_string(ui_info);
+    m_refBuilder->add_from_string(ui_info);
   }
   catch(const Glib::Error& ex)
   {
-    std::cerr << "building menus and toolbars failed: " <<  ex.what();
+    std::cerr << "building menus failed: " <<  ex.what();
   }
 
-  Gtk::Widget* pMenuBar = m_refUIManager->get_widget("/MenuBar") ;
+  //Get the menubar:
+  Glib::RefPtr<Glib::Object> object =
+    m_refBuilder->get_object("menubar");
+  Glib::RefPtr<Gio::Menu> gmenu =
+    Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+  if(!gmenu)
+    g_warning("GMenu not found");
+
+  Gtk::MenuBar* pMenuBar = new Gtk::MenuBar(gmenu);
 
   //Add the MenuBar to the window:
   m_Box.pack_start(*pMenuBar, Gtk::PACK_SHRINK);
 
-
-  Gtk::Widget* pToolbar = m_refUIManager->get_widget("/ToolBar") ;
+/*
+  Gtk::Toolbar* pToolbar = 0;
+  m_refBuilder->get_widget("ToolBar", pToolbar) ;
 
   //Add the MenuBar to the window:
   m_Box.pack_start(*pToolbar, Gtk::PACK_SHRINK);
+*/
 
   show_all_children();
 }
@@ -125,43 +160,22 @@ void ExampleWindow::on_action_others()
   std::cout << "A menu item was selected." << std::endl;
 }
 
-
-void ExampleWindow::add_stock_item(
-  const Glib::RefPtr<Gtk::IconFactory>& factory,
-  const std::string& filepath,
-  const Glib::ustring& id, const Glib::ustring& label)
+void ExampleWindow::on_action_toggle()
 {
-  Gtk::IconSource source;
+  std::cout << "The toggle menu item was selected." << std::endl;
 
-  Glib::RefPtr<Gdk::Pixbuf> pixbuf;
-  try
-  {
-    //This throws an exception if the file is not found:
-    pixbuf = Gdk::Pixbuf::create_from_file(filepath);
-  }
-  catch(const Glib::Exception& ex)
-  {
-    std::cout << ex.what() << std::endl;
-  }
+  bool active = false;
+  m_refActionRain->get_state(active);
 
-  if(!pixbuf)
-    return;
-    
-  source.set_pixbuf(pixbuf);
-  source.set_size(Gtk::ICON_SIZE_SMALL_TOOLBAR);
-  source.set_size_wildcarded(); //Icon may be scaled.
+  //The toggle action's state does not change automatically:
+  active = !active;
+  m_refActionRain->change_state(active);
 
-  Glib::RefPtr<Gtk::IconSet> icon_set = Gtk::IconSet::create();
-  icon_set->add_source(source); //More than one source per set is allowed.
+  Glib::ustring message;
+  if(active)
+    message = "Toggle is active.";
+  else
+    message = "Toggle is not active";
 
-  const Gtk::StockID stock_id(id);
-  factory->add(stock_id, icon_set);
-  Gtk::Stock::add(Gtk::StockItem(stock_id, label));
-}
-
-void ExampleWindow::register_stock_items()
-{
-  Glib::RefPtr<Gtk::IconFactory> factory = Gtk::IconFactory::create();
-  add_stock_item(factory, "rain.png", "example_stock_rain", "Stay dry");
-  factory->add_default(); //Add factory to list of factories.
+  std::cout << message << std::endl;
 }
