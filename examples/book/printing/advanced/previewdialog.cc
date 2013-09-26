@@ -30,7 +30,7 @@ PreviewDialog::PreviewDialog(
   m_VBox(Gtk::ORIENTATION_VERTICAL),
   m_SpinAdjustment( Gtk::Adjustment::create(1, 100, 1) ), //Used to construct m_PageSpin
   m_PageSpin(m_SpinAdjustment, 1, 0),
-  m_CloseButton(Gtk::Stock::CLOSE),
+  m_CloseButton("_Close", true),
   m_Page(1),
   m_DpiX(0),
   m_DpiY(0)
