@@ -20,7 +20,6 @@
 
 TimerExample::TimerExample() :
   m_Box(Gtk::ORIENTATION_HORIZONTAL, 10),
-    // use Gtk::Stock wherever possible for buttons, etc.
   m_ButtonAddTimer("_Add", true),
   m_ButtonDeleteTimer("_Remove", true),
   m_ButtonQuit("_Quit", true),

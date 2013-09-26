@@ -115,7 +115,6 @@ check_PROGRAMS =					\
 	others/exception/exceptiontest			\
 	others/idle/idle				\
 	others/statusbar/statusbar			\
-	others/stock/stock				\
 	others/tictactoe/ttt_test			\
 	others/treemodelcustom/example
 #Waiting for a gdk_cairo_region_from_surface(): others/window/wheelbarrow
@@ -691,9 +690,6 @@ others_idle_idle_SOURCES = \
 
 others_statusbar_statusbar_SOURCES = \
 	others/statusbar/statusbar.cc
-
-others_stock_stock_SOURCES = \
-	others/stock/stock.cc
 
 others_tictactoe_ttt_test_SOURCES =	\
 	others/tictactoe/tictactoe.cc	\
