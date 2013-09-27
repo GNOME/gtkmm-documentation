@@ -282,3 +282,4 @@ void ExampleWindow::on_menu_toggle()
   std::cout << message << std::endl;
 }
 
+

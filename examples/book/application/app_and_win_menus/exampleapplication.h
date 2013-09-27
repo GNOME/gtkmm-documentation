@@ -14,11 +14,30 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#include <iostream>
+#ifndef GTKMM_EXAMPLEAPPLICATION_H
+#define GTKMM_EXAMPLEAPPLICATION_H
 
-#include "examplewindow.h"
+#include <gtkmm.h>
 
-ExampleWindow::ExampleWindow()
+class ExampleApplication: public Gtk::Application
 {
-  set_title("Gtk::Application example");
-}
+protected:
+  ExampleApplication();
+
+public:
+  static Glib::RefPtr<ExampleApplication> create();
+    
+protected:
+  //Overrides of default signal handlers:
+  virtual void on_activate();
+  virtual void on_startup();
+
+private:
+  void create_window();
+
+  void on_window_hide(Gtk::Window* window);
+  void on_action_something();
+  void on_action_quit();
+};
+
+#endif /* GTKMM_EXAMPLEAPPLICATION_H */
