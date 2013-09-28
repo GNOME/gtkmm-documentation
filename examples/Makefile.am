@@ -62,6 +62,7 @@ check_PROGRAMS =					\
 	book/giomm/volumes/example			\
 	book/giomm/write_file/example			\
 	book/grid/example				\
+	book/headerbar/example				\
 	book/helloworld/helloworld			\
 	book/helloworld2/helloworld2			\
 	book/iconview/example				\
@@ -414,6 +415,11 @@ book_giomm_volumes_example_SOURCES = \
 book_giomm_write_file_example_LDADD = $(GIOMM_LIBS)
 book_giomm_write_file_example_SOURCES = \
 	book/giomm/write_file/main.cc
+
+book_headerbar_example_SOURCES = \
+	book/headerbar/examplewindow.cc \
+	book/headerbar/examplewindow.h \
+	book/headerbar/main.cc
 
 book_grid_example_SOURCES = \
 	book/grid/examplewindow.cc \
