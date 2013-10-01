@@ -60,7 +60,7 @@ void ExampleApplication::on_startup()
   Glib::RefPtr<Gio::Menu> submenu_edit = Gio::Menu::create();
   submenu_edit->append("_Cut", "win.cut");
   Glib::RefPtr<Gio::MenuItem> item = Gio::MenuItem::create("_Copy", "win.copy");
-  //TODO: This works, but doesn't seem to be documented. See https://bugzilla.gnome.org/show_bug.cgi?id=708908
+  //Setting "accel" works, but might be deprecated soon: See https://bugzilla.gnome.org/show_bug.cgi?id=708908
   item->set_attribute_value("accel", Glib::Variant<Glib::ustring>::create("<Primary>c"));
   submenu_edit->append_item(item);
   item = Gio::MenuItem::create("_Copy", "win.paste");
