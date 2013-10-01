@@ -57,7 +57,7 @@ ExampleWindow::ExampleWindow()
   Glib::RefPtr<Gtk::Builder> m_refBuilder = Gtk::Builder::create();
   //TODO? add_accel_group(m_refBuilder->get_accel_group());
 
-  //Layout the actions in a menubar and toolbar:
+  //Layout the actions in a menubar:
   const char* ui_info =
     "<interface>"
     "  <menu id='menubar'>"
@@ -130,13 +130,23 @@ ExampleWindow::ExampleWindow()
   //Add the MenuBar to the window:
   m_Box.pack_start(*pMenuBar, Gtk::PACK_SHRINK);
 
-/*
-  Gtk::Toolbar* pToolbar = 0;
-  m_refBuilder->get_widget("ToolBar", pToolbar) ;
 
-  //Add the MenuBar to the window:
-  m_Box.pack_start(*pToolbar, Gtk::PACK_SHRINK);
-*/
+  //Create the toolbar and add it to a container widget:
+  Gtk::Toolbar* toolbar = Gtk::manage(new Gtk::Toolbar());
+  Gtk::ToolButton* button = Gtk::manage(new Gtk::ToolButton());
+  button->set_icon_name("document-new");
+  //We can't do this until we can break the ToolButton ABI: button->set_detailed_action_name("example.new");
+  gtk_actionable_set_detailed_action_name (GTK_ACTIONABLE (button->gobj()), "example.new");
+  toolbar->add(*button);
+
+  button = Gtk::manage(new Gtk::ToolButton());
+  button->set_icon_name("application-exit");
+  //We can't do this until we can break the ToolButton ABI: button->set_detailed_action_name("example.quit");
+  gtk_actionable_set_detailed_action_name (GTK_ACTIONABLE (button->gobj()), "example.quit");
+  toolbar->add(*button);
+
+  m_Box.pack_start(*toolbar, Gtk::PACK_SHRINK);
+
 
   show_all_children();
 }
