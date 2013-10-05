@@ -87,6 +87,7 @@ check_PROGRAMS =					\
 	book/recent_files/example			\
 	book/revealer/example				\
 	book/scrolledwindow/example			\
+	book/searchbar/example				\
 	book/signals/custom/example			\
 	book/socket/plug				\
 	book/socket/socket				\
@@ -558,6 +559,11 @@ book_scrolledwindow_example_SOURCES =		\
 	book/scrolledwindow/examplewindow.cc	\
 	book/scrolledwindow/examplewindow.h	\
 	book/scrolledwindow/main.cc
+
+book_searchbar_example_SOURCES =	\
+	book/searchbar/examplewindow.cc	\
+	book/searchbar/examplewindow.h	\
+	book/searchbar/main.cc
 
 book_signals_custom_example_SOURCES =	\
 	book/signals/custom/client.cc	\
