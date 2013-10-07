@@ -19,15 +19,13 @@
 
 #include <gtkmm.h>
 
-#include <iostream>
-
 class ExampleWindow : public Gtk::Window
 {
 public:
   ExampleWindow();
   virtual ~ExampleWindow();
 
-protected:
+private:
   // Slots
   bool on_window_key_press(GdkEventKey* key_event);
   void on_search_mode_changed();
@@ -52,7 +50,6 @@ protected:
   Gtk::Label m_close_button_label;
   Gtk::Separator m_separator;
 
-private:
 };
 
 #endif // GTKMM_EXAMPLEWINDOW_H

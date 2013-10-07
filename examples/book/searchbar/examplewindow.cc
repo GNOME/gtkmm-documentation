@@ -48,7 +48,7 @@ ExampleWindow::ExampleWindow()
 
   // Switches
   m_search_mode_switch.set_active(false);
-  m_close_button_switch.set_active(true);
+  m_close_button_switch.set_active();
   m_search_mode_switch.property_active().signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_search_mode_changed));
   m_close_button_switch.property_active().signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_show_close_button_changed));
 
@@ -86,27 +86,24 @@ ExampleWindow::~ExampleWindow()
 
 bool ExampleWindow::on_window_key_press(GdkEventKey* key_event)
 {
-  GdkEvent event;
-
-  event.key = *key_event;
-  return m_search_bar.handle_event(&event);
+  return m_search_bar.handle_event(key_event);
 }
 
 void ExampleWindow::on_search_bar_reveal_changed()
 {
-  bool revealed = m_search_bar.get_search_mode();
+  const bool revealed = m_search_bar.get_search_mode();
   m_search_mode_switch.set_active(revealed);
 }
 
 void ExampleWindow::on_search_mode_changed()
 {
-  bool search_mode = m_search_mode_switch.get_active();
+  const bool search_mode = m_search_mode_switch.get_active();
   m_search_bar.set_search_mode(search_mode);
 }
 
 void ExampleWindow::on_show_close_button_changed()
 {
-  bool show_close_button = m_close_button_switch.get_active();
+  const bool show_close_button = m_close_button_switch.get_active();
   m_search_bar.set_show_close_button(show_close_button);
 }
 
