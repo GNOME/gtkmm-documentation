@@ -27,10 +27,10 @@ ExampleWindow::ExampleWindow()
   // Window properties
   set_title("SearchBar Example");
   set_border_width(12);
-  set_size_request(800, -1);
+  set_size_request(500, -1); // To provide space for the searchbar when it appears.
 
   // Search bar properties
-  m_search_bar.set_show_close_button(true);
+  m_search_bar.set_show_close_button();
 
   // Connect search entry
   m_search_bar.connect_entry(m_entry);
@@ -42,38 +42,38 @@ ExampleWindow::ExampleWindow()
   signal_key_press_event().connect(sigc::mem_fun(*this, &ExampleWindow::on_window_key_press));
   m_search_bar.property_search_mode_enabled().signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_search_bar_reveal_changed));
 
-  // Buttons
-  m_go_up_button.set_image_from_icon_name("go-up-symbolic");
-  m_go_down_button.set_image_from_icon_name("go-down-symbolic");
-
   // Switches
   m_search_mode_switch.set_active(false);
   m_close_button_switch.set_active();
   m_search_mode_switch.property_active().signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_search_mode_changed));
   m_close_button_switch.property_active().signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_show_close_button_changed));
 
-  // Match style of epiphany's search bar
-  m_up_down_box.get_style_context()->add_class("raised");
-  m_up_down_box.get_style_context()->add_class("linked");
-
-  // Options panel layout
-  m_options_grid.set_halign(Gtk::ALIGN_CENTER);
+  // Options panel layout:
+  m_options_grid.set_halign(Gtk::ALIGN_START);
   m_options_grid.set_column_spacing(6);
   m_options_grid.attach(m_search_mode_label, 0, 0, 1, 1);
   m_options_grid.attach(m_search_mode_switch, 1, 0, 1, 1);
   m_options_grid.attach(m_close_button_label, 0, 1, 1, 1);
   m_options_grid.attach(m_close_button_switch, 1, 1, 1, 1);
 
-  // Layout
-  m_up_down_box.pack_start(m_go_down_button, Gtk::PACK_SHRINK, 0);
-  m_up_down_box.pack_start(m_go_up_button, Gtk::PACK_SHRINK, 0);
-  m_search_box.pack_end(m_up_down_box, Gtk::PACK_SHRINK, 0);
+  // Searchbar Layout
+  m_up_down_box.pack_start(m_go_down_button, Gtk::PACK_SHRINK);
+  m_up_down_box.pack_start(m_go_up_button, Gtk::PACK_SHRINK);
+  m_search_box.pack_end(m_up_down_box, Gtk::PACK_SHRINK);
   m_search_box.pack_start(m_entry, Gtk::PACK_EXPAND_WIDGET, 6);
   m_search_bar.add(m_search_box);
 
-  m_vbox.pack_start(m_search_bar, Gtk::PACK_EXPAND_WIDGET, 6);
-  m_vbox.pack_start(m_label, Gtk::PACK_EXPAND_WIDGET, 6);
-  m_vbox.pack_start(m_separator, Gtk::PACK_EXPAND_WIDGET, 12);
+  // Match style of epiphany's search bar
+  m_up_down_box.get_style_context()->add_class("raised");
+  m_up_down_box.get_style_context()->add_class("linked");
+
+  // Buttons
+  m_go_up_button.set_image_from_icon_name("go-up-symbolic");
+  m_go_down_button.set_image_from_icon_name("go-down-symbolic");
+
+  m_vbox.pack_start(m_search_bar, Gtk::PACK_SHRINK, 6);
+  m_vbox.pack_start(m_label, Gtk::PACK_SHRINK, 6);
+  m_vbox.pack_start(m_separator, Gtk::PACK_SHRINK, 12);
   m_vbox.pack_start(m_options_grid, Gtk::PACK_SHRINK, 12);
   add(m_vbox);
 
