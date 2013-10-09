@@ -17,7 +17,6 @@
  */
 
 #include "examplewindow.h"
-#include <gtkmm/stock.h>
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
@@ -253,7 +252,7 @@ void ExampleWindow::on_menu_choices(const Glib::ustring& parameter)
 void ExampleWindow::on_menu_choices_other(int parameter)
 {
   //The radio action's state does not change automatically:
-  m_refChoice->change_state(parameter);
+  m_refChoiceOther->change_state(parameter);
 
   Glib::ustring message;
   if(parameter == 1)
@@ -281,5 +280,3 @@ void ExampleWindow::on_menu_toggle()
 
   std::cout << message << std::endl;
 }
-
-
