@@ -22,8 +22,8 @@
 #include <gtkmm.h>
 
 class ExampleTreeModel
-  : public Glib::Object,
-    public Gtk::TreeModel
+  : public Gtk::TreeModel,
+    public Glib::Object
 {
 protected:
   //Create a TreeModel with @a columns_count number of columns, each of type Glib::ustring.
