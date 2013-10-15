@@ -1,3 +1,37 @@
+3.9.1:
+
+* Port examples from GtkUIManager, GtkAction and GtkMenu
+  to GtkBuilder, GAction and GMenu.
+  We have not yet updated the book text about these.
+  (Murray Cumming, Kjell Ahlstedt)
+* Remove use of (deprecated) stock items.
+  (Kjell Ahlstedt, Murray Cumming)
+* Added HeaderBar example, though we do not yet
+  have a book chapter about it.
+  (Juan Rafael Garcia Blanco)
+* Added ListBox example, though we do not yet
+  have a book chapter about it.
+  (Kjell Ahlstedt)
+* Added PlacesSidebar example, though we do not yet
+  have a book chapter about it.
+  (Juan Rafael Garcia Blanco)
+* Added Revealer example, though we do not yet
+  have a book chapter about it.
+  (Juan Rafael Garcia Blanco)
+* Added SearchBar example, though we do not yet
+  have a book chapter about it.
+  (Juan Rafael Garcia Blanco)
+* Multi-Threaded Programs chapter:
+  Added a multi-threaded example program.
+  (Kjell Ahlstedt)
+* treemodelcustom: Use the new base class order.
+  (Murray Cumming)
+* gmmproc appendix: Document new features.
+  (José Alburquerque)
+* Build: Move to a generated ChangeLog.
+  (José Alburquerque)
+
+  
 3.8.0:
 
 * Dialogs chapter: Add Non-modal AboutDialog section.
