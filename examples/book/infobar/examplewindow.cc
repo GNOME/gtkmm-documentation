@@ -69,7 +69,7 @@ ExampleWindow::ExampleWindow()
   m_refTextBuffer->signal_changed().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_textbuffer_changed) );
 
-  show_all_children();
+  show_all();
 
   // Keep the InfoBar hidden until a message needs to be shown:
   m_InfoBar.hide();
