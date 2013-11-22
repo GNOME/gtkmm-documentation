@@ -29,7 +29,9 @@ ExampleWindow::ExampleWindow()
   m_EventBox.add(m_Label);
 
   //Clip the label short:
+  set_default_size(110, 20);
   m_Label.set_size_request(110, 20);
+  m_Label.set_ellipsize(Pango::ELLIPSIZE_END);
 
   //And bind an action to it:
   m_EventBox.set_events(Gdk::BUTTON_PRESS_MASK);
