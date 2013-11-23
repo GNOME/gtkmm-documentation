@@ -29,7 +29,6 @@ Glib::RefPtr<Glib::IOChannel> iochannel;
 // and quit the program if the message was 'Q'.
 bool MyCallback(Glib::IOCondition io_condition)
 {
-
   if ((io_condition & Glib::IO_IN) == 0) {
     std::cerr << "Invalid fifo response" << std::endl;
   }
@@ -51,7 +50,7 @@ int main(int argc, char *argv[])
   app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   if (access("testfifo", F_OK) == -1) {
-    // fifo doesn't exit - create it
+    // fifo doesn't exist - create it
     #ifdef HAVE_MKFIFO
     if (mkfifo("testfifo", 0666) != 0) {
       std::cerr << "error creating fifo" << std::endl;
@@ -77,6 +76,7 @@ int main(int argc, char *argv[])
   iochannel = Glib::IOChannel::create_from_fd(read_fd);
 
   // and last but not least - run the application main loop
+  app->hold(); // keep the application running without a window
   app->run();
 
   // now remove the temporary fifo
