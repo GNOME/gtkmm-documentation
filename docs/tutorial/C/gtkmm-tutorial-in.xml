@@ -4766,15 +4766,20 @@ the user can only select the actions which you have specified in your calls to
 The source widget will emit these signals, in this order:
 <itemizedlist>
 <listitem><para><literal>drag_begin</literal>: Provides DragContext.</para></listitem>
-<listitem><para><literal>drag_motion</literal>: Provides DragContext and coordinates. You can call the drag_status() method of the DragContext to indicate which target will be accepted.</para></listitem>
 <listitem><para><literal>drag_data_get</literal>: Provides <literal>info</literal> about the dragged data format, and a <literal>Gtk::SelectionData</literal> structure, in which you should put the requested data.</para></listitem>
-<listitem><para><literal>drag_drop</literal>: Provides DragContext and coordinates.</para></listitem>
 <listitem><para><literal>drag_end</literal>: Provides DragContext.</para></listitem>
 </itemizedlist>
 </para>
 <para>
-The destination widget will emit this signal, after the source widget has emitted the <literal>drag_data_get</literal> signal:
+The destination widget will emit these signals, in this order:
 <itemizedlist>
+<listitem><para><literal>drag_motion</literal>: Provides DragContext and coordinates.
+  You can call the <methodname>drag_status()</methodname> method of the DragContext
+  to indicate which action will be accepted.</para></listitem>
+<listitem><para><literal>drag_drop</literal>: Provides DragContext and coordinates.
+  You can call <methodname>drag_get_data()</methodname>, which triggers the
+  <literal>drag_data_get</literal> signal in the source widget, and then the
+  <literal>drag_data_received</literal> signal in the destination widget.</para></listitem>
 <listitem>
     <para>
         <literal>drag_data_received</literal>: Provides <literal>info</literal>
