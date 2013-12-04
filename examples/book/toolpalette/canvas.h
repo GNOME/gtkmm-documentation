@@ -37,7 +37,9 @@ private:
   public:
     CanvasItem(Gtk::Widget* canvas, Gtk::ToolButton* button, double x, double y)
     {
-      const Glib::ustring icon_name(button->get_icon_name());
+      Glib::ustring icon_name(button->get_icon_name());
+      if (icon_name.empty())
+        icon_name = button->get_label();
 
       Glib::RefPtr<Gtk::IconTheme> icon_theme = Gtk::IconTheme::get_for_screen(canvas->get_screen());
       int width = 0;

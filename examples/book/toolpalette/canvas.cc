@@ -21,7 +21,7 @@
 
 Canvas::Canvas()
 : m_drag_data_requested_for_drop(false),
-  m_drop_item()
+  m_drop_item(0)
 {
   set_app_paintable();
 }
@@ -36,8 +36,7 @@ Canvas::~Canvas()
     m_canvas_items.erase(iter);
   }
 
-  if(m_drop_item)
-    delete m_drop_item;
+  delete m_drop_item;
 }
 
 void Canvas::item_draw(const CanvasItem *item,
@@ -112,7 +111,8 @@ bool Canvas::on_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context,
 }
 
 
-void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time)
+void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context,
+  int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time)
 {
   // Find the tool button which is the source of this DnD operation.
   Gtk::Widget* widget = drag_get_source_widget(context);
@@ -133,33 +133,37 @@ void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context
   if(!button)
     return;
 
-  if(m_drop_item)
+  delete m_drop_item;
+  m_drop_item = 0;
+
+  try
   {
-    delete m_drop_item;
-    m_drop_item = 0;
+    CanvasItem* item = new CanvasItem(this, button, x, y);
+
+    if(m_drag_data_requested_for_drop)
+    {
+      m_canvas_items.push_back(item);
+
+      // Signal that the item was accepted and then redraw.
+      context->drag_finish(true /* success */, false /* del */, time);
+    }
+    else
+    {
+      m_drop_item = item;
+
+      // We are getting this data due to a request in drag_motion,
+      // rather than due to a request in drag_drop, so we are just
+      // supposed to call gdk_drag_status (), not actually paste in
+      // the data.
+      context->drag_status(Gdk::ACTION_COPY, time);
+    }
+
+    queue_draw();
   }
-
-  CanvasItem* item = new CanvasItem(this, button, x, y);
-
-  if(m_drag_data_requested_for_drop)
+  catch (const Gtk::IconThemeError& ex)
   {
-    m_canvas_items.push_back(item);
-
-    // Signal that the item was accepted and then redraw.
-    context->drag_finish(true /* success */, false /* del */, time);
+    std::cerr << "IconThemeError: " << ex.what() << std::endl;
   }
-  else
-  {
-    m_drop_item = item;
-
-    // We are getting this data due to a request in drag_motion,
-    // rather than due to a request in drag_drop, so we are just
-    // supposed to call gdk_drag_status (), not actually paste in
-    // the data.
-    context->drag_status(Gdk::ACTION_COPY, time);
-  }
-
-  queue_draw();
 
   Gtk::DrawingArea::on_drag_data_received(context, x, y, selection_data, info, time);
 }

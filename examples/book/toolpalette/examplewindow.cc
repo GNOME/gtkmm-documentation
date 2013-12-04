@@ -27,7 +27,13 @@ void ExampleWindow::load_icon_items()
   type_stringvec icon_names = icon_theme->list_icons();
 
   // Obtain the names of all contexts, and the icon names per context.
-  const type_stringvec contexts = icon_theme->list_contexts();
+  type_stringvec contexts = icon_theme->list_contexts();
+  std::sort(contexts.begin(), contexts.end());
+
+  int requested_icon_size = 0;
+  int requested_icon_height = 0; //ignored
+  Gtk::IconSize::lookup(Gtk::ICON_SIZE_BUTTON, requested_icon_size, requested_icon_height);
+  const guint max_icons_per_group = 10;
 
   for (type_stringvec::const_iterator iter = contexts.begin(); iter != contexts.end(); ++iter)
   {
@@ -36,23 +42,39 @@ void ExampleWindow::load_icon_items()
       Gtk::manage(new Gtk::ToolItemGroup(context_name));
     m_ToolPalette.add(*group);
 
-    // Iterate through the icon names, populating the ListStore as appropriate.
+    // Iterate through the icon names, populating the ToolItemGroup as appropriate.
     type_stringvec icon_names = icon_theme->list_icons(context_name);
     std::sort(icon_names.begin(), icon_names.end());
-    const guint max_icons = 10;
     guint icons_count = 0;
     for (type_stringvec::const_iterator iconiter = icon_names.begin(); iconiter != icon_names.end(); ++iconiter)
     {
-      const Glib::ustring id = *iconiter;
-      Gtk::ToolButton* button = Gtk::manage(new Gtk::ToolButton());
-      button->set_icon_name(id);
-      button->set_tooltip_text(id);
+      const Glib::ustring icon_name = *iconiter;
+      Glib::RefPtr<Gdk::Pixbuf> pixbuf;
+      try
+      {
+        pixbuf = icon_theme->load_icon(icon_name, requested_icon_size, Gtk::ICON_LOOKUP_GENERIC_FALLBACK);
+      }
+      catch (const Gtk::IconThemeError& /* ex */)
+      {
+        // Gtk::IconTheme::list_icons() may return some names of icons
+        // that can't be loaded.
+        continue;
+      }
+
+      // Skip large icons, just to make the ToolPalette look better.
+      if (pixbuf->get_width() > 2*requested_icon_size ||
+          pixbuf->get_height() > 2*requested_icon_size)
+        continue;
+
+      Gtk::Image* image = Gtk::manage(new Gtk::Image(pixbuf));
+      Gtk::ToolButton* button = Gtk::manage(new Gtk::ToolButton(*image, icon_name));
+      button->set_tooltip_text(icon_name);
       button->set_is_important();
       group->insert(*button);
 
-      /* Prevent us having an insane number of icons: */
+      // Prevent us having an insane number of icons:
       ++icons_count;
-      if(icons_count >= max_icons)
+      if(icons_count >= max_icons_per_group)
         break;
     }
   }
@@ -153,7 +175,7 @@ void ExampleWindow::load_special_items()
                            NULL);
 
   button = Gtk::manage(new Gtk::ToolButton());
-  button->set_icon_name("help-browser");
+  button->set_icon_name("help-contents");
   button->set_tooltip_text("A regular item");
   group->insert(*button);
 }
