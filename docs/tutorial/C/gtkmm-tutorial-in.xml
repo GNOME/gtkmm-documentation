@@ -156,7 +156,7 @@ using &gtkmm; without purchasing licenses.
 <para>Trolltech's Qt is the closest competition to &gtkmm;, so it deserves discussion.</para>
 
 <para>&gtkmm; developers tend to prefer &gtkmm; to Qt because &gtkmm; does things in a more C++ way. Qt originates from a time when C++ and the standard library were not standardised or well supported by compilers. It therefore duplicates a lot of stuff that is now in the standard library, such as containers and type information. Most significantly, Trolltech modified the C++ language to provide signals, so that Qt classes cannot be used easily with non-Qt classes. &gtkmm; was able to use standard C++ to provide signals without changing the C++ language.
-See the <ulink url="https://wiki.gnome.org/gtkmm/FAQ">FAQ</ulink> for more detailed differences.</para>
+See the <ulink url="https://wiki.gnome.org/Projects/gtkmm/FAQ">FAQ</ulink> for more detailed differences.</para>
 </sect2>
 
 <sect2 id="gtkmm-is-a-wrapper">
@@ -293,7 +293,7 @@ be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
 
 <sect1 id="sec-packages-windows">
 <title>Microsoft Windows</title>
-<para>GTK+ and &gtkmm; were designed to work well with Microsoft Windows, and the developers encourage its use on the win32 platform. However, Windows has no standard installation system for development libraries. Please see the <ulink url="http://live.gnome.org/gtkmm/MSWindows">Windows Installation</ulink>
+<para>GTK+ and &gtkmm; were designed to work well with Microsoft Windows, and the developers encourage its use on the win32 platform. However, Windows has no standard installation system for development libraries. Please see the <ulink url="https://wiki.gnome.org/Projects/gtkmm/MSWindows">Windows Installation</ulink>
 page for Windows-specific installation instructions and notes.</para>
 </sect1>
 
@@ -655,7 +655,7 @@ orientation (vertical or horizontal) to be specified without requiring the use o
 
 <para>All deprecated API was removed in &gtkmm; 3.0, though there will be new deprecations in future versions.</para>
 
-<para>As a first step to porting your source code to &gtkmm;-3.0 you should probably ensure that your application builds with the deprecated &gtkmm;-2.4 API disabled, by defining macro such as GTKMM_DISABLE_DEPRECATED. There are some autotools macros that can help with this by defining them optionally at build time. See the <ulink url="https://live.gnome.org/gtkmm/PortingToGtkmm3">gtkmm 3 porting wiki page</ulink> for more details.</para>
+<para>As a first step to porting your source code to &gtkmm;-3.0 you should probably ensure that your application builds with the deprecated &gtkmm;-2.4 API disabled, by defining macro such as GTKMM_DISABLE_DEPRECATED. There are some autotools macros that can help with this by defining them optionally at build time. See the <ulink url="https://wiki.gnome.org/Projects/gtkmm/PortingToGtkmm3">gtkmm 3 porting wiki page</ulink> for more details.</para>
 
 </chapter>
 
@@ -6862,8 +6862,8 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
       <itemizedlist>
         <listitem>
           <para>
-            <ulink url="http://www.gnome.org/~malcolm/i18n/index.html">
-              Internationalizing GNOME applications</ulink>
+            <ulink url="https://wiki.gnome.org/TranslationProject/DevGuidelines">
+              L10N Guidelines for Developers</ulink>
           </para>
         </listitem>
 
@@ -6875,7 +6875,7 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
 
         <listitem>
           <para>
-            <ulink url="https://live.gnome.org/TranslationProject/GitHowTo">How to use Git for GNOME translators</ulink>
+            <ulink url="https://wiki.gnome.org/TranslationProject/GitHowTo">How to use Git for GNOME translators</ulink>
           </para>
         </listitem>
 
@@ -7035,7 +7035,7 @@ instance, you cannot use the copyright sign (&copy;).
 
       <para>If your program is free software, there is a whole <literal>GNOME</literal>
         subproject devoted to helping you make translations, the
-        <ulink url="https://live.gnome.org/TranslationProject/"><literal>GNOME</literal>
+        <ulink url="https://wiki.gnome.org/TranslationProject/"><literal>GNOME</literal>
         Translation Project</ulink>.</para>
 
       <para>The way it works is that you upload your source code to a git
@@ -8440,13 +8440,14 @@ practical - and sensible - to subclass a button for that purpose.
       editions) on the Windows platform. There is an
       <ulink url="ftp://ftp.gnome.org/pub/GNOME/binaries/win32/gtkmm">
       installer</ulink> available for gtkmm on Microsoft Windows. Refer to
-      <ulink url="http://live.gnome.org/gtkmm/MSWindows/">
-      http://live.gnome.org/gtkmm/MSWindows</ulink> for instructions how to
+      <ulink url="https://wiki.gnome.org/Projects/gtkmm/MSWindows/">
+      https://wiki.gnome.org/Projects/gtkmm/MSWindows</ulink> for instructions how to
       use it.
     </para>
   <sect1 id="sec-building-on-win32">
         <title>Building &gtkmm; on Win32</title>
-    <para>Please see <ulink url="http://live.gnome.org/gtkmm/MSWindows/BuildingGtkmm">http://live.gnome.org/gtkmm/MSWindows/BuildingGtkmm</ulink> for instructions on how to build gtkmm on Windws.
+    <para>Please see <ulink url="https://wiki.gnome.org/Projects/gtkmm/MSWindows/BuildingGtkmm">
+    https://wiki.gnome.org/Projects/gtkmm/MSWindows/BuildingGtkmm</ulink> for instructions on how to build gtkmm on Windows.
     </para>
 
     </sect1>
@@ -8463,7 +8464,7 @@ practical - and sensible - to subclass a button for that purpose.
   </para>
   <para>
     The easiest way to do this is using <ulink
-      url="https://wiki.gnome.org/Jhbuild">jhbuild</ulink>.
+      url="https://wiki.gnome.org/Projects/Jhbuild">jhbuild</ulink>.
     <application>jhbuild</application> is a program that makes building GNOME
     software much easier by calculating dependencies and building things in the
     correct order. This section will give a brief explanation of how to set up
@@ -8636,7 +8637,7 @@ $ jhbuild sanitycheck</screen>
 <title>Copying the skeleton project</title>
 
 <para>Typically our wrapper library would be called libsomethingmm. We can start by
-  copying the <ulink url="http://git.gnome.org/cgit/mm-common/tree/skeletonmm">skeleton
+  copying the <ulink url="http://git.gnome.org/browse/mm-common/tree/skeletonmm">skeleton
   source tree</ulink> from the mm-common module.
 <programlisting>
   $ git clone git://git.gnome.org/mm-common
