@@ -36,6 +36,10 @@ ExampleWindow::ExampleWindow()
     sigc::mem_fun(*this, &ExampleWindow::on_action_something) );
   add_action("paste",
     sigc::mem_fun(*this, &ExampleWindow::on_action_something) );
+  add_action("send-note",
+    sigc::mem_fun(*this, &ExampleWindow::on_action_send_notification) );
+  add_action("withdraw-note",
+    sigc::mem_fun(*this, &ExampleWindow::on_action_withdraw_notification) );
 }
 
 void ExampleWindow::on_action_something()
@@ -48,4 +52,22 @@ void ExampleWindow::on_action_close()
   std::cout << G_STRFUNC << std::endl;
 
   hide();
+}
+
+void ExampleWindow::on_action_send_notification()
+{
+  std::cout << G_STRFUNC << std::endl;
+
+  Glib::RefPtr<Gio::Notification> note = Gio::Notification::create("Unimportant message!");
+  note->set_body("Notification from " + Glib::get_application_name());
+  note->add_button("Print", "app.print", Glib::ustring("Hello, world!"));
+  note->add_button("Quit Application", "app.quit");
+  get_application()->send_notification("note", note);
+}
+
+void ExampleWindow::on_action_withdraw_notification()
+{
+  std::cout << G_STRFUNC << std::endl;
+
+  get_application()->withdraw_notification("note");
 }

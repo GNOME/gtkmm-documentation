@@ -22,12 +22,13 @@
 class ExampleWindow: public Gtk::ApplicationWindow
 {
 public:
-
   explicit ExampleWindow();
   
 private:
   void on_action_something();
   void on_action_close();
+  void on_action_send_notification();
+  void on_action_withdraw_notification();
 };
 
 #endif /* GTKMM_EXAMPLEWINDOW_H */
