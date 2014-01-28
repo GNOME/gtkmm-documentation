@@ -1087,47 +1087,6 @@ specified by the <methodname>set_value_pos()</methodname> method.
 </sect2>
 </sect1>
 
-<sect1 id="sec-range-update-policies">
-<title>Update Policies</title>
-
-<para>
-The <emphasis>update policy</emphasis> of a <classname>Range</classname> widget
-defines at what points during user interaction it will change the
-<literal>value</literal> field of its <classname>Gtk::Adjustment</classname> and
-emit the <literal>value_changed</literal> signal. The update policies,
-set with the <methodname>set_update_policy()</methodname> method, are:
-
-<itemizedlist>
-<listitem>
-
-<para>
-<literal>Gtk::UPDATE_CONTINUOUS</literal> - This is the default. The
-<literal>value_changed</literal> signal is emitted continuously, i.e. whenever the
-slider is moved by even the tiniest amount.
-</para>
-</listitem>
-<listitem>
-
-<para>
-<literal>Gtk::UPDATE_DISCONTINUOUS</literal> - The <literal>value_changed</literal> signal is
-only emitted once the slider has stopped moving and the user has
-released the mouse button.
-</para>
-</listitem>
-<listitem>
-
-<para>
-<literal>Gtk::UPDATE_DELAYED</literal> - The <literal>value_changed</literal> signal is emitted
-when the user releases the mouse button, or if the slider stops moving
-for a short period of time.
-</para>
-</listitem>
-
-</itemizedlist>
-
-</para>
-</sect1>
-
 <sect1 id="sec-range-example">
 <title>Example</title>
 
@@ -1488,18 +1447,6 @@ lower bounds, use the <methodname>set_wrap()</methodname> method.
 <para>
 To force it to snap to the nearest <literal>step_increment</literal>,
 use <methodname>set_snap_to_ticks()</methodname>.
-</para>
-
-<para>
-You can modify the update policy using the
-<methodname>set_update_policy()</methodname> method, specifying either
-<literal>Gtk::UPDATE_ALWAYS</literal> or
-<literal>Gtk::UPDATE_IF_VALID</literal>.
-<literal>Gtk::UPDATE_ALWAYS</literal> causes the
-<classname>SpinButton</classname> to ignore errors encountered while converting
-the text in the entry box to a numeric value. This setting also therefore
-allows the <classname>SpinButton</classname> to accept non-numeric values. You
-can force an immediate update using the <methodname>update()</methodname> method.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;SpinButton.html">Reference</ulink></para>
