@@ -7,6 +7,7 @@ AM_CXXFLAGS = $(EXAMPLES_WXXFLAGS)
 LDADD       = $(GTKMM_LIBS)
 
 check_PROGRAMS =					\
+	book/actionbar/example				\
 	book/alignment/example				\
 	book/application/simple/example \
 	book/application/command_line_handling/example \
@@ -140,6 +141,11 @@ dist_noinst_DATA =				\
 	book/iconview/mozilla-firefox.png	\
 	book/iconview/xmms.xpm			\
 	book/menus_and_toolbars/rain.png
+
+book_actionbar_example_SOURCES = \
+	book/actionbar/examplewindow.cc \
+	book/actionbar/examplewindow.h \
+	book/actionbar/main.cc
 
 book_application_simple_example_SOURCES =		\
 	book/application/simple/exampleapplication.cc	\
