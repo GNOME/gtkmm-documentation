@@ -80,6 +80,7 @@ check_PROGRAMS =					\
 	book/notebook/example				\
 	book/paned/example				\
 	book/placessidebar/example			\
+	book/popover/example			\
 	book/printing/advanced/example			\
 	book/printing/simple/example			\
 	book/progressbar/example			\
@@ -518,6 +519,11 @@ book_placessidebar_example_SOURCES =		\
 	book/placessidebar/examplewindow.cc		\
 	book/placessidebar/examplewindow.h		\
 	book/placessidebar/main.cc
+
+book_popover_example_SOURCES =		\
+	book/popover/examplewindow.cc		\
+	book/popover/examplewindow.h		\
+	book/popover/main.cc
 
 book_printing_advanced_example_SOURCES =		\
 	book/printing/advanced/examplewindow.cc		\
