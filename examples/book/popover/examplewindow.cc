@@ -58,8 +58,8 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_toggled()
 {
-    bool active = m_toggle_button.get_active(); 
-    m_toggle_form_popover.set_visible(active);
+  bool active = m_toggle_button.get_active();
+  m_toggle_form_popover.set_visible(active);
 }
 
 void ExampleWindow::configure_form_popover()
@@ -100,6 +100,7 @@ void ExampleWindow::configure_form_buttons()
 
   m_format_buttons_box.set_hexpand();
 
+  // Group format buttons so that they appear that they belong together
   Glib::RefPtr<Gtk::StyleContext> style_context = m_format_buttons_box.get_style_context();
   style_context->add_class("raised");
   style_context->add_class("linked");
@@ -107,8 +108,8 @@ void ExampleWindow::configure_form_buttons()
 
 void ExampleWindow::configure_form_combo()
 {
-  m_toggle_form_combo.append("BOTTOM");
-  m_toggle_form_combo.append("RIGHT");
+  m_toggle_form_combo.append("Bottom");
+  m_toggle_form_combo.append("Right");
 
   m_toggle_form_combo.set_active(0);
 
@@ -144,7 +145,7 @@ void ExampleWindow::configure_cal_popover()
 
 void ExampleWindow::on_day_selected()
 {
-  cairo_rectangle_int_t rect;
+  Gdk::Rectangle rect;
 
   GdkEvent* event = gtk_get_current_event();
 
@@ -157,9 +158,10 @@ void ExampleWindow::on_day_selected()
                                event->button.x, event->button.y,
                                &event->button.x, &event->button.y);
   Gtk::Allocation allocation = m_calendar.get_allocation();
-  rect.x = event->button.x - allocation.get_x();
-  rect.y = event->button.y - allocation.get_y();
-  rect.width = rect.height = 1;
+  rect.set_x(event->button.x - allocation.get_x());
+  rect.set_y(event->button.y - allocation.get_y());
+  rect.set_width(1);
+  rect.set_height(1);
 
   m_calendar_popover.set_pointing_to(rect);
   m_calendar_popover.set_visible(true);
