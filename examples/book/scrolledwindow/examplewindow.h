@@ -29,12 +29,11 @@ public:
 
 protected:
   //Signal handlers:
-  void on_button_close();
+  void on_dialog_response(int response_id);
 
   //Child widgets:
   Gtk::ScrolledWindow m_ScrolledWindow;
   Gtk::Grid m_Grid;
-  Gtk::Button m_Button_Close;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

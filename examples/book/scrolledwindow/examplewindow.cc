@@ -17,10 +17,9 @@
  */
 
 #include "examplewindow.h"
-#include <cstdio>
+#include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_Button_Close("Close")
 {
   set_title("Gtk::ScrolledWindow example");
   set_border_width(0);
@@ -58,19 +57,12 @@ ExampleWindow::ExampleWindow()
   }
 
   /* Add a "close" button to the bottom of the dialog */
-  m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
-              &ExampleWindow::on_button_close));
+  add_button("_Close", Gtk::RESPONSE_CLOSE);
+  signal_response().connect(sigc::mem_fun(*this, &ExampleWindow::on_dialog_response));
 
-  /* this makes it so the button is the default. */
-  m_Button_Close.set_can_default();
-
-  Gtk::Box* pBox = get_action_area();
-  if(pBox)
-    pBox->pack_start(m_Button_Close);
-
-  /* This grabs this button to be the default button. Simply hitting
-   * the "Enter" key will cause this button to activate. */
-  m_Button_Close.grab_default();
+  /* This makes it so the button is the default.
+   * Simply hitting the "Enter" key will cause this button to activate. */
+  set_default_response(Gtk::RESPONSE_CLOSE);
 
   show_all_children();
 }
@@ -79,8 +71,16 @@ ExampleWindow::~ExampleWindow()
 {
 }
 
-void ExampleWindow::on_button_close()
+void ExampleWindow::on_dialog_response(int response_id)
 {
-  hide();
+  switch (response_id)
+  {
+  case Gtk::RESPONSE_CLOSE:
+  case Gtk::RESPONSE_DELETE_EVENT:
+    hide();
+    break;
+  default:
+    std::cout << "Unexpected response_id=" << response_id << std::endl;
+    break;
+  }
 }
-
