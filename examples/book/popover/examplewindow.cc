@@ -22,8 +22,8 @@ ExampleWindow::ExampleWindow()
    m_toggle_form_popover(m_toggle_button),
    m_toggle_form_label("Non-modal Popover"),
    m_toggle_form_combo_label("Popover position:"),
-   m_calendar_popover_label("Label:"),
-   m_calendar_popover(m_calendar)
+   m_calendar_popover(m_calendar),
+   m_calendar_popover_label("Label:")
 {
   // Window properties
   set_title("Popover Example");
