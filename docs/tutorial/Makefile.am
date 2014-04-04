@@ -1,5 +1,7 @@
 ## This file is part of gtkmm-documentation.
 
+@YELP_HELP_RULES@
+
 gtkmm_docdir = $(datadir)/doc/gtkmm-3.0
 
 # Function: $(call vpath_listall,PATTERN ...)
@@ -16,10 +18,12 @@ DB2PDF = docbook2pdf
 
 DOCBOOK_STYLESHEET_EPUB ?= http://docbook.sourceforge.net/release/xsl/current/epub/docbook.xsl
 
-DOC_MODULE = gtkmm-tutorial
-DOC_ENTITIES =
-DOC_INCLUDES =
-DOC_FIGURES =					\
+HELP_ID = gtkmm-tutorial
+
+HELP_FILES = \
+	index.docbook
+
+HELP_MEDIA =					\
 	figures/alignment.png			\
 	figures/aspectframe.png			\
 	figures/assistant.png			\
@@ -99,7 +103,7 @@ DOC_FIGURES =					\
 	figures/treeview_tree.png		\
 	figures/update_ui.png
 
-DOC_LINGUAS = de el es fr pt_BR sl zh_CN
+HELP_LINGUAS = de el es fr pt_BR sl zh_CN
 
 MAINTAINERCLEANFILES = html/*.html $(srcdir)/html/*.html
 
@@ -130,17 +134,17 @@ tutorial_html_files = $(call vpath_listall,html/*.html) style.css
 tutorial_html_inst  = $(foreach\
 	file,$(tutorial_html_files),$(or $(wildcard $(file)),$(srcdir)/$(file)))
 
-tutorial_xml_files  = $(addsuffix /gtkmm-tutorial.xml,C $(DOC_LINGUAS))
-tutorial_po_files   = $(foreach lang,$(lang)/$(lang).po,$(DOC_LINGUAS))
+tutorial_xml_files  = $(addsuffix /index.docbook,C $(HELP_LINGUAS))
+tutorial_po_files   = $(foreach lang,$(lang)/$(lang).po,$(HELP_LINGUAS))
 
 dist_noinst_DATA =		\
 	insert_example_code.pl	\
-	C/gtkmm-tutorial-in.xml	\
+	C/index-in.docbook	\
 	$(tutorial_po_files)	\
 	$(tutorial_xml_files)	\
 	$(tutorial_html_files)
 
-dist_tutorial_figures_DATA = $(addprefix C/,$(DOC_FIGURES))
+dist_tutorial_figures_DATA = $(addprefix C/,$(HELP_MEDIA))
 
 dist_tutorial_icons_DATA =	\
 	icons/caution.png	\
@@ -153,9 +157,8 @@ dist_tutorial_icons_DATA =	\
 	icons/up.png		\
 	icons/warning.png
 
-include $(top_srcdir)/build/gnome-doc-utils.make
 
-all-local: $(DOC_LINGUAS) $(addsuffix /gtkmm-tutorial.xml,C $(DOC_LINGUAS)) html/index.html
+all-local: $(HELP_LINGUAS) $(addsuffix /index.docbook,C $(HELP_LINGUAS)) html/index.html
 
 install-data-local: install-tutorial
 
@@ -171,19 +174,19 @@ uninstall-tutorial:
 	rm -f '$(DESTDIR)$(tutorial_htmldir)'/*.html
 	rm -f '$(DESTDIR)$(tutorial_htmldir)/style.css'
 
-$(DOC_LINGUAS):
+$(HELP_LINGUAS):
 	@$(MKDIR_P) $@
 
 # Create a html generation of the C locale's version of the DocBook,
 # using our custom stylesheet and graphics:
-html/index.html: $(srcdir)/C/gtkmm-tutorial.xml
+html/index.html: $(srcdir)/C/index.docbook
 	$(AM_V_at)rm -fr html
 	$(AM_V_at)$(MKDIR_P) html
 	$(AM_V_GEN)$(XSLTPROC) $(xslt_params) -o html/ --xinclude --catalogs \
 		'$(DOCBOOK_STYLESHEET_HTML)' $<
 
 # TODO: I'm not sure how useful this output is, or what we can do with it. murrayc.
-epub_via_xsl: $(srcdir)/C/gtkmm-tutorial.xml
+epub_via_xsl: $(srcdir)/C/index.docbook
 	$(AM_V_at)rm -fr epub
 	$(AM_V_at)$(MKDIR_P) epub
 	$(AM_V_GEN)$(XSLTPROC) $(xslt_params) -o epub/ --xinclude --catalogs \
@@ -195,7 +198,7 @@ epub: $(srcdir)/gtkmm-tutorial.epub
 # Create an epub generation of the C locale's version of the DocBook,
 # using our custom stylesheet and graphics.
 # This apparently uses the XSL stylesheets that we try to use in epub_via_xsl above.
-gtkmm-tutorial.epub: $(srcdir)/C/gtkmm-tutorial.xml
+gtkmm-tutorial.epub: $(srcdir)/C/index.docbook
 	dbtoepub $<
 
 mobi: $(srcdir)/gtkmm-tutorial.mobi
@@ -211,18 +214,18 @@ gtkmm-tutorial.mobi: $(srcdir)/gtkmm-tutorial.epub $(srcdir)/kindle_cover.jpg
 html/chapter-%.html html/sec-%.html: | html/index.html
 
 # Create a DocBook source file that doesn't have the examples' comments blocks:
-$(srcdir)/C/gtkmm-tutorial.xml: $(srcdir)/C/gtkmm-tutorial-in.xml $(srcdir)/insert_example_code.pl
+$(srcdir)/C/index.docbook: $(srcdir)/C/index-in.docbook $(srcdir)/insert_example_code.pl
 	$(AM_V_GEN)$(PERL) -- $(srcdir)/insert_example_code.pl $(top_srcdir)/examples/book $< >$@
 
-validate_original: $(srcdir)/C/gtkmm-tutorial-in.xml
+validate_original: $(srcdir)/C/index-in.docbook
 	$(XMLLINT) --xinclude --postvalid --noout $<
 
-validate: $(srcdir)/C/gtkmm-tutorial.xml
+validate: $(srcdir)/C/index.docbook
 	$(XMLLINT) --xinclude --postvalid --noout $<
 
 # we need to produce a full examples with all of the XIncludes done so that it
 # can be processed for PDF
-C/programming-with-gtkmm-onefile.xml: $(srcdir)/C/gtkmm-tutorial.xml
+C/programming-with-gtkmm-onefile.xml: $(srcdir)/C/index.docbook
 	$(AM_V_at)$(MKDIR_P) C
 	$(AM_V_GEN)$(XMLLINT) --xinclude --postvalid -o $@ $<
 

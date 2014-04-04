@@ -27,7 +27,7 @@ name
 -->
 
 <!-- The XSL for developer.gnome.org requires this id. -->
-<book id="index">
+<book id="index" lang="en">
 
   <bookinfo>
 

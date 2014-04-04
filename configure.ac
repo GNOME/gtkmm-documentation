@@ -31,8 +31,7 @@ MM_ARG_ENABLE_WARNINGS([EXAMPLES_WXXFLAGS],
                        [-pedantic -Wall -Wextra -Wno-long-long],
                        [G PANGO ATK GDK GDK_PIXBUF GTK GLIBMM GIOMM GDKMM ATKMM PANGOMM GTKMM])
 
-GNOME_DOC_INIT([0.9.0],,
-  [AC_MSG_WARN([[gnome-doc-utils not found: tutorial will not be built.]])])
+YELP_HELP_INIT
 
 AC_CONFIG_FILES([Makefile
                  examples/Makefile
