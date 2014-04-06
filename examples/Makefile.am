@@ -53,6 +53,7 @@ check_PROGRAMS =					\
 	book/entry/simple/example			\
 	book/eventbox/example				\
 	book/expander/example				\
+	book/flowbox/example				\
 	book/frame/example				\
 	book/giomm/directory_list/example		\
 	book/giomm/getline/getline			\
@@ -387,6 +388,11 @@ book_expander_example_SOURCES =		\
 	book/expander/examplewindow.cc	\
 	book/expander/examplewindow.h	\
 	book/expander/main.cc
+
+book_flowbox_example_SOURCES =		\
+	book/flowbox/examplewindow.cc	\
+	book/flowbox/examplewindow.h	\
+	book/flowbox/main.cc
 
 book_frame_example_SOURCES =		\
 	book/frame/examplewindow.cc	\
