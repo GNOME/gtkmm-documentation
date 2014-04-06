@@ -13,6 +13,7 @@ stamp-h?
 /configure.lineno
 /docs/FAQ/html/
 /docs/tutorial/html/
-/docs/tutorial/*/gtkmm-tutorial.xml
-/docs/tutorial/*/*.[mp]o
+/docs/tutorial/*/index.docbook
+/docs/tutorial/*/*.mo
+/docs/tutorial/*/*.stamp
 /gtkmm-documentation-*.tar.*
