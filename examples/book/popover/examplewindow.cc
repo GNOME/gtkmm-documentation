@@ -83,9 +83,9 @@ void ExampleWindow::configure_form_popover()
 
 void ExampleWindow::configure_form_buttons()
 {
-  m_toggle_form_buttons[0].set_image_from_icon_name("format-justify-left-symbolic");
-  m_toggle_form_buttons[1].set_image_from_icon_name("format-justify-center-symbolic");
-  m_toggle_form_buttons[2].set_image_from_icon_name("format-justify-right-symbolic");
+  m_toggle_form_buttons[0].set_image_from_icon_name("format-justify-left-symbolic", Gtk::ICON_SIZE_BUTTON, true);
+  m_toggle_form_buttons[1].set_image_from_icon_name("format-justify-center-symbolic", Gtk::ICON_SIZE_BUTTON, true);
+  m_toggle_form_buttons[2].set_image_from_icon_name("format-justify-right-symbolic", Gtk::ICON_SIZE_BUTTON, true);
 
   m_toggle_form_buttons[0].set_mode(false);
   m_toggle_form_buttons[1].set_mode(false);

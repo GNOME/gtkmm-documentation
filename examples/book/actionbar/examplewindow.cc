@@ -31,12 +31,12 @@ ExampleWindow::ExampleWindow()
   settings->property_gtk_application_prefer_dark_theme().set_value(true);
 
   // Face
-  m_face_image.set_from_icon_name("face-cool", Gtk::IconSize(6));
+  m_face_image.set_from_icon_name("face-cool", Gtk::ICON_SIZE_DIALOG);
 
   // Center widget layout
-  m_prev_button.set_image_from_icon_name("go-previous-symbolic");
-  m_next_button.set_image_from_icon_name("go-next-symbolic");
-  m_photo_button.set_image_from_icon_name("media-record-symbolic");
+  m_prev_button.set_image_from_icon_name("go-previous-symbolic", Gtk::ICON_SIZE_BUTTON, true);
+  m_next_button.set_image_from_icon_name("go-next-symbolic", Gtk::ICON_SIZE_BUTTON, true);
+  m_photo_button.set_image_from_icon_name("media-record-symbolic", Gtk::ICON_SIZE_BUTTON, true);
   m_photo_box.pack_start(m_prev_button, Gtk::PACK_SHRINK, 0);
   m_photo_box.pack_start(m_photo_button, Gtk::PACK_SHRINK, 0);
   m_photo_box.pack_start(m_next_button, Gtk::PACK_SHRINK, 0);
