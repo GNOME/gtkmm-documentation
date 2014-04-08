@@ -61,7 +61,7 @@ void ExampleApplication::on_startup()
   submenu_edit->append("_Cut", "win.cut");
   Glib::RefPtr<Gio::MenuItem> item = Gio::MenuItem::create("_Copy", "win.copy");
   //Setting "accel" works, but might be deprecated soon: See https://bugzilla.gnome.org/show_bug.cgi?id=708908
-  //When it is deprecated, use Gtk::Application::add_accelerator() instead.
+  //When it is deprecated, use Gtk::Application::set_accel_for_action() instead.
   item->set_attribute_value("accel", Glib::Variant<Glib::ustring>::create("<Primary>c"));
   submenu_edit->append_item(item);
   item = Gio::MenuItem::create("_Paste", "win.paste");
