@@ -48,29 +48,13 @@ ExampleWindow::ExampleWindow()
 
 ExampleWindow::~ExampleWindow()
 {
-  while(!m_color_swatches.empty())
-  {
-    Gtk::Button* color_swatch = m_color_swatches.back();
-    delete color_swatch;
-    m_color_swatches.pop_back();
-  }
-
-  while(!m_color_drawing_areas.empty())
-  {
-    Gtk::DrawingArea* drawing_area = m_color_drawing_areas.back();
-    delete drawing_area;
-    m_color_drawing_areas.pop_back();
-  }
 }
 
 Gtk::Button* ExampleWindow::create_color_swatch(int swatch_i)
 {
   Gdk::RGBA rgba(m_color_names[swatch_i]);
-  Gtk::DrawingArea* drawing_area = new Gtk::DrawingArea();
-  Gtk::Button* color_swatch = new Gtk::Button();
-
-  m_color_drawing_areas.push_back(drawing_area);
-  m_color_swatches.push_back(color_swatch);
+  Gtk::DrawingArea* drawing_area = Gtk::manage(new Gtk::DrawingArea());
+  Gtk::Button* color_swatch = Gtk::manage(new Gtk::Button());
 
   drawing_area->set_size_request(24, 24);
   drawing_area->override_background_color(rgba);

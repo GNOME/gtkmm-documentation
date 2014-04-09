@@ -28,11 +28,6 @@ public:
   virtual ~ExampleWindow();
 
 protected:
-  // Slots
-
-  // Widgets
-  std::vector<Gtk::Button*> m_color_swatches;
-  std::vector<Gtk::DrawingArea*> m_color_drawing_areas;
 
   // Containers
   Gtk::ScrolledWindow m_scrolled_window;
