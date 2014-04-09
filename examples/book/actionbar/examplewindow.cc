@@ -37,9 +37,9 @@ ExampleWindow::ExampleWindow()
   m_prev_button.set_image_from_icon_name("go-previous-symbolic", Gtk::ICON_SIZE_BUTTON, true);
   m_next_button.set_image_from_icon_name("go-next-symbolic", Gtk::ICON_SIZE_BUTTON, true);
   m_photo_button.set_image_from_icon_name("media-record-symbolic", Gtk::ICON_SIZE_BUTTON, true);
-  m_photo_box.pack_start(m_prev_button, Gtk::PACK_SHRINK, 0);
-  m_photo_box.pack_start(m_photo_button, Gtk::PACK_SHRINK, 0);
-  m_photo_box.pack_start(m_next_button, Gtk::PACK_SHRINK, 0);
+  m_photo_box.pack_start(m_prev_button, Gtk::PACK_SHRINK);
+  m_photo_box.pack_start(m_photo_button, Gtk::PACK_SHRINK);
+  m_photo_box.pack_start(m_next_button, Gtk::PACK_SHRINK);
   Glib::RefPtr<Gtk::StyleContext> style_context = m_photo_box.get_style_context();
   style_context->add_class("raised");
   style_context->add_class("linked");
@@ -51,8 +51,8 @@ ExampleWindow::ExampleWindow()
 
   // Layout
   m_box.set_homogeneous(false);
-  m_box.pack_start(m_face_image, Gtk::PACK_EXPAND_WIDGET, 0);
-  m_box.pack_end(m_action_bar, Gtk::PACK_SHRINK, 0);
+  m_box.pack_start(m_face_image, Gtk::PACK_EXPAND_WIDGET);
+  m_box.pack_end(m_action_bar, Gtk::PACK_SHRINK);
   add(m_box);
 
   show_all_children();

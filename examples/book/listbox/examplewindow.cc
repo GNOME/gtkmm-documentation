@@ -50,16 +50,16 @@ const SelectionModeStruct selectionModes[] =
 } // anonymous namespace
 
 ExampleWindow::ExampleWindow() :
-  m_HBox(Gtk::ORIENTATION_HORIZONTAL, 0),
-  m_VBox1(Gtk::ORIENTATION_VERTICAL, 0),
-  m_VBox2(Gtk::ORIENTATION_VERTICAL, 0),
+  m_HBox(Gtk::ORIENTATION_HORIZONTAL),
+  m_VBox1(Gtk::ORIENTATION_VERTICAL),
+  m_VBox2(Gtk::ORIENTATION_VERTICAL),
   m_ListBox(),
   m_ComboBox(/* has_entry= */ false),
   m_CheckButton_SingleClick("single click mode", /* mnemonic= */ false),
   m_ScrolledWindow(),
   m_Row3("blah3", 3),
-  m_VBox_Row(Gtk::ORIENTATION_VERTICAL, 0),
-  m_HBox_Row(Gtk::ORIENTATION_HORIZONTAL, 0),
+  m_VBox_Row(Gtk::ORIENTATION_VERTICAL),
+  m_HBox_Row(Gtk::ORIENTATION_HORIZONTAL),
   m_Label_Row("a check box"),
   m_CheckButton_Row1(),
   m_CheckButton_Row2(),
@@ -284,7 +284,7 @@ void ExampleWindow::update_header_func(Gtk::ListBoxRow* row, Gtk::ListBoxRow* be
     // Create header if needed.
     if (!row->get_header())
     {
-      Gtk::Box* hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0));
+      Gtk::Box* hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL));
       Gtk::Label* label = Gtk::manage(new Gtk::Label("Header"));
       hbox->pack_start(*label, Gtk::PACK_SHRINK);
       Gtk::Button* button = Gtk::manage(new Gtk::Button("button"));

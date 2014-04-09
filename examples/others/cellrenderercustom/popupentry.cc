@@ -32,7 +32,7 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
   entry_            (0),
   editing_canceled_ (false)
 {
-  Gtk::Box *const hbox = new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0);
+  Gtk::Box *const hbox = new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL);
   add(*Gtk::manage(hbox));
 
   entry_ = new Gtk::Entry();

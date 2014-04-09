@@ -37,7 +37,7 @@ ExampleWindow::ExampleWindow()
   m_VBox.pack_start(*Gtk::manage(
               new ExampleButtonBox(true, "Spread (spacing 40)", 40,
                   Gtk::BUTTONBOX_SPREAD)),
-          Gtk::PACK_EXPAND_WIDGET, 0);
+          Gtk::PACK_EXPAND_WIDGET);
 
   m_VBox.pack_start(*Gtk::manage(
               new ExampleButtonBox(true, "Edge (spacing 30)", 30,
@@ -64,7 +64,7 @@ ExampleWindow::ExampleWindow()
   m_HBox.pack_start(*Gtk::manage(
               new ExampleButtonBox(false, "Spread (spacing 5)", 5,
                   Gtk::BUTTONBOX_SPREAD)),
-          Gtk::PACK_EXPAND_WIDGET, 0);
+          Gtk::PACK_EXPAND_WIDGET);
 
   m_HBox.pack_start(*Gtk::manage(
               new ExampleButtonBox(false, "Edge (spacing 30)", 30,

@@ -32,7 +32,7 @@ ExampleWindow::ExampleWindow(int which)
   {
     case 1:
     {
-      m_Label1.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0); set_homogeneous(false);");
+      m_Label1.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL); set_homogeneous(false);");
 
       // Align the label to the left side.  We'll discuss this function and
       // others in the section on Widget Attributes.
@@ -64,7 +64,7 @@ ExampleWindow::ExampleWindow(int which)
       m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK, 5);
 
       // create another new label, and show it.
-      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0); set_homogeneous(true);");
+      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL); set_homogeneous(true);");
       m_Label2.set_alignment(Gtk::ALIGN_START, Gtk::ALIGN_START);
       m_box1.pack_start(m_Label2, Gtk::PACK_SHRINK);
 
@@ -96,7 +96,7 @@ ExampleWindow::ExampleWindow(int which)
 
       m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK, 5);
 
-      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0); set_homogeneous(false);");
+      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL); set_homogeneous(false);");
       m_Label2.set_alignment(Gtk::ALIGN_START, Gtk::ALIGN_START);
       m_box1.pack_start(m_Label2, Gtk::PACK_SHRINK);
 

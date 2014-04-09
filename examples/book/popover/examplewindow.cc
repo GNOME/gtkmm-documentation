@@ -94,9 +94,9 @@ void ExampleWindow::configure_form_buttons()
   m_toggle_form_buttons[1].join_group(m_toggle_form_buttons[0]);
   m_toggle_form_buttons[2].join_group(m_toggle_form_buttons[0]);
 
-  m_format_buttons_box.pack_start(m_toggle_form_buttons[0], Gtk::PACK_EXPAND_WIDGET, 0);
-  m_format_buttons_box.pack_start(m_toggle_form_buttons[1], Gtk::PACK_EXPAND_WIDGET, 0);
-  m_format_buttons_box.pack_start(m_toggle_form_buttons[2], Gtk::PACK_EXPAND_WIDGET, 0);
+  m_format_buttons_box.pack_start(m_toggle_form_buttons[0], Gtk::PACK_EXPAND_WIDGET);
+  m_format_buttons_box.pack_start(m_toggle_form_buttons[1], Gtk::PACK_EXPAND_WIDGET);
+  m_format_buttons_box.pack_start(m_toggle_form_buttons[2], Gtk::PACK_EXPAND_WIDGET);
 
   m_format_buttons_box.set_hexpand();
 
