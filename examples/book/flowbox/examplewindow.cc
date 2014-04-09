@@ -33,7 +33,7 @@ ExampleWindow::ExampleWindow()
 
   // Color swatches
   fill_color_names();
-  for (int i(0); i != m_color_names.size(); ++i)
+  for(std::size_t i = 0; i != m_color_names.size(); ++i)
   {
     Gtk::Button* color_swatch = create_color_swatch(i);
     m_flow_box.add(*color_swatch);
