@@ -1,3 +1,51 @@
+3.10.0:
+
+* Added Gtk::ActionBar.
+  (Juan R. García Blanco)
+* Added FlowBox example.
+  (Juan R. García Blanco)
+* Added HeaderBar example.
+  (Juan R. García Blanco) Bug #708866
+* Added ListBox example.
+  (Kjell Ahlstedt)
+* Added PlacesSidebar example.
+  (Juan R. García Blanco)
+* Added Popover example.
+  (Juan R. García Blanco)
+* Added Revealer example.
+  (Juan R. García Blanco) Bug #705460
+* Added SearchBar example.
+  (Juan R. García Blanco)
+* Add a multi-threaded example program.
+  (Kjell Ahlstedt)
+* Application example: Add a window menu.
+  (Murray Cumming)
+* Remove stock items and other deprecated API from the tutorial.
+  (Kjell Ahlstedt)
+* App_and_win_menus example: Add a menu item that sends a Gio::Notification.
+  (Kjell Ahlstedt)
+* ToolPalette example: Skip non-existent and large icons.
+  (Kjell Ahlstedt)
+* EventBox example: Make it possible to clip the label.
+  (Kjell Ahlstedt)
+* InfoBar example: Really show the infobar.
+  (Kjell Ahlstedt)
+* treemodelcustom: Use the new base class order.
+  (Murray Cumming)
+* SignalIO example: Add Gio::Application::hold().
+  (Kjell Ahlstedt)
+* Port from gnome-doc-utils to yelp-tools.
+  (Murray Cumming)
+* Drag and Drop chapter: Correct the description of the DnD signals.
+  (Kjell Ahlstedt)
+* Remove mention of deprecated Range::set_update_policy().
+  (Murray Cumming)Bug #703147 (Joris)
+* Fix broken links.
+  (Kjell Ahlstedt)
+* gmmproc appendix improvments.
+  (José Alburquerque)
+
+
 3.8.0:
 
 * Dialogs chapter: Add Non-modal AboutDialog section.
