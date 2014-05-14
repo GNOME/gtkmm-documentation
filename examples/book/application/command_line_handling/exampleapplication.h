@@ -34,6 +34,15 @@ protected:
     const Glib::ustring& hint);
   virtual int on_command_line(const Glib::RefPtr<Gio::ApplicationCommandLine>& command_line);
 
+  //A regular signal handler, because there is no default signal handler for this:
+  int on_handle_local_options(const Glib::RefPtr<Glib::VariantDict>& options);
+
+  //Callback functions for handling some command-line arguments
+  bool on_option_arg_string(const Glib::ustring& option_name,
+    const Glib::ustring& value, bool has_value);
+  bool on_option_arg_filename(const Glib::ustring& option_name,
+    const std::string& value, bool has_value);
+    
 private:
   void create_window(const Glib::RefPtr<Gio::File>& file = Glib::RefPtr<Gio::File>());
 

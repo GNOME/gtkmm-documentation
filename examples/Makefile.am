@@ -158,8 +158,6 @@ book_application_simple_example_SOURCES =		\
 book_application_command_line_handling_example_SOURCES =		\
 	book/application/command_line_handling/exampleapplication.cc	\
 	book/application/command_line_handling/exampleapplication.h	\
-	book/application/command_line_handling/exampleoptiongroup.cc	\
-	book/application/command_line_handling/exampleoptiongroup.h	\
 	book/application/command_line_handling/examplewindow.cc	\
 	book/application/command_line_handling/examplewindow.h	\
 	book/application/command_line_handling/main.cc
