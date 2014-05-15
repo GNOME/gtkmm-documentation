@@ -18,13 +18,14 @@
 
 ExampleWindow::ExampleWindow()
 : m_hbox(Gtk::ORIENTATION_HORIZONTAL, 6),
-  m_show_desktop_check("Show desktop"),
-  m_show_connect_to_server_check("Show connect to server")
+  m_show_desktop_check("Show \"Desktop\""),
+  m_show_connect_to_server_check("Show \"Connect to Server\""),
+  m_show_enter_location("Show \"Enter Location\"")
 {
   // Window properties
   set_title("PlacesSidebar Example");
   set_border_width(12);
-  set_size_request(300, 600);
+  set_size_request(500, 600);
 
   // Options
   m_controls_frame.set_shadow_type(Gtk::SHADOW_NONE);
@@ -38,12 +39,16 @@ ExampleWindow::ExampleWindow()
   m_show_connect_to_server_check.signal_toggled().connect(sigc::mem_fun(*this, &ExampleWindow::on_show_connect_to_server_toggled));
   m_show_connect_to_server_check.set_active();
 
+  m_show_enter_location.signal_toggled().connect(sigc::mem_fun(*this, &ExampleWindow::on_show_enter_location_toggled));
+  m_show_enter_location.set_active(false);
+
   m_places_sidebar.signal_open_location().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_open_location));
   m_places_sidebar.signal_populate_popup().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_populate_popup));
   //m_places_sidebar.signal_drag_action_requested().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_drag_action_requested));
 
   m_controls.attach(m_show_desktop_check, 0, 0, 1, 1);
   m_controls.attach(m_show_connect_to_server_check, 0, 1, 1, 1);
+  m_controls.attach(m_show_enter_location, 0, 2, 1, 1);
 
   std::cout << "Shortcuts:" << std::endl;
   std::vector<Glib::RefPtr<Gio::File > > shortcuts = m_places_sidebar.list_shortcuts();
@@ -79,6 +84,13 @@ void ExampleWindow::on_show_connect_to_server_toggled()
   const bool show_connect_to_server = m_show_connect_to_server_check.get_active();
 
   m_places_sidebar.set_show_connect_to_server(show_connect_to_server);
+}
+
+void ExampleWindow::on_show_enter_location_toggled()
+{
+  const bool show_enter_location = m_show_enter_location.get_active();
+
+  m_places_sidebar.set_show_enter_location(show_enter_location);
 }
 
 void ExampleWindow::on_placessidebar_open_location(const Glib::RefPtr<Gio::File>& location, Gtk::PlacesOpenFlags /* open_flags */)
