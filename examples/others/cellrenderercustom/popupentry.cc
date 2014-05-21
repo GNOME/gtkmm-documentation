@@ -21,6 +21,11 @@
 
 #include <gdk/gdkkeysyms.h>
 
+// 2014-05-21: The pan-[up,down,left,right]-symbolic icons are new.
+// See https://bugzilla.gnome.org/show_bug.cgi?id=729565
+// If they are not available in your selected icon theme, perhaps you can
+// use the go-[up,down,left,right]-symbolic icons.
+#define ICON_NAME_PREFIX "go" // preferably "pan"
 
 PopupEntry::PopupEntry(const Glib::ustring& path)
 :
@@ -41,7 +46,7 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
 
   button_ = new Gtk::Button();
   hbox->pack_start(*Gtk::manage(button_), Gtk::PACK_SHRINK);
-  button_->add(*Gtk::manage(new Gtk::Arrow(Gtk::ARROW_DOWN, Gtk::SHADOW_OUT)));
+  button_->set_image_from_icon_name(ICON_NAME_PREFIX "-down-symbolic", Gtk::ICON_SIZE_BUTTON, true);
 
   set_can_focus();
   add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
@@ -85,7 +90,7 @@ int PopupEntry::get_button_width()
   Gtk::Button *const button = new Gtk::Button();
   window.add(*Gtk::manage(button));
 
-  button->add(*Gtk::manage(new Gtk::Arrow(Gtk::ARROW_DOWN, Gtk::SHADOW_OUT)));
+  button->set_image_from_icon_name(ICON_NAME_PREFIX "-down-symbolic", Gtk::ICON_SIZE_BUTTON, true);
 
   // Urgh.  Hackish :/
   window.move(-500, -500);

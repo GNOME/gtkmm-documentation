@@ -113,7 +113,6 @@ check_PROGRAMS =					\
 	book/treeview/tree/example			\
 	book/update_ui/example				\
 	others/arrow/arrow				\
-	others/arrow/direction				\
 	others/calendar/calendar			\
 	others/cellrenderercustom/cellrenderertoggle	\
 	others/cellrenderercustom/testpopup		\
@@ -690,9 +689,6 @@ book_update_ui_example_SOURCES =	\
 
 others_arrow_arrow_SOURCES = \
 	others/arrow/arrow.cc
-
-others_arrow_direction_SOURCES = \
-	others/arrow/direction.cc
 
 others_calendar_calendar_SOURCES = \
 	others/calendar/calendar.cc
