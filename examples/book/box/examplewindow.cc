@@ -34,9 +34,9 @@ ExampleWindow::ExampleWindow(int which)
     {
       m_Label1.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL); set_homogeneous(false);");
 
-      // Align the label to the left side.  We'll discuss this function and
-      // others in the section on Widget Attributes.
-      m_Label1.set_alignment(Gtk::ALIGN_START, Gtk::ALIGN_START);
+      // Align the label to the left side.
+      m_Label1.set_halign(Gtk::ALIGN_START);
+      m_Label1.set_valign(Gtk::ALIGN_START);
 
       // Pack the label into the vertical box (vbox box1).  Remember that
       // widgets added to a vbox will be packed one on top of the other in
@@ -65,7 +65,8 @@ ExampleWindow::ExampleWindow(int which)
 
       // create another new label, and show it.
       m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL); set_homogeneous(true);");
-      m_Label2.set_alignment(Gtk::ALIGN_START, Gtk::ALIGN_START);
+      m_Label2.set_halign(Gtk::ALIGN_START);
+      m_Label2.set_valign(Gtk::ALIGN_START);
       m_box1.pack_start(m_Label2, Gtk::PACK_SHRINK);
 
       // Args are: homogeneous, spacing, options, padding
@@ -85,7 +86,8 @@ ExampleWindow::ExampleWindow(int which)
     {
 
       m_Label1.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 10); set_homogeneous(false);");
-      m_Label1.set_alignment(Gtk::ALIGN_START, Gtk::ALIGN_START);
+      m_Label1.set_halign(Gtk::ALIGN_START);
+      m_Label1.set_valign(Gtk::ALIGN_START);
       m_box1.pack_start(m_Label1, Gtk::PACK_SHRINK);
 
       pPackBox1 = Gtk::manage(new PackBox(false, 10, Gtk::PACK_EXPAND_PADDING));
@@ -97,7 +99,8 @@ ExampleWindow::ExampleWindow(int which)
       m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK, 5);
 
       m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL); set_homogeneous(false);");
-      m_Label2.set_alignment(Gtk::ALIGN_START, Gtk::ALIGN_START);
+      m_Label2.set_halign(Gtk::ALIGN_START);
+      m_Label2.set_valign(Gtk::ALIGN_START);
       m_box1.pack_start(m_Label2, Gtk::PACK_SHRINK);
 
       pPackBox3 = Gtk::manage(new PackBox(false, 0, Gtk::PACK_SHRINK, 10));

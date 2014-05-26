@@ -22,7 +22,7 @@
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::ORIENTATION_VERTICAL),
   m_Button_One("Child One"),
-  m_Label_Two("Child 2"),
+  m_Label_Two("Child 2", Gtk::ALIGN_END, Gtk::ALIGN_CENTER),
   m_Button_Quit("Quit")
 {
   set_title("Custom Container example");
@@ -33,8 +33,6 @@ ExampleWindow::ExampleWindow()
 
   //Add the child widgets to the custom container:
   m_MyContainer.set_child_widgets(m_Button_One, m_Label_Two);
-
-  m_Label_Two.set_alignment(1.0, 0.5);
 
   m_VBox.pack_start(m_MyContainer, Gtk::PACK_EXPAND_WIDGET);
   m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);

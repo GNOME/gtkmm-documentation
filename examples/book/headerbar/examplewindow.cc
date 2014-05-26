@@ -17,9 +17,9 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
- : m_close_button_label("Show close button:", 1.0, 0.5),
-   m_title_label("Title:", 1.0, 0.5),
-   m_subtitle_label("Subtitle:", 1.0, 0.5)
+ : m_close_button_label("Show close button:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER),
+   m_title_label("Title:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER),
+   m_subtitle_label("Subtitle:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER)
 {
   // Window properties
   set_title("HeaderBar Example");

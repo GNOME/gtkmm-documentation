@@ -21,8 +21,8 @@ ExampleWindow::ExampleWindow()
   m_search_box(Gtk::ORIENTATION_HORIZONTAL),
   m_up_down_box(Gtk::ORIENTATION_HORIZONTAL),
   m_label("Press any key to start searching"),
-  m_search_mode_label("Show search bar:", 1.0, 0.5),
-  m_close_button_label("Show close button:", 1.0, 0.5)
+  m_search_mode_label("Show search bar:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER),
+  m_close_button_label("Show close button:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER)
 {
   // Window properties
   set_title("SearchBar Example");

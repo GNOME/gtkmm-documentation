@@ -32,11 +32,11 @@ ExampleWindow::ExampleWindow()
   m_VBox_Accelerated(Gtk::ORIENTATION_VERTICAL),
   m_VBox_Value(Gtk::ORIENTATION_VERTICAL),
   m_VBox_Digits(Gtk::ORIENTATION_VERTICAL),
-  m_Label_Day("Day: "),
-  m_Label_Month("Month: "),
-  m_Label_Year("Year: "),
-  m_Label_Value("Value: "),
-  m_Label_Digits("Digits: "),
+  m_Label_Day("Day: ", Gtk::ALIGN_START),
+  m_Label_Month("Month: ", Gtk::ALIGN_START),
+  m_Label_Year("Year: ", Gtk::ALIGN_START),
+  m_Label_Value("Value: ", Gtk::ALIGN_START),
+  m_Label_Digits("Digits: ", Gtk::ALIGN_START),
   m_adjustment_day( Gtk::Adjustment::create(1.0, 1.0, 31.0, 1.0, 5.0, 0.0) ),
   m_adjustment_month( Gtk::Adjustment::create(1.0, 1.0, 12.0, 1.0, 5.0, 0.0) ),
   m_adjustment_year( Gtk::Adjustment::create(2012.0, 1.0, 2200.0, 1.0, 100.0, 0.0) ),
@@ -67,7 +67,6 @@ ExampleWindow::ExampleWindow()
 
   m_VBox.pack_start(m_HBox_NotAccelerated, Gtk::PACK_EXPAND_WIDGET, 5);
 
-  m_Label_Day.set_alignment(Gtk::ALIGN_START);
   m_VBox_Day.pack_start(m_Label_Day);
 
   m_SpinButton_Day.set_wrap();
@@ -76,7 +75,6 @@ ExampleWindow::ExampleWindow()
 
   m_HBox_NotAccelerated.pack_start(m_VBox_Day, Gtk::PACK_EXPAND_WIDGET, 5);
 
-  m_Label_Month.set_alignment(Gtk::ALIGN_START);
   m_VBox_Month.pack_start(m_Label_Month);
 
   m_SpinButton_Month.set_wrap();
@@ -84,7 +82,6 @@ ExampleWindow::ExampleWindow()
 
   m_HBox_NotAccelerated.pack_start(m_VBox_Month, Gtk::PACK_EXPAND_WIDGET, 5);
 
-  m_Label_Year.set_alignment(Gtk::ALIGN_START);
   m_VBox_Year.pack_start(m_Label_Year);
 
   m_SpinButton_Year.set_wrap();
@@ -103,7 +100,6 @@ ExampleWindow::ExampleWindow()
 
   m_HBox_Accelerated.pack_start(m_VBox_Value, Gtk::PACK_EXPAND_WIDGET, 5);
 
-  m_Label_Value.set_alignment(Gtk::ALIGN_START);
   m_VBox_Value.pack_start(m_Label_Value);
 
   m_SpinButton_Value.set_wrap();
@@ -112,7 +108,6 @@ ExampleWindow::ExampleWindow()
 
   m_HBox_Accelerated.pack_start(m_VBox_Digits, Gtk::PACK_EXPAND_WIDGET, 5);
 
-  m_Label_Digits.set_alignment(Gtk::ALIGN_START);
   m_VBox_Digits.pack_start(m_Label_Digits);
 
   m_SpinButton_Digits.set_wrap();

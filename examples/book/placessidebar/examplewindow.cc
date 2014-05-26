@@ -103,11 +103,14 @@ void ExampleWindow::on_placessidebar_open_location(const Glib::RefPtr<Gio::File>
   Gtk::Label file_basename_label, file_path_label, file_uri_label;
 
   file_basename_label.set_text(location->get_basename());
-  file_basename_label.set_alignment(Gtk::ALIGN_START, Gtk::ALIGN_CENTER);
+  file_basename_label.set_halign(Gtk::ALIGN_START);
+  file_basename_label.set_valign(Gtk::ALIGN_CENTER);
   file_path_label.set_text(location->get_path());
-  file_path_label.set_alignment(Gtk::ALIGN_START, Gtk::ALIGN_CENTER);
+  file_path_label.set_halign(Gtk::ALIGN_START);
+  file_path_label.set_valign(Gtk::ALIGN_CENTER);
   file_uri_label.set_text(location->get_uri());
-  file_uri_label.set_alignment(Gtk::ALIGN_START, Gtk::ALIGN_CENTER);
+  file_uri_label.set_halign(Gtk::ALIGN_START);
+  file_uri_label.set_valign(Gtk::ALIGN_CENTER);
 
   location_information_grid.attach(basename_label, 0, 0, 1, 1);
   location_information_grid.attach(file_basename_label, 1, 0, 1, 1);
