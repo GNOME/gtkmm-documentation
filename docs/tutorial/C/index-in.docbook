@@ -773,7 +773,9 @@ This example creates a button with a picture and a label.
 <sect2 id="pushbutton-signals"><title>Signals</title>
 
 <para>
-The <classname>Gtk::Button</classname> widget has the following signals, but most of the time you will just handle the <literal>clicked</literal> signal:
+The <classname>Gtk::Button</classname> widget has the following signals,
+but all except the <literal>clicked</literal> signal are deprecated
+and should not be used in newly-written code:
 </para>
 
 <para>
@@ -784,6 +786,7 @@ The <classname>Gtk::Button</classname> widget has the following signals, but mos
 <listitem>
 <para>
 Emitted when the button is pressed.
+Use <methodname>Gtk::Widget::signal_button_press_event()</methodname> instead.
 </para>
 </listitem>
 </varlistentry>
@@ -792,6 +795,7 @@ Emitted when the button is pressed.
 <listitem>
 <para>
 Emitted when the button is released.
+Use <methodname>Gtk::Widget::signal_button_release_event()</methodname> instead.
 </para>
 </listitem>
 </varlistentry>
@@ -807,7 +811,8 @@ Emitted when the button is pressed and released.
 <term><literal>enter</literal></term>
 <listitem>
 <para>
-Emitted when the mouse pointer moves over the button's window.
+Emitted when the mouse pointer enters the button's window.
+Use <methodname>Gtk::Widget::signal_enter_notify_event()</methodname> instead.
 </para>
 </listitem>
 </varlistentry>
@@ -816,6 +821,7 @@ Emitted when the mouse pointer moves over the button's window.
 <listitem>
 <para>
 Emitted when the mouse pointer leaves the button's window.
+Use <methodname>Gtk::Widget::signal_leave_notify_event()</methodname> instead.
 </para>
 </listitem>
 </varlistentry>
@@ -1775,20 +1781,16 @@ widget itself. For instance, it might be used to center a widget.
 </para>
 
 <para>
-You need to specify the <classname>Alignment</classname>'s characteristics to
-the constructor, or to the <methodname>set()</methodname> method. In particular, you
-won't notice much effect unless you specify a number other than 1.0 for the
-<literal>xscale</literal> and <literal>yscale</literal> parameters, because 1.0
-simply means that the child widget will expand to fill all available space.
+The <classname>Alignment</classname> widget is deprecated from &gtkmm; version 3.14
+and should not be used in newly-written code. Use <classname>Gtk::Widget</classname>'s
+alignment and margin methods instead.
 </para>
-
-<para><ulink url="&url_refdocs_base_gtk;Alignment.html">Reference</ulink></para>
 
 <sect3 id="alignment-example">
 <title>Example</title>
 <para>
-This example right-aligns a button in a window by using an
-<classname>Alignment</classname> widget.
+This example right-aligns a button in a window by using
+<methodname>Gtk::Widget::set_halign()</methodname>.
 </para>
 
 <figure id="figure-alignment">
@@ -1802,7 +1804,7 @@ This example right-aligns a button in a window by using an
 
 <para>
 See the <link linkend="sec-progressbar">ProgressBar</link> section for another
-example that uses an <classname>Alignment</classname>.
+example that uses <methodname>set_halign()</methodname>.
 </para>
 
 </sect3>
@@ -3766,8 +3768,8 @@ the <link linkend="sec-eventbox">EventBox</link> section.
 <para>
 Here is a list of some of these Widgets:
 </para>
-<programlisting>Gtk::Alignment
-Gtk::Arrow
+<programlisting>Gtk::Alignment (deprecated from &gtkmm; version 3.14)
+Gtk::Arrow (deprecated from &gtkmm; version 3.14)
 Gtk::AspectFrame
 Gtk::Bin
 Gtk::Box
