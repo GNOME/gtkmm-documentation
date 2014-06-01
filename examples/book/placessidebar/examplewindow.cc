@@ -31,7 +31,8 @@ ExampleWindow::ExampleWindow()
   m_controls_frame.set_shadow_type(Gtk::SHADOW_NONE);
   m_frame_label.set_markup("<b>Options</b>");
   m_controls_frame.set_label_widget(m_frame_label);
-  m_alignment.set_padding(6, 0, 12, 0);
+  m_controls.set_margin_top(6);
+  m_controls.set_margin_start(12);
 
   m_show_desktop_check.signal_toggled().connect(sigc::mem_fun(*this, &ExampleWindow::on_show_desktop_toggled));
   m_show_desktop_check.set_active();
@@ -59,8 +60,7 @@ ExampleWindow::ExampleWindow()
   }
 
   // Layout
-  m_controls_frame.add(m_alignment);
-  m_alignment.add(m_controls);
+  m_controls_frame.add(m_controls);
   m_hbox.pack_start(m_places_sidebar, Gtk::PACK_EXPAND_WIDGET);
   m_hbox.pack_start(m_controls_frame, Gtk::PACK_SHRINK);
   add(m_hbox);

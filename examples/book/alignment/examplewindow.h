@@ -32,7 +32,6 @@ protected:
   void on_button_clicked();
 
   //Child widgets:
-  Gtk::Alignment m_Alignment;
   Gtk::Button m_Button;
 };
 

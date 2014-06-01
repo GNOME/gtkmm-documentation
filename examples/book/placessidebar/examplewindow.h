@@ -42,7 +42,6 @@ protected:
   Gtk::Grid m_controls;
   Gtk::Frame m_controls_frame;
   Gtk::Label m_frame_label;
-  Gtk::Alignment m_alignment;
 
   // Widgets
   Gtk::PlacesSidebar m_places_sidebar;

@@ -21,7 +21,6 @@
 
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::ORIENTATION_VERTICAL, 5),
-  m_Alignment(0.5, 0.5, 0, 0),
   m_CheckButton_Text("Show text"),
   m_CheckButton_Activity("Activity mode"),
   m_CheckButton_Inverted("Right to Left"),
@@ -34,8 +33,9 @@ ExampleWindow::ExampleWindow()
   m_VBox.set_border_width(10);
   add(m_VBox);
 
-  m_VBox.pack_start(m_Alignment, Gtk::PACK_SHRINK, 5);
-  m_Alignment.add(m_ProgressBar);
+  m_VBox.pack_start(m_ProgressBar, Gtk::PACK_SHRINK, 5);
+  m_ProgressBar.set_halign(Gtk::ALIGN_CENTER);
+  m_ProgressBar.set_valign(Gtk::ALIGN_CENTER);
   m_ProgressBar.set_text("some text");
   m_ProgressBar.set_show_text(false);
 

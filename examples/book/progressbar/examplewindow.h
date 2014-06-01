@@ -37,7 +37,6 @@ protected:
 
   //Child widgets:
   Gtk::Box m_VBox;
-  Gtk::Alignment m_Alignment;
   Gtk::Grid m_Grid;
   Gtk::ProgressBar m_ProgressBar;
   Gtk::Separator m_Separator;
