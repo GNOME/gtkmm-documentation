@@ -123,7 +123,18 @@ void ExampleApplication::on_action_something()
 void ExampleApplication::on_action_quit()
 {
   std::cout << G_STRFUNC << std::endl;
-  quit();
+  quit(); // Not really necessary, when Gtk::Widget::hide() is called.
+
+  // Gio::Application::quit() will make Gio::Application::run() return,
+  // but it's a crude way of ending the program. The window is not removed
+  // from the application. Neither the window's nor the application's
+  // destructors will be called, because there will be remaining reference
+  // counts in both of them. If we want the destructors to be called, we
+  // must remove the window from the application. One way of doing this
+  // is to hide the window.
+  std::vector<Gtk::Window*> windows = get_windows();
+  if (windows.size() > 0)
+    windows[0]->hide(); // In this simple case, we know there is only one window.
 }
 
 void ExampleApplication::on_action_print(const Glib::VariantBase& parameter)
