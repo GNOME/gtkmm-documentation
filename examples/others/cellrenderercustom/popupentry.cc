@@ -30,8 +30,8 @@
 PopupEntry::PopupEntry(const Glib::ustring& path)
 :
   Glib::ObjectBase  (typeid(PopupEntry)),
-  Gtk::EventBox     (),
   Gtk::CellEditable (),
+  Gtk::EventBox     (),
   path_             (path),
   button_           (0),
   entry_            (0),

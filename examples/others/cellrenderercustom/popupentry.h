@@ -23,7 +23,7 @@
 #include <gtkmm/eventbox.h>
 
 
-class PopupEntry : public Gtk::EventBox, public Gtk::CellEditable
+class PopupEntry : public Gtk::CellEditable, public Gtk::EventBox
 {
 public:
   explicit PopupEntry(const Glib::ustring& path);
