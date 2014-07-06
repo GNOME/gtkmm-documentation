@@ -8933,8 +8933,9 @@ public:
     </varlistentry>
     <varlistentry>
         <term><function>_WRAP_METHOD()</function>,
-            <function>_WRAP_SIGNAL()</function>, and
-            <function>_WRAP_PROPERTY()</function></term>
+            <function>_WRAP_SIGNAL()</function>,
+            <function>_WRAP_PROPERTY()</function>, and
+            <function>_WRAP_CHILD_PROPERTY()</function></term>
         <listitem><para>Add methods to wrap parts of the C API.</para></listitem>
     </varlistentry>
 </variablelist>
@@ -9553,6 +9554,23 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
     <classname>Glib::RefPtr&lt;&gt;</classname> object. One of the extra
     arguments <parameter>refreturn</parameter> or
     <parameter>refreturn_ctype</parameter> is required.</para>
+</sect3>
+
+<sect3 id="gmmproc-wrap-child-property">
+<title>_WRAP_CHILD_PROPERTY</title>
+<para>This macro generates the C++ method to wrap a GtkContainer child property.
+    (See <ulink url="https://developer.gnome.org/gtk3/stable/GtkContainer.html">
+    GtkContainer</ulink> for more information about child properties).
+    Similarly to _WRAP_PROPERTY, you must specify the property name and the
+    wanted C++ type for the property. <command>gmmproc</command> uses the .defs
+    file to discover the C type and the .m4 convert files to discover
+    appropriate type conversions.</para>
+<para><function>_WRAP_CHILD_PROPERTY(C child property name, C++ type)</function></para>
+<para>For instance, from <filename>notebook.hg</filename>:
+<programlisting>
+_WRAP_CHILD_PROPERTY("tab-expand", bool)
+</programlisting>
+</para>
 </sect3>
 
 </sect2>
