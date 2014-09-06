@@ -9436,6 +9436,12 @@ _WRAP_SIGNAL(void clicked(),"clicked")
             <para>Puts the generated code in #ifdef blocks.</para>
         </listitem>
     </varlistentry>
+    <varlistentry>
+        <term>exception_handler</term>
+	      <listitem>
+	        <para>Allows to use custom exception handler instead of default one. Exception might be rethrown by user-defined handler, and it will be catched by default handler.</para>
+	      </listitem>
+    </varlistentry>
 </variablelist>
 </para>
 </sect3>
@@ -9545,6 +9551,18 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
             must have been specified with the <literal>slot_name</literal> and
             <literal>slot_callbback</literal> options respectively.</para>
         </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>return_value</term>
+	      <listitem>
+	        <para>Defines non-default return value.</para>
+	      </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>exception_handler</term>
+	      <listitem>
+	        <para>Allows to use custom exception handler instead of default one. Exception might be rethrown by user-defined handler, and it will be catched by default handler.</para>
+	      </listitem>
     </varlistentry>
 </variablelist>
 </para>
