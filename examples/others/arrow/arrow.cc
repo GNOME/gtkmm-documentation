@@ -5,7 +5,7 @@
 #include <gtkmm/window.h>
 #include <gtkmm/application.h>
 
-// 2014-05-21: The pan-[up,down,left,right]-symbolic icons are new.
+// 2014-09-06: The pan-[up,down,start,end]-symbolic icons are new.
 // See https://bugzilla.gnome.org/show_bug.cgi?id=729565
 // If they are not available in your selected icon theme, perhaps you can
 // use the go-[up,down,previous,next]-symbolic icons.
@@ -29,8 +29,8 @@ ArrowButton::ArrowButton(Gtk::ArrowType arrow_type)
 #if USE_PAN_ICON_NAMES
     case Gtk::ARROW_UP:    icon_name = "pan-up-symbolic"; break;
     case Gtk::ARROW_DOWN:  icon_name = "pan-down-symbolic"; break;
-    case Gtk::ARROW_LEFT:  icon_name = "pan-left-symbolic"; break;
-    case Gtk::ARROW_RIGHT: icon_name = "pan-right-symbolic"; break;
+    case Gtk::ARROW_LEFT:  icon_name = "pan-start-symbolic"; break;
+    case Gtk::ARROW_RIGHT: icon_name = "pan-end-symbolic"; break;
 #else
     case Gtk::ARROW_UP:    icon_name = "go-up-symbolic"; break;
     case Gtk::ARROW_DOWN:  icon_name = "go-down-symbolic"; break;
