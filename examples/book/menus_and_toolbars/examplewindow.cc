@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -20,7 +18,7 @@
 #include <gtkmm.h>
 #include <iostream>
 
-ExampleWindow::ExampleWindow()
+ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
 : m_Box(Gtk::ORIENTATION_VERTICAL)
 {
   set_title("main_menu example");
@@ -55,9 +53,8 @@ ExampleWindow::ExampleWindow()
 
   //Define how the actions are presented in the menus and toolbars:
   Glib::RefPtr<Gtk::Builder> m_refBuilder = Gtk::Builder::create();
-  //TODO? add_accel_group(m_refBuilder->get_accel_group());
 
-  //Layout the actions in a menubar:
+  //Layout the actions in a menubar and toolbar:
   const char* ui_info =
     "<interface>"
     "  <menu id='menubar'>"
@@ -94,6 +91,7 @@ ExampleWindow::ExampleWindow()
     "      <item>"
     "        <attribute name='label' translatable='yes'>_Cut</attribute>"
     "        <attribute name='action'>example.cut</attribute>"
+    "        <attribute name='accel'>&lt;Primary&gt;x</attribute>"
     "      </item>"
     "      <item>"
     "        <attribute name='label' translatable='yes'>_Copy</attribute>"
@@ -106,7 +104,70 @@ ExampleWindow::ExampleWindow()
     "        <attribute name='accel'>&lt;Primary&gt;v</attribute>"
     "      </item>"
     "    </submenu>"
-    "  </menu>";
+    "  </menu>"
+    ""
+    "<!-- Generated with glade 3.18.3 -->"
+    "  <object class='GtkImage' id='image_rain'>"
+    "    <property name='visible'>True</property>"
+    "    <property name='can_focus'>False</property>"
+    "    <property name='pixbuf'>rain.png</property>"
+    "  </object>"
+    "  <object class='GtkToolbar' id='toolbar'>"
+    "    <property name='visible'>True</property>"
+    "    <property name='can_focus'>False</property>"
+    "    <child>"
+    "      <object class='GtkToolButton' id='toolbutton_new'>"
+    "        <property name='visible'>True</property>"
+    "        <property name='can_focus'>False</property>"
+    "        <property name='tooltip_text' translatable='yes'>New</property>"
+    "        <property name='action_name'>example.new</property>"
+    "        <property name='icon_name'>document-new</property>"
+    "      </object>"
+    "      <packing>"
+    "        <property name='expand'>False</property>"
+    "        <property name='homogeneous'>True</property>"
+    "      </packing>"
+    "    </child>"
+    "    <child>"
+    "      <object class='GtkToggleToolButton' id='toolbutton_rain'>"
+    "        <property name='visible'>True</property>"
+    "        <property name='can_focus'>False</property>"
+    "        <property name='tooltip_text' translatable='yes'>Stay dry in the rain</property>"
+    "        <property name='action_name'>example.rain</property>"
+    "        <property name='label_widget'>image_rain</property>"
+    "      </object>"
+    "      <packing>"
+    "        <property name='expand'>False</property>"
+    "        <property name='homogeneous'>True</property>"
+    "      </packing>"
+    "    </child>"
+    "    <child>"
+    "      <object class='GtkToolButton' id='toolbutton_quit'>"
+    "        <property name='visible'>True</property>"
+    "        <property name='can_focus'>False</property>"
+    "        <property name='tooltip_text' translatable='yes'>Quit</property>"
+    "        <property name='action_name'>example.quit</property>"
+    "        <property name='icon_name'>application-exit</property>"
+    "      </object>"
+    "      <packing>"
+    "        <property name='expand'>False</property>"
+    "        <property name='homogeneous'>True</property>"
+    "      </packing>"
+    "    </child>"
+    "  </object>"
+    "</interface>";
+
+  // When the menubar is a child of a Gtk::Window, keyboard accelerators are not
+  // automatically fetched from the Gio::Menu.
+  // See the examples/book/menus/main_menu example for an alternative way of
+  // adding the menubar when using Gtk::ApplicationWindow.
+  // Gtk::Application::set_accel_for_action() is new in gtkmm 3.11.9.
+  app->set_accel_for_action("example.new", "<Primary>n");
+  app->set_accel_for_action("example.open", "<Primary>o");
+  app->set_accel_for_action("example.quit", "<Primary>q");
+  app->set_accel_for_action("example.cut", "<Primary>x");
+  app->set_accel_for_action("example.copy", "<Primary>c");
+  app->set_accel_for_action("example.paste", "<Primary>v");
 
   try
   {
@@ -114,39 +175,29 @@ ExampleWindow::ExampleWindow()
   }
   catch(const Glib::Error& ex)
   {
-    std::cerr << "building menus failed: " <<  ex.what();
+    std::cerr << "Building menus and toolbar failed: " <<  ex.what();
   }
 
   //Get the menubar:
-  Glib::RefPtr<Glib::Object> object =
-    m_refBuilder->get_object("menubar");
-  Glib::RefPtr<Gio::Menu> gmenu =
-    Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
-  if(!gmenu)
+  Glib::RefPtr<Glib::Object> object = m_refBuilder->get_object("menubar");
+  Glib::RefPtr<Gio::Menu> gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+  if (!gmenu)
     g_warning("GMenu not found");
+  else
+  {
+    Gtk::MenuBar* pMenuBar = Gtk::manage(new Gtk::MenuBar(gmenu));
 
-  Gtk::MenuBar* pMenuBar = new Gtk::MenuBar(gmenu);
+    //Add the MenuBar to the window:
+    m_Box.pack_start(*pMenuBar, Gtk::PACK_SHRINK);
+  }
 
-  //Add the MenuBar to the window:
-  m_Box.pack_start(*pMenuBar, Gtk::PACK_SHRINK);
-
-
-  //Create the toolbar and add it to a container widget:
-  Gtk::Toolbar* toolbar = Gtk::manage(new Gtk::Toolbar());
-  Gtk::ToolButton* button = Gtk::manage(new Gtk::ToolButton());
-  button->set_icon_name("document-new");
-  //We can't do this until we can break the ToolButton ABI: button->set_detailed_action_name("example.new");
-  gtk_actionable_set_detailed_action_name (GTK_ACTIONABLE (button->gobj()), "example.new");
-  toolbar->add(*button);
-
-  button = Gtk::manage(new Gtk::ToolButton());
-  button->set_icon_name("application-exit");
-  //We can't do this until we can break the ToolButton ABI: button->set_detailed_action_name("example.quit");
-  gtk_actionable_set_detailed_action_name (GTK_ACTIONABLE (button->gobj()), "example.quit");
-  toolbar->add(*button);
-
-  m_Box.pack_start(*toolbar, Gtk::PACK_SHRINK);
-
+  //Get the toolbar and add it to a container widget:
+  Gtk::Toolbar* toolbar = 0;
+  m_refBuilder->get_widget("toolbar", toolbar);
+  if (!toolbar)
+    g_warning("GtkToolbar not found");
+  else
+    m_Box.pack_start(*toolbar, Gtk::PACK_SHRINK);
 
   show_all_children();
 }

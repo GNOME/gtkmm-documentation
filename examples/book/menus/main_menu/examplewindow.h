@@ -36,6 +36,8 @@ protected:
   //Child widgets:
   Gtk::Box m_Box;
 
+  Glib::RefPtr<Gtk::Builder> m_refBuilder;
+
   //Two sets of choices:
   Glib::RefPtr<Gio::SimpleAction> m_refChoice;
   Glib::RefPtr<Gio::SimpleAction> m_refChoiceOther;

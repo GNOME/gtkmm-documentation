@@ -54,24 +54,61 @@ ExampleWindow::ExampleWindow()
   add_action("about", sigc::mem_fun(*this, &ExampleWindow::on_menu_others));
 
   //Create the toolbar and add it to a container widget:
-  Gtk::Toolbar* toolbar = Gtk::manage(new Gtk::Toolbar());
-  Gtk::ToolButton* button = Gtk::manage(new Gtk::ToolButton());
-  button->set_icon_name("document-new");
-  // We can't do this until we can break the ToolButton ABI:
-  //   button->set_detailed_action_name("app.newstandard");
-  gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(button->gobj()),
-    "app.newstandard");
-  toolbar->add(*button);
 
-  button = Gtk::manage(new Gtk::ToolButton());
-  button->set_icon_name("application-exit");
-  // We can't do this until we can break the ToolButton ABI:
-  //   button->set_detailed_action_name("app.quit");
-  gtk_actionable_set_detailed_action_name(GTK_ACTIONABLE(button->gobj()),
-    "app.quit");
-  toolbar->add(*button);
+  m_refBuilder = Gtk::Builder::create();
 
-  m_Box.pack_start(*toolbar, Gtk::PACK_SHRINK);
+  Glib::ustring ui_info =
+    "<?xml version='1.0' encoding='UTF-8'?>"
+    "<!-- Generated with glade 3.18.3 -->"
+    "<interface>"
+    "  <requires lib='gtk+' version='3.12'/>"
+    "  <object class='GtkToolbar' id='toolbar'>"
+    "    <property name='visible'>True</property>"
+    "    <property name='can_focus'>False</property>"
+    "    <child>"
+    "      <object class='GtkToolButton' id='toolbutton_new'>"
+    "        <property name='visible'>True</property>"
+    "        <property name='can_focus'>False</property>"
+    "        <property name='tooltip_text' translatable='yes'>New Standard</property>"
+    "        <property name='action_name'>app.newstandard</property>"
+    "        <property name='icon_name'>document-new</property>"
+    "      </object>"
+    "      <packing>"
+    "        <property name='expand'>False</property>"
+    "        <property name='homogeneous'>True</property>"
+    "      </packing>"
+    "    </child>"
+    "    <child>"
+    "      <object class='GtkToolButton' id='toolbutton_quit'>"
+    "        <property name='visible'>True</property>"
+    "        <property name='can_focus'>False</property>"
+    "        <property name='tooltip_text' translatable='yes'>Quit</property>"
+    "        <property name='action_name'>app.quit</property>"
+    "        <property name='icon_name'>application-exit</property>"
+    "      </object>"
+    "      <packing>"
+    "        <property name='expand'>False</property>"
+    "        <property name='homogeneous'>True</property>"
+    "      </packing>"
+    "    </child>"
+    "  </object>"
+    "</interface>";
+
+  try
+  {
+    m_refBuilder->add_from_string(ui_info);
+  }
+  catch (const Glib::Error& ex)
+  {
+    std::cerr << "Building toolbar failed: " <<  ex.what();
+  }
+
+  Gtk::Toolbar* toolbar = 0;
+  m_refBuilder->get_widget("toolbar", toolbar);
+  if (!toolbar)
+    g_warning("GtkToolbar not found");
+  else
+    m_Box.pack_start(*toolbar, Gtk::PACK_SHRINK);
 }
 
 ExampleWindow::~ExampleWindow()
