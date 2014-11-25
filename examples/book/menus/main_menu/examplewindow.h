@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 705 2006-07-19 02:55:32Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,7 +19,7 @@
 
 #include <gtkmm.h>
 
-class ExampleWindow : public Gtk::Window
+class ExampleWindow : public Gtk::ApplicationWindow
 {
 public:
   ExampleWindow();
@@ -29,8 +27,6 @@ public:
 
 protected:
   //Signal handlers:
-  void on_menu_file_new_generic();
-  void on_menu_file_quit();
   void on_menu_others();
 
   void on_menu_choices(const Glib::ustring& parameter);
@@ -40,10 +36,9 @@ protected:
   //Child widgets:
   Gtk::Box m_Box;
 
-  Glib::RefPtr<Gtk::Builder> m_refBuilder;
-
   //Two sets of choices:
-  Glib::RefPtr<Gio::SimpleAction> m_refChoice, m_refChoiceOther;
+  Glib::RefPtr<Gio::SimpleAction> m_refChoice;
+  Glib::RefPtr<Gio::SimpleAction> m_refChoiceOther;
 
   Glib::RefPtr<Gio::SimpleAction> m_refToggle;
 };

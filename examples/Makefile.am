@@ -488,6 +488,8 @@ book_listbox_example_SOURCES =		\
 	book/listbox/main.cc
 
 book_menus_main_menu_main_menu_SOURCES =	\
+	book/menus/main_menu/exampleapplication.cc	\
+	book/menus/main_menu/exampleapplication.h	\
 	book/menus/main_menu/examplewindow.cc	\
 	book/menus/main_menu/examplewindow.h	\
 	book/menus/main_menu/main.cc

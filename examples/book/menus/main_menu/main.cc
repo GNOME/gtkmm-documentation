@@ -1,5 +1,3 @@
-//$Id: main.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -16,15 +14,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#include "examplewindow.h"
-#include <gtkmm/application.h>
+#include "exampleapplication.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
-  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  Glib::RefPtr<ExampleApplication> application = ExampleApplication::create();
 
-  ExampleWindow window;
-
-  //Shows the window and returns when it is closed.
-  return app->run(window);
+  // Start the application, showing the initial window,
+  // and opening extra windows for any files that it is asked to open,
+  // for instance as a command-line parameter.
+  // run() will return when the last window has been closed by the user.
+  const int status = application->run(argc, argv);
+  return status;
 }
