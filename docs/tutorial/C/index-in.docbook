@@ -3375,6 +3375,15 @@ classes, all of which should be instantiated via their
 <methodname>create()</methodname> methods, which return
 <classname>RefPtr</classname>s.
 </para>
+<note>
+<para>
+<classname>GtkAction</classname>, <classname>GtkActionGroup</classname> and
+<classname>GtkUIManager</classname> are deprecated in GTK+ from version 3.10.
+The corresponding classes in &gtkmm; will also be deprecated in the future.
+The examples in this chapter use <classname>Gio::SimpleAction</classname>,
+<classname>Gio::SimpleActionGroup</classname> and <classname>Gtk::Builder</classname> instead.
+</para>
+</note>
 
 <sect1 id="sec-actions">
 <title>Actions</title>
@@ -3513,16 +3522,38 @@ signal, which you will need to handle anyway. For instance:
 <sect1 id="sec-menus-examples">
     <title>Examples</title>
 
-<sect2 id="menu-example-main"><title>Main Menu example</title>
+<sect2 id="menu-example-main"><title>Application Menu and Main Menu example</title>
+<para>
+This program contains an application menu, a menubar and a toolbar.
+Classes are derived from <classname>Gtk::Application</classname> and
+<classname>Gtk::ApplicationWindow</classname>.
+</para>
 
 <figure id="figure-menus-mainmenu">
-  <title>Main Menu</title>
+  <title>App and Main Menu</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;main_menu.png"/>
   </screenshot>
 </figure>
 
 <para><ulink url="&url_examples_base;menus/main_menu/">Source Code</ulink></para>
+
+</sect2>
+
+<sect2 id="menu-example-main2"><title>Main Menu example</title>
+<para>
+This program contains a menubar and a toolbar.
+A class is derived from <classname>Gtk::Window</classname>.
+</para>
+
+<figure id="figure-menus-mainmenu2">
+  <title>Main Menu</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;menus_and_toolbars.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;menus_and_toolbars">Source Code</ulink></para>
 
 </sect2>
 
