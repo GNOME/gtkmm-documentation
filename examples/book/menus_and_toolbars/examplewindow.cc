@@ -107,6 +107,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
     "  </menu>"
     ""
     "<!-- Generated with glade 3.18.3 -->"
+    "  <requires lib='gtk+' version='3.4'/>"
     "  <object class='GtkImage' id='image_rain'>"
     "    <property name='visible'>True</property>"
     "    <property name='can_focus'>False</property>"

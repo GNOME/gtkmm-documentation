@@ -58,10 +58,9 @@ ExampleWindow::ExampleWindow()
   m_refBuilder = Gtk::Builder::create();
 
   Glib::ustring ui_info =
-    "<?xml version='1.0' encoding='UTF-8'?>"
     "<!-- Generated with glade 3.18.3 -->"
     "<interface>"
-    "  <requires lib='gtk+' version='3.12'/>"
+    "  <requires lib='gtk+' version='3.4'/>"
     "  <object class='GtkToolbar' id='toolbar'>"
     "    <property name='visible'>True</property>"
     "    <property name='can_focus'>False</property>"
