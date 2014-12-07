@@ -23,6 +23,7 @@ check_PROGRAMS =					\
 	book/buttons/checkbutton/example		\
 	book/buttons/filechooserbutton/example		\
 	book/buttons/radiobutton/radiobuttons		\
+	book/buttons/scalebutton/example			\
 	book/buttons/togglebutton/example		\
 	book/clipboard/ideal/example			\
 	book/clipboard/simple/example			\
@@ -228,6 +229,11 @@ book_buttons_radiobutton_radiobuttons_SOURCES =		\
 	book/buttons/radiobutton/main.cc		\
 	book/buttons/radiobutton/radiobuttons.cc	\
 	book/buttons/radiobutton/radiobuttons.h
+
+book_buttons_scalebutton_example_SOURCES =		\
+	book/buttons/scalebutton/examplewindow.cc	\
+	book/buttons/scalebutton/examplewindow.h	\
+	book/buttons/scalebutton/main.cc
 
 book_buttons_togglebutton_example_SOURCES =		\
 	book/buttons/togglebutton/examplewindow.cc	\
