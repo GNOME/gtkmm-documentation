@@ -7205,6 +7205,23 @@ instance, you cannot use the copyright sign (&copy;).
       <methodname>Gtk::Widget::set_realized()</methodname> and
       <methodname>Gtk::Widget::set_window()</methodname> from there.</para>
 
+<sect2 id="custom-style-properties">
+<title>Custom Style Properties</title>
+
+<para>You can add style properties to your widget class, whether it's derived directly
+from <classname>Gtk::Widget</classname> or from another widget class. The values of
+the style properties can be read from a CSS (Cascading Style Sheets) file. The users
+of your widget, or the users of an application program with your widget, can then
+modify the style of your widget without modifying the source code.
+Useful classes are <classname>Gtk::StyleProperty</classname> and <classname>Gtk::CssProvider</classname>.
+With <methodname>Gtk::Widget::get_style_property()</methodname> you can read the values
+of both your own style properties and those of your widget's base class. Note that style
+properties are not wrapped in &gtkmm;. See <application>GTK+</application>'s
+documentation for lists of existing style properties.
+The following example shows a simple use of a custom style property.
+</para>
+</sect2>
+
 <sect2 id="custom-widget-example"><title>Example</title>
 
 <para>This example implements a widget which draws a Penrose triangle.</para>
@@ -7597,7 +7614,7 @@ consider contributing to this document.
 </para>
 <para>
 Ideally, we would like you to <ulink url="http://www.gtkmm.org/bugs.shtml">provide a patch</ulink> to the
-<filename>docs/tutorial/C/gtkmm-tutorial-in.xml</filename> file. This file is currently
+<filename>docs/tutorial/C/index-in.docbook</filename> file. This file is currently
 in the <literal>gtkmm-documentation</literal> module in GNOME git.
 </para>
 

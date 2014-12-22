@@ -1,5 +1,3 @@
-//$Id: mywidget.h 834 2007-05-08 01:09:32Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2004 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,6 +19,7 @@
 
 #include <gtkmm/widget.h>
 #include <gtkmm/cssprovider.h>
+#include <gtkmm/styleproperty.h>
 
 class MyWidget : public Gtk::Widget
 {
@@ -43,8 +42,12 @@ protected:
   virtual void on_unrealize();
   virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
 
+  //Signal handler:
+  void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error);
+
+  Gtk::StyleProperty<int> m_scale_prop;
   Glib::RefPtr<Gdk::Window> m_refGdkWindow;
-  Glib::RefPtr<Gtk::CssProvider> m_refStyleProvider;
+  Glib::RefPtr<Gtk::CssProvider> m_refCssProvider;
 
   int m_scale;
 };

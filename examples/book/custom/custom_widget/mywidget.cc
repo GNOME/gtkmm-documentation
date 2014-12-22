@@ -1,5 +1,3 @@
-//$Id: mywidget.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2004 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,11 +20,17 @@
 //#include <gtk/gtkwidget.h> //For GTK_IS_WIDGET()
 #include <cstring>
 
+// The MyWidget class uses API which was added in gtkmm 3.15.3 (Gtk::CssProviderError,
+// Gtk::CssProvider::signal_parsing_error() and Gtk::CssSection) and in gtkmm 3.15.2
+// (Gtk::StyleProperty).
 
 MyWidget::MyWidget() :
   //The GType name will actually be gtkmm__CustomObject_mywidget
   Glib::ObjectBase("mywidget"),
   Gtk::Widget(),
+  //Install a style property so that an aspect of this widget may be themed
+  //via a CSS style sheet file:
+  m_scale_prop(*this, "example_scale", 500),
   m_scale(1000)
 {
   set_has_window(true);
@@ -37,30 +41,26 @@ MyWidget::MyWidget() :
   //This shows that the GType still derives from GtkWidget:
   //std::cout << "Gtype is a GtkWidget?:" << GTK_IS_WIDGET(gobj()) << std::endl;
 
-  //Install a style so that an aspect of this widget may be themed via a CSS
-  //style sheet file:
-  gtk_widget_class_install_style_property(GTK_WIDGET_CLASS(
-              G_OBJECT_GET_CLASS(gobj())),
-      g_param_spec_int("example_scale",
-        "Scale of Example Drawing",
-        "The scale to use when drawing. This is just a silly example.",
-        G_MININT,
-        G_MAXINT,
-        500,
-        G_PARAM_READABLE) );
-
-  m_refStyleProvider = Gtk::CssProvider::create();
+  m_refCssProvider = Gtk::CssProvider::create();
   Glib::RefPtr<Gtk::StyleContext> refStyleContext = get_style_context();
-  refStyleContext->add_provider(m_refStyleProvider, 
+  refStyleContext->add_provider(m_refCssProvider,
     GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  m_refCssProvider->signal_parsing_error().connect(
+    sigc::mem_fun(*this, &MyWidget::on_parsing_error));
     
   try
   {
-    m_refStyleProvider->load_from_path("custom_gtk.css");
+    m_refCssProvider->load_from_path("custom_gtk.css");
+  }
+  catch(const Gtk::CssProviderError& ex)
+  {
+    std::cerr << "CssProviderError, Gtk::CssProvider::load_from_path() failed: "
+              << ex.what() << std::endl;
   }
   catch(const Glib::Error& ex)
   {
-    std::cerr << "Gtk::CssProvider::load_from_path() failed: " << ex.what() << std::endl;
+    std::cerr << "Error, Gtk::CssProvider::load_from_path() failed: "
+              << ex.what() << std::endl;
   }
 }
 
@@ -140,7 +140,7 @@ void MyWidget::on_realize()
   set_realized();
 
   //Get the themed style from the CSS file:
-  get_style_property("example_scale", m_scale);
+  m_scale = m_scale_prop.get_value();
   std::cout << "m_scale (example_scale from the theme/css-file) is: "
       << m_scale << std::endl;
 
@@ -216,4 +216,17 @@ bool MyWidget::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
   cr->stroke();
 
   return true;
+}
+
+void MyWidget::on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error)
+{
+  std::cerr << "on_parsing_error(): " << error.what() << std::endl;
+  if (section)
+  {
+    std::cerr << "  URI = " << section->get_file()->get_uri() << std::endl;
+    std::cerr << "  start_line = " << section->get_start_line()+1
+              << ", end_line = " << section->get_end_line()+1 << std::endl;
+    std::cerr << "  start_position = " << section->get_start_position()
+              << ", end_position = " << section->get_end_position() << std::endl;
+  }
 }
