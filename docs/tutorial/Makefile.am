@@ -103,6 +103,12 @@ HELP_MEDIA =					\
 	figures/treeview_tree.png		\
 	figures/update_ui.png
 
+# Do not define the environment variable LINGUAS.
+# If the environment variable LINGUAS exists, YELP_HELP_RULES generate
+# make rules for creating files only for languages that are listed in both
+# LINGUAS and HELP_LINGUAS, but this Makefile.am assumes that files for
+# all languages in HELP_LINGUAS can be created.
+
 HELP_LINGUAS = de el es fr pt_BR sl zh_CN
 
 MAINTAINERCLEANFILES = html/*.html $(srcdir)/html/*.html
@@ -158,7 +164,7 @@ dist_tutorial_icons_DATA =	\
 	icons/warning.png
 
 
-all-local: $(HELP_LINGUAS) $(addsuffix /index.docbook,C $(HELP_LINGUAS)) html/index.html
+all-local: $(addsuffix /index.docbook,C $(HELP_LINGUAS)) html/index.html
 
 install-data-local: install-tutorial
 
@@ -173,9 +179,6 @@ uninstall-tutorial:
 	@$(NORMAL_UNINSTALL)
 	rm -f '$(DESTDIR)$(tutorial_htmldir)'/*.html
 	rm -f '$(DESTDIR)$(tutorial_htmldir)/style.css'
-
-$(HELP_LINGUAS):
-	@$(MKDIR_P) $@
 
 # Create a html generation of the C locale's version of the DocBook,
 # using our custom stylesheet and graphics:
