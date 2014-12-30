@@ -16,6 +16,7 @@
 
 #include "myarea.h"
 #include <cairomm/context.h>
+#include <giomm/resource.h>
 #include <gdkmm/general.h> // set_source_pixbuf()
 #include <glibmm/fileutils.h>
 #include <iostream>
@@ -26,11 +27,11 @@ MyArea::MyArea()
   {
     // The fractal image has been created by the XaoS program.
     // http://xaos.sourceforge.net
-    m_image = Gdk::Pixbuf::create_from_file("fractal_image.png");
+    m_image = Gdk::Pixbuf::create_from_resource("/image/fractal_image.png");
   }
-  catch(const Glib::FileError& ex)
+  catch(const Gio::ResourceError& ex)
   {
-    std::cerr << "FileError: " << ex.what() << std::endl;
+    std::cerr << "ResourceError: " << ex.what() << std::endl;
   }
   catch(const Gdk::PixbufError& ex)
   {

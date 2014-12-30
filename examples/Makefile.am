@@ -131,7 +131,7 @@ dist_noinst_DATA =				\
 	book/builder/derived/derived.glade	\
 	book/buttons/button/info.xpm		\
 	book/custom/custom_widget/custom_gtk.css	\
-	book/drawingarea/image/fractal_image.png	\
+	$(DRAWINGAREA_IMAGE_RESOURCES) \
 	book/iconview/gnome-dice-1.svg		\
 	book/iconview/gnome-dice-2.svg		\
 	book/iconview/gnome-dice-3.svg		\
@@ -140,7 +140,7 @@ dist_noinst_DATA =				\
 	book/iconview/gnome-dice-6.svg		\
 	book/iconview/mozilla-firefox.png	\
 	book/iconview/xmms.xpm			\
-	book/menus_and_toolbars/rain.png
+	$(MENUS_AND_TOOLBARS_RESOURCES)
 
 book_actionbar_example_SOURCES = \
 	book/actionbar/examplewindow.cc \
@@ -335,6 +335,7 @@ book_drawingarea_curve_drawingareacurve_SOURCES =	\
 	book/drawingarea/curve/myarea.h
 
 book_drawingarea_image_drawingareaimage_SOURCES =	\
+	book/drawingarea/image/resources.c \
 	book/drawingarea/image/main.cc			\
 	book/drawingarea/image/myarea.cc		\
 	book/drawingarea/image/myarea.h
@@ -506,6 +507,7 @@ book_menus_popup_popup_SOURCES =		\
 	book/menus/popup/main.cc
 
 book_menus_and_toolbars_example_SOURCES =	\
+	book/menus_and_toolbars/resources.c \
 	book/menus_and_toolbars/examplewindow.cc\
 	book/menus_and_toolbars/examplewindow.h	\
 	book/menus_and_toolbars/main.cc
@@ -739,5 +741,24 @@ others_treemodelcustom_example_SOURCES =		\
 	others/treemodelcustom/examplewindow.h		\
 	others/treemodelcustom/main.cc
 
-others_window_wheelbarrow_SOURCES = \
-	others/window/wheelbarrow.cc
+#others_window_wheelbarrow_SOURCES = \
+#	others/window/wheelbarrow.cc
+
+MAINTAINERCLEANFILES = \
+  book/drawingarea/image/resources.c \
+  book/menus_and_toolbars/resources.c
+
+DRAWINGAREA_IMAGE_RESOURCES = \
+  book/drawingarea/image/image.gresource.xml \
+  book/drawingarea/image/fractal_image.png
+
+book/drawingarea/image/resources.c: $(DRAWINGAREA_IMAGE_RESOURCES)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(dir $<) --generate-source $<
+
+MENUS_AND_TOOLBARS_RESOURCES = \
+  book/menus_and_toolbars/toolbar.gresource.xml \
+  book/menus_and_toolbars/rain.png \
+  book/menus_and_toolbars/toolbar.glade
+
+book/menus_and_toolbars/resources.c: $(MENUS_AND_TOOLBARS_RESOURCES)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(dir $<) --generate-source $<

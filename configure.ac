@@ -23,6 +23,11 @@ PKG_CHECK_MODULES([GIOMM], [giomm-2.4 >= 2.40.0])
 PKG_CHECK_MODULES([GTKMM], [gtkmm-3.0 >= 3.12.0])
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
 
+# glib-compile-resources and C compiler are needed to generate and compile
+# resource files in example programs.
+AC_SUBST(GLIB_COMPILE_RESOURCES, [`$PKG_CONFIG --variable=glib_compile_resources gio-2.0`])
+AC_PROG_CC
+
 AC_LANG([C++])
 AC_CHECK_FUNCS([mkfifo])
 
