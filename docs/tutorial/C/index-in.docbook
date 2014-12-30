@@ -3,6 +3,7 @@
   "http://docbook.org/docbook/xml/4.5/docbookx.dtd" [
   <!ENTITY url_refdocs_base_glib_html "http://developer.gnome.org/glibmm/unstable/">
   <!ENTITY url_refdocs_base_glib "&url_refdocs_base_glib_html;classGlib_1_1">
+  <!ENTITY url_refdocs_base_gio "&url_refdocs_base_glib_html;classGio_1_1">
   <!ENTITY url_refdocs_base_gtk_html "http://developer.gnome.org/gtkmm/unstable/">
   <!ENTITY url_refdocs_base_gtk "&url_refdocs_base_gtk_html;classGtk_1_1">
   <!ENTITY url_refdocs_base_gtk_namespace "&url_refdocs_base_gtk_html;namespaceGtk_1_1">
@@ -3519,6 +3520,75 @@ signal, which you will need to handle anyway. For instance:
 
 </sect1>
 
+<sect1 id="sec-gio-resource">
+<title>Gio::Resource and glib-compile-resources</title>
+
+<para>
+Applications and libraries often contain binary or textual data that is
+really part of the application, rather than user data. For instance
+<classname>Gtk::Builder</classname> <filename class='extension'>.glade</filename> files,
+splashscreen images, <classname>Gio::Menu</classname> markup xml, CSS files,
+icons, etc. These are often shipped as files in <filename class='directory'>$datadir/appname</filename>,
+or manually included as literal strings in the code.
+</para>
+<para>
+The <classname>Gio::Resource</classname> API and the <application>glib-compile-resources</application>
+program provide a convenient and efficient alternative to this, which has some nice properties. You
+maintain the files as normal files, so it's easy to edit them, but during the build the files
+are combined into a binary bundle that is linked into the executable. This means that loading
+the resource files is efficient (as they are already in memory, shared with other instances) and
+simple (no need to check for things like I/O errors or locate the files in the filesystem). It
+also makes it easier to create relocatable applications.
+</para>
+<para>
+Resource bundles are created by the <ulink
+url="https://developer.gnome.org/gio/stable/glib-compile-resources.html">glib-compile-resources</ulink>
+program which takes an xml file that describes the bundle, and a set of files that the xml references.
+These are combined into a binary resource bundle.
+</para>
+<para><ulink url="&url_refdocs_base_gio;Resource.html">Gio::Resource Reference</ulink></para>
+<para>
+An example:
+<programlisting>
+<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/toolbar">
+    <file preprocess="xml-stripblanks">toolbar.glade</file>
+    <file>rain.png</file>
+  </gresource>
+</gresources>]]>
+</programlisting>
+This will create a resource bundle with the files
+<itemizedlist>
+  <listitem><para><filename>/toolbar/toolbar.glade</filename></para></listitem>
+  <listitem><para><filename>/toolbar/rain.png</filename></para></listitem>
+</itemizedlist>
+</para>
+<para>
+You can then use <application>glib-compile-resources</application> to compile the xml to a binary bundle
+that you can load with <methodname>Gio::Resource::create_from_file()</methodname>.
+However, it's more common to use the <parameter class='command'>--generate-source</parameter>
+argument to create a C source file to link directly into your application. E.g.
+<screen>$ glib-compile-resources --target=resources.c --generate-source toolbar.gresource.xml</screen>
+</para>
+<para>
+Once a <classname>Gio::Resource</classname> has been created and registered all the data
+in it can be accessed globally in the process by using API calls like
+<methodname>Gio::Resource::open_stream_from_global_resources()</methodname>
+to stream the data or <methodname>Gio::Resource::lookup_data_in_global_resources()</methodname>
+to get a direct pointer to the data. You can also use URIs like <uri>resource:///toolbar/rain.png</uri>
+with <classname>Gio::File</classname> to access the resource data.
+</para>
+<para>
+Often you don't need a <classname>Gio::Resource</classname> instance,
+because resource data can be loaded with methods such as
+<methodname>Gdk::Pixbuf::create_from_resource()</methodname>,
+<methodname>Gtk::Builder::add_from_resource()</methodname> and
+<methodname>Gtk::Image::set_from_resource()</methodname>.
+</para>
+
+</sect1>
+
 <sect1 id="sec-menus-examples">
     <title>Examples</title>
 
@@ -4534,9 +4604,10 @@ context->restore();</programlisting>
           <para>
               Probably the most common way of creating
               <classname>Gdk::Pixbuf</classname>s is to use
-              <methodname>Gdk::Pixbuf::create_from_file()</methodname>, which can
-              read an image file, such as a png file into a pixbuf ready for
-              rendering.
+              <methodname>Gdk::Pixbuf::create_from_file()</methodname> or
+              <methodname>Gdk::Pixbuf::create_from_resource()</methodname>,
+              which can read an image file, such as a png file into a pixbuf
+              ready for rendering.
           </para>
           <para>
               The <classname>Gdk::Pixbuf</classname> can be rendered by setting
@@ -4567,6 +4638,12 @@ context->restore();</programlisting>
             <title>Example</title>
             <para>
                 Here is an example of a simple program that draws an image.
+                The program loads the image from a resource file. See the <link
+                linkend="sec-gio-resource">Gio::Resource and glib-compile-resources</link>
+                section. Use <application>glib-compile-resources</application> to compile
+                the resources into a C source file that can be compiled and
+                linked with the C++ code. E.g.
+                <screen>$ glib-compile-resources --target=resources.c --generate-source image.gresource.xml</screen>
             </para>
         <figure id="figure-drawingarea-image">
             <title>Drawing Area - Image</title>
