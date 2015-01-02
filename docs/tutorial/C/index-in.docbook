@@ -3623,7 +3623,7 @@ A class is derived from <classname>Gtk::Window</classname>.
   </screenshot>
 </figure>
 
-<para><ulink url="&url_examples_base;menus_and_toolbars">Source Code</ulink></para>
+<para><ulink url="&url_examples_base;menus_and_toolbars">Source Code</ulink></para> <!-- Insert toolbar.gresource.xml -->
 
 </sect2>
 
@@ -4652,7 +4652,7 @@ context->restore();</programlisting>
             </screenshot>
         </figure>
 
-        <para><ulink url="&url_examples_base;drawingarea/image">Source Code</ulink></para>
+        <para><ulink url="&url_examples_base;drawingarea/image">Source Code</ulink></para> <!-- Insert image.gresource.xml -->
         </sect2>
   </sect1>
   <!--
@@ -7310,7 +7310,7 @@ The following example shows a simple use of a custom style property.
   </screenshot>
 </figure>
 
-<para><ulink url="&url_examples_base;custom/custom_widget/">Source Code</ulink></para>
+<para><ulink url="&url_examples_base;custom/custom_widget/">Source Code</ulink></para> <!-- Insert custom_gtk.css -->
 </sect2>
 
     </sect1>

@@ -1,22 +1,23 @@
 #! /usr/bin/perl -w
 
+use strict;
+
 #sub main()
 {
   my $examples_base = shift(@ARGV);
 
   $examples_base .= "/" unless($examples_base =~ /\/$/);
 
-  foreach $file (@ARGV)
+  foreach my $file (@ARGV)
   {
     open(FILE, $file);
 
     while(<FILE>)
     {
-      #Beginning of comment:
       # Look for
-      # <para><ulink url="&url_examples_base;helloworld">Source Code</ulink></para>
+      # <para><ulink url="&url_examples_base;helloworld">Source Code</ulink></para> [<!-- Insert filenames... -->]
 
-      if(/<para><ulink url=\"&url_examples_base;([\/\w]+)\">Source Code<\/ulink><\/para>/)
+      if(/<para><ulink url=\"&url_examples_base;([\/\w]+)\">Source Code<\/ulink><\/para>\s*(?:<!--\s*Insert\s+(.*?)-->)?/)
       {
         #Modify the line to add the branch, so people see the correct version.
         #This is particularly important during major API changes every few years,
@@ -25,6 +26,10 @@
 
         #List all the source files in that directory:
         my $directory = $examples_base . $1;
+
+        #And possibly other files in that directory:
+        my @extra_files;
+        @extra_files = split ' ', $2 if defined($2);
 
         opendir(DIR, $directory);
         my @dir_contents = readdir(DIR);
@@ -35,15 +40,14 @@
 
         print "<!-- start inserted example code -->\n";
 
-        foreach $source_file (@header_files, @source_files)
+        foreach my $source_file (@header_files, @source_files)
         {
-           print "<para>File: <filename>${source_file}</filename> (For use with gtkmm 3, not gtkmm 2)\n";
-           print "</para>\n";
-           print "<programlisting>\n";
+          &process_source_file($directory, $source_file, 1);
+        }
 
-           &process_source_file("${directory}/${source_file}");
-
-           print "</programlisting>\n";
+        foreach my $source_file (@extra_files)
+        {
+          &process_source_file($directory, $source_file, 0);
         }
 
         print "<!-- end inserted example code -->\n";
@@ -61,12 +65,16 @@
   exit 0;
 }
 
-sub process_source_file($)
+sub process_source_file($$$)
 {
-  my ($source_file) = @_;
-  my $found_start = 0;
+  my ($directory, $source_file, $skip_leading_comments) = @_;
+  my $found_start = !$skip_leading_comments;
 
-  open(SOURCE_FILE, $source_file);
+  print "<para>File: <filename>$source_file</filename> (For use with gtkmm 3, not gtkmm 2)\n";
+  print "</para>\n";
+  print "<programlisting>\n";
+
+  open(SOURCE_FILE, "$directory/$source_file");
 
   while(<SOURCE_FILE>)
   {
@@ -86,4 +94,6 @@ sub process_source_file($)
   }
 
   close(SOURCE_FILE);
+
+  print "</programlisting>\n";
 }
