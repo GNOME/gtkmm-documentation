@@ -25,6 +25,7 @@ check_PROGRAMS =					\
 	book/buttons/radiobutton/radiobuttons		\
 	book/buttons/scalebutton/example			\
 	book/buttons/togglebutton/example		\
+	book/buttons/volumebutton/example			\
 	book/clipboard/ideal/example			\
 	book/clipboard/simple/example			\
 	book/combobox/complex/example			\
@@ -239,6 +240,11 @@ book_buttons_togglebutton_example_SOURCES =		\
 	book/buttons/togglebutton/examplewindow.cc	\
 	book/buttons/togglebutton/examplewindow.h	\
 	book/buttons/togglebutton/main.cc
+
+book_buttons_volumebutton_example_SOURCES =		\
+	book/buttons/volumebutton/examplewindow.cc	\
+	book/buttons/volumebutton/examplewindow.h	\
+	book/buttons/volumebutton/main.cc
 
 book_clipboard_ideal_example_SOURCES =		\
 	book/clipboard/ideal/examplewindow.cc	\
