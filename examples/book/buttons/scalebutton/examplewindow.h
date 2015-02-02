@@ -20,6 +20,7 @@
 #define GTKMM_EXAMPLE_BUTTONS_H
 
 #include <gtkmm/window.h>
+#include <gtkmm/grid.h>
 #include <gtkmm/scalebutton.h>
 
 class ExampleWindow : public Gtk::Window
@@ -29,10 +30,12 @@ public:
   virtual ~ExampleWindow();
 
 protected:
-  //Signal handlers:
-  void on_button_clicked();
+
+  void on_value_changed(double value);
 
   //Child widgets:
+  Gtk::Grid m_grid;
+
   Gtk::ScaleButton m_button;
 };
 
