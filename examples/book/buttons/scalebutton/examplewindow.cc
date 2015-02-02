@@ -30,12 +30,10 @@ ExampleWindow::ExampleWindow()
   set_border_width(12);
 
   std::vector<Glib::ustring> icons;
-  icons.push_back("audio-volume-high");
   icons.push_back("audio-volume-low");
+  icons.push_back("audio-volume-high");
   icons.push_back("audio-volume-medium");
   m_button.set_icons(icons);
-
-  m_button.set_label("Some Value");
 
   add(m_grid);
   m_grid.set_vexpand(true);
