@@ -167,10 +167,6 @@ void MyWidget::on_realize()
             GDK_WA_X | GDK_WA_Y);
     set_window(m_refGdkWindow);
 
-    //set colors
-    override_background_color(Gdk::RGBA("red"));
-    override_color(Gdk::RGBA("blue"));
-
     //make the widget receive expose events
     m_refGdkWindow->set_user_data(gobj());
   }
@@ -186,12 +182,14 @@ void MyWidget::on_unrealize()
 
 bool MyWidget::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
-  const double scale_x = (double)get_allocation().get_width() / m_scale;
-  const double scale_y = (double)get_allocation().get_height() / m_scale;
+  const Gtk::Allocation allocation = get_allocation();
+  const double scale_x = (double)allocation.get_width() / m_scale;
+  const double scale_y = (double)allocation.get_height() / m_scale;
 
   // paint the background
-  Gdk::Cairo::set_source_rgba(cr, get_style_context()->get_background_color());
-  cr->paint();
+  get_style_context()->render_background(cr,
+    allocation.get_x(), allocation.get_y(),
+    allocation.get_width(), allocation.get_height());
 
   // draw the foreground
   Gdk::Cairo::set_source_rgba(cr, get_style_context()->get_color());

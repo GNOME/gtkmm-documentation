@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -43,9 +41,9 @@ ExampleWindow::ExampleWindow()
   m_Color.set_alpha(1.0); //opaque
   m_ColorButton.set_rgba(m_Color);
 
-  m_DrawingArea.override_background_color(m_Color);
-
   m_VBox.pack_start(m_DrawingArea);
+  m_DrawingArea.signal_draw().connect(sigc::mem_fun(*this,
+    &ExampleWindow::on_drawing_area_draw));
 
   show_all_children();
 }
@@ -56,9 +54,8 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_color_button_color_set()
 {
-  //Store the chosen color, and show it:
+  //Store the chosen color:
   m_Color = m_ColorButton.get_rgba();
-  m_DrawingArea.override_background_color(m_Color);
 }
 
 void ExampleWindow::on_button_dialog_clicked()
@@ -76,10 +73,9 @@ void ExampleWindow::on_button_dialog_clicked()
   {
     case Gtk::RESPONSE_OK:
     {
-      //Store the chosen color, and show it:
+      //Store the chosen color:
       m_Color = dialog.get_rgba();
       m_ColorButton.set_rgba(m_Color);
-      m_DrawingArea.override_background_color(m_Color);
       break;
     }
     case Gtk::RESPONSE_CANCEL:
@@ -93,4 +89,12 @@ void ExampleWindow::on_button_dialog_clicked()
       break;
     }
   }
+}
+
+bool ExampleWindow::on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr)
+{
+  Gdk::Cairo::set_source_rgba(cr, m_Color);
+  cr->paint();
+
+  return true;
 }

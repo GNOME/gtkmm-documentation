@@ -1,5 +1,3 @@
-//$Id: calendar.cc 829 2007-05-01 17:04:39Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -34,7 +32,6 @@ public:
   virtual ~CalendarExample();
 
   void set_flags();
-  void font_selection_ok();
   void toggle_flag(Gtk::CheckButton *toggle);
 
   void month_changed();
@@ -44,9 +41,12 @@ public:
 protected:
   void on_font_button_font_set();
   void on_button_close();
+  void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error);
  
   Gtk::CheckButton* flag_checkboxes_[5];
   bool settings_[5];
+
+  Glib::RefPtr<Gtk::CssProvider> css_provider_;
 
   Gtk::FontButton* font_button_;
   Gtk::Calendar* calendar_;
@@ -118,16 +118,42 @@ void CalendarExample::toggle_flag(Gtk::CheckButton *toggle)
 
 void CalendarExample::on_font_button_font_set()
 {
-  const Glib::ustring font_name = font_button_->get_font_name();
-  if(!font_name.empty())
+  try
   {
-    calendar_->override_font(Pango::FontDescription(font_name));
+    const Glib::ustring font_name = font_button_->get_font_name();
+    if (!font_name.empty())
+    {
+      css_provider_->load_from_data("* { font: " + font_name + "; }");
+    }
+  }
+  catch (const Gtk::CssProviderError& ex)
+  {
+    std::cerr << "CssProviderError, Gtk::CssProvider::load_from_path() failed: "
+              << ex.what() << std::endl;
+  }
+  catch (const Glib::Error& ex)
+  {
+    std::cerr << "Error, Gtk::CssProvider::load_from_path() failed: "
+              << ex.what() << std::endl;
   }
 }
 
 void CalendarExample::on_button_close()
 {
   hide();
+}
+
+void CalendarExample::on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error)
+{
+  std::cerr << "on_parsing_error(): " << error.what() << std::endl;
+  if (section)
+  {
+    std::cerr << "  URI = " << section->get_file()->get_uri() << std::endl;
+    std::cerr << "  start_line = " << section->get_start_line()+1
+              << ", end_line = " << section->get_end_line()+1 << std::endl;
+    std::cerr << "  start_position = " << section->get_start_position()
+              << ", end_position = " << section->get_end_position() << std::endl;
+  }
 }
 
 CalendarExample::CalendarExample()
@@ -202,10 +228,20 @@ CalendarExample::CalendarExample()
   font_button_->signal_font_set().connect(sigc::mem_fun(*this, &CalendarExample::on_font_button_font_set));
   vbox2->pack_start(*font_button_, Gtk::PACK_SHRINK);
 
+  // Add a StyleProvider to the Gtk::Calendar, so we can change the font.
+  // This was easier before Gtk::Widget::override_font() was deprecated.
+  css_provider_ = Gtk::CssProvider::create();
+  Glib::RefPtr<Gtk::StyleContext> refStyleContext = calendar_->get_style_context();
+  refStyleContext->add_provider(css_provider_, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  css_provider_->signal_parsing_error().connect(
+    sigc::mem_fun(*this, &CalendarExample::on_parsing_error));
+
+  // Set initial font.
+  on_font_button_font_set();
+
   /*
    *  Build the Signal-event part.
    */
-
   frame = Gtk::manage(new Gtk::Frame("Signal events"));
   vbox->pack_start(*frame, Gtk::PACK_EXPAND_WIDGET, DEF_PAD);
   vbox2 = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD_SMALL));
@@ -254,7 +290,6 @@ Glib::Date CalendarExample::get_date() const
   
   return date;  
 }
-
 
 int main(int argc, char** argv)
 {
