@@ -128,12 +128,12 @@ void CalendarExample::on_font_button_font_set()
   }
   catch (const Gtk::CssProviderError& ex)
   {
-    std::cerr << "CssProviderError, Gtk::CssProvider::load_from_path() failed: "
+    std::cerr << "CssProviderError, Gtk::CssProvider::load_from_data() failed: "
               << ex.what() << std::endl;
   }
   catch (const Glib::Error& ex)
   {
-    std::cerr << "Error, Gtk::CssProvider::load_from_path() failed: "
+    std::cerr << "Error, Gtk::CssProvider::load_from_data() failed: "
               << ex.what() << std::endl;
   }
 }
