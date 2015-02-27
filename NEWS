@@ -1,4 +1,52 @@
-3.12.0:
+3.15.1 (unstable):
+
+* Replace use of deprecated Widget::override_*() methods.
+  (Kjell Ahlstedt)
+* Add ScaleButton example.
+  (Murray Cumming)
+* Add VolumeButton example.
+  (Murray Cumming)
+* Add the "Gio::Resource and glib-compile-resources" section.
+  (Kjell Ahlstedt)
+* drawingarea/image and menus_and_toolbars examples: Use resource files.
+  (Kjell Ahlstedt)
+* Custom widget example: Use Gtk::StyleProperty.
+  (Kjell Ahlstedt)
+* Improve the UI definitions in the menu examples
+  (Kjell Ahlstedt)
+* Main menu example: Use Gtk::Application to display an app menu
+  (Kjell Ahlstedt)
+* Menus and Toolbars: Update the text and examples.
+  (Kjell Ahlstedt)
+* Completed _WRAP_SIGNAL and _WRAP_VFUNC documentation.
+  (Marcin Kolny)
+* Arrow example: Arrow icons have been renamed.
+  (Kjell Ahlstedt)
+* Remove the example with the deprecated StatusIcon
+  (Kjell Ahlstedt)
+* Add _WRAP_CHILD_PROPERTY section to tutorial.
+  (Juan R. García Blanco)
+* others/cellrenderercustom/testpopup: Use the new base class order.
+  (Kjell Ahlstedt)
+* Application/app_and_win_menus example: Hide the window when quitting.
+  (Kjell Ahlstedt) Bug #731126
+* Mention that Arrow, Alignment and most Button signals are deprecated
+  (Kjell Ahlstedt)
+* Fix 'make check' after Gtk::Alignment has been deprecated
+  (Kjell Ahlstedt)
+* Fix 'make check' after Gtk::Misc has been deprecated
+  (Kjell Ahlstedt)
+* Fix 'make check' after Gtk::Arrow has been deprecated
+  (Kjell Ahlstedt)
+* PlacesSidebar example: use new show-enter-location.
+  (Juan R. García Blanco )
+* Application example: Show the new command-line parsing API
+  (Kjell Ahlstedt) Bug #727822
+* Builder examples: Don't use deprecated API in the Glade files
+   (Kjell Ahlstedt)    
+
+
+3.12.0 (stable):
 
 * Added Gtk::ActionBar.
   (Juan R. García Blanco)
