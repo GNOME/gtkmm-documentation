@@ -9597,7 +9597,9 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
 <para>The C function (e.g. <function>get_request_mode</function>) is described
     more fully in the <filename>*_vfuncs.defs</filename> file, and the
     <filename>convert*.m4</filename> files contain the necessary conversion from
-    the C++ parameter type to the C parameter type.</para>
+    the C++ parameter type to the C parameter type. Conversions can also be
+    written in the .hg file. Virtual functions often require special conversions
+    that are best kept local to the .hg file where they are used.</para>
 <para>There are some optional extra arguments:
 <variablelist>
     <varlistentry>
@@ -9615,6 +9617,14 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
                 of an overridden <function>something_vfunc()</function> function
                 in the C callback function, in case the calling C function
                 expects it to provide a reference.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>keep_return</term>
+        <listitem>
+            <para>Keep a copy of the return value in the C callback function,
+                in case the calling C function does not expect to get its own
+                reference.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
