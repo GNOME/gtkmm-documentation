@@ -9487,17 +9487,24 @@ _WRAP_METHOD_DOCS_ONLY(gtk_container_remove)
 </sect3>
 
 <sect3 id="gmmproc-ignore">
-<title>_IGNORE / _IGNORE_SIGNAL</title>
-<para><command>gmmproc</command> will warn you on stdout about functions and signals that
-    you have forgotten to wrap, helping to ensure that you are wrapping the
-    complete API. But if you don't want to wrap some functions or signals, or if you chose
-    to hand-code some methods then you can use the _IGNORE() or _IGNORE_SIGNAL() macro to make
+<title>_IGNORE, _IGNORE_SIGNAL, _IGNORE_PROPERTY, _IGNORE_CHILD_PROPERTY</title>
+<para><command>gmmproc</command> will warn you on stdout about functions, signals,
+    properties and child properties that you have forgotten to wrap, helping to
+    ensure that you are wrapping the complete API. But if you don't want to wrap
+    some functions, signals, properties or child properties, or if you chose
+    to hand-code some methods then you can use the _IGNORE(), _IGNORE_SIGNAL(),
+    _IGNORE_PROPERTY() or _IGNORE_CHILD_PROPERTY() macro to make
     <command>gmmproc</command> stop complaining.</para>
-<para><function>_IGNORE(C function name 1, C function name2, etc)</function></para>
-<para><function>_IGNORE_SIGNAL(C signal name 1, C signal name2, etc)</function></para>
-<para>For instance, from <filename>buttonbox.hg</filename>:
+<para>
+<literallayout><function>_IGNORE(C function name 1, C function name 2, etc)
+_IGNORE_SIGNAL(C signal name 1, C signal name 2, etc)
+_IGNORE_PROPERTY(C property name 1, C property name 2, etc)
+_IGNORE_CHILD_PROPERTY(C child property name 1, C child property name 2, etc)</function></literallayout>
+</para>
+<para>For instance, from <filename>flowbox.hg</filename>:
 <programlisting>
-_IGNORE(gtk_button_box_set_spacing, gtk_button_box_get_spacing)
+_IGNORE(gtk_flow_box_set_filter_func, gtk_flow_box_set_sort_func)
+_IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
 </programlisting>
 </para>
 </sect3>
