@@ -9398,6 +9398,13 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
         </listitem>
     </varlistentry>
     <varlistentry>
+        <term>newin</term>
+        <listitem>
+            <para>Adds a @newin Doxygen command to the documentation, or replaces
+                the @newin command generated from the C documentation.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
         <term>ifdef</term>
         <listitem>
             <para>Puts the generated code in #ifdef blocks.</para>
@@ -9484,6 +9491,24 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
 _WRAP_METHOD_DOCS_ONLY(gtk_container_remove)
 </programlisting>
 </para>
+<para>There are some optional extra arguments:
+<variablelist>
+    <varlistentry>
+        <term>errthrow</term>
+        <listitem>
+            <para>Excludes documentation of the last GError** parameter of
+                the C function.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>newin</term>
+        <listitem>
+            <para>Adds a @newin Doxygen command to the documentation, or replaces
+                the @newin command generated from the C documentation.</para>
+        </listitem>
+    </varlistentry>
+</variablelist>
+</para>
 </sect3>
 
 <sect3 id="gmmproc-ignore">
@@ -9560,6 +9585,13 @@ _WRAP_SIGNAL(void clicked(),"clicked")
             <para>Do an extra <function>reference()</function> on the return value
                 of the <function>on_something()</function> virtual method, in
                 case the C function does not provide a reference.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>newin</term>
+        <listitem>
+            <para>Adds a @newin Doxygen command to the documentation, or replaces
+                the @newin command generated from the C documentation.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
@@ -9771,6 +9803,8 @@ _WRAP_ENUM(WindowType, GtkWindowType)
   This is the case when there is no <function>*_get_type()</function> function for the C enum, but
   be careful that you don't just need to include an extra header for that function. You should also
   file a bug against the C API, because all enums should be registered as GTypes.</para>
+<para>_WRAP_ENUM() accepts the optional <literal>newin</literal> parameter.
+  See <link linkend="gmmproc-wrap-method">_WRAP_METHOD()</link>.</para>
 <para>For example, from <filename>icontheme.hg</filename>:
 <programlisting>
 _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
@@ -9797,6 +9831,8 @@ _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
 a Code enum and a code() method. You must specify the desired C++ name, the name
 of the corresponding C enum, and the prefix for the C enum values.</para>
 <para>This exception can then be thrown by methods which are generated from _WRAP_METHOD() with the errthrow option.</para>
+<para>_WRAP_GERROR() accepts the optional <literal>newin</literal> parameter.
+  See <link linkend="gmmproc-wrap-method">_WRAP_METHOD()</link>.</para>
 <para>For instance, from <filename>pixbuf.hg</filename>:
 <programlisting>
 _WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)
