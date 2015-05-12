@@ -26,11 +26,6 @@ Clock::Clock()
 : m_radius(0.42), m_line_width(0.05)
 {
   Glib::signal_timeout().connect( sigc::mem_fun(*this, &Clock::on_timeout), 1000 );
-
-  #ifndef GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED
-  //Connect the signal handler if it isn't already a virtual method override:
-  signal_draw().connect(sigc::mem_fun(*this, &Clock::on_draw), false);
-  #endif //GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED
 }
 
 Clock::~Clock()

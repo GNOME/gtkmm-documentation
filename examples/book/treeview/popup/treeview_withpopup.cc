@@ -60,11 +60,6 @@ TreeView_WithPopup::TreeView_WithPopup()
 
   m_Menu_Popup.accelerate(*this);
   m_Menu_Popup.show_all(); //Show all menu items when the menu pops up
-
-#ifndef GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED
-  signal_button_press_event()
-    .connect(sigc::mem_fun(*this, &TreeView_WithPopup::on_button_press_event), false);
-#endif
 }
 
 TreeView_WithPopup::~TreeView_WithPopup()
