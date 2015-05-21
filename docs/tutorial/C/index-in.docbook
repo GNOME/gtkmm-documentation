@@ -9383,7 +9383,7 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>deprecated</term>
+        <term>deprecated ["&lt;text&gt;"]</term>
         <listitem>
             <para>Puts the generated code in #ifdef blocks. Text about the
                 deprecation can be specified as an optional
@@ -9398,20 +9398,20 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>newin</term>
+        <term>newin "&lt;version&gt;"</term>
         <listitem>
             <para>Adds a @newin Doxygen command to the documentation, or replaces
                 the @newin command generated from the C documentation.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>ifdef</term>
+        <term>ifdef &lt;identifier&gt;</term>
         <listitem>
             <para>Puts the generated code in #ifdef blocks.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>slot_name</term>
+        <term>slot_name &lt;parameter_name&gt;</term>
         <listitem>
           <para>Specifies the name of the slot parameter of the method, if it
             has one.  This enables <command>gmmproc</command> to generate code
@@ -9423,7 +9423,7 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>slot_callback</term>
+        <term>slot_callback &lt;function_name&gt;</term>
         <listitem>
           <para>Used in conjunction with the <literal>slot_name</literal>
             option to specify the name of the glue callback function that
@@ -9501,7 +9501,7 @@ _WRAP_METHOD_DOCS_ONLY(gtk_container_remove)
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>newin</term>
+        <term>newin "&lt;version&gt;"</term>
         <listitem>
             <para>Adds a @newin Doxygen command to the documentation, or replaces
                 the @newin command generated from the C documentation.</para>
@@ -9588,22 +9588,31 @@ _WRAP_SIGNAL(void clicked(),"clicked")
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>newin</term>
+        <term>deprecated ["&lt;text&gt;"]</term>
+        <listitem>
+            <para>Puts the generated code in #ifdef blocks. Text about the
+                deprecation can be specified as an optional parameter.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>newin "&lt;version&gt;"</term>
         <listitem>
             <para>Adds a @newin Doxygen command to the documentation, or replaces
                 the @newin command generated from the C documentation.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>ifdef</term>
+        <term>ifdef &lt;identifier&gt;</term>
         <listitem>
             <para>Puts the generated code in #ifdef blocks.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>exception_handler</term>
+        <term>exception_handler &lt;method_name&gt;</term>
 	      <listitem>
-	        <para>Allows to use custom exception handler instead of default one. Exception might be rethrown by user-defined handler, and it will be catched by default handler.</para>
+	        <para>Allows to use custom exception handler instead of default one.
+	            Exception might be rethrown by user-defined handler, and it will be
+	            caught by default handler.</para>
 	      </listitem>
     </varlistentry>
 </variablelist>
@@ -9621,6 +9630,17 @@ _WRAP_SIGNAL(void clicked(),"clicked")
 <programlisting>
 _WRAP_PROPERTY("label", Glib::ustring)
 </programlisting>
+</para>
+<para>There is one optional extra argument:
+<variablelist>
+    <varlistentry>
+        <term>deprecated ["&lt;text&gt;"]</term>
+        <listitem>
+            <para>Puts the generated code in #ifdef blocks. Text about the
+                deprecation can be specified as an optional parameter.</para>
+        </listitem>
+    </varlistentry>
+</variablelist>
 </para>
 </sect3>
 
@@ -9689,13 +9709,13 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>ifdef</term>
+        <term>ifdef &lt;identifier&gt;</term>
         <listitem>
             <para>Puts the generated code in #ifdef blocks.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>slot_name</term>
+        <term>slot_name &lt;parameter_name&gt;</term>
         <listitem>
           <para>Specifies the name of the slot parameter of the method, if it
             has one.  This enables <command>gmmproc</command> to generate code
@@ -9707,7 +9727,7 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>slot_callback</term>
+        <term>slot_callback &lt;function_name&gt;</term>
         <listitem>
           <para>Used in conjunction with the <literal>slot_name</literal>
             option to specify the name of the glue callback function that
@@ -9727,15 +9747,17 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>return_value</term>
+        <term>return_value &lt;value&gt;</term>
 	      <listitem>
 	        <para>Defines non-default return value.</para>
 	      </listitem>
     </varlistentry>
     <varlistentry>
-        <term>exception_handler</term>
+        <term>exception_handler &lt;method_name&gt;</term>
 	      <listitem>
-	        <para>Allows to use custom exception handler instead of default one. Exception might be rethrown by user-defined handler, and it will be catched by default handler.</para>
+	        <para>Allows to use custom exception handler instead of default one.
+	            Exception might be rethrown by user-defined handler, and it will be
+	            caught by default handler.</para>
 	      </listitem>
     </varlistentry>
 </variablelist>
@@ -9763,6 +9785,17 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
 _WRAP_CHILD_PROPERTY("tab-expand", bool)
 </programlisting>
 </para>
+<para>There is one optional extra argument:
+<variablelist>
+    <varlistentry>
+        <term>deprecated ["&lt;text&gt;"]</term>
+        <listitem>
+            <para>Puts the generated code in #ifdef blocks. Text about the
+                deprecation can be specified as an optional parameter.</para>
+        </listitem>
+    </varlistentry>
+</variablelist>
+</para>
 </sect3>
 
 </sect2>
@@ -9781,7 +9814,7 @@ _IMPLEMENTS_INTERFACE(Activatable)
 <para>There is one optional extra argument:
 <variablelist>
     <varlistentry>
-        <term>ifdef</term>
+        <term>ifdef &lt;identifier&gt;</term>
         <listitem>
             <para>Puts the generated code in #ifdef blocks.</para>
         </listitem>
