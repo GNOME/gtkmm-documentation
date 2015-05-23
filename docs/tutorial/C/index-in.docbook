@@ -9615,6 +9615,27 @@ _WRAP_SIGNAL(void clicked(),"clicked")
 	            caught by default handler.</para>
 	      </listitem>
     </varlistentry>
+    <varlistentry>
+        <term>detail_name &lt;parameter_name&gt;</term>
+	      <listitem>
+	        <para>Adds a <type>const Glib::ustring&amp;</type> parameter to the
+	            <methodname>signal_something()</methodname> method. Use it, if the signal
+	            accepts a detailed signal name, i.e. if the underlying C code registers
+	            the signal with the <literal>G_SIGNAL_DETAILED</literal> flag.</para>
+	      </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>two_signal_methods</term>
+	      <listitem>
+	        <para>Used in conjunction with the <literal>detail_name</literal>
+              option to generate two <methodname>signal_something()</methodname>
+              methods, one without a parameter and one with a parameter without
+              a default value. With only the <literal>detail_name</literal> option
+              one method is generated, with a parameter with default value.
+              Use the <literal>two_signal_methods</literal> option, if it's
+              necessary in order to preserve ABI.</para>
+	      </listitem>
+    </varlistentry>
 </variablelist>
 </para>
 </sect3>
