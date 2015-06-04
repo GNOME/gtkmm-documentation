@@ -9652,13 +9652,20 @@ _WRAP_SIGNAL(void clicked(),"clicked")
 _WRAP_PROPERTY("label", Glib::ustring)
 </programlisting>
 </para>
-<para>There is one optional extra argument:
+<para>There are some optional extra arguments:
 <variablelist>
     <varlistentry>
         <term>deprecated ["&lt;text&gt;"]</term>
         <listitem>
             <para>Puts the generated code in #ifdef blocks. Text about the
                 deprecation can be specified as an optional parameter.</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>newin "&lt;version&gt;"</term>
+        <listitem>
+            <para>Adds a @newin Doxygen command to the documentation, or replaces
+                the @newin command generated from the C documentation.</para>
         </listitem>
     </varlistentry>
 </variablelist>
@@ -9806,16 +9813,7 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
 _WRAP_CHILD_PROPERTY("tab-expand", bool)
 </programlisting>
 </para>
-<para>There is one optional extra argument:
-<variablelist>
-    <varlistentry>
-        <term>deprecated ["&lt;text&gt;"]</term>
-        <listitem>
-            <para>Puts the generated code in #ifdef blocks. Text about the
-                deprecation can be specified as an optional parameter.</para>
-        </listitem>
-    </varlistentry>
-</variablelist>
+<para>_WRAP_CHILD_PROPERTY() accepts the same optional arguments as _WRAP_PROPERTY().
 </para>
 </sect3>
 
