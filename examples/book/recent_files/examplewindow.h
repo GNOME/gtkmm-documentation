@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 720 2006-07-26 00:42:55Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -24,7 +22,7 @@
 class ExampleWindow : public Gtk::Window
 {
 public:
-  ExampleWindow();
+  ExampleWindow(const Glib::RefPtr<Gtk::Application>& app);
   virtual ~ExampleWindow();
 
 protected:
