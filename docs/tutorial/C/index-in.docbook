@@ -3362,119 +3362,162 @@ Then, to add a widget at that position, use
 <title>Menus and Toolbars</title>
 
 <para>
-There are specific APIs for Menus and toolbars, but you should usually deal
-with them together, using the <classname>UIManager</classname> to define
-<classname>Action</classname>s which you can then arrange in menus and toolbars.
-In this way you can handle activation of the action instead of responding to
-the menu and toolbar items separately. And you can enable or disable both the
-menu and toolbar item via the action.
+There are specific APIs for menus and toolbars, but you should usually deal
+with them together, creating <classname>Gio::SimpleAction</classname>s that
+you can refer to in both menus and toolbars. In this way you can handle
+activation of the action instead of responding to the menu and toolbar items
+separately. And you can enable or disable both the menu and toolbar item via
+the action. <classname>Gtk::Builder</classname> can create menus and toolbars.
 </para>
 <para>
-This involves the use of the <classname>Gtk::ActionGroup</classname>,
-<classname>Gtk::Action</classname>, and <classname>UIManager</classname>
-classes, all of which should be instantiated via their
-<methodname>create()</methodname> methods, which return
-<classname>RefPtr</classname>s.
+This involves the use of the <classname>Gio::SimpleActionGroup</classname>,
+<classname>Gio::SimpleAction</classname> and <classname>Gtk::Builder</classname>
+classes, all of which should be instantiated via their <methodname>create()</methodname>
+methods, which return <classname>RefPtr</classname>s.
 </para>
-<note>
 <para>
+Alternatively, <classname>Gtk::ActionGroup</classname>,
+<classname>Gtk::Action</classname> and <classname>Gtk::UIManager</classname>
+can be used, but this is not recommended in new code.
 <classname>GtkAction</classname>, <classname>GtkActionGroup</classname> and
 <classname>GtkUIManager</classname> are deprecated in GTK+ from version 3.10.
-The corresponding classes in &gtkmm; will also be deprecated in the future.
-The examples in this chapter use <classname>Gio::SimpleAction</classname>,
-<classname>Gio::SimpleActionGroup</classname> and <classname>Gtk::Builder</classname> instead.
+The corresponding classes in &gtkmm; will be deprecated in the future.
 </para>
-</note>
 
 <sect1 id="sec-actions">
 <title>Actions</title>
 <para>
-First create the <classname>Action</classname>s and add them to an
-<classname>ActionGroup</classname>, with
-<methodname>ActionGroup::add()</methodname>.
-</para>
-
-<para>
-The arguments to <methodname>Action::create()</methodname> specify the action's
-name and how it will appear in menus and toolbars.
+First create the <classname>Gio::SimpleAction</classname>s and add them to a
+<classname>Gio::SimpleActionGroup</classname>, with
+<methodname>Gio::ActionMap::add_action()</methodname>.
+(<classname>Gio::ActionMap</classname> is a base class of
+<classname>Gio::SimpleActionGroup</classname>.) Then add the action group to
+your window with <methodname>Gtk::Widget::insert_action_group()</methodname>.
 </para>
 <para>
-You can also specify a signal handler when calling
-<methodname>ActionGroup::add()</methodname>. This signal handler will be called
-when the action is activated via either a menu item or a toolbar button.
+The arguments to <methodname>add_action()</methodname> specify the action's
+name, which is used in the menu items and toolbar buttons. You can also specify
+a signal handler when calling <methodname>add_action()</methodname>. This signal
+handler will be called when the action is activated via either a menu item or
+a toolbar button.
 </para>
-<para>Note that you must specify actions for sub menus as well as menu items.</para>
 
 <para>For instance:
 </para>
-<programlisting>m_refActionGroup = Gtk::ActionGroup::create();
+<programlisting>
+<![CDATA[m_refActionGroup = Gio::SimpleActionGroup::create();
 
-m_refActionGroup-&gt;add( Gtk::Action::create(&quot;MenuFile&quot;, &quot;_File&quot;) );
-m_refActionGroup-&gt;add( Gtk::Action::create(&quot;New&quot;, &quot;_New&quot;),
-  sigc::mem_fun(*this, &amp;ExampleWindow::on_action_file_new) );
-m_refActionGroup-&gt;add( Gtk::Action::create(&quot;ExportData&quot;, &quot;Export Data&quot;),
-  sigc::mem_fun(*this, &amp;ExampleWindow::on_action_file_open) );
-m_refActionGroup-&gt;add( Gtk::Action::create(&quot;Quit&quot;, &quot;_Quit&quot;),
-  sigc::mem_fun(*this, &amp;ExampleWindow::on_action_file_quit) );</programlisting>
+m_refActionGroup->add_action("new", sigc::mem_fun(*this, &ExampleWindow::on_action_file_new));
+m_refActionGroup->add_action("open", sigc::mem_fun(*this, &ExampleWindow::on_action_file_open));
+m_refActionGroup->add_action("quit", sigc::mem_fun(*this, &ExampleWindow::on_action_file_quit));
 
-<para>Note that this is where we specify the names of the actions as they will be seen by users in menus and toolbars. Therefore, this is where you should make strings translatable, by putting them inside the _() macro.</para>
+insert_action_group("example", m_refActionGroup);]]>
+</programlisting>
+
+<para>
+If you use an <classname>Gtk::ApplicationWindow</classname>, you don't have to
+create your own action group. <classname>Gio::ActionGroup</classname> and
+<classname>Gio::ActionMap</classname> are base classes of
+<classname>Gtk::ApplicationWindow</classname>.
+</para>
+
 </sect1>
 
 
-<sect1 id="sec-uimanager">
-<title>UIManager</title>
+<sect1 id="sec-menubar-and-toolbar">
+<title>Menubar and Toolbar</title>
 <para>
-Next you should create a <classname>UIManager</classname> and add the
-<classname>ActionGroup</classname> to the <classname>UIManager</classname> with
-<methodname>insert_action_group()</methodname> At this point is also a good idea to
-tell the parent window to respond to the specified keyboard shortcuts, by using
-<methodname>add_accel_group()</methodname>.
+Next you should create a <classname>Gtk::Builder</classname>. At this point is
+also a good idea to tell the application to respond to keyboard shortcuts,
+by using <methodname>Gtk::Application::set_accel_for_action()</methodname>.
 </para>
 
 <para>For instance,
 </para>
-<programlisting>Glib::RefPtr&lt;Gtk::UIManager&gt; m_refUIManager =
-    Gtk::UIManager::create();
-m_refUIManager-&gt;insert_action_group(m_refActionGroup);
-add_accel_group(m_refUIManager-&gt;get_accel_group());</programlisting>
+<programlisting>
+<![CDATA[Glib::RefPtr<Gtk::Builder> m_refBuilder = Gtk::Builder::create();
+
+app->set_accel_for_action("example.new", "<Primary>n");
+app->set_accel_for_action("example.quit", "<Primary>q");
+app->set_accel_for_action("example.copy", "<Primary>c");
+app->set_accel_for_action("example.paste", "<Primary>v");]]>
+</programlisting>
+<para>
+If your main window is derived from <classname>ApplicationWindow</classname> and
+you instantiate your menubar with <methodname>Gtk::Application::set_menubar()</methodname>,
+then you don't have to call <methodname>set_accel_for_action()</methodname>.
+See <link linkend="menu-example-main">Application Menu and Main Menu example</link>
+for an example.
+</para>
+
 <para>
 Then, you can define the actual visible layout of the menus and toolbars, and
-add the UI layout to the <classname>UIManager</classname>. This &quot;ui
+add the UI layout to the <classname>Builder</classname>. This &quot;ui
 string&quot; uses an XML format, in which you should mention the names of the
 actions that you have already created. For instance:
 </para>
-<programlisting>Glib::ustring ui_info =
-    &quot;&lt;ui&gt;&quot;
-    &quot;  &lt;menubar name='MenuBar'&gt;&quot;
-    &quot;    &lt;menu action='MenuFile'&gt;&quot;
-    &quot;      &lt;menuitem action='New'/&gt;&quot;
-    &quot;      &lt;menuitem action='Open'/&gt;&quot;
-    &quot;      &lt;separator/&gt;&quot;
-    &quot;      &lt;menuitem action='Quit'/&gt;&quot;
-    &quot;    &lt;/menu&gt;&quot;
-    &quot;    &lt;menu action='MenuEdit'&gt;&quot;
-    &quot;      &lt;menuitem action='Cut'/&gt;&quot;
-    &quot;      &lt;menuitem action='Copy'/&gt;&quot;
-    &quot;      &lt;menuitem action='Paste'/&gt;&quot;
-    &quot;    &lt;/menu&gt;&quot;
-    &quot;  &lt;/menubar&gt;&quot;
-    &quot;  &lt;toolbar  name='ToolBar'&gt;&quot;
-    &quot;    &lt;toolitem action='Open'/&gt;&quot;
-    &quot;    &lt;toolitem action='Quit'/&gt;&quot;
-    &quot;  &lt;/toolbar&gt;&quot;
-    &quot;&lt;/ui&gt;&quot;;
+<programlisting>
+<![CDATA[const char* ui_info =
+  "<interface>"
+  "  <menu id='menubar'>"
+  "    <submenu>"
+  "      <attribute name='label' translatable='yes'>_File</attribute>"
+  "      <section>"
+  "        <item>"
+  "          <attribute name='label' translatable='yes'>_New</attribute>"
+  "          <attribute name='action'>example.new</attribute>"
+  "          <attribute name='accel'>&lt;Primary&gt;n</attribute>"
+  "        </item>"
+  "      </section>"
+  "      <section>"
+  "        <item>"
+  "          <attribute name='label' translatable='yes'>_Quit</attribute>"
+  "          <attribute name='action'>example.quit</attribute>"
+  "          <attribute name='accel'>&lt;Primary&gt;q</attribute>"
+  "        </item>"
+  "      </section>"
+  "    </submenu>"
+  "    <submenu>"
+  "      <attribute name='label' translatable='yes'>_Edit</attribute>"
+  "      <item>"
+  "        <attribute name='label' translatable='yes'>_Copy</attribute>"
+  "        <attribute name='action'>example.copy</attribute>"
+  "        <attribute name='accel'>&lt;Primary&gt;c</attribute>"
+  "      </item>"
+  "      <item>"
+  "        <attribute name='label' translatable='yes'>_Paste</attribute>"
+  "        <attribute name='action'>example.paste</attribute>"
+  "        <attribute name='accel'>&lt;Primary&gt;v</attribute>"
+  "      </item>"
+  "    </submenu>"
+  "  </menu>"
+  "</interface>";
 
-m_refUIManager-&gt;add_ui_from_string(ui_info);</programlisting>
+m_refBuilder->add_from_string(ui_info);
+m_refBuilder->add_from_resource("/toolbar/toolbar.glade");]]>
+</programlisting>
 
-<para>Remember that these names are just the identifiers that we used when creating the actions. They are not the text that the user will see in the menus and toolbars. We provided those human-readable names when we created the actions.</para>
+<para>This is where we specify the names of the menu items as they will be seen
+by users in the menu. Therefore, this is where you should make strings
+translatable, by adding <literal>translatable='yes'</literal>.
+</para>
 <para>
-To instantiate a <classname>Gtk::MenuBar</classname> or
+To instantiate a <classname>Gtk::MenuBar</classname> and
 <classname>Gtk::Toolbar</classname> which you can actually show, you should use
-the <methodname>UIManager::get_widget()</methodname> method, and then add the widget
+the <methodname>Builder::get_object()</methodname> and
+<methodname>Builder::get_widget()</methodname> methods, and then add the widgets
 to a container. For instance:
 </para>
-<programlisting>Gtk::Widget* pMenubar = m_refUIManager-&gt;get_widget(&quot;/MenuBar&quot;);
-pBox-&gt;add(*pMenuBar, Gtk::PACK_SHRINK);</programlisting>
+<programlisting>
+<![CDATA[Glib::RefPtr<Glib::Object> object = m_refBuilder->get_object("menubar");
+Glib::RefPtr<Gio::Menu> gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+Gtk::MenuBar* pMenuBar = Gtk::manage(new Gtk::MenuBar(gmenu));
+m_Box.pack_start(*pMenuBar, Gtk::PACK_SHRINK);
+
+Gtk::Toolbar* toolbar = 0;
+m_refBuilder->get_widget("toolbar", toolbar);
+m_Box.pack_start(*toolbar, Gtk::PACK_SHRINK);]]>
+</programlisting>
 
 </sect1>
 
@@ -3487,18 +3530,35 @@ instance, a context menu might be displayed when the user clicks their right
 mouse button.
 </para>
 
-<para>The UI layout for a popup menu should use the <literal>popup</literal> node. For instance:
+<para>For instance:
 </para>
-<programlisting>Glib::ustring ui_info =
-    &quot;&lt;ui&gt;&quot;
-    &quot;  &lt;popup name='PopupMenu'&gt;&quot;
-    &quot;    &lt;menuitem action='ContextEdit'/&gt;&quot;
-    &quot;    &lt;menuitem action='ContextProcess'/&gt;&quot;
-    &quot;    &lt;menuitem action='ContextRemove'/&gt;&quot;
-    &quot;  &lt;/popup&gt;&quot;
-    &quot;&lt;/ui&gt;&quot;;
+<programlisting>
+<![CDATA[Glib::ustring ui_info =
+  "<interface>"
+  "  <menu id='menu-examplepopup'>"
+  "    <section>"
+  "      <item>"
+  "        <attribute name='label' translatable='yes'>Edit</attribute>"
+  "        <attribute name='action'>examplepopup.edit</attribute>"
+  "      </item>"
+  "      <item>"
+  "        <attribute name='label' translatable='yes'>Process</attribute>"
+  "        <attribute name='action'>examplepopup.process</attribute>"
+  "      </item>"
+  "      <item>"
+  "        <attribute name='label' translatable='yes'>Remove</attribute>"
+  "        <attribute name='action'>examplepopup.remove</attribute>"
+  "      </item>"
+  "    </section>"
+  "  </menu>"
+  "</interface>";
 
-m_refUIManager-&gt;add_ui_from_string(ui_info);</programlisting>
+m_refBuilder->add_from_string(ui_info);
+
+Glib::RefPtr<Glib::Object> object = m_refBuilder->get_object("menu-examplepopup");
+Glib::RefPtr<Gio::Menu> gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+m_pMenuPopup = new Gtk::Menu(gmenu);]]>
+</programlisting>
 
 <para>
 To show the popup menu, use <classname>Gtk::Menu</classname>'s
@@ -3506,17 +3566,21 @@ To show the popup menu, use <classname>Gtk::Menu</classname>'s
 time of activation, as provided by the <literal>button_press_event</literal>
 signal, which you will need to handle anyway. For instance:
 </para>
-<programlisting>bool ExampleWindow::on_button_press_event(GdkEventButton* event)
+<programlisting>
+<![CDATA[bool ExampleWindow::on_button_press_event(GdkEventButton* event)
 {
-  if( (event-&gt;type == GDK_BUTTON_PRESS) &amp;&amp;
-      (event-&gt;button == 3) )
+  if( (event->type == GDK_BUTTON_PRESS) && (event->button == 3) )
   {
-    m_Menu_Popup->popup(event-&gt;button, event-&gt;time);
+    if(!m_pMenuPopup->get_attach_widget())
+      m_pMenuPopup->attach_to_widget(*this);
+
+    m_pMenuPopup->popup(event->button, event->time);
     return true; //It has been handled.
   }
   else
     return false;
-}</programlisting>
+}]]>
+</programlisting>
 
 </sect1>
 
@@ -5677,7 +5741,7 @@ if (info)
       <para><ulink url="&url_examples_base;recent_files">Source Code</ulink></para>
       <para>
         The constructor for <classname>ExampleWindow</classname> creates the
-        menu using <classname>UIManager</classname> (see <xref
+        menu and the toolbar using <classname>Builder</classname> (see <xref
           linkend="chapter-menus-and-toolbars"/> for more information). It then adds
         the menu and the toolbar to the window.
       </para>
