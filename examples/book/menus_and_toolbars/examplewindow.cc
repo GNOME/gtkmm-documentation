@@ -52,7 +52,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   insert_action_group("example", m_refActionGroup);
 
   //Define how the actions are presented in the menus and toolbars:
-  Glib::RefPtr<Gtk::Builder> m_refBuilder = Gtk::Builder::create();
+  m_refBuilder = Gtk::Builder::create();
 
   //Layout the actions in a menubar and toolbar:
   const char* ui_info =

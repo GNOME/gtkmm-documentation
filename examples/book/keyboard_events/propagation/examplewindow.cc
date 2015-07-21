@@ -80,12 +80,12 @@ bool ExampleWindow::windowKeyReleaseBefore(GdkEventKey* /* event */ )
   return false;
 }
 
-bool ExampleWindow::on_key_release_event(GdkEventKey* event)
+bool ExampleWindow::on_key_release_event(GdkEventKey* key_event)
 {
   std::cout << "Window overridden" << std::endl;
 
   // call base class function (to get the normal behaviour)
-  return Gtk::Window::on_key_release_event(event);
+  return Gtk::Window::on_key_release_event(key_event);
 }
 
 // This will set the entry's text in the label, every time a key is pressed.

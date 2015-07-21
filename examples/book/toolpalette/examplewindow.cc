@@ -43,10 +43,10 @@ void ExampleWindow::load_icon_items()
     m_ToolPalette.add(*group);
 
     // Iterate through the icon names, populating the ToolItemGroup as appropriate.
-    type_stringvec icon_names = icon_theme->list_icons(context_name);
-    std::sort(icon_names.begin(), icon_names.end());
+    type_stringvec icon_names_for_context = icon_theme->list_icons(context_name);
+    std::sort(icon_names_for_context.begin(), icon_names_for_context.end());
     guint icons_count = 0;
-    for (type_stringvec::const_iterator iconiter = icon_names.begin(); iconiter != icon_names.end(); ++iconiter)
+    for (type_stringvec::const_iterator iconiter = icon_names_for_context.begin(); iconiter != icon_names_for_context.end(); ++iconiter)
     {
       const Glib::ustring icon_name = *iconiter;
       Glib::RefPtr<Gdk::Pixbuf> pixbuf;

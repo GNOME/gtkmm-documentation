@@ -112,9 +112,9 @@ void ExampleWindow::on_menu_file_popup_generic()
    std::cout << "A popup menu item was selected." << std::endl;
 }
 
-bool ExampleWindow::on_button_press_event(GdkEventButton* event)
+bool ExampleWindow::on_button_press_event(GdkEventButton* button_event)
 {
-  if( (event->type == GDK_BUTTON_PRESS) && (event->button == 3) )
+  if( (button_event->type == GDK_BUTTON_PRESS) && (button_event->button == 3) )
   {
     if(!m_pMenuPopup->get_attach_widget())
     {
@@ -122,7 +122,7 @@ bool ExampleWindow::on_button_press_event(GdkEventButton* event)
     }
 
     if(m_pMenuPopup)
-      m_pMenuPopup->popup(event->button, event->time);
+      m_pMenuPopup->popup(button_event->button, button_event->time);
 
 
     return true; //It has been handled.

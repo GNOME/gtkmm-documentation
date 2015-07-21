@@ -108,9 +108,9 @@ PopupEntry::type_signal_arrow_clicked& PopupEntry::signal_arrow_clicked()
   return signal_arrow_clicked_;
 }
 
-bool PopupEntry::on_key_press_event(GdkEventKey* event)
+bool PopupEntry::on_key_press_event(GdkEventKey* key_event)
 {
-  if(event->keyval == GDK_KEY_Escape)
+  if(key_event->keyval == GDK_KEY_Escape)
   {
     editing_canceled_ = true;
 
@@ -125,14 +125,14 @@ bool PopupEntry::on_key_press_event(GdkEventKey* event)
   // Hackish :/ Synthesize a key press event for the entry.
 
   GdkEvent synth_event;
-  synth_event.key = *event;
+  synth_event.key = *key_event;
 
   synth_event.key.window = Glib::unwrap(entry_->get_window()); // TODO: Use a C++ Gdk::Event.
   synth_event.key.send_event = true;
 
   entry_->event(&synth_event);
 
-  return Gtk::EventBox::on_key_press_event(event);
+  return Gtk::EventBox::on_key_press_event(key_event);
 }
 
 void PopupEntry::start_editing_vfunc(GdkEvent*)
@@ -158,9 +158,9 @@ void PopupEntry::on_entry_activate()
   //remove_widget(); // TODO: this line causes the widget to be removed twice -- dunno why
 }
 
-bool PopupEntry::on_entry_key_press_event(GdkEventKey* event)
+bool PopupEntry::on_entry_key_press_event(GdkEventKey* key_event)
 {
-  if(event->keyval == GDK_KEY_Escape)
+  if(key_event->keyval == GDK_KEY_Escape)
   {
     editing_canceled_ = true;
 

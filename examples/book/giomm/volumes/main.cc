@@ -27,9 +27,9 @@ int main(int /* argc */, char** /* argv */)
       typedef std::vector< Glib::RefPtr<Gio::Volume> > type_vec_volumes;
       type_vec_volumes list_volumes = volume_monitor->get_volumes();
 
-      for(type_vec_volumes::iterator iter = list_volumes.begin(); iter != list_volumes.end(); ++iter)
+      for(type_vec_volumes::iterator iter_volumes = list_volumes.begin(); iter_volumes != list_volumes.end(); ++iter_volumes)
       {
-        Glib::RefPtr<Gio::Volume> volume = *iter;
+        Glib::RefPtr<Gio::Volume> volume = *iter_volumes;
         std::cout << "  Volume: " << volume->get_name() << std::endl;
       }
     }

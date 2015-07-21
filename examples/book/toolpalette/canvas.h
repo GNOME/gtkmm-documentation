@@ -45,13 +45,13 @@ private:
       int width = 0;
       int height = 0; //ignored
       Gtk::IconSize::lookup(Gtk::ICON_SIZE_DIALOG, width, height);
-      this->pixbuf = icon_theme->load_icon(icon_name, width, Gtk::ICON_LOOKUP_GENERIC_FALLBACK);
-      this->x = x;
-      this->y = y;
+      this->m_pixbuf = icon_theme->load_icon(icon_name, width, Gtk::ICON_LOOKUP_GENERIC_FALLBACK);
+      this->m_x = x;
+      this->m_y = y;
     }
 
-    Glib::RefPtr<Gdk::Pixbuf> pixbuf;
-    double x, y;
+    Glib::RefPtr<Gdk::Pixbuf> m_pixbuf;
+    double m_x, m_y;
   };
 
   void item_draw(const CanvasItem *item,

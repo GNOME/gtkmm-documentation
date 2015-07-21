@@ -43,15 +43,15 @@ void Canvas::item_draw(const CanvasItem *item,
   const Cairo::RefPtr<Cairo::Context>& cr,
   bool preview)
 {
-  if(!item || !item->pixbuf)
+  if(!item || !item->m_pixbuf)
     return;
 
-  const double cx = item->pixbuf->get_width();
-  const double cy = item->pixbuf->get_height();
+  const double cx = item->m_pixbuf->get_width();
+  const double cy = item->m_pixbuf->get_height();
 
   Gdk::Cairo::set_source_pixbuf(cr,
-    item->pixbuf,
-    item->x - cx * 0.5, item->y - cy * 0.5);
+    item->m_pixbuf,
+    item->m_x - cx * 0.5, item->m_y - cy * 0.5);
 
   if(preview)
     cr->paint_with_alpha(0.6);
@@ -88,8 +88,8 @@ bool Canvas::on_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context,
   {
     // We already have a drop indicator so just update its position.
 
-    m_drop_item->x = x;
-    m_drop_item->y = y;
+    m_drop_item->m_x = x;
+    m_drop_item->m_y = y;
 
     queue_draw();
     context->drag_status(Gdk::ACTION_COPY, time);
