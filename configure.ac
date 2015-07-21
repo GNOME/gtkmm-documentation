@@ -37,8 +37,8 @@ AC_CHECK_FUNCS([mkfifo])
 
 MM_ARG_ENABLE_WARNINGS([EXAMPLES_WXXFLAGS],
                        [-Wall],
-                       [-pedantic -Wall -Wextra -Wshadow -Wno-long-long],
-                       [G PANGO ATK GDK GDK_PIXBUF GTK GLIBMM GIOMM GDKMM ATKMM PANGOMM GTKMM])
+                       [-pedantic -Wall -Wextra -Wformat-security -Wsuggest-override -Wshadow -Wno-long-long],
+                       [G PANGO ATK GDK GDK_PIXBUF GTK GLIBMM GIOMM GDKMM ATKMM PANGOMM GTKMM SIGCXX])
 
 YELP_HELP_INIT
 
