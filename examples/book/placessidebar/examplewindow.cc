@@ -19,7 +19,6 @@
 ExampleWindow::ExampleWindow()
 : m_hbox(Gtk::ORIENTATION_HORIZONTAL, 6),
   m_show_desktop_check("Show \"Desktop\""),
-  m_show_connect_to_server_check("Show \"Connect to Server\""),
   m_show_enter_location("Show \"Enter Location\"")
 {
   // Window properties
@@ -37,9 +36,6 @@ ExampleWindow::ExampleWindow()
   m_show_desktop_check.signal_toggled().connect(sigc::mem_fun(*this, &ExampleWindow::on_show_desktop_toggled));
   m_show_desktop_check.set_active();
 
-  m_show_connect_to_server_check.signal_toggled().connect(sigc::mem_fun(*this, &ExampleWindow::on_show_connect_to_server_toggled));
-  m_show_connect_to_server_check.set_active();
-
   m_show_enter_location.signal_toggled().connect(sigc::mem_fun(*this, &ExampleWindow::on_show_enter_location_toggled));
   m_show_enter_location.set_active(false);
 
@@ -48,8 +44,7 @@ ExampleWindow::ExampleWindow()
   //m_places_sidebar.signal_drag_action_requested().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_drag_action_requested));
 
   m_controls.attach(m_show_desktop_check, 0, 0, 1, 1);
-  m_controls.attach(m_show_connect_to_server_check, 0, 1, 1, 1);
-  m_controls.attach(m_show_enter_location, 0, 2, 1, 1);
+  m_controls.attach(m_show_enter_location, 0, 1, 1, 1);
 
   std::cout << "Shortcuts:" << std::endl;
   std::vector<Glib::RefPtr<Gio::File > > shortcuts = m_places_sidebar.list_shortcuts();
@@ -77,13 +72,6 @@ void ExampleWindow::on_show_desktop_toggled()
   const bool show_desktop = m_show_desktop_check.get_active();
 
   m_places_sidebar.set_show_desktop(show_desktop);
-}
-
-void ExampleWindow::on_show_connect_to_server_toggled()
-{
-  const bool show_connect_to_server = m_show_connect_to_server_check.get_active();
-
-  m_places_sidebar.set_show_connect_to_server(show_connect_to_server);
 }
 
 void ExampleWindow::on_show_enter_location_toggled()

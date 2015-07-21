@@ -30,7 +30,6 @@ public:
 protected:
   // Slots
   void on_show_desktop_toggled();
-  void on_show_connect_to_server_toggled();
   void on_show_enter_location_toggled();
   void on_placessidebar_open_location(const Glib::RefPtr<Gio::File>& location, Gtk::PlacesOpenFlags open_flags);
   void on_placessidebar_populate_popup(Gtk::Menu* menu, const Glib::RefPtr<Gio::File>& selected_item, const Glib::RefPtr<Gio::Volume>& selected_volume);
@@ -46,7 +45,6 @@ protected:
   // Widgets
   Gtk::PlacesSidebar m_places_sidebar;
   Gtk::CheckButton m_show_desktop_check;
-  Gtk::CheckButton m_show_connect_to_server_check;
   Gtk::CheckButton m_show_enter_location;
 
 private:
