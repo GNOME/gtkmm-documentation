@@ -130,7 +130,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   else
     g_warning("GMenu not found");
 
-  Gtk::Toolbar* pToolbar = 0;
+  Gtk::Toolbar* pToolbar = nullptr;
   m_refBuilder->get_widget("toolbar", pToolbar);
   if (pToolbar)
     //Toolbar:

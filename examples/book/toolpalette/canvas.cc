@@ -124,7 +124,7 @@ void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context
     drag_palette = dynamic_cast<Gtk::ToolPalette*>(widget);
   }
 
-  Gtk::ToolItem* drag_item = 0;
+  Gtk::ToolItem* drag_item = nullptr;
   if(drag_palette)
     drag_item = drag_palette->get_drag_item(selection_data);
 
@@ -134,7 +134,7 @@ void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context
     return;
 
   delete m_drop_item;
-  m_drop_item = 0;
+  m_drop_item = nullptr;
 
   try
   {
@@ -193,7 +193,7 @@ void Canvas::on_drag_leave(const Glib::RefPtr<Gdk::DragContext>& context, guint 
     return;
 
   delete m_drop_item;
-  m_drop_item = 0;
+  m_drop_item = nullptr;
 
   queue_draw();
 

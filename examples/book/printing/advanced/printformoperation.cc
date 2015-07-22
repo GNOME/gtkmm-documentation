@@ -209,6 +209,6 @@ void PrintFormOperation::on_preview_window_hide()
   if(m_pDialog)
   {
     delete m_pDialog; //This would hide it anyway.
-    m_pDialog = 0;
+    m_pDialog = nullptr;
   }
 }

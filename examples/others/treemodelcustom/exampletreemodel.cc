@@ -47,7 +47,7 @@ ExampleTreeModel::ExampleTreeModel(unsigned int columns_count)
 : Glib::ObjectBase( typeid(ExampleTreeModel) ), //register a custom GType.
   Glib::Object(), //The custom GType is actually registered here.
   m_stamp(1), //When the model's stamp != the iterator's stamp then that iterator is invalid and should be ignored. Also, 0=invalid
-  m_pGlueList(0)
+  m_pGlueList(nullptr)
 {
   //Initialize our underlying data:
   const typeListOfRows::size_type rows_count = 100;

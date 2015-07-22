@@ -81,8 +81,8 @@ CellRendererPopup::CellRendererPopup()
   Gtk::CellRendererText (),
   button_width_         (-1),
   popup_window_         (Gtk::WINDOW_POPUP),
-  focus_widget_         (0),
-  popup_entry_          (0),
+  focus_widget_         (nullptr),
+  popup_entry_          (nullptr),
   shown_                (false),
   editing_canceled_     (false)
 {
@@ -337,5 +337,5 @@ void CellRendererPopup::on_popup_arrow_clicked()
 
 void CellRendererPopup::on_popup_hide()
 {
-  popup_entry_ = 0;
+  popup_entry_ = nullptr;
 }

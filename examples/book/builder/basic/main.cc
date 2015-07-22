@@ -1,7 +1,7 @@
 #include <gtkmm.h>
 #include <iostream>
 
-Gtk::Dialog* pDialog = 0;
+Gtk::Dialog* pDialog = nullptr;
 
 static
 void on_button_clicked()
@@ -41,7 +41,7 @@ int main (int argc, char **argv)
   if(pDialog)
   {
     //Get the GtkBuilder-instantiated Button, and connect a signal handler:
-    Gtk::Button* pButton = 0;
+    Gtk::Button* pButton = nullptr;
     refBuilder->get_widget("quit_button", pButton);
     if(pButton)
     {

@@ -159,7 +159,6 @@ bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& conte
 
   for(const auto& name : context->list_targets())
   {
-    const Glib::ustring name = *iter;
     g_print ("%s\n", name.c_str());
   }
 

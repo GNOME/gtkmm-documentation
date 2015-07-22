@@ -20,7 +20,7 @@
 ExampleWindow::ExampleWindow()
 : m_Box(Gtk::ORIENTATION_VERTICAL),
   m_Label("Right-click to see the popup menu."),
-  m_pMenuPopup(0)
+  m_pMenuPopup(nullptr)
 {
   set_title("popup example");
   set_default_size(200, 200);

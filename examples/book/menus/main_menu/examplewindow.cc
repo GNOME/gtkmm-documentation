@@ -102,7 +102,7 @@ ExampleWindow::ExampleWindow()
     std::cerr << "Building toolbar failed: " <<  ex.what();
   }
 
-  Gtk::Toolbar* toolbar = 0;
+  Gtk::Toolbar* toolbar = nullptr;
   m_refBuilder->get_widget("toolbar", toolbar);
   if (!toolbar)
     g_warning("GtkToolbar not found");

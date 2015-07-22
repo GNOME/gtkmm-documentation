@@ -33,7 +33,7 @@ bool ExampleWindow::load_file(const Glib::RefPtr<Gio::File>& file)
 
   try
   {
-    char* contents = 0;
+    char* contents = nullptr;
     gsize length = 0;
 
     if(file->load_contents(contents, length))

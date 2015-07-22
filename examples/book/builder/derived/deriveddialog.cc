@@ -21,7 +21,7 @@
 DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
 : Gtk::Dialog(cobject),
   m_refGlade(refGlade),
-  m_pButton(0)
+  m_pButton(nullptr)
 {
   //Get the Glade-instantiated Button, and connect a signal handler:
   m_refGlade->get_widget("quit_button", m_pButton);

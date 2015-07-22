@@ -55,8 +55,8 @@ public:
 
 AppWindow::AppWindow()
 {
-  ArrowButton* button = 0;
-  Gtk::Grid* grid = 0;
+  ArrowButton* button = nullptr;
+  Gtk::Grid* grid = nullptr;
 
   set_title ("Arrow Buttons");
 

@@ -46,7 +46,7 @@ int main (int argc, char **argv)
   }
 
   //Get the GtkBuilder-instantiated dialog::
-  DerivedDialog* pDialog = 0;
+  DerivedDialog* pDialog = nullptr;
   refBuilder->get_widget_derived("DialogDerived", pDialog);
   if(pDialog)
   {

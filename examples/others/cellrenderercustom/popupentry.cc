@@ -33,8 +33,8 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
   Gtk::CellEditable (),
   Gtk::EventBox     (),
   path_             (path),
-  button_           (0),
-  entry_            (0),
+  button_           (nullptr),
+  entry_            (nullptr),
   editing_canceled_ (false)
 {
   Gtk::Box *const hbox = new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL);

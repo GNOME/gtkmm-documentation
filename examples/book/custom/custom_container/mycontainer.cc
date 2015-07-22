@@ -21,7 +21,7 @@
 #include "mycontainer.h"
 
 MyContainer::MyContainer()
-: m_child_one(0), m_child_two(0)
+: m_child_one(nullptr), m_child_two(nullptr)
 {
   set_has_window(false);
   set_redraw_on_allocate(false);
@@ -254,12 +254,12 @@ void MyContainer::on_remove(Gtk::Widget* child)
 
     if(child == m_child_one)
     {
-      m_child_one = 0;
+      m_child_one = nullptr;
       found = true;
     }
     else if(child == m_child_two)
     {
-      m_child_two = 0;
+      m_child_two = nullptr;
       found = true;
     }
 

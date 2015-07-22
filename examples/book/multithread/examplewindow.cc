@@ -27,7 +27,7 @@ ExampleWindow::ExampleWindow() :
   m_TextView(),
   m_Dispatcher(),
   m_Worker(),
-  m_WorkerThread(0)
+  m_WorkerThread(nullptr)
 {
   set_title("Multi-threaded example");
   set_border_width(5);
@@ -109,7 +109,7 @@ void ExampleWindow::on_stop_button_clicked()
 
 void ExampleWindow::update_start_stop_buttons()
 {
-  const bool thread_is_running = m_WorkerThread != 0;
+  const bool thread_is_running = m_WorkerThread != nullptr;
 
   m_ButtonStart.set_sensitive(!thread_is_running);
   m_ButtonStop.set_sensitive(thread_is_running);
@@ -164,7 +164,7 @@ void ExampleWindow::on_notification_from_worker_thread()
   {
     // Work is done.
     m_WorkerThread->join();
-    m_WorkerThread = 0;
+    m_WorkerThread = nullptr;
     update_start_stop_buttons();
   }
   update_widgets();

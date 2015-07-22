@@ -35,7 +35,7 @@ TicTacToe::TicTacToe()
   {
     for(int j=0;j<3; j++)
     {
-      Gtk::ToggleButton* button = 0;
+      Gtk::ToggleButton* button = nullptr;
       buttons[i][j] = button = Gtk::manage( new Gtk::ToggleButton());
       grid->attach(*button, i, j, 1, 1);
       button->signal_toggled().connect( sigc::bind(

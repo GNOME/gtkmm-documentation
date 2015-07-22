@@ -143,7 +143,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   }
 
   //Get the toolbar and add it to a container widget:
-  Gtk::Toolbar* toolbar = 0;
+  Gtk::Toolbar* toolbar = nullptr;
   m_refBuilder->get_widget("toolbar", toolbar);
   if (!toolbar)
     g_warning("GtkToolbar not found");
