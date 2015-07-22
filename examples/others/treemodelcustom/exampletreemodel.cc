@@ -36,9 +36,8 @@ ExampleTreeModel::GlueList::GlueList()
 ExampleTreeModel::GlueList::~GlueList()
 {
   //Delete each GlueItem in the list:
-  for(type_vecOfGlue::iterator iter = m_list.begin(); iter != m_list.end(); ++iter)
+  for(const auto& pItem : m_list)
   {
-    ExampleTreeModel::GlueItem* pItem = *iter;
     delete pItem;
   }
 }

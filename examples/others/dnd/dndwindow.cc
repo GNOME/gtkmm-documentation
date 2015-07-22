@@ -157,9 +157,7 @@ bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& conte
            G_OBJECT_TYPE_NAME (source_widget) :
            "NULL");
 
-  typedef std::vector<std::string> type_targets;
-  const type_targets targets = context->list_targets();
-  for(type_targets::const_iterator iter = targets.begin(); iter != targets.end(); ++iter)
+  for(const auto& name : context->list_targets())
   {
     const Glib::ustring name = *iter;
     g_print ("%s\n", name.c_str());

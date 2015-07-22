@@ -84,11 +84,10 @@ ExampleWindow::ExampleWindow()
   m_CompletionActions[0] = "Use Wizard";
   m_CompletionActions[1] = "Browse for Filename";
 
-  for(type_actions_map::iterator iter = m_CompletionActions.begin();
-          iter != m_CompletionActions.end(); ++iter)
+  for(const auto& the_pair : m_CompletionActions)
   {
-    int position = iter->first;
-    Glib::ustring title = iter->second;
+    auto position = the_pair.first;
+    auto title = the_pair.second;
     completion->insert_action_text(title, position);
   }
 
