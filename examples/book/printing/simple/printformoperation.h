@@ -36,8 +36,8 @@ class PrintFormOperation : public Gtk::PrintOperation
   PrintFormOperation();
 
   //PrintOperation default signal handler overrides:
-  virtual void on_begin_print(const Glib::RefPtr<Gtk::PrintContext>& context);
-  virtual void on_draw_page(const Glib::RefPtr<Gtk::PrintContext>& context, int page_nr);
+  void on_begin_print(const Glib::RefPtr<Gtk::PrintContext>& context) override;
+  void on_draw_page(const Glib::RefPtr<Gtk::PrintContext>& context, int page_nr) override;
 
   Glib::ustring m_Name;
   Glib::ustring m_Comments;

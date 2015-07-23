@@ -27,7 +27,7 @@ public:
 
 protected:
   //Override default signal handler:
-  virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
+  bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 
 private:
   void draw_rectangle(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);

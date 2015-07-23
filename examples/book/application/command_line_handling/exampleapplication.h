@@ -29,10 +29,10 @@ public:
     
 protected:
   //Overrides of default signal handlers:
-  virtual void on_activate();
-  virtual void on_open(const Gio::Application::type_vec_files& files,
-    const Glib::ustring& hint);
-  virtual int on_command_line(const Glib::RefPtr<Gio::ApplicationCommandLine>& command_line);
+  void on_activate()  override;
+  void on_open(const Gio::Application::type_vec_files& files,
+    const Glib::ustring& hint) override;
+  int on_command_line(const Glib::RefPtr<Gio::ApplicationCommandLine>& command_line) override;
 
   //A regular signal handler, because there is no default signal handler for this:
   int on_handle_local_options(const Glib::RefPtr<Glib::VariantDict>& options);

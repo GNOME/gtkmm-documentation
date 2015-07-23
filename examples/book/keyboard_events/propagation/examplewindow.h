@@ -28,7 +28,7 @@ public:
 
 private:
   //Override default signal handler:
-  virtual bool on_key_release_event(GdkEventKey* event);
+  bool on_key_release_event(GdkEventKey* event) override;
 
   bool entryKeyRelease(GdkEventKey* event);
   bool gridKeyRelease(GdkEventKey* event);

@@ -29,9 +29,9 @@ public:
     
 protected:
   //Overrides of default signal handlers:
-  virtual void on_activate();
-  virtual void on_open(const Gio::Application::type_vec_files& files,
-    const Glib::ustring& hint);
+  void on_activate() override;
+  void on_open(const Gio::Application::type_vec_files& files,
+    const Glib::ustring& hint) override;
 
 private:
   void create_window(const Glib::RefPtr<Gio::File>& file = Glib::RefPtr<Gio::File>());

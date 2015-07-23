@@ -40,14 +40,14 @@ class PrintFormOperation : public Gtk::PrintOperation
   PrintFormOperation();
 
   //PrintOperation default signal handler overrides:
-  virtual void on_begin_print(const Glib::RefPtr<Gtk::PrintContext>& context);
-  virtual void on_draw_page(const Glib::RefPtr<Gtk::PrintContext>& context, int page_nr);
+  void on_begin_print(const Glib::RefPtr<Gtk::PrintContext>& context) override;
+  void on_draw_page(const Glib::RefPtr<Gtk::PrintContext>& context, int page_nr) override;
 
-  virtual Gtk::Widget* on_create_custom_widget();
-  virtual void on_custom_widget_apply(Gtk::Widget* widget);
+  Gtk::Widget* on_create_custom_widget() override;
+  void on_custom_widget_apply(Gtk::Widget* widget) override;
 
 
-  virtual bool on_preview(const Glib::RefPtr<Gtk::PrintOperationPreview>& preview, const Glib::RefPtr<Gtk::PrintContext>& context, Gtk::Window* parent);
+  bool on_preview(const Glib::RefPtr<Gtk::PrintOperationPreview>& preview, const Glib::RefPtr<Gtk::PrintContext>& context, Gtk::Window* parent) override;
 
   void on_preview_window_hide();
 

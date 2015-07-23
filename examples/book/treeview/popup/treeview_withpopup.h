@@ -30,7 +30,7 @@ public:
 protected:
   // Override Signal handler:
   // Alternatively, use signal_button_press_event().connect_notify()
-  virtual bool on_button_press_event(GdkEventButton *ev);
+  bool on_button_press_event(GdkEventButton* button_event) override;
 
   //Signal handler for popup menu items:
   void on_menu_file_popup_generic();

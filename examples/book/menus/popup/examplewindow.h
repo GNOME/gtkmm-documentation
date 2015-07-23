@@ -29,7 +29,8 @@ public:
 
 protected:
   //Signal handlers:
-  virtual bool on_button_press_event(GdkEventButton* event);
+  bool on_button_press_event(GdkEventButton* button_event) override;
+
   void on_menu_file_popup_generic();
 
   //Child widgets:

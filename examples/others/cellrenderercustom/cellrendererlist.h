@@ -32,7 +32,7 @@ public:
   Glib::ustring get_selected_item();
 
 protected:
-  virtual void on_show_popup(const Glib::ustring& path, int x1, int y1, int x2, int y2);
+  void on_show_popup(const Glib::ustring& path, int x1, int y1, int x2, int y2) override;
 
 private:
   typedef CellRendererList Self;

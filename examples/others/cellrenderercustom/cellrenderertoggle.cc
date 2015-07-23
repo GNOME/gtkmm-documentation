@@ -42,23 +42,24 @@ public:
   SignalToggled& signal_toggled();
 
 protected:
-  virtual void get_preferred_size_vfunc(Gtk::Widget& widget,
+  //TODO: Update for gtkmm 3. This isn't currently overriding anything.
+  void get_preferred_size_vfunc(Gtk::Widget& widget,
                               const Gdk::Rectangle* cell_area,
                               int* x_offset, int* y_offset,
-                              int* width,    int* height) const;
+                              int* width,    int* height) const /* override */;
 
-  virtual void render_vfunc(const Cairo::RefPtr<Cairo::Context>& cr,
+  void render_vfunc(const Cairo::RefPtr<Cairo::Context>& cr,
                             Gtk::Widget& widget,
                             const Gdk::Rectangle& background_area,
                             const Gdk::Rectangle& cell_area,
-                            Gtk::CellRendererState flag);
+                            Gtk::CellRendererState flag) override;
 
-  virtual bool activate_vfunc(GdkEvent* event,
+  bool activate_vfunc(GdkEvent* event,
                               Gtk::Widget& widget,
                               const Glib::ustring& path,
                               const Gdk::Rectangle& background_area,
                               const Gdk::Rectangle& cell_area,
-                              Gtk::CellRendererState flags);
+                              Gtk::CellRendererState flags) override;
 
 private:
   Glib::Property<bool> property_activatable_;

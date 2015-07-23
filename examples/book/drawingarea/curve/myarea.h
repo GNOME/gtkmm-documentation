@@ -29,7 +29,7 @@ public:
 
 protected:
   //Override default signal handler:
-  virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
+  bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 };
 
 #endif // GTKMM_EXAMPLE_MYAREA_H

@@ -33,7 +33,8 @@ protected:
 
   void on_page_number_changed();
   void on_close_clicked();
-  virtual void on_hide();
+
+  void on_hide() override;
 
   virtual bool on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr);
 

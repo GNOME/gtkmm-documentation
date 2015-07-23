@@ -38,23 +38,23 @@ public:
 protected:
 
    // Overrides:
-   virtual Gtk::TreeModelFlags get_flags_vfunc() const;
-   virtual int get_n_columns_vfunc() const;
-   virtual GType get_column_type_vfunc(int index) const;
-   virtual void get_value_vfunc(const TreeModel::iterator& iter, int column, Glib::ValueBase& value) const;
+   Gtk::TreeModelFlags get_flags_vfunc() const override;
+   int get_n_columns_vfunc() const override;
+   GType get_column_type_vfunc(int index) const override;
+   void get_value_vfunc(const TreeModel::iterator& iter, int column, Glib::ValueBase& value) const override;
   
    bool iter_next_vfunc(const iterator& iter, iterator& iter_next) const;
 
    //TODO: Make sure that we make all of these const when we have made them all const in the TreeModel:
-   virtual bool iter_children_vfunc(const iterator& parent, iterator& iter) const;
-   virtual bool iter_has_child_vfunc(const iterator& iter) const;
-   virtual int iter_n_children_vfunc(const iterator& iter) const;
-   virtual int iter_n_root_children_vfunc() const;
-   virtual bool iter_nth_child_vfunc(const iterator& parent, int n, iterator& iter) const;
-   virtual bool iter_nth_root_child_vfunc(int n, iterator& iter) const;
-   virtual bool iter_parent_vfunc(const iterator& child, iterator& iter) const;
-   virtual Path get_path_vfunc(const iterator& iter) const;
-   virtual bool get_iter_vfunc(const Path& path, iterator& iter) const;
+   bool iter_children_vfunc(const iterator& parent, iterator& iter) const override;
+   bool iter_has_child_vfunc(const iterator& iter) const override;
+   int iter_n_children_vfunc(const iterator& iter) const override;
+   int iter_n_root_children_vfunc() const override;
+   bool iter_nth_child_vfunc(const iterator& parent, int n, iterator& iter) const override;
+   bool iter_nth_root_child_vfunc(int n, iterator& iter) const override;
+   bool iter_parent_vfunc(const iterator& child, iterator& iter) const override;
+   Path get_path_vfunc(const iterator& iter) const override;
+   bool get_iter_vfunc(const Path& path, iterator& iter) const override;
 
 private:
    typedef std::vector< Glib::ustring> typeRow; //X columns, all of type string.

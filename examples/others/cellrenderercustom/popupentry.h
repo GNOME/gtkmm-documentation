@@ -44,8 +44,8 @@ public:
   type_signal_arrow_clicked& signal_arrow_clicked();
 
 protected:
-  virtual bool on_key_press_event(GdkEventKey* event);
-  virtual void start_editing_vfunc(GdkEvent* event);
+  bool on_key_press_event(GdkEventKey* key_event) override;
+  void start_editing_vfunc(GdkEvent* event) override;
 
 private:
   typedef PopupEntry Self;

@@ -47,18 +47,18 @@ protected:
 
   //TODO: Port this to gtkmm 3:
   /*
-  virtual void get_preferred_size_vfunc(Gtk::Widget& widget,
+  void get_preferred_size_vfunc(Gtk::Widget& widget,
                               const Gdk::Rectangle* cell_area,
                               int* x_offset, int* y_offset,
-                              int* width,    int* height) const;
+                              int* width,    int* height) const  override;
   */
 
-  virtual Gtk::CellEditable* start_editing_vfunc(GdkEvent* event,
+  Gtk::CellEditable* start_editing_vfunc(GdkEvent* event,
                                                  Gtk::Widget& widget,
                                                  const Glib::ustring& path,
                                                  const Gdk::Rectangle& background_area,
                                                  const Gdk::Rectangle& cell_area,
-                                                 Gtk::CellRendererState flags);
+                                                 Gtk::CellRendererState flags) override;
 
   virtual void on_show_popup(const Glib::ustring& path, int x1, int y1, int x2, int y2);
   virtual void on_hide_popup();

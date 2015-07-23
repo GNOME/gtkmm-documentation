@@ -136,7 +136,7 @@ public:
   virtual ~Wheelbarrow();
 
 protected:
-  virtual bool on_button_press_event(GdkEventButton* event);
+  bool on_button_press_event(GdkEventButton* button_event) override;
 };
 
 

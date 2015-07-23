@@ -30,7 +30,7 @@ public:
 
 protected:
   //Override default signal handler:
-  virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);
+  bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 
 private:
   double m_fix;
