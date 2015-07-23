@@ -209,21 +209,21 @@ void ExampleWindow::on_sort_clicked()
 
 void ExampleWindow::on_reverse_sort_clicked()
 {
-  m_ListBox.set_sort_func(sigc::ptr_fun(&ExampleWindow::reverse_sort_func));
+  m_ListBox.set_sort_func(
+    [](Gtk::ListBoxRow* row1, Gtk::ListBoxRow* row2)
+    {
+      return sort_func(row2, row1);
+    });
 }
 
 int ExampleWindow::sort_func(Gtk::ListBoxRow* row1, Gtk::ListBoxRow* row2)
 {
-  ExampleRow* xrow1 = dynamic_cast<ExampleRow*>(row1);
-  ExampleRow* xrow2 = dynamic_cast<ExampleRow*>(row2);
+  const auto xrow1 = dynamic_cast<ExampleRow*>(row1);
+  const auto xrow2 = dynamic_cast<ExampleRow*>(row2);
   if (xrow1 && xrow2)
     return xrow1->get_sort_id() - xrow2->get_sort_id();
-  return 0;
-}
 
-int ExampleWindow::reverse_sort_func(Gtk::ListBoxRow* row1, Gtk::ListBoxRow* row2)
-{
-  return sort_func(row2, row1);
+  return 0;
 }
 
 void ExampleWindow::on_change_clicked()
@@ -242,18 +242,17 @@ void ExampleWindow::on_change_clicked()
 
 void ExampleWindow::on_filter_clicked()
 {
-  m_ListBox.set_filter_func(sigc::ptr_fun(&ExampleWindow::filter_func));
+  m_ListBox.set_filter_func(
+   [] (Gtk::ListBoxRow* row)
+   {
+     auto xrow = dynamic_cast<ExampleRow*>(row);
+     return xrow && xrow->get_text() != "blah3";
+   });
 }
 
 void ExampleWindow::on_unfilter_clicked()
 {
   m_ListBox.unset_filter_func();
-}
-
-bool ExampleWindow::filter_func(Gtk::ListBoxRow* row)
-{
-  ExampleRow* xrow = dynamic_cast<ExampleRow*>(row);
-  return xrow && xrow->get_text() != "blah3";
 }
 
 void ExampleWindow::on_add_clicked()

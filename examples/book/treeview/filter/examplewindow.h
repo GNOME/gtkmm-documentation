@@ -31,8 +31,6 @@ protected:
   //Signal handlers:
   void on_button_quit();
 
-  bool on_filter_row_visible(const Gtk::TreeModel::const_iterator& iter);
-
   //Tree model columns:
   class ModelColumns : public Gtk::TreeModel::ColumnRecord
   {

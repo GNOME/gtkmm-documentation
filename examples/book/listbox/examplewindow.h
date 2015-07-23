@@ -41,8 +41,6 @@ private:
   void on_visibility_clicked();
 
   static int sort_func(Gtk::ListBoxRow* row1, Gtk::ListBoxRow* row2);
-  static int reverse_sort_func(Gtk::ListBoxRow* row1, Gtk::ListBoxRow* row2);
-  static bool filter_func(Gtk::ListBoxRow* row);
   static void update_header_func(Gtk::ListBoxRow* row, Gtk::ListBoxRow* before);
 
   // Member data.

@@ -49,8 +49,15 @@ ExampleWindow::ExampleWindow()
 
   //Put the TreeModel inside a filter model:
   m_refTreeModelFilter = Gtk::TreeModelFilter::create(m_refTreeModel);
-  m_refTreeModelFilter->set_visible_func( sigc::mem_fun(*this,
-              &ExampleWindow::on_filter_row_visible) );
+  m_refTreeModelFilter->set_visible_func(
+    [this] (const Gtk::TreeModel::const_iterator& iter) -> bool
+    {
+       if(!iter)
+         return true;
+
+       auto row = *iter;
+       return row[m_Columns.m_col_show];
+    });
 
   m_TreeView.set_model(m_refTreeModelFilter);
 
@@ -91,24 +98,6 @@ ExampleWindow::ExampleWindow()
 
 ExampleWindow::~ExampleWindow()
 {
-}
-
-bool ExampleWindow::on_filter_row_visible(
-        const Gtk::TreeModel::const_iterator& iter)
-{
-  if(iter)
-  {
-    //iter seems to be an iter to the child model:
-    //Gtk::TreeModel::iterator iter_child =
-        //m_refTreeModelFilter->convert_iter_to_child_iter(iter);
-    //if(iter_child)
-    //{
-    Gtk::TreeModel::Row row = *iter;
-    return row[m_Columns.m_col_show];
-    //}
-  }
-
-  return true;
 }
 
 void ExampleWindow::on_button_quit()
