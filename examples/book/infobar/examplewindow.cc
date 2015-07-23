@@ -28,7 +28,7 @@ ExampleWindow::ExampleWindow()
   add(m_VBox);
 
   // Add the message label to the InfoBar:
-  Gtk::Container* infoBarContainer =
+  auto infoBarContainer =
     dynamic_cast<Gtk::Container*>(m_InfoBar.get_content_area());
   if (infoBarContainer)
     infoBarContainer->add(m_Message_Label);

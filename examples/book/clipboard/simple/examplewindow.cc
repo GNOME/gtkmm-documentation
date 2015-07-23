@@ -71,14 +71,14 @@ void ExampleWindow::on_button_copy()
   strData += m_ButtonB1.get_active() ? "1" : "0";
   strData += m_ButtonB2.get_active() ? "1" : "0";
 
-  Glib::RefPtr<Gtk::Clipboard> refClipboard = Gtk::Clipboard::get();
+  auto refClipboard = Gtk::Clipboard::get();
   refClipboard->set_text(strData);
 }
 
 void ExampleWindow::on_button_paste()
 {
   //Tell the clipboard to call our method when it is ready:
-  Glib::RefPtr<Gtk::Clipboard> refClipboard = Gtk::Clipboard::get();
+  auto refClipboard = Gtk::Clipboard::get();
   refClipboard->request_text(sigc::mem_fun(*this,
               &ExampleWindow::on_clipboard_text_received) );
 }

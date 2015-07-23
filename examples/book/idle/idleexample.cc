@@ -38,7 +38,7 @@ IdleExample::IdleExample() :
   m_Box.pack_start( *Gtk::manage(new Gtk::Label("5000 MB")) );
   m_Box.pack_start(m_ProgressBar_d);
 
-  Gtk::Box* hbox = Gtk::manage( new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL,10));
+  auto hbox = Gtk::manage( new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL,10));
   m_Box.pack_start(*hbox);
   hbox->pack_start(m_ButtonQuit, Gtk::PACK_EXPAND_PADDING);
 

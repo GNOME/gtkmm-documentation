@@ -14,9 +14,9 @@ win (TicTacToe *ttt)
 int
 main (int argc, char *argv[])
 {
-  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
-  TicTacToe* ttt = manage( new TicTacToe );
+  auto ttt = manage( new TicTacToe );
   ttt->tictactoe.connect( sigc::bind (sigc::ptr_fun(&win), ttt) );
 
   Gtk::Window window;

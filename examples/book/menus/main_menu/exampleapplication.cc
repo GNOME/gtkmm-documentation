@@ -199,10 +199,10 @@ void ExampleApplication::on_startup()
   }
 
   //Get the menubar and the app menu, and add them to the application:
-  Glib::RefPtr<Glib::Object> object = m_refBuilder->get_object("menu-example");
-  Glib::RefPtr<Gio::Menu> gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+  auto object = m_refBuilder->get_object("menu-example");
+  auto gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
   object = m_refBuilder->get_object("appmenu");
-  Glib::RefPtr<Gio::Menu> appMenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+  auto appMenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
   if (!(gmenu && appMenu)) {
     g_warning("GMenu or AppMenu not found");
   }
@@ -224,7 +224,7 @@ void ExampleApplication::on_activate()
 
 void ExampleApplication::create_window()
 {
-  ExampleWindow* win = new ExampleWindow();
+  auto win = new ExampleWindow();
 
   //Make sure that the application runs for as long this window is still open:
   add_window(*win);

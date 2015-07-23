@@ -129,7 +129,7 @@ void PrintFormOperation::on_draw_page(
   {
     if(line_index >= start_page_line)
     {
-      Glib::RefPtr<Pango::LayoutLine> layout_line = iter.get_line();
+      auto layout_line = iter.get_line();
       Pango::Rectangle logical_rect = iter.get_line_logical_extents();
       int baseline = iter.get_baseline();
 
@@ -154,15 +154,15 @@ Gtk::Widget* PrintFormOperation::on_create_custom_widget()
   //Create a custom tab in the print dialog titled "Other"
   set_custom_tab_label("Other");
 
-  Gtk::Box* vbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
+  auto vbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
   vbox->set_border_width(12);
 
-  Gtk::Box* hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 8));
+  auto hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 8));
   vbox->pack_start(*hbox, false, false);
   hbox->set_border_width(6);
   hbox->show();
 
-  Gtk::Label* label = Gtk::manage(new Gtk::Label("Choose a font: "));
+  auto label = Gtk::manage(new Gtk::Label("Choose a font: "));
   hbox->pack_start(*label, false, false);
   label->show();
 

@@ -7,7 +7,7 @@ int main(int /* argc */, char** /* argv */)
 
   try
   {
-    Glib::RefPtr<Gio::VolumeMonitor> volume_monitor = Gio::VolumeMonitor::get();
+    auto volume_monitor = Gio::VolumeMonitor::get();
     if(!volume_monitor)
       std::cerr << "Gio::VolumeMonitor::get() failed." << std::endl;
 

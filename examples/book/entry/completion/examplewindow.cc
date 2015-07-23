@@ -39,12 +39,12 @@ ExampleWindow::ExampleWindow()
   m_Button_Close.grab_default();
 
   //Add an EntryCompletion:
-  Glib::RefPtr<Gtk::EntryCompletion> completion =
+  auto completion =
       Gtk::EntryCompletion::create();
   m_Entry.set_completion(completion);
 
   //Create and fill the completion's filter model
-  Glib::RefPtr<Gtk::ListStore> refCompletionModel =
+  auto refCompletionModel =
       Gtk::ListStore::create(m_Columns);
   completion->set_model(refCompletionModel);
 

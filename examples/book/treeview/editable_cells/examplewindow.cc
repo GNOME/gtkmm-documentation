@@ -151,10 +151,10 @@ void ExampleWindow::cellrenderer_validated_on_editing_started(
   if(m_validate_retry)
   {
     //This is the CellEditable inside the CellRenderer. 
-    Gtk::CellEditable* celleditable_validated = cell_editable;
+    auto celleditable_validated = cell_editable;
 
     //It's usually an Entry, at least for a CellRendererText:
-    Gtk::Entry* pEntry = dynamic_cast<Gtk::Entry*>(celleditable_validated);
+    auto pEntry = dynamic_cast<Gtk::Entry*>(celleditable_validated);
     if(pEntry)
     {
       pEntry->set_text(m_invalid_text_for_retry);

@@ -70,7 +70,7 @@ ExampleWindow::ExampleWindow()
   add(m_Combo);
 
   //Connect signal handlers:
-  Gtk::Entry* entry = m_Combo.get_entry();
+  auto entry = m_Combo.get_entry();
   if (entry)
   {
     // The Entry shall receive focus-out events.
@@ -99,7 +99,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_entry_changed()
 {
-  Gtk::Entry* entry = m_Combo.get_entry();
+  auto entry = m_Combo.get_entry();
   if (entry)
   {
     std::cout << "on_entry_changed(): Row=" << m_Combo.get_active_row_number()
@@ -109,7 +109,7 @@ void ExampleWindow::on_entry_changed()
 
 void ExampleWindow::on_entry_activate()
 {
-  Gtk::Entry* entry = m_Combo.get_entry();
+  auto entry = m_Combo.get_entry();
   if (entry)
   {
     std::cout << "on_entry_activate(): Row=" << m_Combo.get_active_row_number()
@@ -119,7 +119,7 @@ void ExampleWindow::on_entry_activate()
 
 bool ExampleWindow::on_entry_focus_out_event(GdkEventFocus* /* event */)
 {
-  Gtk::Entry* entry = m_Combo.get_entry();
+  auto entry = m_Combo.get_entry();
   if (entry)
   {
     std::cout << "on_entry_focus_out_event(): Row=" << m_Combo.get_active_row_number()

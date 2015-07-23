@@ -28,10 +28,10 @@ static goffset get_size_recursively(const Glib::RefPtr<Gio::File>& file)
 
   try
   {
-    Glib::RefPtr<Gio::FileInfo> info = file->query_info();
+    auto info = file->query_info();
     if(info->get_file_type() == Gio::FILE_TYPE_DIRECTORY)
     {
-      Glib::RefPtr<Gio::FileEnumerator> children = file->enumerate_children();
+      auto children = file->enumerate_children();
       Glib::RefPtr<Gio::FileInfo> child_info;
 
       while(child_info = children->next_file())
@@ -63,7 +63,7 @@ int main(int argc, char** argv)
 
   Gio::init();
 
-  Glib::RefPtr<Gio::File> file = Gio::File::create_for_path(root_dir);
+  auto file = Gio::File::create_for_path(root_dir);
   std::cout << "Gathering disk usage information for '" << file->get_path() << "'" << std::endl;
 
   const goffset total = get_size_recursively(file);

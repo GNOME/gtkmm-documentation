@@ -21,10 +21,10 @@
 
 int main (int argc, char **argv)
 {
-  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   //Load the Glade file and instiate its widgets:
-  Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
+  auto refBuilder = Gtk::Builder::create();
   try
   {
     refBuilder->add_from_file("derived.glade");

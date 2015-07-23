@@ -116,7 +116,7 @@ void ExampleWindow::on_placessidebar_open_location(const Glib::RefPtr<Gio::File>
 
 void ExampleWindow::on_placessidebar_populate_popup(Gtk::Menu* menu, const Glib::RefPtr<Gio::File>& /* selected_item */, const Glib::RefPtr<Gio::Volume>& /* selected_volume */)
 {
-  Gtk::MenuItem* properties_menu_item = new Gtk::MenuItem("Properties...");
+  auto properties_menu_item = new Gtk::MenuItem("Properties...");
 
   properties_menu_item->signal_activate().connect(sigc::mem_fun(*this, &ExampleWindow::on_menu_properties_activate));
   properties_menu_item->show();
@@ -126,7 +126,7 @@ void ExampleWindow::on_placessidebar_populate_popup(Gtk::Menu* menu, const Glib:
 
 void ExampleWindow::on_menu_properties_activate()
 {
-  Glib::RefPtr<Gio::File> selected_item = m_places_sidebar.get_location();
+  auto selected_item = m_places_sidebar.get_location();
 
   on_placessidebar_open_location(selected_item, Gtk::PLACES_OPEN_NORMAL);
 }

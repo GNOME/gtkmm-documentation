@@ -30,7 +30,7 @@ MyArea::~MyArea()
 bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
   // This is where we draw on the window
-  Glib::RefPtr<Gdk::Window> window = get_window();
+  auto window = get_window();
   if(window)
   {
     Gtk::Allocation allocation = get_allocation();

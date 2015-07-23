@@ -131,7 +131,7 @@ ExampleWindow::ExampleWindow() :
   m_ListBox.signal_row_activated().connect(sigc::mem_fun(*this, &ExampleWindow::on_row_activated));
 
   // Add some rows to the ListBox.
-  ExampleRow* row = Gtk::manage(new ExampleRow("blah4", 4));
+  auto row = Gtk::manage(new ExampleRow("blah4", 4));
   m_ListBox.append(*row);
   m_ListBox.append(m_Row3); // blah3
   row = Gtk::manage(new ExampleRow("blah1", 1));
@@ -259,7 +259,7 @@ void ExampleWindow::on_add_clicked()
 {
   static int new_button_nr = 1;
   const Glib::ustring text = "blah2 new " + Glib::ustring::format(new_button_nr);
-  ExampleRow* new_row = Gtk::manage(new ExampleRow(text, new_button_nr));
+  auto new_row = Gtk::manage(new ExampleRow(text, new_button_nr));
   new_row->show_all();
   m_ListBox.append(*new_row);
   ++new_button_nr;
@@ -277,27 +277,28 @@ void ExampleWindow::on_unseparate_clicked()
 
 void ExampleWindow::update_header_func(Gtk::ListBoxRow* row, Gtk::ListBoxRow* before)
 {
-  ExampleRow* xrow = dynamic_cast<ExampleRow*>(row);
+  auto xrow = dynamic_cast<ExampleRow*>(row);
   if (!before || (xrow && xrow->get_text() == "blah3"))
   {
     // Create header if needed.
     if (!row->get_header())
     {
-      Gtk::Box* hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL));
-      Gtk::Label* label = Gtk::manage(new Gtk::Label("Header"));
+      auto hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL));
+      auto label = Gtk::manage(new Gtk::Label("Header"));
       hbox->pack_start(*label, Gtk::PACK_SHRINK);
-      Gtk::Button* button = Gtk::manage(new Gtk::Button("button"));
+      auto button = Gtk::manage(new Gtk::Button("button"));
       hbox->pack_start(*button, Gtk::PACK_SHRINK);
       hbox->show_all();
       row->set_header(*hbox);
     }
-    Gtk::Container* header = dynamic_cast<Gtk::Container*>(row->get_header());
+
+    auto header = dynamic_cast<Gtk::Container*>(row->get_header());
     if (header)
     {
       std::vector<Gtk::Widget*> children = header->get_children();
       if (children.size() > 0)
       {
-        Gtk::Label* label = dynamic_cast<Gtk::Label*>(children[0]);
+        auto label = dynamic_cast<Gtk::Label*>(children[0]);
         if (label && xrow)
           label->set_text("Header " + Glib::ustring::format(xrow->get_sort_id()));
       }

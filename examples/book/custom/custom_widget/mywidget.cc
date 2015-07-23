@@ -42,7 +42,7 @@ MyWidget::MyWidget() :
   //std::cout << "Gtype is a GtkWidget?:" << GTK_IS_WIDGET(gobj()) << std::endl;
 
   m_refCssProvider = Gtk::CssProvider::create();
-  Glib::RefPtr<Gtk::StyleContext> refStyleContext = get_style_context();
+  auto refStyleContext = get_style_context();
   refStyleContext->add_provider(m_refCssProvider,
     GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   m_refCssProvider->signal_parsing_error().connect(

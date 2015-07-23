@@ -21,7 +21,7 @@
 
 int main(int argc, char *argv[])
 {
-  Glib::RefPtr<ExampleApplication> application = 
+  auto application = 
     ExampleApplication::create();
 
   // Start the application, showing the initial window, 

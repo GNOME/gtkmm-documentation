@@ -152,7 +152,7 @@ bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& conte
     m_Image.set(m_trashcan_open);
   }
 
-  Gtk::Widget* source_widget = Gtk::Widget::drag_get_source_widget(context);
+  auto source_widget = Gtk::Widget::drag_get_source_widget(context);
   g_print ("motion, source %s\n", source_widget ?
            G_OBJECT_TYPE_NAME (source_widget) :
            "NULL");
@@ -235,7 +235,7 @@ void DnDWindow::create_popup()
   m_PopupWindow.set_position(Gtk::WIN_POS_MOUSE);
 
   //Create Grid and fill it:
-  Gtk::Grid* pGrid = Gtk::manage(new Gtk::Grid());
+  auto pGrid = Gtk::manage(new Gtk::Grid());
 
   for(int i = 0; i < 3; i++)
   {
@@ -243,7 +243,7 @@ void DnDWindow::create_popup()
     {
       char buffer[128];
       g_snprintf(buffer, sizeof(buffer), "%d,%d", i, j);
-      Gtk::Button* pButton = Gtk::manage(new Gtk::Button(buffer));
+      auto pButton = Gtk::manage(new Gtk::Button(buffer));
       pGrid->attach(*pButton, i, j, 1, 1);
 
       pButton->drag_dest_set(m_listTargetsNoRoot, Gtk::DEST_DEFAULT_ALL, Gdk::DragAction(GDK_ACTION_COPY | GDK_ACTION_MOVE));

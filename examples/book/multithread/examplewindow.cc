@@ -70,7 +70,7 @@ ExampleWindow::ExampleWindow() :
   m_Dispatcher.connect(sigc::mem_fun(*this, &ExampleWindow::on_notification_from_worker_thread));
 
   // Create a text buffer mark for use in update_widgets().
-  Glib::RefPtr<Gtk::TextBuffer> buffer = m_TextView.get_buffer();
+  auto buffer = m_TextView.get_buffer();
   buffer->create_mark("last_line", buffer->end(), /* left_gravity= */ true);
 
   update_start_stop_buttons();
@@ -125,13 +125,13 @@ void ExampleWindow::update_widgets()
 
   if (message_from_worker_thread != m_TextView.get_buffer()->get_text())
   {
-    Glib::RefPtr<Gtk::TextBuffer> buffer = m_TextView.get_buffer();
+    auto buffer = m_TextView.get_buffer();
     buffer->set_text(message_from_worker_thread);
 
     // Scroll the last inserted line into view. That's somewhat complicated.
     Gtk::TextIter iter = buffer->end();
     iter.set_line_offset(0); // Beginning of last line
-    Glib::RefPtr<Gtk::TextMark> mark = buffer->get_mark("last_line");
+    auto mark = buffer->get_mark("last_line");
     buffer->move_mark(mark, iter);
     m_TextView.scroll_to(mark);
     // TextView::scroll_to(iter) is not perfect.

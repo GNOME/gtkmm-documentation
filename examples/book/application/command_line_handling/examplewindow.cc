@@ -41,7 +41,7 @@ bool ExampleWindow::load_file(const Glib::RefPtr<Gio::File>& file)
       if(contents && length)
       {
         const Glib::ustring text(contents);
-        Glib::RefPtr<Gtk::TextBuffer> buffer = m_view.get_buffer();
+        auto buffer = m_view.get_buffer();
         buffer->set_text(text);
       }
       g_free(contents);

@@ -166,22 +166,22 @@ CalendarExample::CalendarExample()
 
   set_resizable(false);
 
-  Gtk::Box* vbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD));
+  auto vbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD));
   add(*vbox);
 
   /*
    * The top part of the CalendarExample, flags and fontsel.
    */
 
-  Gtk::Box* hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, DEF_PAD));
+  auto hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, DEF_PAD));
   vbox->pack_start(*hbox, Gtk::PACK_EXPAND_WIDGET, DEF_PAD);
-  Gtk::ButtonBox* hbbox = Gtk::manage(new Gtk::ButtonBox());
+  auto hbbox = Gtk::manage(new Gtk::ButtonBox());
   hbox->pack_start(*hbbox, Gtk::PACK_SHRINK, DEF_PAD);
   hbbox->set_layout(Gtk::BUTTONBOX_SPREAD);
   hbbox->set_spacing(5);
 
   /* Calendar widget */
-  Gtk::Frame* frame = Gtk::manage(new Gtk::Frame("Calendar"));
+  auto frame = Gtk::manage(new Gtk::Frame("Calendar"));
   hbbox->pack_start(*frame, Gtk::PACK_EXPAND_WIDGET, DEF_PAD);
   calendar_ = new Gtk::Calendar();
   set_flags();
@@ -191,17 +191,17 @@ CalendarExample::CalendarExample()
   calendar_->signal_day_selected().connect(sigc::mem_fun(*this, &CalendarExample::day_selected));
   calendar_->signal_day_selected_double_click().connect(sigc::mem_fun(*this, &CalendarExample::day_selected_double_click));
 
-  Gtk::Separator* separator = Gtk::manage(new Gtk::Separator(Gtk::ORIENTATION_VERTICAL));
+  auto separator = Gtk::manage(new Gtk::Separator(Gtk::ORIENTATION_VERTICAL));
   hbox->pack_start (*separator, Gtk::PACK_SHRINK);
 
-  Gtk::Box* vbox2 = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD));
+  auto vbox2 = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD));
   hbox->pack_start(*vbox2, Gtk::PACK_SHRINK, DEF_PAD);
   
   /* Build the Right frame with the flags in */ 
 
-  Gtk::Frame* frameFlags = Gtk::manage(new Gtk::Frame("Flags"));
+  auto frameFlags = Gtk::manage(new Gtk::Frame("Flags"));
   vbox2->pack_start(*frameFlags, Gtk::PACK_EXPAND_WIDGET, DEF_PAD);
-  Gtk::Box* vbox3 = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD_SMALL));
+  auto vbox3 = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD_SMALL));
   frameFlags->add(*vbox3);
 
   struct {
@@ -217,7 +217,7 @@ CalendarExample::CalendarExample()
 
   for (int i = 0; i < 5; i++)
   {
-    Gtk::CheckButton* toggle = new Gtk::CheckButton(flags[i].label);
+    auto toggle = new Gtk::CheckButton(flags[i].label);
     toggle->signal_toggled().connect(sigc::bind(sigc::mem_fun(*this, &CalendarExample::toggle_flag), toggle));
     vbox3->pack_start(*toggle);
     flag_checkboxes_[i] = toggle;
@@ -231,7 +231,7 @@ CalendarExample::CalendarExample()
   // Add a StyleProvider to the Gtk::Calendar, so we can change the font.
   // This was easier before Gtk::Widget::override_font() was deprecated.
   css_provider_ = Gtk::CssProvider::create();
-  Glib::RefPtr<Gtk::StyleContext> refStyleContext = calendar_->get_style_context();
+  auto refStyleContext = calendar_->get_style_context();
   refStyleContext->add_provider(css_provider_, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   css_provider_->signal_parsing_error().connect(
     sigc::mem_fun(*this, &CalendarExample::on_parsing_error));
@@ -249,7 +249,7 @@ CalendarExample::CalendarExample()
   
   hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 5));
   vbox2->pack_start (*hbox, Gtk::PACK_SHRINK);
-  Gtk::Label* label = Gtk::manage(new Gtk::Label("Day selected:"));
+  auto label = Gtk::manage(new Gtk::Label("Day selected:"));
   hbox->pack_start (*label, Gtk::PACK_SHRINK);
   label_selected_ = new Gtk::Label("");
   hbox->pack_start (*label_selected_, Gtk::PACK_SHRINK);
@@ -268,11 +268,11 @@ CalendarExample::CalendarExample()
   label_month_ = new Gtk::Label("");
   hbox->pack_start(*label_month_, Gtk::PACK_SHRINK);
   
-  Gtk::ButtonBox* bbox = Gtk::manage(new Gtk::ButtonBox());
+  auto bbox = Gtk::manage(new Gtk::ButtonBox());
   vbox->pack_start(*bbox, Gtk::PACK_SHRINK);
   bbox->set_layout(Gtk::BUTTONBOX_END);
 
-  Gtk::Button* button = Gtk::manage(new Gtk::Button("Close"));
+  auto button = Gtk::manage(new Gtk::Button("Close"));
   button->signal_clicked().connect(
     sigc::mem_fun(*this, &CalendarExample::on_button_close));
   bbox->add(*button);
@@ -293,7 +293,7 @@ Glib::Date CalendarExample::get_date() const
 
 int main(int argc, char** argv)
 {
-  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
   CalendarExample calendar;
   return app->run(calendar);
 }

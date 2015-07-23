@@ -77,7 +77,7 @@ ExampleWindow::~ExampleWindow()
 void ExampleWindow::build_main_menu()
 {
   //Create actions for menus and toolbars:
-  Glib::RefPtr<Gio::SimpleActionGroup> refActionGroup =
+  auto refActionGroup =
    Gio::SimpleActionGroup::create();
 
   //File menu:
@@ -146,18 +146,18 @@ void ExampleWindow::build_main_menu()
 
 
   //Get the menubar and toolbar widgets, and add them to a container widget:
-  Glib::RefPtr<Glib::Object> object =
+  auto object =
     m_refBuilder->get_object("menu-example");
-  Glib::RefPtr<Gio::Menu> gmenu =
+  auto gmenu =
     Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
   if(!gmenu)
     g_warning("GMenu not found");
 
-  Gtk::MenuBar* pMenubar = new Gtk::MenuBar(gmenu);
+  auto pMenubar = new Gtk::MenuBar(gmenu);
   m_VBox.pack_start(*pMenubar, Gtk::PACK_SHRINK);
 
 /* TODO:
-  Gtk::Widget* pToolbar = m_refBuilder->get_widget("/ToolBar") ;
+  auto pToolbar = m_refBuilder->get_widget("/ToolBar") ;
   if(pToolbar)
     m_VBox.pack_start(*pToolbar, Gtk::PACK_SHRINK);
 */
@@ -211,7 +211,7 @@ void ExampleWindow::print_or_preview(Gtk::PrintOperationAction print_action)
 {
   //Create a new PrintOperation with our PageSetup and PrintSettings:
   //(We use our derived PrintOperation class)
-  Glib::RefPtr<PrintFormOperation> print = PrintFormOperation::create();
+  auto print = PrintFormOperation::create();
 
   print->set_name(m_NameEntry.get_text() + " " + m_SurnameEntry.get_text());
   print->set_comments(m_refTextBuffer->get_text(false /*Don't include hidden*/));
@@ -252,7 +252,7 @@ void ExampleWindow::on_menu_file_new()
 void ExampleWindow::on_menu_file_page_setup()
 {
   //Show the page setup dialog, asking it to start with the existing settings:
-  Glib::RefPtr<Gtk::PageSetup> new_page_setup =
+  auto new_page_setup =
       Gtk::run_page_setup_dialog(*this, m_refPageSetup, m_refSettings);
 
   //Save the chosen page setup dialog for use when printing, previewing, or

@@ -92,7 +92,7 @@ void handler2()
 
 int main(int argc, char** argv)
 {
-  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
 
   Gtk::Window window;

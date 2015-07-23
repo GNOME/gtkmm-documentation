@@ -26,7 +26,7 @@
 TicTacToe::TicTacToe()
 : Gtk::Box(Gtk::ORIENTATION_VERTICAL)
 {
-  Gtk::Grid* grid = Gtk::manage( new Gtk::Grid() );
+  auto grid = Gtk::manage( new Gtk::Grid() );
   grid->set_row_homogeneous(true);
   grid->set_column_homogeneous(true);
   add( *grid);

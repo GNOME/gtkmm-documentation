@@ -90,7 +90,7 @@ void ExampleWindow::on_button_copy()
   strData += m_ButtonB1.get_active() ? "1" : "0";
   strData += m_ButtonB2.get_active() ? "1" : "0";
 
-  Glib::RefPtr<Gtk::Clipboard> refClipboard = Gtk::Clipboard::get();
+  auto refClipboard = Gtk::Clipboard::get();
 
   //Targets:
   std::vector<Gtk::TargetEntry> targets;
@@ -113,7 +113,7 @@ void ExampleWindow::on_button_copy()
 void ExampleWindow::on_button_paste()
 {
   //Tell the clipboard to call our method when it is ready:
-  Glib::RefPtr<Gtk::Clipboard> refClipboard = Gtk::Clipboard::get();
+  auto refClipboard = Gtk::Clipboard::get();
 
   refClipboard->request_contents(example_target_custom, 
     sigc::mem_fun(*this, &ExampleWindow::on_clipboard_received) );
@@ -191,7 +191,7 @@ void ExampleWindow::update_paste_status()
 {
   //Disable the paste button if there is nothing to paste.
 
-  Glib::RefPtr<Gtk::Clipboard> refClipboard = Gtk::Clipboard::get();
+  auto refClipboard = Gtk::Clipboard::get();
 
   //Discover what targets are available:
   refClipboard->request_targets(sigc::mem_fun(*this,

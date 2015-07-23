@@ -30,8 +30,8 @@ Canvas::~Canvas()
 {
   while(!m_canvas_items.empty())
   {
-    type_vec_items::iterator iter = m_canvas_items.begin();
-    CanvasItem* item = *iter;
+    auto iter = m_canvas_items.begin();
+    auto item = *iter;
     delete item;
     m_canvas_items.erase(iter);
   }
@@ -115,9 +115,9 @@ void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context
   int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time)
 {
   // Find the tool button which is the source of this DnD operation.
-  Gtk::Widget* widget = drag_get_source_widget(context);
+  auto widget = drag_get_source_widget(context);
 
-  Gtk::ToolPalette* drag_palette = dynamic_cast<Gtk::ToolPalette*>(widget);
+  auto drag_palette = dynamic_cast<Gtk::ToolPalette*>(widget);
   while(widget && !drag_palette)
   {
     widget = widget->get_parent();
@@ -129,7 +129,7 @@ void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context
     drag_item = drag_palette->get_drag_item(selection_data);
 
   // Create a drop indicator when a tool button was found:
-  Gtk::ToolButton* button = dynamic_cast<Gtk::ToolButton*>(drag_item);
+  auto button = dynamic_cast<Gtk::ToolButton*>(drag_item);
   if(!button)
     return;
 
@@ -138,7 +138,7 @@ void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context
 
   try
   {
-    CanvasItem* item = new CanvasItem(this, button, x, y);
+    auto item = new CanvasItem(this, button, x, y);
 
     if(m_drag_data_requested_for_drop)
     {

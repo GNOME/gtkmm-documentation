@@ -121,7 +121,7 @@ void PrintFormOperation::on_draw_page(
   {
     if(line_index >= start_page_line)
     {
-      Glib::RefPtr<Pango::LayoutLine> layout_line = iter.get_line();
+      auto layout_line = iter.get_line();
       Pango::Rectangle logical_rect = iter.get_line_logical_extents();
       int baseline = iter.get_baseline();
 

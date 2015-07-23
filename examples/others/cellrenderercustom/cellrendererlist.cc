@@ -51,7 +51,7 @@ CellRendererList::CellRendererList()
   tree_view_.signal_button_release_event().connect(
       sigc::mem_fun(*this, &Self::on_tree_view_button_release_event));
 
-  const Glib::RefPtr<Gtk::TreeSelection> selection = tree_view_.get_selection();
+  const auto selection = tree_view_.get_selection();
   selection->set_mode(Gtk::SELECTION_BROWSE);
   selection->signal_changed().connect(sigc::mem_fun(*this, &Self::on_tree_selection_changed));
 

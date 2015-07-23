@@ -80,7 +80,7 @@ void MyArea::draw_text(const Cairo::RefPtr<Cairo::Context>& cr,
   font.set_weight(Pango::WEIGHT_BOLD);
 
   // http://developer.gnome.org/pangomm/unstable/classPango_1_1Layout.html
-  Glib::RefPtr<Pango::Layout> layout = create_pango_layout("Hi there!");
+  auto layout = create_pango_layout("Hi there!");
 
   layout->set_font_description(font);
 

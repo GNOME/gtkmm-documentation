@@ -130,13 +130,13 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   }
 
   //Get the menubar:
-  Glib::RefPtr<Glib::Object> object = m_refBuilder->get_object("menubar");
-  Glib::RefPtr<Gio::Menu> gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+  auto object = m_refBuilder->get_object("menubar");
+  auto gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
   if (!gmenu)
     g_warning("GMenu not found");
   else
   {
-    Gtk::MenuBar* pMenuBar = Gtk::manage(new Gtk::MenuBar(gmenu));
+    auto pMenuBar = Gtk::manage(new Gtk::MenuBar(gmenu));
 
     //Add the MenuBar to the window:
     m_Box.pack_start(*pMenuBar, Gtk::PACK_SHRINK);
