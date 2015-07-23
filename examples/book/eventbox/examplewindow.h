@@ -29,7 +29,7 @@ public:
 
 protected:
   //Signal handlers:
-  virtual bool on_eventbox_button_press(GdkEventButton* event);
+  bool on_eventbox_button_press(GdkEventButton* button_event);
 
   //Child widgets:
   Gtk::EventBox m_EventBox;

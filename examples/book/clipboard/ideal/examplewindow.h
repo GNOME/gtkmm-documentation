@@ -38,8 +38,8 @@ protected:
 
   void on_clipboard_received(const Gtk::SelectionData& selection_data);
   void on_clipboard_received_targets(const std::vector<Glib::ustring>& targets);
-   
-  virtual void update_paste_status(); //Disable the paste button if there is nothing to paste.
+
+  void update_paste_status(); //Disable the paste button if there is nothing to paste.
 
   //Child widgets:
   Gtk::Box m_VBox;

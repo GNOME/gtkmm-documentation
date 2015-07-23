@@ -61,7 +61,7 @@ protected:
                                                  Gtk::CellRendererState flags) override;
 
   virtual void on_show_popup(const Glib::ustring& path, int x1, int y1, int x2, int y2);
-  virtual void on_hide_popup();
+  void on_hide_popup();
 
 private:
   typedef CellRendererPopup Self;

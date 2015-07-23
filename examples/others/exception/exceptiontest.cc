@@ -19,7 +19,7 @@ public:
   explicit MyButton(const Glib::ustring& label);
 
 protected:
-  virtual void on_clicked(); // signal handler
+  void on_clicked(); // signal handler
 };
 
 class MyException1 {};
