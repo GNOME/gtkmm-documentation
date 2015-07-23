@@ -155,7 +155,7 @@ Wheelbarrow::Wheelbarrow()
   //TODO: Use get_style_context() and Gdk::RGBA instead?
   const Gdk::Color transparent = Gtk::Widget::get_default_style()->get_bg(Gtk::STATE_NORMAL);
 
-  const Glib::RefPtr<Gdk::Pixbuf> pixbuf =
+  const auto pixbuf =
       Gdk::Pixbuf::create_from_xpm_data(drawable, transparent, wheelbarrow_xpm);
 
   Gtk::Image *const image = new Gtk::Image(pixbuf);
@@ -191,7 +191,7 @@ bool Wheelbarrow::on_button_press_event(GdkEventButton* event)
 
 int main(int argc, char** argv)
 {
-  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
 
   Wheelbarrow wheelbarrow;

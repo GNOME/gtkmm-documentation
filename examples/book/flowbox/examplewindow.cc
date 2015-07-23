@@ -35,7 +35,7 @@ ExampleWindow::ExampleWindow()
   fill_color_names();
   for(std::size_t i = 0; i != m_color_names.size(); ++i)
   {
-    Gtk::Button* color_swatch = create_color_swatch(i);
+    auto color_swatch = create_color_swatch(i);
     m_flow_box.add(*color_swatch);
   }
 
@@ -52,8 +52,8 @@ ExampleWindow::~ExampleWindow()
 
 Gtk::Button* ExampleWindow::create_color_swatch(int swatch_i)
 {
-  Gtk::DrawingArea* drawing_area = Gtk::manage(new Gtk::DrawingArea());
-  Gtk::Button* color_swatch = Gtk::manage(new Gtk::Button());
+  auto drawing_area = Gtk::manage(new Gtk::DrawingArea());
+  auto color_swatch = Gtk::manage(new Gtk::Button());
 
   drawing_area->set_size_request(24, 24);
 

@@ -58,7 +58,7 @@ Glib::RefPtr<ExampleApplication> ExampleApplication::create()
 
 void ExampleApplication::create_window(const Glib::RefPtr<Gio::File>& file)
 {
-  ExampleWindow* window = new ExampleWindow();
+  auto window = new ExampleWindow();
 
   //Make sure that the application runs for as long this window is still open:
   add_window(*window);
@@ -104,7 +104,7 @@ void ExampleApplication::on_open(const Gio::Application::type_vec_files& files,
   //std::cout << "debug: files.size()=" << files.size() << std::endl;
   for(std::size_t i = 0; i < files.size(); i++)
   {
-    Glib::RefPtr<Gio::File> file = files[i];
+    auto file = files[i];
     if(!file)
     {
       std::cerr << G_STRFUNC << ": file is null." << std::endl;
@@ -128,7 +128,7 @@ static bool get_arg_value(const Glib::RefPtr<Glib::VariantDict>& options, const 
   }
   else
   {
-    GVariant* gvariant = g_variant_dict_lookup_value(options->gobj(), arg_name.c_str(), NULL);
+    auto gvariant = g_variant_dict_lookup_value(options->gobj(), arg_name.c_str(), NULL);
     if(!gvariant)
     {
       std::cerr << "The \"" << arg_name << "\" value was not in the options VariantDict." << std::endl;
@@ -146,7 +146,7 @@ static bool get_arg_value(const Glib::RefPtr<Glib::VariantDict>& options, const 
 
 int ExampleApplication::on_command_line(const Glib::RefPtr<Gio::ApplicationCommandLine>& command_line)
 {
-  const Glib::RefPtr<Glib::VariantDict> options = command_line->get_options_dict();
+  const auto options = command_line->get_options_dict();
   if(!options)
     std::cerr << G_STRFUNC << ": options is null." << std::endl;
 

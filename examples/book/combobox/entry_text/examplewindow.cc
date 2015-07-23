@@ -33,7 +33,7 @@ ExampleWindow::ExampleWindow()
   add(m_Combo);
 
   //Connect signal handlers:
-  Gtk::Entry* entry = m_Combo.get_entry();
+  auto entry = m_Combo.get_entry();
   // Alternatively you can connect to entry->signal_changed().
   m_Combo.signal_changed().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_combo_changed) );

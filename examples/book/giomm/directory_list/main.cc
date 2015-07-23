@@ -26,15 +26,15 @@ int main(int /* argc */, char** /* argv */)
 
   try
   {
-    Glib::RefPtr<Gio::File> directory = Gio::File::create_for_path("/etc");
+    auto directory = Gio::File::create_for_path("/etc");
     if(!directory)
       std::cerr << "Gio::File::create_for_path() returned an empty RefPtr." << std::endl;
 
-    Glib::RefPtr<Gio::FileEnumerator> enumerator = directory->enumerate_children();
+    auto enumerator = directory->enumerate_children();
     if(!enumerator)
       std::cerr << "Gio::File::enumerate_children() returned an empty RefPtr." << std::endl;
 
-    Glib::RefPtr<Gio::FileInfo> file_info = enumerator->next_file();
+    auto file_info = enumerator->next_file();
     while(file_info)
     {
       std::cout << "file: " << file_info->get_name() << std::endl;

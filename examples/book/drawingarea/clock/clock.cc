@@ -129,7 +129,7 @@ bool Clock::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 bool Clock::on_timeout()
 {
     // force our program to redraw the entire clock.
-    Glib::RefPtr<Gdk::Window> win = get_window();
+    auto win = get_window();
     if (win)
     {
         Gdk::Rectangle r(0, 0, get_allocation().get_width(),

@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
   // They are included to show a program with Gio::APPLICATION_HANDLES_COMMAND_LINE.
   // Gio::APPLICATION_NON_UNIQUE makes it possible to run several instances of
   // this application simultaneously.
-  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv,
+  auto app = Gtk::Application::create(argc, argv,
     "org.gtkmm.example", Gio::APPLICATION_HANDLES_COMMAND_LINE | Gio::APPLICATION_NON_UNIQUE);
 
   // Note after = false.
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
   // Gio::APPLICATION_NON_UNIQUE makes it possible to run several instances of
   // this application simultaneously.
   int argc1 = 1; // Don't give the command line arguments to Gtk::Application.
-  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc1, argv,
+  auto app = Gtk::Application::create(argc1, argv,
     "org.gtkmm.example", Gio::APPLICATION_NON_UNIQUE);
 #endif
 

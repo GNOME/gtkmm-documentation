@@ -38,7 +38,7 @@ ExampleWindow::ExampleWindow()
 
   //Fill menu:
 
-  Glib::RefPtr<Gio::SimpleActionGroup> refActionGroup =
+  auto refActionGroup =
     Gio::SimpleActionGroup::create();
 
   //File|New sub menu:
@@ -91,9 +91,9 @@ ExampleWindow::ExampleWindow()
   }
 
   //Get the menu:
-  Glib::RefPtr<Glib::Object> object =
+  auto object =
     m_refBuilder->get_object("menu-examplepopup");
-  Glib::RefPtr<Gio::Menu> gmenu =
+  auto gmenu =
     Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
   if(!gmenu)
     g_warning("GMenu not found");

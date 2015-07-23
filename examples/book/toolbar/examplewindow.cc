@@ -48,7 +48,7 @@ ExampleWindow::ExampleWindow()
 
     m_Toolbar.set_toolbar_style(Gtk::TOOLBAR_BOTH);
 
-    Gtk::ToolButton* item = Gtk::manage(new Gtk::ToolButton("Click me"));
+    auto item = Gtk::manage(new Gtk::ToolButton("Click me"));
     //item.set_tooltips(*tooltips, "Toolbar item");
     m_Toolbar.append(*item);
     item->signal_clicked().connect( sigc::mem_fun(*this,

@@ -60,7 +60,7 @@ void MyArea::fix_lines(bool fix)
 // force the redraw of the image
 void MyArea::force_redraw()
 {
-  Glib::RefPtr<Gdk::Window> win = get_window();
+  auto win = get_window();
   if (win)
   {
     Gdk::Rectangle r(0, 0, get_allocation().get_width(), get_allocation().get_height());

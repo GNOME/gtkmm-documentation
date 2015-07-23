@@ -26,7 +26,7 @@ int main(int /* argc */, char** /* argv */)
 
   try
   {
-    Glib::RefPtr<Gio::File> file = Gio::File::create_for_path("test_output.txt");
+    auto file = Gio::File::create_for_path("test_output.txt");
     if(!file)
       std::cerr << "Gio::File::create_for_path() returned an empty RefPtr." << std::endl;
 

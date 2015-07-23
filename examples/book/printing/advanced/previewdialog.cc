@@ -75,7 +75,7 @@ PreviewDialog::~PreviewDialog()
 
 void PreviewDialog::on_drawing_area_realized()
 {
-  Glib::RefPtr<Gdk::Window> gdk_window = m_DrawingArea.get_window();
+  auto gdk_window = m_DrawingArea.get_window();
   if(gdk_window)
   {
     Cairo::RefPtr<Cairo::Context> cairo_ctx =
@@ -150,7 +150,7 @@ void PreviewDialog::on_popreview_got_page_size(
 
     if(m_pOperation)
     {
-      Glib::RefPtr<Pango::Layout> layout = m_pOperation->get_pango_layout();
+      auto layout = m_pOperation->get_pango_layout();
       if(layout)
         layout->update_from_cairo_context(cairo_ctx);
     }

@@ -34,7 +34,7 @@ MessageText::~MessageText()
 
 void MessageText::insert_text()
 {
-  Glib::RefPtr<Gtk::TextBuffer> refTextBuffer = m_TextView.get_buffer();
+  auto refTextBuffer = m_TextView.get_buffer();
 
   Gtk::TextBuffer::iterator iter = refTextBuffer->get_iter_at_offset(0);
   refTextBuffer->insert(iter,

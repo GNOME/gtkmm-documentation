@@ -58,7 +58,7 @@ void ExampleWindow::on_action_send_notification()
 {
   std::cout << G_STRFUNC << std::endl;
 
-  Glib::RefPtr<Gio::Notification> note = Gio::Notification::create("Unimportant message!");
+  auto note = Gio::Notification::create("Unimportant message!");
   note->set_body("Notification from " + Glib::get_application_name());
   note->add_button("Print", "app.print", Glib::ustring("Hello, world!"));
   note->add_button("Quit Application", "app.quit");

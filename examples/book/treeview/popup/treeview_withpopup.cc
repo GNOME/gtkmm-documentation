@@ -43,7 +43,7 @@ TreeView_WithPopup::TreeView_WithPopup()
   append_column("Name", m_Columns.m_col_name);
 
   //Fill popup menu:
-  Gtk::MenuItem* item = Gtk::manage(new Gtk::MenuItem("_Edit", true));
+  auto item = Gtk::manage(new Gtk::MenuItem("_Edit", true));
   item->signal_activate().connect(
     sigc::mem_fun(*this, &TreeView_WithPopup::on_menu_file_popup_generic) );
   m_Menu_Popup.append(*item);
@@ -87,7 +87,7 @@ void TreeView_WithPopup::on_menu_file_popup_generic()
 {
   std::cout << "A popup menu item was selected." << std::endl;
 
-  Glib::RefPtr<Gtk::TreeView::Selection> refSelection = get_selection();
+  auto refSelection = get_selection();
   if(refSelection)
   {
     Gtk::TreeModel::iterator iter = refSelection->get_selected();

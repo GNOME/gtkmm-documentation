@@ -12,10 +12,10 @@ void on_button_clicked()
 
 int main (int argc, char **argv)
 {
-  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
   //Load the GtkBuilder file and instantiate its widgets:
-  Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
+  auto refBuilder = Gtk::Builder::create();
   try
   {
     refBuilder->add_from_file("basic.glade");

@@ -21,7 +21,7 @@
 
 void ExampleWindow::load_icon_items()
 {
-  Glib::RefPtr<Gtk::IconTheme> icon_theme = Gtk::IconTheme::get_for_screen(get_screen());
+  auto icon_theme = Gtk::IconTheme::get_for_screen(get_screen());
 
   typedef std::vector<Glib::ustring> type_stringvec;
   type_stringvec icon_names = icon_theme->list_icons();
@@ -66,8 +66,8 @@ void ExampleWindow::load_icon_items()
           pixbuf->get_height() > 2*requested_icon_size)
         continue;
 
-      Gtk::Image* image = Gtk::manage(new Gtk::Image(pixbuf));
-      Gtk::ToolButton* button = Gtk::manage(new Gtk::ToolButton(*image, icon_name));
+      auto image = Gtk::manage(new Gtk::Image(pixbuf));
+      auto button = Gtk::manage(new Gtk::ToolButton(*image, icon_name));
       button->set_tooltip_text(icon_name);
       button->set_is_important();
       group->insert(*button);
@@ -83,7 +83,7 @@ void ExampleWindow::load_icon_items()
 
 void ExampleWindow::load_toggle_items()
 {
-  Gtk::ToolItemGroup* group = 
+  auto group = 
     Gtk::manage(new Gtk::ToolItemGroup("Radio Item"));
   m_ToolPalette.add(*group);
 
@@ -92,7 +92,7 @@ void ExampleWindow::load_toggle_items()
   for(int i = 1; i <= 10; ++i)
   {
     const Glib::ustring label = Glib::ustring::compose("#%1", i);
-    Gtk::RadioToolButton* button = Gtk::manage(new Gtk::RadioToolButton());
+    auto button = Gtk::manage(new Gtk::RadioToolButton());
     button->set_group(radio_group);
     button->set_label(label);
    
@@ -103,11 +103,11 @@ void ExampleWindow::load_toggle_items()
 
 static Gtk::ToolItem* create_entry_item(const Glib::ustring& text)
 {
-  Gtk::Entry* entry = Gtk::manage(new Gtk::Entry());
+  auto entry = Gtk::manage(new Gtk::Entry());
   entry->set_text(text);
   entry->set_width_chars(5);
 
-  Gtk::ToolItem* item = Gtk::manage(new Gtk::ToolItem());
+  auto item = Gtk::manage(new Gtk::ToolItem());
   item->add(*entry);
 
   return item;
@@ -115,14 +115,14 @@ static Gtk::ToolItem* create_entry_item(const Glib::ustring& text)
 
 void ExampleWindow::load_special_items()
 {
-  Gtk::ToolItemGroup* group = Gtk::manage(new Gtk::ToolItemGroup());
+  auto group = Gtk::manage(new Gtk::ToolItemGroup());
 
   Gtk::Button *label_button = Gtk::manage(new Gtk::Button("Advanced Features"));
   label_button->show();
   group->set_label_widget(*label_button);
   m_ToolPalette.add(*group);
 
-  Gtk::ToolItem* item = create_entry_item ("homogeneous=false");
+  auto item = create_entry_item ("homogeneous=false");
   group->insert(*item);
   //TODO: Add Gtk::Container::set_child_property().
   gtk_container_child_set (GTK_CONTAINER (group->gobj()), GTK_WIDGET (item->gobj()),

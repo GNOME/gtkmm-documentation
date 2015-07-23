@@ -41,7 +41,7 @@ TreeModel_Dnd::row_draggable_vfunc(const Gtk::TreeModel::Path& path) const
   // be dragged:
 
   //TODO: Add a const version of get_iter to TreeModel:
-  TreeModel_Dnd* unconstThis = const_cast<TreeModel_Dnd*>(this);
+  auto unconstThis = const_cast<TreeModel_Dnd*>(this);
   const_iterator iter = unconstThis->get_iter(path);
   //const_iterator iter = get_iter(path);
   if(iter)
@@ -76,7 +76,7 @@ TreeModel_Dnd::row_drop_possible_vfunc(const Gtk::TreeModel::Path& dest,
     //We must unconst this. This should not be necessary with a future version
     //of gtkmm.
     //TODO: Add a const version of get_iter to TreeModel:
-    TreeModel_Dnd* unconstThis = const_cast<TreeModel_Dnd*>(this);
+    auto unconstThis = const_cast<TreeModel_Dnd*>(this);
     const_iterator iter_dest_parent = unconstThis->get_iter(dest_parent);
     //const_iterator iter_dest_parent = get_iter(dest);
     if(iter_dest_parent)
@@ -93,7 +93,7 @@ TreeModel_Dnd::row_drop_possible_vfunc(const Gtk::TreeModel::Path& dest,
   //TODO: Add const version of get_from_selection_data(): Glib::RefPtr<const
   //Gtk::TreeModel> refThis = Glib::RefPtr<const Gtk::TreeModel>(this);
   //
-  //Glib::RefPtr<Gtk::TreeModel> refThis =
+  //auto refThis =
   //Glib::RefPtr<Gtk::TreeModel>(const_cast<TreeModel_Dnd*>(this));
   //refThis->reference(); //, true /* take_copy */)
   //Gtk::TreeModel::Path path_dragged_row;

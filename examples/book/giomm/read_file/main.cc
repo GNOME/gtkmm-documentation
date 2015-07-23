@@ -27,11 +27,11 @@ int main(int /* argc */, char** /* argv */)
 
   try
   {
-    Glib::RefPtr<Gio::File> file = Gio::File::create_for_path("/etc/fstab");
+    auto file = Gio::File::create_for_path("/etc/fstab");
     if(!file)
       std::cerr << "Gio::File::create_for_path() returned an empty RefPtr." << std::endl;
 
-    Glib::RefPtr<Gio::FileInputStream> stream = file->read();
+    auto stream = file->read();
     if(!stream)
       std::cerr << "Gio::File::read() returned an empty RefPtr." << std::endl;
 

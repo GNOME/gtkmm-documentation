@@ -27,7 +27,7 @@ class MySocketWindow : public Gtk::Window
       ifstream infile(id_filename);
       if (infile)
       {
-        Gtk::Socket* socket = Gtk::manage(new Gtk::Socket());
+        auto socket = Gtk::manage(new Gtk::Socket());
         add(*socket);
         socket->signal_plug_added().connect(sigc::ptr_fun(plug_added));
         socket->signal_plug_removed().connect(sigc::ptr_fun(plug_removed));
@@ -38,7 +38,7 @@ class MySocketWindow : public Gtk::Window
       }
       else
       {
-        Gtk::Label* label = Gtk::manage(
+        auto label = Gtk::manage(
             new Gtk::Label(
               "Plug id file not found.\n Make sure plug is running."));
         add(*label);
@@ -52,7 +52,7 @@ int main(int argc, char** argv)
 {
   // The plug and the socket have different application ids, so they can run
   // simultaneously.
-  Glib::RefPtr<Gtk::Application> app =
+  auto app =
     Gtk::Application::create(argc, argv, "org.gtkmm.example.socket");
   MySocketWindow win;
   app->run(win);

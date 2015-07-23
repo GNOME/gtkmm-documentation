@@ -101,7 +101,7 @@ void ExampleWindow::configure_form_buttons()
   m_format_buttons_box.set_hexpand();
 
   // Group format buttons so that they appear that they belong together
-  Glib::RefPtr<Gtk::StyleContext> style_context = m_format_buttons_box.get_style_context();
+  auto style_context = m_format_buttons_box.get_style_context();
   style_context->add_class("raised");
   style_context->add_class("linked");
 }
@@ -147,7 +147,7 @@ void ExampleWindow::on_day_selected()
 {
   Gdk::Rectangle rect;
 
-  GdkEvent* current_event = gtk_get_current_event();
+  auto current_event = gtk_get_current_event();
 
   if (current_event->type != GDK_BUTTON_PRESS)
   {

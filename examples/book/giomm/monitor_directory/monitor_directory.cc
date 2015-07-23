@@ -71,9 +71,9 @@ bool create_temp_file()
 {
   try
   {
-    Glib::RefPtr<Gio::File> temp_file = Gio::File::create_for_path(FILENAME);
+    auto temp_file = Gio::File::create_for_path(FILENAME);
 
-    Glib::RefPtr<Gio::FileOutputStream> stream = temp_file->create_file ();
+    auto stream = temp_file->create_file ();
     stream->write("This is only a test.");
     stream->close();
   }
@@ -90,7 +90,7 @@ bool quit ()
 {
   try
   {
-    Glib::RefPtr<Gio::File> temp_file = Gio::File::create_for_path(FILENAME);
+    auto temp_file = Gio::File::create_for_path(FILENAME);
     temp_file->trash();
   }
   catch (const Gio::Error& ex)
@@ -110,8 +110,8 @@ int main(int /* argc */, char** /* argv */)
   mainloop = Glib::MainLoop::create();
 
   std::string current_dir = Glib::get_current_dir();
-  Glib::RefPtr<Gio::File> dir = Gio::File::create_for_path(current_dir);
-  Glib::RefPtr<Gio::FileMonitor> monitor = dir->monitor_directory();
+  auto dir = Gio::File::create_for_path(current_dir);
+  auto monitor = dir->monitor_directory();
 
   std::cout << "Monitoring directory '" << current_dir << "'..."
     << std::endl << std::endl;

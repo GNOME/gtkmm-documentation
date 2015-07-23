@@ -27,7 +27,7 @@ ExampleWindow::ExampleWindow()
   set_default_size(600, 400);
 
   // Prefer dark theme
-  Glib::RefPtr<Gtk::Settings> settings = Gtk::Settings::get_default();
+  auto settings = Gtk::Settings::get_default();
   settings->property_gtk_application_prefer_dark_theme().set_value(true);
 
   // Face
@@ -40,7 +40,7 @@ ExampleWindow::ExampleWindow()
   m_photo_box.pack_start(m_prev_button, Gtk::PACK_SHRINK);
   m_photo_box.pack_start(m_photo_button, Gtk::PACK_SHRINK);
   m_photo_box.pack_start(m_next_button, Gtk::PACK_SHRINK);
-  Glib::RefPtr<Gtk::StyleContext> style_context = m_photo_box.get_style_context();
+  auto style_context = m_photo_box.get_style_context();
   style_context->add_class("raised");
   style_context->add_class("linked");
 

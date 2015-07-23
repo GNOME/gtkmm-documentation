@@ -84,7 +84,7 @@ ExampleWindow::ExampleWindow()
   //finely control column drag and drop.
   for(guint i = 0; i < 2; i++)
   {
-    Gtk::TreeView::Column* pColumn = m_TreeView.get_column(i);
+    auto pColumn = m_TreeView.get_column(i);
     pColumn->set_reorderable();
   }
 

@@ -28,9 +28,9 @@
 int main(int /* argc */, char** /* argv */)
 {
   Gio::init();
-  Glib::RefPtr<Gio::File> f = Gio::File::create_for_path("/etc/profile");
-  Glib::RefPtr<Gio::FileInputStream> file_stream = f->read();
-  Glib::RefPtr<Gio::DataInputStream> data_stream = Gio::DataInputStream::create(file_stream);
+  auto f = Gio::File::create_for_path("/etc/profile");
+  auto file_stream = f->read();
+  auto data_stream = Gio::DataInputStream::create(file_stream);
 
   std::string line;
   int line_num = 1;
