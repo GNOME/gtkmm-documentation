@@ -1,5 +1,3 @@
-//$Id: cellrendererpopup.cc 613 2006-05-10 20:59:28Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -161,7 +159,7 @@ Gtk::CellEditable* CellRendererPopup::start_editing_vfunc(GdkEvent*,
   if(!property_editable())
     return 0;
 
-  std::auto_ptr<PopupEntry> popup_entry (new PopupEntry(path));
+  std::unique_ptr<PopupEntry> popup_entry (new PopupEntry(path));
 
   popup_entry->signal_editing_done ().connect(sigc::mem_fun(*this, &Self::on_popup_editing_done));
   popup_entry->signal_arrow_clicked().connect(sigc::mem_fun(*this, &Self::on_popup_arrow_clicked));
@@ -171,7 +169,7 @@ Gtk::CellEditable* CellRendererPopup::start_editing_vfunc(GdkEvent*,
 
   popup_entry->show();
 
-  // Release auto_ptr<> ownership, and let gtkmm manage the widget.
+  // Release unique_ptr<> ownership, and let gtkmm manage the widget.
   popup_entry_ = Gtk::manage(popup_entry.release());
 
   return popup_entry_;
