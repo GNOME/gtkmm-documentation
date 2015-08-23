@@ -210,7 +210,7 @@ void ExampleWindow::on_sort_clicked()
 void ExampleWindow::on_reverse_sort_clicked()
 {
   m_ListBox.set_sort_func(
-    [](Gtk::ListBoxRow* row1, Gtk::ListBoxRow* row2)
+    [] (Gtk::ListBoxRow* row1, Gtk::ListBoxRow* row2)
     {
       return sort_func(row2, row1);
     });
