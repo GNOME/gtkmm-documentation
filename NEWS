@@ -1,3 +1,27 @@
+3.17.50 (unstable):
+
+* Use (and require) C++11.
+  (Kjell Ahlstedt)
+* C++11: Use the auto, override, and nullptr keywords.
+  (Murray Cumming)
+* Update the "Menus and Toolbars" chapter.
+  (Kjell Ahlstedt)
+* recent_files example: Add toolbar and accelerator keys.
+  (Kjell Ahlstedt)
+* placessidebar example: Remove use of deprecated set_show_connect_to_server().
+  (Murray Cumming)
+* gmmproc chapter:
+  - Add description of the 'newin' parameter of some _WRAP macros. Bug #748856
+  - Add description of the detail_name parameter in _WRAP_SIGNAL. Bug #749034
+  - Add description of _IGNORE_PROPERTY and _IGNORE_CHILD_PROPERTY.
+  - Add description of the keep_return parameter in _WRAP_VFUNC
+  (Kjell Ahlstedt)
+* Fix the build with -Wshadow.
+  (Murray Cumming)
+* Examples: Remove remaining uses of GLIBMM_DEFAULT_SIGNAL_HANDLERS_ENABLED.
+  (Murray Cumming)
+
+
 3.15.1 (unstable):
 
 * Replace use of deprecated Widget::override_*() methods.
