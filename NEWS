@@ -1,3 +1,7 @@
+
+* Replace deprecated std::auto_ptr by std::unique_ptr.
+  (Kjell Ahlstedt)
+
 3.17.50 (unstable):
 
 * Use (and require) C++11.
