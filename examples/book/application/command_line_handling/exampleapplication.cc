@@ -41,6 +41,10 @@ ExampleApplication::ExampleApplication()
   //An int.
   add_main_option_entry(Gio::Application::OPTION_TYPE_INT, "bar", 'b', "The bar to use.", "number");
 
+  //A bool.
+  add_main_option_entry(Gio::Application::OPTION_TYPE_BOOL, "version", 'v', "Show the application version.");
+
+
   //A std::vector<std::string>.
   add_main_option_entry(Gio::Application::OPTION_TYPE_FILENAME_VECTOR, G_OPTION_REMAINING);
 
@@ -161,16 +165,22 @@ int ExampleApplication::on_command_line(const Glib::RefPtr<Gio::ApplicationComma
   get_arg_value(options, "hoo", hoo_value);
   int bar_value = 0;
   get_arg_value(options, "bar", bar_value);
+  bool version_value = false;
+  get_arg_value(options, "version", version_value);
 
   //The remaining filenames:
   std::vector<std::string> vec_remaining;
   get_arg_value(options, G_OPTION_REMAINING, vec_remaining);
 
+  //Note that "foo" and "goo" will not be false/empty here because we
+  //handled them in on_handle_local_options() and therefore removed them from
+  //the options VariantDict.
   std::cout << "on_command_line(), parsed values: " << std::endl <<
     "  foo = " << (foo_value ? "true" : "false") << std::endl <<
     "  goo = " << goo_value << std::endl <<
     "  hoo = " << hoo_value << std::endl <<
     "  bar = " << bar_value << std::endl <<
+    "  version = " << (version_value ? "true" : "false") << std::endl <<
     "  remaining =";
   for (std::size_t i = 0; i < vec_remaining.size(); ++i)
     std::cout << ' ' << vec_remaining[i];
@@ -206,19 +216,44 @@ int ExampleApplication::on_handle_local_options(const Glib::RefPtr<Glib::Variant
   get_arg_value(options, "hoo", hoo_value);
   int bar_value = 0;
   get_arg_value(options, "bar", bar_value);
+  bool version_value = false;
+  get_arg_value(options, "version", version_value);
 
   std::cout << "on_handle_local_options(), parsed values: " << std::endl <<
     "  foo = " << (foo_value ? "true" : "false") << std::endl <<
     "  goo = " << goo_value << std::endl <<
     "  hoo = " << hoo_value << std::endl <<
-    "  bar = " << bar_value << std::endl;
+    "  bar = " << bar_value << std::endl <<
+    "  version = " << (version_value ? "true" : "false") << std::endl;
 
   //Remove some options to show that we have handled them in the local instance,
   //so they won't be passed to the primary (remote) instance:
   options->remove("foo");
   options->remove("goo");
 
-  return EXIT_SUCCESS;
+  //If --version was requested,
+  //just output the version number and exit with a success code:
+  if(version_value)
+  {
+    std::cout << "Version: 1.2.3" << std::endl;
+
+    //Any non-negative return value here means stop the program.
+    //The local instance will eventually exit with this status code.
+    return EXIT_SUCCESS;
+  }
+
+  //If the command line parameters were invalid,
+  //complain and exist with a failure code:
+  if(goo_value == "ungoo")
+  {
+     std::cerr << "goo cannot be ungoo." << std::endl;
+
+     //Any non-negative return value here means stop the program.
+     //The local instance will eventually exit with this status code.
+     return EXIT_FAILURE;
+  }
+
+  return -1;
 }
 
 bool ExampleApplication::on_option_arg_string(const Glib::ustring& option_name,
