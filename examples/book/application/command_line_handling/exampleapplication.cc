@@ -174,7 +174,8 @@ int ExampleApplication::on_command_line(const Glib::RefPtr<Gio::ApplicationComma
     "  remaining =";
   for (std::size_t i = 0; i < vec_remaining.size(); ++i)
     std::cout << ' ' << vec_remaining[i];
-  std::cout << std::endl; 
+  std::cout << std::endl;
+
 
   if(vec_remaining.empty())
   {
