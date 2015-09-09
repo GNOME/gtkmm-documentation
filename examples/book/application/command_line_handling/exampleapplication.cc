@@ -181,7 +181,7 @@ int ExampleApplication::on_command_line(const Glib::RefPtr<Gio::ApplicationComma
   {
     //Open a new "document" instead:
     activate();
-    return EXIT_FAILURE;
+    return EXIT_SUCCESS;
   }
 
   Gio::Application::type_vec_files vec_files;
