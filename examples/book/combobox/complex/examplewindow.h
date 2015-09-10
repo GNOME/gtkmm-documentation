@@ -29,9 +29,12 @@ public:
   ExampleWindow();
   virtual ~ExampleWindow();
 
-protected:  
+protected:
+  void on_cell_data_extra(const Gtk::TreeModel::const_iterator& iter);
+
   //Signal handlers:
   void on_combo_changed();
+
 
   //Tree model columns:
   class ModelColumns : public Gtk::TreeModel::ColumnRecord
@@ -39,16 +42,18 @@ protected:
   public:
 
     ModelColumns()
-    { add(m_col_id); add(m_col_name); }
+    { add(m_col_id); add(m_col_name); add(m_col_extra);}
 
     Gtk::TreeModelColumn<int> m_col_id;
     Gtk::TreeModelColumn<Glib::ustring> m_col_name;
+    Gtk::TreeModelColumn<Glib::ustring> m_col_extra;
   };
 
   ModelColumns m_Columns;
 
   //Child widgets:
   Gtk::ComboBox m_Combo;
+  Gtk::CellRendererText m_cell;
   Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
 };
 

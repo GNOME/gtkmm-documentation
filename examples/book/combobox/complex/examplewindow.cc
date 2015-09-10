@@ -32,6 +32,7 @@ ExampleWindow::ExampleWindow()
   Gtk::TreeModel::Row row = *(m_refTreeModel->append());
   row[m_Columns.m_col_id] = 1;
   row[m_Columns.m_col_name] = "Billy Bob";
+  row[m_Columns.m_col_extra] = "something";
   m_Combo.set_active(row);
   /*
   Gtk::TreeModel::Row childrow = *(m_refTreeModel->append(row.children()));
@@ -46,11 +47,13 @@ ExampleWindow::ExampleWindow()
   row = *(m_refTreeModel->append());
   row[m_Columns.m_col_id] = 2;
   row[m_Columns.m_col_name] = "Joey Jojo";
+  row[m_Columns.m_col_extra] = "yadda";
 
 
   row = *(m_refTreeModel->append());
   row[m_Columns.m_col_id] = 3;
   row[m_Columns.m_col_name] = "Rob McRoberts";
+  row[m_Columns.m_col_extra] = "";
 
   /*
   childrow = *(m_refTreeModel->append(row.children()));
@@ -63,6 +66,13 @@ ExampleWindow::ExampleWindow()
   m_Combo.pack_start(m_Columns.m_col_id);
   m_Combo.pack_start(m_Columns.m_col_name);
 
+  //An example of adding a cell renderer manually,
+  //instead of using pack_start(model_column)
+  //so we have more control:
+  m_Combo.set_cell_data_func(m_cell,
+    sigc::mem_fun(*this, &ExampleWindow::on_cell_data_extra));
+  m_Combo.pack_start(m_cell);
+
   //Add the ComboBox to the window.
   add(m_Combo);
 
@@ -74,6 +84,23 @@ ExampleWindow::ExampleWindow()
 
 ExampleWindow::~ExampleWindow()
 {
+}
+
+void ExampleWindow::on_cell_data_extra(const Gtk::TreeModel::const_iterator& iter)
+{
+  auto row = *iter;
+  const Glib::ustring extra = row[m_Columns.m_col_extra];
+
+  //Some arbitrary logic just to show that this is where you can do such things:
+
+  //Transform the value, deciding how to represent it as text:
+  if(extra.empty())
+    m_cell.property_text() = "(none)";
+  else
+    m_cell.property_text() = "-" + extra + "-";
+
+  //Change other cell renderer properties too:
+  m_cell.property_foreground() = (extra == "yadda" ? "red" : "green");
 }
 
 void ExampleWindow::on_combo_changed()
