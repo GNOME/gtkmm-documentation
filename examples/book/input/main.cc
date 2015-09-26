@@ -62,7 +62,13 @@ int main(int argc, char *argv[])
     #endif //HAVE_MKFIFO
   }
 
-  read_fd = open("testfifo", O_RDONLY);
+  // Although we will only read from the fifo, we open it in read/write mode.
+  // Due to a peculiarity with the poll() system call, used deep down in glib,
+  // this small program will use all available CPU time, if the fifo is opened
+  // as O_RDONLY. See a discussion on the gtkmm-list, e.g.
+  // https://mail.gnome.org/archives/gtkmm-list/2015-September/msg00034.html
+  // and the link from there to stackoverflow.
+  read_fd = open("testfifo", O_RDWR);
   if (read_fd == -1)
   {
     std::cerr << "error opening fifo" << std::endl;
