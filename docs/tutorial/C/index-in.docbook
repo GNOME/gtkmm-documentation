@@ -10097,6 +10097,30 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
 </programlisting>
   </para>
 </sect3>
+
+<sect3 id="gmmproc-custom-move-operations">
+  <title>_CUSTOM_MOVE_OPERATIONS</title>
+  <para>
+    Use this macro if move constructor and move assignment operator must be hand-coded.
+  </para>
+  <para><function>_CUSTOM_MOVE_OPERATIONS</function></para>
+  <para>For example:
+<programlisting>
+class Derived : public Glib::Object
+{
+  _CLASS_GOBJECT(Derived, GDerived, G_DERIVED, Glib::Object, GObject)
+
+  _CUSTOM_MOVE_OPERATIONS
+
+public:
+  Derived(Derived&amp;&amp; src) noexcept;
+  Derived&amp; operator=(Derived&amp;&amp; src) noexcept;
+  // ...
+};
+</programlisting>
+  </para>
+</sect3>
+
 </sect2>
 
 <sect2 id="gmmproc-parameter-processing">
