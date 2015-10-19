@@ -524,6 +524,7 @@ book_multithread_example_SOURCES =	\
 	book/multithread/exampleworker.cc\
 	book/multithread/exampleworker.h	\
 	book/multithread/main.cc
+book_multithread_example_CXXFLAGS = -pthread
 
 book_notebook_example_SOURCES =		\
 	book/notebook/examplewindow.cc	\

@@ -51,7 +51,7 @@ private:
 
   Glib::Dispatcher m_Dispatcher;
   ExampleWorker m_Worker;
-  Glib::Threads::Thread* m_WorkerThread;
+  std::thread* m_WorkerThread;
 };
 
 #endif // GTKMM_EXAMPLEWINDOW_H

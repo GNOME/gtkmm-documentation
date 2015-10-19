@@ -87,8 +87,11 @@ void ExampleWindow::on_start_button_clicked()
   else
   {
     // Start a new worker thread.
-    m_WorkerThread = Glib::Threads::Thread::create(
-      sigc::bind(sigc::mem_fun(m_Worker, &ExampleWorker::do_work), this));
+    m_WorkerThread = new std::thread(
+      [this]
+      {
+        m_Worker.do_work(this);
+      });
   }
   update_start_stop_buttons();
 }
@@ -145,7 +148,8 @@ void ExampleWindow::on_quit_button_clicked()
   {
     // Order the worker thread to stop and wait for it to stop.
     m_Worker.stop_work();
-    m_WorkerThread->join();
+    if (m_WorkerThread->joinable())
+      m_WorkerThread->join();
   }
   hide();
 }
@@ -163,7 +167,9 @@ void ExampleWindow::on_notification_from_worker_thread()
   if (m_WorkerThread && m_Worker.has_stopped())
   {
     // Work is done.
-    m_WorkerThread->join();
+    if (m_WorkerThread->joinable())
+      m_WorkerThread->join();
+    delete m_WorkerThread;
     m_WorkerThread = nullptr;
     update_start_stop_buttons();
   }

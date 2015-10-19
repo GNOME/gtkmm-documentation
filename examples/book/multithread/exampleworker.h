@@ -17,6 +17,8 @@
 #define GTKMM_EXAMPLEWORKER_H
 
 #include <gtkmm.h>
+#include <thread>
+#include <mutex>
 
 class ExampleWindow;
 
@@ -34,7 +36,7 @@ public:
 
 private:
   // Synchronizes access to member data.
-  mutable Glib::Threads::Mutex m_Mutex;
+  mutable std::mutex m_Mutex;
 
   // Data used by both GUI thread and worker thread.
   bool m_shall_stop;
