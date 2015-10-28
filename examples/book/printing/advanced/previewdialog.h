@@ -36,7 +36,7 @@ protected:
 
   void on_hide() override;
 
-  virtual bool on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr);
+  bool on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr);
 
   //PrintOperationPreview signal handlers:
   void on_popreview_ready(const Glib::RefPtr<Gtk::PrintContext>& print_ctx);
