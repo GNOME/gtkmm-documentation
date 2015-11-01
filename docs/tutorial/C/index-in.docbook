@@ -9412,6 +9412,66 @@ Button::Button(const Glib::ustring&amp; label, bool mnemonic)
 
 </sect2>
 
+<sect2 id="gmmproc-suppressing-macros">
+<title>Macros that suppress generation of some code</title>
+<para>Some macros suppress the generation of some code when they are used after
+a <function>_CLASS_*</function> macro. Some suppress the definition in the
+generated .cc file, others suppress both the declaration in the .h file and
+the definition in the .cc file.
+</para>
+
+<sect3 id="gmmproc-custom-default-ctor">
+<title>_CUSTOM_DEFAULT_CTOR</title>
+<para>Suppresses declaration and definition of default constructor in
+<function>_CLASS_BOXEDTYPE</function>, <function>_CLASS_BOXEDTYPE_STATIC</function>
+and <function>_CLASS_OPAQUE_COPYABLE</function>.
+</para>
+</sect3>
+
+<sect3 id="gmmproc-custom-ctor-cast">
+<title>_CUSTOM_CTOR_CAST</title>
+<para>Suppresses declaration and definition of the constructor that takes a pointer
+to the wrapped C object in <function>_CLASS_BOXEDTYPE</function> and
+<function>_CLASS_BOXEDTYPE_STATIC</function>.
+</para>
+<para>Suppresses definition of the constructor that takes a pointer to the
+wrapped C object in <function>_CLASS_GOBJECT</function>, <function>_CLASS_GTKOBJECT</function>,
+<function>_CLASS_INTERFACE</function> and <function>_CLASS_OPAQUE_COPYABLE</function>.
+</para>
+</sect3>
+
+<sect3 id="gmmproc-custom-dtor">
+<title>_CUSTOM_DTOR</title>
+<para>Suppresses definition of destructor in
+<function>_CLASS_GOBJECT</function> and <function>_CLASS_GTKOBJECT</function>.
+</para>
+</sect3>
+
+<sect3 id="gmmproc-custom-wrap-new">
+<title>_CUSTOM_WRAP_NEW</title>
+<para>Suppresses definition of <function>Glib::wrap_new()</function> function in
+<function>_CLASS_GOBJECT</function>.
+</para>
+</sect3>
+
+<sect3 id="gmmproc-custom-wrap-function">
+<title>_CUSTOM_WRAP_FUNCTION</title>
+<para>Suppresses definition of <function>Glib::wrap()</function> function in
+<function>_CLASS_GOBJECT</function>.
+</para>
+</sect3>
+
+<sect3 id="gmmproc-no-wrap-function">
+<title>_NO_WRAP_FUNCTION</title>
+<para>Suppresses declaration and definition of <function>Glib::wrap()</function>
+function in <function>_CLASS_GOBJECT</function>, <function>_CLASS_BOXEDTYPE</function>,
+<function>_CLASS_BOXEDTYPE_STATIC</function>, <function>_CLASS_OPAQUE_COPYABLE</function>
+and <function>_CLASS_INTERFACE</function>.
+</para>
+</sect3>
+
+</sect2>
+
 <sect2 id="gmmproc-method-macros">
 <title>Method macros</title>
 
