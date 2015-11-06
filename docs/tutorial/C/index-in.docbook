@@ -7390,13 +7390,7 @@ The following example shows a simple use of a custom style property.
 <title>The constraints</title>
 
 <para>
-<application>glibmm</application> provides the normal set of thread
-launching functions, mutexes, condition variables and scoped locking
-classes required for writing multi-threaded programs using C++.
-</para>
-
-<para>
-However, care is required when writing programs based on &gtkmm; using
+Care is required when writing programs based on &gtkmm; using
 multiple threads of execution, arising from the fact that
 <application>libsigc++</application>, and in particular
 <classname>sigc::trackable</classname>, are not thread-safe. That's
@@ -7480,15 +7474,7 @@ A <classname>sigc::slot</classname> object created by a call to
 <function>sigc::mem_fun()</function> which references a method of a
 class deriving from <classname>sigc::trackable</classname> should
 never be copied to another thread, nor destroyed by a different thread
-than the one which created it. (One consequence of this is that
-<methodname>Glib::Threads::Thread::create()</methodname> should not be
-called with a slot argument created by a call to
-<function>sigc::mem_fun()</function> which represents a method of such
-a class. It is however safe to pass
-<methodname>Glib::Threads::Thread::create()</methodname> a function
-object representing such a method by using, say,
-<function>boost::bind()</function> or, in C++11,
-<function>std::bind()</function> or a C++11 lambda expression.)
+than the one which created it.
 </para>
 </listitem>
 
@@ -7526,8 +7512,7 @@ The connect*_once() variants,
 <methodname>Glib::SignalTimeout::connect_seconds_once()</methodname>,
 are thread-safe for any case where the slot is not created by a call to
 <function>sigc::mem_fun()</function> which represents a method of a class
-deriving from <classname>sigc::trackable</classname>. This is similar to
-<methodname>Glib::Threads::Thread::create()</methodname> as mentioned in point 4.
+deriving from <classname>sigc::trackable</classname>.
 </para>
 </listitem>
 
@@ -7619,7 +7604,7 @@ press the <literal>Quit</literal> button.
 A <classname>Glib::Dispatcher</classname> is used for sending notifications
 from the worker thread to the GUI thread. The <classname>ExampleWorker</classname>
 class contains data which is accessed by both threads. This data is protected
-by a <classname>Glib::Threads::Mutex</classname>.
+by a <classname>std::mutex</classname>.
 Only the GUI thread updates the GUI.
 </para>
 
