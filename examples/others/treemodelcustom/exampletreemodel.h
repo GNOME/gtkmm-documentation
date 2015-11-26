@@ -43,7 +43,7 @@ protected:
    GType get_column_type_vfunc(int index) const override;
    void get_value_vfunc(const TreeModel::iterator& iter, int column, Glib::ValueBase& value) const override;
   
-   bool iter_next_vfunc(const iterator& iter, iterator& iter_next) const;
+   bool iter_next_vfunc(const iterator& iter, iterator& iter_next) const override;
 
    //TODO: Make sure that we make all of these const when we have made them all const in the TreeModel:
    bool iter_children_vfunc(const iterator& parent, iterator& iter) const override;
