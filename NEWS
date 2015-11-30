@@ -1,6 +1,31 @@
+3.19.3:
 
-* Replace deprecated std::auto_ptr by std::unique_ptr.
+* Require the latest gtkmm and glibmm.
+* Multi-threaded chapter: Remove warnings about sigc::slots and Glib::Threads::Thread.
+  Because people would use regular lambdas or std::function functors with
+  std::thread in C++11.
+  (Murray Cumming) Bug #755091
+* multithread example: Use std::thread, etc, instead of Glib::Threads::*.
+  Because C++11 now has this concurrency API and we should use standard
+  C++ where possible.
+  (Murray Cumming) Bug #755091
+* Input example: Fix high CPU load, by opening the fifo in read/write mode.
   (Kjell Ahlstedt)
+* command_line_handling example: handle_local_options(): Correct the return
+  values, now that glib bug #750796 was fixed.
+  (Murray Cumming) Bug #754763
+* combobox/complex example: Show use of a cell_data_func().
+  (Murray Cumming)
+* examples: Remove unnecessary virtual keywords.
+  (Murray Cumming)
+* C++11: examples: Replace deprecated std::auto_ptr by std::unique_ptr.
+  (Kjell Ahlstedt)
+* C++11: examples: Use the override keyword.
+  (Murray Cumming)
+* gmmproc chapter:
+  Document _CUSTOM_* gmmproc macros
+  (Kjell Ahlstedt)
+
 
 3.17.50 (unstable):
 
