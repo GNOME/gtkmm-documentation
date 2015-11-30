@@ -1,6 +1,22 @@
+3.18.0:
 
-* Replace deprecated std::auto_ptr by std::unique_ptr.
+* Input example: Fix high CPU load, by opening the fifo in read/write mode.
   (Kjell Ahlstedt)
+* command_line_handling example: handle_local_options(): Correct the return
+  values, now that glib bug #750796 was fixed.
+  (Murray Cumming) Bug #754763
+* combobox/complex example: Show use of a cell_data_func().
+  (Murray Cumming)
+* examples: Remove unnecessary virtual keywords.
+  (Murray Cumming)
+* C++11: examples: Replace deprecated std::auto_ptr by std::unique_ptr.
+  (Kjell Ahlstedt)
+* C++11: examples: Use the override keyword.
+  (Murray Cumming)
+* gmmproc chapter:
+  Document _CUSTOM_* gmmproc macros
+  (Kjell Ahlstedt)
+
 
 3.17.50 (unstable):
 
