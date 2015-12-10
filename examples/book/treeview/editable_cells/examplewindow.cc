@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 858 2007-06-22 08:37:15Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -172,7 +170,7 @@ void ExampleWindow::cellrenderer_validated_on_edited(
   Gtk::TreePath path(path_string);
 
   //Convert the inputed text to an integer, as needed by our model column:
-  char* pchEnd = 0;
+  char* pchEnd = nullptr;
   int new_value = strtol(new_text.c_str(), &pchEnd, 10);
 
   if(new_value > 10)

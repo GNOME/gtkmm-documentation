@@ -3514,7 +3514,7 @@ Glib::RefPtr<Gio::Menu> gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
 Gtk::MenuBar* pMenuBar = Gtk::manage(new Gtk::MenuBar(gmenu));
 m_Box.pack_start(*pMenuBar, Gtk::PACK_SHRINK);
 
-Gtk::Toolbar* toolbar = 0;
+Gtk::Toolbar* toolbar = nullptr;
 m_refBuilder->get_widget("toolbar", toolbar);
 m_Box.pack_start(*toolbar, Gtk::PACK_SHRINK);]]>
 </programlisting>
@@ -6547,9 +6547,9 @@ To access a widget, for instance to <methodname>show()</methodname> a dialog, us
 the <methodname>get_widget()</methodname> method, providing the widget's name. This
 name should be specified in the <application>Glade</application> Properties
 window. If the widget could not be found, or is of the wrong type, then the
-pointer will be set to 0.
+pointer will be set to nullptr.
 <programlisting>
-Gtk::Dialog* pDialog = 0;
+Gtk::Dialog* pDialog = nullptr;
 builder-&gt;get_widget(&quot;DialogBasic&quot;, pDialog);
 </programlisting>
 </para>
@@ -6607,7 +6607,7 @@ its location and child widgets and the properties of its &gtkmm; base class.
 
 <para>Use <methodname>Gtk::Builder::get_widget_derived()</methodname> like so:
 <programlisting>
-DerivedDialog* pDialog = 0;
+DerivedDialog* pDialog = nullptr;
 builder-&gt;get_widget_derived(&quot;DialogBasic&quot;, pDialog);
 </programlisting>
 </para>
@@ -6638,7 +6638,7 @@ or <methodname>get_widget_derived()</methodname> again. For instance,
 DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)
 : Gtk::Dialog(cobject),
   m_builder(builder),
-  m_pButton(0)
+  m_pButton(nullptr)
 {
   //Get the Glade-instantiated Button, and connect a signal handler:
   m_builder-&gt;get_widget(&quot;quit_button&quot;, m_pButton);

@@ -1,5 +1,3 @@
-//$Id: canvas.cc 870 2007-07-13 19:08:46Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2009 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,7 +19,7 @@
 
 Canvas::Canvas()
 : m_drag_data_requested_for_drop(false),
-  m_drop_item(0)
+  m_drop_item(nullptr)
 {
   set_app_paintable();
 }

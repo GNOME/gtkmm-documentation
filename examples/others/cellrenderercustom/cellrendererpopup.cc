@@ -157,7 +157,7 @@ Gtk::CellEditable* CellRendererPopup::start_editing_vfunc(GdkEvent*,
 {
   // If the cell isn't editable we return 0.
   if(!property_editable())
-    return 0;
+    return nullptr;
 
   std::unique_ptr<PopupEntry> popup_entry (new PopupEntry(path));
 

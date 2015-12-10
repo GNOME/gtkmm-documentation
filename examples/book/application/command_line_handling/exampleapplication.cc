@@ -132,7 +132,7 @@ static bool get_arg_value(const Glib::RefPtr<Glib::VariantDict>& options, const 
   }
   else
   {
-    auto gvariant = g_variant_dict_lookup_value(options->gobj(), arg_name.c_str(), NULL);
+    auto gvariant = g_variant_dict_lookup_value(options->gobj(), arg_name.c_str(), nullptr);
     if(!gvariant)
     {
       std::cerr << "The \"" << arg_name << "\" value was not in the options VariantDict." << std::endl;
