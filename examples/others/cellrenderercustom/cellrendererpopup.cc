@@ -20,51 +20,19 @@
 #include <algorithm>
 #include <memory>
 
-
 namespace
 {
 
-bool grab_on_window(const Glib::RefPtr<Gdk::Window>& window, guint32 activate_time)
+bool grab_on_window(const Glib::RefPtr<Gdk::Window>& window)
 {
   Glib::RefPtr<Gdk::Device> device (Glib::wrap(gtk_get_current_event_device(), true));
 
   if(device)
   {
-    Glib::RefPtr<Gdk::Device> keyboard_device;
-    Glib::RefPtr<Gdk::Device> pointer_device;
-
-    if (device->get_source() == Gdk::SOURCE_KEYBOARD)
-    {
-      keyboard_device = device;
-      pointer_device = device->get_associated_device();
-    }
-    else
-    {
-      keyboard_device = device->get_associated_device();
-      pointer_device = device;
-    }
-    if(pointer_device && keyboard_device)
-    {
-      if(pointer_device->grab(window,
-            Gdk::OWNERSHIP_NONE,
-            true,
-            Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK | Gdk::POINTER_MOTION_MASK,
-            activate_time) == Gdk::GRAB_SUCCESS)
-      {
-        if(keyboard_device->grab(window,
-              Gdk::OWNERSHIP_NONE,
-              true,
-              Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK,
-              activate_time) == Gdk::GRAB_SUCCESS)
-        {
-          return true;
-        }
-        else
-        {
-          pointer_device->ungrab(activate_time);
-        }
-      }
-    }
+    auto seat = device->get_seat();
+    if (seat &&
+        seat->grab(window, Gdk::SEAT_CAPABILITY_ALL, true) == Gdk::GRAB_SUCCESS)
+      return true;
   }
 
   return false;
@@ -222,7 +190,7 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
   if(focus_widget_)
     focus_widget_->grab_focus();
 
-  grab_on_window(popup_window_.get_window(), gtk_get_current_event_time());
+  grab_on_window(popup_window_.get_window());
 }
 
 void CellRendererPopup::on_hide_popup()
@@ -320,7 +288,7 @@ void CellRendererPopup::on_popup_arrow_clicked()
     return;
   }
 
-  if(!grab_on_window(popup_entry_->get_window(), gtk_get_current_event_time()))
+  if(!grab_on_window(popup_entry_->get_window()))
     return;
 
   popup_entry_->select_region(0, 0);
