@@ -185,14 +185,16 @@ bool MyWidget::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
   const Gtk::Allocation allocation = get_allocation();
   const double scale_x = (double)allocation.get_width() / m_scale;
   const double scale_y = (double)allocation.get_height() / m_scale;
+  auto refStyleContext = get_style_context();
 
   // paint the background
-  get_style_context()->render_background(cr,
+  refStyleContext->render_background(cr,
     allocation.get_x(), allocation.get_y(),
     allocation.get_width(), allocation.get_height());
 
   // draw the foreground
-  Gdk::Cairo::set_source_rgba(cr, get_style_context()->get_color());
+  const auto state = refStyleContext->get_state();
+  Gdk::Cairo::set_source_rgba(cr, refStyleContext->get_color(state));
   cr->move_to(155.*scale_x, 165.*scale_y);
   cr->line_to(155.*scale_x, 838.*scale_y);
   cr->line_to(265.*scale_x, 900.*scale_y);
