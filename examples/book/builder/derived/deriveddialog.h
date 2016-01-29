@@ -1,5 +1,3 @@
-//$Id: deriveddialog.h 691 2004-06-02 13:33:10Z mxpxpod $ -*- c++ -*-
-
 /* libglademm example Copyright (C) 2003 libglademm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,11 +19,12 @@
 
 #include <gtkmm.h>
 
-
 class DerivedDialog : public Gtk::Dialog
 {
 public:
   DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade);
+  DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade,
+    bool is_glad);
   virtual ~DerivedDialog();
 
 protected:
