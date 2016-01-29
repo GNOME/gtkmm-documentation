@@ -6650,6 +6650,26 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk:
 </programlisting>
 </para>
 
+<para>
+Starting with &gtkmm; 3.19.7, it's possible to pass additional arguments from
+<methodname>get_widget_derived()</methodname> to the constructor of the derived
+widget. For instance, this call to <methodname>get_widget_derived()</methodname>
+<programlisting>
+<![CDATA[DerivedDialog* pDialog = nullptr;
+builder->get_widget_derived("DialogBasic", pDialog, true);]]>
+</programlisting>
+can invoke this constructor
+<programlisting>
+<![CDATA[DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, bool warning)
+: Gtk::Dialog(cobject),
+  m_builder(builder),
+  m_pButton(nullptr)
+{
+  // ....
+}]]>
+</programlisting>
+</para>
+
 <sect2 id="builder-example-accessing">
 <title>Example</title>
 <para>
