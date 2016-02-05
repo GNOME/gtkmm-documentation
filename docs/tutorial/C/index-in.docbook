@@ -10250,6 +10250,34 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
     </para>
   </sect3>
 
+  <sect3 id="gmmproc-string-parameter-processing">
+    <title>String Parameter Processing</title>
+    <para>
+      A string-valued input parameter in a C++ method is usually a
+      <type>const Glib::ustring&amp;</type> or a <type>const std::string&amp;</type>.
+      In C code it's a <type>const gchar*</type>. When an empty string is converted
+      to <type>const gchar*</type>, it can be converted either to <literal>nullptr</literal>
+      or to a pointer to an empty string (with <methodname>c_str()</methodname>).
+      Some parameters in some C functions accept a <literal>nullptr</literal>, and
+      interpret it in a special way. Other parameters must not be <literal>nullptr</literal>.
+    </para>
+    <para>
+      The default conversion in <function>_WRAP_METHOD()</function> and similar
+      directives is
+      <itemizedlist>
+        <listitem><para>for mandatory parameters (with or without default values):
+          empty string to empty string,</para></listitem>
+        <listitem><para>for optional parameters (with appended <literal>{?}</literal>):
+          empty string to <literal>nullptr</literal>.</para></listitem>
+      </itemizedlist>
+      If the default conversion is not the best conversion, append <literal>{NULL}</literal>
+      to a mandatory parameter or <literal>{?!NULL}</literal> to an optional
+      parameter (<literal>!NULL</literal> = not <literal>NULL</literal>). If you
+      append both a C parameter name and <literal>NULL</literal>, separate them
+      with a space: <literal>{c_param_name&nbsp;NULL}</literal>.
+    </para>
+  </sect3>
+
 </sect2>
 
 <sect2 id="gmmproc-basic-types">
