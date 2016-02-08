@@ -34,7 +34,7 @@ static goffset get_size_recursively(const Glib::RefPtr<Gio::File>& file)
       auto children = file->enumerate_children();
       Glib::RefPtr<Gio::FileInfo> child_info;
 
-      while(child_info = children->next_file())
+      while((child_info = children->next_file()))
       {
         goffset size = get_size_recursively(
             file->get_child(child_info->get_name()));
