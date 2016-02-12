@@ -44,7 +44,6 @@ private:
   static void update_header_func(Gtk::ListBoxRow* row, Gtk::ListBoxRow* before);
 
   // Member data.
-  Glib::RefPtr<Gtk::CssProvider> m_refCssProvider;
   Gtk::Box m_HBox;
   Gtk::Box m_VBox1;
   Gtk::Box m_VBox2;

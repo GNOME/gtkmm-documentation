@@ -18,22 +18,6 @@
 
 namespace
 {
-const char css[] =
-  "GtkListBoxRow {"
-  " border-width: 1px;"
-  " border-style: solid;"
-  " border-color: blue;"
-  "}"
-  "GtkListBoxRow:prelight {"
-  "background-color: green;"
-  "}"
-  "GtkListBoxRow:selected {"
-  "background-color: yellow;"
-  "}"
-  "GtkListBoxRow:active {"
-  "background-color: red;"
-  "}";
-
 struct SelectionModeStruct
 {
   Gtk::SelectionMode mode;
@@ -78,22 +62,6 @@ ExampleWindow::ExampleWindow() :
   set_title("ListBox example");
   set_border_width(5);
   set_default_size(300, 300);
-
-  // Add a style sheet for GtkListBoxRow.
-  // (2013-10-01: If this is not done, ListBoxRows look dull, and selection
-  // is not marked in any way. I suppose this is necessary only temporarily.
-  // It ought to be part of gtk+.)
-  m_refCssProvider = Gtk::CssProvider::create();
-  Gtk::StyleContext::add_provider_for_screen(get_screen(), m_refCssProvider,
-    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-  try
-  {
-    m_refCssProvider->load_from_data(css);
-  }
-  catch (const Glib::Error& ex)
-  {
-    std::cerr << "Gtk::CssProvider::load_from_data() failed: " << ex.what() << std::endl;
-  }
 
   add(m_HBox);
   m_HBox.pack_start(m_VBox1, Gtk::PACK_SHRINK);

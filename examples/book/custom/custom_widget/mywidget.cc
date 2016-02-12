@@ -41,6 +41,21 @@ MyWidget::MyWidget() :
   //This shows that the GType still derives from GtkWidget:
   //std::cout << "Gtype is a GtkWidget?:" << GTK_IS_WIDGET(gobj()) << std::endl;
 
+  // Set the widget name to use in the CSS file.
+  set_name("my-widget");
+
+  // If you make a custom widget in C code, based on gtk+'s GtkWidget, there is
+  // an alternative to gtk_widget_set_name(): Set a CSS name for your custom
+  // class (instead of the widget instance) with gtk_widget_class_set_css_name()
+  // (new in gtk+ 3.19.1). That's not possible for custom widgets defined in gtkmm.
+  // gtk_widget_class_set_css_name() must be called in the class init function,
+  // which can't be customized, when the widget is based on gtkmm's Gtk::Widget.
+  //
+  // Another alternative: The custom widget inherits the CSS name "widget" from
+  // GtkWidget. That name can be used in the CSS file. This is not a very good
+  // alternative. GtkWidget's CSS name is not documented. It can probably be
+  // changed or removed in the future.
+
   m_refCssProvider = Gtk::CssProvider::create();
   auto refStyleContext = get_style_context();
   refStyleContext->add_provider(m_refCssProvider,

@@ -9,7 +9,7 @@
   -gtkmm__CustomObject_mywidget-example-scale: 920;
 }
 
-gtkmm__CustomObject_mywidget {
+#my-widget {
   background-color: rgb(255,0,0);
   color:            rgb(0,0,255);
 }
