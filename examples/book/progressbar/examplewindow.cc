@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -40,7 +38,7 @@ ExampleWindow::ExampleWindow()
   m_ProgressBar.set_show_text(false);
 
   //Add a timer callback to update the value of the progress bar:
-  m_connection_id_timeout = Glib::signal_timeout().connect(sigc::mem_fun(*this,
+  m_connection_timeout = Glib::signal_timeout().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_timeout), 50 );
 
   m_VBox.pack_start(m_Separator, Gtk::PACK_SHRINK);
