@@ -1,3 +1,23 @@
+3.20.0:
+
+* Builder chapter and example: Describe additional parameters to get_widget_derived()
+  (Kjell Ahlstedt) Bug #134161
+* CellrendererPopup example: Don't use deprecated methods.
+  (Kjell Ahlstedt)
+* Custom widget and ListBox examples: Update use of CSS files.
+  (Kjell Ahlstedt)
+* Custom widget example: Avoid some warnings.
+  (Kjell Ahlstedt)
+* ProgressBar example: Fix the type of a signal connection id data member.
+  (Kjell Ahlstedt)
+* Update the Internationalization chapter.
+  (Kjell Ahlstedt) Bug #701908.
+* gmmproc section: Add "String Parameter Processing" section.
+  (Kjell Ahlstedt)
+* C++11: Use nullptr instead of 0
+  (Kjell Ahlstedt)
+
+
 3.19.3:
 
 * Require the latest gtkmm and glibmm.
