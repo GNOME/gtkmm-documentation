@@ -10012,16 +10012,50 @@ _IMPLEMENTS_INTERFACE(Activatable)
 _WRAP_ENUM(WindowType, GtkWindowType)
 </programlisting>
 </para>
-<para>If the enum is not a <classname>GType</classname>, you must pass a third parameter NO_GTYPE.
-  This is the case when there is no <function>*_get_type()</function> function for the C enum, but
-  be careful that you don't just need to include an extra header for that function. You should also
-  file a bug against the C API, because all enums should be registered as GTypes.</para>
-<para>_WRAP_ENUM() accepts the optional <literal>newin</literal> parameter.
-  See <link linkend="gmmproc-wrap-method">_WRAP_METHOD()</link>.</para>
-<para>For example, from <filename>icontheme.hg</filename>:
-<programlisting>
+<para>There are some optional extra arguments:
+<variablelist>
+  <varlistentry>
+    <term>NO_GTYPE</term>
+    <listitem>
+      <para>Use this option, if the enum is not a <classname>GType</classname>.
+        This is the case when there is no <function>*_get_type()</function>
+        function for the C enum, but be careful that you don't just need to
+        include an extra header for that function. You should also file a bug
+        against the C API, because all enums should be registered as GTypes.</para>
+      <para>For example, from <filename>icontheme.hg</filename>:
+      <programlisting>
 _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
-</programlisting>
+      </programlisting>
+      </para>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>s#&lt;from&gt;#&lt;to&gt;#</term>
+    <listitem>
+      <para>Substitutes (part of) the name of one or more enum constants.
+        You can add any number of substitutions.</para>
+      <para>For example, from <filename>iochannel.hg</filename> in glibmm:
+      <programlisting>
+_WRAP_ENUM(SeekType, GSeekType, NO_GTYPE, s#^SEEK_#SEEK_TYPE_#)
+      </programlisting>
+      </para>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>deprecated ["&lt;text&gt;"]</term>
+    <listitem>
+      <para>Puts the generated code in #ifdef blocks. Text about the
+        deprecation can be specified as an optional parameter.</para>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>newin "&lt;version&gt;"</term>
+    <listitem>
+      <para>Adds a @newin Doxygen command to the documentation, or replaces
+        the @newin command generated from the C documentation.</para>
+    </listitem>
+  </varlistentry>
+</variablelist>
 </para>
 </sect3>
 
@@ -10043,14 +10077,14 @@ _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
 <para>This macro generates a C++ exception class, derived from Glib::Error, with
 a Code enum and a code() method. You must specify the desired C++ name, the name
 of the corresponding C enum, and the prefix for the C enum values.</para>
-<para>This exception can then be thrown by methods which are generated from _WRAP_METHOD() with the errthrow option.</para>
-<para>_WRAP_GERROR() accepts the optional <literal>newin</literal> parameter.
-  See <link linkend="gmmproc-wrap-method">_WRAP_METHOD()</link>.</para>
+<para>This exception can then be thrown by methods which are generated from
+_WRAP_METHOD() with the errthrow option.</para>
 <para>For instance, from <filename>pixbuf.hg</filename>:
 <programlisting>
 _WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)
 </programlisting>
 </para>
+<para>_WRAP_GERROR() accepts the same optional arguments as _WRAP_ENUM().</para>
 </sect3>
 
 <sect3 id="gmmproc-member-set-get">
