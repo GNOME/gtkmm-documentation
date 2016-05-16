@@ -118,13 +118,19 @@ void CalendarExample::toggle_flag(Gtk::CheckButton *toggle)
 
 void CalendarExample::on_font_button_font_set()
 {
+  const auto font_name = font_button_->get_font_name();
+  Pango::FontDescription font_desc(font_name);
+  const auto font_family = font_desc.get_family();
+  const auto font_size = font_desc.get_size();
+  const auto css =
+    "* {\n" +
+    (font_family.empty() ? "" : "    font-family: " + font_desc.get_family() + ";\n") +
+    (font_size == 0 ? "" : "    font-size: " + std::to_string(font_size / PANGO_SCALE) + "pt;\n") +
+    "}";
+
   try
   {
-    const Glib::ustring font_name = font_button_->get_font_name();
-    if (!font_name.empty())
-    {
-      css_provider_->load_from_data("* { font: " + font_name + "; }");
-    }
+    css_provider_->load_from_data(css);
   }
   catch (const Gtk::CssProviderError& ex)
   {
