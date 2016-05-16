@@ -119,7 +119,7 @@ void CalendarExample::toggle_flag(Gtk::CheckButton *toggle)
 void CalendarExample::on_font_button_font_set()
 {
   const auto font_name = font_button_->get_font_name();
-  Pango::FontDescription font_desc(font_name);
+  const Pango::FontDescription font_desc(font_name);
   const auto font_family = font_desc.get_family();
   const auto font_size = font_desc.get_size();
   const auto css =
