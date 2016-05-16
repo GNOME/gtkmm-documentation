@@ -238,7 +238,12 @@ void MyWidget::on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& secti
   std::cerr << "on_parsing_error(): " << error.what() << std::endl;
   if (section)
   {
-    std::cerr << "  URI = " << section->get_file()->get_uri() << std::endl;
+    const auto file = section->get_file();
+    if (file)
+    {
+      std::cerr << "  URI = " << file->get_uri() << std::endl;
+    }
+
     std::cerr << "  start_line = " << section->get_start_line()+1
               << ", end_line = " << section->get_end_line()+1 << std::endl;
     std::cerr << "  start_position = " << section->get_start_position()
