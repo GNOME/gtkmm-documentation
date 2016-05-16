@@ -34,7 +34,7 @@ void on_stream_read_async_ready(Glib::RefPtr<Gio::AsyncResult>& result)
   try
   {
     const gsize bytes_read = stream->read_finish(result);
-    
+
     if(bytes_read)
       std::cout << "File contents read: " << buffer << std::endl;
     else
@@ -43,7 +43,7 @@ void on_stream_read_async_ready(Glib::RefPtr<Gio::AsyncResult>& result)
   }
   catch(const Glib::Exception& ex)
   {
-    std::cerr << "Exception caught: " << ex.what() << std::endl; 
+    std::cerr << "Exception caught: " << ex.what() << std::endl;
   }
 
   mainloop->quit();
@@ -62,7 +62,7 @@ void on_file_read_async_ready(Glib::RefPtr<Gio::AsyncResult>& result)
   catch(const Glib::Exception& ex)
   {
     std::cerr << "Exception caught: " << ex.what() << std::endl;
-    mainloop->quit(); 
+    mainloop->quit();
   }
 
   if(stream)
@@ -84,7 +84,7 @@ int main(int /* argc */, char** /* argv */)
   }
   catch(const Glib::Exception& ex)
   {
-    std::cerr << "Exception caught: " << ex.what() << std::endl; 
+    std::cerr << "Exception caught: " << ex.what() << std::endl;
   }
 
   mainloop = Glib::MainLoop::create();

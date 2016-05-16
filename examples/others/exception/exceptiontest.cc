@@ -61,7 +61,7 @@ void handler1()
 {
   std::cout << "exception handler 1\n";
 
-  try 
+  try
   {
     throw; // rethrow exception
   }
@@ -79,7 +79,7 @@ void handler2()
   try
   {
     throw; // rethrow exception
-  } 
+  }
   catch(MyException2&)
   {
     std::cout << "caught MyException2\n";

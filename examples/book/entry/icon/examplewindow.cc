@@ -33,7 +33,7 @@ ExampleWindow::ExampleWindow()
 
   m_Entry.set_icon_from_icon_name("edit-find");
   m_Entry.signal_icon_press().connect( sigc::mem_fun(*this, &ExampleWindow::on_icon_pressed) );
- 
+
 
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );

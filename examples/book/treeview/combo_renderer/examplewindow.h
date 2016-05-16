@@ -32,7 +32,7 @@ protected:
   void on_button_quit();
 
   void on_cellrenderer_choice_edited(const Glib::ustring& path_string, const Glib::ustring& new_text);
- 
+
   //Tree model columns for the TreeView:
   class ModelColumns : public Gtk::TreeModel::ColumnRecord
   {
@@ -48,7 +48,7 @@ protected:
   };
 
   ModelColumns m_Columns;
-  
+
   //Tree model columns for the Combo CellRenderer in the TreeView column:
   class ModelColumnsCombo : public Gtk::TreeModel::ColumnRecord
   {
@@ -60,7 +60,7 @@ protected:
     Gtk::TreeModelColumn<Glib::ustring> m_col_choice; //The values from which the user may choose.
     Gtk::TreeModelColumn<Glib::ustring> m_col_description; //Extra information to help the user to choose.
   };
-  
+
   ModelColumnsCombo m_ColumnsCombo;
 
   //Child widgets:
@@ -71,7 +71,7 @@ protected:
   Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
 
   Glib::RefPtr<Gtk::ListStore> m_refTreeModelCombo1, m_refTreeModelCombo2;
-    
+
   Gtk::ButtonBox m_ButtonBox;
   Gtk::Button m_Button_Quit;
 };

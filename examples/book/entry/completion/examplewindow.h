@@ -53,7 +53,7 @@ protected:
 
   typedef std::map<int, Glib::ustring> type_actions_map;
   type_actions_map m_CompletionActions;
-  
+
   //Child widgets:
   Gtk::Box m_HBox;
   Gtk::Box m_VBox;

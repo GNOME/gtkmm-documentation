@@ -32,7 +32,7 @@ protected:
   //Signal handlers:
   void on_button_quit();
 
- 
+
 
   //Child widgets:
   Gtk::Box m_VBox;

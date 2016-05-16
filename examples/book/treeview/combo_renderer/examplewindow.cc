@@ -95,7 +95,7 @@ ExampleWindow::ExampleWindow()
 
   //Create a Combo CellRenderer, instead of the default Text CellRenderer:
   auto pColumn = Gtk::manage(
-          new Gtk::TreeView::Column("Item Chosen") ); 
+          new Gtk::TreeView::Column("Item Chosen") );
   auto pRenderer = Gtk::manage(
           new Gtk::CellRendererCombo);
   pColumn->pack_start(*pRenderer);
@@ -115,7 +115,7 @@ ExampleWindow::ExampleWindow()
 
   // This must be a text column, in m_refTreeModelCombo1, or
   // m_refTreeModelCombo:
-  pRenderer->property_text_column() = 0; 
+  pRenderer->property_text_column() = 0;
 
   //Allow the user to edit the column:
   //This is done automatically when we use View::append_column(model_column),

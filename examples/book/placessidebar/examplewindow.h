@@ -36,7 +36,7 @@ protected:
   int on_placessidebar_drag_action_requested(const Glib::RefPtr<Gdk::DragContext>& context, const Glib::RefPtr<Gio::File>& dest_file, const std::vector< Glib::RefPtr<Gio::File> >& source_file_list);
   void on_menu_properties_activate();
 
-  // Containers 
+  // Containers
   Gtk::Box m_hbox;
   Gtk::Grid m_controls;
   Gtk::Frame m_controls_frame;

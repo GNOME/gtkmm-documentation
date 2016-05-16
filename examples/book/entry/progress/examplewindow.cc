@@ -33,7 +33,7 @@ ExampleWindow::ExampleWindow()
 
   //Change the progress fraction every 0.1 second:
   Glib::signal_timeout().connect(
-    sigc::mem_fun(*this, &ExampleWindow::on_timeout), 
+    sigc::mem_fun(*this, &ExampleWindow::on_timeout),
     100
   );
 

@@ -115,7 +115,7 @@ void ExampleWindow::on_button_paste()
   //Tell the clipboard to call our method when it is ready:
   auto refClipboard = Gtk::Clipboard::get();
 
-  refClipboard->request_contents(example_target_custom, 
+  refClipboard->request_contents(example_target_custom,
     sigc::mem_fun(*this, &ExampleWindow::on_clipboard_received) );
 
   update_paste_status();

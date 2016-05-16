@@ -42,7 +42,7 @@ protected:
   void on_font_button_font_set();
   void on_button_close();
   void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error);
- 
+
   Gtk::CheckButton* flag_checkboxes_[5];
   bool settings_[5];
 
@@ -185,7 +185,7 @@ CalendarExample::CalendarExample()
   hbbox->pack_start(*frame, Gtk::PACK_EXPAND_WIDGET, DEF_PAD);
   calendar_ = new Gtk::Calendar();
   set_flags();
-  calendar_->mark_day(19);	
+  calendar_->mark_day(19);
   frame->add(*calendar_);
   calendar_->signal_month_changed().connect(sigc::mem_fun(*this, &CalendarExample::month_changed));
   calendar_->signal_day_selected().connect(sigc::mem_fun(*this, &CalendarExample::day_selected));
@@ -196,8 +196,8 @@ CalendarExample::CalendarExample()
 
   auto vbox2 = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD));
   hbox->pack_start(*vbox2, Gtk::PACK_SHRINK, DEF_PAD);
-  
-  /* Build the Right frame with the flags in */ 
+
+  /* Build the Right frame with the flags in */
 
   auto frameFlags = Gtk::manage(new Gtk::Frame("Flags"));
   vbox2->pack_start(*frameFlags, Gtk::PACK_EXPAND_WIDGET, DEF_PAD);
@@ -223,7 +223,7 @@ CalendarExample::CalendarExample()
     flag_checkboxes_[i] = toggle;
   }
 
-  /* Build the right font-button */ 
+  /* Build the right font-button */
   font_button_ = Gtk::manage(new Gtk::FontButton());
   font_button_->signal_font_set().connect(sigc::mem_fun(*this, &CalendarExample::on_font_button_font_set));
   vbox2->pack_start(*font_button_, Gtk::PACK_SHRINK);
@@ -246,7 +246,7 @@ CalendarExample::CalendarExample()
   vbox->pack_start(*frame, Gtk::PACK_EXPAND_WIDGET, DEF_PAD);
   vbox2 = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD_SMALL));
   frame->add(*vbox2);
-  
+
   hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 5));
   vbox2->pack_start (*hbox, Gtk::PACK_SHRINK);
   auto label = Gtk::manage(new Gtk::Label("Day selected:"));
@@ -263,11 +263,11 @@ CalendarExample::CalendarExample()
 
   hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 5));
   vbox2->pack_start (*hbox, Gtk::PACK_SHRINK);
-  label = Gtk::manage(new Gtk::Label("Month change:")); 
+  label = Gtk::manage(new Gtk::Label("Month change:"));
   hbox->pack_start (*label, Gtk::PACK_SHRINK);
   label_month_ = new Gtk::Label("");
   hbox->pack_start(*label_month_, Gtk::PACK_SHRINK);
-  
+
   auto bbox = Gtk::manage(new Gtk::ButtonBox());
   vbox->pack_start(*bbox, Gtk::PACK_SHRINK);
   bbox->set_layout(Gtk::BUTTONBOX_END);
@@ -287,8 +287,8 @@ Glib::Date CalendarExample::get_date() const
   using Glib::Date;
   Date date;
   calendar_->get_date(date);
-  
-  return date;  
+
+  return date;
 }
 
 int main(int argc, char** argv)

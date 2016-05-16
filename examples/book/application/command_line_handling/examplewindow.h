@@ -27,7 +27,7 @@ public:
   //so we can separate window creation and hiding of the window
   //when loading fails.
   explicit ExampleWindow();
-  
+
   bool load_file(const Glib::RefPtr<Gio::File>& file);
 
 private:

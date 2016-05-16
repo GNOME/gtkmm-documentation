@@ -44,7 +44,7 @@ protected:
 
     Gtk::TreeModelColumn<unsigned int> m_col_id;
     Gtk::TreeModelColumn<Glib::ustring> m_col_name;
-    Gtk::TreeModelColumn<bool> m_col_something; 
+    Gtk::TreeModelColumn<bool> m_col_something;
   };
 
   ModelColumns m_Columns;

@@ -83,7 +83,7 @@ void ExampleWindow::load_icon_items()
 
 void ExampleWindow::load_toggle_items()
 {
-  auto group = 
+  auto group =
     Gtk::manage(new Gtk::ToolItemGroup("Radio Item"));
   m_ToolPalette.add(*group);
 
@@ -95,7 +95,7 @@ void ExampleWindow::load_toggle_items()
     auto button = Gtk::manage(new Gtk::RadioToolButton());
     button->set_group(radio_group);
     button->set_label(label);
-   
+
     group->insert(*button);
   }
 }
@@ -267,7 +267,7 @@ void ExampleWindow::on_combo_orientation_changed()
 
   Gtk::TreeModel::Row row = *iter;
   const Gtk::Orientation value = row[m_ColumnsOrientation.m_col_value];
- 
+
   m_ToolPalette.set_orientation(value);
 
   if(value == Gtk::ORIENTATION_HORIZONTAL)
@@ -284,7 +284,7 @@ void ExampleWindow::on_combo_style_changed()
 
   Gtk::TreeModel::Row row = *iter;
   const int value = row[m_ColumnsStyle.m_col_value];
- 
+
   if(value == -1)
     m_ToolPalette.unset_style();
   else

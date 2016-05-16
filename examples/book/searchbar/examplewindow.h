@@ -14,7 +14,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef GTKMM_EXAMPLEWINDOW_H 
+#ifndef GTKMM_EXAMPLEWINDOW_H
 #define GTKMM_EXAMPLEWINDOW_H
 
 #include <gtkmm.h>
@@ -32,7 +32,7 @@ private:
   void on_show_close_button_changed();
   void on_search_bar_reveal_changed();
 
-  // Containers 
+  // Containers
   Gtk::Box m_vbox;
   Gtk::Box m_search_box;
   Gtk::Box m_up_down_box;

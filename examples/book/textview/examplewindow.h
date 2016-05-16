@@ -30,7 +30,7 @@ public:
 protected:
 
   void fill_buffers();
-  
+
   //Signal handlers:
   void on_button_quit();
   void on_button_buffer1();
@@ -41,7 +41,7 @@ protected:
 
   Gtk::ScrolledWindow m_ScrolledWindow;
   Gtk::TextView m_TextView;
-  
+
   Glib::RefPtr<Gtk::TextBuffer> m_refTextBuffer1, m_refTextBuffer2;
 
   Gtk::ButtonBox m_ButtonBox;

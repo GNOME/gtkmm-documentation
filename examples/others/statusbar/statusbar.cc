@@ -12,7 +12,7 @@ public:
   StatusBarExample();
 
 protected:
- 
+
   void push_item(unsigned int context_id);
   void pop_item(unsigned int context_id) { m_status_bar.pop(context_id); }
 
@@ -34,17 +34,17 @@ StatusBarExample::StatusBarExample()
 
   set_size_request(200, 100);
   set_title("gtkmm Statusbar Example");
-  
+
   add(m_vbox);
-  
+
   m_vbox.pack_start(m_status_bar);
 
   m_bPush.signal_clicked().connect( sigc::bind(sigc::mem_fun(*this, &StatusBarExample::push_item), m_context_id) );
   m_vbox.pack_start(m_bPush);
-  
+
   m_bPop.signal_clicked().connect( sigc::bind(sigc::mem_fun(*this, &StatusBarExample::pop_item), m_context_id) );
   m_vbox.pack_start(m_bPop);
-  
+
   show_all();
 }
 

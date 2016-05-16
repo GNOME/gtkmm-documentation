@@ -29,7 +29,7 @@ protected:
   //Create a TreeModel with @a columns_count number of columns, each of type Glib::ustring.
   ExampleTreeModel(unsigned int columns_count = 10);
   virtual ~ExampleTreeModel();
-  
+
 public:
   static Glib::RefPtr<ExampleTreeModel> create();
 
@@ -42,7 +42,7 @@ protected:
    int get_n_columns_vfunc() const override;
    GType get_column_type_vfunc(int index) const override;
    void get_value_vfunc(const TreeModel::iterator& iter, int column, Glib::ValueBase& value) const override;
-  
+
    bool iter_next_vfunc(const iterator& iter, iterator& iter_next) const override;
 
    //TODO: Make sure that we make all of these const when we have made them all const in the TreeModel:
@@ -72,7 +72,7 @@ private:
    public:
      GlueItem(int row_number);
      int get_row_number() const;
-     
+
    protected:
      int m_row_number;
    };
@@ -80,8 +80,8 @@ private:
    //Allow the GlueList inner class to access the declaration of the GlueItem inner class.
    //SUN's Forte compiler complains about this.
    class GlueList;
-   friend class GlueList; 
-   
+   friend class GlueList;
+
    class GlueList
    {
    public:

@@ -41,7 +41,7 @@ ArrowButton::ArrowButton(Gtk::ArrowType arrow_type)
   }
   set_image_from_icon_name(icon_name, Gtk::ICON_SIZE_BUTTON, true);
 }
- 
+
 ArrowButton::~ArrowButton()
 {}
 
@@ -62,7 +62,7 @@ AppWindow::AppWindow()
 
   /* Sets the border width of the window. */
   set_border_width (10);
-  
+
   /* Create a grid to hold the arrows/buttons */
   grid = Gtk::manage (new Gtk::Grid ());
   grid->set_row_homogeneous(true);
@@ -84,7 +84,7 @@ AppWindow::AppWindow()
 
   grid->set_row_spacing(5);
   grid->set_column_spacing(5);
- 
+
   add (*grid);
   show_all ();
 }

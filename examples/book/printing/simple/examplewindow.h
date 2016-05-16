@@ -65,7 +65,7 @@ protected:
   Gtk::Label m_CommentsLabel;
   Gtk::ScrolledWindow m_ScrolledWindow;
   Gtk::TextView m_TextView;
-  
+
   Glib::RefPtr<Gtk::TextBuffer> m_refTextBuffer;
 
   unsigned m_ContextId;

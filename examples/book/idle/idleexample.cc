@@ -71,7 +71,7 @@ bool IdleExample::on_timer()
 
   // Update progressbar 1/500th each time:
   m_ProgressBar_c.set_fraction(value + 0.002);
- 
+
   return value < 0.99;  // return false when done
 }
 

@@ -25,7 +25,7 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Bu
   m_refGlade->get_widget("quit_button", m_pButton);
   if(m_pButton)
   {
-    m_pButton->signal_clicked().connect( sigc::mem_fun(*this, &DerivedDialog::on_button_quit) ); 
+    m_pButton->signal_clicked().connect( sigc::mem_fun(*this, &DerivedDialog::on_button_quit) );
   }
 }
 

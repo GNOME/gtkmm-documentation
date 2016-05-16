@@ -92,4 +92,4 @@ void ExampleWindow::on_button_clicked()
   Gtk::MessageDialog dialog(*this, "Button clicked", true);
   dialog.run();
 }
- 
+

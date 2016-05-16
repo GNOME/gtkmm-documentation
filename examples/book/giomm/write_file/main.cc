@@ -44,23 +44,23 @@ int main(int /* argc */, char** /* argv */)
 
     Glib::ustring contents = "This is some test output";
     const gsize bytes_read = stream->write(contents);
-    
+
     if(bytes_read)
       std::cout << "File contents written: " << contents << std::endl;
     else
       std::cerr << "Gio::InputStream::write() wrote 0 bytes." << std::endl;
 
-    //Close the stream to make sure that changes are written now, 
+    //Close the stream to make sure that changes are written now,
     //instead of just when the stream goes out of scope,
     //though that's the same time in this simple example.
-    //For instance, when using Gio::File::replace(), the file is only 
+    //For instance, when using Gio::File::replace(), the file is only
     //actually replaced during close() or when the stream is destroyed.
     stream->close();
     stream.reset(); //Stream can't be used after we have closed it.
   }
   catch(const Glib::Exception& ex)
   {
-    std::cerr << "Exception caught: " << ex.what() << std::endl; 
+    std::cerr << "Exception caught: " << ex.what() << std::endl;
   }
 
   return 0;

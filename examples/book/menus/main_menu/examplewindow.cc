@@ -32,7 +32,7 @@ ExampleWindow::ExampleWindow()
   // We can use add_action() because Gtk::ApplicationWindow derives from Gio::ActionMap.
   // This Action Map uses a "win." prefix for the actions.
   // Therefore, for instance, "win.copy", is used in ExampleApplication::on_startup()
-  // to layout the menu. 
+  // to layout the menu.
 
   //Edit menu:
   add_action("copy", sigc::mem_fun(*this, &ExampleWindow::on_menu_others));

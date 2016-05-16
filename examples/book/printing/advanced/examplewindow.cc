@@ -99,12 +99,12 @@ void ExampleWindow::build_main_menu()
   insert_action_group("example", refActionGroup);
 
   m_refBuilder = Gtk::Builder::create();
- 
+
   //TODO: add_accel_group(m_refBuilder->get_accel_group());
 
   //Layout the actions in a menubar and toolbar:
-  
-  Glib::ustring ui_info = 
+
+  Glib::ustring ui_info =
    "<interface>"
     "  <menu id='menu-example'>"
     "    <submenu>"
@@ -136,7 +136,7 @@ void ExampleWindow::build_main_menu()
     "</interface>";
 
   try
-  {      
+  {
     m_refBuilder->add_from_string(ui_info);
   }
   catch(const Glib::Error& ex)

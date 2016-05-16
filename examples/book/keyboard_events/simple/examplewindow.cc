@@ -21,7 +21,7 @@ ExampleWindow::ExampleWindow()
   set_title("Keyboard Events");
   set_border_width(10);
   add(m_container);
-  
+
   // Radio buttons:
   m_first.set_label("First");
   m_second.set_label("Second");

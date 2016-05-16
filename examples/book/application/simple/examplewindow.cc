@@ -27,7 +27,7 @@ ExampleWindow::ExampleWindow()
 }
 
 bool ExampleWindow::load_file(const Glib::RefPtr<Gio::File>& file)
-{    
+{
   if(!file)
     return false;
 
@@ -51,12 +51,12 @@ bool ExampleWindow::load_file(const Glib::RefPtr<Gio::File>& file)
   {
     std::cerr << G_STRFUNC << ": exception while opening file: " << file->get_uri() <<  std::endl <<
       "  exception: " << ex.what() << std::endl;
-    
-    //Tell the application that this window can no longer be useful to 
-    //this application, so it can forget about it. The instance might then exit 
+
+    //Tell the application that this window can no longer be useful to
+    //this application, so it can forget about it. The instance might then exit
     //if this is its last open window.
-    //Note that we must be careful that the caller only calls this method _after_ 
-    //calling show(), or this would be useless: 
+    //Note that we must be careful that the caller only calls this method _after_
+    //calling show(), or this would be useless:
     hide();
     return false;
   }

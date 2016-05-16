@@ -39,7 +39,7 @@ protected:
   void on_printoperation_status_changed(Glib::RefPtr<PrintFormOperation>* operation);
 
   void on_printoperation_done(Gtk::PrintOperationResult result, Glib::RefPtr<PrintFormOperation>* operation);
-  
+
   //Action signal handlers:
   void on_menu_file_new();
   void on_menu_file_page_setup();
@@ -64,7 +64,7 @@ protected:
   Gtk::Label m_CommentsLabel;
   Gtk::ScrolledWindow m_ScrolledWindow;
   Gtk::TextView m_TextView;
-  
+
   Glib::RefPtr<Gtk::TextBuffer> m_refTextBuffer;
 
   unsigned m_ContextId;

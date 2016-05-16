@@ -37,7 +37,7 @@ protected:
 
   Gtk::ScrolledWindow m_ScrolledWindow;
   Gtk::TextView m_TextView;
-  
+
   Glib::RefPtr<Gtk::TextBuffer> m_refTextBuffer;
 
   Gtk::InfoBar m_InfoBar;

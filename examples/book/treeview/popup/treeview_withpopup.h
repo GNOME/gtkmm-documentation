@@ -35,7 +35,7 @@ protected:
   //Signal handler for popup menu items:
   void on_menu_file_popup_generic();
 
-  
+
   //Tree model columns:
   class ModelColumns : public Gtk::TreeModel::ColumnRecord
   {
@@ -47,7 +47,7 @@ protected:
     Gtk::TreeModelColumn<unsigned int> m_col_id;
     Gtk::TreeModelColumn<Glib::ustring> m_col_name;
   };
-  
+
   ModelColumns m_Columns;
 
   //The Tree model:

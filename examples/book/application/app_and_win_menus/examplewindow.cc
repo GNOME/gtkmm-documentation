@@ -25,7 +25,7 @@ ExampleWindow::ExampleWindow()
   // We can use add_action because Gtk::ApplicationWindow derives from ActionMap.
   // This Action Map uses a "win." prefix for the actions.
   // Therefore, for instance, "win.new", is used in ExampleApplication::on_startup()
-  // to layout the menu. 
+  // to layout the menu.
   add_action("new",
     sigc::mem_fun(*this, &ExampleWindow::on_action_something) );
   add_action("close",

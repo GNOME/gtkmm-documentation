@@ -26,7 +26,7 @@ protected:
 
 public:
   static Glib::RefPtr<ExampleApplication> create();
-    
+
 protected:
   //Overrides of default signal handlers:
   void on_activate()  override;
@@ -42,7 +42,7 @@ protected:
     const Glib::ustring& value, bool has_value);
   bool on_option_arg_filename(const Glib::ustring& option_name,
     const std::string& value, bool has_value);
-    
+
 private:
   void create_window(const Glib::RefPtr<Gio::File>& file = Glib::RefPtr<Gio::File>());
 

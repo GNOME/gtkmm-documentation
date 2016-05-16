@@ -22,7 +22,7 @@ class IdleExample : public Gtk::Window
 
 public:
   IdleExample();
-  
+
   // a timer-function
   bool timer_callback();
   // a idle-function

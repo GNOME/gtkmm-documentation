@@ -29,7 +29,7 @@ protected:
   // Slots
   void on_switch_active_changed();
 
-  // Containers 
+  // Containers
   Gtk::Box m_vbox;
   Gtk::Grid m_controls;
 

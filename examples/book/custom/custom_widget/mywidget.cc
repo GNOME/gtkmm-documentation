@@ -62,7 +62,7 @@ MyWidget::MyWidget() :
     GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   m_refCssProvider->signal_parsing_error().connect(
     sigc::mem_fun(*this, &MyWidget::on_parsing_error));
-    
+
   try
   {
     m_refCssProvider->load_from_path("custom_gtk.css");

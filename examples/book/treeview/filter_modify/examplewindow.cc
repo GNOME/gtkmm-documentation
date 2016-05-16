@@ -120,7 +120,7 @@ void ExampleWindow::on_filter_modify(const Gtk::TreeModel::iterator& iter,
       valString.init( Glib::Value< Glib::ustring >::value_type() );
 
       valString.set(name);
-      value = valString; 
+      value = valString;
       break;
     }
     case(1):

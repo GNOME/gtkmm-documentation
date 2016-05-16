@@ -37,7 +37,7 @@ protected:
   Gtk::Box m_VBox;
 
   Gtk::Label m_Label;
-  
+
   Gtk::Grid m_Grid;
   Gtk::ToggleButton m_ButtonA1, m_ButtonA2, m_ButtonB1, m_ButtonB2;
 

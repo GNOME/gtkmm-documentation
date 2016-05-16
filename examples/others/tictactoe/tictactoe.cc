@@ -39,7 +39,7 @@ TicTacToe::TicTacToe()
       buttons[i][j] = button = Gtk::manage( new Gtk::ToggleButton());
       grid->attach(*button, i, j, 1, 1);
       button->signal_toggled().connect( sigc::bind(
-                                     sigc::mem_fun(*this, &TicTacToe::toggle), 
+                                     sigc::mem_fun(*this, &TicTacToe::toggle),
                                      button));
       button->set_size_request(20, 20);
     }
@@ -88,7 +88,7 @@ TicTacToe::toggle(Gtk::ToggleButton *button)
       success &= buttons[rwins[k][i]][cwins[k][i]]->get_active();
       found |= buttons[rwins[k][i]][cwins[k][i]] == button;
     }
-      
+
     if(success && found)
     {
       tictactoe();

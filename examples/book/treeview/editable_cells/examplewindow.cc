@@ -134,7 +134,7 @@ void ExampleWindow::treeviewcolumn_validated_on_cell_data(
     //In this case, it would be easier to use append_column_editable() or
     //append_column_numeric_editable()
     char buffer[32];
-    sprintf(buffer, "%d", model_value); 
+    sprintf(buffer, "%d", model_value);
 
     Glib::ustring view_text = buffer;
     m_cellrenderer_validated.property_text() = view_text;
@@ -144,11 +144,11 @@ void ExampleWindow::treeviewcolumn_validated_on_cell_data(
 void ExampleWindow::cellrenderer_validated_on_editing_started(
         Gtk::CellEditable* cell_editable, const Glib::ustring& /* path */)
 {
-  //Start editing with previously-entered (but invalid) text, 
-  //if we are allowing the user to correct some invalid data. 
+  //Start editing with previously-entered (but invalid) text,
+  //if we are allowing the user to correct some invalid data.
   if(m_validate_retry)
   {
-    //This is the CellEditable inside the CellRenderer. 
+    //This is the CellEditable inside the CellRenderer.
     auto celleditable_validated = cell_editable;
 
     //It's usually an Entry, at least for a CellRendererText:

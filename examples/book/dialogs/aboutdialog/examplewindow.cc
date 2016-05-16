@@ -68,7 +68,7 @@ ExampleWindow::ExampleWindow()
 
 ExampleWindow::~ExampleWindow()
 {
- 
+
 }
 
 void ExampleWindow::on_about_dialog_response(int response_id)

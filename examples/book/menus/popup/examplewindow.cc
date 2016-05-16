@@ -49,7 +49,7 @@ ExampleWindow::ExampleWindow()
   refActionGroup->add_action("edit",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
 
-  refActionGroup->add_action("process", //TODO: How to specify "<control>P" as an accelerator. 
+  refActionGroup->add_action("process", //TODO: How to specify "<control>P" as an accelerator.
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
 
   refActionGroup->add_action("remove",

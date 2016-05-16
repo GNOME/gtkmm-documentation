@@ -50,7 +50,7 @@ protected:
   //Overridden virtual functions:
   bool row_draggable_vfunc(const Gtk::TreeModel::Path& path) const override;
   bool row_drop_possible_vfunc(const Gtk::TreeModel::Path& dest, const Gtk::SelectionData& selection_data) const override;
-  
+
 };
 
 #endif //GTKMM_EXAMPLE_TREEMODEL_DND_H

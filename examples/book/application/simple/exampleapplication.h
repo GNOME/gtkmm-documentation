@@ -26,7 +26,7 @@ protected:
 
 public:
   static Glib::RefPtr<ExampleApplication> create();
-    
+
 protected:
   //Overrides of default signal handlers:
   void on_activate() override;

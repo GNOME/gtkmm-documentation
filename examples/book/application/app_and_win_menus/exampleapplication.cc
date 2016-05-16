@@ -41,7 +41,7 @@ void ExampleApplication::on_startup()
   add_action("quit",
     sigc::mem_fun(*this, &ExampleApplication::on_action_quit) );
 
-  
+
   auto app_menu = Gio::Menu::create();
   app_menu->append("_Something", "app.something");
   app_menu->append("_Quit", "app.quit");

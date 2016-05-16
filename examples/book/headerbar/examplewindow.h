@@ -32,7 +32,7 @@ protected:
   void on_subtitle_entry_activate();
   void on_button_clicked();
 
-  // Containers 
+  // Containers
   Gtk::Grid m_grid;
 
   // Widgets

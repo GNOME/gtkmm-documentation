@@ -31,7 +31,7 @@ protected:
   void on_combo_changed();
   void on_day_selected();
 
-  // Containers 
+  // Containers
   Gtk::Grid m_grid;
   Gtk::Grid m_toggle_form_grid;
   Gtk::Box m_format_buttons_box;

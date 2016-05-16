@@ -38,7 +38,7 @@ int main(int /* argc */, char** /* argv */)
     gchar buffer[1000]; //TODO: This is unpleasant.
     memset(buffer, 0, 1000);
     const gsize bytes_read = stream->read(buffer, 1000);
-    
+
     if(bytes_read)
       std::cout << "File contents read: " << buffer << std::endl;
     else
@@ -47,7 +47,7 @@ int main(int /* argc */, char** /* argv */)
   }
   catch(const Glib::Exception& ex)
   {
-    std::cerr << "Exception caught: " << ex.what() << std::endl; 
+    std::cerr << "Exception caught: " << ex.what() << std::endl;
   }
 
 
