@@ -9,7 +9,6 @@
 // See https://bugzilla.gnome.org/show_bug.cgi?id=729565
 // If they are not available in your selected icon theme, perhaps you can
 // use the go-[up,down,previous,next]-symbolic icons.
-#define USE_PAN_ICON_NAMES 0
 
 class ArrowButton : public Gtk::Button
 {
@@ -26,17 +25,10 @@ ArrowButton::ArrowButton(Gtk::ArrowType arrow_type)
   Glib::ustring icon_name;
   switch (arrow_type)
   {
-#if USE_PAN_ICON_NAMES
     case Gtk::ARROW_UP:    icon_name = "pan-up-symbolic"; break;
     case Gtk::ARROW_DOWN:  icon_name = "pan-down-symbolic"; break;
     case Gtk::ARROW_LEFT:  icon_name = "pan-start-symbolic"; break;
     case Gtk::ARROW_RIGHT: icon_name = "pan-end-symbolic"; break;
-#else
-    case Gtk::ARROW_UP:    icon_name = "go-up-symbolic"; break;
-    case Gtk::ARROW_DOWN:  icon_name = "go-down-symbolic"; break;
-    case Gtk::ARROW_LEFT:  icon_name = "go-previous-symbolic"; break;
-    case Gtk::ARROW_RIGHT: icon_name = "go-next-symbolic"; break;
-#endif
     default:               icon_name = "dialog-question"; break;
   }
   set_image_from_icon_name(icon_name, Gtk::ICON_SIZE_BUTTON, true);

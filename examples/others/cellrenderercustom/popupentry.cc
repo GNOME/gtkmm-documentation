@@ -1,5 +1,3 @@
-//$Id: popupentry.cc 457 2005-11-29 16:38:19Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,11 +19,10 @@
 
 #include <gdk/gdkkeysyms.h>
 
-// 2014-05-21: The pan-[up,down,left,right]-symbolic icons are new.
+// 2014-09-06: The pan-[up,down,start,end]-symbolic icons are new.
 // See https://bugzilla.gnome.org/show_bug.cgi?id=729565
 // If they are not available in your selected icon theme, perhaps you can
-// use the go-[up,down,left,right]-symbolic icons.
-#define ICON_NAME_PREFIX "go" // preferably "pan"
+// use the go-[up,down,previous,next]-symbolic icons.
 
 PopupEntry::PopupEntry(const Glib::ustring& path)
 :
@@ -46,7 +43,7 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
 
   button_ = new Gtk::Button();
   hbox->pack_start(*Gtk::manage(button_), Gtk::PACK_SHRINK);
-  button_->set_image_from_icon_name(ICON_NAME_PREFIX "-down-symbolic", Gtk::ICON_SIZE_BUTTON, true);
+  button_->set_image_from_icon_name("pan-down-symbolic", Gtk::ICON_SIZE_BUTTON, true);
 
   set_can_focus();
   add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
@@ -90,7 +87,7 @@ int PopupEntry::get_button_width()
   Gtk::Button *const button = new Gtk::Button();
   window.add(*Gtk::manage(button));
 
-  button->set_image_from_icon_name(ICON_NAME_PREFIX "-down-symbolic", Gtk::ICON_SIZE_BUTTON, true);
+  button->set_image_from_icon_name("pan-down-symbolic", Gtk::ICON_SIZE_BUTTON, true);
 
   // Urgh.  Hackish :/
   window.move(-500, -500);
