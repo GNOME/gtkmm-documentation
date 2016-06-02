@@ -9484,6 +9484,28 @@ wrapped C object in <function>_CLASS_GOBJECT</function>, <function>_CLASS_GTKOBJ
 </para>
 </sect3>
 
+<sect3 id="gmmproc-custom-move-operations">
+<title>_CUSTOM_MOVE_OPERATIONS</title>
+<para>Suppresses declaration and definition of move constructor and move
+assignment operator in <function>_CLASS_GOBJECT</function>.
+</para>
+<para>For example:
+<programlisting>
+class Derived : public Glib::Object
+{
+  _CLASS_GOBJECT(Derived, GDerived, G_DERIVED, Glib::Object, GObject)
+
+  _CUSTOM_MOVE_OPERATIONS
+
+public:
+  Derived(Derived&amp;&amp; src) noexcept;
+  Derived&amp; operator=(Derived&amp;&amp; src) noexcept;
+  // ...
+};
+</programlisting>
+</para>
+</sect3>
+
 <sect3 id="gmmproc-custom-wrap-new">
 <title>_CUSTOM_WRAP_NEW</title>
 <para>Suppresses definition of <function>Glib::wrap_new()</function> function in
@@ -10138,29 +10160,6 @@ _WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)
   <para>For example, in Pangomm, <filename>layoutline.hg</filename>:
 <programlisting>
 _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
-</programlisting>
-  </para>
-</sect3>
-
-<sect3 id="gmmproc-custom-move-operations">
-  <title>_CUSTOM_MOVE_OPERATIONS</title>
-  <para>
-    Use this macro if move constructor and move assignment operator must be hand-coded.
-  </para>
-  <para><function>_CUSTOM_MOVE_OPERATIONS</function></para>
-  <para>For example:
-<programlisting>
-class Derived : public Glib::Object
-{
-  _CLASS_GOBJECT(Derived, GDerived, G_DERIVED, Glib::Object, GObject)
-
-  _CUSTOM_MOVE_OPERATIONS
-
-public:
-  Derived(Derived&amp;&amp; src) noexcept;
-  Derived&amp; operator=(Derived&amp;&amp; src) noexcept;
-  // ...
-};
 </programlisting>
   </para>
 </sect3>
