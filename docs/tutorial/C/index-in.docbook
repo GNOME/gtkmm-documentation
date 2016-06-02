@@ -9938,7 +9938,17 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
     <varlistentry>
         <term>return_value &lt;value&gt;</term>
 	      <listitem>
-	        <para>Defines non-default return value.</para>
+	        <para>Defines a non-default return value.</para>
+	      </listitem>
+    </varlistentry>
+    <varlistentry>
+        <term>err_return_value &lt;value&gt;</term>
+	      <listitem>
+	        <para>Defines a non-default return value, used only if the C++
+	          <function>something_vfunc()</function> function throws an exception
+	          which is propagated to the C callback function. If return_value is
+	          specified, but err_return_value is not, then return_value is used
+	          also when an exception is propagated.</para>
 	      </listitem>
     </varlistentry>
     <varlistentry>
