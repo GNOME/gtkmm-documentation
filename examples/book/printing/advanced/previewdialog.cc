@@ -78,8 +78,8 @@ void PreviewDialog::on_drawing_area_realized()
   auto gdk_window = m_DrawingArea.get_window();
   if(gdk_window)
   {
-    Cairo::RefPtr<Cairo::Context> cairo_ctx =
-      gdk_window->create_cairo_context();
+    m_refDrawingContext = gdk_window->begin_draw_frame(gdk_window->get_clip_region());
+    auto cairo_ctx = m_refDrawingContext->get_cairo_context();
 
     if(m_refPrintContext)
       m_refPrintContext->set_cairo_context(cairo_ctx, 72, 72);
@@ -135,10 +135,10 @@ void PreviewDialog::on_popreview_got_page_size(
     double dpi_x = m_DrawingArea.get_allocation().get_width() / width;
     double dpi_y = m_DrawingArea.get_allocation().get_height() / height;
 
-    // We create a cairo context for the DrawingArea and then give that cairo
+    // We get a cairo context for the DrawingArea and then give that cairo
     // context to the PrintOperation's pango layout so that render_page() will
     // render into the drawing area.
-    Cairo::RefPtr<Cairo::Context> cairo_ctx = m_DrawingArea.get_window()->create_cairo_context();
+    auto cairo_ctx = m_refDrawingContext->get_cairo_context();
 
     if (fabs(dpi_x - m_DpiX) > 0.001 ||
         fabs(dpi_y - m_DpiY) > 0.001)
@@ -146,6 +146,7 @@ void PreviewDialog::on_popreview_got_page_size(
       print_ctx->set_cairo_context(cairo_ctx, dpi_x, dpi_y);
       m_DpiX = dpi_x;
       m_DpiY = dpi_y;
+      m_DrawingArea.queue_draw();
     }
 
     if(m_pOperation)
@@ -159,11 +160,16 @@ void PreviewDialog::on_popreview_got_page_size(
 
 void PreviewDialog::on_hide()
 {
+  auto gdk_window = m_DrawingArea.get_window();
+  if(gdk_window)
+    gdk_window->end_draw_frame(m_refDrawingContext);
+
   m_refPreview->end_preview();
 
   //We will not be using these anymore, so null the RefPtrs:
   m_refPreview.reset();
   m_refPrintContext.reset();
+  m_refDrawingContext.reset();
 }
 
 void PreviewDialog::on_close_clicked()

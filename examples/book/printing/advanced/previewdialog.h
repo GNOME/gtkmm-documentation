@@ -47,6 +47,8 @@ protected:
   Glib::RefPtr<Gtk::PrintOperationPreview> m_refPreview;
   Glib::RefPtr<Gtk::PrintContext> m_refPrintContext;
   Glib::RefPtr<Pango::Layout> m_refLayout;
+  // Gdk::DrawingContext is new in gtkmm 3.22 (and 3.21.x, where x > 2)
+  Glib::RefPtr<Gdk::DrawingContext> m_refDrawingContext;
 
   Gtk::Box m_VBox;
   Gtk::Box m_HBox;
