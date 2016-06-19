@@ -14,15 +14,15 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
+// This file is part of the printing/simple and printing/advanced examples
+
 #include "examplewindow.h"
 #include "printformoperation.h"
-#include "previewdialog.h"
-
 #include <iostream>
 
 const Glib::ustring app_title = "gtkmm Printing Example";
 
-ExampleWindow::ExampleWindow()
+ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
 : m_VBox(Gtk::ORIENTATION_VERTICAL),
   m_NameLabel("Name"),
   m_SurnameLabel("Surname"),
@@ -38,7 +38,7 @@ ExampleWindow::ExampleWindow()
 
   add(m_VBox);
 
-  build_main_menu();
+  build_main_menu(app);
 
   m_VBox.pack_start(m_Grid);
 
@@ -74,11 +74,10 @@ ExampleWindow::~ExampleWindow()
 {
 }
 
-void ExampleWindow::build_main_menu()
+void ExampleWindow::build_main_menu(const Glib::RefPtr<Gtk::Application>& app)
 {
   //Create actions for menus and toolbars:
-  auto refActionGroup =
-   Gio::SimpleActionGroup::create();
+  auto refActionGroup = Gio::SimpleActionGroup::create();
 
   //File menu:
   refActionGroup->add_action("new",
@@ -98,20 +97,31 @@ void ExampleWindow::build_main_menu()
 
   insert_action_group("example", refActionGroup);
 
+  // When the menubar is a child of a Gtk::Window, keyboard accelerators are not
+  // automatically fetched from the Gio::Menu.
+  // See the examples/book/menus/main_menu example for an alternative way of
+  // adding the menubar when using Gtk::ApplicationWindow.
+  app->set_accel_for_action("example.new", "<Primary>n");
+  app->set_accel_for_action("example.print", "<Primary>p");
+  app->set_accel_for_action("example.quit", "<Primary>q");
+
   m_refBuilder = Gtk::Builder::create();
 
-  //TODO: add_accel_group(m_refBuilder->get_accel_group());
-
-  //Layout the actions in a menubar and toolbar:
-
-  Glib::ustring ui_info =
-   "<interface>"
+  // Layout the actions in a menubar:
+  Glib::ustring ui_menu_info =
+    "<interface>"
     "  <menu id='menu-example'>"
     "    <submenu>"
     "      <attribute name='label' translatable='yes'>_File</attribute>"
     "      <section>"
     "        <item>"
-    "          <attribute name='label' translatable='yes'>Page _Setup</attribute>"
+    "          <attribute name='label' translatable='yes'>_New</attribute>"
+    "          <attribute name='action'>example.new</attribute>"
+    "        </item>"
+    "      </section>"
+    "      <section>"
+    "        <item>"
+    "          <attribute name='label' translatable='yes'>Page _Setup...</attribute>"
     "          <attribute name='action'>example.pagesetup</attribute>"
     "        </item>"
     "        <item>"
@@ -119,91 +129,160 @@ void ExampleWindow::build_main_menu()
     "          <attribute name='action'>example.printpreview</attribute>"
     "        </item>"
     "        <item>"
-    "          <attribute name='label' translatable='yes'>_Print</attribute>"
+    "          <attribute name='label' translatable='yes'>_Print...</attribute>"
     "          <attribute name='action'>example.print</attribute>"
+    "        </item>"
+    "      </section>"
+    "      <section>"
+    "        <item>"
+    "          <attribute name='label' translatable='yes'>_Quit</attribute>"
+    "          <attribute name='action'>example.quit</attribute>"
     "        </item>"
     "      </section>"
     "    </submenu>"
     "  </menu>"
-/* TODO:
-      "  <toolbar  name='ToolBar'>"
-        "    <toolitem action='New'/>"
-        "    <toolitem action='Print'/>"
-        "      <separator/>"
-        "    <toolitem action='Quit'/>"
-        "  </toolbar>"
-*/
     "</interface>";
 
   try
   {
-    m_refBuilder->add_from_string(ui_info);
+    m_refBuilder->add_from_string(ui_menu_info);
   }
   catch(const Glib::Error& ex)
   {
     std::cerr << "building menus failed: " << ex.what();
   }
 
+  // Layout the actions in a toolbar:
+  Glib::ustring ui_toolbar_info =
+    "<!-- Generated with glade 3.18.3 -->"
+    "<interface>"
+      "<requires lib='gtk+' version='3.8'/>"
+      "<object class='GtkToolbar' id='toolbar'>"
+        "<property name='visible'>True</property>"
+        "<property name='can_focus'>False</property>"
+        "<child>"
+          "<object class='GtkToolButton' id='toolbutton_new'>"
+            "<property name='visible'>True</property>"
+            "<property name='can_focus'>False</property>"
+            "<property name='tooltip_text' translatable='yes'>New</property>"
+            "<property name='action_name'>example.new</property>"
+            "<property name='icon_name'>document-new</property>"
+          "</object>"
+          "<packing>"
+            "<property name='expand'>False</property>"
+            "<property name='homogeneous'>True</property>"
+          "</packing>"
+        "</child>"
+        "<child>"
+          "<object class='GtkToolButton' id='toolbutton_print'>"
+            "<property name='visible'>True</property>"
+            "<property name='can_focus'>False</property>"
+            "<property name='tooltip_text' translatable='yes'>Print</property>"
+            "<property name='action_name'>example.print</property>"
+            "<property name='icon_name'>document-print</property>"
+          "</object>"
+          "<packing>"
+            "<property name='expand'>False</property>"
+            "<property name='homogeneous'>True</property>"
+          "</packing>"
+        "</child>"
+        "<child>"
+          "<object class='GtkSeparatorToolItem' id='separator1'>"
+            "<property name='visible'>True</property>"
+            "<property name='can_focus'>False</property>"
+          "</object>"
+          "<packing>"
+            "<property name='expand'>False</property>"
+            "<property name='homogeneous'>False</property>"
+          "</packing>"
+        "</child>"
+        "<child>"
+          "<object class='GtkToolButton' id='toolbutton_quit'>"
+            "<property name='visible'>True</property>"
+            "<property name='can_focus'>False</property>"
+            "<property name='tooltip_text' translatable='yes'>Quit</property>"
+            "<property name='action_name'>example.quit</property>"
+            "<property name='icon_name'>application-exit</property>"
+          "</object>"
+          "<packing>"
+            "<property name='expand'>False</property>"
+            "<property name='homogeneous'>True</property>"
+          "</packing>"
+        "</child>"
+      "</object>"
+    "</interface>";
 
-  //Get the menubar and toolbar widgets, and add them to a container widget:
-  auto object =
-    m_refBuilder->get_object("menu-example");
-  auto gmenu =
-    Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
-  if(!gmenu)
+  try
+  {
+    m_refBuilder->add_from_string(ui_toolbar_info);
+  }
+  catch(const Glib::Error& ex)
+  {
+    std::cerr << "building toolbar failed: " << ex.what();
+  }
+
+  // Get the menubar and add it to a container widget:
+  auto object = m_refBuilder->get_object("menu-example");
+  auto gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+  if (!gmenu)
     g_warning("GMenu not found");
+  else
+  {
+    auto pMenuBar = Gtk::manage(new Gtk::MenuBar(gmenu));
 
-  auto pMenubar = new Gtk::MenuBar(gmenu);
-  m_VBox.pack_start(*pMenubar, Gtk::PACK_SHRINK);
+    // Add the MenuBar to the window:
+    m_VBox.pack_start(*pMenuBar, Gtk::PACK_SHRINK);
+  }
 
-/* TODO:
-  auto pToolbar = m_refBuilder->get_widget("/ToolBar") ;
-  if(pToolbar)
-    m_VBox.pack_start(*pToolbar, Gtk::PACK_SHRINK);
-*/
+  // Get the toolbar and add it to a container widget:
+  Gtk::Toolbar* toolbar = nullptr;
+  m_refBuilder->get_widget("toolbar", toolbar);
+  if (!toolbar)
+    g_warning("GtkToolbar not found");
+  else
+    m_VBox.pack_start(*toolbar, Gtk::PACK_SHRINK);
 }
 
-void
-ExampleWindow::on_printoperation_status_changed(
-        Glib::RefPtr<PrintFormOperation>* operation)
+void ExampleWindow::on_printoperation_status_changed()
 {
   Glib::ustring status_msg;
 
-  if ((*operation)->is_finished())
+  if (m_refPrintFormOperation->is_finished())
   {
     status_msg = "Print job completed.";
   }
   else
   {
     //You could also use get_status().
-    status_msg = (*operation)->get_status_string();
+    status_msg = m_refPrintFormOperation->get_status_string();
   }
 
   m_Statusbar.push(status_msg, m_ContextId);
 }
 
-void ExampleWindow::on_printoperation_done(Gtk::PrintOperationResult result,
-        Glib::RefPtr<PrintFormOperation>* operation)
+void ExampleWindow::on_printoperation_done(Gtk::PrintOperationResult result)
 {
   //Printing is "done" when the print data is spooled.
 
   if (result == Gtk::PRINT_OPERATION_RESULT_ERROR)
   {
-    Gtk::MessageDialog err_dialog(*this, "Error printing form", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    Gtk::MessageDialog err_dialog(*this, "Error printing form", false,
+            Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     err_dialog.run();
   }
   else if (result == Gtk::PRINT_OPERATION_RESULT_APPLY)
   {
     //Update PrintSettings with the ones used in this PrintOperation:
-    m_refSettings = (*operation)->get_print_settings();
+    m_refSettings = m_refPrintFormOperation->get_print_settings();
   }
 
-  if (! (*operation)->is_finished())
+  if (!m_refPrintFormOperation->is_finished())
   {
     //We will connect to the status-changed signal to track status
     //and update a status bar. In addition, you can, for example,
     //keep a list of active print operations, or provide a progress dialog.
-    (*operation)->signal_status_changed().connect(sigc::bind(sigc::mem_fun(*this, &ExampleWindow::on_printoperation_status_changed), operation));
+    m_refPrintFormOperation->signal_status_changed().connect(sigc::mem_fun(*this,
+                    &ExampleWindow::on_printoperation_status_changed));
   }
 }
 
@@ -211,24 +290,22 @@ void ExampleWindow::print_or_preview(Gtk::PrintOperationAction print_action)
 {
   //Create a new PrintOperation with our PageSetup and PrintSettings:
   //(We use our derived PrintOperation class)
-  auto print = PrintFormOperation::create();
+  m_refPrintFormOperation = PrintFormOperation::create();
 
-  print->set_name(m_NameEntry.get_text() + " " + m_SurnameEntry.get_text());
-  print->set_comments(m_refTextBuffer->get_text(false /*Don't include hidden*/));
-  //The font will be set through a custom tab in the print dialog.
+  m_refPrintFormOperation->set_name(m_NameEntry.get_text() + " " + m_SurnameEntry.get_text());
+  m_refPrintFormOperation->set_comments(m_refTextBuffer->get_text(false /*Don't include hidden*/));
+  // In the printing/advanced example, the font will be set through a custom tab
+  // in the print dialog.
 
-  print->set_track_print_status();
-  print->set_default_page_setup(m_refPageSetup);
-  print->set_print_settings(m_refSettings);
+  m_refPrintFormOperation->set_track_print_status();
+  m_refPrintFormOperation->set_default_page_setup(m_refPageSetup);
+  m_refPrintFormOperation->set_print_settings(m_refSettings);
 
-  //Pass a pointer to Glib::RefPtr<Gtk::PrintFormOperation> to prevent
-  //the unnecessary refcount increase and thus extension of its lifetime
-  //after it has been completed.
-  print->signal_done().connect(sigc::bind(sigc::mem_fun(*this,
-                  &ExampleWindow::on_printoperation_done), &print));
+  m_refPrintFormOperation->signal_done().connect(sigc::mem_fun(*this,
+                  &ExampleWindow::on_printoperation_done));
   try
   {
-    print->run(print_action /* print or preview */, *this);
+    m_refPrintFormOperation->run(print_action /* print or preview */, *this);
   }
   catch (const Gtk::PrintError& ex)
   {
@@ -236,8 +313,6 @@ void ExampleWindow::print_or_preview(Gtk::PrintOperationAction print_action)
     std::cerr << "An error occurred while trying to run a print operation:"
         << ex.what() << std::endl;
   }
-
-  g_debug("print status: %s", print->get_status_string().c_str());
 }
 
 void ExampleWindow::on_menu_file_new()

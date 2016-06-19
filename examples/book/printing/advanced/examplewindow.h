@@ -17,6 +17,8 @@
 #ifndef GTKMM_EXAMPLEWINDOW_H
 #define GTKMM_EXAMPLEWINDOW_H
 
+// This file is part of the printing/simple and printing/advanced examples
+
 #include <gtkmm.h>
 
 class PrintFormOperation;
@@ -24,21 +26,20 @@ class PrintFormOperation;
 class ExampleWindow : public Gtk::Window
 {
 public:
-  ExampleWindow();
+  ExampleWindow(const Glib::RefPtr<Gtk::Application>& app);
   virtual ~ExampleWindow();
 
 protected:
 
-  void build_main_menu();
+  void build_main_menu(const Glib::RefPtr<Gtk::Application>& app);
 
   void print_or_preview(Gtk::PrintOperationAction print_action);
 
   //PrintOperation signal handlers.
   //We handle these so can get necessary information to update the UI or print settings.
   //Our derived PrintOperation class also overrides some default signal handlers.
-  void on_printoperation_status_changed(Glib::RefPtr<PrintFormOperation>* operation);
-
-  void on_printoperation_done(Gtk::PrintOperationResult result, Glib::RefPtr<PrintFormOperation>* operation);
+  void on_printoperation_status_changed();
+  void on_printoperation_done(Gtk::PrintOperationResult result);
 
   //Action signal handlers:
   void on_menu_file_new();
@@ -50,6 +51,7 @@ protected:
   //Printing-related objects:
   Glib::RefPtr<Gtk::PageSetup> m_refPageSetup;
   Glib::RefPtr<Gtk::PrintSettings> m_refSettings;
+  Glib::RefPtr<PrintFormOperation> m_refPrintFormOperation;
 
   //Child widgets:
   Gtk::Box m_VBox;
