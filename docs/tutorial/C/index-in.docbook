@@ -9516,7 +9516,7 @@ public:
 <sect3 id="gmmproc-custom-wrap-function">
 <title>_CUSTOM_WRAP_FUNCTION</title>
 <para>Suppresses definition of <function>Glib::wrap()</function> function in
-<function>_CLASS_GOBJECT</function>.
+<function>_CLASS_GOBJECT</function> and <function>_CLASS_GTKOBJECT</function>.
 </para>
 </sect3>
 
@@ -9524,8 +9524,8 @@ public:
 <title>_NO_WRAP_FUNCTION</title>
 <para>Suppresses declaration and definition of <function>Glib::wrap()</function>
 function in <function>_CLASS_GOBJECT</function>, <function>_CLASS_BOXEDTYPE</function>,
-<function>_CLASS_BOXEDTYPE_STATIC</function>, <function>_CLASS_OPAQUE_COPYABLE</function>
-and <function>_CLASS_INTERFACE</function>.
+<function>_CLASS_BOXEDTYPE_STATIC</function>, <function>_CLASS_OPAQUE_COPYABLE</function>,
+<function>_CLASS_INTERFACE</function> and <function>_CLASS_GTKOBJECT</function>.
 </para>
 </sect3>
 
