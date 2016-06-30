@@ -77,6 +77,7 @@ check_PROGRAMS =					\
 	book/keyboard_events/propagation/example	\
 	book/label/example				\
 	book/listbox/example				\
+	book/listmodel/example			\
 	book/menus/main_menu/main_menu			\
 	book/menus/popup/popup				\
 	book/menus_and_toolbars/example			\
@@ -499,6 +500,13 @@ book_listbox_example_SOURCES =		\
 	book/listbox/examplerow.cc	\
 	book/listbox/examplerow.h	\
 	book/listbox/main.cc
+
+book_listmodel_example_SOURCES =		\
+	book/listmodel/examplewindow.cc	\
+	book/listmodel/examplewindow.h	\
+	book/listmodel/myobject.cc	\
+	book/listmodel/myobject.h	\
+	book/listmodel/main.cc
 
 book_menus_main_menu_main_menu_SOURCES =	\
 	book/menus/main_menu/exampleapplication.cc	\
