@@ -127,7 +127,7 @@ Gtk::CellEditable* CellRendererPopup::start_editing_vfunc(GdkEvent*,
   if(!property_editable())
     return nullptr;
 
-  std::unique_ptr<PopupEntry> popup_entry (new PopupEntry(path));
+  auto popup_entry = std::make_unique<PopupEntry>(path));
 
   popup_entry->signal_editing_done ().connect(sigc::mem_fun(*this, &Self::on_popup_editing_done));
   popup_entry->signal_arrow_clicked().connect(sigc::mem_fun(*this, &Self::on_popup_arrow_clicked));
