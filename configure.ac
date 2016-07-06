@@ -20,7 +20,7 @@ AC_ARG_VAR([ACLOCAL_FLAGS], [aclocal flags, e.g. -I <macro dir>])
 MM_PREREQ([0.9.10])
 
 AC_PROG_CXX
-MM_AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory])
+MM_AX_CXX_COMPILE_STDCXX([14], [noext], [mandatory])
 
 AC_PATH_PROG([PERL], [perl], [perl])
 AC_PROG_SED
