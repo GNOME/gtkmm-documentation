@@ -133,6 +133,7 @@ dist_noinst_DATA =				\
 	book/builder/derived/derived.glade	\
 	book/buttons/button/info.xpm		\
 	book/custom/custom_widget/custom_gtk.css	\
+	$(DIALOGS_ABOUTDIALOG_RESOURCES) \
 	$(DRAWINGAREA_IMAGE_RESOURCES) \
 	book/iconview/gnome-dice-1.svg		\
 	book/iconview/gnome-dice-2.svg		\
@@ -292,6 +293,7 @@ book_custom_custom_widget_example_SOURCES =		\
 	book/custom/custom_widget/mywidget.h
 
 book_dialogs_aboutdialog_example_SOURCES =		\
+	book/dialogs/aboutdialog/resources.c \
 	book/dialogs/aboutdialog/examplewindow.cc	\
 	book/dialogs/aboutdialog/examplewindow.h	\
 	book/dialogs/aboutdialog/main.cc
@@ -760,8 +762,16 @@ others_treemodelcustom_example_SOURCES =		\
 #	others/window/wheelbarrow.cc
 
 MAINTAINERCLEANFILES = \
+  book/dialogs/aboutdialog/resources.c \
   book/drawingarea/image/resources.c \
   book/menus_and_toolbars/resources.c
+
+DIALOGS_ABOUTDIALOG_RESOURCES = \
+  book/dialogs/aboutdialog/aboutdialog.gresource.xml \
+  book/dialogs/aboutdialog/gtkmm_logo.gif
+
+book/dialogs/aboutdialog/resources.c: $(DIALOGS_ABOUTDIALOG_RESOURCES)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(dir $<) --generate-source $<
 
 DRAWINGAREA_IMAGE_RESOURCES = \
   book/drawingarea/image/image.gresource.xml \

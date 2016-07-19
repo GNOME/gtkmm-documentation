@@ -8,6 +8,7 @@ example
 /book/base/base
 /book/buttons/button/buttons
 /book/buttons/radiobutton/radiobuttons
+/book/dialogs/aboutdialog/resources.c
 /book/drag_and_drop/drag_and_drop
 /book/drawingarea/arcs/drawingareaarcs
 /book/drawingarea/clock/cairoclock

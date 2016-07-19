@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -41,6 +39,7 @@ ExampleWindow::ExampleWindow()
 
   m_Dialog.set_transient_for(*this);
 
+  m_Dialog.set_logo(Gdk::Pixbuf::create_from_resource("/about/gtkmm_logo.gif", -1, 40, true));
   m_Dialog.set_program_name("Example application");
   m_Dialog.set_version("1.0.0");
   m_Dialog.set_copyright("Murray Cumming");
@@ -79,10 +78,16 @@ void ExampleWindow::on_about_dialog_response(int response_id)
     << ", delete_event=" << Gtk::RESPONSE_DELETE_EVENT
     << std::endl;
 
-  if((response_id == Gtk::RESPONSE_CLOSE) ||
-     (response_id == Gtk::RESPONSE_CANCEL) )
+  switch (response_id)
   {
+  case Gtk::RESPONSE_CLOSE:
+  case Gtk::RESPONSE_CANCEL:
+  case Gtk::RESPONSE_DELETE_EVENT:
     m_Dialog.hide();
+    break;
+  default:
+    std::cout << "Unexpected response!" << std::endl;
+    break;
   }
 }
 

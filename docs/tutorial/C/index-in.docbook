@@ -4179,7 +4179,7 @@ search-and-replace dialog is non-modal.
   </screenshot>
 </figure>
 
-<para><ulink url="&url_examples_base;dialogs/aboutdialog">Source Code</ulink></para>
+<para><ulink url="&url_examples_base;dialogs/aboutdialog">Source Code</ulink></para> <!-- Insert aboutdialog.gresource.xml -->
 </sect2>
 
 </sect1>
