@@ -11,14 +11,16 @@ AC_CONFIG_MACRO_DIR([build])
 AC_CONFIG_HEADERS([build/config.h])
 
 AM_INIT_AUTOMAKE([1.9 -Wno-portability check-news dist-bzip2 no-define nostdinc tar-ustar])
-m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES])
+# Support silent build rules.
+# Disable by either passing --disable-silent-rules to configure or passing V=1 to make.
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AM_MAINTAINER_MODE
 AC_ARG_VAR([ACLOCAL_FLAGS], [aclocal flags, e.g. -I <macro dir>])
 
-MM_PREREQ([0.9.8])
+MM_PREREQ([0.9.10])
 
 AC_PROG_CXX
-MM_AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
+MM_AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory])
 
 AC_PATH_PROG([PERL], [perl], [perl])
 AC_PROG_SED
