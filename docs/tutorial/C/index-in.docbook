@@ -3376,12 +3376,10 @@ classes, all of which should be instantiated via their <methodname>create()</met
 methods, which return <classname>RefPtr</classname>s.
 </para>
 <para>
-Alternatively, <classname>Gtk::ActionGroup</classname>,
-<classname>Gtk::Action</classname> and <classname>Gtk::UIManager</classname>
-can be used, but this is not recommended in new code.
-<classname>GtkAction</classname>, <classname>GtkActionGroup</classname> and
-<classname>GtkUIManager</classname> are deprecated in GTK+ from version 3.10.
-The corresponding classes in &gtkmm; will be deprecated in the future.
+<classname>Gtk::ActionGroup</classname>, <classname>Gtk::Action</classname> with
+its subclasses and <classname>Gtk::UIManager</classname> has been an alternative.
+These classes are deprecated from &gtkmm; version 3.22 and should not be used in
+newly-written code.
 </para>
 
 <sect1 id="sec-actions">
@@ -5534,8 +5532,7 @@ and update the print settings.
     <classname>RecentManager</classname>,
     <classname>RecentChooserDialog</classname>,
     <classname>RecentChooserMenu</classname>,
-    <classname>RecentChooserWidget</classname>,
-    <classname>RecentAction</classname>, and
+    <classname>RecentChooserWidget</classname>, and
     <classname>RecentFilter</classname>.
   </para>
   <para>
@@ -5696,7 +5693,7 @@ if (info)
       &gtkmm; provides four built-in implementations for choosing recent files:
       <classname>RecentChooserWidget</classname>,
       <classname>RecentChooserDialog</classname>,
-      <classname>RecentChooserMenu</classname>, and
+      <classname>RecentChooserMenu</classname>, and the deprecated
       <classname>RecentAction</classname>.
     </para>
     <para>
@@ -5707,16 +5704,14 @@ if (info)
       user interface if you want to.
     </para>
     <para>
-      <classname>RecentChooserMenu</classname> and
-      <classname>RecentAction</classname> allow you to list recently used files
-      as a menu.
+      <classname>RecentChooserMenu</classname> allows you to list recently used
+      files as a menu.
     </para>
     <sect2 id="recentchooserdialog-example">
       <title>Simple RecentChooserDialog example</title>
       <para>
         Shown below is a simple example of how to use the
-        <classname>RecentChooserDialog</classname> and the
-        <classname>RecentAction</classname> classes in a program.
+        <classname>RecentChooserDialog</classname> class in a program.
         This simple program has a menubar with a
         <guimenuitem>Recent Files Dialog</guimenuitem> menu item.
         When you select this menu item, a dialog pops up showing the list of
@@ -9112,7 +9107,7 @@ namespace Gtk
 
 class Button
   : public Bin,
-    public Activatable
+    public Activatable // Activatable is deprecated. Will be replaced at ABI break.
 {
   _CLASS_GTKOBJECT(Button,GtkButton,GTK_BUTTON,Gtk::Bin,GtkBin)
   _IMPLEMENTS_INTERFACE(Activatable)
@@ -10018,9 +10013,9 @@ _WRAP_CHILD_PROPERTY("tab-expand", bool)
 <title>_IMPLEMENTS_INTERFACE</title>
 <para>This macro generates initialization code for the interface.</para>
 <para><function>_IMPLEMENTS_INTERFACE(C++ interface name)</function></para>
-<para>For instance, from <filename>button.hg</filename>:
+<para>For instance, from <filename>grid.hg</filename>:
 <programlisting>
-_IMPLEMENTS_INTERFACE(Activatable)
+_IMPLEMENTS_INTERFACE(Orientable)
 </programlisting>
 </para>
 <para>There is one optional extra argument:
