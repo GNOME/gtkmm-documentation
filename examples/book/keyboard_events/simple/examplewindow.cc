@@ -26,8 +26,7 @@ ExampleWindow::ExampleWindow()
   m_first.set_label("First");
   m_second.set_label("Second");
 
-  Gtk::RadioButton::Group group = m_first.get_group();
-  m_second.set_group(group);
+  m_second.join_group(m_first);
   m_first.set_active();
 
   // Main Container:

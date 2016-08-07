@@ -1,5 +1,3 @@
-//$Id: radiobuttons.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -33,9 +31,8 @@ RadioButtons::RadioButtons() :
   set_border_width(0);
 
   // Put radio buttons 2 and 3 in the same group as 1:
-  Gtk::RadioButton::Group group = m_RadioButton1.get_group();
-  m_RadioButton2.set_group(group);
-  m_RadioButton3.set_group(group);
+  m_RadioButton2.join_group(m_RadioButton1);
+  m_RadioButton3.join_group(m_RadioButton1);
 
   // Add outer box to the window (because the window
   // can only contain a single widget)

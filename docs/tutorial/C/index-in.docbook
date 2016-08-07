@@ -907,35 +907,33 @@ put three radio buttons in it:
 <programlisting>class RadioButtons : public Gtk::Window
 {
 public:
-    RadioButtons();
+  RadioButtons();
 
 protected:
-    Gtk::RadioButton m_rb1, m_rb2, m_rb3;
+  Gtk::RadioButton m_rb1, m_rb2, m_rb3;
 };
 
 RadioButtons::RadioButtons()
-  : m_rb1("button1"),
-    m_rb2("button2"),
-    m_rb3("button3")
+: m_rb1("button1"),
+  m_rb2("button2"),
+  m_rb3("button3")
 {
-    Gtk::RadioButton::Group group = m_rb1.get_group();
-    m_rb2.set_group(group);
-    m_rb3.set_group(group);
+  m_rb2.join_group(m_rb1);
+  m_rb3.join_group(m_rb1);
 }</programlisting>
 <para>
 We told &gtkmm; to put all three <classname>RadioButton</classname>s in the
-same group by obtaining the group with <methodname>get_group()</methodname> and using
-<methodname>set_group()</methodname> to tell the other
-<classname>RadioButton</classname>s to share that group.
+same group by using <methodname>join_group()</methodname> to tell the other
+<classname>RadioButton</classname>s to share group with the first
+<classname>RadioButton</classname>.
 </para>
 
 <para>
-Note that you can't just do
+Note that you can't do
 <programlisting>m_rb2.set_group(m_rb1.get_group()); //doesn't work</programlisting>
-because the group is modified by <methodname>set_group()</methodname> and therefore
-non-const.
+because <methodname>get_group()</methodname> returns a <classname>RadioButton::Group</classname>
+which is modified by <methodname>set_group()</methodname> and therefore is non-const.
 </para>
-
 
 <para>
 The second way to set up radio buttons is to make a group first, and
@@ -944,25 +942,21 @@ then add radio buttons to it. Here's an example:
 <programlisting>class RadioButtons : public Gtk::Window
 {
 public:
-    RadioButtons();
+  RadioButtons();
 };
 
 RadioButtons::RadioButtons()
 {
-    Gtk::RadioButton::Group group;
-    Gtk::RadioButton *m_rb1 = Gtk::manage(
-      new Gtk::RadioButton(group,"button1"));
-    Gtk::RadioButton *m_rb2 = manage(
-      new Gtk::RadioButton(group,"button2"));
-      Gtk::RadioButton *m_rb3 = manage(
-        new Gtk::RadioButton(group,"button3"));
+  Gtk::RadioButton::Group group;
+  Gtk::RadioButton* m_rb1 = Gtk::manage(new Gtk::RadioButton(group, "button1"));
+  Gtk::RadioButton* m_rb2 = Gtk::manage(new Gtk::RadioButton(group, "button2"));
+  Gtk::RadioButton* m_rb3 = Gtk::manage(new Gtk::RadioButton(group, "button3"));
 }</programlisting>
 
 <para>
 We made a new group by simply declaring a variable, <literal>group</literal>,
 of type <classname>Gtk::RadioButton::Group</classname>. Then we made three radio
-buttons, using a constructor to make each of them part of
-<literal>group</literal>.
+buttons, using a constructor to make each of them part of <literal>group</literal>.
 </para>
 </sect2>
 
