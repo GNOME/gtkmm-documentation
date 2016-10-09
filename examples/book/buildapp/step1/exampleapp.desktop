@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Gtkmm example
+GenericName=Example
+Comment=From the "Programming with gtkmm 3" tutorial
+Icon=exampleapp
+StartupNotify=true
+Exec=@bindir@/exampleapp %U
+Categories=GNOME;GTK;Utility

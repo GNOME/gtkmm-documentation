@@ -1,5 +1,7 @@
 ## This file is part of gtkmm-documentation.
 
+SUBDIRS = book/buildapp
+
 AUTOMAKE_OPTIONS = subdir-objects
 
 AM_CPPFLAGS = -I$(top_builddir) $(GTHREAD_CFLAGS) $(GTKMM_CFLAGS)

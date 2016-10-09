@@ -87,6 +87,7 @@ name
         <firstname>Kjell</firstname>
         <surname>Ahlstedt</surname>
         <contrib>Parts of the update from gtkmm 2 to gtkmm 3.</contrib>
+        <contrib>Chapter on &quot;Building applications&quot;.</contrib>
       </author>
     </authorgroup>
 
@@ -7768,6 +7769,232 @@ first see a blank window, into which the widgets will be gradually drawn.
 </para>
 
 </sect1>
+</chapter>
+
+<chapter id="chapter-building-applications">
+<title>Building applications</title>
+
+<para>
+This chapter is similar to the &quot;Building applications&quot; chapter in the
+<ulink url="https://developer.gnome.org/gtk3/stable/">GTK+ 3 Reference Manual</ulink>.
+The same application is built, but &gtkmm; is used instead of <application>GTK+</application>.
+</para>
+<para>
+An application consists of a number of files:
+<variablelist>
+  <varlistentry>
+    <term>The binary file</term>
+    <listitem><para>This gets installed in <filename>/usr/bin</filename>.</para></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>A desktop file</term>
+    <listitem><para>The desktop file provides important information about the application
+      to the desktop shell, such as its name, icon, D-Bus name, commandline to launch it,
+      etc. It is installed in <filename>/usr/share/applications</filename>.</para></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>An icon</term>
+    <listitem><para>The icon gets installed in <filename>/usr/share/icons/hicolor/48x48/apps</filename>,
+      where it will be found regardless of the current theme.</para></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>A settings schema</term>
+    <listitem><para>If the application uses <classname>Gio::Settings</classname>,
+      it will install its schema in <filename>/usr/share/glib-2.0/schemas</filename>,
+      so that tools like dconf-editor can find it.</para></listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>Other resources</term>
+    <listitem><para>Other files, such as <classname>Gtk::Builder</classname> ui files,
+      are best loaded from resources stored in the application binary itself. This
+      eliminates the need for most of the files that would traditionally be installed
+      in an application-specific location in <filename>/usr/share</filename>.</para></listitem>
+  </varlistentry>
+</variablelist>
+</para>
+
+<para>
+&gtkmm; includes application support that is built on top of <classname>Gio::Application</classname>.
+In this chapter we'll build a simple application by starting from scratch, adding more
+and more pieces over time. Along the way, we'll learn about <classname>Gtk::Application</classname>,
+<classname>Gtk::Builder</classname>, resources, application menus, settings,
+<classname>Gtk::HeaderBar</classname>, <classname>Gtk::Stack</classname>,
+<classname>Gtk::SearchBar</classname>, <classname>Gtk::ListBox</classname>, and more.
+</para>
+
+<para>
+The full, buildable sources for these examples can be found in the
+<filename>examples/book/buildapp</filename> directory of the
+<application>gtkmm-documentation</application> source distribution, or online in the
+<ulink url="&url_examples_base;buildapp"><application>gtkmm-documentation</application>
+git repository</ulink>. You can build each example separately by using make with the
+<filename>Makefile.example</filename> file. For more information, see the
+<filename>README</filename> included in the <filename>buildapp</filename> directory.
+</para>
+
+<sect1 id="sec-buildapp-trivial-app">
+<title>A trivial application</title>
+
+<para>
+When using <classname>Gtk::Application</classname>, the <function>main()</function> function
+can be very simple. We just call <methodname>Gio::Application::run()</methodname> on an
+instance of our application class.
+</para>
+
+<para>
+All the application logic is in the application class, which is a subclass of
+<classname>Gtk::Application</classname>. Our example does not yet have any interesting
+functionality. All it does is open a window when it is activated without arguments,
+and open the files it is given, if it is started with arguments. (Or rather, our
+application class tries to open the files, but our subclassed application window
+does not yet do what it's told to do.)
+</para>
+
+<para>
+To handle these two cases, we override <methodname>signal_activate()</methodname>'s
+default handler, which gets called when the application is launched without commandline
+arguments, and <methodname>signal_open()</methodname>'s default handler, which gets
+called when the application is launched with commandline arguments.
+</para>
+
+<para><ulink url="&url_refdocs_base_gio;Application.html">Gio::Application Reference</ulink></para>
+
+<para>
+Another important class that is part of the application support in &gtkmm; is
+<classname>Gtk::ApplicationWindow</classname>. It is typically subclassed as well.
+Our subclass does not do anything yet, so we will just get an empty window.
+</para>
+
+<para>
+As part of the initial setup of our application, we also create an icon and a desktop file.
+Note that @bindir@ in the desktop file needs to be replaced with the actual path
+to the binary before this desktop file can be used.
+</para>
+
+<para>
+Here is what we've achieved so far:
+</para>
+
+<figure id="figure-buildapp-trivial-app">
+  <title>A trivial application</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;buildapp_trivial_app.png"/>
+  </screenshot>
+</figure>
+
+<para>
+This does not look very impressive yet, but our application is already presenting itself
+on the session bus, it has single-instance semantics, and it accepts files as commandline arguments.
+</para>
+
+<para><ulink url="&url_examples_base;buildapp/step1">Source Code</ulink></para> <!-- Insert exampleapp.desktop -->
+
+</sect1>
+
+<sect1 id="sec-buildapp-populating-window">
+<title>Populating the window</title>
+
+<para>
+In this step, we use a <classname>Gtk::Builder</classname> instance to associate a
+<classname>Gtk::Builder</classname> ui file with our application window class.
+</para>
+
+<para>
+Our simple ui file puts a <classname>Gtk::HeaderBar</classname> on top of a
+<classname>Gtk::Stack</classname> widget. The header bar contains a
+<classname>Gtk::StackSwitcher</classname>, which is a standalone widget to show a row
+of 'tabs' for the pages of a <classname>Gtk::Stack</classname>. 
+</para>
+
+<para>
+To make use of this file in our application, we revisit our
+<classname>Gtk::ApplicationWindow</classname> subclass, and call
+<methodname>Gtk::Builder::create_from_resource()</methodname> and
+<methodname>Gtk::Builder::get_widget_derived()</methodname> from the
+<methodname>ExampleAppWindow::create()</methodname> method to get an instance of
+our subclassed <classname>Gtk::ApplicationWindow</classname>. See the 
+<link linkend="sec-builder-using-derived-widgets">Using derived widgets</link> section
+for more information about <methodname>get_widget_derived()</methodname>.
+</para>
+
+<para>
+You may have noticed that we use the <methodname>_from_resource()</methodname> variant
+of the method that reads the ui file. Now we need to use <application>GLib</application>'s
+resource functionality to include the ui file in the binary. This is commonly done by
+listing all resources in a .gresource.xml file.
+This file has to be converted into a C source file that will be compiled and linked
+into the application together with the other source files. To do so, we use the
+<application>glib-compile-resources</application> utility:
+<screen>$ glib-compile-resources --target=resources.c --generate-source exampleapp.gresource.xml</screen>
+The <link linkend="sec-gio-resource">Gio::Resource and glib-compile-resources</link>
+section contains more information about resource files.
+</para>
+
+<para>
+Our application now looks like this:
+</para>
+
+<figure id="figure-buildapp-populating-window">
+  <title>Populating the window</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;buildapp_populating_window.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;buildapp/step2">Source Code</ulink></para> <!-- Insert exampleapp.gresource.xml window.ui -->
+
+</sect1>
+
+<sect1 id="sec-buildapp-opening-files">
+<title>Opening files</title>
+
+<para>
+In this step, we make our application show the contents of all the files that it is
+given on the commandline.
+</para>
+
+<para>
+To this end, we add a data member to our application window and keep a pointer to the
+<classname>Gtk::Stack</classname> there. We get the pointer with a call to
+<methodname>Gtk::Builder::get_widget()</methodname> in the application window's constructor.
+</para>
+
+<para>
+Now we revisit the <methodname>ExampleAppWindow::open_file_view()</methodname> method
+that is called for each commandline argument, and construct a <classname>Gtk::TextView</classname>
+that we then add as a page to the stack.
+</para>
+
+<para>
+Note that we do not have to touch the stack switcher at all. It gets all its information
+from the stack that it belongs to. Here, we are passing the label to show for each file
+as the last argument to the <methodname>Gtk::Stack::add()</methodname> method.
+</para>
+
+<para>
+Our application is beginning to take shape:
+</para>
+
+<figure id="figure-buildapp-opening-files">
+  <title>Opening files</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;buildapp_opening_files.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;buildapp/step3">Source Code</ulink></para>
+
+</sect1>
+
+<sect1 id="sec-buildapp-app-menu">
+<title>An application menu</title>
+
+<para>
+To be continued.
+</para>
+
+</sect1>
+
 </chapter>
 
 <chapter id="chapter-contributing">

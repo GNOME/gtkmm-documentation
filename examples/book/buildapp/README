@@ -1,0 +1,19 @@
+=== gtkmm-documentation/examples/book/buildapp/step[1-9] ===
+
+== Building the examples ==
+
+The examples in this directory are built with 'make check' alongside the rest of
+the examples in gtkmm-documentation.
+
+The examples in the step[1-9] directories can also be built independently,
+by doing:
+
+  $ cd step1  # or step2, step3, etc.
+  $ make -f Makefile.example
+
+To make gnome-shell use the desktop file and icon for one of the examples
+while running it uninstalled, do the following:
+
+  $ cd step1  # or step2, step3, etc.
+  $ make -f Makefile.example install-desktop-file
+

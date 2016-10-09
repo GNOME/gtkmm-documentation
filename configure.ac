@@ -46,5 +46,6 @@ YELP_HELP_INIT
 
 AC_CONFIG_FILES([Makefile
                  examples/Makefile
+                 examples/book/buildapp/Makefile
                  docs/tutorial/Makefile])
 AC_OUTPUT

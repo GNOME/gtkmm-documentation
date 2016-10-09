@@ -1,0 +1,41 @@
+CC ?= gcc
+CXX ?= g++
+PROGRAM = exampleapp
+CXXFILES = main.cc exampleappwindow.cc exampleapplication.cc
+BUILT_SRC = resources.c
+OBJS = $(BUILT_SRC:.c=.o) $(CXXFILES:.cc=.o)
+DEPDIR = .deps
+CXXFLAGS = `pkg-config --cflags gtkmm-3.0` -std=c++11 -Wall -g
+CFLAGS = `pkg-config --cflags gtk+-3.0`
+LIBS = `pkg-config --libs gtkmm-3.0`
+GLIB_COMPILE_RESOURCES = `pkg-config --variable=glib_compile_resources gio-2.0`
+
+all: $(PROGRAM)
+
+include $(CXXFILES:%.cc=$(DEPDIR)/%.Po)
+include $(BUILT_SRC:%.c=$(DEPDIR)/%.Po)
+
+resources.c: exampleapp.gresource.xml window.ui
+	$(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(dir $<) --generate-source $<
+
+%.o: %.c
+	$(CC) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $(CFLAGS) $<
+	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+
+%.o: %.cc
+	$(CXX) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $(CXXFLAGS) $<
+	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+
+$(PROGRAM): $(OBJS)
+	$(CXX) -o $(PROGRAM) $(OBJS) $(LIBS)
+
+clean:
+	rm -f $(BUILT_SRC)
+	rm -f $(OBJS)
+	rm -f $(PROGRAM)
+
+install-desktop-file:
+	mkdir -p ~/.local/share/applications
+	sed -e "s#@bindir@#$$PWD#" ../step1/exampleapp.desktop > ~/.local/share/applications/$(PROGRAM).desktop
+	mkdir -p ~/.local/share/icons/hicolor/48x48/apps
+	cp ../step1/exampleapp.png ~/.local/share/icons/hicolor/48x48/apps

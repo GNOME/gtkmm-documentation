@@ -1,0 +1,2 @@
+include ../step2/Makefile.example
+# Equal to the corresponding file in step2
