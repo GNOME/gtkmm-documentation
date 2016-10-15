@@ -14,7 +14,7 @@ all: $(PROGRAM)
 
 -include $(OBJS:%.o=$(DEPDIR)/%.Po)
 
-resources.c: exampleapp.gresource.xml window.ui
+resources.c: exampleapp.gresource.xml window.ui app_menu.ui
 	$(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=. --generate-source $<
 
 %.o: %.c

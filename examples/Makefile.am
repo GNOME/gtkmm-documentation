@@ -294,8 +294,8 @@ book_custom_custom_widget_example_SOURCES =		\
 	book/custom/custom_widget/mywidget.cc		\
 	book/custom/custom_widget/mywidget.h
 
+nodist_book_dialogs_aboutdialog_example_SOURCES = book/dialogs/aboutdialog/resources.c
 book_dialogs_aboutdialog_example_SOURCES =		\
-	book/dialogs/aboutdialog/resources.c \
 	book/dialogs/aboutdialog/examplewindow.cc	\
 	book/dialogs/aboutdialog/examplewindow.h	\
 	book/dialogs/aboutdialog/main.cc
@@ -345,8 +345,8 @@ book_drawingarea_curve_drawingareacurve_SOURCES =	\
 	book/drawingarea/curve/myarea.cc		\
 	book/drawingarea/curve/myarea.h
 
+nodist_book_drawingarea_image_drawingareaimage_SOURCES = book/drawingarea/image/resources.c
 book_drawingarea_image_drawingareaimage_SOURCES =	\
-	book/drawingarea/image/resources.c \
 	book/drawingarea/image/main.cc			\
 	book/drawingarea/image/myarea.cc		\
 	book/drawingarea/image/myarea.h
@@ -524,8 +524,8 @@ book_menus_popup_popup_SOURCES =		\
 	book/menus/popup/examplewindow.h	\
 	book/menus/popup/main.cc
 
+nodist_book_menus_and_toolbars_example_SOURCES = book/menus_and_toolbars/resources.c
 book_menus_and_toolbars_example_SOURCES =	\
-	book/menus_and_toolbars/resources.c \
 	book/menus_and_toolbars/examplewindow.cc\
 	book/menus_and_toolbars/examplewindow.h	\
 	book/menus_and_toolbars/main.cc
@@ -763,7 +763,7 @@ others_treemodelcustom_example_SOURCES =		\
 #others_window_wheelbarrow_SOURCES = \
 #	others/window/wheelbarrow.cc
 
-MAINTAINERCLEANFILES = \
+DISTCLEANFILES = \
   book/dialogs/aboutdialog/resources.c \
   book/drawingarea/image/resources.c \
   book/menus_and_toolbars/resources.c

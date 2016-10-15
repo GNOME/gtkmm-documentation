@@ -34,6 +34,9 @@ MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
 AC_SUBST(GLIB_COMPILE_RESOURCES, [`$PKG_CONFIG --variable=glib_compile_resources gio-2.0`])
 AC_PROG_CC
 
+# Some example programs use GSettings schema XML files.
+GLIB_GSETTINGS
+
 AC_LANG([C++])
 AC_CHECK_FUNCS([mkfifo])
 

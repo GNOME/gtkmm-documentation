@@ -8,11 +8,12 @@ LIBS = `pkg-config --libs gtkmm-3.0`
 
 all: $(PROGRAM)
 
-include $(CXXFILES:%.cc=$(DEPDIR)/%.Po)
+-include $(OBJS:%.o=$(DEPDIR)/%.Po)
 
 %.o: %.cc
+	@mkdir -p $(DEPDIR)
 	$(CXX) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $(CXXFLAGS) $<
-	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+	@mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
 
 $(PROGRAM): $(OBJS)
 	$(CXX) -o $(PROGRAM) $(OBJS) $(LIBS)
@@ -22,7 +23,7 @@ clean:
 	rm -f $(PROGRAM)
 
 install-desktop-file:
-	mkdir -p ~/.local/share/applications
+	@mkdir -p ~/.local/share/applications
 	sed -e "s#@bindir@#$$PWD#" exampleapp.desktop > ~/.local/share/applications/$(PROGRAM).desktop
-	mkdir -p ~/.local/share/icons/hicolor/48x48/apps
+	@mkdir -p ~/.local/share/icons/hicolor/48x48/apps
 	cp exampleapp.png ~/.local/share/icons/hicolor/48x48/apps

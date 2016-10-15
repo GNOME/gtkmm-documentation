@@ -1,7 +1,7 @@
 CC ?= gcc
 CXX ?= g++
 PROGRAM = exampleapp
-CXXFILES = main.cc exampleappwindow.cc exampleapplication.cc
+CXXFILES = main.cc exampleappwindow.cc exampleapplication.cc exampleappprefs.cc
 BUILT_SRC = resources.c
 OBJS = $(BUILT_SRC:.c=.o) $(CXXFILES:.cc=.o)
 DEPDIR = .deps
@@ -9,12 +9,17 @@ CXXFLAGS = `pkg-config --cflags gtkmm-3.0` -std=c++11 -Wall -g
 CFLAGS = `pkg-config --cflags gtk+-3.0`
 LIBS = `pkg-config --libs gtkmm-3.0`
 GLIB_COMPILE_RESOURCES = $(shell pkg-config --variable=glib_compile_resources gio-2.0)
+GLIB_COMPILE_SCHEMAS   = $(shell pkg-config --variable=glib_compile_schemas gio-2.0)
 
-all: $(PROGRAM)
+all: $(PROGRAM) gschemas.compiled
 
 -include $(OBJS:%.o=$(DEPDIR)/%.Po)
 
-resources.c: exampleapp.gresource.xml window.ui
+gschemas.compiled: org.gtkmm.exampleapp.gschema.xml
+	$(GLIB_COMPILE_SCHEMAS) --strict --dry-run --schema-file=$<
+	$(GLIB_COMPILE_SCHEMAS) .
+
+resources.c: exampleapp.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=. --generate-dependencies exampleapp.gresource.xml)
 	$(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=. --generate-source $<
 
 %.o: %.c
@@ -31,6 +36,7 @@ $(PROGRAM): $(OBJS)
 	$(CXX) -o $(PROGRAM) $(OBJS) $(LIBS)
 
 clean:
+	rm -f gschemas.compiled
 	rm -f $(BUILT_SRC)
 	rm -f $(OBJS)
 	rm -f $(PROGRAM)
@@ -40,3 +46,10 @@ install-desktop-file:
 	sed -e "s#@bindir@#$$PWD#" ../step1/exampleapp.desktop > ~/.local/share/applications/$(PROGRAM).desktop
 	@mkdir -p ~/.local/share/icons/hicolor/48x48/apps
 	cp ../step1/exampleapp.png ~/.local/share/icons/hicolor/48x48/apps
+
+install-gschema-file:
+	if test -n "$(GSETTINGS_SCHEMA_DIR)" -a "$(GSETTINGS_SCHEMA_DIR)" != .; then \
+		mkdir -p "$(GSETTINGS_SCHEMA_DIR)"; \
+		cp org.gtkmm.exampleapp.gschema.xml "$(GSETTINGS_SCHEMA_DIR)"; \
+		$(GLIB_COMPILE_SCHEMAS) "$(GSETTINGS_SCHEMA_DIR)"; \
+	fi
