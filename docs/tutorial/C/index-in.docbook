@@ -8170,18 +8170,103 @@ With the search bar, our application now looks like this:
 <title>Adding a side bar</title>
 
 <para>
-To be continued.
+As another piece of functionality, we are adding a sidebar, which demonstrates
+<classname>Gtk::MenuButton</classname>, <classname>Gtk::Revealer</classname> and
+<classname>Gtk::ListBox</classname>. The new widgets are added in the <filename>window.ui</filename> file.
 </para>
+
+<para>
+The code to populate the sidebar with buttons for the words found in each file is a
+little too involved to go into here. But we'll look at the code to add the gears menu.
+As expected by now, the gears menu is specified in a <classname>Gtk::Builder</classname>
+ui file, <filename>gears_menu.ui</filename>
+</para>
+
+<para>
+To connect the menu item to the new <literal>show-words</literal> setting, we use a
+<classname>Gio::Action</classname> corresponding to the given <classname>Gio::Settings</classname>
+key. In <classname>ExampleAppWindow</classname>'s constructor:
+<programlisting>
+<![CDATA[// Connect the menu to the MenuButton m_gears, and bind the show-words setting
+// to the win.show-words action and the "Words" menu item.
+// (The connection between action and menu item is specified in gears_menu.ui.)
+auto menu_builder = Gtk::Builder::create_from_resource("/org/gtkmm/exampleapp/gears_menu.ui");
+auto object = menu_builder->get_object("menu");
+auto menu = Glib::RefPtr<Gio::MenuModel>::cast_dynamic(object);
+m_gears->set_menu_model(menu);
+add_action(m_settings->create_action("show-words"));]]>
+</programlisting>
+</para>
+
+<para>
+What our application looks like now:
+</para>
+
+<figure id="figure-buildapp-side-bar">
+  <title>Adding a side bar</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;buildapp_side_bar.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;buildapp/step7">Source Code</ulink></para> <!-- Insert exampleapp.gresource.xml gears_menu.ui window.ui org.gtkmm.exampleapp.gschema.xml -->
+
 
 </sect1>
 
-<!--
 <sect1 id="sec-buildapp-properties">
 <title>Properties</title>
 
 <para>
-To be continued.
+Widgets and other objects have many useful properties. Here we show some ways to use
+them in new and flexible ways, by wrapping them in actions with <classname>Gio::PropertyAction</classname>
+or by binding them with <classname>Glib::Binding</classname>.
+(At the time of writing (october 2016) <classname>Gio::PropertyAction</classname>
+does not exist. We have to call a <application>glib</application> function directly.)
 </para>
+
+<para>
+To set this up, we add two labels to the header bar in our <filename>window.ui</filename> file,
+named <literal>lines_label</literal> and <literal>lines</literal>, and get pointers to them
+in the application window's constructor, as we've seen a couple of times by now.
+We add a new "Lines" menu item to the gears menu, which triggers the
+<literal>show-lines</literal> action.
+</para>
+
+<para>
+To make this menu item do something, we create a property action for the <literal>visible</literal>
+property of the <literal>lines</literal> label, and add it to the actions of the window.
+The effect of this is that the visibility of the label gets toggled every time the action
+is activated.
+Since we want both labels to appear and disappear together, we bind the <literal>visible</literal>
+property of the <literal>lines_label</literal> widget to the same property of the
+<literal>lines</literal> widget.
+In <classname>ExampleAppWindow</classname>'s constructor:
+<programlisting>add_action(Glib::wrap((GAction*)
+  g_property_action_new("show-lines", m_lines->gobj(), "visible")));
+m_binding_lines_visible = Glib::Binding::bind_property(m_lines->property_visible(),
+  m_lines_label->property_visible());<![CDATA[
+]]>
+</programlisting>
+</para>
+
+<para>
+We also need a function that counts the lines of the currently active tab, and updates
+the <literal>lines</literal> label. See the full source if you are interested in the details.
+</para>
+
+<para>
+This brings our example application to this appearance:
+</para>
+
+<figure id="figure-buildapp-properties">
+  <title>Properties</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;buildapp_properties.png"/>
+  </screenshot>
+</figure>
+
+<para><ulink url="&url_examples_base;buildapp/step8">Source Code</ulink></para> <!-- Insert gears_menu.ui window.ui -->
 
 </sect1>
 
@@ -8189,11 +8274,40 @@ To be continued.
 <title>Header bar</title>
 
 <para>
-To be continued.
+Our application already uses a <classname>Gtk::HeaderBar</classname>, but so far it still
+gets a 'normal' window titlebar on top of that. This is a bit redundant, and we will now
+tell &gtkmm; to use the header bar as replacement for the titlebar. To do so, we move
+it around to be a direct child of the window, and set its type to be <literal>titlebar</literal>.
+This is done in the <filename>window.ui</filename> file.
 </para>
 
+<para>
+A small extra bonus of using a header bar is that we get a fallback application menu
+button for free. We include an icon in the resource file, and set up this icon as the
+window icon. Then it is displayed in the menu button.
+</para>
+
+<para>
+Here is how the application now looks, if the fallback menu is used:
+</para>
+
+<figure id="figure-buildapp-header-bar">
+  <title>Header bar</title>
+  <screenshot>
+    <graphic format="PNG" fileref="&url_figures_base;buildapp_header_bar.png"/>
+  </screenshot>
+</figure>
+
+<para>
+The <filename>window.ui</filename> file sets a header bar title, but this title is not shown.
+That's because the stack switcher is a child of type <literal>title</literal>. The stack
+switcher becomes a custom title that hides the title label, as if it had been set with
+<methodname>Gtk::HeaderBar::set_custom_title()</methodname>.
+</para>
+
+<para><ulink url="&url_examples_base;buildapp/step9">Source Code</ulink></para> <!-- Insert exampleapp.gresource.xml window.ui -->
+
 </sect1>
--->
 
 </chapter>
 

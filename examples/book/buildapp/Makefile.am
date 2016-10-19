@@ -12,7 +12,10 @@ check_PROGRAMS = \
   step3/exampleapp \
   step4/exampleapp \
   step5/exampleapp \
-  step6/exampleapp
+  step6/exampleapp \
+  step7/exampleapp \
+  step8/exampleapp \
+  step9/exampleapp
 
 check_DATA = $(GSCHEMAS_COMPILED)
 
@@ -31,6 +34,12 @@ dist_noinst_DATA = \
   step5/Makefile.example \
   $(STEP6_RESOURCES) \
   step6/Makefile.example \
+  $(STEP7_RESOURCES) \
+  step7/Makefile.example \
+  $(STEP8_RESOURCES) \
+  step8/Makefile.example \
+  $(STEP9_RESOURCES) \
+  step9/Makefile.example \
   $(gsettings_SCHEMAS)
 
 step1_exampleapp_SOURCES = \
@@ -84,19 +93,55 @@ step6_exampleapp_SOURCES = \
   step6/exampleappprefs.h \
   step6/main.cc
 
+nodist_step7_exampleapp_SOURCES = step7/resources.c
+step7_exampleapp_SOURCES = \
+  step7/exampleapplication.cc \
+  step7/exampleapplication.h \
+  step7/exampleappwindow.cc \
+  step7/exampleappwindow.h \
+  step7/exampleappprefs.cc \
+  step7/exampleappprefs.h \
+  step7/main.cc
+
+nodist_step8_exampleapp_SOURCES = step8/resources.c
+step8_exampleapp_SOURCES = \
+  step8/exampleapplication.cc \
+  step8/exampleapplication.h \
+  step8/exampleappwindow.cc \
+  step8/exampleappwindow.h \
+  step8/exampleappprefs.cc \
+  step8/exampleappprefs.h \
+  step8/main.cc
+
+nodist_step9_exampleapp_SOURCES = step9/resources.c
+step9_exampleapp_SOURCES = \
+  step9/exampleapplication.cc \
+  step9/exampleapplication.h \
+  step9/exampleappwindow.cc \
+  step9/exampleappwindow.h \
+  step9/exampleappprefs.cc \
+  step9/exampleappprefs.h \
+  step9/main.cc
+
 gsettings_SCHEMAS = \
   step5/org.gtkmm.exampleapp.gschema.xml \
-  step6/org.gtkmm.exampleapp.gschema.xml
+  step6/org.gtkmm.exampleapp.gschema.xml \
+  step7/org.gtkmm.exampleapp.gschema.xml \
+  step8/org.gtkmm.exampleapp.gschema.xml \
+  step9/org.gtkmm.exampleapp.gschema.xml
 
 GSCHEMAS_COMPILED = \
   step5/gschemas.compiled \
-  step6/gschemas.compiled
+  step6/gschemas.compiled \
+  step7/gschemas.compiled \
+  step8/gschemas.compiled \
+  step9/gschemas.compiled
 
-## $(<D) is the source directory, $(@D) is the build directory.
+## $(dir $<) is the source directory, $(dir $@) is the build directory.
 ## They are different during make distcheck.
 %/gschemas.compiled: %/org.gtkmm.exampleapp.gschema.xml
 	$(AM_V_GEN) $(GLIB_COMPILE_SCHEMAS) --strict --dry-run --schema-file=$<
-	@$(GLIB_COMPILE_SCHEMAS) --targetdir=$(@D) $(<D)
+	@$(GLIB_COMPILE_SCHEMAS) --targetdir=$(dir $@) $(dir $<)
 
 ## In most programs you would use @GSETTINGS_RULES@ instead of some of the
 ## schema rules in this Makefile.am, but gtkmm-documentation is different.
@@ -109,6 +154,9 @@ DISTCLEANFILES = \
   step4/resources.c \
   step5/resources.c \
   step6/resources.c \
+  step7/resources.c \
+  step8/resources.c \
+  step9/resources.c \
   $(GSCHEMAS_COMPILED)
 
 STEP2_RESOURCES = \
@@ -149,5 +197,36 @@ STEP6_RESOURCES = \
   step6/prefs.ui
 
 step6/resources.c: $(STEP6_RESOURCES)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(dir $<) --generate-source $<
+
+STEP7_RESOURCES = \
+  step7/exampleapp.gresource.xml \
+  step7/window.ui \
+  step7/app_menu.ui \
+  step7/gears_menu.ui \
+  step7/prefs.ui
+
+step7/resources.c: $(STEP7_RESOURCES)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(dir $<) --generate-source $<
+
+STEP8_RESOURCES = \
+  step8/exampleapp.gresource.xml \
+  step8/window.ui \
+  step8/app_menu.ui \
+  step8/gears_menu.ui \
+  step8/prefs.ui
+
+step8/resources.c: $(STEP7_RESOURCES)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(dir $<) --generate-source $<
+
+STEP9_RESOURCES = \
+  step9/exampleapp.gresource.xml \
+  step9/window.ui \
+  step9/app_menu.ui \
+  step9/gears_menu.ui \
+  step9/prefs.ui \
+  step9/exampleapp.png
+
+step9/resources.c: $(STEP7_RESOURCES)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(dir $<) --generate-source $<
 

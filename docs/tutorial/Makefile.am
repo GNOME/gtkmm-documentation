@@ -31,10 +31,13 @@ HELP_MEDIA =					\
 	figures/box_packing2.png		\
 	figures/box_packing3.png		\
 	figures/buildapp_app_menu.png \
+	figures/buildapp_header_bar.png \
 	figures/buildapp_opening_files.png \
 	figures/buildapp_populating_window.png \
 	figures/buildapp_pref_dialog.png \
+	figures/buildapp_properties.png \
 	figures/buildapp_search_bar.png \
+	figures/buildapp_side_bar.png \
 	figures/buildapp_trivial_app.png \
 	figures/buttonbox.png			\
 	figures/buttons.png			\
