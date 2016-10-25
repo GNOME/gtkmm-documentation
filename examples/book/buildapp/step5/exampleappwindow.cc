@@ -29,7 +29,7 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
     throw std::runtime_error("No \"stack\" object in window.ui");
 
   m_settings = Gio::Settings::create("org.gtkmm.exampleapp");
-  m_settings->bind("transition", m_stack, "transition-type");
+  m_settings->bind("transition", m_stack->property_transition_type());
 }
 
 //static
@@ -77,10 +77,7 @@ void ExampleAppWindow::open_file_view(const Glib::RefPtr<Gio::File>& file)
       << "\"):\n  " << ex.what() << std::endl;
   }
 
-  // tag is a Glib::RefPtr<Gtk::TextTag>. Gio::Settings::bind() requires a plain
-  // pointer to the tag. It does not accept a RefPtr. There is no Glib::RefPtr::get()
-  // or equivalent. We must use the unintuitive tag.operator->().
   auto tag = buffer->create_tag();
-  m_settings->bind("font", tag.operator->(), "font");
+  m_settings->bind("font", tag->property_font());
   buffer->apply_tag(tag, buffer->begin(), buffer->end());
 }

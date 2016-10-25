@@ -8063,7 +8063,7 @@ to bind settings keys to object properties, as we do for the transition setting 
 <classname>ExampleAppWindow</classname>'s constructor.
 <programlisting>
 <![CDATA[m_settings = Gio::Settings::create("org.gtkmm.exampleapp");
-m_settings->bind("transition", m_stack, "transition-type");]]>
+m_settings->bind("transition", m_stack->property_transition_type());]]>
 </programlisting>
 </para>
 
@@ -8073,7 +8073,7 @@ an object property in a <classname>Gtk::TextTag</classname> that we must first c
 The code is in <methodname>ExampleAppWindow::open_file_view()</methodname>.
 <programlisting>
 <![CDATA[auto tag = buffer->create_tag();
-m_settings->bind("font", tag.operator->(), "font");
+m_settings->bind("font", tag->property_font());
 buffer->apply_tag(tag, buffer->begin(), buffer->end());]]>
 </programlisting>
 </para>

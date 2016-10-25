@@ -34,8 +34,8 @@ ExampleAppPrefs::ExampleAppPrefs(BaseObjectType* cobject,
     throw std::runtime_error("No \"transition\" object in prefs.ui");
 
   m_settings = Gio::Settings::create("org.gtkmm.exampleapp");
-  m_settings->bind("font", m_font, "font");
-  m_settings->bind("transition", m_transition, "active-id");
+  m_settings->bind("font", m_font->property_font_name());
+  m_settings->bind("transition", m_transition->property_active_id());
 }
 
 //static
