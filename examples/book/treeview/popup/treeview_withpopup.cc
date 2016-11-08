@@ -1,5 +1,3 @@
-//$Id: treeview_withpopup.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -77,7 +75,11 @@ bool TreeView_WithPopup::on_button_press_event(GdkEventButton* button_event)
   //Then do our custom stuff:
   if( (button_event->type == GDK_BUTTON_PRESS) && (button_event->button == 3) )
   {
-    m_Menu_Popup.popup(button_event->button, button_event->time);
+    m_Menu_Popup.popup_at_pointer((GdkEvent*)button_event);
+
+    // Menu::popup_at_pointer() is new in gtkmm 3.22.
+    // If you have an older revision, try this:
+    //m_Menu_Popup.popup(button_event->button, button_event->time);
   }
 
   return return_value;

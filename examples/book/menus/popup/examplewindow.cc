@@ -122,8 +122,11 @@ bool ExampleWindow::on_button_press_event(GdkEventButton* button_event)
     }
 
     if(m_pMenuPopup)
-      m_pMenuPopup->popup(button_event->button, button_event->time);
+      m_pMenuPopup->popup_at_pointer((GdkEvent*)button_event);
 
+      // Menu::popup_at_pointer() is new in gtkmm 3.22.
+      // If you have an older revision, try this:
+      //m_pMenuPopup->popup(button_event->button, button_event->time);
 
     return true; //It has been handled.
   }

@@ -1,5 +1,3 @@
-//$Id: cellrenderertoggle.cc 613 2006-05-10 20:59:28Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -24,9 +22,11 @@
 #include <gtkmm.h>
 #include <sstream>
 
-
-namespace
-{
+// Can't have MyCellRendererToggle in an anonymous namespace, because then
+// gcc 6.2.0 reports unused functions as errors when compiling with
+// --enable-warnings=fatal.
+//namespace
+//{
 
 class MyCellRendererToggle : public Gtk::CellRenderer
 {
@@ -283,7 +283,7 @@ void AppWindow::on_cell_toggled(const Glib::ustring& path_string)
   row[list_columns_.active] = !row[list_columns_.active];
 }
 
-} // anonymous namespace
+//} // anonymous namespace
 
 
 int main(int argc, char** argv)
