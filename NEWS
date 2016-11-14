@@ -1,3 +1,28 @@
+3.22.0: (stable)
+
+* Add the "Building applications" chapter with example code.
+  (Kjell Ahlstedt) Bug #772391
+* Document that Gtk::Action and some other classes are deprecated.
+  (Kjell Ahlstedt)
+* Add the ListModel example.
+  (Kjell Ahlstedt) Bug #755149
+* gmmproc section: Document new options in _CLASS_GTKOBJECT.
+  (Kjell Ahlstedt) Bug #767951
+* Printing examples: Add missing menu items and toolbar.
+  (Kjell Ahlstedt)
+* Printing advanced example: Don't use deprecated methods.
+  (Kjell Ahlstedt)
+* gmmproc section: Describe the err_return_value argument in _WRAP_VFUNC.
+  (Kjell Ahlstedt)
+* Calendar example: Don't use deprecated font: CSS syntax.
+  (Murray Cumming)
+* Custom widget and calendar examples: Don't crash when showing errors.
+  (Murray Cumming)
+* gmmproc section: Document all options in _WRAP_ENUM and _WRAP_GERROR.
+  (Kjell Ahlstedt)
+* gmmproc section: Add description of _CUSTOM_MOVE_OPERATIONS macro.
+  (Marcin Kolny)
+
 3.20.0:
 
 * Builder chapter and example: Describe additional parameters to get_widget_derived()
