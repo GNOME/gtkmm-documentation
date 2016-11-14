@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
   "http://docbook.org/docbook/xml/4.5/docbookx.dtd" [
-  <!ENTITY url_refdocs_base_glib_html "http://developer.gnome.org/glibmm/unstable/">
+  <!ENTITY url_refdocs_base_glib_html "http://developer.gnome.org/glibmm/2.50/">
   <!ENTITY url_refdocs_base_glib "&url_refdocs_base_glib_html;classGlib_1_1">
   <!ENTITY url_refdocs_base_gio "&url_refdocs_base_glib_html;classGio_1_1">
-  <!ENTITY url_refdocs_base_gtk_html "http://developer.gnome.org/gtkmm/unstable/">
+  <!ENTITY url_refdocs_base_gtk_html "http://developer.gnome.org/gtkmm/3.22/">
   <!ENTITY url_refdocs_base_gtk "&url_refdocs_base_gtk_html;classGtk_1_1">
   <!ENTITY url_refdocs_base_gtk_namespace "&url_refdocs_base_gtk_html;namespaceGtk_1_1">
   <!ENTITY url_figures_base "figures/">
   <!ENTITY url_examples_base "http://git.gnome.org/browse/gtkmm-documentation/tree/examples/book/">
-  <!ENTITY url_examples_branchsuffix "master">
+  <!ENTITY url_examples_branchsuffix "gtkmm-3-22">
   <!ENTITY gtkmm "<application>gtkmm</application>">
   <!ENTITY uuml "&#252;" >
   <!ENTITY szlig "&#223;" >
