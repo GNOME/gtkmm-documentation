@@ -32,7 +32,7 @@ name
 
   <bookinfo>
 
-    <title>Programming with &gtkmm; 3</title>
+    <title>Programming with &gtkmm; 4</title>
 
     <authorgroup>
       <author>
@@ -175,16 +175,16 @@ See the <ulink url="https://wiki.gnome.org/Projects/gtkmm/FAQ">FAQ</ulink> for m
 <sect1 id="sec-installation-dependencies">
 <title>Dependencies</title>
 <para>
-  Before attempting to install &gtkmm; 3.0, you might first need to install these other
-  packages.
+  Before attempting to install &gtkmm;<application>-4.0</application>,
+  you might first need to install these other packages.
 </para>
 <itemizedlist>
-  <listitem><para><application>libsigc++ 2.0</application></para></listitem>
-  <listitem><para><application>GTK+ 3.0</application></para></listitem>
-  <listitem><para><application>glibmm</application></para></listitem>
-  <listitem><para><application>cairomm</application></para></listitem>
-  <listitem><para><application>pangomm</application></para></listitem>
-  <listitem><para><application>atkmm</application></para></listitem>
+  <listitem><para><application>libsigc++-3.0</application></para></listitem>
+  <listitem><para><application>gtk+-4.0</application></para></listitem>
+  <listitem><para><application>glibmm-2.52</application></para></listitem>
+  <listitem><para><application>cairomm-1.16</application></para></listitem>
+  <listitem><para><application>pangomm-2.42</application></para></listitem>
+  <listitem><para><application>atkmm-2.26</application></para></listitem>
 </itemizedlist>
 <para>
 These dependencies have their own dependencies, including the following
@@ -216,8 +216,8 @@ applications and libraries:
 </para>
 <para>
     The names of the &gtkmm; packages vary from distribution to distribution
-    (e.g. <application>libgtkmm-3.0-dev</application> on Debian and Ubuntu or
-    <application>gtkmm30-devel</application> on Red Hat Fedora), so check with
+    (e.g. <application>libgtkmm-4.0-dev</application> on Debian and Ubuntu or
+    <application>gtkmm40-devel</application> on Red Hat Fedora), so check with
     your distribution's package management program for the correct package name
     and install it like you would any other package.
 </para>
@@ -225,8 +225,8 @@ applications and libraries:
 <para>
 The package names will not change when new API/ABI-compatible versions of &gtkmm;
 are released. Otherwise they would not be API/ABI-compatible. So don't be
-surprised, for instance, to find &gtkmm; 3.8 supplied by Debian's
-<application>libgtkmm-3.0-dev</application> package.
+surprised, for instance, to find &gtkmm; 4.8 supplied by Debian's
+<application>libgtkmm-4.0-dev</application> package.
 </para>
 </note>
 </sect2>
@@ -333,9 +333,9 @@ suffices.
 <para>
 The next statement:
 
-<programlisting>Glib::RefPtr&lt;Gtk::Application&gt; app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");</programlisting>
+<programlisting>auto app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");</programlisting>
 
-creates a <classname>Gtk::Application</classname> object, stored in a <classname>RefPtr</classname> smartpointer. This is needed in all &gtkmm;
+creates a <classname>Gtk::Application</classname> object, stored in a <classname>Glib::RefPtr</classname> smartpointer. This is needed in all &gtkmm;
 applications. The <methodname>create()</methodname> method for this object initializes &gtkmm;, and checks the
 arguments passed to your application on the command line, looking for
 standard options such as <literal>--display</literal>. It takes these from the argument list, leaving anything it does not
@@ -358,7 +358,7 @@ Your <function>main()</function> function will then return with an appropriate s
 <para>
 After putting the source code in <literal>simple.cc</literal> you can compile
 the above program with <application>gcc</application> using:
-<programlisting>g++ simple.cc -o simple `pkg-config gtkmm-3.0 --cflags --libs`</programlisting>
+<programlisting>g++ simple.cc -o simple `pkg-config gtkmm-4.0 --cflags --libs`</programlisting>
 Note that you must surround the <literal>pkg-config</literal> invocation with backquotes.
 Backquotes cause the shell to execute the command inside them, and to use
 the command's output as part of the command line.
@@ -385,13 +385,18 @@ find them in. Try running it from your shell-prompt to see the results on your s
 <para>
 However, this is even simpler when using the <function>PKG_CHECK_MODULES()</function> macro in a standard configure.ac file with autoconf and automake.
 For instance:
-<programlisting>PKG_CHECK_MODULES([MYAPP], [gtkmm-3.0 >= 3.8.0])</programlisting>
+<programlisting>PKG_CHECK_MODULES([MYAPP], [gtkmm-4.0 >= 4.8.0])</programlisting>
 This checks for the presence of gtkmm and defines MYAPP_LIBS and MYAPP_CFLAGS for use in your Makefile.am files.
 </para>
-<para>gtkmm-3.0 is the name of the current stable API. There was an older API called gtkmm-2-4 which installs in parallel when it is available. There were several versions of gtkmm-2.4, such as gtkmm 2.10 and there are several versions of the gtkmm-3.0 API. Note that the API name does not change for every version because that would be an incompatible API and ABI break. Theoretically, there might be a future gtkmm-4.0 API which would install in parallel with gtkmm-3.0 without affecting existing applications.
+<para>gtkmm-4.0 is the name of the current stable API. There are older APIs called gtkmm-2.4
+and gtkmm-3.0 which install in parallel when they are available. There are several
+versions of gtkmm-2.4, such as gtkmm 2.10 and there are several versions of the gtkmm-3.0 API.
+Note that the API name does not change for every version because that would be an incompatible
+API and ABI break. There might be a future gtkmm-5.0 API which would install in parallel
+with gtkmm-4.0 without affecting existing applications.
 </para>
 
-<para>Note that if you mention extra modules in addition to gtkmm-3.0, they should be separated by spaces, not commas.
+<para>Note that if you mention extra modules in addition to gtkmm-4.0, they should be separated by spaces, not commas.
 </para>
 <para>
 Openismus has more <ulink url="http://www.openismus.com/documents/linux/automake/automake.shtml">basic help with automake and autoconf</ulink>.

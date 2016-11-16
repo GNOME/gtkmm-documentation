@@ -2,7 +2,7 @@
 
 @YELP_HELP_RULES@
 
-gtkmm_docdir = $(datadir)/doc/gtkmm-3.0
+gtkmm_docdir = $(datadir)/doc/gtkmm-4.0
 
 # Function: $(call vpath_listall,PATTERN ...)
 # Get all filenames which match a PATTERN from the list.  Look for files

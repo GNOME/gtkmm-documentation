@@ -70,7 +70,7 @@ sub process_source_file($$$)
   my ($directory, $source_file, $skip_leading_comments) = @_;
   my $found_start = !$skip_leading_comments;
 
-  print "<para>File: <filename>$source_file</filename> (For use with gtkmm 3, not gtkmm 2)\n";
+  print "<para>File: <filename>$source_file</filename> (For use with gtkmm 4)\n";
   print "</para>\n";
   print "<programlisting>\n";
 
