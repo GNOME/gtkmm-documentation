@@ -97,8 +97,6 @@ check_PROGRAMS =					\
 	book/scrolledwindow/example			\
 	book/searchbar/example				\
 	book/signals/custom/example			\
-	book/socket/plug				\
-	book/socket/socket				\
 	book/spinbutton/example				\
 	book/textview/example				\
 	book/timeout/timeout				\
@@ -614,12 +612,6 @@ book_signals_custom_example_SOURCES =	\
 	book/signals/custom/main.cc	\
 	book/signals/custom/server.cc	\
 	book/signals/custom/server.h
-
-book_socket_plug_SOURCES = \
-	book/socket/plug.cc
-
-book_socket_socket_SOURCES = \
-	book/socket/socket.cc
 
 book_spinbutton_example_SOURCES =		\
 	book/spinbutton/examplewindow.cc	\

@@ -97,8 +97,6 @@ HELP_MEDIA =					\
 	figures/range_widgets.png		\
 	figures/recentchooserdialog.png		\
 	figures/scrolledwindow.png		\
-	figures/socket-fail.png			\
-	figures/socket.png			\
 	figures/spinbutton.png			\
 	figures/textview.png			\
 	figures/toolbar.png			\
