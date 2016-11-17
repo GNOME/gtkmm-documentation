@@ -42,7 +42,7 @@ ExampleAppWindow* ExampleApplication::create_appwindow()
   // otherwise equivalent to Gtk::Application::add_window().
 
   // Delete the window when it is hidden.
-  appwindow->signal_hide().connect(sigc::bind<Gtk::Window*>(sigc::mem_fun(*this,
+  appwindow->signal_hide().connect(sigc::bind(sigc::mem_fun(*this,
     &ExampleApplication::on_hide_window), appwindow));
 
   return appwindow;

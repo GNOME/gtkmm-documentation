@@ -3,8 +3,8 @@ PROGRAM = exampleapp
 CXXFILES = main.cc exampleappwindow.cc exampleapplication.cc
 OBJS = $(CXXFILES:.cc=.o)
 DEPDIR = .deps
-CXXFLAGS = `pkg-config --cflags gtkmm-3.0` -std=c++11 -Wall -g
-LIBS = `pkg-config --libs gtkmm-3.0`
+CXXFLAGS = `pkg-config --cflags gtkmm-4.0` -std=c++14 -Wall -g
+LIBS = `pkg-config --libs gtkmm-4.0`
 
 all: $(PROGRAM)
 

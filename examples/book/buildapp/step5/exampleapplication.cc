@@ -43,7 +43,7 @@ ExampleAppWindow* ExampleApplication::create_appwindow()
   // otherwise equivalent to Gtk::Application::add_window().
 
   // Delete the window when it is hidden.
-  appwindow->signal_hide().connect(sigc::bind<Gtk::Window*>(sigc::mem_fun(*this,
+  appwindow->signal_hide().connect(sigc::bind(sigc::mem_fun(*this,
     &ExampleApplication::on_hide_window), appwindow));
 
   return appwindow;
@@ -143,7 +143,7 @@ void ExampleApplication::on_action_preferences()
     prefs_dialog->present();
 
     // Delete the dialog when it is hidden.
-    prefs_dialog->signal_hide().connect(sigc::bind<Gtk::Window*>(sigc::mem_fun(*this,
+    prefs_dialog->signal_hide().connect(sigc::bind(sigc::mem_fun(*this,
       &ExampleApplication::on_hide_window), prefs_dialog));
   }
   catch (const Glib::Error& ex)
