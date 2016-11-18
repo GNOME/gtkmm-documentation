@@ -20,9 +20,6 @@
 //#include <gtk/gtkwidget.h> //For GTK_IS_WIDGET()
 #include <cstring>
 
-// The MyWidget class uses API which was added in gtkmm 3.15.3 (Gtk::CssProviderError,
-// Gtk::CssProvider::signal_parsing_error() and Gtk::CssSection) and in gtkmm 3.15.2
-// (Gtk::StyleProperty).
 
 MyWidget::MyWidget() :
   //The GType name will actually be gtkmm__CustomObject_mywidget
@@ -93,30 +90,23 @@ Gtk::SizeRequestMode MyWidget::get_request_mode_vfunc() const
 //this widget.
 //Let's make this simple example widget always need minimum 60 by 50 and
 //natural 100 by 70.
-void MyWidget::get_preferred_width_vfunc(int& minimum_width, int& natural_width) const
+void MyWidget::measure_vfunc(Gtk::Orientation orientation, int /* for_size */,
+  int& minimum, int& natural, int& minimum_baseline, int& natural_baseline) const
 {
-  minimum_width = 60;
-  natural_width = 100;
-}
+  if (orientation == Gtk::ORIENTATION_HORIZONTAL)
+  {
+    minimum = 60;
+    natural = 100;
+  }
+  else
+  {
+    minimum = 50;
+    natural = 70;
+  }
 
-void MyWidget::get_preferred_height_for_width_vfunc(int /* width */,
-   int& minimum_height, int& natural_height) const
-{
-  minimum_height = 50;
-  natural_height = 70;
-}
-
-void MyWidget::get_preferred_height_vfunc(int& minimum_height, int& natural_height) const
-{
-  minimum_height = 50;
-  natural_height = 70;
-}
-
-void MyWidget::get_preferred_width_for_height_vfunc(int /* height */,
-   int& minimum_width, int& natural_width) const
-{
-  minimum_width = 60;
-  natural_width = 100;
+  // Don't use baseline alignment.
+  minimum_baseline = -1;
+  natural_baseline = -1;
 }
 
 void MyWidget::on_size_allocate(Gtk::Allocation& allocation)
@@ -162,24 +152,8 @@ void MyWidget::on_realize()
   if(!m_refGdkWindow)
   {
     //Create the GdkWindow:
-
-    GdkWindowAttr attributes;
-    memset(&attributes, 0, sizeof(attributes));
-
-    Gtk::Allocation allocation = get_allocation();
-
-    //Set initial position and size of the Gdk::Window:
-    attributes.x = allocation.get_x();
-    attributes.y = allocation.get_y();
-    attributes.width = allocation.get_width();
-    attributes.height = allocation.get_height();
-
-    attributes.event_mask = get_events () | Gdk::EXPOSURE_MASK;
-    attributes.window_type = GDK_WINDOW_CHILD;
-    attributes.wclass = GDK_INPUT_OUTPUT;
-
-    m_refGdkWindow = Gdk::Window::create(get_parent_window(), &attributes,
-            GDK_WA_X | GDK_WA_Y);
+    m_refGdkWindow = Gdk::Window::create_child(get_parent_window(),
+      get_events () | Gdk::EXPOSURE_MASK, get_allocation());
     set_window(m_refGdkWindow);
 
     //make the widget receive expose events
@@ -208,8 +182,7 @@ bool MyWidget::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     allocation.get_width(), allocation.get_height());
 
   // draw the foreground
-  const auto state = refStyleContext->get_state();
-  Gdk::Cairo::set_source_rgba(cr, refStyleContext->get_color(state));
+  Gdk::Cairo::set_source_rgba(cr, refStyleContext->get_color());
   cr->move_to(155.*scale_x, 165.*scale_y);
   cr->line_to(155.*scale_x, 838.*scale_y);
   cr->line_to(265.*scale_x, 900.*scale_y);

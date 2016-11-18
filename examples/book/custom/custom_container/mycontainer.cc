@@ -1,5 +1,3 @@
-//$Id: mycontainer.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2004 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -29,19 +27,11 @@ MyContainer::MyContainer()
 
 MyContainer::~MyContainer()
 {
-/*
-  // These calls to Gtk::Widget::unparent() are necessary if MyContainer is
-  // deleted before its children. But if you use a version of gtkmm where bug
-  // https://bugzilla.gnome.org/show_bug.cgi?id=605728
-  // has not been fixed (gtkmm 3.7.10 or earlier) and the children are deleted
-  // before the container, these calls can make the program crash.
-  // That's because on_remove() is not called, when the children are deleted.
   if (m_child_one)
     m_child_one->unparent();
 
   if (m_child_two)
     m_child_two->unparent();
-*/
 }
 
 void MyContainer::set_child_widgets(Gtk::Widget& child_one,
@@ -54,117 +44,86 @@ void MyContainer::set_child_widgets(Gtk::Widget& child_one,
   m_child_two->set_parent(*this);
 }
 
-//This example container is a simplified VBox with at most two children.
+// This example container is a simplified vertical Box with at most two children.
 Gtk::SizeRequestMode MyContainer::get_request_mode_vfunc() const
 {
   return Gtk::SIZE_REQUEST_HEIGHT_FOR_WIDTH;
 }
 
-//Discover the total amount of minimum space and natural space needed by
-//this container and its children.
-void MyContainer::get_preferred_width_vfunc(int& minimum_width, int& natural_width) const
+// Discover the total amount of minimum space and natural space needed by
+// this container and its children.
+void MyContainer::measure_vfunc(Gtk::Orientation orientation, int for_size,
+  int& minimum, int& natural, int& minimum_baseline, int& natural_baseline) const
 {
-  int child_minimum_width[2] = {0, 0};
-  int child_natural_width[2] = {0, 0};
+  // Don't use baseline alignment.
+  minimum_baseline = -1;
+  natural_baseline = -1;
 
-  if(m_child_one && m_child_one->get_visible())
-    m_child_one->get_preferred_width(child_minimum_width[0], child_natural_width[0]);
+  int dummy_minimum_baseline = 0;
+  int dummy_natural_baseline = 0;
 
-  if(m_child_two && m_child_two->get_visible())
-    m_child_two->get_preferred_width(child_minimum_width[1], child_natural_width[1]);
-
-  //Request a width equal to the width of the widest visible child.
-  minimum_width = std::max(child_minimum_width[0], child_minimum_width[1]);
-  natural_width = std::max(child_natural_width[0], child_natural_width[1]);
-}
-
-void MyContainer::get_preferred_height_for_width_vfunc(int width,
-   int& minimum_height, int& natural_height) const
-{
-  int child_minimum_height[2] = {0, 0};
-  int child_natural_height[2] = {0, 0};
-  int nvis_children = 0;
-
-  if(m_child_one && m_child_one->get_visible())
+  if (orientation == Gtk::ORIENTATION_HORIZONTAL)
   {
-    ++nvis_children;
-    m_child_one->get_preferred_height_for_width(width, child_minimum_height[0],
-                                                child_natural_height[0]);
-  }
+    int height_per_child = for_size;
 
-  if(m_child_two && m_child_two->get_visible())
+    if (for_size >= 0)
+    {
+      int nvis_children = 0;
+
+      // Get number of visible children.
+      if (m_child_one && m_child_one->get_visible())
+        ++nvis_children;
+      if (m_child_two && m_child_two->get_visible())
+        ++nvis_children;
+
+      // Divide the height equally among the visible children.
+      if (nvis_children > 0)
+        height_per_child = for_size / nvis_children;
+    }
+
+    int child_minimum_width[2] = {0, 0};
+    int child_natural_width[2] = {0, 0};
+
+    if (m_child_one && m_child_one->get_visible())
+      m_child_one->measure(orientation, height_per_child, child_minimum_width[0],
+        child_natural_width[0], dummy_minimum_baseline, dummy_natural_baseline);
+
+    if (m_child_two && m_child_two->get_visible())
+      m_child_two->measure(orientation, height_per_child, child_minimum_width[1],
+        child_natural_width[1], dummy_minimum_baseline, dummy_natural_baseline);
+
+    // Request a width equal to the width of the widest visible child.
+    minimum = std::max(child_minimum_width[0], child_minimum_width[1]);
+    natural = std::max(child_natural_width[0], child_natural_width[1]);
+  }
+  else // Gtk::ORIENTATION_VERTICAL
   {
-    ++nvis_children;
-    m_child_two->get_preferred_height_for_width(width, child_minimum_height[1],
-                                                child_natural_height[1]);
+    int child_minimum_height[2] = {0, 0};
+    int child_natural_height[2] = {0, 0};
+    int nvis_children = 0;
+
+    if (m_child_one && m_child_one->get_visible())
+    {
+      ++nvis_children;
+      m_child_one->measure(orientation, for_size, child_minimum_height[0],
+        child_natural_height[0], dummy_minimum_baseline, dummy_natural_baseline);
+    }
+
+    if (m_child_two && m_child_two->get_visible())
+    {
+      ++nvis_children;
+      m_child_two->measure(orientation, for_size, child_minimum_height[1],
+        child_natural_height[1], dummy_minimum_baseline, dummy_natural_baseline);
+    }
+
+    // The allocated height will be divided equally among the visible children.
+    // Request a height equal to the number of visible children times the height
+    // of the highest child.
+    minimum = nvis_children * std::max(child_minimum_height[0],
+                                       child_minimum_height[1]);
+    natural = nvis_children * std::max(child_natural_height[0],
+                                       child_natural_height[1]);
   }
-
-  //The allocated height will be divided equally among the visible children.
-  //Request a height equal to the number of visible children times the height
-  //of the highest child.
-  minimum_height = nvis_children * std::max(child_minimum_height[0],
-                                            child_minimum_height[1]);
-  natural_height = nvis_children * std::max(child_natural_height[0],
-                                            child_natural_height[1]);
-}
-
-void MyContainer::get_preferred_height_vfunc(int& minimum_height, int& natural_height) const
-{
-  int child_minimum_height[2] = {0, 0};
-  int child_natural_height[2] = {0, 0};
-  int nvis_children = 0;
-
-  if(m_child_one && m_child_one->get_visible())
-  {
-    ++nvis_children;
-    m_child_one->get_preferred_height(child_minimum_height[0], child_natural_height[0]);
-  }
-
-  if(m_child_two && m_child_two->get_visible())
-  {
-    ++nvis_children;
-    m_child_two->get_preferred_height(child_minimum_height[1], child_natural_height[1]);
-  }
-
-  //The allocated height will be divided equally among the visible children.
-  //Request a height equal to the number of visible children times the height
-  //of the highest child.
-  minimum_height = nvis_children * std::max(child_minimum_height[0],
-                                            child_minimum_height[1]);
-  natural_height = nvis_children * std::max(child_natural_height[0],
-                                            child_natural_height[1]);
-}
-
-void MyContainer::get_preferred_width_for_height_vfunc(int height,
-   int& minimum_width, int& natural_width) const
-{
-  int child_minimum_width[2] = {0, 0};
-  int child_natural_width[2] = {0, 0};
-  int nvis_children = 0;
-
-  //Get number of visible children.
-  if(m_child_one && m_child_one->get_visible())
-    ++nvis_children;
-  if(m_child_two && m_child_two->get_visible())
-    ++nvis_children;
-
-  if(nvis_children > 0)
-  {
-    //Divide the height equally among the visible children.
-    const int height_per_child = height / nvis_children;
-
-    if(m_child_one && m_child_one->get_visible())
-      m_child_one->get_preferred_width_for_height(height_per_child,
-                   child_minimum_width[0], child_natural_width[0]);
-
-    if(m_child_two && m_child_two->get_visible())
-      m_child_two->get_preferred_width_for_height(height_per_child,
-                   child_minimum_width[1], child_natural_width[1]);
-  }
-
-  //Request a width equal to the width of the widest child.
-  minimum_width = std::max(child_minimum_width[0], child_minimum_width[1]);
-  natural_width = std::max(child_natural_width[0], child_natural_width[1]);
 }
 
 void MyContainer::on_size_allocate(Gtk::Allocation& allocation)

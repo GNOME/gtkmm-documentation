@@ -1,5 +1,3 @@
-//$Id: mycontainer.h 246 2004-10-10 21:49:33Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2004 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -33,10 +31,8 @@ protected:
 
   //Overrides:
   Gtk::SizeRequestMode get_request_mode_vfunc() const override;
-  void get_preferred_width_vfunc(int& minimum_width, int& natural_width) const override;
-  void get_preferred_height_for_width_vfunc(int width, int& minimum_height, int& natural_height) const override;
-  void get_preferred_height_vfunc(int& minimum_height, int& natural_height) const override;
-  void get_preferred_width_for_height_vfunc(int height, int& minimum_width, int& natural_width) const override;
+  void measure_vfunc(Gtk::Orientation orientation, int for_size, int& minimum, int& natural,
+    int& minimum_baseline, int& natural_baseline) const override;
   void on_size_allocate(Gtk::Allocation& allocation) override;
 
   void forall_vfunc(gboolean include_internals, GtkCallback callback, gpointer callback_data) override;
