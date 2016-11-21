@@ -22,9 +22,9 @@ ExampleWindow::ExampleWindow()
   m_Button_Clear("_Clear", true)
 {
   set_title("Gtk::InfoBar example");
-  set_border_width(6);
   set_default_size(400, 200);
 
+  m_VBox.property_margin() = 6;
   add(m_VBox);
 
   // Add the message label to the InfoBar:

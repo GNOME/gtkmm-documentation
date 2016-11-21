@@ -38,11 +38,11 @@ public:
   Glib::PropertyProxy<bool> property_active();
   Glib::PropertyProxy<bool> property_radio();
 
-  typedef sigc::signal<void, const Glib::ustring&> SignalToggled;
+  using SignalToggled = sigc::signal<void(const Glib::ustring&)>;
   SignalToggled& signal_toggled();
 
 protected:
-  //TODO: Update for gtkmm 3. This isn't currently overriding anything.
+  //TODO: Update for gtkmm 4. This isn't currently overriding anything.
   void get_preferred_size_vfunc(Gtk::Widget& widget,
                               const Gdk::Rectangle* cell_area,
                               int* x_offset, int* y_offset,

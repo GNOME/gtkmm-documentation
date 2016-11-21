@@ -1,5 +1,3 @@
-/* -*- Mode: C++; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
-
 /* gtkmm example Copyright (C) 2007 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -34,8 +32,8 @@ ExampleWindow::ExampleWindow()
 {
   //Set up window and the top-level container:
   set_title(app_title);
-  set_border_width(10);
 
+  m_vbox.property_margin() = 10;
   add(m_vbox);
 
   //Check button with markup in tooltip:

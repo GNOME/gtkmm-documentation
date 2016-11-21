@@ -21,7 +21,6 @@ ExampleWindow::ExampleWindow()
   // Window properties
   set_title("FlowBox Example");
   set_default_size(600, 400);
-  set_border_width(6);
 
   // Scrolled window
   m_scrolled_window.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC);
@@ -41,6 +40,7 @@ ExampleWindow::ExampleWindow()
 
   // Layout
   m_scrolled_window.add(m_flow_box);
+  m_scrolled_window.property_margin() = 6;
   add(m_scrolled_window);
 
   show_all_children();

@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -25,9 +23,9 @@ ExampleWindow::ExampleWindow()
   m_Button_Buffer2("Use buffer 2")
 {
   set_title("Gtk::TextView example");
-  set_border_width(5);
   set_default_size(400, 200);
 
+  m_VBox.property_margin() = 5;
   add(m_VBox);
 
   //Add the TreeView, inside a ScrolledWindow, with the button underneath:
@@ -44,7 +42,7 @@ ExampleWindow::ExampleWindow()
   m_ButtonBox.pack_start(m_Button_Buffer1, Gtk::PACK_SHRINK);
   m_ButtonBox.pack_start(m_Button_Buffer2, Gtk::PACK_SHRINK);
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
-  m_ButtonBox.set_border_width(5);
+  m_ButtonBox.property_margin() = 5;
   m_ButtonBox.set_spacing(5);
   m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
 

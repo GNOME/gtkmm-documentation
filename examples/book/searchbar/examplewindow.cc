@@ -26,7 +26,6 @@ ExampleWindow::ExampleWindow()
 {
   // Window properties
   set_title("SearchBar Example");
-  set_border_width(12);
   set_size_request(500, -1); // To provide space for the searchbar when it appears.
 
   // Search bar properties
@@ -75,6 +74,7 @@ ExampleWindow::ExampleWindow()
   m_vbox.pack_start(m_label, Gtk::PACK_SHRINK, 6);
   m_vbox.pack_start(m_separator, Gtk::PACK_SHRINK, 12);
   m_vbox.pack_start(m_options_grid, Gtk::PACK_SHRINK, 12);
+  m_vbox.property_margin() = 12;
   add(m_vbox);
 
   show_all_children();

@@ -1,5 +1,3 @@
-//$Id: helloworld.h 2 2003-01-21 13:41:59Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -27,13 +25,13 @@ class HelloWorld : public Gtk::Window
 {
 public:
   HelloWorld();
-  virtual ~HelloWorld();
+  ~HelloWorld() override;
 
 protected:
 
   // Signal handlers:
-  // Our new improved on_button_clicked(). (see below)
-  void on_button_clicked(Glib::ustring data);
+  // Our new improved on_button_clicked().
+  void on_button_clicked(const Glib::ustring& data);
 
   // Child widgets:
   Gtk::Box m_box1;

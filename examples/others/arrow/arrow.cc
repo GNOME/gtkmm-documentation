@@ -52,14 +52,13 @@ AppWindow::AppWindow()
 
   set_title ("Arrow Buttons");
 
-  /* Sets the border width of the window. */
-  set_border_width (10);
-
   /* Create a grid to hold the arrows/buttons */
   grid = Gtk::manage (new Gtk::Grid ());
   grid->set_row_homogeneous(true);
   grid->set_column_homogeneous(true);
-  grid->set_border_width (2);
+
+  /* Set the margin around the grid. */
+  grid->property_margin() = 12;
 
   /* Pack and show all our widgets */
   button = Gtk::manage (new ArrowButton (Gtk::ARROW_UP));

@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 870 2007-07-13 19:08:46Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,8 +20,8 @@ ExampleWindow::ExampleWindow()
 : m_Label("Click here to quit, quit, quit, quit, quit")
 {
   set_title ("EventBox");
-  set_border_width(10);
 
+  m_EventBox.property_margin() = 10;
   add(m_EventBox);
 
   m_EventBox.add(m_Label);

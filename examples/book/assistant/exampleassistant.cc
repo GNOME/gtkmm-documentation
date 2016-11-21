@@ -24,7 +24,6 @@ ExampleAssistant::ExampleAssistant()
   m_check("Optional extra information")
 {
   set_title("Gtk::Assistant example");
-  set_border_width(12);
   set_default_size(400, 300);
 
   m_box.pack_start(m_label1);

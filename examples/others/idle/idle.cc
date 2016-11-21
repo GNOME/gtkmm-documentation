@@ -57,8 +57,8 @@ IdleExample::IdleExample() :
   hbox->pack_start(m_quit, Gtk::PACK_EXPAND_PADDING);
   vbox->pack_start(*hbox);
 
-  // set border and display all
-  set_border_width(5);
+  // set margin and display all
+  vbox->property_margin() = 5;
   add(*vbox);
   show_all_children();
 

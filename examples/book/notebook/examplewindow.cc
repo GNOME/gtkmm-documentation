@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -26,14 +24,13 @@ ExampleWindow::ExampleWindow()
   m_Button_Quit("Quit")
 {
   set_title("Gtk::Notebook example");
-  set_border_width(10);
   set_default_size(400, 200);
 
-
+  m_VBox.property_margin() = 10;
   add(m_VBox);
 
   //Add the Notebook, with the button underneath:
-  m_Notebook.set_border_width(10);
+  m_Notebook.property_margin() = 10;
   m_VBox.pack_start(m_Notebook);
   m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
 

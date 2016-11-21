@@ -23,7 +23,6 @@ ExampleWindow::ExampleWindow()
 {
   // Window properties
   set_title("HeaderBar Example");
-  set_border_width(12);
 
   // Button
   m_button.set_image_from_icon_name("go-home-symbolic", Gtk::ICON_SIZE_BUTTON, true);
@@ -57,6 +56,7 @@ ExampleWindow::ExampleWindow()
   m_grid.attach(m_title_entry, 1, 1, 1, 1);
   m_grid.attach(m_subtitle_label, 0, 2, 1, 1);
   m_grid.attach(m_subtitle_entry, 1, 2, 1, 1);
+  m_grid.property_margin() = 12;
   add(m_grid);
 
   show_all_children();

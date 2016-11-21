@@ -30,9 +30,9 @@ ExampleWindow::ExampleWindow() :
   m_WorkerThread(nullptr)
 {
   set_title("Multi-threaded example");
-  set_border_width(5);
   set_default_size(300, 300);
 
+  m_VBox.property_margin() = 5;
   add(m_VBox);
 
   // Add the ProgressBar.
@@ -57,7 +57,7 @@ ExampleWindow::ExampleWindow() :
   m_ButtonBox.pack_start(m_ButtonStart, Gtk::PACK_SHRINK);
   m_ButtonBox.pack_start(m_ButtonStop, Gtk::PACK_SHRINK);
   m_ButtonBox.pack_start(m_ButtonQuit, Gtk::PACK_SHRINK);
-  m_ButtonBox.set_border_width(5);
+  m_ButtonBox.property_margin() = 5;
   m_ButtonBox.set_spacing(5);
   m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
 

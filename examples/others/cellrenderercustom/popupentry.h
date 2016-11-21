@@ -1,5 +1,3 @@
-//$Id: popupentry.h 156 2004-03-12 10:11:35Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -40,7 +38,7 @@ public:
 
   static int get_button_width();
 
-  typedef sigc::signal<void> type_signal_arrow_clicked;
+  using type_signal_arrow_clicked = sigc::signal<void()>;
   type_signal_arrow_clicked& signal_arrow_clicked();
 
 protected:

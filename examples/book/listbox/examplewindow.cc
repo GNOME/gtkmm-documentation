@@ -60,9 +60,9 @@ ExampleWindow::ExampleWindow() :
   m_Button_Visibility("visibility")
 {
   set_title("ListBox example");
-  set_border_width(5);
   set_default_size(300, 300);
 
+  m_HBox.property_margin() = 5;
   add(m_HBox);
   m_HBox.pack_start(m_VBox1, Gtk::PACK_SHRINK);
 

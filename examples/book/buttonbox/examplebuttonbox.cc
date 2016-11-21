@@ -1,5 +1,3 @@
-//$Id: examplebuttonbox.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -27,14 +25,15 @@ ExampleButtonBox::ExampleButtonBox(bool horizontal,
   m_Button_Cancel("Cancel"),
   m_Button_Help("Help")
 {
-  Gtk::ButtonBox* bbox = nullptr;
+  auto orientation = horizontal ? Gtk::ORIENTATION_HORIZONTAL : Gtk::ORIENTATION_VERTICAL;
+  auto bbox = Gtk::manage(new Gtk::ButtonBox(orientation));
 
-  if(horizontal)
-    bbox = Gtk::manage( new Gtk::ButtonBox(Gtk::ORIENTATION_HORIZONTAL) );
-  else
-    bbox = Gtk::manage( new Gtk::ButtonBox(Gtk::ORIENTATION_VERTICAL) );
-
-  bbox->set_border_width(5);
+  if (!horizontal)
+  {
+    set_margin_start(5);
+    set_margin_end(5);
+  }
+  bbox->property_margin() = 5;
 
   add(*bbox);
 

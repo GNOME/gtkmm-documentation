@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -55,12 +53,12 @@ ExampleWindow::ExampleWindow()
 {
   set_title("SpinButton");
 
-  m_VBox_Main.set_border_width(10);
+  m_VBox_Main.property_margin() = 10;
   add(m_VBox_Main);
 
   m_VBox_Main.pack_start(m_Frame_NotAccelerated);
 
-  m_VBox.set_border_width(5);
+  m_VBox.property_margin() = 5;
   m_Frame_NotAccelerated.add(m_VBox);
 
   /* Day, month, year spinners */
@@ -93,7 +91,7 @@ ExampleWindow::ExampleWindow()
   //Accelerated:
   m_VBox_Main.pack_start(m_Frame_Accelerated);
 
-  m_VBox_Accelerated.set_border_width(5);
+  m_VBox_Accelerated.property_margin() = 5;
   m_Frame_Accelerated.add(m_VBox_Accelerated);
 
   m_VBox_Accelerated.pack_start(m_HBox_Accelerated, Gtk::PACK_EXPAND_WIDGET, 5);

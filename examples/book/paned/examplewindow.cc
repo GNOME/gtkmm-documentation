@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,8 +20,8 @@ ExampleWindow::ExampleWindow()
 : m_VPaned(Gtk::ORIENTATION_VERTICAL)
 {
   set_title ("Paned Windows");
-  set_border_width(10);
   set_default_size(450, 400);
+  m_VPaned.property_margin() = 10;
 
   /* Add a vpaned widget to our toplevel window */
   add(m_VPaned);

@@ -1,5 +1,3 @@
-//$Id: timerexample.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2003 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -27,8 +25,7 @@ TimerExample::TimerExample() :
   count_value(5), // each timer will count down 5 times before disconnecting
   timeout_value(1500) // 1500 ms = 1.5 seconds
 {
-  set_border_width(10);
-
+  m_Box.property_margin() = 10;
   add(m_Box);
   m_Box.pack_start(m_ButtonAddTimer);
   m_Box.pack_start(m_ButtonDeleteTimer);
@@ -55,7 +52,7 @@ void TimerExample::on_button_add_timer()
   // Creation of a new object prevents long lines and shows us a little
   // how slots work.  We have 0 parameters and bool as a return value
   // after calling sigc::bind.
-  sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this,
+  sigc::slot<bool()> my_slot = sigc::bind(sigc::mem_fun(*this,
               &TimerExample::on_timeout), m_timer_number);
 
   // This is where we connect the slot to the Glib::signal_timeout()

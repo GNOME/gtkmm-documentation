@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -39,8 +37,8 @@ ExampleWindow::ExampleWindow()
           "This one is underlined in quite a funky fashion")
 {
   set_title("Label");
-  set_border_width(5);
 
+  m_HBox.property_margin() = 5;
   add(m_HBox);
 
   m_HBox.pack_start(m_VBox, Gtk::PACK_SHRINK);

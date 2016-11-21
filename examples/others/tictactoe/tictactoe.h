@@ -36,7 +36,7 @@ public:
 
   void clear();
 
-  sigc::signal<void> tictactoe;
+  sigc::signal<void()> tictactoe;
 
   TicTacToe();
   ~TicTacToe();

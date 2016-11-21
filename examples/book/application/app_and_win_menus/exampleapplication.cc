@@ -95,7 +95,7 @@ void ExampleApplication::create_window()
 
   //Delete the window when it is hidden.
   //That's enough for this simple example.
-  window->signal_hide().connect(sigc::bind<Gtk::Window*>(sigc::mem_fun(*this,
+  window->signal_hide().connect(sigc::bind(sigc::mem_fun(*this,
     &ExampleApplication::on_window_hide), window));
 
   window->show();

@@ -1,5 +1,3 @@
-//$Id: idleexample.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2003 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,7 +20,7 @@ IdleExample::IdleExample() :
   m_Box(Gtk::ORIENTATION_VERTICAL, 5),
   m_ButtonQuit("_Quit", true)
 {
-  set_border_width(5);
+  m_Box.property_margin() = 5;
 
   // Put buttons into container
 

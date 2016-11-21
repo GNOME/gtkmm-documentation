@@ -37,8 +37,8 @@ PreviewDialog::PreviewDialog(
 {
   set_transient_for(parent);
   set_title("Preview");
-  set_border_width(2);
 
+  m_VBox.property_margin() = 2;
   add(m_VBox);
 
   m_HBox.pack_start(m_PageSpin);

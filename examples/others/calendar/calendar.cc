@@ -173,11 +173,10 @@ CalendarExample::CalendarExample()
     settings_[i] = 0;
   }
 
-  set_border_width(5);
-
   set_resizable(false);
 
   auto vbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD));
+  vbox->property_margin() = 5;
   add(*vbox);
 
   /*

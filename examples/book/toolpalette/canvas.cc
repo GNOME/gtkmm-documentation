@@ -21,7 +21,6 @@ Canvas::Canvas()
 : m_drag_data_requested_for_drop(false),
   m_drop_item(nullptr)
 {
-  set_app_paintable();
 }
 
 Canvas::~Canvas()

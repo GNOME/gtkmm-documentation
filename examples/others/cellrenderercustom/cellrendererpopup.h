@@ -1,5 +1,3 @@
-//$Id: cellrendererpopup.h 156 2004-03-12 10:11:35Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -27,7 +25,7 @@ class CellRendererPopup : public Gtk::CellRendererText
 {
 public:
   CellRendererPopup();
-  virtual ~CellRendererPopup();
+  ~CellRendererPopup() override;
 
   PopupEntry*  get_popup_entry();
   Gtk::Window* get_popup_window();
@@ -35,17 +33,17 @@ public:
   void set_focus_widget(Gtk::Widget& focus_widget);
   Gtk::Widget* get_focus_widget();
 
-  typedef sigc::signal<void,const Glib::ustring&,int,int,int,int> SignalShowPopup;
+  using SignalShowPopup = sigc::signal<void(const Glib::ustring&,int,int,int,int)>;
   SignalShowPopup& signal_show_popup();
 
-  typedef sigc::signal<void> SignalHidePopup;
+  using SignalHidePopup = sigc::signal<void()>;
   SignalHidePopup& signal_hide_popup();
 
   void hide_popup();
 
 protected:
 
-  //TODO: Port this to gtkmm 3:
+  //TODO: Port this to gtkmm 4:
   /*
   void get_preferred_size_vfunc(Gtk::Widget& widget,
                               const Gdk::Rectangle* cell_area,
@@ -64,7 +62,7 @@ protected:
   void on_hide_popup();
 
 private:
-  typedef CellRendererPopup Self;
+  using Self = CellRendererPopup;
 
   SignalShowPopup  signal_show_popup_;
   SignalHidePopup signal_hide_popup_;

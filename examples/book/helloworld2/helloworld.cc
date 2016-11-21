@@ -1,5 +1,3 @@
-//$Id: helloworld.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -26,15 +24,15 @@ HelloWorld::HelloWorld()
   // This just sets the title of our new window.
   set_title("Hello Buttons!");
 
-  // sets the border width of the window.
-  set_border_width(10);
+  // Sets the margin around the box.
+  m_box1.property_margin() = 10;
 
   // put the box into the main window.
   add(m_box1);
 
   // Now when the button is clicked, we call the "on_button_clicked" function
-  // with a pointer to "button 1" as it's argument
-  m_button1.signal_clicked().connect(sigc::bind<Glib::ustring>(
+  // with a pointer to "button 1" as its argument
+  m_button1.signal_clicked().connect(sigc::bind(
               sigc::mem_fun(*this, &HelloWorld::on_button_clicked), "button 1"));
 
   // instead of gtk_container_add, we pack this button into the invisible
@@ -48,7 +46,7 @@ HelloWorld::HelloWorld()
 
   // call the same signal handler with a different argument,
   // passing a pointer to "button 2" instead.
-  m_button2.signal_clicked().connect(sigc::bind<-1, Glib::ustring>(
+  m_button2.signal_clicked().connect(sigc::bind(
               sigc::mem_fun(*this, &HelloWorld::on_button_clicked), "button 2"));
 
   m_box1.pack_start(m_button2);
@@ -65,7 +63,7 @@ HelloWorld::~HelloWorld()
 
 // Our new improved signal handler.  The data passed to this method is
 // printed to stdout.
-void HelloWorld::on_button_clicked(Glib::ustring data)
+void HelloWorld::on_button_clicked(const Glib::ustring& data)
 {
   std::cout << "Hello World - " << data << " was pressed" << std::endl;
 }

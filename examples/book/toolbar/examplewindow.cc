@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 870 2007-07-13 19:08:46Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -31,7 +29,7 @@ ExampleWindow::ExampleWindow()
 
   //Put a toolbar at the top, and a button underneath:
   m_VBox.pack_start(m_Toolbar, Gtk::PACK_SHRINK);
-  m_ButtonBox.set_border_width(5);
+  m_ButtonBox.property_margin() = 5;
   m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
   m_VBox.pack_end(m_ButtonBox, Gtk::PACK_SHRINK);
 

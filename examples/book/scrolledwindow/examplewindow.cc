@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,10 +20,9 @@
 ExampleWindow::ExampleWindow()
 {
   set_title("Gtk::ScrolledWindow example");
-  set_border_width(0);
   set_size_request(300, 300);
 
-  m_ScrolledWindow.set_border_width(10);
+  m_ScrolledWindow.property_margin() = 10;
 
   /* the policy is one of Gtk::POLICY AUTOMATIC, or Gtk::POLICY_ALWAYS.
    * Gtk::POLICY_AUTOMATIC will automatically decide whether you need

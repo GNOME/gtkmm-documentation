@@ -1,5 +1,3 @@
-//$Id: buttons.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -26,8 +24,8 @@ ExampleWindow::ExampleWindow()
   set_default_size(300, 300);
 
   set_title("VolumeButton Example");
-  set_border_width(12);
 
+  m_grid.property_margin() = 12;
   add(m_grid);
   m_button.set_vexpand(true);
   m_button.set_hexpand(true);

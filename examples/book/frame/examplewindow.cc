@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -24,8 +22,8 @@ ExampleWindow::ExampleWindow()
   set_title("Frame Example");
   set_size_request(300, 300);
 
-  /* Sets the border width of the window. */
-  set_border_width(10);
+  /* Sets the margin around the frame. */
+  m_Frame.property_margin() = 10;
 
   add(m_Frame);
 

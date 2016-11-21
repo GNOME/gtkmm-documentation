@@ -21,7 +21,7 @@ main (int argc, char *argv[])
 
   Gtk::Window window;
   window.set_title("Tic-Tac-Toe");
-  window.set_border_width(10);
+  ttt->property_margin() = 10;
   window.add(*ttt);
   window.show_all_children();
 

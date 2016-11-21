@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 870 2007-07-13 19:08:46Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -186,8 +184,8 @@ ExampleWindow::ExampleWindow()
 {
   set_title("Gtk::ToolPalette example");
   set_size_request(600, 600);
-  set_border_width(6);
 
+  m_VBox.property_margin() = 6;
   add(m_VBox);
 
   //The Orientation ComboBox:
@@ -237,14 +235,14 @@ ExampleWindow::ExampleWindow()
   m_VBox.pack_start(m_HBox, Gtk::PACK_EXPAND_WIDGET);
 
   m_ScrolledWindowPalette.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC);
-  m_ScrolledWindowPalette.set_border_width(6);
+  m_ScrolledWindowPalette.property_margin() = 6;
   m_ScrolledWindowPalette.add(m_ToolPalette);
   m_HBox.pack_start(m_ScrolledWindowPalette);
 
   on_combo_orientation_changed();
 
   m_ScrolledWindowCanvas.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_ALWAYS);
-  m_ScrolledWindowCanvas.set_border_width(6);
+  m_ScrolledWindowCanvas.property_margin() = 6;
   m_ScrolledWindowCanvas.add(m_Canvas);
   m_ScrolledWindowCanvas.set_size_request(200, -1);
   m_HBox.pack_start(m_ScrolledWindowCanvas);

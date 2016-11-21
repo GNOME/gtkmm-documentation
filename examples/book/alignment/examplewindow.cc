@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,9 +20,9 @@ ExampleWindow::ExampleWindow()
 : m_Button("_Close", /* mnemonic= */ true)
 {
   set_title("Alignment");
-  set_border_width(10);
   set_default_size(200, 50);
 
+  m_Button.property_margin() = 10;
   m_Button.set_halign(Gtk::ALIGN_END);
   m_Button.set_valign(Gtk::ALIGN_CENTER);
   add(m_Button);

@@ -155,11 +155,11 @@ Gtk::Widget* PrintFormOperation::on_create_custom_widget()
   set_custom_tab_label("Other");
 
   auto vbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL));
-  vbox->set_border_width(12);
+  vbox->property_margin() = 12;
 
   auto hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 8));
   vbox->pack_start(*hbox, false, false);
-  hbox->set_border_width(6);
+  hbox->property_margin() = 6;
   hbox->show();
 
   auto label = Gtk::manage(new Gtk::Label("Choose a font: "));

@@ -26,7 +26,6 @@ ExampleWindow::ExampleWindow()
 {
   // Window properties
   set_title("Revealer Example");
-  set_border_width(12);
   set_resizable(false);
 
   // Transition type selector
@@ -56,6 +55,7 @@ ExampleWindow::ExampleWindow()
   m_vbox.pack_start(m_controls, Gtk::PACK_SHRINK, 0);
   m_vbox.pack_start(m_separator, Gtk::PACK_SHRINK, 12);
   m_vbox.pack_start(m_revealer, Gtk::PACK_EXPAND_WIDGET, 6);
+  m_vbox.property_margin() = 12;
   add(m_vbox);
 
   show_all_children();

@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -24,9 +22,9 @@ ExampleWindow::ExampleWindow()
   m_Button_Quit("Quit")
 {
   set_title("Gtk::TreeView (ListStore) example");
-  set_border_width(5);
   set_default_size(400, 200);
 
+  m_VBox.property_margin() = 5;
   add(m_VBox);
 
   //Add the TreeView, inside a ScrolledWindow, with the button underneath:
@@ -39,7 +37,7 @@ ExampleWindow::ExampleWindow()
   m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
 
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
-  m_ButtonBox.set_border_width(5);
+  m_ButtonBox.property_margin() = 5;
   m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
   m_Button_Quit.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_quit) );

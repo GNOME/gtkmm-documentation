@@ -23,7 +23,6 @@ ExampleWindow::ExampleWindow()
 {
   // Window properties
   set_title("PlacesSidebar Example");
-  set_border_width(12);
   set_size_request(500, 600);
 
   // Options
@@ -58,6 +57,7 @@ ExampleWindow::ExampleWindow()
   m_controls_frame.add(m_controls);
   m_hbox.pack_start(m_places_sidebar, Gtk::PACK_EXPAND_WIDGET);
   m_hbox.pack_start(m_controls_frame, Gtk::PACK_SHRINK);
+  m_hbox.property_margin() = 12;
   add(m_hbox);
 
   show_all_children();
@@ -108,8 +108,10 @@ void ExampleWindow::on_placessidebar_open_location(const Glib::RefPtr<Gio::File>
   location_information_grid.attach(file_uri_label, 1, 2, 1, 1);
 
   location_information_grid.set_column_spacing(6);
+  location_information_grid.set_margin_start(6);
+  location_information_grid.set_margin_end(6);
 
-  dialog.get_content_area()->pack_end(location_information_grid, true, true, 6);
+  dialog.get_content_area()->pack_end(location_information_grid, true, true);
   dialog.show_all();
   dialog.run();
 }

@@ -28,7 +28,6 @@ RadioButtons::RadioButtons() :
 {
   // Set title and border of the window
   set_title("radio buttons");
-  set_border_width(0);
 
   // Put radio buttons 2 and 3 in the same group as 1:
   m_RadioButton2.join_group(m_RadioButton1);
@@ -43,9 +42,9 @@ RadioButtons::RadioButtons() :
   m_Box_Top.pack_start(m_Separator);
   m_Box_Top.pack_start(m_Box2);
 
-  // Set the inner boxes' borders
-  m_Box2.set_border_width(10);
-  m_Box1.set_border_width(10);
+  // Set the inner boxes' margins
+  m_Box1.property_margin() = 10;
+  m_Box2.property_margin() = 10;
 
   // Put the radio buttons in Box1:
   m_Box1.pack_start(m_RadioButton1);

@@ -97,9 +97,9 @@ int main(int argc, char** argv)
 
   Gtk::Window window;
   window.set_title("Exception Handlers");
-  window.set_border_width(10);
 
   Gtk::Box *const box = new Gtk::Box(Gtk::ORIENTATION_VERTICAL, 5);
+  box->property_margin() = 10;
   window.add(*Gtk::manage(box));
 
   // New exception handlers are inserted at the front of the per-thread

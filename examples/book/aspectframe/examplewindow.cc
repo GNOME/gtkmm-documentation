@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -26,13 +24,13 @@ ExampleWindow::ExampleWindow()
     false /* ignore child's aspect */)
 {
   set_title("Aspect Frame");
-  set_border_width(10);
 
   // Add a child widget to the aspect frame */
   // Ask for a 200x200 window, but the AspectFrame will give us a 200x100
   // window since we are forcing a 2x1 aspect ratio */
   m_DrawingArea.set_size_request(200, 200);
   m_AspectFrame.add(m_DrawingArea);
+  m_AspectFrame.property_margin() = 10;
 
   // Add the aspect frame to our toplevel window:
   add(m_AspectFrame);

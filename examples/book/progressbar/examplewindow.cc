@@ -28,7 +28,7 @@ ExampleWindow::ExampleWindow()
   set_resizable();
   set_title("Gtk::ProgressBar");
 
-  m_VBox.set_border_width(10);
+  m_VBox.property_margin() = 10;
   add(m_VBox);
 
   m_VBox.pack_start(m_ProgressBar, Gtk::PACK_SHRINK, 5);

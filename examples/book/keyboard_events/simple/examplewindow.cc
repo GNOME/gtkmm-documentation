@@ -19,7 +19,7 @@
 ExampleWindow::ExampleWindow()
 {
   set_title("Keyboard Events");
-  set_border_width(10);
+  m_container.property_margin() = 10;
   add(m_container);
 
   // Radio buttons:

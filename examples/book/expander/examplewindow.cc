@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -24,8 +22,8 @@ ExampleWindow::ExampleWindow()
  /* Set some window properties */
   set_title("Expander Example");
 
-  /* Sets the border width of the window. */
-  set_border_width(6);
+  /* Sets the margin around the expander. */
+  m_Expander.property_margin() = 6;
 
   add(m_Expander);
   m_Expander.add(m_Label);

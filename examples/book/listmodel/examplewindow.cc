@@ -27,7 +27,6 @@ m_button_remove_some("_Remove some", true),
 m_button_quit("_Quit", true)
 {
   set_title("ListBox and FlowBox with ListModel");
-  set_border_width(5);
   set_default_size(300, 300);
 
   for (int i = 0; i < 20; ++i)
@@ -39,6 +38,7 @@ m_button_quit("_Quit", true)
   // Use current time as seed for random number generator.
   std::srand(std::time(nullptr));
 
+  m_grid.property_margin() = 5;
   add(m_grid);
 
   // Select bind_model() or bind_list_store() randomly.

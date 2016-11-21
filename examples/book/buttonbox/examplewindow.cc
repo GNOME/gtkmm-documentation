@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -26,12 +24,13 @@ ExampleWindow::ExampleWindow()
   m_Frame_Vertical("Vertical Button Boxes")
 {
   set_title("Gtk::ButtonBox");
+  m_VBox_Main.property_margin() = 10;
   add(m_VBox_Main);
 
   m_VBox_Main.pack_start(m_Frame_Horizontal, Gtk::PACK_EXPAND_WIDGET, 10);
 
   //The horizontal ButtonBoxes:
-  m_VBox.set_border_width(10);
+  m_VBox.property_margin() = 10;
   m_Frame_Horizontal.add(m_VBox);
 
   m_VBox.pack_start(*Gtk::manage(
@@ -50,7 +49,7 @@ ExampleWindow::ExampleWindow()
           Gtk::PACK_EXPAND_WIDGET, 5);
 
   m_VBox.pack_start(*Gtk::manage(
-              new ExampleButtonBox(true, "end (spacing 10)", 10,
+              new ExampleButtonBox(true, "End (spacing 10)", 10,
                   Gtk::BUTTONBOX_END)),
           Gtk::PACK_EXPAND_WIDGET, 5);
 
@@ -58,7 +57,7 @@ ExampleWindow::ExampleWindow()
   //The vertical ButtonBoxes:
   m_VBox_Main.pack_start(m_Frame_Vertical, Gtk::PACK_EXPAND_WIDGET, 10);
 
-  m_HBox.set_border_width(10);
+  m_HBox.property_margin() = 10;
   m_Frame_Vertical.add(m_HBox);
 
   m_HBox.pack_start(*Gtk::manage(

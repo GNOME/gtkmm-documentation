@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -25,8 +23,8 @@ ExampleWindow::ExampleWindow()
   set_default_size(200, -1);
 
   set_title("FileChooserButton example");
-  set_border_width(10);
 
+  m_button.property_margin() = 10;
   add(m_button);
 
   //Allow our file chooser to select remote URIs,

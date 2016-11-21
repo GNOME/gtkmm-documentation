@@ -19,9 +19,9 @@
 
 ExampleWindow::ExampleWindow()
 {
-  add(m_container);
   set_title("Event Propagation");
-  set_border_width(10);
+  m_container.property_margin() = 10;
+  add(m_container);
 
   m_label.set_label("A label");
   m_checkbutton_can_propagate.set_label("Can Propagate");

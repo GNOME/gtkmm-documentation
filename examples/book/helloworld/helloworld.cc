@@ -1,5 +1,3 @@
-//$Id: helloworld.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,8 +20,8 @@
 HelloWorld::HelloWorld()
 : m_button("Hello World")   // creates a new button with label "Hello World".
 {
-  // Sets the border width of the window.
-  set_border_width(10);
+  // Sets the margin around the button.
+  m_button.property_margin() = 10;
 
   // When the button receives the "clicked" signal, it will call the
   // on_button_clicked() method defined below.

@@ -23,9 +23,10 @@ ExampleWindow::ExampleWindow()
   m_label2("Contents of assistant entry:", Gtk::ALIGN_START, Gtk::ALIGN_CENTER)
 {
   set_title("Gtk::Assistant example");
-  set_border_width(12);
 
   m_grid.set_row_homogeneous(true);
+  m_grid.set_column_spacing(5);
+  m_grid.property_margin() = 12;
 
   m_grid.attach(m_button, 0, 0, 2, 1);
   m_button.set_hexpand(true);

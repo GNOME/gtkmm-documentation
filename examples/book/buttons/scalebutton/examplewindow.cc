@@ -1,5 +1,3 @@
-//$Id: buttons.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -27,7 +25,6 @@ ExampleWindow::ExampleWindow()
   set_default_size(300, 300);
 
   set_title("ScaleButton Example");
-  set_border_width(12);
 
   std::vector<Glib::ustring> icons;
   icons.push_back("audio-volume-low");
@@ -35,6 +32,7 @@ ExampleWindow::ExampleWindow()
   icons.push_back("audio-volume-medium");
   m_button.set_icons(icons);
 
+  m_grid.property_margin() = 12;
   add(m_grid);
   m_grid.set_vexpand(true);
   m_grid.set_hexpand(true);

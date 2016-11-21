@@ -98,7 +98,7 @@ void CellRendererPopup::hide_popup()
   signal_hide_popup_();
 }
 
-//TODO: Port this to gtkmm 3:
+//TODO: Port this to gtkmm 4:
 /*
 void CellRendererPopup::get_preferred_size_vfunc(Gtk::Widget& widget,
                                        const Gdk::Rectangle* cell_area,
@@ -157,17 +157,21 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
 
   const int button_height = y2 - y1;
 
-  int       screen_height = Gdk::screen_height() - y;
-  const int screen_width  = Gdk::screen_width();
+  auto display = Gdk::Display::get_default();
+  auto monitor = display->get_monitor_at_point(x2, y2);
+  Gdk::Rectangle workarea;
+  monitor->get_workarea(workarea);
+  int monitor_height = workarea.get_height() - y;
+  const int monitor_width = workarea.get_width();
 
   // Check if it fits in the available height.
-  if(alloc.get_height() > screen_height)
+  if(alloc.get_height() > monitor_height)
   {
     // It doesn't fit, so we see if we have the minimum space needed.
-    if((alloc.get_height() > screen_height) && (y - button_height > screen_height))
+    if((alloc.get_height() > monitor_height) && (y - button_height > monitor_height))
     {
       // We don't, so we show the popup above the cell instead of below it.
-      screen_height = y - button_height;
+      monitor_height = y - button_height;
       y -= (alloc.get_height() + button_height);
       y = std::max(0, y);
     }
@@ -175,7 +179,7 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
 
   // We try to line it up with the right edge of the column, but we don't
   // want it to go off the edges of the screen.
-  x = std::min(x, screen_width);
+  x = std::min(x, monitor_width);
 
   x -= alloc.get_width();
   x = std::max(0, x);

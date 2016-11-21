@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -68,7 +66,7 @@ ExampleWindow::ExampleWindow()
 
   add(m_VBox_Top);
   m_VBox_Top.pack_start(m_VBox2);
-  m_VBox2.set_border_width(10);
+  m_VBox2.property_margin() = 10;
   m_VBox2.pack_start(m_HBox_Scales);
 
   //Put VScale and HScale (above scrollbar) side-by-side.
@@ -139,7 +137,7 @@ ExampleWindow::ExampleWindow()
   m_Button_Quit.grab_default();
   m_Button_Quit.signal_clicked().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_button_quit));
-  m_Button_Quit.set_border_width(10);
+  m_Button_Quit.property_margin() = 10;
 
   show_all_children();
 }
