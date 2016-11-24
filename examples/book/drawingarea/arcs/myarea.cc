@@ -1,5 +1,3 @@
-//$Id: myarea.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,24 +20,20 @@
 
 MyArea::MyArea()
 {
+  set_draw_func(sigc::mem_fun(*this, &MyArea::on_draw));
 }
 
 MyArea::~MyArea()
 {
 }
 
-bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
+void MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height)
 {
-  // This is where we draw on the window
-  Gtk::Allocation allocation = get_allocation();
-  const int width = allocation.get_width();
-  const int height = allocation.get_height();
-  const int lesser = MIN(width, height);
+  const int lesser = std::min(width, height);
 
   // coordinates for the center of the window
-  int xc, yc;
-  xc = width / 2;
-  yc = height / 2;
+  const int xc = width / 2;
+  const int yc = height / 2;
 
   cr->set_line_width(lesser * 0.02);  // outline thickness changes
                                       // with window size
@@ -83,6 +77,4 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
   cr->fill_preserve();
   cr->restore();  // back to opaque black
   cr->stroke();
-
-  return true;
 }

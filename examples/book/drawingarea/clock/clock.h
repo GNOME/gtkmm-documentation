@@ -1,5 +1,3 @@
-//$Id: clock.h 491 2005-12-23 11:01:49Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -28,14 +26,12 @@ public:
   virtual ~Clock();
 
 protected:
-  //Override default signal handler:
-  bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+  void on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);
 
   bool on_timeout();
 
   double m_radius;
   double m_line_width;
-
 };
 
 #endif // GTKMM_EXAMPLE_CLOCK_H

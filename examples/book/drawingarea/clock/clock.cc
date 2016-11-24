@@ -26,18 +26,15 @@ Clock::Clock()
 : m_radius(0.42), m_line_width(0.05)
 {
   Glib::signal_timeout().connect( sigc::mem_fun(*this, &Clock::on_timeout), 1000 );
+  set_draw_func(sigc::mem_fun(*this, &Clock::on_draw));
 }
 
 Clock::~Clock()
 {
 }
 
-bool Clock::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
+void Clock::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height)
 {
-  Gtk::Allocation allocation = get_allocation();
-  const int width = allocation.get_width();
-  const int height = allocation.get_height();
-
   // scale to unit square and translate (0, 0) to be (0.5, 0.5), i.e.
   // the center of the window
   cr->scale(width, height);
@@ -121,8 +118,6 @@ bool Clock::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
   // draw a little dot in the middle
   cr->arc(0, 0, m_line_width / 3.0, 0, 2 * M_PI);
   cr->fill();
-
-  return true;
 }
 
 

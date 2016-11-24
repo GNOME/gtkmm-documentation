@@ -1,5 +1,3 @@
-//$Id: myarea.h 491 2005-12-23 11:01:49Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -28,8 +26,7 @@ public:
   virtual ~MyArea();
 
 protected:
-  //Override default signal handler:
-  bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+  void on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);
 };
 
 #endif // GTKMM_EXAMPLE_MYAREA_H

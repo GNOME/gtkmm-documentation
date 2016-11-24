@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 705 2006-07-19 02:55:32Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -58,7 +56,7 @@ private:
     const Cairo::RefPtr<Cairo::Context>& cr,
     bool preview);
 
-  bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+  void on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);
   void on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context,
     int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time) override;
   bool on_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time) override;

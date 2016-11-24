@@ -36,7 +36,7 @@ protected:
 
   void on_hide() override;
 
-  bool on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr);
+  void on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);
 
   //PrintOperationPreview signal handlers:
   void on_popreview_ready(const Glib::RefPtr<Gtk::PrintContext>& print_ctx);
@@ -47,7 +47,6 @@ protected:
   Glib::RefPtr<Gtk::PrintOperationPreview> m_refPreview;
   Glib::RefPtr<Gtk::PrintContext> m_refPrintContext;
   Glib::RefPtr<Pango::Layout> m_refLayout;
-  // Gdk::DrawingContext is new in gtkmm 3.22 (and 3.21.x, where x > 2)
   Glib::RefPtr<Gdk::DrawingContext> m_refDrawingContext;
 
   Gtk::Box m_VBox;

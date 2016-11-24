@@ -18,18 +18,15 @@
 
 MyArea::MyArea()
 {
+  set_draw_func(sigc::mem_fun(*this, &MyArea::on_draw));
 }
 
 MyArea::~MyArea()
 {
 }
 
-bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
+void MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height)
 {
-  Gtk::Allocation allocation = get_allocation();
-  const int width = allocation.get_width();
-  const int height = allocation.get_height();
-
   const int rectangle_width = width;
   const int rectangle_height = height / 2;
 
@@ -59,8 +56,6 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
   // black text
   cr->set_source_rgb(0.0, 0.0, 0.0);
   draw_text(cr, rectangle_width, rectangle_height);
-
-  return true;
 }
 
 void MyArea::draw_rectangle(const Cairo::RefPtr<Cairo::Context>& cr,

@@ -29,7 +29,9 @@ protected:
   //Signal handlers:
   void on_color_button_color_set();
   void on_button_dialog_clicked();
-  bool on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr);
+
+  //Draw function:
+  void on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);
 
   //Child widgets:
   Gtk::Box m_VBox;

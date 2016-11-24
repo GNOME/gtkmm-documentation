@@ -19,19 +19,17 @@
 MyArea::MyArea()
 : m_fix (0)
 {
-  set_size_request (200, 100);
+  set_content_width(200);
+  set_content_height(100);
+  set_draw_func(sigc::mem_fun(*this, &MyArea::on_draw));
 }
 
 MyArea::~MyArea()
 {
 }
 
-bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
+void MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height)
 {
-  Gtk::Allocation allocation = get_allocation();
-  const int width = allocation.get_width();
-  const int height = allocation.get_height();
-
   cr->set_line_width(1.0);
 
   // draw one line, every two pixels
@@ -44,8 +42,6 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
   }
 
   cr->stroke();
-
-  return true;
 }
 
 // Toogle between both values (0 or 0.5)

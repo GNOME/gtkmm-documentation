@@ -28,8 +28,9 @@ public:
   virtual ~ExampleWindow();
 
 protected:
-  //Signal handlers:
-  bool on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr, int swatch_i);
+  // Draw function
+  void on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr,
+    int width, int height, int swatch_i);
 
   // Containers
   Gtk::ScrolledWindow m_scrolled_window;

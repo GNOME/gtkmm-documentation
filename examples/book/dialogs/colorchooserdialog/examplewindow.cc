@@ -42,8 +42,7 @@ ExampleWindow::ExampleWindow()
   m_ColorButton.set_rgba(m_Color);
 
   m_VBox.pack_start(m_DrawingArea);
-  m_DrawingArea.signal_draw().connect(sigc::mem_fun(*this,
-    &ExampleWindow::on_drawing_area_draw));
+  m_DrawingArea.set_draw_func(sigc::mem_fun(*this, &ExampleWindow::on_drawing_area_draw));
 
   show_all_children();
 }
@@ -91,10 +90,8 @@ void ExampleWindow::on_button_dialog_clicked()
   }
 }
 
-bool ExampleWindow::on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr)
+void ExampleWindow::on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr, int, int)
 {
   Gdk::Cairo::set_source_rgba(cr, m_Color);
   cr->paint();
-
-  return true;
 }

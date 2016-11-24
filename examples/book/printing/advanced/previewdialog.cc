@@ -45,7 +45,8 @@ PreviewDialog::PreviewDialog(
   m_HBox.pack_start(m_CloseButton, Gtk::PACK_SHRINK);
   m_VBox.pack_start(m_HBox, Gtk::PACK_SHRINK);
 
-  m_DrawingArea.set_size_request(200, 300);
+  m_DrawingArea.set_content_width(200);
+  m_DrawingArea.set_content_height(300);
   m_VBox.pack_start(m_DrawingArea, Gtk::PACK_EXPAND_WIDGET);
 
   m_refPreview->signal_ready().connect(
@@ -57,7 +58,7 @@ PreviewDialog::PreviewDialog(
   m_DrawingArea.signal_realize().connect(
     sigc::mem_fun(*this, &PreviewDialog::on_drawing_area_realized));
 
-  m_DrawingArea.signal_draw().connect(
+  m_DrawingArea.set_draw_func(
     sigc::mem_fun(*this, &PreviewDialog::on_drawing_area_draw));
 
   m_CloseButton.signal_clicked().connect(
@@ -92,7 +93,7 @@ void PreviewDialog::on_page_number_changed()
   m_DrawingArea.queue_draw();
 }
 
-bool PreviewDialog::on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr)
+void PreviewDialog::on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr, int, int)
 {
   Cairo::RefPtr<Cairo::Context> prev_cairo_ctx;
   double dpi_x = 72.0;
@@ -111,8 +112,6 @@ bool PreviewDialog::on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr
 
   if(m_refPrintContext)
     m_refPrintContext->set_cairo_context(prev_cairo_ctx, dpi_x, dpi_y);
-
-  return true;
 }
 
 void PreviewDialog::on_popreview_ready(const Glib::RefPtr<Gtk::PrintContext>&)

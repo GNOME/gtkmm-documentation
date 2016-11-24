@@ -28,7 +28,8 @@ ExampleWindow::ExampleWindow()
   // Add a child widget to the aspect frame */
   // Ask for a 200x200 window, but the AspectFrame will give us a 200x100
   // window since we are forcing a 2x1 aspect ratio */
-  m_DrawingArea.set_size_request(200, 200);
+  m_DrawingArea.set_content_width(200);
+  m_DrawingArea.set_content_height(200);
   m_AspectFrame.add(m_DrawingArea);
   m_AspectFrame.property_margin() = 10;
 

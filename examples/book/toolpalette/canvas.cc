@@ -21,6 +21,7 @@ Canvas::Canvas()
 : m_drag_data_requested_for_drop(false),
   m_drop_item(nullptr)
 {
+  set_draw_func(sigc::mem_fun(*this, &Canvas::on_draw));
 }
 
 Canvas::~Canvas()
@@ -56,11 +57,10 @@ void Canvas::item_draw(const CanvasItem *item,
     cr->paint();
 }
 
-bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
+void Canvas::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height)
 {
   cr->set_source_rgb(1.0, 1.0, 1.0);
-  const Gtk::Allocation allocation = get_allocation();
-  cr->rectangle(0, 0, allocation.get_width(), allocation.get_height());
+  cr->rectangle(0, 0, width, height);
   cr->fill();
 
   for(type_vec_items::iterator iter = m_canvas_items.begin();
@@ -71,8 +71,6 @@ bool Canvas::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
   if(m_drop_item)
     item_draw (m_drop_item, cr, true);
-
-  return true;
 }
 
 

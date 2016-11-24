@@ -1,5 +1,3 @@
-//$Id: myarea.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,22 +19,19 @@
 
 MyArea::MyArea()
 {
+  set_draw_func(sigc::mem_fun(*this, &MyArea::on_draw));
 }
 
 MyArea::~MyArea()
 {
 }
 
-bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
+void MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height)
 {
   // This is where we draw on the window
   auto window = get_window();
   if(window)
   {
-    Gtk::Allocation allocation = get_allocation();
-    const int width = allocation.get_width();
-    const int height = allocation.get_height();
-
     cr->set_line_width(10.0);
 
     // Scale to unit square
@@ -62,6 +57,4 @@ bool MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     cr->set_line_join(Cairo::LINE_JOIN_ROUND);
     cr->stroke();
   }
-
-  return true;
 }

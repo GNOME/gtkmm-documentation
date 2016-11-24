@@ -38,7 +38,7 @@ protected:
   void on_unmap() override;
   void on_realize() override;
   void on_unrealize() override;
-  bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+  bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) /* override */;
 
   //Signal handler:
   void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error);
