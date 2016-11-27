@@ -77,13 +77,14 @@ PreviewDialog::~PreviewDialog()
 void PreviewDialog::on_drawing_area_realized()
 {
   auto gdk_window = m_DrawingArea.get_window();
-  if(gdk_window)
+  if (gdk_window)
   {
-    m_refDrawingContext = gdk_window->begin_draw_frame(gdk_window->get_clip_region());
-    auto cairo_ctx = m_refDrawingContext->get_cairo_context();
+    auto drawing_context = gdk_window->begin_draw_frame(gdk_window->get_clip_region());
+    m_refCairoContext = drawing_context->get_cairo_context();
+    gdk_window->end_draw_frame(drawing_context);
 
-    if(m_refPrintContext)
-      m_refPrintContext->set_cairo_context(cairo_ctx, 72, 72);
+    if (m_refPrintContext)
+      m_refPrintContext->set_cairo_context(m_refCairoContext, 72, 72);
   }
 }
 
@@ -95,6 +96,8 @@ void PreviewDialog::on_page_number_changed()
 
 void PreviewDialog::on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr, int, int)
 {
+  m_refCairoContext = cr; // Can be used in on_popreview_got_page_size()
+
   Cairo::RefPtr<Cairo::Context> prev_cairo_ctx;
   double dpi_x = 72.0;
   double dpi_y = 72.0;
@@ -137,12 +140,11 @@ void PreviewDialog::on_popreview_got_page_size(
     // We get a cairo context for the DrawingArea and then give that cairo
     // context to the PrintOperation's pango layout so that render_page() will
     // render into the drawing area.
-    auto cairo_ctx = m_refDrawingContext->get_cairo_context();
 
     if (fabs(dpi_x - m_DpiX) > 0.001 ||
         fabs(dpi_y - m_DpiY) > 0.001)
     {
-      print_ctx->set_cairo_context(cairo_ctx, dpi_x, dpi_y);
+      print_ctx->set_cairo_context(m_refCairoContext, dpi_x, dpi_y);
       m_DpiX = dpi_x;
       m_DpiY = dpi_y;
       m_DrawingArea.queue_draw();
@@ -152,23 +154,19 @@ void PreviewDialog::on_popreview_got_page_size(
     {
       auto layout = m_pOperation->get_pango_layout();
       if(layout)
-        layout->update_from_cairo_context(cairo_ctx);
+        layout->update_from_cairo_context(m_refCairoContext);
     }
   }
 }
 
 void PreviewDialog::on_hide()
 {
-  auto gdk_window = m_DrawingArea.get_window();
-  if(gdk_window)
-    gdk_window->end_draw_frame(m_refDrawingContext);
-
   m_refPreview->end_preview();
 
   //We will not be using these anymore, so null the RefPtrs:
   m_refPreview.reset();
   m_refPrintContext.reset();
-  m_refDrawingContext.reset();
+  m_refCairoContext.clear();
 }
 
 void PreviewDialog::on_close_clicked()

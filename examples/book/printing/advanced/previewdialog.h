@@ -47,7 +47,7 @@ protected:
   Glib::RefPtr<Gtk::PrintOperationPreview> m_refPreview;
   Glib::RefPtr<Gtk::PrintContext> m_refPrintContext;
   Glib::RefPtr<Pango::Layout> m_refLayout;
-  Glib::RefPtr<Gdk::DrawingContext> m_refDrawingContext;
+  Cairo::RefPtr<Cairo::Context> m_refCairoContext;
 
   Gtk::Box m_VBox;
   Gtk::Box m_HBox;
