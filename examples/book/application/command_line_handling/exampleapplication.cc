@@ -24,9 +24,6 @@ ExampleApplication::ExampleApplication()
 {
   Glib::set_application_name("Gtk::Application Example");
 
-  signal_handle_local_options().connect(
-    sigc::mem_fun(*this, &ExampleApplication::on_handle_local_options), false);
-
   //These are just pointless command-line arguments to show the use of the API:
 
   //A bool.

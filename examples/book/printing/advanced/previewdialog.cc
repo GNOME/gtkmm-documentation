@@ -166,7 +166,7 @@ void PreviewDialog::on_hide()
   //We will not be using these anymore, so null the RefPtrs:
   m_refPreview.reset();
   m_refPrintContext.reset();
-  m_refCairoContext.clear();
+  m_refCairoContext.reset();
 }
 
 void PreviewDialog::on_close_clicked()

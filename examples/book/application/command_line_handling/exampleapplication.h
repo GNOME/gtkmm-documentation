@@ -33,9 +33,7 @@ protected:
   void on_open(const Gio::Application::type_vec_files& files,
     const Glib::ustring& hint) override;
   int on_command_line(const Glib::RefPtr<Gio::ApplicationCommandLine>& command_line) override;
-
-  //A regular signal handler, because there is no default signal handler for this:
-  int on_handle_local_options(const Glib::RefPtr<Glib::VariantDict>& options);
+  int on_handle_local_options(const Glib::RefPtr<Glib::VariantDict>& options) override;
 
   //Callback functions for handling some command-line arguments
   bool on_option_arg_string(const Glib::ustring& option_name,
