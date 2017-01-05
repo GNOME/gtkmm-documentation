@@ -190,7 +190,8 @@ ExampleWindow::ExampleWindow()
 
   //The Orientation ComboBox:
   m_refTreeModelOrientation = Gtk::ListStore::create(m_ColumnsOrientation);
-  Gtk::TreeModel::Row row = *(m_refTreeModelOrientation->append());
+  Gtk::TreeModel::iterator iter = m_refTreeModelOrientation->append();
+  Gtk::TreeModel::Row row = *iter;
   row[m_ColumnsOrientation.m_col_value] = Gtk::ORIENTATION_HORIZONTAL;
   row[m_ColumnsOrientation.m_col_name] = "Horizontal";\
   row = *(m_refTreeModelOrientation->append());
@@ -201,11 +202,12 @@ ExampleWindow::ExampleWindow()
   m_ComboOrientation.pack_start(m_ColumnsOrientation.m_col_name);
   m_ComboOrientation.signal_changed().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_combo_orientation_changed) );
-  m_ComboOrientation.set_active(row);
+  m_ComboOrientation.set_active(iter);
 
   //The Style ComboBox:
   m_refTreeModelStyle = Gtk::ListStore::create(m_ColumnsStyle);
-  row = *(m_refTreeModelStyle->append());
+  iter = m_refTreeModelStyle->append();
+  row = *iter;
   row[m_ColumnsStyle.m_col_value] = Gtk::TOOLBAR_TEXT;
   row[m_ColumnsStyle.m_col_name] = "Text";\
   row = *(m_refTreeModelStyle->append());
@@ -225,7 +227,7 @@ ExampleWindow::ExampleWindow()
   m_ComboStyle.pack_start(m_ColumnsStyle.m_col_name);
   m_ComboStyle.signal_changed().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_combo_style_changed) );
-  m_ComboStyle.set_active(row);
+  m_ComboStyle.set_active(iter);
 
   //Add and fill the ToolPalette:
   load_icon_items();
