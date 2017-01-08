@@ -1,5 +1,3 @@
-//$Id: treemodel_dnd.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -40,13 +38,10 @@ TreeModel_Dnd::row_draggable_vfunc(const Gtk::TreeModel::Path& path) const
   // Make the value of the "draggable" column determine whether this row can
   // be dragged:
 
-  //TODO: Add a const version of get_iter to TreeModel:
-  auto unconstThis = const_cast<TreeModel_Dnd*>(this);
-  const_iterator iter = unconstThis->get_iter(path);
-  //const_iterator iter = get_iter(path);
+  const const_iterator iter = get_iter(path);
   if(iter)
   {
-    Row row = *iter;
+    ConstRow row = *iter;
     bool is_draggable = row[m_Columns.m_col_draggable];
     return is_draggable;
   }
@@ -73,15 +68,10 @@ TreeModel_Dnd::row_drop_possible_vfunc(const Gtk::TreeModel::Path& dest,
   else
   {
     //Get an iterator for the row at this path:
-    //We must unconst this. This should not be necessary with a future version
-    //of gtkmm.
-    //TODO: Add a const version of get_iter to TreeModel:
-    auto unconstThis = const_cast<TreeModel_Dnd*>(this);
-    const_iterator iter_dest_parent = unconstThis->get_iter(dest_parent);
-    //const_iterator iter_dest_parent = get_iter(dest);
+    const const_iterator iter_dest_parent = get_iter(dest_parent);
     if(iter_dest_parent)
     {
-      Row row = *iter_dest_parent;
+      ConstRow row = *iter_dest_parent;
       bool receives_drags = row[m_Columns.m_col_receivesdrags];
       return receives_drags;
     }
