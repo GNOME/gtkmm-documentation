@@ -52,7 +52,7 @@ protected:
                             Gtk::Widget& widget,
                             const Gdk::Rectangle& background_area,
                             const Gdk::Rectangle& cell_area,
-                            Gtk::CellRendererState flag) override;
+                            Gtk::CellRendererState flag) /* override */;
 
   bool activate_vfunc(GdkEvent* event,
                               Gtk::Widget& widget,

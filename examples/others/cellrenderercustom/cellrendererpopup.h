@@ -76,7 +76,7 @@ private:
 
   bool on_button_press_event(GdkEventButton* event);
   bool on_key_press_event(GdkEventKey* event);
-  void on_style_changed(const Glib::RefPtr<Gtk::Style>& previous_style);
+  void on_style_updated();
 
   void on_popup_editing_done();
   void on_popup_arrow_clicked();

@@ -57,7 +57,7 @@ CellRendererPopup::CellRendererPopup()
 
   popup_window_.signal_button_press_event().connect(sigc::mem_fun(*this, &Self::on_button_press_event));
   popup_window_.signal_key_press_event   ().connect(sigc::mem_fun(*this, &Self::on_key_press_event));
-  //TODO: popup_window_.signal_style_changed     ().connect(sigc::mem_fun(*this, &Self::on_style_changed));
+  popup_window_.signal_style_updated     ().connect(sigc::mem_fun(*this, &Self::on_style_updated));
 }
 
 CellRendererPopup::~CellRendererPopup()
@@ -269,7 +269,7 @@ bool CellRendererPopup::on_key_press_event(GdkEventKey* event)
   return true;
 }
 
-void CellRendererPopup::on_style_changed(const Glib::RefPtr<Gtk::Style>&)
+void CellRendererPopup::on_style_updated()
 {
   // Invalidate the cache.
   button_width_ = -1;
