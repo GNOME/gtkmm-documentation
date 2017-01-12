@@ -38,6 +38,7 @@ ExampleWindow::ExampleWindow()
   m_show_enter_location.signal_toggled().connect(sigc::mem_fun(*this, &ExampleWindow::on_show_enter_location_toggled));
   m_show_enter_location.set_active(false);
 
+  m_places_sidebar.property_populate_all() = true;
   m_places_sidebar.signal_open_location().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_open_location));
   m_places_sidebar.signal_populate_popup().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_populate_popup));
   //m_places_sidebar.signal_drag_action_requested().connect(sigc::mem_fun(*this, &ExampleWindow::on_placessidebar_drag_action_requested));
@@ -116,14 +117,31 @@ void ExampleWindow::on_placessidebar_open_location(const Glib::RefPtr<Gio::File>
   dialog.run();
 }
 
-void ExampleWindow::on_placessidebar_populate_popup(Gtk::Menu* menu, const Glib::RefPtr<Gio::File>& /* selected_item */, const Glib::RefPtr<Gio::Volume>& /* selected_volume */)
+void ExampleWindow::on_placessidebar_populate_popup(Gtk::Container* container, const Glib::RefPtr<Gio::File>& /* selected_item */, const Glib::RefPtr<Gio::Volume>& /* selected_volume */)
 {
-  auto properties_menu_item = new Gtk::MenuItem("Properties...");
+  if (auto menu = dynamic_cast<Gtk::Menu*>(container))
+  {
+    auto properties_menu_item = Gtk::manage(new Gtk::MenuItem("Properties..."));
 
-  properties_menu_item->signal_activate().connect(sigc::mem_fun(*this, &ExampleWindow::on_menu_properties_activate));
-  properties_menu_item->show();
+    properties_menu_item->signal_activate().connect(sigc::mem_fun(*this, &ExampleWindow::on_menu_properties_activate));
+    properties_menu_item->show();
 
-  menu->attach(*properties_menu_item, 0, 1, 0, 1);
+    menu->attach(*properties_menu_item, 0, 1, 0, 1);
+  }
+  else if (auto box = dynamic_cast<Gtk::Box*>(container))
+  {
+    auto properties_button = Gtk::manage(new Gtk::ModelButton());
+    properties_button->property_text() = "Properties...";
+
+    properties_button->signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_menu_properties_activate));
+    properties_button->show();
+
+    box->pack_end(*properties_button);
+  }
+  else
+  {
+    std::cout << "on_placessidebar_populate_popup(): Unknown type of container." << std::endl;
+  }
 }
 
 void ExampleWindow::on_menu_properties_activate()
