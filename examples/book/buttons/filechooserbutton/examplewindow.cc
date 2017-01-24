@@ -24,14 +24,12 @@ ExampleWindow::ExampleWindow()
 
   set_title("FileChooserButton example");
 
-  m_button.property_margin() = 10;
+  m_button.set_margin(10);
   add(m_button);
 
   //Allow our file chooser to select remote URIs,
   //for instance via bookmarked servers:
   m_button.set_local_only(false);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

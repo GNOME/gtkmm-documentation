@@ -1,5 +1,3 @@
-/* example-start tictactoe tictactoe.c */
-
 /* GTK - The GIMP Toolkit
  * Copyright(C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
  *
@@ -37,15 +35,13 @@ TicTacToe::TicTacToe()
     {
       Gtk::ToggleButton* button = nullptr;
       buttons[i][j] = button = Gtk::manage( new Gtk::ToggleButton());
-      grid->attach(*button, i, j, 1, 1);
+      grid->attach(*button, i, j);
       button->signal_toggled().connect( sigc::bind(
                                      sigc::mem_fun(*this, &TicTacToe::toggle),
                                      button));
       button->set_size_request(20, 20);
     }
   }
-
-  grid->show_all();
 }
 
 TicTacToe::~TicTacToe()

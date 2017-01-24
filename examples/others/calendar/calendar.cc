@@ -176,7 +176,7 @@ CalendarExample::CalendarExample()
   set_resizable(false);
 
   auto vbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, DEF_PAD));
-  vbox->property_margin() = 5;
+  vbox->set_margin(5);
   add(*vbox);
 
   /*
@@ -288,8 +288,6 @@ CalendarExample::CalendarExample()
   bbox->add(*button);
   button->set_can_default();
   button->grab_default();
-
-  show_all();
 }
 
 Glib::Date CalendarExample::get_date() const

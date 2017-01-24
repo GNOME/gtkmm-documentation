@@ -58,10 +58,6 @@ ExampleWindow::ExampleWindow()
   m_Dialog.signal_response().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_about_dialog_response) );
 
-  show_all_children();
-
-  // The widget must be realized and mapped before grab_focus() is called.
-  // That's why it's called after show_all_children().
   m_Button.grab_focus();
 }
 

@@ -33,7 +33,7 @@ ExampleWindow::ExampleWindow()
   //Set up window and the top-level container:
   set_title(app_title);
 
-  m_vbox.property_margin() = 10;
+  m_vbox.set_margin(10);
   add(m_vbox);
 
   //Check button with markup in tooltip:
@@ -61,8 +61,6 @@ ExampleWindow::ExampleWindow()
   m_button_tooltip_window.add(*label);
 
   connect_signals();
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

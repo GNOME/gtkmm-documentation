@@ -24,13 +24,13 @@ ExampleWindow::ExampleWindow()
   m_Frame_Vertical("Vertical Button Boxes")
 {
   set_title("Gtk::ButtonBox");
-  m_VBox_Main.property_margin() = 10;
+  m_VBox_Main.set_margin(10);
   add(m_VBox_Main);
 
   m_VBox_Main.pack_start(m_Frame_Horizontal, Gtk::PACK_EXPAND_WIDGET, 10);
 
   //The horizontal ButtonBoxes:
-  m_VBox.property_margin() = 10;
+  m_VBox.set_margin(10);
   m_Frame_Horizontal.add(m_VBox);
 
   m_VBox.pack_start(*Gtk::manage(
@@ -57,7 +57,7 @@ ExampleWindow::ExampleWindow()
   //The vertical ButtonBoxes:
   m_VBox_Main.pack_start(m_Frame_Vertical, Gtk::PACK_EXPAND_WIDGET, 10);
 
-  m_HBox.property_margin() = 10;
+  m_HBox.set_margin(10);
   m_Frame_Vertical.add(m_HBox);
 
   m_HBox.pack_start(*Gtk::manage(
@@ -78,8 +78,6 @@ ExampleWindow::ExampleWindow()
   m_HBox.pack_start(*Gtk::manage(new ExampleButtonBox(false, "End (spacing 10)",
                   10, Gtk::BUTTONBOX_END)),
           Gtk::PACK_EXPAND_WIDGET, 5);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

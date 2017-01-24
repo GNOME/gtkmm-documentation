@@ -25,10 +25,8 @@ ExampleWindow::ExampleWindow()
   m_button.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_clicked) );
 
-  m_button.property_margin() = 10;
+  m_button.set_margin(10);
   add(m_button);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

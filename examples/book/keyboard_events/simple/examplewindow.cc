@@ -19,7 +19,7 @@
 ExampleWindow::ExampleWindow()
 {
   set_title("Keyboard Events");
-  m_container.property_margin() = 10;
+  m_container.set_margin(10);
   add(m_container);
 
   // Radio buttons:
@@ -36,8 +36,6 @@ ExampleWindow::ExampleWindow()
   // Events.
   // We override the default event signal handler.
   add_events(Gdk::KEY_PRESS_MASK);
-
-  show_all_children();
 }
 
 bool ExampleWindow::on_key_press_event(GdkEventKey* key_event)

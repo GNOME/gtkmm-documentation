@@ -21,7 +21,7 @@ ExampleWindow::ExampleWindow()
 {
   set_title ("Paned Windows");
   set_default_size(450, 400);
-  m_VPaned.property_margin() = 10;
+  m_VPaned.set_margin(10);
 
   /* Add a vpaned widget to our toplevel window */
   add(m_VPaned);
@@ -29,8 +29,6 @@ ExampleWindow::ExampleWindow()
   /* Now add the contents of the two halves of the window */
   m_VPaned.add1(m_MessagesList);
   m_VPaned.add2(m_MessageText);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

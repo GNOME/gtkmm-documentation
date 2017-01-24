@@ -26,11 +26,11 @@ ExampleWindow::ExampleWindow()
   set_title("Gtk::Notebook example");
   set_default_size(400, 200);
 
-  m_VBox.property_margin() = 10;
+  m_VBox.set_margin(10);
   add(m_VBox);
 
   //Add the Notebook, with the button underneath:
-  m_Notebook.property_margin() = 10;
+  m_Notebook.set_margin(10);
   m_VBox.pack_start(m_Notebook);
   m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
 
@@ -44,8 +44,6 @@ ExampleWindow::ExampleWindow()
 
   m_Notebook.signal_switch_page().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_notebook_switch_page) );
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

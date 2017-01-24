@@ -58,9 +58,8 @@ IdleExample::IdleExample() :
   vbox->pack_start(*hbox);
 
   // set margin and display all
-  vbox->property_margin() = 5;
+  vbox->set_margin(5);
   add(*vbox);
-  show_all_children();
 
   // formatting drive c in timeout callback ;-)
   Glib::signal_timeout().connect(sigc::mem_fun(*this, &IdleExample::timer_callback), 50);

@@ -40,10 +40,8 @@ ExampleWindow::ExampleWindow()
 
   // Layout
   m_scrolled_window.add(m_flow_box);
-  m_scrolled_window.property_margin() = 6;
+  m_scrolled_window.set_margin(6);
   add(m_scrolled_window);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

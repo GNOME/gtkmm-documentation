@@ -61,6 +61,6 @@ bool ExampleWindow::load_file(const Glib::RefPtr<Gio::File>& file)
     return false;
   }
 
-  show_all_children();
+  show();
   return true;
 }

@@ -21,7 +21,7 @@ ExampleWindow::ExampleWindow()
 {
   set_title ("EventBox");
 
-  m_EventBox.property_margin() = 10;
+  m_EventBox.set_margin(10);
   add(m_EventBox);
 
   m_EventBox.add(m_Label);
@@ -37,8 +37,6 @@ ExampleWindow::ExampleWindow()
     sigc::mem_fun(*this, &ExampleWindow::on_eventbox_button_press) );
 
   m_EventBox.set_tooltip_text("Click me!");
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

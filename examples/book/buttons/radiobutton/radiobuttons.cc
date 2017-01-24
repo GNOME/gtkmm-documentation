@@ -43,8 +43,8 @@ RadioButtons::RadioButtons() :
   m_Box_Top.pack_start(m_Box2);
 
   // Set the inner boxes' margins
-  m_Box1.property_margin() = 10;
-  m_Box2.property_margin() = 10;
+  m_Box1.set_margin(10);
+  m_Box2.set_margin(10);
 
   // Put the radio buttons in Box1:
   m_Box1.pack_start(m_RadioButton1);
@@ -65,9 +65,6 @@ RadioButtons::RadioButtons() :
   // RadioButtons::on_button_clicked()
   m_Button_Close.signal_clicked().connect(sigc::mem_fun(*this,
               &RadioButtons::on_button_clicked) );
-
-  // Show all children of the window
-  show_all_children();
 }
 
 RadioButtons::~RadioButtons()

@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -93,8 +91,6 @@ ExampleWindow::ExampleWindow()
 
   completion->signal_action_activated().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_completion_action_activated) );
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

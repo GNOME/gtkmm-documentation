@@ -23,19 +23,16 @@ ExampleWindow::ExampleWindow()
   set_title("Custom Widget example");
   set_default_size(400, 200);
 
-  m_VBox.property_margin() = 6;
+  m_VBox.set_margin(6);
   add(m_VBox);
   m_VBox.pack_start(m_MyWidget, Gtk::PACK_EXPAND_WIDGET);
-  m_MyWidget.show();
 
   m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
 
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
-  m_ButtonBox.property_margin() = 6;
+  m_ButtonBox.set_margin(6);
   m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
   m_Button_Quit.signal_clicked().connect( sigc::mem_fun(*this, &ExampleWindow::on_button_quit) );
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

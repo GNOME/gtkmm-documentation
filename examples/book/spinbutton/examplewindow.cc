@@ -53,12 +53,12 @@ ExampleWindow::ExampleWindow()
 {
   set_title("SpinButton");
 
-  m_VBox_Main.property_margin() = 10;
+  m_VBox_Main.set_margin(10);
   add(m_VBox_Main);
 
   m_VBox_Main.pack_start(m_Frame_NotAccelerated);
 
-  m_VBox.property_margin() = 5;
+  m_VBox.set_margin(5);
   m_Frame_NotAccelerated.add(m_VBox);
 
   /* Day, month, year spinners */
@@ -91,7 +91,7 @@ ExampleWindow::ExampleWindow()
   //Accelerated:
   m_VBox_Main.pack_start(m_Frame_Accelerated);
 
-  m_VBox_Accelerated.property_margin() = 5;
+  m_VBox_Accelerated.set_margin(5);
   m_Frame_Accelerated.add(m_VBox_Accelerated);
 
   m_VBox_Accelerated.pack_start(m_HBox_Accelerated, Gtk::PACK_EXPAND_WIDGET, 5);
@@ -145,8 +145,6 @@ ExampleWindow::ExampleWindow()
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
   m_VBox_Main.pack_start(m_Button_Close, Gtk::PACK_SHRINK);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

@@ -57,7 +57,6 @@ TreeView_WithPopup::TreeView_WithPopup()
   m_Menu_Popup.append(*item);
 
   m_Menu_Popup.accelerate(*this);
-  m_Menu_Popup.show_all(); //Show all menu items when the menu pops up
 }
 
 TreeView_WithPopup::~TreeView_WithPopup()

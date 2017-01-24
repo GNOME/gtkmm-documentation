@@ -43,8 +43,6 @@ ExampleWindow::ExampleWindow()
 
   m_VBox.pack_start(m_DrawingArea);
   m_DrawingArea.set_draw_func(sigc::mem_fun(*this, &ExampleWindow::on_drawing_area_draw));
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

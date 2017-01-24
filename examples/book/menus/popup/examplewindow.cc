@@ -99,8 +99,6 @@ ExampleWindow::ExampleWindow()
     g_warning("GMenu not found");
 
   m_pMenuPopup = new Gtk::Menu(gmenu);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

@@ -25,7 +25,7 @@ ExampleWindow::ExampleWindow()
 {
   set_title("Gtk::Clipboard example");
 
-  m_VBox.property_margin() = 12;
+  m_VBox.set_margin(12);
   add(m_VBox);
 
   m_VBox.pack_start(m_Label, Gtk::PACK_SHRINK);
@@ -51,8 +51,6 @@ ExampleWindow::ExampleWindow()
   m_ButtonBox.pack_start(m_Button_Paste, Gtk::PACK_SHRINK);
   m_Button_Paste.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_paste) );
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

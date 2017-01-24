@@ -23,7 +23,7 @@ ExampleWindow::ExampleWindow()
   set_size_request(300, 300);
 
   /* Sets the margin around the frame. */
-  m_Frame.property_margin() = 10;
+  m_Frame.set_margin(10);
 
   add(m_Frame);
 
@@ -35,8 +35,6 @@ ExampleWindow::ExampleWindow()
 
   /* Set the style of the frame */
   m_Frame.set_shadow_type(Gtk::SHADOW_ETCHED_OUT);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

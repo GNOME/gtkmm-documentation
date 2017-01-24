@@ -50,10 +50,10 @@ ExampleWindow::ExampleWindow()
   // Options panel layout:
   m_options_grid.set_halign(Gtk::ALIGN_START);
   m_options_grid.set_column_spacing(6);
-  m_options_grid.attach(m_search_mode_label, 0, 0, 1, 1);
-  m_options_grid.attach(m_search_mode_switch, 1, 0, 1, 1);
-  m_options_grid.attach(m_close_button_label, 0, 1, 1, 1);
-  m_options_grid.attach(m_close_button_switch, 1, 1, 1, 1);
+  m_options_grid.attach(m_search_mode_label, 0, 0);
+  m_options_grid.attach(m_search_mode_switch, 1, 0);
+  m_options_grid.attach(m_close_button_label, 0, 1);
+  m_options_grid.attach(m_close_button_switch, 1, 1);
 
   // Searchbar Layout
   m_up_down_box.pack_start(m_go_down_button, Gtk::PACK_SHRINK);
@@ -74,10 +74,8 @@ ExampleWindow::ExampleWindow()
   m_vbox.pack_start(m_label, Gtk::PACK_SHRINK, 6);
   m_vbox.pack_start(m_separator, Gtk::PACK_SHRINK, 12);
   m_vbox.pack_start(m_options_grid, Gtk::PACK_SHRINK, 12);
-  m_vbox.property_margin() = 12;
+  m_vbox.set_margin(12);
   add(m_vbox);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

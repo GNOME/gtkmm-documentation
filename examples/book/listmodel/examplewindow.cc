@@ -38,7 +38,7 @@ m_button_quit("_Quit", true)
   // Use current time as seed for random number generator.
   std::srand(std::time(nullptr));
 
-  m_grid.property_margin() = 5;
+  m_grid.set_margin(5);
   add(m_grid);
 
   // Select bind_model() or bind_list_store() randomly.
@@ -74,8 +74,6 @@ m_button_quit("_Quit", true)
   m_grid.attach(m_button_remove_some, 0, 2, 2, 1);
   m_button_quit.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_quit));
   m_grid.attach(m_button_quit, 0, 3, 2, 1);
-
-  show_all_children();
 }
 
 // static

@@ -25,7 +25,7 @@ ExampleWindow::ExampleWindow()
   set_title("Gtk::TextView example");
   set_default_size(400, 200);
 
-  m_VBox.property_margin() = 5;
+  m_VBox.set_margin(5);
   add(m_VBox);
 
   //Add the TreeView, inside a ScrolledWindow, with the button underneath:
@@ -42,7 +42,7 @@ ExampleWindow::ExampleWindow()
   m_ButtonBox.pack_start(m_Button_Buffer1, Gtk::PACK_SHRINK);
   m_ButtonBox.pack_start(m_Button_Buffer2, Gtk::PACK_SHRINK);
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
-  m_ButtonBox.property_margin() = 5;
+  m_ButtonBox.set_margin(5);
   m_ButtonBox.set_spacing(5);
   m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
 
@@ -56,8 +56,6 @@ ExampleWindow::ExampleWindow()
 
   fill_buffers();
   on_button_buffer1();
-
-  show_all_children();
 }
 
 void ExampleWindow::fill_buffers()

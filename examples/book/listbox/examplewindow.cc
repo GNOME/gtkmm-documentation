@@ -62,7 +62,7 @@ ExampleWindow::ExampleWindow() :
   set_title("ListBox example");
   set_default_size(300, 300);
 
-  m_HBox.property_margin() = 5;
+  m_HBox.set_margin(5);
   add(m_HBox);
   m_HBox.pack_start(m_VBox1, Gtk::PACK_SHRINK);
 
@@ -142,8 +142,6 @@ ExampleWindow::ExampleWindow() :
   m_Button_Unseparate.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_unseparate_clicked));
   m_VBox2.pack_start(m_Button_Visibility, Gtk::PACK_SHRINK);
   m_Button_Visibility.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_visibility_clicked));
-
-  show_all_children();
 }
 
 void ExampleWindow::on_selection_mode_changed()
@@ -228,7 +226,6 @@ void ExampleWindow::on_add_clicked()
   static int new_button_nr = 1;
   const Glib::ustring text = "blah2 new " + Glib::ustring::format(new_button_nr);
   auto new_row = Gtk::manage(new ExampleRow(text, new_button_nr));
-  new_row->show_all();
   m_ListBox.append(*new_row);
   ++new_button_nr;
 }
@@ -256,7 +253,6 @@ void ExampleWindow::update_header_func(Gtk::ListBoxRow* row, Gtk::ListBoxRow* be
       hbox->pack_start(*label, Gtk::PACK_SHRINK);
       auto button = Gtk::manage(new Gtk::Button("button"));
       hbox->pack_start(*button, Gtk::PACK_SHRINK);
-      hbox->show_all();
       row->set_header(*hbox);
     }
 

@@ -99,7 +99,7 @@ int main(int argc, char** argv)
   window.set_title("Exception Handlers");
 
   Gtk::Box *const box = new Gtk::Box(Gtk::ORIENTATION_VERTICAL, 5);
-  box->property_margin() = 10;
+  box->set_margin(10);
   window.add(*Gtk::manage(box));
 
   // New exception handlers are inserted at the front of the per-thread
@@ -128,8 +128,6 @@ int main(int argc, char** argv)
   button5->signal_clicked().connect(sigc::mem_fun(conn_handler1, &sigc::connection::disconnect));
   button6->signal_clicked().connect(sigc::mem_fun(conn_handler2, &sigc::connection::disconnect));
 
-
-  window.show_all_children();
   return app->run(window);
 }
 

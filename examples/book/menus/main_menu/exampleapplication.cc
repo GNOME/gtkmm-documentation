@@ -233,8 +233,6 @@ void ExampleApplication::create_window()
   //That's enough for this simple example.
   win->signal_hide().connect(sigc::bind(
     sigc::mem_fun(*this, &ExampleApplication::on_window_hide), win));
-
-  win->show_all();
 }
 
 void ExampleApplication::on_window_hide(Gtk::Window* window)

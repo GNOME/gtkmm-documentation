@@ -24,7 +24,7 @@ ExampleWindow::ExampleWindow()
   set_title("Gtk::InfoBar example");
   set_default_size(400, 200);
 
-  m_VBox.property_margin() = 6;
+  m_VBox.set_margin(6);
   add(m_VBox);
 
   // Add the message label to the InfoBar:
@@ -68,8 +68,6 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::on_button_clear) );
   m_refTextBuffer->signal_changed().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_textbuffer_changed) );
-
-  show_all();
 
   // Keep the InfoBar hidden until a message needs to be shown:
   m_InfoBar.hide();

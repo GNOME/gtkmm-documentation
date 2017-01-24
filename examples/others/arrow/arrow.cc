@@ -58,26 +58,25 @@ AppWindow::AppWindow()
   grid->set_column_homogeneous(true);
 
   /* Set the margin around the grid. */
-  grid->property_margin() = 12;
+  grid->set_margin(12);
 
   /* Pack and show all our widgets */
   button = Gtk::manage (new ArrowButton (Gtk::ARROW_UP));
-  grid->attach (*button, 1, 0, 1, 1);
+  grid->attach (*button, 1, 0);
 
   button = Gtk::manage (new ArrowButton (Gtk::ARROW_LEFT));
-  grid->attach (*button, 0, 1, 1, 1);
+  grid->attach (*button, 0, 1);
 
   button = Gtk::manage (new ArrowButton (Gtk::ARROW_RIGHT));
-  grid->attach (*button, 2, 1, 1, 1);
+  grid->attach (*button, 2, 1);
 
   button = Gtk::manage (new ArrowButton (Gtk::ARROW_DOWN));
-  grid->attach (*button, 1, 2, 1, 1);
+  grid->attach (*button, 1, 2);
 
   grid->set_row_spacing(5);
   grid->set_column_spacing(5);
 
   add (*grid);
-  show_all ();
 }
 
 AppWindow::~AppWindow()

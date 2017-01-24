@@ -50,16 +50,14 @@ ExampleWindow::ExampleWindow()
   // Layout
   m_grid.set_column_spacing(6);
   m_grid.set_row_spacing(6);
-  m_grid.attach(m_close_button_label, 0, 0, 1, 1);
-  m_grid.attach(m_switch, 1, 0, 1, 1);
-  m_grid.attach(m_title_label, 0, 1, 1, 1);
-  m_grid.attach(m_title_entry, 1, 1, 1, 1);
-  m_grid.attach(m_subtitle_label, 0, 2, 1, 1);
-  m_grid.attach(m_subtitle_entry, 1, 2, 1, 1);
-  m_grid.property_margin() = 12;
+  m_grid.attach(m_close_button_label, 0, 0);
+  m_grid.attach(m_switch, 1, 0);
+  m_grid.attach(m_title_label, 0, 1);
+  m_grid.attach(m_title_entry, 1, 1);
+  m_grid.attach(m_subtitle_label, 0, 2);
+  m_grid.attach(m_subtitle_entry, 1, 2);
+  m_grid.set_margin(12);
   add(m_grid);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

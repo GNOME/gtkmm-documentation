@@ -38,7 +38,7 @@ PreviewDialog::PreviewDialog(
   set_transient_for(parent);
   set_title("Preview");
 
-  m_VBox.property_margin() = 2;
+  m_VBox.set_margin(2);
   add(m_VBox);
 
   m_HBox.pack_start(m_PageSpin);
@@ -66,8 +66,6 @@ PreviewDialog::PreviewDialog(
 
   m_PageSpin.signal_value_changed().connect(
     sigc::mem_fun(*this, &PreviewDialog::on_page_number_changed));
-
-  show_all_children();
 }
 
 PreviewDialog::~PreviewDialog()

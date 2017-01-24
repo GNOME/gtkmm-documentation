@@ -32,7 +32,7 @@ ExampleWindow::ExampleWindow()
   icons.push_back("audio-volume-medium");
   m_button.set_icons(icons);
 
-  m_grid.property_margin() = 12;
+  m_grid.set_margin(12);
   add(m_grid);
   m_grid.set_vexpand(true);
   m_grid.set_hexpand(true);
@@ -44,8 +44,6 @@ ExampleWindow::ExampleWindow()
   m_button.set_value(30.0);
   m_button.signal_value_changed().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_value_changed));
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

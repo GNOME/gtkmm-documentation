@@ -54,8 +54,6 @@ ExampleAssistant::ExampleAssistant()
 
   m_entry.signal_changed().connect(sigc::mem_fun(*this,
     &ExampleAssistant::on_entry_changed));
-
-  show_all_children();
 }
 
 ExampleAssistant::~ExampleAssistant()

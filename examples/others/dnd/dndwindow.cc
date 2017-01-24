@@ -1,5 +1,3 @@
-//$Id: dndwindow.cc 177 2004-03-28 18:58:09Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -48,13 +46,13 @@ DnDWindow::DnDWindow()
 
   m_Label_Drop.signal_drag_data_received().connect( sigc::mem_fun(*this, &DnDWindow::on_label_drop_drag_data_received) );
 
-  m_Grid.attach(m_Label_Drop, 0, 0, 1, 1);
+  m_Grid.attach(m_Label_Drop, 0, 0);
   m_Label_Drop.set_hexpand(true);
   m_Label_Drop.set_vexpand(true);
 
   m_Label_Popup.drag_dest_set(m_listTargetsNoRoot, Gtk::DEST_DEFAULT_ALL, Gdk::DragAction(GDK_ACTION_COPY | GDK_ACTION_MOVE));
 
-  m_Grid.attach(m_Label_Popup, 1, 1, 1, 1);
+  m_Grid.attach(m_Label_Popup, 1, 1);
   m_Label_Popup.set_hexpand(true);
   m_Label_Popup.set_vexpand(true);
 
@@ -64,7 +62,7 @@ DnDWindow::DnDWindow()
   m_Image.set(m_trashcan_closed);
   m_Image.drag_dest_set();
 
-  m_Grid.attach(m_Image, 1, 0, 1, 1);
+  m_Grid.attach(m_Image, 1, 0);
   m_Image.set_hexpand(true);
   m_Image.set_vexpand(true);
 
@@ -80,7 +78,7 @@ DnDWindow::DnDWindow()
 
   m_Button.drag_source_set_icon(m_drag_icon);
 
-  m_Grid.attach(m_Button, 0, 1, 1, 1);
+  m_Grid.attach(m_Button, 0, 1);
   m_Button.set_hexpand(true);
   m_Button.set_vexpand(true);
 
@@ -88,8 +86,6 @@ DnDWindow::DnDWindow()
   m_Button.signal_drag_data_delete().connect( sigc::mem_fun(*this, &DnDWindow::on_button_drag_data_delete));
 
   create_popup();
-
-  show_all();
 }
 
 DnDWindow::~DnDWindow()
@@ -251,7 +247,6 @@ void DnDWindow::create_popup()
     }
   }
 
-  pGrid->show_all();
   m_PopupWindow.add(*pGrid);
 }
 

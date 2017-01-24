@@ -25,7 +25,7 @@ ExampleWindow::ExampleWindow()
 {
   set_title("Gtk::Grid");
 
-  m_grid.property_margin() = 12;
+  m_grid.set_margin(12);
   add(m_grid);
 
   m_grid.add(m_button_1);
@@ -39,8 +39,6 @@ ExampleWindow::ExampleWindow()
 
   m_button_quit.signal_clicked().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_button_quit) );
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

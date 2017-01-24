@@ -58,10 +58,8 @@ ExampleWindow::ExampleWindow()
   m_controls_frame.add(m_controls);
   m_hbox.pack_start(m_places_sidebar, Gtk::PACK_EXPAND_WIDGET);
   m_hbox.pack_start(m_controls_frame, Gtk::PACK_SHRINK);
-  m_hbox.property_margin() = 12;
+  m_hbox.set_margin(12);
   add(m_hbox);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()
@@ -113,7 +111,6 @@ void ExampleWindow::on_placessidebar_open_location(const Glib::RefPtr<Gio::File>
   location_information_grid.set_margin_end(6);
 
   dialog.get_content_area()->pack_end(location_information_grid, true, true);
-  dialog.show_all();
   dialog.run();
 }
 

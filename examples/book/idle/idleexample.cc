@@ -20,7 +20,7 @@ IdleExample::IdleExample() :
   m_Box(Gtk::ORIENTATION_VERTICAL, 5),
   m_ButtonQuit("_Quit", true)
 {
-  m_Box.property_margin() = 5;
+  m_Box.set_margin(5);
 
   // Put buttons into container
 
@@ -50,8 +50,6 @@ IdleExample::IdleExample() :
 
   // formatting drive d in idle signal handler - called as quickly as possible
   Glib::signal_idle().connect( sigc::mem_fun(*this, &IdleExample::on_idle) );
-
-  show_all_children();
 }
 
 

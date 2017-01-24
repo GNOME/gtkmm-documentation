@@ -159,7 +159,7 @@ void ExampleWindow::load_special_items()
   button = Gtk::manage(new Gtk::ToolButton());
   button->set_icon_name("edit-delete");
   button->set_tooltip_text("Do not show at all");
-  button->set_no_show_all();
+  button->hide();
   group->insert(*button);
   button->set_visible_vertical(false);
 
@@ -185,7 +185,7 @@ ExampleWindow::ExampleWindow()
   set_title("Gtk::ToolPalette example");
   set_size_request(600, 600);
 
-  m_VBox.property_margin() = 6;
+  m_VBox.set_margin(6);
   add(m_VBox);
 
   //The Orientation ComboBox:
@@ -237,22 +237,20 @@ ExampleWindow::ExampleWindow()
   m_VBox.pack_start(m_HBox, Gtk::PACK_EXPAND_WIDGET);
 
   m_ScrolledWindowPalette.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC);
-  m_ScrolledWindowPalette.property_margin() = 6;
+  m_ScrolledWindowPalette.set_margin(6);
   m_ScrolledWindowPalette.add(m_ToolPalette);
   m_HBox.pack_start(m_ScrolledWindowPalette);
 
   on_combo_orientation_changed();
 
   m_ScrolledWindowCanvas.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_ALWAYS);
-  m_ScrolledWindowCanvas.property_margin() = 6;
+  m_ScrolledWindowCanvas.set_margin(6);
   m_ScrolledWindowCanvas.add(m_Canvas);
   m_ScrolledWindowCanvas.set_size_request(200, -1);
   m_HBox.pack_start(m_ScrolledWindowCanvas);
 
   m_ToolPalette.add_drag_dest(m_Canvas,
     Gtk::DEST_DEFAULT_HIGHLIGHT, Gtk::TOOL_PALETTE_DRAG_ITEMS, Gdk::ACTION_COPY);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

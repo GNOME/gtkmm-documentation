@@ -22,7 +22,7 @@ ExampleWindow::ExampleWindow()
   set_title("Gtk::ScrolledWindow example");
   set_size_request(300, 300);
 
-  m_ScrolledWindow.property_margin() = 10;
+  m_ScrolledWindow.set_margin(10);
 
   /* the policy is one of Gtk::POLICY AUTOMATIC, or Gtk::POLICY_ALWAYS.
    * Gtk::POLICY_AUTOMATIC will automatically decide whether you need
@@ -60,8 +60,6 @@ ExampleWindow::ExampleWindow()
   /* This makes it so the button is the default.
    * Simply hitting the "Enter" key will cause this button to activate. */
   set_default_response(Gtk::RESPONSE_CLOSE);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

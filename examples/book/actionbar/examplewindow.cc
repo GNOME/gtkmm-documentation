@@ -54,8 +54,6 @@ ExampleWindow::ExampleWindow()
   m_box.pack_start(m_face_image, Gtk::PACK_EXPAND_WIDGET);
   m_box.pack_end(m_action_bar, Gtk::PACK_SHRINK);
   add(m_box);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

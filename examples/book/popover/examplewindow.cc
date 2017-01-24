@@ -46,10 +46,8 @@ ExampleWindow::ExampleWindow()
   m_grid.set_row_spacing(6);
   m_grid.attach(m_toggle_button, 0, 0, 1, 1);
   m_grid.attach(m_calendar, 0, 1, 6, 1);
-  m_grid.property_margin() = 12;
+  m_grid.set_margin(12);
   add(m_grid);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()
@@ -73,11 +71,10 @@ void ExampleWindow::configure_form_popover()
   m_toggle_form_grid.attach(m_format_buttons_box, 0, 1, 2, 1);
   m_toggle_form_grid.attach(m_toggle_form_combo_label, 0, 2, 1, 1);
   m_toggle_form_grid.attach(m_toggle_form_combo, 1, 2, 1, 1);
-  m_toggle_form_grid.show_all();
 
   m_toggle_form_popover.add(m_toggle_form_grid);
   m_toggle_form_popover.set_position(Gtk::POS_BOTTOM);
-  m_toggle_form_popover.property_margin() = 6;
+  m_toggle_form_popover.set_margin(6);
   m_toggle_form_popover.set_modal(false);
 }
 
@@ -137,10 +134,9 @@ void ExampleWindow::configure_cal_popover()
   m_calendar_form_grid.set_column_spacing(6);
   m_calendar_form_grid.attach(m_calendar_popover_label, 0, 0, 1, 1);
   m_calendar_form_grid.attach(m_calendar_popover_entry, 1, 0, 1, 1);
-  m_calendar_form_grid.show_all();
 
   m_calendar_popover.add(m_calendar_form_grid);
-  m_calendar_popover.property_margin() = 6;
+  m_calendar_popover.set_margin(6);
 }
 
 void ExampleWindow::on_day_selected()

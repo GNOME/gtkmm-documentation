@@ -47,8 +47,6 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
 
   set_can_focus();
   add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
-
-  show_all_children();
 }
 
 PopupEntry::~PopupEntry()
@@ -91,7 +89,6 @@ int PopupEntry::get_button_width()
 
   // Urgh.  Hackish :/
   window.move(-500, -500);
-  window.show_all();
 
   //TODO: Support natural-size:
   Gtk::Requisition requisition_min, requisition_natural;

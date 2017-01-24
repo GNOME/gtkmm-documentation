@@ -1,5 +1,3 @@
-//$Id: cellrendererlist.cc 156 2004-03-12 10:11:35Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -60,7 +58,6 @@ CellRendererList::CellRendererList()
 
   frame->add(tree_view_);
   frame->set_shadow_type(Gtk::SHADOW_OUT);
-  frame->show_all();
 
   set_focus_widget(tree_view_);
 }

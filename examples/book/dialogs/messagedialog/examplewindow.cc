@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -37,8 +35,6 @@ ExampleWindow::ExampleWindow()
   m_ButtonBox.pack_start(m_Button_Question);
   m_Button_Question.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_question_clicked) );
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

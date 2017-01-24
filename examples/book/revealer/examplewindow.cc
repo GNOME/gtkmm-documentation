@@ -30,20 +30,20 @@ ExampleWindow::ExampleWindow()
 
   // Transition type selector
   compose_transition_selector();
-  m_controls.attach(m_transition_type_label, 0, 0, 1, 1);
-  m_controls.attach(m_transition_type, 1, 0, 1, 1);
+  m_controls.attach(m_transition_type_label, 0, 0);
+  m_controls.attach(m_transition_type, 1, 0);
 
   // Transition duration selector
   m_transition_duration.set_range(10.0, 10000.0); // Up to 10 secs
   m_transition_duration.set_value(1000.0);
-  m_controls.attach(m_transition_duration_label, 0, 1, 1, 1);
-  m_controls.attach(m_transition_duration, 1, 1, 1, 1);
+  m_controls.attach(m_transition_duration_label, 0, 1);
+  m_controls.attach(m_transition_duration, 1, 1);
 
   // Switch
   m_switch.set_active(true);
   m_switch.property_active().signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_switch_active_changed));
-  m_controls.attach(m_switch_label, 0, 2, 1, 1);
-  m_controls.attach(m_switch, 1, 2, 1, 1);
+  m_controls.attach(m_switch_label, 0, 2);
+  m_controls.attach(m_switch, 1, 2);
 
   // Revealer
   m_revealer.add(m_label);
@@ -55,10 +55,8 @@ ExampleWindow::ExampleWindow()
   m_vbox.pack_start(m_controls, Gtk::PACK_SHRINK, 0);
   m_vbox.pack_start(m_separator, Gtk::PACK_SHRINK, 12);
   m_vbox.pack_start(m_revealer, Gtk::PACK_EXPAND_WIDGET, 6);
-  m_vbox.property_margin() = 12;
+  m_vbox.set_margin(12);
   add(m_vbox);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

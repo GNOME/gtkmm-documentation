@@ -29,7 +29,7 @@ ExampleWindow::ExampleWindow()
 
   //Put a toolbar at the top, and a button underneath:
   m_VBox.pack_start(m_Toolbar, Gtk::PACK_SHRINK);
-  m_ButtonBox.property_margin() = 5;
+  m_ButtonBox.set_margin(5);
   m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
   m_VBox.pack_end(m_ButtonBox, Gtk::PACK_SHRINK);
 
@@ -76,8 +76,6 @@ ExampleWindow::ExampleWindow()
     m_Toolbar.append( *Gtk::manage(
                 new Gtk::RadioToolButton(group, "Radio 3")) );
   }
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

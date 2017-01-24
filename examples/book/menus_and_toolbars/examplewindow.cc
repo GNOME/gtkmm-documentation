@@ -149,8 +149,6 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
     g_warning("GtkToolbar not found");
   else
     m_Box.pack_start(*toolbar, Gtk::PACK_SHRINK);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

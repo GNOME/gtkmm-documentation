@@ -38,7 +38,7 @@ ExampleWindow::ExampleWindow()
 {
   set_title("Label");
 
-  m_HBox.property_margin() = 5;
+  m_HBox.set_margin(5);
   add(m_HBox);
 
   m_HBox.pack_start(m_VBox, Gtk::PACK_SHRINK);
@@ -97,8 +97,6 @@ ExampleWindow::ExampleWindow()
           "     __ _______ ___");
   m_Frame_Underlined.add(m_Label_Underlined);
   m_VBox2.pack_start(m_Frame_Underlined, Gtk::PACK_SHRINK);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

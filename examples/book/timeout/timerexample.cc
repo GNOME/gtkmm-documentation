@@ -25,7 +25,7 @@ TimerExample::TimerExample() :
   count_value(5), // each timer will count down 5 times before disconnecting
   timeout_value(1500) // 1500 ms = 1.5 seconds
 {
-  m_Box.property_margin() = 10;
+  m_Box.set_margin(10);
   add(m_Box);
   m_Box.pack_start(m_ButtonAddTimer);
   m_Box.pack_start(m_ButtonDeleteTimer);
@@ -38,8 +38,6 @@ TimerExample::TimerExample() :
               &TimerExample::on_button_add_timer));
   m_ButtonDeleteTimer.signal_clicked().connect(sigc::mem_fun(*this,
               &TimerExample::on_button_delete_timer));
-
-  show_all_children();
 }
 
 void TimerExample::on_button_quit()

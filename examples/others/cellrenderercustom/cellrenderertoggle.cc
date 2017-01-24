@@ -267,8 +267,6 @@ AppWindow::AppWindow()
     row[list_columns_.text]   = output.str();
     row[list_columns_.active] = ((i % 2) != 0);
   }
-
-  show_all_children();
 }
 
 AppWindow::~AppWindow()

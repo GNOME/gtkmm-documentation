@@ -37,7 +37,7 @@ ExampleWindow::ExampleWindow()
 {
   set_title("Gtk::Clipboard example");
 
-  m_VBox.property_margin() = 12;
+  m_VBox.set_margin(12);
   add(m_VBox);
 
   m_VBox.pack_start(m_Label, Gtk::PACK_SHRINK);
@@ -68,8 +68,6 @@ ExampleWindow::ExampleWindow()
   //the clipboard change.
   Gtk::Clipboard::get()->signal_owner_change().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_clipboard_owner_change) );
-
-  show_all_children();
 
   update_paste_status();
 }

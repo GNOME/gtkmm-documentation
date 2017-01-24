@@ -33,8 +33,6 @@ ExampleWindow::ExampleWindow()
 
   // Synchonize the drawing in m_Area_Lines with the state of the toggle button.
   on_button_toggled();
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

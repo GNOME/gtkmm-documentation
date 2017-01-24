@@ -44,8 +44,6 @@ StatusBarExample::StatusBarExample()
 
   m_bPop.signal_clicked().connect( sigc::bind(sigc::mem_fun(*this, &StatusBarExample::pop_item), m_context_id) );
   m_vbox.pack_start(m_bPop);
-
-  show_all();
 }
 
 void

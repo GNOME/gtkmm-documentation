@@ -28,7 +28,7 @@ ExampleWindow::ExampleWindow()
   set_resizable();
   set_title("Gtk::ProgressBar");
 
-  m_VBox.property_margin() = 10;
+  m_VBox.set_margin(10);
   add(m_VBox);
 
   m_VBox.pack_start(m_ProgressBar, Gtk::PACK_SHRINK, 5);
@@ -46,20 +46,20 @@ ExampleWindow::ExampleWindow()
   m_Grid.set_row_homogeneous(true);
 
   //Add a check button to select displaying of the trough text:
-  m_Grid.attach(m_CheckButton_Text, 0, 0, 1, 1);
-  m_CheckButton_Text.property_margin() = 5;
+  m_Grid.attach(m_CheckButton_Text, 0, 0);
+  m_CheckButton_Text.set_margin(5);
   m_CheckButton_Text.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_text) );
 
   //Add a check button to toggle activity mode:
-  m_Grid.attach(m_CheckButton_Activity, 0, 1, 1, 1);
-  m_CheckButton_Activity.property_margin() = 5;
+  m_Grid.attach(m_CheckButton_Activity, 0, 1);
+  m_CheckButton_Activity.set_margin(5);
   m_CheckButton_Activity.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_activity) );
 
   //Add a check button to select growth from left to right or from right to left:
-  m_Grid.attach(m_CheckButton_Inverted, 0, 2, 1, 1);
-  m_CheckButton_Inverted.property_margin() = 5;
+  m_Grid.attach(m_CheckButton_Inverted, 0, 2);
+  m_CheckButton_Inverted.set_margin(5);
   m_CheckButton_Inverted.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_inverted) );
 
@@ -69,8 +69,6 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::on_button_close) );
   m_Button_Close.set_can_default();
   m_Button_Close.grab_default();
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

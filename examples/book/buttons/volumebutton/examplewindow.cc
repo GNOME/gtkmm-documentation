@@ -25,7 +25,7 @@ ExampleWindow::ExampleWindow()
 
   set_title("VolumeButton Example");
 
-  m_grid.property_margin() = 12;
+  m_grid.set_margin(12);
   add(m_grid);
   m_button.set_vexpand(true);
   m_button.set_hexpand(true);
@@ -37,8 +37,6 @@ ExampleWindow::ExampleWindow()
   m_button.set_value(0.4);
   m_button.signal_value_changed().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_value_changed));
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

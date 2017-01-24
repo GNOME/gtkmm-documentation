@@ -31,12 +31,10 @@ ExampleWindow::ExampleWindow()
   m_DrawingArea.set_content_width(200);
   m_DrawingArea.set_content_height(200);
   m_AspectFrame.add(m_DrawingArea);
-  m_AspectFrame.property_margin() = 10;
+  m_AspectFrame.set_margin(10);
 
   // Add the aspect frame to our toplevel window:
   add(m_AspectFrame);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

@@ -20,7 +20,7 @@
 ExampleWindow::ExampleWindow()
 {
   set_title("Event Propagation");
-  m_container.property_margin() = 10;
+  m_container.set_margin(10);
   add(m_container);
 
   m_label.set_label("A label");
@@ -49,8 +49,6 @@ ExampleWindow::ExampleWindow()
   // Called after the default event signal handler.
   signal_key_release_event().connect(
     sigc::mem_fun(*this, &ExampleWindow::windowKeyRelease));
-
-  show_all_children();
 }
 
 //By changing the return value we allow, or don't allow, the event to propagate to other elements.

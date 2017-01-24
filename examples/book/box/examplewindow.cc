@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -161,8 +159,6 @@ ExampleWindow::ExampleWindow(int which)
   // pack the vbox (box1) which now contains all our widgets, into the
   // main window.
   add(m_box1);
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 838 2007-05-10 01:35:59Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -85,8 +83,6 @@ ExampleWindow::ExampleWindow()
   }
   else
     std::cout << "No Entry ???" << std::endl;
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()

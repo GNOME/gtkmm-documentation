@@ -43,7 +43,7 @@ ExampleWindow::ExampleWindow()
   set_title("Gtk::IconView (ListStore + TreeModelSort) example");
   set_default_size(400, 400);
 
-  m_VBox.property_margin() = 5;
+  m_VBox.set_margin(5);
   add(m_VBox);
 
   // Add the TreeView inside a ScrolledWindow, with the button underneath:
@@ -56,7 +56,7 @@ ExampleWindow::ExampleWindow()
   m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
 
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
-  m_ButtonBox.property_margin() = 6;
+  m_ButtonBox.set_margin(6);
   m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
   m_Button_Quit.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_quit) );
@@ -92,8 +92,6 @@ ExampleWindow::ExampleWindow()
   {
     add_entry( entries[idx].m_filename, entries[idx].m_description );
   }
-
-  show_all_children();
 }
 
 ExampleWindow::~ExampleWindow()
