@@ -395,11 +395,15 @@ Note that the API name does not change for every version because that would be a
 API and ABI break. There might be a future gtkmm-5.0 API which would install in parallel
 with gtkmm-4.0 without affecting existing applications.
 </para>
-
 <para>Note that if you mention extra modules in addition to gtkmm-4.0, they should be separated by spaces, not commas.
 </para>
-<para>
-Openismus has more <ulink url="http://www.openismus.com/documents/linux/automake/automake.shtml">basic help with automake and autoconf</ulink>.
+
+<para>The GNU site has more information about <ulink url="https://www.gnu.org/software/autoconf/">autoconf</ulink>
+and <ulink url="https://www.gnu.org/software/automake/">automake</ulink>.
+</para>
+<para>If you start by experimenting with a small application that you plan to use just for yourself,
+it's easier to start with a Makefile similar to the <filename>Makefile.example</filename> files
+in the <link linkend="chapter-building-applications">Building applications</link> chapter.
 </para>
 
 </sect1>
