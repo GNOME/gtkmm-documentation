@@ -390,11 +390,15 @@ This checks for the presence of gtkmm and defines MYAPP_LIBS and MYAPP_CFLAGS fo
 </para>
 <para>gtkmm-3.0 is the name of the current stable API. There was an older API called gtkmm-2-4 which installs in parallel when it is available. There were several versions of gtkmm-2.4, such as gtkmm 2.10 and there are several versions of the gtkmm-3.0 API. Note that the API name does not change for every version because that would be an incompatible API and ABI break. Theoretically, there might be a future gtkmm-4.0 API which would install in parallel with gtkmm-3.0 without affecting existing applications.
 </para>
-
 <para>Note that if you mention extra modules in addition to gtkmm-3.0, they should be separated by spaces, not commas.
 </para>
-<para>
-Openismus has more <ulink url="http://www.openismus.com/documents/linux/automake/automake.shtml">basic help with automake and autoconf</ulink>.
+
+<para>The GNU site has more information about <ulink url="https://www.gnu.org/software/autoconf/">autoconf</ulink>
+and <ulink url="https://www.gnu.org/software/automake/">automake</ulink>.
+</para>
+<para>If you start by experimenting with a small application that you plan to use just for yourself,
+it's easier to start with a Makefile similar to the <filename>Makefile.example</filename> files
+in the <link linkend="chapter-building-applications">Building applications</link> chapter.
 </para>
 
 </sect1>
