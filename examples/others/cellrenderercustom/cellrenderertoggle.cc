@@ -20,6 +20,7 @@
  */
 
 #include <gtkmm.h>
+#include <gtkmm/snapshot.h>
 #include <sstream>
 
 // Can't have MyCellRendererToggle in an anonymous namespace, because then
@@ -42,17 +43,20 @@ public:
   SignalToggled& signal_toggled();
 
 protected:
-  //TODO: Update for gtkmm 4. This isn't currently overriding anything.
-  void get_preferred_size_vfunc(Gtk::Widget& widget,
-                              const Gdk::Rectangle* cell_area,
-                              int* x_offset, int* y_offset,
-                              int* width,    int* height) const /* override */;
+  void get_preferred_width_vfunc(Gtk::Widget& widget,
+    int& minimum_width, int& natural_width) const override;
+  void get_preferred_width_for_height_vfunc(Gtk::Widget& widget, int height,
+    int& minimum_width, int& natural_width) const override;
+  void get_preferred_height_vfunc(Gtk::Widget& widget,
+    int& minimum_height, int& natural_height) const override;
+  void get_preferred_height_for_width_vfunc(Gtk::Widget& widget, int width,
+    int& minimum_height, int& natural_height) const override;
 
-  void render_vfunc(const Cairo::RefPtr<Cairo::Context>& cr,
-                            Gtk::Widget& widget,
-                            const Gdk::Rectangle& background_area,
-                            const Gdk::Rectangle& cell_area,
-                            Gtk::CellRendererState flag) /* override */;
+  void snapshot_vfunc(Gtk::Snapshot& snapshot,
+                      Gtk::Widget& widget,
+                      const Gdk::Rectangle& background_area,
+                      const Gdk::Rectangle& cell_area,
+                      Gtk::CellRendererState flags) override;
 
   bool activate_vfunc(GdkEvent* event,
                               Gtk::Widget& widget,
@@ -130,44 +134,39 @@ MyCellRendererToggle::SignalToggled& MyCellRendererToggle::signal_toggled()
   return signal_toggled_;
 }
 
-void MyCellRendererToggle::get_preferred_size_vfunc(Gtk::Widget&,
-                                          const Gdk::Rectangle* cell_area,
-                                          int* x_offset, int* y_offset,
-                                          int* width,    int* height) const
+enum { TOGGLE_WIDTH = 12 };
+
+void MyCellRendererToggle::get_preferred_width_vfunc(Gtk::Widget& /* widget */,
+  int& minimum_width, int& natural_width) const
 {
-  enum { TOGGLE_WIDTH = 12 };
-
   const unsigned int xpad = property_xpad();
-  const unsigned int ypad = property_ypad();
-  const unsigned int xalign = property_xalign();
-  const unsigned int yalign = property_yalign();
-
   const int calc_width = xpad * 2 + TOGGLE_WIDTH;
-  const int calc_height = ypad * 2 + TOGGLE_WIDTH;
-
-  if(width)
-    *width = calc_width;
-
-  if(height)
-    *height = calc_height;
-
-  if(cell_area)
-  {
-    if(x_offset)
-    {
-      *x_offset = int(xalign * (cell_area->get_width() - calc_width));
-      *x_offset = std::max(0, *x_offset);
-    }
-
-    if(y_offset)
-    {
-      *y_offset = int(yalign * (cell_area->get_height() - calc_height));
-      *y_offset = std::max(0, *y_offset);
-    }
-  }
+  minimum_width = calc_width;
+  natural_width = calc_width;
 }
 
-void MyCellRendererToggle::render_vfunc(const Cairo::RefPtr<Cairo::Context>& cr,
+void MyCellRendererToggle::get_preferred_width_for_height_vfunc(Gtk::Widget& widget,
+  int /* height */, int& minimum_width, int& natural_width) const
+{
+  get_preferred_width_vfunc(widget, minimum_width, natural_width);
+}
+
+void MyCellRendererToggle::get_preferred_height_vfunc(Gtk::Widget& /* widget */,
+  int& minimum_height, int& natural_height) const
+{
+  const unsigned int ypad = property_ypad();
+  const int calc_height = ypad * 2 + TOGGLE_WIDTH;
+  minimum_height = calc_height;
+  natural_height = calc_height;
+}
+
+void MyCellRendererToggle::get_preferred_height_for_width_vfunc(Gtk::Widget& widget,
+  int /* width */, int& minimum_height, int& natural_height) const
+{
+  get_preferred_height_vfunc(widget, minimum_height, natural_height);
+}
+
+void MyCellRendererToggle::snapshot_vfunc(Gtk::Snapshot& snapshot,
   Gtk::Widget& widget,
   const Gdk::Rectangle& /* background_area */,
   const Gdk::Rectangle& cell_area,
@@ -175,7 +174,6 @@ void MyCellRendererToggle::render_vfunc(const Cairo::RefPtr<Cairo::Context>& cr,
 {
   const unsigned int cell_xpad = property_xpad();
   const unsigned int cell_ypad = property_ypad();
-
 
   int width = 0, height = 0;
 
@@ -193,17 +191,24 @@ void MyCellRendererToggle::render_vfunc(const Cairo::RefPtr<Cairo::Context>& cr,
 
   Gtk::StateFlags state = Gtk::STATE_FLAG_INSENSITIVE;
 
-  if(property_activatable_)
+  if (property_activatable_)
     state = (Gtk::StateFlags)0;
 
-  if((flags & Gtk::CELL_RENDERER_SELECTED) != 0)
+  if ((flags & Gtk::CELL_RENDERER_SELECTED) != 0)
     state = (widget.has_focus()) ? Gtk::STATE_FLAG_SELECTED : Gtk::STATE_FLAG_ACTIVE;
 
-  widget.get_style_context()->set_state(state);
+  if (property_active_)
+    state |= Gtk::STATE_FLAG_CHECKED;
 
-  if(property_radio_)
+  auto style_context = widget.get_style_context();
+  style_context->set_state(state);
+
+  // Create a cairo context to draw on.
+  auto cr = snapshot.append_cairo(cell_area, "MyCairoNode");
+
+  if (property_radio_)
   {
-    widget.get_style_context()->render_option(
+    style_context->render_option(
       cr,
       cell_area.get_x() + cell_xpad,
       cell_area.get_y() + cell_ypad,
@@ -211,7 +216,7 @@ void MyCellRendererToggle::render_vfunc(const Cairo::RefPtr<Cairo::Context>& cr,
   }
   else
   {
-    widget.get_style_context()->render_check(
+    style_context->render_check(
       cr,
       cell_area.get_x() + cell_xpad,
       cell_area.get_y() + cell_ypad,

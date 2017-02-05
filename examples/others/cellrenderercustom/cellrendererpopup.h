@@ -42,14 +42,10 @@ public:
   void hide_popup();
 
 protected:
-
-  //TODO: Port this to gtkmm 4:
-  /*
-  void get_preferred_size_vfunc(Gtk::Widget& widget,
-                              const Gdk::Rectangle* cell_area,
-                              int* x_offset, int* y_offset,
-                              int* width,    int* height) const  override;
-  */
+  void get_preferred_width_vfunc(Gtk::Widget& widget,
+    int& minimum_width, int& natural_width) const override;
+  void get_preferred_width_for_height_vfunc(Gtk::Widget& widget, int height,
+    int& minimum_width, int& natural_width) const override;
 
   Gtk::CellEditable* start_editing_vfunc(GdkEvent* event,
                                                  Gtk::Widget& widget,

@@ -98,23 +98,32 @@ void CellRendererPopup::hide_popup()
   signal_hide_popup_();
 }
 
-//TODO: Port this to gtkmm 4:
-/*
-void CellRendererPopup::get_preferred_size_vfunc(Gtk::Widget& widget,
-                                       const Gdk::Rectangle* cell_area,
-                                       int* x_offset, int* y_offset,
-                                       int* width,    int* height) const
+void CellRendererPopup::get_preferred_width_vfunc(Gtk::Widget& widget,
+  int& minimum_width, int& natural_width) const
 {
-  Gtk::CellRendererText::get_preferred_size_vfunc(widget, cell_area, x_offset, y_offset, width, height);
+  Gtk::CellRendererText::get_preferred_width_vfunc(widget, minimum_width, natural_width);
 
   // We cache this because it takes a really long time to get the width.
-  if(button_width_ < 0)
+  if (button_width_ < 0)
     button_width_ = PopupEntry::get_button_width();
 
-  if(width)
-    *width += button_width_;
+  minimum_width += button_width_;
+  natural_width += button_width_;
 }
-*/
+
+void CellRendererPopup::get_preferred_width_for_height_vfunc(Gtk::Widget& widget,
+  int height, int& minimum_width, int& natural_width) const
+{
+  Gtk::CellRendererText::get_preferred_width_for_height_vfunc(
+    widget, height, minimum_width, natural_width);
+
+  // We cache this because it takes a really long time to get the width.
+  if (button_width_ < 0)
+    button_width_ = PopupEntry::get_button_width();
+
+  minimum_width += button_width_;
+  natural_width += button_width_;
+}
 
 Gtk::CellEditable* CellRendererPopup::start_editing_vfunc(GdkEvent*,
                                                           Gtk::Widget&,
