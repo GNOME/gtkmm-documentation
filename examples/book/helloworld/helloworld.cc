@@ -21,7 +21,7 @@ HelloWorld::HelloWorld()
 : m_button("Hello World")   // creates a new button with label "Hello World".
 {
   // Sets the margin around the button.
-  m_button.property_margin() = 10;
+  m_button.set_margin(10);
 
   // When the button receives the "clicked" signal, it will call the
   // on_button_clicked() method defined below.
@@ -30,9 +30,6 @@ HelloWorld::HelloWorld()
 
   // This packs the button into the Window (a container).
   add(m_button);
-
-  // The final step is to display this newly created widget...
-  m_button.show();
 }
 
 HelloWorld::~HelloWorld()

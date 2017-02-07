@@ -6,7 +6,6 @@
   <!ENTITY url_refdocs_base_gio "&url_refdocs_base_glib_html;classGio_1_1">
   <!ENTITY url_refdocs_base_gtk_html "http://developer.gnome.org/gtkmm/unstable/">
   <!ENTITY url_refdocs_base_gtk "&url_refdocs_base_gtk_html;classGtk_1_1">
-  <!ENTITY url_refdocs_base_gtk_namespace "&url_refdocs_base_gtk_html;namespaceGtk_1_1">
   <!ENTITY url_figures_base "figures/">
   <!ENTITY url_examples_base "http://git.gnome.org/browse/gtkmm-documentation/tree/examples/book/">
   <!ENTITY url_examples_branchsuffix "master">
@@ -197,6 +196,7 @@ applications and libraries:
   <listitem><para><application>Pango</application></para></listitem>
   <listitem><para><application>cairo</application></para></listitem>
   <listitem><para><application>gdk-pixbuf</application></para></listitem>
+  <listitem><para><application>graphene</application></para></listitem>
 </itemizedlist>
 </sect1>
 
@@ -336,11 +336,9 @@ The next statement:
 <programlisting>auto app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");</programlisting>
 
 creates a <classname>Gtk::Application</classname> object, stored in a <classname>Glib::RefPtr</classname> smartpointer. This is needed in all &gtkmm;
-applications. The <methodname>create()</methodname> method for this object initializes &gtkmm;, and checks the
-arguments passed to your application on the command line, looking for
-standard options such as <literal>--display</literal>. It takes these from the argument list, leaving anything it does not
-recognize for your application to parse or ignore. This ensures
-that all &gtkmm; applications accept the same set of standard arguments.
+applications. The <methodname>create()</methodname> method for this object initializes &gtkmm;, and stores the
+<parameter>argc</parameter> and <parameter>argv</parameter> arguments passed to your application on the command line.
+The arguments can be checked when <methodname>run()</methodname> is called, but this simple application does not use the arguments.
 </para>
 
 <para>
@@ -453,7 +451,11 @@ just connecting to the existing &gtkmm; signals, see the <link linkend="chapter-
 <sect1 id="sec-basics-ustring">
 <title>Glib::ustring</title>
 <para>You might be surprised to learn that &gtkmm; doesn't use <classname>std::string</classname> in its interfaces. Instead it uses <classname>Glib::ustring</classname>, which is so similar and unobtrusive that you could actually pretend that each <classname>Glib::ustring</classname> is a <classname>std::string</classname> and ignore the rest of this section. But read on if you want to use languages other than English in your application.</para>
-<para>std::string uses 8 bit per character, but 8 bits aren't enough to encode languages such as Arabic, Chinese, and Japanese. Although the encodings for these languages have now been specified by the Unicode Consortium, the C and C++ languages do not yet provide any standardised Unicode support. GTK+ and GNOME chose to implement Unicode using UTF-8, and that's what is wrapped by Glib::ustring. It provides almost exactly the same interface as std::string, along with automatic conversions to and from std::string.</para>
+<para>std::string uses 8 bits per character, but 8 bits aren't enough to encode languages such as Arabic, Chinese, and Japanese.
+Although the encodings for these languages have been specified by the <ulink url="http://www.unicode.org/">Unicode Consortium</ulink>,
+the C and C++ languages do not yet provide any standardised Unicode support for UTF-8 encoding.
+GTK+ and GNOME chose to implement Unicode using UTF-8, and that's what is wrapped by Glib::ustring.
+It provides almost exactly the same interface as std::string, along with automatic conversions to and from std::string.</para>
 <para>One of the benefits of UTF-8 is that you don't need to use it unless you want to, so you don't need to retrofit all of your code at once. <classname>std::string</classname> will still work for 7-bit ASCII strings. But when you try to localize your application for languages like Chinese, for instance, you will start to see strange errors, and possible crashes. Then all you need to do is start using <classname>Glib::ustring</classname> instead.</para>
 <para>Note that UTF-8 isn't compatible with 8-bit encodings like ISO-8859-1. For instance, German umlauts are not in the ASCII range and need more than 1 byte in the UTF-8 encoding. If your code contains 8-bit string literals, you have to convert them to UTF-8 (e.g. the Bavarian greeting "Gr&uuml;&szlig; Gott" would be "Gr\xC3\xBC\xC3\x9F Gott").</para>
 <para>You should avoid C-style pointer arithmetic, and functions such as strlen(). In UTF-8, each character might need anywhere from 1 to 6 bytes, so it's not possible to assume that the next byte is another character. <classname>Glib::ustring</classname> worries about the details of this for you so you can use methods such as Glib::ustring::substr() while still thinking in terms of characters instead of bytes.</para>
@@ -530,14 +532,13 @@ Pretty thrilling, eh?  Let's examine the code. First, the
 
 <programlisting>class HelloWorld : public Gtk::Window
 {
-
 public:
   HelloWorld();
-  virtual ~HelloWorld();
+  ~HelloWorld() override;
 
 protected:
   //Signal handlers:
-  virtual void on_button_clicked();
+  void on_button_clicked();
 
   //Member widgets:
   Gtk::Button m_button;
@@ -553,14 +554,12 @@ omitted:
 </para>
 
 <programlisting>HelloWorld::HelloWorld()
-:
-  m_button ("Hello World")
+: m_button("Hello World")
 {
-  set_border_width(10);
+  m_button.set_margin(10);
   m_button.signal_clicked().connect(sigc::mem_fun(*this,
     &amp;HelloWorld::on_button_clicked));
-  add(m_button);.
-  m_button.show();
+  add(m_button);
 }</programlisting>
 
 <para>
@@ -569,9 +568,8 @@ object the label &quot;Hello World&quot;.
 </para>
 
 <para>
-Next we call the Window's <methodname>set_border_width()</methodname> method. This sets
-the amount of space between the sides of the window and the widget it
-contains.
+Next we call the Button's <methodname>set_margin()</methodname> method. This sets
+the amount of space around the button.
 </para>
 
 <para>
@@ -583,21 +581,17 @@ This prints our friendly greeting to <literal>stdout</literal>.
 Next, we use the Window's <methodname>add()</methodname> method to put <literal>m_button</literal> in
 the Window. (<methodname>add()</methodname> comes from <classname>Gtk::Container</classname>, which is
 described in the chapter on container widgets.)  The <methodname>add()</methodname> method
-places the Widget in the Window, but it doesn't display
-the widget. &gtkmm; widgets are always invisible when you create them - to display them, you must call their <methodname>show()</methodname> method, which
-is what we do in the next line.
+places the Widget in the Window.
 </para>
-
 
 <para>
 Now let's look at our program's <function>main()</function> function. Here it is,
 without comments:
 </para>
 
-<programlisting>int main(int argc, char** argv)
+<programlisting>int main(int argc, char* argv[])
 {
-  Glib::RefPtr&lt;Gtk::Application&gt; app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
-
+  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
   HelloWorld helloworld;
   return app-&gt;run(helloworld);
 }</programlisting>
@@ -605,8 +599,7 @@ without comments:
 <para>
 First we instantiate an object stored in a <classname>RefPtr</classname> smartpointer called <literal>app</literal>. This is of type
 <classname>Gtk::Application</classname>. Every &gtkmm; program must have one of these. We pass
-our command-line arguments to its create() method. It takes the arguments
-it wants, and leaves you the rest, as we described earlier.
+our command-line arguments to its <methodname>create()</methodname> method, as we described earlier.
 </para>
 
 <para>
@@ -620,7 +613,7 @@ takes no arguments, but it isn't visible yet. When we call <methodname>Gtk::Appl
 <chapter id="changes-gtkmm3">
 <title>Changes in &gtkmm; 3</title>
 
-<para>&gtkmm;-3.0 is a new version of the &gtkmm; API that installs in parallel with the older &gtkmm;-2.4 API. The last version of the &gtkmm;-2.4 API was &gtkmm; 2.24. &gtkmm; 3 has no major fundamental differences to &gtkmm; 2 but does make several small changes that were not possible while maintaining binary compatibility. If you never used the &gtkmm;-2.4 API then you can safely ignore this chapter.</para>
+<para>&gtkmm;-3.0 is an old version of the &gtkmm; API that installs in parallel with the still older &gtkmm;-2.4 API and the new &gtkmm;-4.0 API. The last version of the &gtkmm;-2.4 API was &gtkmm; 2.24. &gtkmm; 3 has no major fundamental differences to &gtkmm; 2 but does make several small changes that were not possible while maintaining binary compatibility. If you never used the &gtkmm;-2.4 API then you can safely ignore this chapter.</para>
 
 <para>&gtkmm; 3's library is called <literal>libgtkmm-3.0</literal> rather than <literal>libgtkmm-2.4</literal> and installs its headers in a similarly-versioned directory, so your pkg-config check should ask for <literal>gtkmm-3.0</literal>  rather than <literal>gtkmm-2.4</literal>.</para>
 
@@ -630,7 +623,7 @@ takes no arguments, but it isn't visible yet. When we call <methodname>Gtk::Appl
 <orderedlist>
 <listitem><simpara><classname>Gtk::AppChooser</classname>, <classname>Gtk::AppChooserButton</classname>, <classname>Gtk::AppChooserDialog</classname> allow the user to select an installed application to open a particular type of content.</simpara></listitem>
 <listitem><simpara><classname>Gtk::Grid</classname> is a new container widget that will eventually replace <classname>Gtk::Box</classname> and <classname>Gtk::Table</classname>. It arranges its children according to properties of those children rather than its own layout details.</simpara></listitem>
-<listitem><simpara><classname>Gtk::Switch</classname> displays On/Off states more explictly than <classname>Gtk::CheckBox</classname>. It may be useful, for instance, when allowing users to activate hardware.</simpara></listitem>
+<listitem><simpara><classname>Gtk::Switch</classname> displays On/Off states more explictly than <classname>Gtk::CheckButton</classname>. It may be useful, for instance, when allowing users to activate hardware.</simpara></listitem>
 </orderedlist>
 
 <para>&gtkmm; 3 also made several small changes to the API, which you will probably encounter when porting code that used &gtkmm;-2.4. Here is a short list:</para>
@@ -664,7 +657,7 @@ orientation (vertical or horizontal) to be specified without requiring the use o
 </orderedlist>
 </para>
 
-<para>All deprecated API was removed in &gtkmm; 3.0, though there will be new deprecations in future versions.</para>
+<para>All deprecated API was removed in &gtkmm; 3.0, though there have been new deprecations in later &gtkmm; 3.x versions.</para>
 
 <para>As a first step to porting your source code to &gtkmm;-3.0 you should probably ensure that your application builds with the deprecated &gtkmm;-2.4 API disabled, by defining macro such as GTKMM_DISABLE_DEPRECATED. There are some autotools macros that can help with this by defining them optionally at build time. See the <ulink url="https://wiki.gnome.org/Projects/gtkmm/PortingToGtkmm3">gtkmm 3 porting wiki page</ulink> for more details.</para>
 
@@ -696,7 +689,7 @@ to set the global locale for you, you should add a call to
 <function>Glib::set_init_to_users_preferred_locale(false)</function> before any call to
 <function>Glib::init()</function> or <methodname>Gtk::Application::create()</methodname>.
 </para>
-<para><ulink url="&url_refdocs_base_glib;set_init_to_users_preferred_locale.html">Reference</ulink></para>
+<para><ulink url="&url_refdocs_base_glib_html;namespaceGlib.html">Reference</ulink></para>
 
 <para>&gtkmm; 4 added some new classes:</para>
 
@@ -745,7 +738,7 @@ for more details.</para>
 <variablelist>
 
 <varlistentry>
-<term>Push-Buttons</term>
+<term>Push buttons</term>
 <listitem>
 <para>
 <ulink url="&url_refdocs_base_gtk;Button.html"><classname>Gtk::Button</classname></ulink>. Standard buttons, usually
@@ -764,14 +757,14 @@ press it again. It might be useful as an on/off switch. See the <link linkend="s
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Checkboxes</term>
+<term>Check buttons</term>
 <listitem>
 <para>
 <ulink url="&url_refdocs_base_gtk;CheckButton.html"><classname>Gtk::CheckButton</classname></ulink>.
 These act like ToggleButtons, but show their state in small squares,
 with their label at the side. They should be used in most situations
 which require an on/off setting.
-See the <link linkend="sec-checkboxes">CheckButton</link> section.
+See the <link linkend="sec-checkbuttons">CheckButton</link> section.
 </para>
 </listitem>
 </varlistentry>
@@ -784,7 +777,7 @@ Named after the station selectors on old car
 radios, these buttons are used in groups for options which are
 mutually exclusive. Pressing one causes all the
 others in its group to turn off. They are similar to
-CheckBoxes (a small widget with a label at the side), but usually
+CheckButtons (a small widget with a label at the side), but usually
 look different.
 See the <link linkend="sec-radio-buttons">RadioButton</link> section.
 </para>
@@ -794,14 +787,12 @@ See the <link linkend="sec-radio-buttons">RadioButton</link> section.
 
 <para>
 Note that, due to GTK+'s theming system, the appearance of these
-widgets will vary. In the case of checkboxes and radio buttons, they
+widgets will vary. In the case of check buttons and radio buttons, they
 may vary considerably.
 </para>
 
 <sect1 id="sec-pushbuttons">
 <title>Button</title>
-
-<sect2 id="pushbutton-constructors"><title>Constructors</title>
 
 <para>
 There are two ways to create a Button. You can specify a label
@@ -814,20 +805,17 @@ or set it later with <methodname>set_label()</methodname>.
 <programlisting>Gtk::Button* pButton = new Gtk::Button("_Something", true);</programlisting>
 
 <para>
-Stock items have been recommended for use in buttons. From &gtkmm;-3.10 they are deprecated.
-They should not be used in newly-written code. However, the documentation of
-<ulink url="&url_refdocs_base_gtk_namespace;Stock.html">namespace Gtk::Stock</ulink>
-shows recommended labels and named icons to show in buttons.
-</para>
-
-<para>
 <classname>Gtk::Button</classname> is also
 a container so you could put any other widget, such as a
 <classname>Gtk::Image</classname> into it.
 </para>
 
+<para>
+The <classname>Gtk::Button</classname> widget has the <literal>clicked</literal> signal
+which is emitted when the button is pressed and released.
+</para>
+
 <para><ulink url="&url_refdocs_base_gtk;Button.html">Reference</ulink></para>
-</sect2>
 
 <sect2 id="pushbutton-example"><title>Example</title>
 
@@ -846,65 +834,6 @@ This example creates a button with a picture and a label.
 
 </sect2>
 
-<sect2 id="pushbutton-signals"><title>Signals</title>
-
-<para>
-The <classname>Gtk::Button</classname> widget has the following signals,
-but all except the <literal>clicked</literal> signal are deprecated
-and should not be used in newly-written code:
-</para>
-
-<para>
-<variablelist>
-
-<varlistentry>
-<term><literal>pressed</literal></term>
-<listitem>
-<para>
-Emitted when the button is pressed.
-Use <methodname>Gtk::Widget::signal_button_press_event()</methodname> instead.
-</para>
-</listitem>
-</varlistentry>
-<varlistentry>
-<term><literal>released</literal></term>
-<listitem>
-<para>
-Emitted when the button is released.
-Use <methodname>Gtk::Widget::signal_button_release_event()</methodname> instead.
-</para>
-</listitem>
-</varlistentry>
-<varlistentry>
-<term><literal>clicked</literal></term>
-<listitem>
-<para>
-Emitted when the button is pressed and released.
-</para>
-</listitem>
-</varlistentry>
-<varlistentry>
-<term><literal>enter</literal></term>
-<listitem>
-<para>
-Emitted when the mouse pointer enters the button's window.
-Use <methodname>Gtk::Widget::signal_enter_notify_event()</methodname> instead.
-</para>
-</listitem>
-</varlistentry>
-<varlistentry>
-<term><literal>leave</literal></term>
-<listitem>
-<para>
-Emitted when the mouse pointer leaves the button's window.
-Use <methodname>Gtk::Widget::signal_leave_notify_event()</methodname> instead.
-</para>
-</listitem>
-</varlistentry>
-</variablelist>
-</para>
-
-</sect2>
 </sect1>
 
 <sect1 id="sec-toggle-buttons">
@@ -934,14 +863,14 @@ forcing it to be up or down: This switches the button's state, and causes the <l
 
 </sect1>
 
-<sect1 id="sec-checkboxes">
+<sect1 id="sec-checkbuttons">
 <title>CheckButton</title>
 
 <para>
 <classname>Gtk::CheckButton</classname> inherits from
 <classname>Gtk::ToggleButton</classname>. The only real difference between the
 two is <classname>Gtk::CheckButton</classname>'s
-appearance. You can check, set, and toggle a checkbox using the same
+appearance. You can check, set, and toggle a check button using the same
 member methods as for <classname>Gtk::ToggleButton</classname>.
 </para>
 
@@ -965,7 +894,7 @@ member methods as for <classname>Gtk::ToggleButton</classname>.
 <title>RadioButton</title>
 
 <para>
-Like checkboxes, radio buttons also inherit from
+Like check buttons, radio buttons also inherit from
 <classname>Gtk::ToggleButton</classname>, but these work in groups, and only
 one RadioButton in a group can be selected at any one time.
 </para>
@@ -974,7 +903,8 @@ one RadioButton in a group can be selected at any one time.
 <para>
 There are two ways to set up a group of radio buttons. The first way
 is to create the buttons, and set up their groups afterwards. Only
-the first two constructors are used. In the following example, we
+the constructors without a <classname>Gtk::RadioButton::Group</classname>
+parameter are used. In the following example, we
 make a new window class called <classname>RadioButtons</classname>, and then
 put three radio buttons in it:
 </para>
@@ -1039,7 +969,7 @@ buttons, using a constructor to make each of them part of <literal>group</litera
 <para>
 <classname>RadioButtons</classname> are "off" when created; this means that
 when you first make a group of them, they will all be off. Don't forget to turn
-one of them on using <methodname>set_active()</methodname>:
+one of them on using <methodname>set_active()</methodname>.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;RadioButton.html">Reference</ulink></para>
@@ -1083,8 +1013,8 @@ scrollbar behaviour.
 </para>
 
 <para>
-As will be explained in the <link linkend="chapter-adjustment">Adjustment</link>
-section, all Range widgets are associated with a
+As will be explained in the <link linkend="chapter-adjustment">Adjustments</link>
+section, all Range widgets are associated with an
 <classname>Adjustment</classname> object. To change the lower, upper, and
 current values used by the widget you need to use the methods of its
 <classname>Adjustment</classname>, which you can get with the
@@ -1103,7 +1033,7 @@ details.
 
 <para>
 These are standard scrollbars. They should be used only to scroll another
-widget, such as, a <classname>Gtk::Entry</classname>, or a
+widget, such as a <classname>Gtk::Entry</classname> or a
 <classname>Gtk::Viewport</classname>, though it's usually easier to use the
 <classname>Gtk::ScrolledWindow</classname> widget in most cases.
 </para>
@@ -1195,7 +1125,7 @@ for the user.
 
 <para>
 Labels are the  main method of placing non-editable text in windows, for
-instance to place a title next to a <classname>Entry</classname> widget. You
+instance to place a title next to an <classname>Entry</classname> widget. You
 can specify the text in the constructor, or later with the
 <methodname>set_text()</methodname> or <methodname>set_markup()</methodname> methods.
 </para>
@@ -1211,7 +1141,7 @@ with <methodname>set_line_wrap()</methodname>.
 </para>
 
 <para>
-Gtk::Label support some simple formatting, for instance allowing you to make some
+Gtk::Label supports some simple formatting, for instance allowing you to make some
 text bold, colored, or larger. You can do this by providing a string to
 <methodname>set_markup()</methodname>, using the <ulink url="http://developer.gnome.org/pango/unstable/PangoMarkupFormat.html">Pango Markup syntax</ulink>. For instance,
 <code>
@@ -1315,12 +1245,12 @@ visible flags.
 
 <sect2 id="sec-text-entry-completion">
 <title>Entry Completion</title>
-<para>A <classname>Entry</classname> widget can offer a drop-down list of
+<para>An <classname>Entry</classname> widget can offer a drop-down list of
 pre-existing choices based on the first few characters typed by the user. For
 instance, a search dialog could suggest text from previous searches.
 </para>
 
-<para>To enable this functionality, you must create a
+<para>To enable this functionality, you must create an
 <classname>EntryCompletion</classname> object, and provide it to the
 <classname>Entry</classname> widget via the
 <methodname>set_completion()</methodname> method.</para>
@@ -1458,14 +1388,14 @@ like so:
 <listitem>
 <para>
  <literal>step_increment</literal>: value to increment/decrement when pressing
-mouse button 1 on a button
+mouse button 1
 </para>
 </listitem>
 <listitem>
 
 <para>
  <literal>page_increment</literal>: value to increment/decrement when pressing
-mouse button 2 on a button
+mouse button 2
 </para>
 </listitem>
 <listitem>
@@ -1559,7 +1489,7 @@ been completed.
 
 <para>
 To change the value shown, use the <methodname>set_fraction()</methodname> method,
-passing a <type>double</type> between 0.0 and 1.0 to provide the new percentage.
+passing a <type>double</type> between 0.0 and 1.0 to provide the new fraction.
 </para>
 
 <para>
@@ -1590,7 +1520,7 @@ intervals. You can also choose the step size, with the
 
 <para>
 The progress bar can also display a configurable text
-string within its trough, using the <methodname>set_text()</methodname> method.
+string next to the bar, using the <methodname>set_text()</methodname> method.
 </para>
 </sect2>
 
@@ -1640,8 +1570,7 @@ An <classname>InfoBar</classname> may show small items of information or ask bri
 Tooltips are the little information windows that pop up when you leave your
 pointer over a widget for a few seconds. Use
 <methodname>set_tooltip_text()</methodname> to set a text string as a tooltip
-on any <classname>Widget</classname>. <classname>Gtk::ToolItem</classname>s are
-not <classname>Widget</classname>s, but have the same method for convenience.
+on any <classname>Widget</classname>.
 <classname>Gtk::Tooltip</classname> is used for more advanced tooltip usage,
 such as showing an image as well as text.
 </para>
@@ -3031,7 +2960,7 @@ section.
 <chapter id="chapter-combobox">
 <title>Combo Boxes</title>
 
-<para>The <classname>ComboBox</classname> widget offers a list (or tree) of choices in a dropdown menu. If appropriate, it can show extra information about each item, such as text, a picture, a checkbox, or a progress bar. The <classname>ComboBox</classname> widget usually restricts the user to the available choices, but it can optionally have an <classname>Entry</classname>, allowing the user to enter arbitrary text if none of the available choices are suitable.
+<para>The <classname>ComboBox</classname> widget offers a list (or tree) of choices in a dropdown menu. If appropriate, it can show extra information about each item, such as text, a picture, a check button, or a progress bar. The <classname>ComboBox</classname> widget usually restricts the user to the available choices, but it can optionally have an <classname>Entry</classname>, allowing the user to enter arbitrary text if none of the available choices are suitable.
 </para>
 
 <para>The list is provided via a <classname>TreeModel</classname>, and columns from this model are added to the ComboBox's view with the <methodname>ComboBox::pack_start()</methodname> method. This provides flexibility and compile-time type-safety, but the <classname>ComboBoxText</classname> class provides a simpler text-based specialization in case that flexibility is not required.
