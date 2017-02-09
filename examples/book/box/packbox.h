@@ -1,5 +1,3 @@
-//$Id: packbox.h 705 2006-07-19 02:55:32Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -24,7 +22,7 @@
 class PackBox : public Gtk::Box
 {
 public:
-  PackBox(bool homogeneous, int spacing, Gtk::PackOptions options, int padding = 0);
+  PackBox(bool homogeneous, int spacing, Gtk::PackOptions options, int margin = 0);
   virtual ~PackBox();
 
 protected:

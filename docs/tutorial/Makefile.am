@@ -24,7 +24,6 @@ HELP_FILES = \
 	index.docbook
 
 HELP_MEDIA =					\
-	figures/alignment.png			\
 	figures/aspectframe.png			\
 	figures/assistant.png			\
 	figures/box_packing1.png		\

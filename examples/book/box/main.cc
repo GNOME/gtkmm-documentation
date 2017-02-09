@@ -1,5 +1,3 @@
-//$Id: main.cc 2 2003-01-21 13:41:59Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -50,15 +48,16 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
+  int argc1 = argc;
+
 #if GTK_APPLICATION_RECEIVES_COMMAND_LINE_ARGUMENTS
-  // The command line arguments must be checked before Gtk::Application::run()
-  // is called. The Gio::APPLICATION_HANDLES_COMMAND_LINE flag and the
+  // The Gio::APPLICATION_HANDLES_COMMAND_LINE flag and the
   // on_command_line() signal handler are not necessary. This program is simpler
-  // without them, and with argc = 1 in the call to Gtk::Application::create().
+  // without them, and with argc = 1 in the call to Gtk::Application::run().
   // They are included to show a program with Gio::APPLICATION_HANDLES_COMMAND_LINE.
   // Gio::APPLICATION_NON_UNIQUE makes it possible to run several instances of
   // this application simultaneously.
-  auto app = Gtk::Application::create(argc, argv,
+  auto app = Gtk::Application::create(
     "org.gtkmm.example", Gio::APPLICATION_HANDLES_COMMAND_LINE | Gio::APPLICATION_NON_UNIQUE);
 
   // Note after = false.
@@ -68,11 +67,11 @@ int main(int argc, char *argv[])
 #else
   // Gio::APPLICATION_NON_UNIQUE makes it possible to run several instances of
   // this application simultaneously.
-  int argc1 = 1; // Don't give the command line arguments to Gtk::Application.
+  argc1 = 1; // Don't give the command line arguments to Gtk::Application.
   auto app = Gtk::Application::create(argc1, argv,
     "org.gtkmm.example", Gio::APPLICATION_NON_UNIQUE);
 #endif
 
   ExampleWindow window(std::atoi(argv[1]));
-  return app->run(window); //Shows the window and returns when it is closed.
+  return app->run(window, argc1, argv); // Shows the window and returns when it is closed.
 }

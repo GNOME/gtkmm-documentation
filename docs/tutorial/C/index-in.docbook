@@ -1770,50 +1770,25 @@ resizes the top-level window.
 </sect2>
 
 
-<sect2 id="sec-alignment">
-<title>Alignment</title>
+<sect2 id="sec-other-single-item-containers">
+<title>Other Single-item Containers</title>
 
 <para>
-The <classname>Alignment</classname> widget allows you to place a widget at a
-position and size relative to the size of the <classname>Alignment</classname>
-widget itself. For instance, it might be used to center a widget.
+There are other single-item containers. See the reference documentation for a
+complete list. Here are links to some example programs that show containers,
+which are not mentioned elsewhere in this tutorial.
 </para>
 
-<para>
-The <classname>Alignment</classname> widget is deprecated from &gtkmm; version 3.14
-and should not be used in newly-written code. Use <classname>Gtk::Widget</classname>'s
-alignment and margin methods instead.
-</para>
-
-<sect3 id="alignment-example">
-<title>Example</title>
-<para>
-This example right-aligns a button in a window by using
-<methodname>Gtk::Widget::set_halign()</methodname>.
-</para>
-
-<figure id="figure-alignment">
-  <title>Alignment</title>
-  <screenshot>
-    <graphic format="PNG" fileref="&url_figures_base;alignment.png"/>
-  </screenshot>
-</figure>
-
-<para><ulink url="&url_examples_base;alignment">Source Code</ulink></para>
-
-<para>
-See the <link linkend="sec-progressbar">ProgressBar</link> section for another
-example that uses <methodname>set_halign()</methodname>.
-</para>
-
-</sect3>
+<para><ulink url="&url_examples_base;actionbar">Source Code, ActionBar</ulink></para>
+<para><ulink url="&url_examples_base;expander">Source Code, Expander</ulink></para>
+<para><ulink url="&url_examples_base;popover">Source Code, Popover</ulink></para>
 
 </sect2>
 
 </sect1>
 
 <sect1 id="sec-multi-item-containers">
-<title>Multiple-item widgets </title>
+<title>Multiple-item Containers </title>
 
 <para>
 Multiple-item widgets inherit from <classname>Gtk::Container</classname>; just
@@ -1858,7 +1833,7 @@ you can arrange your widgets in rows, columns,
 and/or grids. &gtkmm; can size your window automatically, based on the
 sizes of the widgets it contains. And the sizes of the widgets are, in turn, determined by the amount of text they contain, or the minimum and maximum sizes that you specify, and/or how you have requested that the available space should be shared between sets of widgets.
 You can perfect your layout by
-specifying padding distance and centering values for each of your widgets. &gtkmm; then uses
+specifying margins and centering values for each of your widgets. &gtkmm; then uses
 all this information to resize and reposition everything sensibly and smoothly when the user manipulates the window. </para>
 
 <para>
@@ -1972,7 +1947,7 @@ There are several options governing how  widgets are to be packed, and this can
 be confusing at first. If you have difficulties then it is sometimes a good
 idea to play with the <application>glade</application> GUI designer to see what
 is possible. You might even decide to use the
-<application>Gtk::Builder</application> API to load your GUI at runtime.
+<classname>Gtk::Builder</classname> API to load your GUI at runtime.
 </para>
 
 <para>
@@ -1998,8 +1973,7 @@ several buttons. Each of the buttons on a line is packed into the
 This is the declaration of the <methodname>pack_start()</methodname> method:
 </para>
 <programlisting>void pack_start(Gtk::Widget&amp; child,
-                Gtk::PackOptions options = Gtk::PACK_EXPAND_WIDGET,
-                guint padding = 0);</programlisting>
+                Gtk::PackOptions options = Gtk::PACK_EXPAND_WIDGET);</programlisting>
 
 <para>
 The first argument is the widget you're packing. In our example these are all <classname>Button</classname>s.
@@ -2015,8 +1989,8 @@ The <parameter>options</parameter> argument can take one of these three options:
 </para>
 
 <para>
-The <parameter>padding</parameter> argument specifies the width of an extra
-border area to leave around the packed widget.
+Margins are set with the child widget's <methodname>set_margin()</methodname>,
+<methodname>set_margin_start()</methodname> etc. methods.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;Box.html">Reference</ulink></para>
@@ -2038,9 +2012,10 @@ each widget.
 
 <para>
 What's the difference between spacing (set when the box is created)
-and padding (set when elements are packed)? Spacing is added between
-objects, and padding is added on either side of a widget. The following
-figure should make it clearer:
+and margins (set separately for each child widget)? Spacing is added between
+objects, and margins are added on one or more sides of a widget. The following
+figure should make it clearer. The shown margins are the left and right margins
+of each button in the row.
 </para>
 
 <figure id="figure-box-packing2">
@@ -2064,12 +2039,13 @@ with <classname>Gtk::Application</classname>.
 <listitem><para>
 Handle the options in <function>main()</function> and hide them from
 <classname>Gtk::Application</classname> by setting <literal>argc = 1</literal>
-in the call to <methodname>Gtk::Application::create()</methodname>.
+in the call to <methodname>Gtk::Application::run()</methodname>.
 </para></listitem>
 
 <listitem><para>
-Give all command-line options to <methodname>Gtk::Application::create()</methodname>
-and add the flag <literal>Gio::APPLICATION_HANDLES_COMMAND_LINE</literal>.
+Give all command-line options to <methodname>Gtk::Application::run()</methodname>
+and add the flag <literal>Gio::APPLICATION_HANDLES_COMMAND_LINE</literal>
+to <methodname>Gtk::Application::create()</methodname>.
 Connect a signal handler to the <literal>command_line</literal> signal, and
 handle the command-line options in the signal handler.</para>
 
@@ -2178,19 +2154,6 @@ spanning two columns.
 
 </sect2>
 
-<sect2 id="sec-table">
-<title>Table</title>
-
-<para>
-<classname>Gtk::Table</classname> allows us to place widgets in a grid,
-similar to <classname>Gtk::Grid</classname>.
-</para>
-<para>
-<classname>Gtk::Table</classname> is deprecated from &gtkmm; version 3.4 and should
-not be used in newly-written code. Use <classname>Gtk::Grid</classname> instead.
-</para>
-</sect2>
-
 <sect2 id="sec-notebook">
 <title>Notebook</title>
 
@@ -2255,7 +2218,7 @@ To determine the currently-visible page, use the <methodname>get_current_page()<
 </para>
 
 <para>
-To set the title of a page, use the <methodname>set_page_title()</methodname> method. The header and side images of a page can be set with the <methodname>set_page_header_image()</methodname> and <methodname>set_page_side_image()</methodname> methods.
+To set the title of a page, use the <methodname>set_page_title()</methodname> method.
 </para>
 
 <para>
@@ -2276,6 +2239,20 @@ To add widgets to the action area, use the <methodname>add_action_widget()</meth
 <para><ulink url="&url_examples_base;assistant/">Source Code</ulink></para>
 
 </sect3>
+
+</sect2>
+
+<sect2 id="sec-other-multi-item-containers">
+<title>Other Multi-item Containers</title>
+
+<para>
+There are other multi-item containers. See the reference documentation for a
+complete list. Here are links to some example programs that show containers,
+which are not mentioned elsewhere in this tutorial.
+</para>
+
+<para><ulink url="&url_examples_base;flowbox">Source Code, FlowBox</ulink></para>
+<para><ulink url="&url_examples_base;iconview">Source Code, IconView</ulink></para>
 
 </sect2>
 

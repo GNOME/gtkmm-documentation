@@ -24,13 +24,18 @@ ExampleWindow::ExampleWindow(int which)
 {
   set_title("Gtk::Box example");
 
+  m_separator1.set_margin_top(5);
+  m_separator1.set_margin_bottom(5);
+  m_separator2.set_margin_top(5);
+  m_separator2.set_margin_bottom(5);
+
   PackBox *pPackBox1, *pPackBox2, *pPackBox3, *pPackBox4, *pPackBox5;
 
   switch(which)
   {
     case 1:
     {
-      m_Label1.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL); set_homogeneous(false);");
+      m_Label1.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0); set_homogeneous(false);");
 
       // Align the label to the left side.
       m_Label1.set_halign(Gtk::ALIGN_START);
@@ -42,40 +47,40 @@ ExampleWindow::ExampleWindow(int which)
       m_box1.pack_start(m_Label1, Gtk::PACK_SHRINK);
 
       // Create a PackBox - homogeneous = false, spacing = 0,
-      // options = Gtk::PACK_SHRINK, padding = 0
+      // options = Gtk::PACK_SHRINK, margin = 0
       pPackBox1 = Gtk::manage(new PackBox(false, 0, Gtk::PACK_SHRINK));
       m_box1.pack_start(*pPackBox1, Gtk::PACK_SHRINK);
 
       // Create a PackBox - homogeneous = false, spacing = 0,
-      // options = Gtk::PACK_EXPAND_PADDING, padding = 0
+      // options = Gtk::PACK_EXPAND_PADDING, margin = 0
       pPackBox2 = Gtk::manage(new PackBox(false, 0, Gtk::PACK_EXPAND_PADDING));
       m_box1.pack_start(*pPackBox2, Gtk::PACK_SHRINK);
 
       // Create a PackBox - homogeneous = false, spacing = 0,
-      // options = Gtk::PACK_EXPAND_WIDGET, padding = 0
+      // options = Gtk::PACK_EXPAND_WIDGET, margin = 0
       pPackBox3 = Gtk::manage(new PackBox(false, 0, Gtk::PACK_EXPAND_WIDGET));
       m_box1.pack_start(*pPackBox3, Gtk::PACK_SHRINK);
 
       // pack the separator into the vbox.  Remember each of these
       // widgets are being packed into a vbox, so they'll be stacked
       // vertically.
-      m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK, 5);
+      m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK);
 
       // create another new label, and show it.
-      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL); set_homogeneous(true);");
+      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0); set_homogeneous(true);");
       m_Label2.set_halign(Gtk::ALIGN_START);
       m_Label2.set_valign(Gtk::ALIGN_START);
       m_box1.pack_start(m_Label2, Gtk::PACK_SHRINK);
 
-      // Args are: homogeneous, spacing, options, padding
+      // Args are: homogeneous, spacing, options, margin
       pPackBox4 = Gtk::manage(new PackBox(true, 0, Gtk::PACK_EXPAND_PADDING));
       m_box1.pack_start(*pPackBox4, Gtk::PACK_SHRINK);
 
-      // Args are: homogeneous, spacing, options, padding
+      // Args are: homogeneous, spacing, options, margin
       pPackBox5 = Gtk::manage(new PackBox(true, 0, Gtk::PACK_EXPAND_WIDGET));
       m_box1.pack_start(*pPackBox5, Gtk::PACK_SHRINK);
 
-      m_box1.pack_start(m_separator2, Gtk::PACK_SHRINK, 5);
+      m_box1.pack_start(m_separator2, Gtk::PACK_SHRINK);
 
       break;
     }
@@ -94,9 +99,9 @@ ExampleWindow::ExampleWindow(int which)
       pPackBox2 = Gtk::manage(new PackBox(false, 10, Gtk::PACK_EXPAND_WIDGET));
       m_box1.pack_start(*pPackBox2, Gtk::PACK_SHRINK);
 
-      m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK, 5);
+      m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK);
 
-      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL); set_homogeneous(false);");
+      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0); set_homogeneous(false);");
       m_Label2.set_halign(Gtk::ALIGN_START);
       m_Label2.set_valign(Gtk::ALIGN_START);
       m_box1.pack_start(m_Label2, Gtk::PACK_SHRINK);
@@ -107,7 +112,7 @@ ExampleWindow::ExampleWindow(int which)
       pPackBox4 = Gtk::manage(new PackBox(false, 0, Gtk::PACK_EXPAND_WIDGET, 10));
       m_box1.pack_start(*pPackBox4, Gtk::PACK_SHRINK);
 
-      m_box1.pack_start(m_separator2, Gtk::PACK_SHRINK, 5);
+      m_box1.pack_start(m_separator2, Gtk::PACK_SHRINK);
 
       break;
     }
@@ -127,15 +132,15 @@ ExampleWindow::ExampleWindow(int which)
 
       m_box1.pack_start(*pPackBox1, Gtk::PACK_SHRINK);
 
-      // this explicitly sets the separator to 500 pixels wide by 5 pixels
-      // high.  This is so the hbox we created will also be 500 pixels wide,
+      // This explicitly sets the separator to 700 pixels wide by 5 pixels
+      // high.  This is so the hbox we created will also be 700 pixels wide,
       // and the "end" label will be separated from the other labels in the
       // hbox.  Otherwise, all the widgets in the hbox would be packed as
       // close together as possible.
-      m_separator1.set_size_request(500, 5);
+      m_separator1.set_size_request(700, 5);
 
       // pack the separator into the vbox.
-      m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK, 5);
+      m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK);
 
       break;
     }
@@ -152,7 +157,6 @@ ExampleWindow::ExampleWindow(int which)
               &ExampleWindow::on_button_quit_clicked) );
 
   // pack the button into the quitbox.
-  // The last 2 arguments to Box::pack_start are: options, padding.
   m_boxQuit.pack_start(m_buttonQuit, Gtk::PACK_EXPAND_PADDING);
   m_box1.pack_start(m_boxQuit, Gtk::PACK_SHRINK);
 

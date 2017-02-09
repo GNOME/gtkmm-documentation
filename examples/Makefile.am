@@ -10,7 +10,6 @@ LDADD       = $(GTKMM_LIBS)
 
 check_PROGRAMS =					\
 	book/actionbar/example				\
-	book/alignment/example				\
 	book/application/simple/example \
 	book/application/command_line_handling/example \
 	book/application/app_and_win_menus/example \
@@ -170,11 +169,6 @@ book_application_app_and_win_menus_example_SOURCES =		\
 	book/application/app_and_win_menus/examplewindow.cc	\
 	book/application/app_and_win_menus/examplewindow.h	\
 	book/application/app_and_win_menus/main.cc
-
-book_alignment_example_SOURCES =		\
-	book/alignment/examplewindow.cc		\
-	book/alignment/examplewindow.h		\
-	book/alignment/main.cc
 
 book_aspectframe_example_SOURCES =		\
 	book/aspectframe/examplewindow.cc	\

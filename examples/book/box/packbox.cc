@@ -19,22 +19,32 @@
 #include "packbox.h"
 
 PackBox::PackBox(bool homogeneous, int spacing, Gtk::PackOptions options,
-        int padding)
+        int margin)
 : Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, spacing),
   m_button1("box.pack_start("),
   m_button2("button,"),
-  m_button3((options == Gtk::PACK_SHRINK) ? "Gtk::PACK_SHRINK" :
+  m_button3((options == Gtk::PACK_SHRINK) ? "Gtk::PACK_SHRINK);" :
             ((options == Gtk::PACK_EXPAND_PADDING) ?
-             "Gtk::PACK_EXPAND_PADDING" : "Gtk::PACK_EXPAND_WIDGET"))
+             "Gtk::PACK_EXPAND_PADDING);" : "Gtk::PACK_EXPAND_WIDGET);"))
 {
   set_homogeneous(homogeneous);
 
-  pack_start(m_button1, options, padding);
-  pack_start(m_button2, options, padding);
-  pack_start(m_button3, options, padding);
+  m_button1.set_margin_start(margin);
+  m_button1.set_margin_end(margin);
+  pack_start(m_button1, options);
 
-  m_pbutton4 = new Gtk::Button(Glib::ustring::format(padding) + ");");
-  pack_start(*m_pbutton4, options, padding);
+  m_button2.set_margin_start(margin);
+  m_button2.set_margin_end(margin);
+  pack_start(m_button2, options);
+
+  m_button3.set_margin_start(margin);
+  m_button3.set_margin_end(margin);
+  pack_start(m_button3, options);
+
+  m_pbutton4 = new Gtk::Button("margin=" + Glib::ustring::format(margin));
+  m_pbutton4->set_margin_start(margin);
+  m_pbutton4->set_margin_end(margin);
+  pack_start(*m_pbutton4, options);
 }
 
 PackBox::~PackBox()
