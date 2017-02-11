@@ -14,7 +14,7 @@ win (TicTacToe *ttt)
 int
 main (int argc, char *argv[])
 {
-  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create("org.gtkmm.example");
 
   auto ttt = manage( new TicTacToe );
   ttt->tictactoe.connect( sigc::bind (sigc::ptr_fun(&win), ttt) );
@@ -24,5 +24,5 @@ main (int argc, char *argv[])
   ttt->set_margin(10);
   window.add(*ttt);
 
-  return app->run(window);
+  return app->run(window, argc, argv);
 }

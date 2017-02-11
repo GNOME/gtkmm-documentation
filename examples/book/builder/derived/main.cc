@@ -39,7 +39,7 @@ int main (int argc, char **argv)
     }
   }
 
-  auto app = Gtk::Application::create(argc1, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create("org.gtkmm.example");
 
   //Load the Glade file and instantiate its widgets:
   auto refBuilder = Gtk::Builder::create();
@@ -73,7 +73,7 @@ int main (int argc, char **argv)
   if(pDialog)
   {
     //Start:
-    app->run(*pDialog);
+    app->run(*pDialog, argc1, argv);
   }
 
   delete pDialog;

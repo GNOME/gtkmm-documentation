@@ -84,10 +84,10 @@ AppWindow::~AppWindow()
 
 int main (int argc, char *argv[])
 {
-  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create("org.gtkmm.example");
   AppWindow arrows;
 
-  return app->run(arrows);
+  return app->run(arrows, argc, argv);
 }
 
 /* example-end */

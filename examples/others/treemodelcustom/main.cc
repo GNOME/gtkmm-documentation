@@ -1,5 +1,3 @@
-//$Id: main.cc 102 2004-01-16 13:49:40Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,8 +19,8 @@
 
 int main(int argc, char *argv[])
 {
-  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create("org.gtkmm.example");
 
   ExampleWindow window;
-  return app->run(window); //Shows the window and returns when it is closed.
+  return app->run(window, argc, argv); //Shows the window and returns when it is closed.
 }

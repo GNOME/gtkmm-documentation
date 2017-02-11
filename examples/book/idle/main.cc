@@ -1,5 +1,3 @@
-//$Id: main.cc 31 2003-04-20 11:53:30Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2003 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,8 +19,8 @@
 
 int main (int argc, char *argv[])
 {
-  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create("org.gtkmm.example");
 
   IdleExample example;
-  return app->run(example);
+  return app->run(example, argc, argv);
 }

@@ -20,7 +20,7 @@
 
 int main(int argc, char** argv)
 {
-  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create("org.gtkmm.example");
 
   Gtk::Window win;
   win.set_title("DrawingArea");
@@ -30,5 +30,5 @@ int main(int argc, char** argv)
   win.add(area);
   area.show();
 
-  return app->run(win);
+  return app->run(win, argc, argv);
 }

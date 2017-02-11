@@ -1,5 +1,3 @@
-/* -*- Mode: C++; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
-
 /* gtkmm example Copyright (C) 2007 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,10 +19,10 @@
 
 int main(int argc, char *argv[])
 {
-  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create("org.gtkmm.example");
 
   ExampleWindow window;
 
   //Shows the window and returns when it is closed.
-  return app->run(window);
+  return app->run(window, argc, argv);
 }

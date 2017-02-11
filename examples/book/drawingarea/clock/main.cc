@@ -1,5 +1,3 @@
-//$Id: main.cc 491 2005-12-23 11:01:49Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,7 +20,7 @@
 
 int main(int argc, char** argv)
 {
-   auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+   auto app = Gtk::Application::create("org.gtkmm.example");
 
    Gtk::Window win;
    win.set_title("Cairomm Clock");
@@ -31,5 +29,5 @@ int main(int argc, char** argv)
    win.add(c);
    c.show();
 
-   return app->run(win);
+   return app->run(win, argc, argv);
 }

@@ -333,12 +333,10 @@ suffices.
 <para>
 The next statement:
 
-<programlisting>auto app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");</programlisting>
+<programlisting>auto app = Gtk::Application::create("org.gtkmm.examples.base");</programlisting>
 
 creates a <classname>Gtk::Application</classname> object, stored in a <classname>Glib::RefPtr</classname> smartpointer. This is needed in all &gtkmm;
-applications. The <methodname>create()</methodname> method for this object initializes &gtkmm;, and stores the
-<parameter>argc</parameter> and <parameter>argv</parameter> arguments passed to your application on the command line.
-The arguments can be checked when <methodname>run()</methodname> is called, but this simple application does not use the arguments.
+applications. The <methodname>create()</methodname> method for this object initializes &gtkmm;.
 </para>
 
 <para>
@@ -349,9 +347,11 @@ window.set_default_size(200, 200);</programlisting>
 <para>
 The last line shows the window and enters the &gtkmm; main processing loop, which will finish when the window is closed.
 Your <function>main()</function> function will then return with an appropriate success or error code.
+The <parameter>argc</parameter> and <parameter>argv</parameter> arguments, passed to your application on the command line,
+can be checked when <methodname>run()</methodname> is called, but this simple application does not use those arguments.
 </para>
 
-<programlisting>return app->run(window);</programlisting>
+<programlisting>return app->run(window, argc, argv);</programlisting>
 
 <para>
 After putting the source code in <literal>simple.cc</literal> you can compile
@@ -591,20 +591,28 @@ without comments:
 
 <programlisting>int main(int argc, char* argv[])
 {
-  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create("org.gtkmm.example");
   HelloWorld helloworld;
-  return app-&gt;run(helloworld);
+  return app-&gt;run(helloworld, argc, argv);
 }</programlisting>
 
 <para>
 First we instantiate an object stored in a <classname>RefPtr</classname> smartpointer called <literal>app</literal>. This is of type
-<classname>Gtk::Application</classname>. Every &gtkmm; program must have one of these. We pass
-our command-line arguments to its <methodname>create()</methodname> method, as we described earlier.
+<classname>Gtk::Application</classname>. Every &gtkmm; program must have one of these.
 </para>
 
 <para>
 Next we make an object of our <classname>HelloWorld</classname> class, whose constructor
-takes no arguments, but it isn't visible yet. When we call <methodname>Gtk::Application::run()</methodname>, giving it the helloworld Window, it shows the Window and starts the &gtkmm; <emphasis>event loop</emphasis>. During the event loop &gtkmm; idles, waiting for actions from the user, and responding appropriately. When the user closes the Window, run() will return, causing the final line of our main() function be to executed. The application will then finish.
+takes no arguments, but it isn't visible yet. When we call <methodname>Gtk::Application::run()</methodname>,
+giving it the helloworld Window and the command-line arguments, it shows the Window and starts the &gtkmm; <emphasis>event loop</emphasis>.
+During the event loop &gtkmm; idles, waiting for actions from the user, and responding appropriately.
+When the user closes the Window, <methodname>run()</methodname> will return,
+causing the final line of our <function>main()</function> function be to executed. The application will then finish.
+</para>
+
+<para>
+Like the simple example we showed earlier, this Hello World program does not use
+the command-line parameters. It's not necessary to pass them to <methodname>run()</methodname>.
 </para>
 
 </sect1>

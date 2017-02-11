@@ -92,7 +92,7 @@ void handler2()
 
 int main(int argc, char** argv)
 {
-  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create("org.gtkmm.example");
 
 
   Gtk::Window window;
@@ -128,6 +128,6 @@ int main(int argc, char** argv)
   button5->signal_clicked().connect(sigc::mem_fun(conn_handler1, &sigc::connection::disconnect));
   button6->signal_clicked().connect(sigc::mem_fun(conn_handler2, &sigc::connection::disconnect));
 
-  return app->run(window);
+  return app->run(window, argc, argv);
 }
 

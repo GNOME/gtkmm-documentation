@@ -47,7 +47,7 @@ bool MyCallback(Glib::IOCondition io_condition)
 
 int main(int argc, char *argv[])
 {
-  app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  app = Gtk::Application::create("org.gtkmm.example");
 
   if (access("testfifo", F_OK) == -1) {
     // fifo doesn't exist - create it
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 
   // and last but not least - run the application main loop
   app->hold(); // keep the application running without a window
-  app->run();
+  app->run(argc, argv);
 
   // now remove the temporary fifo
   if(unlink("testfifo"))

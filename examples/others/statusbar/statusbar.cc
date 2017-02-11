@@ -57,10 +57,10 @@ StatusBarExample::push_item(unsigned int context_id)
 
 int main (int argc, char *argv[])
 {
-  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create("org.gtkmm.example");
 
   StatusBarExample exampleWindow;
 
-  return app->run(exampleWindow);
+  return app->run(exampleWindow, argc, argv);
 }
 

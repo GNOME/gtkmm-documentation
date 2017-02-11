@@ -68,8 +68,7 @@ int main(int argc, char *argv[])
   // Gio::APPLICATION_NON_UNIQUE makes it possible to run several instances of
   // this application simultaneously.
   argc1 = 1; // Don't give the command line arguments to Gtk::Application.
-  auto app = Gtk::Application::create(argc1, argv,
-    "org.gtkmm.example", Gio::APPLICATION_NON_UNIQUE);
+  auto app = Gtk::Application::create("org.gtkmm.example", Gio::APPLICATION_NON_UNIQUE);
 #endif
 
   ExampleWindow window(std::atoi(argv[1]));

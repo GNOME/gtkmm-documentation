@@ -191,9 +191,9 @@ bool Wheelbarrow::on_button_press_event(GdkEventButton* event)
 
 int main(int argc, char** argv)
 {
-  auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
+  auto app = Gtk::Application::create("org.gtkmm.example");
 
 
   Wheelbarrow wheelbarrow;
-  return app->run(wheelbarrow);
+  return app->run(wheelbarrow, argc, argv);
 }
