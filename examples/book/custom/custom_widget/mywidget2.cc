@@ -1,4 +1,4 @@
-/* gtkmm example Copyright (C) 2004 gtkmm development team
+/* gtkmm example Copyright (C) 2017 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2
@@ -10,22 +10,21 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "mywidget.h"
+#include "mywidget2.h"
 #include <gdkmm/general.h>  // for cairo helper functions
 #include <iostream>
 //#include <gtk/gtkwidget.h> //For GTK_IS_WIDGET()
 #include <cstring>
 
 
-MyWidget::MyWidget() :
-  //The GType name will actually be gtkmm__CustomObject_MyWidget
-  Glib::ObjectBase("MyWidget"),
-  Gtk::WidgetCustomSnapshot(),
-  MyExtraInit("my-widget"),
+MyWidget2::MyWidget2() :
+  //The GType name will actually be gtkmm__CustomObject_MyWidget2
+  Glib::ObjectBase("MyWidget2"),
+  Gtk::WidgetCustomDraw(),
+  MyExtraInit("my-widget2"),
   Gtk::Widget(),
   //Install a style property so that an aspect of this widget may be themed
   //via a CSS style sheet file:
@@ -60,7 +59,7 @@ MyWidget::MyWidget() :
   refStyleContext->add_provider(m_refCssProvider,
     GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
   m_refCssProvider->signal_parsing_error().connect(
-    sigc::mem_fun(*this, &MyWidget::on_parsing_error));
+    sigc::mem_fun(*this, &MyWidget2::on_parsing_error));
 
   try
   {
@@ -78,11 +77,11 @@ MyWidget::MyWidget() :
   }
 }
 
-MyWidget::~MyWidget()
+MyWidget2::~MyWidget2()
 {
 }
 
-Gtk::SizeRequestMode MyWidget::get_request_mode_vfunc() const
+Gtk::SizeRequestMode MyWidget2::get_request_mode_vfunc() const
 {
   //Accept the default value supplied by the base class.
   return Gtk::Widget::get_request_mode_vfunc();
@@ -92,7 +91,7 @@ Gtk::SizeRequestMode MyWidget::get_request_mode_vfunc() const
 //this widget.
 //Let's make this simple example widget always need minimum 60 by 50 and
 //natural 100 by 70.
-void MyWidget::measure_vfunc(Gtk::Orientation orientation, int /* for_size */,
+void MyWidget2::measure_vfunc(Gtk::Orientation orientation, int /* for_size */,
   int& minimum, int& natural, int& minimum_baseline, int& natural_baseline) const
 {
   if (orientation == Gtk::ORIENTATION_HORIZONTAL)
@@ -111,7 +110,7 @@ void MyWidget::measure_vfunc(Gtk::Orientation orientation, int /* for_size */,
   natural_baseline = -1;
 }
 
-void MyWidget::on_size_allocate(Gtk::Allocation& allocation)
+void MyWidget2::on_size_allocate(Gtk::Allocation& allocation)
 {
   //Do something with the space that we have actually been given:
   //(We will not be given heights or widths less than we have requested, though
@@ -127,19 +126,19 @@ void MyWidget::on_size_allocate(Gtk::Allocation& allocation)
   }
 }
 
-void MyWidget::on_map()
+void MyWidget2::on_map()
 {
   //Call base class:
   Gtk::Widget::on_map();
 }
 
-void MyWidget::on_unmap()
+void MyWidget2::on_unmap()
 {
   //Call base class:
   Gtk::Widget::on_unmap();
 }
 
-void MyWidget::on_realize()
+void MyWidget2::on_realize()
 {
   //Do not call base class Gtk::Widget::on_realize().
   //It's intended only for widgets that set_has_window(false).
@@ -163,7 +162,7 @@ void MyWidget::on_realize()
   }
 }
 
-void MyWidget::on_unrealize()
+void MyWidget2::on_unrealize()
 {
   m_refGdkWindow.reset();
 
@@ -171,7 +170,7 @@ void MyWidget::on_unrealize()
   Gtk::Widget::on_unrealize();
 }
 
-void MyWidget::snapshot_vfunc(Gtk::Snapshot& snapshot)
+bool MyWidget2::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
   const Gtk::Allocation allocation = get_allocation();
   Gtk::Allocation clip = get_clip();
@@ -180,9 +179,6 @@ void MyWidget::snapshot_vfunc(Gtk::Snapshot& snapshot)
   const double scale_x = (double)clip.get_width() / m_scale;
   const double scale_y = (double)clip.get_height() / m_scale;
   auto refStyleContext = get_style_context();
-
-  // Create a cairo context to draw on.
-  auto cr = snapshot.append_cairo(clip, "MyCairoNode");
 
   // paint the background
   refStyleContext->render_background(cr,
@@ -209,9 +205,11 @@ void MyWidget::snapshot_vfunc(Gtk::Snapshot& snapshot)
   cr->move_to(633.*scale_x, 564.*scale_y);
   cr->line_to(155.*scale_x, 838.*scale_y);
   cr->stroke();
+
+  return true;
 }
 
-void MyWidget::on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error)
+void MyWidget2::on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error)
 {
   std::cerr << "on_parsing_error(): " << error.what() << std::endl;
   if (section)

@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 705 2006-07-19 02:55:32Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2004 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,6 +19,7 @@
 
 #include <gtkmm.h>
 #include "mywidget.h"
+#include "mywidget2.h"
 
 class ExampleWindow : public Gtk::Window
 {
@@ -33,8 +32,11 @@ protected:
   void on_button_quit();
 
   //Child widgets:
-  Gtk::Box m_VBox;
-  MyWidget m_MyWidget;
+  Gtk::Grid m_Grid;
+  MyWidget m_MyWidgetS1;
+  MyWidget m_MyWidgetS2;
+  MyWidget2 m_MyWidgetD1;
+  MyWidget2 m_MyWidgetD2;
   Gtk::ButtonBox m_ButtonBox;
   Gtk::Button m_Button_Quit;
 };

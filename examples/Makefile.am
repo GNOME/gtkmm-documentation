@@ -283,8 +283,12 @@ book_custom_custom_widget_example_SOURCES =		\
 	book/custom/custom_widget/examplewindow.cc	\
 	book/custom/custom_widget/examplewindow.h	\
 	book/custom/custom_widget/main.cc		\
+	book/custom/custom_widget/myextrainit.cc \
+	book/custom/custom_widget/myextrainit.h \
 	book/custom/custom_widget/mywidget.cc		\
-	book/custom/custom_widget/mywidget.h
+	book/custom/custom_widget/mywidget.h \
+	book/custom/custom_widget/mywidget2.cc	\
+	book/custom/custom_widget/mywidget2.h
 
 nodist_book_dialogs_aboutdialog_example_SOURCES = book/dialogs/aboutdialog/resources.c
 book_dialogs_aboutdialog_example_SOURCES =		\

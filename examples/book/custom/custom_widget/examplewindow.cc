@@ -17,17 +17,23 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_VBox(Gtk::ORIENTATION_VERTICAL),
-  m_Button_Quit("Quit")
+: m_Button_Quit("Quit")
 {
   set_title("Custom Widget example");
-  set_default_size(400, 200);
+  set_default_size(600, 400);
 
-  m_VBox.set_margin(6);
-  add(m_VBox);
-  m_VBox.pack_start(m_MyWidget, Gtk::PACK_EXPAND_WIDGET);
+  m_Grid.set_margin(6);
+  m_Grid.set_row_spacing(10);
+  m_Grid.set_column_spacing(10);
 
-  m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
+  add(m_Grid);
+
+  m_Grid.attach(m_MyWidgetS1, 0, 0);
+  m_Grid.attach(m_MyWidgetS2, 1, 1);
+  m_Grid.attach(m_MyWidgetD1, 0, 1);
+  m_Grid.attach(m_MyWidgetD2, 1, 0);
+
+  m_Grid.attach(m_ButtonBox, 0, 2, 2, 1);
 
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
   m_ButtonBox.set_margin(6);

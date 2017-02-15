@@ -6,11 +6,16 @@
 
 * {
   /* -<widget class name>-<style property canonical name>: <value>; */
-  -gtkmm__CustomObject_mywidget-example-scale: 920;
+  -gtkmm__CustomObject_MyWidget-example-scale: 920;
+  -gtkmm__CustomObject_MyWidget2-example-scale: 1000;
 }
 
-#my-widget {
+my-widget {
   background-color: rgb(255,0,0);
   color:            rgb(0,0,255);
 }
 
+my-widget2 {
+  background-color: rgb(255,255,0);
+  color:            rgb(255,0,0);
+}

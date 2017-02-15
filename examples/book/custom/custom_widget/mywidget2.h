@@ -1,4 +1,4 @@
-/* gtkmm example Copyright (C) 2004 gtkmm development team
+/* gtkmm example Copyright (C) 2017 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2
@@ -10,28 +10,27 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GTKMM_CUSTOM_WIDGET_MYWIDGET_H
-#define GTKMM_CUSTOM_WIDGET_MYWIDGET_H
+#ifndef GTKMM_CUSTOM_WIDGET_MYWIDGET2_H
+#define GTKMM_CUSTOM_WIDGET_MYWIDGET2_H
 
 #include <gtkmm/widget.h>
 #include <gtkmm/cssprovider.h>
 #include <gtkmm/styleproperty.h>
-#include <gtkmm/widgetcustomsnapshot.h>
+#include <gtkmm/widgetcustomdraw.h>
 #include "myextrainit.h"
 
-class MyWidget
+class MyWidget2
 :
-public Gtk::WidgetCustomSnapshot,
+public Gtk::WidgetCustomDraw,
 public MyExtraInit,
 public Gtk::Widget
 {
 public:
-  MyWidget();
-  virtual ~MyWidget();
+  MyWidget2();
+  virtual ~MyWidget2();
 
 protected:
 
@@ -44,7 +43,7 @@ protected:
   void on_unmap() override;
   void on_realize() override;
   void on_unrealize() override;
-  void snapshot_vfunc(Gtk::Snapshot& snapshot) override;
+  bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 
   //Signal handler:
   void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error);
@@ -56,4 +55,4 @@ protected:
   int m_scale;
 };
 
-#endif //GTKMM_CUSTOM_WIDGET_MYWIDGET_H
+#endif //GTKMM_CUSTOM_WIDGET_MYWIDGET2_H
