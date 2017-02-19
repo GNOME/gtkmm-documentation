@@ -1804,7 +1804,7 @@ as with <classname>Gtk::Bin</classname>, you use the <methodname>add()</methodna
 and <methodname>remove()</methodname> methods to add and remove contained widgets.
 Unlike <methodname>Gtk::Bin::remove()</methodname>, however, the
 <methodname>remove()</methodname> method for <classname>Gtk::Container</classname>
-takes an argument, specifiying which widget to remove.
+takes an argument, specifying which widget to remove.
 </para>
 
 <sect2 id="container-packing">
@@ -2393,7 +2393,7 @@ with the <methodname>append()</methodname>, <methodname>prepend()</methodname>, 
 <sect2 id="treeview-setting-values">
 <title>Setting values</title>
 <para>
-You can use the <methodname>operator[]</methodname> override to set the data for a
+You can use the <methodname>operator[]</methodname> overload to set the data for a
 particular column in the row, specifying the
 <classname>TreeModelColumn</classname> used to create the model.
 </para>
@@ -2403,8 +2403,8 @@ particular column in the row, specifying the
 <sect2 id="treeview-getting-values">
 <title>Getting values</title>
 <para>
-You can use the <methodname>operator[]</methodname> override to get the data in a
-particular column in a row, specifiying the
+You can use the <methodname>operator[]</methodname> overload to get the data in a
+particular column in a row, specifying the
 <classname>TreeModelColumn</classname> used to create the model.
 </para>
 <programlisting>Glib::ustring strText = row[m_Columns.m_col_text];
@@ -2457,7 +2457,7 @@ certain column title.
 </para>
 <programlisting>m_TreeView.append_column("Messages", m_Columns.m_col_text);</programlisting>
 <para>
-When using this simple <methodname>append_column()</methodname> override, the
+When using this simple <methodname>append_column()</methodname> overload, the
 <classname>TreeView</classname> will display the model data with an appropriate
 <classname>CellRenderer</classname>. For instance, strings and numbers are
 shown in a simple <classname>Gtk::Entry</classname> widget, and booleans are
@@ -2481,15 +2481,13 @@ To render more than one model column in a view column, you need to create the
 
 <para>
 Then use <methodname>append_column()</methodname> to add the view Column to the
-View. Notice that <methodname>Gtk::TreeView::append_column()</methodname> is overridden
+View. Notice that <methodname>Gtk::TreeView::append_column()</methodname> is overloaded
 to accept either a prebuilt <classname>Gtk::TreeView::Column</classname> widget, or
 just the <classname>TreeModelColumn</classname> from which it generates an
 appropriate <classname>Gtk::TreeView::Column</classname> widget.
 </para>
 <para>
-Here is some example code from
-<filename>gtkmm/demos/gtk-demo/example_icontheme.cc</filename>, which has a pixbuf
-icon and a text name in the same column:
+Here is some example code, which has a pixbuf icon and a text name in the same column:
 </para>
 <programlisting>Gtk::TreeView::Column* pColumn =
   Gtk::manage(new Gtk::TreeView::Column("Icon Name"));
@@ -2571,7 +2569,7 @@ specific <classname>CellRenderer</classname> that you expect, so you can use spe
 <para>For instance, for a CellRendererText, you would set the cell's <emphasis>editable</emphasis> property to true, like
 so:
 </para>
-<programlisting>cell.property_editable() = true;</programlisting>
+<programlisting>cell-&gt;property_editable() = true;</programlisting>
 <para>
 For a CellRendererToggle, you would set the <emphasis>activatable</emphasis>
 property instead.
@@ -2582,7 +2580,7 @@ to the appropriate "edited" signal. For instance, connect to
 <methodname>Gtk::CellRendererToggle::signal_toggled()</methodname>. If the column
 contains more than one <classname>CellRenderer</classname> then you will need
 to use <methodname>Gtk::TreeView::get_column()</methodname> and then call
-<methodname>get_cell_renderers()</methodname> on that view Column.
+<methodname>get_cells()</methodname> on that view Column.
 </para>
 <para>
 In your signal handler, you should examine the new value and then
@@ -2649,15 +2647,16 @@ multiple selection by setting the mode, like so:
 For single-selection, you can just call <methodname>get_selected()</methodname>,
 like so:
 </para>
-<programlisting>TreeModel::iterator iter = refTreeSelection-&gt;get_selected();
+<programlisting>Gtk::TreeModel::iterator iter = refTreeSelection-&gt;get_selected();
 if(iter) //If anything is selected
 {
-  TreeModel::Row row = *iter;
+  Gtk::TreeModel::Row row = *iter;
   //Do something with the row.
 }</programlisting>
 
 <para>
-For multiple-selection, you need to define a callback, and give it to
+For multiple-selection, you need to call <methodname>get_selected_rows()</methodname>
+or define a callback, and give it to
 <methodname>selected_foreach()</methodname>,
 <methodname>selected_foreach_path()</methodname>, or
 <methodname>selected_foreach_iter()</methodname>, like so:
@@ -2666,9 +2665,9 @@ For multiple-selection, you need to define a callback, and give it to
     sigc::mem_fun(*this, &amp;TheClass::selected_row_callback) );
 
 void TheClass::selected_row_callback(
-    const Gtk::TreeModel::iterator&amp; iter)
+    const Gtk::TreeModel::const_iterator&amp; iter)
 {
-  TreeModel::Row row = *iter;
+  TreeModel::ConstRow row = *iter;
   //Do something with the row.
 }</programlisting>
 
@@ -2718,9 +2717,9 @@ To change the selection, specify a
 <classname>Gtk::TreeModel::iterator</classname> or
 <classname>Gtk::TreeModel::Row</classname>, like so:
 </para>
-<programlisting>Gtk::TreeModel::Row row = m_refModel-&gt;children()[5]; //The fifth row.
+<programlisting>Gtk::TreeModel::Row row = m_refModel-&gt;children()[5]; //The sixth row.
 if(row)
-  refTreeSelection-&gt;select(row);</programlisting>
+  refTreeSelection-&gt;select(row.get_iter());</programlisting>
 <para>
 or
 </para>
@@ -2753,7 +2752,12 @@ if(pColumn)
 <sect2 id="treeview-sort-independent-views">
 <title>Independently sorted views of the same model</title>
 <para>
-The <classname>TreeView</classname> already allows you to show the same <classname>TreeModel</classname> in two <classname>TreeView</classname> widgets. If you need one of these TreeViews to sort the model differently than the other then you should use a <classname>TreeModelSort</classname> instead of just, for instance, <methodname>Gtk::TreeViewModel::set_sort_column()</methodname>. <classname>TreeModelSort</classname> is a model that contains another model, presenting a sorted version of that model. For instance, you might add a sorted version of a model to a <classname>TreeView</classname> like so:
+The <classname>TreeView</classname> already allows you to show the same <classname>TreeModel</classname>
+in two <classname>TreeView</classname> widgets. If you need one of these TreeViews to sort the model
+differently than the other then you should use a <classname>TreeModelSort</classname> instead of just,
+for instance, <methodname>Gtk::TreeViewColumn::set_sort_column()</methodname>.
+<classname>TreeModelSort</classname> is a model that contains another model, presenting a sorted version
+of that model. For instance, you might add a sorted version of a model to a <classname>TreeView</classname> like so:
 </para>
 <programlisting>Glib::RefPtr&lt;Gtk::TreeModelSort&gt; sorted_model =
     Gtk::TreeModelSort::create(model);
@@ -2801,7 +2805,13 @@ If you call <methodname>Gtk::TreeView::set_reorderable()</methodname> then your
 TreeView's items can be moved within the treeview itself. This is demonstrated
 in the <classname>TreeStore</classname> example.
 </para>
-<para>However, this does not allow you any control of which items can be dragged, and where they can be dropped. If you need that extra control then you might create a derived <literal>Gtk::TreeModel</literal> from <literal>Gtk::TreeStore</literal> or <literal>Gtk::ListStore</literal> and override the <literal>Gtk::TreeDragSource::row_draggable()</literal> and <literal>Gdk::TreeDragDest::row_drop_possible()</literal> virtual methods. You can examine the <literal>Gtk::TreeModel::Path</literal>s provided and allow or disallow dragging or dropping by returning <literal>true</literal> or <literal>false</literal>.</para>
+<para>However, this does not allow you any control of which items can be dragged, and where they can be dropped.
+If you need that extra control then you might create a derived <literal>Gtk::TreeModel</literal> from
+<literal>Gtk::TreeStore</literal> or <literal>Gtk::ListStore</literal> and override the
+<literal>Gtk::TreeDragSource::row_draggable_vfunc()</literal> and
+<literal>Gtk::TreeDragDest::row_drop_possible_vfunc()</literal> virtual methods.
+You can examine the <literal>Gtk::TreeModel::Path</literal>s provided and allow or disallow dragging
+or dropping by returning <literal>true</literal> or <literal>false</literal>.</para>
 <para>This is demonstrated in the drag_and_drop example.</para>
 </sect2>
 
@@ -2824,8 +2834,8 @@ To detect a click of the right mouse button, you need to handle the
 <literal>button_press_event</literal> signal, and check exactly which button
 was pressed. Because the <classname>TreeView</classname> normally handles this
 signal completely, you need to either override the default signal handler in a
-derived <classname>TreeView</classname> class, or use
-<methodname>connect_notify()</methodname> instead of <methodname>connect()</methodname>.
+derived <classname>TreeView</classname> class, use <methodname>connect_notify()</methodname>
+or use <methodname>connect(slot, /* after= */ false)</methodname>.
 You probably also want to call the default handler before doing anything else,
 so that the right-click will cause the row to be selected first.
 </para>
