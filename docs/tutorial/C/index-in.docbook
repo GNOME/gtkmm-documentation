@@ -2967,8 +2967,11 @@ section.
 <title>The model</title>
 <para>The model for a ComboBox can be defined and filled exactly as for a <classname>TreeView</classname>. For instance, you might derive a ComboBox class with one integer and one text column, like so:
 </para>
-<programlisting>ModelColumns()
-{ add(m_col_id); add(m_col_name); }
+<programlisting>class ModelColumns : public Gtk::TreeModel::ColumnRecord
+{
+public:
+  ModelColumns()
+  { add(m_col_id); add(m_col_name); }
 
   Gtk::TreeModelColumn&lt;int&gt; m_col_id;
   Gtk::TreeModelColumn&lt;Glib::ustring&gt; m_col_name;
@@ -3156,7 +3159,13 @@ The <classname>TextView</classname> creates its own default
 <sect2 id="textview-iterators">
 <title>Iterators</title>
 <para>
+A <classname>Gtk::TextBuffer::iterator</classname> and a <classname>Gtk::TextBuffer::const_iterator</classname>
+represent a position between two characters in the text buffer. Whenever the buffer
+is modified in a way that affects the number of characters in the buffer, all outstanding
+iterators become invalid. Because of this, iterators can't be used to preserve positions
+across buffer modifications. To preserve a position, use <classname>Gtk::TextBuffer::Mark</classname>.
 </para>
+<para><ulink url="&url_refdocs_base_gtk;TextIter.html">Reference</ulink></para>
 </sect2>
 
 <sect2 id="textview-formatting">
@@ -3298,9 +3307,9 @@ etc.
 <title>Scrolling</title>
 <para>
 <classname>Gtk::TextView</classname> has various
-<methodname>scroll_to_*()</methodname> methods. These allow you to ensure that a
+<methodname>scroll_to()</methodname> methods. These allow you to ensure that a
 particular part of the text buffer is visible. For instance, your application's
-Find feature might use <methodname>Gtk::TextView::scroll_to_iter()</methodname> to
+Find feature might use <methodname>Gtk::TextView::scroll_to()</methodname> to
 show the found text.
 </para>
 </sect3>
@@ -3367,12 +3376,6 @@ This involves the use of the <classname>Gio::SimpleActionGroup</classname>,
 <classname>Gio::SimpleAction</classname> and <classname>Gtk::Builder</classname>
 classes, all of which should be instantiated via their <methodname>create()</methodname>
 methods, which return <classname>RefPtr</classname>s.
-</para>
-<para>
-<classname>Gtk::ActionGroup</classname>, <classname>Gtk::Action</classname> with
-its subclasses and <classname>Gtk::UIManager</classname> has been an alternative.
-These classes are deprecated from &gtkmm; version 3.22 and should not be used in
-newly-written code.
 </para>
 
 <sect1 id="sec-actions">
@@ -3733,7 +3736,7 @@ group_brushes->insert(*button);
 <sect1 id="toolpallete-dranganddrop">
 <title>Drag and Drop</title>
 <para>Call <methodname>add_drag_dest()</methodname> to allow items or groups to be dragged from the tool palette to a particular destination widget. You can then use <methodname>get_drag_item()</methodname> to discover which ToolItem or ToolItemGroup is being dragged. You can use <literal>dynamic_cast</literal> to discover whether it is an item or a group. For instance, you might use this in your <literal>drag_data_received</literal> signal handler, to add a dropped item, or to show a suitable icon while dragging.</para>
-<para>See the <link linkend="chapter-draganddrop">Drag and Drop</link> chapter for general advice about Drag and Drop with gtkmm.</para>
+<para>See the <link linkend="chapter-draganddrop">Drag and Drop</link> chapter for general advice about Drag and Drop with &gtkmm;.</para>
 </sect1>
 
 <sect1 id="toolpalette-example"><title>ToolPalette Example</title>
@@ -3924,9 +3927,7 @@ the <link linkend="sec-eventbox">EventBox</link> section.
 <para>
 Here is a list of some of these Widgets:
 </para>
-<programlisting>Gtk::Alignment (deprecated from &gtkmm; version 3.14)
-Gtk::Arrow (deprecated from &gtkmm; version 3.14)
-Gtk::AspectFrame
+<programlisting>Gtk::AspectFrame
 Gtk::Bin
 Gtk::Box
 Gtk::Button
@@ -3943,7 +3944,6 @@ Gtk::RadioButton
 Gtk::Range
 Gtk::ScrolledWindow
 Gtk::Separator
-Gtk::Table (deprecated from &gtkmm; version 3.4)
 Gtk::Toolbar</programlisting>
 
 <para>
@@ -4178,17 +4178,17 @@ search-and-replace dialog is non-modal.
 </chapter>
 
 <chapter id="chapter-drawingarea">
-  <title>The Drawing Area Widget</title>
+  <title>The DrawingArea Widget</title>
   <para>
     The <classname>DrawingArea</classname> widget is a blank window that gives
     you the freedom to create any graphic you desire. Along with that freedom
-    comes the responsibility to handle draw signals on the widget. When a
+    comes the responsibility to draw on the widget. When a
     widget is first shown, or when it is covered and then uncovered again it
     needs to redraw itself. Most widgets have code to do this, but the
-    DrawingArea does not, allowing you to write your own draw signal
-    handler to determine how the contents of the widget will be drawn. This is
-    most often done by overriding the virtual
-    <methodname>on_draw()</methodname> member function.
+    <classname>DrawingArea</classname> does not, allowing you to write your own
+    draw function to determine how the contents of the widget will be drawn.
+    This is done by setting a draw function with a call to the
+    <methodname>set_draw_func()</methodname> member function.
   </para>
 
   <para>
@@ -4232,25 +4232,29 @@ search-and-replace dialog is non-modal.
         allows the actual drawing functions to take fewer arguments to simplify
         the interface. In &gtkmm;, a <classname>Cairo::Context</classname> is
         created by calling the
-        <methodname>Gdk::Window::create_cairo_context()</methodname> function.
-        Since Cairo contexts are reference-counted objects, this function
-        returns a <classname>Cairo::RefPtr&lt;Cairo::Context&gt;</classname>
-        object.
+        <methodname>Gdk::Window::begin_draw_frame()</methodname> and
+        <methodname>Gdk::DrawingContext::get_cairo_context()</methodname> functions.
+        Since Cairo contexts are reference-counted objects, <methodname>get_cairo_context()</methodname>
+        returns a <classname>Cairo::RefPtr&lt;Cairo::Context&gt;</classname> object.
     </para>
     <para>
         The following example shows  how to set up a Cairo context with a
         foreground color of red and a width of 2. Any drawing functions that
         use this context will use these settings.
     </para>
-    <programlisting>Gtk::DrawingArea myArea;
-Cairo::RefPtr&lt;Cairo::Context&gt; myContext = myArea.get_window()->create_cairo_context();
+    <programlisting>
+<![CDATA[Gtk::DrawingArea myArea;
+Cairo::RefPtr<Cairo::Region> clipRegion = myArea.get_window()->get_clip_region();
+Glib::RefPtr<Gdk::DrawingContext> drawingContext = myArea.get_window()->begin_draw_frame(clipRegion);
+Cairo::RefPtr<Cairo::Context> myContext = drawingContext->get_cairo_context();
 myContext->set_source_rgb(1.0, 0.0, 0.0);
-myContext->set_line_width(2.0);</programlisting>
+myContext->set_line_width(2.0);]]>
+    </programlisting>
     <para>
         Each <classname>Cairo::Context</classname> is associated with a
         particular <classname>Gdk::Window</classname>, so the first line of the
         above example creates a <classname>Gtk::DrawingArea</classname> widget
-        and the second line uses its associated
+        and the next 3 lines use its associated
         <classname>Gdk::Window</classname> to create a
         <classname>Cairo::Context</classname> object. The final two lines
         change the graphics state of the context.
@@ -4303,10 +4307,10 @@ myContext->set_line_width(2.0);</programlisting>
         </tip>
     </para>
     <para>
-        The virtual <methodname>on_draw()</methodname> method provides a
-        Cairo context that you shall use for drawing in the
+        The draw function that you set with a call to <methodname>set_draw_func()</methodname>
+        is called with a Cairo context that you shall use for drawing in the
         <classname>Gtk::DrawingArea</classname> widget. It is not necessary to
-        save and restore this Cairo context in <methodname>on_draw()</methodname>.
+        save and restore this Cairo context in the draw function.
     </para>
   </sect1>
   <sect1 id="sec-cairo-drawing-lines">
@@ -4377,7 +4381,9 @@ myContext->set_line_width(2.0);</programlisting>
         This program contains a single class, <classname>MyArea</classname>,
         which is a subclass of <classname>Gtk::DrawingArea</classname> and
         contains an <methodname>on_draw()</methodname> member function.
-        This function is called whenever the image in the drawing area needs to
+        This function becomes the draw function by a call to <methodname>set_draw_func()</methodname>
+        in <classname>MyArea</classname>'s constructor. <methodname>on_draw()</methodname>
+        is then called whenever the image in the drawing area needs to
         be redrawn. It is passed a <classname>Cairo::RefPtr</classname>
         pointer to a <classname>Cairo::Context</classname> that we use
         for the drawing.
@@ -4680,14 +4686,13 @@ context->restore();</programlisting>
               usually you wouldn't load the image every time in the draw
               signal handler! It's just shown here to keep it all together.)
           </para>
-          <programlisting>bool MyArea::on_draw(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; cr)
+          <programlisting>void MyArea::on_draw(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; cr, int width, int height)
 {
   Glib::RefPtr&lt;Gdk::Pixbuf&gt; image = Gdk::Pixbuf::create_from_file("myimage.png");
   // Draw the image at 110, 90, except for the outermost 10 pixels.
   Gdk::Cairo::set_source_pixbuf(cr, image, 100, 80);
   cr-&gt;rectangle(110, 90, image-&gt;get_width()-20, image-&gt;get_height()-20);
   cr-&gt;fill();
-  return true;
 }</programlisting>
         <sect2 id="cairo-example-image">
             <title>Example</title>
@@ -4736,8 +4741,8 @@ context->restore();</programlisting>
       <para><ulink url="&url_examples_base;drawingarea/clock">Source Code</ulink></para>
       <para>
           As before, almost all of the interesting stuff is done in the draw
-          signal handler <methodname>on_draw()</methodname>. Before we dig
-          into the draw signal handler, notice that the constructor for the
+          function <methodname>on_draw()</methodname>. Before we dig
+          into the draw function, notice that the constructor for the
           <classname>Clock</classname> widget connects a handler function
           <methodname>on_timeout()</methodname> to a timer with a timeout
           period of 1000 milliseconds (1 second). This means that
