@@ -85,7 +85,7 @@ name
       <author>
         <firstname>Kjell</firstname>
         <surname>Ahlstedt</surname>
-        <contrib>Parts of the update from gtkmm 2 to gtkmm 3.</contrib>
+        <contrib>Update from gtkmm 3 to gtkmm 4.</contrib>
         <contrib>Chapter on &quot;Building applications&quot;.</contrib>
       </author>
     </authorgroup>
@@ -7101,10 +7101,7 @@ instance, you cannot use the copyright sign (&copy;).
     <para>When deriving from <classname>Gtk::Container</classname>, you should override the following virtual methods:
     <itemizedlist>
       <listitem><para><methodname>get_request_mode_vfunc()</methodname>: Return what <literal>Gtk::SizeRequestMode</literal> is preferred by the container.</para></listitem>
-      <listitem><para><methodname>get_preferred_width_vfunc()</methodname>: Calculate the minimum and natural width of the container.</para></listitem>
-      <listitem><para><methodname>get_preferred_height_vfunc()</methodname>: Calculate the minimum and natural height of the container.</para></listitem>
-      <listitem><para><methodname>get_preferred_width_for_height_vfunc()</methodname>: Calculate the minimum and natural width of the container, if it would be given the specified height.</para></listitem>
-      <listitem><para><methodname>get_preferred_height_for_width_vfunc()</methodname>: Calculate the minimum and natural height of the container, if it would be given the specified width.</para></listitem>
+      <listitem><para><methodname>measure_vfunc()</methodname>: Calculate the minimum and natural width or height of the container.</para></listitem>
       <listitem><para><methodname>on_size_allocate()</methodname>: Position the child widgets, given the height and width that the container has actually been given.</para></listitem>
       <listitem><para><methodname>forall_vfunc()</methodname>: Call the same callback for each of the children.</para></listitem>
       <listitem><para><methodname>on_add()</methodname>: Add a child widget to the container.</para></listitem>
@@ -7114,19 +7111,16 @@ instance, you cannot use the copyright sign (&copy;).
     </para>
 
     <para>The <methodname>get_request_mode_vfunc()</methodname>,
-        <methodname>get_preferred_width_vfunc()</methodname>,
-        <methodname>get_preferred_height_vfunc()</methodname>,
-        <methodname>get_preferred_width_for_height_vfunc()</methodname>,
-        <methodname>get_preferred_height_for_width_vfunc()</methodname>, and
+        <methodname>measure_vfunc()</methodname>, and
         <methodname>on_size_allocate()</methodname> virtual methods control the
         layout of the child widgets. For instance, if your container has 2
         child widgets, with one below the other, your
         <methodname>get_request_mode_vfunc()</methodname> might request
         height-for-width layout. Then your
-        <methodname>get_preferred_width_vfunc()</methodname>
-        might report the maximum of the widths of the child widgets, and
-        <methodname>get_preferred_height_for_width_vfunc()</methodname>
-        might report the sum of their heights. If you want padding between
+        <methodname>measure_vfunc()</methodname>
+        might report the maximum of the widths of the child widgets when asked
+        to report width, and it might report the sum of their heights when asked
+        to report height. If you want padding between
         the child widgets then you would add that to the width and height too.
         Your widget's container will use this result to ensure that your widget
         gets enough space, and not less. By examining each widget's parent, and
@@ -7134,9 +7128,11 @@ instance, you cannot use the copyright sign (&copy;).
         window.</para>
 
     <para>You are not guaranteed to get the <literal>Gtk::SizeRequestMode</literal>
-        that you request. Therefore all four of the
-        <methodname>get_preferred_xxx_vfunc()</methodname> methods must return
-        sensible values.</para>
+        that you request. Therefore <methodname>measure_vfunc()</methodname> must
+        return sensible values for all reasonable values of its input parameters.
+        For a description of <methodname>measure_vfunc()</methodname>'s parameters see
+        also the description of <methodname>Gtk::Widget::measure()</methodname>, which
+        may be better documented than <methodname>measure_vfunc()</methodname>.</para>
 
    <para><methodname>on_size_allocate()</methodname> receives the actual
        height and width that the parent container has decided to give to your
@@ -7166,15 +7162,24 @@ instance, you cannot use the copyright sign (&copy;).
       <methodname>set_redraw_on_allocate(false)</methodname> to improve
       performance.</para>
 
+  <para><application>GTK+</application> requires that <methodname>set_has_window()</methodname>
+      is called in the instance init function, which is executed before your constructor.
+      If you call it in the constructor, <application>GTK+</application> may issue
+      a warning message, but at the time of writing (2017-02-24) it works as intended.
+      Adding code to the instance init function is more complicated for a &gtkmm;
+      programmer. The <link linkend="custom-widget-example">custom widget example</link>
+      shows how it can be done.</para>
+
   <para>By overriding <methodname>forall_vfunc()</methodname> you can allow
       applications to operate on all of the container's child widgets. For
-      instance, <methodname>show_all_children()</methodname> uses this to find all
-      the child widgets and show them.</para>
+      instance, <methodname>get_children()</methodname> uses this to find all
+      the child widgets.</para>
 
   <para>Although your container might have its own method to set the child
       widgets, you should still provide an implementation for the virtual
       <methodname>on_add()</methodname> and <methodname>on_remove()</methodname>
-      methods from the base class, so that the add() and remove() methods will
+      methods from the base class, so that the <methodname>add()</methodname>
+      and <methodname>remove()</methodname> methods will
       do something appropriate if they are called.</para>
 
   <para>Your implementation of the <methodname>child_type_vfunc()</methodname>
@@ -7219,20 +7224,23 @@ instance, you cannot use the copyright sign (&copy;).
         may be appropriate.
     <itemizedlist>
       <listitem><para><methodname>get_request_mode_vfunc()</methodname>: (optional) Return what <literal>Gtk::SizeRequestMode</literal> is preferred by the widget.</para></listitem>
-      <listitem><para><methodname>get_preferred_width_vfunc()</methodname>: Calculate the minimum and natural width of the widget.</para></listitem>
-      <listitem><para><methodname>get_preferred_height_vfunc()</methodname>: Calculate the minimum and natural height of the widget.</para></listitem>
-      <listitem><para><methodname>get_preferred_width_for_height_vfunc()</methodname>: Calculate the minimum and natural width of the widget, if it would be given the specified height.</para></listitem>
-      <listitem><para><methodname>get_preferred_height_for_width_vfunc()</methodname>: Calculate the minimum and natural height of the widget, if it would be given the specified width.</para></listitem>
+      <listitem><para><methodname>measure_vfunc()</methodname>: Calculate the minimum and natural width or height of the widget.</para></listitem>
       <listitem><para><methodname>on_size_allocate()</methodname>: Position the widget, given the height and width that it has actually been given.</para></listitem>
       <listitem><para><methodname>on_realize()</methodname>: Associate a <classname>Gdk::Window</classname> with the widget.</para></listitem>
       <listitem><para><methodname>on_unrealize()</methodname>: (optional) Break the association with the <classname>Gdk::Window</classname>. </para></listitem>
       <listitem><para><methodname>on_map()</methodname>: (optional)</para></listitem>
       <listitem><para><methodname>on_unmap()</methodname>: (optional)</para></listitem>
-      <listitem><para><methodname>on_draw()</methodname>: Draw on the supplied <classname>Cairo::Context</classname>.</para></listitem>
+      <listitem><para>One of these methods:
+        <itemizedlist>
+          <listitem><para><methodname>on_draw()</methodname>: Draw on the supplied <classname>Cairo::Context</classname>, or</para></listitem>
+          <listitem><para><methodname>snapshot_vfunc()</methodname>: Create a render node, e.g. a <classname>Cairo::Context</classname> node, and draw on it.</para></listitem>
+        </itemizedlist>
+        </para>
+      </listitem>
     </itemizedlist>
     </para>
 
-    <para>The first 6 methods in the previous table are also overridden in custom
+    <para>The first 3 methods in the previous table are also overridden in custom
         containers. They are briefly described in the
         <link linkend="sec-custom-containers">Custom Containers</link> section.
     </para>
@@ -7240,11 +7248,28 @@ instance, you cannot use the copyright sign (&copy;).
     <para>Most custom widgets need their own <classname>Gdk::Window</classname>
       to draw on. Then you can call
       <methodname>Gtk::Widget::set_has_window(true)</methodname> in your
-      constructor. (This is the default value.) If you do not call
+      constructor, or (better) call <function>gtk_widget_set_has_window(widget, true)</function>
+      in the instance init function. If you do not call
       <methodname>set_has_window(false)</methodname>, you must override
       <methodname>on_realize()</methodname> and call
       <methodname>Gtk::Widget::set_realized()</methodname> and
       <methodname>Gtk::Widget::set_window()</methodname> from there.</para>
+
+    <para>If you use <methodname>on_draw()</methodname>, your custom widget class must
+      derive from <classname>Gtk::WidgetCustomDraw</classname>. If you use
+      <methodname>snapshot_vfunc()</methodname>, your custom widget class must
+      derive from <classname>Gtk::WidgetCustomSnapshot</classname>.</para>
+
+<sect2 id="custom-init-functions">
+<title>Class Init and Instance Init Functions</title>
+
+<para>Some <application>GTK+</application> functions, if called at all, must be
+called from the class init function. Some other <application>GTK+</application>
+functions, if called, must be called from the instance init function.
+If your custom widget must call any of those functions, you can derive a class
+from <classname>Glib::ExtraClassInit</classname> and derive your custom class
+from that class. The following example shows how that's done.</para>
+</sect2>
 
 <sect2 id="custom-style-properties">
 <title>Custom Style Properties</title>
@@ -7256,16 +7281,19 @@ of your widget, or the users of an application program with your widget, can the
 modify the style of your widget without modifying the source code.
 Useful classes are <classname>Gtk::StyleProperty</classname> and <classname>Gtk::CssProvider</classname>.
 With <methodname>Gtk::Widget::get_style_property()</methodname> you can read the values
-of both your own style properties and those of your widget's base class. Note that style
+of both your own style properties and those of your widget's base class. Style
 properties are not wrapped in &gtkmm;. See <application>GTK+</application>'s
-documentation for lists of existing style properties.
+documentation for lists of existing style properties. Style properties are however
+being phased out of <application>GTK+</application>.
 The following example shows a simple use of a custom style property.
 </para>
 </sect2>
 
 <sect2 id="custom-widget-example"><title>Example</title>
 
-<para>This example implements a widget which draws a Penrose triangle.</para>
+<para>This example implements a widget which draws Penrose triangles.
+It has one custom widget that uses <methodname>on_draw()</methodname> and one that
+uses <methodname>snapshot_vfunc()</methodname>.</para>
 
 <figure id="figure-custom-widget">
   <title>Custom Widget</title>
