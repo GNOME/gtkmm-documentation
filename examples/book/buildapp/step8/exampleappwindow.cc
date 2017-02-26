@@ -103,10 +103,7 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
 
   // Bind the "visible" property of m_lines to the win.show-lines action, to
   // the "Lines" menu item and to the "visible" property of m_lines_label.
-  // The GPropertyAction class is not wrapped in a glibmm class at the time of
-  // writing (october 2016). We have to call a glib function directly.
-  add_action(Glib::wrap((GAction*)
-    g_property_action_new("show-lines", m_lines->gobj(), "visible")));
+  add_action(Gio::PropertyAction::create("show-lines", m_lines->property_visible()));
   m_binding_lines_visible = Glib::Binding::bind_property(m_lines->property_visible(),
     m_lines_label->property_visible());
 }

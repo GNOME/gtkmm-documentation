@@ -7305,9 +7305,7 @@ uses <methodname>snapshot_vfunc()</methodname>.</para>
 <para><ulink url="&url_examples_base;custom/custom_widget/">Source Code</ulink></para> <!-- Insert custom_gtk.css -->
 </sect2>
 
-    </sect1>
-
-
+</sect1>
 
 </chapter>
 
@@ -7490,7 +7488,7 @@ synchronization will normally be required to ensure visibility).
 <para>
 Aside from the fact that connected slots always execute in the
 receiver thread, <classname>Glib::Dispatcher</classname> objects are
-similar to <classname>sigc::signal&lt;void&gt;</classname> objects.
+similar to <classname>sigc::signal&lt;void()&gt;</classname> objects.
 They therefore cannot pass unbound arguments nor return a value. The
 best way to pass unbound arguments is with a thread-safe
 (asynchronous) queue. At the time of writing
@@ -7512,7 +7510,7 @@ fill up before the receiver thread's main loop has had an opportunity
 to read from it to empty it, and the receiver thread attempt to emit
 and so write to it when it is in that condition, the receiver thread
 would block on the write, so deadlocking. Where the receiver thread is
-to emit, a normal <classname>sigc::signal&lt;void&gt;</classname>
+to emit, a normal <classname>sigc::signal&lt;void()&gt;</classname>
 object could of course be used instead.
 </para>
 
@@ -7583,9 +7581,10 @@ and hints for creating &gtkmm; applications.
     <title>Application Lifetime</title>
 <para>Most applications will have only one <classname>Window</classname>, or
     only one main window. These applications can use the
-    <methodname>Gtk::Application::run(Gtk::Window&amp;)</methodname> overload. It shows
-    the window and returns when the window has been hidden. This might happen
-    when the user closes the window, or when your code decides to
+    <methodname>Gtk::Application::run(Gtk::Window&amp; window)</methodname> or
+    <methodname>Gtk::Application::run(Gtk::Window&amp; window, int argc, char** argv)</methodname>
+    overloads. They show the window and return when the window has been hidden.
+    This might happen when the user closes the window, or when your code decides to
     <methodname>hide()</methodname> the window. You can prevent the user from
     closing the window (for instance, if there are unsaved changes) by
     overriding <methodname>Gtk::Window::on_delete_event()</methodname>.</para>
@@ -7630,13 +7629,7 @@ Connect any signals you wish to use to the appropriate handlers.
 <para>
 Pack the widget into a container using the appropriate call,
 e.g. <methodname>Gtk::Container::add()</methodname> or
-<methodname>pack_start()</methodname>.
-</para>
-</listitem>
-
-<listitem>
-<para>
-Call <methodname>show()</methodname> to display the widget.
+<methodname>Gtk::Box::pack_start()</methodname>.
 </para>
 </listitem>
 
@@ -7645,13 +7638,10 @@ Call <methodname>show()</methodname> to display the widget.
 </para>
 
 <para>
-<methodname>Gtk::Widget::show()</methodname> lets &gtkmm; know that we have
-finished setting the attributes of the widget, and that it is ready to be
-displayed. You can use <methodname>Gtk::Widget::hide()</methodname> to make it
-disappear again. The order in which you show the widgets is not important, but
-we do suggest that you show the top-level window last; this way, the whole
-window will appear with its contents already drawn. Otherwise, the user will
-first see a blank window, into which the widgets will be gradually drawn.
+If you don't want all widgets to be shown, call <methodname>Gtk::Widget::hide()</methodname>
+on the widgets that you don't want to show. If a container widget is hidden, all
+of its child widgets are also hidden, even if <methodname>hide()</methodname> is
+not called on the child widgets.
 </para>
 
 </sect1>
@@ -7662,7 +7652,7 @@ first see a blank window, into which the widgets will be gradually drawn.
 
 <para>
 This chapter is similar to the &quot;Building applications&quot; chapter in the
-<ulink url="https://developer.gnome.org/gtk3/stable/">GTK+ 3 Reference Manual</ulink>.
+<ulink url="https://developer.gnome.org/gtk4/unstable/">GTK+ 4 Reference Manual</ulink>.
 The same application is built, but &gtkmm; is used instead of <application>GTK+</application>.
 </para>
 <para>
@@ -7723,7 +7713,7 @@ git repository</ulink>. You can build each example separately by using make with
 
 <para>
 When using <classname>Gtk::Application</classname>, the <function>main()</function> function
-can be very simple. We just call <methodname>Gio::Application::run()</methodname> on an
+can be very simple. We just call <methodname>Gtk::Application::run()</methodname> on an
 instance of our application class.
 </para>
 
@@ -7744,6 +7734,7 @@ called when the application is launched with commandline arguments.
 </para>
 
 <para><ulink url="&url_refdocs_base_gio;Application.html">Gio::Application Reference</ulink></para>
+<para><ulink url="&url_refdocs_base_gtk;Application.html">Gtk::Application Reference</ulink></para>
 
 <para>
 Another important class that is part of the application support in &gtkmm; is
@@ -8107,8 +8098,6 @@ What our application looks like now:
 Widgets and other objects have many useful properties. Here we show some ways to use
 them in new and flexible ways, by wrapping them in actions with <classname>Gio::PropertyAction</classname>
 or by binding them with <classname>Glib::Binding</classname>.
-(At the time of writing (october 2016) <classname>Gio::PropertyAction</classname>
-does not exist. We have to call a <application>glib</application> function directly.)
 </para>
 
 <para>
@@ -8128,10 +8117,9 @@ Since we want both labels to appear and disappear together, we bind the <literal
 property of the <literal>lines_label</literal> widget to the same property of the
 <literal>lines</literal> widget.
 In <classname>ExampleAppWindow</classname>'s constructor:
-<programlisting>add_action(Glib::wrap((GAction*)
-  g_property_action_new("show-lines", m_lines->gobj(), "visible")));
+<programlisting><![CDATA[add_action(Gio::PropertyAction::create("show-lines", m_lines->property_visible()));
 m_binding_lines_visible = Glib::Binding::bind_property(m_lines->property_visible(),
-  m_lines_label->property_visible());<![CDATA[
+  m_lines_label->property_visible());
 ]]>
 </programlisting>
 </para>
