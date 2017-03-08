@@ -77,18 +77,17 @@ TreeModel_Dnd::row_drop_possible_vfunc(const Gtk::TreeModel::Path& dest,
     }
   }
 
-  //You could also examine the row being dragged (via selection_data)
-  //if you must look at both rows to see whether a drop should be allowed.
-  //You could use
-  //TODO: Add const version of get_from_selection_data(): Glib::RefPtr<const
-  //Gtk::TreeModel> refThis = Glib::RefPtr<const Gtk::TreeModel>(this);
-  //
-  //auto refThis =
-  //Glib::RefPtr<Gtk::TreeModel>(const_cast<TreeModel_Dnd*>(this));
-  //refThis->reference(); //, true /* take_copy */)
-  //Gtk::TreeModel::Path path_dragged_row;
-  //Gtk::TreeModel::Path::get_from_selection_data(selection_data, refThis,
-  //path_dragged_row);
+  // You could also examine the row being dragged (via selection_data)
+  // if you must look at both rows to see whether a drop should be allowed.
+  // You could use
+  //   Glib::RefPtr<const Gtk::TreeModel> model_dragged_row;
+  //   Gtk::TreeModel::Path path_dragged_row;
+  //   Gtk::TreeModel::Path::get_from_selection_data(selection_data,
+  //     model_dragged_row, path_dragged_row);
+  // This is risky, though. If the row being dragged, and thus selection_data,
+  // does not originate in the process that's calling get_from_selection_data(),
+  // you'll most likely get a segmentation fault. See the documentation of
+  // Gtk::TreePath::get_from_selection_data() or gtk_tree_get_row_drag_data().
 
   return Gtk::TreeStore::row_drop_possible_vfunc(dest, selection_data);
 }
