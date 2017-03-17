@@ -55,13 +55,13 @@ ExampleWindow::ExampleWindow()
   m_TreeView.enable_model_drag_dest();
 
   //Fill the TreeView's model
-  Gtk::TreeModel::Row row = *(m_refTreeModel->append());
+  auto row = *(m_refTreeModel->append());
   row[m_refTreeModel->m_Columns.m_col_id] = 1;
   row[m_refTreeModel->m_Columns.m_col_name] = "Billy Bob";
   row[m_refTreeModel->m_Columns.m_col_draggable] = true;
   row[m_refTreeModel->m_Columns.m_col_receivesdrags] = true;
 
-  Gtk::TreeModel::Row childrow = *(m_refTreeModel->append(row.children()));
+  auto childrow = *(m_refTreeModel->append(row.children()));
   childrow[m_refTreeModel->m_Columns.m_col_id] = 11;
   childrow[m_refTreeModel->m_Columns.m_col_name] = "Billy Bob Junior";
   childrow[m_refTreeModel->m_Columns.m_col_draggable] = true;

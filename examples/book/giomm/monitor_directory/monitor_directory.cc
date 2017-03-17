@@ -109,7 +109,7 @@ int main(int /* argc */, char** /* argv */)
   Gio::init();
   mainloop = Glib::MainLoop::create();
 
-  std::string current_dir = Glib::get_current_dir();
+  auto current_dir = Glib::get_current_dir();
   auto dir = Gio::File::create_for_path(current_dir);
   auto monitor = dir->monitor_directory();
 

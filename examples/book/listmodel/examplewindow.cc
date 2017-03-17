@@ -31,7 +31,7 @@ m_button_quit("_Quit", true)
 
   for (int i = 0; i < 20; ++i)
   {
-    const Glib::ustring label = Glib::ustring::format("Item ", i);
+    const auto label = Glib::ustring::format("Item ", i);
     m_store->append(MyObject::create(i, label));
   }
 
@@ -111,7 +111,7 @@ void ExampleWindow::on_add_some()
   {
     const auto n_items = m_store->get_n_items();
     const auto i = std::rand() % std::max(2*n_items, 4u);
-    const Glib::ustring label = Glib::ustring::format("Added ", i);
+    const auto label = Glib::ustring::format("Added ", i);
     m_store->insert_sorted(MyObject::create(i, label),
       sigc::ptr_fun(&MyObject::compare));
   }

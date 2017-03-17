@@ -43,7 +43,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_font_button_font_set()
 {
-  Glib::ustring font_name = m_FontButton.get_font_name();
+  auto font_name = m_FontButton.get_font_name();
   std::cout << "Font chosen: " << font_name << std::endl;
 }
 
@@ -61,7 +61,7 @@ void ExampleWindow::on_button_dialog_clicked()
   {
     case Gtk::RESPONSE_OK:
     {
-      Glib::ustring font_name = dialog.get_font();
+      auto font_name = dialog.get_font();
       std::cout << "Font chosen: " << font_name << std::endl;
       m_FontButton.set_font_name(font_name);
       break;

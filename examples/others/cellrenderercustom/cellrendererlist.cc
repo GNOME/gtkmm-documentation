@@ -67,13 +67,13 @@ CellRendererList::~CellRendererList()
 
 void CellRendererList::append_list_item(const Glib::ustring& text)
 {
-  Gtk::TreeModel::Row row = *list_store_->append();
+  auto row = *list_store_->append();
   row[popup_columns().item] = text;
 }
 
 Glib::ustring CellRendererList::get_selected_item()
 {
-  if(const Gtk::TreeModel::iterator selected = tree_view_.get_selection()->get_selected())
+  if(const auto selected = tree_view_.get_selection()->get_selected())
   {
     return (*selected)[popup_columns().item];
   }

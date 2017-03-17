@@ -128,7 +128,7 @@ void ExampleWindow::on_clipboard_get(Gtk::SelectionData& selection_data,
   // info corresponds to the optional info parameter in Gtk::TargetEntry's
   // constructor. We don't use that, so we use selection_data's target instead.
 
-  const std::string target = selection_data.get_target();
+  const auto target = selection_data.get_target();
 
   if(target == example_target_custom)
   {
@@ -164,13 +164,13 @@ void ExampleWindow::on_clipboard_clear()
 void ExampleWindow::on_clipboard_received(
         const Gtk::SelectionData& selection_data)
 {
-  const std::string target = selection_data.get_target();
+  const auto target = selection_data.get_target();
 
   //It should always be this, because that's what we asked for when calling
   //request_contents().
   if(target == example_target_custom)
   {
-    Glib::ustring clipboard_data = selection_data.get_data_as_string();
+    auto clipboard_data = selection_data.get_data_as_string();
 
     //See comment in on_button_copy() about this silly clipboard format.
     if(clipboard_data.size() >= 4)

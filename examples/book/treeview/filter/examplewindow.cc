@@ -60,7 +60,7 @@ ExampleWindow::ExampleWindow()
   m_TreeView.set_model(m_refTreeModelFilter);
 
   //Fill the TreeView's model
-  Gtk::TreeModel::Row row = *(m_refTreeModel->append());
+  auto row = *(m_refTreeModel->append());
   row[m_Columns.m_col_id] = 1;
   row[m_Columns.m_col_name] = "Billy Bob";
   row[m_Columns.m_col_show] = true;

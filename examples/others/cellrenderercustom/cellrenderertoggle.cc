@@ -189,7 +189,7 @@ void MyCellRendererToggle::snapshot_vfunc(Gtk::Snapshot& snapshot,
   if(width <= 0 || height <= 0)
     return;
 
-  Gtk::StateFlags state = Gtk::STATE_FLAG_INSENSITIVE;
+  auto state = Gtk::STATE_FLAG_INSENSITIVE;
 
   if (property_activatable_)
     state = (Gtk::StateFlags)0;
@@ -267,7 +267,7 @@ AppWindow::AppWindow()
     output.str("row #");
     output << i;
 
-    Gtk::TreeModel::Row row = *list_store_->append();
+    auto row = *list_store_->append();
 
     row[list_columns_.text]   = output.str();
     row[list_columns_.active] = ((i % 2) != 0);
@@ -280,7 +280,7 @@ AppWindow::~AppWindow()
 void AppWindow::on_cell_toggled(const Glib::ustring& path_string)
 {
   // Get the model row that has been toggled.
-  Gtk::TreeModel::Row row = *list_store_->get_iter(Gtk::TreeModel::Path(path_string));
+  auto row = *list_store_->get_iter(Gtk::TreeModel::Path(path_string));
 
   // Invert the 'active' value in the toggled row.
   row[list_columns_.active] = !row[list_columns_.active];

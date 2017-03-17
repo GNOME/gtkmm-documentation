@@ -58,7 +58,7 @@ TreeModel_Dnd::row_drop_possible_vfunc(const Gtk::TreeModel::Path& dest,
 
   //dest is the path that the row would have after it has been dropped:
   //But in this case we are more interested in the parent row:
-  Gtk::TreeModel::Path dest_parent = dest;
+  auto dest_parent = dest;
   bool dest_is_not_top_level = dest_parent.up();
   if(!dest_is_not_top_level || dest_parent.empty())
   {

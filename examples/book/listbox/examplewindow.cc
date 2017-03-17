@@ -73,7 +73,7 @@ ExampleWindow::ExampleWindow() :
   m_ComboBox.signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_selection_mode_changed));
   m_VBox1.pack_start(m_ComboBox, Gtk::PACK_SHRINK);
 
-  const Gtk::SelectionMode mode = m_ListBox.get_selection_mode();
+  const auto mode = m_ListBox.get_selection_mode();
   int index = 0;
   for (std::size_t i = 0; i < G_N_ELEMENTS(selectionModes); ++i)
   {

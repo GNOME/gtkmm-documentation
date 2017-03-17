@@ -153,7 +153,7 @@ void ExampleWindow::on_day_selected()
   gdk_window_coords_to_parent (current_event->button.window,
                                current_event->button.x, current_event->button.y,
                                &current_event->button.x, &current_event->button.y);
-  Gtk::Allocation allocation = m_calendar.get_allocation();
+  auto allocation = m_calendar.get_allocation();
   rect.set_x(current_event->button.x - allocation.get_x());
   rect.set_y(current_event->button.y - allocation.get_y());
   rect.set_width(1);

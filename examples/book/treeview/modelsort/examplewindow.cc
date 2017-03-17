@@ -65,7 +65,7 @@ ExampleWindow::ExampleWindow()
 
 
   //Fill the tree model
-  Gtk::TreeModel::Row row = *(m_refTreeModel->append());
+  auto row = *(m_refTreeModel->append());
   row[m_Columns.m_col_id] = 1;
   row[m_Columns.m_col_name] = "Zebede Aardvark";
   row[m_Columns.m_col_something] = true;

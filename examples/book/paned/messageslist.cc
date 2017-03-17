@@ -35,7 +35,7 @@ MessagesList::MessagesList()
     std::ostringstream text;
     text << "message #" << i;
 
-    Gtk::TreeModel::Row row = *(m_refListStore->append());
+    auto row = *(m_refListStore->append());
     row[m_Columns.m_col_text] = text.str();
   }
 

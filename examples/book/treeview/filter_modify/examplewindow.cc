@@ -55,7 +55,7 @@ ExampleWindow::ExampleWindow()
   m_TreeView.set_model(m_refTreeModelFilter);
 
   //Fill the TreeView's model
-  Gtk::TreeModel::Row row = *(m_refTreeModel->append());
+  auto row = *(m_refTreeModel->append());
   row[m_Columns.m_col_id] = 1;
   row[m_Columns.m_col_name] = "Billy Bob";
   row[m_Columns.m_col_something] = true;
@@ -102,7 +102,7 @@ void ExampleWindow::on_filter_modify(const Gtk::TreeModel::iterator& iter,
   //Look in the child model, to calculate the model to show in the filter model:
   Gtk::TreeModel::iterator iter_child =
       m_refTreeModelFilter->convert_iter_to_child_iter(iter);
-  Gtk::TreeModel::Row row_child = *iter_child;
+  auto row_child = *iter_child;
 
   switch(column)
   {

@@ -112,7 +112,7 @@ void PrintFormOperation::on_draw_page(
   cairo_ctx->set_source_rgb(0, 0, 0);
 
   //Render Pango LayoutLines over the Cairo context:
-  Pango::LayoutIter iter = m_refLayout->get_iter();
+  auto iter = m_refLayout->get_iter();
 
   double start_pos = 0;
   int line_index = 0;
@@ -122,7 +122,7 @@ void PrintFormOperation::on_draw_page(
     if(line_index >= start_page_line)
     {
       auto layout_line = iter.get_line();
-      Pango::Rectangle logical_rect = iter.get_line_logical_extents();
+      auto logical_rect = iter.get_line_logical_extents();
       int baseline = iter.get_baseline();
 
       if (line_index == start_page_line)

@@ -78,7 +78,7 @@ void ExampleWindow::compose_transition_selector()
 void ExampleWindow::on_switch_active_changed()
 {
   const bool reveal_child = m_switch.get_active();
-  const Gtk::RevealerTransitionType transition_type = get_selected_transition_type();
+  const auto transition_type = get_selected_transition_type();
   const guint transition_duration = m_transition_duration.get_value_as_int();
 
   m_revealer.set_transition_type(transition_type);
@@ -88,7 +88,7 @@ void ExampleWindow::on_switch_active_changed()
 
 Gtk::RevealerTransitionType ExampleWindow::get_selected_transition_type()
 {
-  Gtk::RevealerTransitionType transition_type = Gtk::REVEALER_TRANSITION_TYPE_NONE;
+  auto transition_type = Gtk::REVEALER_TRANSITION_TYPE_NONE;
   const int active_row = m_transition_type.get_active_row_number();
 
   switch (active_row)

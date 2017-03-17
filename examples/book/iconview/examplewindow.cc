@@ -107,8 +107,8 @@ void ExampleWindow::on_button_quit()
 
 void ExampleWindow::on_item_activated(const Gtk::TreeModel::Path& path)
 {
-  Gtk::TreeModel::iterator iter = m_refListModel->get_iter(path);
-  Gtk::TreeModel::Row row = *iter;
+  auto iter = m_refListModel->get_iter(path);
+  auto row = *iter;
 
   const std::string filename = row[m_Columns.m_col_filename];
   const Glib::ustring description = row[m_Columns.m_col_description];
@@ -128,8 +128,8 @@ void ExampleWindow::on_selection_changed()
   if(!selected.empty())
   {
     const Gtk::TreeModel::Path& path = *selected.begin();
-    Gtk::TreeModel::iterator iter = m_refListModel->get_iter(path);
-    Gtk::TreeModel::Row row = *iter;
+    auto iter = m_refListModel->get_iter(path);
+    auto row = *iter;
 
     const std::string filename = row[m_Columns.m_col_filename];
     const Glib::ustring description = row[m_Columns.m_col_description];
@@ -145,7 +145,7 @@ void ExampleWindow::on_selection_changed()
 void ExampleWindow::add_entry(const std::string& filename,
         const Glib::ustring& description )
 {
-  Gtk::TreeModel::Row row = *(m_refListModel->append());
+  auto row = *(m_refListModel->append());
   row[m_Columns.m_col_filename] = filename;
   row[m_Columns.m_col_description] = description;
 

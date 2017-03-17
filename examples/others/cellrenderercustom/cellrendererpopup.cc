@@ -159,7 +159,7 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
   popup_window_.move(-500, -500);
   popup_window_.show();
 
-  const Gtk::Allocation alloc = popup_window_.get_allocation();
+  const auto alloc = popup_window_.get_allocation();
 
   int x = x2;
   int y = y2;
@@ -237,7 +237,7 @@ bool CellRendererPopup::on_button_press_event(GdkEventButton* event)
   int xoffset = 0, yoffset = 0;
   popup_window_.get_window()->get_root_origin(xoffset, yoffset);
 
-  const Gtk::Allocation alloc = popup_window_.get_allocation();
+  const auto alloc = popup_window_.get_allocation();
 
   xoffset += alloc.get_x();
   yoffset += alloc.get_y();
@@ -309,7 +309,7 @@ void CellRendererPopup::on_popup_arrow_clicked()
   int x = 0, y = 0;
   popup_entry_->get_window()->get_origin(x, y);
 
-  const Gtk::Allocation alloc = popup_entry_->get_allocation();
+  const auto alloc = popup_entry_->get_allocation();
 
   signal_show_popup_(popup_entry_->get_path(), x, y, x + alloc.get_width(), y + alloc.get_height());
 }

@@ -32,7 +32,7 @@ void MessageText::insert_text()
 {
   auto refTextBuffer = m_TextView.get_buffer();
 
-  Gtk::TextBuffer::iterator iter = refTextBuffer->get_iter_at_offset(0);
+  auto iter = refTextBuffer->get_iter_at_offset(0);
   refTextBuffer->insert(iter,
     "From: pathfinder@nasa.gov\n"
     "To: mom@nasa.gov\n"

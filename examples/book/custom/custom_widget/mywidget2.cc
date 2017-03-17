@@ -172,8 +172,8 @@ void MyWidget2::on_unrealize()
 
 bool MyWidget2::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
-  const Gtk::Allocation allocation = get_allocation();
-  Gtk::Allocation clip = get_clip();
+  const auto allocation = get_allocation();
+  auto clip = get_clip();
   clip.set_x(clip.get_x() - allocation.get_x());
   clip.set_y(clip.get_y() - allocation.get_y());
   const double scale_x = (double)clip.get_width() / m_scale;

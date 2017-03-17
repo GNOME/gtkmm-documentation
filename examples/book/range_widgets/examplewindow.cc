@@ -91,7 +91,7 @@ ExampleWindow::ExampleWindow()
   m_ComboBox_Position.pack_start(m_Columns.m_col_title);
 
   //Fill the ComboBox's Tree Model:
-  Gtk::TreeModel::Row row = *(m_refTreeModel->append());
+  auto row = *(m_refTreeModel->append());
   row[m_Columns.m_col_position_type] = Gtk::POS_TOP;
   row[m_Columns.m_col_title] = "Top";
   row = *(m_refTreeModel->append());
@@ -152,15 +152,15 @@ void ExampleWindow::on_checkbutton_toggled()
 
 void ExampleWindow::on_combo_position()
 {
-  Gtk::TreeModel::iterator iter = m_ComboBox_Position.get_active();
+  const auto iter = m_ComboBox_Position.get_active();
   if(!iter)
     return;
 
-  Gtk::TreeModel::Row row = *iter;
+  const auto row = *iter;
   if(!row)
     return;
 
-  const Gtk::PositionType postype = row[m_Columns.m_col_position_type];
+  const auto postype = row[m_Columns.m_col_position_type];
 
   m_VScale.set_value_pos(postype);
   m_HScale.set_value_pos(postype);

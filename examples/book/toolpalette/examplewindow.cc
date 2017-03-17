@@ -33,9 +33,9 @@ void ExampleWindow::load_icon_items()
   Gtk::IconSize::lookup(Gtk::ICON_SIZE_BUTTON, requested_icon_size, requested_icon_height);
   const guint max_icons_per_group = 10;
 
-  for (type_stringvec::const_iterator iter = contexts.begin(); iter != contexts.end(); ++iter)
+  for (auto iter = contexts.begin(); iter != contexts.end(); ++iter)
   {
-    const Glib::ustring context_name = *iter;
+    const auto context_name = *iter;
     Gtk::ToolItemGroup* group =
       Gtk::manage(new Gtk::ToolItemGroup(context_name));
     m_ToolPalette.add(*group);
@@ -44,9 +44,9 @@ void ExampleWindow::load_icon_items()
     type_stringvec icon_names_for_context = icon_theme->list_icons(context_name);
     std::sort(icon_names_for_context.begin(), icon_names_for_context.end());
     guint icons_count = 0;
-    for (type_stringvec::const_iterator iconiter = icon_names_for_context.begin(); iconiter != icon_names_for_context.end(); ++iconiter)
+    for (auto iconiter = icon_names_for_context.begin(); iconiter != icon_names_for_context.end(); ++iconiter)
     {
-      const Glib::ustring icon_name = *iconiter;
+      const auto icon_name = *iconiter;
       Glib::RefPtr<Gdk::Pixbuf> pixbuf;
       try
       {
@@ -89,7 +89,7 @@ void ExampleWindow::load_toggle_items()
 
   for(int i = 1; i <= 10; ++i)
   {
-    const Glib::ustring label = Glib::ustring::compose("#%1", i);
+    const auto label = Glib::ustring::compose("#%1", i);
     auto button = Gtk::manage(new Gtk::RadioToolButton());
     button->set_group(radio_group);
     button->set_label(label);
@@ -190,8 +190,8 @@ ExampleWindow::ExampleWindow()
 
   //The Orientation ComboBox:
   m_refTreeModelOrientation = Gtk::ListStore::create(m_ColumnsOrientation);
-  Gtk::TreeModel::iterator iter = m_refTreeModelOrientation->append();
-  Gtk::TreeModel::Row row = *iter;
+  auto iter = m_refTreeModelOrientation->append();
+  auto row = *iter;
   row[m_ColumnsOrientation.m_col_value] = Gtk::ORIENTATION_HORIZONTAL;
   row[m_ColumnsOrientation.m_col_name] = "Horizontal";\
   row = *(m_refTreeModelOrientation->append());
@@ -259,11 +259,11 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_combo_orientation_changed()
 {
-  Gtk::TreeModel::iterator iter = m_ComboOrientation.get_active();
+  const auto iter = m_ComboOrientation.get_active();
   if(!iter)
     return;
 
-  Gtk::TreeModel::Row row = *iter;
+  const auto row = *iter;
   const Gtk::Orientation value = row[m_ColumnsOrientation.m_col_value];
 
   m_ToolPalette.set_orientation(value);
@@ -276,11 +276,11 @@ void ExampleWindow::on_combo_orientation_changed()
 
 void ExampleWindow::on_combo_style_changed()
 {
-  Gtk::TreeModel::iterator iter = m_ComboStyle.get_active();
+  const auto iter = m_ComboStyle.get_active();
   if(!iter)
     return;
 
-  Gtk::TreeModel::Row row = *iter;
+  const auto row = *iter;
   const int value = row[m_ColumnsStyle.m_col_value];
 
   if(value == -1)

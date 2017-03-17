@@ -130,7 +130,7 @@ void ExampleWindow::update_widgets()
     buffer->set_text(message_from_worker_thread);
 
     // Scroll the last inserted line into view. That's somewhat complicated.
-    Gtk::TextIter iter = buffer->end();
+    auto iter = buffer->end();
     iter.set_line_offset(0); // Beginning of last line
     auto mark = buffer->get_mark("last_line");
     buffer->move_mark(mark, iter);

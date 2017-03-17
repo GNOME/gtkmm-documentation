@@ -115,7 +115,7 @@ void ExampleWindow::on_button_file_clicked()
       std::cout << "Open clicked." << std::endl;
 
       //Notice that this is a std::string, not a Glib::ustring.
-      std::string filename = dialog.get_filename();
+      auto filename = dialog.get_filename();
       std::cout << "File selected: " <<  filename << std::endl;
       break;
     }

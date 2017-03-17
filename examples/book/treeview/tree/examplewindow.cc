@@ -50,11 +50,11 @@ ExampleWindow::ExampleWindow()
   m_TreeView.set_reorderable();
 
   //Fill the TreeView's model
-  Gtk::TreeModel::Row row = *(m_refTreeModel->append());
+  auto row = *(m_refTreeModel->append());
   row[m_Columns.m_col_id] = 1;
   row[m_Columns.m_col_name] = "Billy Bob";
 
-  Gtk::TreeModel::Row childrow = *(m_refTreeModel->append(row.children()));
+  auto childrow = *(m_refTreeModel->append(row.children()));
   childrow[m_Columns.m_col_id] = 11;
   childrow[m_Columns.m_col_name] = "Billy Bob Junior";
 
@@ -96,10 +96,10 @@ void ExampleWindow::on_button_quit()
 void ExampleWindow::on_treeview_row_activated(const Gtk::TreeModel::Path& path,
         Gtk::TreeViewColumn* /* column */)
 {
-  Gtk::TreeModel::iterator iter = m_refTreeModel->get_iter(path);
+  const auto iter = m_refTreeModel->get_iter(path);
   if(iter)
   {
-    Gtk::TreeModel::Row row = *iter;
+    const auto row = *iter;
     std::cout << "Row activated: ID=" << row[m_Columns.m_col_id] << ", Name="
         << row[m_Columns.m_col_name] << std::endl;
   }

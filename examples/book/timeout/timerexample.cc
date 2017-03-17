@@ -54,7 +54,7 @@ void TimerExample::on_button_add_timer()
               &TimerExample::on_timeout), m_timer_number);
 
   // This is where we connect the slot to the Glib::signal_timeout()
-  sigc::connection conn = Glib::signal_timeout().connect(my_slot,
+  auto conn = Glib::signal_timeout().connect(my_slot,
           timeout_value);
 
   // Remember the connection:

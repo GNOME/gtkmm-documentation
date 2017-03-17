@@ -27,14 +27,14 @@ ExampleWindow::ExampleWindow()
   m_Combo.set_model(m_refTreeModel);
 
   //Fill the ComboBox's Tree Model:
-  Gtk::TreeModel::iterator iter = m_refTreeModel->append();
-  Gtk::TreeModel::Row row = *iter;
+  auto iter = m_refTreeModel->append();
+  auto row = *iter;
   row[m_Columns.m_col_id] = 1;
   row[m_Columns.m_col_name] = "Billy Bob";
   row[m_Columns.m_col_extra] = "something";
   m_Combo.set_active(iter);
   /*
-  Gtk::TreeModel::Row childrow = *(m_refTreeModel->append(row.children()));
+  auto childrow = *(m_refTreeModel->append(row.children()));
   childrow[m_Columns.m_col_id] = 11;
   childrow[m_Columns.m_col_name] = "Billy Bob Junior";
 
@@ -102,10 +102,10 @@ void ExampleWindow::on_cell_data_extra(const Gtk::TreeModel::const_iterator& ite
 
 void ExampleWindow::on_combo_changed()
 {
-  Gtk::TreeModel::iterator iter = m_Combo.get_active();
+  const auto iter = m_Combo.get_active();
   if(iter)
   {
-    Gtk::TreeModel::Row row = *iter;
+    const auto row = *iter;
     if(row)
     {
       //Get the data for the selected row, using our knowledge of the tree

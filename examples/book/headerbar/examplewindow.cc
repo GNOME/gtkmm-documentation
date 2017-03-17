@@ -72,7 +72,7 @@ void ExampleWindow::on_switch_active_changed()
 
 void ExampleWindow::on_title_entry_activate()
 {
-  const Glib::ustring title = m_title_entry.get_text();
+  const auto title = m_title_entry.get_text();
   if(!title.empty())
   {
     m_header_bar.set_title(title);
@@ -81,7 +81,7 @@ void ExampleWindow::on_title_entry_activate()
 
 void ExampleWindow::on_subtitle_entry_activate()
 {
-  const Glib::ustring subtitle = m_subtitle_entry.get_text();
+  const auto subtitle = m_subtitle_entry.get_text();
   m_header_bar.set_subtitle(subtitle);
 }
 

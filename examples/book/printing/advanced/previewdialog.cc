@@ -125,7 +125,7 @@ void PreviewDialog::on_popreview_got_page_size(
                        const Glib::RefPtr<Gtk::PrintContext>& print_ctx,
                        const Glib::RefPtr<Gtk::PageSetup>& page_setup)
 {
-  const Gtk::PaperSize paper_size = page_setup->get_paper_size();
+  const auto paper_size = page_setup->get_paper_size();
 
   const double width = paper_size.get_width(Gtk::UNIT_INCH);
   const double height = paper_size.get_height(Gtk::UNIT_INCH);

@@ -63,7 +63,7 @@ void Canvas::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int hei
   cr->rectangle(0, 0, width, height);
   cr->fill();
 
-  for(type_vec_items::iterator iter = m_canvas_items.begin();
+  for(auto iter = m_canvas_items.begin();
     iter != m_canvas_items.end(); ++iter )
   {
     item_draw(*iter, cr, false);
@@ -93,7 +93,7 @@ bool Canvas::on_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context,
   {
     // Request DnD data for creating a drop indicator.
     // This will cause on_drag_data_received() to be called.
-    const Glib::ustring target = drag_dest_find_target(context);
+    const auto target = drag_dest_find_target(context);
 
     if (target.empty())
       return false;
@@ -168,7 +168,7 @@ bool Canvas::on_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int /* 
 {
   // Request DnD data for creating a dopped item.
   // This will cause on_drag_data_received() to be called.
-  const Glib::ustring target = drag_dest_find_target(context);
+  const auto target = drag_dest_find_target(context);
 
   if (target.empty())
     return false;

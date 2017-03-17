@@ -28,11 +28,11 @@ ExampleWindow::ExampleWindow()
   m_Combo.set_model(m_refTreeModel);
 
   //Fill the ComboBox's Tree Model:
-  Gtk::TreeModel::Row row = *(m_refTreeModel->append());
+  auto row = *(m_refTreeModel->append());
   row[m_Columns.m_col_id] = "1";
   row[m_Columns.m_col_name] = "Billy Bob";
   /*
-  Gtk::TreeModel::Row childrow = *(m_refTreeModel->append(row.children()));
+  auto childrow = *(m_refTreeModel->append(row.children()));
   childrow[m_Columns.m_col_id] = 11;
   childrow[m_Columns.m_col_name] = "Billy Bob Junior";
 

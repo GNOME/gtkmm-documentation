@@ -46,7 +46,7 @@ ExampleWindow::ExampleWindow()
   //You could also use set_cell_data_func() to choose or fill these later.
   m_refTreeModelCombo1 = Gtk::ListStore::create(m_ColumnsCombo);
 
-  Gtk::TreeModel::Row row = *(m_refTreeModelCombo1->append());
+  auto row = *(m_refTreeModelCombo1->append());
   row[m_ColumnsCombo.m_col_choice] = "abc";
   row = *(m_refTreeModelCombo1->append());
   row[m_ColumnsCombo.m_col_choice] = "def";
@@ -139,11 +139,11 @@ void ExampleWindow::on_cellrenderer_choice_edited(
   Gtk::TreePath path(path_string);
 
   //Get the row from the path:
-  Gtk::TreeModel::iterator iter = m_refTreeModel->get_iter(path);
+  auto iter = m_refTreeModel->get_iter(path);
   if(iter)
   {
       //Store the user's new text in the model:
-      Gtk::TreeRow row = *iter;
+      auto row = *iter;
       row[m_Columns.m_col_itemchosen] = new_text;
   }
 }

@@ -52,7 +52,7 @@ ExampleWindow::ExampleWindow()
               //&ExampleWindow::on_completion_match) );
 
   //Fill the TreeView's model
-  Gtk::TreeModel::Row row = *(refCompletionModel->append());
+  auto row = *(refCompletionModel->append());
   row[m_Columns.m_col_id] = 1;
   row[m_Columns.m_col_name] = "Alan Zebedee";
 
@@ -112,12 +112,12 @@ bool ExampleWindow::on_completion_match(const Glib::ustring& key, const
 {
   if(iter)
   {
-    Gtk::TreeModel::Row row = *iter;
+    const auto row = *iter;
 
-    Glib::ustring::size_type key_length = key.size();
-    Glib::ustring filter_string = row[m_Columns.m_col_name];
+    const auto key_length = key.size();
+    auto filter_string = row[m_Columns.m_col_name];
 
-    Glib::ustring filter_string_start = filter_string.substr(0, key_length);
+    auto filter_string_start = filter_string.substr(0, key_length);
     //The key is lower-case, even if the user input is not.
     filter_string_start = filter_string_start.lowercase();
 
@@ -131,10 +131,10 @@ bool ExampleWindow::on_completion_match(const Glib::ustring& key, const
 
 void ExampleWindow::on_completion_action_activated(int index)
 {
-  type_actions_map::iterator iter = m_CompletionActions.find(index);
+  auto iter = m_CompletionActions.find(index);
   if(iter != m_CompletionActions.end()) //If it's in the map
   {
-    Glib::ustring title = iter->second;
+    auto title = iter->second;
     std::cout << "Action selected: " << title << std::endl;
   }
 }

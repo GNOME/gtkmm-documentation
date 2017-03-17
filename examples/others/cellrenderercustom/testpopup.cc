@@ -83,7 +83,7 @@ AppWindow::AppWindow()
     output.str("row #");
     output << i;
 
-    Gtk::TreeModel::Row row = *list_store_->append();
+    auto row = *list_store_->append();
 
     row[list_columns_.text1] = output.str();
     row[list_columns_.text2] = "foobar!";
@@ -96,7 +96,7 @@ AppWindow::~AppWindow()
 void AppWindow::on_cell_edited(const Glib::ustring& path, const Glib::ustring& new_text)
 {
   // Get the model row that has been edited.
-  Gtk::TreeModel::Row row = *list_store_->get_iter(Gtk::TreeModel::Path(path));
+  auto row = *list_store_->get_iter(Gtk::TreeModel::Path(path));
 
   row[list_columns_.text2] = new_text;
 }

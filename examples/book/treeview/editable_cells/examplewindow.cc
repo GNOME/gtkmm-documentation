@@ -53,7 +53,7 @@ ExampleWindow::ExampleWindow()
   m_TreeView.set_model(m_refTreeModel);
 
   //Fill the TreeView's model
-  Gtk::TreeModel::Row row = *(m_refTreeModel->append());
+  auto row = *(m_refTreeModel->append());
   row[m_Columns.m_col_id] = 1;
   row[m_Columns.m_col_name] = "Billy Bob";
   row[m_Columns.m_col_foo] = true;
@@ -119,12 +119,12 @@ void ExampleWindow::on_button_quit()
 
 void ExampleWindow::treeviewcolumn_validated_on_cell_data(
         Gtk::CellRenderer* /* renderer */,
-        const Gtk::TreeModel::iterator& iter)
+        const Gtk::TreeModel::const_iterator& iter)
 {
   //Get the value from the model and show it appropriately in the view:
   if(iter)
   {
-    Gtk::TreeModel::Row row = *iter;
+    const auto row = *iter;
     int model_value = row[m_Columns.m_col_number_validated];
 
     //This is just an example.
@@ -133,7 +133,7 @@ void ExampleWindow::treeviewcolumn_validated_on_cell_data(
     char buffer[32];
     sprintf(buffer, "%d", model_value);
 
-    Glib::ustring view_text = buffer;
+    auto view_text = buffer;
     m_cellrenderer_validated.property_text() = view_text;
   }
 }
@@ -195,10 +195,10 @@ void ExampleWindow::cellrenderer_validated_on_edited(
   else
   {
     //Get the row from the path:
-    Gtk::TreeModel::iterator iter = m_refTreeModel->get_iter(path);
+    auto iter = m_refTreeModel->get_iter(path);
     if(iter)
     {
-      Gtk::TreeModel::Row row = *iter;
+      auto row = *iter;
 
       //Put the new value in the model:
       row[m_Columns.m_col_number_validated] = new_value;
