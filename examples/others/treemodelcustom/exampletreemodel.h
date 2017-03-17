@@ -70,11 +70,11 @@ private:
    class GlueItem
    {
    public:
-     GlueItem(int row_number);
-     int get_row_number() const;
+     explicit GlueItem(std::size_t row_number);
+     std::size_t get_row_number() const;
 
    protected:
-     int m_row_number;
+     std::size_t m_row_number;
    };
 
    //Allow the GlueList inner class to access the declaration of the GlueItem inner class.

@@ -19,12 +19,12 @@
 #include <iostream>
 #include "exampletreemodel.h"
 
-ExampleTreeModel::GlueItem::GlueItem(int row_number)
+ExampleTreeModel::GlueItem::GlueItem(std::size_t row_number)
 : m_row_number(row_number)
 {
 }
 
-int ExampleTreeModel::GlueItem::get_row_number() const
+std::size_t ExampleTreeModel::GlueItem::get_row_number() const
 {
   return m_row_number;
 }
@@ -149,7 +149,7 @@ bool ExampleTreeModel::iter_next_vfunc(const iterator& iter, iterator& iter_next
 
     //Get the current row:
     const auto pItem = (const GlueItem*)iter.gobj()->user_data;
-    typeListOfRows::size_type row_index = pItem->get_row_number();
+    auto row_index = pItem->get_row_number();
 
     //Make the iter_next GtkTreeIter represent the next row:
     row_index++;
@@ -215,7 +215,7 @@ bool ExampleTreeModel::iter_nth_root_child_vfunc(int n, iterator& iter) const
     //Store the row_index in the GtkTreeIter:
     //See also iter_next_vfunc()
 
-    unsigned row_index = n;
+    const auto row_index = n;
 
     //This will be deleted in the GlueList destructor, when old iterators are marked as invalid.
     auto pItem = new GlueItem(row_index);
@@ -272,7 +272,7 @@ bool ExampleTreeModel::get_iter_vfunc(const Path& path, iterator& iter) const
    //See also iter_next_vfunc()
    //TODO: Store a pointer to some more complex data type such as a typeListOfRows::iterator.
 
-   unsigned row_index = path[0];
+   const auto row_index = path[0];
    auto pItem = new GlueItem(row_index);
 
    //Store the GlueItem in the GtkTreeIter.
@@ -296,7 +296,7 @@ ExampleTreeModel::typeListOfRows::iterator ExampleTreeModel::get_data_row_iter_f
   //Don't call this on an invalid iter.
   const auto pItem = (const GlueItem*)iter.gobj()->user_data;
 
-  typeListOfRows::size_type row_index = pItem->get_row_number();
+  const auto row_index = pItem->get_row_number();
   if( row_index > m_rows.size() )
     return m_rows.end();
   else
@@ -308,7 +308,7 @@ ExampleTreeModel::typeListOfRows::const_iterator ExampleTreeModel::get_data_row_
   //Don't call this on an invalid iter.
   const auto pItem = (const GlueItem*)iter.gobj()->user_data;
 
-  typeListOfRows::size_type row_index = pItem->get_row_number();
+  const auto row_index = pItem->get_row_number();
   if( row_index > m_rows.size() )
     return m_rows.end();
   else
