@@ -47,9 +47,8 @@ ExampleWindow::ExampleWindow()
   m_controls.attach(m_show_enter_location, 0, 1, 1, 1);
 
   std::cout << "Shortcuts:" << std::endl;
-  std::vector<Glib::RefPtr<Gio::File > > shortcuts = m_places_sidebar.list_shortcuts();
-  for(std::vector<Glib::RefPtr<Gio::File > >::const_iterator it = shortcuts.begin();
-    it != shortcuts.end(); ++it)
+  const auto shortcuts = m_places_sidebar.list_shortcuts();
+  for(auto it = shortcuts.begin(); it != shortcuts.end(); ++it)
   {
     std::cout << "basename: " << (*it)->get_basename() << std::endl;
   }

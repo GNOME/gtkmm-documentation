@@ -28,6 +28,6 @@ int main(int argc, char *argv[])
   // and opening extra windows for any files that it is asked to open,
   // for instance as a command-line parameter.
   // run() will return when the last window has been closed by the user.
-  const int status = application->run(argc, argv);
+  const auto status = application->run(argc, argv);
   return status;
 }

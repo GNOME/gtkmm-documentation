@@ -150,7 +150,7 @@ Wheelbarrow::Wheelbarrow()
   set_icon(Gdk::Pixbuf::create_from_xpm_data(wheelbarrow_xpm));
 
   realize(); // the widget must be realized to create the GDK window
-  const Glib::RefPtr<const Gdk::Window> window = get_window();
+  const auto window = get_window();
 
   //TODO: Use get_style_context() and Gdk::RGBA instead?
   const auto transparent = Gtk::Widget::get_default_style()->get_bg(Gtk::STATE_NORMAL);
