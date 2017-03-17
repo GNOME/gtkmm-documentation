@@ -41,19 +41,19 @@ protected:
    Gtk::TreeModelFlags get_flags_vfunc() const override;
    int get_n_columns_vfunc() const override;
    GType get_column_type_vfunc(int index) const override;
-   void get_value_vfunc(const TreeModel::iterator& iter, int column, Glib::ValueBase& value) const override;
+   void get_value_vfunc(const TreeModel::const_iterator& iter, int column, Glib::ValueBase& value) const override;
 
    bool iter_next_vfunc(const iterator& iter, iterator& iter_next) const override;
 
    //TODO: Make sure that we make all of these const when we have made them all const in the TreeModel:
    bool iter_children_vfunc(const iterator& parent, iterator& iter) const override;
-   bool iter_has_child_vfunc(const iterator& iter) const override;
-   int iter_n_children_vfunc(const iterator& iter) const override;
+   bool iter_has_child_vfunc(const const_iterator& iter) const override;
+   int iter_n_children_vfunc(const const_iterator& iter) const override;
    int iter_n_root_children_vfunc() const override;
    bool iter_nth_child_vfunc(const iterator& parent, int n, iterator& iter) const override;
    bool iter_nth_root_child_vfunc(int n, iterator& iter) const override;
    bool iter_parent_vfunc(const iterator& child, iterator& iter) const override;
-   Path get_path_vfunc(const iterator& iter) const override;
+   Path get_path_vfunc(const const_iterator& iter) const override;
    bool get_iter_vfunc(const Path& path, iterator& iter) const override;
 
 private:
@@ -94,8 +94,8 @@ private:
    };
 
    typeListOfRows::iterator get_data_row_iter_from_tree_row_iter(const iterator& iter);
-   typeListOfRows::const_iterator get_data_row_iter_from_tree_row_iter(const iterator& iter) const;
-   bool check_treeiter_validity(const iterator& iter) const;
+   typeListOfRows::const_iterator get_data_row_iter_from_tree_row_iter(const const_iterator& iter) const;
+   bool check_treeiter_validity(const const_iterator& iter) const;
    void remember_glue_item(GlueItem* item) const;
 
    //The data:

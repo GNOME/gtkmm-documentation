@@ -110,7 +110,7 @@ GType ExampleTreeModel::get_column_type_vfunc(int index) const
     return 0;
 }
 
-void ExampleTreeModel::get_value_vfunc(const TreeModel::iterator& iter, int column, Glib::ValueBase& value) const
+void ExampleTreeModel::get_value_vfunc(const TreeModel::const_iterator& iter, int column, Glib::ValueBase& value) const
 {
   if(check_treeiter_validity(iter))
   {
@@ -124,10 +124,10 @@ void ExampleTreeModel::get_value_vfunc(const TreeModel::iterator& iter, int colu
       //Glib::Value< Glib::ustring > value_specific;
       //value_specific.init( Glib::Value< Glib::ustring >::value_type() ); //TODO: Is there any way to avoid this step?
 
-      typeListOfRows::const_iterator dataRowIter = get_data_row_iter_from_tree_row_iter(iter);
+      auto dataRowIter = get_data_row_iter_from_tree_row_iter(iter);
       if(dataRowIter != m_rows.end())
       {
-        const typeRow& dataRow = *dataRowIter;
+        const auto& dataRow = *dataRowIter;
 
         Glib::ustring result = dataRow[column];
 
@@ -175,12 +175,12 @@ bool ExampleTreeModel::iter_children_vfunc(const iterator& parent, iterator& ite
   return iter_nth_child_vfunc(parent, 0, iter);
 }
 
-bool ExampleTreeModel::iter_has_child_vfunc(const iterator& iter) const
+bool ExampleTreeModel::iter_has_child_vfunc(const const_iterator& iter) const
 {
   return (iter_n_children_vfunc(iter) > 0);
 }
 
-int ExampleTreeModel::iter_n_children_vfunc(const iterator& iter) const
+int ExampleTreeModel::iter_n_children_vfunc(const const_iterator& iter) const
 {
   if(!check_treeiter_validity(iter))
     return 0;
@@ -242,7 +242,7 @@ bool ExampleTreeModel::iter_parent_vfunc(const iterator& child, iterator& iter) 
   return false; //There are no children, so no parents.
 }
 
-Gtk::TreeModel::Path ExampleTreeModel::get_path_vfunc(const iterator& /* iter */) const
+Gtk::TreeModel::Path ExampleTreeModel::get_path_vfunc(const const_iterator& /* iter */) const
 {
    //TODO:
    return Path();
@@ -303,7 +303,7 @@ ExampleTreeModel::typeListOfRows::iterator ExampleTreeModel::get_data_row_iter_f
     return m_rows.begin() + row_index; //TODO: Performance.
 }
 
-ExampleTreeModel::typeListOfRows::const_iterator ExampleTreeModel::get_data_row_iter_from_tree_row_iter(const iterator& iter) const
+ExampleTreeModel::typeListOfRows::const_iterator ExampleTreeModel::get_data_row_iter_from_tree_row_iter(const const_iterator& iter) const
 {
   //Don't call this on an invalid iter.
   const auto pItem = (const GlueItem*)iter.gobj()->user_data;
@@ -315,7 +315,7 @@ ExampleTreeModel::typeListOfRows::const_iterator ExampleTreeModel::get_data_row_
     return m_rows.begin() + row_index; //TODO: Performance.
 }
 
-bool ExampleTreeModel::check_treeiter_validity(const iterator& iter) const
+bool ExampleTreeModel::check_treeiter_validity(const const_iterator& iter) const
 {
   // Anything that modifies the model's structure should change the model's stamp,
   // so that old iters are ignored.
