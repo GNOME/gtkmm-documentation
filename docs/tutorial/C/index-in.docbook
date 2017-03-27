@@ -180,7 +180,7 @@ See the <ulink url="https://wiki.gnome.org/Projects/gtkmm/FAQ">FAQ</ulink> for m
 <itemizedlist>
   <listitem><para><application>libsigc++-3.0</application></para></listitem>
   <listitem><para><application>gtk+-4.0</application></para></listitem>
-  <listitem><para><application>glibmm-2.52</application></para></listitem>
+  <listitem><para><application>glibmm-2.54</application></para></listitem>
   <listitem><para><application>cairomm-1.16</application></para></listitem>
   <listitem><para><application>pangomm-2.42</application></para></listitem>
   <listitem><para><application>atkmm-2.26</application></para></listitem>
@@ -468,20 +468,6 @@ It provides almost exactly the same interface as std::string, along with automat
 
 </sect1>
 
-<sect1 id="sec-intermediate-types">
-<title>Intermediate types</title>
-<para>Some API related to gtkmm uses intermediate data containers, such as <classname>Glib::StringArrayHandle</classname>, instead of a specific Standard C++ container such as <classname>std::vector</classname> or <classname>std::list</classname>, though &gtkmm; itself now uses just <classname>std::vector</classname> since &gtkmm; 3.0.</para>
-<para>You should not declare these types yourself. You should instead use whatever Standard C++ container you prefer. glibmm will do the conversion for you. Here are some of these intermediate types:
-<itemizedlist>
-    <listitem><para><classname>Glib::StringArrayHandle</classname> or <classname>Glib::ArrayHandle&lt;Glib::ustring&gt;</classname>: Use <classname>std::vector&lt;Glib::ustring&gt;</classname>, <classname>std::list&lt;Glib::ustring&gt;</classname>, <type>const char*[]</type>, etc.</para></listitem>
-    <listitem><para><classname>Glib::ListHandle&lt;Gtk::Widget*&gt;</classname>: Use <classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::list&lt;Gtk::Widget*&gt;</classname>, etc.</para></listitem>
-    <listitem><para><classname>Glib::SListHandle&lt;Gtk::Widget*&gt;</classname>: Use <classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::list&lt;Gtk::Widget*&gt;</classname>, etc.</para></listitem>
-</itemizedlist>
-
-</para>
-
-</sect1>
-
 <sect1 id="sec-basics-gobj-and-wrap">
 <title>Mixing C and C++ APIs</title>
 <para>You can use C APIs which do not yet have convenient C++ interfaces. It is generally not a problem to use C APIs from C++, and &gtkmm; helps by providing access to the underlying C object, and providing an easy way to create a C++ wrapper object from a C object, provided that the C API is also based on the GObject system.</para>
@@ -672,7 +658,7 @@ orientation (vertical or horizontal) to be specified without requiring the use o
 </chapter>
 
 <chapter id="changes-gtkmm4">
-<title>Changes in &gtkmm; 4</title>
+<title>Changes in &gtkmm;-4.0 and <application>glibmm-2.54</application></title>
 
 <para>&gtkmm;-4.0 is a new version of the &gtkmm; API that installs in parallel with the
 older &gtkmm;-2.4 and &gtkmm;-3.0 APIs. The last version of the &gtkmm;-3.0 API
@@ -687,7 +673,7 @@ directory, so your pkg-config check should ask for <literal>gtkmm-4.0</literal>
 rather than <literal>gtkmm-3.0</literal>.
 </para>
 
-<para>&gtkmm;-4.0 is used in combination with <application>glibmm-2.52</application>,
+<para>&gtkmm;-4.0 is used in combination with <application>glibmm-2.54</application>,
 which sets the global locale for your program. The older <application>glibmm-2.4</application>
 does not do that, and &gtkmm;-3.0 does it only to some extent. What this means is
 briefly that if your &gtkmm;-3.0 program contains a call to
@@ -699,14 +685,17 @@ to set the global locale for you, you should add a call to
 </para>
 <para><ulink url="&url_refdocs_base_glib_html;namespaceGlib.html">Reference</ulink></para>
 
-<para>&gtkmm; 4 added some new classes:</para>
+<para>Some new classes were added in &gtkmm; 4 and <application>glibmm</application> 2.54:</para>
 
 <orderedlist>
-<listitem><simpara><classname>Gtk::???</classname>, <classname>Gtk::???</classname> To be added.</simpara></listitem>
+<listitem><simpara><classname>Glib::ExtraClassInit</classname>, <classname>Gtk::WidgetCustomDraw</classname>,
+  <classname>Gtk::WidgetCustomSnapshot</classname> and <classname>Gtk::Snapshot</classname>:
+  These classes are needed only for writing custom widgets. See the
+  <link linkend="sec-custom-widgets">Custom Widgets</link> section.</simpara></listitem>
 </orderedlist>
 
-<para>&gtkmm; 4 also made several small changes to the API, which you will probably encounter
-when porting code that used &gtkmm;-3.0. Here is a short list:</para>
+<para>There have also been several small changes to the API, which you will probably encounter
+when porting code that used &gtkmm;-3.0 and <application>glibmm</application>-2.4. Here is a short list:</para>
 
 <para>
 <orderedlist>
@@ -721,10 +710,15 @@ when porting code that used &gtkmm;-3.0. Here is a short list:</para>
 <listitem><simpara><classname>sigc::slot</classname>s use the <classname>sigc::slot&lt;R(Args...)&gt;</classname> syntax.
   Example: <classname>sigc::slot&lt;void(int, int)&gt;</classname> instead of <classname>sigc::slot&lt;void, int, int&gt;</classname>.</simpara></listitem>
 <listitem><simpara><classname>Gtk::DrawingArea</classname> uses a draw function instead of the draw signal.</simpara></listitem>
+<listitem><simpara><classname>Glib::ArrayHandle</classname>, <classname>Glib::StringArrayHandle</classname>,
+  <classname>Glib::ListHandle</classname> and <classname>Glib::SListHandle</classname> have been removed.
+  They were used in <application>glibmm</application>-2.4, but not used in &gtkmm;-3.0.
+  If you've ever used these classes, replace them with a standard C++ container, such as <classname>std::vector</classname>.</simpara></listitem>
 </orderedlist>
 </para>
 
-<para>All deprecated API was removed in &gtkmm; 4.0, though there will be new deprecations in future versions.</para>
+<para>All deprecated API was removed in &gtkmm; 4.0 and <application>glibmm</application> 2.54,
+  though there will be new deprecations in future versions.</para>
 
 <para>As a first step to porting your source code to &gtkmm;-4.0 you should probably ensure
 that your application builds with the deprecated &gtkmm;-3.0 and <application>glibmm-2.4</application>
@@ -9562,7 +9556,7 @@ public:
     automatically when using the above build structure:
 <programlisting>
 $ cd gtk/src
-$ /usr/lib/glibmm-2.52/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtkmm
+$ /usr/lib/glibmm-2.54/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtkmm
 </programlisting>
 </para>
 <para>Notice that we provided <command>gmmproc</command> with the path to the
