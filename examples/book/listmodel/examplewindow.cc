@@ -79,7 +79,7 @@ m_button_quit("_Quit", true)
 // static
 Gtk::Widget* ExampleWindow::on_create_widget1(const Glib::RefPtr<Glib::Object>& item)
 {
-  auto obj = Glib::RefPtr<MyObject>::cast_dynamic(item);
+  auto obj = std::dynamic_pointer_cast<MyObject>(item);
   if (!obj)
   {
     std::cout << "on_create_widget1(): item is not a MyObject" << std::endl;

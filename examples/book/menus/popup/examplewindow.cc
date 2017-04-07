@@ -94,7 +94,7 @@ ExampleWindow::ExampleWindow()
   auto object =
     m_refBuilder->get_object("menu-examplepopup");
   auto gmenu =
-    Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+    std::dynamic_pointer_cast<Gio::Menu>(object);
   if(!gmenu)
     g_warning("GMenu not found");
 

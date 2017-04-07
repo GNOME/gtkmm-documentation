@@ -120,7 +120,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
 
   //Get the menubar and toolbar widgets, and add them to a container widget:
   auto object = m_refBuilder->get_object("menubar");
-  auto gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+  auto gmenu = std::dynamic_pointer_cast<Gio::Menu>(object);
   if (gmenu)
   {
     //Menubar:

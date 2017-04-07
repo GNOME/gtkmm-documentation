@@ -200,9 +200,9 @@ void ExampleApplication::on_startup()
 
   //Get the menubar and the app menu, and add them to the application:
   auto object = m_refBuilder->get_object("menu-example");
-  auto gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+  auto gmenu = std::dynamic_pointer_cast<Gio::Menu>(object);
   object = m_refBuilder->get_object("appmenu");
-  auto appMenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+  auto appMenu = std::dynamic_pointer_cast<Gio::Menu>(object);
   if (!(gmenu && appMenu)) {
     g_warning("GMenu or AppMenu not found");
   }

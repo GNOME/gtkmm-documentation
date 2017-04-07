@@ -71,7 +71,7 @@ void ExampleApplication::on_startup()
   }
 
   auto object = refBuilder->get_object("appmenu");
-  auto app_menu = Glib::RefPtr<Gio::MenuModel>::cast_dynamic(object);
+  auto app_menu = std::dynamic_pointer_cast<Gio::MenuModel>(object);
   if (app_menu)
     set_app_menu(app_menu);
   else

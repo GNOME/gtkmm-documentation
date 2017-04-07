@@ -83,7 +83,7 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
   // (The connection between action and menu item is specified in gears_menu.ui.)
   auto menu_builder = Gtk::Builder::create_from_resource("/org/gtkmm/exampleapp/gears_menu.ui");
   auto object = menu_builder->get_object("menu");
-  auto menu = Glib::RefPtr<Gio::MenuModel>::cast_dynamic(object);
+  auto menu = std::dynamic_pointer_cast<Gio::MenuModel>(object);
   if (!menu)
     throw std::runtime_error("No \"menu\" object in gears_menu.ui");
 

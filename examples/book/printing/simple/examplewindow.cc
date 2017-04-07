@@ -221,7 +221,7 @@ void ExampleWindow::build_main_menu(const Glib::RefPtr<Gtk::Application>& app)
 
   // Get the menubar and add it to a container widget:
   auto object = m_refBuilder->get_object("menu-example");
-  auto gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+  auto gmenu = std::dynamic_pointer_cast<Gio::Menu>(object);
   if (!gmenu)
     g_warning("GMenu not found");
   else
