@@ -19,7 +19,7 @@
 #include "packbox.h"
 
 ExampleWindow::ExampleWindow(int which)
-: m_box1(Gtk::ORIENTATION_VERTICAL),
+: m_box1(Gtk::Orientation::VERTICAL),
   m_buttonQuit("Quit")
 {
   set_title("Gtk::Box example");
@@ -35,11 +35,11 @@ ExampleWindow::ExampleWindow(int which)
   {
     case 1:
     {
-      m_Label1.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0); set_homogeneous(false);");
+      m_Label1.set_text("Gtk::Box(Gtk::Orientation::HORIZONTAL, 0); set_homogeneous(false);");
 
       // Align the label to the left side.
-      m_Label1.set_halign(Gtk::ALIGN_START);
-      m_Label1.set_valign(Gtk::ALIGN_START);
+      m_Label1.set_halign(Gtk::Align::START);
+      m_Label1.set_valign(Gtk::Align::START);
 
       // Pack the label into the vertical box (vbox box1).  Remember that
       // widgets added to a vbox will be packed one on top of the other in
@@ -67,9 +67,9 @@ ExampleWindow::ExampleWindow(int which)
       m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK);
 
       // create another new label, and show it.
-      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0); set_homogeneous(true);");
-      m_Label2.set_halign(Gtk::ALIGN_START);
-      m_Label2.set_valign(Gtk::ALIGN_START);
+      m_Label2.set_text("Gtk::Box(Gtk::Orientation::HORIZONTAL, 0); set_homogeneous(true);");
+      m_Label2.set_halign(Gtk::Align::START);
+      m_Label2.set_valign(Gtk::Align::START);
       m_box1.pack_start(m_Label2, Gtk::PACK_SHRINK);
 
       // Args are: homogeneous, spacing, options, margin
@@ -87,10 +87,9 @@ ExampleWindow::ExampleWindow(int which)
 
     case 2:
     {
-
-      m_Label1.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 10); set_homogeneous(false);");
-      m_Label1.set_halign(Gtk::ALIGN_START);
-      m_Label1.set_valign(Gtk::ALIGN_START);
+      m_Label1.set_text("Gtk::Box(Gtk::Orientation::HORIZONTAL, 10); set_homogeneous(false);");
+      m_Label1.set_halign(Gtk::Align::START);
+      m_Label1.set_valign(Gtk::Align::START);
       m_box1.pack_start(m_Label1, Gtk::PACK_SHRINK);
 
       pPackBox1 = Gtk::manage(new PackBox(false, 10, Gtk::PACK_EXPAND_PADDING));
@@ -101,9 +100,9 @@ ExampleWindow::ExampleWindow(int which)
 
       m_box1.pack_start(m_separator1, Gtk::PACK_SHRINK);
 
-      m_Label2.set_text("Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 0); set_homogeneous(false);");
-      m_Label2.set_halign(Gtk::ALIGN_START);
-      m_Label2.set_valign(Gtk::ALIGN_START);
+      m_Label2.set_text("Gtk::Box(Gtk::Orientation::HORIZONTAL, 0); set_homogeneous(false);");
+      m_Label2.set_halign(Gtk::Align::START);
+      m_Label2.set_valign(Gtk::Align::START);
       m_box1.pack_start(m_Label2, Gtk::PACK_SHRINK);
 
       pPackBox3 = Gtk::manage(new PackBox(false, 0, Gtk::PACK_SHRINK, 10));

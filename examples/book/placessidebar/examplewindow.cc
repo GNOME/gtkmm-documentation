@@ -17,7 +17,7 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_hbox(Gtk::ORIENTATION_HORIZONTAL, 6),
+: m_hbox(Gtk::Orientation::HORIZONTAL, 6),
   m_show_desktop_check("Show \"Desktop\""),
   m_show_enter_location("Show \"Enter Location\"")
 {
@@ -26,7 +26,7 @@ ExampleWindow::ExampleWindow()
   set_size_request(500, 600);
 
   // Options
-  m_controls_frame.set_shadow_type(Gtk::SHADOW_NONE);
+  m_controls_frame.set_shadow_type(Gtk::ShadowType::NONE);
   m_frame_label.set_markup("<b>Options</b>");
   m_controls_frame.set_label_widget(m_frame_label);
   m_controls.set_margin_top(6);
@@ -83,20 +83,20 @@ void ExampleWindow::on_placessidebar_open_location(const Glib::RefPtr<Gio::File>
 {
   Gtk::MessageDialog dialog(*this, "<b>open-location</b> event triggered", true);
   Gtk::Grid location_information_grid;
-  Gtk::Label basename_label("Basename:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER);
-  Gtk::Label path_label("Path:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER);
-  Gtk::Label uri_label("URI:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER);
+  Gtk::Label basename_label("Basename:", Gtk::Align::END, Gtk::Align::CENTER);
+  Gtk::Label path_label("Path:", Gtk::Align::END, Gtk::Align::CENTER);
+  Gtk::Label uri_label("URI:", Gtk::Align::END, Gtk::Align::CENTER);
   Gtk::Label file_basename_label, file_path_label, file_uri_label;
 
   file_basename_label.set_text(location->get_basename());
-  file_basename_label.set_halign(Gtk::ALIGN_START);
-  file_basename_label.set_valign(Gtk::ALIGN_CENTER);
+  file_basename_label.set_halign(Gtk::Align::START);
+  file_basename_label.set_valign(Gtk::Align::CENTER);
   file_path_label.set_text(location->get_path());
-  file_path_label.set_halign(Gtk::ALIGN_START);
-  file_path_label.set_valign(Gtk::ALIGN_CENTER);
+  file_path_label.set_halign(Gtk::Align::START);
+  file_path_label.set_valign(Gtk::Align::CENTER);
   file_uri_label.set_text(location->get_uri());
-  file_uri_label.set_halign(Gtk::ALIGN_START);
-  file_uri_label.set_valign(Gtk::ALIGN_CENTER);
+  file_uri_label.set_halign(Gtk::Align::START);
+  file_uri_label.set_valign(Gtk::Align::CENTER);
 
   location_information_grid.attach(basename_label, 0, 0, 1, 1);
   location_information_grid.attach(file_basename_label, 1, 0, 1, 1);
@@ -144,7 +144,7 @@ void ExampleWindow::on_menu_properties_activate()
 {
   auto selected_item = m_places_sidebar.get_location();
 
-  on_placessidebar_open_location(selected_item, Gtk::PLACES_OPEN_NORMAL);
+  on_placessidebar_open_location(selected_item, Gtk::PlacesOpenFlags::NORMAL);
 }
 
 

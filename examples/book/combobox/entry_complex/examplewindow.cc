@@ -72,7 +72,7 @@ ExampleWindow::ExampleWindow()
   if (entry)
   {
     // The Entry shall receive focus-out events.
-    entry->add_events(Gdk::FOCUS_CHANGE_MASK);
+    entry->add_events(Gdk::EventMask::FOCUS_CHANGE_MASK);
     // Alternatively you can connect to m_Combo.signal_changed().
     entry->signal_changed().connect(sigc::mem_fun(*this,
       &ExampleWindow::on_entry_changed) );

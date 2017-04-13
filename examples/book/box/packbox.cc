@@ -1,5 +1,3 @@
-//$Id: packbox.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -20,7 +18,7 @@
 
 PackBox::PackBox(bool homogeneous, int spacing, Gtk::PackOptions options,
         int margin)
-: Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, spacing),
+: Gtk::Box(Gtk::Orientation::HORIZONTAL, spacing),
   m_button1("box.pack_start("),
   m_button2("button,"),
   m_button3((options == Gtk::PACK_SHRINK) ? "Gtk::PACK_SHRINK);" :

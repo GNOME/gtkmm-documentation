@@ -17,12 +17,12 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_vbox(Gtk::ORIENTATION_VERTICAL),
-  m_search_box(Gtk::ORIENTATION_HORIZONTAL),
-  m_up_down_box(Gtk::ORIENTATION_HORIZONTAL),
+: m_vbox(Gtk::Orientation::VERTICAL),
+  m_search_box(Gtk::Orientation::HORIZONTAL),
+  m_up_down_box(Gtk::Orientation::HORIZONTAL),
   m_label("Press any key to start searching"),
-  m_search_mode_label("Show search bar:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER),
-  m_close_button_label("Show close button:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER)
+  m_search_mode_label("Show search bar:", Gtk::Align::END, Gtk::Align::CENTER),
+  m_close_button_label("Show close button:", Gtk::Align::END, Gtk::Align::CENTER)
 {
   // Window properties
   set_title("SearchBar Example");
@@ -35,7 +35,7 @@ ExampleWindow::ExampleWindow()
   m_search_bar.connect_entry(m_entry);
 
   // Events
-  add_events(Gdk::KEY_PRESS_MASK);
+  add_events(Gdk::EventMask::KEY_PRESS_MASK);
 
   // Connect signals
   signal_key_press_event().connect(sigc::mem_fun(*this, &ExampleWindow::on_window_key_press));
@@ -48,7 +48,7 @@ ExampleWindow::ExampleWindow()
   m_close_button_switch.property_active().signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_show_close_button_changed));
 
   // Options panel layout:
-  m_options_grid.set_halign(Gtk::ALIGN_START);
+  m_options_grid.set_halign(Gtk::Align::START);
   m_options_grid.set_column_spacing(6);
   m_options_grid.attach(m_search_mode_label, 0, 0);
   m_options_grid.attach(m_search_mode_switch, 1, 0);
@@ -67,8 +67,8 @@ ExampleWindow::ExampleWindow()
   m_up_down_box.get_style_context()->add_class("linked");
 
   // Buttons
-  m_go_up_button.set_image_from_icon_name("go-up-symbolic", Gtk::ICON_SIZE_BUTTON, true);
-  m_go_down_button.set_image_from_icon_name("go-down-symbolic", Gtk::ICON_SIZE_BUTTON, true);
+  m_go_up_button.set_image_from_icon_name("go-up-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
+  m_go_down_button.set_image_from_icon_name("go-down-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
 
   m_vbox.pack_start(m_search_bar, Gtk::PACK_SHRINK, 6);
   m_vbox.pack_start(m_label, Gtk::PACK_SHRINK, 6);

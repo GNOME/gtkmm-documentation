@@ -18,7 +18,7 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_ButtonBox(Gtk::ORIENTATION_VERTICAL),
+: m_ButtonBox(Gtk::Orientation::VERTICAL),
   m_FontButton("Sans 10"),
   m_Button_Dialog("Choose Font")
 {
@@ -59,14 +59,14 @@ void ExampleWindow::on_button_dialog_clicked()
   //Handle the response:
   switch(result)
   {
-    case Gtk::RESPONSE_OK:
+    case static_cast<int>(Gtk::ResponseType::OK):
     {
       auto font_name = dialog.get_font();
       std::cout << "Font chosen: " << font_name << std::endl;
       m_FontButton.set_font_name(font_name);
       break;
     }
-    case Gtk::RESPONSE_CANCEL:
+    case static_cast<int>(Gtk::ResponseType::CANCEL):
     {
       std::cout << "Cancel clicked." << std::endl;
       break;

@@ -42,8 +42,8 @@ private:
       auto icon_theme = Gtk::IconTheme::get_for_screen(canvas->get_screen());
       int width = 0;
       int height = 0; //ignored
-      Gtk::IconSize::lookup(Gtk::ICON_SIZE_DIALOG, width, height);
-      this->m_pixbuf = icon_theme->load_icon(icon_name, width, Gtk::ICON_LOOKUP_GENERIC_FALLBACK);
+      Gtk::IconSize::lookup(Gtk::BuiltinIconSize::DIALOG, width, height);
+      this->m_pixbuf = icon_theme->load_icon(icon_name, width, Gtk::IconLookupFlags::GENERIC_FALLBACK);
       this->m_x = x;
       this->m_y = y;
     }

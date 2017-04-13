@@ -34,7 +34,7 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
   entry_            (nullptr),
   editing_canceled_ (false)
 {
-  Gtk::Box *const hbox = new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL);
+  Gtk::Box *const hbox = new Gtk::Box(Gtk::Orientation::HORIZONTAL);
   add(*Gtk::manage(hbox));
 
   entry_ = new Gtk::Entry();
@@ -43,10 +43,10 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
 
   button_ = new Gtk::Button();
   hbox->pack_start(*Gtk::manage(button_), Gtk::PACK_SHRINK);
-  button_->set_image_from_icon_name("pan-down-symbolic", Gtk::ICON_SIZE_BUTTON, true);
+  button_->set_image_from_icon_name("pan-down-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
 
   set_can_focus();
-  add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
+  add_events(Gdk::EventMask::KEY_PRESS_MASK | Gdk::EventMask::KEY_RELEASE_MASK);
 }
 
 PopupEntry::~PopupEntry()
@@ -80,12 +80,12 @@ bool PopupEntry::get_editing_canceled() const
 // static
 int PopupEntry::get_button_width()
 {
-  Gtk::Window window (Gtk::WINDOW_POPUP);
+  Gtk::Window window (Gtk::WindowType::POPUP);
 
   Gtk::Button *const button = new Gtk::Button();
   window.add(*Gtk::manage(button));
 
-  button->set_image_from_icon_name("pan-down-symbolic", Gtk::ICON_SIZE_BUTTON, true);
+  button->set_image_from_icon_name("pan-down-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
 
   // Urgh.  Hackish :/
   window.move(-500, -500);

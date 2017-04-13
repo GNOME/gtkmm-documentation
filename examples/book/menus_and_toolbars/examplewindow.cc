@@ -19,7 +19,7 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
-: m_Box(Gtk::ORIENTATION_VERTICAL)
+: m_Box(Gtk::Orientation::VERTICAL)
 {
   set_title("main_menu example");
   set_default_size(200, 200);

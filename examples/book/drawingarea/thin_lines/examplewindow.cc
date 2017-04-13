@@ -21,7 +21,7 @@ ExampleWindow::ExampleWindow()
 {
   set_title("Thin lines example");
 
-  m_Container.set_orientation(Gtk::ORIENTATION_HORIZONTAL);
+  m_Container.set_orientation(Gtk::Orientation::HORIZONTAL);
 
   m_Container.add(m_Area_Lines);
   m_Container.add(m_Button_FixLines);

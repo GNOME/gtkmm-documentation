@@ -26,24 +26,24 @@ struct SelectionModeStruct
 
 const SelectionModeStruct selectionModes[] =
 {
-  { Gtk::SELECTION_NONE,   "SELECTION_NONE" },
-  { Gtk::SELECTION_SINGLE, "SELECTION_SINGLE" },
-  { Gtk::SELECTION_BROWSE, "SELECTION_BROWSE" }
+  { Gtk::SelectionMode::NONE,   "SelectionMode::NONE" },
+  { Gtk::SelectionMode::SINGLE, "SelectionMode::SINGLE" },
+  { Gtk::SelectionMode::BROWSE, "SelectionMode::BROWSE" }
 };
 
 } // anonymous namespace
 
 ExampleWindow::ExampleWindow() :
-  m_HBox(Gtk::ORIENTATION_HORIZONTAL),
-  m_VBox1(Gtk::ORIENTATION_VERTICAL),
-  m_VBox2(Gtk::ORIENTATION_VERTICAL),
+  m_HBox(Gtk::Orientation::HORIZONTAL),
+  m_VBox1(Gtk::Orientation::VERTICAL),
+  m_VBox2(Gtk::Orientation::VERTICAL),
   m_ListBox(),
   m_ComboBox(/* has_entry= */ false),
   m_CheckButton_SingleClick("single click mode", /* mnemonic= */ false),
   m_ScrolledWindow(),
   m_Row3("blah3", 3),
-  m_VBox_Row(Gtk::ORIENTATION_VERTICAL),
-  m_HBox_Row(Gtk::ORIENTATION_HORIZONTAL),
+  m_VBox_Row(Gtk::Orientation::VERTICAL),
+  m_HBox_Row(Gtk::Orientation::HORIZONTAL),
   m_Label_Row("a check box"),
   m_CheckButton_Row1(),
   m_CheckButton_Row2(),
@@ -91,7 +91,7 @@ ExampleWindow::ExampleWindow() :
   m_VBox1.pack_start(m_CheckButton_SingleClick, Gtk::PACK_SHRINK);
 
   // Put the ListBox in a ScrolledWindow.
-  m_ScrolledWindow.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC);
+  m_ScrolledWindow.set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC);
   m_ScrolledWindow.add(m_ListBox);
   m_HBox.pack_start(m_ScrolledWindow, Gtk::PACK_SHRINK);
 
@@ -118,7 +118,7 @@ ExampleWindow::ExampleWindow() :
 
   row = Gtk::manage(new ExampleRow("", 0));
   m_Button_Row2.set_hexpand(false);
-  m_Button_Row2.set_halign(Gtk::ALIGN_START);
+  m_Button_Row2.set_halign(Gtk::Align::START);
   row->add(m_Button_Row2);
   m_ListBox.append(*row);
 
@@ -248,7 +248,7 @@ void ExampleWindow::update_header_func(Gtk::ListBoxRow* row, Gtk::ListBoxRow* be
     // Create header if needed.
     if (!row->get_header())
     {
-      auto hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL));
+      auto hbox = Gtk::manage(new Gtk::Box(Gtk::Orientation::HORIZONTAL));
       auto label = Gtk::manage(new Gtk::Label("Header"));
       hbox->pack_start(*label, Gtk::PACK_SHRINK);
       auto button = Gtk::manage(new Gtk::Button("button"));

@@ -18,7 +18,7 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_VBox(Gtk::ORIENTATION_VERTICAL),
+: m_VBox(Gtk::Orientation::VERTICAL),
   m_ListViewText(3),
   m_Button_Quit("Quit")
 {
@@ -32,14 +32,14 @@ ExampleWindow::ExampleWindow()
   m_ScrolledWindow.add(m_ListViewText);
 
   //Only show the scrollbars when they are necessary:
-  m_ScrolledWindow.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+  m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
   m_VBox.pack_start(m_ScrolledWindow);
   m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
 
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
   m_ButtonBox.set_margin(5);
-  m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
+  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
   m_Button_Quit.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_quit) );
 

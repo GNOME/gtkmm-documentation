@@ -47,7 +47,7 @@ void MyContainer::set_child_widgets(Gtk::Widget& child_one,
 // This example container is a simplified vertical Box with at most two children.
 Gtk::SizeRequestMode MyContainer::get_request_mode_vfunc() const
 {
-  return Gtk::SIZE_REQUEST_HEIGHT_FOR_WIDTH;
+  return Gtk::SizeRequestMode::HEIGHT_FOR_WIDTH;
 }
 
 // Discover the total amount of minimum space and natural space needed by
@@ -62,7 +62,7 @@ void MyContainer::measure_vfunc(Gtk::Orientation orientation, int for_size,
   int dummy_minimum_baseline = 0;
   int dummy_natural_baseline = 0;
 
-  if (orientation == Gtk::ORIENTATION_HORIZONTAL)
+  if (orientation == Gtk::Orientation::HORIZONTAL)
   {
     int height_per_child = for_size;
 
@@ -96,7 +96,7 @@ void MyContainer::measure_vfunc(Gtk::Orientation orientation, int for_size,
     minimum = std::max(child_minimum_width[0], child_minimum_width[1]);
     natural = std::max(child_natural_width[0], child_natural_width[1]);
   }
-  else // Gtk::ORIENTATION_VERTICAL
+  else // Gtk::Orientation::VERTICAL
   {
     int child_minimum_height[2] = {0, 0};
     int child_natural_height[2] = {0, 0};

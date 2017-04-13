@@ -31,7 +31,7 @@ bool grab_on_window(const Glib::RefPtr<Gdk::Window>& window)
   {
     auto seat = device->get_seat();
     if (seat &&
-        seat->grab(window, Gdk::SEAT_CAPABILITY_ALL, true) == Gdk::GRAB_SUCCESS)
+        seat->grab(window, Gdk::SeatCapabilities::ALL, true) == Gdk::GrabStatus::SUCCESS)
       return true;
   }
 
@@ -46,7 +46,7 @@ CellRendererPopup::CellRendererPopup()
   Glib::ObjectBase      (typeid(CellRendererPopup)),
   Gtk::CellRendererText (),
   button_width_         (-1),
-  popup_window_         (Gtk::WINDOW_POPUP),
+  popup_window_         (Gtk::WindowType::POPUP),
   focus_widget_         (nullptr),
   popup_entry_          (nullptr),
   shown_                (false),

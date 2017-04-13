@@ -18,7 +18,7 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_VBox(Gtk::ORIENTATION_VERTICAL),
+: m_VBox(Gtk::Orientation::VERTICAL),
   m_Button_Close("_Close", true)
 {
   set_title("Gtk::Toolbar example");
@@ -30,7 +30,7 @@ ExampleWindow::ExampleWindow()
   //Put a toolbar at the top, and a button underneath:
   m_VBox.pack_start(m_Toolbar, Gtk::PACK_SHRINK);
   m_ButtonBox.set_margin(5);
-  m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
+  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
   m_VBox.pack_end(m_ButtonBox, Gtk::PACK_SHRINK);
 
   m_ButtonBox.pack_start(m_Button_Close, Gtk::PACK_SHRINK);
@@ -44,7 +44,7 @@ ExampleWindow::ExampleWindow()
     //toolbars together, because toolbar items should just be a way to do what
     //is also in a menu.
 
-    m_Toolbar.set_toolbar_style(Gtk::TOOLBAR_BOTH);
+    m_Toolbar.set_toolbar_style(Gtk::ToolbarStyle::BOTH);
 
     auto item = Gtk::manage(new Gtk::ToolButton("Click me"));
     //item.set_tooltips(*tooltips, "Toolbar item");

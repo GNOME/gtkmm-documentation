@@ -18,7 +18,7 @@
 
 MessageText::MessageText()
 {
-  set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+  set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
   add(m_TextView);
   insert_text();

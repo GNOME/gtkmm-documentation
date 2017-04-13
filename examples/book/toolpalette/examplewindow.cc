@@ -30,7 +30,7 @@ void ExampleWindow::load_icon_items()
 
   int requested_icon_size = 0;
   int requested_icon_height = 0; //ignored
-  Gtk::IconSize::lookup(Gtk::ICON_SIZE_BUTTON, requested_icon_size, requested_icon_height);
+  Gtk::IconSize::lookup(Gtk::BuiltinIconSize::BUTTON, requested_icon_size, requested_icon_height);
   const guint max_icons_per_group = 10;
 
   for (auto iter = contexts.begin(); iter != contexts.end(); ++iter)
@@ -50,7 +50,7 @@ void ExampleWindow::load_icon_items()
       Glib::RefPtr<Gdk::Pixbuf> pixbuf;
       try
       {
-        pixbuf = icon_theme->load_icon(icon_name, requested_icon_size, Gtk::ICON_LOOKUP_GENERIC_FALLBACK);
+        pixbuf = icon_theme->load_icon(icon_name, requested_icon_size, Gtk::IconLookupFlags::GENERIC_FALLBACK);
       }
       catch (const Gtk::IconThemeError& /* ex */)
       {
@@ -179,8 +179,8 @@ void ExampleWindow::load_special_items()
 }
 
 ExampleWindow::ExampleWindow()
-: m_VBox(Gtk::ORIENTATION_VERTICAL, 6),
-  m_HBox(Gtk::ORIENTATION_HORIZONTAL, 6)
+: m_VBox(Gtk::Orientation::VERTICAL, 6),
+  m_HBox(Gtk::Orientation::HORIZONTAL, 6)
 {
   set_title("Gtk::ToolPalette example");
   set_size_request(600, 600);
@@ -192,10 +192,10 @@ ExampleWindow::ExampleWindow()
   m_refTreeModelOrientation = Gtk::ListStore::create(m_ColumnsOrientation);
   auto iter = m_refTreeModelOrientation->append();
   auto row = *iter;
-  row[m_ColumnsOrientation.m_col_value] = Gtk::ORIENTATION_HORIZONTAL;
+  row[m_ColumnsOrientation.m_col_value] = Gtk::Orientation::HORIZONTAL;
   row[m_ColumnsOrientation.m_col_name] = "Horizontal";\
   row = *(m_refTreeModelOrientation->append());
-  row[m_ColumnsOrientation.m_col_value] = Gtk::ORIENTATION_VERTICAL;
+  row[m_ColumnsOrientation.m_col_value] = Gtk::Orientation::VERTICAL;
   row[m_ColumnsOrientation.m_col_name] = "Vertical";
   m_ComboOrientation.set_model(m_refTreeModelOrientation);
   m_VBox.pack_start(m_ComboOrientation, Gtk::PACK_SHRINK);
@@ -208,16 +208,16 @@ ExampleWindow::ExampleWindow()
   m_refTreeModelStyle = Gtk::ListStore::create(m_ColumnsStyle);
   iter = m_refTreeModelStyle->append();
   row = *iter;
-  row[m_ColumnsStyle.m_col_value] = Gtk::TOOLBAR_TEXT;
+  row[m_ColumnsStyle.m_col_value] = static_cast<int>(Gtk::ToolbarStyle::TEXT);
   row[m_ColumnsStyle.m_col_name] = "Text";\
   row = *(m_refTreeModelStyle->append());
-  row[m_ColumnsStyle.m_col_value] = Gtk::TOOLBAR_BOTH;
+  row[m_ColumnsStyle.m_col_value] = static_cast<int>(Gtk::ToolbarStyle::BOTH);
   row[m_ColumnsStyle.m_col_name] = "Both";
   row = *(m_refTreeModelStyle->append());
-  row[m_ColumnsStyle.m_col_value] = Gtk::TOOLBAR_BOTH_HORIZ;
+  row[m_ColumnsStyle.m_col_value] = static_cast<int>(Gtk::ToolbarStyle::BOTH_HORIZ);
   row[m_ColumnsStyle.m_col_name] = "Both: Horizontal";
   row = *(m_refTreeModelStyle->append());
-  row[m_ColumnsStyle.m_col_value] = Gtk::TOOLBAR_ICONS;
+  row[m_ColumnsStyle.m_col_value] = static_cast<int>(Gtk::ToolbarStyle::ICONS);
   row[m_ColumnsStyle.m_col_name] = "Icons";
   row = *(m_refTreeModelStyle->append());
   row[m_ColumnsStyle.m_col_value] = -1; // A custom meaning for this demo.
@@ -236,21 +236,21 @@ ExampleWindow::ExampleWindow()
 
   m_VBox.pack_start(m_HBox, Gtk::PACK_EXPAND_WIDGET);
 
-  m_ScrolledWindowPalette.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC);
+  m_ScrolledWindowPalette.set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC);
   m_ScrolledWindowPalette.set_margin(6);
   m_ScrolledWindowPalette.add(m_ToolPalette);
   m_HBox.pack_start(m_ScrolledWindowPalette);
 
   on_combo_orientation_changed();
 
-  m_ScrolledWindowCanvas.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_ALWAYS);
+  m_ScrolledWindowCanvas.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::ALWAYS);
   m_ScrolledWindowCanvas.set_margin(6);
   m_ScrolledWindowCanvas.add(m_Canvas);
   m_ScrolledWindowCanvas.set_size_request(200, -1);
   m_HBox.pack_start(m_ScrolledWindowCanvas);
 
   m_ToolPalette.add_drag_dest(m_Canvas,
-    Gtk::DEST_DEFAULT_HIGHLIGHT, Gtk::TOOL_PALETTE_DRAG_ITEMS, Gdk::ACTION_COPY);
+    Gtk::DestDefaults::HIGHLIGHT, Gtk::ToolPaletteDragTargets::ITEMS, Gdk::DragAction::COPY);
 }
 
 ExampleWindow::~ExampleWindow()
@@ -268,10 +268,10 @@ void ExampleWindow::on_combo_orientation_changed()
 
   m_ToolPalette.set_orientation(value);
 
-  if(value == Gtk::ORIENTATION_HORIZONTAL)
-    m_ScrolledWindowPalette.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_NEVER);
+  if(value == Gtk::Orientation::HORIZONTAL)
+    m_ScrolledWindowPalette.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::NEVER);
   else
-    m_ScrolledWindowPalette.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC);
+    m_ScrolledWindowPalette.set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC);
 }
 
 void ExampleWindow::on_combo_style_changed()

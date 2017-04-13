@@ -25,13 +25,13 @@ ArrowButton::ArrowButton(Gtk::ArrowType arrow_type)
   Glib::ustring icon_name;
   switch (arrow_type)
   {
-    case Gtk::ARROW_UP:    icon_name = "pan-up-symbolic"; break;
-    case Gtk::ARROW_DOWN:  icon_name = "pan-down-symbolic"; break;
-    case Gtk::ARROW_LEFT:  icon_name = "pan-start-symbolic"; break;
-    case Gtk::ARROW_RIGHT: icon_name = "pan-end-symbolic"; break;
-    default:               icon_name = "dialog-question"; break;
+    case Gtk::ArrowType::UP:    icon_name = "pan-up-symbolic"; break;
+    case Gtk::ArrowType::DOWN:  icon_name = "pan-down-symbolic"; break;
+    case Gtk::ArrowType::LEFT:  icon_name = "pan-start-symbolic"; break;
+    case Gtk::ArrowType::RIGHT: icon_name = "pan-end-symbolic"; break;
+    default:                    icon_name = "dialog-question"; break;
   }
-  set_image_from_icon_name(icon_name, Gtk::ICON_SIZE_BUTTON, true);
+  set_image_from_icon_name(icon_name, Gtk::BuiltinIconSize::BUTTON, true);
 }
 
 ArrowButton::~ArrowButton()
@@ -61,16 +61,16 @@ AppWindow::AppWindow()
   grid->set_margin(12);
 
   /* Pack and show all our widgets */
-  button = Gtk::manage (new ArrowButton (Gtk::ARROW_UP));
+  button = Gtk::manage(new ArrowButton(Gtk::ArrowType::UP));
   grid->attach (*button, 1, 0);
 
-  button = Gtk::manage (new ArrowButton (Gtk::ARROW_LEFT));
+  button = Gtk::manage(new ArrowButton(Gtk::ArrowType::LEFT));
   grid->attach (*button, 0, 1);
 
-  button = Gtk::manage (new ArrowButton (Gtk::ARROW_RIGHT));
+  button = Gtk::manage(new ArrowButton(Gtk::ArrowType::RIGHT));
   grid->attach (*button, 2, 1);
 
-  button = Gtk::manage (new ArrowButton (Gtk::ARROW_DOWN));
+  button = Gtk::manage(new ArrowButton(Gtk::ArrowType::DOWN));
   grid->attach (*button, 1, 2);
 
   grid->set_row_spacing(5);

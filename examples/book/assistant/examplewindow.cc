@@ -19,8 +19,8 @@
 
 ExampleWindow::ExampleWindow()
 : m_button("Show the assistant"),
-  m_label1("State of assistant checkbutton:", Gtk::ALIGN_START, Gtk::ALIGN_CENTER),
-  m_label2("Contents of assistant entry:", Gtk::ALIGN_START, Gtk::ALIGN_CENTER)
+  m_label1("State of assistant checkbutton:", Gtk::Align::START, Gtk::Align::CENTER),
+  m_label2("Contents of assistant entry:", Gtk::Align::START, Gtk::Align::CENTER)
 {
   set_title("Gtk::Assistant example");
 
@@ -30,14 +30,14 @@ ExampleWindow::ExampleWindow()
 
   m_grid.attach(m_button, 0, 0, 2, 1);
   m_button.set_hexpand(true);
-  m_button.set_valign(Gtk::ALIGN_CENTER);
+  m_button.set_valign(Gtk::Align::CENTER);
 
   m_grid.attach(m_label1, 0, 1, 1, 1);
 
   m_grid.attach(m_label2, 0, 2, 1, 1);
 
   m_grid.attach(m_check, 1, 1, 1, 1);
-  m_check.set_halign(Gtk::ALIGN_START);
+  m_check.set_halign(Gtk::Align::START);
 
   m_grid.attach(m_entry, 1, 2, 1, 1);
   m_entry.set_hexpand(true);

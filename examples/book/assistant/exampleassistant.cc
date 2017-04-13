@@ -18,7 +18,7 @@
 #include "exampleassistant.h"
 
 ExampleAssistant::ExampleAssistant()
-: m_box(Gtk::ORIENTATION_HORIZONTAL, 12),
+: m_box(Gtk::Orientation::HORIZONTAL, 12),
   m_label1("Type text to allow the assistant to continue:"),
   m_label2("Confirmation page"),
   m_check("Optional extra information")
@@ -40,8 +40,8 @@ ExampleAssistant::ExampleAssistant()
   set_page_complete(m_check, true);
   set_page_complete(m_label2, true);
 
-  set_page_type(m_box, Gtk::ASSISTANT_PAGE_INTRO);
-  set_page_type(m_label2, Gtk::ASSISTANT_PAGE_CONFIRM);
+  set_page_type(m_box, Gtk::AssistantPageType::INTRO);
+  set_page_type(m_label2, Gtk::AssistantPageType::CONFIRM);
 
   signal_apply().connect(sigc::mem_fun(*this,
     &ExampleAssistant::on_assistant_apply));

@@ -8,8 +8,6 @@
 #include <gtkmm/button.h>
 
 
-
-
 namespace
 {
 
@@ -98,7 +96,7 @@ int main(int argc, char** argv)
   Gtk::Window window;
   window.set_title("Exception Handlers");
 
-  Gtk::Box *const box = new Gtk::Box(Gtk::ORIENTATION_VERTICAL, 5);
+  Gtk::Box *const box = new Gtk::Box(Gtk::Orientation::VERTICAL, 5);
   box->set_margin(10);
   window.add(*Gtk::manage(box));
 

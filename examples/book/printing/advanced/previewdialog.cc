@@ -27,7 +27,7 @@ PreviewDialog::PreviewDialog(
 : m_pOperation(pfo),
   m_refPreview(preview),
   m_refPrintContext(print_ctx),
-  m_VBox(Gtk::ORIENTATION_VERTICAL),
+  m_VBox(Gtk::Orientation::VERTICAL),
   m_SpinAdjustment( Gtk::Adjustment::create(1, 100, 1) ), //Used to construct m_PageSpin
   m_PageSpin(m_SpinAdjustment, 1, 0),
   m_CloseButton("_Close", true),
@@ -127,8 +127,8 @@ void PreviewDialog::on_popreview_got_page_size(
 {
   const auto paper_size = page_setup->get_paper_size();
 
-  const double width = paper_size.get_width(Gtk::UNIT_INCH);
-  const double height = paper_size.get_height(Gtk::UNIT_INCH);
+  const double width = paper_size.get_width(Gtk::Unit::INCH);
+  const double height = paper_size.get_height(Gtk::Unit::INCH);
 
   if(m_DrawingArea.get_realized()) //Avoid getting an odd allocation.
   {

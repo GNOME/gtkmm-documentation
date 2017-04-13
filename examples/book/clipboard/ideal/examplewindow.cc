@@ -28,7 +28,7 @@ const char example_target_text[]   = "UTF8_STRING";
 
 
 ExampleWindow::ExampleWindow()
-: m_VBox(Gtk::ORIENTATION_VERTICAL),
+: m_VBox(Gtk::Orientation::VERTICAL),
   m_Label("Select cells in the grid, click Copy, then open a second instance "
           "of this example to try pasting the copied data.\nOr try pasting the "
           "text representation into gedit."),
@@ -56,7 +56,7 @@ ExampleWindow::ExampleWindow()
   m_VBox.set_spacing(6);
 
   //Fill ButtonBox:
-  m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
+  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
   m_ButtonBox.pack_start(m_Button_Copy, Gtk::PACK_SHRINK);
   m_Button_Copy.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_copy) );

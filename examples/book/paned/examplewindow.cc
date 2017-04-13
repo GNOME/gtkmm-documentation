@@ -17,7 +17,7 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_VPaned(Gtk::ORIENTATION_VERTICAL)
+: m_VPaned(Gtk::Orientation::VERTICAL)
 {
   set_title ("Paned Windows");
   set_default_size(450, 400);

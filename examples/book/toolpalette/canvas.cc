@@ -87,7 +87,7 @@ bool Canvas::on_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context,
     m_drop_item->m_y = y;
 
     queue_draw();
-    context->drag_status(Gdk::ACTION_COPY, time);
+    context->drag_status(Gdk::DragAction::COPY, time);
   }
   else
   {
@@ -150,7 +150,7 @@ void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context
       // rather than due to a request in drag_drop, so we are just
       // supposed to call gdk_drag_status (), not actually paste in
       // the data.
-      context->drag_status(Gdk::ACTION_COPY, time);
+      context->drag_status(Gdk::DragAction::COPY, time);
     }
 
     queue_draw();

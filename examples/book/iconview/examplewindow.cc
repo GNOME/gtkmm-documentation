@@ -37,7 +37,7 @@ namespace
 }
 
 ExampleWindow::ExampleWindow()
-: m_VBox(Gtk::ORIENTATION_VERTICAL),
+: m_VBox(Gtk::Orientation::VERTICAL),
   m_Button_Quit("Quit")
 {
   set_title("Gtk::IconView (ListStore + TreeModelSort) example");
@@ -50,20 +50,20 @@ ExampleWindow::ExampleWindow()
   m_ScrolledWindow.add(m_IconView);
 
   // Only show the scrollbars when they are necessary:
-  m_ScrolledWindow.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+  m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
   m_VBox.pack_start(m_ScrolledWindow);
   m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
 
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
   m_ButtonBox.set_margin(6);
-  m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
+  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
   m_Button_Quit.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_quit) );
 
   // Create the Tree model:
   m_refListModel = Gtk::ListStore::create( m_Columns );
-  m_refListModel->set_sort_column( m_Columns.m_col_description, Gtk::SORT_ASCENDING );
+  m_refListModel->set_sort_column( m_Columns.m_col_description, Gtk::SortType::ASCENDING );
 
   m_IconView.set_model(m_refListModel);
   m_IconView.set_markup_column(m_Columns.m_col_description);

@@ -19,9 +19,9 @@
 
 ExampleWindow::ExampleWindow()
 :
-  m_HBox(Gtk::ORIENTATION_HORIZONTAL, 5),
-  m_VBox(Gtk::ORIENTATION_VERTICAL, 5),
-  m_VBox2(Gtk::ORIENTATION_VERTICAL, 5),
+  m_HBox(Gtk::Orientation::HORIZONTAL, 5),
+  m_VBox(Gtk::Orientation::VERTICAL, 5),
+  m_VBox2(Gtk::Orientation::VERTICAL, 5),
   m_Frame_Normal("Normal Label"),
   m_Frame_Multi("Multi-line Label"),
   m_Frame_Left("Left Justified Label"),
@@ -49,11 +49,11 @@ ExampleWindow::ExampleWindow()
   m_Frame_Multi.add(m_Label_Multi);
   m_VBox.pack_start(m_Frame_Multi, Gtk::PACK_SHRINK);
 
-  m_Label_Left.set_justify(Gtk::JUSTIFY_LEFT);
+  m_Label_Left.set_justify(Gtk::Justification::LEFT);
   m_Frame_Left.add(m_Label_Left);
   m_VBox.pack_start(m_Frame_Left, Gtk::PACK_SHRINK);
 
-  m_Label_Right.set_justify(Gtk::JUSTIFY_RIGHT);
+  m_Label_Right.set_justify(Gtk::Justification::RIGHT);
   m_Frame_Right.add(m_Label_Right);
   m_VBox.pack_start(m_Frame_Right, Gtk::PACK_SHRINK);
 
@@ -86,12 +86,12 @@ ExampleWindow::ExampleWindow()
           "    This is another newer, longer, better "
           "paragraph.  It is coming to an end, "
           "unfortunately.");
-  m_Label_FilledWrapped.set_justify(Gtk::JUSTIFY_FILL);
+  m_Label_FilledWrapped.set_justify(Gtk::Justification::FILL);
   m_Label_FilledWrapped.set_line_wrap();
   m_Frame_FilledWrapped.add(m_Label_FilledWrapped);
   m_VBox2.pack_start(m_Frame_FilledWrapped, Gtk::PACK_SHRINK);
 
-  m_Label_Underlined.set_justify(Gtk::JUSTIFY_LEFT);
+  m_Label_Underlined.set_justify(Gtk::Justification::LEFT);
   m_Label_Underlined.set_pattern (
           "_________________________ _ _________ _ ______"
           "     __ _______ ___");

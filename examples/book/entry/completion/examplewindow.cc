@@ -18,7 +18,7 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_VBox(Gtk::ORIENTATION_VERTICAL),
+: m_VBox(Gtk::Orientation::VERTICAL),
   m_Label("Press a or b to see a list of possible completions and actions."),
   m_Button_Close("Close")
 {

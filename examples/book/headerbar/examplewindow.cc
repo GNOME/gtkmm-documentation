@@ -17,15 +17,15 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
- : m_close_button_label("Show close button:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER),
-   m_title_label("Title:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER),
-   m_subtitle_label("Subtitle:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER)
+ : m_close_button_label("Show close button:", Gtk::Align::END, Gtk::Align::CENTER),
+   m_title_label("Title:", Gtk::Align::END, Gtk::Align::CENTER),
+   m_subtitle_label("Subtitle:", Gtk::Align::END, Gtk::Align::CENTER)
 {
   // Window properties
   set_title("HeaderBar Example");
 
   // Button
-  m_button.set_image_from_icon_name("go-home-symbolic", Gtk::ICON_SIZE_BUTTON, true);
+  m_button.set_image_from_icon_name("go-home-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
   m_button.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_button_clicked));
 
   // Entries

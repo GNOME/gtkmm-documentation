@@ -29,7 +29,7 @@ static goffset get_size_recursively(const Glib::RefPtr<Gio::File>& file)
   try
   {
     auto info = file->query_info();
-    if(info->get_file_type() == Gio::FILE_TYPE_DIRECTORY)
+    if(info->get_file_type() == Gio::FileType::DIRECTORY)
     {
       auto children = file->enumerate_children();
       Glib::RefPtr<Gio::FileInfo> child_info;

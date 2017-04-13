@@ -17,12 +17,12 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_vbox(Gtk::ORIENTATION_VERTICAL),
+: m_vbox(Gtk::Orientation::VERTICAL),
   m_label("A child widget."),
-  m_transition_type_label("Transition type:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER),
+  m_transition_type_label("Transition type:", Gtk::Align::END, Gtk::Align::CENTER),
   m_transition_duration(1.0, 0),
-  m_transition_duration_label("Duration (in ms):", Gtk::ALIGN_END, Gtk::ALIGN_CENTER),
-  m_switch_label("Reveal child:", Gtk::ALIGN_END, Gtk::ALIGN_CENTER)
+  m_transition_duration_label("Duration (in ms):", Gtk::Align::END, Gtk::Align::CENTER),
+  m_switch_label("Reveal child:", Gtk::Align::END, Gtk::Align::CENTER)
 {
   // Window properties
   set_title("Revealer Example");
@@ -88,29 +88,29 @@ void ExampleWindow::on_switch_active_changed()
 
 Gtk::RevealerTransitionType ExampleWindow::get_selected_transition_type()
 {
-  auto transition_type = Gtk::REVEALER_TRANSITION_TYPE_NONE;
+  auto transition_type = Gtk::RevealerTransitionType::NONE;
   const int active_row = m_transition_type.get_active_row_number();
 
   switch (active_row)
   {
     case 0:
     default:
-      transition_type = Gtk::REVEALER_TRANSITION_TYPE_NONE;
+      transition_type = Gtk::RevealerTransitionType::NONE;
       break;
     case 1:
-      transition_type = Gtk::REVEALER_TRANSITION_TYPE_CROSSFADE;
+      transition_type = Gtk::RevealerTransitionType::CROSSFADE;
       break;
     case 2:
-      transition_type = Gtk::REVEALER_TRANSITION_TYPE_SLIDE_RIGHT;
+      transition_type = Gtk::RevealerTransitionType::SLIDE_RIGHT;
       break;
     case 3:
-      transition_type = Gtk::REVEALER_TRANSITION_TYPE_SLIDE_LEFT;
+      transition_type = Gtk::RevealerTransitionType::SLIDE_LEFT;
       break;
     case 4:
-      transition_type = Gtk::REVEALER_TRANSITION_TYPE_SLIDE_UP;
+      transition_type = Gtk::RevealerTransitionType::SLIDE_UP;
       break;
     case 5:
-      transition_type = Gtk::REVEALER_TRANSITION_TYPE_SLIDE_DOWN;
+      transition_type = Gtk::RevealerTransitionType::SLIDE_DOWN;
       break;
   }
 

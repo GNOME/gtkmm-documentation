@@ -72,7 +72,7 @@ void MyArea::draw_text(const Cairo::RefPtr<Cairo::Context>& cr,
   Pango::FontDescription font;
 
   font.set_family("Monospace");
-  font.set_weight(Pango::WEIGHT_BOLD);
+  font.set_weight(Pango::Weight::BOLD);
 
   // http://developer.gnome.org/pangomm/unstable/classPango_1_1Layout.html
   auto layout = create_pango_layout("Hi there!");

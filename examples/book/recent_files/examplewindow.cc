@@ -18,7 +18,7 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
-: m_Box(Gtk::ORIENTATION_VERTICAL),
+: m_Box(Gtk::Orientation::VERTICAL),
   m_refRecentManager(Gtk::RecentManager::get_default())
 {
   set_title("recent files example");
@@ -156,12 +156,12 @@ void ExampleWindow::on_menu_file_quit()
 void ExampleWindow::on_menu_file_recent_files_dialog()
 {
   Gtk::RecentChooserDialog dialog(*this, "Recent Files", m_refRecentManager);
-  dialog.add_button("Select File", Gtk::RESPONSE_OK);
-  dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
+  dialog.add_button("Select File", Gtk::ResponseType::OK);
+  dialog.add_button("_Cancel", Gtk::ResponseType::CANCEL);
 
   const int response = dialog.run();
   dialog.hide();
-  if(response == Gtk::RESPONSE_OK)
+  if(response == Gtk::ResponseType::OK)
   {
     std::cout << "URI selected = " << dialog.get_current_uri() << std::endl;
   }

@@ -18,7 +18,7 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_Box(Gtk::ORIENTATION_VERTICAL),
+: m_Box(Gtk::Orientation::VERTICAL),
   m_Label("Right-click to see the popup menu."),
   m_pMenuPopup(nullptr)
 {

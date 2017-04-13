@@ -18,10 +18,10 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_VBox(Gtk::ORIENTATION_VERTICAL),
+: m_VBox(Gtk::Orientation::VERTICAL),
   m_Label("The AboutDialog is non-modal. "
     "You can select parts of this text while the AboutDialog is shown."),
-  m_ButtonBox(Gtk::ORIENTATION_VERTICAL),
+  m_ButtonBox(Gtk::Orientation::VERTICAL),
   m_Button("Show AboutDialog")
 {
   set_title("Gtk::AboutDialog example");
@@ -63,22 +63,21 @@ ExampleWindow::ExampleWindow()
 
 ExampleWindow::~ExampleWindow()
 {
-
 }
 
 void ExampleWindow::on_about_dialog_response(int response_id)
 {
   std::cout << response_id
-    << ", close=" << Gtk::RESPONSE_CLOSE
-    << ", cancel=" << Gtk::RESPONSE_CANCEL
-    << ", delete_event=" << Gtk::RESPONSE_DELETE_EVENT
+    << ", close=" << static_cast<int>(Gtk::ResponseType::CLOSE)
+    << ", cancel=" << static_cast<int>(Gtk::ResponseType::CANCEL)
+    << ", delete_event=" << static_cast<int>(Gtk::ResponseType::DELETE_EVENT)
     << std::endl;
 
   switch (response_id)
   {
-  case Gtk::RESPONSE_CLOSE:
-  case Gtk::RESPONSE_CANCEL:
-  case Gtk::RESPONSE_DELETE_EVENT:
+  case static_cast<int>(Gtk::ResponseType::CLOSE):
+  case static_cast<int>(Gtk::ResponseType::CANCEL):
+  case static_cast<int>(Gtk::ResponseType::DELETE_EVENT):
     m_Dialog.hide();
     break;
   default:

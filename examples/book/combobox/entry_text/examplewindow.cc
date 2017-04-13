@@ -38,7 +38,7 @@ ExampleWindow::ExampleWindow()
   if (entry)
   {
     // The Entry shall receive focus-out events.
-    entry->add_events(Gdk::FOCUS_CHANGE_MASK);
+    entry->add_events(Gdk::EventMask::FOCUS_CHANGE_MASK);
     entry->signal_activate().connect(sigc::mem_fun(*this,
       &ExampleWindow::on_entry_activate) );
     m_ConnectionFocusOut = entry->signal_focus_out_event().

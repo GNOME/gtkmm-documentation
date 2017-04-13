@@ -18,7 +18,7 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_button(Gtk::ICON_SIZE_BUTTON, 0.0, 100.0, 10.0)
+: m_button(Gtk::BuiltinIconSize::BUTTON, 0.0, 100.0, 10.0)
 {
   //Make the window big enough to show the popup scale from the GtkVolumeButton.
   //Otherwise it will be truncated.
@@ -38,8 +38,8 @@ ExampleWindow::ExampleWindow()
   m_grid.set_hexpand(true);
 
   m_grid.attach(m_button, 1, 1, 1, 1);
-  m_button.set_valign(Gtk::ALIGN_END);
-  m_button.set_halign(Gtk::ALIGN_END);
+  m_button.set_valign(Gtk::Align::END);
+  m_button.set_halign(Gtk::Align::END);
 
   m_button.set_value(30.0);
   m_button.signal_value_changed().connect(

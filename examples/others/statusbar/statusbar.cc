@@ -26,7 +26,7 @@ protected:
 StatusBarExample::StatusBarExample()
 :
   m_count(1),
-  m_vbox(Gtk::ORIENTATION_VERTICAL, 1),
+  m_vbox(Gtk::Orientation::VERTICAL, 1),
   m_bPush("push item"),
   m_bPop("pop last item")
 {

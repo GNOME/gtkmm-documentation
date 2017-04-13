@@ -18,9 +18,9 @@
 
 
 RadioButtons::RadioButtons() :
-  m_Box_Top(Gtk::ORIENTATION_VERTICAL),
-  m_Box1(Gtk::ORIENTATION_VERTICAL, 10),
-  m_Box2(Gtk::ORIENTATION_VERTICAL, 10),
+  m_Box_Top(Gtk::Orientation::VERTICAL),
+  m_Box1(Gtk::Orientation::VERTICAL, 10),
+  m_Box2(Gtk::Orientation::VERTICAL, 10),
   m_RadioButton1("button1"),
   m_RadioButton2("button2"),
   m_RadioButton3("button3"),

@@ -18,7 +18,7 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_VBox(Gtk::ORIENTATION_VERTICAL, 5),
+: m_VBox(Gtk::Orientation::VERTICAL, 5),
   m_Button_Dialog("Choose Color")
 {
   set_title("Gtk::ColorChooserDialog example");
@@ -68,14 +68,14 @@ void ExampleWindow::on_button_dialog_clicked()
   //Handle the response:
   switch(result)
   {
-    case Gtk::RESPONSE_OK:
+    case static_cast<int>(Gtk::ResponseType::OK):
     {
       //Store the chosen color:
       m_Color = dialog.get_rgba();
       m_ColorButton.set_rgba(m_Color);
       break;
     }
-    case Gtk::RESPONSE_CANCEL:
+    case static_cast<int>(Gtk::ResponseType::CANCEL):
     {
       std::cout << "Cancel clicked." << std::endl;
       break;

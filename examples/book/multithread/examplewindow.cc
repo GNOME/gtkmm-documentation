@@ -17,8 +17,8 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow() :
-  m_VBox(Gtk::ORIENTATION_VERTICAL, 5),
-  m_ButtonBox(Gtk::ORIENTATION_HORIZONTAL),
+  m_VBox(Gtk::Orientation::VERTICAL, 5),
+  m_ButtonBox(Gtk::Orientation::HORIZONTAL),
   m_ButtonStart("Start work"),
   m_ButtonStop("Stop work"),
   m_ButtonQuit("_Quit", /* mnemonic= */ true),
@@ -45,7 +45,7 @@ ExampleWindow::ExampleWindow() :
   m_ScrolledWindow.add(m_TextView);
 
   // Only show the scrollbars when they are necessary.
-  m_ScrolledWindow.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+  m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
   m_VBox.pack_start(m_ScrolledWindow);
 
@@ -59,7 +59,7 @@ ExampleWindow::ExampleWindow() :
   m_ButtonBox.pack_start(m_ButtonQuit, Gtk::PACK_SHRINK);
   m_ButtonBox.set_margin(5);
   m_ButtonBox.set_spacing(5);
-  m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
+  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
 
   // Connect the signal handlers to the buttons.
   m_ButtonStart.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_start_button_clicked));

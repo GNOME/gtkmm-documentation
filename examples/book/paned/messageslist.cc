@@ -20,7 +20,7 @@
 MessagesList::MessagesList()
 {
   /* Create a new scrolled window, with scrollbars only if needed */
-  set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+  set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
   add(m_TreeView);
 

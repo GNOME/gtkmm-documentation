@@ -50,14 +50,14 @@ CellRendererList::CellRendererList()
       sigc::mem_fun(*this, &Self::on_tree_view_button_release_event));
 
   const auto selection = tree_view_.get_selection();
-  selection->set_mode(Gtk::SELECTION_BROWSE);
+  selection->set_mode(Gtk::SelectionMode::BROWSE);
   selection->signal_changed().connect(sigc::mem_fun(*this, &Self::on_tree_selection_changed));
 
   Gtk::Frame *const frame = new Gtk::Frame();
   get_popup_window()->add(*Gtk::manage(frame));
 
   frame->add(tree_view_);
-  frame->set_shadow_type(Gtk::SHADOW_OUT);
+  frame->set_shadow_type(Gtk::ShadowType::OUT);
 
   set_focus_widget(tree_view_);
 }

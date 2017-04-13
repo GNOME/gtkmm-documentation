@@ -41,25 +41,25 @@ on_directory_changed(const Glib::RefPtr<Gio::File>& file,
 
   switch(event)
   {
-    case Gio::FILE_MONITOR_EVENT_CHANGED:
+    case Gio::FileMonitorEvent::CHANGED:
       std::cout << "Event: A file is being changed" << std::endl;
       break;
-    case Gio::FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
+    case Gio::FileMonitorEvent::CHANGES_DONE_HINT:
       std::cout << "Event: File changes are done" << std::endl;
       break;
-    case Gio::FILE_MONITOR_EVENT_DELETED:
+    case Gio::FileMonitorEvent::DELETED:
       std::cout << "Event: A file was deleted" << std::endl;
       break;
-    case Gio::FILE_MONITOR_EVENT_CREATED:
+    case Gio::FileMonitorEvent::CREATED:
       std::cout << "Event: A file was created" << std::endl;
       break;
-    case Gio::FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED:
+    case Gio::FileMonitorEvent::ATTRIBUTE_CHANGED:
       std::cout << "Event: A file attribute was changed" << std::endl;
       break;
-    case Gio::FILE_MONITOR_EVENT_PRE_UNMOUNT:
+    case Gio::FileMonitorEvent::PRE_UNMOUNT:
       std::cout << "Event: pre-unmount event" << std::endl;
       break;
-    case Gio::FILE_MONITOR_EVENT_UNMOUNTED:
+    case Gio::FileMonitorEvent::UNMOUNTED:
       std::cout << "Event: unmounted" << std::endl;
       break;
     default:

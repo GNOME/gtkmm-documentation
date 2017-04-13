@@ -23,7 +23,7 @@
 const Glib::ustring app_title = "gtkmm Printing Example";
 
 ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
-: m_VBox(Gtk::ORIENTATION_VERTICAL),
+: m_VBox(Gtk::Orientation::VERTICAL),
   m_NameLabel("Name"),
   m_SurnameLabel("Surname"),
   m_CommentsLabel("Comments")
@@ -55,7 +55,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   m_ScrolledWindow.add(m_TextView);
 
   //Only show the scrollbars when they are necessary:
-  m_ScrolledWindow.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+  m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
   m_Grid.attach(m_CommentsLabel, 0, 2);
   m_Grid.attach(m_ScrolledWindow, 1, 2);
@@ -262,13 +262,13 @@ void ExampleWindow::on_printoperation_done(Gtk::PrintOperationResult result)
 {
   //Printing is "done" when the print data is spooled.
 
-  if (result == Gtk::PRINT_OPERATION_RESULT_ERROR)
+  if (result == Gtk::PrintOperationResult::ERROR)
   {
     Gtk::MessageDialog err_dialog(*this, "Error printing form", false,
-            Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+            Gtk::MessageType::ERROR, Gtk::ButtonsType::OK, true);
     err_dialog.run();
   }
-  else if (result == Gtk::PRINT_OPERATION_RESULT_APPLY)
+  else if (result == Gtk::PrintOperationResult::APPLY)
   {
     //Update PrintSettings with the ones used in this PrintOperation:
     m_refSettings = m_refPrintFormOperation->get_print_settings();
@@ -335,12 +335,12 @@ void ExampleWindow::on_menu_file_page_setup()
 
 void ExampleWindow::on_menu_file_print_preview()
 {
-  print_or_preview(Gtk::PRINT_OPERATION_ACTION_PREVIEW);
+  print_or_preview(Gtk::PrintOperationAction::PREVIEW);
 }
 
 void ExampleWindow::on_menu_file_print()
 {
-  print_or_preview(Gtk::PRINT_OPERATION_ACTION_PRINT_DIALOG);
+  print_or_preview(Gtk::PrintOperationAction::PRINT_DIALOG);
 }
 
 void ExampleWindow::on_menu_file_quit()

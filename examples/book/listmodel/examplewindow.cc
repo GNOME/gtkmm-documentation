@@ -46,7 +46,7 @@ m_button_quit("_Quit", true)
   std::cout << "Using bind_" << (use_bind_model ? "model" : "list_store") << std::endl;
 
   // A ListBox to the left.
-  m_scrolled_window_list_box.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+  m_scrolled_window_list_box.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
   m_scrolled_window_list_box.set_hexpand(true);
   m_scrolled_window_list_box.set_vexpand(true);
   m_grid.attach(m_scrolled_window_list_box, 0, 0, 1 ,1);
@@ -57,7 +57,7 @@ m_button_quit("_Quit", true)
     m_list_box.bind_list_store(m_store, sigc::ptr_fun(&ExampleWindow::on_create_widget2));
 
   // A FlowBox to the right.
-  m_scrolled_window_flow_box.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+  m_scrolled_window_flow_box.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
   m_scrolled_window_flow_box.set_hexpand(true);
   m_scrolled_window_flow_box.set_vexpand(true);
   m_grid.attach(m_scrolled_window_flow_box, 1, 0, 1 ,1);
@@ -87,7 +87,7 @@ Gtk::Widget* ExampleWindow::on_create_widget1(const Glib::RefPtr<Glib::Object>& 
   }
   auto label = Gtk::manage(new Gtk::Label());
   Glib::Binding::bind_property(obj->property_label(), label->property_label(),
-    Glib::BINDING_SYNC_CREATE);
+    Glib::BindingFlags::SYNC_CREATE);
   return label;
 }
 
@@ -101,7 +101,7 @@ Gtk::Widget* ExampleWindow::on_create_widget2(const Glib::RefPtr<MyObject>& item
   }
   auto label = Gtk::manage(new Gtk::Label());
   Glib::Binding::bind_property(item->property_label(), label->property_label(),
-    Glib::BINDING_SYNC_CREATE);
+    Glib::BindingFlags::SYNC_CREATE);
   return label;
 }
 

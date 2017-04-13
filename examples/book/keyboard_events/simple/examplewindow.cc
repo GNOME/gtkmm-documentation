@@ -35,7 +35,7 @@ ExampleWindow::ExampleWindow()
 
   // Events.
   // We override the default event signal handler.
-  add_events(Gdk::KEY_PRESS_MASK);
+  add_events(Gdk::EventMask::KEY_PRESS_MASK);
 }
 
 bool ExampleWindow::on_key_press_event(GdkEventKey* key_event)

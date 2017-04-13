@@ -17,7 +17,7 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_VBox(Gtk::ORIENTATION_VERTICAL),
+: m_VBox(Gtk::Orientation::VERTICAL),
   m_Label("Select cells in the grid, click Copy, then open a second "
         "instance of this example to try pasting the copied data."),
   m_ButtonA1("A1"), m_ButtonA2("A2"), m_ButtonB1("B1"), m_ButtonB2("B2"),
@@ -44,7 +44,7 @@ ExampleWindow::ExampleWindow()
   m_VBox.set_spacing(6);
 
   //Fill ButtonBox:
-  m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
+  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
   m_ButtonBox.pack_start(m_Button_Copy, Gtk::PACK_SHRINK);
   m_Button_Copy.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_copy) );

@@ -28,13 +28,13 @@ ExampleWindow::ExampleWindow()
   m_checkbutton_can_propagate.set_active();
 
   // Main Container
-  m_container.set_orientation(Gtk::ORIENTATION_VERTICAL);
+  m_container.set_orientation(Gtk::Orientation::VERTICAL);
   m_container.add(m_label);
   m_container.add(m_entry);
   m_container.add(m_checkbutton_can_propagate);
 
   // Events
-  add_events(Gdk::KEY_RELEASE_MASK);
+  add_events(Gdk::EventMask::KEY_RELEASE_MASK);
 
   m_entry.signal_key_release_event().connect(
     sigc::mem_fun(*this, &ExampleWindow::entryKeyRelease));

@@ -23,11 +23,11 @@ ExampleWindow::ExampleWindow()
   set_default_size(600, 400);
 
   // Scrolled window
-  m_scrolled_window.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC);
+  m_scrolled_window.set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC);
 
   // Flow box
   m_flow_box.set_max_children_per_line(30);
-  m_flow_box.set_selection_mode(Gtk::SELECTION_NONE);
+  m_flow_box.set_selection_mode(Gtk::SelectionMode::NONE);
   m_flow_box.set_homogeneous();
 
   // Color swatches

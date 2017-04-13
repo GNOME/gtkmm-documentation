@@ -25,7 +25,7 @@ ExampleButtonBox::ExampleButtonBox(bool horizontal,
   m_Button_Cancel("Cancel"),
   m_Button_Help("Help")
 {
-  auto orientation = horizontal ? Gtk::ORIENTATION_HORIZONTAL : Gtk::ORIENTATION_VERTICAL;
+  auto orientation = horizontal ? Gtk::Orientation::HORIZONTAL : Gtk::Orientation::VERTICAL;
   auto bbox = Gtk::manage(new Gtk::ButtonBox(orientation));
 
   if (!horizontal)

@@ -24,12 +24,12 @@ ExampleWindow::ExampleWindow()
 
   m_ScrolledWindow.set_margin(10);
 
-  /* the policy is one of Gtk::POLICY AUTOMATIC, or Gtk::POLICY_ALWAYS.
-   * Gtk::POLICY_AUTOMATIC will automatically decide whether you need
-   * scrollbars, whereas Gtk::POLICY_ALWAYS will always leave the scrollbars
+  /* the policy is one of Gtk::PolicyType::AUTOMATIC, or Gtk::PolicyType::ALWAYS.
+   * Gtk::PolicyType::AUTOMATIC will automatically decide whether you need
+   * scrollbars, whereas Gtk::PolicyType::ALWAYS will always leave the scrollbars
    * there.  The first one is the horizontal scrollbar, the second,
    * the vertical. */
-  m_ScrolledWindow.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_ALWAYS);
+  m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::ALWAYS);
 
   get_content_area()->pack_start(m_ScrolledWindow);
 
@@ -54,12 +54,12 @@ ExampleWindow::ExampleWindow()
   }
 
   /* Add a "close" button to the bottom of the dialog */
-  add_button("_Close", Gtk::RESPONSE_CLOSE);
+  add_button("_Close", Gtk::ResponseType::CLOSE);
   signal_response().connect(sigc::mem_fun(*this, &ExampleWindow::on_dialog_response));
 
   /* This makes it so the button is the default.
    * Simply hitting the "Enter" key will cause this button to activate. */
-  set_default_response(Gtk::RESPONSE_CLOSE);
+  set_default_response(Gtk::ResponseType::CLOSE);
 }
 
 ExampleWindow::~ExampleWindow()
@@ -70,8 +70,8 @@ void ExampleWindow::on_dialog_response(int response_id)
 {
   switch (response_id)
   {
-  case Gtk::RESPONSE_CLOSE:
-  case Gtk::RESPONSE_DELETE_EVENT:
+  case static_cast<int>(Gtk::ResponseType::CLOSE):
+  case static_cast<int>(Gtk::ResponseType::DELETE_EVENT):
     hide();
     break;
   default:

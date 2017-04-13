@@ -19,7 +19,7 @@
 
 ExampleWindow::ExampleWindow()
 : Gtk::ApplicationWindow(),
-  m_Box(Gtk::ORIENTATION_VERTICAL)
+  m_Box(Gtk::Orientation::VERTICAL)
 {
   set_title("Main menu example");
   set_default_size(300, 100);

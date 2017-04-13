@@ -22,7 +22,7 @@
 #include "tictactoe.h"
 
 TicTacToe::TicTacToe()
-: Gtk::Box(Gtk::ORIENTATION_VERTICAL)
+: Gtk::Box(Gtk::Orientation::VERTICAL)
 {
   auto grid = Gtk::manage( new Gtk::Grid() );
   grid->set_row_homogeneous(true);

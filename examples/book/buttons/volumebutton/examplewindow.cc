@@ -31,8 +31,8 @@ ExampleWindow::ExampleWindow()
   m_button.set_hexpand(true);
 
   m_grid.attach(m_button, 1, 1, 1, 1);
-  m_button.set_valign(Gtk::ALIGN_END);
-  m_button.set_halign(Gtk::ALIGN_END);
+  m_button.set_valign(Gtk::Align::END);
+  m_button.set_halign(Gtk::Align::END);
 
   m_button.set_value(0.4);
   m_button.signal_value_changed().connect(

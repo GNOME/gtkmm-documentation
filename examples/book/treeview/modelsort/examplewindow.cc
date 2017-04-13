@@ -18,7 +18,7 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_VBox(Gtk::ORIENTATION_VERTICAL),
+: m_VBox(Gtk::Orientation::VERTICAL),
   m_Button_Quit("Quit")
 {
   set_title("Gtk::TreeView (TreeModelSort) example");
@@ -33,8 +33,8 @@ ExampleWindow::ExampleWindow()
   m_ScrolledWindow2.add(m_TreeView2);
 
   //Only show the scrollbars when they are necessary:
-  m_ScrolledWindow1.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
-  m_ScrolledWindow2.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+  m_ScrolledWindow1.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
+  m_ScrolledWindow2.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
   m_VBox.pack_start(m_ScrolledWindow1);
   m_VBox.pack_start(m_ScrolledWindow2);
@@ -42,7 +42,7 @@ ExampleWindow::ExampleWindow()
 
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
   m_ButtonBox.set_margin(5);
-  m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
+  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
   m_Button_Quit.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_quit) );
 
@@ -55,12 +55,12 @@ ExampleWindow::ExampleWindow()
   //This example shows how to use SortModel to show two views of the same model,
   //with different sort columns.
   m_refTreeModelSort1 = Gtk::TreeModelSort::create(m_refTreeModel);
-  m_refTreeModelSort1->set_sort_column(m_Columns.m_col_id, Gtk::SORT_ASCENDING);
+  m_refTreeModelSort1->set_sort_column(m_Columns.m_col_id, Gtk::SortType::ASCENDING);
   m_TreeView1.set_model(m_refTreeModelSort1);
 
   m_refTreeModelSort2 = Gtk::TreeModelSort::create(m_refTreeModel);
   m_refTreeModelSort2->set_sort_column(m_Columns.m_col_name,
-          Gtk::SORT_ASCENDING);
+          Gtk::SortType::ASCENDING);
   m_TreeView2.set_model(m_refTreeModelSort2);
 
 

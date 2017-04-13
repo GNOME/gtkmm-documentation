@@ -24,11 +24,11 @@ const Glib::ustring markedup_tip = "<i>Markup</i> in a tooltip.";
 
 ExampleWindow::ExampleWindow()
   :
-  m_vbox(Gtk::ORIENTATION_VERTICAL, 3),
+  m_vbox(Gtk::Orientation::VERTICAL, 3),
   m_checkbutton("Click to alternate markup in tooltip"),
   m_label("A label"),
   m_button("Custom widget in tooltip window"),
-  m_button_tooltip_window(Gtk::WINDOW_POPUP)
+  m_button_tooltip_window(Gtk::WindowType::POPUP)
 {
   //Set up window and the top-level container:
   set_title(app_title);
@@ -74,7 +74,7 @@ void ExampleWindow::prepare_textview()
 
   //Set up a scrolled window:
   m_scrolled_window.add(m_text_view);
-  m_scrolled_window.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+  m_scrolled_window.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
   m_vbox.pack_start(m_scrolled_window);
 
   //Create a text buffer with some text:
@@ -87,7 +87,7 @@ void ExampleWindow::prepare_textview()
   //In the tooltip signal handler below, we will show a tooltip
   //when mouse pointer is above this tagged text.
   m_ref_bold_tag = m_ref_text_buffer->create_tag("bold");
-  m_ref_bold_tag->set_property("weight", Pango::WEIGHT_BOLD);
+  m_ref_bold_tag->set_property("weight", Pango::Weight::BOLD);
 
   tags.push_back(m_ref_bold_tag);
 
@@ -144,7 +144,7 @@ bool ExampleWindow::on_textview_query_tooltip(int x, int y, bool keyboard_toolti
   else
   {
     int mouse_x, mouse_y, trailing;
-    m_text_view.window_to_buffer_coords(Gtk::TEXT_WINDOW_TEXT,
+    m_text_view.window_to_buffer_coords(Gtk::TextWindowType::TEXT,
                                         x, y, mouse_x, mouse_y);
     m_text_view.get_iter_at_position(iter, trailing, mouse_x, mouse_y);
   }
@@ -154,7 +154,7 @@ bool ExampleWindow::on_textview_query_tooltip(int x, int y, bool keyboard_toolti
   if (iter.has_tag(m_ref_bold_tag))
   {
     tooltip->set_markup("<b>Information</b> attached to a text tag");
-    tooltip->set_icon_from_icon_name("dialog-information", Gtk::ICON_SIZE_MENU);
+    tooltip->set_icon_from_icon_name("dialog-information", Gtk::BuiltinIconSize::MENU);
   }
   else
   {

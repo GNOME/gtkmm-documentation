@@ -19,13 +19,13 @@
 
 ExampleWindow::ExampleWindow()
 :
-  m_VBox_Top(Gtk::ORIENTATION_VERTICAL, 0),
-  m_VBox2(Gtk::ORIENTATION_VERTICAL, 20),
-  m_VBox_HScale(Gtk::ORIENTATION_VERTICAL, 10),
-  m_HBox_Scales(Gtk::ORIENTATION_HORIZONTAL, 10),
-  m_HBox_Combo(Gtk::ORIENTATION_HORIZONTAL, 10),
-  m_HBox_Digits(Gtk::ORIENTATION_HORIZONTAL, 10),
-  m_HBox_PageSize(Gtk::ORIENTATION_HORIZONTAL, 10),
+  m_VBox_Top(Gtk::Orientation::VERTICAL, 0),
+  m_VBox2(Gtk::Orientation::VERTICAL, 20),
+  m_VBox_HScale(Gtk::Orientation::VERTICAL, 10),
+  m_HBox_Scales(Gtk::Orientation::HORIZONTAL, 10),
+  m_HBox_Combo(Gtk::Orientation::HORIZONTAL, 10),
+  m_HBox_Digits(Gtk::Orientation::HORIZONTAL, 10),
+  m_HBox_PageSize(Gtk::Orientation::HORIZONTAL, 10),
 
   // Value, lower, upper, step_increment, page_increment, page_size:
   // Note that the page_size value only makes a difference for
@@ -35,8 +35,8 @@ ExampleWindow::ExampleWindow()
   m_adjustment_digits( Gtk::Adjustment::create(1.0, 0.0, 5.0, 1.0, 2.0) ),
   m_adjustment_pagesize( Gtk::Adjustment::create(1.0, 1.0, 101.0) ),
 
-  m_VScale(m_adjustment, Gtk::ORIENTATION_VERTICAL),
-  m_HScale(m_adjustment, Gtk::ORIENTATION_HORIZONTAL),
+  m_VScale(m_adjustment, Gtk::Orientation::VERTICAL),
+  m_HScale(m_adjustment, Gtk::Orientation::HORIZONTAL),
   m_Scale_Digits(m_adjustment_digits),
   m_Scale_PageSize(m_adjustment_pagesize),
 
@@ -55,13 +55,13 @@ ExampleWindow::ExampleWindow()
 
   //VScale:
   m_VScale.set_digits(1);
-  m_VScale.set_value_pos(Gtk::POS_TOP);
+  m_VScale.set_value_pos(Gtk::PositionType::TOP);
   m_VScale.set_draw_value();
   m_VScale.set_inverted(); // highest value at top
 
   //HScale:
   m_HScale.set_digits(1);
-  m_HScale.set_value_pos(Gtk::POS_TOP);
+  m_HScale.set_value_pos(Gtk::PositionType::TOP);
   m_HScale.set_draw_value();
 
   add(m_VBox_Top);
@@ -92,16 +92,16 @@ ExampleWindow::ExampleWindow()
 
   //Fill the ComboBox's Tree Model:
   auto row = *(m_refTreeModel->append());
-  row[m_Columns.m_col_position_type] = Gtk::POS_TOP;
+  row[m_Columns.m_col_position_type] = Gtk::PositionType::TOP;
   row[m_Columns.m_col_title] = "Top";
   row = *(m_refTreeModel->append());
-  row[m_Columns.m_col_position_type] = Gtk::POS_BOTTOM;
+  row[m_Columns.m_col_position_type] = Gtk::PositionType::BOTTOM;
   row[m_Columns.m_col_title] = "Bottom";
   row = *(m_refTreeModel->append());
-  row[m_Columns.m_col_position_type] = Gtk::POS_LEFT;
+  row[m_Columns.m_col_position_type] = Gtk::PositionType::LEFT;
   row[m_Columns.m_col_title] = "Left";
   row = *(m_refTreeModel->append());
-  row[m_Columns.m_col_position_type] = Gtk::POS_RIGHT;
+  row[m_Columns.m_col_position_type] = Gtk::PositionType::RIGHT;
   row[m_Columns.m_col_title] = "Right";
 
   m_VBox2.pack_start(m_HBox_Combo, Gtk::PACK_SHRINK);

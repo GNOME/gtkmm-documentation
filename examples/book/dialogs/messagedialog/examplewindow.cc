@@ -20,7 +20,7 @@
 
 
 ExampleWindow::ExampleWindow()
-: m_ButtonBox(Gtk::ORIENTATION_VERTICAL),
+: m_ButtonBox(Gtk::Orientation::VERTICAL),
   m_Button_Info("Show Info MessageDialog"),
   m_Button_Question("Show Question MessageDialog")
 {
@@ -53,8 +53,8 @@ void ExampleWindow::on_button_info_clicked()
 void ExampleWindow::on_button_question_clicked()
 {
   Gtk::MessageDialog dialog(*this, "This is a QUESTION MessageDialog",
-          false /* use_markup */, Gtk::MESSAGE_QUESTION,
-          Gtk::BUTTONS_OK_CANCEL);
+          false /* use_markup */, Gtk::MessageType::QUESTION,
+          Gtk::ButtonsType::OK_CANCEL);
   dialog.set_secondary_text(
           "And this is the secondary text that explains things.");
 
@@ -63,12 +63,12 @@ void ExampleWindow::on_button_question_clicked()
   //Handle the response:
   switch(result)
   {
-    case(Gtk::RESPONSE_OK):
+    case static_cast<int>(Gtk::ResponseType::OK):
     {
       std::cout << "OK clicked." << std::endl;
       break;
     }
-    case(Gtk::RESPONSE_CANCEL):
+    case static_cast<int>(Gtk::ResponseType::CANCEL):
     {
       std::cout << "Cancel clicked." << std::endl;
       break;

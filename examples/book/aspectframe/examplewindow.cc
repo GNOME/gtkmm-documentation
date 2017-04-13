@@ -18,8 +18,8 @@
 
 ExampleWindow::ExampleWindow()
 : m_AspectFrame("2x1", /* label */
-    Gtk::ALIGN_CENTER, /* center x */
-    Gtk::ALIGN_CENTER, /* center y */
+    Gtk::Align::CENTER, /* center x */
+    Gtk::Align::CENTER, /* center y */
     2.0, /* xsize/ysize = 2 */
     false /* ignore child's aspect */)
 {

@@ -95,7 +95,7 @@ Gtk::SizeRequestMode MyWidget::get_request_mode_vfunc() const
 void MyWidget::measure_vfunc(Gtk::Orientation orientation, int /* for_size */,
   int& minimum, int& natural, int& minimum_baseline, int& natural_baseline) const
 {
-  if (orientation == Gtk::ORIENTATION_HORIZONTAL)
+  if (orientation == Gtk::Orientation::HORIZONTAL)
   {
     minimum = 60;
     natural = 100;
@@ -155,7 +155,7 @@ void MyWidget::on_realize()
   {
     //Create the GdkWindow:
     m_refGdkWindow = Gdk::Window::create_child(get_parent_window(),
-      get_events () | Gdk::EXPOSURE_MASK, get_allocation());
+      get_events () | Gdk::EventMask::EXPOSURE_MASK, get_allocation());
     set_window(m_refGdkWindow);
 
     //make the widget receive expose events

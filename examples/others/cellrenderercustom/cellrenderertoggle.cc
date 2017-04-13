@@ -106,7 +106,7 @@ MyCellRendererToggle::MyCellRendererToggle()
   property_active_      (*this, "active",      false),
   property_radio_       (*this, "radio",       false)
 {
-  property_mode() = Gtk::CELL_RENDERER_MODE_ACTIVATABLE;
+  property_mode() = Gtk::CellRendererMode::ACTIVATABLE;
   property_xpad() = 2;
   property_ypad() = 2;
 }
@@ -189,16 +189,16 @@ void MyCellRendererToggle::snapshot_vfunc(Gtk::Snapshot& snapshot,
   if(width <= 0 || height <= 0)
     return;
 
-  auto state = Gtk::STATE_FLAG_INSENSITIVE;
+  auto state = Gtk::StateFlags::INSENSITIVE;
 
   if (property_activatable_)
     state = (Gtk::StateFlags)0;
 
-  if ((flags & Gtk::CELL_RENDERER_SELECTED) != 0)
-    state = (widget.has_focus()) ? Gtk::STATE_FLAG_SELECTED : Gtk::STATE_FLAG_ACTIVE;
+  if ((flags & Gtk::CellRendererState::SELECTED) == Gtk::CellRendererState::SELECTED)
+    state = (widget.has_focus()) ? Gtk::StateFlags::SELECTED : Gtk::StateFlags::ACTIVE;
 
   if (property_active_)
-    state |= Gtk::STATE_FLAG_CHECKED;
+    state |= Gtk::StateFlags::CHECKED;
 
   auto style_context = widget.get_style_context();
   style_context->set_state(state);

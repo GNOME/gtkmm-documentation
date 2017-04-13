@@ -19,7 +19,7 @@
 
 
 ExampleWindow::ExampleWindow()
-: m_ButtonBox(Gtk::ORIENTATION_VERTICAL),
+: m_ButtonBox(Gtk::Orientation::VERTICAL),
   m_Button_File("Choose File"),
   m_Button_Folder("Choose Folder")
 {
@@ -43,26 +43,26 @@ ExampleWindow::~ExampleWindow()
 void ExampleWindow::on_button_folder_clicked()
 {
   Gtk::FileChooserDialog dialog("Please choose a folder",
-          Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER);
+          Gtk::FileChooserAction::SELECT_FOLDER);
   dialog.set_transient_for(*this);
 
   //Add response buttons the the dialog:
-  dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
-  dialog.add_button("Select", Gtk::RESPONSE_OK);
+  dialog.add_button("_Cancel", Gtk::ResponseType::CANCEL);
+  dialog.add_button("Select", Gtk::ResponseType::OK);
 
   int result = dialog.run();
 
   //Handle the response:
   switch(result)
   {
-    case(Gtk::RESPONSE_OK):
+    case static_cast<int>(Gtk::ResponseType::OK):
     {
       std::cout << "Select clicked." << std::endl;
       std::cout << "Folder selected: " << dialog.get_filename()
           << std::endl;
       break;
     }
-    case(Gtk::RESPONSE_CANCEL):
+    case static_cast<int>(Gtk::ResponseType::CANCEL):
     {
       std::cout << "Cancel clicked." << std::endl;
       break;
@@ -78,12 +78,12 @@ void ExampleWindow::on_button_folder_clicked()
 void ExampleWindow::on_button_file_clicked()
 {
   Gtk::FileChooserDialog dialog("Please choose a file",
-          Gtk::FILE_CHOOSER_ACTION_OPEN);
+          Gtk::FileChooserAction::OPEN);
   dialog.set_transient_for(*this);
 
   //Add response buttons the the dialog:
-  dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
-  dialog.add_button("_Open", Gtk::RESPONSE_OK);
+  dialog.add_button("_Cancel", Gtk::ResponseType::CANCEL);
+  dialog.add_button("_Open", Gtk::ResponseType::OK);
 
   //Add filters, so that only certain file types can be selected:
 
@@ -110,7 +110,7 @@ void ExampleWindow::on_button_file_clicked()
   //Handle the response:
   switch(result)
   {
-    case(Gtk::RESPONSE_OK):
+    case static_cast<int>(Gtk::ResponseType::OK):
     {
       std::cout << "Open clicked." << std::endl;
 
@@ -119,7 +119,7 @@ void ExampleWindow::on_button_file_clicked()
       std::cout << "File selected: " <<  filename << std::endl;
       break;
     }
-    case(Gtk::RESPONSE_CANCEL):
+    case static_cast<int>(Gtk::ResponseType::CANCEL):
     {
       std::cout << "Cancel clicked." << std::endl;
       break;

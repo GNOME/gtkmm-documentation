@@ -23,7 +23,7 @@ DnDWindow::DnDWindow()
 : m_Label_Drop("Drop here\n"), m_Label_Popup("Popup\n"),
   m_Button("Drag Here\n"),
   m_have_drag(false),
-  m_PopupWindow(Gtk::WINDOW_POPUP)
+  m_PopupWindow(Gtk::WindowType::POPUP)
 {
   m_popped_up = false;
   m_in_popup = false;
@@ -42,7 +42,7 @@ DnDWindow::DnDWindow()
   //Targets without rootwin:
   m_listTargetsNoRoot.assign(m_listTargets.begin(), --m_listTargets.end());
 
-  m_Label_Drop.drag_dest_set(m_listTargetsNoRoot, Gtk::DEST_DEFAULT_ALL, Gdk::DragAction(GDK_ACTION_COPY | GDK_ACTION_MOVE));
+  m_Label_Drop.drag_dest_set(m_listTargetsNoRoot, Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
 
   m_Label_Drop.signal_drag_data_received().connect( sigc::mem_fun(*this, &DnDWindow::on_label_drop_drag_data_received) );
 
@@ -50,7 +50,7 @@ DnDWindow::DnDWindow()
   m_Label_Drop.set_hexpand(true);
   m_Label_Drop.set_vexpand(true);
 
-  m_Label_Popup.drag_dest_set(m_listTargetsNoRoot, Gtk::DEST_DEFAULT_ALL, Gdk::DragAction(GDK_ACTION_COPY | GDK_ACTION_MOVE));
+  m_Label_Popup.drag_dest_set(m_listTargetsNoRoot, Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
 
   m_Grid.attach(m_Label_Popup, 1, 1);
   m_Label_Popup.set_hexpand(true);
@@ -73,8 +73,8 @@ DnDWindow::DnDWindow()
 
   /* Drag site */
 
-  m_Button.drag_source_set(m_listTargets, Gdk::ModifierType(GDK_BUTTON1_MASK | GDK_BUTTON3_MASK),
-                           Gdk::DragAction(GDK_ACTION_COPY | GDK_ACTION_MOVE));
+  m_Button.drag_source_set(m_listTargets, Gdk::ModifierType::BUTTON1_MASK | Gdk::ModifierType::BUTTON3_MASK,
+                           Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
 
   m_Button.drag_source_set_icon(m_drag_icon);
 
@@ -228,7 +228,7 @@ bool DnDWindow::on_popup_timeout()
 
 void DnDWindow::create_popup()
 {
-  m_PopupWindow.set_position(Gtk::WIN_POS_MOUSE);
+  m_PopupWindow.set_position(Gtk::WindowPosition::MOUSE);
 
   //Create Grid and fill it:
   auto pGrid = Gtk::manage(new Gtk::Grid());
@@ -242,8 +242,9 @@ void DnDWindow::create_popup()
       auto pButton = Gtk::manage(new Gtk::Button(buffer));
       pGrid->attach(*pButton, i, j, 1, 1);
 
-      pButton->drag_dest_set(m_listTargetsNoRoot, Gtk::DEST_DEFAULT_ALL, Gdk::DragAction(GDK_ACTION_COPY | GDK_ACTION_MOVE));
-      pButton->signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_button_drag_motion) );                      pButton->signal_drag_leave().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_button_drag_leave) );
+      pButton->drag_dest_set(m_listTargetsNoRoot, Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
+      pButton->signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_button_drag_motion) );
+      pButton->signal_drag_leave().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_button_drag_leave) );
     }
   }
 

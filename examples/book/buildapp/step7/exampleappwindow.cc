@@ -68,7 +68,7 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
 
   // Bind properties.
   m_prop_binding = Glib::Binding::bind_property(m_search->property_active(),
-    m_searchbar->property_search_mode_enabled(), Glib::BINDING_BIDIRECTIONAL);
+    m_searchbar->property_search_mode_enabled(), Glib::BindingFlags::BIDIRECTIONAL);
 
   // Connect signal handlers.
   m_searchentry->signal_search_changed().connect(
@@ -169,7 +169,7 @@ void ExampleAppWindow::on_search_text_changed()
   auto buffer = view->get_buffer();
   Gtk::TextIter match_start;
   Gtk::TextIter match_end;
-  if (buffer->begin().forward_search(text, Gtk::TEXT_SEARCH_CASE_INSENSITIVE,
+  if (buffer->begin().forward_search(text, Gtk::TextSearchFlags::CASE_INSENSITIVE,
       match_start, match_end))
   {
     buffer->select_range(match_start, match_end);

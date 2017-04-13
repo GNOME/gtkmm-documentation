@@ -17,7 +17,7 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_VBox(Gtk::ORIENTATION_VERTICAL, 6),
+: m_VBox(Gtk::Orientation::VERTICAL, 6),
   m_Button_Quit("_Quit", true),
   m_Button_Clear("_Clear", true)
 {
@@ -47,7 +47,7 @@ ExampleWindow::ExampleWindow()
   m_ScrolledWindow.add(m_TextView);
 
   // Show the scrollbars only when they are necessary:
-  m_ScrolledWindow.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+  m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
   m_VBox.pack_start(m_ScrolledWindow);
 
@@ -57,7 +57,7 @@ ExampleWindow::ExampleWindow()
   m_ButtonBox.pack_start(m_Button_Clear, Gtk::PACK_SHRINK);
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
   m_ButtonBox.set_spacing(6);
-  m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
+  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
 
   // Connect signals:
   m_InfoBar.signal_response().connect(sigc::mem_fun(*this,
@@ -98,7 +98,7 @@ void ExampleWindow::on_button_clear()
 {
   m_refTextBuffer->set_text("");
   m_Message_Label.set_text("Cleared the text.");
-  m_InfoBar.set_message_type(Gtk::MESSAGE_INFO);
+  m_InfoBar.set_message_type(Gtk::MessageType::INFO);
   m_InfoBar.show();
 }
 

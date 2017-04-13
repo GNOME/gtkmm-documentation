@@ -17,7 +17,7 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
- : m_format_buttons_box(Gtk::ORIENTATION_HORIZONTAL),
+ : m_format_buttons_box(Gtk::Orientation::HORIZONTAL),
    m_toggle_button("Button"),
    m_toggle_form_popover(m_toggle_button),
    m_toggle_form_label("Non-modal Popover"),
@@ -73,16 +73,16 @@ void ExampleWindow::configure_form_popover()
   m_toggle_form_grid.attach(m_toggle_form_combo, 1, 2, 1, 1);
 
   m_toggle_form_popover.add(m_toggle_form_grid);
-  m_toggle_form_popover.set_position(Gtk::POS_BOTTOM);
+  m_toggle_form_popover.set_position(Gtk::PositionType::BOTTOM);
   m_toggle_form_popover.set_margin(6);
   m_toggle_form_popover.set_modal(false);
 }
 
 void ExampleWindow::configure_form_buttons()
 {
-  m_toggle_form_buttons[0].set_image_from_icon_name("format-justify-left-symbolic", Gtk::ICON_SIZE_BUTTON, true);
-  m_toggle_form_buttons[1].set_image_from_icon_name("format-justify-center-symbolic", Gtk::ICON_SIZE_BUTTON, true);
-  m_toggle_form_buttons[2].set_image_from_icon_name("format-justify-right-symbolic", Gtk::ICON_SIZE_BUTTON, true);
+  m_toggle_form_buttons[0].set_image_from_icon_name("format-justify-left-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
+  m_toggle_form_buttons[1].set_image_from_icon_name("format-justify-center-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
+  m_toggle_form_buttons[2].set_image_from_icon_name("format-justify-right-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
 
   m_toggle_form_buttons[0].set_draw_indicator(false);
   m_toggle_form_buttons[1].set_draw_indicator(false);
@@ -119,11 +119,11 @@ void ExampleWindow::on_combo_changed()
 
   if (active_entry == 0)
   {
-    m_toggle_form_popover.set_position(Gtk::POS_BOTTOM);
+    m_toggle_form_popover.set_position(Gtk::PositionType::BOTTOM);
   }
   else if (active_entry == 1)
   {
-    m_toggle_form_popover.set_position(Gtk::POS_RIGHT);
+    m_toggle_form_popover.set_position(Gtk::PositionType::RIGHT);
   }
 }
 
