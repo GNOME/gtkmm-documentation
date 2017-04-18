@@ -115,7 +115,7 @@ ExampleAppWindow* ExampleAppWindow::create()
   auto refBuilder = Gtk::Builder::create_from_resource("/org/gtkmm/exampleapp/window.ui");
 
   ExampleAppWindow* window = nullptr;
-  refBuilder->get_widget_derived("app_window", window);
+  Gtk::Builder::get_widget_derived(refBuilder, "app_window", window);
   if (!window)
     throw std::runtime_error("No \"app_window\" object in window.ui");
 

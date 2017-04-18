@@ -67,9 +67,9 @@ int main (int argc, char **argv)
   DerivedDialog* pDialog = nullptr;
   if (show_icon)
     // This call to get_widget_derived() requires gtkmm 3.19.7 or higher.
-    refBuilder->get_widget_derived("DialogDerived", pDialog, is_glad);
+    Gtk::Builder::get_widget_derived(refBuilder, "DialogDerived", pDialog, is_glad);
   else
-    refBuilder->get_widget_derived("DialogDerived", pDialog);
+    Gtk::Builder::get_widget_derived(refBuilder, "DialogDerived", pDialog);
   if(pDialog)
   {
     //Start:

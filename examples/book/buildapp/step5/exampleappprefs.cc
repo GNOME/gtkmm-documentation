@@ -45,7 +45,7 @@ ExampleAppPrefs* ExampleAppPrefs::create(Gtk::Window& parent)
   auto refBuilder = Gtk::Builder::create_from_resource("/org/gtkmm/exampleapp/prefs.ui");
 
   ExampleAppPrefs* dialog = nullptr;
-  refBuilder->get_widget_derived("prefs_dialog", dialog);
+  Gtk::Builder::get_widget_derived(refBuilder, "prefs_dialog", dialog);
   if (!dialog)
     throw std::runtime_error("No \"prefs_dialog\" object in prefs.ui");
 
