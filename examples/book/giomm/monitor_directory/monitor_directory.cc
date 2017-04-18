@@ -27,7 +27,7 @@ const std::string FILENAME = "./temp-file";
 void
 on_directory_changed(const Glib::RefPtr<Gio::File>& file,
            const Glib::RefPtr<Gio::File>& other_file,
-           Gio::FileMonitorEvent event)
+           Gio::FileMonitor::Event event)
 {
   std::cout << "** Directory changed **" << std::endl;
 
@@ -41,25 +41,25 @@ on_directory_changed(const Glib::RefPtr<Gio::File>& file,
 
   switch(event)
   {
-    case Gio::FileMonitorEvent::CHANGED:
+    case Gio::FileMonitor::Event::CHANGED:
       std::cout << "Event: A file is being changed" << std::endl;
       break;
-    case Gio::FileMonitorEvent::CHANGES_DONE_HINT:
+    case Gio::FileMonitor::Event::CHANGES_DONE_HINT:
       std::cout << "Event: File changes are done" << std::endl;
       break;
-    case Gio::FileMonitorEvent::DELETED:
+    case Gio::FileMonitor::Event::DELETED:
       std::cout << "Event: A file was deleted" << std::endl;
       break;
-    case Gio::FileMonitorEvent::CREATED:
+    case Gio::FileMonitor::Event::CREATED:
       std::cout << "Event: A file was created" << std::endl;
       break;
-    case Gio::FileMonitorEvent::ATTRIBUTE_CHANGED:
+    case Gio::FileMonitor::Event::ATTRIBUTE_CHANGED:
       std::cout << "Event: A file attribute was changed" << std::endl;
       break;
-    case Gio::FileMonitorEvent::PRE_UNMOUNT:
+    case Gio::FileMonitor::Event::PRE_UNMOUNT:
       std::cout << "Event: pre-unmount event" << std::endl;
       break;
-    case Gio::FileMonitorEvent::UNMOUNTED:
+    case Gio::FileMonitor::Event::UNMOUNTED:
       std::cout << "Event: unmounted" << std::endl;
       break;
     default:
