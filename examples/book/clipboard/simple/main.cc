@@ -19,10 +19,10 @@
 
 int main(int argc, char *argv[])
 {
-  // Gio::ApplicationFlags::NON_UNIQUE because it shall be possible to run
+  // Gio::Application::Flags::NON_UNIQUE because it shall be possible to run
   // several instances of this application simultaneously.
   auto app = Gtk::Application::create(
-    "org.gtkmm.example", Gio::ApplicationFlags::NON_UNIQUE);
+    "org.gtkmm.example", Gio::Application::Flags::NON_UNIQUE);
 
   ExampleWindow window;
 

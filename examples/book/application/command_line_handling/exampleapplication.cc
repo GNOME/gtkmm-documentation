@@ -20,7 +20,7 @@
 
 ExampleApplication::ExampleApplication()
 : Gtk::Application("org.gtkmm.examples.application",
-    Gio::ApplicationFlags(Gio::ApplicationFlags::HANDLES_OPEN | Gio::ApplicationFlags::HANDLES_COMMAND_LINE))
+    Gio::Application::Flags(Gio::Application::Flags::HANDLES_OPEN | Gio::Application::Flags::HANDLES_COMMAND_LINE))
 {
   Glib::set_application_name("Gtk::Application Example");
 

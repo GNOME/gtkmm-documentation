@@ -20,7 +20,7 @@
 #include <exception>
 
 ExampleApplication::ExampleApplication()
-: Gtk::Application("org.gtkmm.examples.application", Gio::ApplicationFlags::HANDLES_OPEN)
+: Gtk::Application("org.gtkmm.examples.application", Gio::Application::Flags::HANDLES_OPEN)
 {
 }
 
