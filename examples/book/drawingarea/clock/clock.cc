@@ -59,7 +59,7 @@ void Clock::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int heig
     double inset = 0.05;
 
     cr->save();
-    cr->set_line_cap(Cairo::LINE_CAP_ROUND);
+    cr->set_line_cap(Cairo::Context::LineCap::ROUND);
 
     if(i % 3 != 0)
     {
@@ -88,7 +88,7 @@ void Clock::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int heig
   double seconds= timeinfo->tm_sec * M_PI / 30;
 
   cr->save();
-  cr->set_line_cap(Cairo::LINE_CAP_ROUND);
+  cr->set_line_cap(Cairo::Context::LineCap::ROUND);
 
   // draw the seconds hand
   cr->save();

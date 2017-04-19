@@ -44,17 +44,17 @@ void MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int hei
     cr->move_to(0.3, 0.3);
     cr->rel_line_to(0.2, -0.2);
     cr->rel_line_to(0.2, 0.2);
-    cr->set_line_join(Cairo::LINE_JOIN_MITER); /* default */
+    cr->set_line_join(Cairo::Context::LineJoin::MITER); /* default */
     cr->stroke();
     cr->move_to(0.3, 0.6);
     cr->rel_line_to(0.2, -0.2);
     cr->rel_line_to(0.2, 0.2);
-    cr->set_line_join(Cairo::LINE_JOIN_BEVEL);
+    cr->set_line_join(Cairo::Context::LineJoin::BEVEL);
     cr->stroke();
     cr->move_to(0.3, 0.9);
     cr->rel_line_to(0.2, -0.2);
     cr->rel_line_to(0.2, 0.2);
-    cr->set_line_join(Cairo::LINE_JOIN_ROUND);
+    cr->set_line_join(Cairo::Context::LineJoin::ROUND);
     cr->stroke();
   }
 }
