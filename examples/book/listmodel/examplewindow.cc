@@ -87,7 +87,7 @@ Gtk::Widget* ExampleWindow::on_create_widget1(const Glib::RefPtr<Glib::Object>& 
   }
   auto label = Gtk::manage(new Gtk::Label());
   Glib::Binding::bind_property(obj->property_label(), label->property_label(),
-    Glib::BindingFlags::SYNC_CREATE);
+    Glib::Binding::Flags::SYNC_CREATE);
   return label;
 }
 
@@ -101,7 +101,7 @@ Gtk::Widget* ExampleWindow::on_create_widget2(const Glib::RefPtr<MyObject>& item
   }
   auto label = Gtk::manage(new Gtk::Label());
   Glib::Binding::bind_property(item->property_label(), label->property_label(),
-    Glib::BindingFlags::SYNC_CREATE);
+    Glib::Binding::Flags::SYNC_CREATE);
   return label;
 }
 

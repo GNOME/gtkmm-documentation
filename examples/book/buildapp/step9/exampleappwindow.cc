@@ -79,7 +79,7 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
 
   // Bind properties of the search button to the search bar.
   m_binding_search_enabled = Glib::Binding::bind_property(m_search->property_active(),
-    m_searchbar->property_search_mode_enabled(), Glib::BindingFlags::BIDIRECTIONAL);
+    m_searchbar->property_search_mode_enabled(), Glib::Binding::Flags::BIDIRECTIONAL);
 
   // Connect signal handlers.
   m_searchentry->signal_search_changed().connect(

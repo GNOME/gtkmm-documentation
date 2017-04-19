@@ -68,7 +68,7 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
 
   // Bind properties.
   m_prop_binding = Glib::Binding::bind_property(m_search->property_active(),
-    m_searchbar->property_search_mode_enabled(), Glib::BindingFlags::BIDIRECTIONAL);
+    m_searchbar->property_search_mode_enabled(), Glib::Binding::Flags::BIDIRECTIONAL);
 
   // Connect signal handlers.
   m_searchentry->signal_search_changed().connect(
