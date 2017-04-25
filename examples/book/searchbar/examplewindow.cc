@@ -38,7 +38,7 @@ ExampleWindow::ExampleWindow()
   add_events(Gdk::EventMask::KEY_PRESS_MASK);
 
   // Connect signals
-  signal_key_press_event().connect(sigc::mem_fun(*this, &ExampleWindow::on_window_key_press));
+  signal_key_press_event().connect(sigc::mem_fun(*this, &ExampleWindow::on_window_key_press), true);
   m_search_bar.property_search_mode_enabled().signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_search_bar_reveal_changed));
 
   // Switches

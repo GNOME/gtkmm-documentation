@@ -56,7 +56,7 @@ DnDWindow::DnDWindow()
   m_Label_Popup.set_hexpand(true);
   m_Label_Popup.set_vexpand(true);
 
-  m_Label_Popup.signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_label_popup_drag_motion) );
+  m_Label_Popup.signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_label_popup_drag_motion), true );
   m_Label_Popup.signal_drag_leave().connect( sigc::mem_fun(*this, &DnDWindow::on_label_popup_drag_leave) );
 
   m_Image.set(m_trashcan_closed);
@@ -67,8 +67,8 @@ DnDWindow::DnDWindow()
   m_Image.set_vexpand(true);
 
   m_Image.signal_drag_leave().connect( sigc::mem_fun(*this, &DnDWindow::on_image_drag_leave) );
-  m_Image.signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_image_drag_motion) );
-  m_Image.signal_drag_drop().connect( sigc::mem_fun(*this, &DnDWindow::on_image_drag_drop) );
+  m_Image.signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_image_drag_motion), true );
+  m_Image.signal_drag_drop().connect( sigc::mem_fun(*this, &DnDWindow::on_image_drag_drop), true );
   m_Image.signal_drag_data_received().connect( sigc::mem_fun(*this, &DnDWindow::on_image_drag_data_received) );
 
   /* Drag site */
@@ -243,7 +243,7 @@ void DnDWindow::create_popup()
       pGrid->attach(*pButton, i, j, 1, 1);
 
       pButton->drag_dest_set(m_listTargetsNoRoot, Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
-      pButton->signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_button_drag_motion) );
+      pButton->signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_button_drag_motion), true );
       pButton->signal_drag_leave().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_button_drag_leave) );
     }
   }

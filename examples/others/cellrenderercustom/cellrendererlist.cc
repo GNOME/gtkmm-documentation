@@ -47,7 +47,7 @@ CellRendererList::CellRendererList()
   tree_view_.set_headers_visible(false);
   tree_view_.append_column("", popup_columns().item);
   tree_view_.signal_button_release_event().connect(
-      sigc::mem_fun(*this, &Self::on_tree_view_button_release_event));
+      sigc::mem_fun(*this, &Self::on_tree_view_button_release_event), true);
 
   const auto selection = tree_view_.get_selection();
   selection->set_mode(Gtk::SelectionMode::BROWSE);

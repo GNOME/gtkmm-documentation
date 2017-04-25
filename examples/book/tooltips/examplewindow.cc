@@ -114,10 +114,10 @@ void ExampleWindow::connect_signals()
     sigc::mem_fun(*this, &ExampleWindow::on_markup_checkbutton_click));
 
   m_text_view.signal_query_tooltip().connect(
-    sigc::mem_fun(*this, &ExampleWindow::on_textview_query_tooltip));
+    sigc::mem_fun(*this, &ExampleWindow::on_textview_query_tooltip), true);
 
   m_button.signal_query_tooltip().connect(
-    sigc::mem_fun(*this, &ExampleWindow::on_button_query_tooltip));
+    sigc::mem_fun(*this, &ExampleWindow::on_button_query_tooltip), true);
 }
 
 void ExampleWindow::on_markup_checkbutton_click()

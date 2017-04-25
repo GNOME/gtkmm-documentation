@@ -37,10 +37,10 @@ ExampleWindow::ExampleWindow()
   add_events(Gdk::EventMask::KEY_RELEASE_MASK);
 
   m_entry.signal_key_release_event().connect(
-    sigc::mem_fun(*this, &ExampleWindow::entryKeyRelease));
+    sigc::mem_fun(*this, &ExampleWindow::entryKeyRelease), true);
 
   m_container.signal_key_release_event().connect(
-    sigc::mem_fun(*this, &ExampleWindow::gridKeyRelease));
+    sigc::mem_fun(*this, &ExampleWindow::gridKeyRelease), true);
 
   // Called before the default event signal handler.
   signal_key_release_event().connect(
@@ -48,7 +48,7 @@ ExampleWindow::ExampleWindow()
 
   // Called after the default event signal handler.
   signal_key_release_event().connect(
-    sigc::mem_fun(*this, &ExampleWindow::windowKeyRelease));
+    sigc::mem_fun(*this, &ExampleWindow::windowKeyRelease), true);
 }
 
 //By changing the return value we allow, or don't allow, the event to propagate to other elements.
