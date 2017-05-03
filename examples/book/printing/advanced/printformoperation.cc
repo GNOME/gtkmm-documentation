@@ -158,14 +158,14 @@ Gtk::Widget* PrintFormOperation::on_create_custom_widget()
   vbox->set_margin(12);
 
   auto hbox = Gtk::manage(new Gtk::Box(Gtk::Orientation::HORIZONTAL, 8));
-  vbox->pack_start(*hbox, false, false);
+  vbox->pack_start(*hbox, Gtk::PackOptions::SHRINK);
   hbox->set_margin(6);
 
   auto label = Gtk::manage(new Gtk::Label("Choose a font: "));
-  hbox->pack_start(*label, false, false);
+  hbox->pack_start(*label, Gtk::PackOptions::SHRINK);
 
   m_FontButton.set_font_name(m_Font);
-  hbox->pack_start(m_FontButton, false, false);
+  hbox->pack_start(m_FontButton, Gtk::PackOptions::SHRINK);
 
   return vbox;
 }

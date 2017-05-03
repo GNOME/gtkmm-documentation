@@ -109,7 +109,7 @@ void ExampleWindow::on_placessidebar_open_location(const Glib::RefPtr<Gio::File>
   location_information_grid.set_margin_start(6);
   location_information_grid.set_margin_end(6);
 
-  dialog.get_content_area()->pack_end(location_information_grid, true, true);
+  dialog.get_content_area()->pack_end(location_information_grid, Gtk::PackOptions::EXPAND_WIDGET);
   dialog.run();
 }
 
