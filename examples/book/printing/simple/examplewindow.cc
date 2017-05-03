@@ -258,17 +258,17 @@ void ExampleWindow::on_printoperation_status_changed()
   m_Statusbar.push(status_msg, m_ContextId);
 }
 
-void ExampleWindow::on_printoperation_done(Gtk::PrintOperationResult result)
+void ExampleWindow::on_printoperation_done(Gtk::PrintOperation::Result result)
 {
   //Printing is "done" when the print data is spooled.
 
-  if (result == Gtk::PrintOperationResult::ERROR)
+  if (result == Gtk::PrintOperation::Result::ERROR)
   {
     Gtk::MessageDialog err_dialog(*this, "Error printing form", false,
             Gtk::MessageType::ERROR, Gtk::ButtonsType::OK, true);
     err_dialog.run();
   }
-  else if (result == Gtk::PrintOperationResult::APPLY)
+  else if (result == Gtk::PrintOperation::Result::APPLY)
   {
     //Update PrintSettings with the ones used in this PrintOperation:
     m_refSettings = m_refPrintFormOperation->get_print_settings();
@@ -284,7 +284,7 @@ void ExampleWindow::on_printoperation_done(Gtk::PrintOperationResult result)
   }
 }
 
-void ExampleWindow::print_or_preview(Gtk::PrintOperationAction print_action)
+void ExampleWindow::print_or_preview(Gtk::PrintOperation::Action print_action)
 {
   //Create a new PrintOperation with our PageSetup and PrintSettings:
   //(We use our derived PrintOperation class)
@@ -335,12 +335,12 @@ void ExampleWindow::on_menu_file_page_setup()
 
 void ExampleWindow::on_menu_file_print_preview()
 {
-  print_or_preview(Gtk::PrintOperationAction::PREVIEW);
+  print_or_preview(Gtk::PrintOperation::Action::PREVIEW);
 }
 
 void ExampleWindow::on_menu_file_print()
 {
-  print_or_preview(Gtk::PrintOperationAction::PRINT_DIALOG);
+  print_or_preview(Gtk::PrintOperation::Action::PRINT_DIALOG);
 }
 
 void ExampleWindow::on_menu_file_quit()

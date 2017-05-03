@@ -33,13 +33,13 @@ protected:
 
   void build_main_menu(const Glib::RefPtr<Gtk::Application>& app);
 
-  void print_or_preview(Gtk::PrintOperationAction print_action);
+  void print_or_preview(Gtk::PrintOperation::Action print_action);
 
   //PrintOperation signal handlers.
   //We handle these so can get necessary information to update the UI or print settings.
   //Our derived PrintOperation class also overrides some default signal handlers.
   void on_printoperation_status_changed();
-  void on_printoperation_done(Gtk::PrintOperationResult result);
+  void on_printoperation_done(Gtk::PrintOperation::Result result);
 
   //Action signal handlers:
   void on_menu_file_new();
