@@ -29,7 +29,7 @@ public:
 
 protected:
   //Signal handlers:
-  void on_icon_pressed(Gtk::EntryIconPosition icon_pos, const GdkEventButton* event);
+  void on_icon_pressed(Gtk::Entry::IconPosition icon_pos, const GdkEventButton* event);
   void on_button_close();
 
   //Child widgets:
