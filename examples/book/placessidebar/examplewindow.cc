@@ -132,7 +132,7 @@ void ExampleWindow::on_placessidebar_populate_popup(Gtk::Container* container, c
     properties_button->signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_menu_properties_activate));
     properties_button->show();
 
-    box->pack_end(*properties_button);
+    box->pack_end(*properties_button, Gtk::PackOptions::EXPAND_WIDGET);
   }
   else
   {
