@@ -157,6 +157,7 @@ ExampleWindow::ExampleWindow(int which)
 
   // pack the button into the quitbox.
   m_boxQuit.pack_start(m_buttonQuit, Gtk::PackOptions::EXPAND_PADDING);
+  m_buttonQuit.set_halign(Gtk::Align::CENTER);
   m_box1.pack_start(m_boxQuit, Gtk::PackOptions::SHRINK);
 
   // pack the vbox (box1) which now contains all our widgets, into the
