@@ -92,9 +92,9 @@ Glib::RefPtr<ExampleTreeModel> ExampleTreeModel::create()
   return Glib::make_refptr_for_instance( new ExampleTreeModel );
 }
 
-Gtk::TreeModelFlags ExampleTreeModel::get_flags_vfunc() const
+Gtk::TreeModel::Flags ExampleTreeModel::get_flags_vfunc() const
 {
-   return Gtk::TreeModelFlags(0);
+   return Gtk::TreeModel::Flags(0);
 }
 
 int ExampleTreeModel::get_n_columns_vfunc() const
