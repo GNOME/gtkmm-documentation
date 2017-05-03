@@ -39,7 +39,7 @@ DnDWindow::DnDWindow()
   m_Button_Drag.signal_drag_data_get().connect(sigc::mem_fun(*this,
               &DnDWindow::on_button_drag_data_get));
 
-  m_HBox.pack_start(m_Button_Drag);
+  m_HBox.pack_start(m_Button_Drag, Gtk::PackOptions::EXPAND_WIDGET);
 
   //Drop site:
 
@@ -50,7 +50,7 @@ DnDWindow::DnDWindow()
   m_Label_Drop.signal_drag_data_received().connect(sigc::mem_fun(*this,
               &DnDWindow::on_label_drop_drag_data_received) );
 
-  m_HBox.pack_start(m_Label_Drop);
+  m_HBox.pack_start(m_Label_Drop, Gtk::PackOptions::EXPAND_WIDGET);
 }
 
 DnDWindow::~DnDWindow()

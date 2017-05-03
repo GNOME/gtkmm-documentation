@@ -41,7 +41,7 @@ ExampleWindow::ExampleWindow()
   m_Color.set_alpha(1.0); //opaque
   m_ColorButton.set_rgba(m_Color);
 
-  m_VBox.pack_start(m_DrawingArea);
+  m_VBox.pack_start(m_DrawingArea, Gtk::PackOptions::EXPAND_WIDGET);
   m_DrawingArea.set_draw_func(sigc::mem_fun(*this, &ExampleWindow::on_drawing_area_draw));
 }
 

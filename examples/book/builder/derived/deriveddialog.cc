@@ -40,7 +40,7 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Bu
   // Show an icon.
   auto pImage = Gtk::manage(new Gtk::Image());
   pImage->set_from_icon_name(is_glad ? "face-smile" : "face-sad", Gtk::BuiltinIconSize::DIALOG);
-  get_content_area()->pack_start(*pImage);
+  get_content_area()->pack_start(*pImage, Gtk::PackOptions::EXPAND_WIDGET);
 }
 
 DerivedDialog::~DerivedDialog()

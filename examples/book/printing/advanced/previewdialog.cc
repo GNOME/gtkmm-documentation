@@ -41,7 +41,7 @@ PreviewDialog::PreviewDialog(
   m_VBox.set_margin(2);
   add(m_VBox);
 
-  m_HBox.pack_start(m_PageSpin);
+  m_HBox.pack_start(m_PageSpin, Gtk::PackOptions::EXPAND_WIDGET);
   m_HBox.pack_start(m_CloseButton, Gtk::PackOptions::SHRINK);
   m_VBox.pack_start(m_HBox, Gtk::PackOptions::SHRINK);
 

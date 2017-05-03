@@ -65,18 +65,18 @@ ExampleWindow::ExampleWindow()
   m_HScale.set_draw_value();
 
   add(m_VBox_Top);
-  m_VBox_Top.pack_start(m_VBox2);
+  m_VBox_Top.pack_start(m_VBox2, Gtk::PackOptions::EXPAND_WIDGET);
   m_VBox2.set_margin(10);
-  m_VBox2.pack_start(m_HBox_Scales);
+  m_VBox2.pack_start(m_HBox_Scales, Gtk::PackOptions::EXPAND_WIDGET);
 
   //Put VScale and HScale (above scrollbar) side-by-side.
-  m_HBox_Scales.pack_start(m_VScale);
-  m_HBox_Scales.pack_start(m_VBox_HScale);
+  m_HBox_Scales.pack_start(m_VScale, Gtk::PackOptions::EXPAND_WIDGET);
+  m_HBox_Scales.pack_start(m_VBox_HScale, Gtk::PackOptions::EXPAND_WIDGET);
 
-  m_VBox_HScale.pack_start(m_HScale);
+  m_VBox_HScale.pack_start(m_HScale, Gtk::PackOptions::EXPAND_WIDGET);
 
   //Scrollbar:
-  m_VBox_HScale.pack_start(m_Scrollbar);
+  m_VBox_HScale.pack_start(m_Scrollbar, Gtk::PackOptions::EXPAND_WIDGET);
 
   //CheckButton:
   m_CheckButton.set_active();
@@ -107,7 +107,7 @@ ExampleWindow::ExampleWindow()
   m_VBox2.pack_start(m_HBox_Combo, Gtk::PackOptions::SHRINK);
   m_HBox_Combo.pack_start(
     *Gtk::manage(new Gtk::Label("Scale Value Position:", 0)), Gtk::PackOptions::SHRINK);
-  m_HBox_Combo.pack_start(m_ComboBox_Position);
+  m_HBox_Combo.pack_start(m_ComboBox_Position, Gtk::PackOptions::EXPAND_WIDGET);
   m_ComboBox_Position.signal_changed().connect( sigc::mem_fun(*this, &ExampleWindow::on_combo_position) );
   m_ComboBox_Position.set_active(0); // Top
 
@@ -117,7 +117,7 @@ ExampleWindow::ExampleWindow()
   m_Scale_Digits.set_digits(0);
   m_adjustment_digits->signal_value_changed().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_adjustment1_value_changed));
-  m_HBox_Digits.pack_start(m_Scale_Digits);
+  m_HBox_Digits.pack_start(m_Scale_Digits, Gtk::PackOptions::EXPAND_WIDGET);
 
   //Page Size:
   m_HBox_PageSize.pack_start(
@@ -126,7 +126,7 @@ ExampleWindow::ExampleWindow()
   m_Scale_PageSize.set_digits(0);
   m_adjustment_pagesize->signal_value_changed().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_adjustment2_value_changed));
-  m_HBox_PageSize.pack_start(m_Scale_PageSize);
+  m_HBox_PageSize.pack_start(m_Scale_PageSize, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_VBox2.pack_start(m_HBox_Digits, Gtk::PackOptions::SHRINK);
   m_VBox2.pack_start(m_HBox_PageSize, Gtk::PackOptions::SHRINK);

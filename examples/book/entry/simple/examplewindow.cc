@@ -32,24 +32,24 @@ ExampleWindow::ExampleWindow()
   m_Entry.set_text("hello");
   m_Entry.set_text(m_Entry.get_text() + " world");
   m_Entry.select_region(0, m_Entry.get_text_length());
-  m_VBox.pack_start(m_Entry);
+  m_VBox.pack_start(m_Entry, Gtk::PackOptions::EXPAND_WIDGET);
 
   // Note that add() can also be used instead of pack_xxx()
   m_VBox.add(m_HBox);
 
-  m_HBox.pack_start(m_CheckButton_Editable);
+  m_HBox.pack_start(m_CheckButton_Editable, Gtk::PackOptions::EXPAND_WIDGET);
   m_CheckButton_Editable.signal_toggled().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_checkbox_editable_toggled) );
   m_CheckButton_Editable.set_active(true);
 
-  m_HBox.pack_start(m_CheckButton_Visible);
+  m_HBox.pack_start(m_CheckButton_Visible, Gtk::PackOptions::EXPAND_WIDGET);
   m_CheckButton_Visible.signal_toggled().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_checkbox_visibility_toggled) );
   m_CheckButton_Visible.set_active(true);
 
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
-  m_VBox.pack_start(m_Button_Close);
+  m_VBox.pack_start(m_Button_Close, Gtk::PackOptions::EXPAND_WIDGET);
   m_Button_Close.set_can_default();
   m_Button_Close.grab_default();
 }

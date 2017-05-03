@@ -75,7 +75,7 @@ void ExampleWindow::prepare_textview()
   //Set up a scrolled window:
   m_scrolled_window.add(m_text_view);
   m_scrolled_window.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
-  m_vbox.pack_start(m_scrolled_window);
+  m_vbox.pack_start(m_scrolled_window, Gtk::PackOptions::EXPAND_WIDGET);
 
   //Create a text buffer with some text:
   m_ref_text_buffer = Gtk::TextBuffer::create();

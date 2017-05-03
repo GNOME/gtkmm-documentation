@@ -58,7 +58,7 @@ ExampleWindow::ExampleWindow()
   //Add the model columns to the Combo (which is a kind of view),
   //rendering them in the default way:
   //This is automatically rendered when we use set_entry_text_column().
-  //m_Combo.pack_start(m_Columns.m_col_id);
+  //m_Combo.pack_start(m_Columns.m_col_id, Gtk::PackOptions::EXPAND_WIDGET);
   m_Combo.pack_start(m_Columns.m_col_name);
 
   m_Combo.set_entry_text_column(m_Columns.m_col_id);

@@ -40,7 +40,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
 
   build_main_menu(app);
 
-  m_VBox.pack_start(m_Grid);
+  m_VBox.pack_start(m_Grid, Gtk::PackOptions::EXPAND_WIDGET);
 
   //Arrange the widgets inside the grid:
   m_Grid.set_row_spacing(5);
@@ -65,7 +65,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   m_refTextBuffer = Gtk::TextBuffer::create();
   m_TextView.set_buffer(m_refTextBuffer);
 
-  m_VBox.pack_start(m_Statusbar);
+  m_VBox.pack_start(m_Statusbar, Gtk::PackOptions::EXPAND_WIDGET);
 }
 
 ExampleWindow::~ExampleWindow()

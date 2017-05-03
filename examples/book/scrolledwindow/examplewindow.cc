@@ -31,7 +31,7 @@ ExampleWindow::ExampleWindow()
    * the vertical. */
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::ALWAYS);
 
-  get_content_area()->pack_start(m_ScrolledWindow);
+  get_content_area()->pack_start(m_ScrolledWindow, Gtk::PackOptions::EXPAND_WIDGET);
 
   /* set the spacing to 10 on x and 10 on y */
   m_Grid.set_row_spacing(10);

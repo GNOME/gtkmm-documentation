@@ -239,7 +239,7 @@ ExampleWindow::ExampleWindow()
   m_ScrolledWindowPalette.set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC);
   m_ScrolledWindowPalette.set_margin(6);
   m_ScrolledWindowPalette.add(m_ToolPalette);
-  m_HBox.pack_start(m_ScrolledWindowPalette);
+  m_HBox.pack_start(m_ScrolledWindowPalette, Gtk::PackOptions::EXPAND_WIDGET);
 
   on_combo_orientation_changed();
 
@@ -247,7 +247,7 @@ ExampleWindow::ExampleWindow()
   m_ScrolledWindowCanvas.set_margin(6);
   m_ScrolledWindowCanvas.add(m_Canvas);
   m_ScrolledWindowCanvas.set_size_request(200, -1);
-  m_HBox.pack_start(m_ScrolledWindowCanvas);
+  m_HBox.pack_start(m_ScrolledWindowCanvas, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_ToolPalette.add_drag_dest(m_Canvas,
     Gtk::DestDefaults::HIGHLIGHT, Gtk::ToolPaletteDragTargets::ITEMS, Gdk::DragAction::COPY);

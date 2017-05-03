@@ -235,7 +235,7 @@ CalendarExample::CalendarExample()
   {
     auto toggle = new Gtk::CheckButton(flags[i].label);
     toggle->signal_toggled().connect(sigc::bind(sigc::mem_fun(*this, &CalendarExample::toggle_flag), toggle));
-    vbox3->pack_start(*toggle);
+    vbox3->pack_start(*toggle, Gtk::PackOptions::EXPAND_WIDGET);
     flag_checkboxes_[i] = toggle;
   }
 

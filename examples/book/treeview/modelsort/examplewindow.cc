@@ -36,8 +36,8 @@ ExampleWindow::ExampleWindow()
   m_ScrolledWindow1.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
   m_ScrolledWindow2.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
-  m_VBox.pack_start(m_ScrolledWindow1);
-  m_VBox.pack_start(m_ScrolledWindow2);
+  m_VBox.pack_start(m_ScrolledWindow1, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox.pack_start(m_ScrolledWindow2, Gtk::PackOptions::EXPAND_WIDGET);
   m_VBox.pack_start(m_ButtonBox, Gtk::PackOptions::SHRINK);
 
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PackOptions::SHRINK);

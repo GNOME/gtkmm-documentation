@@ -31,7 +31,7 @@ ExampleWindow::ExampleWindow()
   m_VBox.pack_start(m_Label, Gtk::PackOptions::SHRINK);
 
   //Fill Grid:
-  m_VBox.pack_start(m_Grid);
+  m_VBox.pack_start(m_Grid, Gtk::PackOptions::EXPAND_WIDGET);
   m_Grid.set_row_homogeneous(true);
   m_Grid.set_column_homogeneous(true);
   m_Grid.attach(m_ButtonA1, 0, 0, 1, 1);

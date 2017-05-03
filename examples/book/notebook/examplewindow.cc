@@ -31,7 +31,7 @@ ExampleWindow::ExampleWindow()
 
   //Add the Notebook, with the button underneath:
   m_Notebook.set_margin(10);
-  m_VBox.pack_start(m_Notebook);
+  m_VBox.pack_start(m_Notebook, Gtk::PackOptions::EXPAND_WIDGET);
   m_VBox.pack_start(m_ButtonBox, Gtk::PackOptions::SHRINK);
 
   m_ButtonBox.pack_start(m_Button_Quit, Gtk::PackOptions::SHRINK);

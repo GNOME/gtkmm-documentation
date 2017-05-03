@@ -38,7 +38,7 @@ HelloWorld::HelloWorld()
   // instead of gtk_container_add, we pack this button into the invisible
   // box, which has been packed into the window.
   // note that the pack_start default arguments are Gtk::EXPAND | Gtk::FILL, 0
-  m_box1.pack_start(m_button1);
+  m_box1.pack_start(m_button1, Gtk::PackOptions::EXPAND_WIDGET);
 
   // always remember this step, this tells GTK that our preparation
   // for this button is complete, and it can be displayed now.
@@ -49,7 +49,7 @@ HelloWorld::HelloWorld()
   m_button2.signal_clicked().connect(sigc::bind(
               sigc::mem_fun(*this, &HelloWorld::on_button_clicked), "button 2"));
 
-  m_box1.pack_start(m_button2);
+  m_box1.pack_start(m_button2, Gtk::PackOptions::EXPAND_WIDGET);
 
   // Show the widgets.
   // They will not really be shown until this Window is shown.

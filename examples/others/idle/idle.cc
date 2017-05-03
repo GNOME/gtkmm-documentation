@@ -45,17 +45,17 @@ IdleExample::IdleExample() :
   // adding a few widgets
   vbox->pack_start(* manage(new Gtk::Label("Formatting windows drive C:")));
   vbox->pack_start(* manage(new Gtk::Label("100 MB")));
-  vbox->pack_start(m_progressbar_c);
+  vbox->pack_start(m_progressbar_c, Gtk::PackOptions::EXPAND_WIDGET);
 
   vbox->pack_start(* manage(new Gtk::Label("")));
 
   vbox->pack_start(* manage(new Gtk::Label("Formatting windows drive D:")));
   vbox->pack_start(* manage(new Gtk::Label("5000 MB")));
-  vbox->pack_start(m_progressbar_d);
+  vbox->pack_start(m_progressbar_d, Gtk::PackOptions::EXPAND_WIDGET);
 
   Gtk::Box *hbox = manage( new Gtk::Box(Gtk::Orientation::HORIZONTAL,10));
   hbox->pack_start(m_quit, Gtk::PackOptions::EXPAND_PADDING);
-  vbox->pack_start(*hbox);
+  vbox->pack_start(*hbox, Gtk::PackOptions::EXPAND_WIDGET);
 
   // set margin and display all
   vbox->set_margin(5);

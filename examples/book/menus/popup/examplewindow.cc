@@ -28,7 +28,7 @@ ExampleWindow::ExampleWindow()
   add(m_Box);
 
   //Add an event box that can catch button_press events:
-  m_Box.pack_start(m_EventBox);
+  m_Box.pack_start(m_EventBox, Gtk::PackOptions::EXPAND_WIDGET);
   m_EventBox.signal_button_press_event().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_press_event), true);
 

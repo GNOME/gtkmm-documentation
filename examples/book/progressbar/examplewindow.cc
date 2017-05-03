@@ -44,7 +44,7 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::on_timeout), 50 );
 
   m_VBox.pack_start(m_Separator, Gtk::PackOptions::SHRINK);
-  m_VBox.pack_start(m_Grid);
+  m_VBox.pack_start(m_Grid, Gtk::PackOptions::EXPAND_WIDGET);
   m_Grid.set_row_homogeneous(true);
 
   //Add a check button to select displaying of the trough text:

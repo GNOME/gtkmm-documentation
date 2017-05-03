@@ -66,7 +66,7 @@ ExampleWindow::ExampleWindow()
   m_Combo.pack_start(m_Columns.m_col_name);
 
   //An example of adding a cell renderer manually,
-  //instead of using pack_start(model_column)
+  //instead of using pack_start(model_column, Gtk::PackOptions::EXPAND_WIDGET)
   //so we have more control:
   m_Combo.set_cell_data_func(m_cell,
     sigc::mem_fun(*this, &ExampleWindow::on_cell_data_extra));

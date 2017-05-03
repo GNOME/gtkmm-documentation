@@ -37,13 +37,13 @@ StatusBarExample::StatusBarExample()
 
   add(m_vbox);
 
-  m_vbox.pack_start(m_status_bar);
+  m_vbox.pack_start(m_status_bar, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_bPush.signal_clicked().connect( sigc::bind(sigc::mem_fun(*this, &StatusBarExample::push_item), m_context_id) );
-  m_vbox.pack_start(m_bPush);
+  m_vbox.pack_start(m_bPush, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_bPop.signal_clicked().connect( sigc::bind(sigc::mem_fun(*this, &StatusBarExample::pop_item), m_context_id) );
-  m_vbox.pack_start(m_bPop);
+  m_vbox.pack_start(m_bPop, Gtk::PackOptions::EXPAND_WIDGET);
 }
 
 void

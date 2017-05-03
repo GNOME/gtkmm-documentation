@@ -27,9 +27,9 @@ TimerExample::TimerExample() :
 {
   m_Box.set_margin(10);
   add(m_Box);
-  m_Box.pack_start(m_ButtonAddTimer);
-  m_Box.pack_start(m_ButtonDeleteTimer);
-  m_Box.pack_start(m_ButtonQuit);
+  m_Box.pack_start(m_ButtonAddTimer, Gtk::PackOptions::EXPAND_WIDGET);
+  m_Box.pack_start(m_ButtonDeleteTimer, Gtk::PackOptions::EXPAND_WIDGET);
+  m_Box.pack_start(m_ButtonQuit, Gtk::PackOptions::EXPAND_WIDGET);
 
   // Connect the three buttons:
   m_ButtonQuit.signal_clicked().connect(sigc::mem_fun(*this,

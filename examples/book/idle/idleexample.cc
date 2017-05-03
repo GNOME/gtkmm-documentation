@@ -28,16 +28,16 @@ IdleExample::IdleExample() :
   add(m_Box);
   m_Box.pack_start( *Gtk::manage(new Gtk::Label("Formatting Windows drive C:")));
   m_Box.pack_start( *Gtk::manage(new Gtk::Label("100 MB")) );
-  m_Box.pack_start(m_ProgressBar_c);
+  m_Box.pack_start(m_ProgressBar_c, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_Box.pack_start( *Gtk::manage(new Gtk::Label("")) );
 
   m_Box.pack_start( *Gtk::manage(new Gtk::Label("Formatting Windows drive D:")));
   m_Box.pack_start( *Gtk::manage(new Gtk::Label("5000 MB")) );
-  m_Box.pack_start(m_ProgressBar_d);
+  m_Box.pack_start(m_ProgressBar_d, Gtk::PackOptions::EXPAND_WIDGET);
 
   auto hbox = Gtk::manage( new Gtk::Box(Gtk::Orientation::HORIZONTAL,10));
-  m_Box.pack_start(*hbox);
+  m_Box.pack_start(*hbox, Gtk::PackOptions::EXPAND_WIDGET);
   hbox->pack_start(m_ButtonQuit, Gtk::PackOptions::EXPAND_PADDING);
 
   // Connect the signal handlers:

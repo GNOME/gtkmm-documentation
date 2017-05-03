@@ -47,7 +47,7 @@ ExampleWindow::ExampleWindow() :
   // Only show the scrollbars when they are necessary.
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
-  m_VBox.pack_start(m_ScrolledWindow);
+  m_VBox.pack_start(m_ScrolledWindow, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_TextView.set_editable(false);
 
