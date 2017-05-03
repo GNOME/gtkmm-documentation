@@ -31,7 +31,7 @@ bool grab_on_window(const Glib::RefPtr<Gdk::Window>& window)
   {
     auto seat = device->get_seat();
     if (seat &&
-        seat->grab(window, Gdk::SeatCapabilities::ALL, true) == Gdk::GrabStatus::SUCCESS)
+        seat->grab(window, Gdk::Seat::Capabilities::ALL, true) == Gdk::GrabStatus::SUCCESS)
       return true;
   }
 
