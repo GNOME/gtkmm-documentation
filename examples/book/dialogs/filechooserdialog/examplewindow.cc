@@ -43,7 +43,7 @@ ExampleWindow::~ExampleWindow()
 void ExampleWindow::on_button_folder_clicked()
 {
   Gtk::FileChooserDialog dialog("Please choose a folder",
-          Gtk::FileChooserAction::SELECT_FOLDER);
+          Gtk::FileChooser::Action::SELECT_FOLDER);
   dialog.set_transient_for(*this);
 
   //Add response buttons the the dialog:
@@ -78,7 +78,7 @@ void ExampleWindow::on_button_folder_clicked()
 void ExampleWindow::on_button_file_clicked()
 {
   Gtk::FileChooserDialog dialog("Please choose a file",
-          Gtk::FileChooserAction::OPEN);
+          Gtk::FileChooser::Action::OPEN);
   dialog.set_transient_for(*this);
 
   //Add response buttons the the dialog:

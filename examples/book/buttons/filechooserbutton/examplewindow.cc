@@ -18,7 +18,7 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_button("Select file", Gtk::FileChooserAction::OPEN)
+: m_button("Select file", Gtk::FileChooser::Action::OPEN)
 {
   set_default_size(200, -1);
 
