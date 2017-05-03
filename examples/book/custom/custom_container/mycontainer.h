@@ -35,7 +35,7 @@ protected:
     int& minimum_baseline, int& natural_baseline) const override;
   void on_size_allocate(Gtk::Allocation& allocation) override;
 
-  void forall_vfunc(bool include_internals, const ForeachSlot& slot) override;
+  void forall_vfunc(const ForeachSlot& slot) override;
 
   void on_add(Gtk::Widget* child) override;
   void on_remove(Gtk::Widget* child) override;

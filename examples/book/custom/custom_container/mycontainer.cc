@@ -181,7 +181,7 @@ void MyContainer::on_size_allocate(Gtk::Allocation& allocation)
     m_child_two->size_allocate(child_allocation_two);
 }
 
-void MyContainer::forall_vfunc(bool /* include_internals */, const ForeachSlot& slot)
+void MyContainer::forall_vfunc(const ForeachSlot& slot)
 {
   if (m_child_one)
     slot(*m_child_one);
