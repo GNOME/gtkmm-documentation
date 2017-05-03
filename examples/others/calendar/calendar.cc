@@ -175,7 +175,7 @@ CalendarExample::CalendarExample()
 
   set_resizable(false);
 
-  auto vbox = Gtk::manage(new Gtk::Box(Gtk::Orientation::VERTICAL, DEF_PAD));
+  auto vbox = Gtk::manage(new Gtk::Box(Gtk::Orientation::VERTICAL, DEF_PAD * 2));
   vbox->set_margin(5);
   add(*vbox);
 
@@ -184,15 +184,18 @@ CalendarExample::CalendarExample()
    */
 
   auto hbox = Gtk::manage(new Gtk::Box(Gtk::Orientation::HORIZONTAL, DEF_PAD));
-  vbox->pack_start(*hbox, Gtk::PackOptions::EXPAND_WIDGET, DEF_PAD);
+  vbox->pack_start(*hbox, Gtk::PackOptions::EXPAND_WIDGET);
   auto hbbox = Gtk::manage(new Gtk::ButtonBox());
-  hbox->pack_start(*hbbox, Gtk::PackOptions::SHRINK, DEF_PAD);
+  hbox->pack_start(*hbbox, Gtk::PackOptions::SHRINK);
+  hbbox->set_margin_end(DEF_PAD);
   hbbox->set_layout(Gtk::ButtonBoxStyle::SPREAD);
   hbbox->set_spacing(5);
 
   /* Calendar widget */
   auto frame = Gtk::manage(new Gtk::Frame("Calendar"));
-  hbbox->pack_start(*frame, Gtk::PackOptions::EXPAND_WIDGET, DEF_PAD);
+  hbbox->pack_start(*frame, Gtk::PackOptions::EXPAND_WIDGET);
+  frame->set_margin_start(DEF_PAD);
+  frame->set_margin_end(DEF_PAD);
   calendar_ = new Gtk::Calendar();
   set_flags();
   calendar_->mark_day(19);
@@ -205,12 +208,15 @@ CalendarExample::CalendarExample()
   hbox->pack_start (*separator, Gtk::PackOptions::SHRINK);
 
   auto vbox2 = Gtk::manage(new Gtk::Box(Gtk::Orientation::VERTICAL, DEF_PAD));
-  hbox->pack_start(*vbox2, Gtk::PackOptions::SHRINK, DEF_PAD);
+  hbox->pack_start(*vbox2, Gtk::PackOptions::SHRINK);
+  vbox2->set_margin_start(DEF_PAD);
+  vbox2->set_margin_end(DEF_PAD);
 
   /* Build the Right frame with the flags in */
 
   auto frameFlags = Gtk::manage(new Gtk::Frame("Flags"));
-  vbox2->pack_start(*frameFlags, Gtk::PackOptions::EXPAND_WIDGET, DEF_PAD);
+  vbox2->pack_start(*frameFlags, Gtk::PackOptions::EXPAND_WIDGET);
+  frameFlags->set_margin_end(DEF_PAD);
   auto vbox3 = Gtk::manage(new Gtk::Box(Gtk::Orientation::VERTICAL, DEF_PAD_SMALL));
   frameFlags->add(*vbox3);
 
@@ -253,7 +259,7 @@ CalendarExample::CalendarExample()
    *  Build the Signal-event part.
    */
   frame = Gtk::manage(new Gtk::Frame("Signal events"));
-  vbox->pack_start(*frame, Gtk::PackOptions::EXPAND_WIDGET, DEF_PAD);
+  vbox->pack_start(*frame, Gtk::PackOptions::EXPAND_WIDGET);
   vbox2 = Gtk::manage(new Gtk::Box(Gtk::Orientation::VERTICAL, DEF_PAD_SMALL));
   frame->add(*vbox2);
 

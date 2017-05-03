@@ -59,7 +59,8 @@ ExampleWindow::ExampleWindow()
   m_up_down_box.pack_start(m_go_down_button, Gtk::PackOptions::SHRINK);
   m_up_down_box.pack_start(m_go_up_button, Gtk::PackOptions::SHRINK);
   m_search_box.pack_end(m_up_down_box, Gtk::PackOptions::SHRINK);
-  m_search_box.pack_start(m_entry, Gtk::PackOptions::EXPAND_WIDGET, 6);
+  m_search_box.pack_start(m_entry, Gtk::PackOptions::EXPAND_WIDGET);
+  m_search_box.set_spacing(6);
   m_search_bar.add(m_search_box);
 
   // Match style of epiphany's search bar
@@ -70,10 +71,15 @@ ExampleWindow::ExampleWindow()
   m_go_up_button.set_image_from_icon_name("go-up-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
   m_go_down_button.set_image_from_icon_name("go-down-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
 
-  m_vbox.pack_start(m_search_bar, Gtk::PackOptions::SHRINK, 6);
-  m_vbox.pack_start(m_label, Gtk::PackOptions::SHRINK, 6);
-  m_vbox.pack_start(m_separator, Gtk::PackOptions::SHRINK, 12);
-  m_vbox.pack_start(m_options_grid, Gtk::PackOptions::SHRINK, 12);
+  m_vbox.set_spacing(6);
+  m_vbox.pack_start(m_search_bar, Gtk::PackOptions::SHRINK);
+  m_vbox.pack_start(m_label, Gtk::PackOptions::SHRINK);
+  m_vbox.pack_start(m_separator, Gtk::PackOptions::SHRINK);
+  m_separator.set_margin_start(6);
+  m_separator.set_margin_end(6);
+  m_vbox.pack_start(m_options_grid, Gtk::PackOptions::SHRINK);
+  m_options_grid.set_margin_start(6);
+  m_options_grid.set_margin_end(6);
   m_vbox.set_margin(12);
   add(m_vbox);
 }

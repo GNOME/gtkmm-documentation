@@ -31,7 +31,8 @@ ExampleWindow::ExampleWindow()
   m_VBox.set_margin(10);
   add(m_VBox);
 
-  m_VBox.pack_start(m_ProgressBar, Gtk::PackOptions::SHRINK, 5);
+  m_VBox.pack_start(m_ProgressBar, Gtk::PackOptions::SHRINK);
+  m_ProgressBar.set_margin_end(5);
   m_ProgressBar.set_halign(Gtk::Align::CENTER);
   m_ProgressBar.set_valign(Gtk::Align::CENTER);
   m_ProgressBar.set_size_request(100, -1);

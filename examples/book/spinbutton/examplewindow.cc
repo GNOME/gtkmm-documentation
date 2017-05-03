@@ -63,7 +63,8 @@ ExampleWindow::ExampleWindow()
 
   /* Day, month, year spinners */
 
-  m_VBox.pack_start(m_HBox_NotAccelerated, Gtk::PackOptions::EXPAND_WIDGET, 5);
+  m_VBox.set_spacing(5);
+  m_VBox.pack_start(m_HBox_NotAccelerated, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_VBox_Day.pack_start(m_Label_Day);
 
@@ -71,14 +72,15 @@ ExampleWindow::ExampleWindow()
 
   m_VBox_Day.pack_start(m_SpinButton_Day);
 
-  m_HBox_NotAccelerated.pack_start(m_VBox_Day, Gtk::PackOptions::EXPAND_WIDGET, 5);
+  m_HBox_NotAccelerated.set_spacing(5);
+  m_HBox_NotAccelerated.pack_start(m_VBox_Day, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_VBox_Month.pack_start(m_Label_Month);
 
   m_SpinButton_Month.set_wrap();
   m_VBox_Month.pack_start(m_SpinButton_Month);
 
-  m_HBox_NotAccelerated.pack_start(m_VBox_Month, Gtk::PackOptions::EXPAND_WIDGET, 5);
+  m_HBox_NotAccelerated.pack_start(m_VBox_Month, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_VBox_Year.pack_start(m_Label_Year);
 
@@ -86,7 +88,7 @@ ExampleWindow::ExampleWindow()
   m_SpinButton_Year.set_size_request(55, -1);
   m_VBox_Year.pack_start(m_SpinButton_Year);
 
-  m_HBox_NotAccelerated.pack_start(m_VBox_Year, Gtk::PackOptions::EXPAND_WIDGET, 5);
+  m_HBox_NotAccelerated.pack_start(m_VBox_Year, Gtk::PackOptions::EXPAND_WIDGET);
 
   //Accelerated:
   m_VBox_Main.pack_start(m_Frame_Accelerated);
@@ -94,9 +96,10 @@ ExampleWindow::ExampleWindow()
   m_VBox_Accelerated.set_margin(5);
   m_Frame_Accelerated.add(m_VBox_Accelerated);
 
-  m_VBox_Accelerated.pack_start(m_HBox_Accelerated, Gtk::PackOptions::EXPAND_WIDGET, 5);
+  m_VBox_Accelerated.set_spacing(5);
+  m_VBox_Accelerated.pack_start(m_HBox_Accelerated, Gtk::PackOptions::EXPAND_WIDGET);
 
-  m_HBox_Accelerated.pack_start(m_VBox_Value, Gtk::PackOptions::EXPAND_WIDGET, 5);
+  m_HBox_Accelerated.pack_start(m_VBox_Value, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_VBox_Value.pack_start(m_Label_Value);
 
@@ -104,7 +107,7 @@ ExampleWindow::ExampleWindow()
   m_SpinButton_Value.set_size_request(100, -1);
   m_VBox_Value.pack_start(m_SpinButton_Value);
 
-  m_HBox_Accelerated.pack_start(m_VBox_Digits, Gtk::PackOptions::EXPAND_WIDGET, 5);
+  m_HBox_Accelerated.pack_start(m_VBox_Digits, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_VBox_Digits.pack_start(m_Label_Digits);
 
@@ -128,15 +131,16 @@ ExampleWindow::ExampleWindow()
 
 
   //Buttons:
-  m_VBox_Accelerated.pack_start (m_HBox_Buttons, Gtk::PackOptions::SHRINK, 5);
+  m_VBox_Accelerated.pack_start (m_HBox_Buttons, Gtk::PackOptions::SHRINK);
 
   m_Button_Int.signal_clicked().connect( sigc::bind( sigc::mem_fun(*this,
                   &ExampleWindow::on_button_getvalue), VALUE_FORMAT_INT) );
-  m_HBox_Buttons.pack_start(m_Button_Int, Gtk::PackOptions::EXPAND_WIDGET, 5);
+  m_HBox_Buttons.set_spacing(5);
+  m_HBox_Buttons.pack_start(m_Button_Int, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_Button_Float.signal_clicked().connect( sigc::bind( sigc::mem_fun(*this,
                   &ExampleWindow::on_button_getvalue), VALUE_FORMAT_FLOAT) );
-  m_HBox_Buttons.pack_start(m_Button_Float, Gtk::PackOptions::EXPAND_WIDGET, 5);
+  m_HBox_Buttons.pack_start(m_Button_Float, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_VBox_Accelerated.pack_start(m_Label_ShowValue);
   m_Label_ShowValue.set_text("0");
