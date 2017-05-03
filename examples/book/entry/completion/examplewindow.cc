@@ -26,13 +26,13 @@ ExampleWindow::ExampleWindow()
   set_title("Gtk::EntryCompletion");
 
   add(m_VBox);
-  m_VBox.pack_start(m_Entry, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_Entry, Gtk::PackOptions::SHRINK);
 
-  m_VBox.pack_start(m_Label, Gtk::PACK_EXPAND_WIDGET);
+  m_VBox.pack_start(m_Label, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
-  m_VBox.pack_start(m_Button_Close, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_Button_Close, Gtk::PackOptions::SHRINK);
   m_Button_Close.set_can_default();
   m_Button_Close.grab_default();
 

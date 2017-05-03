@@ -36,7 +36,7 @@ ExampleWindow::ExampleWindow() :
   add(m_VBox);
 
   // Add the ProgressBar.
-  m_VBox.pack_start(m_ProgressBar, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_ProgressBar, Gtk::PackOptions::SHRINK);
 
   m_ProgressBar.set_text("Fraction done");
   m_ProgressBar.set_show_text();
@@ -52,11 +52,11 @@ ExampleWindow::ExampleWindow() :
   m_TextView.set_editable(false);
 
   // Add the buttons to the ButtonBox.
-  m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_ButtonBox, Gtk::PackOptions::SHRINK);
 
-  m_ButtonBox.pack_start(m_ButtonStart, Gtk::PACK_SHRINK);
-  m_ButtonBox.pack_start(m_ButtonStop, Gtk::PACK_SHRINK);
-  m_ButtonBox.pack_start(m_ButtonQuit, Gtk::PACK_SHRINK);
+  m_ButtonBox.pack_start(m_ButtonStart, Gtk::PackOptions::SHRINK);
+  m_ButtonBox.pack_start(m_ButtonStop, Gtk::PackOptions::SHRINK);
+  m_ButtonBox.pack_start(m_ButtonQuit, Gtk::PackOptions::SHRINK);
   m_ButtonBox.set_margin(5);
   m_ButtonBox.set_spacing(5);
   m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);

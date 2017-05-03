@@ -37,7 +37,7 @@ ExampleWindow::ExampleWindow()
   m_InfoBar.add_button("_OK", 0);
 
   // Add the InfoBar to the vbox:
-  m_VBox.pack_start(m_InfoBar, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_InfoBar, Gtk::PackOptions::SHRINK);
 
   // Create the buffer and set it for the TextView:
   m_refTextBuffer = Gtk::TextBuffer::create();
@@ -52,10 +52,10 @@ ExampleWindow::ExampleWindow()
   m_VBox.pack_start(m_ScrolledWindow);
 
   // Add button box:
-  m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_ButtonBox, Gtk::PackOptions::SHRINK);
 
-  m_ButtonBox.pack_start(m_Button_Clear, Gtk::PACK_SHRINK);
-  m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
+  m_ButtonBox.pack_start(m_Button_Clear, Gtk::PackOptions::SHRINK);
+  m_ButtonBox.pack_start(m_Button_Quit, Gtk::PackOptions::SHRINK);
   m_ButtonBox.set_spacing(6);
   m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
 

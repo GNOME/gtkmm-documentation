@@ -38,11 +38,11 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
   add(*Gtk::manage(hbox));
 
   entry_ = new Gtk::Entry();
-  hbox->pack_start(*Gtk::manage(entry_), Gtk::PACK_EXPAND_WIDGET);
+  hbox->pack_start(*Gtk::manage(entry_), Gtk::PackOptions::EXPAND_WIDGET);
   entry_->set_has_frame(false);
 
   button_ = new Gtk::Button();
-  hbox->pack_start(*Gtk::manage(button_), Gtk::PACK_SHRINK);
+  hbox->pack_start(*Gtk::manage(button_), Gtk::PackOptions::SHRINK);
   button_->set_image_from_icon_name("pan-down-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
 
   set_can_focus();

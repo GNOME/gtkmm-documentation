@@ -35,9 +35,9 @@ ExampleWindow::ExampleWindow()
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
   m_VBox.pack_start(m_ScrolledWindow);
-  m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_ButtonBox, Gtk::PackOptions::SHRINK);
 
-  m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
+  m_ButtonBox.pack_start(m_Button_Quit, Gtk::PackOptions::SHRINK);
   m_ButtonBox.set_margin(5);
   m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
   m_Button_Quit.signal_clicked().connect( sigc::mem_fun(*this,

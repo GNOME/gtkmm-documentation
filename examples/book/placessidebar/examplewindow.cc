@@ -55,8 +55,8 @@ ExampleWindow::ExampleWindow()
 
   // Layout
   m_controls_frame.add(m_controls);
-  m_hbox.pack_start(m_places_sidebar, Gtk::PACK_EXPAND_WIDGET);
-  m_hbox.pack_start(m_controls_frame, Gtk::PACK_SHRINK);
+  m_hbox.pack_start(m_places_sidebar, Gtk::PackOptions::EXPAND_WIDGET);
+  m_hbox.pack_start(m_controls_frame, Gtk::PackOptions::SHRINK);
   m_hbox.set_margin(12);
   add(m_hbox);
 }

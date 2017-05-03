@@ -21,9 +21,9 @@ PackBox::PackBox(bool homogeneous, int spacing, Gtk::PackOptions options,
 : Gtk::Box(Gtk::Orientation::HORIZONTAL, spacing),
   m_button1("box.pack_start("),
   m_button2("button,"),
-  m_button3((options == Gtk::PACK_SHRINK) ? "Gtk::PACK_SHRINK);" :
-            ((options == Gtk::PACK_EXPAND_PADDING) ?
-             "Gtk::PACK_EXPAND_PADDING);" : "Gtk::PACK_EXPAND_WIDGET);"))
+  m_button3((options == Gtk::PackOptions::SHRINK) ? "Gtk::PackOptions::SHRINK);" :
+            ((options == Gtk::PackOptions::EXPAND_PADDING) ?
+             "Gtk::PackOptions::EXPAND_PADDING);" : "Gtk::PackOptions::EXPAND_WIDGET);"))
 {
   set_homogeneous(homogeneous);
 

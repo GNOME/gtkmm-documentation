@@ -38,11 +38,11 @@ ExampleWindow::ExampleWindow()
 
   //Check button with markup in tooltip:
   m_checkbutton.set_tooltip_text(non_markedup_tip);
-  m_vbox.pack_start(m_checkbutton, Gtk::PACK_SHRINK);
+  m_vbox.pack_start(m_checkbutton, Gtk::PackOptions::SHRINK);
 
   //Label:
   m_label.set_tooltip_text("Another tooltip");
-  m_vbox.pack_start(m_label, Gtk::PACK_SHRINK);
+  m_vbox.pack_start(m_label, Gtk::PackOptions::SHRINK);
 
   //Textview:
   prepare_textview();
@@ -51,7 +51,7 @@ ExampleWindow::ExampleWindow()
   // set_tooltip_window(), like set_tooltip_text(),
   // will call set_has_tooltip() for us.
   m_button.set_tooltip_window(m_button_tooltip_window);
-  m_vbox.pack_start(m_button, Gtk::PACK_SHRINK);
+  m_vbox.pack_start(m_button, Gtk::PackOptions::SHRINK);
 
   //Button's custom tooltip window:
   m_button_tooltip_window.set_default_size(250, 30);

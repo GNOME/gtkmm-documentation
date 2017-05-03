@@ -42,12 +42,12 @@ PreviewDialog::PreviewDialog(
   add(m_VBox);
 
   m_HBox.pack_start(m_PageSpin);
-  m_HBox.pack_start(m_CloseButton, Gtk::PACK_SHRINK);
-  m_VBox.pack_start(m_HBox, Gtk::PACK_SHRINK);
+  m_HBox.pack_start(m_CloseButton, Gtk::PackOptions::SHRINK);
+  m_VBox.pack_start(m_HBox, Gtk::PackOptions::SHRINK);
 
   m_DrawingArea.set_content_width(200);
   m_DrawingArea.set_content_height(300);
-  m_VBox.pack_start(m_DrawingArea, Gtk::PACK_EXPAND_WIDGET);
+  m_VBox.pack_start(m_DrawingArea, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_refPreview->signal_ready().connect(
     sigc::mem_fun(*this, &PreviewDialog::on_popreview_ready));

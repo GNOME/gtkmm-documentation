@@ -37,11 +37,11 @@ ExampleWindow::ExampleWindow()
   m_VBox.pack_start(m_ScrolledWindow);
 
   //Add buttons:
-  m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_ButtonBox, Gtk::PackOptions::SHRINK);
 
-  m_ButtonBox.pack_start(m_Button_Buffer1, Gtk::PACK_SHRINK);
-  m_ButtonBox.pack_start(m_Button_Buffer2, Gtk::PACK_SHRINK);
-  m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
+  m_ButtonBox.pack_start(m_Button_Buffer1, Gtk::PackOptions::SHRINK);
+  m_ButtonBox.pack_start(m_Button_Buffer2, Gtk::PackOptions::SHRINK);
+  m_ButtonBox.pack_start(m_Button_Quit, Gtk::PackOptions::SHRINK);
   m_ButtonBox.set_margin(5);
   m_ButtonBox.set_spacing(5);
   m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);

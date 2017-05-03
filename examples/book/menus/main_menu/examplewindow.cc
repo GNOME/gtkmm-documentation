@@ -107,7 +107,7 @@ ExampleWindow::ExampleWindow()
   if (!toolbar)
     g_warning("GtkToolbar not found");
   else
-    m_Box.pack_start(*toolbar, Gtk::PACK_SHRINK);
+    m_Box.pack_start(*toolbar, Gtk::PackOptions::SHRINK);
 }
 
 ExampleWindow::~ExampleWindow()

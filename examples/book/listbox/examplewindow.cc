@@ -64,14 +64,14 @@ ExampleWindow::ExampleWindow() :
 
   m_HBox.set_margin(5);
   add(m_HBox);
-  m_HBox.pack_start(m_VBox1, Gtk::PACK_SHRINK);
+  m_HBox.pack_start(m_VBox1, Gtk::PackOptions::SHRINK);
 
   // ComboBox for selection mode.
   for (std::size_t i = 0; i < G_N_ELEMENTS(selectionModes); ++i)
     m_ComboBox.append(selectionModes[i].text);
 
   m_ComboBox.signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_selection_mode_changed));
-  m_VBox1.pack_start(m_ComboBox, Gtk::PACK_SHRINK);
+  m_VBox1.pack_start(m_ComboBox, Gtk::PackOptions::SHRINK);
 
   const auto mode = m_ListBox.get_selection_mode();
   int index = 0;
@@ -88,12 +88,12 @@ ExampleWindow::ExampleWindow() :
   // Check button for single click.
   m_CheckButton_SingleClick.set_active(m_ListBox.get_activate_on_single_click());
   m_CheckButton_SingleClick.signal_toggled().connect(sigc::mem_fun(*this, &ExampleWindow::on_single_click_toggled));
-  m_VBox1.pack_start(m_CheckButton_SingleClick, Gtk::PACK_SHRINK);
+  m_VBox1.pack_start(m_CheckButton_SingleClick, Gtk::PackOptions::SHRINK);
 
   // Put the ListBox in a ScrolledWindow.
   m_ScrolledWindow.set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC);
   m_ScrolledWindow.add(m_ListBox);
-  m_HBox.pack_start(m_ScrolledWindow, Gtk::PACK_SHRINK);
+  m_HBox.pack_start(m_ScrolledWindow, Gtk::PackOptions::SHRINK);
 
   m_ListBox.signal_row_selected().connect(sigc::mem_fun(*this, &ExampleWindow::on_row_selected));
   m_ListBox.signal_row_activated().connect(sigc::mem_fun(*this, &ExampleWindow::on_row_activated));
@@ -108,11 +108,11 @@ ExampleWindow::ExampleWindow() :
   m_ListBox.append(*row);
 
   row = Gtk::manage(new ExampleRow("", 0));
-  m_HBox_Row.pack_start(m_Label_Row, Gtk::PACK_SHRINK);
-  m_HBox_Row.pack_start(m_CheckButton_Row1, Gtk::PACK_SHRINK);
-  m_HBox_Row.pack_start(m_Button_Row1, Gtk::PACK_SHRINK);
-  m_VBox_Row.pack_start(m_HBox_Row, Gtk::PACK_SHRINK);
-  m_VBox_Row.pack_start(m_CheckButton_Row2, Gtk::PACK_SHRINK);
+  m_HBox_Row.pack_start(m_Label_Row, Gtk::PackOptions::SHRINK);
+  m_HBox_Row.pack_start(m_CheckButton_Row1, Gtk::PackOptions::SHRINK);
+  m_HBox_Row.pack_start(m_Button_Row1, Gtk::PackOptions::SHRINK);
+  m_VBox_Row.pack_start(m_HBox_Row, Gtk::PackOptions::SHRINK);
+  m_VBox_Row.pack_start(m_CheckButton_Row2, Gtk::PackOptions::SHRINK);
   row->add(m_VBox_Row);
   m_ListBox.append(*row);
 
@@ -123,24 +123,24 @@ ExampleWindow::ExampleWindow() :
   m_ListBox.append(*row);
 
   // Put buttons in a vertical box, and connect signal handlers.
-  m_HBox.pack_start(m_VBox2, Gtk::PACK_SHRINK);
-  m_VBox2.pack_start(m_Button_Sort, Gtk::PACK_SHRINK);
+  m_HBox.pack_start(m_VBox2, Gtk::PackOptions::SHRINK);
+  m_VBox2.pack_start(m_Button_Sort, Gtk::PackOptions::SHRINK);
   m_Button_Sort.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_sort_clicked));
-  m_VBox2.pack_start(m_Button_ReverseSort, Gtk::PACK_SHRINK);
+  m_VBox2.pack_start(m_Button_ReverseSort, Gtk::PackOptions::SHRINK);
   m_Button_ReverseSort.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_reverse_sort_clicked));
-  m_VBox2.pack_start(m_Button_Change, Gtk::PACK_SHRINK);
+  m_VBox2.pack_start(m_Button_Change, Gtk::PackOptions::SHRINK);
   m_Button_Change.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_change_clicked));
-  m_VBox2.pack_start(m_Button_Filter, Gtk::PACK_SHRINK);
+  m_VBox2.pack_start(m_Button_Filter, Gtk::PackOptions::SHRINK);
   m_Button_Filter.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_filter_clicked));
-  m_VBox2.pack_start(m_Button_Unfilter, Gtk::PACK_SHRINK);
+  m_VBox2.pack_start(m_Button_Unfilter, Gtk::PackOptions::SHRINK);
   m_Button_Unfilter.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_unfilter_clicked));
-  m_VBox2.pack_start(m_Button_Add, Gtk::PACK_SHRINK);
+  m_VBox2.pack_start(m_Button_Add, Gtk::PackOptions::SHRINK);
   m_Button_Add.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_add_clicked));
-  m_VBox2.pack_start(m_Button_Separate, Gtk::PACK_SHRINK);
+  m_VBox2.pack_start(m_Button_Separate, Gtk::PackOptions::SHRINK);
   m_Button_Separate.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_separate_clicked));
-  m_VBox2.pack_start(m_Button_Unseparate, Gtk::PACK_SHRINK);
+  m_VBox2.pack_start(m_Button_Unseparate, Gtk::PackOptions::SHRINK);
   m_Button_Unseparate.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_unseparate_clicked));
-  m_VBox2.pack_start(m_Button_Visibility, Gtk::PACK_SHRINK);
+  m_VBox2.pack_start(m_Button_Visibility, Gtk::PackOptions::SHRINK);
   m_Button_Visibility.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_visibility_clicked));
 }
 
@@ -250,9 +250,9 @@ void ExampleWindow::update_header_func(Gtk::ListBoxRow* row, Gtk::ListBoxRow* be
     {
       auto hbox = Gtk::manage(new Gtk::Box(Gtk::Orientation::HORIZONTAL));
       auto label = Gtk::manage(new Gtk::Label("Header"));
-      hbox->pack_start(*label, Gtk::PACK_SHRINK);
+      hbox->pack_start(*label, Gtk::PackOptions::SHRINK);
       auto button = Gtk::manage(new Gtk::Button("button"));
-      hbox->pack_start(*button, Gtk::PACK_SHRINK);
+      hbox->pack_start(*button, Gtk::PackOptions::SHRINK);
       row->set_header(*hbox);
     }
 

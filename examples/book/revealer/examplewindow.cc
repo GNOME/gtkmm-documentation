@@ -52,9 +52,9 @@ ExampleWindow::ExampleWindow()
   // Layout
   m_controls.set_row_spacing(6);
   m_controls.set_column_spacing(12);
-  m_vbox.pack_start(m_controls, Gtk::PACK_SHRINK, 0);
-  m_vbox.pack_start(m_separator, Gtk::PACK_SHRINK, 12);
-  m_vbox.pack_start(m_revealer, Gtk::PACK_EXPAND_WIDGET, 6);
+  m_vbox.pack_start(m_controls, Gtk::PackOptions::SHRINK, 0);
+  m_vbox.pack_start(m_separator, Gtk::PackOptions::SHRINK, 12);
+  m_vbox.pack_start(m_revealer, Gtk::PackOptions::EXPAND_WIDGET, 6);
   m_vbox.set_margin(12);
   add(m_vbox);
 }

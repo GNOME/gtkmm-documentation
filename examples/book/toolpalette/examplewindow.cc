@@ -198,7 +198,7 @@ ExampleWindow::ExampleWindow()
   row[m_ColumnsOrientation.m_col_value] = Gtk::Orientation::VERTICAL;
   row[m_ColumnsOrientation.m_col_name] = "Vertical";
   m_ComboOrientation.set_model(m_refTreeModelOrientation);
-  m_VBox.pack_start(m_ComboOrientation, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_ComboOrientation, Gtk::PackOptions::SHRINK);
   m_ComboOrientation.pack_start(m_ColumnsOrientation.m_col_name);
   m_ComboOrientation.signal_changed().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_combo_orientation_changed) );
@@ -223,7 +223,7 @@ ExampleWindow::ExampleWindow()
   row[m_ColumnsStyle.m_col_value] = -1; // A custom meaning for this demo.
   row[m_ColumnsStyle.m_col_name] = "Default";
   m_ComboStyle.set_model(m_refTreeModelStyle);
-  m_VBox.pack_start(m_ComboStyle, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_ComboStyle, Gtk::PackOptions::SHRINK);
   m_ComboStyle.pack_start(m_ColumnsStyle.m_col_name);
   m_ComboStyle.signal_changed().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_combo_style_changed) );
@@ -234,7 +234,7 @@ ExampleWindow::ExampleWindow()
   load_toggle_items();
   load_special_items();
 
-  m_VBox.pack_start(m_HBox, Gtk::PACK_EXPAND_WIDGET);
+  m_VBox.pack_start(m_HBox, Gtk::PackOptions::EXPAND_WIDGET);
 
   m_ScrolledWindowPalette.set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC);
   m_ScrolledWindowPalette.set_margin(6);

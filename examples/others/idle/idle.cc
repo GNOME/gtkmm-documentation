@@ -54,7 +54,7 @@ IdleExample::IdleExample() :
   vbox->pack_start(m_progressbar_d);
 
   Gtk::Box *hbox = manage( new Gtk::Box(Gtk::Orientation::HORIZONTAL,10));
-  hbox->pack_start(m_quit, Gtk::PACK_EXPAND_PADDING);
+  hbox->pack_start(m_quit, Gtk::PackOptions::EXPAND_PADDING);
   vbox->pack_start(*hbox);
 
   // set margin and display all

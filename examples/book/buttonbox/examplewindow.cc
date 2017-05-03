@@ -27,7 +27,7 @@ ExampleWindow::ExampleWindow()
   m_VBox_Main.set_margin(10);
   add(m_VBox_Main);
 
-  m_VBox_Main.pack_start(m_Frame_Horizontal, Gtk::PACK_EXPAND_WIDGET, 10);
+  m_VBox_Main.pack_start(m_Frame_Horizontal, Gtk::PackOptions::EXPAND_WIDGET, 10);
 
   //The horizontal ButtonBoxes:
   m_VBox.set_margin(10);
@@ -36,26 +36,26 @@ ExampleWindow::ExampleWindow()
   m_VBox.pack_start(*Gtk::manage(
               new ExampleButtonBox(true, "Spread (spacing 40)", 40,
                   Gtk::ButtonBoxStyle::SPREAD)),
-          Gtk::PACK_EXPAND_WIDGET);
+          Gtk::PackOptions::EXPAND_WIDGET);
 
   m_VBox.pack_start(*Gtk::manage(
               new ExampleButtonBox(true, "Edge (spacing 30)", 30,
                   Gtk::ButtonBoxStyle::EDGE)),
-          Gtk::PACK_EXPAND_WIDGET, 5);
+          Gtk::PackOptions::EXPAND_WIDGET, 5);
 
   m_VBox.pack_start(*Gtk::manage(
               new ExampleButtonBox(true, "Start (spacing 20)", 20,
                   Gtk::ButtonBoxStyle::START)),
-          Gtk::PACK_EXPAND_WIDGET, 5);
+          Gtk::PackOptions::EXPAND_WIDGET, 5);
 
   m_VBox.pack_start(*Gtk::manage(
               new ExampleButtonBox(true, "End (spacing 10)", 10,
                   Gtk::ButtonBoxStyle::END)),
-          Gtk::PACK_EXPAND_WIDGET, 5);
+          Gtk::PackOptions::EXPAND_WIDGET, 5);
 
 
   //The vertical ButtonBoxes:
-  m_VBox_Main.pack_start(m_Frame_Vertical, Gtk::PACK_EXPAND_WIDGET, 10);
+  m_VBox_Main.pack_start(m_Frame_Vertical, Gtk::PackOptions::EXPAND_WIDGET, 10);
 
   m_HBox.set_margin(10);
   m_Frame_Vertical.add(m_HBox);
@@ -63,21 +63,21 @@ ExampleWindow::ExampleWindow()
   m_HBox.pack_start(*Gtk::manage(
               new ExampleButtonBox(false, "Spread (spacing 5)", 5,
                   Gtk::ButtonBoxStyle::SPREAD)),
-          Gtk::PACK_EXPAND_WIDGET);
+          Gtk::PackOptions::EXPAND_WIDGET);
 
   m_HBox.pack_start(*Gtk::manage(
               new ExampleButtonBox(false, "Edge (spacing 30)", 30,
                   Gtk::ButtonBoxStyle::EDGE)),
-          Gtk::PACK_EXPAND_WIDGET, 5);
+          Gtk::PackOptions::EXPAND_WIDGET, 5);
 
   m_HBox.pack_start(*Gtk::manage(
               new ExampleButtonBox(false, "Start (spacing 20)", 20,
                   Gtk::ButtonBoxStyle::START)),
-          Gtk::PACK_EXPAND_WIDGET, 5);
+          Gtk::PackOptions::EXPAND_WIDGET, 5);
 
   m_HBox.pack_start(*Gtk::manage(new ExampleButtonBox(false, "End (spacing 10)",
                   10, Gtk::ButtonBoxStyle::END)),
-          Gtk::PACK_EXPAND_WIDGET, 5);
+          Gtk::PackOptions::EXPAND_WIDGET, 5);
 }
 
 ExampleWindow::~ExampleWindow()

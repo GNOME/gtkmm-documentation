@@ -28,12 +28,12 @@ ExampleWindow::ExampleWindow()
   add(m_VBox);
 
   //Put a toolbar at the top, and a button underneath:
-  m_VBox.pack_start(m_Toolbar, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_Toolbar, Gtk::PackOptions::SHRINK);
   m_ButtonBox.set_margin(5);
   m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
-  m_VBox.pack_end(m_ButtonBox, Gtk::PACK_SHRINK);
+  m_VBox.pack_end(m_ButtonBox, Gtk::PackOptions::SHRINK);
 
-  m_ButtonBox.pack_start(m_Button_Close, Gtk::PACK_SHRINK);
+  m_ButtonBox.pack_start(m_Button_Close, Gtk::PackOptions::SHRINK);
 
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );

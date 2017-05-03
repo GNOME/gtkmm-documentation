@@ -26,11 +26,11 @@ ExampleWindow::ExampleWindow()
 
   add(m_VBox);
 
-  m_VBox.pack_start(m_ColorButton, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_ColorButton, Gtk::PackOptions::SHRINK);
   m_ColorButton.signal_color_set().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_color_button_color_set) );
 
-  m_VBox.pack_start(m_Button_Dialog, Gtk::PACK_SHRINK);
+  m_VBox.pack_start(m_Button_Dialog, Gtk::PackOptions::SHRINK);
   m_Button_Dialog.signal_clicked().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_button_dialog_clicked) );
 

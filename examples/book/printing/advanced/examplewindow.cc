@@ -229,7 +229,7 @@ void ExampleWindow::build_main_menu(const Glib::RefPtr<Gtk::Application>& app)
     auto pMenuBar = Gtk::manage(new Gtk::MenuBar(gmenu));
 
     // Add the MenuBar to the window:
-    m_VBox.pack_start(*pMenuBar, Gtk::PACK_SHRINK);
+    m_VBox.pack_start(*pMenuBar, Gtk::PackOptions::SHRINK);
   }
 
   // Get the toolbar and add it to a container widget:
@@ -238,7 +238,7 @@ void ExampleWindow::build_main_menu(const Glib::RefPtr<Gtk::Application>& app)
   if (!toolbar)
     g_warning("GtkToolbar not found");
   else
-    m_VBox.pack_start(*toolbar, Gtk::PACK_SHRINK);
+    m_VBox.pack_start(*toolbar, Gtk::PackOptions::SHRINK);
 }
 
 void ExampleWindow::on_printoperation_status_changed()

@@ -38,7 +38,7 @@ IdleExample::IdleExample() :
 
   auto hbox = Gtk::manage( new Gtk::Box(Gtk::Orientation::HORIZONTAL,10));
   m_Box.pack_start(*hbox);
-  hbox->pack_start(m_ButtonQuit, Gtk::PACK_EXPAND_PADDING);
+  hbox->pack_start(m_ButtonQuit, Gtk::PackOptions::EXPAND_PADDING);
 
   // Connect the signal handlers:
   m_ButtonQuit.signal_clicked().connect( sigc::mem_fun(*this,

@@ -82,7 +82,7 @@ ExampleWindow::ExampleWindow()
   m_CheckButton.set_active();
   m_CheckButton.signal_toggled().connect( sigc::mem_fun(*this,
     &ExampleWindow::on_checkbutton_toggled) );
-  m_VBox2.pack_start(m_CheckButton, Gtk::PACK_SHRINK);
+  m_VBox2.pack_start(m_CheckButton, Gtk::PackOptions::SHRINK);
 
   //Position ComboBox:
   //Create the Tree model:
@@ -104,16 +104,16 @@ ExampleWindow::ExampleWindow()
   row[m_Columns.m_col_position_type] = Gtk::PositionType::RIGHT;
   row[m_Columns.m_col_title] = "Right";
 
-  m_VBox2.pack_start(m_HBox_Combo, Gtk::PACK_SHRINK);
+  m_VBox2.pack_start(m_HBox_Combo, Gtk::PackOptions::SHRINK);
   m_HBox_Combo.pack_start(
-    *Gtk::manage(new Gtk::Label("Scale Value Position:", 0)), Gtk::PACK_SHRINK);
+    *Gtk::manage(new Gtk::Label("Scale Value Position:", 0)), Gtk::PackOptions::SHRINK);
   m_HBox_Combo.pack_start(m_ComboBox_Position);
   m_ComboBox_Position.signal_changed().connect( sigc::mem_fun(*this, &ExampleWindow::on_combo_position) );
   m_ComboBox_Position.set_active(0); // Top
 
   //Digits:
   m_HBox_Digits.pack_start(
-    *Gtk::manage(new Gtk::Label("Scale Digits:", 0)), Gtk::PACK_SHRINK);
+    *Gtk::manage(new Gtk::Label("Scale Digits:", 0)), Gtk::PackOptions::SHRINK);
   m_Scale_Digits.set_digits(0);
   m_adjustment_digits->signal_value_changed().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_adjustment1_value_changed));
@@ -122,16 +122,16 @@ ExampleWindow::ExampleWindow()
   //Page Size:
   m_HBox_PageSize.pack_start(
     *Gtk::manage(new Gtk::Label("Scrollbar Page Size:", 0)),
-    Gtk::PACK_SHRINK);
+    Gtk::PackOptions::SHRINK);
   m_Scale_PageSize.set_digits(0);
   m_adjustment_pagesize->signal_value_changed().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_adjustment2_value_changed));
   m_HBox_PageSize.pack_start(m_Scale_PageSize);
 
-  m_VBox2.pack_start(m_HBox_Digits, Gtk::PACK_SHRINK);
-  m_VBox2.pack_start(m_HBox_PageSize, Gtk::PACK_SHRINK);
-  m_VBox_Top.pack_start(m_Separator, Gtk::PACK_SHRINK);
-  m_VBox_Top.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
+  m_VBox2.pack_start(m_HBox_Digits, Gtk::PackOptions::SHRINK);
+  m_VBox2.pack_start(m_HBox_PageSize, Gtk::PackOptions::SHRINK);
+  m_VBox_Top.pack_start(m_Separator, Gtk::PackOptions::SHRINK);
+  m_VBox_Top.pack_start(m_Button_Quit, Gtk::PackOptions::SHRINK);
 
   m_Button_Quit.set_can_default();
   m_Button_Quit.grab_default();
