@@ -40,8 +40,8 @@ ExampleAssistant::ExampleAssistant()
   set_page_complete(m_check, true);
   set_page_complete(m_label2, true);
 
-  set_page_type(m_box, Gtk::AssistantPageType::INTRO);
-  set_page_type(m_label2, Gtk::AssistantPageType::CONFIRM);
+  set_page_type(m_box, Gtk::Assistant::PageType::INTRO);
+  set_page_type(m_label2, Gtk::Assistant::PageType::CONFIRM);
 
   signal_apply().connect(sigc::mem_fun(*this,
     &ExampleAssistant::on_assistant_apply));
