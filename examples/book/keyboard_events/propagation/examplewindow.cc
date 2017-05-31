@@ -34,8 +34,6 @@ ExampleWindow::ExampleWindow()
   m_container.add(m_checkbutton_can_propagate);
 
   // Events
-  add_events(Gdk::EventMask::KEY_RELEASE_MASK);
-
   m_entry.signal_key_release_event().connect(
     sigc::mem_fun(*this, &ExampleWindow::entryKeyRelease), true);
 
@@ -52,7 +50,7 @@ ExampleWindow::ExampleWindow()
 }
 
 //By changing the return value we allow, or don't allow, the event to propagate to other elements.
-bool ExampleWindow::entryKeyRelease(GdkEventKey* /* event */ )
+bool ExampleWindow::entryKeyRelease(Gdk::EventKey& /* event */ )
 {
   std::cout << "Entry" << std::endl;
 
@@ -64,7 +62,7 @@ bool ExampleWindow::entryKeyRelease(GdkEventKey* /* event */ )
   return true;
 }
 
-bool ExampleWindow::gridKeyRelease(GdkEventKey* /* event */ )
+bool ExampleWindow::gridKeyRelease(Gdk::EventKey& /* event */ )
 {
   std::cout << "Grid" << std::endl;
 
@@ -72,13 +70,13 @@ bool ExampleWindow::gridKeyRelease(GdkEventKey* /* event */ )
   return false;
 }
 
-bool ExampleWindow::windowKeyReleaseBefore(GdkEventKey* /* event */ )
+bool ExampleWindow::windowKeyReleaseBefore(Gdk::EventKey& /* event */ )
 {
   std::cout << "Window before" << std::endl;
   return false;
 }
 
-bool ExampleWindow::on_key_release_event(GdkEventKey* key_event)
+bool ExampleWindow::on_key_release_event(Gdk::EventKey& key_event)
 {
   std::cout << "Window overridden" << std::endl;
 
@@ -87,7 +85,7 @@ bool ExampleWindow::on_key_release_event(GdkEventKey* key_event)
 }
 
 // This will set the entry's text in the label, every time a key is pressed.
-bool ExampleWindow::windowKeyRelease(GdkEventKey* /* event */ )
+bool ExampleWindow::windowKeyRelease(Gdk::EventKey& /* event */ )
 {
   std::cout << "Window after";
 

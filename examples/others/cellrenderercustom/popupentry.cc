@@ -46,7 +46,6 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
   button_->set_image_from_icon_name("pan-down-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
 
   set_can_focus();
-  add_events(Gdk::EventMask::KEY_PRESS_MASK | Gdk::EventMask::KEY_RELEASE_MASK);
 }
 
 PopupEntry::~PopupEntry()
@@ -102,9 +101,9 @@ PopupEntry::type_signal_arrow_clicked& PopupEntry::signal_arrow_clicked()
   return signal_arrow_clicked_;
 }
 
-bool PopupEntry::on_key_press_event(GdkEventKey* key_event)
+bool PopupEntry::on_key_press_event(Gdk::EventKey& key_event)
 {
-  if(key_event->keyval == GDK_KEY_Escape)
+  if (key_event.get_keyval() == GDK_KEY_Escape)
   {
     editing_canceled_ = true;
 
@@ -118,18 +117,22 @@ bool PopupEntry::on_key_press_event(GdkEventKey* key_event)
 
   // Hackish :/ Synthesize a key press event for the entry.
 
-  GdkEvent synth_event;
-  synth_event.key = *key_event;
+  Gdk::EventKey synth_event(key_event);
 
-  synth_event.key.window = Glib::unwrap(entry_->get_window()); // TODO: Use a C++ Gdk::Event.
-  synth_event.key.send_event = true;
+  GdkEventKey* const synth_event_gobj = synth_event.gobj();
+  if (synth_event_gobj->window)
+    g_object_unref(synth_event_gobj->window);
+  synth_event_gobj->window = Glib::unwrap(entry_->get_window());
+  if (synth_event_gobj->window)
+    g_object_ref(synth_event_gobj->window);
+  synth_event_gobj->send_event = true;
 
-  entry_->event(&synth_event);
+  entry_->event(synth_event);
 
   return Gtk::EventBox::on_key_press_event(key_event);
 }
 
-void PopupEntry::start_editing_vfunc(GdkEvent*)
+void PopupEntry::start_editing_vfunc(Gdk::Event&)
 {
   entry_->select_region(0, -1);
 
@@ -152,9 +155,9 @@ void PopupEntry::on_entry_activate()
   //remove_widget(); // TODO: this line causes the widget to be removed twice -- dunno why
 }
 
-bool PopupEntry::on_entry_key_press_event(GdkEventKey* key_event)
+bool PopupEntry::on_entry_key_press_event(Gdk::EventKey& key_event)
 {
-  if(key_event->keyval == GDK_KEY_Escape)
+  if (key_event.get_keyval() == GDK_KEY_Escape)
   {
     editing_canceled_ = true;
 

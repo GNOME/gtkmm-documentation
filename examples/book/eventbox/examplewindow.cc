@@ -32,7 +32,6 @@ ExampleWindow::ExampleWindow()
   m_Label.set_ellipsize(Pango::EllipsizeMode::END);
 
   //And bind an action to it:
-  m_EventBox.set_events(Gdk::EventMask::BUTTON_PRESS_MASK);
   m_EventBox.signal_button_press_event().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_eventbox_button_press), false);
 
@@ -43,7 +42,7 @@ ExampleWindow::~ExampleWindow()
 {
 }
 
-bool ExampleWindow::on_eventbox_button_press(GdkEventButton*)
+bool ExampleWindow::on_eventbox_button_press(Gdk::EventButton&)
 {
   hide();
   return true;

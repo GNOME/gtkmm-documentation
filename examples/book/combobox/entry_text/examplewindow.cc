@@ -37,8 +37,6 @@ ExampleWindow::ExampleWindow()
     &ExampleWindow::on_combo_changed) );
   if (entry)
   {
-    // The Entry shall receive focus-out events.
-    entry->add_events(Gdk::EventMask::FOCUS_CHANGE_MASK);
     entry->signal_activate().connect(sigc::mem_fun(*this,
       &ExampleWindow::on_entry_activate) );
     m_ConnectionFocusOut = entry->signal_focus_out_event().
@@ -70,7 +68,7 @@ void ExampleWindow::on_entry_activate()
     << ", Text=" << m_Combo.get_active_text() << std::endl;
 }
 
-bool ExampleWindow::on_entry_focus_out_event(GdkEventFocus* /* event */)
+bool ExampleWindow::on_entry_focus_out_event(Gdk::EventFocus& /* event */)
 {
   std::cout << "on_entry_focus_out_event(): Row=" << m_Combo.get_active_row_number()
     << ", Text=" << m_Combo.get_active_text() << std::endl;

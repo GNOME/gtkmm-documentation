@@ -34,9 +34,6 @@ ExampleWindow::ExampleWindow()
   // Connect search entry
   m_search_bar.connect_entry(m_entry);
 
-  // Events
-  add_events(Gdk::EventMask::KEY_PRESS_MASK);
-
   // Connect signals
   signal_key_press_event().connect(sigc::mem_fun(*this, &ExampleWindow::on_window_key_press), true);
   m_search_bar.property_search_mode_enabled().signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_search_bar_reveal_changed));
@@ -88,7 +85,7 @@ ExampleWindow::~ExampleWindow()
 {
 }
 
-bool ExampleWindow::on_window_key_press(GdkEventKey* key_event)
+bool ExampleWindow::on_window_key_press(Gdk::EventKey& key_event)
 {
   return m_search_bar.handle_event(key_event);
 }

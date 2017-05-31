@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 398 2005-04-19 14:42:11Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -32,7 +30,7 @@ protected:
   //Signal handlers:
   void on_combo_changed();
   void on_entry_activate();
-  bool on_entry_focus_out_event(GdkEventFocus* event);
+  bool on_entry_focus_out_event(Gdk::EventFocus& event);
 
   //Signal connection:
   sigc::connection m_ConnectionFocusOut;

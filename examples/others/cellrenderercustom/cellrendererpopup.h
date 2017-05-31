@@ -47,12 +47,12 @@ protected:
   void get_preferred_width_for_height_vfunc(Gtk::Widget& widget, int height,
     int& minimum_width, int& natural_width) const override;
 
-  Gtk::CellEditable* start_editing_vfunc(GdkEvent* event,
-                                                 Gtk::Widget& widget,
-                                                 const Glib::ustring& path,
-                                                 const Gdk::Rectangle& background_area,
-                                                 const Gdk::Rectangle& cell_area,
-                                                 Gtk::CellRendererState flags) override;
+  Gtk::CellEditable* start_editing_vfunc(Gdk::Event& event,
+                                         Gtk::Widget& widget,
+                                         const Glib::ustring& path,
+                                         const Gdk::Rectangle& background_area,
+                                         const Gdk::Rectangle& cell_area,
+                                         Gtk::CellRendererState flags) override;
 
   virtual void on_show_popup(const Glib::ustring& path, int x1, int y1, int x2, int y2);
   void on_hide_popup();
@@ -70,8 +70,8 @@ private:
   bool          shown_;
   bool          editing_canceled_;
 
-  bool on_button_press_event(GdkEventButton* event);
-  bool on_key_press_event(GdkEventKey* event);
+  bool on_button_press_event(Gdk::EventButton& event);
+  bool on_key_press_event(Gdk::EventKey& event);
   void on_style_updated();
 
   void on_popup_editing_done();

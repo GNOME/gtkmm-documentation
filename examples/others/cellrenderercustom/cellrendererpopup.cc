@@ -125,7 +125,7 @@ void CellRendererPopup::get_preferred_width_for_height_vfunc(Gtk::Widget& widget
   natural_width += button_width_;
 }
 
-Gtk::CellEditable* CellRendererPopup::start_editing_vfunc(GdkEvent*,
+Gtk::CellEditable* CellRendererPopup::start_editing_vfunc(Gdk::Event&,
                                                           Gtk::Widget&,
                                                           const Glib::ustring& path,
                                                           const Gdk::Rectangle&,
@@ -223,16 +223,16 @@ void CellRendererPopup::on_hide_popup()
   editing_canceled_ = false;
 }
 
-bool CellRendererPopup::on_button_press_event(GdkEventButton* event)
+bool CellRendererPopup::on_button_press_event(Gdk::EventButton& event)
 {
-  if(event->button != 1)
+  if (event.get_button() != 1)
     return false;
 
   // If the event happened outside the popup, cancel editing.
 
-  //gdk_event_get_root_coords ((GdkEvent *) event, &x, &y);
-  const double x = event->x_root;
-  const double y = event->y_root;
+  //gdk_event_get_root_coords(event.Event::gobj(), &x, &y);
+  const double x = event.get_root_x();
+  const double y = event.get_root_y();
 
   int xoffset = 0, yoffset = 0;
   popup_window_.get_window()->get_root_origin(xoffset, yoffset);
@@ -256,9 +256,9 @@ bool CellRendererPopup::on_button_press_event(GdkEventButton* event)
   return false;
 }
 
-bool CellRendererPopup::on_key_press_event(GdkEventKey* event)
+bool CellRendererPopup::on_key_press_event(Gdk::EventKey& event)
 {
-  switch(event->keyval)
+  switch (event.get_keyval())
   {
     case GDK_KEY_Escape:
       editing_canceled_ = true; break;

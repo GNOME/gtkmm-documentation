@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 870 2007-07-13 19:08:46Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -29,7 +27,7 @@ public:
 
 protected:
   //Signal handlers:
-  bool on_eventbox_button_press(GdkEventButton* button_event);
+  bool on_eventbox_button_press(Gdk::EventButton& button_event);
 
   //Child widgets:
   Gtk::EventBox m_EventBox;

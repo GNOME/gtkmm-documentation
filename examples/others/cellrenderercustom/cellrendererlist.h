@@ -1,5 +1,3 @@
-//$Id: cellrendererlist.h 156 2004-03-12 10:11:35Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -40,7 +38,7 @@ private:
   Glib::RefPtr<Gtk::ListStore>  list_store_;
   Gtk::TreeView                 tree_view_;
 
-  bool on_tree_view_button_release_event(GdkEventButton* event);
+  bool on_tree_view_button_release_event(Gdk::EventButton& event);
   void on_tree_selection_changed();
 };
 

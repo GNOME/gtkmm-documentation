@@ -88,9 +88,9 @@ void CellRendererList::on_show_popup(const Glib::ustring& path, int x1, int y1, 
   CellRendererPopup::on_show_popup(path, x1, y1, x2, y2);
 }
 
-bool CellRendererList::on_tree_view_button_release_event(GdkEventButton* event)
+bool CellRendererList::on_tree_view_button_release_event(Gdk::EventButton& event)
 {
-  if(event->button == 1)
+  if (event.get_button() == 1)
   {
     hide_popup();
     return true;

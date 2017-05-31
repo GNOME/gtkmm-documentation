@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 705 2006-07-19 02:55:32Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -32,7 +30,7 @@ protected:
   void on_button_copy();
   void on_button_paste();
 
-  void on_clipboard_owner_change(GdkEventOwnerChange* event);
+  void on_clipboard_owner_change(Gdk::EventOwnerChange& event);
   void on_clipboard_get(Gtk::SelectionData& selection_data, guint info);
   void on_clipboard_clear();
 

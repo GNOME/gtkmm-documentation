@@ -63,7 +63,7 @@ TreeView_WithPopup::~TreeView_WithPopup()
 {
 }
 
-bool TreeView_WithPopup::on_button_press_event(GdkEventButton* button_event)
+bool TreeView_WithPopup::on_button_press_event(Gdk::EventButton& button_event)
 {
   bool return_value = false;
 
@@ -72,14 +72,8 @@ bool TreeView_WithPopup::on_button_press_event(GdkEventButton* button_event)
   return_value = TreeView::on_button_press_event(button_event);
 
   //Then do our custom stuff:
-  if( (button_event->type == GDK_BUTTON_PRESS) && (button_event->button == 3) )
-  {
-    m_Menu_Popup.popup_at_pointer((GdkEvent*)button_event);
-
-    // Menu::popup_at_pointer() is new in gtkmm 3.22.
-    // If you have an older revision, try this:
-    //m_Menu_Popup.popup(button_event->button, button_event->time);
-  }
+  if (button_event.shall_trigger_context_menu())
+    m_Menu_Popup.popup_at_pointer(button_event);
 
   return return_value;
 }

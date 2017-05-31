@@ -71,8 +71,6 @@ ExampleWindow::ExampleWindow()
   auto entry = m_Combo.get_entry();
   if (entry)
   {
-    // The Entry shall receive focus-out events.
-    entry->add_events(Gdk::EventMask::FOCUS_CHANGE_MASK);
     // Alternatively you can connect to m_Combo.signal_changed().
     entry->signal_changed().connect(sigc::mem_fun(*this,
       &ExampleWindow::on_entry_changed) );
@@ -113,7 +111,7 @@ void ExampleWindow::on_entry_activate()
   }
 }
 
-bool ExampleWindow::on_entry_focus_out_event(GdkEventFocus* /* event */)
+bool ExampleWindow::on_entry_focus_out_event(Gdk::EventFocus& /* event */)
 {
   auto entry = m_Combo.get_entry();
   if (entry)

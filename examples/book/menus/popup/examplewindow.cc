@@ -110,21 +110,15 @@ void ExampleWindow::on_menu_file_popup_generic()
    std::cout << "A popup menu item was selected." << std::endl;
 }
 
-bool ExampleWindow::on_button_press_event(GdkEventButton* button_event)
+bool ExampleWindow::on_button_press_event(Gdk::EventButton& button_event)
 {
-  if( (button_event->type == GDK_BUTTON_PRESS) && (button_event->button == 3) )
+  if (button_event.shall_trigger_context_menu())
   {
-    if(!m_pMenuPopup->get_attach_widget())
-    {
+    if (m_pMenuPopup && !m_pMenuPopup->get_attach_widget())
       m_pMenuPopup->attach_to_widget(*this);
-    }
 
-    if(m_pMenuPopup)
-      m_pMenuPopup->popup_at_pointer((GdkEvent*)button_event);
-
-      // Menu::popup_at_pointer() is new in gtkmm 3.22.
-      // If you have an older revision, try this:
-      //m_pMenuPopup->popup(button_event->button, button_event->time);
+    if (m_pMenuPopup)
+      m_pMenuPopup->popup_at_pointer();
 
     return true; //It has been handled.
   }

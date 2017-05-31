@@ -117,7 +117,7 @@ void ExampleWindow::on_button_paste()
   update_paste_status();
 }
 
-void ExampleWindow::on_clipboard_owner_change(GdkEventOwnerChange*)
+void ExampleWindow::on_clipboard_owner_change(Gdk::EventOwnerChange&)
 {
   update_paste_status();
 }
