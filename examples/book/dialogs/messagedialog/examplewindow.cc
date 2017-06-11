@@ -63,12 +63,12 @@ void ExampleWindow::on_button_question_clicked()
   //Handle the response:
   switch(result)
   {
-    case static_cast<int>(Gtk::ResponseType::OK):
+    case Gtk::ResponseType::OK:
     {
       std::cout << "OK clicked." << std::endl;
       break;
     }
-    case static_cast<int>(Gtk::ResponseType::CANCEL):
+    case Gtk::ResponseType::CANCEL:
     {
       std::cout << "Cancel clicked." << std::endl;
       break;

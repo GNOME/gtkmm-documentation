@@ -68,14 +68,14 @@ void ExampleWindow::on_button_dialog_clicked()
   //Handle the response:
   switch(result)
   {
-    case static_cast<int>(Gtk::ResponseType::OK):
+    case Gtk::ResponseType::OK:
     {
       //Store the chosen color:
       m_Color = dialog.get_rgba();
       m_ColorButton.set_rgba(m_Color);
       break;
     }
-    case static_cast<int>(Gtk::ResponseType::CANCEL):
+    case Gtk::ResponseType::CANCEL:
     {
       std::cout << "Cancel clicked." << std::endl;
       break;

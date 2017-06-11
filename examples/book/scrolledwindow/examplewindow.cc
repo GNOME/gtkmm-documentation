@@ -70,8 +70,8 @@ void ExampleWindow::on_dialog_response(int response_id)
 {
   switch (response_id)
   {
-  case static_cast<int>(Gtk::ResponseType::CLOSE):
-  case static_cast<int>(Gtk::ResponseType::DELETE_EVENT):
+  case Gtk::ResponseType::CLOSE:
+  case Gtk::ResponseType::DELETE_EVENT:
     hide();
     break;
   default:

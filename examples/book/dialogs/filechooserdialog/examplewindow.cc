@@ -55,14 +55,14 @@ void ExampleWindow::on_button_folder_clicked()
   //Handle the response:
   switch(result)
   {
-    case static_cast<int>(Gtk::ResponseType::OK):
+    case Gtk::ResponseType::OK:
     {
       std::cout << "Select clicked." << std::endl;
       std::cout << "Folder selected: " << dialog.get_filename()
           << std::endl;
       break;
     }
-    case static_cast<int>(Gtk::ResponseType::CANCEL):
+    case Gtk::ResponseType::CANCEL:
     {
       std::cout << "Cancel clicked." << std::endl;
       break;
@@ -110,7 +110,7 @@ void ExampleWindow::on_button_file_clicked()
   //Handle the response:
   switch(result)
   {
-    case static_cast<int>(Gtk::ResponseType::OK):
+    case Gtk::ResponseType::OK:
     {
       std::cout << "Open clicked." << std::endl;
 
@@ -119,7 +119,7 @@ void ExampleWindow::on_button_file_clicked()
       std::cout << "File selected: " <<  filename << std::endl;
       break;
     }
-    case static_cast<int>(Gtk::ResponseType::CANCEL):
+    case Gtk::ResponseType::CANCEL:
     {
       std::cout << "Cancel clicked." << std::endl;
       break;

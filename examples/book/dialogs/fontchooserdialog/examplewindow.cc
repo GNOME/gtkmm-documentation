@@ -59,14 +59,14 @@ void ExampleWindow::on_button_dialog_clicked()
   //Handle the response:
   switch(result)
   {
-    case static_cast<int>(Gtk::ResponseType::OK):
+    case Gtk::ResponseType::OK:
     {
       auto font_name = dialog.get_font();
       std::cout << "Font chosen: " << font_name << std::endl;
       m_FontButton.set_font_name(font_name);
       break;
     }
-    case static_cast<int>(Gtk::ResponseType::CANCEL):
+    case Gtk::ResponseType::CANCEL:
     {
       std::cout << "Cancel clicked." << std::endl;
       break;

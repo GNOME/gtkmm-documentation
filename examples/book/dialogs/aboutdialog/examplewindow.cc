@@ -68,16 +68,16 @@ ExampleWindow::~ExampleWindow()
 void ExampleWindow::on_about_dialog_response(int response_id)
 {
   std::cout << response_id
-    << ", close=" << static_cast<int>(Gtk::ResponseType::CLOSE)
-    << ", cancel=" << static_cast<int>(Gtk::ResponseType::CANCEL)
-    << ", delete_event=" << static_cast<int>(Gtk::ResponseType::DELETE_EVENT)
+    << ", close=" << Gtk::ResponseType::CLOSE
+    << ", cancel=" << Gtk::ResponseType::CANCEL
+    << ", delete_event=" << Gtk::ResponseType::DELETE_EVENT
     << std::endl;
 
   switch (response_id)
   {
-  case static_cast<int>(Gtk::ResponseType::CLOSE):
-  case static_cast<int>(Gtk::ResponseType::CANCEL):
-  case static_cast<int>(Gtk::ResponseType::DELETE_EVENT):
+  case Gtk::ResponseType::CLOSE:
+  case Gtk::ResponseType::CANCEL:
+  case Gtk::ResponseType::DELETE_EVENT:
     m_Dialog.hide();
     break;
   default:
