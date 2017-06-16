@@ -21,6 +21,7 @@
 ExampleWindow::ExampleWindow()
 {
   set_title("Gtk::Application example");
+  set_default_size(300,200);
 
   add(m_scrolledwindow);
   m_scrolledwindow.add(m_view);

@@ -27,27 +27,27 @@ ExampleApplication::ExampleApplication()
   //These are just pointless command-line arguments to show the use of the API:
 
   //A bool.
-  add_main_option_entry(Gio::Application::OPTION_TYPE_BOOL, "foo", 'f', "Enable foo.");
+  add_main_option_entry(Gio::Application::OptionType::BOOL, "foo", 'f', "Enable foo.");
 
   //A std::string.
-  add_main_option_entry(Gio::Application::OPTION_TYPE_FILENAME, "goo", 'g', "The file name of goo to use.", "file");
+  add_main_option_entry(Gio::Application::OptionType::FILENAME, "goo", 'g', "The file name of goo to use.", "file");
 
   //A Glib::ustring.
-  add_main_option_entry(Gio::Application::OPTION_TYPE_STRING, "hoo", 'h', "The hoo to use.", "", Glib::OptionEntry::FLAG_HIDDEN);
+  add_main_option_entry(Gio::Application::OptionType::STRING, "hoo", 'h', "The hoo to use.", "", Glib::OptionEntry::Flags::HIDDEN);
 
   //An int.
-  add_main_option_entry(Gio::Application::OPTION_TYPE_INT, "bar", 'b', "The bar to use.", "number");
+  add_main_option_entry(Gio::Application::OptionType::INT, "bar", 'b', "The bar to use.", "number");
 
   //A bool.
-  add_main_option_entry(Gio::Application::OPTION_TYPE_BOOL, "version", 'v', "Show the application version.");
+  add_main_option_entry(Gio::Application::OptionType::BOOL, "version", 'v', "Show the application version.");
 
 
   //A std::vector<std::string>.
-  add_main_option_entry(Gio::Application::OPTION_TYPE_FILENAME_VECTOR, G_OPTION_REMAINING);
+  add_main_option_entry(Gio::Application::OptionType::FILENAME_VECTOR, G_OPTION_REMAINING);
 
   //Custom-decoded arguments
   add_main_option_entry(sigc::mem_fun(*this, &ExampleApplication::on_option_arg_string),
-    "string", 's', "The string to use", "string", Glib::OptionEntry::FLAG_OPTIONAL_ARG);
+    "string", 's', "The string to use", "string", Glib::OptionEntry::Flags::OPTIONAL_ARG);
   add_main_option_entry_filename(sigc::mem_fun(*this, &ExampleApplication::on_option_arg_filename),
     "name", 'n', "The filename to use", "file");
 }
