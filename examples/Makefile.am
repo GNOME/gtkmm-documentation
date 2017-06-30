@@ -38,6 +38,7 @@ check_PROGRAMS =					\
 	book/dialogs/aboutdialog/example		\
 	book/dialogs/colorchooserdialog/example	\
 	book/dialogs/filechooserdialog/example		\
+	book/dialogs/filechoosernative/example		\
 	book/dialogs/fontchooserdialog/example	\
 	book/dialogs/messagedialog/example		\
 	book/dialogs/simple/example			\
@@ -305,6 +306,11 @@ book_dialogs_filechooserdialog_example_SOURCES =	\
 	book/dialogs/filechooserdialog/examplewindow.cc	\
 	book/dialogs/filechooserdialog/examplewindow.h	\
 	book/dialogs/filechooserdialog/main.cc
+
+book_dialogs_filechoosernative_example_SOURCES =	\
+	book/dialogs/filechoosernative/examplewindow.cc	\
+	book/dialogs/filechoosernative/examplewindow.h	\
+	book/dialogs/filechoosernative/main.cc
 
 book_dialogs_fontchooserdialog_example_SOURCES =		\
 	book/dialogs/fontchooserdialog/examplewindow.cc	\
