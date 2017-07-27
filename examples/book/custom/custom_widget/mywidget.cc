@@ -25,18 +25,15 @@ MyWidget::MyWidget() :
   //The GType name will actually be gtkmm__CustomObject_MyWidget
   Glib::ObjectBase("MyWidget"),
   Gtk::WidgetCustomSnapshot(),
-  MyExtraInit("my-widget"),
+  MyExtraInit("my-widget"), // CSS node name, which must be used in the CSS file.
   Gtk::Widget(),
-  //Install a style property so that an aspect of this widget may be themed
-  //via a CSS style sheet file:
-  m_scale_prop(*this, "example_scale", 500),
-  m_scale(1000)
+  m_padding()
 {
   // Expand, if there is extra space.
   set_hexpand(true);
   set_vexpand(true);
 
-  //This shows the GType name, which must be used in the CSS file.
+  //This shows the GType name.
   std::cout << "GType name: " << G_OBJECT_TYPE_NAME(gobj()) << std::endl;
 
   //This shows that the GType still derives from GtkWidget:
@@ -111,20 +108,21 @@ void MyWidget::measure_vfunc(Gtk::Orientation orientation, int /* for_size */,
   natural_baseline = -1;
 }
 
-void MyWidget::on_size_allocate(Gtk::Allocation& allocation)
+void MyWidget::on_size_allocate(const Gtk::Allocation& allocation,
+  int /* baseline */, Gtk::Allocation& out_clip)
 {
   //Do something with the space that we have actually been given:
   //(We will not be given heights or widths less than we have requested, though
   //we might get more)
-
-  //Use the offered allocation for this container:
-  set_allocation(allocation);
 
   if(m_refGdkWindow)
   {
     m_refGdkWindow->move_resize( allocation.get_x(), allocation.get_y(),
             allocation.get_width(), allocation.get_height() );
   }
+
+  // Use the offered allocation for this widget:
+  out_clip = allocation;
 }
 
 void MyWidget::on_map()
@@ -146,10 +144,13 @@ void MyWidget::on_realize()
 
   set_realized();
 
-  //Get the themed style from the CSS file:
-  m_scale = m_scale_prop.get_value();
-  std::cout << "m_scale (example_scale from the theme/css-file) is: "
-      << m_scale << std::endl;
+  //Get the themed padding from the CSS file:
+  m_padding = get_style_context()->get_padding();
+  std::cout << "m_padding from the theme/css-file is"
+    << ": top=" << m_padding.get_top()
+    << ", right=" << m_padding.get_right()
+    << ", bottom=" << m_padding.get_bottom()
+    << ", left=" << m_padding.get_left() << std::endl;
 
   if(!m_refGdkWindow)
   {
@@ -175,10 +176,8 @@ void MyWidget::snapshot_vfunc(Gtk::Snapshot& snapshot)
 {
   const auto allocation = get_allocation();
   auto clip = get_clip();
-  clip.set_x(clip.get_x() - allocation.get_x());
-  clip.set_y(clip.get_y() - allocation.get_y());
-  const double scale_x = (double)clip.get_width() / m_scale;
-  const double scale_y = (double)clip.get_height() / m_scale;
+  clip.set_x(clip.get_x() - allocation.get_x() - m_padding.get_left());
+  clip.set_y(clip.get_y() - allocation.get_y() - m_padding.get_top());
   auto refStyleContext = get_style_context();
 
   // Create a cairo context to draw on.
@@ -189,6 +188,8 @@ void MyWidget::snapshot_vfunc(Gtk::Snapshot& snapshot)
     clip.get_x(), clip.get_y(), clip.get_width(), clip.get_height());
 
   // draw the foreground
+  const double scale_x = 0.001 * (clip.get_width() - m_padding.get_left() - m_padding.get_right());
+  const double scale_y = 0.001 * (clip.get_height() - m_padding.get_top() - m_padding.get_bottom());
   Gdk::Cairo::set_source_rgba(cr, refStyleContext->get_color());
   cr->move_to(155.*scale_x, 165.*scale_y);
   cr->line_to(155.*scale_x, 838.*scale_y);

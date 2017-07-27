@@ -18,7 +18,6 @@
 
 #include <gtkmm/widget.h>
 #include <gtkmm/cssprovider.h>
-#include <gtkmm/styleproperty.h>
 #include <gtkmm/widgetcustomdraw.h>
 #include "myextrainit.h"
 
@@ -38,7 +37,8 @@ protected:
   Gtk::SizeRequestMode get_request_mode_vfunc() const override;
   void measure_vfunc(Gtk::Orientation orientation, int for_size, int& minimum, int& natural,
     int& minimum_baseline, int& natural_baseline) const override;
-  void on_size_allocate(Gtk::Allocation& allocation) override;
+  void on_size_allocate(const Gtk::Allocation& allocation, int baseline,
+    Gtk::Allocation& out_clip) override;
   void on_map() override;
   void on_unmap() override;
   void on_realize() override;
@@ -48,11 +48,9 @@ protected:
   //Signal handler:
   void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error);
 
-  Gtk::StyleProperty<int> m_scale_prop;
+  Gtk::Border m_padding;
   Glib::RefPtr<Gdk::Window> m_refGdkWindow;
   Glib::RefPtr<Gtk::CssProvider> m_refCssProvider;
-
-  int m_scale;
 };
 
 #endif //GTKMM_CUSTOM_WIDGET_MYWIDGET2_H

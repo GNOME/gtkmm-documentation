@@ -1,21 +1,13 @@
-/* Example of a CSS style sheet with a custom style property.
- *
- * The name of the style property must have its canonical form, i.e. characters
- * other than ASCII letters, digits, and hyphens must be replaced by hyphens.
-*/
-
-* {
-  /* -<widget class name>-<style property canonical name>: <value>; */
-  -gtkmm__CustomObject_MyWidget-example-scale: 920;
-  -gtkmm__CustomObject_MyWidget2-example-scale: 1000;
-}
+/* Example of a CSS style sheet. */
 
 my-widget {
   background-color: rgb(255,0,0);
   color:            rgb(0,0,255);
+  padding:          0px 0px 20px 0px;
 }
 
 my-widget2 {
   background-color: rgb(255,255,0);
   color:            rgb(255,0,0);
+  padding:          30px 0px 0px 10px;
 }
