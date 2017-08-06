@@ -18,10 +18,10 @@
 #include <gtkmm/celleditable.h>
 #include <gtkmm/editable.h>
 #include <gtkmm/entry.h>
-#include <gtkmm/eventbox.h>
+#include <gtkmm/box.h>
 
 
-class PopupEntry : public Gtk::CellEditable, public Gtk::EventBox
+class PopupEntry : public Gtk::CellEditable, public Gtk::Box
 {
 public:
   explicit PopupEntry(const Glib::ustring& path);

@@ -55,7 +55,6 @@ check_PROGRAMS =					\
 	book/entry/icon/example				\
 	book/entry/progress/example			\
 	book/entry/simple/example			\
-	book/eventbox/example				\
 	book/expander/example				\
 	book/flowbox/example				\
 	book/frame/example				\
@@ -394,11 +393,6 @@ book_entry_simple_example_SOURCES =		\
 	book/entry/simple/examplewindow.cc	\
 	book/entry/simple/examplewindow.h	\
 	book/entry/simple/main.cc
-
-book_eventbox_example_SOURCES =		\
-	book/eventbox/examplewindow.cc	\
-	book/eventbox/examplewindow.h	\
-	book/eventbox/main.cc
 
 book_expander_example_SOURCES =		\
 	book/expander/examplewindow.cc	\

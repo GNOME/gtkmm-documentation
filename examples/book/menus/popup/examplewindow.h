@@ -33,7 +33,6 @@ protected:
 
   //Child widgets:
   Gtk::Box m_Box;
-  Gtk::EventBox m_EventBox;
   Gtk::Label m_Label;
 
   Glib::RefPtr<Gtk::Builder> m_refBuilder;

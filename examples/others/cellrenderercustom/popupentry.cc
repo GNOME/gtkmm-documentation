@@ -19,30 +19,22 @@
 
 #include <gdk/gdkkeysyms.h>
 
-// 2014-09-06: The pan-[up,down,start,end]-symbolic icons are new.
-// See https://bugzilla.gnome.org/show_bug.cgi?id=729565
-// If they are not available in your selected icon theme, perhaps you can
-// use the go-[up,down,previous,next]-symbolic icons.
-
 PopupEntry::PopupEntry(const Glib::ustring& path)
 :
   Glib::ObjectBase  (typeid(PopupEntry)),
   Gtk::CellEditable (),
-  Gtk::EventBox     (),
+  Gtk::Box          (Gtk::Orientation::HORIZONTAL),
   path_             (path),
   button_           (nullptr),
   entry_            (nullptr),
   editing_canceled_ (false)
 {
-  Gtk::Box *const hbox = new Gtk::Box(Gtk::Orientation::HORIZONTAL);
-  add(*Gtk::manage(hbox));
-
   entry_ = new Gtk::Entry();
-  hbox->pack_start(*Gtk::manage(entry_), Gtk::PackOptions::EXPAND_WIDGET);
+  pack_start(*Gtk::manage(entry_), Gtk::PackOptions::EXPAND_WIDGET);
   entry_->set_has_frame(false);
 
   button_ = new Gtk::Button();
-  hbox->pack_start(*Gtk::manage(button_), Gtk::PackOptions::SHRINK);
+  pack_start(*Gtk::manage(button_), Gtk::PackOptions::SHRINK);
   button_->set_image_from_icon_name("pan-down-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
 
   set_can_focus();
@@ -129,7 +121,7 @@ bool PopupEntry::on_key_press_event(Gdk::EventKey& key_event)
 
   entry_->event(synth_event);
 
-  return Gtk::EventBox::on_key_press_event(key_event);
+  return Gtk::Box::on_key_press_event(key_event);
 }
 
 void PopupEntry::start_editing_vfunc(Gdk::Event&)

@@ -70,7 +70,6 @@ HELP_MEDIA =					\
 	figures/entry_completion.png		\
 	figures/entry_icon.png		\
 	figures/entry_progress.png		\
-	figures/eventbox.png			\
 	figures/expander.png			\
 	figures/filechooserbutton.png		\
 	figures/frame.png			\

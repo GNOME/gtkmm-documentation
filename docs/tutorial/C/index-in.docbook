@@ -3063,9 +3063,6 @@ entering text. To be notified of these events, connect to the
 <programlisting>Gtk::Entry* entry = m_Combo.get_entry();
 if (entry)
 {
-  // The Entry shall receive focus-out events.
-  entry->add_events(Gdk::FOCUS_CHANGE_MASK);
-
   // Alternatively you can connect to m_Combo.signal_changed().
   entry->signal_changed().connect(sigc::mem_fun(*this,
     &amp;ExampleWindow::on_entry_changed) );
@@ -3901,103 +3898,6 @@ You probably won't ever need to attach a handler to this signal, unless you're
 writing a new type of range widget.
 </para>
 <programlisting>adjustment-&#62;signal_changed();</programlisting>
-
-</sect1>
-
-</chapter>
-
-<chapter id="chapter-widgets-without-xwindows">
-<title>Widgets Without X-Windows</title>
-
-<para>
-Some Widgets do not have an associated X-Window, so they therefore do not
-receive X events. This means that the signals described in the  <link
-    linkend="sec-xeventsignals">X event signals</link> section will not be
-emitted. If you want to capture events for these widgets you can use a special
-container called <classname>Gtk::EventBox</classname>, which is described in
-the <link linkend="sec-eventbox">EventBox</link> section.
-</para>
-
-<para>
-Here is a list of some of these Widgets:
-</para>
-<programlisting>Gtk::AspectFrame
-Gtk::Bin
-Gtk::Box
-Gtk::Button
-Gtk::CheckButton
-Gtk::Fixed
-Gtk::Frame
-Gtk::Grid
-Gtk::Image
-Gtk::Label
-Gtk::MenuItem
-Gtk::Notebook
-Gtk::Paned
-Gtk::RadioButton
-Gtk::Range
-Gtk::ScrolledWindow
-Gtk::Separator
-Gtk::Toolbar</programlisting>
-
-<para>
-These widgets are mainly used for decoration or layout, so you won't often need
-to capture events on them. They are intended to have no X-Window in order to improve performance.
-</para>
-
-<sect1 id="sec-eventbox">
-<title>EventBox</title>
-
-<para>
-Some &gtkmm; widgets don't have associated X windows; they draw on
-their parents' windows. Because of this, they cannot receive events.
-Also, if they are incorrectly sized, they don't clip, so you can get
-messy overwriting etc. To receive events on one of these widgets, you can place it
-inside an <classname>EventBox</classname> widget and then call
-<methodname>Gtk::Widget::set_events()</methodname> on the EventBox before showing it.</para>
-
-<para>Although the name
-<classname>EventBox</classname> emphasises the event-handling method, the
-widget can also be used for clipping (and more; see the example below).
-</para>
-<!--
-<para>TODO: Why don't they have X Windows - explain clipping.
-Also, how does this affect platform such as Windows and MacOS that don't use X.
-</para>
--->
-
-<para>
-The constructor for <classname>Gtk::EventBox</classname> is:
-</para>
-
-<programlisting>Gtk::EventBox();</programlisting>
-
-<para>
-A child widget can be added to the <classname>EventBox</classname> using:
-</para>
-
-<programlisting>event_box.add(child_widget);</programlisting>
-
-<para><ulink url="&url_refdocs_base_gtk;EventBox.html">Reference</ulink></para>
-
-<sect2 id="eventbox-example">
-<title>Example</title>
-<para>
-The following example demonstrates both uses of an
-<classname>EventBox</classname> - a label is created that is clipped to a small
-box, and set up so that a mouse-click on the label causes the program to exit.
-Resizing the window reveals varying amounts of the label.
-</para>
-
-<figure id="figure-eventbox">
-  <title>EventBox</title>
-  <screenshot>
-    <graphic format="PNG" fileref="&url_figures_base;eventbox.png"/>
-  </screenshot>
-</figure>
-
-<para><ulink url="&url_examples_base;eventbox">Source Code</ulink></para>
-</sect2>
 
 </sect1>
 
@@ -5769,9 +5669,7 @@ if (info)
       a signal handler to handle such events.
     </para>
     <para>
-      To receive the keyboard events, you must first call the
-      <methodname>Gtk::Widget::add_events()</methodname> function with a bit
-      mask of the events you're interested in. The event signal handler will
+      The event signal handler will
       receive an argument that depends on the type of event. For keyboard
       events it's a <type>GdkEventKey*</type>. As discribed in the
       <link linkend="sec-xeventsignals">appendix</link>, the event signal handler
@@ -5806,7 +5704,6 @@ Gtk::Entry m_entry; // in a class definition
 // in the class constructor
 m_entry.signal_key_press_event().connect( sigc::ptr_fun(&amp;on_key_press_or_release_event) );
 m_entry.signal_key_release_event().connect( sigc::ptr_fun(&amp;on_key_press_or_release_event) );
-m_entry.add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
 </programlisting>
     </para>
 
@@ -8694,13 +8591,6 @@ Handling an X event doesn't affect the Widget's other signals. If you handle
 <literal>button_press_event</literal> for
 <classname>Gtk::Button</classname>, you'll still be able to get the
 <literal>clicked</literal> signal. They are emitted at (nearly) the same time.
-</para>
-
-<para>Note also that not all widgets receive all X events by default. To receive additional
-X events, you can use <methodname>Gtk::Widget::set_events()</methodname> before showing the
-widget, or <methodname>Gtk::Widget::add_events()</methodname> after showing the widget. However,
-some widgets must first be placed inside an <classname>EventBox</classname> widget. See
-the <link linkend="chapter-widgets-without-xwindows">Widgets Without X-Windows</link> chapter.
 </para>
 
 <para>
