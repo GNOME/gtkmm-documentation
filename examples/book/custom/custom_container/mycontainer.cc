@@ -22,7 +22,6 @@ MyContainer::MyContainer()
 : m_child_one(nullptr), m_child_two(nullptr)
 {
   set_has_window(false);
-  set_redraw_on_allocate(false);
 }
 
 MyContainer::~MyContainer()
