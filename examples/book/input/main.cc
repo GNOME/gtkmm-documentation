@@ -29,7 +29,7 @@ Glib::RefPtr<Glib::IOChannel> iochannel;
 // and quit the program if the message was 'Q'.
 bool MyCallback(Glib::IOCondition io_condition)
 {
-  if ((io_condition & Glib::IOCondition::IN) != Glib::IOCondition::IN) {
+  if ((io_condition & Glib::IOCondition::IO_IN) != Glib::IOCondition::IO_IN) {
     std::cerr << "Invalid fifo response" << std::endl;
   }
   else {
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
   }
 
   // connect the signal handler
-  Glib::signal_io().connect(sigc::ptr_fun(MyCallback), read_fd, Glib::IOCondition::IN);
+  Glib::signal_io().connect(sigc::ptr_fun(MyCallback), read_fd, Glib::IOCondition::IO_IN);
 
   // Creates a iochannel from the file descriptor
   iochannel = Glib::IOChannel::create_from_fd(read_fd);
