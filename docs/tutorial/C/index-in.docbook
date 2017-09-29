@@ -9842,10 +9842,16 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
         </listitem>
     </varlistentry>
     <varlistentry>
-        <term>errthrow</term>
+        <term>errthrow ["&lt;exceptions&gt;"]</term>
         <listitem>
             <para>Use the last GError** parameter of the C function to
-                throw an exception.</para>
+                throw an exception.
+                The optional "&lt;exceptions&gt;" is a comma-separated list
+                of exceptions that can be thrown. It determines which @throws
+                Doxygen commands are added to the documentation. Default value
+                is <classname>Glib::Error</classname>. If you want a comma in
+                the description of an exception, precede it by a backslash. Example:
+                <code>errthrow&nbsp;"Glib::OptionError&nbsp;Hello\,&nbsp;world,&nbsp;Glib::ConvertError"</code></para>
         </listitem>
     </varlistentry>
     <varlistentry>
@@ -9959,10 +9965,16 @@ _WRAP_METHOD_DOCS_ONLY(gtk_container_add)
 <para>There are some optional extra arguments:
 <variablelist>
     <varlistentry>
-        <term>errthrow</term>
+        <term>errthrow ["&lt;exceptions&gt;"]</term>
         <listitem>
             <para>Excludes documentation of the last GError** parameter of
-                the C function.</para>
+                the C function.
+                The optional "&lt;exceptions&gt;" is a comma-separated list
+                of exceptions that can be thrown. It determines which @throws
+                Doxygen commands are added to the documentation. Default value
+                is <classname>Glib::Error</classname>. If you want a comma in
+                the description of an exception, precede it by a backslash. Example:
+                <code>errthrow&nbsp;"Glib::OptionError&nbsp;Hello\,&nbsp;world,&nbsp;Glib::ConvertError"</code></para>
         </listitem>
     </varlistentry>
     <varlistentry>
