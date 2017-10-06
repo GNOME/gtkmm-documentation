@@ -141,21 +141,26 @@ void ExampleWindow::configure_cal_popover()
 
 void ExampleWindow::on_day_selected()
 {
-  Gdk::Rectangle rect;
+  auto current_event = Glib::wrap(gtk_get_current_event(), false);
 
-  auto current_event = gtk_get_current_event();
-
-  if (current_event->type != GDK_BUTTON_PRESS)
+  if (current_event.get_event_type() != Gdk::Event::Type::BUTTON_PRESS)
   {
     return;
   }
 
-  gdk_window_coords_to_parent (current_event->button.window,
-                               current_event->button.x, current_event->button.y,
-                               &current_event->button.x, &current_event->button.y);
+  // The event is a GdkEventButton.
+  // This suspicious-looking cast is okay because Gdk::EventButton
+  // does not add any data members to those of Gdk::Event.
+  Gdk::EventButton& current_event_button = *static_cast<Gdk::EventButton*>(&current_event);
+
+  double x = 0.0;
+  double y = 0.0;
+  current_event_button.get_coords(x, y);
+  current_event_button.get_window()->coords_to_parent(x, y, x, y);
+  Gdk::Rectangle rect;
   auto allocation = m_calendar.get_allocation();
-  rect.set_x(current_event->button.x - allocation.get_x());
-  rect.set_y(current_event->button.y - allocation.get_y());
+  rect.set_x(x - allocation.get_x());
+  rect.set_y(y - allocation.get_y());
   rect.set_width(1);
   rect.set_height(1);
 
@@ -163,7 +168,5 @@ void ExampleWindow::on_day_selected()
   m_calendar_popover.set_visible(true);
 
   m_calendar_popover_entry.set_text("");
-
-  gdk_event_free (current_event);
 }
 

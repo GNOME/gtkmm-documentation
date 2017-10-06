@@ -230,9 +230,9 @@ bool CellRendererPopup::on_button_press_event(Gdk::EventButton& event)
 
   // If the event happened outside the popup, cancel editing.
 
-  //gdk_event_get_root_coords(event.Event::gobj(), &x, &y);
-  const double x = event.get_root_x();
-  const double y = event.get_root_y();
+  double x = 0.0;
+  double y = 0.0;
+  event.get_root_coords(x, y);
 
   int xoffset = 0, yoffset = 0;
   popup_window_.get_window()->get_root_origin(xoffset, yoffset);

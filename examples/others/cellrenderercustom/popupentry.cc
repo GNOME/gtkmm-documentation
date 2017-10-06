@@ -109,6 +109,12 @@ bool PopupEntry::on_key_press_event(Gdk::EventKey& key_event)
 
   // Hackish :/ Synthesize a key press event for the entry.
 
+/*
+ * Can't do this now (2017-10-06).
+ * GdkEvent and its subclasses are now opaque structures. We can't directly
+ * access their data. There is a gdk_event_get_window() to get the window,
+ * but there is no gdk_event_set_window() to set a window.
+
   Gdk::EventKey synth_event(key_event);
 
   GdkEventKey* const synth_event_gobj = synth_event.gobj();
@@ -120,7 +126,7 @@ bool PopupEntry::on_key_press_event(Gdk::EventKey& key_event)
   synth_event_gobj->send_event = true;
 
   entry_->event(synth_event);
-
+*/
   return Gtk::Box::on_key_press_event(key_event);
 }
 
