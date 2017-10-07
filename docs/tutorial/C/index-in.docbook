@@ -472,22 +472,37 @@ It provides almost exactly the same interface as std::string, along with automat
 <title>Mixing C and C++ APIs</title>
 <para>You can use C APIs which do not yet have convenient C++ interfaces. It is generally not a problem to use C APIs from C++, and &gtkmm; helps by providing access to the underlying C object, and providing an easy way to create a C++ wrapper object from a C object, provided that the C API is also based on the GObject system.</para>
 
-<para>To use a &gtkmm; instance with a C function that requires a C GObject instance, use the <function>gobj()</function> function to obtain a pointer to the underlying GObject instance. For instance</para>
+<para>
+To use a &gtkmm; instance with a C function that requires a C
+<classname>GObject</classname> instance, use the C++ instance’s
+<function>gobj()</function> function to obtain a pointer to the underlying C
+instance. For example:
+</para>
 
 <para>
 <programlisting>
 Gtk::Button* button = new Gtk::Button("example");
-gtk_button_do_something_new(button-&gt;gobj());
+gtk_button_do_something_that_gtkmm_cannot(button-&gt;gobj());
 </programlisting>
 </para>
 
-<para>To obtain a &gtkmm; instance from a C GObject instance, use the Glib::wrap() function. For instance</para>
+<para>
+To obtain a &gtkmm; instance from a C <classname>GObject</classname> instance,
+use the <function>Glib::wrap()</function> function. The returned C++ wrapper is
+lazily initialized and owned by &gtkmm;, so you should not delete it. The C
+instance’s reference count is not incremented, unless you set the optional
+<parameter>take_copy</parameter> argument to <literal>true</literal>. For
+example:
+</para>
+
 <para>
 <programlisting>
 GtkButton* cbutton = get_a_button();
 Gtk::Button* button = Glib::wrap(cbutton);
+button.set_label("Now I speak C++ too!");
 </programlisting>
 </para>
+
 </sect1>
 
 <sect1 id="sec-helloworld">
