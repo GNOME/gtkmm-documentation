@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation master\n"
 "POT-Creation-Date: 2014-04-03 21:30+0000\n"
-"PO-Revision-Date: 2017-09-21 22:34+0200\n"
+"PO-Revision-Date: 2017-10-07 22:36+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -4051,8 +4051,8 @@ msgid ""
 msgstr ""
 "Model <classname>Gtk::TreeStore</classname> může mít dceřiné položky. "
 "Přidávají se pomocí metody <methodname>append()</methodname>, "
-"<methodname>prepend()</methodname> nebo <methodname>insert()</methodname>, "
-"nějak takto:"
+"<methodname>prepend()</methodname> nebo <methodname>insert()</methodname> "
+"takto:"
 
 #: C/gtkmm-tutorial-in.xml:2401(programlisting)
 #, no-wrap
@@ -6734,6 +6734,19 @@ msgid ""
 "others. For further information, see the <ulink url=\"http://www."
 "cairographics.org/cairomm/\">cairomm</ulink> API documentation."
 msgstr ""
+"Existuje řada proměnných s grafickými stavy, které se dají nastavit pro "
+"kontext Cairo. Nejběžnějšími atributy kontextu jsou barvy (použijte "
+"<methodname>set_source_rgb()</methodname> nebo "
+"<methodname>set_source_rgba()</methodname> pro průsvitné barvy), tloušťka "
+"čáry (použijte <methodname>set_line_width()</methodname>), vzorek čáry "
+"(použijte <methodname>set_dash()</methodname>), styl zakončení čáry "
+"(použijte <methodname>set_line_cap()</methodname>), styl spojení čar "
+"(použijte <methodname>set_line_join()</methodname>) a styly fontu (použijte "
+"<methodname>set_font_size()</methodname>, <methodname>set_font_face()</"
+"methodname> atd). Existují i další nastavneí, jako jsou transformační "
+"matice, pravidla vyplňování, povolení vyhlazování a další. Více informací "
+"najdete v dokumentaci k API <ulink url=\"http://www.cairographics.org/"
+"cairomm/\">cairomm</ulink>."
 
 #: C/gtkmm-tutorial-in.xml:4132(para)
 msgid ""
@@ -6783,6 +6796,19 @@ msgid ""
 "<methodname>restore()</methodname> restores the state from the matching "
 "paired <methodname>save()</methodname>. <placeholder-1/>"
 msgstr ""
+"Aktuální stav <classname>Cairo::Context</classname> se dá uložit do "
+"interního zásobníku stavů a později jej obnovit do stejného stavu, jako byl "
+"při uložení. K tomu použijte metodu <methodname>save()</methodname> a metodu "
+"<methodname>restore()</methodname>. Může se to hodit, když potřebujete "
+"dočasně změnit např. tloušťku a barvu čáry (nebo jiné grafické nastavení), "
+"abyste něco nakreslili, a pak se vrátit k předchozímu nastavení. V takové "
+"situaci byste mohli zavolat <methodname>Cairo::Context::save()</methodname>, "
+"změnit grafické nastavení, nakreslit čáru a zavolat <methodname>Cairo::"
+"Context::restore()</methodname> pro obnovení původního grafického stavu. Dá "
+"se do sebe postupně vložit i více volání metod <methodname>save()</"
+"methodname> a <methodname>restore()</methodname>. Každé volání "
+"<methodname>restore()</methodname> pak obnoví stav z příslušného páru volání "
+"<methodname>save()</methodname>. <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:4147(para)
 msgid ""
@@ -6812,6 +6838,16 @@ msgid ""
 "or some other mapping that works for your application. This can be done with "
 "the <methodname>Cairo::Context::scale()</methodname> function."
 msgstr ""
+"Vzhledem k tomu, že grafická knihovna Cairo byla napsána s podporou více "
+"výstupních cílů (systém X window, obrázky PNG, OpenGL atd.), existuje zde "
+"rozdíl mezi souřadnicemi v uživatelském prostoru a v prostoru zařízení. "
+"Výchozí mapování mezi těmito dvěma souřadnicovými systémy je jedna ku jedné, "
+"takže celočíselné hodnoty se mapují zhruba na jednotlivé pixely na "
+"obrazovce, nastavení se ale klidně můžete přizpůsobit svým potřebám. Někdy "
+"může být výhodné změnit měřítko, aby souřadnice měly pro celou šířku i výšku "
+"rozsah od 0 do 1 („čtvercové jednotky“) nebo nějaké jiné mapování, které "
+"bude vaší aplikaci vyhovovat. Provést to můžete pomocí funkce "
+"<methodname>Cairo::Context::scale()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:4156(para)
 msgid ""
@@ -6822,6 +6858,11 @@ msgid ""
 "located in the upper-left corner of the window with positive x values to the "
 "right and positive y values going down. <placeholder-1/>"
 msgstr ""
+"Teď, když rozumíme základům grafické knihovny Cairo, jsme více méně "
+"připravení začít kreslit. Pojďme začít s nejjednodušším možným útvarem – "
+"rovnu čárou. Nejdříve ale musíte něco málo vědět o systému souřadnic v "
+"Cairo. Počátek systému souřadnic v Cairo je v levém horním rohu okna s "
+"rostoucími kladnými hodnotami x doprava a hodnotami y dolů. <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:4179(para)
 msgid ""
@@ -6835,6 +6876,14 @@ msgid ""
 "between the point you were at and the point you moved to. To draw a line "
 "between two points, use the <methodname>line_to()</methodname> function."
 msgstr ""
+"V tomto příkladu sestavíme malý, ale plně funkční program používající "
+"<application>gtkmm</application> a nakreslíme do okna pár čar. Čáry se "
+"kreslí vytvořením cesty a jejím obtažením. Cesta se vytváří pomocí funkcí "
+"<methodname>Cairo::Context::move_to()</methodname> a <methodname>Cairo::"
+"Context::line_to()</methodname>. Funkce <methodname>move_to()</methodname> "
+"funguje podobně, jako když zvednete pero nad papír a posunete ruku jinam a "
+"znovu jej přiložíte – během přesunu ruky pero nic nekreslilo. Pro kreslení "
+"čáry mezi dvěma body se používá funkce <methodname>line_to()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:4191(para)
 msgid ""
@@ -6845,6 +6894,11 @@ msgid ""
 "classname> object. After stroking, the current path will be cleared so that "
 "you can start on your next path."
 msgstr ""
+"Po dokončení tvorby cesty pořád nemáte nakreslené nic viditelného. Aby se "
+"cesta zviditelnila, musíte použít funkci <methodname>stroke()</methodname>, "
+"která obtáhne cestu čarou s tloušťkou a stylem definovanými v objektu "
+"<classname>Cairo::Context</classname>. Po obtažení se aktuální cesta smaže a "
+"můžete začít s novou cestou."
 
 #: C/gtkmm-tutorial-in.xml:4200(para)
 msgid ""
@@ -6855,6 +6909,12 @@ msgid ""
 "variant, the current path will be retained so that you can use the same path "
 "with the next drawing function."
 msgstr ""
+"Mnoho kreslicích funkcí Cairo má variantu <methodname>_preserve()</"
+"methodname>. Normální kreslicí funkce, jako jsou <methodname>clip()</"
+"methodname>, <methodname>fill()</methodname> nebo <methodname>stroke()</"
+"methodname>, mažou aktuální cestu. Když použijete variantu "
+"<methodname>_preserve()</methodname>, bude aktuální cesta ponechána, takže "
+"ji můžete použít v následující kreslicí funkci."
 
 #: C/gtkmm-tutorial-in.xml:4210(title) C/gtkmm-tutorial-in.xml:4328(title)
 msgid "Drawing Area - Lines"
@@ -6875,6 +6935,18 @@ msgid ""
 "<methodname>move_to()</methodname> and <methodname>line_to()</methodname>, "
 "and then stroked this path with <methodname>stroke()</methodname>."
 msgstr ""
+"Tento program obsahuje jednu třídu, <classname>MyArea</classname>, která je "
+"podtřídou <classname>Gtk::DrawingArea</classname> a obsahuje členskou funkci "
+"<methodname>on_draw()</methodname>. Tato funkce je zavolána vždy, když se má "
+"překreslit obrázek v kreslicí oblasti. Je jí předán ukazatel "
+"<classname>Cairo::RefPtr</classname> na <classname>Cairo::Context</"
+"classname>, který použijeme ke kreslení. Skutečný kreslicí kód nastavuje "
+"barvu, kterou chceme použít ke kreslení pomocí <methodname>set_source_rgb()</"
+"methodname>, která má argumenty definující červenou, zelenou a modrou složku "
+"požadované barvy (platné jsou hodnoty mezi 0 a 1). Po nastavení barvy "
+"vytvoříme novou cestu pomocí funkcí <methodname>move_to()</methodname> a "
+"<methodname>line_to()</methodname> a obtáhneme ji pomocí "
+"<methodname>stroke()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:4235(title)
 msgid "Drawing with relative coordinates"
@@ -7056,6 +7128,16 @@ msgid ""
 "argument specifying the alpha value of the color (valid values are between 0 "
 "and 1)."
 msgstr ""
+"Volání metody <methodname>Cairo::Context::curve_to()</methodname> by mělo "
+"být pochopitelné na pohled. První pár souřadnic definuje řídící bod pro "
+"začátek křivky. Druhá sada souřadnic definuje řídící bod pro konec křivky a "
+"poslední sada souřadnic definuje cílový bod. Abyste si dokázali koncept "
+"řídících bodů snáze vizuálně představit, nakreslí se čára z obou řídících "
+"bodů do příslušných koncových bodů křivky. Tyto pomocné čáry jsou průsvitné, "
+"čehož se dosáhne zavoláním metody <methodname>set_source_rgba()</"
+"methodname>, která je jen rozšířenou variantou <methodname>set_source_rgb()</"
+"methodname>. Přebírá navíc čtvrtý argument určující alfakanál barvy (platné "
+"hodnoty jsou mezi 0 a 1)."
 
 #: C/gtkmm-tutorial-in.xml:4368(title)
 msgid "Drawing Arcs and Circles"
@@ -7076,6 +7158,17 @@ msgid ""
 "transformation matrix, angles increase in a clockwise direction. (Remember "
 "that the positive Y axis points downwards.)"
 msgstr ""
+"Ke kreslení oblouků, kružnic a elips se v Cairo používá ta samá funkce: "
+"<methodname>Cairo::Context::arc()</methodname>. Tato funkce má pět "
+"argumentů. První dva jsou souřadnice středu oblouku, třetí je poloměr "
+"oblouku a konečně poslední dva argumenty definují počáteční a koncový úhel "
+"oblouku. Všechny úhly se určují v radiánech, takže nakreslení kružnice je to "
+"stejné, jako nakreslení oblouku od 0 do 2 * M_PI radiánů. Úhel 0 leží na "
+"kladné ose X (v uživatelském prostoru). Úhel M_PI/2 radiánů (90 stupňů) je v "
+"kladném směru osy Y (v uživatelském prostoru). Úhel se zvyšuje ve směru z "
+"kladné osy X ke kladné ose Y. Takže s výchozí transformační maticí se úhel "
+"zvyšuje po směru hodinových ručiček. (Vzpomeňte, že kladná osa Y jde směrem "
+"dolů.)"
 
 #: C/gtkmm-tutorial-in.xml:4390(programlisting)
 #, no-wrap
@@ -7099,6 +7192,10 @@ msgid ""
 "with center at <varname>x</varname>, <varname>y</varname> and size "
 "<varname>width</varname>, <varname>height</varname>: <placeholder-1/>"
 msgstr ""
+"Abyste nakreslili elipsu, můžete změnit měřítko na různé hodnoty ve směru X "
+"a Y v transformační matici. Například, když chcete nakreslit elipsu se "
+"středem v <varname>x</varname>, <varname>y</varname> a s šířkou "
+"<varname>width</varname> a výškou <varname>height</varname>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:4398(para)
 msgid ""
@@ -7120,6 +7217,11 @@ msgid ""
 "that function. In addition, the first part of the function is nearly "
 "identical to the previous examples, so we'll skip that portion."
 msgstr ""
+"Je tu pár věcí, které v tomto příkladu stojí za zmínku. Ještě jednou, jediný "
+"skutečný rozdíl mezi tímto příkladem a předchozím je ve funkci "
+"<methodname>on_draw()</methodname>, takže se zaměříme jen na ni. Navíc, "
+"první část této funkce je hodně podobná předchozímu příkladu, takže ji "
+"přeskočíme."
 
 #: C/gtkmm-tutorial-in.xml:4420(para)
 msgid ""
@@ -7130,6 +7232,12 @@ msgid ""
 "wrapped with a <methodname>save()</methodname>/<methodname>restore()</"
 "methodname> pair so that we're back at a known state after each drawing."
 msgstr ""
+"Všimněte si, že v tomto případě jsme téměř vše vyjádřili v pojmech výšky a "
+"šířky okna, včetně tloušťky čar. Díky tomu vše při změně velikosti okna "
+"správně změní měřítko. Navíc si všimněte, že jsou ve funkci tři samostatné "
+"celky kreslení, které jsou obalené v páru funkcí <methodname>save()</"
+"methodname> a <methodname>restore()</methodname>, takže po každém kreslení "
+"se vrátíme zpět do známého stavu."
 
 #: C/gtkmm-tutorial-in.xml:4429(para)
 msgid ""
@@ -7142,6 +7250,14 @@ msgid ""
 "joined together. If you use <methodname>line_to()</methodname> instead, the "
 "lines will end at the same point, but Cairo won't do any special joining."
 msgstr ""
+"V části kreslící oblouk můžete potkat novou funkci <methodname>close_path()</"
+"methodname>. Tato funkce se projevuje nakreslením rovné čáry z aktuálního do "
+"prvního bodu cesty. Je ale podstatný rozdíl mezi zavoláním "
+"<methodname>close_path()</methodname> a ručním nakreslením čáry zpět k "
+"počátečnímu bodu. Když použijete <methodname>close_path()</methodname>, "
+"budou čáry spolu pěkně spojené. Když místo toho použijete "
+"<methodname>line_to()</methodname>, budou čáry sice končit ve stejném bodě, "
+"ale Cairo je nijak speciálně nespojí."
 
 #: C/gtkmm-tutorial-in.xml:4442(title)
 msgid "Drawing counter-clockwise"
@@ -7236,6 +7352,15 @@ msgid ""
 "<classname>Cairo::Context</classname>. It takes a <classname>Cairo::Context</"
 "classname> as its first parameter."
 msgstr ""
+"<classname>Gdk::Pixbuf</classname> lze vykreslit jeho nastavením jako "
+"zdrojového vzorku v kontextu Cairo pomocí <methodname>Gdk::Cairo::"
+"set_source_pixbuf()</methodname>. Pak obrázek nakreslíte pomocí "
+"<methodname>Cairo::Context::paint()</methodname> (nakreslí celý obrázek), "
+"nebo pomocí <methodname>Cairo::Context::rectangle()</methodname> a "
+"<methodname>Cairo::Context::fill()</methodname> (vyplní určený obdélník). "
+"<methodname>set_source_pixbuf()</methodname> není členská metoda z "
+"<classname>Cairo::Context</classname>. Jako první parametr je vyžadován "
+"<classname>Cairo::Context</classname>."
 
 #: C/gtkmm-tutorial-in.xml:4519(para)
 msgid ""
@@ -7308,6 +7433,14 @@ msgid ""
 "invalidate the window so that <application>gtkmm</application> will be "
 "forced to redraw it."
 msgstr ""
+"Stejně jako před tím, se většina zajímavých věcí děje v obsluze kreslicího "
+"signálu <methodname>on_draw()</methodname>. Než se ponoříme do této obsluhy "
+"signálu, všimněte si, že konstruktor widgetu <classname>Clock</classname> "
+"napojuje obsluhu funkce <methodname>on_timeout()</methodname> na časovač s "
+"periodou 1000 milisekund (1 sekunda). To znamená, že "
+"<methodname>on_timeout()</methodname> bude voláno jednou za sekundu. Jedinou "
+"povinností této funkce je zneplatnit obsah okna, takže <application>gtkmm</"
+"application> je nuceno jej znovu překreslit."
 
 #: C/gtkmm-tutorial-in.xml:4583(para)
 msgid ""
@@ -7319,6 +7452,13 @@ msgid ""
 "Furthermore, the coordinate system is scaled over and down so that the (0, "
 "0) coordinate is in the very center of the window."
 msgstr ""
+"Nyní se zaměřme na kód, který provádí skutečné vykreslení. První část funkce "
+"<methodname>on_draw()</methodname> by vám měla být dobře známá. Tento "
+"příklad znovu mění měřítko systému souřadnic na čtvercovou jednotku, takže "
+"bude jednodušší vykreslit hodiny, jako procentní část velikosti okna a při "
+"změně velikosti okna dojde k automatickému přizpůsobení velikosti hodin. "
+"Navíc je systém souřadnic posunut vpřed a dolů, takže souřadnice (0, 0) je "
+"přímo uprostřed okna."
 
 #: C/gtkmm-tutorial-in.xml:4593(para)
 msgid ""
@@ -7332,6 +7472,12 @@ msgid ""
 "then this same path is clipped to make sure that our next lines don't go "
 "outside the outline of the clock."
 msgstr ""
+"Funkce <methodname>Cairo::Context::paint()</methodname> je zde použita k "
+"nastavení barvy pozadí okna. Tato funkce nepřebírá žádný argument a vyplní "
+"aktuální povrch (nebo oříznutou část povrchu) právě aktivní zdrojovou "
+"barvou. Po nastavení barvy pozadí okna nakreslíme kružnici tvořící obrys "
+"hodin a následně tu stejnou cestu ořízneme, abychom si zajistili, že naše "
+"následující čáry nepůjdou mimo hodiny."
 
 #: C/gtkmm-tutorial-in.xml:4605(para)
 msgid ""
@@ -7597,12 +7743,22 @@ msgid ""
 "methodname> method from your <literal>drag_data_received</literal> signal "
 "handler to indicate whether the drop was successful."
 msgstr ""
+"Signály pro „táhni a upusť“ poskytuje třída <classname>DragContext</"
+"classname>, která obsahuje některé informace o operaci tažení a upuštění a "
+"může být použita k ovlivnění procesu. Například můžete najít zdrojový widget "
+"nebo změnit ikonu taženého objektu pomocí metody <methodname>set_icon()</"
+"methodname>. Podstatnější je, že byste měli ze své obsluhy signálu "
+"<literal>drag_data_received</literal> zavolat metodu "
+"<methodname>drag_finish()</methodname>, abyste dali vědět, jestli upuštění "
+"bylo úspěšné."
 
 #: C/gtkmm-tutorial-in.xml:4777(para)
 msgid ""
 "Here is a very simple example, demonstrating a drag and drop <literal>Copy</"
 "literal> operation:"
 msgstr ""
+"Zde je velmi jednoduchý příklad předvádějící operaci <literal>kopírování</"
+"literal> pomocí tažení a upuštění:"
 
 #: C/gtkmm-tutorial-in.xml:4788(para)
 msgid "There is a more complex example in examples/others/dnd."
@@ -7620,6 +7776,12 @@ msgid ""
 "instance, a drawing program would need special code to allow copy and paste "
 "within a view, or between documents."
 msgstr ""
+"Jednoduchá funkcionalita kopírování/vložení textu je volně poskytována "
+"widgety, jako jsou <classname>Gtk::Entry</classname> a <classname>Gtk::"
+"TextView</classname>, pro zacházení se svým vlastním datovým formátem ale "
+"budete potřebovat speciální kód. Například kreslicí program by potřeboval "
+"speciální kód, který by zprovoznil kopírování a vkládání v rámci zobrazení, "
+"nebo mezi dokumenty."
 
 #: C/gtkmm-tutorial-in.xml:4804(para)
 msgid ""
@@ -7628,6 +7790,10 @@ msgid ""
 "Clipboard::get()</methodname>. This is probably the only clipboard you will "
 "ever need."
 msgstr ""
+"Obvykle můžete předstírat, že je <classname>Gtk::Clipboard</classname> "
+"jedináček. Výchozí instanci schránky můžete získat pomocí <methodname>Gtk::"
+"Clipboard::get()</methodname>. Je to pravděpodobně jediná schránka, kterou "
+"kdy budete potřebovat."
 
 #: C/gtkmm-tutorial-in.xml:4810(para)
 msgid ""
@@ -7638,6 +7804,12 @@ msgid ""
 "Clipboard</classname> is ready, it will call these methods, either providing "
 "the requested data, or asking for data."
 msgstr ""
+"Vaše aplikace nepotřebuje na operace se schránkou čekat, zejména v čase mezi "
+"tím, co uživatel použil „Kopírovat“ a chystá se použít „Vložit“. Většina "
+"metod <classname>Gtk::Clipboard</classname> přebírá objekty <classname>sigc::"
+"slot</classname>, které specifikují metody zpětného volání. Když je "
+"<classname>Gtk::Clipboard</classname> připravený, zavolá tyto metody a buď "
+"jim poskytne požadovaná data nebo si o data požádá."
 
 #: C/gtkmm-tutorial-in.xml:4822(title)
 msgid "Targets"
@@ -7649,6 +7821,9 @@ msgid ""
 "that data available in a variety of formats. <application>gtkmm</"
 "application> calls these data types <literal>target</literal>s."
 msgstr ""
+"Různé aplikace obsahují různé typy dat a ta data mohou zpřístupňovat v "
+"různých formátech. <application>gtkmm</application> nazývá takovéto datové "
+"typy <literal>cíle</literal>."
 
 #: C/gtkmm-tutorial-in.xml:4827(para)
 msgid ""
@@ -7660,6 +7835,13 @@ msgid ""
 "receive one of the targets that the other supplies then you will be able to "
 "copy data from one to the other."
 msgstr ""
+"Například <application>gedit</application> může dodávat a přijímat cíl "
+"<literal>\"UTF8_STRING\"</literal>, takže můžete do aplikace "
+"<application>gedit</application> vkládat z libovolné aplikace, která dodává "
+"takovýto cíl. Nebo dvě různé aplikace pro úpravy obrázků mohou dodávat a "
+"přijímat jako cíle různorodé formáty obrázků. Pokud aplikace umí přijímat "
+"jeden z cílů, který ostatní aplikace dodávají, může uživatel kopírovat data "
+"z jedné do druhé."
 
 #: C/gtkmm-tutorial-in.xml:4834(para)
 msgid ""
@@ -7670,6 +7852,11 @@ msgid ""
 "classname> provides overloads that allow you to specify the format in more "
 "detail if necessary."
 msgstr ""
+"Cíle mohou být v různých binárních formátech. Tato kapitola a příklady "
+"operují s 8bitovým textem. To by umožnilo používat pro data ve schránce "
+"formát XML. Není to ale nejspíše úplně vhodné pro binární data, jako jsou "
+"obrázky. <classname>Gtk::Clipboard</classname> poskytuje přetěžování, které "
+"vám v případě potřeby umožňuje určit formát mnohem podrobněji."
 
 #: C/gtkmm-tutorial-in.xml:4843(para)
 msgid ""
@@ -7677,6 +7864,9 @@ msgid ""
 "same mechanism. You should probably use the same data targets and formats "
 "for both Clipboard and Drag and Drop operations."
 msgstr ""
+"API <link linkend=\"chapter-draganddrop\">Táhni a upusť</link> používá ten "
+"stejný mechanizmus. Asi byste měli používat stejné datové cíle a formáty jak "
+"pro operace se schránku, tak pro „táhni a upusť“."
 
 #: C/gtkmm-tutorial-in.xml:4849(para)
 msgid ""
@@ -7686,6 +7876,11 @@ msgid ""
 "store a copy of the data, to be provided when the clipboard calls your "
 "callback method in response to a paste."
 msgstr ""
+"Když uživatel žádá o zkopírování nějakých dat, měli byste objektu "
+"<classname>Clipboard</classname> říci, jaké cíle jsou k dispozici a "
+"poskytnout metodu zpětného volání, kterou může použít k získání dat. V tuto "
+"chvíli byste si měli uložit kopii dat, abyste je mohli poskytnout, až "
+"schránka zavolá vaše zpětné volání v reakci na uživatelovo vložení."
 
 #: C/gtkmm-tutorial-in.xml:4858(programlisting)
 #, no-wrap
@@ -7717,6 +7912,8 @@ msgid ""
 "Your callback will then provide the stored data when the user chooses to "
 "paste the data. For instance:"
 msgstr ""
+"Až uživatel zvolí vložení dat, vaše zpětné volání poskytne uložená data. "
+"Například:"
 
 #: C/gtkmm-tutorial-in.xml:4871(programlisting)
 #, no-wrap
@@ -7744,12 +7941,16 @@ msgid ""
 "The <literal>ideal</literal> example below can supply more than one "
 "clipboard target."
 msgstr ""
+"<literal>Ideální</literal> příklad níže by mohl dodávat více než jeden cíl "
+"schránky."
 
 #: C/gtkmm-tutorial-in.xml:4883(para)
 msgid ""
 "The clear callback allows you to free the memory used by your stored data "
 "when the clipboard replaces its data with something else."
 msgstr ""
+"Čistící zpětné volání vám ve chvíli, kdy schránka nahradí stávající data "
+"jinými, dá prostor k uvolnění paměti, kterou jste použili u chování dat."
 
 #: C/gtkmm-tutorial-in.xml:4889(title)
 msgid "Paste"
@@ -7761,6 +7962,10 @@ msgid ""
 "you should request a specific format and provide a callback method which "
 "will be called with the actual data. For instance:"
 msgstr ""
+"Když uživatel požádá o vložení dat ze schránky, tj. z objektu "
+"<classname>Clipboard</classname>, měli byste si požádat o konkrétní formát a "
+"poskytnout metodu zpětného volání, která bude zavolána na skutečná data. "
+"Například:"
 
 #: C/gtkmm-tutorial-in.xml:4895(programlisting)
 #, no-wrap
@@ -7803,6 +8008,10 @@ msgid ""
 "<methodname>request_targets()</methodname> method, specifying a method to be "
 "called with the information. For instance:"
 msgstr ""
+"Když chcete najít, jaké cíle jsou aktuálně v objektu <classname>Clipboard</"
+"classname> dostupné pro vkládání, zavolejte metodu "
+"<methodname>request_targets()</methodname> a určete jí svoji metodu, která "
+"se má zavolat s informacemi. Například:"
 
 #: C/gtkmm-tutorial-in.xml:4915(programlisting)
 #, no-wrap
@@ -7819,6 +8028,10 @@ msgid ""
 "your application supports for pasting. You could enable or disable a Paste "
 "menu item, depending on whether pasting is currently possible. For instance:"
 msgstr ""
+"Ve svém zpětném volání porovnejte vektor dostupných cílů s těmi, které vaše "
+"aplikace podporuje pro vložení. Mohli byste i povolit nebo zakázat položku "
+"nabídky „Vložit“, v závislosti na tom, jestli je vložení zrovna možné. "
+"Například:"
 
 #: C/gtkmm-tutorial-in.xml:4921(programlisting)
 #, no-wrap
@@ -7847,7 +8060,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:4937(title) C/gtkmm-tutorial-in.xml:5330(title)
 msgid "Simple"
-msgstr ""
+msgstr "Jednoduchý"
 
 #: C/gtkmm-tutorial-in.xml:4938(para)
 msgid ""
@@ -7856,26 +8069,32 @@ msgid ""
 "does not identify the <classname>Clipboard</classname> data as being of a "
 "particular type."
 msgstr ""
+"Tento příklad umožňuje kopírovat a vkládat data specifická pro aplikaci "
+"pomocí standardního textového cíle. I když je příklad jednoduchý, není "
+"ideální, protože nezjišťuje, jestli jsou dat v objektu <classname>Clipboard</"
+"classname> konkrétního typu."
 
 #: C/gtkmm-tutorial-in.xml:4946(title)
 msgid "Clipboard - Simple"
-msgstr ""
+msgstr "Schránka – jednoduchý příklad"
 
 #: C/gtkmm-tutorial-in.xml:4956(title)
 msgid "Ideal"
-msgstr ""
+msgstr "Ideální"
 
 #: C/gtkmm-tutorial-in.xml:4959(simpara)
 msgid ""
 "Defines a custom clipboard target, though the format of that target is still "
 "text."
-msgstr ""
+msgstr "Definuje vlastní cíl schránky, ačkoliv formát cíle zůstává textový."
 
 #: C/gtkmm-tutorial-in.xml:4960(simpara)
 msgid ""
 "It supports pasting of 2 targets - both the custom one and a text one that "
 "creates an arbitrary text representation of the custom data."
 msgstr ""
+"Podporuje vložení dvou cílů – jak vlastní, tak textový vytváří reprezentaci "
+"libovolného textu z vlastních dat."
 
 #: C/gtkmm-tutorial-in.xml:4961(simpara)
 msgid ""
@@ -7883,14 +8102,17 @@ msgid ""
 "<literal>owner_change</literal> signal and disables the Paste button if it "
 "can't use anything on the clipboard."
 msgstr ""
+"Používá <methodname>request_targets()</methodname> a signál "
+"<literal>owner_change</literal> a zakazuje tlačítko <guilabel>Paste</"
+"guilabel>, když není nic k dispozici pro vložení."
 
 #: C/gtkmm-tutorial-in.xml:4957(para)
 msgid "This is like the simple example, but it <placeholder-1/>"
-msgstr ""
+msgstr "Je to hodně podobné jednoduchému příkladu, ale"
 
 #: C/gtkmm-tutorial-in.xml:4966(title)
 msgid "Clipboard - Ideal"
-msgstr ""
+msgstr "Schránka – ideální příklad"
 
 #: C/gtkmm-tutorial-in.xml:4982(title)
 msgid "Printing"
@@ -7904,6 +8126,11 @@ msgid ""
 "In the implementation of this common API, platform-specific backends and "
 "printer-specific drivers are used."
 msgstr ""
+"Z hlediska vývoje aplikací, tiskové API v <application>gtkmm</application> "
+"poskytuje dialogová okna, která jsou jednotná napříč aplikacemi a umožňují "
+"používat běžné kreslicí API Cairo, spolu s vykreslováním textu pomocí "
+"knihovny Pango. V implementaci tohoto společného API se používají výkonné "
+"části specifické pro platformu a ovladače specifické pro tiskárnu."
 
 #: C/gtkmm-tutorial-in.xml:4990(title)
 msgid "PrintOperation"
@@ -7917,6 +8144,11 @@ msgid ""
 "<classname>PrintOperation</classname> automatically handles all the settings "
 "affecting the print loop."
 msgstr ""
+"Hlavním objektem je <classname>Gtk::PrintOperation</classname> a alokuje se "
+"zvlášť pro jednotlivé tiskové operace. Abyste mohli obsluhovat kreslení "
+"stránky, musíte se napojit na jeho signály nebo jej zdědit a přepsat jeho "
+"výchozí virtuální obsluhy signálů. <classname>PrintOperation</classname> "
+"automaticky obsluhuje všechna nastavení ovlivňující tiskovou smyčku."
 
 #: C/gtkmm-tutorial-in.xml:5009(para)
 msgid ""
@@ -7925,6 +8157,10 @@ msgid ""
 "provided <classname>Gtk::PrintContext</classname>, and break up your "
 "printing output into pages."
 msgstr ""
+"<literal>begin_print</literal>: Tento signál musíte obsluhovat, protože to "
+"je místo, kde vytvoříte a nastavíte <classname>Pango::Layout</classname> "
+"používaný k poskytnutí <classname>Gtk::PrintContext</classname> a rozdělíte "
+"tiskový výstup na stránky."
 
 #: C/gtkmm-tutorial-in.xml:5019(para)
 msgid ""
@@ -7932,6 +8168,10 @@ msgid ""
 "to monitor it you can call the <methodname>PrintOperation::"
 "set_show_progress()</methodname> method and handle this signal."
 msgstr ""
+"<literal>paginate</literal>: Zalomení na stránky může být časově náročná "
+"operace, takže jestli ji potřebujete sledovat, můžete zavolat "
+"<methodname>PrintOperation::set_show_progress()</methodname> a obsluhovat "
+"tento signál."
 
 #: C/gtkmm-tutorial-in.xml:5033(para)
 msgid ""
@@ -7952,6 +8192,13 @@ msgid ""
 "drawn. To render text, iterate over the <classname>Pango::Layout</classname> "
 "you created in the <literal>begin_print</literal> handler."
 msgstr ""
+"<literal>draw_page</literal>: Musíte obsluhovat tento signál, který "
+"poskytuje <classname>PrintContext</classname> a číslo stránky. "
+"<classname>PrintContext</classname> by se měl použít k vytvoření "
+"<classname>Cairo::Context</classname> a do něj pak nakreslit požadovanou "
+"stránku. Když chcete vykreslit text, použijte iteraci nad <classname>Pango::"
+"Layout</classname>, který jste vytvořili v obsluze signálu "
+"<literal>begin_print</literal>."
 
 #: C/gtkmm-tutorial-in.xml:5028(para)
 msgid ""
@@ -7968,6 +8215,11 @@ msgid ""
 "your custom class that inherits from <classname>PrintOperation</classname>, "
 "it is naturally simpler to do it in the destructor."
 msgstr ""
+"<literal>end_print</literal>: Obsluha tohoto signálu je bezpečné místo k "
+"uvolnění libovolných prostředků, které se vztahují k objektu "
+"<classname>PrintOperation</classname>. Pokud máte vlastní třídu zděděnou z "
+"<classname>PrintOperation</classname>, je přirozeně jednodušší to udělat v "
+"destruktoru."
 
 #: C/gtkmm-tutorial-in.xml:5067(para)
 msgid ""
@@ -7976,6 +8228,11 @@ msgid ""
 "PrintOperationResult</literal> may indicate that an error occurred. In any "
 "case you probably want to notify the user about the final status."
 msgstr ""
+"<literal>done</literal>: Signál je vyslán, když je tisk dokončen, míněno, "
+"když jsou tisková data zařazena do tiskové fronty. Pamatujte, že poskytnutý "
+"objekt <literal>Gtk::PrintOperationResult</literal> může oznamovat chybu, "
+"která se při tisku objevila. V takovém případě nejspíše budete chtít na "
+"výsledek upozornit uživatele."
 
 #: C/gtkmm-tutorial-in.xml:5077(para)
 msgid ""
@@ -7985,6 +8242,11 @@ msgid ""
 "spooling. To see the status, use <methodname>get_status()</methodname> or "
 "<methodname>get_status_string()</methodname>."
 msgstr ""
+"<literal>status_changed</literal>: Vyšle se, kdykoliv se změní stav tiskové "
+"úlohy. Pro sledování stavu úlohy po zařazení do tiskové fronty použijte "
+"metodu <methodname>PrintOperation::set_track_print_status()</methodname>. "
+"Když chcete zjistit stav, použijte <methodname>get_status()</methodname> "
+"nebo <methodname>get_status_string()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:5003(para)
 msgid ""
@@ -8009,12 +8271,25 @@ msgid ""
 "classname> and to access the selected <classname>Gtk::PaperSize</classname>, "
 "<literal>Gtk::PageOrientation</literal> and printer-specific margins."
 msgstr ""
+"Třída <classname>PrintOperation</classname> má metodu nazvanou "
+"<methodname>set_default_page_setup()</methodname>, která vybírá výchozí "
+"velikost papíru, jeho otočení a okraje. K zobrazení dialogového okna s "
+"nastavením stránky pro svoji aplikaci použijte metodu <methodname>Gtk::"
+"run_page_setup_dialog()</methodname>, která vrací objekt <classname>Gtk::"
+"PageSetup</classname> se zvolený nastavením. Tento objek použijte k "
+"aktualizaci <classname>PrintOperation</classname> a k přístupu k vybrané "
+"velikosti papíru <classname>Gtk::PaperSize</classname>, otočení papíru "
+"<literal>Gtk::PageOrientation</literal> a okrajům, které se liší podle "
+"tiskárny."
 
 #: C/gtkmm-tutorial-in.xml:5111(para)
 msgid ""
 "You should save the chosen <classname>Gtk::PageSetup</classname> so you can "
 "use it again if the page setup dialog is shown again."
 msgstr ""
+"Zvolený <classname>Gtk::PageSetup</classname> byste si měli uložit, abyste "
+"jej mohli znovu použít, když se znovu zobrazí dialogové okno nastavení "
+"stránky."
 
 #: C/gtkmm-tutorial-in.xml:5115(programlisting)
 #, no-wrap
@@ -8024,6 +8299,10 @@ msgid ""
 "Glib::RefPtr&lt;Gtk::PageSetup&gt; new_page_setup = Gtk::run_page_setup_dialog(*this, m_refPageSetup, m_refSettings);\n"
 "m_refPageSetup = new_page_setup;\n"
 msgstr ""
+"\n"
+"// Ve třídě, která je zděděná z Gtk::Window a pamatuje si jako členy m_refPageSetup a m_refSettings…\n"
+"Glib::RefPtr&lt;Gtk::PageSetup&gt; new_page_setup = Gtk::run_page_setup_dialog(*this, m_refPageSetup, m_refSettings);\n"
+"m_refPageSetup = new_page_setup;\n"
 
 #: C/gtkmm-tutorial-in.xml:5114(para) C/gtkmm-tutorial-in.xml:5179(para)
 #: C/gtkmm-tutorial-in.xml:9985(para)
@@ -8039,6 +8318,12 @@ msgid ""
 "default measurement unit is device pixels. To select other units, use the "
 "<methodname>PrintOperation::set_unit()</methodname> method."
 msgstr ""
+"Systém souřadnic v Cairo, v obsluze <literal>draw_page</literal>, je "
+"automaticky otočen podle aktuálního otočení stránky. Normálně je v rozmezí "
+"tiskových okrajů, ale to můžete změnit pomocí metody "
+"<methodname>PrintOperation::set_use_full_page()</methodname>. Výchozí měrnou "
+"jednotkou jsou pixely zařízení. K výběru jiných jednotek použijte metodu "
+"<methodname>PrintOperation::set_unit()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:5138(title)
 msgid "Rendering text"
@@ -8058,6 +8343,18 @@ msgid ""
 "<classname>Pango::LayoutLine</classname>s that appear within the requested "
 "page number."
 msgstr ""
+"Vykreslování textu se provádí pomocí knihovny Pango. Objekt "
+"<classname>Pango::Layout</classname> pro tisk by se měl vytvořit zavoláním "
+"metody <methodname>PrintContext::create_pango_layout()</methodname>. Objekt "
+"<classname>PrintContext</classname> poskytuje také metriku stránky, přes "
+"<methodname>get_width()</methodname> a <methodname>get_height()</"
+"methodname>. Počet stránek můžete nastavit pomocí "
+"<methodname>PrintOperation::set_n_pages()</methodname>. Abyste mohli v "
+"<literal>on_draw_page</literal> provést skutečné vykreslení textu Pango, "
+"získejte <classname>Cairo::Context</classname> pomocí "
+"<methodname>PrintContext::get_cairo_context()</methodname> a zobrazte "
+"objekty <classname>Pango::LayoutLine</classname>, které se tím objeví na "
+"příslušné stránce."
 
 #: C/gtkmm-tutorial-in.xml:5155(para)
 msgid ""
@@ -8079,6 +8376,12 @@ msgid ""
 "Note that <methodname>set_allow_async()</methodname> is not supported on all "
 "platforms, however the <literal>done</literal> signal will still be emitted."
 msgstr ""
+"Standardně se <methodname>PrintOperation::run()</methodname> vrací po té, co "
+"je tisková operace dokončená. Pokud potřebujete spustit neblokující tiskovou "
+"operaci, zavolejte <methodname>PrintOperation::set_allow_async()</"
+"methodname>. Pamatujte ale, že <methodname>set_allow_async()</methodname> "
+"není podporováno na všech platformách, ale signál <literal>done</literal> "
+"bude i tak vyslán."
 
 #: C/gtkmm-tutorial-in.xml:5172(para)
 msgid ""
@@ -8087,6 +8390,11 @@ msgid ""
 "handle the result or error you need to implement signal handlers for the "
 "<literal>done</literal> and <literal>status_changed</literal> signals:"
 msgstr ""
+"<methodname>run()</methodname> může vracet "
+"<literal>PRINT_OPERATION_RESULT_IN_PROGRESS</literal>. Abyste mohli sledovat "
+"stav a reagovat na výsledky nebo chyby, potřebujete implementovat obsluhu "
+"signálu pro signály <literal>done</literal> a <literal>status_changed</"
+"literal>:"
 
 #: C/gtkmm-tutorial-in.xml:5180(programlisting)
 #, no-wrap
@@ -8098,6 +8406,12 @@ msgid ""
 "op-&gt;signal_done().connect(sigc::bind(sigc::mem_fun(*this, &amp;ExampleWindow::on_printoperation_done), op));\n"
 "// run the op\n"
 msgstr ""
+"\n"
+"// v metodě třídy ExampleWindow …\n"
+"Glib::RefPtr&lt;PrintOperation&gt; op = PrintOperation::create();\n"
+"// … nastavení operace …\n"
+"op-&gt;signal_done().connect(sigc::bind(sigc::mem_fun(*this, &amp;ExampleWindow::on_printoperation_done), op));\n"
+"// spuštění operace\n"
 
 #: C/gtkmm-tutorial-in.xml:5190(programlisting)
 #, no-wrap
@@ -8114,13 +8428,24 @@ msgid ""
 "    op-&gt;signal_status_changed().connect(sigc::bind(sigc::mem_fun(*this, &amp;ExampleWindow::on_printoperation_status_changed), op));\n"
 "}\n"
 msgstr ""
+"\n"
+"void ExampleWindow::on_printoperation_done(Gtk::PrintOperationResult result, const Glib::RefPtr&lt;PrintOperation&gt;&amp; op)\n"
+"{\n"
+"  if (result == Gtk::PRINT_OPERATION_RESULT_ERROR)\n"
+"    // upozornění uživatele\n"
+"  else if (result == Gtk::PRINT_OPERATION_RESULT_APPLY)\n"
+"    // Aktualizace PrintSettings s tím, co bylo použito v této PrintOperation\n"
+"\n"
+"  if (! op-&gt;is_finished())\n"
+"    op-&gt;signal_status_changed().connect(sigc::bind(sigc::mem_fun(*this, &amp;ExampleWindow::on_printoperation_status_changed), op));\n"
+"}\n"
 
 #: C/gtkmm-tutorial-in.xml:5189(para)
 msgid ""
 "Second, check for an error and connect to the <literal>status_changed</"
 "literal> signal. For instance: <placeholder-1/>"
 msgstr ""
-"Zadruhé zkontrolujeme chyby a napojíme na signál <literal>status_changed</"
+"Za druhé zkontrolujeme chyby a napojíme na signál <literal>status_changed</"
 "literal>. Například: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:5205(programlisting)
@@ -8165,6 +8490,11 @@ msgid ""
 "op-&gt;set_export_filename(\"test.pdf\");\n"
 "Gtk::PrintOperationResult res = op-&gt;run(Gtk::PRINT_OPERATION_ACTION_EXPORT);\n"
 msgstr ""
+"\n"
+"Glib::RefPtr&lt;Gtk::PrintOperation&gt; op = Gtk::PrintOperation::create();\n"
+"// … nastavení operace …\n"
+"op-&gt;set_export_filename(\"test.pdf\");\n"
+"Gtk::PrintOperationResult res = op-&gt;run(Gtk::PRINT_OPERATION_ACTION_EXPORT);\n"
 
 #: C/gtkmm-tutorial-in.xml:5222(para)
 msgid ""
@@ -8172,10 +8502,13 @@ msgid ""
 "need for extra implementation. However, it is sometimes useful to generate a "
 "pdf file directly from code. For instance, <placeholder-1/>"
 msgstr ""
+"Volba „Tisk do souboru“, která je dostupná v dialogovém okně tisku, "
+"nepotřebuje žádnou zvláštní implementaci. Někdy ale může být užitečné "
+"vygenerovat soubor PDF přímo z kódu. Například <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:5237(title)
 msgid "Extending the print dialog"
-msgstr ""
+msgstr "Rozšířené dialogové okno tisku"
 
 #: C/gtkmm-tutorial-in.xml:5244(para)
 msgid ""
@@ -8184,12 +8517,19 @@ msgid ""
 "the <literal>create_custom_widget</literal> signal handler. You'll probably "
 "want this to be a container widget, packed with some others."
 msgstr ""
+"Nastavte název karty přes <methodname>PrintOperation::"
+"set_custom_tab_label()</methodname>, vytvořte nový widget a vraťte je z "
+"obsluhy signálu <literal>create_custom_widget</literal>. Pravděpodobně "
+"budete chtít, aby to byl kontejnerový widget, ve kterém budou zabalené další "
+"widgety."
 
 #: C/gtkmm-tutorial-in.xml:5254(para)
 msgid ""
 "Get the data from the widgets in the <literal>custom_widget_apply</literal> "
 "signal handler."
 msgstr ""
+"Získejte data z widgetů v obsluze signálu <literal>custom_widget_apply</"
+"literal>."
 
 #: C/gtkmm-tutorial-in.xml:5239(para)
 msgid "You may add a custom tab to the print dialog: <placeholder-1/>"
@@ -8223,6 +8563,29 @@ msgid ""
 "  //...\n"
 "}\n"
 msgstr ""
+"\n"
+"Gtk::Widget* CustomPrintOperation::on_create_custom_widget()\n"
+"{\n"
+"  set_custom_tab_label(\"My custom tab\");\n"
+"\n"
+"  Gtk::Box* hbox = new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 8);\n"
+"  hbox-&gt;set_border_width(6);\n"
+"\n"
+"  Gtk::Label* label = Gtk::manage(new Gtk::Label(\"Enter some text: \"));\n"
+"  hbox-&gt;pack_start(*label, false, false);\n"
+"  label-&gt;show();\n"
+"\n"
+"  hbox-&gt;pack_start(m_Entry, false, false);\n"
+"  m_Entry.show();\n"
+"\n"
+"  return hbox;\n"
+"}\n"
+"\n"
+"void CustomPrintOperation::on_custom_widget_apply(Gtk::Widget* /* widget */)\n"
+"{\n"
+"  Glib::ustring user_input = m_Entry.get_text();\n"
+"  //...\n"
+"}\n"
 
 #: C/gtkmm-tutorial-in.xml:5262(para)
 msgid ""
@@ -8233,6 +8596,12 @@ msgid ""
 "literal> as a member of your <classname>CustomPrintOperation</classname> "
 "class: <placeholder-1/>"
 msgstr ""
+"Ačkoliv signál <literal>custom_widget_apply</literal> poskytuje widget, "
+"který jste před tím vytvořili, pro zjednodušení věcí si můžete widget, který "
+"očekáváte, že obsahuje uživatelův vstup, pamatovat jako člena třídy. "
+"Například řekněme, že máme <classname>Gtk::Entry</classname> nazvanou "
+"<literal>m_Entry</literal> jako člena vaší třídy "
+"<classname>CustomPrintOperation</classname>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:5296(para)
 msgid "The example in examples/book/printing/advanced demonstrates this."
@@ -8251,12 +8620,19 @@ msgid ""
 "// ...set up op...\n"
 "op-&gt;run(Gtk::PRINT_OPERATION_ACTION_PREVIEW, *this);\n"
 msgstr ""
+"\n"
+"// ve třídě, která je zděděná z Gtk::Window …\n"
+"Glib::RefPtr&lt;PrintOperation&gt; op = PrintOperation::create();\n"
+"// … nastavení operace …\n"
+"op-&gt;run(Gtk::PRINT_OPERATION_ACTION_PREVIEW, *this);\n"
 
 #: C/gtkmm-tutorial-in.xml:5305(para)
 msgid ""
 "The native GTK+ print dialog has a preview button, but you may also start a "
 "preview directly from an application: <placeholder-1/>"
 msgstr ""
+"Standardní dialogové okno tisku z GTK+ má tlačítko <guilabel>Náhled</"
+"guilabel>, ale náhled můžete spustit i přímo z aplikace: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:5317(para)
 msgid ""
@@ -8265,6 +8641,10 @@ msgid ""
 "override this behaviour and provide a custom preview dialog. See the example "
 "located in /examples/book/printing/advanced."
 msgstr ""
+"V Unixu výchozí obsluha náhledu používá externí prohlížeč. Ve Windows se "
+"zobrazí nativní dialogové okno s náhledem. V případě potřeby můžete toto "
+"chování přepsat a poskytnout vlastní dialogové okno s náhledem. Viz příklad "
+"v /examples/book/printing/advanced."
 
 #: C/gtkmm-tutorial-in.xml:5332(para)
 msgid ""
@@ -8273,10 +8653,14 @@ msgid ""
 "<literal>on_draw_page</literal>, as well as how to track print status and "
 "update the print settings."
 msgstr ""
+"Následující příklad předvádí, jak vytisknout nějaký vstup z uživatelského "
+"rozhraní. Ukazuje, jak implementovat <literal>on_begin_print</literal> a "
+"<literal>on_draw_page</literal>, a navíc jak sledovat stav tisku a jak "
+"aktualizovat nastavení tisku."
 
 #: C/gtkmm-tutorial-in.xml:5340(title)
 msgid "Printing - Simple"
-msgstr ""
+msgstr "Tisk – jednoduchý příklad"
 
 #: C/gtkmm-tutorial-in.xml:5355(title)
 msgid "Recently Used Documents"
@@ -8291,6 +8675,12 @@ msgid ""
 "<classname>RecentChooserWidget</classname>, <classname>RecentAction</"
 "classname>, and <classname>RecentFilter</classname>."
 msgstr ""
+"<application>gtkmm</application> poskytuje jednoduchý způsob, jak spravovat "
+"nedávno použité dokumenty. Třídy, které se starají o implementaci této "
+"funkcionality, jsou <classname>RecentManager</classname>, "
+"<classname>RecentChooserDialog</classname>, <classname>RecentChooserMenu</"
+"classname>, <classname>RecentChooserWidget</classname>, "
+"<classname>RecentAction</classname> a <classname>RecentFilter</classname>."
 
 #: C/gtkmm-tutorial-in.xml:5367(para)
 msgid ""
@@ -8300,6 +8690,11 @@ msgid ""
 "application registered it, whether it's private to the registering "
 "application, and several other things."
 msgstr ""
+"Jednotlivé položky v seznamu nedávno použitých souborů jsou identifikovány "
+"jejich adresou URI a mohou mít přiřazena metadata. Metadata se dají využít k "
+"určení, jak se má soubor zobrazovat, popisu souboru, jeho typu MIME, která "
+"aplikace jej má registrovaný, jestli je soukromý jen pro registrující "
+"aplikaci a dalším věcí."
 
 #: C/gtkmm-tutorial-in.xml:5375(title)
 msgid "RecentManager"
@@ -8312,6 +8707,10 @@ msgid ""
 "or look up recently used files. There is one list of recently used files per "
 "user."
 msgstr ""
+"<classname>RecentManager</classname> funguje jako databáze nedávno použitých "
+"souborů. Tuto třídu můžete použít k registraci nových souborů, odstranění "
+"souborů ze seznamu a vyhledání nedávno použitých souborů. Každý uživatel má "
+"svůj vlastní seznam nedávno použitých souborů."
 
 #: C/gtkmm-tutorial-in.xml:5382(para)
 msgid ""
@@ -8320,6 +8719,9 @@ msgid ""
 "default <classname>RecentManager</classname> with <methodname>get_default()</"
 "methodname>."
 msgstr ""
+"Můžete vytvořit nový <classname>RecentManager</classname>, ale nejspíše "
+"budete chtít používat výchozí. Ukazatel na výchozí <classname>RecentManager</"
+"classname> získáte pomocí metody <methodname>get_default()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:5388(para)
 msgid ""
@@ -8327,6 +8729,9 @@ msgid ""
 "where the view is a class that implements the <classname>RecentChooser</"
 "classname> interface."
 msgstr ""
+"<classname>RecentManager</classname> je model v návrhovém vzoru model-"
+"zobrazení. Pro zobrazení slouží třída, která implementuje rozhraní "
+"<classname>RecentChooser</classname>."
 
 #: C/gtkmm-tutorial-in.xml:5394(title)
 msgid "Adding Items to the List of Recent Files"
@@ -8367,6 +8772,9 @@ msgid ""
 "resource. This string may contain the \"f\" and \"u\" escape characters "
 "which will be expanded to the resource file path and URI respectively"
 msgstr ""
+"<varname>app_exec</varname>: Příkazový řádek, který bude použitý ke spuštění "
+"tohoto prostředku. Tento řetězec může obsahovat ošetřené znaky „f“ a „u“, "
+"které se nahradí souborovou cestou prostředku, respektive jeho adresou URI."
 
 #: C/gtkmm-tutorial-in.xml:5415(para)
 msgid ""
@@ -8398,6 +8806,10 @@ msgid ""
 "resource. They can be thought of as 'categories' (such as \"email\", "
 "\"graphics\", etc) or tags for the resource."
 msgstr ""
+"<varname>groups</varname>: Seznam skupin přidružených k položce. Skupiny "
+"jsou v podstatě libovolné řetězce přidružené ke konkrétnímu prostředku. "
+"Můžete o nich uvažovat, jako o kategoriích (třeba „e-mail“, „grafika“, atd.) "
+"nebo o štítcích pro prostředek."
 
 #: C/gtkmm-tutorial-in.xml:5433(para)
 msgid ""
@@ -8416,6 +8828,8 @@ msgid ""
 "In addition to adding items to the list, you can also look up items from the "
 "list and modify or remove items."
 msgstr ""
+"Mimo přidávání položek do seznamu, můžete položky v seznamu také vyhledávat "
+"a měnit nebo odebírat."
 
 #: C/gtkmm-tutorial-in.xml:5446(title)
 msgid "Looking up Items in the List of Recent Files"
@@ -8430,6 +8844,12 @@ msgid ""
 "in the list of recent files, <methodname>lookup_item()</methodname> throws a "
 "<classname>RecentManagerError</classname> exception. For example:"
 msgstr ""
+"Pro vyhledání nedávno použitých souborů <classname>RecentManager</classname> "
+"poskytuje několik funkcí. K vyhledání konkrétní položky podle její URI "
+"můžete použít funkci <methodname>lookup_item()</methodname>, která vrací "
+"třídu <classname>RecentInfo</classname>. Pokud zadaná adresa URI v seznamu "
+"nedávných souborů neexistuje <methodname>lookup_item()</methodname> vyhodí "
+"výjimku <classname>RecentManagerError</classname>. Například:"
 
 #: C/gtkmm-tutorial-in.xml:5456(programlisting)
 #, no-wrap
@@ -8469,6 +8889,10 @@ msgid ""
 "use this object to look up any of the properties listed <link linkend=\"list-"
 "file-metadata\">above</link>."
 msgstr ""
+"Objekt <classname>RecentInfo</classname> je v podstatě objekt obsahující "
+"všechna metadata o jednom nedávno použitém souboru. Můžete jej využít k "
+"vyhledání vlastností uvedených <link linkend=\"list-file-metadata\">v "
+"předchozím</link>."
 
 #: C/gtkmm-tutorial-in.xml:5475(para)
 msgid ""
@@ -8479,11 +8903,17 @@ msgid ""
 "The following code demonstrates how you might get a list of recently used "
 "files:"
 msgstr ""
+"Pokud nechcete vyhledávat podle konkrétní URI, ale místo toho chcete získat "
+"seznam všech nedávno použitých položek, poskytuje <classname>RecentManager</"
+"classname> funkci <methodname>get_items()</methodname>. Návratová hodnota "
+"této funkce je <classname>std::vector</classname> se všemi nedávno použitými "
+"soubory. Následující kód ukazuje, jak můžete seznam nedávno použitých "
+"souborů získat:"
 
 #: C/gtkmm-tutorial-in.xml:5483(programlisting)
 #, no-wrap
 msgid "std::vector&lt; Glib::RefPtr&lt;Gtk::RecentInfo&gt; &gt; info_list = recent_manager-&gt;get_items();"
-msgstr ""
+msgstr "std::vector&lt; Glib::RefPtr&lt;Gtk::RecentInfo&gt; &gt; info_list = recent_manager-&gt;get_items();"
 
 #: C/gtkmm-tutorial-in.xml:5484(para)
 msgid ""
@@ -8491,6 +8921,9 @@ msgid ""
 "<methodname>Gtk::Settings::property_gtk_recent_files_max_age()</methodname>. "
 "Default value: 30 days."
 msgstr ""
+"Maximální stáří položek v seznamu nedávno použitých položek se dá nastavit "
+"pomocí <methodname>Gtk::Settings::property_gtk_recent_files_max_age()</"
+"methodname>. Výchozí hodnota je 30 dní."
 
 #: C/gtkmm-tutorial-in.xml:5491(title)
 msgid "Modifying the List of Recent Files"
@@ -8504,6 +8937,11 @@ msgid ""
 "location. You can update an item's location by using "
 "<methodname>move_item()</methodname>."
 msgstr ""
+"Mohou nastat situace, kdy budete chtít seznam nedávných souborů změnit. "
+"Například, když je soubor přesunut nebo přejmenován, můžete potřebovat "
+"aktualizovat umístění souboru v seznamu nedávných souborů, aby neodkazoval "
+"na nesprávné místo. Aktualizovat umístění položky můžete pomocí "
+"<methodname>move_item()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:5499(para)
 msgid ""
@@ -8512,6 +8950,10 @@ msgid ""
 "accomplished with <methodname>remove_item()</methodname>, the latter with "
 "<methodname>purge_items()</methodname>."
 msgstr ""
+"Mimo změny URI souboru můžete také položky ze seznam odstranit, buď po jedné "
+"nebo smazat všechny naráz. Prvního zmíněného dosáhnete pomocí "
+"<methodname>remove_item()</methodname>, druhého pomocí "
+"<methodname>purge_items()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:5506(para)
 msgid ""
@@ -8520,10 +8962,14 @@ msgid ""
 "methodname> have no effect on the actual files that are referred to by the "
 "URIs, they only modify the list of recent files."
 msgstr ""
+"Funkce <methodname>move_item()</methodname>, <methodname>remove_item()</"
+"methodname> a <methodname>purge_items()</methodname> nemají žádný vliv na "
+"skutečné soubory, na které odkazují adresy URI, mění pouze seznam nedávných "
+"souborů."
 
 #: C/gtkmm-tutorial-in.xml:5518(title)
 msgid "RecentChooser"
-msgstr ""
+msgstr "Výběr nedávno použitých (RecentChooser)"
 
 #: C/gtkmm-tutorial-in.xml:5519(para)
 msgid ""
@@ -8534,6 +8980,12 @@ msgid ""
 "<classname>RecentChooserDialog</classname>, <classname>RecentChooserMenu</"
 "classname>, and <classname>RecentAction</classname>."
 msgstr ""
+"<classname>RecentChooser</classname> je rozhraní, které může být "
+"implementováno widgety zobrazujícími seznam nedávných souborů. "
+"<application>gtkmm</application> poskytuje čtyři vestavěné implementace pro "
+"výběr nedávných souborů: <classname>RecentChooserWidget</classname>, "
+"<classname>RecentChooserDialog</classname>, <classname>RecentChooserMenu</"
+"classname> a <classname>RecentAction</classname>."
 
 #: C/gtkmm-tutorial-in.xml:5528(para)
 msgid ""
@@ -8542,16 +8994,23 @@ msgid ""
 "the basic building block for <classname>RecentChooserDialog</classname>, but "
 "you can embed it into your user interface if you want to."
 msgstr ""
+"<classname>RecentChooserWidget</classname> je jednoduchý widget pro "
+"zobrazení seznamu nedávno použitých souborů. <classname>RecentChooserWidget</"
+"classname> základním stavebním kamenem pro <classname>RecentChooserDialog</"
+"classname>, ale pokud chcete, můžete jej vestavět do svého uživatelského "
+"rozhraní."
 
 #: C/gtkmm-tutorial-in.xml:5535(para)
 msgid ""
 "<classname>RecentChooserMenu</classname> and <classname>RecentAction</"
 "classname> allow you to list recently used files as a menu."
 msgstr ""
+"Třídy <classname>RecentChooserMenu</classname> a <classname>RecentAction</"
+"classname> umožňují vypsat nedávno použité soubory v podobě nabídky."
 
 #: C/gtkmm-tutorial-in.xml:5541(title)
 msgid "Simple RecentChooserDialog example"
-msgstr ""
+msgstr "Jednoduchý příklad s RecentChooserDialog"
 
 #: C/gtkmm-tutorial-in.xml:5542(para)
 msgid ""
@@ -8574,6 +9033,8 @@ msgid ""
 "After selecting the <guimenuitem>Recent Files Dialog</guimenuitem> menu "
 "item, you should see something similar to the following window."
 msgstr ""
+"Po vybrání položky <guimenuitem>Recent Files Dialog</guimenuitem> v nabídce "
+"byste měli vidět něco podobného následujícímu oknu."
 
 #: C/gtkmm-tutorial-in.xml:5568(para)
 msgid ""
@@ -8582,6 +9043,9 @@ msgid ""
 "and-toolbars\"/> for more information). It then adds the menu and the "
 "toolbar to the window."
 msgstr ""
+"Konstruktor pro <classname>ExampleWindow</classname> vytvoří nabídku pomocí "
+"<classname>UIManager</classname> (více informací viz <xref linkend=\"chapter-"
+"menus-and-toolbars\"/>). Pak přidá do okna nabídku a nástrojovou lištu."
 
 #: C/gtkmm-tutorial-in.xml:5576(title)
 msgid "Filtering Recent Files"
@@ -8715,7 +9179,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5660(para)
 msgid "There are two basic strategies that can be used: <placeholder-1/>"
-msgstr ""
+msgstr "Existují dvě základní strategie, které můžete použít: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:5692(title)
 msgid "Plugs and Sockets Example"
@@ -8803,6 +9267,8 @@ msgid ""
 "If for some reason the <classname>Socket</classname> couldn't attach the "
 "<classname>Plug</classname>, the window would look something like this:"
 msgstr ""
+"Pokud by <classname>Socket</classname> z nějakého důvodu nemohl připojit "
+"<classname>Plug</classname>, vypadalo by okno nějak takto:"
 
 #: C/gtkmm-tutorial-in.xml:5751(title)
 msgid "Keyboard Events"
@@ -8927,7 +9393,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:5819(title)
 msgid "Keyboard Events - Simple"
-msgstr "Události klávesnice – jednoduše"
+msgstr "Události klávesnice – jednoduchý příklad"
 
 #: C/gtkmm-tutorial-in.xml:5830(title)
 msgid "Event Propagation"
@@ -9023,6 +9489,17 @@ msgid ""
 "handlers. If it propagates, the text you're writing will appear in the "
 "<classname>Label</classname> above the <classname>Entry</classname>."
 msgstr ""
+"Když píšete do vstupního pole, vyšle se událost o uvolnění klávesy, která "
+"jde nejprve do okna nejvyšší úrovně (<classname>Gtk::Window</classname>), "
+"protože máme nastavenou jednu obsluhu události, aby byla zavolaná napřed, "
+"bude to ona, co bude zavolána první (<methodname>windowKeyReleaseBefore()</"
+"methodname>). Pak je zavolána výchozí obsluha (kterou máme přepsanou) a "
+"následně je událost zaslána widgetu, který má zaměření, což je v našem "
+"příkladu <classname>Entry</classname>. Podle toho, jak budeme událost "
+"propagovat, může dorazit až k obsluhám událostí objektů <classname>Grid</"
+"classname> a <classname>Window</classname>. Pokud bude propagována, bude se "
+"text, který píšete objevovat v popisku <classname>Label</classname> nad "
+"vstupním polem <classname>Entry</classname>."
 
 #: C/gtkmm-tutorial-in.xml:5887(title)
 msgid "Keyboard Events - Event Propagation"
@@ -9043,6 +9520,10 @@ msgid ""
 "following methods you can create a timeout method that will be called every "
 "few milliseconds."
 msgstr ""
+"Možná vás zajímá, jak to udělat, aby <application>gtkmm</application> dělalo "
+"něco užitečného, když je v nečinném stavu. Máte štěstí, máte dokonce hned "
+"několik možností. Pomocí následujících metod můžete vytvořit časovanou "
+"metodu, která bude zavolaná každých pár milisekund."
 
 #: C/gtkmm-tutorial-in.xml:5911(programlisting)
 #, no-wrap
@@ -9063,6 +9544,11 @@ msgid ""
 "classname> object that can be used to deactivate the connection using its "
 "<methodname>disconnect()</methodname> method:"
 msgstr ""
+"První argument je <classname>slot</classname>, který si přejete mít "
+"zavolaný, když doběhne časový odpočet. Druhý argument je počet milisekund "
+"mezi voláními této metody. Obdržíte objekt <classname>sigc::connection</"
+"classname>, který můžete použít k deaktivaci napojení pomocí metody "
+"<methodname>disconnect()</methodname>:"
 
 #: C/gtkmm-tutorial-in.xml:5927(programlisting)
 #, no-wrap
@@ -9079,6 +9565,8 @@ msgid ""
 "\n"
 "bool MyCallback() { std::cout &lt;&lt; \"Hello World!\\n\" &lt;&lt; std::endl; return true; }\n"
 msgstr ""
+"\n"
+"bool MyCallback() { std::cout &lt;&lt; \"Hello World!\\n\" &lt;&lt; std::endl; return true; }\n"
 
 #: C/gtkmm-tutorial-in.xml:5932(para)
 msgid ""
@@ -9088,6 +9576,10 @@ msgid ""
 "<literal>bool</literal>. A definition of a sample method might look like "
 "this: <placeholder-1/>"
 msgstr ""
+"Jiným způsobme, jak zlikvidovat připojení, je vaše obsluha signálu. Musí být "
+"typu <classname>sigc::slot&lt;bool&gt;</classname>. Jak vidíte z definice, "
+"vaše obsluha signálu musí vracet hodnotu typu <literal>bool</literal>. "
+"Definice ukázkové metody může vypadat nějak takto: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:5945(para)
 msgid ""
@@ -9095,6 +9587,10 @@ msgid ""
 "your signal handler. Therefore, if you want your method to be called "
 "repeatedly, it should return <literal>true</literal>."
 msgstr ""
+"Metodu <methodname>timetout</methodname> můžete zastavit vrácením "
+"<literal>false</literal> z vaší obsluhy signálu. Pokud chcete, aby vaše "
+"metoda byla volána pravidelně, měli byste proto vrátit <literal>true</"
+"literal>."
 
 #: C/gtkmm-tutorial-in.xml:5951(para)
 msgid "Here's an example of this technique:"
@@ -9111,6 +9607,10 @@ msgid ""
 "for you. This is especially useful for networking applications. The "
 "following method is used to do this:"
 msgstr ""
+"Šikovnou funkcí knihovny Glib (jedna z knihoven ležících pod "
+"<application>gtkmm</application>) je schopnost mít pro vás kontrolu nad daty "
+"z popisovače souborů. To se hodí hlavně pro síťové aplikace. Následující "
+"metody právě tohle využívá:"
 
 #: C/gtkmm-tutorial-in.xml:5970(programlisting)
 #, no-wrap
@@ -9132,6 +9632,10 @@ msgid ""
 "argument two. Argument three may be one or more (using <literal>|</literal>) "
 "of:"
 msgstr ""
+"První argument je slož, který si přejete mít volaný, když nastane určená "
+"událost (viz třetí argument) na popisovači souboru, který jste určili druhým "
+"argumentem. Třetí argument může být jedna nebo více (pomocí <literal>|</"
+"literal>) hodnot z:"
 
 #: C/gtkmm-tutorial-in.xml:5987(para)
 msgid ""
@@ -9201,6 +9705,10 @@ msgid ""
 "method of an object), or <function>sigc::ptr_fun()</function> (for a "
 "function)."
 msgstr ""
+"kde argument <parameter>condition</parameter> je takový, jak byl určen v "
+"předchozím. Jako obvykle je slot vytvořen pomocí <function>sigc::mem_fun()</"
+"function> (pro členské metody objektu), nebo pomocí <function>sigc::"
+"ptr_fun()</function> (pro funkce)."
 
 #: C/gtkmm-tutorial-in.xml:6043(para)
 msgid ""
@@ -9211,6 +9719,12 @@ msgid ""
 "example will print each line you enter until you execute <literal>echo \"Q\" "
 "&gt; testfifo</literal>."
 msgstr ""
+"Následuje menší příklad. Pokud jej chcete použít, spusťte jej spustit z "
+"terminálu – nevytváří žádné okno. CO ale vytvoří, je pojmenovaná rouru "
+"<literal>testfifo</literal> v aktuální složce. Pak spusťte další shell a v "
+"něm <literal>echo \"Hello\" &gt; testinfo</literal>. Příklad bude vypisovat "
+"jednotlivé řádky, které takto zadáte, až dokud nespustíte <literal>echo \"Q"
+"\" &gt; testfifo</literal>."
 
 #: C/gtkmm-tutorial-in.xml:6057(title)
 msgid "Idle Functions"
@@ -9244,6 +9758,12 @@ msgid ""
 "connection</classname> object, or returning <literal>false</literal> in the "
 "signal handler, which should be declared as follows:"
 msgstr ""
+"Tohle způsobí, že <application>gtkmm</application> zavolá určenou metodu "
+"kdykoliv, kdy se nic neděje. Můžete přidat prioritu (nižší čísla znamenají "
+"vyšší prioritu). Jsou dva způsoby, jak obsluhu signálu odstranit: zavolat "
+"<methodname>disconnect()</methodname> na objektu <classname>sigc::"
+"connection</classname>, nebo vrátit <literal>false</literal> z obsluhy "
+"signálu, která byla deklarována následovně:"
 
 #: C/gtkmm-tutorial-in.xml:6080(programlisting)
 #, no-wrap
@@ -9259,6 +9779,9 @@ msgid ""
 "Since this is very similar to the methods above this explanation should be "
 "sufficient to understand what's going on. However, here's a little example:"
 msgstr ""
+"Protože je tahle metoda velmi podobná metodě rozebrané v předchozím, mělo by "
+"tohle vysvětlení k pochopení fungování stačit. Pro jistotu je zde ale "
+"příklad:"
 
 #: C/gtkmm-tutorial-in.xml:6092(para)
 msgid ""
@@ -9268,12 +9791,20 @@ msgid ""
 "called as often as possible (like calculating a fractal in background), then "
 "use idle methods."
 msgstr ""
+"Tento příklad ukazuje malý rozdíl mezi metodou <methodname>idle</methodname> "
+"a <methodname>timeout</methodname>. Když potřebujete metodu, která je volána "
+"pravidelně a rychlost není důležitá, pak budete chtít metodu "
+"<methodname>timeout</methodname>. Pokud potřebujete takovou, která je volána "
+"tak často, jak je to možné (např. výpočet fraktálu na pozadí), pak použijte "
+"metodu <methodname>idle</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:6100(para)
 msgid ""
 "Try executing the example and increasing the system load. The upper progress "
 "bar will increase steadily; the lower one will slow down."
 msgstr ""
+"Zkuste příklad spustit a zvýšit zátěž systému. Horní ukazatel průběhu bude "
+"nabývat rovnoměrně, dolní se zpomalí."
 
 #: C/gtkmm-tutorial-in.xml:6110(title)
 msgid "Memory management"
@@ -9295,6 +9826,15 @@ msgid ""
 "present in some C++ GUI toolkits, which restrict the programmer to only a "
 "subset of C++'s memory management features."
 msgstr ""
+"<application>gtkmm</application> dává programům kontrolu nad životností (tj. "
+"konstrukcí a destrukcí) kteréhokoliv widgetu stejným způsobme, jako nad "
+"kterýmkoliv jiným objektem C++. Díky této flexibilitě můžete použit "
+"<literal>new</literal> a <literal>delete</literal> k vytvoření a zničení "
+"objektu dynamicky, nebo můžete použít běžného člena třídy (který je zničen "
+"automaticky při zničení třídy), nebo použít lokální instanci (která zanikne "
+"při opuštění jejího rozsahu působnosti). Takovouto flexibilita nenajdete v "
+"každé vývojářské sade GUI v C++, mnohé omezují programátory jen na nějakou "
+"podmnožinu funkcí správy paměti v C++."
 
 #: C/gtkmm-tutorial-in.xml:6130(para)
 msgid "Here are some examples of normal C++ memory management:"
@@ -9401,10 +9941,16 @@ msgid ""
 "<literal>delete</literal> operators may also be used. <placeholder-1/> Here, "
 "the programmer deletes <varname>pButton</varname> to prevent a memory leak."
 msgstr ""
+"Ačkoliv ve většině případů programátoři dávají přednost tomu, aby kontejnery "
+"automaticky ničily své potomky pomocí <function>Gtk::manage()</function> "
+"(viz dále), není po programátorech použití <function>Gtk::manage()</"
+"function> vyžadováno. Dají se použít i tradiční operátory <literal>new</"
+"literal> a <literal>delete</literal>. <placeholder-1/> Zde programátor "
+"smazal <varname>pButton</varname>, aby zabránil úniku paměti."
 
 #: C/gtkmm-tutorial-in.xml:6202(title)
 msgid "Managed Widgets"
-msgstr ""
+msgstr "Widgety pod správou"
 
 #: C/gtkmm-tutorial-in.xml:6204(para)
 msgid ""
@@ -9416,6 +9962,14 @@ msgid ""
 "<methodname>Gtk::Box::pack_start()</methodname>, or a similar method. Now "
 "the widget will be destroyed whenever its container is destroyed."
 msgstr ""
+"Jinou možností je nechat na kontejnerovém widgetu rozhodování, kdy se má "
+"widget zničit. Ve většině případů chcete, aby widget existoval tak dlouho, "
+"jako kontejner, ve kterém je. Když chcete přenést správu životnosti widgetu "
+"na jeho kontejner, nejprve jej vytvořte pomocí <function>Gtk::manage()</"
+"function> a zabalte jej do jeho kontejneru pomocí <methodname>Gtk::"
+"Container::add()</methodname>, <methodname>Gtk::Box::pack_start()</"
+"methodname> nebo podobné metody. Takto bude widget zničen, kdykoliv bude "
+"zničen jeho kontejner."
 
 #: C/gtkmm-tutorial-in.xml:6215(title)
 msgid "Dynamic allocation with manage() and add()"
@@ -9430,6 +9984,12 @@ msgid ""
 "function marks a widget so that when the widget is added to a container, the "
 "container becomes responsible for deleting the widget."
 msgstr ""
+"<application>gtkmm</application> poskytuje funkci <function>manage()</"
+"function> a metody <methodname>add()</methodname> pro vytvoření a zničení "
+"widgetu. Každý widget vyjma okna nejvyšší úrovně musí být přidán nebo "
+"zabalen do kontejneru v pořadí, v jakém se má zobrazit. Funkce "
+"<function>manage()</function> widgety označuje, takže když je widget přidán "
+"do kontejneru, stane se kontejner zodpovědný za jeho smazání."
 
 #: C/gtkmm-tutorial-in.xml:6227(programlisting)
 #, no-wrap
@@ -9456,6 +10016,10 @@ msgid ""
 "its deletion has been delegated to the <classname>MyContainer</classname> "
 "object."
 msgstr ""
+"<placeholder-1/> Nyní, když jsou objekty typu <classname>MyContainer</"
+"classname> zničené, je smazáné i tlačítko. Není již potřeba mazat "
+"<varname>pButton</varname>, aby se uvolnila jeho paměť. Jeho smazání bylo "
+"předáno za úkol kontejneru <classname>MyContainer</classname>."
 
 #: C/gtkmm-tutorial-in.xml:6240(para)
 msgid ""
@@ -9464,6 +10028,10 @@ msgid ""
 "of the traditional C++ techniques. For instance, your top-level Window might "
 "just be an instance in your <function>main()</function> function."
 msgstr ""
+"Kontejner nejvyšší úrovně samozřejmě nebude přidán do jiného kontejneru. "
+"Program je zodpovědný za zničení kontejneru nejvyšší úrovně pomocí jedné z "
+"tradičních technik C++. Například vaše okno nejvyšší úrovně může být jen "
+"instancí vaší funkce <function>main()</function>."
 
 #: C/gtkmm-tutorial-in.xml:6252(title)
 msgid "Shared resources"
@@ -9541,6 +10109,10 @@ msgid ""
 "it anymore. There's no <literal>new</literal> so there's no <literal>delete</"
 "literal>."
 msgstr ""
+"Kdy <varname>pixbuf</varname> přejde mimo rozsah působnosti, provede se na "
+"pozadí <methodname>unref()</methodname> a dále se o něj již nemusíte starat. "
+"Nebylo zde žádné <literal>new</literal>, tak není ani žádné <literal>delete</"
+"literal>."
 
 #: C/gtkmm-tutorial-in.xml:6293(programlisting)
 #, no-wrap
@@ -9559,6 +10131,11 @@ msgid ""
 "that the instance will not be destroyed until the last <classname>RefPtr</"
 "classname> has gone out of scope."
 msgstr ""
+"Když kopírujete <classname>RefPtr</classname>, například <placeholder-1/>, "
+"nebo jej předáte jako argument metody, nebo jej vrátíte jako typ, pak "
+"<classname>RefPtr</classname> nebude provádět počítání referencí, aby se "
+"zajistilo, že instance nebude zničena dříve, než poslední <classname>RefPtr</"
+"classname> přejde mimo rozsah působnosti."
 
 #: C/gtkmm-tutorial-in.xml:6301(para)
 msgid ""
@@ -9761,6 +10338,15 @@ msgid ""
 "cannot be managed because they have no parent container, so you must delete "
 "them at some point."
 msgstr ""
+"<methodname>get_widget()</methodname> vrací synovské widgety, které jsou "
+"spravované přes <methodname>managed()</methodname> (viz kapitola <link "
+"linkend=\"chapter-memory\">Správa paměti</link>), a tím pádem budou smazané, "
+"když je smazán jejich rodičovský kontejner. Takže když dostanete jen "
+"synovské widgety z <application>Gtk::Builder</application>, místo z celého "
+"okna, pak je buď musíte vložit do kontejneru nebo je smazat. Třídy "
+"<classname>Windows</classname> (jako je <classname>Dialogs</classname>) "
+"nemohou být spravované, protože nemají rodičovský kontejner, a proto je "
+"musíte v některém okamžiku smazat."
 
 #: C/gtkmm-tutorial-in.xml:6412(para)
 msgid ""
@@ -10121,7 +10707,8 @@ msgstr ""
 "Nyní máte místo, kam dávat překlady, a teď potřebujete inicializovat "
 "<application>intltool</application> a <application>gettext</application>. "
 "Přidejte následující kód do svého souboru <literal>configure.ac</literal>, "
-"přičemž „nazevaplikace“ nahraďte názvem svojí aplikace."
+"přičemž „nazevaplikace“ nahraďte názvem svojí aplikace (platí pro celou "
+"kapitolu)."
 
 #: C/gtkmm-tutorial-in.xml:6620(programlisting)
 #, no-wrap
@@ -10374,6 +10961,12 @@ msgid ""
 "translation of a particular string. If none is found, the original string is "
 "used."
 msgstr ""
+"Když je aplikace spuštěna, knihovna <application>gettext</application> "
+"zkontroluje systémovou složku, jestli v ní je soubor <filename>.mo</"
+"filename> pro národní prostředí uživatele (národní prostředí můžete nastavit "
+"například příkazem „export LANG=cs_CZ.UTF-8“ z příkazové řádky). Až později "
+"běžící aplikace narazí na volání <literal>gettext</literal>, podívá se po "
+"překladu konkrétního řetězce. Pokud jej nenajde, použije se řetězec původní."
 
 #: C/gtkmm-tutorial-in.xml:6770(title)
 msgid "Testing and adding translations"
@@ -10407,6 +11000,14 @@ msgid ""
 "filename> file (specified in the header, but also as content) to "
 "<literal>UTF-8</literal>."
 msgstr ""
+"Vytvoří se tím soubor <filename>nazevaplikace.pot</filename>. Zkopírujte "
+"tento soubor do <filename>kodjazyka.po</filename>, třeba <filename>cs.po</"
+"filename> nebo <filename>hu.po</filename>. Příslušný jazyka také přidejte do "
+"souboru <literal>LINGUAS</literal>. Soubor <filename>.po</filename> obsahuje "
+"hlavičku a seznam anglických řetězců s rezervovaným místem pro zadání "
+"přeložených řetězců. Ujistěte se, že je kódování souboru <filename>.po</"
+"filename> nastavené na <literal>UTF-8</literal> (je to uvedené v hlavičce a "
+"musí být v tomto kódování i řetězce)."
 
 #: C/gtkmm-tutorial-in.xml:6793(para)
 msgid ""
@@ -10415,6 +11016,10 @@ msgid ""
 "substitute the original string. To make them appear, simply remove the "
 "<literal>fuzzy</literal> tag."
 msgstr ""
+"Je možné, že některé řetězce budou v souboru <filename>.po</filename> "
+"označené jako <literal>fuzzy</literal>. Tyto překlady nenahradí originální "
+"řetězce. Aby se objevily, stačí po kontrole, a případné opravě překladu, "
+"odstranit značku <literal>fuzzy</literal>."
 
 #: C/gtkmm-tutorial-in.xml:6803(title)
 msgid "Resources"
@@ -10525,6 +11130,21 @@ msgid ""
 "string</classname> from a <classname>ostringstream</classname>: "
 "<placeholder-1/>"
 msgstr ""
+"Integrace se standardními iostream není bohužel úplně bezbolestná. Když "
+"provádíte výstup do <classname>ostream</classname> pomocí "
+"<function>operátoru &lt;&lt;</function>, <application>gtkmm</application> "
+"převádí řetězce <classname>Glib::ustring</classname> na kódování podle "
+"národního prostředí (které nemusí být UTF-8). Obdobně, získání řětězců "
+"<classname>Glib::ustring</classname> z <classname>istream</classname> pomocí "
+"<function>operátoru &gt;&gt;</function> způsobí převod opačným směrem. Tohle "
+"schéma se ale naruší, když půjdete skrz <classname>std::string</classname>, "
+"např. vložením textu z datového proudu do <classname>std::string</classname> "
+"a jeho implicitním převodem na <classname>Glib::ustring</classname>. Pokud "
+"řetězec obsahuje jiné znaky, než jen ASCII, a aktuální národní prostředí "
+"není kódované v UTF-8, ve výsledkem poškozený řetězec <classname>Glib::"
+"ustring</classname>. Můžete to obejít ručním převodem. Například když chcete "
+"získat <classname>std::string</classname> z <classname>ostringstream</"
+"classname>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:6896(title)
 msgid "Pitfalls"
@@ -10833,6 +11453,8 @@ msgid ""
 "<methodname>on_size_allocate()</methodname>: Position the child widgets, "
 "given the height and width that the container has actually been given."
 msgstr ""
+"<methodname>on_size_allocate()</methodname>: Umístí synovské widgety s "
+"ohledem na výšku a šířku, kterou kontejner skutečně uvedl."
 
 #: C/gtkmm-tutorial-in.xml:7035(para)
 msgid ""
@@ -10890,6 +11512,24 @@ msgid ""
 "By examining each widget's parent, and its parent, this logic will "
 "eventually decide the size of the top-level window."
 msgstr ""
+"Virtuální metody <methodname>get_request_mode_vfunc()</methodname>, "
+"<methodname>get_preferred_width_vfunc()</methodname>, "
+"<methodname>get_preferred_height_vfunc()</methodname>, "
+"<methodname>get_preferred_width_for_height_vfunc()</methodname>, "
+"<methodname>get_preferred_height_for_width_vfunc()</methodname> a "
+"<methodname>on_size_allocate()</methodname> řídí rozvržení synovských "
+"widgetů. Například, když má kontejner dva synovské widgety, jeden nad "
+"druhým, mohla by metoda <methodname>get_request_mode_vfunc()</methodname> "
+"požádat o rozvržení height-for-width (widget si řekne, kolik místa na výšku "
+"chce podle toho, kolik ho dostane na šířku). Pak by metoda "
+"<methodname>get_preferred_width_vfunc()</methodname> mohla oznámit maximální "
+"šířku synovských widgetů a metoda "
+"<methodname>get_preferred_height_for_width_vfunc()</methodname> součet "
+"jejich výšek. Pokud chcete mezi synovskými widgety odsazení, pak byste jej "
+"přidali navíc k šířce a výšce. Kontejner pro widgety použije tyto výsledky, "
+"aby zajistil, že widgety budou mít dostatek místa a ne méně. Postupným "
+"zkoumáním rodičů widgetů a jejich rodičů a tak dále tato logika nakonec "
+"rozhodne o velikosti okna nejvyšší úrovně."
 
 #: C/gtkmm-tutorial-in.xml:7062(para)
 msgid ""
@@ -10898,6 +11538,10 @@ msgid ""
 "<methodname>get_preferred_xxx_vfunc()</methodname> methods must return "
 "sensible values."
 msgstr ""
+"Není zaručeno, že dostanete velikost <literal>Gtk::SizeRequestMode</"
+"literal>, kterou požadujete. Proto všechny čtyři metody "
+"<methodname>get_preferred_xxx_vfunc()</methodname> musí vracet proměnlivé "
+"hodnoty."
 
 #: C/gtkmm-tutorial-in.xml:7067(para)
 msgid ""
@@ -10912,6 +11556,16 @@ msgid ""
 "<methodname>on_size_allocate()</methodname> implementation to actually use "
 "the allocated space that has been offered by the parent container."
 msgstr ""
+"<methodname>on_size_allocate()</methodname> obdrží skutečnou výšku a šířku, "
+"kterou se rodičovský kontejner rozhodl widgetu dát. Což může být více než "
+"minimum, i více než nahlášená přirozená velikost, například v případě "
+"roztaženého hlavního okna. Můžete si zvolit, že budete místo navíc ignorovat "
+"a necháte oblast prázdnou, nebo můžete zvolit roztažení synovského widgetu, "
+"aby místo zaplnil, nebo můžete zvolit roztažení odsazení mezi widgety. Je to "
+"váš kontejner, vaše rozhodnutí. Nezapomeňte zavolat "
+"<methodname>set_allocation()</methodname> uvnitř implementace "
+"<methodname>on_size_allocate()</methodname>, aby se skutečně použilo "
+"naalokované místo, které bylo rodičovským kontejnerem nabídnuto."
 
 #: C/gtkmm-tutorial-in.xml:7079(para)
 msgid ""
@@ -10951,6 +11605,10 @@ msgid ""
 "methods from the base class, so that the add() and remove() methods will do "
 "something appropriate if they are called."
 msgstr ""
+"Ačkoliv váš kontejner může mít svoji vlastní metodu pro nastavení synovských "
+"widgetů, měli byste i tak poskytnou implementaci pro virtuální metody "
+"<methodname>on_add()</methodname> a <methodname>on_remove()</methodname> ze "
+"základní třídy tak, aby obě metody dělali něco vhodného, když jsou zavolány."
 
 #: C/gtkmm-tutorial-in.xml:7106(para)
 msgid ""
@@ -10962,6 +11620,13 @@ msgid ""
 "any more widgets, then this method should return <literal>G_TYPE_NONE</"
 "literal>."
 msgstr ""
+"Vaše implementace metody <methodname>child_type_vfunc()</methodname> by měla "
+"hlásit typ widgetu, který je možné přidat do vašeho kontejneru za "
+"předpokladu, že už není plný. Obvykle to je <methodname>Gtk::Widget::"
+"get_type()</methodname>, abyste dali najevo, že kontejner může obsahovat "
+"libovolnou třídu zděděnou z <classname>Gtk::Widget</classname>. Pokud "
+"kontejner již nemůže pojmou žádný další widget, měla by tato metoda vráti "
+"<literal>G_TYPE_NONE</literal>."
 
 #: C/gtkmm-tutorial-in.xml:7118(para)
 msgid ""
@@ -11038,6 +11703,8 @@ msgid ""
 "<methodname>on_size_allocate()</methodname>: Position the widget, given the "
 "height and width that it has actually been given."
 msgstr ""
+"<methodname>on_size_allocate()</methodname>: Umístí widget s ohledem na "
+"výšku a šířku, které byly skutečně zadány."
 
 #: C/gtkmm-tutorial-in.xml:7153(para)
 msgid ""
@@ -11078,6 +11745,10 @@ msgid ""
 "overridden in all custom widgets. The base class's methods may be "
 "appropriate. <placeholder-1/>"
 msgstr ""
+"Když odvozujete z třídy <classname>Gtk::Widget</classname>, měli byste "
+"přepsat následující virtuální metody. Metody označené „(volitelné)“ není "
+"potřeba přepsat ve všech vlastních widgetech. U základních metod třídy to "
+"může být vhodné. <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:7161(para)
 msgid ""
@@ -11121,7 +11792,7 @@ msgstr "Vícevláknové programy"
 
 #: C/gtkmm-tutorial-in.xml:7199(title)
 msgid "The constraints"
-msgstr "Kontejnery"
+msgstr "Omezení"
 
 #: C/gtkmm-tutorial-in.xml:7201(para)
 msgid ""
@@ -11129,6 +11800,9 @@ msgid ""
 "launching functions, mutexes, condition variables and scoped locking classes "
 "required for writing multi-threaded programs using C++."
 msgstr ""
+"<application>gtkmm</application> poskytuje normální sadu funkcí na spouštění "
+"vláken, mutexy, podmíněné proměnné a třídy na zamykání v rozsahu působnosti "
+"pro psaní vícevláknových programů pomocí C++."
 
 #: C/gtkmm-tutorial-in.xml:7216(para)
 msgid ""
@@ -11148,6 +11822,21 @@ msgid ""
 "methodname> method or calls to any <classname>sigc::connection</classname> "
 "object relating to such a connection."
 msgstr ""
+"Tyto interakce vyplývají ze skutečnosti, že, mimo jiné, třída dědící z "
+"<classname>sigc::trackable</classname> bude mít, prostřednictvím rozhraní, "
+"objekt <classname>std::list</classname> sledující sloty vytvořené voláním "
+"<function>sigc::mem_fun()</function> představující jejich nestatické metody "
+"(lépe řečeno, sleduje seznam zpětných volání, která nastavují na null "
+"napojené sloty při jejich destrukci). Jednotlivé objekty <classname>sigc::"
+"slot</classname> také udržují, přes <classname>sigc::slot_rep</classname>, "
+"svůj vlastní objekt <classname>sigc::trackable</classname> pro sledování "
+"objektů <classname>sigc::connection</classname>, které potřebuje kvůli "
+"informacím o jejich zániku, a také má funkci k odregistrování sebe sama z "
+"<classname>sigc::trackable</classname> pro odpojení nebo destrukci. Objekty "
+"<classname>sigc::signal</classname> také uchovávají seznam slotů, které "
+"budou aktualizovány voláním jejich metody <methodname>connect()</methodname> "
+"nebo voláním objektu <classname>sigc::connection</classname> vztahujícího se "
+"k takovému napojení."
 
 #: C/gtkmm-tutorial-in.xml:7207(para)
 msgid ""
@@ -11159,6 +11848,13 @@ msgid ""
 "<application>libsigc++</application> are protected by a mutex or other means "
 "of synchronization. <placeholder-1/>"
 msgstr ""
+"Přesto je potřeba při psaní programů založených na <application>gtkmm</"
+"application> a používajících spouštění více vláken věnovat některým věcem "
+"pozornost. Pramení to z faktu, že <application>libsigc++</application>, a "
+"zejména <classname>sigc::trackable</classname>, nejsou bezpečné z hlediska "
+"vláken. Je to proto, že žádné složitější interakce, které se vyskytují při "
+"použití <application>libsigc++</application>, nejsou chráněné mutexem nebo "
+"jiným synchronizačním mechanizmem. <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:7240(title)
 msgid "The rules"
@@ -11172,6 +11868,11 @@ msgid ""
 "from <classname>sigc::trackable</classname>, because the effects are "
 "unintuitive (see particularly points 4 and 5 below)."
 msgstr ""
+"Celé to vyžaduje řadu pravidel, kterých je třeba se držet při psaní "
+"vícevláknových aplikací pomocí <application>gtkmm</application>. Jsou "
+"uvedena níže, ale jedna věc stojí zvlášť za pozornost, a to, že je potřeba "
+"věnovat speciální péči odvozování tříd z <classname>sigc::trackable</"
+"classname>, protože efekty jsou nepředvidatelné (viz hlavně body 4 a 5 níže)."
 
 #: C/gtkmm-tutorial-in.xml:7253(para)
 msgid ""
@@ -11179,6 +11880,9 @@ msgid ""
 "application> functions from worker threads (this is dealt with in more "
 "detail in the next section)."
 msgstr ""
+"Použijte <classname>Glib::Dispatcher</classname> k vyvolání funkcí "
+"<application>gtkmm</application> z pracovních vláken (podrobněji bude "
+"rozebráno dále)."
 
 #: C/gtkmm-tutorial-in.xml:7261(para)
 msgid ""
@@ -11194,6 +11898,17 @@ msgid ""
 "referenced by slots connected to the signal object should only be destroyed "
 "in that thread."
 msgstr ""
+"Objekt <classname>sigc::signal</classname> by měl být považován za vlastněný "
+"vláknem, které jej vytvořilo. Pouze toto vlákno by mělo napojit objekt "
+"<classname>sigc::slot</classname> na objekt signálu a pouze toto vlákno by "
+"mělo vyslat signál pomocí <methodname>emit()</methodname>, nebo na signál "
+"zavolat <methodname>operator()()</methodname>, nebo napojený objekt "
+"<classname>sigc::slot</classname> anulovat. Z toho vyplývá (mimo jiné), že "
+"objekt signálu poskytovaný widgetem <application>gtkmm</application> by měl "
+"operovat jen v hlavním vlákně starajícím se grafické uživatelské rozhraní a "
+"objekt odvozený z <classname>sigc::trackable</classname> mající nestatické "
+"metody, na které se odkazuje slot napojený na objekt signálu, by měl být "
+"zlikvidován v tomto vlákně."
 
 #: C/gtkmm-tutorial-in.xml:7277(para)
 msgid ""
@@ -11202,6 +11917,10 @@ msgid ""
 "connection</classname> object was called. Only that thread should call "
 "<classname>sigc::connection</classname> methods on the object."
 msgstr ""
+"Objekt <classname>sigc::connection</classname> by měl být považován za "
+"vlastněný vláknem, ve kterém byl metoda vracející objekt <classname>sigc::"
+"connection</classname> zavolána. Jen toto vlákno by mělo volat metody "
+"<classname>sigc::connection</classname> na objektu."
 
 #: C/gtkmm-tutorial-in.xml:7287(para)
 msgid ""
@@ -11217,6 +11936,17 @@ msgid ""
 "method by using, say, <function>boost::bind()</function> or, in C++11, "
 "<function>std::bind()</function> or a C++11 lambda expression.)"
 msgstr ""
+"Objekt <classname>sigc::slot</classname> vytvořený zavoláním <function>sigc::"
+"mem_fun()</function>, který odkazuje na metodu třídy odvozené z "
+"<classname>sigc::trackable</classname> by neměl být kopírován do jiného "
+"vlákna, ani zničen jiným vláknem, než tím, které ho vytvořilo. (Jedním "
+"důsledkem toho je, že <methodname>Gllib::Thread::create()</methodname> by "
+"nemělo být voláno s argumentem se slotem, který byl vytvořený zavoláním "
+"<function>sigc::mem_fun()</function>, která představuje metodu takového "
+"třídy. Je však bezpečné předat objekt funkce <methodname>Glib::Threads:"
+"Thread::create()</methodname> představující takovou metodu třeba pomocí "
+"<function>boost::bind()</function> nebo v C++11 pomocí <function>std::"
+"bind()</function> nebo lambda výrazem z C++11.)"
 
 #: C/gtkmm-tutorial-in.xml:7305(para)
 msgid ""
@@ -11229,6 +11959,14 @@ msgid ""
 "using that function, or nulling those slots by disconnecting them or "
 "destroying the trackable object."
 msgstr ""
+"Pokud je určitý objekt třídy odvozený z <classname>sigc::trackable</"
+"classname>, jen jedno vlákno by mělo vytvářet objekty <classname>sigc::slot</"
+"classname> představující některou z nestatických metod třídy volánm "
+"<function>sigc::mem_fun()</function>. První vlákno, které má vytvořit "
+"takovýto slot, by mělo být považováno za vlastníka příslušného objektu za "
+"účelem vytváření dalších slotů odkazujících na <emphasis>kteroukoliv</"
+"emphasis> z jeho nestatických metodu používajících tuto funkci, nebo "
+"anulovat tyto sloty jejich odpojením nebo zničeném sledovacího objektu."
 
 #: C/gtkmm-tutorial-in.xml:7319(para)
 msgid ""
@@ -11241,6 +11979,15 @@ msgid ""
 "connect_seconds</methodname> for that main loop, or manipulate any "
 "<classname>sigc::connection</classname> object returned by them."
 msgstr ""
+"Ačkoliv <application>glib</application> je sama o sobě z hlediska vláken "
+"bezpečná, některé obalující funkce z <application>glibmm</application>, "
+"které používají <application>libsigc++</application>, bezpečné nebudou. "
+"Takže například jen vlákno, ve kterém běží hlavní smyčka by mělo volat "
+"<methodname>Glib::SignalIdle::connect()</methodname>, <methodname>Glib::"
+"SignalIO::connect()</methodname>, <methodname>Glib::SignalTimeout::"
+"connect()</methodname>, <methodname>Glib::SignalTimeout::connect_seconds</"
+"methodname> pro hlavní smyčku, nebo manipulovat s objektem <classname>sigc::"
+"connection</classname>, který vrací."
 
 #: C/gtkmm-tutorial-in.xml:7331(para)
 msgid ""
@@ -11253,6 +12000,14 @@ msgid ""
 "<methodname>Glib::Threads::Thread::create()</methodname> as mentioned in "
 "point 4."
 msgstr ""
+"Varianty connect*_once(), <methodname>Glib::SignalIdle::connect_once()</"
+"methodname>, <methodname>Glib::SignalTimeout::connect_once()</methodname>, "
+"<methodname>Glib::SignalTimeout::connect_seconds_once()</methodname>, jsou "
+"bezpečné z hlediska vláken pro libovolný případ, kde slot není vytvořený "
+"voláním <function>sigc::mem_fun()</function>, která představuje metodu třídy "
+"odvozené z <classname>sigc::trackable</classname>. Je to obdobné jako "
+"<methodname>Glib::Threads::Thread::create()</methodname>, která byla zmíněna "
+"v bodě 4."
 
 #: C/gtkmm-tutorial-in.xml:7350(title)
 msgid "Using Glib::Dispatcher"
@@ -11329,6 +12084,12 @@ msgid ""
 "It is deleted when the work is finished, when you press the <literal>Stop "
 "work</literal> button, or when you press the <literal>Quit</literal> button."
 msgstr ""
+"Jedná se o příklad programu se dvěma vlákny, jedním vláknem pro grafické "
+"uživatelské rozhraní, podobně jako ve všech programech <application>gtkmm</"
+"application>, a jedním pracovním vláknem. Pracovní vlákno se vytvoří, když "
+"zmáčknete tlačítko <literal>Start work</literal>. Smaže se, když je práce "
+"dokončena, když zmáčknete tlačítko <literal>Stop work</literal>, nebo když "
+"zmáčknete tlačítko <literal>Quit</literal>."
 
 #: C/gtkmm-tutorial-in.xml:7427(para)
 msgid ""
@@ -11338,6 +12099,11 @@ msgid ""
 "is protected by a <classname>Glib::Threads::Mutex</classname>. Only the GUI "
 "thread updates the GUI."
 msgstr ""
+"<classname>Glib::Dispatchet</classname> se používá k zasílání upozornění z "
+"pracovního vlákna do vlákna starajícího se o grafické uživatelské rozhraní. "
+"Třída <classname>ExampleWorker</classname> obsahuje data, ke kterým je "
+"přistupováno z obou vláken. Tato data jsou chráněna pomocí <classname>Glib::"
+"Threads::Mutex</classname>. Pouze vlákno starající se o GUI může měnit GUI."
 
 #: C/gtkmm-tutorial-in.xml:7436(title)
 msgid "Multi-Threaded Program"
@@ -11352,6 +12118,8 @@ msgid ""
 "This section is simply a gathering of wisdom, general style guidelines and "
 "hints for creating <application>gtkmm</application> applications."
 msgstr ""
+"V této kapitole je taková všehochuť mouder, obecných pokynů a rad k "
+"vytváření aplikací s <application>gtkmm</application>."
 
 #: C/gtkmm-tutorial-in.xml:7455(para)
 msgid ""
@@ -11363,6 +12131,13 @@ msgid ""
 "of software installation, handling a large number of system quirks to "
 "increase portability."
 msgstr ""
+"Používejte GNU <application>autoconf</application> a <application>automake</"
+"application>! Jsou to vaši přátelé :-) <application>Automake</application> "
+"prozkoumá soubory v C, určí, jak na sobě navzájem závisí, a vygeneruje "
+"<filename>Makefile</filename>, takže lze soubory zkompilovat v správném "
+"pořadí. <application>Autoconf</application> umožňuje automatickou "
+"konfiguraci instalace softwaru, která se vyrovná se spoustou specialit "
+"jednotlivých systémů, takž dosáhnete lepší přenositelnosti."
 
 #: C/gtkmm-tutorial-in.xml:7465(para)
 msgid ""
@@ -11370,6 +12145,9 @@ msgid ""
 "your main <classname>Window</classname> at least. Then you can make your "
 "child Widgets and signal handlers members of that class."
 msgstr ""
+"Odvozujte podtřídy widgetů kvůli lepší přehlednosti kódu. Pravděpodobně "
+"odvodíte minimálně podtřídu z <classname>Window</classname>. Pak můžete ze "
+"synovských widgetů a obsluh signálů udělat členy této třídy."
 
 #: C/gtkmm-tutorial-in.xml:7470(para)
 msgid ""
@@ -11381,6 +12159,13 @@ msgid ""
 "<classname>sigc::signal</classname>s, as described in the "
 "<application>libsigc++</application> documentation."
 msgstr ""
+"Místo předávání ukazatelů všude možně vytvářejte své vlastní signály. "
+"Objekty spolu mohou navzájem komunikovat přes signály a obsluhy signálů. Je "
+"to mnohem jednodušší, než objekty uchovávající si ukazatele na sebe navzájem "
+"a volající si navzájem metody. Třídy z <application>gtkmm</application> "
+"používají speciální verze <classname>sigc::signal</classname>, ale vy byste "
+"měli používat normální signály <classname>sigc::signal</classname>, jak je "
+"popsáno v dokumentaci <application>libsigc++</application>."
 
 #: C/gtkmm-tutorial-in.xml:7479(title)
 msgid "Application Lifetime"
@@ -11397,6 +12182,14 @@ msgid ""
 "(for instance, if there are unsaved changes) by overriding <methodname>Gtk::"
 "Window::on_delete_event()</methodname>."
 msgstr ""
+"Většina aplikací bude mít jen jeden objekt <classname>Window</classname>, "
+"nebo aspoň jen jedno hlavní okno. Tyto aplikace mohou používat přetížení "
+"<methodname>Gtk::Application::run(Gtk::Window&amp;)</methodname>. Tím se "
+"zobrazí okno a k návratu z volání dojde, až se okno skryje. To může nastat, "
+"když uživatel okno zavře, nebo když se váš kód rozhodne okno skrýt pomocí "
+"<methodname>hide()</methodname>. Přepsáním <methodname>Gtk::Window::"
+"on_delete_event()</methodname> můžete uživateli zabránit okno zavřít "
+"(například, když existuje neuložené změny v jeho datech)."
 
 #: C/gtkmm-tutorial-in.xml:7488(para)
 msgid "Most of our examples use this technique."
@@ -11412,7 +12205,7 @@ msgid ""
 "for using a <classname>Widget</classname>:"
 msgstr ""
 "Všechny naše příklady se snaží mít stejnou strukturu. V použití třídy "
-"<classname>Widget</classname> s snaží držet těchto kroků:"
+"<classname>Widget</classname> se snaží držet těchto kroků:"
 
 #: C/gtkmm-tutorial-in.xml:7503(para)
 msgid ""
@@ -11423,6 +12216,12 @@ msgid ""
 "pointer, it's still probably best to make that pointer a member variable of "
 "a container class so that you can access it later."
 msgstr ""
+"Deklarujte proměnnou typu <classname>Widget</classname>, kterou si přejte "
+"použit, obecně jako členskou proměnnou odvozené kontejnerové třídy. Mohli "
+"byste také deklarovat ukazatel na typ widgetu a pak jej vytvořit pomocí "
+"<literal>new</literal> ve svém kódu. Ale i když používáte widget přes "
+"ukazatel, je pořád pravděpodobně nejlepší vytvořit ukazatel jako členskou "
+"proměnnou v kontejnerové třídě, abyste se k widgetu později dostali."
 
 #: C/gtkmm-tutorial-in.xml:7514(para)
 msgid ""
@@ -11430,6 +12229,9 @@ msgid ""
 "then you will need to initialize the widget in the initalizer list of your "
 "container class's constructor."
 msgstr ""
+"Nastavit vlastnosti widgetu. Pokud widget nemá výchozí konstruktor, "
+"potřebujete jej inicializovat v seznamu inicializací v konstruktoru "
+"kontejnerové třídy."
 
 #: C/gtkmm-tutorial-in.xml:7520(para)
 msgid "Connect any signals you wish to use to the appropriate handlers."
@@ -11442,6 +12244,9 @@ msgid ""
 "<methodname>Gtk::Container::add()</methodname> or <methodname>pack_start()</"
 "methodname>."
 msgstr ""
+"Zabalit widget do kontejneru pomocí příslušného volání, např. "
+"<methodname>Gtk::Container::add()</methodname> nebo "
+"<methodname>pack_start()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:7534(para)
 msgid "Call <methodname>show()</methodname> to display the widget."
@@ -11458,10 +12263,18 @@ msgid ""
 "contents already drawn. Otherwise, the user will first see a blank window, "
 "into which the widgets will be gradually drawn."
 msgstr ""
+"<methodname>Gtk::Widget::show()</methodname> dává <application>gtkmm</"
+"application> najevo, že máme dokončené nastavení vlastností widgetu a widget "
+"je připravený k zobrazení. Když jej chcete znovu skrýt, můžete použít "
+"<methodname>Gtk::Widget::hide()</methodname>. Pořadí, ve které widgety "
+"zobrazíte, není důležité, ale doporučujeme, abyste hlavní okno zobrazili až "
+"jako poslední. Tak se celé okno objeví s již vykresleným obsahem. V opačném "
+"případě by uživatel nejdříve spatřil prázdné okno, ve kterém by se mu "
+"postupně zjevily widgety."
 
 #: C/gtkmm-tutorial-in.xml:7557(title)
 msgid "Contributing"
-msgstr ""
+msgstr "Přispívání"
 
 #: C/gtkmm-tutorial-in.xml:7559(para)
 msgid ""
@@ -11470,6 +12283,10 @@ msgid ""
 "<application>gtkmm</application> that does not already have documentation, "
 "please consider contributing to this document."
 msgstr ""
+"Tento dokument, stejně jako mnoho dalšího skvělého softwaru, byl vytvořen "
+"zdarma dobrovolníky. Pokud víte o čemkoliv z <application>gtkmm</"
+"application>, co není ještě zdokumentováno, pouvažujte prosím o přispění do "
+"tohoto dokumentu."
 
 #: C/gtkmm-tutorial-in.xml:7565(para)
 msgid ""
@@ -11478,6 +12295,10 @@ msgid ""
 "in.xml</filename> file. This file is currently in the <literal>gtkmm-"
 "documentation</literal> module in GNOME git."
 msgstr ""
+"Ideální by bylo, kdybyste <ulink url=\"http://www.gtkmm.org/bugs.shtml"
+"\">poskytli záplatu</ulink> k souboru <filename>docs/tutorial/C/gtkmm-"
+"tutorial-in.xml</filename>. Tento soubor se momentálně nachází v modulu "
+"<literal>gtkmm-documentation</literal> v repozitáři git projektu GNOME."
 
 #: C/gtkmm-tutorial-in.xml:7571(para)
 msgid ""
@@ -11489,6 +12310,13 @@ msgid ""
 "examples in their programs, and copies of this document (including your "
 "contribution) may be distributed freely."
 msgstr ""
+"Pokud se rozhodnete přispět, pošlete prosím příspěvek do poštovní konference "
+"<application>gtkmm</application> na adrese <ulink url=\"mailto:gtkmm-"
+"list@gnome.org\">&lt;gtkmm-list@gnome.org&gt;</ulink>. Pamatujte ale, že "
+"celý dokument je svobodný a zdarma a i příspěvky, se kterými přijdete, musí "
+"splňovat tyto podmínky. To mimo jiné znamená, že lidé mohou volně používat "
+"části příkladů ve svých programech a volně šířit kopie tohoto dokumentu "
+"(včetně příspěvků)."
 
 #: C/gtkmm-tutorial-in.xml:7583(title)
 msgid "The RefPtr smartpointer"
@@ -11572,13 +12400,16 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:7624(title)
 msgid "Dereferencing"
-msgstr ""
+msgstr "Snižování referencí"
 
 #: C/gtkmm-tutorial-in.xml:7625(para)
 msgid ""
 "You can dereference a smartpointer with the -&gt; operator, to call the "
 "methods of the underlying instance, just like a normal pointer."
 msgstr ""
+"Počitadlo referencí chytrého ukazatele můžete snížit (dereference) pomocí "
+"operátor -&gt;, který zavolá metodu podkladové instance, jako u normálního "
+"ukazatele."
 
 #: C/gtkmm-tutorial-in.xml:7629(programlisting)
 #, no-wrap
@@ -11743,6 +12574,10 @@ msgid ""
 "<classname>std::string</classname> for a method parameter to avoid "
 "unnecessary copying."
 msgstr ""
+"<literal>const … &amp;</literal> je u obou jen kvůli efektivitě, podobně "
+"jako použití <classname>const std::string&amp;</classname> místo "
+"<classname>std::string</classname> pro parametr metody, aby se zabránilo "
+"zbytečnému kopírování."
 
 #: C/gtkmm-tutorial-in.xml:7725(title)
 msgid "Connecting signal handlers"
@@ -11759,6 +12594,14 @@ msgid ""
 "<application>GTK+</application> C coders, these signal handlers are often "
 "named callbacks."
 msgstr ""
+"Třídy widgetů v <application>gtkmm</application> mají metody zpřístupňující "
+"signály, jako je <methodname>Gtk::Button::signal_clicked()</methodname>, "
+"která vám umožňují napojit si svoji obsluhu signálu. Díky pružnosti "
+"<application>libsigc++</application>, která je používaná <application>gtkmm</"
+"application> jako knihovna pro zpětná volání, může být obsluhou signálu "
+"většinou libovolný druh funkce, ale nejspíše budete chtít použít metodu "
+"třídy. Mezi programátory <methodname>GTK+</methodname> v C jsou tyto obsluhy "
+"signálů často nazývané „zpětná volání“."
 
 #: C/gtkmm-tutorial-in.xml:7736(para)
 msgid "Here's an example of a signal handler being connected to a signal:"
@@ -11800,6 +12643,8 @@ msgid ""
 "There's rather a lot to think about in this (non-functional) code. First "
 "let's identify the parties involved:"
 msgstr ""
+"V tomto (nefunkčním) kódu je toho hodně k zamyšlení. Nejdříve pojďme "
+"pojmenovat zúčastněné věci:"
 
 #: C/gtkmm-tutorial-in.xml:7765(para)
 msgid "The signal handler is <methodname>on_button_clicked()</methodname>."
@@ -11810,16 +12655,20 @@ msgid ""
 "We're hooking it up to the <classname>Gtk::Button</classname> object called "
 "<varname>button</varname>."
 msgstr ""
+"Zaháčkovali jsme jej k objektu <classname>Gtk::Button</classname> nazvaném "
+"<varname>button</varname>."
 
 #: C/gtkmm-tutorial-in.xml:7778(para)
 msgid ""
 "When the Button emits its <literal>clicked</literal> signal, "
 "<methodname>on_button_clicked()</methodname> will be called."
 msgstr ""
+"Když <classname>Button</classname> vyšle svůj signál <literal>clicked</"
+"literal>, zavolá se <methodname>on_button_clicked()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:7786(para)
 msgid "Now let's look at the connection again:"
-msgstr ""
+msgstr "Nyní se pojďme znovu podívat na přípojení:"
 
 #: C/gtkmm-tutorial-in.xml:7791(programlisting)
 #, no-wrap
@@ -11841,6 +12690,10 @@ msgid ""
 "method. Instead, we call <function>sigc::ptr_fun()</function>, and pass the "
 "result to <methodname>connect()</methodname>."
 msgstr ""
+"Všimněte si, že ukazatel na <methodname>on_button_clicked()</methodname> "
+"nepředáváme přímo do metody <methodname>connect()</methodname> patřící "
+"signálu. Místo toho zavoláme <function>sigc::ptr_fun()</function> a do "
+"<methodname>connect()</methodname> předáme výsledek."
 
 #: C/gtkmm-tutorial-in.xml:7805(para)
 msgid ""
@@ -11851,10 +12704,16 @@ msgid ""
 "standalone function or static method. <function>sigc::mem_fun()</function> "
 "generates a slot for a member method of a particular instance."
 msgstr ""
+"<function>sigc::ptr_fun()</function> generuje <classname>sigc::slot</"
+"classname>. Slot je objekt, který vypadá a působí jako funkce. Někdy se "
+"můžete setkat i s označením funkční objekt nebo functors. <function>sigc::"
+"ptr_fun()</function> generuje slot pro samostatnou funkci nebo statickou "
+"metodu. <function>sigc::mem_fun()</function> generuje slot pro členskou "
+"metodu konkrétní instance."
 
 #: C/gtkmm-tutorial-in.xml:7814(para)
 msgid "Here's a slightly larger example of slots in action:"
-msgstr ""
+msgstr "Zde je trochu rozsáhlejší příklad slotů v činnosti:"
 
 #: C/gtkmm-tutorial-in.xml:7819(programlisting)
 #, no-wrap
@@ -11911,6 +12770,13 @@ msgid ""
 "\"called\", call the pointed-to method of the specified object, in this case "
 "<methodname>some_object.on_button_clicked()</methodname>."
 msgstr ""
+"Další už je podstatně zajímavější. <function>sigc::mem_fun()</function> je "
+"volaná se dvěma argumenty. První argument je <parameter>some_object</"
+"parameter>, což je objekt, na který náš nový slot bude ukazovat. Druhý "
+"argument je ukazatel na jednu z jeho metod. Tato konkrétní verze "
+"<function>sigc::mem_fun()</function> vytváří slot, který bude, když je "
+"„zavolán“, volat metodu určeného objektu, na kterou ukazuje, v tomto případě "
+"<methodname>some_object.on_button_clicked()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:7851(para)
 msgid ""
@@ -11919,6 +12785,10 @@ msgid ""
 "perfectly fine - when the button is clicked, both signal handlers will be "
 "called."
 msgstr ""
+"Další věcí, která stojí v tomto příkladu za zmínku, je, že voláme "
+"<methodname>connect()</methodname> dvakrát pro ten samý objekt signálu. To "
+"je úplně v pořádku – když je na tlačítko kliknuto, jsou zavolány obě obsluhy "
+"signálu."
 
 #: C/gtkmm-tutorial-in.xml:7858(para)
 msgid ""
@@ -11929,6 +12799,12 @@ msgid ""
 "function>, of course). Therefore, it's important to know what type of signal "
 "handler you'll be expected to connect to a given signal."
 msgstr ""
+"Právě jsme vám řekli, že signál <literal>clicked</literal> tlačítka očekává "
+"volání metody bez argumentu. Všechny signály mají obdobné požadavky – "
+"nemůžete zaháčkovat funkci se dvěma argumenty na signál, který neočekává "
+"žádný (ledaže použijete adaptér, jako je <function>sigc::bind()</function>). "
+"Proto je důležité znát, jaký typ obsluhy signálu byste měli očekávat, že se "
+"k danému signálu napojí."
 
 #: C/gtkmm-tutorial-in.xml:7870(title)
 msgid "Writing signal handlers"
@@ -12185,7 +13061,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:8021(title)
 msgid "Binding extra arguments"
-msgstr ""
+msgstr "Navázání dodatečných argumentů"
 
 #: C/gtkmm-tutorial-in.xml:8028(programlisting)
 #, no-wrap
@@ -12218,6 +13094,16 @@ msgid ""
 "argument to the declaration of our signal handler: <placeholder-2/> Of "
 "course, a normal \"clicked\" signal handler would have no arguments."
 msgstr ""
+"V případě, že použijete obsluhu signálu k zachycení stejného signálu z "
+"několika widgetů, byli byste rádi, kdyby obsluha signálu obdržela nějaké "
+"doplňující informace. Například můžete chtít vědět, na které tlačítko bylo "
+"kliknuto. To můžete udělat pomocí <function>sigc::bind()</function>. Zde je "
+"kód z příkladu <link linkend=\"sec-helloworld2\">helloworld2</link>. "
+"<placeholder-1/> Říká se v něm, že chceme po signálu, aby poslal do obsluhy "
+"signálu doplňující argument <classname>Glib::ustring</classname> a hodnota "
+"tohoto argumentu by měla být „button 1“. Samozřejmě potřebujeme přidat tento "
+"doplňující argument do deklarace naší obsluhy signálu: <placeholder-2/> A "
+"samozřejmě, normální obsluha signálu „clicked“ by neměla mít žádné argumenty."
 
 #: C/gtkmm-tutorial-in.xml:8040(para)
 msgid ""
@@ -12230,6 +13116,15 @@ msgid ""
 "derived widget, but widget derivation is very difficult in C. We have far "
 "less need of this hack in <application>gtkmm</application>."
 msgstr ""
+"Funkce <function>sigc::bind()</function> se nepoužívá úplně běžné, ale občas "
+"se vám hodit může. Pokud se dobře vyznáte v programování <application>GTK+</"
+"application>, pak jste si nejspíše všimli, se je to podobné, jako doplňující "
+"argument <literal>gpointer data</literal>, který mají všechna zpětná volání "
+"v GTK+. Obecně je v <application>GTK+</application> nadužívaný k předávání "
+"informací, které by měly být uložené v členských datech v odvozených "
+"widgetech, ale v C je odvozování widgetů velmi složité. V "
+"<application>gtkmm</application> máme mnohem menší potřebu takovýchto "
+"obezliček."
 
 #: C/gtkmm-tutorial-in.xml:8052(title)
 msgid "X Event signals"
@@ -12256,6 +13151,12 @@ msgid ""
 "<literal>button_press_event</literal> if you needed this information. X "
 "events are also often used to handle key-presses."
 msgstr ""
+"Občas, když něčeho nejde dosáhnout s normálními signály, můžete shledat "
+"užitečným obsluhovat události X. <classname>Gtk::Button</classname> "
+"například neposílá v jeho signálu <literal>clicked</literal> souřadnice "
+"ukazatele myši, ale pokud tuto informaci potřebujete, mohli byste obsluhovat "
+"<literal>button_press_event</literal>. Události X jsou také často využívány "
+"k obsluze zmačknutí kláves."
 
 #: C/gtkmm-tutorial-in.xml:8068(para)
 msgid ""
@@ -12265,6 +13166,11 @@ msgid ""
 "pass the event on to the next signal handler. If the value is <literal>true</"
 "literal> then no other signal handlers will need to be called."
 msgstr ""
+"Tyto signály se chovají lehce jinak. Hodnota vrácená z obsluhy signálu říká, "
+"jestli událost byla „plně“ obsloužena. Pokud je hodnota <literal>false</"
+"literal>, pak <application>gtkmm</application> předá událost následující "
+"obsluze signálu v hierarchii. Pokud je hodnota <literal>true</literal>, není "
+"potřeba volat žádnou další obsluhu signálu."
 
 #: C/gtkmm-tutorial-in.xml:8073(para)
 msgid ""
@@ -12273,6 +13179,10 @@ msgid ""
 "classname>, you'll still be able to get the <literal>clicked</literal> "
 "signal. They are emitted at (nearly) the same time."
 msgstr ""
+"Obsluha událostí X neovlivňuje ostatní signály widgetu. Pokud třeba "
+"obsluhujete <literal>button_press_event</literal> pro <classname>Gtk::"
+"Button</classname>, stále budete schopni obdržet signál <literal>clicked</"
+"literal>. Obojí je vysláno v (téměř) stejnou chvíli."
 
 #: C/gtkmm-tutorial-in.xml:8080(para)
 msgid ""
@@ -12284,6 +13194,13 @@ msgid ""
 "the <link linkend=\"chapter-widgets-without-xwindows\">Widgets Without X-"
 "Windows</link> chapter."
 msgstr ""
+"Pamatujte také, že ne všechny widgety přijímají ve výchozí podobě všechny "
+"události X. K příjmu dalších událostí X můžete použít před zobrazením "
+"widgetu jeho metodu <methodname>Gtk::Widget::set_events()</methodname> nebo "
+"po jeho zobrazení metodu <methodname>Gtk::Widget::add_events()</methodname>. "
+"Některé widgety je však třeba nejprve umístit do widgetu "
+"<classname>EventBox</classname>. Viz kapitola <link linkend=\"chapter-"
+"widgets-without-xwindows\">Widgety bez X-Windows</link>."
 
 #: C/gtkmm-tutorial-in.xml:8089(programlisting)
 #, no-wrap
@@ -12303,6 +13220,8 @@ msgid ""
 "When the mouse is over the button and a mouse button is pressed, "
 "<methodname>on_button_press()</methodname> will be called."
 msgstr ""
+"Když je ukazatel myši na tlačítkem a zmáčknete tlačítko myši, je zavoláno "
+"<methodname>on_button_press()</methodname>."
 
 #: C/gtkmm-tutorial-in.xml:8100(para)
 msgid ""
@@ -12311,6 +13230,10 @@ msgid ""
 "button was pressed. There are several different types of <type>GdkEvent</"
 "type> structures for the various events."
 msgstr ""
+"<type>GdkEventButton</type> je struktura, která obsahuje parametry události, "
+"jako jsou souřadnice ukazatele myši ve chvíli, kdy bylo tlačítko zmáčknuto. "
+"Existuje několik různých typů struktury <type>GdkEvent</type> pro různé "
+"události."
 
 #: C/gtkmm-tutorial-in.xml:8108(title)
 msgid "Signal Handler sequence"
@@ -12460,6 +13383,10 @@ msgid ""
 "that the exception was thrown from <filename>without_signal.cc</filename>, "
 "line 6 (<code>throw \"Something\";</code>)."
 msgstr ""
+"Zde je výňatek z práce s <application>gdb</application>. Zobrazené jsou jen "
+"nejzajímavější části výstupu. <placeholder-1/> Můžete vidět, že výjimka byla "
+"vyhozená z <filename>without_signal.cc</filename>, řádek 6 (<code>throw "
+"\"Something\";</code>)."
 
 #: C/gtkmm-tutorial-in.xml:8182(programlisting)
 #, no-wrap
@@ -12551,6 +13478,12 @@ msgid ""
 "application> or <application>gtkmm</application>, and <application>gdb</"
 "application> can't see where it was thrown."
 msgstr ""
+"A tady je výňatek z práce s <application>gdb</application>. <placeholder-1/> "
+"Výjimka je zachycena v <application>glibmm</application> a program končí "
+"pomocí volání <function>g_error()</function>. Jiné výjimky mohou vést k "
+"jinému chování, ale v každém případě je výjimka z obsluhy signálu zachycena "
+"v <application>glibmm</application> nebo v <application>gtkmm</application> "
+"a <application>gdb</application> nemůže vidět, kde byla vyhozena."
 
 #: C/gtkmm-tutorial-in.xml:8227(programlisting)
 #, no-wrap
@@ -12626,6 +13559,13 @@ msgid ""
 "backtrace from the last (or possibly the last but one) <code>throw</code> "
 "before the program stops, is the interesting one."
 msgstr ""
+"Pokud se před tím, než není zachycena zajímavá výjimka, zachytává příliš "
+"jiných výjimek, může být tento postup poněkud únavný. Dá se ale "
+"automatizovat následujícími příkazy <application>gdb</application>. "
+"<placeholder-1/> Tyto příkazy vypíší zpětně zásobník volání pro každé "
+"<code>throw</code> a pokračuje se. Výpis z posledního (nebo možná "
+"předposledního) <code>throw</code> před zastavením programu je ten, který "
+"nás zajímá."
 
 #: C/gtkmm-tutorial-in.xml:8267(title)
 msgid "Creating your own signals"
@@ -12638,6 +13578,10 @@ msgid ""
 "between your own classes. That's actually very simple by using the "
 "<application>libsigc++</application> library directly."
 msgstr ""
+"Nyní, když jste poznali signály a obsluhu signálů v <application>gtkmm</"
+"application>, budete možná chtít používat stejnou techniku ke komunikaci "
+"mezi vašimi vlastními třídami. Je to skutečně velmi jednoduché přímo díky "
+"knihovně <application>libsigc++</application>."
 
 #: C/gtkmm-tutorial-in.xml:8274(para)
 msgid ""
@@ -12647,6 +13591,12 @@ msgid ""
 "signal system, but for new, non-GTK+ signals, you can create pure C++ "
 "signals, using the <classname>sigc::signal&lt;&gt;</classname> template."
 msgstr ""
+"Není to záležitostí jen <application>gtkmm</application> nebo grafického "
+"uživatelského rozhraní. <application>gtkmm</application> používá "
+"<application>libsigc++</application> k implementaci vlastního zástupného "
+"obalení pro systém signálu <application>GTK+</application>, ale pro nové "
+"signály nepocházející z GTK+ můžete vytvářet signály čistě z C++, pomocí "
+"šablony <classname>sigc::signal&lt;&gt;</classname>."
 
 #: C/gtkmm-tutorial-in.xml:8285(programlisting)
 #, no-wrap
@@ -12655,7 +13605,7 @@ msgid ""
 "sigc::signal&lt;void, bool, int&gt; signal_something;\n"
 msgstr ""
 "\n"
-"sigc::signal&lt;void, bool, int&gt; signal_something;\n"
+"sigc::signal&lt;void, bool, int&gt; signal_neco;\n"
 
 #: C/gtkmm-tutorial-in.xml:8281(para)
 msgid ""
@@ -12663,6 +13613,9 @@ msgid ""
 "type> and an <type>int</type>, just declare a <classname>sigc::signal</"
 "classname>, like so: <placeholder-1/>"
 msgstr ""
+"Například, abyste vytvořili signál, který posílá dva parametry, <type>bool</"
+"type> a <type>int</type>, jednoduše zadeklarujte <classname>sigc::signal</"
+"classname>, nějak takto: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8293(programlisting)
 #, no-wrap
@@ -12684,6 +13637,22 @@ msgid ""
 "  return m_signal_something;\n"
 "}\n"
 msgstr ""
+"\n"
+"class Server\n"
+"{\n"
+"public:\n"
+"  // pro přístup k signálu:\n"
+"  typedef sigc::signal&lt;void, bool, int&gt; type_signal_something;\n"
+"  type_signal_something signal_something();\n"
+"\n"
+"protected:\n"
+"  type_signal_something m_signal_something;\n"
+"};\n"
+"\n"
+"Server::type_signal_something Server::signal_something()\n"
+"{\n"
+"  return m_signal_something;\n"
+"}\n"
 
 #: C/gtkmm-tutorial-in.xml:8289(para)
 msgid ""
@@ -12691,6 +13660,9 @@ msgid ""
 "people find that distasteful and prefer to make it available via an accessor "
 "method, like so: <placeholder-1/>"
 msgstr ""
+"Stačilo by jen deklarovat signál, jako veřejnou členskou proměnnou, ale "
+"někteří to nepovažují za vhodné a dávají přednost jeho zpřístupnění přes "
+"metodu, nějak takto: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8315(programlisting)
 #, no-wrap
@@ -12699,6 +13671,9 @@ msgid ""
 "server.signal_something().connect(\n"
 "  sigc::mem_fun(client, &amp;Client::on_server_something) );\n"
 msgstr ""
+"\n"
+"server.signal_something().connect(\n"
+"  sigc::mem_fun(client, &amp;Client::on_server_something) );\n"
 
 #: C/gtkmm-tutorial-in.xml:8312(para)
 msgid ""
@@ -12706,10 +13681,14 @@ msgid ""
 "connecting to <application>gtkmm</application> signals. For instance, "
 "<placeholder-1/>"
 msgstr ""
+"Na signál se můžete napojit pomocí stejné syntaxe, jako se používá při "
+"napojení k signálům <application>gtkmm</application>. Například "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8323(para)
 msgid "This is a full working example that defines and uses custom signals."
 msgstr ""
+"Jedná se o úplný funkční příklad, který definuje a používá vlastní signály."
 
 #: C/gtkmm-tutorial-in.xml:8337(title)
 msgid "Comparison with other signalling systems"
@@ -12729,6 +13708,17 @@ msgid ""
 "broadcasters, and slots play the role of listeners - sort of. More on this "
 "later.)"
 msgstr ""
+"(Odbočení od tématu: <application>GTK+</application> nazývá toto schéma "
+"„signalink“ – „signalizace“. Pozorný čtenář se zkušenostmi s vývojářskou "
+"sadou GUI namítne, že ten stejný návrh můžete často vidět pod názvem "
+"„broadcaster-listener“ – „hromadné vysílání-naslouchání“ (např. ve "
+"vývojářském základ PowerPlant v Mertokworks rpo Macintowsh). Funguje to "
+"podobně: nastaví se vysílače <literal>broadcaster</literal> a pak k nim "
+"připojí posluchači <literal>listeners</literal>. Vysílače udržují seznam "
+"objektů, které je poslouchají a když někdo vysílači předá zprávu, ten zavolá "
+"všechny své objekty ze seznamu a zprávu jim předá. V <application>gtkmm</"
+"application> signální objekty hrají roli vysílačů a sloty hrají roli "
+"posluchačů. Více se o tom dozvíte dále."
 
 #: C/gtkmm-tutorial-in.xml:8352(para)
 msgid ""
@@ -12738,6 +13728,11 @@ msgid ""
 "And, unlike <application>Qt</application>, <application>gtkmm</application> "
 "achieves this without modifying the C++ language."
 msgstr ""
+"Obsluhy signálů <application>gtkmm</application> jsou silně typové, kdežto "
+"kód <application>GTK+</application> v C umožní napojit zpětné volání s "
+"nesprávným počtem a typem argumentů, což vede k selhání segmentace za běhu. "
+"A na rozdíl od <application>Qt</application>, <application>gtkmm</"
+"application> toho dosáhne beze změn v jazyce C++."
 
 #: C/gtkmm-tutorial-in.xml:8358(para)
 msgid ""
@@ -12747,6 +13742,12 @@ msgid ""
 "inheritance and overloading. In C++, it's simple, since those features are "
 "supported in the language itself; you can let the compiler do the dirty work."
 msgstr ""
+"Přepisování obsluhy signálu: Můžete to dělat i přímo ve světě C v GTK+. Je "
+"to to, k čemu objektový systém GTK slouží. V GTK+ ale musíte projít "
+"složitými postupy, abyste získali objektově orientované vlastnosti, jako je "
+"dědění nebo přetěžování. V C++ je to jednoduché, protože tyto vlastnosti "
+"jsou podporované jazykem jako takovým. Necháte na kompilátoru, aby udělal "
+"špinavou práci za vás."
 
 #: C/gtkmm-tutorial-in.xml:8366(para)
 msgid ""
@@ -12757,6 +13758,12 @@ msgid ""
 "overriding methods is so easy in C++, it's entirely practical - and sensible "
 "- to subclass a button for that purpose."
 msgstr ""
+"Je to jedna z věcí, na které se ukazuje krása C++. Neměli byste přemýšlet o "
+"podtřídách widgetů GTK+ kvůli přepsání jeho akčních metod, to vám akorát "
+"přinese potíže. V GTK+ s k udělání věcí většinou vždy používají signály, "
+"vyjma situací, kdy píšete nový widget. Protože ale v C++ je přepisování "
+"metod tak snadné, je pro tento účel praktické, a rozumné, vytvořit podtřídu "
+"tlačítka."
 
 #: C/gtkmm-tutorial-in.xml:8377(title)
 msgid "<application>gtkmm</application> and Win32"
@@ -12769,6 +13776,10 @@ msgid ""
 "platforms such as GNU/Linux can generally be transferred to Windows (and "
 "vice versa) with few modifications to the source."
 msgstr ""
+"Jedním z hlavních přínosů <application>gtkmm</application> je, že je "
+"multiplatformní. Programy <application>gtkmm</application> napsané na jiných "
+"platformách, jako je GNU/Linux, mohou být obecně vzato přenesené do Windows "
+"(a naopak) je s pár změnami ve zdrojových kódech."
 
 #: C/gtkmm-tutorial-in.xml:8383(para)
 msgid ""
@@ -12781,10 +13792,18 @@ msgid ""
 "MSWindows/\"> https://wiki.gnome.org/Projects/gtkmm/MSWindows</ulink> for "
 "instructions how to use it."
 msgstr ""
+"<application>gtkmm</application> aktuálně funguje s <ulink url=\"http://"
+"mingw.org/\">MingW/GCC3.4 compiler</ulink> a Microsoft Visual C++ 2005 nebo "
+"novějším (včetně volně dostupné verze express) na platformě Windows. Zde je "
+"<ulink url=\"ftp://ftp.gnome.org/pub/GNOME/binaries/win32/gtkmm"
+"\">instalátor<ulink url=\"http://mingw.org/\"> dostupný pro gtkmm na MS "
+"Windows. Instrukce, jak jej použít viz <ulink url=\"https://wiki.gnome.org/"
+"Projects/gtkmm/MSWindows/\">https://wiki.gnome.org/Projects/gtkmm/MSWindows</"
+"ulink>."
 
 #: C/gtkmm-tutorial-in.xml:8395(title)
 msgid "Building <application>gtkmm</application> on Win32"
-msgstr ""
+msgstr "Sestavování <application>gtkmm</application> na Win32"
 
 #: C/gtkmm-tutorial-in.xml:8396(para)
 msgid ""
@@ -12792,6 +13811,9 @@ msgid ""
 "BuildingGtkmm\"> https://wiki.gnome.org/Projects/gtkmm/MSWindows/"
 "BuildingGtkmm</ulink> for instructions on how to build gtkmm on Windows."
 msgstr ""
+"Na instrukce, jak sestavit gtkmm na Windows se prosím podívejte na <ulink "
+"url=\"https://wiki.gnome.org/Projects/gtkmm/MSWindows/BuildingGtkmm"
+"\">https://wiki.gnome.org/Projects/gtkmm/MSWindows/BuildingGtkmm</ulink>"
 
 #: C/gtkmm-tutorial-in.xml:8404(title)
 msgid "Working with gtkmm's Source Code"
@@ -12862,6 +13884,10 @@ msgid ""
 "your <filename>.jhbuildrc</filename> file and set your moduleset setting to "
 "the latest version e.g. like so: <placeholder-1/>"
 msgstr ""
+"Modul <application>gtkmm</application> je definován v sadě modulů "
+"<filename>gnome-suites-core-deps-3.x.modules</filename>, takže upravte svůj "
+"soubor <filename>.jhbuildrc</filename> a nastavte nastavení sady modulů na "
+"nejnovější verzi, například takto: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8460(programlisting)
 #, no-wrap
@@ -12875,6 +13901,10 @@ msgid ""
 "application> and all of its dependencies, set <varname>modules</varname> "
 "like so: <placeholder-1/>"
 msgstr ""
+"Po nastavení správné sady modulů potřebujete říci systému "
+"<application>jhbuild</application>, který modul nebo sadu modulů sestavit. "
+"Abyste sestavili <application>gtkmm</application> a všechny jeho závislosti, "
+"nastavte <varname>modules</varname> takto: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8462(para)
 msgid ""
@@ -12889,7 +13919,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:8472(title)
 msgid "Setting a prefix"
-msgstr ""
+msgstr "Nastavení prefixu"
 
 #: C/gtkmm-tutorial-in.xml:8473(para)
 msgid ""
@@ -13008,7 +14038,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:8570(title)
 msgid "The build structure"
-msgstr ""
+msgstr "Struktura sestavení"
 
 #: C/gtkmm-tutorial-in.xml:8571(para)
 msgid ""
@@ -13019,6 +14049,12 @@ msgid ""
 "infrastructure provided by the mm-common module. To get started, it helps a "
 "lot to pick an existing binding module as an example to look at."
 msgstr ""
+"Generování zdrojových kódů pro obalující API ve stylu gtkmm vyžaduje použití "
+"nástrojů, jako jsou <command>gmmproc</command> a <filename>generate_wrap_int."
+"pl</filename>. Teoreticky si můžete napsat vlastní sestavovací soubory pro "
+"tentýž účel, ale mnohem lepší volbou je, použít sestavovací infrastrukturu "
+"poskytovanou modulem mm-common. Jestli s tím začínáte, výrazně vám pomůže, "
+"vzít si existující modul jako příklad na okoukání."
 
 #: C/gtkmm-tutorial-in.xml:8578(para)
 msgid ""
@@ -13027,6 +14063,10 @@ msgid ""
 "types named, for instance, <classname>SomeWidget</classname> and "
 "<classname>SomeStuff</classname>."
 msgstr ""
+"Například si představme, že obalujeme knihovnu C nazvanou libneco a že "
+"poskytuje API na základě <classname>GObject</classname> s typy nazvanými "
+"například <classname>NecoWidget</classname> a <classname>NecoNejakeho</"
+"classname>."
 
 #: C/gtkmm-tutorial-in.xml:8584(title)
 msgid "Copying the skeleton project"
@@ -13041,7 +14081,7 @@ msgid ""
 msgstr ""
 "\n"
 "  $ git clone git://git.gnome.org/mm-common\n"
-"  $ cp -a mm-common/skeletonmm libsomethingmm\n"
+"  $ cp -a mm-common/skeletonmm libnecomm\n"
 
 #: C/gtkmm-tutorial-in.xml:8586(para)
 msgid ""
@@ -13050,16 +14090,22 @@ msgid ""
 "skeletonmm\">skeleton source tree</ulink> from the mm-common module. "
 "<placeholder-1/>"
 msgstr ""
+"Typicky by se naše obalujíc knihovna nazývala libnecomm. Můžeme začít "
+"zkopírováním <ulink url=\"http://git.gnome.org/browse/mm-common/tree/"
+"skeletonmm\">kostry zdrojového stromu</ulink> z modulu mm-common. "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8599(para)
 msgid "<filename>libsomethingmm</filename>: The top-level directory."
-msgstr "<filename>libsomethingmm</filename>: Složka nejvyšší úrovně."
+msgstr "<filename>libnecomm</filename>: Složka nejvyšší úrovně."
 
 #: C/gtkmm-tutorial-in.xml:8601(para)
 msgid ""
 "<filename>libsomething</filename>: Contains the main include file and the "
 "pkg-config .pc file."
 msgstr ""
+"<filename>libneco</filename>: Obsahuje hlavní soubor pro vložení a soubor "
+"<filename>.pc</filename> pro pkg-config."
 
 #: C/gtkmm-tutorial-in.xml:8603(para)
 msgid "<filename>src</filename>: Contains .hg and .ccg source files."
@@ -13070,7 +14116,7 @@ msgid ""
 "<filename>libsomethingmm</filename>: Contains generated and hand-written .h "
 "and .cc files."
 msgstr ""
-"<filename>libsomethingmm</filename>: Obsahuje vygenerované a ručně napsané "
+"<filename>libnecomm</filename>: Obsahuje vygenerované a ručně napsané "
 "soubory .h a .cc."
 
 #: C/gtkmm-tutorial-in.xml:8606(para)
@@ -13089,6 +14135,13 @@ msgid ""
 "of generic Automake variables. The directory structure usually looks like "
 "this, after we have renamed the directories appropriately: <placeholder-1/>"
 msgstr ""
+"Tím se poskytne struktura složek pro zdrojové soubory <filename>.hg</"
+"filename> a <filename>.ccg</filename> a generované soubory <filename>.h</"
+"filename> a <filename>.cc</filename>, se souborem <filename>filelist.amd</"
+"filename> pro Automake, který obsahuje soubory, kterými mohou být různé "
+"soubory používané ve významu obecných proměnných Automake. Struktura složek, "
+"po příslušném přejmenování složek, obvykle vypadá nějak takto: "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8618(programlisting)
 #, no-wrap
@@ -13099,8 +14152,8 @@ msgid ""
 "  done\n"
 msgstr ""
 "\n"
-"$ for f in $(find libsomethingmm -depth -name '*skeleton*'); do \\\n"
-"    d=\"${f%/*}\"; b=\"${f##*/}\"; mv \"$f\" \"$d/${b//skeleton/libsomething}\"; \\\n"
+"$ for f in $(find libnecomm -depth -name '*skeleton*'); do \\\n"
+"    d=\"${f%/*}\"; b=\"${f##*/}\"; mv \"$f\" \"$d/${b//skeleton/libneco}\"; \\\n"
 "  done\n"
 
 #: C/gtkmm-tutorial-in.xml:8616(para)
@@ -13109,6 +14162,9 @@ msgid ""
 "files. For instance: <placeholder-1/> A number of the skeleton files must "
 "still be filled in with project-specific content later."
 msgstr ""
+"Stejně, jako jsme přejmenovali složky, měli bychom přejmenovat i některé "
+"zdrojové soubory. Například: <placeholder-1/> U řady souborů v kostře se "
+"také bude muset později vyplnit obsah podle projektu."
 
 #: C/gtkmm-tutorial-in.xml:8625(para)
 msgid ""
@@ -13116,10 +14172,13 @@ msgid ""
 "files with the same name but without the <filename>.in</filename> suffix, by "
 "replacing some variables with actual values during the configure stage."
 msgstr ""
+"Soubory končící na <filename>.in</filename> budou použity k vygenerování "
+"souborů se stejným názvem, ale bez přípony <filename>.in</filename>. Během "
+"konfigurační fáze se v nich nahradí některé proměnné skutečnými hodnotami."
 
 #: C/gtkmm-tutorial-in.xml:8631(title)
 msgid "Modifying build files"
-msgstr ""
+msgstr "Úprava souborů řídících sestavení"
 
 #: C/gtkmm-tutorial-in.xml:8633(para)
 msgid ""
@@ -13129,6 +14188,12 @@ msgid ""
 "source tree contain placeholder text. Thus, the substitutions should be "
 "performed globally, and not be limited to the Automake and Autoconf files."
 msgstr ""
+"Nyní upravíme soubory, abychom je přizpůsobili našim potřebám. Možná dáváte "
+"přednost použití nějakého nástroje pro hledání a nahrazování ve více "
+"souborech, jako je <command>regexxer</command>. Proto je dobré vědět, že "
+"téměř všechny soubory poskytnuté v kostře zdrojového stromu obsahují "
+"zástupné texty. Náhrady by tak měly být prováděné globálně a neomezovat se "
+"jen na soubory Automake a Autoconf."
 
 #: C/gtkmm-tutorial-in.xml:8637(para)
 msgid ""
@@ -13138,6 +14203,10 @@ msgid ""
 "varname> should be replaced by \"SOMETHING\" or \"LIBSOMETHING\", and all "
 "occurrences of <varname>Skeleton</varname> changed to \"Something\"."
 msgstr ""
+"Všechny výskyty <varname>skeleton</varname> by měly být nahrazeny správným "
+"názvem knihovny C, kterou obalujete, např. za „neco“ a „libneco“. Stejně tak "
+"všechny výskyty <varname>SKELETON</varname> by měly být nahrazeny za „NECO“ "
+"a „LIBNECO“ a všechny výskyty <varname>Skeleton</varname> za „Neco“."
 
 #: C/gtkmm-tutorial-in.xml:8641(para)
 msgid ""
@@ -13145,6 +14214,9 @@ msgid ""
 "of the intended copyright holder, which is probably you. Do the same for the "
 "<varname>joe@example.com</varname> email address."
 msgstr ""
+"Obdobně nahraďte všechny výskyty <varname>Joe Hacker</varname> zamýšleného "
+"držitele práv, což budete nejspíše vy. To stejné proveďte s e-mailovou "
+"adresou <varname>joe@example.com</varname>."
 
 #: C/gtkmm-tutorial-in.xml:8646(title)
 msgid "configure.ac"
@@ -13156,6 +14228,9 @@ msgid ""
 "source tree. We can edit this later if we don't yet know the names of any of "
 "the files that we will create."
 msgstr ""
+"Na řádku s <function>AC_CONFIG_SRCDIR()</function> musí být zmíněný soubor z "
+"naše stromu zdrojových kódů. Pokud zatím nevíme názvy žádných souborů, které "
+"vytvoříme, můžeme tento údaj doplnit později."
 
 #: C/gtkmm-tutorial-in.xml:8652(para)
 msgid ""
@@ -13177,22 +14252,34 @@ msgid ""
 "configuration headers are installed with your library and define publically "
 "visible macros."
 msgstr ""
+"Řádek <function>AC_CONFIG_HEADERS()</function> se používá ke generování dvou "
+"nebo více hlavičkových souborů. První hlavičkový soubor v seznamu obsahuje "
+"všechna konfigurační makra, která se nastaví při běhu konfigurace. Zbývající "
+"hlavičkové soubory v seznamu obsahují jen podmnožinu konfiguračních maker a "
+"jejich příslušný soubor <filename>config.h.in</filename> se automaticky "
+"nevygeneruje. Důvodem je oddělení těchto věcí, protože konfigurační "
+"hlavičkové soubory se jmenným prostorem se instalují spolu s vaší knihovnou "
+"a definují veřejně viditelná makra."
 
 #: C/gtkmm-tutorial-in.xml:8665(para)
 msgid ""
 "The <function>AC_SUBST([SOMETHINGMM_MODULES], ['...'])</function> line may "
 "need to be modified to check for the correct dependencies."
 msgstr ""
+"Řádek <function>AC_SUBST([SOMETHINGMM_MODULES], ['…'])</function> může "
+"potřebovat upravit, aby kontroloval správné závislosti."
 
 #: C/gtkmm-tutorial-in.xml:8667(para)
 msgid ""
 "The <function>AC_CONFIG_FILES()</function> block must mention the correct "
 "directory names, as described above."
 msgstr ""
+"Blok <function>AC_CONFIG_FILES()</function> musí uvádět správné názvy "
+"složek, jak bylo popsáno výše."
 
 #: C/gtkmm-tutorial-in.xml:8647(para)
 msgid "In <filename>configure.ac</filename>, <placeholder-1/>"
-msgstr ""
+msgstr "V souboru <filename>configure.ac</filename> <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8674(title)
 msgid "Makefile.am files"
@@ -13203,18 +14290,20 @@ msgid ""
 "In <filename>skeleton/src/Makefile.am</filename> we must mention the correct "
 "values for the generic variables that are used elsewhere in the build system:"
 msgstr ""
+"V <filename>skeleton/src/Makefile.am</filename> musíme uvést správné hodnoty "
+"pro obecné proměnné, které s použijí všude možně v sestavovacím systému."
 
 #: C/gtkmm-tutorial-in.xml:8682(varname)
 msgid "binding_name"
-msgstr ""
+msgstr "binding_name"
 
 #: C/gtkmm-tutorial-in.xml:8683(para)
 msgid "The name of the library, such as libsomethingmm."
-msgstr ""
+msgstr "Název knihovny, jako libnecomm."
 
 #: C/gtkmm-tutorial-in.xml:8687(varname)
 msgid "wrap_init_flags"
-msgstr ""
+msgstr "wrap_init_flags"
 
 #: C/gtkmm-tutorial-in.xml:8688(para)
 msgid ""
@@ -13222,6 +14311,9 @@ msgid ""
 "filename> script, such as the C++ namespace and the parent directory prefix "
 "of include files."
 msgstr ""
+"Doplňkové přepínače z příkazové řádky předané skriptu "
+"<filename>generate_wrap_init.pl</filename>, jako je jmenný prostor C++ a "
+"prefix v podobě rodičovské složky pro vkládané soubory."
 
 #: C/gtkmm-tutorial-in.xml:8695(para)
 msgid ""
@@ -13229,6 +14321,9 @@ msgid ""
 "correct values for the generic variables that are used elsewhere in the "
 "build system:"
 msgstr ""
+"V <filename>skeleton/skeletonmm/Makefile.am</filename> musíme uvést správné "
+"hodnoty pro obecné proměnné, které se používají všude možně v sestavovacím "
+"systému:"
 
 #: C/gtkmm-tutorial-in.xml:8700(varname)
 msgid "lib_LTLIBRARIES"
@@ -13242,6 +14337,11 @@ msgid ""
 "to use variables substituted by <filename>configure</filename> like "
 "<varname>@SOMETHINGMM_API_VERSION@</varname> as part of the variable names."
 msgstr ""
+"Tato proměnná musí uvádět správný název knihovny a název této knihovny musí "
+"být použitý k vytvoření názvů proměnných <varname>_SOURCES</varname>, "
+"<varname>_LDFLAGS</varname> a <varname>_LIBADD</varname>. Je zcela legitimní "
+"použít jako součást názvů proměnných proměnné nahrazované skriptem "
+"<filename>configure</filename>, jako <varname>@NECOMM_API_VERSION@</varname>."
 
 #: C/gtkmm-tutorial-in.xml:8710(varname)
 msgid "AM_CPPFLAGS"
@@ -13249,7 +14349,7 @@ msgstr "AM_CPPFLAGS"
 
 #: C/gtkmm-tutorial-in.xml:8711(para)
 msgid "The command line options passed to the C preprocessor."
-msgstr ""
+msgstr "Volba příkazové řádky předávaná do preprocesoru C."
 
 #: C/gtkmm-tutorial-in.xml:8715(varname)
 msgid "AM_CXXFLAGS"
@@ -13257,13 +14357,15 @@ msgstr "AM_CXXFLAGS"
 
 #: C/gtkmm-tutorial-in.xml:8716(para)
 msgid "The command line options passed to the C++ compiler."
-msgstr ""
+msgstr "Volba příkazové řádky předávaná do kompilátoru C++."
 
 #: C/gtkmm-tutorial-in.xml:8675(para)
 msgid ""
 "Next we must adapt the various <filename>Makefile.am</filename> files: "
 "<placeholder-1/>"
 msgstr ""
+"Následně musíme přizpůsobit různé soubory <filename>Makefile.am</filename>: "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8726(title)
 msgid "Creating .hg and .ccg files"
@@ -13276,6 +14378,11 @@ msgid ""
 "example source files already exists: <filename>skeleton.ccg</filename> and "
 "<filename>skeleton.hg</filename>. Create copies of these files as necessary."
 msgstr ""
+"Měli bychom vytvořit své první soubory <filename>.hg</filename> a <filename>."
+"ccg</filename> pro obalení některého z objektů v knihovně C. Jeden pár "
+"ukázkových zdrojových souborů již existuje: <filename>skeleton.ccg</"
+"filename> a <filename>skeleton.hg</filename>. Podle potřeby si vytvořte "
+"kopie těchto souborů."
 
 #: C/gtkmm-tutorial-in.xml:8731(para)
 msgid ""
@@ -13283,6 +14390,9 @@ msgid ""
 "filename> files in the <filename>skeleton/src/filelist.am</filename> file, "
 "typically in the <varname>files_hg</varname> variable."
 msgstr ""
+"Všechny naše soubory <filename>.hg</filename> a <filename>.ccg</filename> "
+"musíme uvést v <filename>skeleton/src/filelist.am</filename>, typicky v "
+"proměnné <varname>files_hg</varname>."
 
 #: C/gtkmm-tutorial-in.xml:8735(para)
 msgid ""
@@ -13292,12 +14402,19 @@ msgid ""
 "filename>, typically in the <varname>files_extra_h</varname> and "
 "<varname>files_extra_cc</varname> variables."
 msgstr ""
+"Případné další negenerované zdrojové soubory <filename>.h</filename> a "
+"<filename>.cc</filename> mohou být umístěné v <filename>skeleton/skeletonmm/"
+"</filename> a vypsané v <filename>skeleton/skeletonmm/filelist.am</"
+"filename>, typicky v proměnných <varname>files_extra_h</varname> a "
+"<varname>files_extra_cc</varname>."
 
 #: C/gtkmm-tutorial-in.xml:8741(para)
 msgid ""
 "In the <link linkend=\"sec-wrapping-hg-files\">.hg and .ccg files</link> "
 "section you can learn about the syntax used in these files."
 msgstr ""
+"V oddíle <link linkend=\"sec-wrapping-hg-files\">soubory .hg a .ccg</link> "
+"se můžete dozvědět více o syntaxi používané v těchto souborech."
 
 #: C/gtkmm-tutorial-in.xml:8748(title)
 msgid "Generating the .defs files."
@@ -13306,32 +14423,35 @@ msgstr "Generování souborů .defs"
 #: C/gtkmm-tutorial-in.xml:8752(para)
 msgid "objects (GObjects, widgets, interfaces, boxed-types and plain structs)"
 msgstr ""
+"objektů (GObject, widgety, rozhraní, boxované typy a obyčejné struktury)"
 
 #: C/gtkmm-tutorial-in.xml:8753(para)
 msgid "functions"
-msgstr ""
+msgstr "funkcí"
 
 #: C/gtkmm-tutorial-in.xml:8754(para)
 msgid "enums"
-msgstr ""
+msgstr "výčtových typů"
 
 #: C/gtkmm-tutorial-in.xml:8755(para)
 msgid "signals"
-msgstr ""
+msgstr "signálů"
 
 #: C/gtkmm-tutorial-in.xml:8756(para)
 msgid "properties"
-msgstr ""
+msgstr "vlastností"
 
 #: C/gtkmm-tutorial-in.xml:8757(para)
 msgid "vfuncs"
-msgstr ""
+msgstr "virtuálních funkcí"
 
 #: C/gtkmm-tutorial-in.xml:8749(para)
 msgid ""
 "The <filename>.defs</filename> files are text files, in a lisp format, that "
 "describe the API of a C library, including its <placeholder-1/>"
 msgstr ""
+"Soubory <filename>.defs</filename> jsou textové soubory ve formátu lisp, "
+"které popisují API knihovny C, včetně jejích <filename>"
 
 #: C/gtkmm-tutorial-in.xml:8766(filename)
 msgid "gtk.defs"
@@ -13372,6 +14492,8 @@ msgstr "gtk_vfuncs.defs"
 #: C/gtkmm-tutorial-in.xml:8783(para)
 msgid "vfuncs (function pointer member fields in structs), written by hand."
 msgstr ""
+"Virtuální funkce (ukazatel na funkci jako členské pole v struktuře), psané "
+"ručně."
 
 #: C/gtkmm-tutorial-in.xml:8760(para)
 msgid ""
@@ -13381,6 +14503,10 @@ msgid ""
 "<application>gtkmm</application> sources, you will find these files: "
 "<placeholder-1/>"
 msgstr ""
+"V tuto chvíli máme oddělené nástroje pro generování různých částí těchto "
+"souborů <filename>.defs</filename>, takže je rozdělíme do samostatných "
+"souborů. Například ve složce <filename>gtk/src</filename> se zdrojovými kódy "
+"<application>gtkmm</application> můžete najít tyto soubory: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8787(para)
 msgid ""
@@ -13389,6 +14515,10 @@ msgid ""
 "filename> file, described in the <link linkend=\"sec-wrapping-documentation"
 "\">Documentation</link> section."
 msgstr ""
+"Skript <filename>skeletonmm/codegen/generate_defs_and_docs.sh</filename> "
+"generuje všechny soubory <filename>.defs</filename> a soubor "
+"<filename>*_docs.xml</filename>, popsaný v kapitole <link linkend=\"sec-"
+"wrapping-documentation\">Dokumentace</link>."
 
 #: C/gtkmm-tutorial-in.xml:8793(title)
 msgid "Generating the methods .defs"
@@ -13410,6 +14540,10 @@ msgid ""
 "in glibmm's <filename>tools/defs_gen</filename> directory. For instance, "
 "<placeholder-1/>"
 msgstr ""
+"Soubor <filename>.defs</filename> popisuje objekty a jejich funkce. Je "
+"generovaný pomocí skriptu <command>h2def.py</command>, který můžete najít ve "
+"složce <filename>tools/defs_gen</filename> knihovny glibmm. Například "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8804(title)
 msgid "Generating the enums .defs"
@@ -13431,6 +14565,10 @@ msgid ""
 "can find in glibmm's <filename>tools</filename> directory. For instance, "
 "<placeholder-1/>"
 msgstr ""
+"Soubor <filename>.defs</filename> popisuje výčtové typy a jejich možné "
+"hodnoty. Je generovaný pomocí skriptu <filename>enum.pl</filename>, který "
+"můžete najít ve složce <filename>tools</filename> knihovny glibmm. Například "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8815(title)
 msgid "Generating the signals and properties .defs"
@@ -13454,6 +14592,10 @@ msgid ""
 "that is in every wrapping project, such as <filename>gtkmm/tools/"
 "extra_defs_gen/</filename>. For instance <placeholder-1/>"
 msgstr ""
+"Tento soubor <filename>.defs</filename> popisuje signály a vlastnosti. Je "
+"generovaný pomocí speciálního nástroje <filename>generate_extra_defs</"
+"filename>, která je v každém obalujicím projektu, jako je <filename>gtkmm/"
+"tools/extra_defs_gen/</filename>. Například <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8825(para)
 msgid ""
@@ -13466,6 +14608,15 @@ msgid ""
 "<varname>skeleton</varname> placeholder. The <filename>codegen/Makefile.am</"
 "filename> file should also mention the new source filename."
 msgstr ""
+"Aby se vygenerovat soubor <filename>.defs</filename> pro typy GObject v C, "
+"které si přejete obalit, musíte upravit zdrojový kód svého vlastního "
+"nástroje <filename>generate_extra_defs</filename>. Ve stromu zdrojových kódů "
+"kostry je soubor s názvem <filename>codegen/extradefs/"
+"generate_extra_defs_skeleton.cc</filename>. Pokud jste to zatím neudělali, "
+"měli byste jej přejmenovat. Základní název by měla tvořit nová vazba "
+"nahrazující zástupný název <varname>skeleton</varname>. Nový název "
+"zdrojového souboru by měl být také uveden v <filename>codegen/Makefile.am</"
+"filename>."
 
 #: C/gtkmm-tutorial-in.xml:8834(programlisting)
 #, no-wrap
@@ -13500,6 +14651,9 @@ msgid ""
 "For instance, your <function>main()</function> function might look like "
 "this: <placeholder-1/>"
 msgstr ""
+"Pak upravte soubor <filename>.cc</filename>, aby uváděl správné typy. "
+"Například vaše funkce <function>main()</function> může vypadat nějak takto: "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8850(title)
 msgid "Writing the vfuncs .defs"
@@ -13513,6 +14667,11 @@ msgid ""
 "<application>gtkmm</application>'s <filename>gtk/src/gtk_vfuncs.defs</"
 "filename> file."
 msgstr ""
+"Tento soubor <filename>.defs</filename> popisuje virtuální funkce. Musíte "
+"jej napsat ručně. Existuje k tomu připravená kostra <filename>skeleton/src/"
+"skeleton_vfunc.defs</filename>, ze které můžete vyjít. Můžete se také "
+"podívat na soubor <filename>gtk/src/gtk_vfuncs.defs</filename> z "
+"<application>gtkmm</application>."
 
 #: C/gtkmm-tutorial-in.xml:8862(title)
 msgid "The .hg and .ccg files"
@@ -13527,6 +14686,14 @@ msgid ""
 "the same position in the header. Any additional C++ source code will be "
 "copied verbatim into the corresponding .h or .cc file."
 msgstr ""
+"Zdrojové soubory <filename>.hg</filename> a <filename>.ccg</filename> se "
+"velmi podobají zdrojovým souborům <filename>.h</filename> a <filename>.cc</"
+"filename>, ale mohou obsahovat další makra, jako je "
+"<function>_CLASS_GOBJECT()</function> a <function>_WRAP_METHOD()</function>, "
+"ze kterých <command>gmmproc</command> generuje příslušný zdrojový kód C++, "
+"obvykle na stejném místě v hlavičkovém souboru. Případný doplňující zdrojový "
+"kód C++ bude doslovně nakopírován do příslušného souboru <filename>.h</"
+"filename> nebo <filename>.cc</filename>."
 
 #: C/gtkmm-tutorial-in.xml:8876(programlisting)
 #, no-wrap
@@ -13564,6 +14731,38 @@ msgid ""
 "\n"
 "} // namespace Gtk\n"
 msgstr ""
+"\n"
+"#include &lt;gtkmm/bin.h&gt;\n"
+"#include &lt;gtkmm/activatable.h&gt;\n"
+"_DEFS(gtkmm,gtk)\n"
+"_PINCLUDE(gtkmm/private/bin_p.h)\n"
+"\n"
+"namespace Gtk\n"
+"{\n"
+"\n"
+"class Button\n"
+"  : public Bin,\n"
+"    public Activatable\n"
+"{\n"
+"  _CLASS_GTKOBJECT(Button,GtkButton,GTK_BUTTON,Gtk::Bin,GtkBin)\n"
+"  _IMPLEMENTS_INTERFACE(Activatable)\n"
+"public:\n"
+"\n"
+"  _CTOR_DEFAULT\n"
+"  explicit Button(const Glib::ustring&amp; label, bool mnemonic = false);\n"
+"\n"
+"  _WRAP_METHOD(void set_label(const Glib::ustring&amp; label), gtk_button_set_label)\n"
+"\n"
+"  ...\n"
+"\n"
+"  _WRAP_SIGNAL(void clicked(), \"clicked\")\n"
+"\n"
+"  ...\n"
+"\n"
+"  _WRAP_PROPERTY(\"label\", Glib::ustring)\n"
+"};\n"
+"\n"
+"} // jmenný prostor Gtk\n"
 
 #: C/gtkmm-tutorial-in.xml:8871(para)
 msgid ""
@@ -13572,6 +14771,10 @@ msgid ""
 "<application>gtkmm</application>'s <filename>button.hg</filename> looks "
 "roughly like this: <placeholder-1/>"
 msgstr ""
+"Soubor <filename>.hg</filename> má typicky vložené některé hlavičkové "
+"soubory a následně deklaruje. Pomocí některých maker se do této třídy přidá "
+"API nebo chování. Například <filename>button.hg</filename> z "
+"<application>gtkmm</application> vypadá zhruba takto: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8913(function)
 msgid "_DEFS()"
@@ -13582,6 +14785,9 @@ msgid ""
 "Specifies the destination directory for generated sources, and the name of "
 "the main .defs file that <command>gmmproc</command> should parse."
 msgstr ""
+"Určuje cílovou složku pro generované zdrojové soubory a název hlavního "
+"souboru <filename>.defs</filename>, který by měl <command>gmmproc</command> "
+"zpracovat."
 
 #: C/gtkmm-tutorial-in.xml:8917(function)
 msgid "_PINCLUDE()"
@@ -13592,6 +14798,8 @@ msgid ""
 "Tells <command>gmmproc</command> to include a header in the generated "
 "private/button_p.h file."
 msgstr ""
+"Řekne <command>gmmproc</command>, aby vložil hlavičkové soubory do "
+"generovaného souboru <filename>private/button_p.h</filename>."
 
 #: C/gtkmm-tutorial-in.xml:8921(function)
 msgid "_CLASS_GTKOBJECT()"
@@ -13602,6 +14810,8 @@ msgid ""
 "Tells <command>gmmproc</command> to add some typedefs, constructors, and "
 "standard methods to this class, as appropriate when wrapping a widget."
 msgstr ""
+"Řekne <command>gmmproc</command>, aby přidal podle potřeby některé definice "
+"typů, konstruktory a standardní metody do této třídy při obalování widgetu."
 
 #: C/gtkmm-tutorial-in.xml:8925(function)
 msgid "_IMPLEMENTS_INTERFACE()"
@@ -13612,6 +14822,7 @@ msgid ""
 "Tells <command>gmmproc</command> to add initialization code for the "
 "interface."
 msgstr ""
+"Řekne <command>gmmproc</command>, aby přidal inicializační kód pro rozhraní."
 
 #: C/gtkmm-tutorial-in.xml:8929(function) C/gtkmm-tutorial-in.xml:9175(title)
 msgid "_CTOR_DEFAULT"
@@ -13619,21 +14830,23 @@ msgstr "_CTOR_DEFAULT"
 
 #: C/gtkmm-tutorial-in.xml:8930(para)
 msgid "Add a default constructor."
-msgstr ""
+msgstr "Přidá výchozí konstruktor."
 
 #: C/gtkmm-tutorial-in.xml:8933(term)
 msgid ""
 "<function>_WRAP_METHOD()</function>, <function>_WRAP_SIGNAL()</function>, "
 "and <function>_WRAP_PROPERTY()</function>"
 msgstr ""
+"<function>_WRAP_METHOD()</function>, <function>_WRAP_SIGNAL()</function> a "
+"<function>_WRAP_PROPERTY()</function>"
 
 #: C/gtkmm-tutorial-in.xml:8936(para)
 msgid "Add methods to wrap parts of the C API."
-msgstr ""
+msgstr "Přidá metody pro obalení částí API C."
 
 #: C/gtkmm-tutorial-in.xml:8910(para)
 msgid "The macros in this example do the following: <placeholder-1/>"
-msgstr ""
+msgstr "Makro v následujícím příkladu dělá následující: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8943(programlisting)
 #, no-wrap
@@ -13652,6 +14865,10 @@ msgid ""
 "processing them with <command>gmmproc</command> like so, though this happens "
 "automatically when using the above build structure: <placeholder-1/>"
 msgstr ""
+"Soubory <filename>.h</filename> a <filename>.cc</filename> budou "
+"vygenerované ze souborů <filename>.hg</filename> a <filename>.ccg</filename> "
+"jejich zpracováním pomocí <command>gmmproc</command>, k čemuž dojde "
+"automaticky při použití sestavovací struktury uvedené výše: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8948(para)
 msgid ""
@@ -13659,6 +14876,10 @@ msgid ""
 "convert files, the path to the .defs file, the name of a .hg file, the "
 "source directory, and the destination directory."
 msgstr ""
+"Všimněte si, že <command>gmmproc</command> poskytujeme cestu k převodním "
+"souborům <filename>.m4</filename>, cestu k souboru <filename>.defs</"
+"filename>, název souboru <filename>.hg</filename>, složku se zdrojovými kódy "
+"a cílovou složku."
 
 #: C/gtkmm-tutorial-in.xml:8951(para)
 msgid ""
@@ -13667,10 +14888,14 @@ msgid ""
 "API. But you will need to include the necessary C headers from your .ccg "
 "file."
 msgstr ""
+"Měli byste se vyhnout vložení hlavičkového souboru C z vašeho hlavičkového "
+"souboru C++, aby se předešlo šíření globálního jmenného prostoru a exportu "
+"nepotřebného veřejného API. Budete ale potřebovat vložit nutné hlavičkové "
+"soubory C ze souboru <filename>.ccg</filename>."
 
 #: C/gtkmm-tutorial-in.xml:8956(para)
 msgid "The macros are explained in more detail in the following sections."
-msgstr ""
+msgstr "V následujících oddílech jsou podrobně rozebrána makra."
 
 #: C/gtkmm-tutorial-in.xml:8959(title)
 msgid "m4 Conversions"
@@ -13695,12 +14920,22 @@ msgid ""
 "this tells gmmproc how to convert a GtkTreeView pointer to a Gtk::TreeView "
 "pointer: <placeholder-1/>"
 msgstr ""
+"Makra, která používáte v souborech <filename>.hg</filename> a <filename>."
+"ccg</filename>, často potřebují znát, jak převést typ C++ na typ C a naopak. "
+"<command>gmmproc</command> získává tyto informace z souboru <filename>.m4</"
+"filename> ve složce <filename>tools/m4/</filename>. Díky tomu se mohou volat "
+"funkce v C z implementací vašich metod v C++ se správným předáním parametrů "
+"do funkce C. Například takto se řekne <command>gmmproc</command>, jak má "
+"převést ukazatel na <classname>GtkTreeView</classname> na ukazatel na "
+"<classname>Gtk::TreeView</classname>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8971(para)
 msgid ""
 "<literal>$3</literal> will be replaced by the parameter name when this "
 "conversion is used by gmmproc."
 msgstr ""
+"Když je tento převod použit skriptem <command>gmmproc</command>, je <literal>"
+"$3</literal> nahrazeno názvem parametru."
 
 #: C/gtkmm-tutorial-in.xml:8978(programlisting)
 #, no-wrap
@@ -13720,6 +14955,9 @@ msgid ""
 "Some extra macros make this easier and consistent. Look in gtkmm's .m4 files "
 "for examples. For instance: <placeholder-1/>"
 msgstr ""
+"Pár doplňujících maker to usnadňuje a zajistí jednotnost. Na příklady se "
+"podívejte do souborů <filename>.m4</filename> z gtkmm. Například "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:8987(title)
 msgid "m4 Initializations"
@@ -13735,6 +14973,13 @@ msgid ""
 "must be included to tell gmmproc how to initialize the C++ parameter from "
 "the return of the C function."
 msgstr ""
+"Při balení metod je často žádoucí ukládat návratové hodnoty funkce C v tzv. "
+"výstupním parametru. V tomto případě metoda C ++ vrací <type>void</ type>, "
+"ale výstupní parametr, ve kterém je uložena hodnota z funkce v C, je zahrnut "
+"v seznamu argumentů metody v C ++. <command>gmmproc</command> umožňuje tuto "
+"funkcionalitu, ale musí být zahrnuta vhodná inicializační makra, které "
+"řeknou <command>gmmproc</command>, jak inicializovat parametr C ++ z "
+"návratové hodnoty funkce v C."
 
 #: C/gtkmm-tutorial-in.xml:9003(programlisting)
 #, no-wrap
@@ -13753,6 +14998,10 @@ msgid ""
 "specified output parameter, an initialization macro such as the following "
 "would be necessary: <placeholder-1/>"
 msgstr ""
+"Pokud by například funkce v C vracela <type>GtkWidget*</type> a metoda v C++ "
+"z nějakého důvodu místo widgetu vracela něco jiného, je žádoucí, aby metoda "
+"v C++ umístila widget do určeného výstupního parametru, k čemuž by bylo "
+"nutné následující inicializační makro: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9008(para)
 msgid ""
@@ -13762,10 +15011,15 @@ msgid ""
 "<literal>$1</literal> will also be replaced by the C++ type without the "
 "ampersand (&amp;) and <literal>$2</literal> will be replaced by the C type."
 msgstr ""
+"Když je tato inicializace použita skriptem <command>gmmproc</command>, je "
+"<literal>$3</literal> nahrazeno názvem výstupního parametru metody v C++ a "
+"<literal>$4</literal> návratovým parametrem funkce v C. Někdy se může hodit "
+"i <literal>$1</literal>, které je nahrazeno typem C++ bez amprsandu (&amp;) "
+"a <literal>$2</literal>, které je nahrazeno typem C."
 
 #: C/gtkmm-tutorial-in.xml:9019(title)
 msgid "Class macros"
-msgstr "Makra třídy"
+msgstr "Makra pro třídy"
 
 #: C/gtkmm-tutorial-in.xml:9020(para)
 msgid ""
@@ -13775,6 +15029,11 @@ msgid ""
 "accessors, type registration, and the <function>Glib::wrap()</function> "
 "method, among other things."
 msgstr ""
+"Makro deklaruje samotnou třídu a její vztah k podkladovému typu v C. "
+"Generuje některé interní konstruktory, definice členských typů "
+"<varname>gobject</varname>, příslušníky <function>gobj()</function>, "
+"registraci typu a metodu <function>Glib::wrap()</function>, spolu s dalšími "
+"věcmi."
 
 #: C/gtkmm-tutorial-in.xml:9025(para)
 msgid ""
@@ -13782,6 +15041,9 @@ msgid ""
 "<function>_WRAP_SIGNAL()</function> may only be used after a call to a "
 "<function>_CLASS_*</function> macro."
 msgstr ""
+"Ostatní makra, jako je <function>_WRAP_METHOD()</function> a "
+"<function>_WRAP_SIGNAL()</function> mohou být použita jen po zavolání makra "
+"<function>_CLASS_*</function>."
 
 #: C/gtkmm-tutorial-in.xml:9030(title)
 msgid "_CLASS_GOBJECT"
@@ -13793,6 +15055,9 @@ msgid ""
 "<classname>GObject</classname>, but whose wrapper is not derived from "
 "<classname>Gtk::Object</classname>."
 msgstr ""
+"Toto makro deklaruje obalení pro typ, který je odvozený z "
+"<classname>GObject</classname>, ale jeho obalení není odvozené z "
+"<classname>Gtk::Object</classname>."
 
 #: C/gtkmm-tutorial-in.xml:9034(function)
 msgid ""
@@ -13813,7 +15078,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9035(para)
 msgid "For instance, from <filename>accelgroup.hg</filename>: <placeholder-1/>"
-msgstr "Například z <filename>accelgroup.hg</filename>: <placeholder-1/>"
+msgstr "Příklad z <filename>accelgroup.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9043(title)
 msgid "_CLASS_GTKOBJECT"
@@ -13824,6 +15089,8 @@ msgid ""
 "This macro declares a wrapper for a type whose wrapper is derived from "
 "<classname>Gtk::Object</classname>, such as a widget or dialog."
 msgstr ""
+"Toto makro deklaruje obalení pro typ, jehož obalení je odvozené z "
+"<classname>Gtk::Object</classname>, jako je widget nebo dialog."
 
 #: C/gtkmm-tutorial-in.xml:9046(function)
 msgid ""
@@ -13845,7 +15112,7 @@ msgstr ""
 #: C/gtkmm-tutorial-in.xml:9047(para) C/gtkmm-tutorial-in.xml:9386(para)
 #: C/gtkmm-tutorial-in.xml:9447(para) C/gtkmm-tutorial-in.xml:9564(para)
 msgid "For instance, from <filename>button.hg</filename>: <placeholder-1/>"
-msgstr "Například z <filename>button.hg</filename>: <placeholder-1/>"
+msgstr "Příklad z <filename>button.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9052(para)
 msgid ""
@@ -13853,6 +15120,10 @@ msgid ""
 "Object. For instance, you will use it when wrapping a GTK+ Widget, because "
 "Gtk::Widget derives from Gtk::Object."
 msgstr ""
+"Toto makro typicky použijete, když třída již existuje a je odvozená z "
+"<classname>Gtk::Object</classname>. Například jej použijete, když obalujete "
+"Widget z GTK+, protože <classname>Gtk::Widget</classname> je zděděný z "
+"<classname>Gtk::Object</classname>."
 
 #: C/gtkmm-tutorial-in.xml:9053(para)
 msgid ""
@@ -13863,6 +15134,12 @@ msgid ""
 "you are sure that true reference-counting is not needed. We consider it "
 "useful for widgets."
 msgstr ""
+"Mohli byste také odvodit z <classname>Gtk::Object</classname> jinou třídu "
+"než widget, takže by šla používat bez <classname>Glib::RefPtr</classname>. "
+"Například by její instance mohly být vytvářeny pomocí <function>Gtk::"
+"manage()</function> nebo na zásobníku jako členské proměnné. Pro některé "
+"účely je to vhodné, ale musíte to použít jen v případě, kdy máte jistotu, že "
+"počítání referencí není zapotřebí. Za užitečné to považujeme pro widgety."
 
 #: C/gtkmm-tutorial-in.xml:9057(title)
 msgid "_CLASS_BOXEDTYPE"
@@ -13873,6 +15150,9 @@ msgid ""
 "This macro declares a wrapper for a non-<classname>GObject</classname> "
 "struct, registered with <function>g_boxed_type_register_static()</function>."
 msgstr ""
+"Toto makro deklaruje obalení pro jinou strukturu než <classname>GObject</"
+"classname> registrovanou pomocí <function>g_boxed_type_register_static()</"
+"function>."
 
 #: C/gtkmm-tutorial-in.xml:9061(function)
 msgid ""
@@ -13893,7 +15173,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9062(para)
 msgid "For instance, from <classname>Gdk::RGBA</classname>: <placeholder-1/>"
-msgstr ""
+msgstr "Příklad z <classname>Gdk::RGBA</classname>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9070(title)
 msgid "_CLASS_BOXEDTYPE_STATIC"
@@ -13906,6 +15186,10 @@ msgid ""
 "<function>_CLASS_BOXEDTYPE</function>, but the C struct is not allocated "
 "dynamically."
 msgstr ""
+"Toto makro deklaruje obalení pro jednoduchou přiřaditelnou strukturu, jako "
+"je <classname>GdkRectangle</classname>. Je to podobné, jako u "
+"<function>_CLASS_BOXEDTYPE</function>, jen struktura v C se nealokuje "
+"dynamicky."
 
 #: C/gtkmm-tutorial-in.xml:9075(function)
 msgid "_CLASS_BOXEDTYPE_STATIC( C++ class, C class )"
@@ -13935,6 +15219,9 @@ msgid ""
 "functions. The new, copy and free functions will be used to instantiate the "
 "default constructor, copy constructor and destructor."
 msgstr ""
+"Toto makro deklaruje obalení pro neprůhlednou strukturu, která má funkce "
+"copy a free. Funkce new, copy a free se použijí pro vytváření instancí "
+"pomocí výchozího konstruktoru, pro kopírovací konstruktor a pro destruktor."
 
 #: C/gtkmm-tutorial-in.xml:9088(function)
 msgid ""
@@ -13956,7 +15243,7 @@ msgstr ""
 #: C/gtkmm-tutorial-in.xml:9089(para)
 msgid ""
 "For instance, from <classname>Glib::Checksum</classname>: <placeholder-1/>"
-msgstr "Například z <classname>Glib::Checksum</classname>: <placeholder-1/>"
+msgstr "Příklad z <classname>Glib::Checksum</classname>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9097(title)
 msgid "_CLASS_OPAQUE_REFCOUNTED"
@@ -13968,6 +15255,9 @@ msgid ""
 "wrapper cannot be directly instantiated and can only be used with "
 "<classname>Glib::RefPtr</classname>."
 msgstr ""
+"Toto makro deklaruje obalení pro neprůhlednou strukturu s počítáním "
+"referencí. Pro obalení v C++ nelze přímo vytvářet instance a lze je použít "
+"jen pomocí <classname>Glib::RefPtr</classname>."
 
 #: C/gtkmm-tutorial-in.xml:9101(function)
 msgid ""
@@ -14000,6 +15290,8 @@ msgid ""
 "This macro can be used to wrap structs which don't fit into any specialized "
 "category."
 msgstr ""
+"Toto makro se dá použít k obalení struktur, které nezapadají do žádné "
+"speciální kategorie."
 
 #: C/gtkmm-tutorial-in.xml:9113(function)
 msgid "_CLASS_GENERIC( C++ class, C class )"
@@ -14028,6 +15320,8 @@ msgid ""
 "This macro declares a wrapper for a type that is derived from "
 "<classname>GTypeInterface</classname>."
 msgstr ""
+"Toto makro deklaruje obalení pro typ, který je odvozený z "
+"<classname>GTypeInterface</classname>."
 
 #: C/gtkmm-tutorial-in.xml:9126(function)
 msgid ""
@@ -14049,7 +15343,7 @@ msgstr ""
 #: C/gtkmm-tutorial-in.xml:9127(para)
 msgid ""
 "For instance, from <filename>celleditable.hg</filename>: <placeholder-1/>"
-msgstr "Například z <filename>celleditable.hg</filename>: <placeholder-1/>"
+msgstr "Příklad z <filename>celleditable.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9136(programlisting)
 #, no-wrap
@@ -14067,10 +15361,13 @@ msgid ""
 "another GInterface as a prerequisite. For instance, from "
 "<filename>loadableicon.hg</filename>: <placeholder-1/>"
 msgstr ""
+"Dva doplňující parametry jsou volitelné, pro případ kdy je rozhraní odvozeno "
+"z jiného rozhraní, což by mělo být, když GInterface má jako předpoklad jiný "
+"GInterface. Příklad z <filename>loadableicon.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9145(title)
 msgid "Constructor macros"
-msgstr "Makra konstruktoru"
+msgstr "Makra pro konstruktory"
 
 #: C/gtkmm-tutorial-in.xml:9146(para)
 msgid ""
@@ -14084,6 +15381,16 @@ msgid ""
 "instantiate derived GTypes, and the <function>*_new()</function> C functions "
 "are meant only as convenience functions for C programmers."
 msgstr ""
+"Makra <function>_CTOR_DEFAULT()</function> a <function>_WRAP_CTOR()</"
+"function> přidávají konstruktory pomocí obalení určených funkcí "
+"<function>*_new()</function> v C. Tato makra předpokládají, že objekt C má "
+"vlastnosti se stejnými názvy, jako jsou parametry funkce, což tak obvykle "
+"je, takže se mohou parametry přímo předat do volání "
+"<function>g_object_new()</function>. Tyto konstruktory ve skutečnosti nikdy "
+"nevolají funkce <function>*_new()</function> v C, protože gtkmm musí ve "
+"skutečnosti vytvořit instance odvozených typů GType a funkce "
+"<function>*_new()</function> v C jsou zamýšlené jen pro pohodlí programátorů "
+"v jazyce C."
 
 #: C/gtkmm-tutorial-in.xml:9161(programlisting)
 #, no-wrap
@@ -14118,6 +15425,11 @@ msgid ""
 "This prevents the class from being instantiated without using a "
 "<classname>RefPtr</classname>. For instance: <placeholder-1/>"
 msgstr ""
+"Při použití <function>_CLASS_GOBJECT()</function> by konstruktor měl být "
+"chráněný (místo veřejný) a jednotlivé konstruktory by měly mít příslušná "
+"makra <function>_WRAP_CREATE()</function> ve veřejné části. Tím se zabrání "
+"vytváření instancí třídy bez použití <classname>RefPtr</classname>. "
+"Například: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9176(para)
 msgid "This macro creates a default constructor with no arguments."
@@ -14135,6 +15447,11 @@ msgid ""
 "constructor with the same argument types. It takes a C++ constructor "
 "signature, and a C function name."
 msgstr ""
+"Toto makro vytvoří konstruktor s argumenty ekvivalentní funkci "
+"<function>*_new()</function> v C. Ve skutečnosti se nebude volat funkce "
+"<function>*_new()</function>, ale jednoduše vytvoří ekvivalentní konstruktor "
+"se stejnými typy argumentů. Vyžadována je hlavička konstruktoru v C++ a "
+"název funkce v C."
 
 #: C/gtkmm-tutorial-in.xml:9192(term) C/gtkmm-tutorial-in.xml:9251(term)
 #: C/gtkmm-tutorial-in.xml:9487(term)
@@ -14146,10 +15463,12 @@ msgid ""
 "This tells gmmproc that the C <function>*_new()</function> has a final "
 "GError** parameter which should be ignored."
 msgstr ""
+"Tímto se říká <command>gmmproc</command>, že <function>*_new()</function> v "
+"C má poslední parametr GError**, který by se měl ignorovat."
 
 #: C/gtkmm-tutorial-in.xml:9189(para)
 msgid "It also takes an optional extra argument: <placeholder-1/>"
-msgstr ""
+msgstr "Navíc přebírá dodatečný volitelný argument: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9203(title)
 msgid "Hand-coding constructors"
@@ -14181,10 +15500,17 @@ msgid ""
 "property names and values. For instance, from <filename>button.ccg</"
 "filename>: <placeholder-1/>"
 msgstr ""
+"Pokud musí být konstruktor částečně napsán ručně, protože například "
+"parametry funkce <function>*_new()</function> v C neodpovídají přímo "
+"vlastnostem objektu, nebo protože funkce <function>*_new()</function> v C "
+"toho dělá více, než že jen zavolá <function>g_object_new()</function>, pak "
+"se může pro ušetření práce použít v souboru <filename>.ccg</filename> makro "
+"<function>_CONSTRUCT()</function>. To vyžaduje sérii názvů vlastností a "
+"hodnoty. Příklad z <filename>button.ccg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9224(title)
 msgid "Method macros"
-msgstr ""
+msgstr "Makra pro metody"
 
 #: C/gtkmm-tutorial-in.xml:9227(title)
 msgid "_WRAP_METHOD"
@@ -14192,7 +15518,7 @@ msgstr "_WRAP_METHOD"
 
 #: C/gtkmm-tutorial-in.xml:9228(para)
 msgid "This macro generates the C++ method to wrap a C function."
-msgstr ""
+msgstr "Toto makro generuje metodu v C++ pro obalení funkce v C."
 
 #: C/gtkmm-tutorial-in.xml:9229(function)
 msgid "_WRAP_METHOD( C++ method signature, C function name)"
@@ -14209,7 +15535,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9230(para)
 msgid "For instance, from <filename>entry.hg</filename>: <placeholder-1/>"
-msgstr "Například z <filename>entry.hg</filename>: <placeholder-1/>"
+msgstr "Příklad z <filename>entry.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9235(para)
 msgid ""
@@ -14220,42 +15546,54 @@ msgid ""
 "based on the <filename>*_docs.xml</filename> and <filename>*_docs_override."
 "xml</filename> files."
 msgstr ""
+"Funkce v C (např. <function>gtk_entry_set_text</function>) je více popsaná v "
+"souboru <filename>.defs</filename> a soubory <filename>convert*.m4</"
+"filename> obsahují nutné převody z typů parametrů v C++ na typy parametrů v "
+"C. Toto makro také generuje dokumentační komentáře Doxygen na základě "
+"souborů <filename>*_docs.xml</filename> a <filename>*_docs_override.xml</"
+"filename>."
 
 #: C/gtkmm-tutorial-in.xml:9244(term) C/gtkmm-tutorial-in.xml:9423(term)
 #: C/gtkmm-tutorial-in.xml:9470(term)
 msgid "refreturn"
-msgstr ""
+msgstr "refreturn"
 
 #: C/gtkmm-tutorial-in.xml:9246(para)
 msgid ""
 "Do an extra <function>reference()</function> on the return value, in case "
 "the C function does not provide a reference."
 msgstr ""
+"Provede pomocí <function>reference()</function> zvýšení počtu referencí na "
+"návratové hodnotě v případě, že funkce v C neposkytuje reference."
 
 #: C/gtkmm-tutorial-in.xml:9253(para)
 msgid ""
 "Use the last GError** parameter of the C function to throw an exception."
-msgstr ""
+msgstr "Použijte poslední parametr GError** funkce v C k vyhození výjimky."
 
 #: C/gtkmm-tutorial-in.xml:9258(term)
 msgid "deprecated"
-msgstr ""
+msgstr "deprecated"
 
 #: C/gtkmm-tutorial-in.xml:9260(para)
 msgid ""
 "Puts the generated code in #ifdef blocks. Text about the deprecation can be "
 "specified as an optional parameter."
 msgstr ""
+"Vloží vygenerovaný kód do bloků #ifdef. Jako volitelný parametr lze uvést "
+"vysvětlující text o zavržení."
 
 #: C/gtkmm-tutorial-in.xml:9266(term)
 msgid "constversion"
-msgstr ""
+msgstr "constversion"
 
 #: C/gtkmm-tutorial-in.xml:9268(para)
 msgid ""
 "Just call the non-const version of the same function, instead of generating "
 "almost duplicate code."
 msgstr ""
+"Prostě zavolá nekonstantní verzi té samé funkce, místo aby se generovalo "
+"spousta duplicitního kódu."
 
 #: C/gtkmm-tutorial-in.xml:9273(term) C/gtkmm-tutorial-in.xml:9431(term)
 #: C/gtkmm-tutorial-in.xml:9509(term) C/gtkmm-tutorial-in.xml:9572(term)
@@ -14265,7 +15603,7 @@ msgstr "ifdef"
 #: C/gtkmm-tutorial-in.xml:9275(para) C/gtkmm-tutorial-in.xml:9433(para)
 #: C/gtkmm-tutorial-in.xml:9511(para) C/gtkmm-tutorial-in.xml:9574(para)
 msgid "Puts the generated code in #ifdef blocks."
-msgstr ""
+msgstr "Vloží vygenerovaný kód do bloků #ifdef."
 
 #: C/gtkmm-tutorial-in.xml:9279(term) C/gtkmm-tutorial-in.xml:9515(term)
 msgid "slot_name"
@@ -14280,6 +15618,12 @@ msgid ""
 "used to specify the name of the glue callback function to also pass on to "
 "the C function."
 msgstr ""
+"Určuje název parametru slot v metodě, pokud existuje. Umožňuje to "
+"<command>gmmproc</command> generovat kód pro kopírování slotu a předání "
+"kopie do funkce v C v jejím posledním parametru <literal>gpointer user_data</"
+"literal>. Musí být také použita volba <literal>slot_callback</literal> pro "
+"určení názvu lepicí funkce zpětného volání, aby došlo k předání také do "
+"funkce v C."
 
 #: C/gtkmm-tutorial-in.xml:9291(term) C/gtkmm-tutorial-in.xml:9527(term)
 msgid "slot_callback"
@@ -14292,6 +15636,10 @@ msgid ""
 "then calling it. The address of this callback is also passed on to the C "
 "function that the method wraps."
 msgstr ""
+"Používá se ve spojení s volbou <literal>slot_name</literal> k určení názvu "
+"lepicí funkce zpětného volání, která se stará o získání slotu a jeho "
+"zavolání. Adresa tohoto zpětného volání je rovněž předaná do funkce C, "
+"kterou metoda obaluje."
 
 #: C/gtkmm-tutorial-in.xml:9301(term) C/gtkmm-tutorial-in.xml:9537(term)
 msgid "no_slot_copy"
@@ -14305,11 +15653,15 @@ msgid ""
 "the <literal>slot_name</literal> and <literal>slot_callbback</literal> "
 "options respectively."
 msgstr ""
+"Říká <command>gmmproc</command> aby nepředával kopii slotu do funkce v C, "
+"pokud metoda nějaké má. Místo slotu je předána sama funkce. Název parametru "
+"se slotem a lepící funkce zpětného volání musí mít být zadány jako volby "
+"<literal>slot_name</literal>, respektive <literal>slot_callback</literal>."
 
 #: C/gtkmm-tutorial-in.xml:9241(para) C/gtkmm-tutorial-in.xml:9394(para)
 #: C/gtkmm-tutorial-in.xml:9467(para)
 msgid "There are some optional extra arguments: <placeholder-1/>"
-msgstr ""
+msgstr "Je zde několik dalších volitelných argumentů: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9316(para)
 msgid ""
@@ -14317,6 +15669,9 @@ msgid ""
 "classname> as a const reference. For instance, <code>const Glib::RefPtr&lt;"
 "Gtk::FileFilter&gt;&amp; filter</code>."
 msgstr ""
+"Objekty používané přes <classname>RefPtr</classname>: Předávejte "
+"<classname>RefPtr</classname> jako konstantní referenci. Například "
+"<code>const Glib::RefPtr&lt;Gtk::FileFilter&gt;&amp; filter</code>."
 
 #: C/gtkmm-tutorial-in.xml:9320(para)
 msgid ""
@@ -14325,6 +15680,10 @@ msgid ""
 "even if the <classname>RefPtr</classname> is already const. For instance, "
 "<code>const Glib::RefPtr&lt;const Gtk::FileFilter&gt;&amp; filter</code>."
 msgstr ""
+"Konstantní objekty předávané přes <classname>RefPtr</classname>: Pokud nemá "
+"být objekt měněn funkcí, zajistěte aby byl objekt konstantní, i když je již "
+"konstantní <classname>RefPtr</classname>. Například <code>const Glib::"
+"RefPtr&lt;const Gtk::FileFilter&gt;&amp; filter</code>."
 
 #: C/gtkmm-tutorial-in.xml:9325(para)
 msgid ""
@@ -14336,11 +15695,18 @@ msgid ""
 "Pixbuf&gt; &gt;</code>. You may need to define a Traits type to specify how "
 "the C and C++ types should be converted."
 msgstr ""
+"Obaluje parametry<classname>GList*</classname> a <classname>GSList*</"
+"classname>: Za prvé, potřebujete vyhledat, které objekty se nachází v "
+"datových polích seznamu pro jednotlivé položky. Obvykle si k tomu stačí "
+"přečíst dokumentaci pro funkci v C. Seznam je pak možné obalit typem "
+"<classname>std::vector</classname>. Například <code>std::vector&lt; Glib::"
+"RefPtr&lt;Gdk::Pixbuf&gt; &gt;</code>. Možná budete potřebovat definovat typ "
+"Traits pro určení, jak se typy C a C++ mají převádět."
 
 #: C/gtkmm-tutorial-in.xml:9342(programlisting)
 #, no-wrap
 msgid "#m4 _CONVERSION(`GSList*',`std::vector&lt;Widget*&gt;',`Glib::SListHandler&lt;Widget*&gt;::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')"
-msgstr ""
+msgstr "#m4 _CONVERSION(`GSList*',`std::vector&lt;Widget*&gt;',`Glib::SListHandler&lt;Widget*&gt;::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')"
 
 #: C/gtkmm-tutorial-in.xml:9334(para)
 msgid ""
@@ -14352,6 +15718,13 @@ msgid ""
 "should probably put directly into the .hg file because the ownership depends "
 "on the function rather than the type. For instance: <placeholder-1/>"
 msgstr ""
+"Obalení návratových typů <classname>GList*</classname> a <classname>GSList*</"
+"classname>: Musíte vyhledat, jestli má volající seznam uvolnit a jestli má "
+"uvolnit položky v seznamu. Opět k tomu stačí přečíst si dokumentaci funkce v "
+"C. S touto informací můžete zvolit vlastnictví (žádné, mělké nebo hluboké) "
+"pro převodní pravidlo m4, které byste pravděpodobně měli vložit přímo do "
+"souboru <filename>.hg</filename>, protože vlastnictví závisí spíše na "
+"funkci, než na typu. Například: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9312(para)
 msgid ""
@@ -14359,6 +15732,9 @@ msgid ""
 "API. Though it's usually obvious what C++ types should be used in the C++ "
 "method, here are some hints: <placeholder-1/>"
 msgstr ""
+"Výběr typů C++, které by se měli použít, je důležitý také při obalování API "
+"C. Ačkoliv je většinou zřejmé, jaké typy C++ by se měly použít v metodě C++, "
+"máme pro vás pár rad: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9348(title)
 msgid "_WRAP_METHOD_DOCS_ONLY"
@@ -14371,6 +15747,10 @@ msgid ""
 "when you must hand-code the method, but you want to use the documentation "
 "that would be generated if the method was generated."
 msgstr ""
+"Toto makro je podobné jako <function>_WRAP_METHOD()</function>, ale generuje "
+"jen dokumentaci pro metodu v C++, která obaluje funkci v C. Použijte v "
+"situaci, kdy musíte ručně napsat metodu, ale chcete použít dokumentaci, "
+"která by byla vygenerovaná, kdyby se generovala metoda."
 
 #: C/gtkmm-tutorial-in.xml:9353(function)
 msgid "_WRAP_METHOD_DOCS_ONLY(C function name)"
@@ -14387,7 +15767,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9354(para)
 msgid "For instance, from <filename>container.hg</filename>: <placeholder-1/>"
-msgstr ""
+msgstr "Příklad z <filename>container.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9362(title)
 msgid "_IGNORE / _IGNORE_SIGNAL"
@@ -14402,6 +15782,12 @@ msgid ""
 "_IGNORE() or _IGNORE_SIGNAL() macro to make <command>gmmproc</command> stop "
 "complaining."
 msgstr ""
+"<command>gmmproc</command> vás bude na standardním výstupu varovat o "
+"funkcích a signálech, které jste zapomněli obalit, a pomůže vám tím zajistit "
+"obalení celého API. Pokud ale některé funkce nebo signály obalit nechcete, "
+"nebo když zvolíte ruční napsaní některých metod, můžete použít makro "
+"<function>_IGNORE()</function> nebo <function>_IGNORE_SIGNAL()</function>, "
+"abyste zastavili stížnosti <command>gmmproc</command>."
 
 #: C/gtkmm-tutorial-in.xml:9368(function)
 msgid "_IGNORE(C function name 1, C function name2, etc)"
@@ -14422,7 +15808,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9370(para)
 msgid "For instance, from <filename>buttonbox.hg</filename>: <placeholder-1/>"
-msgstr ""
+msgstr "Příklad z <filename>buttonbox.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9378(title)
 msgid "_WRAP_SIGNAL"
@@ -14436,6 +15822,12 @@ msgid ""
 "<command>gmmproc</command> uses the .defs file to discover the C parameter "
 "types and the .m4 convert files to discover appropriate type conversions."
 msgstr ""
+"Toto makro generuje signál v C++ ve stylu libsigc++ pro obalení signálu "
+"objektu GObject v C. Ve skutečnosti generuje veřejně přístupnou metodu, jako "
+"je <function>signal_clicked()</function>, která vrací zástupný objekt."
+"<command>gmmproc</command> používá soubor <filename>.defs</filename> k "
+"vyhledání typů parametrů C a převodní soubory <filename>.m4</filename> k "
+"vyhledání příslušných typů převodů."
 
 #: C/gtkmm-tutorial-in.xml:9385(function)
 msgid "_WRAP_SIGNAL( C++ signal handler signature, C signal name)"
@@ -14456,6 +15848,9 @@ msgid ""
 "corresponding enum value and a <function>g_signal_new()</function> in the .c "
 "file."
 msgstr ""
+"Signály obvykle mají ve struktuře GTK ukazatel na funkci s příslušnou "
+"výčtovou hodnotou a <function>g_signal_new()</function> v souboru <filename>."
+"c</filename>."
 
 #: C/gtkmm-tutorial-in.xml:9397(term)
 msgid "no_default_handler"
@@ -14468,6 +15863,10 @@ msgid ""
 "signal with a default signal handler would break the ABI by increasing the "
 "size of the class's virtual function table."
 msgstr ""
+"Negenerovat virtuální metodu <function>on_neco()</function>, která umožňuje "
+"snadné přepsání výchozí obsluhy signálu. Použijte, když by přidání signál s "
+"výchozí obsluhou signálu rozbilo ABI zvýšením velikosti tabulky virtuálních "
+"funkcí pro třídu."
 
 #: C/gtkmm-tutorial-in.xml:9407(term)
 msgid "custom_default_handler"
@@ -14480,6 +15879,9 @@ msgid ""
 "in the <filename>.cc</filename> file. Use this when you must generate the "
 "definition by hand."
 msgstr ""
+"Generovat deklaraci virtuální metody <function>on_neco()</function> v "
+"souboru <filename>.h</filename>, ale negenerovat definici v souboru "
+"<filename>.cc</filename>. Použijte, když musíte generovat definici ručně."
 
 #: C/gtkmm-tutorial-in.xml:9416(term)
 msgid "custom_c_callback"
@@ -14490,6 +15892,8 @@ msgid ""
 "Do not generate a C callback function for the signal. Use this when you must "
 "generate the callback function by hand."
 msgstr ""
+"Negenerovat funkce zpětného volání v C pro signál. Použijte to, když musíte "
+"vygenerovat funkci zpětného volání ručně."
 
 #: C/gtkmm-tutorial-in.xml:9425(para)
 msgid ""
@@ -14497,6 +15901,9 @@ msgid ""
 "<function>on_something()</function> virtual method, in case the C function "
 "does not provide a reference."
 msgstr ""
+"Provede pomocí <function>reference()</function> dodatečné zvýšení počitadla "
+"referencí u návratové hodnoty z virtuální metody <function>on_neco()</"
+"function> v případě, že funkce v C neposkytuje reference."
 
 #: C/gtkmm-tutorial-in.xml:9441(title)
 msgid "_WRAP_PROPERTY"
@@ -14509,6 +15916,11 @@ msgid ""
 "<command>gmmproc</command> uses the .defs file to discover the C type and "
 "the .m4 convert files to discover appropriate type conversions."
 msgstr ""
+"Toto makro generuje metodu C++ pro obalení vlastnosti objektu GObject v C. "
+"Musíte správně uvést název vlastnosti a typ C++, který chcete. "
+"<command>gmmproc</command> používá soubor <filename>.defs</filename> k "
+"vyhledání typu C a převodní soubory <filename>.m4</filename> k vyhledání "
+"příslušného typu převodů."
 
 #: C/gtkmm-tutorial-in.xml:9446(function)
 msgid "_WRAP_PROPERTY(C property name, C++ type)"
@@ -14546,7 +15958,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9458(para)
 msgid "For instance, from <filename>widget.hg</filename>: <placeholder-1/>"
-msgstr "Například z <filename>widget.hg</filename>: <placeholder-1/>"
+msgstr "Příklad z <filename>widget.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9463(para)
 msgid ""
@@ -14555,6 +15967,9 @@ msgid ""
 "<filename>convert*.m4</filename> files contain the necessary conversion from "
 "the C++ parameter type to the C parameter type."
 msgstr ""
+"Funkce v C (např. <function>get_request_mode()</function>) je více popsaná v "
+"souboru <filename>*_vfunc.defs</filename> a soubory <filename>convert*.m4</"
+"filename> obsahují nutné převody z typu parametru v C++ na typ parametru v C."
 
 #: C/gtkmm-tutorial-in.xml:9472(para)
 msgid ""
@@ -14562,6 +15977,9 @@ msgid ""
 "<function>something_vfunc()</function> function, in case the virtual C "
 "function does not provide a reference."
 msgstr ""
+"V případě, že virtuální funkce v C neposkytuje reference, proveďte dodatečné "
+"zvýšení počitadla referencí pomocí <function>reference()</function> u "
+"návratové hodnoty funkce <function>neco_vfunc()</function>."
 
 #: C/gtkmm-tutorial-in.xml:9478(term)
 msgid "refreturn_ctype"
@@ -14573,12 +15991,18 @@ msgid ""
 "overridden <function>something_vfunc()</function> function in the C callback "
 "function, in case the calling C function expects it to provide a reference."
 msgstr ""
+"V případě, že volání funkce v C očekává, že mu bude poskytnuta reference, "
+"proveďte dodatečné zvýšení počitadla referencí pomocí <function>reference()</"
+"function> u návratové hodnoty přepsané funkce <function>neco_vfunc()</"
+"function> ve funkci zpětného volání v C."
 
 #: C/gtkmm-tutorial-in.xml:9489(para)
 msgid ""
 "Use the last GError** parameter of the C virtual function (if there is one) "
 "to throw an exception."
 msgstr ""
+"Použijte poslední parametr GError** virtuální funkce v C (pokud existuje) k "
+"vyhození výjimky."
 
 #: C/gtkmm-tutorial-in.xml:9494(term)
 msgid "custom_vfunc"
@@ -14589,6 +16013,8 @@ msgid ""
 "Do not generate a definition of the vfunc in the <filename>.cc</filename> "
 "file. Use this when you must generate the vfunc by hand."
 msgstr ""
+"Negenerujte definice virtuálních funkcí v souboru <filename>.cc</filename>. "
+"Tohle použijte, když musíte generovat virtuální funkce ručně."
 
 #: C/gtkmm-tutorial-in.xml:9502(term)
 msgid "custom_vfunc_callback"
@@ -14599,6 +16025,8 @@ msgid ""
 "Do not generate a C callback function for the vfunc. Use this when you must "
 "generate the callback function by hand."
 msgstr ""
+"Negenerujte funkce zpětných volání v C pro virtuální funkce. Tohle použijte, "
+"když musíte generovat funkce zpětných volání ručně."
 
 #: C/gtkmm-tutorial-in.xml:9548(para)
 msgid ""
@@ -14609,6 +16037,12 @@ msgid ""
 "arguments <parameter>refreturn</parameter> or <parameter>refreturn_ctype</"
 "parameter> is required."
 msgstr ""
+"Pravidlo, ze kterého mohou existovat výjimky: V případě, že virtuální funkce "
+"v C vrací ukazatel na objekt odvozený z <classname>GObject</classname>, tj. "
+"objekt s počítáním referencí, pak virtuální funkce v C++ vrátí objekt "
+"<classname>Glib::RefPtr&lt;&gt;</classname>. Je vyžadován jeden z doplňující "
+"argumentů <parameter>refreturn</parameter> nebo <parameter>refreturn_ctype</"
+"parameter>."
 
 #: C/gtkmm-tutorial-in.xml:9559(title)
 msgid "Other macros"
@@ -14637,7 +16071,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9569(para)
 msgid "There is one optional extra argument: <placeholder-1/>"
-msgstr ""
+msgstr "Existuje jeden další volitelný argument: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9582(title)
 msgid "_WRAP_ENUM"
@@ -14648,6 +16082,8 @@ msgid ""
 "This macro generates a C++ enum to wrap a C enum. You must specify the "
 "desired C++ name and the name of the underlying C enum."
 msgstr ""
+"Toto makro generuje výčet v C++ pro obalení výčtu v C. Musíte uvést "
+"požadovaný název v C++ a název podkladového výčtu v C."
 
 #: C/gtkmm-tutorial-in.xml:9586(programlisting)
 #, no-wrap
@@ -14660,7 +16096,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9585(para)
 msgid "For instance, from <filename>enums.hg</filename>: <placeholder-1/>"
-msgstr "Například z <filename>enums.hg</filename>: <placeholder-1/>"
+msgstr "Příklad z <filename>enums.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9590(para)
 msgid ""
@@ -14671,6 +16107,12 @@ msgid ""
 "should also file a bug against the C API, because all enums should be "
 "registered as GTypes."
 msgstr ""
+"Pokud výčet není <classname>GType</classname>, musíte předat třetí parametr "
+"NO_GTYPE. To je případ, když neexistuje funkce <function>*_get_type()</"
+"function> pro výčet v C, ale dávejte pozor, jestli jenom nepotřebujete "
+"vložit další hlavičkový soubor pro onu funkci. Měli byste také vyplnit "
+"chybové hlášení vůči API C, protože všechny výčtové typy by měli být "
+"zaregistrované jako GType."
 
 #: C/gtkmm-tutorial-in.xml:9595(programlisting)
 #, no-wrap
@@ -14683,7 +16125,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9594(para)
 msgid "For example, from <filename>icontheme.hg</filename>: <placeholder-1/>"
-msgstr ""
+msgstr "Například z <filename>icontheme.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9602(title)
 msgid "_WRAP_ENUM_DOCS_ONLY"
@@ -14699,6 +16141,13 @@ msgid ""
 "same options (though NO_GTYPE is just ignored because it makes no difference "
 "when just generating the enum's documentation)."
 msgstr ""
+"Toto makro jen vygeneruje pro výčet blok s dokumentací Doxygen. To se hodí "
+"pro výčty, které nemohou být obalené pomocí <function>_WRAP_ENUM()</"
+"function>, protože jsou definované komplexně (možná pomocí maker v C), ale "
+"přejete si, aby vygenerovaná dokumentace k výčtu byl součástí. Používá se se "
+"stejnou syntaxí, jako <function>_WRAP_ENUM()</function> a zpracovává ty samé "
+"volby (a však NO_GTYPE je jednoduše ignorováno, protože nezpůsobuje žádný "
+"rozdíl, když se generuje dokumentace k výčtu)."
 
 #: C/gtkmm-tutorial-in.xml:9615(title)
 msgid "_WRAP_GERROR"
@@ -14710,12 +16159,17 @@ msgid ""
 "Code enum and a code() method. You must specify the desired C++ name, the "
 "name of the corresponding C enum, and the prefix for the C enum values."
 msgstr ""
+"Toto makro generuje třídu výjimky v C++ odvozenou z Glib::Error, s výčtem "
+"Code a metodou code(). Musíte uvést požadovaný název v C++, název "
+"příslušného výčtu v C a prefix pro hodnoty výčtu v C."
 
 #: C/gtkmm-tutorial-in.xml:9619(para)
 msgid ""
 "This exception can then be thrown by methods which are generated from "
 "_WRAP_METHOD() with the errthrow option."
 msgstr ""
+"Tato výjimka může být vyhozená metodou, která je vygenerovaná pomocí "
+"_WRAP_METOD() s volbou errthrow."
 
 #: C/gtkmm-tutorial-in.xml:9621(programlisting)
 #, no-wrap
@@ -14728,7 +16182,7 @@ msgstr ""
 
 #: C/gtkmm-tutorial-in.xml:9620(para)
 msgid "For instance, from <filename>pixbuf.hg</filename>: <placeholder-1/>"
-msgstr "Například z <filename>pixbuf.hg</filename>: <placeholder-1/>"
+msgstr "Příklad z <filename>pixbuf.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9628(title)
 msgid "_MEMBER_GET / _MEMBER_SET"
@@ -14740,6 +16194,9 @@ msgid ""
 "provides direct access to its data members, to create getters and setters "
 "for the data members."
 msgstr ""
+"Tato makra použijte, když obalujete jednoduchou strukturu nebo boxovyný typ, "
+"který poskytuje přímý přístup ke svým datovým členům, aby se vytvořily "
+"funkce pro získávání a nastavování datových členů."
 
 #: C/gtkmm-tutorial-in.xml:9633(function)
 msgid "_MEMBER_GET(C++ name, C name, C++ type, C type)"
@@ -14756,7 +16213,7 @@ msgstr "_MEMBER_GET(x, x, int, int)"
 
 #: C/gtkmm-tutorial-in.xml:9635(para)
 msgid "For example, in <filename>rectangle.hg</filename>: <placeholder-1/>"
-msgstr ""
+msgstr "Například v <filename>rectangle.hg</filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9641(title)
 msgid "_MEMBER_GET_PTR / _MEMBER_SET_PTR"
@@ -14768,6 +16225,9 @@ msgid ""
 "member that is a pointer type. For the getter function, it will create two "
 "methods, one const and one non-const."
 msgstr ""
+"Tato makra použijte k poskytnutí funkcí pro získávání a nastavování datového "
+"člena, který je typu ukazatel. Pro funkci na získávání to vytvoří dvě "
+"metody, jednu konstantní a jednu nekonstantní."
 
 #: C/gtkmm-tutorial-in.xml:9647(function)
 msgid "_MEMBER_GET_PTR(C++ name, C name, C++ type, C type)"
@@ -14784,12 +16244,17 @@ msgid ""
 "// _MEMBER_GET_PTR(engine_lang, lang_engine, EngineLang*, PangoEngineLang*)\n"
 "// It's just a comment. It's difficult to find a real-world example.\n"
 msgstr ""
+"\n"
+"// _MEMBER_GET_PTR(engine_lang, lang_engine, EngineLang*, PangoEngineLang*)\n"
+"// Je to jen komentáře. Je těžké najít skutečný příklad ze života.\n"
 
 #: C/gtkmm-tutorial-in.xml:9649(para)
 msgid ""
 "For example, for <classname>Pango::Analysis</classname> in <filename>item."
 "hg</filename>: <placeholder-1/>"
 msgstr ""
+"Například pro <classname>Pango::Analysis</classname> v <filename>item.hg</"
+"filename>: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9657(title)
 msgid "_MEMBER_GET_GOBJECT / _MEMBER_SET_GOBJECT"
@@ -14801,6 +16266,9 @@ msgid ""
 "<classname>GObject</classname> type that must be referenced before being "
 "returned."
 msgstr ""
+"Tato makra použijte k poskytnutí funkcí pro získávání a nastavování datového "
+"člena typu <classname>GObject</classname>, u kterého musí být před jeho "
+"vrácením zvýšeno počitadlo referencí."
 
 #: C/gtkmm-tutorial-in.xml:9663(function)
 msgid "_MEMBER_GET_GOBJECT(C++ name, C name, C++ type, C type)"
@@ -14823,6 +16291,7 @@ msgstr ""
 msgid ""
 "For example, in Pangomm, <filename>layoutline.hg</filename>: <placeholder-1/>"
 msgstr ""
+"Například v <filename>layoutline.hg</filename> z Pangomm: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9674(title)
 msgid "gmmproc Parameter Processing"
@@ -14835,6 +16304,10 @@ msgid ""
 "<function>_WRAP_METHOD()</function>, <function>_WRAP_CTOR()</function> and "
 "<function>_WRAP_CREATE()</function>) in a variety of ways:"
 msgstr ""
+"<command>gmmproc</command> umožňuje zpracování parametrů v hlavičkách metod "
+"různým způsobem pro makra, které zpracovávají hlavičky metod (jako jsou "
+"<function>_WRAP_METHOD()</function>, <function>_WRAP_CTOR()</function> and "
+"<function>_WRAP_CREATE()</function>):"
 
 #: C/gtkmm-tutorial-in.xml:9682(title)
 msgid "Parameter Reordering"
@@ -14898,6 +16371,17 @@ msgid ""
 "Since the C++ parameter names correspond to the C ones, the above could be "
 "re-written as: <placeholder-3/>"
 msgstr ""
+"Pro všechna makra, která zpracovávají hlavičky metod, je možné určit jiné "
+"pořadí parametrů C++, než je stávající pořadí ve funkcích, virtuálních "
+"funkcích nebo signálech v jazyce C. Například řekněme, že následující funkce "
+"C byly obaleny jako metody v C++ pro třídu <classname>Gtk::Widget</"
+"classname>: <placeholder-1/> Je však nutné změnit pořadí dvou parametrů "
+"metody v C++. Nějak takto by se dala funkce obalit jako metoda v C++ s jiným "
+"pořadím pro dva parametry: <placeholder-2/> <literal>{c_param_name}</"
+"literal> následující za názvy parametrů metody říká <command>gmmproc</"
+"command>, aby mapoval parametr v C++ na daný parametr v C uvedený v "
+"<literal>{}</literal>. Vzhledem k tomu, že názvy parametrů v C++ odpovídají "
+"těm v C, lze výše uvedené zapsat jako: <placeholder-3/>"
 
 #: C/gtkmm-tutorial-in.xml:9713(para)
 msgid ""
@@ -14908,6 +16392,12 @@ msgid ""
 "no matter what the C API's parameter names may be. It's how the utility is "
 "written presently."
 msgstr ""
+"Pamatujte, že při změně pořadí parametrů pro hlavičku metody "
+"<function>_WRAP_SIGNAL()</function>, názvy parametrů v C budou vždy "
+"<literal>p0</literal>, <literal>p1</literal> atd., protože nástroj "
+"<filename>generate_extrac_defs</filename> používá tyto názvy parametrů bez "
+"ohledu na názvy parametrů v API C. Takto prostě zmíněný nástroj v "
+"současnosti funguje."
 
 #: C/gtkmm-tutorial-in.xml:9725(title)
 msgid "Optional Parameter Processing"
@@ -14955,6 +16445,19 @@ msgid ""
 "so: <placeholder-2/> In this case, two constructors would be generated: One "
 "with the optional parameter and one without it."
 msgstr ""
+"Pro všechna makra zpracovávající hlavičky metod, vyjma maker "
+"<function>_WRAP_SIGNAL()</function> a <function>_WRAP_VFUNC()</function>, je "
+"také možné určit parametry jako volitelné tak, že se vygenerují další metody "
+"v C++ bez určených volitelných parametrů. Například řekněme, že následující "
+"funkce <function>*_new()</function> byla obalena jako konstruktor v třídě "
+"<classname>Gtk::ToolButton</classname>: <placeholder-1/> Navíc řekněme, že "
+"API C umožňuje NULL pro parametr <parameter>label</parameter> v této funkci, "
+"takže parametr může být volitelný. Pak by bylo možné přimět "
+"<command>gmmproc</command> vygenerovat původní konstruktor (se všemi "
+"parametry) souběžně s dalším konstruktorem bez volitelného parametru tak, že "
+"k názvu parametru připojí <literal>{?}</literal>: <placeholder-2/> V takovém "
+"situaci se vygenerují dva konstruktory: Jeden s volitelným parametrem a "
+"jeden bez něj."
 
 #: C/gtkmm-tutorial-in.xml:9754(title)
 msgid "Output Parameter Processing"
@@ -15028,6 +16531,21 @@ msgid ""
 "necessary initialization macro like the following would also have to be "
 "specified: <placeholder-3/> Which could also be written as: <placeholder-4/>"
 msgstr ""
+"Pomocí <function>_WRAP_METHOD()</function> je pro návratovou hodnotu obalené "
+"funkce v C (pokud nějakou mát) také možné umístit ji do některého výstupního "
+"parametru metody v C++, místo aby byla návratovou hodnotou metody v C++ "
+"stejně jako u funkce v C. Když to chcete takto, stačí vložit výstupní "
+"parametr do seznamu parametrů metody v C++ a přidat za jeho název "
+"<literal>{OUT}</literal>. Například, když je "
+"<function>gtk_widget_get_request_mode()</function> deklarována následovně: "
+"<placeholder-1/> a máme metodu v C++, která nastavuje výstupní parametr, jak "
+"je požadováno, místo aby vracela <type>SizeRequestMode</type>, mohli bychom "
+"použít něco takového: <placeholder-2/> <literal>{OUT}</literal> připojené k "
+"názvu výstupního parametru <parameter>mode</parameter> říká skriptu "
+"<command>gmmproc</command>, aby umístil návratovou hodnotu funkce v C do "
+"tohoto výstupního parametru. V tomto případě byla ale navíc nutné určit "
+"inicializační makro: <placeholder-3/> Což by šlo zapsat i jako: "
+"<placeholder-4/>"
 
 #: C/gtkmm-tutorial-in.xml:9795(programlisting)
 #, no-wrap
@@ -15090,6 +16608,22 @@ msgid ""
 "from a <classname>GdkRectangle*</classname> such as the following: "
 "<placeholder-3/>"
 msgstr ""
+"<function>_WRAP_METHOD()</function> podporuje také nastavení výstupních "
+"parametrů v C++ z výstupních parametrů v C, pokud obalená funkce v C nějaké "
+"má. Předpokládejme například, že chceme obalit následující funkci v C, která "
+"vrací hodnotu v jejím výstupním parametru <parameter>rect</parameter>: "
+"<placeholder-1/> Aby <command>gmmproc</command> umístil hodnotu vracenou ve "
+"výstupním parametru <parameter>rect</parameter> v C++, můžete použít nějak "
+"takto direktivu <function>_WRAP_METHOD()</function>: <placeholder-2/> "
+"<literal>{&gt;&gt;}</literal> následující za názvem parametru "
+"<parameter>rect</parameter> říká, že výstupní parametr v C++ by se měl "
+"nastavit z hodnoty vracené v parametru v C z funkce v C. <command>gmmproc</"
+"command> vygeneruje deklaraci dočasné proměnné, ve které se uchová hodnota "
+"výstupního parametru v C a výraz, který nastaví výstupní parametr v C++ z "
+"dočasné proměnné. V tomto případě může být nutné mít nějaké makro "
+"<function>_INITIALIZATION()</function> popisující, jak nastavit "
+"<classname>Gdk::Rectangle&ampt;</classname> z <classname>GdkRectangle*</"
+"classname>. Může vypadat třeba takto: <placeholder-3/>"
 
 #: C/gtkmm-tutorial-in.xml:9827(title)
 msgid "Basic Types"
@@ -15165,7 +16699,7 @@ msgstr "<placeholder-1/> (nebo <placeholder-2/> pro názvy souborů)"
 
 #: C/gtkmm-tutorial-in.xml:9849(title)
 msgid "Hand-coded source files"
-msgstr ""
+msgstr "Ručně psané soubory se zdrojovými kódy"
 
 #: C/gtkmm-tutorial-in.xml:9850(para)
 msgid ""
@@ -15176,6 +16710,12 @@ msgid ""
 "in the <filename>Makefile.am</filename> in the <varname>files_extra_h</"
 "varname> and <varname>files_extra_cc</varname> variables."
 msgstr ""
+"Můžete chtít vložit další zdrojové soubory, které se nebudou generovat "
+"pomocí <command>gmmproc</command> ze souborů <filename>.hg</filename> a "
+"<filename>ccg</filename>. Stačí je prostě umístit do vaší složky "
+"<filename>libneco/libnecomm</filename> a uvést je v <filename>Makefile.am</"
+"filename> v proměnných <varname>files_extra_h</varname> and "
+"<varname>files_extra_cc</varname>."
 
 #: C/gtkmm-tutorial-in.xml:9860(title)
 msgid "Initialization"
@@ -15191,6 +16731,12 @@ msgid ""
 "  wrap_init(); //Tells the Glib::wrap() table about the libsomethingmm classes.\n"
 "}\n"
 msgstr ""
+"\n"
+"void init()\n"
+"{\n"
+"  Gtk::Main::init_gtkmm_internals(); // Nastavuje systém typů g_* a tabulku Glib::wrap()\n"
+"  wrap_init(); // Říká tabulce Glib::wrap() o třídě libnecomm.\n"
+"}\n"
 
 #: C/gtkmm-tutorial-in.xml:9861(para)
 msgid ""
@@ -15203,6 +16749,15 @@ msgid ""
 "and <application>gtkmm</application>) and call your generated "
 "<function>wrap_init()</function> function. For instance: <placeholder-1/>"
 msgstr ""
+"Než můžete svoji knihovnu použít, je potřeba ji inicializovat, aby se "
+"zaregistrovaly nové typy, které zpřístupňuje. Také knihovny v C, které "
+"obalujete, mohou mít své vlastní inicializační funkce, které byste měli "
+"zavolat. Můžete to udělat ve funkci <function>init()</function>, kterou "
+"můžete umístit do ručně napsaných souborů <filename>init.h</filename> a "
+"<filename>init.cc</filename>. Tato funkce by měla inicializovat vaše "
+"závislosti (např. funkci v C a <application>gtkmm</application>) a zavolat "
+"vaši vygenerovanou funkci <function>wrap_init()</function>. Například: "
+"<placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9877(para)
 msgid ""
@@ -15213,6 +16768,12 @@ msgid ""
 "<filename>wrap_init.h</filename> so that the <function>wrap_init()</"
 "function> function appears in the correct C++ namespace."
 msgstr ""
+"Implementace metody <function>wrap_init()</function> ve <filename>wrap_init."
+"cc</filename> je generovaná skriptem <filename>generate_wrap_init.pl</"
+"filename>, ale deklarace ve <filename>wrap_init.h</filename> je psaná ručně, "
+"takže musíte upravit <filename>wrap_init.h</filename>, aby se funkce "
+"<function>wrap_init()</function> vyskytovala ve správném jmenném prostoru C+"
+"+."
 
 #: C/gtkmm-tutorial-in.xml:9886(title)
 msgid "Problems in the C API."
@@ -15224,6 +16785,8 @@ msgid ""
 "wrapping, particularly if it is a new project. Here are some common "
 "problems, with solutions."
 msgstr ""
+"Nejspíše se setkáte s některými problémy v knihovně, kterou balíte, zejména "
+"pokud jde o nový projekt. Zde jsou některé běžné problémy včetně řešení."
 
 #: C/gtkmm-tutorial-in.xml:9889(title)
 msgid "Unable to predeclare structs"
@@ -15245,7 +16808,7 @@ msgstr ""
 "\n"
 "struct _ExampleWidget\n"
 "{\n"
-"  ...\n"
+"  …\n"
 "};\n"
 
 #: C/gtkmm-tutorial-in.xml:9890(para)
@@ -15253,6 +16816,8 @@ msgid ""
 "By convention, structs are declared in glib/GTK+-style headers like so: "
 "<placeholder-1/>"
 msgstr ""
+"Podle konvencí se struktury deklarují v hlavičkových souborech ve stylu glib/"
+"GTK+ takto: <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9900(para)
 msgid ""
@@ -15263,6 +16828,12 @@ msgid ""
 "assumes that this technique was used, so you will see compiler errors if "
 "that is not the case."
 msgstr ""
+"Doplňující typedef umožňuje použít strukturu v hlavičkovém souboru bez "
+"vložení její plné definice, pouze jejím předeklarováním pomocí zopakování "
+"tohoto typedef. To znamená, že nemusíte vkládat hlavičkový soubor knihovny v "
+"C do svého hlavičkového souboru v C++ a tím ji udržet mimo veřejné API. "
+"<command>gmmproc</command> předpokládá, že je tato technika použita, takže "
+"pokud tomu tak není, uvidíte chybové hlášení kompilátoru."
 
 #: C/gtkmm-tutorial-in.xml:9907(programlisting)
 #, no-wrap
@@ -15272,6 +16843,10 @@ msgid ""
 "../../libexample/libexamplemm/example-widget.h:34: error: 'ExampleWidget' has a previous declaration here\n"
 "make[4]: *** [example-widget.lo] Error 1\n"
 msgstr ""
+"\n"
+"example-widget.h:56: error: using typedef-name 'ExampleWidget' after 'struct'\n"
+"../../libexample/libexamplemm/example-widget.h:34: error: 'ExampleWidget' has a previous declaration here\n"
+"make[4]: *** [example-widget.lo] Error 1\n"
 
 #: C/gtkmm-tutorial-in.xml:9913(programlisting)
 #, no-wrap
@@ -15280,22 +16855,29 @@ msgid ""
 "example-widget.h:60: error: '_ExampleWidget ExampleWidget' redeclared as different kind of symbol\n"
 "../../libexample/libexamplemm/example-widget.h:34: error: previous declaration of 'typedef struct _ExampleWidget ExampleWidget'\n"
 msgstr ""
+"\n"
+"example-widget.h:60: error: '_ExampleWidget ExampleWidget' redeclared as different kind of symbol\n"
+"../../libexample/libexamplemm/example-widget.h:34: error: previous declaration of 'typedef struct _ExampleWidget ExampleWidget'\n"
 
 #: C/gtkmm-tutorial-in.xml:9905(para)
 msgid ""
 "This compiler error might look like this: <placeholder-1/> or this: "
 "<placeholder-2/>"
 msgstr ""
+"Tato chyba kompilátoru může vypadat nějak takto: <placeholder-1/> nebo "
+"takto: <placeholder-2/>"
 
 #: C/gtkmm-tutorial-in.xml:9918(para)
 msgid ""
 "This is easy to correct in the C library, so do send a patch to the relevant "
 "maintainer."
 msgstr ""
+"Takovéto věci se v knihovně v jazyce C opravují snadno, tak neváhejte poslat "
+"příslušnému správci záplatu."
 
 #: C/gtkmm-tutorial-in.xml:9922(title)
 msgid "Lack of properties"
-msgstr ""
+msgstr "Chybějící vlastnosti"
 
 #: C/gtkmm-tutorial-in.xml:9929(programlisting)
 #, no-wrap
@@ -15321,6 +16903,12 @@ msgid ""
 "along with the names of the properties for which they are values. For "
 "instance, <placeholder-1/>"
 msgstr ""
+"Podle zvyklostí mají objekty ve stylu glib/GTK+ funkce <function>*_new()</"
+"function>, jako třeba <function>example_widget_new()</function>, které "
+"nedělají nic víc, než že zavolají <function>g_object_new()</function> a "
+"vrátí jeho výsledek. Vstupní parametry se předají do "
+"<function>g_object_new()</function> spolu s názvy vlastností, pro které tyto "
+"hodnoty jsou. Například <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9936(para)
 msgid ""
@@ -15329,6 +16917,11 @@ msgid ""
 "This is often necessary so that they can actually instantiate a derived "
 "GType, to add their own hooks for signal handlers and vfuncs."
 msgstr ""
+"To umožňuje vazbám mezi různými programovacími jazyka implementovat jejich "
+"vlastní ekvivalenty (jako jsou konstruktory v C++), bez použití funkce "
+"<function>*_new()</function>. Často je to nutné, protože mohou ve "
+"skutečnosti vytvářet instanci odvozenin GType, do kterých přidají vlastní "
+"háčky pro obsluhu signálů a virtuálních funkcí."
 
 #: C/gtkmm-tutorial-in.xml:9940(para)
 msgid ""
@@ -15338,6 +16931,11 @@ msgid ""
 "<function>_new()</function> function as long as those lines of code use API "
 "that is available to us."
 msgstr ""
+"Minimálně by funkce <function>_new()</function> neměla používat žádné "
+"privátní API (funkce, které jsou jen v souboru .c). Dokonce i v případě, že "
+"neexistují žádné funkce, můžeme napsat dva až tři řádky kódu s implementací "
+"funkce <function>_new()</function>, pokud tyto řádky kódu používají API, "
+"které je pro nás dostupné."
 
 #: C/gtkmm-tutorial-in.xml:9948(programlisting)
 #, no-wrap
@@ -15378,6 +16976,9 @@ msgid ""
 "that the C++ constructor can call after instantiating its own type. For "
 "instance, <placeholder-1/>"
 msgstr ""
+"Jiný řešením je přidat funkci <function>*_construct()</function>, kterou "
+"konstruktor C++ může zavolat po vytvoření instance jeho vlastního typu. "
+"Například <placeholder-1/>"
 
 #: C/gtkmm-tutorial-in.xml:9964(para)
 msgid ""
@@ -15385,6 +16986,10 @@ msgid ""
 "is relatively difficult to correct in the C library, but it is possible, so "
 "do file a bug and try to send a patch to the relevant maintainer."
 msgstr ""
+"Provést opravu přidání vlastností a zajištěním, že budou spolu navzájem "
+"správně komunikovat, je v knihovně v jazyce C relativně obtížné, ale není to "
+"nemožné. Takže vyplňte chybové hlášení a zkuste příslušnému správci poslat "
+"záplatu."
 
 #: C/gtkmm-tutorial-in.xml:9972(title)
 msgid "Documentation"
@@ -15396,10 +17001,13 @@ msgid ""
 "formatted C++ comments and generates HTML documentation. You may write these "
 "doxygen comments directly in the header files."
 msgstr ""
+"Obecně používají projekty ve stylu gtkmm Doxygen, který čte speciálně "
+"formátované komentáře jazyka C++ a generuje z nich dokumentaci v HTML. Tyto "
+"komentáře můžete zapisovat přímo do hlavičkových souborů."
 
 #: C/gtkmm-tutorial-in.xml:9976(title)
 msgid "Reusing C documentation"
-msgstr ""
+msgstr "Recyklace dokumentace ke knihovnám C"
 
 #: C/gtkmm-tutorial-in.xml:9977(para)
 msgid ""
@@ -15412,6 +17020,15 @@ msgid ""
 "doxygen comments. <command>gmmproc</command> will even try to transform the "
 "documentation to make it more appropriate for a C++ API."
 msgstr ""
+"Můžete si přát využít dokumentaci, která již existuje pro knihovny jazyka C, "
+"které jsou pro C++ obalené. Tyto knihovny ve stylu GTK typicky používají gtk-"
+"doc a proto mají komentáře ve zdrojovém kódu formátované pro gtk-doc a k "
+"tomu nějako doplňující dokumentaci v souborech .sgml a .xml. Skript "
+"<filename>docextract_to_xml.py</filename> ze složky <filename>tools/"
+"defs_gen</filename> umí tyto soubory číst a vygenerovat soubor .xml, který "
+"může <command>gmmproc</command> použít k vygenerování komentářů pro doxygen. "
+"<command>gmmproc</command> se navíc pokusí provést v dokumentaci nějaké "
+"změny, aby lépe odpovídala API C++."
 
 #: C/gtkmm-tutorial-in.xml:9987(programlisting)
 #, no-wrap
@@ -15426,10 +17043,14 @@ msgid ""
 "xml</filename> file to the <filename>something_docs_override.xml</filename> "
 "file and changing the contents."
 msgstr ""
+"Protože automatický převod není vždy zcela správný, můžete chtít pro některé "
+"metody poskytnout ručně psaný text. Můžete to udělat zkopírováním uzlu XML "
+"pro tuto funkci ze souboru <filename>neco_docs.xml</filename> do "
+"<filename>neco_docs_override.xml</filename> a změnou jeho obsahu."
 
 #: C/gtkmm-tutorial-in.xml:9999(title)
 msgid "Documentation build structure"
-msgstr ""
+msgstr "Struktura pro sestavení dokumentace"
 
 #: C/gtkmm-tutorial-in.xml:10000(para)
 msgid ""
@@ -15442,6 +17063,14 @@ msgid ""
 "by the <varname>doc_input</varname> variable in the <filename>Makefile.am</"
 "filename> file."
 msgstr ""
+"Pokud jste zkopírovali kostru zdrojového stromu v mm-common a nahradili "
+"zástupné texty, tak budete již mít vhodné soubory <filename>Makefile.am</"
+"filename> a <filename>Doxyfile.in</filename>. S nastavení sestavení podle mm-"
+"common není seznam vstupních souborů Doxygen definován v konfiguračním "
+"souboru Doxygen, ale je předáván z <command>make</command> na standardní "
+"vstup příkazu <command>doxygen</command>. Seznam vstupních souborů je "
+"definován proměnnou <varname>doc_input</varname> v souboru "
+"<filename>Makefile.am</filename>."
 
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
 #: C/gtkmm-tutorial-in.xml:0(None)
