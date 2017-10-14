@@ -47,7 +47,7 @@ protected:
   void get_preferred_width_for_height_vfunc(Gtk::Widget& widget, int height,
     int& minimum_width, int& natural_width) const override;
 
-  Gtk::CellEditable* start_editing_vfunc(Gdk::Event& event,
+  Gtk::CellEditable* start_editing_vfunc(const Gdk::Event& event,
                                          Gtk::Widget& widget,
                                          const Glib::ustring& path,
                                          const Gdk::Rectangle& background_area,

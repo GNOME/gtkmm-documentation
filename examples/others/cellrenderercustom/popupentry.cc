@@ -130,7 +130,7 @@ bool PopupEntry::on_key_press_event(Gdk::EventKey& key_event)
   return Gtk::Box::on_key_press_event(key_event);
 }
 
-void PopupEntry::start_editing_vfunc(Gdk::Event&)
+void PopupEntry::start_editing_vfunc(const Gdk::Event&)
 {
   entry_->select_region(0, -1);
 

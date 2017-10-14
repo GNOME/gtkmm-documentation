@@ -58,7 +58,7 @@ protected:
                       const Gdk::Rectangle& cell_area,
                       Gtk::CellRendererState flags) override;
 
-  bool activate_vfunc(Gdk::Event& event,
+  bool activate_vfunc(const Gdk::Event& event,
                       Gtk::Widget& widget,
                       const Glib::ustring& path,
                       const Gdk::Rectangle& background_area,
@@ -224,7 +224,7 @@ void MyCellRendererToggle::snapshot_vfunc(Gtk::Snapshot& snapshot,
   }
 }
 
-bool MyCellRendererToggle::activate_vfunc(Gdk::Event&,
+bool MyCellRendererToggle::activate_vfunc(const Gdk::Event&,
                                           Gtk::Widget&,
                                           const Glib::ustring& path,
                                           const Gdk::Rectangle&,

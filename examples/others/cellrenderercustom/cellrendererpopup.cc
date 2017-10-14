@@ -125,7 +125,7 @@ void CellRendererPopup::get_preferred_width_for_height_vfunc(Gtk::Widget& widget
   natural_width += button_width_;
 }
 
-Gtk::CellEditable* CellRendererPopup::start_editing_vfunc(Gdk::Event&,
+Gtk::CellEditable* CellRendererPopup::start_editing_vfunc(const Gdk::Event&,
                                                           Gtk::Widget&,
                                                           const Glib::ustring& path,
                                                           const Gdk::Rectangle&,

@@ -43,7 +43,7 @@ public:
 
 protected:
   bool on_key_press_event(Gdk::EventKey& key_event) override;
-  void start_editing_vfunc(Gdk::Event& event) override;
+  void start_editing_vfunc(const Gdk::Event& event) override;
 
 private:
   typedef PopupEntry Self;
