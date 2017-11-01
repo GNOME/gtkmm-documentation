@@ -216,7 +216,7 @@ STEP8_RESOURCES = \
   step8/gears_menu.ui \
   step8/prefs.ui
 
-step8/resources.c: $(STEP7_RESOURCES)
+step8/resources.c: $(STEP8_RESOURCES)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(dir $<) --generate-source $<
 
 STEP9_RESOURCES = \
@@ -227,6 +227,6 @@ STEP9_RESOURCES = \
   step9/prefs.ui \
   step9/exampleapp.png
 
-step9/resources.c: $(STEP7_RESOURCES)
+step9/resources.c: $(STEP9_RESOURCES)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(dir $<) --generate-source $<
 

@@ -17,3 +17,19 @@ while running it uninstalled, do the following:
   $ cd step1  # or step2, step3, etc.
   $ make -f Makefile.example install-desktop-file
 
+To make Gio::Settings find the preferences in step[5-9], they must be stored
+where they can be found via one of the environment variables XDG_DATA_DIRS,
+XDG_DATA_HOME or GSETTINGS_SCHEMA_DIR. One way to achieve this is:
+
+  $ cd step5  # or step6, step7, etc.
+  $ export GSETTINGS_SCHEMA_DIR=.
+
+But then the program can only be run from that directory. Alternatively,
+set GSETTINGS_SCHEMA_DIR to an absolute path, such as
+
+  $ export GSETTINGS_SCHEMA_DIR=~/.local/share/glib-2.0/schemas
+
+and do the following:
+
+  $ cd step5  # or step6, step7, etc.
+  $ make -f Makefile.example install-gschema-file
