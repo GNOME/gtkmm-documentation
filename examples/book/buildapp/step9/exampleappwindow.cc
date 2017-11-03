@@ -114,7 +114,8 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
   set_show_menubar(true);
 
   // Set the window icon.
-  set_icon(Gdk::Pixbuf::create_from_resource("/org/gtkmm/exampleapp/exampleapp.png"));
+  set_icon(Gdk::Cairo::create_surface_from_pixbuf(
+    Gdk::Pixbuf::create_from_resource("/org/gtkmm/exampleapp/exampleapp.png"), 1));
 }
 
 //static

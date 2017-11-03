@@ -19,7 +19,7 @@
 
 void ExampleWindow::load_icon_items()
 {
-  auto icon_theme = Gtk::IconTheme::get_for_screen(get_screen());
+  auto icon_theme = Gtk::IconTheme::get_for_display(get_display());
 
   typedef std::vector<Glib::ustring> type_stringvec;
   type_stringvec icon_names = icon_theme->list_icons();
@@ -56,6 +56,10 @@ void ExampleWindow::load_icon_items()
       {
         // Gtk::IconTheme::list_icons() may return some names of icons
         // that can't be loaded.
+        continue;
+      }
+      catch (const Gdk::PixbufError& /* ex */)
+      {
         continue;
       }
 

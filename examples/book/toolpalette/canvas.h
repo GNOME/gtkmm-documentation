@@ -39,7 +39,7 @@ private:
       if (icon_name.empty())
         icon_name = button->get_label();
 
-      auto icon_theme = Gtk::IconTheme::get_for_screen(canvas->get_screen());
+      auto icon_theme = Gtk::IconTheme::get_for_display(canvas->get_display());
       int width = 0;
       int height = 0; //ignored
       Gtk::IconSize::lookup(Gtk::BuiltinIconSize::DIALOG, width, height);
