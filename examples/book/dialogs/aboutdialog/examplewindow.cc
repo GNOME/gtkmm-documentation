@@ -39,8 +39,8 @@ ExampleWindow::ExampleWindow()
 
   m_Dialog.set_transient_for(*this);
 
-  m_Dialog.set_logo(Gdk::Cairo::create_surface_from_pixbuf(
-    Gdk::Pixbuf::create_from_resource("/about/gtkmm_logo.gif", -1, 40, true), 1));
+  m_Dialog.set_logo(Gdk::Texture::create_for_pixbuf(
+    Gdk::Pixbuf::create_from_resource("/about/gtkmm_logo.gif", -1, 40, true)));
   m_Dialog.set_program_name("Example application");
   m_Dialog.set_version("1.0.0");
   m_Dialog.set_copyright("Murray Cumming");
