@@ -10007,6 +10007,14 @@ _WRAP_METHOD_DOCS_ONLY(gtk_container_add)
                 the @newin command generated from the C documentation.</para>
         </listitem>
     </varlistentry>
+    <varlistentry>
+        <term>voidreturn</term>
+        <listitem>
+            <para>Don't include a @return Doxygen command in the documentation.
+                Useful if the wrapped C function returns a value, but the corresponding
+                C++ method returns <type>void</type>.</para>
+        </listitem>
+    </varlistentry>
 </variablelist>
 </para>
 </sect3>
