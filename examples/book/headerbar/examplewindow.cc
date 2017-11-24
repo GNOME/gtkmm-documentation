@@ -25,7 +25,7 @@ ExampleWindow::ExampleWindow()
   set_title("HeaderBar Example");
 
   // Button
-  m_button.set_image_from_icon_name("go-home-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
+  m_button.set_image_from_icon_name("go-home-symbolic", Gtk::IconSize::INHERIT, true);
   m_button.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_button_clicked));
 
   // Entries

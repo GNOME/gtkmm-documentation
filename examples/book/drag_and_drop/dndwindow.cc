@@ -26,14 +26,15 @@ DnDWindow::DnDWindow()
   add(m_HBox);
 
   //Targets:
-  std::vector<Gtk::TargetEntry> listTargets;
-  listTargets.push_back( Gtk::TargetEntry("STRING") );
-  listTargets.push_back( Gtk::TargetEntry("text/plain") );
+  std::vector<Glib::ustring> listFormats;
+  listFormats.push_back("STRING");
+  listFormats.push_back("text/plain");
+  auto targetList = Gdk::ContentFormats::create(listFormats);
 
   //Drag site:
 
   //Make m_Button_Drag a DnD drag source:
-  m_Button_Drag.drag_source_set(listTargets);
+  m_Button_Drag.drag_source_set(targetList);
 
   //Connect signals:
   m_Button_Drag.signal_drag_data_get().connect(sigc::mem_fun(*this,
@@ -44,7 +45,7 @@ DnDWindow::DnDWindow()
   //Drop site:
 
   //Make m_Label_Drop a DnD drop destination:
-  m_Label_Drop.drag_dest_set(listTargets);
+  m_Label_Drop.drag_dest_set(targetList);
 
   //Connect signals:
   m_Label_Drop.signal_drag_data_received().connect(sigc::mem_fun(*this,
@@ -59,7 +60,7 @@ DnDWindow::~DnDWindow()
 
 void DnDWindow::on_button_drag_data_get(
         const Glib::RefPtr<Gdk::DragContext>&,
-        Gtk::SelectionData& selection_data, guint, guint)
+        Gtk::SelectionData& selection_data, guint)
 {
   selection_data.set(selection_data.get_target(), 8 /* 8 bits format */,
           (const guchar*)"I'm Data!",
@@ -68,7 +69,7 @@ void DnDWindow::on_button_drag_data_get(
 
 void DnDWindow::on_label_drop_drag_data_received(
         const Glib::RefPtr<Gdk::DragContext>& context, int, int,
-        const Gtk::SelectionData& selection_data, guint, guint time)
+        const Gtk::SelectionData& selection_data, guint time)
 {
   const int length = selection_data.get_length();
   if((length >= 0) && (selection_data.get_format() == 8))

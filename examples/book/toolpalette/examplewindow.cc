@@ -28,9 +28,7 @@ void ExampleWindow::load_icon_items()
   type_stringvec contexts = icon_theme->list_contexts();
   std::sort(contexts.begin(), contexts.end());
 
-  int requested_icon_size = 0;
-  int requested_icon_height = 0; //ignored
-  Gtk::IconSize::lookup(Gtk::BuiltinIconSize::BUTTON, requested_icon_size, requested_icon_height);
+  const int requested_icon_size = 16;
   const guint max_icons_per_group = 10;
 
   for (auto iter = contexts.begin(); iter != contexts.end(); ++iter)

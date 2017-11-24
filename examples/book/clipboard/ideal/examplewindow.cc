@@ -21,8 +21,8 @@ namespace
 {
 
 //These should usually be MIME types.
-const char example_target_custom[] = "gtkmmclipboardexample";
-const char example_target_text[]   = "UTF8_STRING";
+const char example_format_custom[] = "gtkmmclipboardexample";
+const char example_format_text[]   = "UTF8_STRING";
 
 } // anonymous namespace
 
@@ -88,13 +88,13 @@ void ExampleWindow::on_button_copy()
 
   auto refClipboard = Gtk::Clipboard::get();
 
-  //Targets:
-  std::vector<Gtk::TargetEntry> targets;
+  // Formats:
+  std::vector<Glib::ustring> formats;
 
-  targets.push_back( Gtk::TargetEntry(example_target_custom) );
-  targets.push_back( Gtk::TargetEntry(example_target_text) );
+  formats.push_back(example_format_custom);
+  formats.push_back(example_format_text);
 
-  refClipboard->set(targets,
+  refClipboard->set(Gdk::ContentFormats::create(formats),
     sigc::mem_fun(*this, &ExampleWindow::on_clipboard_get),
     sigc::mem_fun(*this, &ExampleWindow::on_clipboard_clear) );
 
@@ -111,7 +111,7 @@ void ExampleWindow::on_button_paste()
   //Tell the clipboard to call our method when it is ready:
   auto refClipboard = Gtk::Clipboard::get();
 
-  refClipboard->request_contents(example_target_custom,
+  refClipboard->request_contents(example_format_custom,
     sigc::mem_fun(*this, &ExampleWindow::on_clipboard_received) );
 
   update_paste_status();
@@ -122,20 +122,16 @@ void ExampleWindow::on_clipboard_owner_change(const Gdk::EventOwnerChange&)
   update_paste_status();
 }
 
-void ExampleWindow::on_clipboard_get(Gtk::SelectionData& selection_data,
-  guint /* info */)
+void ExampleWindow::on_clipboard_get(Gtk::SelectionData& selection_data)
 {
-  // info corresponds to the optional info parameter in Gtk::TargetEntry's
-  // constructor. We don't use that, so we use selection_data's target instead.
-
   const auto target = selection_data.get_target();
 
-  if(target == example_target_custom)
+  if(target == example_format_custom)
   {
     // This set() override uses an 8-bit text format for the data.
-    selection_data.set(example_target_custom, m_ClipboardStore);
+    selection_data.set(example_format_custom, m_ClipboardStore);
   }
-  else if(target == example_target_text)
+  else if(target == example_format_text)
   {
     //Build some arbitrary text representation of the data,
     //so that people see something when they paste into a text editor:
@@ -168,7 +164,7 @@ void ExampleWindow::on_clipboard_received(
 
   //It should always be this, because that's what we asked for when calling
   //request_contents().
-  if(target == example_target_custom)
+  if(target == example_format_custom)
   {
     auto clipboard_data = selection_data.get_data_as_string();
 
@@ -199,7 +195,7 @@ void ExampleWindow::on_clipboard_received_targets(
 {
   const bool bPasteIsPossible =
     std::find(targets.begin(), targets.end(),
-      example_target_custom) != targets.end();
+      example_format_custom) != targets.end();
 
   // Enable/Disable the Paste button appropriately:
   m_Button_Paste.set_sensitive(bPasteIsPossible);

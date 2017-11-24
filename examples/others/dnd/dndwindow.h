@@ -1,5 +1,3 @@
-//$Id: dndwindow.h 114 2004-02-10 14:50:18Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -33,16 +31,16 @@ protected:
   void create_popup();
 
   //Signal handlers:
-  void on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time);
+  void on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, const Gtk::SelectionData& selection_data, guint time);
   bool on_label_popup_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);
   void on_label_popup_drag_leave(const Glib::RefPtr<Gdk::DragContext>& context, guint time);
 
-  void on_image_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time);
+  void on_image_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, const Gtk::SelectionData& selection_data, guint time);
   bool on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);
   void on_image_drag_leave(const Glib::RefPtr<Gdk::DragContext>& context, guint time);
   bool on_image_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time);
 
-  void on_button_drag_data_get(const Glib::RefPtr<Gdk::DragContext>& context, Gtk::SelectionData& selection_data, guint info, guint time);
+  void on_button_drag_data_get(const Glib::RefPtr<Gdk::DragContext>& context, Gtk::SelectionData& selection_data, guint time);
   void on_button_drag_data_delete(const Glib::RefPtr<Gdk::DragContext>& context);
 
   bool on_popdown_timeout();
@@ -70,16 +68,8 @@ protected:
   sigc::connection m_popdown_timer;
   sigc::connection m_popup_timer;
 
-  //Positions in the targets list:
-  enum
-  {
-    TARGET_STRING,
-    TARGET_ROOTWIN
-  };
-
   //Targets:
-  typedef std::vector<Gtk::TargetEntry> type_vecTargets;
-  type_vecTargets m_listTargets, m_listTargetsNoRoot;
+  std::vector<Glib::ustring> m_listTargets, m_listTargetsNoRoot;
 };
 
 #endif // GTKMM_EXAMPLE_DNDWINDOW_H

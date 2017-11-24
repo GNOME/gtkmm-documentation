@@ -35,10 +35,10 @@ protected:
   //Signal handlers:
   void on_button_drag_data_get(
           const Glib::RefPtr<Gdk::DragContext>& context,
-          Gtk::SelectionData& selection_data, guint info, guint time);
+          Gtk::SelectionData& selection_data, guint time);
   void on_label_drop_drag_data_received(
           const Glib::RefPtr<Gdk::DragContext>& context, int x, int y,
-          const Gtk::SelectionData& selection_data, guint info, guint time);
+          const Gtk::SelectionData& selection_data, guint time);
 
   //Member widgets:
   Gtk::Box m_HBox;

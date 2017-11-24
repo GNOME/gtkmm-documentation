@@ -18,7 +18,7 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_button(Gtk::BuiltinIconSize::BUTTON, 0.0, 100.0, 10.0)
+: m_button(0.0, 100.0, 10.0)
 {
   //Make the window big enough to show the popup scale from the GtkVolumeButton.
   //Otherwise it will be truncated.

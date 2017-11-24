@@ -40,10 +40,7 @@ private:
         icon_name = button->get_label();
 
       auto icon_theme = Gtk::IconTheme::get_for_display(canvas->get_display());
-      int width = 0;
-      int height = 0; //ignored
-      Gtk::IconSize::lookup(Gtk::BuiltinIconSize::DIALOG, width, height);
-      this->m_pixbuf = icon_theme->load_icon(icon_name, width, Gtk::IconLookupFlags::GENERIC_FALLBACK);
+      this->m_pixbuf = icon_theme->load_icon(icon_name, 48, Gtk::IconLookupFlags::GENERIC_FALLBACK);
       this->m_x = x;
       this->m_y = y;
     }
@@ -58,7 +55,7 @@ private:
 
   void on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);
   void on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context,
-    int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time) override;
+    int x, int y, const Gtk::SelectionData& selection_data, guint time) override;
   bool on_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time) override;
   bool on_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time) override;
   void on_drag_leave(const Glib::RefPtr<Gdk::DragContext>& context, guint time) override;

@@ -154,8 +154,7 @@ void MyWidget2::on_realize()
   if(!m_refGdkWindow)
   {
     //Create the GdkWindow:
-    m_refGdkWindow = Gdk::Window::create_child(get_parent_window(),
-      get_parent_window()->get_events() | Gdk::EventMask::EXPOSURE_MASK, get_allocation());
+    m_refGdkWindow = Gdk::Window::create_child(get_parent_window(), get_allocation());
     set_window(m_refGdkWindow);
 
     //make the widget receive expose events

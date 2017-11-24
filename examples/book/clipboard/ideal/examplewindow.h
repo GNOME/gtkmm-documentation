@@ -31,7 +31,7 @@ protected:
   void on_button_paste();
 
   void on_clipboard_owner_change(const Gdk::EventOwnerChange& event);
-  void on_clipboard_get(Gtk::SelectionData& selection_data, guint info);
+  void on_clipboard_get(Gtk::SelectionData& selection_data);
   void on_clipboard_clear();
 
   void on_clipboard_received(const Gtk::SelectionData& selection_data);

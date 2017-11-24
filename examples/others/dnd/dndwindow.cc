@@ -35,14 +35,14 @@ DnDWindow::DnDWindow()
   m_trashcan_closed = Gdk::Pixbuf::create_from_xpm_data(trashcan_closed_xpm);
 
   //Targets:
-  m_listTargets.push_back( Gtk::TargetEntry("STRING", Gtk::TargetFlags(0), TARGET_STRING) );
-  m_listTargets.push_back( Gtk::TargetEntry("text/plain", Gtk::TargetFlags(0), TARGET_STRING) );
-  m_listTargets.push_back( Gtk::TargetEntry("application/x-rootwin-drop", Gtk::TargetFlags(0), TARGET_ROOTWIN) );
+  m_listTargets.push_back("STRING");
+  m_listTargets.push_back("text/plain");
+  m_listTargets.push_back("application/x-rootwin-drop");
 
   //Targets without rootwin:
   m_listTargetsNoRoot.assign(m_listTargets.begin(), --m_listTargets.end());
 
-  m_Label_Drop.drag_dest_set(m_listTargetsNoRoot, Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
+  m_Label_Drop.drag_dest_set(Gdk::ContentFormats::create(m_listTargetsNoRoot), Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
 
   m_Label_Drop.signal_drag_data_received().connect( sigc::mem_fun(*this, &DnDWindow::on_label_drop_drag_data_received) );
 
@@ -50,7 +50,7 @@ DnDWindow::DnDWindow()
   m_Label_Drop.set_hexpand(true);
   m_Label_Drop.set_vexpand(true);
 
-  m_Label_Popup.drag_dest_set(m_listTargetsNoRoot, Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
+  m_Label_Popup.drag_dest_set(Gdk::ContentFormats::create(m_listTargetsNoRoot), Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
 
   m_Grid.attach(m_Label_Popup, 1, 1);
   m_Label_Popup.set_hexpand(true);
@@ -73,7 +73,7 @@ DnDWindow::DnDWindow()
 
   /* Drag site */
 
-  m_Button.drag_source_set(m_listTargets, Gdk::ModifierType::BUTTON1_MASK | Gdk::ModifierType::BUTTON3_MASK,
+  m_Button.drag_source_set(Gdk::ContentFormats::create(m_listTargets), Gdk::ModifierType::BUTTON1_MASK | Gdk::ModifierType::BUTTON3_MASK,
                            Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
 
   m_Button.drag_source_set_icon(m_drag_icon);
@@ -93,7 +93,7 @@ DnDWindow::~DnDWindow()
 }
 
 
-void DnDWindow::on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int, int, const Gtk::SelectionData& selection_data, guint, guint time)
+void DnDWindow::on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int, int, const Gtk::SelectionData& selection_data, guint time)
 {
   const int length = selection_data.get_length();
   const guchar* data = selection_data.get_data();
@@ -127,7 +127,7 @@ void DnDWindow::on_label_popup_drag_leave(const Glib::RefPtr<Gdk::DragContext>&,
  }
 }
 
-void DnDWindow::on_image_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int, int, const Gtk::SelectionData& selection_data, guint, guint time)
+void DnDWindow::on_image_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int, int, const Gtk::SelectionData& selection_data, guint time)
 {
   const int length = selection_data.get_length();
   const guchar* data = selection_data.get_data();
@@ -153,7 +153,7 @@ bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& conte
            G_OBJECT_TYPE_NAME (source_widget) :
            "NULL");
 
-  for(const auto& name : context->list_targets())
+  for(const auto& name : context->get_formats()->get_mime_types())
   {
     g_print ("%s\n", name.c_str());
   }
@@ -176,7 +176,7 @@ bool DnDWindow::on_image_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context
 
   m_Image.set(m_trashcan_closed);
 
-  std::vector<std::string> targets = context->list_targets();
+  const auto targets = context->get_formats()->get_mime_types();
   if(!targets.empty())
   {
     drag_get_data( context, targets[0], time );
@@ -186,9 +186,9 @@ bool DnDWindow::on_image_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context
 }
 
 
-void DnDWindow::on_button_drag_data_get(const Glib::RefPtr<Gdk::DragContext>&, Gtk::SelectionData& selection_data, guint info, guint)
+void DnDWindow::on_button_drag_data_get(const Glib::RefPtr<Gdk::DragContext>&, Gtk::SelectionData& selection_data, guint)
 {
-  if(info == TARGET_ROOTWIN)
+  if(selection_data.get_target() == "application/x-rootwin-drop")
     g_print ("I was dropped on the rootwin\n");
   else
     selection_data.set(selection_data.get_target(),
@@ -242,7 +242,7 @@ void DnDWindow::create_popup()
       auto pButton = Gtk::manage(new Gtk::Button(buffer));
       pGrid->attach(*pButton, i, j, 1, 1);
 
-      pButton->drag_dest_set(m_listTargetsNoRoot, Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
+      pButton->drag_dest_set(Gdk::ContentFormats::create(m_listTargetsNoRoot), Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
       pButton->signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_button_drag_motion), true );
       pButton->signal_drag_leave().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_button_drag_leave) );
     }

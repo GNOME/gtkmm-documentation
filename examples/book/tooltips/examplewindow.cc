@@ -154,7 +154,7 @@ bool ExampleWindow::on_textview_query_tooltip(int x, int y, bool keyboard_toolti
   if (iter.has_tag(m_ref_bold_tag))
   {
     tooltip->set_markup("<b>Information</b> attached to a text tag");
-    tooltip->set_icon_from_icon_name("dialog-information", Gtk::BuiltinIconSize::MENU);
+    tooltip->set_icon_from_icon_name("dialog-information");
   }
   else
   {

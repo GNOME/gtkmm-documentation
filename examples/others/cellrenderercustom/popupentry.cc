@@ -35,7 +35,7 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
 
   button_ = new Gtk::Button();
   pack_start(*Gtk::manage(button_), Gtk::PackOptions::SHRINK);
-  button_->set_image_from_icon_name("pan-down-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
+  button_->set_image_from_icon_name("pan-down-symbolic", Gtk::IconSize::INHERIT, true);
 
   set_can_focus();
 }
@@ -76,7 +76,7 @@ int PopupEntry::get_button_width()
   Gtk::Button *const button = new Gtk::Button();
   window.add(*Gtk::manage(button));
 
-  button->set_image_from_icon_name("pan-down-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
+  button->set_image_from_icon_name("pan-down-symbolic", Gtk::IconSize::INHERIT, true);
 
   // Urgh.  Hackish :/
   window.move(-500, -500);

@@ -31,7 +31,7 @@ ArrowButton::ArrowButton(Gtk::ArrowType arrow_type)
     case Gtk::ArrowType::RIGHT: icon_name = "pan-end-symbolic"; break;
     default:                    icon_name = "dialog-question"; break;
   }
-  set_image_from_icon_name(icon_name, Gtk::BuiltinIconSize::BUTTON, true);
+  set_image_from_icon_name(icon_name, Gtk::IconSize::INHERIT, true);
 }
 
 ArrowButton::~ArrowButton()

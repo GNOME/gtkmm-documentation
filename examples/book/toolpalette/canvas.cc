@@ -107,7 +107,7 @@ bool Canvas::on_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context,
 
 
 void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context,
-  int x, int y, const Gtk::SelectionData& selection_data, guint info, guint time)
+  int x, int y, const Gtk::SelectionData& selection_data, guint time)
 {
   // Find the tool button which is the source of this DnD operation.
   auto widget = drag_get_source_widget(context);
@@ -160,7 +160,7 @@ void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context
     std::cerr << "IconThemeError: " << ex.what() << std::endl;
   }
 
-  Gtk::DrawingArea::on_drag_data_received(context, x, y, selection_data, info, time);
+  Gtk::DrawingArea::on_drag_data_received(context, x, y, selection_data, time);
 }
 
 

@@ -65,8 +65,8 @@ ExampleWindow::ExampleWindow()
   m_up_down_box.get_style_context()->add_class("linked");
 
   // Buttons
-  m_go_up_button.set_image_from_icon_name("go-up-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
-  m_go_down_button.set_image_from_icon_name("go-down-symbolic", Gtk::BuiltinIconSize::BUTTON, true);
+  m_go_up_button.set_image_from_icon_name("go-up-symbolic", Gtk::IconSize::INHERIT, true);
+  m_go_down_button.set_image_from_icon_name("go-down-symbolic", Gtk::IconSize::INHERIT, true);
 
   m_vbox.set_spacing(6);
   m_vbox.pack_start(m_search_bar, Gtk::PackOptions::SHRINK);
