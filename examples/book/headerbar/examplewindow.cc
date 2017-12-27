@@ -17,7 +17,7 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
- : m_close_button_label("Show close button:", Gtk::Align::END, Gtk::Align::CENTER),
+ : m_title_buttons_label("Show title buttons:", Gtk::Align::END, Gtk::Align::CENTER),
    m_title_label("Title:", Gtk::Align::END, Gtk::Align::CENTER),
    m_subtitle_label("Subtitle:", Gtk::Align::END, Gtk::Align::CENTER)
 {
@@ -37,7 +37,7 @@ ExampleWindow::ExampleWindow()
   // Header bar
   on_title_entry_activate();
   on_subtitle_entry_activate();
-  m_header_bar.set_show_close_button();
+  m_header_bar.set_show_title_buttons();
   m_header_bar.pack_start(m_button);
 
   // Set headerbar as titlebar
@@ -50,7 +50,7 @@ ExampleWindow::ExampleWindow()
   // Layout
   m_grid.set_column_spacing(6);
   m_grid.set_row_spacing(6);
-  m_grid.attach(m_close_button_label, 0, 0);
+  m_grid.attach(m_title_buttons_label, 0, 0);
   m_grid.attach(m_switch, 1, 0);
   m_grid.attach(m_title_label, 0, 1);
   m_grid.attach(m_title_entry, 1, 1);
@@ -66,8 +66,8 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_switch_active_changed()
 {
-  bool show_close_button = m_switch.get_active();
-  m_header_bar.set_show_close_button(show_close_button);
+  bool show_title_buttons = m_switch.get_active();
+  m_header_bar.set_show_title_buttons(show_title_buttons);
 }
 
 void ExampleWindow::on_title_entry_activate()

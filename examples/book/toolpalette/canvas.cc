@@ -19,7 +19,8 @@
 
 Canvas::Canvas()
 : m_drag_data_requested_for_drop(false),
-  m_drop_item(nullptr)
+  m_drop_item(nullptr),
+  m_drop_pos(0, 0)
 {
   set_draw_func(sigc::mem_fun(*this, &Canvas::on_draw));
 }
@@ -107,7 +108,7 @@ bool Canvas::on_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context,
 
 
 void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context,
-  int x, int y, const Gtk::SelectionData& selection_data, guint time)
+  const Gtk::SelectionData& selection_data, guint time)
 {
   // Find the tool button which is the source of this DnD operation.
   auto widget = drag_get_source_widget(context);
@@ -133,14 +134,14 @@ void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context
 
   try
   {
-    auto item = new CanvasItem(this, button, x, y);
+    auto item = new CanvasItem(this, button, m_drop_pos.get_x(), m_drop_pos.get_y());
 
     if(m_drag_data_requested_for_drop)
     {
       m_canvas_items.push_back(item);
 
       // Signal that the item was accepted and then redraw.
-      context->drag_finish(true /* success */, false /* del */, time);
+      context->drag_finish(true /* success */, time);
     }
     else
     {
@@ -160,11 +161,11 @@ void Canvas::on_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context
     std::cerr << "IconThemeError: " << ex.what() << std::endl;
   }
 
-  Gtk::DrawingArea::on_drag_data_received(context, x, y, selection_data, time);
+  Gtk::DrawingArea::on_drag_data_received(context, selection_data, time);
 }
 
 
-bool Canvas::on_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int /* x */, int /* y */, guint time)
+bool Canvas::on_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int x, int y, guint time)
 {
   // Request DnD data for creating a dopped item.
   // This will cause on_drag_data_received() to be called.
@@ -175,6 +176,7 @@ bool Canvas::on_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int /* 
 
   m_drag_data_requested_for_drop = true;
   drag_get_data(context, target, time);
+  m_drop_pos = Gdk::Point(x, y);
 
   return true;
 }

@@ -30,12 +30,10 @@ protected:
   void on_button_copy();
   void on_button_paste();
 
-  void on_clipboard_owner_change(const Gdk::EventOwnerChange& event);
-  void on_clipboard_get(Gtk::SelectionData& selection_data);
-  void on_clipboard_clear();
+  void on_clipboard_content_changed();
 
-  void on_clipboard_received(const Gtk::SelectionData& selection_data);
-  void on_clipboard_received_targets(const std::vector<Glib::ustring>& targets);
+  void on_clipboard_received(Glib::RefPtr<Gio::AsyncResult>& result);
+  void on_clipboard_received_targets(Glib::RefPtr<Gio::AsyncResult>& result);
 
   void update_paste_status(); //Disable the paste button if there is nothing to paste.
 
@@ -49,8 +47,6 @@ protected:
 
   Gtk::ButtonBox m_ButtonBox;
   Gtk::Button m_Button_Copy, m_Button_Paste;
-
-  Glib::ustring m_ClipboardStore; //Keep copied stuff here, until it is pasted. This could be a big complex data structure.
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

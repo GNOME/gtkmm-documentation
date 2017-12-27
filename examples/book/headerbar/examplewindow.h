@@ -38,7 +38,7 @@ protected:
   // Widgets
   Gtk::HeaderBar m_header_bar;
   Gtk::Button m_button;
-  Gtk::Label m_close_button_label;
+  Gtk::Label m_title_buttons_label;
   Gtk::Switch m_switch;
   Gtk::Label m_title_label;
   Gtk::Entry m_title_entry;

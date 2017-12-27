@@ -1,5 +1,3 @@
-//$Id: dndwindow.h 839 2007-05-10 04:11:54Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -37,7 +35,7 @@ protected:
           const Glib::RefPtr<Gdk::DragContext>& context,
           Gtk::SelectionData& selection_data, guint time);
   void on_label_drop_drag_data_received(
-          const Glib::RefPtr<Gdk::DragContext>& context, int x, int y,
+          const Glib::RefPtr<Gdk::DragContext>& context,
           const Gtk::SelectionData& selection_data, guint time);
 
   //Member widgets:

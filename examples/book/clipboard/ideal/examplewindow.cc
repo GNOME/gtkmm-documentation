@@ -15,14 +15,13 @@
  */
 
 #include "examplewindow.h"
-#include <algorithm>
+#include <iostream>
+#include <string>
 
 namespace
 {
 
-//These should usually be MIME types.
 const char example_format_custom[] = "gtkmmclipboardexample";
-const char example_format_text[]   = "UTF8_STRING";
 
 } // anonymous namespace
 
@@ -46,10 +45,10 @@ ExampleWindow::ExampleWindow()
   m_VBox.pack_start(m_Grid, Gtk::PackOptions::EXPAND_WIDGET);
   m_Grid.set_row_homogeneous(true);
   m_Grid.set_column_homogeneous(true);
-  m_Grid.attach(m_ButtonA1, 0, 0, 1, 1);
-  m_Grid.attach(m_ButtonA2, 1, 0, 1, 1);
-  m_Grid.attach(m_ButtonB1, 0, 1, 1, 1);
-  m_Grid.attach(m_ButtonB2, 1, 1, 1, 1);
+  m_Grid.attach(m_ButtonA1, 0, 0);
+  m_Grid.attach(m_ButtonA2, 1, 0);
+  m_Grid.attach(m_ButtonB1, 0, 1);
+  m_Grid.attach(m_ButtonB2, 1, 1);
 
   //Add ButtonBox to bottom:
   m_VBox.pack_start(m_ButtonBox, Gtk::PackOptions::SHRINK);
@@ -66,8 +65,8 @@ ExampleWindow::ExampleWindow()
 
   //Connect a signal handler that will be called when the contents of
   //the clipboard change.
-  Gtk::Clipboard::get()->signal_owner_change().connect(sigc::mem_fun(*this,
-              &ExampleWindow::on_clipboard_owner_change) );
+  get_clipboard()->property_content().signal_changed().connect(sigc::mem_fun(*this,
+              &ExampleWindow::on_clipboard_content_changed));
 
   update_paste_status();
 }
@@ -80,122 +79,77 @@ void ExampleWindow::on_button_copy()
 {
   //Build a string representation of the stuff to be copied:
   //Ideally you would use XML, with an XML parser here:
-  Glib::ustring strData;
-  strData += m_ButtonA1.get_active() ? "1" : "0";
-  strData += m_ButtonA2.get_active() ? "1" : "0";
-  strData += m_ButtonB1.get_active() ? "1" : "0";
-  strData += m_ButtonB2.get_active() ? "1" : "0";
+  Glib::ustring strData(example_format_custom);
+  strData += m_ButtonA1.get_active() ? " A1" : "";
+  strData += m_ButtonA2.get_active() ? " A2" : "";
+  strData += m_ButtonB1.get_active() ? " B1" : "";
+  strData += m_ButtonB2.get_active() ? " B2" : "";
 
-  auto refClipboard = Gtk::Clipboard::get();
-
-  // Formats:
-  std::vector<Glib::ustring> formats;
-
-  formats.push_back(example_format_custom);
-  formats.push_back(example_format_text);
-
-  refClipboard->set(Gdk::ContentFormats::create(formats),
-    sigc::mem_fun(*this, &ExampleWindow::on_clipboard_get),
-    sigc::mem_fun(*this, &ExampleWindow::on_clipboard_clear) );
-
-  //Store the copied data until it is pasted:
-  //(Must be done after the call to refClipboard->set(), because that call
-  //may trigger a call to on_clipboard_clear.)
-  m_ClipboardStore = strData;
-
-  update_paste_status();
+  get_clipboard()->set_text(strData);
 }
 
 void ExampleWindow::on_button_paste()
 {
   //Tell the clipboard to call our method when it is ready:
-  auto refClipboard = Gtk::Clipboard::get();
-
-  refClipboard->request_contents(example_format_custom,
-    sigc::mem_fun(*this, &ExampleWindow::on_clipboard_received) );
-
-  update_paste_status();
+  get_clipboard()->read_text_async(sigc::mem_fun(*this,
+              &ExampleWindow::on_clipboard_received));
 }
 
-void ExampleWindow::on_clipboard_owner_change(const Gdk::EventOwnerChange&)
+void ExampleWindow::on_clipboard_content_changed()
 {
   update_paste_status();
 }
 
-void ExampleWindow::on_clipboard_get(Gtk::SelectionData& selection_data)
+void ExampleWindow::on_clipboard_received(Glib::RefPtr<Gio::AsyncResult>& result)
 {
-  const auto target = selection_data.get_target();
-
-  if(target == example_format_custom)
+  Glib::ustring text;
+  try
   {
-    // This set() override uses an 8-bit text format for the data.
-    selection_data.set(example_format_custom, m_ClipboardStore);
+    text = get_clipboard()->read_text_finish(result);
   }
-  else if(target == example_format_text)
+  catch (const Glib::Error& err)
   {
-    //Build some arbitrary text representation of the data,
-    //so that people see something when they paste into a text editor:
-    Glib::ustring text_representation;
+    // Print an error about why pasting failed.
+    // Usually you probably want to ignore such failures,
+    // but for demonstration purposes, we show the error.
+    std::cout << "Pasting failed: " << err.what() << std::endl;
+  }
 
-    text_representation += m_ButtonA1.get_active() ? "A1, " : "";
-    text_representation += m_ButtonA2.get_active() ? "A2, " : "";
-    text_representation += m_ButtonB1.get_active() ? "B1, " : "";
-    text_representation += m_ButtonB2.get_active() ? "B2, " : "";
-
-    selection_data.set_text(text_representation);
+  if (text.find(example_format_custom) == 0)
+  {
+    // It's the expected format.
+    m_ButtonA1.set_active(text.find("A1") != std::string::npos);
+    m_ButtonA2.set_active(text.find("A2") != std::string::npos);
+    m_ButtonB1.set_active(text.find("B1") != std::string::npos);
+    m_ButtonB2.set_active(text.find("B2") != std::string::npos);
   }
   else
   {
-    g_warning("ExampleWindow::on_clipboard_get(): "
-            "Unexpected clipboard target format.");
-  }
-}
-
-void ExampleWindow::on_clipboard_clear()
-{
-  //This isn't really necessary. I guess it might save memory.
-  m_ClipboardStore.clear();
-}
-
-void ExampleWindow::on_clipboard_received(
-        const Gtk::SelectionData& selection_data)
-{
-  const auto target = selection_data.get_target();
-
-  //It should always be this, because that's what we asked for when calling
-  //request_contents().
-  if(target == example_format_custom)
-  {
-    auto clipboard_data = selection_data.get_data_as_string();
-
-    //See comment in on_button_copy() about this silly clipboard format.
-    if(clipboard_data.size() >= 4)
-    {
-      m_ButtonA1.set_active( clipboard_data[0] == '1' );
-      m_ButtonA2.set_active( clipboard_data[1] == '1' );
-      m_ButtonB1.set_active( clipboard_data[2] == '1' );
-      m_ButtonB2.set_active( clipboard_data[3] == '1' );
-    }
+    // Unexpected format. Disable the Paste button.
+    std::cout << "Unexpected pasted text: \"" << text << "\"" << std::endl;
+    m_Button_Paste.set_sensitive(false);
   }
 }
 
 void ExampleWindow::update_paste_status()
 {
-  //Disable the paste button if there is nothing to paste.
-
-  auto refClipboard = Gtk::Clipboard::get();
-
-  //Discover what targets are available:
-  refClipboard->request_targets(sigc::mem_fun(*this,
-              &ExampleWindow::on_clipboard_received_targets) );
+  // Disable the paste button if there is nothing to paste.
+  get_clipboard()->read_text_async(sigc::mem_fun(*this,
+              &ExampleWindow::on_clipboard_received_targets));
 }
 
-void ExampleWindow::on_clipboard_received_targets(
-  const std::vector<Glib::ustring>& targets)
+void ExampleWindow::on_clipboard_received_targets(Glib::RefPtr<Gio::AsyncResult>& result)
 {
-  const bool bPasteIsPossible =
-    std::find(targets.begin(), targets.end(),
-      example_format_custom) != targets.end();
+  Glib::ustring text;
+  try
+  {
+    text = get_clipboard()->read_text_finish(result);
+  }
+  catch (const Glib::Error&)
+  {
+  }
+
+  const bool bPasteIsPossible = text.find(example_format_custom) == 0;
 
   // Enable/Disable the Paste button appropriately:
   m_Button_Paste.set_sensitive(bPasteIsPossible);

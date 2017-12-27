@@ -14,6 +14,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
+//TODO: Remove this undef when we know what to use instead of signal_button_press_event().
+#undef GTKMM_DISABLE_DEPRECATED
+
 #include <gtkmm.h>
 #include "cellrendererpopup.h"
 #include "popupentry.h"

@@ -164,7 +164,7 @@ Gtk::Widget* PrintFormOperation::on_create_custom_widget()
   auto label = Gtk::manage(new Gtk::Label("Choose a font: "));
   hbox->pack_start(*label, Gtk::PackOptions::SHRINK);
 
-  m_FontButton.set_font_name(m_Font);
+  m_FontButton.set_font(m_Font);
   hbox->pack_start(m_FontButton, Gtk::PackOptions::SHRINK);
 
   return vbox;
@@ -176,7 +176,7 @@ void PrintFormOperation::on_custom_widget_apply(Gtk::Widget*)
   // on_create_custom_widget().  We don't need to use it, because we can use the
   // child FontButton directly:
 
-  auto selected_font = m_FontButton.get_font_name();
+  auto selected_font = m_FontButton.get_font();
   m_Font = selected_font;
 }
 

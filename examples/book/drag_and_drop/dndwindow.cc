@@ -25,16 +25,11 @@ DnDWindow::DnDWindow()
 
   add(m_HBox);
 
-  //Targets:
-  std::vector<Glib::ustring> listFormats;
-  listFormats.push_back("STRING");
-  listFormats.push_back("text/plain");
-  auto targetList = Gdk::ContentFormats::create(listFormats);
-
   //Drag site:
 
   //Make m_Button_Drag a DnD drag source:
-  m_Button_Drag.drag_source_set(targetList);
+  m_Button_Drag.drag_source_set(Glib::RefPtr<Gdk::ContentFormats>());
+  m_Button_Drag.drag_source_add_text_targets();
 
   //Connect signals:
   m_Button_Drag.signal_drag_data_get().connect(sigc::mem_fun(*this,
@@ -45,7 +40,11 @@ DnDWindow::DnDWindow()
   //Drop site:
 
   //Make m_Label_Drop a DnD drop destination:
-  m_Label_Drop.drag_dest_set(targetList);
+  // Don't do this: m_Label_Drop.drag_dest_set({}).
+  // It would call the wrong overload of drag_dest_set() with the wrong
+  // default values of flags and actions (wrong in this simple example).
+  m_Label_Drop.drag_dest_set(Glib::RefPtr<Gdk::ContentFormats>());
+  m_Label_Drop.drag_dest_add_text_targets();
 
   //Connect signals:
   m_Label_Drop.signal_drag_data_received().connect(sigc::mem_fun(*this,
@@ -68,7 +67,7 @@ void DnDWindow::on_button_drag_data_get(
 }
 
 void DnDWindow::on_label_drop_drag_data_received(
-        const Glib::RefPtr<Gdk::DragContext>& context, int, int,
+        const Glib::RefPtr<Gdk::DragContext>& context,
         const Gtk::SelectionData& selection_data, guint time)
 {
   const int length = selection_data.get_length();
@@ -78,5 +77,5 @@ void DnDWindow::on_label_drop_drag_data_received(
         << "\" in label " << std::endl;
   }
 
-  context->drag_finish(false, false, time);
+  context->drag_finish(false, time);
 }

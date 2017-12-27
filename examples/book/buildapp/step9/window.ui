@@ -8,7 +8,7 @@
       <object class="GtkHeaderBar" id="header">
         <property name="title" translatable="yes">Example Application</property>
         <property name="visible">True</property>
-        <property name="show-close-button">True</property>
+        <property name="show-title-buttons">True</property>
         <property name="decoration-layout">menu:close</property>
         <child>
           <object class="GtkLabel" id="lines_label">

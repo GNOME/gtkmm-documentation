@@ -15,6 +15,7 @@
  */
 
 #include "examplewindow.h"
+#include <iostream>
 
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::Orientation::VERTICAL),
@@ -34,10 +35,10 @@ ExampleWindow::ExampleWindow()
   m_VBox.pack_start(m_Grid, Gtk::PackOptions::EXPAND_WIDGET);
   m_Grid.set_row_homogeneous(true);
   m_Grid.set_column_homogeneous(true);
-  m_Grid.attach(m_ButtonA1, 0, 0, 1, 1);
-  m_Grid.attach(m_ButtonA2, 1, 0, 1, 1);
-  m_Grid.attach(m_ButtonB1, 0, 1, 1, 1);
-  m_Grid.attach(m_ButtonB2, 1, 1, 1, 1);
+  m_Grid.attach(m_ButtonA1, 0, 0);
+  m_Grid.attach(m_ButtonA2, 1, 0);
+  m_Grid.attach(m_ButtonB1, 0, 1);
+  m_Grid.attach(m_ButtonB2, 1, 1);
 
   //Add ButtonBox to bottom:
   m_VBox.pack_start(m_ButtonBox, Gtk::PackOptions::SHRINK);
@@ -67,20 +68,31 @@ void ExampleWindow::on_button_copy()
   strData += m_ButtonB1.get_active() ? "1" : "0";
   strData += m_ButtonB2.get_active() ? "1" : "0";
 
-  auto refClipboard = Gtk::Clipboard::get();
-  refClipboard->set_text(strData);
+  get_clipboard()->set_text(strData);
 }
 
 void ExampleWindow::on_button_paste()
 {
   //Tell the clipboard to call our method when it is ready:
-  auto refClipboard = Gtk::Clipboard::get();
-  refClipboard->request_text(sigc::mem_fun(*this,
-              &ExampleWindow::on_clipboard_text_received) );
+  get_clipboard()->read_text_async(sigc::mem_fun(*this,
+              &ExampleWindow::on_clipboard_text_received));
 }
 
-void ExampleWindow::on_clipboard_text_received(const Glib::ustring& text)
+void ExampleWindow::on_clipboard_text_received(Glib::RefPtr<Gio::AsyncResult>& result)
 {
+  Glib::ustring text;
+  try
+  {
+    text = get_clipboard()->read_text_finish(result);
+  }
+  catch (const Glib::Error& err)
+  {
+    // Print an error about why pasting failed.
+    // Usually you probably want to ignore such failures,
+    // but for demonstration purposes, we show the error.
+    std::cout << "Pasting failed: " << err.what() << std::endl;
+  }
+
   //See comment in on_button_copy() about this silly clipboard format.
   if(text.size() >= 4)
   {

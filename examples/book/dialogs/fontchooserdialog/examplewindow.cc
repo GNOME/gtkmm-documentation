@@ -43,7 +43,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_font_button_font_set()
 {
-  auto font_name = m_FontButton.get_font_name();
+  auto font_name = m_FontButton.get_font();
   std::cout << "Font chosen: " << font_name << std::endl;
 }
 
@@ -52,7 +52,7 @@ void ExampleWindow::on_button_dialog_clicked()
   Gtk::FontChooserDialog dialog("Please choose a font", *this);
 
   //Get the previously selected font name from the FontButton:
-  dialog.set_font(m_FontButton.get_font_name());
+  dialog.set_font(m_FontButton.get_font());
 
   int result = dialog.run();
 
@@ -63,7 +63,7 @@ void ExampleWindow::on_button_dialog_clicked()
     {
       auto font_name = dialog.get_font();
       std::cout << "Font chosen: " << font_name << std::endl;
-      m_FontButton.set_font_name(font_name);
+      m_FontButton.set_font(font_name);
       break;
     }
     case Gtk::ResponseType::CANCEL:

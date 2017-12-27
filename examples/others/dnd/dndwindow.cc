@@ -37,6 +37,13 @@ DnDWindow::DnDWindow()
   //Targets:
   m_listTargets.push_back("STRING");
   m_listTargets.push_back("text/plain");
+  m_listTargets.push_back("text/plain;charset=utf-8");
+  if (!Glib::get_charset())
+  {
+    std::string charset;
+    Glib::get_charset(charset);
+    m_listTargets.push_back("text/plain;charset=" + charset);
+  }
   m_listTargets.push_back("application/x-rootwin-drop");
 
   //Targets without rootwin:
@@ -76,7 +83,7 @@ DnDWindow::DnDWindow()
   m_Button.drag_source_set(Gdk::ContentFormats::create(m_listTargets), Gdk::ModifierType::BUTTON1_MASK | Gdk::ModifierType::BUTTON3_MASK,
                            Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
 
-  m_Button.drag_source_set_icon(m_drag_icon);
+  m_Button.drag_source_set_icon(Gdk::Cairo::create_surface_from_pixbuf(m_drag_icon, 1));
 
   m_Grid.attach(m_Button, 0, 1);
   m_Button.set_hexpand(true);
@@ -93,7 +100,7 @@ DnDWindow::~DnDWindow()
 }
 
 
-void DnDWindow::on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int, int, const Gtk::SelectionData& selection_data, guint time)
+void DnDWindow::on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, const Gtk::SelectionData& selection_data, guint time)
 {
   const int length = selection_data.get_length();
   const guchar* data = selection_data.get_data();
@@ -103,7 +110,7 @@ void DnDWindow::on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::DragCon
     g_print ("Received \"%s\" in label\n", (gchar *)data);
   }
 
-  context->drag_finish(false, false, time);
+  context->drag_finish(false, time);
 }
 
 bool DnDWindow::on_label_popup_drag_motion(const Glib::RefPtr<Gdk::DragContext>&, int, int, guint)
@@ -127,7 +134,7 @@ void DnDWindow::on_label_popup_drag_leave(const Glib::RefPtr<Gdk::DragContext>&,
  }
 }
 
-void DnDWindow::on_image_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, int, int, const Gtk::SelectionData& selection_data, guint time)
+void DnDWindow::on_image_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, const Gtk::SelectionData& selection_data, guint time)
 {
   const int length = selection_data.get_length();
   const guchar* data = selection_data.get_data();
@@ -137,7 +144,7 @@ void DnDWindow::on_image_drag_data_received(const Glib::RefPtr<Gdk::DragContext>
     g_print ("Received \"%s\" in trashcan\n", (gchar*)data);
   }
 
-  context->drag_finish(false, false, time);
+  context->drag_finish(false, time);
 }
 
 bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int, int, guint time)
@@ -179,7 +186,7 @@ bool DnDWindow::on_image_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context
   const auto targets = context->get_formats()->get_mime_types();
   if(!targets.empty())
   {
-    drag_get_data( context, targets[0], time );
+    m_Image.drag_get_data(context, targets[0], time);
   }
 
   return true;
