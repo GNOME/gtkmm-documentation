@@ -21,6 +21,9 @@
 #include <iostream>
 #include <giomm.h>
 
+namespace
+{
+
 Glib::RefPtr<Glib::MainLoop> mainloop;
 const std::string FILENAME = "./temp-file";
 
@@ -32,38 +35,50 @@ on_directory_changed(const Glib::RefPtr<Gio::File>& file,
   std::cout << "** Directory changed **" << std::endl;
 
   if(file)
-    std::cout << "   File 1: " << file->get_path () << std::endl;
+    std::cout << "   File 1: " << file->get_path() << std::endl;
 
   if(other_file)
-    std::cout << "   File 2: " << other_file->get_path () << std::endl;
+    std::cout << "   File 2: " << other_file->get_path() << std::endl;
 
-  std::cout << "   ";
+  std::cout << "   Event: ";
 
   switch(event)
   {
     case Gio::FileMonitor::Event::CHANGED:
-      std::cout << "Event: A file is being changed" << std::endl;
+      std::cout << "A file changed" << std::endl;
       break;
     case Gio::FileMonitor::Event::CHANGES_DONE_HINT:
-      std::cout << "Event: File changes are done" << std::endl;
+      std::cout << "A hint that this was probably the last change in a set of changes" << std::endl;
       break;
     case Gio::FileMonitor::Event::DELETED:
-      std::cout << "Event: A file was deleted" << std::endl;
+      std::cout << "A file was deleted" << std::endl;
       break;
     case Gio::FileMonitor::Event::CREATED:
-      std::cout << "Event: A file was created" << std::endl;
+      std::cout << "A file was created" << std::endl;
       break;
     case Gio::FileMonitor::Event::ATTRIBUTE_CHANGED:
-      std::cout << "Event: A file attribute was changed" << std::endl;
+      std::cout << "A file attribute was changed" << std::endl;
       break;
     case Gio::FileMonitor::Event::PRE_UNMOUNT:
-      std::cout << "Event: pre-unmount event" << std::endl;
+      std::cout << "The file location will soon be unmounted" << std::endl;
       break;
     case Gio::FileMonitor::Event::UNMOUNTED:
-      std::cout << "Event: unmounted" << std::endl;
+      std::cout << "The file location was unmounted" << std::endl;
+      break;
+    case Gio::FileMonitor::Event::MOVED:
+      std::cout << "The file was moved" << std::endl;
+      break;
+    case Gio::FileMonitor::Event::RENAMED:
+      std::cout << "The file was renamed within the current directory" << std::endl;
+      break;
+    case Gio::FileMonitor::Event::MOVED_IN:
+      std::cout << "The file was moved into the monitored directory from another location" << std::endl;
+      break;
+    case Gio::FileMonitor::Event::MOVED_OUT:
+      std::cout << "The file was moved out of the monitored directory to another location" << std::endl;
       break;
     default:
-      g_assert_not_reached ();
+      std::cout << "Unknown event "  << static_cast<int>(event) << std::endl;
   }
 }
 
@@ -86,12 +101,12 @@ bool create_temp_file()
   return false;
 }
 
-bool quit ()
+bool quit()
 {
   try
   {
     auto temp_file = Gio::File::create_for_path(FILENAME);
-    temp_file->trash();
+    temp_file->remove();
   }
   catch (const Gio::Error& ex)
   {
@@ -104,6 +119,8 @@ bool quit ()
   return false;
 }
 
+} // anomymous namespace
+
 int main(int /* argc */, char** /* argv */)
 {
   Gio::init();
@@ -111,7 +128,7 @@ int main(int /* argc */, char** /* argv */)
 
   auto current_dir = Glib::get_current_dir();
   auto dir = Gio::File::create_for_path(current_dir);
-  auto monitor = dir->monitor_directory();
+  auto monitor = dir->monitor_directory(Gio::FileMonitorFlags::WATCH_MOVES);
 
   std::cout << "Monitoring directory '" << current_dir << "'..."
     << std::endl << std::endl;
@@ -122,10 +139,11 @@ int main(int /* argc */, char** /* argv */)
 
   // Wait a couple seconds and then create a temp file to trigger the
   // directory monitor.
-  Glib::signal_timeout().connect_seconds(sigc::ptr_fun (&create_temp_file), 2);
+  Glib::signal_timeout().connect_seconds(sigc::ptr_fun(&create_temp_file), 2);
 
-  // Then exit a couple seconds later:
-  Glib::signal_timeout().connect_seconds(sigc::ptr_fun (&quit), 4);
+  // Then exit when the user has had some time to make changes in
+  // the monitored directory.
+  Glib::signal_timeout().connect_seconds(sigc::ptr_fun(&quit), 30);
   mainloop->run();
   return 0;
 }
