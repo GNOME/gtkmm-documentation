@@ -45,7 +45,7 @@ private:
       this->m_y = y;
     }
 
-    Glib::RefPtr<Gdk::Pixbuf> m_pixbuf;
+    Glib::RefPtr<const Gdk::Pixbuf> m_pixbuf;
     double m_x, m_y;
   };
 

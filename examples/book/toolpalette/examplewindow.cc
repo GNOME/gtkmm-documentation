@@ -47,7 +47,9 @@ void ExampleWindow::load_icon_items()
       Glib::RefPtr<Gdk::Pixbuf> pixbuf;
       try
       {
-        pixbuf = icon_theme->load_icon(icon_name, requested_icon_size, Gtk::IconLookupFlags::GENERIC_FALLBACK);
+        // Take a copy of the pixbuf from load_icon().
+        // Gtk::Image(pixbuf) requires a non-const pixbuf.
+        pixbuf = icon_theme->load_icon(icon_name, requested_icon_size, Gtk::IconLookupFlags::GENERIC_FALLBACK)->copy();
       }
       catch (const Gtk::IconThemeError& /* ex */)
       {
