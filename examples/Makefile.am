@@ -85,7 +85,6 @@ check_PROGRAMS =					\
 	book/multithread/example			\
 	book/notebook/example				\
 	book/paned/example				\
-	book/placessidebar/example			\
 	book/popover/example			\
 	book/printing/advanced/example			\
 	book/printing/simple/example			\
@@ -547,11 +546,6 @@ book_paned_example_SOURCES =		\
 	book/paned/messageslist.h	\
 	book/paned/messagetext.cc	\
 	book/paned/messagetext.h
-
-book_placessidebar_example_SOURCES =		\
-	book/placessidebar/examplewindow.cc		\
-	book/placessidebar/examplewindow.h		\
-	book/placessidebar/main.cc
 
 book_popover_example_SOURCES =		\
 	book/popover/examplewindow.cc		\
