@@ -27,7 +27,7 @@ public:
 
 private:
   // Slots
-  bool on_window_key_press(Gdk::EventKey& key_event);
+  bool on_window_key_press(const Glib::RefPtr<Gdk::EventKey>& key_event);
   void on_search_mode_changed();
   void on_show_close_button_changed();
   void on_search_bar_reveal_changed();

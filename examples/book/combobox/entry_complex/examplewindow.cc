@@ -111,7 +111,7 @@ void ExampleWindow::on_entry_activate()
   }
 }
 
-bool ExampleWindow::on_entry_focus_out_event(Gdk::EventFocus& /* event */)
+bool ExampleWindow::on_entry_focus_out_event(const Glib::RefPtr<Gdk::EventFocus>& /* event */)
 {
   auto entry = m_Combo.get_entry();
   if (entry)

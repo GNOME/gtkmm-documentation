@@ -143,7 +143,7 @@ void ExampleWindow::on_day_selected()
 {
   auto current_event = Glib::wrap(gtk_get_current_event(), false);
 
-  if (current_event.get_event_type() != Gdk::Event::Type::BUTTON_PRESS)
+  if (current_event->get_event_type() != Gdk::Event::Type::BUTTON_PRESS)
   {
     return;
   }
@@ -151,12 +151,13 @@ void ExampleWindow::on_day_selected()
   // The event is a GdkEventButton.
   // This suspicious-looking cast is okay because Gdk::EventButton
   // does not add any data members to those of Gdk::Event.
-  Gdk::EventButton& current_event_button = *static_cast<Gdk::EventButton*>(&current_event);
+  const Glib::RefPtr<Gdk::EventButton> current_event_button =
+    std::static_pointer_cast<Gdk::EventButton>(current_event);
 
   double x = 0.0;
   double y = 0.0;
-  current_event_button.get_coords(x, y);
-  current_event_button.get_window()->coords_to_parent(x, y, x, y);
+  current_event_button->get_coords(x, y);
+  current_event_button->get_window()->coords_to_parent(x, y, x, y);
   Gdk::Rectangle rect;
   auto allocation = m_calendar.get_allocation();
   rect.set_x(x - allocation.get_x());

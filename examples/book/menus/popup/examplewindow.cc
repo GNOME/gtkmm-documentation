@@ -111,9 +111,9 @@ void ExampleWindow::on_menu_file_popup_generic()
    std::cout << "A popup menu item was selected." << std::endl;
 }
 
-bool ExampleWindow::on_button_press_event(Gdk::EventButton& button_event)
+bool ExampleWindow::on_button_press_event(const Glib::RefPtr<Gdk::EventButton>& button_event)
 {
-  if (button_event.shall_trigger_context_menu())
+  if (button_event->shall_trigger_context_menu())
   {
     if (m_pMenuPopup && !m_pMenuPopup->get_attach_widget())
       m_pMenuPopup->attach_to_widget(*this);

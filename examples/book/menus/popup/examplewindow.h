@@ -27,7 +27,7 @@ public:
 
 protected:
   //Signal handlers:
-  bool on_button_press_event(Gdk::EventButton& button_event) override;
+  bool on_button_press_event(const Glib::RefPtr<Gdk::EventButton>& button_event) override;
 
   void on_menu_file_popup_generic();
 

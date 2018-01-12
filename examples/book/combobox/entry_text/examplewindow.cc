@@ -68,7 +68,7 @@ void ExampleWindow::on_entry_activate()
     << ", Text=" << m_Combo.get_active_text() << std::endl;
 }
 
-bool ExampleWindow::on_entry_focus_out_event(Gdk::EventFocus& /* event */)
+bool ExampleWindow::on_entry_focus_out_event(const Glib::RefPtr<Gdk::EventFocus>& /* event */)
 {
   std::cout << "on_entry_focus_out_event(): Row=" << m_Combo.get_active_row_number()
     << ", Text=" << m_Combo.get_active_text() << std::endl;

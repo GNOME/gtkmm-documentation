@@ -50,7 +50,7 @@ ExampleWindow::ExampleWindow()
 }
 
 //By changing the return value we allow, or don't allow, the event to propagate to other elements.
-bool ExampleWindow::entryKeyRelease(Gdk::EventKey& /* event */ )
+bool ExampleWindow::entryKeyRelease(const Glib::RefPtr<Gdk::EventKey>& /* event */ )
 {
   std::cout << "Entry" << std::endl;
 
@@ -62,7 +62,7 @@ bool ExampleWindow::entryKeyRelease(Gdk::EventKey& /* event */ )
   return true;
 }
 
-bool ExampleWindow::gridKeyRelease(Gdk::EventKey& /* event */ )
+bool ExampleWindow::gridKeyRelease(const Glib::RefPtr<Gdk::EventKey>& /* event */ )
 {
   std::cout << "Grid" << std::endl;
 
@@ -70,13 +70,13 @@ bool ExampleWindow::gridKeyRelease(Gdk::EventKey& /* event */ )
   return false;
 }
 
-bool ExampleWindow::windowKeyReleaseBefore(Gdk::EventKey& /* event */ )
+bool ExampleWindow::windowKeyReleaseBefore(const Glib::RefPtr<Gdk::EventKey>& /* event */ )
 {
   std::cout << "Window before" << std::endl;
   return false;
 }
 
-bool ExampleWindow::on_key_release_event(Gdk::EventKey& key_event)
+bool ExampleWindow::on_key_release_event(const Glib::RefPtr<Gdk::EventKey>& key_event)
 {
   std::cout << "Window overridden" << std::endl;
 
@@ -85,7 +85,7 @@ bool ExampleWindow::on_key_release_event(Gdk::EventKey& key_event)
 }
 
 // This will set the entry's text in the label, every time a key is pressed.
-bool ExampleWindow::windowKeyRelease(Gdk::EventKey& /* event */ )
+bool ExampleWindow::windowKeyRelease(const Glib::RefPtr<Gdk::EventKey>& /* event */ )
 {
   std::cout << "Window after";
 

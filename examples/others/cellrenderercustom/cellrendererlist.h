@@ -38,7 +38,7 @@ private:
   Glib::RefPtr<Gtk::ListStore>  list_store_;
   Gtk::TreeView                 tree_view_;
 
-  bool on_tree_view_button_release_event(Gdk::EventButton& event);
+  bool on_tree_view_button_release_event(const Glib::RefPtr<Gdk::EventButton>& event);
   void on_tree_selection_changed();
 };
 

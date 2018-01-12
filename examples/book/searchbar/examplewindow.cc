@@ -85,7 +85,7 @@ ExampleWindow::~ExampleWindow()
 {
 }
 
-bool ExampleWindow::on_window_key_press(Gdk::EventKey& key_event)
+bool ExampleWindow::on_window_key_press(const Glib::RefPtr<Gdk::EventKey>& key_event)
 {
   return m_search_bar.handle_event(key_event);
 }

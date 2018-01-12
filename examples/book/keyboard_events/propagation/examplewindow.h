@@ -28,12 +28,12 @@ public:
 
 private:
   //Override default signal handler:
-  bool on_key_release_event(Gdk::EventKey& event) override;
+  bool on_key_release_event(const Glib::RefPtr<Gdk::EventKey>& event) override;
 
-  bool entryKeyRelease(Gdk::EventKey& event);
-  bool gridKeyRelease(Gdk::EventKey& event);
-  bool windowKeyReleaseBefore(Gdk::EventKey& event);
-  bool windowKeyRelease(Gdk::EventKey& event);
+  bool entryKeyRelease(const Glib::RefPtr<Gdk::EventKey>& event);
+  bool gridKeyRelease(const Glib::RefPtr<Gdk::EventKey>& event);
+  bool windowKeyReleaseBefore(const Glib::RefPtr<Gdk::EventKey>& event);
+  bool windowKeyRelease(const Glib::RefPtr<Gdk::EventKey>& event);
 
   Gtk::Grid m_container;
 

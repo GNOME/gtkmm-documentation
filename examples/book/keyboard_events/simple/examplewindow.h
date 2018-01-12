@@ -28,7 +28,7 @@ public:
 
 private:
   //Override default signal handler:
-  bool on_key_press_event(Gdk::EventKey& event) override;
+  bool on_key_press_event(const Glib::RefPtr<Gdk::EventKey>& event) override;
 
   Gtk::Grid m_container;
   Gtk::RadioButton m_first;

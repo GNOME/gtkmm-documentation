@@ -93,9 +93,9 @@ PopupEntry::type_signal_arrow_clicked& PopupEntry::signal_arrow_clicked()
   return signal_arrow_clicked_;
 }
 
-bool PopupEntry::on_key_press_event(Gdk::EventKey& key_event)
+bool PopupEntry::on_key_press_event(const Glib::RefPtr<Gdk::EventKey>& key_event)
 {
-  if (key_event.get_keyval() == GDK_KEY_Escape)
+  if (key_event->get_keyval() == GDK_KEY_Escape)
   {
     editing_canceled_ = true;
 
@@ -130,7 +130,7 @@ bool PopupEntry::on_key_press_event(Gdk::EventKey& key_event)
   return Gtk::Box::on_key_press_event(key_event);
 }
 
-void PopupEntry::start_editing_vfunc(const Gdk::Event&)
+void PopupEntry::start_editing_vfunc(const Glib::RefPtr<const Gdk::Event>&)
 {
   entry_->select_region(0, -1);
 
@@ -153,9 +153,9 @@ void PopupEntry::on_entry_activate()
   //remove_widget(); // TODO: this line causes the widget to be removed twice -- dunno why
 }
 
-bool PopupEntry::on_entry_key_press_event(Gdk::EventKey& key_event)
+bool PopupEntry::on_entry_key_press_event(const Glib::RefPtr<Gdk::EventKey>& key_event)
 {
-  if (key_event.get_keyval() == GDK_KEY_Escape)
+  if (key_event->get_keyval() == GDK_KEY_Escape)
   {
     editing_canceled_ = true;
 
