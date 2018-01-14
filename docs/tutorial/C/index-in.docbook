@@ -226,10 +226,11 @@ applications and libraries:
 </para>
 <note>
 <para>
-The package names will not change when new API/ABI-compatible versions of &gtkmm;
-are released. Otherwise they would not be API/ABI-compatible. So don't be
-surprised, for instance, to find &gtkmm; 3.8 supplied by Debian's
-<application>libgtkmm-3.0-dev</application> package.
+    The package names will not change when new API/ABI-compatible versions of
+    &gtkmm; are released. Otherwise they would not be API/ABI-compatible. As
+    &gtkmm; 3.0 was was released in 2011, your distro most likely supplies a
+    later minor version, such as the long-term stable 3.22, under the
+    package/API name <application>gtkmm-3.0</application>.
 </para>
 </note>
 </sect2>
