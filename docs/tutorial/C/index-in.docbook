@@ -48,7 +48,7 @@ name
         <firstname>Jonathon</firstname>
         <surname>Jongsma</surname>
         <contrib>Chapter on &quot;Drawing with Cairo&quot;.</contrib>
-        <contrib>Chapter on &quot;Working with gtkmm's Source Code&quot;.</contrib>
+        <contrib>Chapter on &quot;Working with gtkmm’s Source Code&quot;.</contrib>
         <contrib>Chapter on &quot;Recent Files&quot;.</contrib>
       </author>
       <author>
@@ -145,14 +145,17 @@ using &gtkmm; without purchasing licenses.
 <para>&gtkmm; was originally named <application>gtk--</application> because GTK+
 already has a <literal>+</literal> in the name. However, as
 <literal>--</literal> is not easily indexed by search engines, the package
-generally went by the name &gtkmm;, and that's what we stuck with.</para>
+generally went by the name &gtkmm;, and that’s what we stuck with.</para>
 
 <sect2 id="why-use-gtkmm">
 <title>Why use &gtkmm; instead of GTK+?</title>
 <para>&gtkmm; allows you to write code using normal C++ techniques such as
 encapsulation, inheritance, and polymorphism. As a C++ programmer, you probably
 already realise that this leads to clearer and better organized code.</para>
-<para>&gtkmm; is more type-safe, so the compiler can detect errors that would only be detected at run time when using C. This use of specific types also makes the API clearer because you can see what types should be used just by looking at a method's declaration.</para>
+<para>&gtkmm; is more type-safe, so the compiler can detect errors that would
+only be detected at run time when using C. This use of specific types also makes
+the API clearer because you can see what types should be used just by looking at
+a method’s declaration.</para>
 <para>Inheritance can be used to derive new widgets. Creating new derived widget
 classes in GTK+ C code is so complicated and error prone that almost no C coders
 do it. As a C++ developer you know that inheritance is one of the main
@@ -163,8 +166,8 @@ techniques that object-oriented programming provides to ease design.</para>
 
 <sect2 id="gtkmm-vs-qt">
 <title>&gtkmm; compared to Qt</title>
-<para>Trolltech's Qt is the closest competition to &gtkmm;, so it deserves discussion.</para>
-
+<para>Trolltech’s Qt is the closest competition to &gtkmm;, so it deserves
+discussion.</para>
 <para>&gtkmm; developers tend to prefer &gtkmm; to Qt because &gtkmm; does things in a more C++ way. Qt originates from a time when C++ and the standard library were not standardised or well supported by compilers. It therefore duplicates a lot of stuff that is now in the standard library, such as containers and type information. Most significantly, Trolltech modified the C++ language to provide signals, so that Qt classes cannot be used easily with non-Qt classes. &gtkmm; was able to use standard C++ to provide signals without changing the C++ language.
 See the <ulink url="https://wiki.gnome.org/Projects/gtkmm/FAQ">FAQ</ulink> for more detailed differences.</para>
 </sect2>
@@ -226,7 +229,7 @@ applications and libraries:
     The names of the &gtkmm; packages vary from distribution to distribution
     (e.g. <application>libgtkmm-3.0-dev</application> on Debian and Ubuntu or
     <application>gtkmm30-devel</application> on Red Hat Fedora), so check with
-    your distribution's package management program for the correct package name
+    your distribution’s package management program for the correct package name
     and install it like you would any other package.
 </para>
 <note>
@@ -250,7 +253,7 @@ you can also install &gtkmm; from source. The source code for &gtkmm; can
 be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
 </para>
 <para>
-  After you've installed all of the dependencies, download the &gtkmm; source
+  After you’ve installed all of the dependencies, download the &gtkmm; source
   code, unpack it, and change to the newly created directory. &gtkmm; can be
   built and installed with the following sequence of commands:
 </para>
@@ -288,15 +291,15 @@ be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
         such as <filename>/usr</filename>. Linux distributions install software
         packages to <filename>/usr</filename>, so installing a source package
         to this prefix could corrupt or conflict with software installed using
-        your distribution's package-management system. Ideally, you should use
+        your distribution’s package-management system. Ideally, you should use
         a separate prefix for all software you install from source.
     </para>
 </warning>
 <para>
   If you want to help develop &gtkmm; or experiment with new features, you can
   also install &gtkmm; from Git. Most users will never need to do this, but if
-  you're interested in helping with &gtkmm; development, see the <link
-    linkend="chapter-working-with-source">Working with gtkmm's Source Code</link> appendix.
+  you’re interested in helping with &gtkmm; development, see the <link
+    linkend="chapter-working-with-source">Working with gtkmm’s Source Code</link> appendix.
 </para>
 </sect2>
 
@@ -324,7 +327,7 @@ Your existing knowledge of C++ will help you with &gtkmm; as it would with any l
 <title>Simple Example</title>
 
 <para>
-To begin our introduction to &gtkmm;, we'll start with the simplest
+To begin our introduction to &gtkmm;, we’ll start with the simplest
 program possible. This program will create an empty 200 x 200 pixel window.
 </para>
 
@@ -372,9 +375,9 @@ the above program with <application>GCC</application> using:
 <para>
 Some details here are important to note: You must surround the
 <command>pkg-config</command> invocation with backquotes, as those cause the
-shell to execute the command inside them and to use the command's output as
+shell to execute the command inside them and to use the command’s output as
 part of the command line, i.e. to substitute the command with the switches it
-returns that your compiler needs in order to find &gtkmm;'s headers and symbols.
+returns that your compiler needs in order to find &gtkmm;’s headers and symbols.
 Filenames, like <filename>simple.cc</filename>, must come before the
 <command>pkg-config</command> invocation on the command line, as most linkers
 work through their command-line arguments in the order given, and they must
@@ -394,13 +397,13 @@ really should use the <application>Automake</application> and
 <application>Autoconf</application> tools, as described in "Autoconf,
 Automake, Libtool", by G. V. Vaughan et al. The examples used in this book are
 included in the <application>gtkmm-documentation</application> package, with
-appropriate build files, so we won't show the build commands in future. You'll
+appropriate build files, so we won’t show the build commands in future. You’ll
 just need to find the appropriate directory and type <command>make</command>.
 </para>
 <para>
 To simplify compilation, we use <command>pkg-config</command>, which
 is present in all (properly installed) &gtkmm; installations. This
-program 'knows' what compiler switches are needed to compile programs
+program ‘knows’ what compiler switches are needed to compile programs
 that use &gtkmm;. The <literal>--cflags</literal> option causes
 <command>pkg-config</command> to output a list of include directories for the
 compiler to look in; the <literal>--libs</literal> option requests the
@@ -441,7 +444,7 @@ version because that would be an incompatible API and ABI break.
 and <ulink url="https://www.gnu.org/software/automake/">automake</ulink>.
 </para>
 <para>If you start by experimenting with a small application that you plan to use just for yourself,
-it's easier to start with a Makefile similar to the <filename>Makefile.example</filename> files
+it’s easier to start with a Makefile similar to the <filename>Makefile.example</filename> files
 in the <link linkend="chapter-building-applications">Building applications</link> chapter.
 </para>
 
@@ -449,7 +452,11 @@ in the <link linkend="chapter-building-applications">Building applications</link
 
 <sect1 id="sec-widgets-overview">
 <title>Widgets</title>
-<para>&gtkmm; applications consist of windows containing widgets, such as buttons and text boxes. In some other systems, widgets are called "controls". For each widget in your application's windows, there is a C++ object in your application's code. So you just need to call a method of the widget's class to affect the visible widget.</para>
+<para>&gtkmm; applications consist of windows containing widgets, such as
+buttons and text boxes. In some other systems, widgets are called “controls”.
+For each widget in your application’s windows, there is a C++ object in your
+application’s code. So you just need to call a method of the widget’s class to
+affect the visible widget.</para>
  <para>Widgets are arranged inside container widgets such as frames and notebooks, in a hierarchy of widgets within widgets. Some of these container widgets, such as <classname>Gtk::Grid</classname>, are not visible - they exist only to arrange other widgets. Here is some example code that adds 2 <classname>Gtk::Button</classname> widgets to a <classname>Gtk::Box</classname> container widget:
 <programlisting>m_box.pack_start(m_Button1);
 m_box.pack_start(m_Button2);</programlisting>
@@ -480,11 +487,11 @@ linkend="chapter-builder">Glade and Gtk::Builder</link> chapter.
 button, the appropriate signal will be <emphasis>emitted</emphasis> by the Widget
 that was pressed. Each Widget has a different set of signals that it can emit. To make a
 button click result in an action, we set up a
-<emphasis>signal handler</emphasis> to catch the button's <literal>clicked</literal> signal.
+<emphasis>signal handler</emphasis> to catch the button’s <literal>clicked</literal> signal.
 </para>
 <para>&gtkmm; uses the <application>libsigc++</application> library to implement
 signals. Here is an example line of code that connects a
-<classname>Gtk::Button</classname>'s <literal>clicked</literal> signal with a
+<classname>Gtk::Button</classname>’s <literal>clicked</literal> signal with a
 signal handler called <methodname>on_button_clicked</methodname>:
 <programlisting>m_button1.signal_clicked().connect( sigc::mem_fun(*this,
   &amp;HelloWorld::on_button_clicked) );</programlisting>
@@ -498,20 +505,36 @@ just connecting to the existing &gtkmm; signals, see the <link linkend="chapter-
 
 <sect1 id="sec-basics-ustring">
 <title>Glib::ustring</title>
-<para>You might be surprised to learn that &gtkmm; doesn't use <classname>std::string</classname> in its interfaces. Instead it uses <classname>Glib::ustring</classname>, which is so similar and unobtrusive that you could actually pretend that each <classname>Glib::ustring</classname> is a <classname>std::string</classname> and ignore the rest of this section. But read on if you want to use languages other than English in your application.</para>
-<para>std::string uses 8 bit per character, but 8 bits aren't enough to encode
+<para>You might be surprised to learn that &gtkmm; doesn’t use
+<classname>std::string</classname> in its interfaces. Instead it uses
+<classname>Glib::ustring</classname>, which is so similar and unobtrusive that
+you could actually pretend that each <classname>Glib::ustring</classname> is a
+<classname>std::string</classname> and ignore the rest of this section.  But
+read on if you want to use languages other than English in your
+application.</para>
+<para>std::string uses 8 bit per character, but 8 bits aren’t enough to encode
 languages such as Arabic, Chinese, and Japanese. Although the encodings for
 these languages have now been specified by the Unicode Consortium, the C and C++
 languages do not yet provide any standardised Unicode support. GTK+ and GNOME
-chose to implement Unicode using UTF-8, and that's what is wrapped by
+chose to implement Unicode using UTF-8, and that’s what is wrapped by
 Glib::ustring. It provides almost exactly the same interface as
 <classname>std::string</classname>, along with automatic conversions to and from
 <classname>std::string</classname>.</para>
-<para>One of the benefits of UTF-8 is that you don't need to use it unless you want to, so you don't need to retrofit all of your code at once. <classname>std::string</classname> will still work for 7-bit ASCII strings. But when you try to localize your application for languages like Chinese, for instance, you will start to see strange errors, and possible crashes. Then all you need to do is start using <classname>Glib::ustring</classname> instead.</para>
-<para>Note that UTF-8 isn't compatible with 8-bit encodings like ISO-8859-1. For instance, German umlauts are not in the ASCII range and need more than 1 byte in the UTF-8 encoding. If your code contains 8-bit string literals, you have to convert them to UTF-8 (e.g. the Bavarian greeting "Gr&uuml;&szlig; Gott" would be "Gr\xC3\xBC\xC3\x9F Gott").</para>
+<para>One of the benefits of UTF-8 is that you don’t need to use it unless you
+want to, so you don’t need to retrofit all of your code at once.
+<classname>std::string</classname> will still work for 7-bit ASCII strings. But
+when you try to localize your application for languages like Chinese, for
+instance, you will start to see strange errors, and possible crashes. Then all
+you need to do is start using <classname>Glib::ustring</classname>
+instead.</para>
+<para>Note that UTF-8 isn’t compatible with 8-bit encodings like ISO-8859-1. For
+instance, German umlauts are not in the ASCII range and need more than 1 byte in
+the UTF-8 encoding. If your code contains 8-bit string literals, you have to
+convert them to UTF-8 (e.g. the Bavarian greeting “Gr&uuml;&szlig; Gott” would
+be “Gr\xC3\xBC\xC3\x9F Gott”).</para>
 <para>You should avoid C-style pointer arithmetic, and functions such as
 <function>strlen()</function>. In UTF-8, each character might need anywhere from
-1 to 6 bytes, so it's not possible to assume that the next byte is another
+1 to 6 bytes, so it’s not possible to assume that the next byte is another
 character. <classname>Glib::ustring</classname> worries about the details of
 this for you so you can use methods such as
 <methodname>Glib::ustring::substr()</methodname> while still thinking in terms
@@ -573,12 +596,12 @@ button-&gt;set_label("Now I speak C++ too!");
 </programlisting>
 The C++ wrapper shall be explicitly deleted if
 <itemizedlist>
-<listitem><para>it's a widget or other class that inherits from <classname>Gtk::Object</classname>, and</para></listitem>
+<listitem><para>it’s a widget or other class that inherits from <classname>Gtk::Object</classname>, and</para></listitem>
 <listitem><para>the C instance has a floating reference when the wrapper is created, and</para></listitem>
 <listitem><para><function>Gtk::manage()</function> is not called.</para></listitem>
 </itemizedlist>
 <function>Glib::wrap()</function> binds the C and C++ instances to each other.
-Don't delete the C++ instance before you want the C instance to die.
+Don’t delete the C++ instance before you want the C instance to die.
 </para>
 <para>In all other cases the C++ instance is automatically deleted when the last reference
 to the C instance is dropped. This includes all <function>Glib::wrap()</function>
@@ -590,7 +613,7 @@ overloads that return a <classname>Glib::RefPtr</classname>.</para>
 <title>Hello World in &gtkmm;</title>
 
 <para>
-We've now learned enough to look at a real example. In accordance with an ancient
+We’ve now learned enough to look at a real example. In accordance with an ancient
 tradition of computer science, we now introduce Hello World, a la &gtkmm;:
 </para>
 
@@ -608,7 +631,7 @@ Try to compile and run it before going on. You should see something like this:
 </figure>
 
 <para>
-Pretty thrilling, eh?  Let's examine the code. First, the
+Pretty thrilling, eh? Let’s examine the code. First, the
 <classname>HelloWorld</classname> class:
 </para>
 
@@ -628,9 +651,9 @@ protected:
 };</programlisting>
 
 <para>
-This class implements the "Hello World" window. It's derived from
+This class implements the "Hello World" window. It’s derived from
 <classname>Gtk::Window</classname>, and has a single <classname>Gtk::Button</classname> as a member.
-We've chosen to use the
+We’ve chosen to use the
 constructor to do all of the initialisation work for the window,
 including setting up the signals. Here it is, with the comments
 omitted:
@@ -648,33 +671,33 @@ omitted:
 }</programlisting>
 
 <para>
-Notice that we've used an initialiser statement to give the <varname>m_button</varname>
+Notice that we’ve used an initialiser statement to give the <varname>m_button</varname>
 object the label &quot;Hello World&quot;.
 </para>
 
 <para>
-Next we call the Window's <methodname>set_border_width()</methodname> method. This sets
+Next we call the Window’s <methodname>set_border_width()</methodname> method. This sets
 the amount of space between the sides of the window and the widget it
 contains.
 </para>
 
 <para>
-We then hook up a signal handler to <varname>m_button</varname>'s <literal>clicked</literal> signal.
+We then hook up a signal handler to <varname>m_button</varname>’s <literal>clicked</literal> signal.
 This prints our friendly greeting to <literal>stdout</literal>.
 </para>
 
 <para>
-Next, we use the Window's <methodname>add()</methodname> method to put <varname>m_button</varname> in
+Next, we use the Window’s <methodname>add()</methodname> method to put <varname>m_button</varname> in
 the Window. (<methodname>add()</methodname> comes from <classname>Gtk::Container</classname>, which is
 described in the chapter on container widgets.)  The <methodname>add()</methodname> method
-places the Widget in the Window, but it doesn't display
+places the Widget in the Window, but it doesn’t display
 the widget. &gtkmm; widgets are always invisible when you create them - to display them, you must call their <methodname>show()</methodname> method, which
 is what we do in the next line.
 </para>
 
 
 <para>
-Now let's look at our program's <function>main()</function> function. Here it is,
+Now let’s look at our program’s <function>main()</function> function. Here it is,
 without comments:
 </para>
 
@@ -696,7 +719,7 @@ it wants, and leaves you the rest, as we described earlier.
 
 <para>
 Next we make an object of our <classname>HelloWorld</classname> class, whose constructor
-takes no arguments, but it isn't visible yet. When we call
+takes no arguments, but it isn’t visible yet. When we call
 <methodname>Gtk::Application::run()</methodname>, giving it the
 <varname>helloworld</varname> Window, it shows the Window and starts the &gtkmm;
 <emphasis>event loop</emphasis>. During the event loop, &gtkmm; idles, waiting
@@ -720,7 +743,7 @@ be made in version 2 of either library because of the need to maintain API/ABI
 compatibility. If you never used the <application>gtkmm-2.4</application> API
 then you can safely ignore this chapter.</para>
 
-<para>&gtkmm; 3's library is called <application>libgtkmm-3.0</application>
+<para>&gtkmm; 3’s library is called <application>libgtkmm-3.0</application>
 rather than <application>libgtkmm-2.4</application> and installs its headers in
 a similarly-versioned directory, so your <command>pkg-config</command> check
 should ask for <application>gtkmm-3.0</application> rather than
@@ -867,7 +890,7 @@ See the <link linkend="sec-radio-buttons">RadioButton</link> section.
 </variablelist>
 
 <para>
-Note that, due to GTK+'s theming system, the appearance of these
+Note that, due to GTK+’s theming system, the appearance of these
 widgets will vary. In the case of checkboxes and radio buttons, they
 may vary considerably.
 </para>
@@ -884,7 +907,7 @@ or set it later with <methodname>set_label()</methodname>.
 </para>
 
 <para>To define an accelerator key for keyboard navigation, place an underscore
-before one of the label's characters and specify <literal>true</literal> for the
+before one of the label’s characters and specify <literal>true</literal> for the
 optional <varname>mnemonic</varname> parameter. For instance:
 </para>
 <programlisting>Gtk::Button* pButton = new Gtk::Button("_Something", true);</programlisting>
@@ -963,7 +986,7 @@ Emitted when the button is pressed and released.
 <term><literal>enter</literal></term>
 <listitem>
 <para>
-Emitted when the mouse pointer enters the button's window.
+Emitted when the mouse pointer enters the button’s window.
 Use <methodname>Gtk::Widget::signal_enter_notify_event()</methodname> instead.
 </para>
 </listitem>
@@ -972,7 +995,7 @@ Use <methodname>Gtk::Widget::signal_enter_notify_event()</methodname> instead.
 <term><literal>leave</literal></term>
 <listitem>
 <para>
-Emitted when the mouse pointer leaves the button's window.
+Emitted when the mouse pointer leaves the button’s window.
 Use <methodname>Gtk::Widget::signal_leave_notify_event()</methodname> instead.
 </para>
 </listitem>
@@ -991,13 +1014,16 @@ Use <methodname>Gtk::Widget::signal_leave_notify_event()</methodname> instead.
 <para>
 To retrieve the state of the <classname>ToggleButton</classname>, you can use the
 <methodname>get_active()</methodname> method. This returns <literal>true</literal> if the button
-is "down". You can also set the toggle button's state, with <methodname>set_active()</methodname>. Note that, if you do this, and the state actually changes, it causes the
+is "down". You can also set the toggle button’s state, with
+<methodname>set_active()</methodname>. Note that, if you do this, and the state
+actually changes, it causes the
 <literal>clicked</literal> signal to be emitted. This is usually what you want.
 </para>
 
 <para>
 You can use the <methodname>toggled()</methodname> method to toggle the button, rather than
-forcing it to be up or down: This switches the button's state, and causes the <literal>toggled</literal> signal to be emitted.
+forcing it to be up or down: This switches the button’s state, and causes the
+<literal>toggled</literal> signal to be emitted.
 </para>
 
 <para>
@@ -1016,7 +1042,7 @@ forcing it to be up or down: This switches the button's state, and causes the <l
 <para>
 <classname>Gtk::CheckButton</classname> inherits from
 <classname>Gtk::ToggleButton</classname>. The only real difference between the
-two is <classname>Gtk::CheckButton</classname>'s
+two is <classname>Gtk::CheckButton</classname>’s
 appearance. You can check, set, and toggle a checkbox using the same
 member methods as for <classname>Gtk::ToggleButton</classname>.
 </para>
@@ -1080,15 +1106,15 @@ same group by using <methodname>join_group()</methodname> to tell the other
 </para>
 
 <para>
-Note that you can't do
-<programlisting>m_rb2.set_group(m_rb1.get_group()); //doesn't work</programlisting>
+Note that you can’t do
+<programlisting>m_rb2.set_group(m_rb1.get_group()); //doesn’t work</programlisting>
 because <methodname>get_group()</methodname> returns a <classname>RadioButton::Group</classname>
 which is modified by <methodname>set_group()</methodname> and therefore is non-const.
 </para>
 
 <para>
 The second way to set up radio buttons is to make a group first, and
-then add radio buttons to it. Here's an example:
+then add radio buttons to it. Here’s an example:
 </para>
 <programlisting>class RadioButtons : public Gtk::Window
 {
@@ -1114,7 +1140,7 @@ buttons, using a constructor to make each of them part of <varname>group</varnam
 <sect2 id="radiobutton-methods"><title>Methods</title>
 <para>
 <classname>RadioButtons</classname> are "off" when created; this means that
-when you first make a group of them, they will all be off. Don't forget to turn
+when you first make a group of them, they will all be off. Don’t forget to turn
 one of them on using <methodname>set_active()</methodname>:
 </para>
 
@@ -1166,7 +1192,7 @@ section, all Range widgets are associated with a
 current values used by the widget you need to use the methods of its
 <classname>Adjustment</classname>, which you can get with the
 <methodname>get_adjustment()</methodname> method. The <classname>Range</classname>
-widgets' default constructors create an <classname>Adjustment</classname>
+widgets’ default constructors create an <classname>Adjustment</classname>
 automatically, or you can specify an existing
 <classname>Adjustment</classname>, maybe to share it with another widget. See
 the <link linkend="chapter-adjustment">Adjustments</link> section for further
@@ -1181,7 +1207,7 @@ details.
 <para>
 These are standard scrollbars. They should be used only to scroll another
 widget, such as, a <classname>Gtk::Entry</classname>, or a
-<classname>Gtk::Viewport</classname>, though it's usually easier to use the
+<classname>Gtk::Viewport</classname>, though it’s usually easier to use the
 <classname>Gtk::ScrolledWindow</classname> widget in most cases.
 </para>
 
@@ -1210,7 +1236,7 @@ inactivity before a screensaver takes over the screen.
 As with <classname>Scrollbar</classname>s, the orientation can be either
 horizontal or vertical. The default constructor creates an
 <classname>Adjustment</classname> with all of its values set to
-<literal>0.0</literal>. This isn't useful so you will need to set some
+<literal>0.0</literal>. This isn’t useful so you will need to set some
 <classname>Adjustment</classname> details to get meaningful behaviour.
 </para>
 
@@ -1338,7 +1364,7 @@ read-only. This can be done by passing <literal>false</literal> to the
 </para>
 
 <para>
-For the input of passwords, passphrases and other information you don't want
+For the input of passwords, passphrases and other information you don’t want
 echoed on the screen, calling <methodname>set_visibility()</methodname> with
 <literal>false</literal> will cause the text to be hidden.
 </para>
@@ -1496,14 +1522,14 @@ bar.
 <para>
 A <classname>SpinButton</classname> allows the user to select a value from a
 range of numeric values. It has an <classname>Entry</classname> widget with increment and decrement buttons
-at the side. Clicking the buttons causes the value to 'spin' up and down across
+at the side. Clicking the buttons causes the value to ‘spin’ up and down across
 the range of possible values. The <classname>Entry</classname> widget may also
 be used to enter a value directly.
 </para>
 
 <para>
 The value can have an adjustable number of decimal places, and the step size is
-configurable. <classname>SpinButton</classname>s have an 'auto-repeat' feature
+configurable. <classname>SpinButton</classname>s have an ‘auto-repeat’ feature
 as well: holding down the increment or decrement button can optionally cause the value to
 change more quickly the longer the button is held down.
 </para>
@@ -1576,12 +1602,12 @@ The number of decimal places can be altered using the
 </para>
 
 <para>
-You can set the spinbutton's value using the <methodname>set_value()</methodname>
+You can set the spinbutton’s value using the <methodname>set_value()</methodname>
 method, and retrieve it with <methodname>get_value()</methodname>.
 </para>
 
 <para>
-The <methodname>spin()</methodname> method 'spins' the
+The <methodname>spin()</methodname> method ‘spins’ the
 <classname>SpinButton</classname>, as if its increment or decrement button had been clicked.
 You need to specify a <type>Gtk::SpinType</type> to specify the
 direction or new position.
@@ -1593,7 +1619,7 @@ To prevent the user from typing non-numeric characters into the entry box, pass
 </para>
 
 <para>
-To make the <classname>SpinButton</classname> 'wrap' between its upper and
+To make the <classname>SpinButton</classname> ‘wrap’ between its upper and
 lower bounds, use the <methodname>set_wrap()</methodname> method.
 </para>
 
@@ -1609,7 +1635,7 @@ use <methodname>set_snap_to_ticks()</methodname>.
 <sect2 id="spinbutton-example"><title>Example</title>
 
 <para>
-Here's an example of a <classname>SpinButton</classname> in action:
+Here’s an example of a <classname>SpinButton</classname> in action:
 </para>
 
 <figure id="figure-spinbutton">
@@ -1929,7 +1955,7 @@ widget itself. For instance, it might be used to center a widget.
 
 <para>
 The <classname>Alignment</classname> widget is deprecated from &gtkmm; version 3.14
-and should not be used in newly-written code. Use <classname>Gtk::Widget</classname>'s
+and should not be used in newly-written code. Use <classname>Gtk::Widget</classname>’s
 alignment and margin methods instead.
 </para>
 
@@ -1975,8 +2001,9 @@ takes an argument, specifiying which widget to remove.
 <sect2 id="container-packing">
 <title>Packing</title>
 <para>
-You've probably noticed that &gtkmm; windows seem "elastic" - they can usually be stretched in many  different ways. This is due to the <emphasis>widget packing</emphasis>
-system.
+You’ve probably noticed that &gtkmm; windows seem “elastic”: they can usually
+be stretched in many different ways. This is due to the <emphasis>widget
+packing</emphasis> system.
 </para>
 
 <para>
@@ -1986,16 +2013,23 @@ Many GUI toolkits require you to precisely place widgets in a window, using abso
 <itemizedlist>
 
 <listitem>
-<para>The widgets don't rearrange themselves when the window is resized. Some widgets are hidden when the window is made smaller, and lots of useless space appears when the window is made larger.</para>
+<para>The widgets don’t rearrange themselves when the window is resized. Some
+widgets are hidden when the window is made smaller, and lots of useless space
+appears when the window is made larger.</para>
 </listitem>
 
 <listitem>
-<para>It's impossible to predict the amount of space necessary for text after it has been translated to other languages, or displayed in a different font. On Unix it is also impossible to anticipate the effects of every theme and window manager.</para>
+<para>It’s impossible to predict the amount of space necessary for text after it
+has been translated to other languages or displayed in a different font. On
+Unix, it is also impossible to anticipate the effects of every theme and window
+manager.</para>
 </listitem>
 
 <listitem>
 <para>
-Changing the layout of a window "on the fly", to make some extra widgets appear, for instance, is complex. It  requires tedious recalculation of every widget's position.</para>
+Changing the layout of a window “on the fly”, to make some extra widgets appear,
+for instance, is complex. It requires tedious recalculation of every widget’s
+position.</para>
 </listitem>
 
 </itemizedlist>
@@ -2021,7 +2055,7 @@ in &gtkmm; are descendants of <classname>Gtk::Bin</classname>, including
 </para>
 
 <para>
-Yes, that's correct: a Window can contain at most one widget. How, then, can
+Yes, that’s correct: a Window can contain at most one widget. How, then, can
 we use a window for anything useful?  By placing a multiple-child container in
 the window. The most useful container widgets are
 <classname>Gtk::Grid</classname> and <classname>Gtk::Box</classname>.
@@ -2054,8 +2088,8 @@ child widgets.
 </para>
 
 <para>
-If you've never used a packing toolkit before, it can take some
-getting used to. You'll probably find, however, that you don't
+If you’ve never used a packing toolkit before, it can take some
+getting used to. You’ll probably find, however, that you don’t
 need to rely on visual form editors quite as much as you might with
 other toolkits.
 </para>
@@ -2066,8 +2100,8 @@ other toolkits.
 <title>An improved Hello World</title>
 
 <para>
-Let's take a look at a slightly improved <application>helloworld</application>,
-showing what we've learnt.
+Let’s take a look at a slightly improved <application>helloworld</application>,
+showing what we’ve learnt.
 </para>
 
 <figure id="figure-helloworld2">
@@ -2151,14 +2185,17 @@ This is the declaration of the <methodname>pack_start()</methodname> method:
                 guint padding = 0);</programlisting>
 
 <para>
-The first argument is the widget you're packing. In our example these are all <classname>Button</classname>s.
+The first argument is the widget you’re packing. In our example these are all <classname>Button</classname>s.
 </para>
 
 <para>
 The <parameter>options</parameter> argument can take one of these three options:
 <itemizedlist>
 <listitem><para><literal>Gtk::PACK_SHRINK</literal>: Space is contracted to the child widget size. The widget will take up just-enough space and never expand.</para></listitem>
-<listitem><para><literal>Gtk::PACK_EXPAND_PADDING</literal>: Extra space is filled with padding. The widgets will be spaced out evenly, but their sizes won't change - there will be empty space between the widgets instead. </para></listitem>
+<listitem><para><literal>Gtk::PACK_EXPAND_PADDING</literal>: Extra space is
+filled with padding. The widgets will be spaced out evenly, but
+their sizes won’t change: there will be empty space between the
+widgets instead.</para></listitem>
 <listitem><para><literal>Gtk::PACK_EXPAND_WIDGET</literal>: Extra space is taken up by increasing the child widget size, without changing the amount of space between widgets.</para></listitem>
 </itemizedlist>
 </para>
@@ -2174,7 +2211,7 @@ border area to leave around the packed widget.
 
 <sect4 id="per-container-packing-options"><title>Per-container packing options</title>
 <para>
-Here's the constructor for the <classname>Box</classname> widget,
+Here’s the constructor for the <classname>Box</classname> widget,
 and methods that set per-container packing options:
 <programlisting>Gtk::Box(Gtk::Orientation orientation = Gtk::ORIENTATION_HORIZONTAL, int spacing = 0);
 void set_spacing(int spacing);
@@ -2186,7 +2223,7 @@ each widget.
 </para>
 
 <para>
-What's the difference between spacing (set when the box is created)
+What’s the difference between spacing (set when the box is created)
 and padding (set when elements are packed)? Spacing is added between
 objects, and padding is added on either side of a widget. The following
 figure should make it clearer:
@@ -2393,7 +2430,11 @@ To programmatically change the selected page, use the
 <title>Assistant</title>
 
 <para>
-An <classname>Assistant</classname> splits a complex operation into steps. Each step is a page, containing a header, a child widget and an action area. The Assistant's action area has navigation buttons which update automatically depending on the type of the page, set with <methodname>set_page_type()</methodname>.
+An <classname>Assistant</classname> splits a complex operation into steps. Each
+step is a page, containing a header, a child widget and an action area. The
+Assistant’s action area has navigation buttons which update automatically
+depending on the type of the page, set with
+<methodname>set_page_type()</methodname>.
 </para>
 
 <para>
@@ -2593,7 +2634,7 @@ int number = row[m_Columns.m_col_text];</programlisting>
 <title>&quot;Hidden&quot; Columns</title>
 <para>
 You might want to associate extra data with each row. If so, just add
-it as a Model column, but don't add it to the View.
+it as a Model column, but don’t add it to the View.
 </para>
 </sect2>
 
@@ -2604,7 +2645,7 @@ it as a Model column, but don't add it to the View.
 <para>
 The View is the actual widget (<classname>Gtk::TreeView</classname>) that
 displays the model (<classname>Gtk::TreeModel</classname>) data and allows the
-user to interact with it. The View can show all of the model's columns, or just
+user to interact with it. The View can show all of the model’s columns, or just
 some, and it can show them in various ways.
 </para>
 
@@ -2744,7 +2785,7 @@ specific <classname>CellRenderer</classname> that you expect, so you can use spe
 </para>
 <para>
 For instance, for a <classname>CellRendererText</classname>, you would set the
-cell's <literal>editable</literal> property to true, like so:
+cell’s <literal>editable</literal> property to true, like so:
 </para>
 <programlisting>cell.property_editable() = true;</programlisting>
 <para>
@@ -2865,7 +2906,7 @@ signal like so:
 <para>
 Maybe the user should not be able to select every item in your list or tree.
 For instance, in the gtk-demo, you can select a demo to see the source code,
-but it doesn't make any sense to select a demo category.
+but it doesn’t make any sense to select a demo category.
 </para>
 <para>
 To control which rows can be selected, use the
@@ -2918,7 +2959,11 @@ The standard tree models (<classname>TreeStore</classname> and <classname>ListSt
 <sect2 id="treeview-sort-headers">
 <title>Sorting by clicking on columns</title>
 <para>
-So that a user can click on a <classname>TreeView</classname>'s column header to sort the <classname>TreeView</classname>'s contents, call <methodname>Gtk::TreeView::Column::set_sort_column()</methodname>, supplying the model column on which model should be sorted when the header is clicked. For instance:
+So that a user can click on a <classname>TreeView</classname>’s column header to
+sort the <classname>TreeView</classname>’s contents, call
+<methodname>Gtk::TreeView::Column::set_sort_column()</methodname>, supplying the
+model column on which model should be sorted when the header is clicked. For
+instance:
 </para>
 <programlisting>Gtk::TreeView::Column* pColumn = treeview.get_column(0);
 if(pColumn)
@@ -2973,7 +3018,7 @@ the normal <link linkend="chapter-draganddrop">Drag and Drop</link> API.
 <title>Reorderable rows</title>
 <para>
 If you call <methodname>Gtk::TreeView::set_reorderable()</methodname> then your
-TreeView's items can be moved within the treeview itself. This is demonstrated
+TreeView’s items can be moved within the treeview itself. This is demonstrated
 in the <classname>TreeStore</classname> example.
 </para>
 <para>However, this does not allow you any control of which items can be
@@ -2995,8 +3040,8 @@ provided and allow or disallow dragging or dropping by returning
 <title>Popup Context Menu</title>
 <para>
 Lots of people need to implement right-click context menus for
-<classname>TreeView</classname>'s so we will explain how to do that  here to
-save you some time. Apart from one or two points, it's  much the same as a
+<classname>TreeView</classname>’s so we will explain how to do that  here to
+save you some time. Apart from one or two points, it’s  much the same as a
 normal context menu, as described in the <link linkend="sec-menus-popup">menus
     chapter</link>.
 </para>
@@ -3132,7 +3177,12 @@ section.
 <para>The <classname>ComboBox</classname> widget offers a list (or tree) of choices in a dropdown menu. If appropriate, it can show extra information about each item, such as text, a picture, a checkbox, or a progress bar. The <classname>ComboBox</classname> widget usually restricts the user to the available choices, but it can optionally have an <classname>Entry</classname>, allowing the user to enter arbitrary text if none of the available choices are suitable.
 </para>
 
-<para>The list is provided via a <classname>TreeModel</classname>, and columns from this model are added to the ComboBox's view with the <methodname>ComboBox::pack_start()</methodname> method. This provides flexibility and compile-time type-safety, but the <classname>ComboBoxText</classname> class provides a simpler text-based specialization in case that flexibility is not required.
+<para>The list is provided via a <classname>TreeModel</classname>, and columns
+from this model are added to the ComboBox’s view with the
+<methodname>ComboBox::pack_start()</methodname> method. This provides
+flexibility and compile-time type-safety, but the
+<classname>ComboBoxText</classname> class provides a simpler text-based
+specialization in case that flexibility is not required.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;ComboBox.html">Reference</ulink></para>
@@ -3211,7 +3261,7 @@ You might need to react to every change of selection in the ComboBox, for instan
 
 <para>A <classname>ComboBox</classname> may contain an
 <classname>Entry</classname> widget for entering of arbitrary text, by
-specifying <literal>true</literal> for the constructor's
+specifying <literal>true</literal> for the constructor’s
 <parameter>has_entry</parameter> parameter.</para>
 
 <sect2 id="sec-comboboxentry-text-column">
@@ -3226,7 +3276,11 @@ When you select a choice from the drop-down menu, the value from this column wil
 
 <sect2 id="sec-comboboxentry-model">
 <title>The entry</title>
-<para>Because the user may enter arbitrary text, an active model row isn't enough to tell us what text the user has entered. Therefore, you should retrieve the <classname>Entry</classname> widget with the <methodname>ComboBox::get_entry()</methodname> method and call <methodname>get_text()</methodname> on that.
+<para>Because the user may enter arbitrary text, an active model row isn’t
+enough to tell us what text the user has entered. Therefore, you should retrieve
+the <classname>Entry</classname> widget with the
+<methodname>ComboBox::get_entry()</methodname> method and call
+<methodname>get_text()</methodname> on that.
 </para>
 </sect2>
 
@@ -3238,7 +3292,7 @@ When the user enters arbitrary text, it may not be enough to connect to the
 It is not emitted when the user presses the Enter key. Pressing the Enter key or
 moving the keyboard focus to another widget may signal that the user has finished
 entering text. To be notified of these events, connect to the
-<classname>Entry</classname>'s <literal>activate</literal> and
+<classname>Entry</classname>’s <literal>activate</literal> and
 <literal>focus_out_event</literal> signals, like so
 <programlisting>Gtk::Entry* entry = m_Combo.get_entry();
 if (entry)
@@ -3257,8 +3311,8 @@ if (entry)
     &amp;ExampleWindow::on_entry_focus_out_event) );
 }</programlisting>
 The <literal>changed</literal> signals of <classname>ComboBox</classname> and
-<classname>Entry</classname> are both emitted for every change. It doesn't matter
-which one you connect to. But only <classname>Entry</classname>'s
+<classname>Entry</classname> are both emitted for every change. It doesn’t matter
+which one you connect to. But only <classname>Entry</classname>’s
 <literal>focus_out_event</literal> signal is useful here.
 </para>
 <para>
@@ -3381,7 +3435,7 @@ Glib::RefPtr&lt;Gtk::TextBuffer&gt; refBuffer =
 
 <para>
 You can also use <methodname>get_tag_table()</methodname> to get, and maybe modify,
-the <classname>TextBuffer</classname>'s default <classname>TagTable</classname>
+the <classname>TextBuffer</classname>’s default <classname>TagTable</classname>
 instead of creating one explicitly.
 </para>
 
@@ -3427,13 +3481,13 @@ remember a position in these situations. For instance,
 
 <para>
 You can then use the <methodname>get_iter()</methodname> method later to create an
-iterator for the <classname>Mark</classname>'s new position.
+iterator for the <classname>Mark</classname>’s new position.
 </para>
 
 <para>
 There are two built-in <classname>Mark</classname>s - <literal>insert</literal>
 and <literal>selection_bound</literal>, which you can access with
-<classname>TextBuffer</classname>'s <methodname>get_insert()</methodname> and
+<classname>TextBuffer</classname>’s <methodname>get_insert()</methodname> and
 <methodname>get_selection_bound()</methodname> methods.
 </para>
 
@@ -3476,7 +3530,7 @@ etc.
 <para>
 <classname>Gtk::TextView</classname> has various
 <methodname>scroll_to_*()</methodname> methods. These allow you to ensure that a
-particular part of the text buffer is visible. For instance, your application's
+particular part of the text buffer is visible. For instance, your application’s
 Find feature might use <methodname>Gtk::TextView::scroll_to_iter()</methodname> to
 show the found text.
 </para>
@@ -3563,7 +3617,7 @@ First create the <classname>Gio::SimpleAction</classname>s and add them to a
 your window with <methodname>Gtk::Widget::insert_action_group()</methodname>.
 </para>
 <para>
-The arguments to <methodname>add_action()</methodname> specify the action's
+The arguments to <methodname>add_action()</methodname> specify the action’s
 name, which is used in the menu items and toolbar buttons. You can also specify
 a signal handler when calling <methodname>add_action()</methodname>. This signal
 handler will be called when the action is activated via either a menu item or
@@ -3583,7 +3637,7 @@ insert_action_group("example", m_refActionGroup);]]>
 </programlisting>
 
 <para>
-If you use an <classname>Gtk::ApplicationWindow</classname>, you don't have to
+If you use an <classname>Gtk::ApplicationWindow</classname>, you don’t have to
 create your own action group. <classname>Gio::ActionGroup</classname> and
 <classname>Gio::ActionMap</classname> are base classes of
 <classname>Gtk::ApplicationWindow</classname>.
@@ -3613,7 +3667,7 @@ app->set_accel_for_action("example.paste", "<Primary>v");]]>
 <para>
 If your main window is derived from <classname>ApplicationWindow</classname> and
 you instantiate your menubar with <methodname>Gtk::Application::set_menubar()</methodname>,
-then you don't have to call <methodname>set_accel_for_action()</methodname>.
+then you don’t have to call <methodname>set_accel_for_action()</methodname>.
 See <link linkend="menu-example-main">Application Menu and Main Menu example</link>
 for an example.
 </para>
@@ -3729,7 +3783,7 @@ m_pMenuPopup = new Gtk::Menu(gmenu);]]>
 </programlisting>
 
 <para>
-To show the popup menu, use <classname>Gtk::Menu</classname>'s
+To show the popup menu, use <classname>Gtk::Menu</classname>’s
 <methodname>popup()</methodname> method, providing the button identifier and the
 time of activation, as provided by the <literal>button_press_event</literal>
 signal, which you will need to handle anyway. For instance:
@@ -3766,7 +3820,7 @@ or manually included as literal strings in the code.
 <para>
 The <classname>Gio::Resource</classname> API and the <application>glib-compile-resources</application>
 program provide a convenient and efficient alternative to this, which has some nice properties. You
-maintain the files as normal files, so it's easy to edit them, but during the build the files
+maintain the files as normal files, so it’s easy to edit them, but during the build the files
 are combined into a binary bundle that is linked into the executable. This means that loading
 the resource files is efficient (as they are already in memory, shared with other instances) and
 simple (no need to check for things like I/O errors or locate the files in the filesystem). It
@@ -3799,7 +3853,7 @@ This will create a resource bundle with the files
 <para>
 You can then use <application>glib-compile-resources</application> to compile the xml to a binary bundle
 that you can load with <methodname>Gio::Resource::create_from_file()</methodname>.
-However, it's more common to use the <parameter class='command'>--generate-source</parameter>
+However, it’s more common to use the <parameter class='command'>--generate-source</parameter>
 argument to create a C source file to link directly into your application. E.g.
 <screen>$ glib-compile-resources --target=resources.c --generate-source toolbar.gresource.xml</screen>
 </para>
@@ -3812,7 +3866,7 @@ to get a direct pointer to the data. You can also use URIs like <uri>resource://
 with <classname>Gio::File</classname> to access the resource data.
 </para>
 <para>
-Often you don't need a <classname>Gio::Resource</classname> instance,
+Often you don’t need a <classname>Gio::Resource</classname> instance,
 because resource data can be loaded with methods such as
 <methodname>Gdk::Pixbuf::create_from_resource()</methodname>,
 <methodname>Gtk::Builder::add_from_resource()</methodname> and
@@ -3881,8 +3935,13 @@ A class is derived from <classname>Gtk::Window</classname>.
 
 <para>A <classname>ToolPalette</classname> is similar to a <classname>Toolbar</classname> but can contain a grid of items, categorized into groups. The user may hide or expand each group. As in a toolbar, the items may be displayed as only icons, as only text, or as icons with text.
 </para>
-<para>The <classname>ToolPalette</classname>'s items might be dragged or simply activated. For instance, the user might drag objects to a canvas to create new items there. Or the user might click an item to activate a certain brush size in a drawing application.</para>
-<para><classname>ToolItemGroup</classname>s should be added to the tool palette via the base class's <function>Gtk::Container::add()</function> method, for instance like so:
+<para>The <classname>ToolPalette</classname>’s items might be dragged or simply
+activated. For instance, the user might drag objects to a canvas to create new
+items there. Or the user might click an item to activate a certain brush size in
+a drawing application.</para>
+<para><classname>ToolItemGroup</classname>s should be added to the tool palette
+via the base class’s <function>Gtk::Container::add()</function> method, for
+instance like so:
 </para>
 <para>
 <programlisting>
@@ -3901,7 +3960,12 @@ button->set_tooltip_text("Big Brush);
 group_brushes->insert(*button);
 </programlisting>
 </para>
-<para>You might then handle the <classname>ToolButton</classname>'s <literal>clicked</literal> signal. Alternatively, you could allow the item to be dragged to another widget, by calling <methodname>Gtk::ToolPalette::add_drag_dest()</methodname> and then using <methodname>Gtk::ToolPalette::get_drag_item()</methodname> in the other widget's <literal>drag_data_received</literal> signal handler.</para>
+<para>You might then handle the <classname>ToolButton</classname>’s
+<literal>clicked</literal> signal. Alternatively, you could allow the item to be
+dragged to another widget, by calling
+<methodname>Gtk::ToolPalette::add_drag_dest()</methodname> and then using
+<methodname>Gtk::ToolPalette::get_drag_item()</methodname> in the other widget’s
+<literal>drag_data_received</literal> signal handler.</para>
 
 <para><ulink url="&url_refdocs_base_gtk;ToolPalette.html">ToolPalette Reference</ulink></para>
 <para><ulink url="&url_refdocs_base_gtk;ToolItemGroup.html">ToolItemGroup Reference</ulink></para>
@@ -3978,7 +4042,7 @@ the two increments by which the user can change the value, while the
 <parameter>page_size</parameter> argument usually corresponds somehow to
 the visible area of a panning widget. The <parameter>upper</parameter> argument
 is used to represent the bottommost or rightmost coordinate in a panning
-widget's child.
+widget’s child.
 <!-- TODO: Investigate the upper argument properly. There was some unclear stuff about it not always being the upper value. -->
 </para>
 
@@ -3999,7 +4063,7 @@ The group which treats the values as arbitrary numbers includes the
 and the <classname>SpinButton</classname> widget. These widgets  are typically
 "adjusted" directly by the user with the mouse or keyboard. They will treat the
 <parameter>lower</parameter> and <parameter>upper</parameter> values of an
-adjustment as a range within which the user can manipulate the adjustment's
+adjustment as a range within which the user can manipulate the adjustment’s
 <parameter>value</parameter>. By default, they will only modify the
 <parameter>value</parameter> of an adjustment.
 </para>
@@ -4009,7 +4073,7 @@ The other group includes the <classname>Viewport</classname> widget and the
 <classname>ScrolledWindow</classname> widget. All of these widgets use pixel
 values for their adjustments. These are also typically adjusted indirectly
 using scrollbars. While all widgets which use adjustments can either create
-their own adjustments or use ones you supply, you'll generally want to let this
+their own adjustments or use ones you supply, you’ll generally want to let this
 particular category of widgets create its own adjustments.
 </para>
 
@@ -4029,7 +4093,7 @@ Gtk::Scrollbar vscrollbar (textview.get_vadjustment(), Gtk::ORIENTATION_VERTICAL
 <title>Adjustment Internals</title>
 
 <para>
-OK, you say, that's nice, but what if I want to create my own handlers to
+OK, you say, that’s nice, but what if I want to create my own handlers to
 respond when the user adjusts a <classname>Range</classname> widget or a
 <classname>SpinButton</classname>. To access the value of a
 <classname>Gtk::Adjustment</classname>, you can use the
@@ -4041,7 +4105,7 @@ As mentioned earlier, <classname>Gtk::Adjustment</classname> can emit signals.
 This is, of course, how updates happen automatically when you share an
 <classname>Adjustment</classname> object between a
 <classname>Scrollbar</classname> and another adjustable widget; all adjustable
-widgets connect signal handlers to their adjustment's
+widgets connect signal handlers to their adjustment’s
 <literal>value_changed</literal> signal, as can your program.
 </para>
 
@@ -4055,7 +4119,7 @@ create a signal handler like this:
   picture-&#62;set_rotation(adj-&gt;get_value());
 ...</programlisting>
 <para>
-and connect it to the scale widget's adjustment like this:
+and connect it to the scale widget’s adjustment like this:
 </para>
 <programlisting>adj-&gt;signal_value_changed().connect(sigc::bind&#60;MyPicture*&#62;(sigc::mem_fun(*this,
     &amp;cb_rotate_picture), picture));</programlisting>
@@ -4077,7 +4141,7 @@ the difference between the <parameter>lower</parameter> and
 </para>
 
 <para>
-You probably won't ever need to attach a handler to this signal, unless you're
+You probably won’t ever need to attach a handler to this signal, unless you’re
 writing a new type of range widget.
 </para>
 <programlisting>adjustment-&#62;signal_changed();</programlisting>
@@ -4124,7 +4188,7 @@ Gtk::Table (deprecated from &gtkmm; version 3.4)
 Gtk::Toolbar</programlisting>
 
 <para>
-These widgets are mainly used for decoration or layout, so you won't often need
+These widgets are mainly used for decoration or layout, so you won’t often need
 to capture events on them. They are intended to have no X-Window in order to improve performance.
 </para>
 
@@ -4132,9 +4196,9 @@ to capture events on them. They are intended to have no X-Window in order to imp
 <title>EventBox</title>
 
 <para>
-Some &gtkmm; widgets don't have associated X windows; they draw on
-their parents' windows. Because of this, they cannot receive events.
-Also, if they are incorrectly sized, they don't clip, so you can get
+Some &gtkmm; widgets don’t have associated X windows; they draw on
+their parents’ windows. Because of this, they cannot receive events.
+Also, if they are incorrectly sized, they don’t clip, so you can get
 messy overwriting etc. To receive events on one of these widgets, you can place it
 inside an <classname>EventBox</classname> widget and then call
 <methodname>Gtk::Widget::set_events()</methodname> on the EventBox before showing it.</para>
@@ -4144,8 +4208,8 @@ inside an <classname>EventBox</classname> widget and then call
 widget can also be used for clipping (and more; see the example below).
 </para>
 <!--
-<para>TODO: Why don't they have X Windows - explain clipping.
-Also, how does this affect platform such as Windows and MacOS that don't use X.
+<para>TODO: Why don’t they have X Windows - explain clipping.
+Also, how does this affect platform such as Windows and MacOS that don’t use X.
 </para>
 -->
 
@@ -4327,11 +4391,11 @@ about a program, like its logo, name, copyright, website and license.
 </para>
 <para>
 Most dialogs in this chapter are modal, that is, they freeze the rest of
-the application while they are shown. It's also possible to create a non-modal
+the application while they are shown. It’s also possible to create a non-modal
 dialog, which does not freeze other windows in the application.
 The following example shows a non-modal <classname>AboutDialog</classname>. This is
 perhaps not the kind of dialog you would normally make non-modal, but non-modal
-dialogs can be useful in other cases. E.g. <application>gedit</application>'s
+dialogs can be useful in other cases. E.g. <application>gedit</application>’s
 search-and-replace dialog is non-modal.
 </para>
 
@@ -4384,13 +4448,13 @@ search-and-replace dialog is non-modal.
   </para>
   <note>
       <title>Cairo and Pango</title>
-      <para>Although Cairo can render text, it's not meant to be a replacement for
+      <para>Although Cairo can render text, it’s not meant to be a replacement for
       Pango. Pango is a better choice if you need to perform more advanced
       text rendering such as wrapping or ellipsizing text. Drawing text with
       Cairo should only be done if the text is part of a graphic.</para>
   </note>
   <para>
-      In this section of the tutorial, we'll cover the basic Cairo drawing
+      In this section of the tutorial, we’ll cover the basic Cairo drawing
       model, describe each of the basic drawing elements in some detail (with
       examples), and then present a simple application that uses Cairo to draw
       a custom clock widget.
@@ -4398,7 +4462,7 @@ search-and-replace dialog is non-modal.
   <sect1 id="sec-cairo-drawing-model">
     <title>The Cairo Drawing Model</title>
     <para>
-        The basic concept of drawing in Cairo involves defining 'invisible'
+        The basic concept of drawing in Cairo involves defining ’invisible’
         paths and then stroking or filling them to make them visible.
     </para>
     <para>
@@ -4489,10 +4553,10 @@ myContext->set_line_width(2.0);</programlisting>
   <sect1 id="sec-cairo-drawing-lines">
     <title>Drawing Straight Lines</title>
     <para>
-        Now that we understand the basics of the Cairo graphics library, we're
-        almost ready to start drawing. We'll start with the simplest of
+        Now that we understand the basics of the Cairo graphics library, we’re
+        almost ready to start drawing. We’ll start with the simplest of
         drawing elements: the straight line. But first you need to know a
-        little bit about Cairo's coordinate system. The origin of the Cairo
+        little bit about Cairo’s coordinate system. The origin of the Cairo
         coordinate system is located in the upper-left corner of the window
         with positive x values to the right and positive y values going down.
         <tip>
@@ -4503,8 +4567,8 @@ myContext->set_line_width(2.0);</programlisting>
             defaults to one-to-one so that integer values map roughly to pixels
             on the screen, but this setting can be adjusted if desired.
             Sometimes it may be useful to scale the coordinates so that the
-            full width and height of a window both range from 0 to 1 (the 'unit
-            square') or some other mapping that works for your application.
+            full width and height of a window both range from 0 to 1 (the ’unit
+            square’) or some other mapping that works for your application.
             This can be done with the
             <methodname>Cairo::Context::scale()</methodname> function.</para>
         </tip>
@@ -4512,7 +4576,7 @@ myContext->set_line_width(2.0);</programlisting>
 
     <sect2 id="cairo-example-lines"><title>Example</title>
     <para>
-        In this example, we'll construct a small but fully functional &gtkmm;
+        In this example, we’ll construct a small but fully functional &gtkmm;
         program and draw some lines into the window. The lines are drawn by
         creating a path and then stroking it. A path is created using the
         functions <methodname>Cairo::Context::move_to()</methodname> and
@@ -4524,7 +4588,7 @@ myContext->set_line_width(2.0);</programlisting>
         function.
     </para>
     <para>
-        After you've finished creating your path, you still haven't
+        After you’ve finished creating your path, you still haven’t
         drawn anything visible yet. To make the path visible, you must use the
         function <methodname>stroke()</methodname> which will stroke the current
         path with the line width and style specified in your
@@ -4577,12 +4641,12 @@ myContext->set_line_width(2.0);</programlisting>
         <title>Line styles</title>
         <para>
             In addition to drawing basic straight lines, there are a number of
-            things that you can customize about a line. You've already seen
-            examples of setting a line's color and width, but there are others
+            things that you can customize about a line. You’ve already seen
+            examples of setting a line’s color and width, but there are others
             as well.
         </para>
         <para>
-            If you've drawn a series of lines that form a path, you may
+            If you’ve drawn a series of lines that form a path, you may
             want them to join together in a certain way. Cairo offers
             three different ways to join lines together: Miter, Bevel, and
             Round. These are show below:
@@ -4619,9 +4683,9 @@ myContext->set_line_width(2.0);</programlisting>
         If you try to draw one pixel wide lines, you may notice that the line
         sometimes comes up blurred and wider than it ought to be.
         This happens because Cairo will try to draw from the selected position,
-        to both sides (half to each), so if you're positioned right on the
+        to both sides (half to each), so if you’re positioned right on the
         intersection of the pixels, and want a one pixel wide line, Cairo will try
-        to use half of each adjacent pixel, which isn't possible (a pixel is the
+        to use half of each adjacent pixel, which isn’t possible (a pixel is the
         smallest unit possible). This happens when the width of the line is an
         odd number of pixels (not just one pixel).
       </para>
@@ -4650,8 +4714,8 @@ myContext->set_line_width(2.0);</programlisting>
             <methodname>Cairo::Context::curve_to()</methodname> and
             <methodname>Cairo::Context::rel_curve_to()</methodname> functions.
             These functions take coordinates for a destination point as well as
-            coordinates for two 'control' points. This is best explained using
-            an example, so let's dive in.
+            coordinates for two ‘control’ points. This is best explained using
+            an example, so let’s dive in.
         </para>
         <sect2 id="cairo-example-curves">
             <title>Example</title>
@@ -4671,14 +4735,14 @@ myContext->set_line_width(2.0);</programlisting>
             The only difference between this example and the straight line
             example is in the <methodname>on_draw()</methodname> function,
             but there are a few new concepts and functions introduced here, so
-            let's examine them briefly.
+            let’s examine them briefly.
         </para>
         <para>
             We make a call to
             <methodname>Cairo::Context::scale()</methodname>, passing in the width
             and height of the drawing area. This scales the user-space
             coordinate system such that the width and height of the widget
-            are both equal to 1.0 'units'. There's no particular reason to
+            are both equal to 1.0 ‘units’. There’s no particular reason to
             scale the coordinate system in this case, but sometimes it can make
             drawing operations easier.
         </para>
@@ -4731,7 +4795,7 @@ context->restore();</programlisting>
       <sect2 id="cairo-example-arcs">
           <title>Example</title>
           <para>
-              Here's an example of a simple program that draws an arc, a circle
+              Here’s an example of a simple program that draws an arc, a circle
               and an ellipse into a drawing area.
           </para>
           <figure id="figure-drawingarea-arc">
@@ -4748,18 +4812,18 @@ context->restore();</programlisting>
               There are a couple of things to note about this example code.
               Again, the only real difference between this example and the
               previous ones is the <methodname>on_draw()</methodname>
-              function, so we'll limit our focus to that function. In
+              function, so we’ll limit our focus to that function. In
               addition, the first part of the function is nearly identical to
-              the previous examples, so we'll skip that portion.
+              the previous examples, so we’ll skip that portion.
           </para>
           <para>
-              Note that in this case, we've expressed nearly everything in
+              Note that in this case, we’ve expressed nearly everything in
               terms of the height and width of the window, including the width
               of the lines. Because of this, when you resize the window,
               everything scales with the window. Also note that there are
               three drawing sections in the function and each is wrapped with a
               <methodname>save()</methodname>/<methodname>restore()</methodname> pair
-              so that we're back at a known state after each drawing.
+              so that we’re back at a known state after each drawing.
           </para>
           <para>
               The section for drawing an arc introduces one new function,
@@ -4770,7 +4834,7 @@ context->restore();</programlisting>
               line back to the starting point, however. If you use
               <methodname>close_path()</methodname>, the lines will be nicely
               joined together. If you use <methodname>line_to()</methodname>
-              instead, the lines will end at the same point, but Cairo won't do
+              instead, the lines will end at the same point, but Cairo won’t do
               any special joining.
           </para>
           <note>
@@ -4854,8 +4918,8 @@ context->restore();</programlisting>
           </para>
           <para>
               Here is a small bit of code to tie it all together: (Note that
-              usually you wouldn't load the image every time in the draw
-              signal handler! It's just shown here to keep it all together.)
+              usually you wouldn’t load the image every time in the draw
+              signal handler! It’s just shown here to keep it all together.)
           </para>
           <programlisting>bool MyArea::on_draw(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; cr)
 {
@@ -4900,7 +4964,7 @@ context->restore();</programlisting>
   <sect1 id="sec-drawing-clock-example">
       <title>Example Application: Creating a Clock with Cairo</title>
       <para>
-          Now that we've covered the basics of drawing with Cairo, let's try to
+          Now that we’ve covered the basics of drawing with Cairo, let’s try to
           put it all together and create a simple application that actually
           does something. The following example uses Cairo to create a custom
           <classname>Clock</classname> widget. The clock has a second hand, a
@@ -4923,10 +4987,10 @@ context->restore();</programlisting>
           the window so that &gtkmm; will be forced to redraw it.
       </para>
       <para>
-          Now let's take a look at the code that performs the actual drawing.
+          Now let’s take a look at the code that performs the actual drawing.
           The first section of <methodname>on_draw()</methodname> should be
           pretty familiar by now. This example again scales the coordinate system
-          to be a unit square so that it's easier to draw the clock as a
+          to be a unit square so that it’s easier to draw the clock as a
           percentage of window size so that it will automatically scale when
           the window size is adjusted. Furthermore, the coordinate system is
           scaled over and down so that the (0, 0) coordinate is in the very
@@ -4942,11 +5006,11 @@ context->restore();</programlisting>
           Notice that both of these actions use the
           <methodname>_preserve</methodname> variant to preserve the current path,
           and then this same path is clipped to make sure that our next lines
-          don't go outside the outline of the clock.
+          don’t go outside the outline of the clock.
       </para>
       <para>
           After drawing the outline, we go around the clock and draw ticks for
-          every hour, with a larger tick at 12, 3, 6, and 9. Now we're finally
+          every hour, with a larger tick at 12, 3, 6, and 9. Now we’re finally
           ready to implement the time-keeping functionality of the clock, which
           simply involves getting the current values for hours, minutes and
           seconds, and drawing the hands at the correct angles.
@@ -5092,7 +5156,7 @@ The destination widget will emit these signals, in this order:
 <title>Move</title>
 <para>During a move, the source widget will also emit this signal:
 <itemizedlist>
-<listitem><para><literal>drag_data_delete</literal>: Gives the source the opportunity to delete the original data if that's appropriate.</para></listitem>
+<listitem><para><literal>drag_data_delete</literal>: Gives the source the opportunity to delete the original data if that’s appropriate.</para></listitem>
 </itemizedlist>
 </para>
 </sect2>
@@ -5155,7 +5219,7 @@ This is probably the only clipboard you will ever need.
 </para>
 
 <para>
-Your application doesn't need to wait for clipboard operations, particularly
+Your application doesn’t need to wait for clipboard operations, particularly
 between the time when the user chooses Copy and then later chooses Paste. Most
 <classname>Gtk::Clipboard</classname> methods take
 <classname>sigc::slot</classname>s which specify callback methods. When
@@ -5284,7 +5348,7 @@ In your callback, compare the vector of available targets with those that your a
 <sect2 id="sec-clipboard-example-simple"><title>Simple</title>
 <para>
 This example allows copy and pasting of application-specific data, using the
-standard text target. Although this is simple, it's not ideal because it does
+standard text target. Although this is simple, it’s not ideal because it does
 not identify the <classname>Clipboard</classname> data as being of a particular
 type.
 </para>
@@ -5305,7 +5369,9 @@ type.
 <orderedlist>
 <listitem><simpara>Defines a custom clipboard target, though the format of that target is still text.</simpara></listitem>
 <listitem><simpara>It supports pasting of 2 targets - both the custom one and a text one that creates an arbitrary text representation of the custom data.</simpara></listitem>
-<listitem><simpara>It uses <methodname>request_targets()</methodname> and the <literal>owner_change</literal> signal and disables the Paste button if it can't use anything on the clipboard.</simpara></listitem>
+<listitem><simpara>It uses <methodname>request_targets()</methodname> and the
+<literal>owner_change</literal> signal and disables the Paste button if it can’t
+use anything on the clipboard.</simpara></listitem>
 </orderedlist>
 </para>
 
@@ -5329,8 +5395,10 @@ type.
 <title>Printing</title>
 
 <para>
-At the application development level, &gtkmm;'s printing API
-provides dialogs that are consistent across applications and allows use of Cairo's common drawing API, with Pango-driven text rendering. In the implementation of this common API, platform-specific backends and printer-specific drivers are used.
+At the application development level, &gtkmm;’s printing API provides dialogs
+that are consistent across applications and allows use of Cairo’s common drawing
+API, with Pango-driven text rendering. In the implementation of this common API,
+platform-specific backends and printer-specific drivers are used.
 </para>
 
 <sect1 id="sec-printoperation">
@@ -5422,7 +5490,7 @@ during which various signals are emitted:
 
   <listitem>
     <para>
-      <literal>status_changed</literal>: Emitted whenever a print job's
+      <literal>status_changed</literal>: Emitted whenever a print job’s
       status changes, until it is finished. Call the
       <methodname>PrintOperation::set_track_print_status()</methodname> method to
       monitor the job status after spooling. To see the status, use
@@ -5525,7 +5593,7 @@ the <literal>done</literal> and <literal>status_changed</literal> signals:
 
 <para>For instance,
 <programlisting>
-// in class ExampleWindow's method...
+// in class ExampleWindow’s method...
 Glib::RefPtr&lt;PrintOperation&gt; op = PrintOperation::create();
 // ...set up op...
 op->signal_done().connect(sigc::bind(sigc::mem_fun(*this, &amp;ExampleWindow::on_printoperation_done), op));
@@ -5567,7 +5635,7 @@ void ExampleWindow::on_printoperation_status_changed(const Glib::RefPtr&lt;Print
 <sect1 id="sec-printing-export-to-pdf">
 <title>Export to PDF</title>
 <para>
-The 'Print to file' option is available in the print dialog, without the need for extra implementation. However, it is sometimes useful to generate a pdf file directly from code. For instance,
+The ‘Print to file’ option is available in the print dialog, without the need for extra implementation. However, it is sometimes useful to generate a pdf file directly from code. For instance,
 
 <programlisting>
 Glib::RefPtr&lt;Gtk::PrintOperation&gt; op = Gtk::PrintOperation::create();
@@ -5592,7 +5660,7 @@ You may add a custom tab to the print dialog:
       Set the title of the tab via
       <methodname>PrintOperation::set_custom_tab_label()</methodname>,
       create a new widget and return it from the
-      <literal>create_custom_widget</literal> signal handler. You'll probably
+      <literal>create_custom_widget</literal> signal handler. You’ll probably
       want this to be a container widget, packed with some others.
     </para>
   </listitem>
@@ -5609,7 +5677,7 @@ You may add a custom tab to the print dialog:
 <para>
 Although the <literal>custom_widget_apply</literal> signal provides the widget you
 previously created, to simplify things you can keep the widgets you expect
-to contain some user input as class members. For example, let's say you have
+to contain some user input as class members. For example, let’s say you have
 a <classname>Gtk::Entry</classname> called <varname>m_Entry</varname> as
 a member of your <classname>CustomPrintOperation</classname> class:
 
@@ -5714,7 +5782,7 @@ and update the print settings.
     Each item in the list of recently used files is identified by its URI, and
     can have associated metadata. The metadata can be used to specify how the
     file should be displayed, a description of the file, its mime type, which
-    application registered it, whether it's private to the registering
+    application registered it, whether it’s private to the registering
     application, and several other things.
   </para>
   <sect1 id="sec-recentmanager">
@@ -5726,7 +5794,7 @@ and update the print settings.
       of recently used files per user.
     </para>
     <para>
-      You can create a new <classname>RecentManager</classname>, but you'll most
+      You can create a new <classname>RecentManager</classname>, but you’ll most
       likely just want to use the default one. You can get a reference to the
       default <classname>RecentManager</classname> with
       <methodname>get_default()</methodname>.
@@ -5773,7 +5841,7 @@ recent_manager->add_item(uri);</programlisting>
         <listitem>
           <para><varname>groups</varname>: A list of groups associated with this
             item. Groups are essentially arbitrary strings associated with a
-            particular resource. They can be thought of as 'categories' (such
+            particular resource. They can be thought of as ‘categories’ (such
             as <literal>email</literal>, <literal>graphics</literal>, etc.) or
             tags for the resource.</para>
         </listitem>
@@ -5821,7 +5889,7 @@ if (info)
         <link linkend="list-file-metadata">above</link>.
       </para>
       <para>
-        If you don't want to look for a specific URI, but instead want to get a
+        If you don’t want to look for a specific URI, but instead want to get a
         list of all recently used items, <classname>RecentManager</classname>
         provides the <methodname>get_items()</methodname> function. The return
         value of this function is a <classname>std::vector</classname> of all
@@ -5840,12 +5908,12 @@ if (info)
       <para>
         There may be times when you need to modify the list of recent files.
         For instance, if a file is moved or renamed, you may need to update the
-        file's location in the recent files list so that it doesn't point to an
-        incorrect location. You can update an item's location by using
+        file’s location in the recent files list so that it doesn’t point to an
+        incorrect location. You can update an item’s location by using
         <methodname>move_item()</methodname>.
       </para>
       <para>
-        In addition to changing a file's URI, you can also remove items from the
+        In addition to changing a file’s URI, you can also remove items from the
         list, either one at a time or by clearing them all at once. The former
         is accomplished with <methodname>remove_item()</methodname>, the latter with
         <methodname>purge_items()</methodname>.
@@ -5896,7 +5964,7 @@ if (info)
       </para>
       <note>
         <para>
-          If this is the first time you're using a program that uses the Recent
+          If this is the first time you’re using a program that uses the Recent
           Files framework, the dialog may be empty at first. Otherwise it
           should show the list of recently used documents registered by other
           applications.
@@ -5922,7 +5990,7 @@ if (info)
       <title>Filtering Recent Files</title>
       <para>
         For any of the <classname>RecentChooser</classname> classes, if you
-        don't wish to display all of the items in the list of recent files, you
+        don’t wish to display all of the items in the list of recent files, you
         can filter the list to show only those that you want. You can filter
         the list with the help of the <classname>RecentFilter</classname> class.
         This class allows you to filter recent files by their name
@@ -5934,7 +6002,7 @@ if (info)
         groups it belongs to.
       </para>
       <para>
-        After you've created and set up the filter to match only the items you
+        After you’ve created and set up the filter to match only the items you
         want, you can apply a filter to a chooser widget with the
         <methodname>RecentChooser::add_filter()</methodname> function.
       </para>
@@ -6016,7 +6084,7 @@ if (info)
               <classname>Plug</classname> to a particular
               <classname>Socket</classname> after creation, so you must pass the
               <classname>Socket</classname> ID to the
-              <classname>Plug</classname>'s constructor.
+              <classname>Plug</classname>’s constructor.
             </para>
           </listitem>
           <listitem>
@@ -6069,7 +6137,7 @@ if (info)
       After starting <filename>socket</filename>, you should see the following
       output in the terminal:
     </para>
-    <screen>I've been embedded.
+    <screen>I’ve been embedded.
 A plug was added</screen>
     <para>
       The first line of output is from <filename>plug</filename>, after it has
@@ -6084,7 +6152,7 @@ A plug was added</screen>
       <graphic format="PNG" fileref="&url_figures_base;socket.png"/>
     </screenshot>
     <para>
-      If for some reason the <classname>Socket</classname> couldn't attach the
+      If for some reason the <classname>Socket</classname> couldn’t attach the
       <classname>Plug</classname>, the window would look something like this:
     </para>
     <screenshot>
@@ -6110,9 +6178,9 @@ A plug was added</screen>
     <para>
       To receive the keyboard events, you must first call the
       <methodname>Gtk::Widget::add_events()</methodname> function with a bit
-      mask of the events you're interested in. The event signal handler will
+      mask of the events you’re interested in. The event signal handler will
       receive an argument that depends on the type of event. For keyboard
-      events it's a <type>GdkEventKey*</type>. As discribed in the
+      events it’s a <type>GdkEventKey*</type>. As discribed in the
       <link linkend="sec-xeventsignals">appendix</link>, the event signal handler
       returns a <type>bool</type> value, to indicate that the signal is fully
       handled (<literal>true</literal>) or allow event propagation
@@ -6126,7 +6194,7 @@ A plug was added</screen>
       <varname>GdkEventKey::state</varname>.
     </para>
     <para>
-      Here's a simple example:
+      Here’s a simple example:
 <programlisting>
 bool on_key_press_or_release_event(GdkEventKey* event)
 {
@@ -6185,7 +6253,7 @@ m_entry.add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
       (<classname>Gtk::Window</classname>), where it will be checked
       for any keyboard shortcuts that may be set (accelerator keys and mnemonics,
       used for selecting menu items from the keyboard). After this (and assuming
-      the event wasn't handled), it is sent to the widget which has focus,
+      the event wasn’t handled), it is sent to the widget which has focus,
       and the propagation begins from there.
     </para>
     <para>
@@ -6202,7 +6270,7 @@ m_entry.add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
     <title>Example</title>
       <para>
         In this example there are three event handlers that are called after
-        <classname>Gtk::Window</classname>'s default event handler, one in the
+        <classname>Gtk::Window</classname>’s default event handler, one in the
         <classname>Gtk::Entry</classname>, one in the <classname>Gtk::Grid</classname>
         and one in the <classname>Gtk::Window</classname>.
       </para>
@@ -6218,14 +6286,14 @@ m_entry.add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
       <para>
         When you write in the entry, a key release event will be emitted,
         which will go first to the toplevel window (<classname>Gtk::Window</classname>),
-        since we have one event handler set to be called before, that's what is
+        since we have one event handler set to be called before, that’s what is
         called first (<methodname>windowKeyReleaseBefore()</methodname>).
         Then the default handler is called (which we have overridden), and after
         that the event is sent to the widget that has focus,
         the <classname>Entry</classname> in our example and, depending on whether we let
-        it propagate, it can reach the <classname>Grid</classname>'s and the
-        <classname>Window</classname>'s event handlers. If it propagates,
-        the text you're writing will appear in the <classname>Label</classname>
+        it propagate, it can reach the <classname>Grid</classname>’s and the
+        <classname>Window</classname>’s event handlers. If it propagates,
+        the text you’re writing will appear in the <classname>Label</classname>
         above the <classname>Entry</classname>.
       </para>
 
@@ -6248,7 +6316,7 @@ m_entry.add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
 <title>Timeouts</title>
 
 <para>
-You may be wondering how to make &gtkmm; do useful work while it's idling along. Happily,
+You may be wondering how to make &gtkmm; do useful work while it’s idling along. Happily,
 you have several options. Using the following methods you can create a timeout
 method that will be called every few milliseconds.
 </para>
@@ -6295,7 +6363,7 @@ method to be called repeatedly, it should return <literal>true</literal>.
 </para>
 
 <para>
-Here's an example of this technique:
+Here’s an example of this technique:
 </para>
 
 <para><ulink url="&url_examples_base;timeout/">Source Code</ulink></para>
@@ -6388,7 +6456,7 @@ specified above. As usual the slot is created with
 
 <para>
 A little example follows. To use the example just execute it from a terminal;
-it doesn't create a window. It will create a pipe named
+it doesn’t create a window. It will create a pipe named
 <filename>testfifo</filename> in the current directory. Then start another shell
 and execute <command>echo "Hello" &#62; testfifo</command>. The example will
 print each line you enter until you execute <command>echo "Q" &#62;
@@ -6430,7 +6498,7 @@ bool idleFunc();
 
 <para>
 Since this is very similar to the methods above this explanation should
-be sufficient to understand what's going on. However, here's a little example:
+be sufficient to understand what’s going on. However, here’s a little example:
 </para>
 
 <para><ulink url="&url_examples_base;idle/">Source Code</ulink></para>
@@ -6469,7 +6537,7 @@ This flexibility allows you to use <code>new</code> and
 or to use regular class members (that are destroyed automatically when the
 class is destroyed) or to use local instances (that are destroyed when the
 instance goes out of scope). This flexibility is not present in some C++ GUI
-toolkits, which restrict the programmer to only a subset of C++'s memory
+toolkits, which restrict the programmer to only a subset of C++’s memory
 management features.
 </para>
 
@@ -6548,9 +6616,9 @@ Here, the programmer deletes <varname>pButton</varname> to prevent a memory leak
 <title>Managed Widgets</title>
 
 <para>
-Alternatively, you can let a widget's container control when the widget is
+Alternatively, you can let a widget’s container control when the widget is
 destroyed. In most cases, you want a widget to last only as long as the
-container it is in. To delegate the management of a widget's lifetime to its
+container it is in. To delegate the management of a widget’s lifetime to its
 container, first create it with <function>Gtk::manage()</function> and
 pack it into its container with <methodname>Gtk::Container::add()</methodname>,
 <methodname>Gtk::Box::pack_start()</methodname>, or a similar method. Now the
@@ -6579,7 +6647,7 @@ MyContainer::MyContainer()
 </programlisting>
 Now, when objects of type <classname>MyContainer</classname> are destroyed, the
 button will also be deleted. It is no longer necessary to delete <varname>pButton</varname>
-to free the button's memory; its deletion has been delegated to the
+to free the button’s memory; its deletion has been delegated to the
 <classname>MyContainer</classname> object.
 </para>
 
@@ -6630,8 +6698,8 @@ if(pixbuf)
 
 <para>
 When <varname>pixbuf</varname> goes out of scope an
-<methodname>unref()</methodname> will happen in the background and you don't need
-to worry about it anymore. There's no <code>new</code>, so there's no
+<methodname>unref()</methodname> will happen in the background and you don’t need
+to worry about it anymore. There’s no <code>new</code>, so there’s no
 <code>delete</code>.
 </para>
 <para>
@@ -6716,7 +6784,7 @@ Glib::RefPtr&lt;Gtk::Builder&gt; builder = Gtk::Builder::create_from_file(&quot;
 
 <para>
 To access a widget, for instance to <methodname>show()</methodname> a dialog, use
-the <methodname>get_widget()</methodname> method, providing the widget's name. This
+the <methodname>get_widget()</methodname> method, providing the widget’s name. This
 name should be specified in the <application>Glade</application> Properties
 window. If the widget could not be found, or is of the wrong type, then the
 pointer will be set to nullptr.
@@ -6772,7 +6840,7 @@ This simple example shows how to load a <application>Glade</application> file at
 <para>
 You can use <application>Glade</application> to layout your own custom widgets
 derived from &gtkmm; widget classes. This keeps your code organized and
-encapsulated. Of course you won't see the exact appearance and properties of
+encapsulated. Of course you won’t see the exact appearance and properties of
 your derived widget in <application>Glade</application>, but you can specify
 its location and child widgets and the properties of its &gtkmm; base class.
 </para>
@@ -6792,7 +6860,7 @@ All relevant classes of &gtkmm; typedef their underlying C type as
 typedefs <classname>BaseObjectType</classname> as <type>GtkDialog</type>, for instance).
 </para>
 <para>
-You must call the base class's constructor in the initialization list, providing the C pointer. For
+You must call the base class’s constructor in the initialization list, providing the C pointer. For
 instance,
 <programlisting>
 DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)
@@ -6823,7 +6891,7 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk:
 </para>
 
 <para>
-Starting with &gtkmm; 3.19.7, it's possible to pass additional arguments from
+Starting with &gtkmm; 3.19.7, it’s possible to pass additional arguments from
 <methodname>get_widget_derived()</methodname> to the constructor of the derived
 widget. For instance, this call to <methodname>get_widget_derived()</methodname>
 <programlisting>
@@ -6863,11 +6931,11 @@ This example shows how to load a <application>Glade</application> file at runtim
     &gtkmm; applications can easily support multiple languages, including
     non-European languages such as Chinese and right-to-left languages such as
     Arabic. An appropriately-written and translated &gtkmm; application will use
-    the appropriate language at runtime based on the user's environment.
+    the appropriate language at runtime based on the user’s environment.
   </para>
   <para>
     You might not anticipate the need to support additional languages, but
-    you can never rule it out. And it's easier to develop the application
+    you can never rule it out. And it’s easier to develop the application
     properly in the first place rather than retrofitting later.
   </para>
 
@@ -6883,7 +6951,7 @@ This example shows how to load a <application>Glade</application> file at runtim
     The main activity in the internationalization process is finding strings
     seen by users and marking them for translation. You do not need to do it all
     at once - if you set up the necessary project infrastructure correctly then
-    your application will work normally regardless of how many strings you've
+    your application will work normally regardless of how many strings you’ve
     covered.
   </para>
 
@@ -6924,7 +6992,7 @@ This example shows how to load a <application>Glade</application> file at runtim
     </note>
 
     <para>
-      An alternative to <application>gnome-common</application>'s
+      An alternative to <application>gnome-common</application>’s
       <filename>autogen.sh</filename> may look like this:
     </para>
     <programlisting>#! /bin/sh -e
@@ -6937,7 +7005,7 @@ intltoolize --copy --force --automake
 test -n "$NOCONFIGURE" || "$srcdir/configure" "$@"</programlisting>
 
     <para>
-      Create a sub-directory named <filename>po</filename> in your project's root
+      Create a sub-directory named <filename>po</filename> in your project’s root
       directory. This directory will eventually contain all of your
       translations. Within it, create a file named <filename>LINGUAS</filename>
       and a file named <filename>POTFILES.in</filename>. It is common practice to
@@ -6959,7 +7027,7 @@ test -n "$NOCONFIGURE" || "$srcdir/configure" "$@"</programlisting>
 de
 ja</programlisting>
     <para>
-      (In addition, you'd have the files <filename>ja.po</filename> and
+      (In addition, you’d have the files <filename>ja.po</filename> and
       <filename>de.po</filename> in your
       <filename>po</filename> directory which contain the German and Japanese
       translations, respectively.)
@@ -7028,7 +7096,7 @@ AC_SUBST(PROGRAMNAME_LOCALEDIR)</programlisting>
       <itemizedlist>
         <listitem>
           <para>Add <literal>po</literal> to the <varname>SUBDIRS</varname>
-            variable. Without this, your translations won't get built and
+            variable. Without this, your translations won’t get built and
             installed when you build the program</para>
         </listitem>
         <listitem>
@@ -7156,7 +7224,7 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
     <para>
       When the application runs, the <application>gettext</application>
       library checks the system-wide directory to see if there is a
-      <filename>.mo</filename> file for the user's locale environment
+      <filename>.mo</filename> file for the user’s locale environment
       (you can set the locale with, for instance, <command>export LANG=de_DE.UTF-8</command>
       from a Bash console). Later, when the program reaches a
       <function>gettext()</function> call, it looks for a translation of a
@@ -7168,7 +7236,7 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
     <title>Testing and adding translations</title>
 
     <para>
-      To convince yourself that you've done well, you may wish to add a
+      To convince yourself that you’ve done well, you may wish to add a
       translation for a new locale. In order to do that, go to the
       <filename>po</filename> subdirectory of your project and
       execute the following command:
@@ -7186,10 +7254,10 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
       also as content) to <literal>UTF-8</literal>.
     </para>
 
-    <!-- TODO: This need more explanation. What's the point of the fuzzy tag then? murrayc -->
+    <!-- TODO: This need more explanation. What’s the point of the fuzzy tag then? murrayc -->
     <note>
       <para>
-      It's possible that certain strings will be marked as
+      It’s possible that certain strings will be marked as
       <literal>fuzzy</literal> in the <filename>.po</filename> file.
       These translations will not substitute the original string. To make
       them appear, simply remove the <literal>fuzzy</literal> tag.
@@ -7251,9 +7319,9 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
 <title>Expecting UTF8</title>
 <para>
 A properly internationalized application will not make assumptions about the
-number of bytes in a character. That means that you shouldn't use pointer
+number of bytes in a character. That means that you shouldn’t use pointer
 arithmetic to step through the characters in a string, and it means you
-shouldn't use <classname>std::string</classname> or standard C functions such
+shouldn’t use <classname>std::string</classname> or standard C functions such
 as <function>strlen()</function> because they make the same assumption.
 </para>
 <para>
@@ -7282,7 +7350,7 @@ result is a corrupted <classname>Glib::ustring</classname>. You can work around
 this with a manual conversion. For instance, to retrieve the
 <classname>std::string</classname> from a <classname>ostringstream</classname>:
 <programlisting>std::ostringstream output;
-output.imbue(std::locale("")); // use the user's locale for this stream
+output.imbue(std::locale("")); // use the user’s locale for this stream
 output &lt;&lt; percentage &lt;&lt; " % done";
 label-&gt;set_text(Glib::locale_to_utf8(output.str()));</programlisting>
 </para>
@@ -7312,7 +7380,7 @@ Such comments will be shown in the <filename>.po</filename> files. For
 instance:
 </para>
 
-<programlisting>// note to translators: don't translate the "[noun]" part - it is
+<programlisting>// note to translators: don’t translate the "[noun]" part - it is
 // just here to distinguish the string from another "jumps" string
 text = strip(gettext("jumps[noun]"), "[noun]");</programlisting>
       </sect2>
@@ -7452,8 +7520,8 @@ instance, you cannot use the copyright sign (&copy;).
         <methodname>get_preferred_height_for_width_vfunc()</methodname>
         might report the sum of their heights. If you want padding between
         the child widgets then you would add that to the width and height too.
-        Your widget's container will use this result to ensure that your widget
-        gets enough space, and not less. By examining each widget's parent, and
+        Your widget’s container will use this result to ensure that your widget
+        gets enough space, and not less. By examining each widget’s parent, and
         its parent, this logic will eventually decide the size of the top-level
         window.</para>
 
@@ -7469,7 +7537,7 @@ instance, you cannot use the copyright sign (&copy;).
        top-level window has been expanded. You might choose to ignore the extra
        space and leave a blank area, or you might choose to expand your child
        widgets to fill the space, or you might choose to expand the padding
-       between your widgets. It's your container, so you decide. Don't forget to
+       between your widgets. It’s your container, so you decide. Don’t forget to
        call <methodname>set_allocation()</methodname> inside your
        <methodname>on_size_allocate()</methodname> implementation to actually use the
        allocated space that has been offered by the parent container.</para>
@@ -7478,7 +7546,7 @@ instance, you cannot use the copyright sign (&copy;).
       <classname>Gtk::Window</classname>, you should probably also call
       <methodname>Gtk::Widget::set_has_window(false)</methodname> in your
       constructor. This means that your container does not create its own
-      <classname>Gdk::Window</classname>, but uses its parent's
+      <classname>Gdk::Window</classname>, but uses its parent’s
       window. (Note the difference between <classname>Gtk::Window</classname>
       and <classname>Gdk::Window</classname>.) If your container does need
       its own <classname>Gdk::Window</classname>, and does not derive from
@@ -7491,7 +7559,7 @@ instance, you cannot use the copyright sign (&copy;).
       performance.</para>
 
   <para>By overriding <methodname>forall_vfunc()</methodname> you can allow
-      applications to operate on all of the container's child widgets. For
+      applications to operate on all of the container’s child widgets. For
       instance, <methodname>show_all_children()</methodname> uses this to find all
       the child widgets and show them.</para>
 
@@ -7539,7 +7607,7 @@ instance, you cannot use the copyright sign (&copy;).
 
     <para>When deriving from <classname>Gtk::Widget</classname>, you should
         override the following virtual methods. The methods marked (optional)
-        need not be overridden in all custom widgets. The base class's methods
+        need not be overridden in all custom widgets. The base class’s methods
         may be appropriate.
     <itemizedlist>
       <listitem><para><methodname>get_request_mode_vfunc()</methodname>: (optional) Return what <type>Gtk::SizeRequestMode</type> is preferred by the widget.</para></listitem>
@@ -7573,15 +7641,15 @@ instance, you cannot use the copyright sign (&copy;).
 <sect2 id="custom-style-properties">
 <title>Custom Style Properties</title>
 
-<para>You can add style properties to your widget class, whether it's derived directly
+<para>You can add style properties to your widget class, whether it’s derived directly
 from <classname>Gtk::Widget</classname> or from another widget class. The values of
 the style properties can be read from a CSS (Cascading Style Sheets) file. The users
 of your widget, or the users of an application program with your widget, can then
 modify the style of your widget without modifying the source code.
 Useful classes are <classname>Gtk::StyleProperty</classname> and <classname>Gtk::CssProvider</classname>.
 With <methodname>Gtk::Widget::get_style_property()</methodname> you can read the values
-of both your own style properties and those of your widget's base class. Note that style
-properties are not wrapped in &gtkmm;. See <application>GTK+</application>'s
+of both your own style properties and those of your widget’s base class. Note that style
+properties are not wrapped in &gtkmm;. See <application>GTK+</application>’s
 documentation for lists of existing style properties.
 The following example shows a simple use of a custom style property.
 </para>
@@ -7617,7 +7685,7 @@ The following example shows a simple use of a custom style property.
 Care is required when writing programs based on &gtkmm; using
 multiple threads of execution, arising from the fact that
 <application>libsigc++</application>, and in particular
-<classname>sigc::trackable</classname>, are not thread-safe. That's
+<classname>sigc::trackable</classname>, are not thread-safe. That’s
 because none of the complex interactions that occur behind the scenes
 when using <application>libsigc++</application> are protected by a
 mutex or other means of synchronization.
@@ -7707,7 +7775,7 @@ than the one which created it.
 If a particular class object derives from
 <classname>sigc::trackable</classname>, only one thread should create
 <classname>sigc::slot</classname> objects representing any of the
-class's non-static methods by calling
+class’s non-static methods by calling
 <function>sigc::mem_fun()</function>. The first thread to create such
 a slot should be regarded as owning the relevant object for the
 purpose of creating further slots referencing <emphasis>any</emphasis>
@@ -7804,7 +7872,7 @@ should be done within reasonable bounds. On unix-like systems
 pipe, which could in theory at least fill up on a very heavily loaded
 system running a program with a very large number of
 <classname>Dispatcher</classname> objects in use. Were the pipe to
-fill up before the receiver thread's main loop has had an opportunity
+fill up before the receiver thread’s main loop has had an opportunity
 to read from it to empty it, and the receiver thread attempt to emit
 and so write to it when it is in that condition, the receiver thread
 would block on the write, so deadlocking. Where the receiver thread is
@@ -7870,7 +7938,7 @@ and hints for creating &gtkmm; applications.
 <para>Create your own signals instead of passing pointers around. Objects can
     communicate with each other via signals and signal handlers. This is much
     simpler than objects holding pointers to each other and calling each
-    other's methods. &gtkmm;'s classes uses special versions of
+    other’s methods. &gtkmm;’s classes uses special versions of
     <classname>sigc::signal</classname>, but you should use normal
     <classname>sigc::signal</classname>s, as described in the
     <application>libsigc++</application> documentation.</para>
@@ -7905,14 +7973,17 @@ Declare a variable of the type of <classname>Widget</classname> you wish to
 use, generally as member variable of a derived container class. You could also
 declare a pointer to the widget type, and then create it with
 <code>new</code> in your code. Even when using the widget via a pointer,
-it's still probably best to make that pointer a member variable of a container
+it’s still probably best to make that pointer a member variable of a container
+>>>>>>> cd88df5... Replace typewriter quotes with curly UTF-8 quotes
 class so that you can access it later.
 </para>
 </listitem>
 
 <listitem>
 <para>
- Set the attributes of the widget. If the widget has no default constructor, then you will need to initialize the widget in the initalizer list of your container class's constructor.
+Set the attributes of the widget. If the widget has no default constructor, then
+you will need to initialize the widget in the initalizer list of your container
+class’s constructor.
 </para>
 </listitem>
 
@@ -7997,8 +8068,8 @@ An application consists of a number of files:
 
 <para>
 &gtkmm; includes application support that is built on top of <classname>Gio::Application</classname>.
-In this chapter we'll build a simple application by starting from scratch, adding more
-and more pieces over time. Along the way, we'll learn about <classname>Gtk::Application</classname>,
+In this chapter we’ll build a simple application by starting from scratch, adding more
+and more pieces over time. Along the way, we’ll learn about <classname>Gtk::Application</classname>,
 <classname>Gtk::Builder</classname>, resources, application menus, settings,
 <classname>Gtk::HeaderBar</classname>, <classname>Gtk::Stack</classname>,
 <classname>Gtk::SearchBar</classname>, <classname>Gtk::ListBox</classname>, and more.
@@ -8029,13 +8100,13 @@ All the application logic is in the application class, which is a subclass of
 functionality. All it does is open a window when it is activated without arguments,
 and open the files it is given, if it is started with arguments. (Or rather, our
 application class tries to open the files, but our subclassed application window
-does not yet do what it's told to do.)
+does not yet do what it’s told to do.)
 </para>
 
 <para>
-To handle these two cases, we override <methodname>signal_activate()</methodname>'s
+To handle these two cases, we override <methodname>signal_activate()</methodname>’s
 default handler, which gets called when the application is launched without commandline
-arguments, and <methodname>signal_open()</methodname>'s default handler, which gets
+arguments, and <methodname>signal_open()</methodname>’s default handler, which gets
 called when the application is launched with commandline arguments.
 </para>
 
@@ -8054,7 +8125,7 @@ to the binary before this desktop file can be used.
 </para>
 
 <para>
-Here is what we've achieved so far:
+Here is what we’ve achieved so far:
 </para>
 
 <figure id="figure-buildapp-trivial-app">
@@ -8085,7 +8156,7 @@ In this step, we use a <classname>Gtk::Builder</classname> instance to associate
 Our simple ui file puts a <classname>Gtk::HeaderBar</classname> on top of a
 <classname>Gtk::Stack</classname> widget. The header bar contains a
 <classname>Gtk::StackSwitcher</classname>, which is a standalone widget to show a row
-of 'tabs' for the pages of a <classname>Gtk::Stack</classname>. 
+of ‘tabs’ for the pages of a <classname>Gtk::Stack</classname>. 
 </para>
 
 <para>
@@ -8101,7 +8172,7 @@ for more information about <methodname>get_widget_derived()</methodname>.
 
 <para>
 You may have noticed that we use the <methodname>_from_resource()</methodname> variant
-of the method that reads the ui file. Now we need to use <application>GLib</application>'s
+of the method that reads the ui file. Now we need to use <application>GLib</application>’s
 resource functionality to include the ui file in the binary. This is commonly done by
 listing all resources in a .gresource.xml file.
 This file has to be converted into a C source file that will be compiled and linked
@@ -8138,7 +8209,7 @@ given on the commandline.
 <para>
 To this end, we add a data member to our application window and keep a pointer to the
 <classname>Gtk::Stack</classname> there. We get the pointer with a call to
-<methodname>Gtk::Builder::get_widget()</methodname> in the application window's constructor.
+<methodname>Gtk::Builder::get_widget()</methodname> in the application window’s constructor.
 </para>
 
 <para>
@@ -8175,7 +8246,7 @@ Our application is beginning to take shape:
 An application menu is shown by GNOME Shell at the top of the screen. It is meant
 to collect infrequently used actions that affect the whole application.
 The application menu is shown either at the top of the screen, or at the top of
-the application's window, depending on which desktop shell you use.
+the application’s window, depending on which desktop shell you use.
 </para>
 
 <para>
@@ -8242,7 +8313,7 @@ to do this in autotools-based projects. See the description of
 Next, we need to connect our settings to the widgets that they are supposed to control.
 One convenient way to do this is to use <methodname>Gio::Settings::bind()</methodname>
 to bind settings keys to object properties, as we do for the transition setting in
-<classname>ExampleAppWindow</classname>'s constructor.
+<classname>ExampleAppWindow</classname>’s constructor.
 <programlisting>
 <![CDATA[m_settings = Gio::Settings::create("org.gtkmm.exampleapp");
 m_settings->bind("transition", m_stack->property_transition_type());]]>
@@ -8265,12 +8336,12 @@ At this point, the application will already react if you change one of the setti
 e.g. using the <command>gsettings</command> commandline tool. Of course, we expect
 the application to provide a preference dialog for these. So lets do that now.
 Our preference dialog will be a subclass of <classname>Gtk::Dialog</classname>, and
-we'll use the same techniques that we've already seen in <classname>ExampleAppWindow</classname>:
+we’ll use the same techniques that we’ve already seen in <classname>ExampleAppWindow</classname>:
 a <classname>Gtk::Builder</classname> ui file and settings bindings.
 </para>
 
 <para>
-When we've created the <filename>prefs.ui</filename> file and the <classname>ExampleAppPrefs</classname>
+When we’ve created the <filename>prefs.ui</filename> file and the <classname>ExampleAppPrefs</classname>
 class, we revisit the <methodname>ExampleApplication::on_action_preferences()</methodname>
 method in our application class, and make it open a new preference dialog.
 <programlisting>
@@ -8359,7 +8430,7 @@ As another piece of functionality, we are adding a sidebar, which demonstrates
 
 <para>
 The code to populate the sidebar with buttons for the words found in each file is a
-little too involved to go into here. But we'll look at the code to add the gears menu.
+little too involved to go into here. But we’ll look at the code to add the gears menu.
 As expected by now, the gears menu is specified in a <classname>Gtk::Builder</classname>
 ui file, <filename>gears_menu.ui</filename>
 </para>
@@ -8367,7 +8438,7 @@ ui file, <filename>gears_menu.ui</filename>
 <para>
 To connect the menu item to the new <literal>show-words</literal> setting, we use a
 <classname>Gio::Action</classname> corresponding to the given <classname>Gio::Settings</classname>
-key. In <classname>ExampleAppWindow</classname>'s constructor:
+key. In <classname>ExampleAppWindow</classname>’s constructor:
 <programlisting>
 <![CDATA[// Connect the menu to the MenuButton m_gears, and bind the show-words setting
 // to the win.show-words action and the "Words" menu item.
@@ -8410,7 +8481,7 @@ does not exist. We have to call a <application>glib</application> function direc
 <para>
 To set this up, we add two labels to the header bar in our <filename>window.ui</filename> file,
 named <literal>lines_label</literal> and <literal>lines</literal>, and get pointers to them
-in the application window's constructor, as we've seen a couple of times by now.
+in the application window’s constructor, as we’ve seen a couple of times by now.
 We add a new "Lines" menu item to the gears menu, which triggers the
 <literal>show-lines</literal> action.
 </para>
@@ -8423,7 +8494,7 @@ is activated.
 Since we want both labels to appear and disappear together, we bind the <literal>visible</literal>
 property of the <literal>lines_label</literal> widget to the same property of the
 <literal>lines</literal> widget.
-In <classname>ExampleAppWindow</classname>'s constructor:
+In <classname>ExampleAppWindow</classname>’s constructor:
 <programlisting>add_action(Glib::wrap((GAction*)
   g_property_action_new("show-lines", m_lines->gobj(), "visible")));
 m_binding_lines_visible = Glib::Binding::bind_property(m_lines->property_visible(),
@@ -8457,7 +8528,7 @@ This brings our example application to this appearance:
 
 <para>
 Our application already uses a <classname>Gtk::HeaderBar</classname>, but so far it still
-gets a 'normal' window titlebar on top of that. This is a bit redundant, and we will now
+gets a ‘normal’ window titlebar on top of that. This is a bit redundant, and we will now
 tell &gtkmm; to use the header bar as replacement for the titlebar. To do so, we move
 it around to be a direct child of the window, and set its type to be <literal>titlebar</literal>.
 This is done in the <filename>window.ui</filename> file.
@@ -8482,7 +8553,7 @@ Here is how the application now looks, if the fallback menu is used:
 
 <para>
 The <filename>window.ui</filename> file sets a header bar title, but this title is not shown.
-That's because the stack switcher is a child of type <literal>title</literal>. The stack
+That’s because the stack switcher is a child of type <literal>title</literal>. The stack
 switcher becomes a custom title that hides the title label, as if it had been set with
 <methodname>Gtk::HeaderBar::set_custom_title()</methodname>.
 </para>
@@ -8539,7 +8610,7 @@ long before there was a reference-counting smartpointer in the C++ Standard Libr
     <title>Copying</title>
 <para>
 You can copy <classname>RefPtr</classname>s, just like normal pointers. But
-unlike normal pointers, you don't need to worry about deleting the underlying
+unlike normal pointers, you don’t need to worry about deleting the underlying
 instance.
 </para>
 <para>
@@ -8571,7 +8642,7 @@ Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf = Gdk::Pixbuf::create_from_file(filena
 int width = refPixbuf-&gt;get_width();
 </programlisting>
 </para>
-<para>But unlike most smartpointers, you can't use the <literal>*</literal> operator to
+<para>But unlike most smartpointers, you can’t use the <literal>*</literal> operator to
 access the underlying instance.
 </para>
 <para>
@@ -8628,7 +8699,7 @@ if(refModel)
 </para>
 <para>
 But unlike normal pointers, <classname>RefPtr</classname>s are automatically
-initialized to null so you don't need to remember to do that yourself.
+initialized to null so you don’t need to remember to do that yourself.
 </para>
 </sect1>
 
@@ -8674,7 +8745,7 @@ signal handlers are often named callbacks.
 </para>
 
 <para>
-Here's an example of a signal handler being connected to a signal:
+Here’s an example of a signal handler being connected to a signal:
 </para>
 
 <para>
@@ -8695,8 +8766,8 @@ int main()
 </para>
 
 <para>
-There's rather a lot to think about in this (non-functional) code.
-First let's identify the parties involved:
+There’s rather a lot to think about in this (non-functional) code.
+First let’s identify the parties involved:
 </para>
 
 <itemizedlist>
@@ -8709,7 +8780,7 @@ The signal handler is <methodname>on_button_clicked()</methodname>.
 <listitem>
 
 <para>
-We're hooking it up to the <classname>Gtk::Button</classname> object called
+We’re hooking it up to the <classname>Gtk::Button</classname> object called
 <varname>button</varname>.
 </para>
 </listitem>
@@ -8724,7 +8795,7 @@ When the Button emits its <literal>clicked</literal> signal,
 </itemizedlist>
 
 <para>
-Now let's look at the connection again:
+Now let’s look at the connection again:
 </para>
 
 <para>
@@ -8736,8 +8807,8 @@ Now let's look at the connection again:
 </para>
 
 <para>
-Note that we don't pass a pointer to <methodname>on_button_clicked()</methodname>
-directly to the signal's <methodname>connect()</methodname> method. Instead, we
+Note that we don’t pass a pointer to <methodname>on_button_clicked()</methodname>
+directly to the signal’s <methodname>connect()</methodname> method. Instead, we
 call <function>sigc::ptr_fun()</function>, and pass the result to
 <methodname>connect()</methodname>.
 </para>
@@ -8752,7 +8823,7 @@ known as function objects, or functors.
 </para>
 
 <para>
-Here's a slightly larger example of slots in action:
+Here’s a slightly larger example of slots in action:
 </para>
 
 <para>
@@ -8796,12 +8867,12 @@ called.
 </para>
 
 <para>
-We just told you that the button's <literal>clicked</literal> signal is expecting
+We just told you that the button’s <literal>clicked</literal> signal is expecting
 to call a method with no arguments. All signals have
-requirements like this - you can't hook a function with two arguments
+requirements like this - you can’t hook a function with two arguments
 to a signal expecting none (unless you use an adapter, such as
-<function>sigc::bind()</function>, of course). Therefore, it's important to
-know what type of signal handler you'll be expected to connect to a given
+<function>sigc::bind()</function>, of course). Therefore, it’s important to
+know what type of signal handler you’ll be expected to connect to a given
 signal.
 </para>
 </sect1>
@@ -8811,7 +8882,7 @@ signal.
 
 <para>
 To find out what type of signal handler you can connect to a signal, you can
-look it up in the reference documentation or the header file. Here's an example of a signal declaration you
+look it up in the reference documentation or the header file. Here’s an example of a signal declaration you
 might see in the &gtkmm; headers:
 </para>
 
@@ -8822,19 +8893,19 @@ Glib::SignalProxy1&lt;bool, Gtk::DirectionType&gt; signal_focus()
 </para>
 
 <para>
-Other than the signal's name (<literal>focus</literal>), two things are
+Other than the signal’s name (<literal>focus</literal>), two things are
 important to note here: the number following the word
 <classname>SignalProxy</classname> at the beginning (1, in this case), and the
 types in the list (<type>bool</type> and <type>Gtk::DirectionType</type>). The
 number indicates how many arguments the signal handler should have; the first
 type, <type>bool</type>, is the type that the signal handler should return; and
-the next type, <type>Gtk::DirectionType</type>, is the type of this signal's
+the next type, <type>Gtk::DirectionType</type>, is the type of this signal’s
 first, and only, argument. By looking at the reference documentation, you can
 see the names of the arguments too.
 </para>
 
 <para>
-The same principles apply for signals which have more arguments. Here's one
+The same principles apply for signals which have more arguments. Here’s one
 with three (taken from <filename>&lt;gtkmm/textbuffer.h&gt;</filename>):
 </para>
 
@@ -8845,11 +8916,11 @@ Glib::SignalProxy3&lt;void, const TextBuffer::iterator&amp;, const Glib::ustrin&
 </para>
 
 <para>
-It follows the same form. The number 3 at the end of the type's name indicates
+It follows the same form. The number 3 at the end of the type’s name indicates
 that our signal handler will need three arguments. The first type in the type
-list is <type>void</type>, so that should be our signal handler's return type.
+list is <type>void</type>, so that should be our signal handler’s return type.
 The following three types are the argument types, in order. Our signal
-handler's prototype could look like this:
+handler’s prototype could look like this:
 </para>
 
 <para>
@@ -8863,7 +8934,7 @@ void on_insert(const TextBuffer::iterator&amp; pos, const Glib::ustring&amp; tex
 <title>Disconnecting signal handlers</title>
 
 <para>
-Let's take another look at a Signal's <literal>connect</literal> method:
+Let’s take another look at a Signal’s <literal>connect</literal> method:
 </para>
 
 <para>
@@ -8886,9 +8957,9 @@ can disconnect its associated signal handler using the method
 <title>Overriding default signal handlers</title>
 
 <para>
-So far we've told you to perform actions in
+So far we’ve told you to perform actions in
 response to button-presses and the like by handling signals.
-That's certainly a good way to do things, but it's not the only
+That’s certainly a good way to do things, but it’s not the only
 way.
 </para>
 
@@ -8901,8 +8972,12 @@ lot simpler than hooking up signal handlers for everything.
 </para>
 
 <para>
-Subclassing isn't always the best way to accomplish
-things. It is only useful when you want the widget to handle its own signal by itself. If you want some other class to handle the signal then you'll need to connect a separate handler. This is even more true if you want several objects to handle the same signal, or if you want one signal handler to respond to the same signal from different objects.
+Subclassing isn’t always the best way to accomplish
+things. It is only useful when you want the widget to handle its own signal by
+itself. If you want some other class to handle the signal then you’ll need to
+connect a separate handler. This is even more true if you want several objects
+to handle the same signal, or if you want one signal handler to respond to the
+same signal from different objects.
 </para>
 
 <para>
@@ -8911,7 +8986,7 @@ virtual member methods specifically intended to be overridden.
 </para>
 
 <para>
-Let's look at an example of overriding:
+Let’s look at an example of overriding:
 </para>
 
 <para>
@@ -8928,7 +9003,7 @@ void OverriddenButton::on_clicked()
 {
     std::cout &#60;&#60; "Hello World" &#60;&#60; std::endl;
 
-    // call the base class's version of the method:
+    // call the base class’s version of the method:
     Gtk::Button::on_clicked();
 }
 </programlisting>
@@ -8946,12 +9021,12 @@ overridden.
 </para>
 
 <para>
-You don't always need to call the parent's method; there are times
+You don’t always need to call the parent’s method; there are times
 when you might not want to. Note that we called the parent method
 <emphasis>after</emphasis> writing "Hello World", but we could have called it before.
 In this simple example, it hardly matters much, but there are times
-when it will. With signals, it's not quite so easy to change details
-like this, and you can do something here which you can't do at all
+when it will. With signals, it’s not quite so easy to change details
+like this, and you can do something here which you can’t do at all
 with connected signal handlers: you can call the parent method in the <emphasis>middle</emphasis> of
 your custom code.
 </para>
@@ -8964,7 +9039,7 @@ your custom code.
 If you use one signal handler to catch the same signal from several widgets,
 you might like that signal handler to receive some extra information. For
 instance, you might want to know which button was clicked. You can do this with
-<function>sigc::bind()</function>. Here's some code from the <link
+<function>sigc::bind()</function>. Here’s some code from the <link
     linkend="sec-helloworld2">helloworld2</link> example.
 <programlisting>
 m_button1.signal_clicked().connect( sigc::bind&lt;Glib::ustring&gt;( sigc::mem_fun(*this, &amp;HelloWorld::on_button_clicked), "button 1") );
@@ -8998,8 +9073,8 @@ correspond to the underlying X-Windows events. These are suffixed by
 <methodname>Widget::signal_button_press_event()</methodname>.
 </para>
 <para>
-You might occasionally find it useful to handle X events when there's something
-you can't accomplish with normal signals. <classname>Gtk::Button</classname>,
+You might occasionally find it useful to handle X events when there’s something
+you can’t accomplish with normal signals. <classname>Gtk::Button</classname>,
 for example, does not send mouse-pointer coordinates with its
 <literal>clicked</literal> signal, but you could handle
 <literal>button_press_event</literal> if you needed this
@@ -9012,9 +9087,9 @@ the event. If the value is <literal>false</literal> then &gtkmm; will pass the e
 </para>
 
 <para>
-Handling an X event doesn't affect the Widget's other signals. If you handle
+Handling an X event doesn’t affect the Widget’s other signals. If you handle
 <literal>button_press_event</literal> for
-<classname>Gtk::Button</classname>, you'll still be able to get the
+<classname>Gtk::Button</classname>, you’ll still be able to get the
 <literal>clicked</literal> signal. They are emitted at (nearly) the same time.
 </para>
 
@@ -9026,7 +9101,7 @@ the <link linkend="chapter-widgets-without-xwindows">Widgets Without X-Windows</
 </para>
 
 <para>
-Here's a simple example:
+Here’s a simple example:
 <programlisting>
 bool on_button_press(GdkEventButton* event);
 Gtk::Button button("label");
@@ -9039,7 +9114,7 @@ When the mouse is over the button and a mouse button is pressed,
 </para>
 
 <para>
-<type>GdkEventButton</type> is a structure containing the event's parameters,
+<type>GdkEventButton</type> is a structure containing the event’s parameters,
 such as the coordinates of the mouse pointer at the time the button was
 pressed. There are several different types of <type>GdkEvent</type> structures
 for the various events.
@@ -9071,7 +9146,7 @@ if no one handles the event.
 <sect1 id="sec-exceptions-in-signal-handlers">
 <title>Exceptions in signal handlers</title>
 <para>
-When a program is aborted because of an unhandled C++ exception, it's sometimes
+When a program is aborted because of an unhandled C++ exception, it’s sometimes
 possible to use a debugger to find the location where the exception was thrown.
 This is more difficult than usual if the exception was thrown from a signal handler.
 </para>
@@ -9080,7 +9155,7 @@ This section describes primarily what you can expect on a Linux system, when you
 use <ulink url="http://www.gnu.org/software/gdb/">the GNU debugger, GDB</ulink>.
 </para>
 <para>
-First, let's look at a simple example where an exception is thrown from a normal
+First, let’s look at a simple example where an exception is thrown from a normal
 function (no signal handler).
 <programlisting>
 // without_signal.cc
@@ -9118,8 +9193,8 @@ You can see that the exception was thrown from <filename>without_signal.cc</file
 line 6 (<code>throw "Something";</code>).
 </para>
 <para>
-Now let's see what happens when an exception is thrown from a signal handler.
-Here's the source code.
+Now let’s see what happens when an exception is thrown from a signal handler.
+Here’s the source code.
 <programlisting>
 // with_signal.cc
 #include &lt;gtkmm.h&gt;
@@ -9141,7 +9216,7 @@ int main(int argc, char** argv)
 </programlisting>
 </para>
 <para>
-And here's an excerpt from a <application>GDB</application> session.
+And here’s an excerpt from a <application>GDB</application> session.
 <programlisting>
 &gt; gdb with_signal
 (gdb) run
@@ -9160,7 +9235,7 @@ The exception is caught in <application>glibmm</application>, and the program
 ends with a call to <function>g_error()</function>. Other exceptions may result
 in different behaviour, but in any case the exception from a signal handler is
 caught in <application>glibmm</application> or &gtkmm;, and
-<application>GDB</application> can't see where it was thrown.
+<application>GDB</application> can’t see where it was thrown.
 </para>
 <para>
 To see where the exception is thrown, you can use the <application>GDB</application>
@@ -9207,13 +9282,13 @@ before the program stops, is the interesting one.
 <appendix id="chapter-custom-signals">
 <title>Creating your own signals</title>
 <para>
-Now that you've seen signals and signal handlers in &gtkmm;, you
+Now that you’ve seen signals and signal handlers in &gtkmm;, you
 might like to use the same technique to allow interaction between your
-own classes. That's actually very simple by using the
+own classes. That’s actually very simple by using the
 <application>libsigc++</application> library directly.
 </para>
 <para>
-This isn't purely a &gtkmm; or GUI issue. &gtkmm; uses
+This isn’t purely a &gtkmm; or GUI issue. &gtkmm; uses
 <application>libsigc++</application> to implement its proxy wrappers for the
 <application>GTK+</application> signal system, but for new,
 non-GTK+ signals, you can create pure C++ signals, using the
@@ -9277,11 +9352,11 @@ This is a full working example that defines and uses custom signals.
 <appendix id="sec-signals-comparison">
 <title>Comparison with other signalling systems</title>
 <para>
-<!-- TODO: Rewrite this paragraph and talk about Qt's moc. -->
+<!-- TODO: Rewrite this paragraph and talk about Qt’s moc. -->
 (An aside: <application>GTK+</application> calls this scheme "signalling"; the
 sharp-eyed reader with GUI toolkit experience will note that this same design
 is often
-seen under the name of "broadcaster-listener" (e.g., in Metrowerks'
+seen under the name of "broadcaster-listener" (e.g., in Metrowerks’
 PowerPlant framework for the Macintosh). It works in much the same
 way: one sets up <emphasis>broadcasters</emphasis>, and then connects
 <emphasis>listeners</emphasis> to them; the broadcaster keeps a list of the
@@ -9297,19 +9372,19 @@ the wrong number and type of arguments, leading to a segfault at runtime. And,
 unlike <application>Qt</application>, &gtkmm; achieves this without modifying
 the C++ language.</para>
 <para>
-Re. Overriding signal handlers: You can do this in the straight-C world of GTK+ too; that's what GTK's
+Re. Overriding signal handlers: You can do this in the straight-C world of GTK+ too; that’s what GTK’s
 object system is for. But in GTK+, you have to go through some
 complicated procedures to get object-oriented features like
-inheritance and overloading. In C++, it's simple, since those
+inheritance and overloading. In C++, it’s simple, since those
 features are supported in the language itself; you can let the
 compiler do the dirty work.
 </para>
 <para>
 This is one of the places where the beauty of C++ really comes out.
-One wouldn't think of subclassing a GTK+ widget simply to override its
-action method; it's just too much trouble. In GTK+, you almost always
-use signals to get things done, unless you're writing a new widget.
-But because overriding methods is so easy in C++, it's entirely
+One wouldn’t think of subclassing a GTK+ widget simply to override its
+action method; it’s just too much trouble. In GTK+, you almost always
+use signals to get things done, unless you’re writing a new widget.
+But because overriding methods is so easy in C++, it’s entirely
 practical - and sensible - to subclass a button for that purpose.
 </para>
 </appendix>
@@ -9342,10 +9417,10 @@ practical - and sensible - to subclass a button for that purpose.
 </appendix>
 
 <appendix id="chapter-working-with-source">
-  <title>Working with gtkmm's Source Code</title>
+  <title>Working with gtkmm’s Source Code</title>
   <para>
     If you are interested in helping out with the development of &gtkmm;, or
-    fixing a bug in &gtkmm;, you'll probably need to build the development
+    fixing a bug in &gtkmm;, you’ll probably need to build the development
     version of &gtkmm;. However, you should not install a development version over
     your stable version. Instead, you should install it alongside your existing &gtkmm;
     installation, in a separate path.
@@ -9367,7 +9442,7 @@ practical - and sensible - to subclass a button for that purpose.
   </para>
   <note>
     <para>
-    Note that to build &gtkmm; from Git, you'll often need to build many of its
+    Note that to build &gtkmm; from Git, you’ll often need to build many of its
     dependencies from Git as well. <application>jhbuild</application> makes
     this easier than it would normally be, but it will take quite a while to
     build and install them all. You will probably encounter build problems,
@@ -9405,21 +9480,21 @@ practical - and sensible - to subclass a button for that purpose.
       <varname>modules</varname> variable to a meta-package, e.g.
       <literal>meta-gnome-core</literal>, or listing more than one module name.
       The <varname>modules</varname> variable specifies which modules will be
-      built when you don't explicitly specify anything on the command line. You
+      built when you don’t explicitly specify anything on the command line. You
       can always build a different moduleset later by specifying it on the
       commandline (e.g. <command>jhbuild build gtkmm</command>).
     </para>
     <important>
       <title>Setting a prefix</title>
       <para>
-        By default, <application>jhbuild</application>'s configuration is
+        By default, <application>jhbuild</application>’s configuration is
         configured to install all software built with
         <application>jhbuild</application> under the
         <filename>/opt/gnome</filename> prefix. You can choose a different
         prefix, but it is recommended that you keep this prefix different from
-        other software that you've installed (don't set it to
-        <filename>/usr</filename>!) If you've followed the jhbuild instructions
-        then this prefix belongs to your user, so you don't need to run jhbuild
+        other software that you’ve installed (don’t set it to
+        <filename>/usr</filename>!) If you’ve followed the jhbuild instructions
+        then this prefix belongs to your user, so you don’t need to run jhbuild
         as <literal>root</literal>.
       </para>
     </important>
@@ -9429,14 +9504,14 @@ practical - and sensible - to subclass a button for that purpose.
       dependencies between modules. By default <application>jhbuild</application>
       does not use the downloaded versions of these files, but reads the
       latest versions in the Git repository. This is usually what you want.
-      If you don't want it, use the <varname>use_local_modulesets</varname>
+      If you don’t want it, use the <varname>use_local_modulesets</varname>
       variable in <filename>.jhbuildrc</filename>.
     </para>
   </sect1>
   <sect1 id="sec-installing-jhbuild">
     <title>Installing and Using the Git version of &gtkmm;</title>
     <para>
-      Once you've configured <application>jhbuild</application> as described
+      Once you’ve configured <application>jhbuild</application> as described
       above, building &gtkmm; should be relatively straightforward. The first
       time you run <application>jhbuild</application>, you should run the
       following sequence of commands to ensure that
@@ -9450,7 +9525,7 @@ $ jhbuild sanitycheck</screen>
       <para>
         If everything worked correctly, you should be able to build &gtkmm; and
         all of its dependencies from Git by executing <command>jhbuild
-          build</command> (or, if you didn't specify &gtkmm; in the
+          build</command> (or, if you didn’t specify &gtkmm; in the
         <varname>modules</varname> variable, with the command <command>jhbuild
           build gtkmm</command>).
       </para>
@@ -9458,7 +9533,7 @@ $ jhbuild sanitycheck</screen>
         This command will build and install a series of modules and will probably
         take quite a long time the first time through. After the first time,
         however, it should go quite a bit faster since it only needs to rebuild
-        files that changed since the last build. Alternatively, after you've
+        files that changed since the last build. Alternatively, after you’ve
         built and installed &gtkmm; the first time, you can rebuild &gtkmm; by
         itself (without rebuilding all of its dependencies) with the command
         <command>jhbuild buildone gtkmm</command>.
@@ -9467,9 +9542,9 @@ $ jhbuild sanitycheck</screen>
     <sect2 id="jhbuild-using-gtkmm">
       <title>Using the Git version of &gtkmm;</title>
       <para>
-        After you've installed the Git version of &gtkmm;, you're ready to start
+        After you’ve installed the Git version of &gtkmm;, you’re ready to start
         using and experimenting with it. In order to use the new version of
-        &gtkmm; you've just installed, you need to set some environment
+        &gtkmm; you’ve just installed, you need to set some environment
         variables so that your <filename>configure</filename> script knows where
         to find the new libraries. Fortunately,
         <application>jhbuild</application> offers an easy solution to this
@@ -9481,7 +9556,7 @@ $ jhbuild sanitycheck</screen>
         shell.
       </para>
       <para>
-        Once you've built your software, you'll need to run your program within
+        Once you’ve built your software, you’ll need to run your program within
         the jhbuild environment as well. To do this, you can again use the
         <command>jhbuild shell</command> command to start a new shell with the
         <application>jhbuild</application> environment set up. Alternatively,
@@ -9500,7 +9575,7 @@ $ jhbuild sanitycheck</screen>
 <title>Wrapping C Libraries with gmmproc</title>
 <para>&gtkmm; uses the <command>gmmproc</command> tool to generate most of its
     source code, using .defs files that define the APIs of
-    <classname>GObject</classname>-based libraries. So it's quite easy to create
+    <classname>GObject</classname>-based libraries. So it’s quite easy to create
     additional gtkmm-style wrappers of other glib/GObject-based
     libraries.</para>
 <para>This involves a variety of tools, some of them crufty, but at least
@@ -9516,7 +9591,7 @@ $ jhbuild sanitycheck</screen>
     make use of the build infrastructure provided by the <application>mm-common</application> module. To
     get started, it helps a lot to pick an existing binding module as an example
     to look at.</para>
-<para>For instance, let's pretend that we are wrapping a C library called
+<para>For instance, let’s pretend that we are wrapping a C library called
     libsomething. It provides a <classname>GObject</classname>-based API with
     types named, for instance, <classname>SomeWidget</classname> and
     <classname>SomeStuff</classname>.</para>
@@ -9591,7 +9666,7 @@ A number of the skeleton files must still be filled in with project-specific con
 <para>In <filename>configure.ac</filename>,
 <itemizedlist>
   <listitem><para>The <function>AC_CONFIG_SRCDIR()</function> line must mention a file
-      in our source tree. We can edit this later if we don't yet know the
+      in our source tree. We can edit this later if we don’t yet know the
       names of any of the files that we will create.</para></listitem>
   <listitem><para>It is common for binding modules to track the version number
       of the library they are wrapping. So, for instance, if the C library is
@@ -9737,7 +9812,7 @@ described in the <link linkend="sec-wrapping-documentation">Documentation</link>
 <title>Generating the methods .defs</title>
 <para>This <filename>.defs</filename> file describes objects and their functions.
   It is generated by the <command>h2def.py</command> script which you can find in
-  <application>glibmm</application>'s <filename>tools/defs_gen</filename>
+  <application>glibmm</application>’s <filename>tools/defs_gen</filename>
   directory. For instance,
 <programlisting>
 $ ./h2def.py /usr/include/gtk-3.0/gtk/*.h &gt; gtk_methods.defs
@@ -9749,7 +9824,7 @@ $ ./h2def.py /usr/include/gtk-3.0/gtk/*.h &gt; gtk_methods.defs
 <title>Generating the enums .defs</title>
 <para>This <filename>.defs</filename> file describes enum types and their possible
   values. It is generated by the <filename>enum.pl</filename> script which you can
-  find in <application>glibmm</application>'s <filename>tools</filename>
+  find in <application>glibmm</application>’s <filename>tools</filename>
   directory. For instance,
 <programlisting>
 $ ./enum.pl /usr/include/gtk-3.0/gtk/*.h &gt; gtk_enums.defs
@@ -9798,7 +9873,7 @@ int main(int, char**)
   This <filename>.defs</filename> file describes virtual functions (vfuncs).
   It must be written by hand. There is the skeleton file
   <filename>skeleton/src/skeleton_vfunc.defs</filename> to start from. You can also look
-  at &gtkmm;'s <filename>gtk/src/gtk_vfuncs.defs</filename> file.
+  at &gtkmm;’s <filename>gtk/src/gtk_vfuncs.defs</filename> file.
 </para>
 </sect2>
 
@@ -9816,7 +9891,7 @@ int main(int, char**)
         .h or .cc file.</para>
     <para>A .hg file will typically include some headers
         and then declare a class, using some macros to add API or behaviour to
-        this class. For instance, &gtkmm;'s <filename>button.hg</filename> looks
+        this class. For instance, &gtkmm;’s <filename>button.hg</filename> looks
         roughly like this:
 
 <programlisting>
@@ -9920,7 +9995,7 @@ conversion is used by gmmproc.
 </para>
 
 <para>
-Some extra macros make this easier and consistent. Look in gtkmm's .m4 files
+Some extra macros make this easier and consistent. Look in gtkmm’s .m4 files
 for examples. For instance:
 <programlisting>
 _CONVERSION(`PrintSettings&amp;',`GtkPrintSettings*',__FR2P)
@@ -10055,7 +10130,7 @@ _CLASS_OPAQUE_REFCOUNTED(Coverage, PangoCoverage, pango_coverage_new, pango_cove
 
 <sect3 id="gmmproc-class-generic">
 <title>_CLASS_GENERIC</title>
-<para>This macro can be used to wrap structs which don't fit into any
+<para>This macro can be used to wrap structs which don’t fit into any
     specialized category.</para>
 <para><function>_CLASS_GENERIC( C++ class, C class )</function></para>
 <para>For instance, for <classname>Pango::AttrIter</classname>:
@@ -10127,7 +10202,7 @@ public:
 <sect3 id="gmmproc-wrap-ctor">
 <title>_WRAP_CTOR</title>
 <para>This macro creates a constructor with arguments, equivalent to a
-  <function>*_new()</function> C function. It won't actually call the
+  <function>*_new()</function> C function. It won’t actually call the
   <function>*_new()</function> function, but will simply create an equivalent
   constructor with the same argument types. It takes a C++ constructor
   signature, and a C function name.
@@ -10149,7 +10224,7 @@ public:
 <sect3 id="gmmproc-ctor-manual">
 <title>Hand-coding constructors</title>
 <para>When a constructor must be partly hand written because, for instance, the
-    <function>*_new()</function> C function's parameters do not correspond
+    <function>*_new()</function> C function’s parameters do not correspond
     directly to object properties, or because the <function>*_new()</function> C
     function does more than call <function>g_object_new()</function>, the
     <function>_CONSTRUCT()</function> macro may be used in the
@@ -10346,7 +10421,7 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
 </variablelist>
 </para>
 <para>Selecting which C++ types should be used is also important when wrapping
-  C API.  Though it's usually obvious what C++ types should be used in the C++
+  C API.  Though it’s usually obvious what C++ types should be used in the C++
   method, here are some hints:
 <itemizedlist>
     <listitem><para>Objects used via <classname>RefPtr</classname>: Pass the
@@ -10360,7 +10435,7 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
             Gtk::FileFilter&gt;&amp; filter</code>.</para></listitem>
 <listitem><para>Wrapping <classname>GList*</classname> and
         <classname>GSList*</classname> parameters: First, you need to discover
-        what objects are contained in the list's data field for each item,
+        what objects are contained in the list’s data field for each item,
         usually by reading the documentation for the C function. The list can
         then be wrapped by a <classname>std::vector</classname> type.
         For instance, <classname>std::vector&lt;
@@ -10416,7 +10491,7 @@ _WRAP_METHOD_DOCS_ONLY(gtk_container_remove)
 <title>_IGNORE, _IGNORE_SIGNAL, _IGNORE_PROPERTY, _IGNORE_CHILD_PROPERTY</title>
 <para><command>gmmproc</command> will warn you on stdout about functions, signals,
     properties and child properties that you have forgotten to wrap, helping to
-    ensure that you are wrapping the complete API. But if you don't want to wrap
+    ensure that you are wrapping the complete API. But if you don’t want to wrap
     some functions, signals, properties or child properties, or if you chose
     to hand-code some methods then you can use the _IGNORE(), _IGNORE_SIGNAL(),
     _IGNORE_PROPERTY() or _IGNORE_CHILD_PROPERTY() macro to make
@@ -10460,7 +10535,7 @@ _WRAP_SIGNAL(void clicked(),"clicked")
             <para>Do not generate an <function>on_something()</function> virtual
                 method to allow easy overriding of the default signal handler.
                 Use this when adding a signal with a default signal handler
-                would break the ABI by increasing the size of the class's
+                would break the ABI by increasing the size of the class’s
                 virtual function table.</para>
         </listitem>
     </varlistentry>
@@ -10533,7 +10608,7 @@ _WRAP_SIGNAL(void clicked(),"clicked")
               methods, one without a parameter and one with a parameter without
               a default value. With only the <parameter>detail_name</parameter> option
               one method is generated, with a parameter with default value.
-              Use the <parameter>two_signal_methods</parameter> option, if it's
+              Use the <parameter>two_signal_methods</parameter> option, if it’s
               necessary in order to preserve ABI.</para>
 	      </listitem>
     </varlistentry>
@@ -10769,7 +10844,7 @@ _WRAP_ENUM(WindowType, GtkWindowType)
     <listitem>
       <para>Use this option, if the enum is not a <classname>GType</classname>.
         This is the case when there is no <function>*_get_type()</function>
-        function for the C enum, but be careful that you don't just need to
+        function for the C enum, but be careful that you don’t just need to
         include an extra header for that function. You should also file a bug
         against the C API, because all enums should be registered as GTypes.</para>
       <para>For example, from <filename>icontheme.hg</filename>:
@@ -10812,13 +10887,13 @@ _WRAP_ENUM(SeekType, GSeekType, NO_GTYPE, s#^SEEK_#SEEK_TYPE_#)
 <sect3 id="gmmproc-wrap-enum-docs-only">
 <title>_WRAP_ENUM_DOCS_ONLY</title>
 <para>This macro just generates a Doxygen documentationn block for the enum.
-  This is useful for enums that can't be wrapped with
+  This is useful for enums that can’t be wrapped with
   <function>_WRAP_ENUM()</function> because they are complexly defined (maybe
   using C macros) but including the generated enum documentation is still
   desired.  It is used with the same syntax as
   <function>_WRAP_ENUM()</function> and also process the same options (though
   NO_GTYPE is just ignored because it makes no difference when just generating
-  the enum's documentation).
+  the enum’s documentation).
 </para>
 </sect3>
 
@@ -10840,7 +10915,7 @@ _WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)
 <sect3 id="gmmproc-member-set-get">
     <title>_MEMBER_GET / _MEMBER_SET</title>
   <para>
-    Use these macros if you're wrapping a simple struct or boxed type that provides
+    Use these macros if you’re wrapping a simple struct or boxed type that provides
     direct access to its data members, to create getters and setters for the data members.
   </para>
   <para><function>_MEMBER_GET(C++ name, C name, C++ type, C type)</function></para>
@@ -10862,7 +10937,7 @@ _WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)
   <para>For example, for <classname>Pango::Analysis</classname> in <filename>item.hg</filename>:
 <programlisting>
 // _MEMBER_GET_PTR(engine_lang, lang_engine, EngineLang*, PangoEngineLang*)
-// It's just a comment. It's difficult to find a real-world example.
+// It’s just a comment. It’s difficult to find a real-world example.
 </programlisting>
   </para>
 </sect3>
@@ -10904,7 +10979,7 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
         void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device,
         GdkEventMask events);
       </programlisting>
-      However, changing the order of the C++ method's two parameters is
+      However, changing the order of the C++ method’s two parameters is
       necessary.  Something like the following would wrap the function as a C++
       method with a different order for the two parameters:
       <programlisting>
@@ -10929,8 +11004,8 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
         <function>_WRAP_SIGNAL()</function> method signature, the C parameter
         names would always be <parameter>p0</parameter>, <parameter>p1</parameter>,
         etc. because the <filename>generate_extra_defs</filename> utility uses those
-        parameter names no matter what the C API's parameter names may be.
-        It's how the utility is written presently.
+        parameter names no matter what the C API’s parameter names may be.
+        It’s how the utility is written presently.
       </para>
     </warning>
   </sect3>
@@ -10949,7 +11024,7 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
         GtkToolItem* gtk_tool_button_new(GtkWidget* icon_widget, const gchar*
         label);
       </programlisting>
-      Also, say that the C API allowed NULL for the function's
+      Also, say that the C API allowed NULL for the function’s
       <parameter>label</parameter> parameter so that that parameter is optional.
       It would be possible to have <command>gmmproc</command> generate the
       original constructor (with all the parameters) along with an additional
@@ -11040,7 +11115,7 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
     <para>
       A string-valued input parameter in a C++ method is usually a
       <type>const Glib::ustring&amp;</type> or a <type>const std::string&amp;</type>.
-      In C code it's a <type>const gchar*</type>. When an empty string is converted
+      In C code it’s a <type>const gchar*</type>. When an empty string is converted
       to <type>const gchar*</type>, it can be converted either to <literal>nullptr</literal>
       or to a pointer to an empty string (with <methodname>c_str()</methodname>).
       Some parameters in some C functions accept a <literal>nullptr</literal>, and
@@ -11068,7 +11143,7 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
 <sect2 id="gmmproc-basic-types">
   <title>Basic Types</title>
   <para>Some of the basic types that are used in C APIs have better alternatives
-    in C++. For example, there's no need for a <type>gboolean</type> type since
+    in C++. For example, there’s no need for a <type>gboolean</type> type since
     C++ has <type>bool</type>. The following list shows some commonly-used
     types in C APIs and what you might convert them to in a C++ wrapper library.
   </para>
@@ -11141,7 +11216,7 @@ struct _ExampleWidget
 </para>
 <para>The extra typedef allows the struct to be used in a header without including
   its full definition, simply by predeclaring it, by repeating that typedef.
-  This means that you don't have to include the C library's header in your C++ header,
+  This means that you don’t have to include the C library’s header in your C++ header,
   thus keeping it out of your public API. <command>gmmproc</command> assumes that
   this technique was used, so you will see compiler errors if that is not the case.</para>
 <para>
@@ -11225,7 +11300,7 @@ header files.</para>
   formatted for <application>gtk-doc</application> and some extra documentation
   in <filename>.sgml</filename> and <filename>.xml</filename> files. The
   <filename>docextract_to_xml.py</filename> script, from
-  <application>glibmm</application>'s <filename>tools/defs_gen</filename>
+  <application>glibmm</application>’s <filename>tools/defs_gen</filename>
   directory, can read these files and generate an <filename>.xml</filename> file
   that <command>gmmproc</command> can use to generate
   <application>Doxygen</application> comments. <command>gmmproc</command> will
