@@ -175,7 +175,14 @@ See the <ulink url="https://wiki.gnome.org/Projects/gtkmm/FAQ">FAQ</ulink> for m
 <sect2 id="gtkmm-is-a-wrapper">
 <title>&gtkmm; is a wrapper</title>
 <para>
-&gtkmm; is not a native C++ toolkit, but a C++ wrapper of a C toolkit. This separation of interface and implementation has advantages. The &gtkmm; developers spend most of their time talking about how &gtkmm; can present the clearest API, without awkward compromises due to obscure technical details. We contribute a little to the underlying GTK+ code base, but so do the C coders, and the Perl coders and the Python coders, etc. Therefore GTK+ benefits from a broader user base than language-specific toolkits - there are more implementers, more developers, more testers, and more users.</para>
+&gtkmm; is not a native C++ toolkit, but a C++ wrapper of a C toolkit. This
+separation of interface and implementation has advantages. The &gtkmm;
+developers spend most of their time talking about how &gtkmm; can present the
+clearest API, without awkward compromises due to obscure technical details. We
+contribute a little to the underlying GTK+ code base, but so do the C coders,
+and the Perl coders and the Python coders, etc. Therefore GTK+ benefits from a
+broader user base than language-specific toolkits – there are more implementers,
+more developers, more testers, and more users.</para>
 </sect2>
 </sect1>
 
@@ -457,7 +464,12 @@ buttons and text boxes. In some other systems, widgets are called “controls”
 For each widget in your application’s windows, there is a C++ object in your
 application’s code. So you just need to call a method of the widget’s class to
 affect the visible widget.</para>
- <para>Widgets are arranged inside container widgets such as frames and notebooks, in a hierarchy of widgets within widgets. Some of these container widgets, such as <classname>Gtk::Grid</classname>, are not visible - they exist only to arrange other widgets. Here is some example code that adds 2 <classname>Gtk::Button</classname> widgets to a <classname>Gtk::Box</classname> container widget:
+<para>Widgets are arranged inside container widgets such as frames and
+notebooks, in a hierarchy of widgets within widgets. Some of these container
+widgets, such as <classname>Gtk::Grid</classname>, are not visible – they exist
+only to arrange other widgets. Here is some example code that adds 2
+<classname>Gtk::Button</classname> widgets to a <classname>Gtk::Box</classname>
+container widget:
 <programlisting>m_box.pack_start(m_Button1);
 m_box.pack_start(m_Button2);</programlisting>
 and here is how to add the <classname>Gtk::Box</classname>, containing those buttons, to a <classname>Gtk::Frame</classname>, which has a visible frame and title:
@@ -691,7 +703,8 @@ Next, we use the Window’s <methodname>add()</methodname> method to put <varnam
 the Window. (<methodname>add()</methodname> comes from <classname>Gtk::Container</classname>, which is
 described in the chapter on container widgets.)  The <methodname>add()</methodname> method
 places the Widget in the Window, but it doesn’t display
-the widget. &gtkmm; widgets are always invisible when you create them - to display them, you must call their <methodname>show()</methodname> method, which
+the widget. &gtkmm; widgets are always invisible when you create them – to
+display them, you must call their <methodname>show()</methodname> method, which
 is what we do in the next line.
 </para>
 
@@ -2510,7 +2523,7 @@ has no children.
 </para>
 
 <figure id="figure-treeview-liststore-model">
-  <title>TreeView - ListStore</title>
+  <title>TreeView – ListStore</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;treeview_list.png"/>
   </screenshot>
@@ -2528,7 +2541,7 @@ have child rows.
 </para>
 
 <figure id="figure-treeview-treestore-model">
-  <title>TreeView - TreeStore</title>
+  <title>TreeView – TreeStore</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;treeview_tree.png"/>
   </screenshot>
@@ -2626,7 +2639,7 @@ int number = row[m_Columns.m_col_number];</programlisting>
 The compiler will complain if you use an inappropriate type. For
 instance, this would generate a compiler error:
 </para>
-<programlisting>//compiler error - no conversion from ustring to int.
+<programlisting>//compiler error – no conversion from ustring to int.
 int number = row[m_Columns.m_col_text];</programlisting>
 </sect2>
 
@@ -2825,7 +2838,7 @@ for(type_children::iterator iter = children.begin();
     iter != children.end(); ++iter)
 {
   Gtk::TreeModel::Row row = *iter;
-  //Do something with the row - see above for set/get.
+  //Do something with the row – see above for set/get.
 }</programlisting>
 
 <sect2 id="treeview-row-children">
@@ -3073,7 +3086,7 @@ This example has a <classname>Gtk::TreeView</classname> widget, with a
 
 
 <figure id="figure-treeview-liststore">
-  <title>TreeView - ListStore</title>
+  <title>TreeView – ListStore</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;treeview_list.png"/>
   </screenshot>
@@ -3092,7 +3105,7 @@ children to the rows.
 </para>
 
 <figure id="figure-treeview-treestore">
-  <title>TreeView - TreeStore</title>
+  <title>TreeView – TreeStore</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;treeview_tree.png"/>
   </screenshot>
@@ -3111,7 +3124,7 @@ it uses <methodname>TreeView::append_column_editable()</methodname> instead of
 </para>
 
 <figure id="figure-treeview-editablecells">
-  <title>TreeView - Editable Cells</title>
+  <title>TreeView – Editable Cells</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;treeview_editablecells.png"/>
   </screenshot>
@@ -3133,7 +3146,7 @@ described in the <link linkend="sec-treeview-draganddrop">TreeView Drag and
 </para>
 
 <figure id="figure-treeview-draganddrop">
-  <title>TreeView - Drag And Drop</title>
+  <title>TreeView – Drag And Drop</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;treeview_draganddrop.png"/>
   </screenshot>
@@ -3155,7 +3168,7 @@ section.
 </para>
 
 <figure id="figure-treeview-popup">
-  <title>TreeView - Popup Context Menu</title>
+  <title>TreeView – Popup Context Menu</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;treeview_popup.png"/>
   </screenshot>
@@ -3485,7 +3498,7 @@ iterator for the <classname>Mark</classname>’s new position.
 </para>
 
 <para>
-There are two built-in <classname>Mark</classname>s - <literal>insert</literal>
+There are two built-in <classname>Mark</classname>s – <literal>insert</literal>
 and <literal>selection_bound</literal>, which you can access with
 <classname>TextBuffer</classname>’s <methodname>get_insert()</methodname> and
 <methodname>get_selection_bound()</methodname> methods.
@@ -4133,7 +4146,7 @@ the <literal>changed</literal> signal.
 
 <para>
 <classname>Range</classname> widgets typically connect a handler to this
-signal, which changes their appearance to reflect the change - for example, the
+signal, which changes their appearance to reflect the change – for example, the
 size of the slider in a scrollbar will grow or shrink in inverse proportion to
 the difference between the <parameter>lower</parameter> and
 <parameter>upper</parameter> values of its
@@ -4208,7 +4221,7 @@ inside an <classname>EventBox</classname> widget and then call
 widget can also be used for clipping (and more; see the example below).
 </para>
 <!--
-<para>TODO: Why don’t they have X Windows - explain clipping.
+<para>TODO: Why don’t they have X Windows – explain clipping.
 Also, how does this affect platform such as Windows and MacOS that don’t use X.
 </para>
 -->
@@ -4231,7 +4244,7 @@ A child widget can be added to the <classname>EventBox</classname> using:
 <title>Example</title>
 <para>
 The following example demonstrates both uses of an
-<classname>EventBox</classname> - a label is created that is clipped to a small
+<classname>EventBox</classname> – a label is created that is clipped to a small
 box, and set up so that a mouse-click on the label causes the program to exit.
 Resizing the window reveals varying amounts of the label.
 </para>
@@ -4606,7 +4619,7 @@ myContext->set_line_width(2.0);</programlisting>
         </tip>
 
     <figure id="figure-drawingarea-lines">
-      <title>Drawing Area - Lines</title>
+      <title>Drawing Area – Lines</title>
       <screenshot>
         <graphic format="PNG" fileref="&url_figures_base;drawingarea_lines.png"/>
       </screenshot>
@@ -4696,7 +4709,7 @@ myContext->set_line_width(2.0);</programlisting>
       </para>
 
       <figure id="figure-drawingarea-thin-lines">
-        <title>Drawing Area - Thin Lines</title>
+        <title>Drawing Area – Thin Lines</title>
         <screenshot>
           <graphic format="PNG" fileref="&url_figures_base;drawingarea_thin_lines.png"/>
         </screenshot>
@@ -4724,7 +4737,7 @@ myContext->set_line_width(2.0);</programlisting>
                 the control points for each end of the curve.
             </para>
         <figure id="figure-drawingarea-curve">
-            <title>Drawing Area - Lines</title>
+            <title>Drawing Area – Lines</title>
             <screenshot>
                 <graphic format="PNG" fileref="&url_figures_base;drawingarea_curve.png"/>
             </screenshot>
@@ -4799,7 +4812,7 @@ context->restore();</programlisting>
               and an ellipse into a drawing area.
           </para>
           <figure id="figure-drawingarea-arc">
-              <title>Drawing Area - Arcs</title>
+              <title>Drawing Area – Arcs</title>
               <screenshot>
                   <graphic format="PNG"
                       fileref="&url_figures_base;drawingarea_arcs.png"/>
@@ -4872,7 +4885,7 @@ context->restore();</programlisting>
            <link linkend="sec-printing-example">example</link> of drawing text.
         </para>
         <figure id="figure-drawingarea-pango-text">
-            <title>Drawing Area - Text</title>
+            <title>Drawing Area – Text</title>
             <screenshot>
                 <graphic format="PNG" fileref="&url_figures_base;drawingarea_pango_text.png"/>
             </screenshot>
@@ -4942,7 +4955,7 @@ context->restore();</programlisting>
                 <screen>$ glib-compile-resources --target=resources.c --generate-source image.gresource.xml</screen>
             </para>
         <figure id="figure-drawingarea-image">
-            <title>Drawing Area - Image</title>
+            <title>Drawing Area – Image</title>
             <screenshot>
                 <graphic format="PNG" fileref="&url_figures_base;drawingarea_image.png"/>
             </screenshot>
@@ -5074,7 +5087,7 @@ using these <classname>Gtk::Widget</classname> methods:
     <para>
         <parameter>actions</parameter> is an ORed combination of values, which
         specified which Drag and Drop operations will be possible from this
-        source - for instance, copy, move, or link. The user can choose between
+        source – for instance, copy, move, or link. The user can choose between
         the actions by using modifier keys, such as <keycap>Shift</keycap> to
         change from <emphasis>copy</emphasis> to <emphasis>move</emphasis>, and
         this will be shown by a different cursor.
@@ -5095,7 +5108,7 @@ using these <classname>Gtk::Widget</classname> methods:
 <listitem>
     <para>
         <emphasis>actions</emphasis> indicates the Drag and Drop actions which
-        this destination can receive - see the description above.
+        this destination can receive – see the description above.
     </para>
 </listitem>
 </itemizedlist>
@@ -5354,7 +5367,7 @@ type.
 </para>
 
 <figure id="figure-clipboard-simple">
-  <title>Clipboard - Simple</title>
+  <title>Clipboard – Simple</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;clipboard_simple.png"/>
   </screenshot>
@@ -5368,7 +5381,9 @@ type.
 <para>This is like the simple example, but it
 <orderedlist>
 <listitem><simpara>Defines a custom clipboard target, though the format of that target is still text.</simpara></listitem>
-<listitem><simpara>It supports pasting of 2 targets - both the custom one and a text one that creates an arbitrary text representation of the custom data.</simpara></listitem>
+<listitem><simpara>It supports pasting of 2 targets – both the custom one and a
+text one that creates an arbitrary text representation of the custom
+data.</simpara></listitem>
 <listitem><simpara>It uses <methodname>request_targets()</methodname> and the
 <literal>owner_change</literal> signal and disables the Paste button if it can’t
 use anything on the clipboard.</simpara></listitem>
@@ -5376,7 +5391,7 @@ use anything on the clipboard.</simpara></listitem>
 </para>
 
 <figure id="figure-clipboard-ideal">
-  <title>Clipboard - Ideal</title>
+  <title>Clipboard – Ideal</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;clipboard_ideal.png"/>
   </screenshot>
@@ -5752,7 +5767,7 @@ and update the print settings.
 </para>
 
 <figure id="figure-printing-simple">
-  <title>Printing - Simple</title>
+  <title>Printing – Simple</title>
   <screenshot>
     <graphic format="PNG" fileref="&url_figures_base;printing.png"/>
   </screenshot>
@@ -6230,7 +6245,7 @@ m_entry.add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
       </para>
 
       <figure id="figure-keyboardevents-simple">
-        <title>Keyboard Events - Simple</title>
+        <title>Keyboard Events – Simple</title>
         <screenshot>
           <graphic format="PNG" fileref="&url_figures_base;keyboardevents_simple.png"/>
         </screenshot>
@@ -6298,7 +6313,7 @@ m_entry.add_events(Gdk::KEY_PRESS_MASK | Gdk::KEY_RELEASE_MASK);
       </para>
 
       <figure id="figure-keyboardevents-propagation">
-        <title>Keyboard Events - Event Propagation</title>
+        <title>Keyboard Events – Event Propagation</title>
         <screenshot>
           <graphic format="PNG" fileref="&url_figures_base;keyboardevents_propagation.png"/>
         </screenshot>
@@ -6399,7 +6414,7 @@ using argument two. Argument three may be one or more (using
 <listitem>
 
 <para>
-Glib::IO_IN - Call your method when there is data ready for
+Glib::IO_IN – Call your method when there is data ready for
 reading on your file descriptor.
 
 </para>
@@ -6407,7 +6422,7 @@ reading on your file descriptor.
 <listitem>
 
 <para>
-Glib::IO_OUT - Call your method when the file descriptor is
+Glib::IO_OUT – Call your method when the file descriptor is
 ready for writing.
 
 </para>
@@ -6415,21 +6430,23 @@ ready for writing.
 <listitem>
 
 <para>
-Glib::IO_PRI - Call your method when the file descriptor has urgent data to be read.
+Glib::IO_PRI – Call your method when the file descriptor has urgent data to be
+read.
 
 </para>
 </listitem>
 <listitem>
 
 <para>
-Glib::IO_ERR - Call your method when an error has occurred on the file descriptor.
+Glib::IO_ERR – Call your method when an error has occurred on the file descriptor.
 
 </para>
 </listitem>
 <listitem>
 
 <para>
-Glib::IO_HUP - Call your method when hung up (the connection has been broken usually for pipes and sockets).
+Glib::IO_HUP – Call your method when hung up (the connection has been broken
+usually for pipes and sockets).
 </para>
 </listitem>
 
@@ -6718,10 +6735,10 @@ If you wish to learn more about smartpointers, you might look in these
 books:
 <itemizedlist>
 <listitem><para>
-Bjarne Stroustrup, "The C++ Programming Language" Forth Edition - section 34.3
+Bjarne Stroustrup, "The C++ Programming Language" Forth Edition – section 34.3
 </para></listitem>
 <listitem><para>
-Nicolai M. Josuttis, "The C++ Standard Library" - section 4.2
+Nicolai M. Josuttis, "The C++ Standard Library" – section 4.2
 </para></listitem>
 </itemizedlist>
 </para>
@@ -6950,7 +6967,7 @@ This example shows how to load a <application>Glade</application> file at runtim
   <para>
     The main activity in the internationalization process is finding strings
     seen by users and marking them for translation. You do not need to do it all
-    at once - if you set up the necessary project infrastructure correctly then
+    at once – if you set up the necessary project infrastructure correctly then
     your application will work normally regardless of how many strings you’ve
     covered.
   </para>
@@ -7333,7 +7350,7 @@ using <classname>std::string</classname>, so you just need to start using
 </para>
 
 <sect2 id="i18n-ustring-iostreams"><title>Glib::ustring and std::iostreams</title>
-<!-- <para>TODO: This section is not clear - it needs to spell things out more clearly and obviously.</para> -->
+<!-- <para>TODO: This section is not clear – it needs to spell things out more clearly and obviously.</para> -->
 <para>
 Unfortunately, the integration with the standard iostreams is not completely
 foolproof. &gtkmm; converts <classname>Glib::ustring</classname>s to a
@@ -7380,7 +7397,7 @@ Such comments will be shown in the <filename>.po</filename> files. For
 instance:
 </para>
 
-<programlisting>// note to translators: don’t translate the "[noun]" part - it is
+<programlisting>// note to translators: don’t translate the "[noun]" part – it is
 // just here to distinguish the string from another "jumps" string
 text = strip(gettext("jumps[noun]"), "[noun]");</programlisting>
       </sect2>
@@ -8648,7 +8665,7 @@ access the underlying instance.
 <para>
 <programlisting>
 Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf = Gdk::Pixbuf::create_from_file(filename);
-Gdk::Pixbuf&amp; underlying = *refPixbuf; //Syntax error - will not compile.
+Gdk::Pixbuf&amp; underlying = *refPixbuf; //Syntax error – will not compile.
 </programlisting>
 </para>
 </sect1>
@@ -8862,14 +8879,14 @@ specified object, in this case
 <para>
 Another thing to note about this example is that we made the call to
 <methodname>connect()</methodname> twice for the same signal object. This is
-perfectly fine - when the button is clicked, both signal handlers will be
+perfectly fine – when the button is clicked, both signal handlers will be
 called.
 </para>
 
 <para>
 We just told you that the button’s <literal>clicked</literal> signal is expecting
 to call a method with no arguments. All signals have
-requirements like this - you can’t hook a function with two arguments
+requirements like this – you can’t hook a function with two arguments
 to a signal expecting none (unless you use an adapter, such as
 <function>sigc::bind()</function>, of course). Therefore, it’s important to
 know what type of signal handler you’ll be expected to connect to a given
@@ -8965,8 +8982,8 @@ way.
 
 <para>
 Instead of laboriously connecting signal handlers to signals,
-you can simply make a new class which inherits from a widget - say, a
-<classname>Gtk::Button</classname> - and then override the default signal
+you can simply make a new class which inherits from a widget — say, a
+<classname>Gtk::Button</classname> — and then override the default signal
 handler, e.g. <methodname>Gtk::Button::on_clicked()</methodname>. This can be a
 lot simpler than hooking up signal handlers for everything.
 </para>
@@ -9363,7 +9380,7 @@ way: one sets up <emphasis>broadcasters</emphasis>, and then connects
 objects listening to it, and when someone gives the broadcaster a
 message, it calls all of its objects in its list with the message. In
 &gtkmm;, signal objects play the role of broadcasters, and slots
-play the role of listeners - sort of. More on this later.)
+play the role of listeners – sort of. More on this later.)
 </para>
 <para>
 &gtkmm; signal handlers are strongly-typed, whereas
@@ -9385,7 +9402,7 @@ One wouldn’t think of subclassing a GTK+ widget simply to override its
 action method; it’s just too much trouble. In GTK+, you almost always
 use signals to get things done, unless you’re writing a new widget.
 But because overriding methods is so easy in C++, it’s entirely
-practical - and sensible - to subclass a button for that purpose.
+practical – and sensible – to subclass a button for that purpose.
 </para>
 </appendix>
 
