@@ -10186,7 +10186,7 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
             to the C function, if the method has one.  Instead the slot itself
             is passed.  The slot parameter name and the glue callback function
             must have been specified with the <literal>slot_name</literal> and
-            <literal>slot_callbback</literal> options respectively.</para>
+            <literal>slot_callback</literal> options respectively.</para>
         </listitem>
     </varlistentry>
 </variablelist>
@@ -10518,7 +10518,7 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
             to the C function, if the method has one.  Instead the slot itself
             is passed.  The slot parameter name and the glue callback function
             must have been specified with the <literal>slot_name</literal> and
-            <literal>slot_callbback</literal> options respectively.</para>
+            <literal>slot_callback</literal> options respectively.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
