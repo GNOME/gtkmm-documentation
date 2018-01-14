@@ -8538,7 +8538,7 @@ void on_button_clicked()
     std::cout &#60;&#60; "Hello World" &#60;&#60; std::endl;
 }
 
-main()
+int main()
 {
     Gtk::Button button("Hello World");
     button.signal_clicked().connect(sigc::ptr_fun(&amp;on_button_clicked));
@@ -8618,7 +8618,7 @@ class some_class
 
 some_class some_object;
 
-main()
+int main()
 {
     Gtk::Button button;
     button.signal_clicked().connect( sigc::ptr_fun(&amp;on_button_clicked) );
