@@ -2408,7 +2408,7 @@ As a <classname>TreeModelColumnRecord</classname> describes structure, not data,
 it can be shared among multiple models, and this is preferable for efficiency.
 However, the instance (such as <varname>m_Columns</varname> here) should usually
 not be static, because it often needs to be instantiated after
-<application>glibmm</application> has been ininitialized. The best solution is
+<application>glibmm</application> has been initialized. The best solution is
 to make it a lazily instantiated singleton, so that it will be constructed
 on-demand, whenever the first model accesses it.
 </para>
