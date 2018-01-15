@@ -710,8 +710,8 @@ then finish.
 <para><application>gtkmm-3.0</application> is a new version of the &gtkmm; API
 that installs in parallel with the older <application>gtkmm-2.4</application>
 API. The last version of the <application>gtkmm-2.4</application> API was 2.24.
-&gtkmm; 3 has no major fundamental differences to &gtkmm; 2 but does make
-several small changes that were not possible while maintaining binary
+Like GTK+, &gtkmm; made various changes in version 3, of the kind that could not
+be made in version 2 of either library because of the need to maintain API/ABI
 compatibility. If you never used the <application>gtkmm-2.4</application> API
 then you can safely ignore this chapter.</para>
 
