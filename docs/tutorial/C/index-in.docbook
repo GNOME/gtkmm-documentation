@@ -362,11 +362,21 @@ Your <function>main()</function> function will then return with an appropriate s
 After putting the source code in <filename>simple.cc</filename>, you can compile
 the above program with <application>GCC</application> using:
 <programlisting>g++ simple.cc -o simple `pkg-config gtkmm-3.0 --cflags --libs`</programlisting>
-Note that you must surround the <command>pkg-config</command> invocation with backquotes.
-Backquotes cause the shell to execute the command inside them, and to use
-the command's output as part of the command line.
-Note also that <filename>simple.cc</filename> must come before the <command>pkg-config</command>
-invocation on the command line.
+</para>
+<para>
+Some details here are important to note: You must surround the
+<command>pkg-config</command> invocation with backquotes, as those cause the
+shell to execute the command inside them and to use the command's output as
+part of the command line, i.e. to substitute the command with the switches it
+returns that your compiler needs in order to find &gtkmm;'s headers and symbols.
+Filenames, like <filename>simple.cc</filename>, must come before the
+<command>pkg-config</command> invocation on the command line, as most linkers
+work through their command-line arguments in the order given, and they must
+first process your sources in order to know which symbols they need in the
+following libraries returned by <command>pkg-config</command>. Finally, if you
+mention extra modules in addition to <application>gtkmm-3.0</application>, they
+should be separated by spaces, not commas, as <command>pkg-config</command> uses
+space-separated lists.
 </para>
 </sect1>
 
@@ -401,18 +411,24 @@ This checks for the presence of &gtkmm; and defines
 <varname>MYAPP_LIBS</varname> and <varname>MYAPP_CFLAGS</varname> for use in
 your <filename>Makefile.am</filename> files.
 </para>
-<para>gtkmm-3.0 is the name of the current stable API. There was an older API
-called gtkmm-2.4, which installs in parallel when it is available. There were
-several versions of <application>gtkmm-2.4</application>, such as gtkmm 2.10 and
-there are several versions of the <application>gtkmm-3.0</application> API. Note
-that the API name does not change for every version because that would be an
-incompatible API and ABI break. Theoretically, there might be a future
-<application>gtkmm-4.0</application> API which would install in parallel with
-<application>gtkmm-3.0</application> without affecting existing applications.
+<para><application>gtkmm-3.0</application> is the name of the current stable
+API. There was an older API called <application>gtkmm-2.4</application>. There
+is also now the newer unstable development API
+<application>gtkmm-4.0</application>, though this is in a high state of flux at
+the time of writing and so is only for users who want to try out the latest
+features while accepting the risk of API/ABI breaks prior to the first stable
+release. All three of these major API versions can be installed in parallel
+without affecting each other or applications that compile against different API
+versions.
 </para>
-<para>Note that if you mention extra modules in addition to
-<application>gtkmm-3.0</application>, they should be separated by spaces, not
-commas.
+<para>There were several versions of <application>gtkmm-2.4</application> such
+as &gtkmm; 2.10, there are several versions of
+<application>gtkmm-3.0</application>, and there will most likely be several
+versions of <application>gtkmm-4.0</application> too. You can see that, while
+the actual minor version increases, the API name does not change for every
+version because that would be an incompatible API and ABI break.
+</para>
+<para>The current long-term stable version of both GTK+ and &gtkmm; is 3.22.
 </para>
 
 <para>The GNU site has more information about <ulink url="https://www.gnu.org/software/autoconf/">autoconf</ulink>
