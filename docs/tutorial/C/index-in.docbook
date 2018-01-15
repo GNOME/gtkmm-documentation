@@ -142,7 +142,10 @@ interfaces. It is licensed using the LGPL license, so you can develop
 open software, free software, or even commercial non-free software
 using &gtkmm; without purchasing licenses.
 </para>
-<para>&gtkmm; was originally named gtk-- because GTK+ already has a + in the name. However, as -- is not easily indexed by search engines the package generally went by the name &gtkmm;, and that's what we stuck with.</para>
+<para>&gtkmm; was originally named <application>gtk--</application> because GTK+
+already has a <literal>+</literal> in the name. However, as
+<literal>--</literal> is not easily indexed by search engines, the package
+generally went by the name &gtkmm;, and that's what we stuck with.</para>
 
 <sect2 id="why-use-gtkmm">
 <title>Why use &gtkmm; instead of GTK+?</title>
@@ -285,7 +288,7 @@ be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
 </warning>
 <para>
   If you want to help develop &gtkmm; or experiment with new features, you can
-  also install &gtkmm; from git. Most users will never need to do this, but if
+  also install &gtkmm; from Git. Most users will never need to do this, but if
   you're interested in helping with &gtkmm; development, see the <link
     linkend="chapter-working-with-source">Working with gtkmm's Source Code</link> appendix.
 </para>
@@ -324,7 +327,7 @@ program possible. This program will create an empty 200 x 200 pixel window.
 <para>We will now explain each line of the example</para>
 <programlisting>#include &lt;gtkmm.h&gt;</programlisting>
 <para>
-All &gtkmm; programs must include certain &gtkmm; headers; <literal>gtkmm.h</literal>
+All &gtkmm; programs must include certain &gtkmm; headers. <filename>gtkmm.h</filename>
 includes the entire &gtkmm; kit. This is usually not a good idea, because
 it includes a megabyte or so of headers, but for simple programs, it
 suffices.
@@ -356,13 +359,13 @@ Your <function>main()</function> function will then return with an appropriate s
 <programlisting>return app->run(window);</programlisting>
 
 <para>
-After putting the source code in <literal>simple.cc</literal> you can compile
-the above program with <application>gcc</application> using:
+After putting the source code in <filename>simple.cc</filename>, you can compile
+the above program with <application>GCC</application> using:
 <programlisting>g++ simple.cc -o simple `pkg-config gtkmm-3.0 --cflags --libs`</programlisting>
-Note that you must surround the <literal>pkg-config</literal> invocation with backquotes.
+Note that you must surround the <command>pkg-config</command> invocation with backquotes.
 Backquotes cause the shell to execute the command inside them, and to use
 the command's output as part of the command line.
-Note also that <literal>simple.cc</literal> must come before the <literal>pkg-config</literal>
+Note also that <filename>simple.cc</filename> must come before the <command>pkg-config</command>
 invocation on the command line.
 </para>
 </sect1>
@@ -370,27 +373,46 @@ invocation on the command line.
 <sect1 id="sec-headers-and-linking">
 <title>Headers and Linking</title>
 <para>
-Although we have shown the compilation command for the simple example, you really should use the automake and autoconf tools, as described in "Autoconf, Automake, Libtool", by G. V. Vaughan et al. The examples used in this book are included in the <application>gtkmm-documentation</application> package, with appropriate build files, so we won't show the build commands in future. You'll just need to find the appropriate directory and type <literal>make</literal>.
+Although we have shown the compilation command for the simple example, you
+really should use the <application>Automake</application> and
+<application>Autoconf</application> tools, as described in "Autoconf,
+Automake, Libtool", by G. V. Vaughan et al. The examples used in this book are
+included in the <application>gtkmm-documentation</application> package, with
+appropriate build files, so we won't show the build commands in future. You'll
+just need to find the appropriate directory and type <command>make</command>.
 </para>
 <para>
-To simplify compilation, we use <literal>pkg-config</literal>, which
+To simplify compilation, we use <command>pkg-config</command>, which
 is present in all (properly installed) &gtkmm; installations. This
 program 'knows' what compiler switches are needed to compile programs
 that use &gtkmm;. The <literal>--cflags</literal> option causes
-<literal>pkg-config</literal> to output a list of include directories for the
+<command>pkg-config</command> to output a list of include directories for the
 compiler to look in; the <literal>--libs</literal> option requests the
 list of libraries for the compiler to link with and the directories to
 find them in. Try running it from your shell-prompt to see the results on your system.
 </para>
 <para>
-However, this is even simpler when using the <function>PKG_CHECK_MODULES()</function> macro in a standard configure.ac file with autoconf and automake.
-For instance:
+However, this is even simpler when using the
+<function>PKG_CHECK_MODULES()</function> macro in a standard
+<filename>configure.ac</filename> file with <application>Autoconf</application>
+and <application>Automake</application>.  For instance:
 <programlisting>PKG_CHECK_MODULES([MYAPP], [gtkmm-3.0 >= 3.8.0])</programlisting>
-This checks for the presence of gtkmm and defines MYAPP_LIBS and MYAPP_CFLAGS for use in your Makefile.am files.
+This checks for the presence of &gtkmm; and defines
+<varname>MYAPP_LIBS</varname> and <varname>MYAPP_CFLAGS</varname> for use in
+your <filename>Makefile.am</filename> files.
 </para>
-<para>gtkmm-3.0 is the name of the current stable API. There was an older API called gtkmm-2-4 which installs in parallel when it is available. There were several versions of gtkmm-2.4, such as gtkmm 2.10 and there are several versions of the gtkmm-3.0 API. Note that the API name does not change for every version because that would be an incompatible API and ABI break. Theoretically, there might be a future gtkmm-4.0 API which would install in parallel with gtkmm-3.0 without affecting existing applications.
+<para>gtkmm-3.0 is the name of the current stable API. There was an older API
+called gtkmm-2.4, which installs in parallel when it is available. There were
+several versions of <application>gtkmm-2.4</application>, such as gtkmm 2.10 and
+there are several versions of the <application>gtkmm-3.0</application> API. Note
+that the API name does not change for every version because that would be an
+incompatible API and ABI break. Theoretically, there might be a future
+<application>gtkmm-4.0</application> API which would install in parallel with
+<application>gtkmm-3.0</application> without affecting existing applications.
 </para>
-<para>Note that if you mention extra modules in addition to gtkmm-3.0, they should be separated by spaces, not commas.
+<para>Note that if you mention extra modules in addition to
+<application>gtkmm-3.0</application>, they should be separated by spaces, not
+commas.
 </para>
 
 <para>The GNU site has more information about <ulink url="https://www.gnu.org/software/autoconf/">autoconf</ulink>
@@ -416,7 +438,11 @@ and here is how to add the <classname>Gtk::Box</classname>, containing those but
 Most of the chapters in this book deal with specific widgets. See the <link linkend="chapter-container-widgets">Container Widgets</link> section for more details about adding widgets to container widgets.
 </para>
 
-<para>Although you can specify the layout and appearance of windows and widgets with C++ code, you will probably find it more convenient to design your user interfaces with <literal>Glade</literal> and load them at runtime with <literal>Gtk::Builder</literal>. See the <link linkend="chapter-builder">Glade and Gtk::Builder</link> chapter.
+<para>Although you can specify the layout and appearance of windows and widgets
+with C++ code, you will probably find it more convenient to design your user
+interfaces with <application>Glade</application> and load them at runtime with
+<classname>Gtk::Builder</classname>. See the <link
+linkend="chapter-builder">Glade and Gtk::Builder</link> chapter.
 </para>
 
 <para>Although &gtkmm; widget instances have lifetimes and scopes just like those of other C++ classes, &gtkmm; has an optional time-saving feature that you will see in some of the examples. <function>Gtk::manage()</function> allows you to say that a child widget is owned by the container into which you place it. This allows you to <function>new</function> the widget, add it to the container and forget about deleting it. You can learn more about &gtkmm; memory management techniques in the <link linkend="chapter-memory">Memory Management chapter</link>.
@@ -434,7 +460,10 @@ that was pressed. Each Widget has a different set of signals that it can emit. T
 button click result in an action, we set up a
 <emphasis>signal handler</emphasis> to catch the button's "clicked" signal.
 </para>
-<para>&gtkmm; uses the libsigc++ library to implement signals. Here is an example line of code that connects a Gtk::Button's "clicked" signal with a signal handler called "on_button_clicked":
+<para>&gtkmm; uses the <application>libsigc++</application> library to implement
+signals. Here is an example line of code that connects a
+<classname>Gtk::Button</classname>'s <literal>clicked</literal> signal with a
+signal handler called <methodname>on_button_clicked</methodname>:
 <programlisting>m_button1.signal_clicked().connect( sigc::mem_fun(*this,
   &amp;HelloWorld::on_button_clicked) );</programlisting>
 </para>
@@ -448,10 +477,23 @@ just connecting to the existing &gtkmm; signals, see the <link linkend="chapter-
 <sect1 id="sec-basics-ustring">
 <title>Glib::ustring</title>
 <para>You might be surprised to learn that &gtkmm; doesn't use <classname>std::string</classname> in its interfaces. Instead it uses <classname>Glib::ustring</classname>, which is so similar and unobtrusive that you could actually pretend that each <classname>Glib::ustring</classname> is a <classname>std::string</classname> and ignore the rest of this section. But read on if you want to use languages other than English in your application.</para>
-<para>std::string uses 8 bit per character, but 8 bits aren't enough to encode languages such as Arabic, Chinese, and Japanese. Although the encodings for these languages have now been specified by the Unicode Consortium, the C and C++ languages do not yet provide any standardised Unicode support. GTK+ and GNOME chose to implement Unicode using UTF-8, and that's what is wrapped by Glib::ustring. It provides almost exactly the same interface as std::string, along with automatic conversions to and from std::string.</para>
+<para>std::string uses 8 bit per character, but 8 bits aren't enough to encode
+languages such as Arabic, Chinese, and Japanese. Although the encodings for
+these languages have now been specified by the Unicode Consortium, the C and C++
+languages do not yet provide any standardised Unicode support. GTK+ and GNOME
+chose to implement Unicode using UTF-8, and that's what is wrapped by
+Glib::ustring. It provides almost exactly the same interface as
+<classname>std::string</classname>, along with automatic conversions to and from
+<classname>std::string</classname>.</para>
 <para>One of the benefits of UTF-8 is that you don't need to use it unless you want to, so you don't need to retrofit all of your code at once. <classname>std::string</classname> will still work for 7-bit ASCII strings. But when you try to localize your application for languages like Chinese, for instance, you will start to see strange errors, and possible crashes. Then all you need to do is start using <classname>Glib::ustring</classname> instead.</para>
 <para>Note that UTF-8 isn't compatible with 8-bit encodings like ISO-8859-1. For instance, German umlauts are not in the ASCII range and need more than 1 byte in the UTF-8 encoding. If your code contains 8-bit string literals, you have to convert them to UTF-8 (e.g. the Bavarian greeting "Gr&uuml;&szlig; Gott" would be "Gr\xC3\xBC\xC3\x9F Gott").</para>
-<para>You should avoid C-style pointer arithmetic, and functions such as strlen(). In UTF-8, each character might need anywhere from 1 to 6 bytes, so it's not possible to assume that the next byte is another character. <classname>Glib::ustring</classname> worries about the details of this for you so you can use methods such as Glib::ustring::substr() while still thinking in terms of characters instead of bytes.</para>
+<para>You should avoid C-style pointer arithmetic, and functions such as
+<function>strlen()</function>. In UTF-8, each character might need anywhere from
+1 to 6 bytes, so it's not possible to assume that the next byte is another
+character. <classname>Glib::ustring</classname> worries about the details of
+this for you so you can use methods such as
+<methodname>Glib::ustring::substr()</methodname> while still thinking in terms
+of characters instead of bytes.</para>
 
 <para>Unlike the Windows UCS-2 Unicode solution, this does not require any special compiler options to process string literals, and it does not result in Unicode executables and libraries which are incompatible with ASCII ones.</para>
 
@@ -464,7 +506,9 @@ just connecting to the existing &gtkmm; signals, see the <link linkend="chapter-
 <sect1 id="sec-intermediate-types">
 <title>Intermediate types</title>
 <para>Some API related to gtkmm uses intermediate data containers, such as <classname>Glib::StringArrayHandle</classname>, instead of a specific Standard C++ container such as <classname>std::vector</classname> or <classname>std::list</classname>, though &gtkmm; itself now uses just <classname>std::vector</classname> since &gtkmm; 3.0.</para>
-<para>You should not declare these types yourself. You should instead use whatever Standard C++ container you prefer. glibmm will do the conversion for you. Here are some of these intermediate types:
+<para>You should not declare these types yourself. You should instead use
+whatever Standard C++ container you prefer. <application>glibmm</application>
+will do the conversion for you. Here are some of these intermediate types:
 <itemizedlist>
     <listitem><para><classname>Glib::StringArrayHandle</classname> or <classname>Glib::ArrayHandle&lt;Glib::ustring&gt;</classname>: Use <classname>std::vector&lt;Glib::ustring&gt;</classname>, <classname>std::list&lt;Glib::ustring&gt;</classname>, <type>const char*[]</type>, etc.</para></listitem>
     <listitem><para><classname>Glib::ListHandle&lt;Gtk::Widget*&gt;</classname>: Use <classname>std::vector&lt;Gtk::Widget*&gt;</classname>, <classname>std::list&lt;Gtk::Widget*&gt;</classname>, etc.</para></listitem>
@@ -486,7 +530,7 @@ the <classname>GObject</classname> system.</para>
 <para>
 To use a &gtkmm; instance with a C function that requires a C
 <classname>GObject</classname> instance, use the C++ instance’s
-<function>gobj()</function> function to obtain a pointer to the underlying C
+<methodname>gobj()</methodname> methodname to obtain a pointer to the underlying C
 instance. For example:
 <programlisting>
 Gtk::Button* button = new Gtk::Button("example");
@@ -582,7 +626,7 @@ omitted:
 }</programlisting>
 
 <para>
-Notice that we've used an initialiser statement to give the <literal>m_button</literal>
+Notice that we've used an initialiser statement to give the <varname>m_button</varname>
 object the label &quot;Hello World&quot;.
 </para>
 
@@ -593,12 +637,12 @@ contains.
 </para>
 
 <para>
-We then hook up a signal handler to <literal>m_button</literal>'s <literal>clicked</literal> signal.
+We then hook up a signal handler to <varname>m_button</varname>'s <literal>clicked</literal> signal.
 This prints our friendly greeting to <literal>stdout</literal>.
 </para>
 
 <para>
-Next, we use the Window's <methodname>add()</methodname> method to put <literal>m_button</literal> in
+Next, we use the Window's <methodname>add()</methodname> method to put <varname>m_button</varname> in
 the Window. (<methodname>add()</methodname> comes from <classname>Gtk::Container</classname>, which is
 described in the chapter on container widgets.)  The <methodname>add()</methodname> method
 places the Widget in the Window, but it doesn't display
@@ -621,7 +665,8 @@ without comments:
 }</programlisting>
 
 <para>
-First we instantiate an object stored in a <classname>RefPtr</classname> smartpointer called <literal>app</literal>. This is of type
+First we instantiate an object stored in a <classname>RefPtr</classname>
+smartpointer called <varname>app</varname>. This is of type
 <classname>Gtk::Application</classname>. Every &gtkmm; program must have one of these. We pass
 our command-line arguments to its create() method. It takes the arguments
 it wants, and leaves you the rest, as we described earlier.
@@ -629,7 +674,14 @@ it wants, and leaves you the rest, as we described earlier.
 
 <para>
 Next we make an object of our <classname>HelloWorld</classname> class, whose constructor
-takes no arguments, but it isn't visible yet. When we call <methodname>Gtk::Application::run()</methodname>, giving it the helloworld Window, it shows the Window and starts the &gtkmm; <emphasis>event loop</emphasis>. During the event loop &gtkmm; idles, waiting for actions from the user, and responding appropriately. When the user closes the Window, run() will return, causing the final line of our main() function be to executed. The application will then finish.
+takes no arguments, but it isn't visible yet. When we call
+<methodname>Gtk::Application::run()</methodname>, giving it the
+<varname>helloworld</varname> Window, it shows the Window and starts the &gtkmm;
+<emphasis>event loop</emphasis>. During the event loop, &gtkmm; idles, waiting
+for actions from the user and responding appropriately. When the user closes
+the Window, <methodname>run()</methodname> will return, causing the final line
+of our <function>main()</function> function be to executed. The application will
+then finish.
 </para>
 
 </sect1>
@@ -638,10 +690,19 @@ takes no arguments, but it isn't visible yet. When we call <methodname>Gtk::Appl
 <chapter id="changes-gtkmm3">
 <title>Changes in &gtkmm; 3</title>
 
-<para>&gtkmm;-3.0 is a new version of the &gtkmm; API that installs in parallel with the older &gtkmm;-2.4 API. The last version of the &gtkmm;-2.4 API was &gtkmm; 2.24. &gtkmm; 3 has no major fundamental differences to &gtkmm; 2 but does make several small changes that were not possible while maintaining binary compatibility. If you never used the &gtkmm;-2.4 API then you can safely ignore this chapter.</para>
+<para><application>gtkmm-3.0</application> is a new version of the &gtkmm; API
+that installs in parallel with the older <application>gtkmm-2.4</application>
+API. The last version of the <application>gtkmm-2.4</application> API was 2.24.
+&gtkmm; 3 has no major fundamental differences to &gtkmm; 2 but does make
+several small changes that were not possible while maintaining binary
+compatibility. If you never used the <application>gtkmm-2.4</application> API
+then you can safely ignore this chapter.</para>
 
-<para>&gtkmm; 3's library is called <literal>libgtkmm-3.0</literal> rather than <literal>libgtkmm-2.4</literal> and installs its headers in a similarly-versioned directory, so your pkg-config check should ask for <literal>gtkmm-3.0</literal>  rather than <literal>gtkmm-2.4</literal>.</para>
-
+<para>&gtkmm; 3's library is called <application>libgtkmm-3.0</application>
+rather than <application>libgtkmm-2.4</application> and installs its headers in
+a similarly-versioned directory, so your <command>pkg-config</command> check
+should ask for <application>gtkmm-3.0</application> rather than
+<application>gtkmm-2.4</application>.</para>
 
 <para>&gtkmm; 3 added some new classes:</para>
 
@@ -658,18 +719,29 @@ takes no arguments, but it isn't visible yet. When we call <methodname>Gtk::Appl
 
 <listitem><simpara><classname>Gtk::CellLayout</classname>, used by <classname>Gtk::IconView</classname>, <classname>Gtk::TreeView::Column</classname> and <classname>Gtk::ComboBox</classname>, now has a <classname>Gtk::CellArea</classname> which can be used to specify more details of how the <classname>CellRenderer</classname>s are arranged and aligned.</simpara></listitem>
 
-<listitem><simpara>Gtk::ComboBox now derives from CellLayout, allowing easier layout and alignment of its <classname>Gtk::CellRenderer</classname>s.</simpara></listitem>
+<listitem><simpara><classname>Gtk::ComboBox</classname> now derives from
+<classname>CellLayout</classname>, allowing easier layout and alignment of its
+<classname>Gtk::CellRenderer</classname>s.</simpara></listitem>
 
 <listitem><simpara><classname>Gtk::Adjustment</classname> and <classname>IconSet</classname> and <classname>Gdk::Cursor</classname> are now used via <classname>Glib::RefPtr</classname>.</simpara></listitem>
 
 <listitem><simpara><classname>Gtk::Box</classname>, <classname>Gtk::ButtonBox</classname>, <classname>Gtk::IconView</classname>, <classname>Gtk::Paned</classname>, <classname>Gtk::ProgressBar</classname>, <classname>Gtk::ScaleButton</classname>, <classname>Gtk::Scrollbar</classname> and <classname>Gtk::Separator</classname> now derive from <classname>Gtk::Orientable</classname>, allowing their
 orientation (vertical or horizontal) to be specified without requiring the use of a derived class such as <classname>Gtk::HBox</classname>.</simpara></listitem>
 
-<listitem><simpara><classname>Gtk::IconView</classname>, <classname>Gtk::TextView</classname>, <classname>Gtk::TreeView</classname> and other widgets derive from Scrollable instead of having their own methods such as <methodname>get_vadjustment()</methodname> and instead of having their own set_scroll_adjustments signal.</simpara></listitem>
+<listitem><simpara><classname>Gtk::IconView</classname>,
+<classname>Gtk::TextView</classname>, <classname>Gtk::TreeView</classname> and
+other widgets implement the <classname>Gtk::Scrollable</classname> interface,
+instead of having their own methods such as
+<methodname>get_vadjustment()</methodname> and having their own
+<literal>set_scroll_adjustments</literal> signal.</simpara></listitem>
 
 <listitem><simpara><classname>Gtk::Style</classname> and <classname>Gtk::Rc</classname> were removed, replaced by <classname>Gtk::StyleContext</classname>, and <classname>Gtk::StyleProvider</classname>s, such as <classname>Gtk::CssProvider</classname>.</simpara></listitem>
 
-<listitem><simpara>Widget::on_expose_event() was replaced by Widget::on_draw(), which assumes that cairomm is used for drawing, via the provided <classname>Cairo::Context</classname> and does not require you to call <methodname>Cairo::Context::clip()</methodname>.</simpara></listitem>
+<listitem><simpara><methodname>Widget::on_expose_event()</methodname> was
+replaced by <methodname>Widget::on_draw()</methodname>, which assumes that
+<application>cairomm</application> is used for drawing, via the provided
+<classname>Cairo::Context</classname>, and does not require you to call
+<methodname>Cairo::Context::clip()</methodname>.</simpara></listitem>
 
 <listitem><simpara><classname>Gdk::RGBA</classname> replaces <classname>Color</classname>, adding an alpha component for opacity. <classname>Colormap</classname> was removed, along with its awkward use to allocate colors.</simpara></listitem>
 
@@ -677,14 +749,24 @@ orientation (vertical or horizontal) to be specified without requiring the use o
 
 <listitem><simpara><classname>Gdk::Drawable</classname> was removed, with its methods moving into <classname>Gdk::Window</classname>.</simpara></listitem>
 
-<listitem><simpara>We now use std::vector in several methods instead of the intermediate *Handle types to make the API clearer.</simpara></listitem>
+<listitem><simpara>We now use <classname>std::vector</classname> in several
+methods instead of the intermediate <classname>*Handle</classname> types to make
+the API clearer.</simpara></listitem>
 
 </orderedlist>
 </para>
 
 <para>All deprecated API was removed in &gtkmm; 3.0, though there will be new deprecations in future versions.</para>
 
-<para>As a first step to porting your source code to &gtkmm;-3.0 you should probably ensure that your application builds with the deprecated &gtkmm;-2.4 API disabled, by defining macro such as GTKMM_DISABLE_DEPRECATED. There are some autotools macros that can help with this by defining them optionally at build time. See the <ulink url="https://wiki.gnome.org/Projects/gtkmm/PortingToGtkmm3">gtkmm 3 porting wiki page</ulink> for more details.</para>
+<para>As a first step to porting your source code to the
+<application>gtkmm-3.0</application> API, you should probably ensure that your
+application builds with the deprecated <application>gtkmm-2.4</application> API
+disabled, by defining the relevant preprocessor macro(s) such as
+<literal>GTKMM_DISABLE_DEPRECATED</literal>. There are some
+<application>Autotools</application> macros that can help with this by defining
+them optionally at build time. See the <ulink
+ url="https://wiki.gnome.org/Projects/gtkmm/PortingToGtkmm3">Porting to &gtkmm;
+3</ulink> wiki page for more details.</para>
 
 </chapter>
 
@@ -762,7 +844,9 @@ string in the <classname>Gtk::Button</classname> constructor,
 or set it later with <methodname>set_label()</methodname>.
 </para>
 
-<para>To define an accelerator key for keyboard navigation, place an underscore before one of the label's characters and specify <literal>true</literal> for the optional <literal>mnemonic</literal> parameter. For instance:
+<para>To define an accelerator key for keyboard navigation, place an underscore
+before one of the label's characters and specify <literal>true</literal> for the
+optional <varname>mnemonic</varname> parameter. For instance:
 </para>
 <programlisting>Gtk::Button* pButton = new Gtk::Button("_Something", true);</programlisting>
 
@@ -982,9 +1066,9 @@ RadioButtons::RadioButtons()
 }</programlisting>
 
 <para>
-We made a new group by simply declaring a variable, <literal>group</literal>,
+We made a new group by simply declaring a variable, <varname>group</varname>,
 of type <classname>Gtk::RadioButton::Group</classname>. Then we made three radio
-buttons, using a constructor to make each of them part of <literal>group</literal>.
+buttons, using a constructor to make each of them part of <varname>group</varname>.
 </para>
 </sect2>
 
@@ -1101,7 +1185,7 @@ with the <methodname>set_draw_value()</methodname> method.
 
 <para>
 The value displayed by a scale widget is rounded to one decimal point
-by default, as is the <literal>value</literal> field in its
+by default, as is the <varname>value</varname> field in its
 <classname>Gtk::Adjustment</classname>. You can change this with the
 <methodname>set_digits()</methodname> method.
 </para>
@@ -1179,7 +1263,7 @@ text bold, colored, or larger. You can do this by providing a string to
 Below is a short example to illustrate these functions. This example
 makes use of the Frame widget to better demonstrate the label styles.
  (The Frame widget is explained in the <link linkend="sec-frame">Frame</link> section.)
-It is possible that the first character in <literal>m_Label_Normal</literal> is shown
+It is possible that the first character in <varname>m_Label_Normal</varname> is shown
 underlined only when you press the <keycap>Alt</keycap> key.
 </para>
 
@@ -1459,7 +1543,7 @@ method, and retrieve it with <methodname>get_value()</methodname>.
 <para>
 The <methodname>spin()</methodname> method 'spins' the
 <classname>SpinButton</classname>, as if its increment or decrement button had been clicked.
-You need to specify a <classname>Gtk::SpinType</classname> to specify the
+You need to specify a <type>Gtk::SpinType</type> to specify the
 direction or new position.
 </para>
 
@@ -1942,7 +2026,8 @@ other toolkits.
 <title>An improved Hello World</title>
 
 <para>
-Let's take a look at a slightly improved <literal>helloworld</literal>, showing what we've learnt.
+Let's take a look at a slightly improved <application>helloworld</application>,
+showing what we've learnt.
 </para>
 
 <figure id="figure-helloworld2">
@@ -2087,8 +2172,9 @@ with <classname>Gtk::Application</classname>.
 <itemizedlist>
 <listitem><para>
 Handle the options in <function>main()</function> and hide them from
-<classname>Gtk::Application</classname> by setting <literal>argc = 1</literal>
-in the call to <methodname>Gtk::Application::create()</methodname>.
+<classname>Gtk::Application</classname> by setting <parameter>argc</parameter>
+to <literal>1</literal> in the call to
+<methodname>Gtk::Application::create()</methodname>.
 </para></listitem>
 
 <listitem><para>
@@ -2097,8 +2183,8 @@ and add the flag <literal>Gio::APPLICATION_HANDLES_COMMAND_LINE</literal>.
 Connect a signal handler to the <literal>command_line</literal> signal, and
 handle the command-line options in the signal handler.</para>
 
-<para>You must set the optional parameter <literal>after = false</literal> in
-the call to <literal>signal_command_line().connect()</literal>, because your signal
+<para>You must set the optional parameter <parameter>after</parameter> to false in
+the call to <methodname>signal_command_line().connect()</methodname>, because your signal
 handler must be called before the default signal handler. You must also call
 <methodname>Gio::Application::activate()</methodname> in the signal handler,
 unless you want your application to exit without showing its main window.
@@ -2220,8 +2306,8 @@ not be used in newly-written code. Use <classname>Gtk::Grid</classname> instead.
 
 <para>
 A <classname>Notebook</classname> has a set of stacked
-<literal>pages</literal>, each of which contains widgets. Labelled
-<literal>tabs</literal> allow the user to select the pages.
+<emphasis>pages</emphasis>, each of which contains widgets. Labelled
+<emphasis>tabs</emphasis> allow the user to select the pages.
 <classname>Notebook</classname>s allow several sets of widgets to be placed in a
 small space, by only showing one page at a time. For instance, they are often
 used in preferences dialogs.
@@ -2230,7 +2316,7 @@ used in preferences dialogs.
 <para>
 Use the <methodname>append_page()</methodname>, <methodname>prepend_page()</methodname>
 and <methodname>insert_page()</methodname> methods to add tabbed pages to the
-<literal>Notebook</literal>, supplying the child widget and the name for the
+<classname>Notebook</classname>, supplying the child widget and the name for the
 tab.
 </para>
 
@@ -2511,9 +2597,11 @@ shown in a <classname>Gtk::CheckButton</classname>. This is usually what you
 need. For other column types you must either connect a callback that converts
 your type into a string representation, with
 <methodname>TreeViewColumn::set_cell_data_func()</methodname>, or derive a custom
-<classname>CellRenderer</classname>. Note that (unsigned) short is not
-supported by default - You could use (unsigned) int or (unsigned) long as the
-column type instead.
+<classname>CellRenderer</classname>. Note that (<literal>unsigned</literal>)
+<literal>short</literal> is not a supported column type by default; you could
+use (<literal>unsigned</literal>) <literal>int</literal> or
+(<literal>unsigned</literal>) <literal>long</literal> as the column type
+instead.
 </para>
 </sect2>
 
@@ -2614,16 +2702,17 @@ methods, then use <methodname>get_column_cell_renderer()</methodname> to get the
 You should then cast that <classname>Gtk::CellRenderer*</classname> to the
 specific <classname>CellRenderer</classname> that you expect, so you can use specific API.
 </para>
-<para>For instance, for a CellRendererText, you would set the cell's <emphasis>editable</emphasis> property to true, like
-so:
+<para>
+For instance, for a <classname>CellRendererText</classname>, you would set the
+cell's <literal>editable</literal> property to true, like so:
 </para>
 <programlisting>cell.property_editable() = true;</programlisting>
 <para>
-For a CellRendererToggle, you would set the <emphasis>activatable</emphasis>
+For a <classname>CellRendererToggle</classname>, you would set the <literal>activatable</literal>
 property instead.
 </para>
 <para>You can then connect
-to the appropriate "edited" signal. For instance, connect to
+to the appropriate <literal>edited</literal> signal. For instance, connect to
 <methodname>Gtk::CellRendererText::signal_edited()</methodname>, or
 <methodname>Gtk::CellRendererToggle::signal_toggled()</methodname>. If the column
 contains more than one <classname>CellRenderer</classname> then you will need
@@ -2847,7 +2936,16 @@ If you call <methodname>Gtk::TreeView::set_reorderable()</methodname> then your
 TreeView's items can be moved within the treeview itself. This is demonstrated
 in the <classname>TreeStore</classname> example.
 </para>
-<para>However, this does not allow you any control of which items can be dragged, and where they can be dropped. If you need that extra control then you might create a derived <literal>Gtk::TreeModel</literal> from <literal>Gtk::TreeStore</literal> or <literal>Gtk::ListStore</literal> and override the <literal>Gtk::TreeDragSource::row_draggable()</literal> and <literal>Gdk::TreeDragDest::row_drop_possible()</literal> virtual methods. You can examine the <literal>Gtk::TreeModel::Path</literal>s provided and allow or disallow dragging or dropping by returning <literal>true</literal> or <literal>false</literal>.</para>
+<para>However, this does not allow you any control of which items can be
+dragged, and where they can be dropped. If you need that extra control then you
+might create a derived <classname>Gtk::TreeModel</classname> from
+<classname>Gtk::TreeStore</classname> or <classname>Gtk::ListStore</classname>
+and override the <methodname>Gtk::TreeDragSource::row_draggable()</methodname>
+and <methodname>Gdk::TreeDragDest::row_drop_possible()</methodname> virtual
+methods.  You can examine the <classname>Gtk::TreeModel::Path</classname>s
+provided and allow or disallow dragging or dropping by returning
+<literal>true</literal> or
+<literal>false</literal>.</para>
 <para>This is demonstrated in the drag_and_drop example.</para>
 </sect2>
 
@@ -3071,7 +3169,10 @@ You might need to react to every change of selection in the ComboBox, for instan
 <sect1 id="sec-comboboxentry">
 <title>ComboBox with an Entry</title>
 
-<para>A <classname>ComboBox</classname> may contain an <classname>Entry</classname> widget for entering of arbitrary text, by specifying <literal>true</literal> for the constructor's <literal>has_entry</literal> parameter.</para>
+<para>A <classname>ComboBox</classname> may contain an
+<classname>Entry</classname> widget for entering of arbitrary text, by
+specifying <literal>true</literal> for the constructor's
+<parameter>has_entry</parameter> parameter.</para>
 
 <sect2 id="sec-comboboxentry-text-column">
 <title>The text column</title>
@@ -4071,8 +4172,8 @@ to the bottom of the <classname>Dialog</classname>, you could use the
 </para>
 
 <para>
-The <methodname>run()</methodname> method returns an <literal>int</literal>. This
-may be a value from the <literal>Gtk::ResponseType</literal> if the user
+The <methodname>run()</methodname> method returns an <type>int</type>. This
+may be a value from the <type>Gtk::ResponseType</type> if the user
 closed the dialog by clicking a standard button, or it could be the custom
 response value that you specified when using <methodname>add_button()</methodname>.
 </para>
@@ -4085,7 +4186,7 @@ response value that you specified when using <methodname>add_button()</methodnam
 simple, standard message dialogs, with a message, an icon, and buttons for user
 response. You can specify the type of message and the text in the constructor,
 as well as specifying standard buttons via the
-<literal>Gtk::ButtonsType</literal> enum.
+<type>Gtk::ButtonsType</type> enum.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;MessageDialog.html">Reference</ulink></para>
@@ -4567,9 +4668,9 @@ myContext->set_line_width(2.0);</programlisting>
           center point of the arc, the third argument is the radius of the arc,
           and the final two arguments define the start and end angle of the
           arc. All angles are defined in radians, so drawing a circle is the
-          same as drawing an arc from 0 to 2 * M_PI radians.
+          same as drawing an arc from 0 to <literal>2 * M_PI</literal> radians.
           An angle of 0 is in the direction of the positive X axis (in user-space). An
-          angle of M_PI/2 radians (90 degrees) is in the direction of the positive Y axis
+          angle of <literal>M_PI / 2.0</literal> radians (90 degrees) is in the direction of the positive Y axis
           (in user-space). Angles increase in the direction from the positive X axis
           toward the positive Y axis. So with the default transformation matrix, angles
           increase in a clockwise direction. (Remember that the positive Y axis
@@ -4822,8 +4923,8 @@ prefixed with "drag_". These are used for Drag and Drop.
 <sect1 id="sec-dnd-sources-destinations">
 <title>Sources and Destinations</title>
 <para>
-Things are dragged from <literal>sources</literal> to be dropped on
-<literal>destinations</literal>. Each source and destination has infomation
+Things are dragged from <emphasis>sources</emphasis> to be dropped on
+<emphasis>destinations</emphasis>. Each source and destination has infomation
 about the data formats that it can send or receive, provided by
 <classname>Gtk::TargetEntry</classname> items. A drop destination will only
 accept a dragged item if they both share a compatible
@@ -4854,24 +4955,24 @@ using these <classname>Gtk::Widget</classname> methods:
 <itemizedlist>
 <listitem>
     <para>
-        <literal>targets</literal> is a vector of
+        <parameter>targets</parameter> is a vector of
         <classname>Gtk::TargetEntry</classname> elements.
     </para>
 </listitem>
 <listitem>
     <para>
-        <literal>start_button_mask</literal> is an ORed combination of values,
+        <parameter>start_button_mask</parameter> is an ORed combination of values,
         which specify which modifier key or mouse button must be pressed to
         start the drag.
     </para>
 </listitem>
 <listitem>
     <para>
-        <literal>actions</literal> is an ORed combination of values, which
+        <parameter>actions</parameter> is an ORed combination of values, which
         specified which Drag and Drop operations will be possible from this
         source - for instance, copy, move, or link. The user can choose between
         the actions by using modifier keys, such as <keycap>Shift</keycap> to
-        change from <literal>copy</literal> to <literal>move</literal>, and
+        change from <emphasis>copy</emphasis> to <emphasis>move</emphasis>, and
         this will be shown by a different cursor.
     </para>
 </listitem>
@@ -4883,13 +4984,13 @@ using these <classname>Gtk::Widget</classname> methods:
 <itemizedlist>
 <listitem>
     <para>
-        <literal>flags</literal> is an ORed combination of values which
+        <parameter>flags</parameter> is an ORed combination of values which
         indicates how the widget will respond visually to Drag and Drop items.
     </para>
 </listitem>
 <listitem>
     <para>
-        <literal>actions</literal> indicates the Drag and Drop actions which
+        <emphasis>actions</emphasis> indicates the Drag and Drop actions which
         this destination can receive - see the description above.
     </para>
 </listitem>
@@ -4902,7 +5003,7 @@ using these <classname>Gtk::Widget</classname> methods:
 When a drop destination has accepted a dragged item, certain signals will be
 emitted, depending on what action has been selected. For instance, the user
 might have held down the <keycap>Shift</keycap> key to specify a
-<literal>move</literal> rather than a <literal>copy</literal>. Remember that
+<emphasis>move</emphasis> rather than a <emphasis>copy</emphasis>. Remember that
 the user can only select the actions which you have specified in your calls to
 <methodname>drag_dest_set()</methodname> and
 <methodname>drag_source_set()</methodname>.
@@ -4913,8 +5014,12 @@ the user can only select the actions which you have specified in your calls to
 <para>
 The source widget will emit these signals, in this order:
 <itemizedlist>
-<listitem><para><literal>drag_begin</literal>: Provides DragContext.</para></listitem>
-<listitem><para><literal>drag_data_get</literal>: Provides <literal>info</literal> about the dragged data format, and a <literal>Gtk::SelectionData</literal> structure, in which you should put the requested data.</para></listitem>
+<listitem><para><literal>drag_begin</literal>: Provides
+<classname>Gdk::DragContext</classname>.</para></listitem>
+<listitem><para><literal>drag_data_get</literal>: Provides
+<parameter>info</parameter> about the dragged data format, and a
+<classname>Gtk::SelectionData</classname> structure, in which you should put the
+requested data.</para></listitem>
 <listitem><para><literal>drag_end</literal>: Provides DragContext.</para></listitem>
 </itemizedlist>
 </para>
@@ -4930,11 +5035,11 @@ The destination widget will emit these signals, in this order:
   <literal>drag_data_received</literal> signal in the destination widget.</para></listitem>
 <listitem>
     <para>
-        <literal>drag_data_received</literal>: Provides <literal>info</literal>
+        <literal>drag_data_received</literal>: Provides <parameter>info</parameter>
         about the dragged data format, and a
-        <literal>Gtk::SelectionData</literal> structure which contains the
+        <classname>Gtk::SelectionData</classname> structure which contains the
         dropped data. You should  call the <methodname>drag_finish()</methodname>
-        method of the <literal>DragContext</literal> to indicate whether the
+        method of the <classname>DragContext</classname> to indicate whether the
         operation was successful.
     </para>
 </listitem>
@@ -4945,7 +5050,7 @@ The destination widget will emit these signals, in this order:
 
 <sect2 id="dnd-signal-move">
 <title>Move</title>
-<para>During a <literal>move</literal>, the source widget will also emit this signal:
+<para>During a move, the source widget will also emit this signal:
 <itemizedlist>
 <listitem><para><literal>drag_data_delete</literal>: Gives the source the opportunity to delete the original data if that's appropriate.</para></listitem>
 </itemizedlist>
@@ -4963,7 +5068,7 @@ The destination widget will emit these signals, in this order:
 <sect1 id="sec-dragcontext">
 <title>DragContext</title>
 <para>
-The drag and drop signals provide a DragContext, which contains some
+The drag and drop signals provide a <classname>Gdk::DragContext</classname>, which contains some
 information about the drag and drop operation and can be used to influence the
 process. For instance, you can discover the source widget, or  change the drag
 and drop icon, by using the <methodname>set_icon()</methodname> methods. More
@@ -4975,7 +5080,8 @@ the drop was successful.
 
 <sect1 id="sec-dnd-example">
 <title>Example</title>
-<para>Here is a very simple example, demonstrating a drag and drop <literal>Copy</literal> operation:</para>
+<para>Here is a very simple example, demonstrating a drag-and-drop copy
+operation:</para>
 
 <figure id="figure-drag-and-drop">
   <title>Drag and Drop</title>
@@ -5023,7 +5129,7 @@ either providing the requested data, or asking for data.
 <title>Targets</title>
 <para>
 Different applications contain different types of data, and they might make that data available in
-a variety of formats. &gtkmm; calls these data types <literal>target</literal>s.</para>
+a variety of formats. &gtkmm; calls these data types <emphasis>target</emphasis>s.</para>
 
 <para>
 For instance, <application>gedit</application> can supply and receive the <literal>&quot;UTF8_STRING&quot;</literal>
@@ -5078,7 +5184,7 @@ refClipboard-&gt;set( targets,
     selection_data.set(&quot;example_custom_target&quot;, m_ClipboardStore);
 }</programlisting>
 <para>
-The <literal>ideal</literal> example below can supply more than one clipboard target.
+The <application>Ideal</application> example below can supply more than one clipboard target.
 </para>
 
 <para>The clear callback allows you to free the memory used by your stored data when the clipboard replaces its data with something else.
@@ -5268,7 +5374,7 @@ during which various signals are emitted:
     <para>
       <literal>done</literal>: This signal is emitted when printing is finished, meaning when the
       print data is spooled. Note that the provided
-      <literal>Gtk::PrintOperationResult</literal> may indicate that
+      <classname>Gtk::PrintOperationResult</classname> may indicate that
       an error occurred. In any case you probably want to notify the user
       about the final status.
     </para>
@@ -5301,13 +5407,13 @@ during which various signals are emitted:
 
 <para>
 The <classname>PrintOperation</classname> class has a method called
-<methodname>set_default_page_setup()</methodname> which selects the default
+<function>set_default_page_setup()</function> which selects the default
 paper size, orientation and margins. To show a page setup dialog from your
-application, use the <methodname>Gtk::run_page_setup_dialog()</methodname> method,
+application, use the <function>Gtk::run_page_setup_dialog()</function> method,
 which returns a <classname>Gtk::PageSetup</classname> object with the chosen
 settings. Use this object to update a <classname>PrintOperation</classname>
 and to access the selected <classname>Gtk::PaperSize</classname>,
-<literal>Gtk::PageOrientation</literal> and printer-specific margins.
+<type>Gtk::PageOrientation</type> and printer-specific margins.
 </para>
 <para>You should save the chosen <classname>Gtk::PageSetup</classname>
 so you can use it again if the page setup dialog is shown again.</para>
@@ -5464,7 +5570,7 @@ You may add a custom tab to the print dialog:
 Although the <literal>custom_widget_apply</literal> signal provides the widget you
 previously created, to simplify things you can keep the widgets you expect
 to contain some user input as class members. For example, let's say you have
-a <classname>Gtk::Entry</classname> called <literal>m_Entry</literal> as
+a <classname>Gtk::Entry</classname> called <varname>m_Entry</varname> as
 a member of your <classname>CustomPrintOperation</classname> class:
 
 <programlisting>
@@ -6131,7 +6237,7 @@ my_connection.disconnect();
 Another way of destroying the connection is your signal handler.
 It has to be of the type <classname>sigc::slot&lt;bool&gt;</classname>.
 As you see from the definition your signal handler has to return a value of
-the type <literal>bool</literal>. A definition of a sample method might
+the type <type>bool</type>. A definition of a sample method might
 look like this:
 
 <programlisting>
@@ -6241,10 +6347,10 @@ specified above. As usual the slot is created with
 <para>
 A little example follows. To use the example just execute it from a terminal;
 it doesn't create a window. It will create a pipe named
-<literal>testfifo</literal> in the current directory. Then start another shell
-and execute <literal>echo "Hello" &#62; testfifo</literal>. The example will
-print each line you enter until you execute <literal>echo "Q" &#62;
-testfifo</literal>.
+<filename>testfifo</filename> in the current directory. Then start another shell
+and execute <command>echo "Hello" &#62; testfifo</command>. The example will
+print each line you enter until you execute <command>echo "Q" &#62;
+testfifo</command>.
 </para>
 
 <para><ulink url="&url_examples_base;input/">Source Code</ulink></para>
@@ -6316,8 +6422,8 @@ progress bar will increase steadily; the lower one will slow down.
 <para>
 &gtkmm; allows the programmer to control the lifetime (that is, the construction
 and destruction) of any widget in the same manner as any other C++ object.
-This flexibility allows you to use <literal>new</literal> and
-<literal>delete</literal> to create and destroy objects dynamically
+This flexibility allows you to use <code>new</code> and
+<code>delete</code> to create and destroy objects dynamically
 or to use regular class members (that are destroyed automatically when the
 class is destroyed) or to use local instances (that are destroyed when the
 instance goes out of scope). This flexibility is not present in some C++ GUI
@@ -6334,7 +6440,7 @@ management features.
 If a programmer does not need dynamic memory allocation, automatic widgets in class
 scope may be used. One advantage of automatic widgets in class scope is that
 memory management is grouped in one place. The programmer does not
-risk memory leaks from failing to <literal>delete</literal> a widget.
+risk memory leaks from failing to <code>delete</code> a widget.
 </para>
 
 <para>
@@ -6381,7 +6487,7 @@ increased data hiding and reduced dependencies.
 Although, in most cases, the programmer will prefer to allow containers to
 automatically destroy their children using <function>Gtk::manage()</function> (see
 below), the programmer is not required to use <function>Gtk::manage()</function>.
-The traditional <literal>new</literal> and <literal>delete</literal> operators
+The traditional <code>new</code> and <code>delete</code> operators
 may also be used.
 <programlisting>
 Gtk::Button* pButton = new Gtk::Button("Test");
@@ -6483,8 +6589,8 @@ if(pixbuf)
 <para>
 When <varname>pixbuf</varname> goes out of scope an
 <methodname>unref()</methodname> will happen in the background and you don't need
-to worry about it anymore. There's no <literal>new</literal> so there's no
-<literal>delete</literal>.
+to worry about it anymore. There's no <code>new</code>, so there's no
+<code>delete</code>.
 </para>
 <para>
 If you copy a <classname>RefPtr</classname>, for instance
@@ -6725,9 +6831,9 @@ This example shows how to load a <application>Glade</application> file at runtim
 
   <para>
     The process of writing source code that allows for translation is called
-    <literal>internationalization</literal>, often abbreviated to
-    <literal>i18n</literal>. The <literal>Localization</literal> process,
-    sometimes abbreviated as <literal>l10n</literal>, provides translated text
+    <emphasis>internationalization</emphasis>, often abbreviated to
+    <emphasis>i18n</emphasis>. The <emphasis>localization</emphasis> process,
+    sometimes abbreviated as <emphasis>l10n</emphasis>, provides translated text
     for other languages, based on that source code.
   </para>
 
@@ -6754,7 +6860,7 @@ This example shows how to load a <application>Glade</application> file at runtim
         In the instructions below we will assume that you will not be using
         <application>gettext</application> directly, but
         <application>intltool</application>, which was written specifically for
-        <literal>GNOME</literal>. <application>intltool</application> uses
+        <application>GNOME</application>. <application>intltool</application> uses
         <function>gettext()</function>, which extracts strings from source code,
         but <application>intltool</application> can also combine strings from
         other files, for example from desktop menu details, and GUI resource
@@ -6767,9 +6873,9 @@ This example shows how to load a <application>Glade</application> file at runtim
         <application>autoconf</application>) to build your project, and
         that you are using <ulink
           url="http://git.gnome.org/browse/gnome-common/tree/autogen.sh">
-          <literal>./autogen.sh</literal> from
+          <command>./autogen.sh</command> from
           <application>gnome-common</application></ulink>
-        or a similar <literal>autogen.sh</literal> file, which, among other
+        or a similar <filename>autogen.sh</filename> file, which, among other
         things, takes care of some <application>intltool</application>
         initialization.
       </para>
@@ -6777,7 +6883,7 @@ This example shows how to load a <application>Glade</application> file at runtim
 
     <para>
       An alternative to <application>gnome-common</application>'s
-      <literal>autogen.sh</literal> may look like this:
+      <filename>autogen.sh</filename> may look like this:
     </para>
     <programlisting>#! /bin/sh -e
 test -n "$srcdir" || srcdir=`dirname "$0"`
@@ -6789,41 +6895,41 @@ intltoolize --copy --force --automake
 test -n "$NOCONFIGURE" || "$srcdir/configure" "$@"</programlisting>
 
     <para>
-      Create a sub-directory named <literal>po</literal> in your project's root
+      Create a sub-directory named <filename>po</filename> in your project's root
       directory. This directory will eventually contain all of your
-      translations. Within it, create a file named <literal>LINGUAS</literal>
-      and a file named <literal>POTFILES.in</literal>. It is common practice to
-      also create a <literal>ChangeLog</literal> file in the
-      <literal>po</literal> directory so that translators can keep track of
+      translations. Within it, create a file named <filename>LINGUAS</filename>
+      and a file named <filename>POTFILES.in</filename>. It is common practice to
+      also create a <filename>ChangeLog</filename> file in the
+      <filename>po</filename> directory so that translators can keep track of
       translation changes.
     </para>
 
     <para>
-      <literal>LINGUAS</literal> contains an alphabetically sorted list of codes
+      <filename>LINGUAS</filename> contains an alphabetically sorted list of codes
       identifying the languages for which your program is translated (comment
       lines starting with a <literal>#</literal> are ignored). Each language
-      code listed in the <literal>LINGUAS</literal> file must have a
-      corresponding <literal>.po</literal> file. So, if your program has German
-      and Japanese translations, your <literal>LINGUAS</literal> file would
+      code listed in the <filename>LINGUAS</filename> file must have a
+      corresponding <filename>.po</filename> file. So, if your program has German
+      and Japanese translations, your <filename>LINGUAS</filename> file would
       look like this:
     </para>
     <programlisting># keep this file sorted alphabetically, one language code per line
 de
 ja</programlisting>
     <para>
-      (In addition, you'd have the files <literal>ja.po</literal> and
-      <literal>de.po</literal> in your
-      <literal>po</literal> directory which contain the German and Japanese
+      (In addition, you'd have the files <filename>ja.po</filename> and
+      <filename>de.po</filename> in your
+      <filename>po</filename> directory which contain the German and Japanese
       translations, respectively.)
     </para>
 
     <para>
-      <literal>POTFILES.in</literal> is a list of paths to all files which
+      <filename>POTFILES.in</filename> is a list of paths to all files which
       contain strings marked up for translation, starting from the project root
       directory. So for example, if your project sources were located in a
-      subdirectory named <literal>src</literal>, and you had two files that
+      subdirectory named <filename>src</filename>, and you had two files that
       contained strings that should be translated, your
-      <literal>POTFILES.in</literal> file might look like this:
+      <filename>POTFILES.in</filename> file might look like this:
     </para>
 
     <programlisting>src/main.cc
@@ -6839,14 +6945,14 @@ src/other.cc</programlisting>
         files</ulink> and several more. So, if you have designed some of the
       application UI in <application>Glade</application> then also add your
       <filename>.glade</filename> files to the list in
-      <literal>POTFILES.in</literal>.
+      <filename>POTFILES.in</filename>.
     </para>
 
     <para>
       Now that there is a place to put your translations, you need to initialize
       <application>intltool</application> and <application>gettext</application>.
-      Add the following code to your <literal>configure.ac</literal>,
-      substituting 'programname' with the name of your program:
+      Add the following code to your <filename>configure.ac</filename>,
+      substituting <literal>programname</literal> with the name of your program:
     </para>
 
     <programlisting>IT_PROG_INTLTOOL([0.35.0])
@@ -6863,15 +6969,15 @@ AC_SUBST(PROGRAMNAME_LOCALEDIR)</programlisting>
 
     <para>
       This <varname>PROGRAMNAME_LOCALEDIR</varname> variable will be used later
-      in the <literal>Makefile.am</literal> file, to define a macro that will be
+      in the <filename>Makefile.am</filename> file, to define a macro that will be
       used when you initialize <application>gettext</application> in your source
       code.
     </para>
 
     <para>
-      <literal>AM_GLIB_GNU_GETTEXT</literal> has been an alternative to
-      <literal>AM_GNU_GETTEXT</literal> and <literal>AM_GNU_GETTEXT_VERSION</literal>,
-      but <literal>AM_GLIB_GNU_GETTEXT</literal> is now deprecated, and shall
+      <function>AM_GLIB_GNU_GETTEXT</function> has been an alternative to
+      <function>AM_GNU_GETTEXT</function> and <function>AM_GNU_GETTEXT_VERSION</function>,
+      but <function>AM_GLIB_GNU_GETTEXT</function> is now deprecated, and shall
       not be used in new code.
     </para>
 
@@ -6879,13 +6985,13 @@ AC_SUBST(PROGRAMNAME_LOCALEDIR)</programlisting>
       In the top-level Makefile.am:
       <itemizedlist>
         <listitem>
-          <para>Add <literal>po</literal> to the <literal>SUBDIRS</literal>
+          <para>Add <literal>po</literal> to the <varname>SUBDIRS</varname>
             variable. Without this, your translations won't get built and
             installed when you build the program</para>
         </listitem>
         <listitem>
           <para>
-            Define <literal>INTLTOOL_FILES</literal> as:
+            Define <varname>INTLTOOL_FILES</varname> as:
             <programlisting>INTLTOOL_FILES = intltool-extract.in \
                  intltool-merge.in \
                  intltool-update.in</programlisting>
@@ -6893,15 +6999,15 @@ AC_SUBST(PROGRAMNAME_LOCALEDIR)</programlisting>
         </listitem>
         <listitem>
           <para>
-            Add <literal>INTLTOOL_FILES</literal> to the
-            <literal>EXTRA_DIST</literal> list of files. This ensures that when
+            Add <varname>INTLTOOL_FILES</varname> to the
+            <varname>EXTRA_DIST</varname> list of files. This ensures that when
             you do a <command>make dist</command>, these commands will be
             included in the source tarball.
           </para>
         </listitem>
         <listitem>
           <para>
-            Update your <literal>DISTCLEANFILES</literal>:
+            Update your <varname>DISTCLEANFILES</varname>:
             <programlisting>DISTCLEANFILES = ... intltool-extract \
                  intltool-merge \
                  intltool-update \
@@ -6922,13 +7028,13 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
     </para>
 
     <para>
-      In your <literal>src/Makefile.am</literal>, update your
-      <literal>AM_CPPFLAGS</literal> to add the following preprocessor macro
+      In your <filename>src/Makefile.am</filename>, update your
+      <varname>AM_CPPFLAGS</varname> to add the following preprocessor macro
       definition:
     </para>
     <programlisting>AM_CPPFLAGS = ... -DPROGRAMNAME_LOCALEDIR=\"${PROGRAMNAME_LOCALEDIR}\"</programlisting>
     <para>
-      This macro will be used when you initialize <literal>gettext</literal> in
+      This macro will be used when you initialize <application>gettext</application> in
       your source code.
     </para>
   </sect1>
@@ -6954,7 +7060,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
     However, <application>Glib</application> defines
     <function>gettext()</function>
     support macros which are shorter wrappers in an easy-to-use form.
-    To use these macros, include <literal>&lt;glibmm/i18n.h&gt;</literal>,
+    To use these macros, include <filename>&lt;glibmm/i18n.h&gt;</filename>,
     and then, for example, substitute:
     <programlisting>display_message("Getting ready for i18n.");</programlisting>
     with:
@@ -6966,7 +7072,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
     strings which appear in your code, even if they are not marked for translation,
     together with file name and line
     number references. To generate such a file named
-    <literal>my-strings</literal>, execute the following command,
+    <filename>my-strings</filename>, execute the following command,
     within the source code directory:
 
     <programlisting>xgettext -a -o my-strings --omit-header *.cc *.h</programlisting>
@@ -6993,7 +7099,7 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
       <filename>localename.po</filename> file. A locale identifies a
       language and an encoding for that language, including date and numerical
       formats. Later, when the text in your source code has changed, the
-      <literal>msmerge</literal> script is used to update the
+      <filename>msmerge</filename> script is used to update the
       <filename>localename.po</filename> files from the regenerated
       <filename>.pot</filename> file.
     </para>
@@ -7009,9 +7115,9 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
       When the application runs, the <application>gettext</application>
       library checks the system-wide directory to see if there is a
       <filename>.mo</filename> file for the user's locale environment
-      (you can set the locale with, for instance, "export LANG=de_DE.UTF-8"
-      from a bash console). Later, when the program reaches a
-      <literal>gettext</literal> call, it looks for a translation of a
+      (you can set the locale with, for instance, <command>export LANG=de_DE.UTF-8</command>
+      from a Bash console). Later, when the program reaches a
+      <function>gettext()</function> call, it looks for a translation of a
       particular string. If none is found, the original string is used.
     </para>
   </sect2>
@@ -7031,7 +7137,7 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
       That will create a file named <filename>programname.pot</filename>.
       Now copy that file to <filename>languagecode.po</filename>, such as
       <filename>de.po</filename> or <filename>hu.po</filename>. Also add
-      that language code to <literal>LINGUAS</literal>. The
+      that language code to <filename>LINGUAS</filename>. The
       <filename>.po</filename> file contains a header and a list of English strings,
       with space for the translated strings to be entered. Make sure you set the
       encoding of the <filename>.po</filename> file (specified in the header, but
@@ -7084,13 +7190,13 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
 
         <listitem>
           <para>
-            <ulink url="http://ftp.gnome.org/pub/GNOME/sources/gtkmm_hello/"><literal>gtkmm_hello</literal> example package</ulink>
+            <ulink url="http://ftp.gnome.org/pub/GNOME/sources/gtkmm_hello/"><application>gtkmm_hello</application> example package</ulink>
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <ulink url="http://ftp.gnome.org/pub/GNOME/sources/gnomemm_hello/"><literal>gnomemm_hello</literal> example package</ulink>
+            <ulink url="http://ftp.gnome.org/pub/GNOME/sources/gnomemm_hello/"><application>gnomemm_hello</application> example package</ulink>
           </para>
         </listitem>
       </itemizedlist>
@@ -7157,7 +7263,7 @@ different contexts, so they would probably not be identical when translated. Sin
 <para>
 In these cases, you should add extra characters to the strings. For instance,
 use <literal>"jumps[noun]"</literal> and <literal>"jumps[verb]"</literal>
-instead of just <literal>"jumps"</literal> and strip them again outside the
+instead of just <literal>"jumps"</literal>, and strip them again outside the
 <function>gettext</function> call. If you add extra characters you should also
 add a comment for the translators before the <function>gettext</function> call.
 Such comments will be shown in the <filename>.po</filename> files. For
@@ -7230,13 +7336,13 @@ instance, you cannot use the copyright sign (&copy;).
     <sect1 id="sec-i18n-getting-help-with-translations">
       <title>Getting help with translations</title>
 
-      <para>If your program is free software, there is a whole <literal>GNOME</literal>
+      <para>If your program is free software, there is a whole <application>GNOME</application>
         subproject devoted to helping you make translations, the
-        <ulink url="https://wiki.gnome.org/TranslationProject/"><literal>GNOME</literal>
+        <ulink url="https://wiki.gnome.org/TranslationProject/"><application>GNOME</application>
         Translation Project</ulink>.</para>
 
-      <para>The way it works is that you upload your source code to a git
-        repository where translators can access it, then contact the gnome-i18n
+      <para>The way it works is that you upload your source code to a Git
+        repository where translators can access it, then contact the <literal>gnome-i18n</literal>
         mailing list and ask to have your program added to the
         <ulink url="http://l10n.gnome.org/module/">list of modules to translate</ulink>.</para>
 
@@ -7276,7 +7382,7 @@ instance, you cannot use the copyright sign (&copy;).
     <title>Custom Containers</title>
     <para>When deriving from <classname>Gtk::Container</classname>, you should override the following virtual methods:
     <itemizedlist>
-      <listitem><para><methodname>get_request_mode_vfunc()</methodname>: Return what <literal>Gtk::SizeRequestMode</literal> is preferred by the container.</para></listitem>
+      <listitem><para><methodname>get_request_mode_vfunc()</methodname>: Return what <type>Gtk::SizeRequestMode</type> is preferred by the container.</para></listitem>
       <listitem><para><methodname>get_preferred_width_vfunc()</methodname>: Calculate the minimum and natural width of the container.</para></listitem>
       <listitem><para><methodname>get_preferred_height_vfunc()</methodname>: Calculate the minimum and natural height of the container.</para></listitem>
       <listitem><para><methodname>get_preferred_width_for_height_vfunc()</methodname>: Calculate the minimum and natural width of the container, if it would be given the specified height.</para></listitem>
@@ -7309,7 +7415,7 @@ instance, you cannot use the copyright sign (&copy;).
         its parent, this logic will eventually decide the size of the top-level
         window.</para>
 
-    <para>You are not guaranteed to get the <literal>Gtk::SizeRequestMode</literal>
+    <para>You are not guaranteed to get the <type>Gtk::SizeRequestMode</type>
         that you request. Therefore all four of the
         <methodname>get_preferred_xxx_vfunc()</methodname> methods must return
         sensible values.</para>
@@ -7394,7 +7500,7 @@ instance, you cannot use the copyright sign (&copy;).
         need not be overridden in all custom widgets. The base class's methods
         may be appropriate.
     <itemizedlist>
-      <listitem><para><methodname>get_request_mode_vfunc()</methodname>: (optional) Return what <literal>Gtk::SizeRequestMode</literal> is preferred by the widget.</para></listitem>
+      <listitem><para><methodname>get_request_mode_vfunc()</methodname>: (optional) Return what <type>Gtk::SizeRequestMode</type> is preferred by the widget.</para></listitem>
       <listitem><para><methodname>get_preferred_width_vfunc()</methodname>: Calculate the minimum and natural width of the widget.</para></listitem>
       <listitem><para><methodname>get_preferred_height_vfunc()</methodname>: Calculate the minimum and natural height of the widget.</para></listitem>
       <listitem><para><methodname>get_preferred_width_for_height_vfunc()</methodname>: Calculate the minimum and natural width of the widget, if it would be given the specified height.</para></listitem>
@@ -7756,7 +7862,7 @@ and hints for creating &gtkmm; applications.
 Declare a variable of the type of <classname>Widget</classname> you wish to
 use, generally as member variable of a derived container class. You could also
 declare a pointer to the widget type, and then create it with
-<literal>new</literal> in your code. Even when using the widget via a pointer,
+<code>new</code> in your code. Even when using the widget via a pointer,
 it's still probably best to make that pointer a member variable of a container
 class so that you can access it later.
 </para>
@@ -7861,7 +7967,7 @@ The full, buildable sources for these examples can be found in the
 <filename>examples/book/buildapp</filename> directory of the
 <application>gtkmm-documentation</application> source distribution, or online in the
 <ulink url="&url_examples_base;buildapp"><application>gtkmm-documentation</application>
-git repository</ulink>. You can build each example separately by using make with the
+Git repository</ulink>. You can build each example separately by using make with the
 <filename>Makefile.example</filename> file. For more information, see the
 <filename>README</filename> included in the <filename>buildapp</filename> directory.
 </para>
@@ -8024,7 +8130,7 @@ Our application is beginning to take shape:
 <title>An application menu</title>
 
 <para>
-An application menu is shown by GNOME shell at the top of the screen. It is meant
+An application menu is shown by GNOME Shell at the top of the screen. It is meant
 to collect infrequently used actions that affect the whole application.
 The application menu is shown either at the top of the screen, or at the top of
 the application's window, depending on which desktop shell you use.
@@ -8049,7 +8155,7 @@ signal handler, which is guaranteed to be called once for each primary applicati
 
 <para>
 Our preferences menu item does not do anything yet, but the Quit menu item is fully
-functional. It can also be activated by the usual Ctrl-Q shortcut. The shortcut
+functional. It can also be activated by the usual <keycap>Ctrl</keycap>-<keycap>Q</keycap> shortcut. The shortcut
 is added with <methodname>Gtk::Application::set_accel_for_action()</methodname>.
 </para>
 
@@ -8357,7 +8463,7 @@ consider contributing to this document.
 <para>
 Ideally, we would like you to <ulink url="http://www.gtkmm.org/bugs.shtml">provide a patch</ulink> to the
 <filename>docs/tutorial/C/index-in.docbook</filename> file. This file is currently
-in the <literal>gtkmm-documentation</literal> module in GNOME git.
+in the <application>gtkmm-documentation</application> module in GNOME Git.
 </para>
 
 <para>
@@ -8423,7 +8529,7 @@ Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf = Gdk::Pixbuf::create_from_file(filena
 int width = refPixbuf-&gt;get_width();
 </programlisting>
 </para>
-<para>But unlike most smartpointers, you can't use the * operator to
+<para>But unlike most smartpointers, you can't use the <literal>*</literal> operator to
 access the underlying instance.
 </para>
 <para>
@@ -8747,7 +8853,8 @@ way.
 <para>
 Instead of laboriously connecting signal handlers to signals,
 you can simply make a new class which inherits from a widget - say, a
-Button - and then override the default signal handler, such as Button::on_clicked(). This can be a
+<classname>Gtk::Button</classname> - and then override the default signal
+handler, e.g. <methodname>Gtk::Button::on_clicked()</methodname>. This can be a
 lot simpler than hooking up signal handlers for everything.
 </para>
 
@@ -8833,7 +8940,7 @@ Of course, a normal "clicked" signal handler would have no arguments.
 <function>sigc::bind()</function> is not commonly used, but you might find it
 helpful sometimes. If you are familiar with <application>GTK+</application>
 programming then you have probably noticed that this is similar to the extra
-<literal>gpointer data</literal> arguments which all GTK+ callbacks have. This
+<parameter>gpointer data</parameter> arguments which all GTK+ callbacks have. This
 is generally overused in <application>GTK+</application> to pass information
 that should be stored as member data in a derived widget, but widget derivation
 is very difficult in C. We have far less need of this hack in &gtkmm;.
@@ -8903,7 +9010,7 @@ signal handlers. However, this can be a problem with the X Event signals. For in
 the existing signal handlers, or the default signal handler, might return <literal>true</literal>
 to stop other signal handlers from being called. To specify that your signal handler
 should be called before the other signal handlers, so that it will always be called,
-you can specify <literal>false</literal> for the optional <literal>after</literal>
+you can specify <literal>false</literal> for the optional <parameter>after</parameter>
 parameter. For instance,
 <programlisting>
 button.signal_button_press_event().connect( sigc::ptr_fun(&amp;on_mywindow_button_press), false );
@@ -8928,7 +9035,7 @@ This is more difficult than usual if the exception was thrown from a signal hand
 </para>
 <para>
 This section describes primarily what you can expect on a Linux system, when you
-use <ulink url="http://www.gnu.org/software/gdb/">the gdb debugger</ulink>.
+use <ulink url="http://www.gnu.org/software/gdb/">the GNU debugger, GDB</ulink>.
 </para>
 <para>
 First, let's look at a simple example where an exception is thrown from a normal
@@ -8953,7 +9060,7 @@ int main(int argc, char** argv)
 </programlisting>
 </para>
 <para>
-Here is an excerpt from a <application>gdb</application> session. Only the most
+Here is an excerpt from a <application>GDB</application> session. Only the most
 interesting parts of the output are shown.
 <programlisting>
 &gt; gdb without_signal
@@ -8992,7 +9099,7 @@ int main(int argc, char** argv)
 </programlisting>
 </para>
 <para>
-And here's an excerpt from a <application>gdb</application> session.
+And here's an excerpt from a <application>GDB</application> session.
 <programlisting>
 &gt; gdb with_signal
 (gdb) run
@@ -9011,10 +9118,10 @@ The exception is caught in <application>glibmm</application>, and the program
 ends with a call to <function>g_error()</function>. Other exceptions may result
 in different behaviour, but in any case the exception from a signal handler is
 caught in <application>glibmm</application> or &gtkmm;, and
-<application>gdb</application> can't see where it was thrown.
+<application>GDB</application> can't see where it was thrown.
 </para>
 <para>
-To see where the exception is thrown, you can use the <application>gdb</application>
+To see where the exception is thrown, you can use the <application>GDB</application>
 command <userinput>catch throw</userinput>.
 <programlisting>
 &gt; gdb with_signal
@@ -9036,7 +9143,7 @@ Program received signal SIGTRAP, Trace/breakpoint trap.
 <para>
 If there are many caught exceptions before the interesting uncaught one, this
 method can be tedious. It can be automated with the following
-<application>gdb</application> commands.
+<application>GDB</application> commands.
 <programlisting>
 (gdb) catch throw
 (gdb) commands
@@ -9134,8 +9241,8 @@ sharp-eyed reader with GUI toolkit experience will note that this same design
 is often
 seen under the name of "broadcaster-listener" (e.g., in Metrowerks'
 PowerPlant framework for the Macintosh). It works in much the same
-way: one sets up <literal>broadcasters</literal>, and then connects
-<literal>listeners</literal> to them; the broadcaster keeps a list of the
+way: one sets up <emphasis>broadcasters</emphasis>, and then connects
+<emphasis>listeners</emphasis> to them; the broadcaster keeps a list of the
 objects listening to it, and when someone gives the broadcaster a
 message, it calls all of its objects in its list with the message. In
 &gtkmm;, signal objects play the role of broadcasters, and slots
@@ -9208,7 +9315,7 @@ practical - and sensible - to subclass a button for that purpose.
     software much easier by calculating dependencies and building things in the
     correct order. This section will give a brief explanation of how to set up
     <application>jhbuild</application> to build and install &gtkmm; from the
-    source repository (git). For up-to-date information
+    source repository (Git). For up-to-date information
     on <application>jhbuild</application>, please refer to the <ulink
       url="http://developer.gnome.org/jhbuild/unstable/">jhbuild manual</ulink>.
     If you need assistance using <application>jhbuild</application>, you should
@@ -9218,8 +9325,8 @@ practical - and sensible - to subclass a button for that purpose.
   </para>
   <note>
     <para>
-    Note that to build &gtkmm; from git, you'll often need to build many of its
-    dependencies from git as well. <application>jhbuild</application> makes
+    Note that to build &gtkmm; from Git, you'll often need to build many of its
+    dependencies from Git as well. <application>jhbuild</application> makes
     this easier than it would normally be, but it will take quite a while to
     build and install them all. You will probably encounter build problems,
     though these will usually be corrected quickly if you report them.
@@ -9275,17 +9382,17 @@ practical - and sensible - to subclass a button for that purpose.
       </para>
     </important>
     <para>
-      When you downloaded <application>jhbuild</application> from the git repository,
+      When you downloaded <application>jhbuild</application> from the Git repository,
       you got a number of <filename>.modules</filename> files, specifying
       dependencies between modules. By default <application>jhbuild</application>
       does not use the downloaded versions of these files, but reads the
-      latest versions in the git repository. This is usually what you want.
+      latest versions in the Git repository. This is usually what you want.
       If you don't want it, use the <varname>use_local_modulesets</varname>
       variable in <filename>.jhbuildrc</filename>.
     </para>
   </sect1>
   <sect1 id="sec-installing-jhbuild">
-    <title>Installing and Using the git version of &gtkmm;</title>
+    <title>Installing and Using the Git version of &gtkmm;</title>
     <para>
       Once you've configured <application>jhbuild</application> as described
       above, building &gtkmm; should be relatively straightforward. The first
@@ -9300,7 +9407,7 @@ $ jhbuild sanitycheck</screen>
       <title>Installing &gtkmm; with <application>jhbuild</application></title>
       <para>
         If everything worked correctly, you should be able to build &gtkmm; and
-        all of its dependencies from git by executing <command>jhbuild
+        all of its dependencies from Git by executing <command>jhbuild
           build</command> (or, if you didn't specify &gtkmm; in the
         <varname>modules</varname> variable, with the command <command>jhbuild
           build gtkmm</command>).
@@ -9316,9 +9423,9 @@ $ jhbuild sanitycheck</screen>
       </para>
     </sect2>
     <sect2 id="jhbuild-using-gtkmm">
-      <title>Using the git version of &gtkmm;</title>
+      <title>Using the Git version of &gtkmm;</title>
       <para>
-        After you've installed the git version of &gtkmm;, you're ready to start
+        After you've installed the Git version of &gtkmm;, you're ready to start
         using and experimenting with it. In order to use the new version of
         &gtkmm; you've just installed, you need to set some environment
         variables so that your <filename>configure</filename> script knows where
@@ -9364,7 +9471,7 @@ $ jhbuild sanitycheck</screen>
     of tools such as <command>gmmproc</command> and
     <filename>generate_wrap_init.pl</filename>. In theory you could write your
     own build files to use these appropriately, but a much better option is to
-    make use of the build infrastructure provided by the mm-common module. To
+    make use of the build infrastructure provided by the <application>mm-common</application> module. To
     get started, it helps a lot to pick an existing binding module as an example
     to look at.</para>
 <para>For instance, let's pretend that we are wrapping a C library called
@@ -9377,7 +9484,7 @@ $ jhbuild sanitycheck</screen>
 
 <para>Typically our wrapper library would be called libsomethingmm. We can start by
   copying the <ulink url="http://git.gnome.org/browse/mm-common/tree/skeletonmm">skeleton
-  source tree</ulink> from the mm-common module.
+  source tree</ulink> from the <application>mm-common</application> module.
 <programlisting>
   $ git clone git://git.gnome.org/mm-common
   $ cp -a mm-common/skeletonmm libsomethingmm
@@ -9426,13 +9533,16 @@ A number of the skeleton files must still be filled in with project-specific con
   search-replace utility for this, such as <command>regexxer</command>. Note that nearly all of the
   files provided with the skeleton source tree contain placeholder text. Thus, the substitutions
   should be performed globally, and not be limited to the Automake and Autoconf files.</para>
-<para>All mentions of <varname>skeleton</varname> should be replaced by the correct name of the C
-  library you are wrapping, such as "something" or "libsomething". In the same manner, all
-  instances of <varname>SKELETON</varname> should be replaced by "SOMETHING" or "LIBSOMETHING", and
-  all occurrences of <varname>Skeleton</varname> changed to "Something".</para>
-<para>Likewise, replace all instances of <varname>Joe Hacker</varname> by the name of the intended
-  copyright holder, which is probably you. Do the same for the <varname>joe@example.com</varname>
-  email address.</para>
+<para>All mentions of <literal>skeleton</literal> should be replaced by the
+  correct name of the C library you are wrapping, such as
+  <literal>something</literal> or <literal>libsomething</literal>. In the same
+  manner, all instances of <literal>SKELETON</literal> should be replaced by
+  <literal>SOMETHING</literal> or <literal>LIBSOMETHING</literal>, and all
+  occurrences of <literal>Skeleton</literal> changed to
+  <literal>Something</literal>.</para>
+<para>Likewise, replace all instances of <literal>Joe Hacker</literal> by the
+  name of the intended copyright holder, which is probably you. Do the same for
+  the <literal>joe@example.com</literal> email address.</para>
 
 <sect3 id="modifying-configure.ac">
 <title>configure.ac</title>
@@ -9585,7 +9695,8 @@ described in the <link linkend="sec-wrapping-documentation">Documentation</link>
 <title>Generating the methods .defs</title>
 <para>This <filename>.defs</filename> file describes objects and their functions.
   It is generated by the <command>h2def.py</command> script which you can find in
-  glibmm's <filename>tools/defs_gen</filename> directory. For instance,
+  <application>glibmm</application>'s <filename>tools/defs_gen</filename>
+  directory. For instance,
 <programlisting>
 $ ./h2def.py /usr/include/gtk-3.0/gtk/*.h &gt; gtk_methods.defs
 </programlisting>
@@ -9596,7 +9707,8 @@ $ ./h2def.py /usr/include/gtk-3.0/gtk/*.h &gt; gtk_methods.defs
 <title>Generating the enums .defs</title>
 <para>This <filename>.defs</filename> file describes enum types and their possible
   values. It is generated by the <filename>enum.pl</filename> script which you can
-  find in glibmm's <filename>tools</filename> directory. For instance,
+  find in <application>glibmm</application>'s <filename>tools</filename>
+  directory. For instance,
 <programlisting>
 $ ./enum.pl /usr/include/gtk-3.0/gtk/*.h &gt; gtk_enums.defs
 </programlisting>
@@ -9752,7 +9864,7 @@ $ /usr/lib/glibmm-2.4/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtkm
 <title>m4 Conversions</title>
 <para>The macros that you use in the .hg and .ccg files often need to know how
 to convert a C++ type to a C type, or vice-versa. gmmproc takes this information
-from an .m4 file in your <literal>tools/m4/</literal> directory. This allows it
+from an .m4 file in your <filename>tools/m4/</filename> directory. This allows it
 to call a C function in the implementation of your C++ method, passing the
 appropriate parameters to that C functon. For instance, this
 tells gmmproc how to convert a GtkTreeView pointer to a Gtk::TreeView pointer:
@@ -10108,9 +10220,9 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
 </programlisting>
 </para>
 <para>The C function (e.g. <function>gtk_entry_set_text</function>) is described
-    more fully in the .defs file, and the <filename>convert*.m4</filename> files
+    more fully in the <filename>.defs</filename> file, and the <filename>convert*.m4</filename> files
     contain the necessary conversion from the C++ parameter type to the C
-    parameter type. This macro also generates doxygen documentation comments
+    parameter type. This macro also generates <application>Doxygen</application> documentation comments
     based on the <filename>*_docs.xml</filename> and
     <filename>*_docs_override.xml</filename> files.</para>
 <para>There are some optional extra arguments:
@@ -10132,7 +10244,7 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
     <varlistentry>
         <term>deprecated ["&lt;text&gt;"]</term>
         <listitem>
-            <para>Puts the generated code in #ifdef blocks. Text about the
+            <para>Puts the generated code in <literal>#ifdef</literal> blocks. Text about the
                 deprecation can be specified as an optional
                 parameter.</para>
         </listitem>
@@ -10147,14 +10259,14 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
     <varlistentry>
         <term>newin "&lt;version&gt;"</term>
         <listitem>
-            <para>Adds a @newin Doxygen command to the documentation, or replaces
-                the @newin command generated from the C documentation.</para>
+            <para>Adds a <literal>@newin</literal> Doxygen command to the documentation, or replaces
+                the <literal>@newin</literal> command generated from the C documentation.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
         <term>ifdef &lt;identifier&gt;</term>
         <listitem>
-            <para>Puts the generated code in #ifdef blocks.</para>
+            <para>Puts the generated code in <literal>#ifdef</literal> blocks.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
@@ -10163,8 +10275,8 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
           <para>Specifies the name of the slot parameter of the method, if it
             has one.  This enables <command>gmmproc</command> to generate code
             to copy the slot and pass the copy on to the C function in its
-            final <literal>gpointer user_data</literal> parameter.  The
-            <literal>slot_callback</literal> option must also be used to
+            final <parameter>gpointer user_data</parameter> parameter.  The
+            <parameter>slot_callback</parameter> option must also be used to
             specify the name of the glue callback function to also pass on to
             the C function.</para>
         </listitem>
@@ -10172,7 +10284,7 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
     <varlistentry>
         <term>slot_callback &lt;function_name&gt;</term>
         <listitem>
-          <para>Used in conjunction with the <literal>slot_name</literal>
+          <para>Used in conjunction with the <parameter>slot_name</parameter>
             option to specify the name of the glue callback function that
             handles extracting the slot and then calling it.  The address of
             this callback is also passed on to the C function that the method
@@ -10185,8 +10297,8 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
           <para>Tells <command>gmmproc</command> not to pass a copy of the slot
             to the C function, if the method has one.  Instead the slot itself
             is passed.  The slot parameter name and the glue callback function
-            must have been specified with the <literal>slot_name</literal> and
-            <literal>slot_callback</literal> options respectively.</para>
+            must have been specified with the <parameter>slot_name</parameter> and
+            <parameter>slot_callback</parameter> options respectively.</para>
         </listitem>
     </varlistentry>
 </variablelist>
@@ -10209,8 +10321,8 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
         what objects are contained in the list's data field for each item,
         usually by reading the documentation for the C function. The list can
         then be wrapped by a <classname>std::vector</classname> type.
-        For instance, <code>std::vector&lt;
-        Glib::RefPtr&lt;Gdk::Pixbuf&gt; &gt;</code>.
+        For instance, <classname>std::vector&lt;
+        Glib::RefPtr&lt;Gdk::Pixbuf&gt; &gt;</classname>.
         You may need to define a Traits type to specify how the C
         and C++ types should be converted.</para></listitem>
 <listitem><para>Wrapping <classname>GList*</classname> and
@@ -10250,8 +10362,8 @@ _WRAP_METHOD_DOCS_ONLY(gtk_container_remove)
     <varlistentry>
         <term>newin "&lt;version&gt;"</term>
         <listitem>
-            <para>Adds a @newin Doxygen command to the documentation, or replaces
-                the @newin command generated from the C documentation.</para>
+            <para>Adds a <literal>@newin</literal> Doxygen command to the documentation, or replaces
+                the <literal>@newin</literal> command generated from the C documentation.</para>
         </listitem>
     </varlistentry>
 </variablelist>
@@ -10283,7 +10395,7 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
 
 <sect3 id="gmmproc-wrap-signal">
 <title>_WRAP_SIGNAL</title>
-<para>This macro generates the C++ libsigc++-style signal to wrap a C GObject
+<para>This macro generates the C++ <application>libsigc++</application>-style signal to wrap a C GObject
     signal. It actually generates a public accessor method, such as
     <function>signal_clicked()</function>, which returns a proxy object.
     <command>gmmproc</command> uses the .defs file to discover the C parameter
@@ -10337,21 +10449,21 @@ _WRAP_SIGNAL(void clicked(),"clicked")
     <varlistentry>
         <term>deprecated ["&lt;text&gt;"]</term>
         <listitem>
-            <para>Puts the generated code in #ifdef blocks. Text about the
+            <para>Puts the generated code in <literal>#ifdef</literal> blocks. Text about the
                 deprecation can be specified as an optional parameter.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
         <term>newin "&lt;version&gt;"</term>
         <listitem>
-            <para>Adds a @newin Doxygen command to the documentation, or replaces
-                the @newin command generated from the C documentation.</para>
+            <para>Adds a <literal>@newin</literal> Doxygen command to the documentation, or replaces
+                the <literal>@newin</literal> command generated from the C documentation.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
         <term>ifdef &lt;identifier&gt;</term>
         <listitem>
-            <para>Puts the generated code in #ifdef blocks.</para>
+            <para>Puts the generated code in <literal>#ifdef</literal> blocks.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
@@ -10374,12 +10486,12 @@ _WRAP_SIGNAL(void clicked(),"clicked")
     <varlistentry>
         <term>two_signal_methods</term>
 	      <listitem>
-	        <para>Used in conjunction with the <literal>detail_name</literal>
+	        <para>Used in conjunction with the <parameter>detail_name</parameter>
               option to generate two <methodname>signal_something()</methodname>
               methods, one without a parameter and one with a parameter without
-              a default value. With only the <literal>detail_name</literal> option
+              a default value. With only the <parameter>detail_name</parameter> option
               one method is generated, with a parameter with default value.
-              Use the <literal>two_signal_methods</literal> option, if it's
+              Use the <parameter>two_signal_methods</parameter> option, if it's
               necessary in order to preserve ABI.</para>
 	      </listitem>
     </varlistentry>
@@ -10404,15 +10516,15 @@ _WRAP_PROPERTY("label", Glib::ustring)
     <varlistentry>
         <term>deprecated ["&lt;text&gt;"]</term>
         <listitem>
-            <para>Puts the generated code in #ifdef blocks. Text about the
+            <para>Puts the generated code in <literal>#ifdef</literal> blocks. Text about the
                 deprecation can be specified as an optional parameter.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
         <term>newin "&lt;version&gt;"</term>
         <listitem>
-            <para>Adds a @newin Doxygen command to the documentation, or replaces
-                the @newin command generated from the C documentation.</para>
+            <para>Adds a <literal>@newin</literal> Doxygen command to the documentation, or replaces
+                the <literal>@newin</literal> command generated from the C documentation.</para>
         </listitem>
     </varlistentry>
 </variablelist>
@@ -10486,7 +10598,7 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
     <varlistentry>
         <term>ifdef &lt;identifier&gt;</term>
         <listitem>
-            <para>Puts the generated code in #ifdef blocks.</para>
+            <para>Puts the generated code in <literal>#ifdef</literal> blocks.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
@@ -10495,8 +10607,8 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
           <para>Specifies the name of the slot parameter of the method, if it
             has one.  This enables <command>gmmproc</command> to generate code
             to copy the slot and pass the copy on to the C function in its
-            final <literal>gpointer user_data</literal> parameter.  The
-            <literal>slot_callback</literal> option must also be used to
+            final <parameter>gpointer user_data</parameter> parameter.  The
+            <parameter>slot_callback</parameter> option must also be used to
             specify the name of the glue callback function to also pass on to
             the C function.</para>
         </listitem>
@@ -10504,7 +10616,7 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
     <varlistentry>
         <term>slot_callback &lt;function_name&gt;</term>
         <listitem>
-          <para>Used in conjunction with the <literal>slot_name</literal>
+          <para>Used in conjunction with the <parameter>slot_name</parameter>
             option to specify the name of the glue callback function that
             handles extracting the slot and then calling it.  The address of
             this callback is also passed on to the C function that the method
@@ -10517,8 +10629,8 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
           <para>Tells <command>gmmproc</command> not to pass a copy of the slot
             to the C function, if the method has one.  Instead the slot itself
             is passed.  The slot parameter name and the glue callback function
-            must have been specified with the <literal>slot_name</literal> and
-            <literal>slot_callback</literal> options respectively.</para>
+            must have been specified with the <parameter>slot_name</parameter> and
+            <parameter>slot_callback</parameter> options respectively.</para>
         </listitem>
     </varlistentry>
     <varlistentry>
@@ -10592,7 +10704,7 @@ _IMPLEMENTS_INTERFACE(Orientable)
     <varlistentry>
         <term>ifdef &lt;identifier&gt;</term>
         <listitem>
-            <para>Puts the generated code in #ifdef blocks.</para>
+            <para>Puts the generated code in <literal>#ifdef</literal> blocks.</para>
         </listitem>
     </varlistentry>
 </variablelist>
@@ -10630,7 +10742,7 @@ _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
     <listitem>
       <para>Substitutes (part of) the name of one or more enum constants.
         You can add any number of substitutions.</para>
-      <para>For example, from <filename>iochannel.hg</filename> in glibmm:
+      <para>For example, from <filename>iochannel.hg</filename> in <application>glibmm</application>:
       <programlisting>
 _WRAP_ENUM(SeekType, GSeekType, NO_GTYPE, s#^SEEK_#SEEK_TYPE_#)
       </programlisting>
@@ -10640,15 +10752,15 @@ _WRAP_ENUM(SeekType, GSeekType, NO_GTYPE, s#^SEEK_#SEEK_TYPE_#)
   <varlistentry>
     <term>deprecated ["&lt;text&gt;"]</term>
     <listitem>
-      <para>Puts the generated code in #ifdef blocks. Text about the
+      <para>Puts the generated code in <literal>#ifdef</literal> blocks. Text about the
         deprecation can be specified as an optional parameter.</para>
     </listitem>
   </varlistentry>
   <varlistentry>
     <term>newin "&lt;version&gt;"</term>
     <listitem>
-      <para>Adds a @newin Doxygen command to the documentation, or replaces
-        the @newin command generated from the C documentation.</para>
+      <para>Adds a <literal>@newin</literal> Doxygen command to the documentation, or replaces
+        the <literal>@newin</literal> command generated from the C documentation.</para>
     </listitem>
   </varlistentry>
 </variablelist>
@@ -10773,7 +10885,7 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
       <para>
         Please note that when reordering parameters for a
         <function>_WRAP_SIGNAL()</function> method signature, the C parameter
-        names would always be <literal>p0</literal>, <literal>p1</literal>,
+        names would always be <parameter>p0</parameter>, <parameter>p1</parameter>,
         etc. because the <filename>generate_extra_defs</filename> utility uses those
         parameter names no matter what the C API's parameter names may be.
         It's how the utility is written presently.
@@ -11058,18 +11170,25 @@ void example_widget_construct(ExampleWidget* widget, int something, const char* 
 
 <sect1 id="sec-wrapping-documentation">
 <title>Documentation</title>
-<para>In general, gtkmm-style projects use Doxygen, which reads specially formatted C++ comments and generates HTML documentation. You may write these doxygen comments directly in the header files.</para>
+<para>In general, gtkmm-style projects use <application>Doxygen</application>,
+which reads specially formatted C++ comments and generates HTML documentation.
+You may write these <application>Doxygen</application> comments directly in the
+header files.</para>
 
 <sect2 id="wrapping-reusing-c-documentation">
 <title>Reusing C documentation</title>
 <para>You might wish to reuse documentation that exists for the C library that
-  you are wrapping. GTK-style C libraries typically use gtk-doc and therefore
-  have source code comments formatted for gtk-doc and some extra documentation
-  in .sgml and .xml files. The docextract_to_xml.py script, from glibmm's
-  <filename>tools/defs_gen</filename> directory, can read these files and
-  generate an .xml file that <command>gmmproc</command> can use to generate
-  doxygen comments. <command>gmmproc</command> will even try to transform the
-  documentation to make it more appropriate for a C++ API.</para>
+  you are wrapping. GTK+-style C libraries typically use
+  <application>gtk-doc</application> and therefore have source code comments
+  formatted for <application>gtk-doc</application> and some extra documentation
+  in <filename>.sgml</filename> and <filename>.xml</filename> files. The
+  <filename>docextract_to_xml.py</filename> script, from
+  <application>glibmm</application>'s <filename>tools/defs_gen</filename>
+  directory, can read these files and generate an <filename>.xml</filename> file
+  that <command>gmmproc</command> can use to generate
+  <application>Doxygen</application> comments. <command>gmmproc</command> will
+  even try to transform the documentation to make it more appropriate for a C++
+  API.</para>
 <para>
 For instance,
 <programlisting>./docextract_to_xml.py -s ~/checkout/gnome/gtk+/gtk/ > gtk_docs.xml
@@ -11085,10 +11204,12 @@ For instance,
 
 <sect2 id="wrapping-documentation-build-structure">
 <title>Documentation build structure</title>
-<para>If you copied the skeleton source tree in mm-common and substituted the
+<para>If you copied the skeleton source tree in <application>mm-common</application> and substituted the
   placeholder text, then you will already have suitable <filename>Makefile.am</filename>
-  and <filename>Doxyfile.in</filename> files. With the mm-common build setup, the list
-  of Doxygen input files is not defined in the Doxygen configuration file, but passed
+  and <filename>Doxyfile.in</filename> files. With the
+  <application>mm-common</application> build setup, the list of
+  <application>Doxygen</application> input files is not defined in the
+  <application>Doxygen</application> configuration file, but passed
   along from <command>make</command> to the standard input of <command>doxygen</command>.
   The input file list is defined by the <varname>doc_input</varname> variable in the
   <filename>Makefile.am</filename> file.
