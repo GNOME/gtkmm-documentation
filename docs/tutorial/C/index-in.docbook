@@ -149,9 +149,14 @@ generally went by the name &gtkmm;, and that's what we stuck with.</para>
 
 <sect2 id="why-use-gtkmm">
 <title>Why use &gtkmm; instead of GTK+?</title>
-<para>&gtkmm; allows you to write code using normal C++ techniques such as encapsulation, derivation, and polymorphism. As a C++ programmer you probably already realise that this leads to clearer and better organized code.</para>
+<para>&gtkmm; allows you to write code using normal C++ techniques such as
+encapsulation, inheritance, and polymorphism. As a C++ programmer, you probably
+already realise that this leads to clearer and better organized code.</para>
 <para>&gtkmm; is more type-safe, so the compiler can detect errors that would only be detected at run time when using C. This use of specific types also makes the API clearer because you can see what types should be used just by looking at a method's declaration.</para>
-<para>Inheritance can be used to derive new widgets. The derivation of new widgets in GTK+ C code is so complicated and error prone that almost no C coders do it. As a C++ developer you know that derivation is an essential Object Orientated technique.</para>
+<para>Inheritance can be used to derive new widgets. Creating new derived widget
+classes in GTK+ C code is so complicated and error prone that almost no C coders
+do it. As a C++ developer you know that inheritance is one of the main
+techniques that object-oriented programming provides to ease design.</para>
 <para>Member instances can be used, simplifying memory management. All GTK+ C widgets are dealt with by use of pointers. As a C++ coder you know that pointers should be avoided where possible.</para>
 <para>&gtkmm; involves less code compared to GTK+, which uses prefixed function names and lots of cast macros.</para>
 </sect2>
@@ -8974,10 +8979,10 @@ Of course, a normal "clicked" signal handler would have no arguments.
 <function>sigc::bind()</function> is not commonly used, but you might find it
 helpful sometimes. If you are familiar with <application>GTK+</application>
 programming then you have probably noticed that this is similar to the extra
-<parameter>gpointer data</parameter> arguments which all GTK+ callbacks have. This
+<parameter>gpointer data</parameter> arguments which all <application>GTK+</application> callbacks have. This
 is generally overused in <application>GTK+</application> to pass information
-that should be stored as member data in a derived widget, but widget derivation
-is very difficult in C. We have far less need of this hack in &gtkmm;.
+that should be stored as member data in a derived widget, but creating derived
+widget classes is very difficult in C. We have far less need of this hack in &gtkmm;.
 </para>
 </sect1>
 
