@@ -480,7 +480,7 @@ linkend="chapter-builder">Glade and Gtk::Builder</link> chapter.
 button, the appropriate signal will be <emphasis>emitted</emphasis> by the Widget
 that was pressed. Each Widget has a different set of signals that it can emit. To make a
 button click result in an action, we set up a
-<emphasis>signal handler</emphasis> to catch the button's "clicked" signal.
+<emphasis>signal handler</emphasis> to catch the button's <literal>clicked</literal> signal.
 </para>
 <para>&gtkmm; uses the <application>libsigc++</application> library to implement
 signals. Here is an example line of code that connects a
@@ -992,7 +992,7 @@ Use <methodname>Gtk::Widget::signal_leave_notify_event()</methodname> instead.
 To retrieve the state of the <classname>ToggleButton</classname>, you can use the
 <methodname>get_active()</methodname> method. This returns <literal>true</literal> if the button
 is "down". You can also set the toggle button's state, with <methodname>set_active()</methodname>. Note that, if you do this, and the state actually changes, it causes the
-"clicked" signal to be emitted. This is usually what you want.
+<literal>clicked</literal> signal to be emitted. This is usually what you want.
 </para>
 
 <para>
@@ -1150,7 +1150,8 @@ The following example demonstrates the use of
 <para>
 <classname>Gtk::Scale</classname> and <classname>Gtk::Scrollbar</classname>
 both inherit from <classname>Gtk::Range</classname> and share much
-functionality. They contain a "trough" and a "slider" (sometimes called a
+functionality. They contain a <emphasis>trough</emphasis> and a
+<emphasis>slider</emphasis> (sometimes called a
 "thumbwheel" in other GUI environments). Dragging the slider with the pointer
 moves it within the trough, while clicking in the trough advances the slider
 towards the location of the click, either completely, or by a designated
@@ -2849,7 +2850,7 @@ void TheClass::selected_row_callback(
 </sect2>
 
 <sect2 id="treeview-selection-changed-signal">
-<title>The "changed" signal</title>
+<title>The <literal>changed</literal> signal</title>
 <para>
 To respond to the user clicking on a row or range of rows, connect to the
 signal like so:
@@ -4957,7 +4958,7 @@ context->restore();</programlisting>
 <title>Drag and Drop</title>
 <para>
 <classname>Gtk::Widget</classname> has several methods and signals which are
-prefixed with "drag_". These are used for Drag and Drop.
+prefixed with <literal>drag_</literal>. These are used for Drag and Drop.
 </para>
 <sect1 id="sec-dnd-sources-destinations">
 <title>Sources and Destinations</title>
@@ -5752,7 +5753,8 @@ recent_manager->add_item(uri);</programlisting>
       <itemizedlist id="list-file-metadata">
         <listitem>
           <para><varname>app_exec</varname>: The command line to be used to launch
-            this resource. This string may contain the "f" and "u" escape
+            this resource. This string may contain the
+            <literal>%f</literal> and <literal>%u</literal> escape
             characters which will be expanded to the resource file path and URI
             respectively</para>
         </listitem>
@@ -5772,7 +5774,8 @@ recent_manager->add_item(uri);</programlisting>
           <para><varname>groups</varname>: A list of groups associated with this
             item. Groups are essentially arbitrary strings associated with a
             particular resource. They can be thought of as 'categories' (such
-            as "email", "graphics", etc) or tags for the resource.</para>
+            as <literal>email</literal>, <literal>graphics</literal>, etc.) or
+            tags for the resource.</para>
         </listitem>
         <listitem>
           <para><varname>is_private</varname>: Whether this resource should be
@@ -8780,7 +8783,7 @@ last time; nothing new here.</para>
 argument is <parameter>some_object</parameter>, which is the object that our
 new slot will be pointing at. The second argument is a pointer to one of its
 methods. This particular version of <function>sigc::mem_fun()</function>
-creates a slot which will, when "called", call the pointed-to method of the
+creates a slot which will, when called, call the pointed-to method of the
 specified object, in this case
 <methodname>some_object.on_button_clicked()</methodname>.
 </para>
@@ -8968,12 +8971,12 @@ m_button1.signal_clicked().connect( sigc::bind&lt;Glib::ustring&gt;( sigc::mem_f
 </programlisting>
 This says that we want the signal to send an extra
 <classname>Glib::ustring</classname> argument to the signal handler, and that
-the value of that argument should be "button 1". Of course we will need to add
+the value of that argument should be <literal>button 1</literal>. Of course, we will need to add
 that extra argument to the declaration of our signal handler:
 <programlisting>
 virtual void on_button_clicked(Glib::ustring data);
 </programlisting>
-Of course, a normal "clicked" signal handler would have no arguments.
+Of course, a normal <literal>clicked</literal> signal handler would have no arguments.
 </para>
 <para>
 <function>sigc::bind()</function> is not commonly used, but you might find it
@@ -9004,7 +9007,7 @@ information. X events are also often used to handle key-presses.
 </para>
 
 <para>
-These signals behave slightly differently. The value returned from the signal handler indicates whether it has fully "handled"
+These signals behave slightly differently. The value returned from the signal handler indicates whether it has fully handled
 the event. If the value is <literal>false</literal> then &gtkmm; will pass the event on to the next signal handler. If the value is <literal>true</literal> then no other signal handlers will need to be called.
 </para>
 
