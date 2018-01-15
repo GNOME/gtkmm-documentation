@@ -725,7 +725,13 @@ should ask for <application>gtkmm-3.0</application> rather than
 
 <orderedlist>
 <listitem><simpara><classname>Gtk::AppChooser</classname>, <classname>Gtk::AppChooserButton</classname>, <classname>Gtk::AppChooserDialog</classname> allow the user to select an installed application to open a particular type of content.</simpara></listitem>
-<listitem><simpara><classname>Gtk::Grid</classname> is a new container widget that will eventually replace <classname>Gtk::Box</classname> and <classname>Gtk::Table</classname>. It arranges its children according to properties of those children rather than its own layout details.</simpara></listitem>
+<listitem><simpara><classname>Gtk::Grid</classname> is a new container widget,
+which you should use to replace the deprecated
+<classname>Gtk::Table</classname>. Also, in some cases, you may find a Grid
+easier to use than one or more <classname>Gtk::Box</classname> instances,
+although that class is not deprecated. <classname>Gtk::Grid</classname> arranges
+its children according to properties of those children rather than its own
+layout details.</simpara></listitem>
 <listitem><simpara><classname>Gtk::Switch</classname> displays On/Off states more explictly than <classname>Gtk::CheckBox</classname>. It may be useful, for instance, when allowing users to activate hardware.</simpara></listitem>
 </orderedlist>
 
@@ -742,8 +748,16 @@ should ask for <application>gtkmm-3.0</application> rather than
 
 <listitem><simpara><classname>Gtk::Adjustment</classname> and <classname>IconSet</classname> and <classname>Gdk::Cursor</classname> are now used via <classname>Glib::RefPtr</classname>.</simpara></listitem>
 
-<listitem><simpara><classname>Gtk::Box</classname>, <classname>Gtk::ButtonBox</classname>, <classname>Gtk::IconView</classname>, <classname>Gtk::Paned</classname>, <classname>Gtk::ProgressBar</classname>, <classname>Gtk::ScaleButton</classname>, <classname>Gtk::Scrollbar</classname> and <classname>Gtk::Separator</classname> now derive from <classname>Gtk::Orientable</classname>, allowing their
-orientation (vertical or horizontal) to be specified without requiring the use of a derived class such as <classname>Gtk::HBox</classname>.</simpara></listitem>
+<listitem><simpara><classname>Gtk::Box</classname>,
+<classname>Gtk::ButtonBox</classname>, <classname>Gtk::IconView</classname>,
+<classname>Gtk::Paned</classname>, <classname>Gtk::ProgressBar</classname>,
+<classname>Gtk::ScaleButton</classname>, <classname>Gtk::Scrollbar</classname>
+and <classname>Gtk::Separator</classname> now derive from
+<classname>Gtk::Orientable</classname>, allowing their orientation (vertical or
+horizontal) to be specified without requiring the use of a derived class such as
+<classname>Gtk::HBox</classname>. You should not use the old derived classes
+with H or V at the beginning of their name, as they are deprecated and will be
+removed in a future version of GTK+/&gtkmm;.</simpara></listitem>
 
 <listitem><simpara><classname>Gtk::IconView</classname>,
 <classname>Gtk::TextView</classname>, <classname>Gtk::TreeView</classname> and
@@ -773,7 +787,10 @@ the API clearer.</simpara></listitem>
 </orderedlist>
 </para>
 
-<para>All deprecated API was removed in &gtkmm; 3.0, though there will be new deprecations in future versions.</para>
+<para>All API that was deprecated during the GTK+ 2 cycle was removed in &gtkmm;
+3.0, though there have been new deprecations in the GTK+ 3 cycle, so you should
+keep an eye out for those in &gtkmm; and use the recommended alternatives in any
+new code.</para>
 
 <para>As a first step to porting your source code to the
 <application>gtkmm-3.0</application> API, you should probably ensure that your
