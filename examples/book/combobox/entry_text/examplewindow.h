@@ -30,7 +30,7 @@ protected:
   //Signal handlers:
   void on_combo_changed();
   void on_entry_activate();
-  bool on_entry_focus_out_event(const Glib::RefPtr<Gdk::EventFocus>& event);
+  bool on_entry_focus_out_event(const Glib::RefPtr<Gdk::Event>& event);
 
   //Signal connection:
   sigc::connection m_ConnectionFocusOut;

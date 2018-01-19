@@ -70,7 +70,7 @@ private:
   bool          shown_;
   bool          editing_canceled_;
 
-  bool on_button_press_event(const Glib::RefPtr<Gdk::EventButton>& event);
+  bool on_button_press_event(const Glib::RefPtr<Gdk::Event>& event);
   bool on_key_press_event(const Glib::RefPtr<Gdk::EventKey>& event);
   void on_style_updated();
 

@@ -14,7 +14,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-//TODO: Remove this undef when we know what to use instead of signal_button_press_event().
+//TODO: Remove this undef when we know what to use instead of signal_event().
 #undef GTKMM_DISABLE_DEPRECATED
 
 #include <gtkmm.h>
@@ -58,9 +58,9 @@ CellRendererPopup::CellRendererPopup()
   signal_show_popup_.connect(sigc::mem_fun(*this, &Self::on_show_popup));
   signal_hide_popup_.connect(sigc::mem_fun(*this, &Self::on_hide_popup));
 
-  popup_window_.signal_button_press_event().connect(sigc::mem_fun(*this, &Self::on_button_press_event), true);
-  popup_window_.signal_key_press_event   ().connect(sigc::mem_fun(*this, &Self::on_key_press_event), true);
-  popup_window_.signal_style_updated     ().connect(sigc::mem_fun(*this, &Self::on_style_updated));
+  popup_window_.signal_event().connect(sigc::mem_fun(*this, &Self::on_button_press_event), true);
+  popup_window_.signal_key_press_event().connect(sigc::mem_fun(*this, &Self::on_key_press_event), true);
+  popup_window_.signal_style_updated().connect(sigc::mem_fun(*this, &Self::on_style_updated));
 }
 
 CellRendererPopup::~CellRendererPopup()
@@ -226,16 +226,17 @@ void CellRendererPopup::on_hide_popup()
   editing_canceled_ = false;
 }
 
-bool CellRendererPopup::on_button_press_event(const Glib::RefPtr<Gdk::EventButton>& event)
+bool CellRendererPopup::on_button_press_event(const Glib::RefPtr<Gdk::Event>& event)
 {
-  if (event->get_button() != 1)
+  if (!(event->get_event_type() == Gdk::Event::Type::BUTTON_PRESS &&
+      std::static_pointer_cast<Gdk::EventButton>(event)->get_button() == 1))
     return false;
 
   // If the event happened outside the popup, cancel editing.
 
   double x = 0.0;
   double y = 0.0;
-  event->get_root_coords(x, y);
+  std::static_pointer_cast<Gdk::EventButton>(event)->get_root_coords(x, y);
 
   int xoffset = 0, yoffset = 0;
   popup_window_.get_window()->get_root_origin(xoffset, yoffset);

@@ -63,17 +63,16 @@ TreeView_WithPopup::~TreeView_WithPopup()
 {
 }
 
-bool TreeView_WithPopup::on_button_press_event(const Glib::RefPtr<Gdk::EventButton>& button_event)
+bool TreeView_WithPopup::on_event(const Glib::RefPtr<Gdk::Event>& event)
 {
-  bool return_value = false;
-
   //Call base class, to allow normal handling,
   //such as allowing the row to be selected by the right-click:
-  return_value = TreeView::on_button_press_event(button_event);
+  const bool return_value = TreeView::on_event(event);
 
   //Then do our custom stuff:
-  if (button_event->shall_trigger_context_menu())
-    m_Menu_Popup.popup_at_pointer(button_event);
+  if (event->get_event_type() == Gdk::Event::Type::BUTTON_PRESS &&
+      std::static_pointer_cast<Gdk::EventButton>(event)->shall_trigger_context_menu())
+    m_Menu_Popup.popup_at_pointer(event);
 
   return return_value;
 }

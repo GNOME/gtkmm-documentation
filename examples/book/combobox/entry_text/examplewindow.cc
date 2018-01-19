@@ -14,6 +14,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
+//TODO: Remove this undef when we know what to use instead of signal_event().
+#undef GTKMM_DISABLE_DEPRECATED
+
 #include "examplewindow.h"
 #include <iostream>
 
@@ -39,7 +42,7 @@ ExampleWindow::ExampleWindow()
   {
     entry->signal_activate().connect(sigc::mem_fun(*this,
       &ExampleWindow::on_entry_activate) );
-    m_ConnectionFocusOut = entry->signal_focus_out_event().
+    m_ConnectionFocusOut = entry->signal_event().
       connect(sigc::mem_fun(*this, &ExampleWindow::on_entry_focus_out_event),true);
   }
   else
@@ -68,9 +71,14 @@ void ExampleWindow::on_entry_activate()
     << ", Text=" << m_Combo.get_active_text() << std::endl;
 }
 
-bool ExampleWindow::on_entry_focus_out_event(const Glib::RefPtr<Gdk::EventFocus>& /* event */)
+bool ExampleWindow::on_entry_focus_out_event(const Glib::RefPtr<Gdk::Event>& event)
 {
-  std::cout << "on_entry_focus_out_event(): Row=" << m_Combo.get_active_row_number()
-    << ", Text=" << m_Combo.get_active_text() << std::endl;
-  return true;
+  if (event->get_event_type() == Gdk::Event::Type::FOCUS_CHANGE &&
+    !std::static_pointer_cast<Gdk::EventFocus>(event)->get_focus_in())
+  {
+    std::cout << "on_entry_focus_out_event(): Row=" << m_Combo.get_active_row_number()
+      << ", Text=" << m_Combo.get_active_text() << std::endl;
+    return true;
+  }
+  return false;
 }

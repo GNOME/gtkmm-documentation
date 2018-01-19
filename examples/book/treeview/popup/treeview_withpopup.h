@@ -27,8 +27,8 @@ public:
 
 protected:
   // Override Signal handler:
-  // Alternatively, use signal_button_press_event().connect_notify()
-  bool on_button_press_event(const Glib::RefPtr<Gdk::EventButton>& button_event) override;
+  // Alternatively, use signalevent().connect_notify()
+  bool on_event(const Glib::RefPtr<Gdk::Event>& event) override;
 
   //Signal handler for popup menu items:
   void on_menu_file_popup_generic();
