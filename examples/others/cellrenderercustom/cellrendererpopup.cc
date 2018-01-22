@@ -14,9 +14,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-//TODO: Remove this undef when we know what to use instead of signal_event().
-#undef GTKMM_DISABLE_DEPRECATED
-
 #include <gtkmm.h>
 #include "cellrendererpopup.h"
 #include "popupentry.h"
@@ -58,7 +55,10 @@ CellRendererPopup::CellRendererPopup()
   signal_show_popup_.connect(sigc::mem_fun(*this, &Self::on_show_popup));
   signal_hide_popup_.connect(sigc::mem_fun(*this, &Self::on_hide_popup));
 
-  popup_window_.signal_event().connect(sigc::mem_fun(*this, &Self::on_button_press_event), true);
+  gesture_ = Gtk::GestureMultiPress::create(popup_window_);
+  gesture_->set_button(GDK_BUTTON_PRIMARY);
+  gesture_->signal_pressed().connect(
+    sigc::mem_fun(*this, &Self::on_popup_window_pressed));
   popup_window_.signal_key_press_event().connect(sigc::mem_fun(*this, &Self::on_key_press_event), true);
   popup_window_.signal_style_updated().connect(sigc::mem_fun(*this, &Self::on_style_updated));
 }
@@ -226,17 +226,21 @@ void CellRendererPopup::on_hide_popup()
   editing_canceled_ = false;
 }
 
-bool CellRendererPopup::on_button_press_event(const Glib::RefPtr<Gdk::Event>& event)
+void CellRendererPopup::on_popup_window_pressed(int /* n_press */, double /* x */, double /* y */)
 {
-  if (!(event->get_event_type() == Gdk::Event::Type::BUTTON_PRESS &&
-      std::static_pointer_cast<Gdk::EventButton>(event)->get_button() == 1))
-    return false;
-
   // If the event happened outside the popup, cancel editing.
+
+  // The (x,y) coords passed to this method are based on Gdk::EventButton::get_coords(),
+  // which can't be trusted when input is grabbed by the popup window.
+  // Use Gdk::EventButton::get_root_coords().
+
+  auto event = gesture_->get_last_event(gesture_->get_current_sequence());
+  if (!(event && event->get_event_type() == Gdk::Event::Type::BUTTON_PRESS))
+    return;
 
   double x = 0.0;
   double y = 0.0;
-  std::static_pointer_cast<Gdk::EventButton>(event)->get_root_coords(x, y);
+  std::static_pointer_cast<const Gdk::EventButton>(event)->get_root_coords(x, y);
 
   int xoffset = 0, yoffset = 0;
   popup_window_.get_window()->get_root_origin(xoffset, yoffset);
@@ -252,12 +256,10 @@ bool CellRendererPopup::on_button_press_event(const Glib::RefPtr<Gdk::Event>& ev
   const int y2 = y1 + alloc.get_height();
 
   if(x > x1 && x < x2 && y > y1 && y < y2)
-    return false;
+    return;
 
   editing_canceled_ = true;
   signal_hide_popup_();
-
-  return false;
 }
 
 bool CellRendererPopup::on_key_press_event(const Glib::RefPtr<Gdk::EventKey>& event)

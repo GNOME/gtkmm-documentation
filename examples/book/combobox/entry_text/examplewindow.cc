@@ -14,9 +14,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-//TODO: Remove this undef when we know what to use instead of signal_event().
-#undef GTKMM_DISABLE_DEPRECATED
-
 #include "examplewindow.h"
 #include <iostream>
 
@@ -42,8 +39,8 @@ ExampleWindow::ExampleWindow()
   {
     entry->signal_activate().connect(sigc::mem_fun(*this,
       &ExampleWindow::on_entry_activate) );
-    m_ConnectionFocusOut = entry->signal_event().
-      connect(sigc::mem_fun(*this, &ExampleWindow::on_entry_focus_out_event),true);
+    m_ConnectionHasFocusChanged = entry->property_has_focus().signal_changed().
+      connect(sigc::mem_fun(*this, &ExampleWindow::on_entry_has_focus_changed));
   }
   else
     std::cout << "No Entry ???" << std::endl;
@@ -53,10 +50,10 @@ ExampleWindow::ExampleWindow()
 
 ExampleWindow::~ExampleWindow()
 {
-  // The focus_out signal may be emitted while m_Combo is being destructed.
+  // The has_focus changed signal may be emitted while m_Combo is being destructed.
   // The signal handler can generate critical messages, if it's called when
   // m_Combo has been partly destructed.
-  m_ConnectionFocusOut.disconnect();
+  m_ConnectionHasFocusChanged.disconnect();
 }
 
 void ExampleWindow::on_combo_changed()
@@ -71,14 +68,18 @@ void ExampleWindow::on_entry_activate()
     << ", Text=" << m_Combo.get_active_text() << std::endl;
 }
 
-bool ExampleWindow::on_entry_focus_out_event(const Glib::RefPtr<Gdk::Event>& event)
+void ExampleWindow::on_entry_has_focus_changed()
 {
-  if (event->get_event_type() == Gdk::Event::Type::FOCUS_CHANGE &&
-    !std::static_pointer_cast<Gdk::EventFocus>(event)->get_focus_in())
+  auto entry = m_Combo.get_entry();
+  if (entry)
   {
-    std::cout << "on_entry_focus_out_event(): Row=" << m_Combo.get_active_row_number()
-      << ", Text=" << m_Combo.get_active_text() << std::endl;
-    return true;
+    const bool entry_has_focus = entry->has_focus();
+    if (m_entry_had_focus && !entry_has_focus)
+    {
+      // entry->has_focus() has changed from true to false; entry has lost focus.
+      std::cout << "on_entry_has_focus_changed() to not focused: Row="
+        << m_Combo.get_active_row_number() << ", ID=" << entry->get_text() << std::endl;
+    }
+    m_entry_had_focus = entry_has_focus;
   }
-  return false;
 }

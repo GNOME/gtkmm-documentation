@@ -14,9 +14,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-//TODO: Remove this undef when we know what to use instead of signal_event().
-#undef GTKMM_DISABLE_DEPRECATED
-
 #include "examplewindow.h"
 #include <iostream>
 
@@ -32,15 +29,16 @@ ExampleWindow::ExampleWindow()
 
   // Catch button_press events:
   m_Box.pack_start(m_Label, Gtk::PackOptions::EXPAND_WIDGET);
-  m_Label.signal_event().connect(sigc::mem_fun(*this,
-              &ExampleWindow::on_label_button_press_event), true);
+  m_refGesture = Gtk::GestureMultiPress::create(m_Label);
+  m_refGesture->set_button(GDK_BUTTON_SECONDARY);
+  m_refGesture->signal_pressed().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_label_pressed));
 
   //Create actions:
 
   //Fill menu:
 
-  auto refActionGroup =
-    Gio::SimpleActionGroup::create();
+  auto refActionGroup = Gio::SimpleActionGroup::create();
 
   //File|New sub menu:
   //These menu actions would normally already exist for a main menu, because a
@@ -111,20 +109,12 @@ void ExampleWindow::on_menu_file_popup_generic()
    std::cout << "A popup menu item was selected." << std::endl;
 }
 
-bool ExampleWindow::on_label_button_press_event(const Glib::RefPtr<Gdk::Event>& event)
+void ExampleWindow::on_label_pressed(int /* n_press */, double /* x */, double /* y */)
 {
-  if (event->get_event_type() == Gdk::Event::Type::BUTTON_PRESS &&
-    std::static_pointer_cast<Gdk::EventButton>(event)->shall_trigger_context_menu())
-  {
-    if (m_pMenuPopup && !m_pMenuPopup->get_attach_widget())
-      m_pMenuPopup->attach_to_widget(*this);
+  if (m_pMenuPopup && !m_pMenuPopup->get_attach_widget())
+    m_pMenuPopup->attach_to_widget(*this);
 
-    if (m_pMenuPopup)
-      m_pMenuPopup->popup_at_pointer();
-
-    return true; //It has been handled.
-  }
-  else
-    return false;
+  if (m_pMenuPopup)
+    m_pMenuPopup->popup_at_pointer();
 }
 

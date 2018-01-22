@@ -60,7 +60,7 @@ protected:
 private:
   using Self = CellRendererPopup;
 
-  SignalShowPopup  signal_show_popup_;
+  SignalShowPopup signal_show_popup_;
   SignalHidePopup signal_hide_popup_;
 
   mutable int   button_width_; //mutable because it is just a cache.
@@ -69,8 +69,9 @@ private:
   PopupEntry*   popup_entry_;
   bool          shown_;
   bool          editing_canceled_;
+  Glib::RefPtr<Gtk::GestureMultiPress> gesture_;
 
-  bool on_button_press_event(const Glib::RefPtr<Gdk::Event>& event);
+  void on_popup_window_pressed(int n_press, double x, double y);
   bool on_key_press_event(const Glib::RefPtr<Gdk::EventKey>& event);
   void on_style_updated();
 

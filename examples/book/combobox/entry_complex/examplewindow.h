@@ -31,10 +31,11 @@ protected:
   //Signal handlers:
   void on_entry_changed();
   void on_entry_activate();
-  bool on_entry_focus_out_event(const Glib::RefPtr<Gdk::Event>& event);
+  void on_entry_has_focus_changed();
 
   //Signal connection:
-  sigc::connection m_ConnectionFocusOut;
+  sigc::connection m_ConnectionHasFocusChanged;
+  bool m_entry_had_focus {false};
 
   //Tree model columns:
   class ModelColumns : public Gtk::TreeModel::ColumnRecord

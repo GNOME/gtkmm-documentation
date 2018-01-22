@@ -14,9 +14,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-//TODO: Remove this undef when we know what to use instead of signal_event().
-#undef GTKMM_DISABLE_DEPRECATED
-
 #include <gtkmm.h>
 #include "cellrendererlist.h"
 #include "popupentry.h"
@@ -49,8 +46,11 @@ CellRendererList::CellRendererList()
 {
   tree_view_.set_headers_visible(false);
   tree_view_.append_column("", popup_columns().item);
-  tree_view_.signal_event().connect(
-      sigc::mem_fun(*this, &Self::on_tree_view_button_release_event), true);
+
+  gesture_ = Gtk::GestureMultiPress::create(tree_view_);
+  gesture_->set_button(GDK_BUTTON_PRIMARY);
+  gesture_->signal_released().connect(
+    sigc::mem_fun(*this, &Self::on_tree_view_released));
 
   const auto selection = tree_view_.get_selection();
   selection->set_mode(Gtk::SelectionMode::BROWSE);
@@ -91,16 +91,9 @@ void CellRendererList::on_show_popup(const Glib::ustring& path, int x1, int y1, 
   CellRendererPopup::on_show_popup(path, x1, y1, x2, y2);
 }
 
-bool CellRendererList::on_tree_view_button_release_event(const Glib::RefPtr<Gdk::Event>& event)
+void CellRendererList::on_tree_view_released(int /* n_press */, double /* x */, double /* y */)
 {
-  if (event->get_event_type() == Gdk::Event::Type::BUTTON_RELEASE &&
-    std::static_pointer_cast<Gdk::EventButton>(event)->get_button() == 1)
-  {
-    hide_popup();
-    return true;
-  }
-
-  return false;
+  hide_popup();
 }
 
 void CellRendererList::on_tree_selection_changed()

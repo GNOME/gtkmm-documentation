@@ -27,7 +27,7 @@ public:
 
 protected:
   //Signal handlers:
-  bool on_label_button_press_event(const Glib::RefPtr<Gdk::Event>& event);
+  void on_label_pressed(int n_press, double x, double y);
 
   void on_menu_file_popup_generic();
 
@@ -36,6 +36,7 @@ protected:
   Gtk::Label m_Label;
 
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
+  Glib::RefPtr<Gtk::GestureMultiPress> m_refGesture;
 
   Gtk::Menu* m_pMenuPopup;
 };
