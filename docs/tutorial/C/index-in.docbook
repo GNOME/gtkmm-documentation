@@ -3723,60 +3723,6 @@ A class is derived from <classname>Gtk::Window</classname>.
 
 </chapter>
 
-<chapter id="chapter-toolpalette">
-<title>ToolPalette</title>
-
-<para>A <classname>ToolPalette</classname> is similar to a <classname>Toolbar</classname> but can contain a grid of items, categorized into groups. The user may hide or expand each group. As in a toolbar, the items may be displayed as only icons, as only text, or as icons with text.
-</para>
-<para>The <classname>ToolPalette</classname>'s items might be dragged or simply activated. For instance, the user might drag objects to a canvas to create new items there. Or the user might click an item to activate a certain brush size in a drawing application.</para>
-<para><classname>ToolItemGroup</classname>s should be added to the tool palette via the base class's <function>Gtk::Container::add()</function> method, for instance like so:
-</para>
-<para>
-<programlisting>
-Gtk::ToolItemGroup* group_brushes =
-  Gtk::manage(new Gtk::ToolItemGroup("Brushes"));
-m_ToolPalette.add(*group_brushes);
-</programlisting>
-</para>
-<para>
-<classname>Gtk::ToolItem</classname>s can then be added to the group. For instance, like so:
-</para>
-<para>
-<programlisting>
-Gtk::ToolButton* button = Gtk::manage(new Gtk::ToolButton(icon, "Big"));
-button->set_tooltip_text("Big Brush);
-group_brushes->insert(*button);
-</programlisting>
-</para>
-<para>You might then handle the <classname>ToolButton</classname>'s <literal>clicked</literal> signal. Alternatively, you could allow the item to be dragged to another widget, by calling <methodname>Gtk::ToolPalette::add_drag_dest()</methodname> and then using <methodname>Gtk::ToolPalette::get_drag_item()</methodname> in the other widget's <literal>drag_data_received</literal> signal handler.</para>
-
-<para><ulink url="&url_refdocs_base_gtk;ToolPalette.html">ToolPalette Reference</ulink></para>
-<para><ulink url="&url_refdocs_base_gtk;ToolItemGroup.html">ToolItemGroup Reference</ulink></para>
-<para><ulink url="&url_refdocs_base_gtk;ToolItem.html">ToolItem Reference</ulink></para>
-
-<sect1 id="toolpallete-dranganddrop">
-<title>Drag and Drop</title>
-<para>Call <methodname>add_drag_dest()</methodname> to allow items or groups to be dragged from the tool palette to a particular destination widget. You can then use <methodname>get_drag_item()</methodname> to discover which ToolItem or ToolItemGroup is being dragged. You can use <literal>dynamic_cast</literal> to discover whether it is an item or a group. For instance, you might use this in your <literal>drag_data_received</literal> signal handler, to add a dropped item, or to show a suitable icon while dragging.</para>
-<para>See the <link linkend="chapter-draganddrop">Drag and Drop</link> chapter for general advice about Drag and Drop with &gtkmm;.</para>
-</sect1>
-
-<sect1 id="toolpalette-example"><title>ToolPalette Example</title>
-
-<para>This example adds a <classname>ToolPalette</classname> and a <classname>DrawingArea</classname> to a window and allows the user to drag icons from the tool palette to the drawing area. The tool palette contains several groups of items. The combo boxes allow the user to change the style and orientation of the tool palette.</para>
-
-<figure id="figure-toolpalette">
-  <title>ToolPalette</title>
-  <screenshot>
-    <graphic format="PNG" fileref="&url_figures_base;toolpalette.png"/>
-  </screenshot>
-</figure>
-
-<para><ulink url="&url_examples_base;toolpalette/">Source Code</ulink></para>
-
-</sect1>
-
-</chapter>
-
 <chapter id="chapter-adjustment">
 <title>Adjustments</title>
 
@@ -5447,13 +5393,8 @@ and update the print settings.
   <title>Recently Used Documents</title>
 
   <para>
-    &gtkmm; provides an easy way to manage recently used documents. The classes
-    involved in implementing this functionality are
-    <classname>RecentManager</classname>,
-    <classname>RecentChooserDialog</classname>,
-    <classname>RecentChooserMenu</classname>,
-    <classname>RecentChooserWidget</classname>, and
-    <classname>RecentFilter</classname>.
+    &gtkmm; provides an easy way to manage recently used documents. This functionality
+    is implemented in the <classname>Gtk::RecentManager</classname> class.
   </para>
   <para>
     Each item in the list of recently used files is identified by its URI, and
@@ -5475,11 +5416,6 @@ and update the print settings.
       likely just want to use the default one. You can get a reference to the
       default <classname>RecentManager</classname> with
       <methodname>get_default()</methodname>.
-    </para>
-    <para>
-      <classname>RecentManager</classname> is the model of a model-view pattern,
-      where the view is a class that implements the
-      <classname>RecentChooser</classname> interface.
     </para>
     <sect2 id="recent-files-adding">
       <title>Adding Items to the List of Recent Files</title>
@@ -5605,36 +5541,35 @@ if (info)
     </sect2>
   </sect1>
 
-  <sect1 id="sec-recentchooser">
-    <title>RecentChooser</title>
+  <sect1 id="sec-filechooser">
+    <title>FileChooser</title>
     <para>
-      <classname>RecentChooser</classname> is an interface that can be
-      implemented by widgets displaying the list of recently used files.
-      &gtkmm; provides three built-in implementations for choosing recent files:
-      <classname>RecentChooserWidget</classname>,
-      <classname>RecentChooserDialog</classname>, and
-      <classname>RecentChooserMenu</classname>.
+      <classname>FileChooser</classname> is an interface that can be
+      implemented by widgets displaying a list of files.
+      &gtkmm; provides four built-in implementations for choosing recent files
+      or other files:
+      <classname>FileChooserWidget</classname>,
+      <classname>FileChooserDialog</classname>,
+      <classname>FileChooserButton</classname>, and
+      <classname>FileChooserNative</classname>.
     </para>
     <para>
-      <classname>RecentChooserWidget</classname> is a simple widget for
-      displaying a list of recently used files.
-      <classname>RecentChooserWidget</classname> is the basic building block for
-      <classname>RecentChooserDialog</classname>, but you can embed it into your
+      <classname>FileChooserWidget</classname> is a simple widget for
+      displaying a list of recently used files or other files.
+      <classname>FileChooserWidget</classname> is the basic building block for
+      <classname>FileChooserDialog</classname>, but you can embed it into your
       user interface if you want to.
     </para>
-    <para>
-      <classname>RecentChooserMenu</classname> allows you to list recently used
-      files as a menu.
-    </para>
-    <sect2 id="recentchooserdialog-example">
-      <title>Simple RecentChooserDialog example</title>
+    <sect2 id="filechooserdialog-example">
+      <title>Simple FileChooserDialog example</title>
       <para>
         Shown below is a simple example of how to use the
-        <classname>RecentChooserDialog</classname> class in a program.
+        <classname>FileChooserDialog</classname> class in a program.
         This simple program has a menubar with a
-        <guimenuitem>Recent Files Dialog</guimenuitem> menu item.
-        When you select this menu item, a dialog pops up showing the list of
-        recently used files.
+        <guimenuitem>File Chooser Dialog</guimenuitem> menu item.
+        When you select this menu item, a dialog pops up showing a list of files.
+        If you select <guimenuitem>Recent</guimenuitem> in the sidebar,
+        the list of recently used files is shown.
       </para>
       <note>
         <para>
@@ -5645,12 +5580,12 @@ if (info)
         </para>
       </note>
       <para>
-        After selecting the <guimenuitem>Recent Files Dialog</guimenuitem> menu
-        item, you should see something similar to the following window.
+        After selecting the <guimenuitem>File Chooser Dialog</guimenuitem> menu
+        item and the <guimenuitem>Recent</guimenuitem> sidebar item, you should
+        see something similar to the following window.
       </para>
       <screenshot>
-          <graphic format="PNG"
-              fileref="&url_figures_base;recentchooserdialog.png"/>
+          <graphic format="PNG" fileref="&url_figures_base;recentfiles.png"/>
       </screenshot>
       <para><ulink url="&url_examples_base;recent_files">Source Code</ulink></para>
       <para>
@@ -5661,24 +5596,20 @@ if (info)
       </para>
     </sect2>
     <sect2 id="recent-files-filtering">
-      <title>Filtering Recent Files</title>
+      <title>Filtering Files</title>
       <para>
-        For any of the <classname>RecentChooser</classname> classes, if you
-        don't wish to display all of the items in the list of recent files, you
+        For any of the <classname>FileChooser</classname> classes, if you
+        don't wish to display all of the items in the list of files, you
         can filter the list to show only those that you want. You can filter
-        the list with the help of the <classname>RecentFilter</classname> class.
-        This class allows you to filter recent files by their name
-        (<methodname>add_pattern()</methodname>), their mime type
-        (<methodname>add_mime_type()</methodname>), the application that registered
-        them (<methodname>add_application()</methodname>), or by a custom filter
-        function (<methodname>add_custom()</methodname>). It also provides the
-        ability to filter based on how long ago the file was modified and which
-        groups it belongs to.
+        the list with the help of the <classname>FileFilter</classname> class.
+        This class allows you to filter files by their name
+        (<methodname>add_pattern()</methodname>), or their mime type
+        (<methodname>add_mime_type()</methodname>).
       </para>
       <para>
         After you've created and set up the filter to match only the items you
         want, you can apply a filter to a chooser widget with the
-        <methodname>RecentChooser::add_filter()</methodname> function.
+        <methodname>FileChooser::add_filter()</methodname> function.
       </para>
     </sect2>
   </sect1>

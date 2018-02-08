@@ -23,12 +23,11 @@ class ExampleWindow : public Gtk::Window
 {
 public:
   ExampleWindow(const Glib::RefPtr<Gtk::Application>& app);
-  virtual ~ExampleWindow();
+  ~ExampleWindow() override;
 
 protected:
   //Signal handlers:
-  void on_menu_file_recent_files_item();
-  void on_menu_file_recent_files_dialog();
+  void on_menu_file_files_dialog();
   void on_menu_file_quit();
   void on_menu_file_new();
 

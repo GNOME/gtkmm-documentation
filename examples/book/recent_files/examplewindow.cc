@@ -21,8 +21,8 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
 : m_Box(Gtk::Orientation::VERTICAL),
   m_refRecentManager(Gtk::RecentManager::get_default())
 {
-  set_title("recent files example");
-  set_default_size(200, 200);
+  set_title("Recent files example");
+  set_default_size(300, 150);
 
   //We can put a MenuBar at the top of the box and other stuff below it.
   add(m_Box);
@@ -34,9 +34,9 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   m_refActionGroup->add_action("new",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_new));
 
-  //A menu item to open the recent-files dialog:
-  m_refActionGroup->add_action("recent-files-dialog",
-    sigc::mem_fun(*this, &ExampleWindow::on_menu_file_recent_files_dialog) );
+  //A menu item to open the file chooser dialog:
+  m_refActionGroup->add_action("files-dialog",
+    sigc::mem_fun(*this, &ExampleWindow::on_menu_file_files_dialog));
 
   m_refActionGroup->add_action("quit",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_quit) );
@@ -51,7 +51,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   // See the examples/book/menus/main_menu example for an alternative way of
   // adding the menubar when using Gtk::ApplicationWindow.
   app->set_accel_for_action("example.new", "<Primary>n");
-  app->set_accel_for_action("example.recent-files-dialog", "<Primary>o");
+  app->set_accel_for_action("example.files-dialog", "<Primary>o");
   app->set_accel_for_action("example.quit", "<Primary>q");
 
   //Layout the actions in a menubar and a toolbar:
@@ -66,8 +66,8 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
     "        <attribute name='accel'>&lt;Primary&gt;n</attribute>"
     "      </item>"
     "      <item>"
-    "        <attribute name='label' translatable='yes'>Recent Files _Dialog</attribute>"
-    "        <attribute name='action'>example.recent-files-dialog</attribute>"
+    "        <attribute name='label' translatable='yes'>File Chooser _Dialog</attribute>"
+    "        <attribute name='action'>example.files-dialog</attribute>"
     "        <attribute name='accel'>&lt;Primary&gt;o</attribute>"
     "      </item>"
     "      <item>"
@@ -153,17 +153,21 @@ void ExampleWindow::on_menu_file_quit()
   hide(); //Closes the main window to stop the app->run().
 }
 
-void ExampleWindow::on_menu_file_recent_files_dialog()
+void ExampleWindow::on_menu_file_files_dialog()
 {
-  Gtk::RecentChooserDialog dialog(*this, "Recent Files", m_refRecentManager);
+  Gtk::FileChooserDialog dialog(*this, "Files", Gtk::FileChooser::Action::OPEN,
+    /* use_header_bar= */ true);
   dialog.add_button("Select File", Gtk::ResponseType::OK);
   dialog.add_button("_Cancel", Gtk::ResponseType::CANCEL);
 
   const int response = dialog.run();
   dialog.hide();
-  if(response == Gtk::ResponseType::OK)
+  if (response == Gtk::ResponseType::OK)
   {
-    std::cout << "URI selected = " << dialog.get_current_uri() << std::endl;
+    auto selected_uri = dialog.get_uri();
+    std::cout << "URI selected = " << selected_uri << std::endl;
+    std::cout << (m_refRecentManager->has_item(selected_uri) ? "A" : "Not a")
+      << " recently used file" << std::endl;
   }
 }
 

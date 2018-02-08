@@ -93,12 +93,11 @@ HELP_MEDIA =					\
 	figures/progressbar.png			\
 	figures/radiobuttons.png		\
 	figures/range_widgets.png		\
-	figures/recentchooserdialog.png		\
+	figures/recentfiles.png		\
 	figures/scrolledwindow.png		\
 	figures/spinbutton.png			\
 	figures/textview.png			\
 	figures/toolbar.png			\
-	figures/toolpalette.png			\
 	figures/tooltip.png			\
 	figures/treeview_combo_renderer.png	\
 	figures/treeview_draganddrop.png	\
