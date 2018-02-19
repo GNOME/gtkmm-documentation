@@ -5560,7 +5560,7 @@ if (info)
       <classname>FileChooserDialog</classname>, but you can embed it into your
       user interface if you want to.
     </para>
-    <sect2 id="filechooserdialog-example">
+    <sect2 id="recentfiles-example">
       <title>Simple FileChooserDialog example</title>
       <para>
         Shown below is a simple example of how to use the
