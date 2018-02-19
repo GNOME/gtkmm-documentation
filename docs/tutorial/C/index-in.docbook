@@ -8070,8 +8070,9 @@ your examples in their programs, and copies of this document
 reference-counting smartpointer. You might be familiar with
 <classname>std::unique_ptr&lt;&gt;</classname>
 and <classname>std::shared_ptr&lt;&gt;</classname>, which are also smartpointers.
-<classname>Glib::RefPtr&lt;&gt;</classname> is similar to <classname>std::shared_ptr&lt;&gt;</classname>,
-which is also reference-counting. <classname>Glib::RefPtr&lt;&gt;</classname> was introduced
+In &gtkmm;-4.0 <classname>Glib::RefPtr&lt;&gt;</classname> is an alias for
+<classname>std::shared_ptr&lt;&gt;</classname>,
+which is reference-counting. <classname>Glib::RefPtr&lt;&gt;</classname> was introduced
 long before there was a reference-counting smartpointer in the C++ Standard Library.
 </para>
 
@@ -8115,13 +8116,15 @@ Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf = Gdk::Pixbuf::create_from_file(filena
 int width = refPixbuf-&gt;get_width();
 </programlisting>
 </para>
-<para>But unlike most smartpointers, you can't use the * operator to
-access the underlying instance.
+<para>You can also use the * operator and the <methodname>get()</methodname> method
+to access the underlying instance, but it's usually a bad idea to do so. Unless
+you are careful, you can end up with a pointer or a reference which is not included
+in the reference count.
 </para>
 <para>
 <programlisting>
 Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf = Gdk::Pixbuf::create_from_file(filename);
-Gdk::Pixbuf&amp; underlying = *refPixbuf; //Syntax error - will not compile.
+Gdk::Pixbuf&amp; underlying = *refPixbuf; // Possible, but not recommended
 </programlisting>
 </para>
 </sect1>
@@ -8138,8 +8141,8 @@ Glib::RefPtr&lt;Gtk::TreeModel&gt; refModel = refStore;
 </programlisting>
 </para>
 <para>This means that any method which takes a <type>const
-Glib::RefPtr&lt;BaseType&gt;</type> argument can also take a
-<type>const Glib::RefPtr&lt;DerivedType&gt;</type>. The cast is
+Glib::RefPtr&lt;BaseType&gt;&amp;</type> argument can also take a
+<type>const Glib::RefPtr&lt;DerivedType&gt;&amp;</type>. The cast is
 implicit, just as it would be for a normal pointer.</para>
 <para>You can also cast to a derived type, but the syntax is
 a little different than with a normal pointer.
@@ -8147,15 +8150,14 @@ a little different than with a normal pointer.
 <para>
 <programlisting>
 Glib::RefPtr&lt;Gtk::TreeStore&gt; refStore =
-Glib::RefPtr&lt;Gtk::TreeStore&gt;::cast_dynamic(refModel);
+  std::dynamic_pointer_cast&lt;Gtk::TreeStore&gt;(refModel);
 Glib::RefPtr&lt;Gtk::TreeStore&gt; refStore2 =
-Glib::RefPtr&lt;Gtk::TreeStore&gt;::cast_static(refModel);
+  std::static_pointer_cast&lt;Gtk::TreeStore&gt;(refModel);
 </programlisting>
 </para>
 </sect1>
 
-
-<sect1 id="sec-refptr-checking-for-null"><title>Checking for null</title>
+<sect1 id="sec-refptr-checking-for-null"><title>Checking for nullptr</title>
 <para>
 Just like normal pointers, you can check whether a
 <classname>RefPtr</classname> points to anything.
@@ -8163,7 +8165,7 @@ Just like normal pointers, you can check whether a
 <para>
 <programlisting>
 Glib::RefPtr&lt;Gtk::TreeModel&gt; refModel = m_TreeView.get_model();
-if(refModel)
+if (refModel)
 {
   int cols_count = refModel-&gt;get_n_columns();
   ...
@@ -8172,10 +8174,9 @@ if(refModel)
 </para>
 <para>
 But unlike normal pointers, <classname>RefPtr</classname>s are automatically
-initialized to null so you don't need to remember to do that yourself.
+initialized to <literal>nullptr</literal> so you don't need to remember to do that yourself.
 </para>
 </sect1>
-
 
 <sect1 id="sec-refptr-constness"><title>Constness</title>
 <para>
