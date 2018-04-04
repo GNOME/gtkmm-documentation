@@ -83,7 +83,7 @@ DnDWindow::DnDWindow()
   m_Button.drag_source_set(Gdk::ContentFormats::create(m_listTargets), Gdk::ModifierType::BUTTON1_MASK | Gdk::ModifierType::BUTTON3_MASK,
                            Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
 
-  m_Button.drag_source_set_icon(Gdk::Cairo::create_surface_from_pixbuf(m_drag_icon, 1));
+  m_Button.drag_source_set_icon(Gdk::Texture::create_for_pixbuf(m_drag_icon));
 
   m_Grid.attach(m_Button, 0, 1);
   m_Button.set_hexpand(true);

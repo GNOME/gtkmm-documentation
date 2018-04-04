@@ -114,9 +114,9 @@ void MyWidget2::on_size_allocate(const Gtk::Allocation& allocation,
   //(We will not be given heights or widths less than we have requested, though
   //we might get more)
 
-  if(m_refGdkWindow)
+  if(m_refGdkSurface)
   {
-    m_refGdkWindow->move_resize( allocation.get_x(), allocation.get_y(),
+    m_refGdkSurface->move_resize( allocation.get_x(), allocation.get_y(),
             allocation.get_width(), allocation.get_height() );
   }
 
@@ -139,7 +139,7 @@ void MyWidget2::on_unmap()
 void MyWidget2::on_realize()
 {
   //Do not call base class Gtk::Widget::on_realize().
-  //It's intended only for widgets that set_has_window(false).
+  //It's intended only for widgets that set_has_surface(false).
 
   set_realized();
 
@@ -151,20 +151,20 @@ void MyWidget2::on_realize()
     << ", bottom=" << m_padding.get_bottom()
     << ", left=" << m_padding.get_left() << std::endl;
 
-  if(!m_refGdkWindow)
+  if(!m_refGdkSurface)
   {
-    //Create the GdkWindow:
-    m_refGdkWindow = Gdk::Window::create_child(get_parent_window(), get_allocation());
-    set_window(m_refGdkWindow);
+    //Create the GdkSurface:
+    m_refGdkSurface = Gdk::Surface::create_child(get_parent_surface(), get_allocation());
+    set_surface(m_refGdkSurface);
 
     //make the widget receive expose events
-    m_refGdkWindow->set_user_data(gobj());
+    m_refGdkSurface->set_user_data(gobj());
   }
 }
 
 void MyWidget2::on_unrealize()
 {
-  m_refGdkWindow.reset();
+  m_refGdkSurface.reset();
 
   //Call base class:
   Gtk::Widget::on_unrealize();

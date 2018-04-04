@@ -157,7 +157,7 @@ void ExampleWindow::on_day_selected()
   double x = 0.0;
   double y = 0.0;
   current_event_button->get_coords(x, y);
-  current_event_button->get_window()->coords_to_parent(x, y, x, y);
+  current_event_button->get_surface()->coords_to_parent(x, y, x, y);
   Gdk::Rectangle rect;
   auto allocation = m_calendar.get_allocation();
   rect.set_x(x - allocation.get_x());

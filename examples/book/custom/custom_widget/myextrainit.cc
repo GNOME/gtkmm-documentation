@@ -38,7 +38,7 @@ void instance_init_function(GTypeInstance* instance, void* /* g_class */)
 {
   g_return_if_fail(GTK_IS_WIDGET(instance));
 
-  gtk_widget_set_has_window(GTK_WIDGET(instance), true);
+  gtk_widget_set_has_surface(GTK_WIDGET(instance), true);
 }
 
 } // anonymous namespace

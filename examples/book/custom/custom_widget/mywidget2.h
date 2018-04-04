@@ -49,7 +49,7 @@ protected:
   void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error);
 
   Gtk::Border m_padding;
-  Glib::RefPtr<Gdk::Window> m_refGdkWindow;
+  Glib::RefPtr<Gdk::Surface> m_refGdkSurface;
   Glib::RefPtr<Gtk::CssProvider> m_refCssProvider;
 };
 

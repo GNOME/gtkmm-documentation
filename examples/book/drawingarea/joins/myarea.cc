@@ -28,9 +28,9 @@ MyArea::~MyArea()
 
 void MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height)
 {
-  // This is where we draw on the window
-  auto window = get_window();
-  if(window)
+  // This is where we draw on the surface
+  auto surface = get_surface();
+  if(surface)
   {
     cr->set_line_width(10.0);
 

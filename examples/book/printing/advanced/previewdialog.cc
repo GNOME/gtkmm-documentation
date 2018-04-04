@@ -37,17 +37,21 @@ PreviewDialog::PreviewDialog(
 {
   set_transient_for(parent);
   set_title("Preview");
+  set_size_request(300, 300);
 
   m_VBox.set_margin(2);
   add(m_VBox);
 
   m_HBox.pack_start(m_PageSpin, Gtk::PackOptions::EXPAND_WIDGET);
+  m_PageSpin.set_vexpand(false);
   m_HBox.pack_start(m_CloseButton, Gtk::PackOptions::SHRINK);
   m_VBox.pack_start(m_HBox, Gtk::PackOptions::SHRINK);
 
-  m_DrawingArea.set_content_width(200);
-  m_DrawingArea.set_content_height(300);
-  m_VBox.pack_start(m_DrawingArea, Gtk::PackOptions::EXPAND_WIDGET);
+  m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
+  m_VBox.pack_start(m_ScrolledWindow, Gtk::PackOptions::EXPAND_WIDGET);
+  m_DrawingArea.set_content_width(300);
+  m_DrawingArea.set_content_height(600);
+  m_ScrolledWindow.add(m_DrawingArea);
 
   m_refPreview->signal_ready().connect(
     sigc::mem_fun(*this, &PreviewDialog::on_popreview_ready));
@@ -74,12 +78,15 @@ PreviewDialog::~PreviewDialog()
 
 void PreviewDialog::on_drawing_area_realized()
 {
-  auto gdk_window = m_DrawingArea.get_window();
-  if (gdk_window)
+  auto gdk_surface = m_DrawingArea.get_surface();
+  if (gdk_surface)
   {
-    auto drawing_context = gdk_window->begin_draw_frame(gdk_window->get_clip_region());
-    m_refCairoContext = drawing_context->get_cairo_context();
-    gdk_window->end_draw_frame(drawing_context);
+    const int scale = gdk_surface->get_scale_factor();
+    const int width = gdk_surface->get_width() * scale;
+    const int height = gdk_surface->get_height() * scale;
+    auto cairo_surface = gdk_surface->create_similar_image_surface(
+      Cairo::Surface::Format::ARGB32, width, height, scale);
+    m_refCairoContext = Cairo::Context::create(cairo_surface);
 
     if (m_refPrintContext)
       m_refPrintContext->set_cairo_context(m_refCairoContext, 72, 72);

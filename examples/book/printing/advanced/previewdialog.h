@@ -54,6 +54,7 @@ protected:
   Glib::RefPtr<Gtk::Adjustment> m_SpinAdjustment;
   Gtk::SpinButton m_PageSpin;
   Gtk::Button m_CloseButton;
+  Gtk::ScrolledWindow m_ScrolledWindow;
   Gtk::DrawingArea m_DrawingArea;
 
   int m_Page;

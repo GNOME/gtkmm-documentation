@@ -23,7 +23,7 @@
 namespace
 {
 
-bool grab_on_window(const Glib::RefPtr<Gdk::Window>& window)
+bool grab_on_window(const Glib::RefPtr<Gdk::Surface>& surface)
 {
   Glib::RefPtr<Gdk::Device> device (Glib::wrap(gtk_get_current_event_device(), true));
 
@@ -31,7 +31,7 @@ bool grab_on_window(const Glib::RefPtr<Gdk::Window>& window)
   {
     auto seat = device->get_seat();
     if (seat &&
-        seat->grab(window, Gdk::Seat::Capabilities::ALL, true) == Gdk::GrabStatus::SUCCESS)
+        seat->grab(surface, Gdk::Seat::Capabilities::ALL, true) == Gdk::GrabStatus::SUCCESS)
       return true;
   }
 
@@ -206,7 +206,7 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
   if(focus_widget_)
     focus_widget_->grab_focus();
 
-  grab_on_window(popup_window_.get_window());
+  grab_on_window(popup_window_.get_surface());
 }
 
 void CellRendererPopup::on_hide_popup()
@@ -243,7 +243,7 @@ void CellRendererPopup::on_popup_window_pressed(int /* n_press */, double /* x *
   std::static_pointer_cast<const Gdk::EventButton>(event)->get_root_coords(x, y);
 
   int xoffset = 0, yoffset = 0;
-  popup_window_.get_window()->get_root_origin(xoffset, yoffset);
+  popup_window_.get_surface()->get_root_origin(xoffset, yoffset);
 
   const auto alloc = popup_window_.get_allocation();
 
@@ -307,13 +307,13 @@ void CellRendererPopup::on_popup_arrow_clicked()
     return;
   }
 
-  if(!grab_on_window(popup_entry_->get_window()))
+  if(!grab_on_window(popup_entry_->get_surface()))
     return;
 
   popup_entry_->select_region(0, 0);
 
   int x = 0, y = 0;
-  popup_entry_->get_window()->get_origin(x, y);
+  popup_entry_->get_surface()->get_origin(x, y);
 
   const auto alloc = popup_entry_->get_allocation();
 

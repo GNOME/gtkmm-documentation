@@ -56,10 +56,10 @@ void MyArea::fix_lines(bool fix)
 // force the redraw of the image
 void MyArea::force_redraw()
 {
-  auto win = get_window();
-  if (win)
+  auto surface = get_surface();
+  if (surface)
   {
-    Gdk::Rectangle r(0, 0, get_allocation().get_width(), get_allocation().get_height());
-    win->invalidate_rect(r, false);
+    Gdk::Rectangle rect(0, 0, get_allocation().get_width(), get_allocation().get_height());
+    surface->invalidate_rect(rect);
   }
 }

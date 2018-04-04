@@ -1,5 +1,3 @@
-//$Id: clock.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -124,12 +122,12 @@ void Clock::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int heig
 bool Clock::on_timeout()
 {
     // force our program to redraw the entire clock.
-    auto win = get_window();
-    if (win)
+    auto surface = get_surface();
+    if (surface)
     {
-        Gdk::Rectangle r(0, 0, get_allocation().get_width(),
+        Gdk::Rectangle rect(0, 0, get_allocation().get_width(),
                 get_allocation().get_height());
-        win->invalidate_rect(r, false);
+        surface->invalidate_rect(rect);
     }
     return true;
 }

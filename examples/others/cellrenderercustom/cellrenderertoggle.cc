@@ -52,7 +52,7 @@ protected:
   void get_preferred_height_for_width_vfunc(Gtk::Widget& widget, int width,
     int& minimum_height, int& natural_height) const override;
 
-  void snapshot_vfunc(Gtk::Snapshot& snapshot,
+  void snapshot_vfunc(const Glib::RefPtr<Gtk::Snapshot>& snapshot,
                       Gtk::Widget& widget,
                       const Gdk::Rectangle& background_area,
                       const Gdk::Rectangle& cell_area,
@@ -166,7 +166,7 @@ void MyCellRendererToggle::get_preferred_height_for_width_vfunc(Gtk::Widget& wid
   get_preferred_height_vfunc(widget, minimum_height, natural_height);
 }
 
-void MyCellRendererToggle::snapshot_vfunc(Gtk::Snapshot& snapshot,
+void MyCellRendererToggle::snapshot_vfunc(const Glib::RefPtr<Gtk::Snapshot>& snapshot,
   Gtk::Widget& widget,
   const Gdk::Rectangle& /* background_area */,
   const Gdk::Rectangle& cell_area,
@@ -204,7 +204,7 @@ void MyCellRendererToggle::snapshot_vfunc(Gtk::Snapshot& snapshot,
   style_context->set_state(state);
 
   // Create a cairo context to draw on.
-  auto cr = snapshot.append_cairo(cell_area, "MyCairoNode");
+  auto cr = snapshot->append_cairo(cell_area, "MyCairoNode");
 
   if (property_radio_)
   {

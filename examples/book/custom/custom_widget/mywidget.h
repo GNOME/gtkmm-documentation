@@ -44,13 +44,13 @@ protected:
   void on_unmap() override;
   void on_realize() override;
   void on_unrealize() override;
-  void snapshot_vfunc(Gtk::Snapshot& snapshot) override;
+  void snapshot_vfunc(const Glib::RefPtr<Gtk::Snapshot>& snapshot) override;
 
   //Signal handler:
   void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error);
 
   Gtk::Border m_padding;
-  Glib::RefPtr<Gdk::Window> m_refGdkWindow;
+  Glib::RefPtr<Gdk::Surface> m_refGdkSurface;
   Glib::RefPtr<Gtk::CssProvider> m_refCssProvider;
 };
 
