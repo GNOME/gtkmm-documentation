@@ -17,16 +17,16 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AM_MAINTAINER_MODE
 AC_ARG_VAR([ACLOCAL_FLAGS], [aclocal flags, e.g. -I <macro dir>])
 
-MM_PREREQ([0.9.10])
+MM_PREREQ([0.9.12])
 
 AC_PROG_CXX
-MM_AX_CXX_COMPILE_STDCXX([14], [noext], [mandatory])
+MM_AX_CXX_COMPILE_STDCXX([17], [noext], [mandatory])
 
 AC_PATH_PROG([PERL], [perl], [perl])
 AC_PROG_SED
 
-PKG_CHECK_MODULES([GIOMM], [giomm-2.58 >= 2.55.1])
-PKG_CHECK_MODULES([GTKMM], [gtkmm-4.0  >= 3.91.2])
+PKG_CHECK_MODULES([GIOMM], [giomm-2.58 >= 2.57.1])
+PKG_CHECK_MODULES([GTKMM], [gtkmm-4.0  >= 3.93.0])
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
 
 # glib-compile-resources and C compiler are needed to generate and compile
