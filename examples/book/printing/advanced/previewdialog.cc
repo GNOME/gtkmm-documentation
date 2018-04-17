@@ -84,8 +84,8 @@ void PreviewDialog::on_drawing_area_realized()
     const int scale = gdk_surface->get_scale_factor();
     const int width = gdk_surface->get_width() * scale;
     const int height = gdk_surface->get_height() * scale;
-    auto cairo_surface = gdk_surface->create_similar_image_surface(
-      Cairo::Surface::Format::ARGB32, width, height, scale);
+    auto cairo_surface = gdk_surface->create_similar_surface(
+      Cairo::Content::CONTENT_COLOR, width, height);
     m_refCairoContext = Cairo::Context::create(cairo_surface);
 
     if (m_refPrintContext)

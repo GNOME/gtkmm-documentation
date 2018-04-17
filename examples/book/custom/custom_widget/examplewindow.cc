@@ -30,8 +30,6 @@ ExampleWindow::ExampleWindow()
 
   m_Grid.attach(m_MyWidgetS1, 0, 0);
   m_Grid.attach(m_MyWidgetS2, 1, 1);
-  m_Grid.attach(m_MyWidgetD1, 0, 1);
-  m_Grid.attach(m_MyWidgetD2, 1, 0);
 
   m_Grid.attach(m_ButtonBox, 0, 2, 2, 1);
 

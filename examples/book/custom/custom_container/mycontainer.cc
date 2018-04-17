@@ -125,8 +125,7 @@ void MyContainer::measure_vfunc(Gtk::Orientation orientation, int for_size,
   }
 }
 
-void MyContainer::on_size_allocate(const Gtk::Allocation& allocation,
-  int  baseline, Gtk::Allocation& out_clip)
+void MyContainer::on_size_allocate(const Gtk::Allocation& allocation, int  baseline)
 {
   //Do something with the space that we have actually been given:
   //(We will not be given heights or widths less than we have requested, though
@@ -143,18 +142,13 @@ void MyContainer::on_size_allocate(const Gtk::Allocation& allocation,
 
   if (nvis_children <= 0)
   {
-    // No visible child. The clip rectangle can be empty.
-    out_clip = allocation;
-    out_clip.set_width(0);
-    out_clip.set_height(0);
+    // No visible child.
     return;
   }
 
   //Assign space to the children:
   Gtk::Allocation child_allocation_one;
   Gtk::Allocation child_allocation_two;
-  Gtk::Allocation child_clip_one;
-  Gtk::Allocation child_clip_two;
 
   //Place the first child at the top-left:
   child_allocation_one.set_x( allocation.get_x() );
@@ -166,9 +160,8 @@ void MyContainer::on_size_allocate(const Gtk::Allocation& allocation,
   if (visible_one)
   {
     //Divide the height equally among the visible children.
-    child_allocation_one.set_height( allocation.get_height() / nvis_children);
-    child_clip_one = child_allocation_one;
-    m_child_one->size_allocate(child_allocation_one, baseline, child_clip_one);
+    child_allocation_one.set_height(allocation.get_height() / nvis_children);
+    m_child_one->size_allocate(child_allocation_one, baseline);
   }
   else
     child_allocation_one.set_height(0);
@@ -187,18 +180,8 @@ void MyContainer::on_size_allocate(const Gtk::Allocation& allocation,
 
   if (visible_two)
   {
-    child_clip_two = child_allocation_two;
-    m_child_two->size_allocate(child_allocation_two, baseline, child_clip_two);
+    m_child_two->size_allocate(child_allocation_two, baseline);
   }
-
-  if (visible_one)
-  {
-    out_clip = child_clip_one;
-    if (visible_two)
-      out_clip.join(child_clip_two);
-  }
-  else
-    out_clip = child_clip_two;
 }
 
 void MyContainer::forall_vfunc(const ForeachSlot& slot)

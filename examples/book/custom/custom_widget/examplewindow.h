@@ -19,7 +19,6 @@
 
 #include <gtkmm.h>
 #include "mywidget.h"
-#include "mywidget2.h"
 
 class ExampleWindow : public Gtk::Window
 {
@@ -35,8 +34,6 @@ protected:
   Gtk::Grid m_Grid;
   MyWidget m_MyWidgetS1;
   MyWidget m_MyWidgetS2;
-  MyWidget2 m_MyWidgetD1;
-  MyWidget2 m_MyWidgetD2;
   Gtk::ButtonBox m_ButtonBox;
   Gtk::Button m_Button_Quit;
 };

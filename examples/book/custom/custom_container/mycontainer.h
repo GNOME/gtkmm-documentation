@@ -33,8 +33,7 @@ protected:
   Gtk::SizeRequestMode get_request_mode_vfunc() const override;
   void measure_vfunc(Gtk::Orientation orientation, int for_size, int& minimum, int& natural,
     int& minimum_baseline, int& natural_baseline) const override;
-  void on_size_allocate(const Gtk::Allocation& allocation, int baseline,
-    Gtk::Allocation& out_clip) override;
+  void on_size_allocate(const Gtk::Allocation& allocation, int baseline) override;
 
   void forall_vfunc(const ForeachSlot& slot) override;
 

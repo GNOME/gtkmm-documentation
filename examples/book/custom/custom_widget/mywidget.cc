@@ -108,8 +108,7 @@ void MyWidget::measure_vfunc(Gtk::Orientation orientation, int /* for_size */,
   natural_baseline = -1;
 }
 
-void MyWidget::on_size_allocate(const Gtk::Allocation& allocation,
-  int /* baseline */, Gtk::Allocation& out_clip)
+void MyWidget::on_size_allocate(const Gtk::Allocation& allocation, int /* baseline */)
 {
   //Do something with the space that we have actually been given:
   //(We will not be given heights or widths less than we have requested, though
@@ -120,9 +119,6 @@ void MyWidget::on_size_allocate(const Gtk::Allocation& allocation,
     m_refGdkSurface->move_resize( allocation.get_x(), allocation.get_y(),
             allocation.get_width(), allocation.get_height() );
   }
-
-  // Use the offered allocation for this widget:
-  out_clip = allocation;
 }
 
 void MyWidget::on_map()
@@ -139,11 +135,6 @@ void MyWidget::on_unmap()
 
 void MyWidget::on_realize()
 {
-  //Do not call base class Gtk::Widget::on_realize().
-  //It's intended only for widgets that set_has_surface(false).
-
-  set_realized();
-
   //Get the themed padding from the CSS file:
   m_padding = get_style_context()->get_padding();
   std::cout << "m_padding from the theme/css-file is"
@@ -161,6 +152,9 @@ void MyWidget::on_realize()
     //make the widget receive expose events
     m_refGdkSurface->set_user_data(gobj());
   }
+
+  //Call base class:
+  Gtk::Widget::on_realize();
 }
 
 void MyWidget::on_unrealize()
@@ -174,22 +168,21 @@ void MyWidget::on_unrealize()
 void MyWidget::snapshot_vfunc(const Glib::RefPtr<Gtk::Snapshot>& snapshot)
 {
   const auto allocation = get_allocation();
-  auto clip = get_clip();
-  clip.set_x(clip.get_x() - allocation.get_x() - m_padding.get_left());
-  clip.set_y(clip.get_y() - allocation.get_y() - m_padding.get_top());
+  const Gdk::Rectangle rect(0, 0, allocation.get_width(), allocation.get_height());
   auto refStyleContext = get_style_context();
 
   // Create a cairo context to draw on.
-  auto cr = snapshot->append_cairo(clip, "MyCairoNode");
+  auto cr = snapshot->append_cairo(rect, "MyCairoNode");
 
   // paint the background
   refStyleContext->render_background(cr,
-    clip.get_x(), clip.get_y(), clip.get_width(), clip.get_height());
+    -m_padding.get_left(), -m_padding.get_top(), allocation.get_width(), allocation.get_height());
 
   // draw the foreground
-  const double scale_x = 0.001 * (clip.get_width() - m_padding.get_left() - m_padding.get_right());
-  const double scale_y = 0.001 * (clip.get_height() - m_padding.get_top() - m_padding.get_bottom());
+  const double scale_x = 0.001 * (allocation.get_width() - m_padding.get_left() - m_padding.get_right());
+  const double scale_y = 0.001 * (allocation.get_height() - m_padding.get_top() - m_padding.get_bottom());
   Gdk::Cairo::set_source_rgba(cr, refStyleContext->get_color());
+  cr->rectangle(0.0, 0.0, 1000.0*scale_x, 1000.0*scale_y);
   cr->move_to(155.*scale_x, 165.*scale_y);
   cr->line_to(155.*scale_x, 838.*scale_y);
   cr->line_to(265.*scale_x, 900.*scale_y);
