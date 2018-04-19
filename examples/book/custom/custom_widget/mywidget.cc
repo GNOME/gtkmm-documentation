@@ -16,6 +16,7 @@
 
 #include "mywidget.h"
 #include <gdkmm/general.h>  // for cairo helper functions
+#include <gtkmm/snapshot.h>
 #include <iostream>
 //#include <gtk/gtkwidget.h> //For GTK_IS_WIDGET()
 #include <cstring>
@@ -24,7 +25,6 @@
 MyWidget::MyWidget() :
   //The GType name will actually be gtkmm__CustomObject_MyWidget
   Glib::ObjectBase("MyWidget"),
-  Gtk::WidgetCustomSnapshot(),
   MyExtraInit("my-widget"), // CSS node name, which must be used in the CSS file.
   Gtk::Widget(),
   m_padding()

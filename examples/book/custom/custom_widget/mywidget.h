@@ -19,12 +19,10 @@
 
 #include <gtkmm/widget.h>
 #include <gtkmm/cssprovider.h>
-#include <gtkmm/widgetcustomsnapshot.h>
 #include "myextrainit.h"
 
 class MyWidget
 :
-public Gtk::WidgetCustomSnapshot,
 public MyExtraInit,
 public Gtk::Widget
 {
