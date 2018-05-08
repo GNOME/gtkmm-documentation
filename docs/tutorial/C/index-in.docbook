@@ -6993,31 +6993,23 @@ instance, you cannot use the copyright sign (&copy;).
        top-level window has been expanded. You might choose to ignore the extra
        space and leave a blank area, or you might choose to expand your child
        widgets to fill the space, or you might choose to expand the padding
-       between your widgets. It's your container, so you decide. Don't forget to
-       call <methodname>set_allocation()</methodname> inside your
-       <methodname>on_size_allocate()</methodname> implementation to actually use the
-       allocated space that has been offered by the parent container.</para>
+       between your widgets. It's your container, so you decide.</para>
 
   <para>Unless your container is a top-level window that derives from
       <classname>Gtk::Window</classname>, you should probably also call
-      <methodname>Gtk::Widget::set_has_window(false)</methodname> in your
+      <methodname>Gtk::Widget::set_has_surface(false)</methodname> in your
       constructor. This means that your container does not create its own
-      <classname>Gdk::Window</classname>, but uses its parent's
-      window. (Note the difference between <classname>Gtk::Window</classname>
-      and <classname>Gdk::Window</classname>.) If your container does need
-      its own <classname>Gdk::Window</classname>, and does not derive from
+      <classname>Gdk::Surface</classname>, but uses its parent's
+      surface. If your container does need
+      its own <classname>Gdk::Surface</classname>, and does not derive from
       <classname>Gtk::Window</classname>, you must also override the
       <methodname>on_realize()</methodname> method as described in the
-      <link linkend="sec-custom-widgets">Custom Widgets</link> section.
-      And unless your container draws directly onto the underlying
-      <classname>Gdk::Window</classname>, you should probably call
-      <methodname>set_redraw_on_allocate(false)</methodname> to improve
-      performance.</para>
+      <link linkend="sec-custom-widgets">Custom Widgets</link> section.</para>
 
-  <para><application>GTK+</application> requires that <methodname>set_has_window()</methodname>
+  <para><application>GTK+</application> requires that <methodname>set_has_surface()</methodname>
       is called in the instance init function, which is executed before your constructor.
       If you call it in the constructor, <application>GTK+</application> may issue
-      a warning message, but at the time of writing (2017-02-24) it works as intended.
+      a warning message, but at the time of writing (2018-05-07) it works as intended.
       Adding code to the instance init function is more complicated for a &gtkmm;
       programmer. The <link linkend="custom-widget-example">custom widget example</link>
       shows how it can be done.</para>
@@ -7048,7 +7040,7 @@ instance, you cannot use the copyright sign (&copy;).
 
     <para>This example implements a container with two child widgets, one above
         the other. Of course, in this case it would be far simpler just to use
-        a vertical <classname>Gtk::Box</classname>.</para>
+        a vertical <classname>Gtk::Box</classname> or <classname>Gtk::Grid</classname>.</para>
 
 <figure id="figure-custom-container">
   <title>Custom Container</title>
@@ -7078,17 +7070,11 @@ instance, you cannot use the copyright sign (&copy;).
       <listitem><para><methodname>get_request_mode_vfunc()</methodname>: (optional) Return what <literal>Gtk::SizeRequestMode</literal> is preferred by the widget.</para></listitem>
       <listitem><para><methodname>measure_vfunc()</methodname>: Calculate the minimum and natural width or height of the widget.</para></listitem>
       <listitem><para><methodname>on_size_allocate()</methodname>: Position the widget, given the height and width that it has actually been given.</para></listitem>
-      <listitem><para><methodname>on_realize()</methodname>: Associate a <classname>Gdk::Window</classname> with the widget.</para></listitem>
-      <listitem><para><methodname>on_unrealize()</methodname>: (optional) Break the association with the <classname>Gdk::Window</classname>. </para></listitem>
+      <listitem><para><methodname>on_realize()</methodname>: Associate a <classname>Gdk::Surface</classname> with the widget.</para></listitem>
+      <listitem><para><methodname>on_unrealize()</methodname>: (optional) Break the association with the <classname>Gdk::Surface</classname>. </para></listitem>
       <listitem><para><methodname>on_map()</methodname>: (optional)</para></listitem>
       <listitem><para><methodname>on_unmap()</methodname>: (optional)</para></listitem>
-      <listitem><para>One of these methods:
-        <itemizedlist>
-          <listitem><para><methodname>on_draw()</methodname>: Draw on the supplied <classname>Cairo::Context</classname>, or</para></listitem>
-          <listitem><para><methodname>snapshot_vfunc()</methodname>: Create a render node, e.g. a <classname>Cairo::Context</classname> node, and draw on it.</para></listitem>
-        </itemizedlist>
-        </para>
-      </listitem>
+      <listitem><para><methodname>snapshot_vfunc()</methodname>: Create a render node, e.g. a <classname>Cairo::Context</classname> node, and draw on it.</para></listitem>
     </itemizedlist>
     </para>
 
@@ -7097,20 +7083,15 @@ instance, you cannot use the copyright sign (&copy;).
         <link linkend="sec-custom-containers">Custom Containers</link> section.
     </para>
 
-    <para>Most custom widgets need their own <classname>Gdk::Window</classname>
+    <para>Most custom widgets need their own <classname>Gdk::Surface</classname>
       to draw on. Then you can call
-      <methodname>Gtk::Widget::set_has_window(true)</methodname> in your
-      constructor, or (better) call <function>gtk_widget_set_has_window(widget, true)</function>
+      <methodname>Gtk::Widget::set_has_surface(true)</methodname> in your
+      constructor, or (better) call <function>gtk_widget_set_has_surface(widget, true)</function>
       in the instance init function. If you do not call
-      <methodname>set_has_window(false)</methodname>, you must override
+      <methodname>set_has_surface(false)</methodname>, you must override
       <methodname>on_realize()</methodname> and call
-      <methodname>Gtk::Widget::set_realized()</methodname> and
-      <methodname>Gtk::Widget::set_window()</methodname> from there.</para>
-
-    <para>If you use <methodname>on_draw()</methodname>, your custom widget class must
-      derive from <classname>Gtk::WidgetCustomDraw</classname>. If you use
-      <methodname>snapshot_vfunc()</methodname>, your custom widget class must
-      derive from <classname>Gtk::WidgetCustomSnapshot</classname>.</para>
+      <methodname>Gtk::Widget::set_surface()</methodname> and the base class's
+      <methodname>on_realize()</methodname> from there.</para>
 
 <sect2 id="custom-init-functions">
 <title>Class Init and Instance Init Functions</title>
@@ -7123,29 +7104,24 @@ from <classname>Glib::ExtraClassInit</classname> and derive your custom class
 from that class. The following example shows how that's done.</para>
 </sect2>
 
-<sect2 id="custom-style-properties">
-<title>Custom Style Properties</title>
+<sect2 id="custom-style-information">
+<title>Custom Style Information</title>
 
-<para>You can add style properties to your widget class, whether it's derived directly
-from <classname>Gtk::Widget</classname> or from another widget class. The values of
-the style properties can be read from a CSS (Cascading Style Sheets) file. The users
+<para>Your widget class, whether it's derived directly from
+<classname>Gtk::Widget</classname> or from another widget class,
+can read some style information from a CSS (Cascading Style Sheets) file. The users
 of your widget, or the users of an application program with your widget, can then
-modify the style of your widget without modifying the source code.
-Useful classes are <classname>Gtk::StyleProperty</classname> and <classname>Gtk::CssProvider</classname>.
-With <methodname>Gtk::Widget::get_style_property()</methodname> you can read the values
-of both your own style properties and those of your widget's base class. Style
-properties are not wrapped in &gtkmm;. See <application>GTK+</application>'s
-documentation for lists of existing style properties. Style properties are however
-being phased out of <application>GTK+</application>.
-The following example shows a simple use of a custom style property.
-</para>
+modify the style of your widget without modifying the source code. Useful classes
+are <classname>Gtk::StyleContext</classname> and <classname>Gtk::CssProvider</classname>.
+With the methods of <classname>Gtk::StyleContext</classname> you can read the values
+of your widget's style information. CSS files are described in the documentation of
+<application>GTK+</application>. The following example shows a simple use of
+<methodname>Gtk::StyleContext::get_padding()</methodname>.</para>
 </sect2>
 
 <sect2 id="custom-widget-example"><title>Example</title>
 
-<para>This example implements a widget which draws Penrose triangles.
-It has one custom widget that uses <methodname>on_draw()</methodname> and one that
-uses <methodname>snapshot_vfunc()</methodname>.</para>
+<para>This example implements a widget which draws Penrose triangles.</para>
 
 <figure id="figure-custom-widget">
   <title>Custom Widget</title>
