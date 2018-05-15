@@ -4095,17 +4095,21 @@ search-and-replace dialog is non-modal.
         paths and then stroking or filling them to make them visible.
     </para>
     <para>
-        To do any drawing in &gtkmm; with Cairo, you must first create a
+        To do any drawing in &gtkmm; with Cairo, you must first get a
         <classname>Cairo::Context</classname> object. This class holds all of the graphics state parameters that
         describe how drawing is to be done. This includes information such as
         line width, color, the surface to draw to, and many other things. This
         allows the actual drawing functions to take fewer arguments to simplify
-        the interface. In &gtkmm;, a <classname>Cairo::Context</classname> is
-        created by calling the
-        <methodname>Gdk::Window::begin_draw_frame()</methodname> and
-        <methodname>Gdk::DrawingContext::get_cairo_context()</methodname> functions.
-        Since Cairo contexts are reference-counted objects, <methodname>get_cairo_context()</methodname>
+        the interface. Usually, you use the <classname>Cairo::Context</classname>
+        that you get as input data to the draw function that you set with the call to
+        <methodname>set_draw_func()</methodname>. It's also possible to create
+        a <classname>Cairo::Context</classname> by calling the
+        <methodname>Gdk::Surface::create_cairo_context()</methodname> and
+        <methodname>Gdk::CairoContext::cairo_create()</methodname> functions.
+        Since Cairo contexts are reference-counted objects, <methodname>cairo_create()</methodname>
         returns a <classname>Cairo::RefPtr&lt;Cairo::Context&gt;</classname> object.
+        (Note the difference between <classname>Gdk::CairoContext</classname>
+        and <classname>Cairo::Context</classname>.)
     </para>
     <para>
         The following example shows  how to set up a Cairo context with a
@@ -4114,20 +4118,18 @@ search-and-replace dialog is non-modal.
     </para>
     <programlisting>
 <![CDATA[Gtk::DrawingArea myArea;
-Cairo::RefPtr<Cairo::Region> clipRegion = myArea.get_window()->get_clip_region();
-Glib::RefPtr<Gdk::DrawingContext> drawingContext = myArea.get_window()->begin_draw_frame(clipRegion);
-Cairo::RefPtr<Cairo::Context> myContext = drawingContext->get_cairo_context();
+Glib::RefPtr<Gdk::CairoContext> gdkCairoContext = myArea.get_surface()->create_cairo_context();
+Cairo::RefPtr<Cairo::Context> myContext = gdkCairoContext->cairo_create();
 myContext->set_source_rgb(1.0, 0.0, 0.0);
 myContext->set_line_width(2.0);]]>
     </programlisting>
     <para>
         Each <classname>Cairo::Context</classname> is associated with a
-        particular <classname>Gdk::Window</classname>, so the first line of the
+        particular <classname>Gdk::Surface</classname>, so the first line of the
         above example creates a <classname>Gtk::DrawingArea</classname> widget
-        and the next 3 lines use its associated
-        <classname>Gdk::Window</classname> to create a
-        <classname>Cairo::Context</classname> object. The final two lines
-        change the graphics state of the context.
+        and the next two lines use its associated <classname>Gdk::Surface</classname>
+        to create a <classname>Cairo::Context</classname> object. The final
+        two lines change the graphics state of the context.
     </para>
     <para>
         There are a number of graphics state variables that can be set for a
