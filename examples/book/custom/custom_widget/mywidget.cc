@@ -172,7 +172,7 @@ void MyWidget::snapshot_vfunc(const Glib::RefPtr<Gtk::Snapshot>& snapshot)
   auto refStyleContext = get_style_context();
 
   // Create a cairo context to draw on.
-  auto cr = snapshot->append_cairo(rect, "MyCairoNode");
+  auto cr = snapshot->append_cairo(rect);
 
   // paint the background
   refStyleContext->render_background(cr,

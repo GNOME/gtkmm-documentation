@@ -204,7 +204,7 @@ void MyCellRendererToggle::snapshot_vfunc(const Glib::RefPtr<Gtk::Snapshot>& sna
   style_context->set_state(state);
 
   // Create a cairo context to draw on.
-  auto cr = snapshot->append_cairo(cell_area, "MyCairoNode");
+  auto cr = snapshot->append_cairo(cell_area);
 
   if (property_radio_)
   {
