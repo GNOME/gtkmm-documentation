@@ -38,6 +38,11 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
   button_->set_image_from_icon_name("pan-down-symbolic", Gtk::IconSize::INHERIT, true);
 
   set_can_focus();
+
+  auto controller = Gtk::EventControllerKey::create();
+  controller->signal_key_pressed().connect(
+    sigc::mem_fun(*this, &Self::on_popup_key_pressed), false);
+  add_controller(controller);
 }
 
 PopupEntry::~PopupEntry()
@@ -93,9 +98,9 @@ PopupEntry::type_signal_arrow_clicked& PopupEntry::signal_arrow_clicked()
   return signal_arrow_clicked_;
 }
 
-bool PopupEntry::on_key_press_event(const Glib::RefPtr<Gdk::EventKey>& key_event)
+bool PopupEntry::on_popup_key_pressed(guint keyval, guint, Gdk::ModifierType)
 {
-  if (key_event->get_keyval() == GDK_KEY_Escape)
+  if (keyval == GDK_KEY_Escape)
   {
     editing_canceled_ = true;
 
@@ -112,22 +117,22 @@ bool PopupEntry::on_key_press_event(const Glib::RefPtr<Gdk::EventKey>& key_event
 /*
  * Can't do this now (2017-10-06).
  * GdkEvent and its subclasses are now opaque structures. We can't directly
- * access their data. There is a gdk_event_get_window() to get the window,
- * but there is no gdk_event_set_window() to set a window.
+ * access their data. There is a gdk_event_get_surface() to get the GDK surface,
+ * but there is no gdk_event_set_surface() to set a surface.
 
   Gdk::EventKey synth_event(key_event);
 
   GdkEventKey* const synth_event_gobj = synth_event.gobj();
   if (synth_event_gobj->window)
-    g_object_unref(synth_event_gobj->window);
-  synth_event_gobj->window = Glib::unwrap(entry_->get_window());
-  if (synth_event_gobj->window)
-    g_object_ref(synth_event_gobj->window);
+    g_object_unref(synth_event_gobj->surface);
+  synth_event_gobj->surface = Glib::unwrap(entry_->get_surface());
+  if (synth_event_gobj->surface)
+    g_object_ref(synth_event_gobj->surface);
   synth_event_gobj->send_event = true;
 
   entry_->event(synth_event);
 */
-  return Gtk::Box::on_key_press_event(key_event);
+  return false;
 }
 
 void PopupEntry::start_editing_vfunc(const Glib::RefPtr<const Gdk::Event>&)
@@ -136,7 +141,11 @@ void PopupEntry::start_editing_vfunc(const Glib::RefPtr<const Gdk::Event>&)
 
   // Although this is a key-binding signal, it's acceptable to use it in applications.
   entry_->signal_activate().connect(sigc::mem_fun(*this, &Self::on_entry_activate));
-  entry_->signal_key_press_event().connect(sigc::mem_fun(*this, &Self::on_entry_key_press_event), false);
+
+  auto controller = Gtk::EventControllerKey::create();
+  controller->signal_key_pressed().connect(
+    sigc::mem_fun(*this, &Self::on_entry_key_pressed), false);
+  entry_->add_controller(controller);
 
   //TODO: Doesn't this mean that we have multiple connection, because this is never disconnected?
   button_->signal_clicked().connect(sigc::mem_fun(*this, &Self::on_button_clicked));
@@ -153,9 +162,9 @@ void PopupEntry::on_entry_activate()
   //remove_widget(); // TODO: this line causes the widget to be removed twice -- dunno why
 }
 
-bool PopupEntry::on_entry_key_press_event(const Glib::RefPtr<Gdk::EventKey>& key_event)
+bool PopupEntry::on_entry_key_pressed(guint keyval, guint, Gdk::ModifierType)
 {
-  if (key_event->get_keyval() == GDK_KEY_Escape)
+  if (keyval == GDK_KEY_Escape)
   {
     editing_canceled_ = true;
 

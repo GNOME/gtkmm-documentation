@@ -27,13 +27,12 @@ public:
   virtual ~ExampleWindow();
 
 private:
-  //Override default signal handler:
-  bool on_key_release_event(const Glib::RefPtr<Gdk::EventKey>& event) override;
-
-  bool entryKeyRelease(const Glib::RefPtr<Gdk::EventKey>& event);
-  bool gridKeyRelease(const Glib::RefPtr<Gdk::EventKey>& event);
-  bool windowKeyReleaseBefore(const Glib::RefPtr<Gdk::EventKey>& event);
-  bool windowKeyRelease(const Glib::RefPtr<Gdk::EventKey>& event);
+  // Signal handlers:
+  bool entry_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state);
+  bool grid_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state);
+  bool window_key_pressed_capture(guint keyval, guint keycode, Gdk::ModifierType state);
+  bool window_key_pressed_target(guint keyval, guint keycode, Gdk::ModifierType state);
+  bool window_key_pressed_bubble(guint keyval, guint keycode, Gdk::ModifierType state);
 
   Gtk::Grid m_container;
 

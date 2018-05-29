@@ -55,11 +55,17 @@ CellRendererPopup::CellRendererPopup()
   signal_show_popup_.connect(sigc::mem_fun(*this, &Self::on_show_popup));
   signal_hide_popup_.connect(sigc::mem_fun(*this, &Self::on_hide_popup));
 
-  gesture_ = Gtk::GestureMultiPress::create(popup_window_);
+  gesture_ = Gtk::GestureMultiPress::create();
   gesture_->set_button(GDK_BUTTON_PRIMARY);
   gesture_->signal_pressed().connect(
     sigc::mem_fun(*this, &Self::on_popup_window_pressed));
-  popup_window_.signal_key_press_event().connect(sigc::mem_fun(*this, &Self::on_key_press_event), true);
+  popup_window_.add_controller(gesture_);
+
+  auto controller = Gtk::EventControllerKey::create();
+  controller->signal_key_pressed().connect(
+    sigc::mem_fun(*this, &Self::on_popup_window_key_pressed), true);
+  popup_window_.add_controller(controller);
+
   popup_window_.signal_style_updated().connect(sigc::mem_fun(*this, &Self::on_style_updated));
 }
 
@@ -262,9 +268,9 @@ void CellRendererPopup::on_popup_window_pressed(int /* n_press */, double /* x *
   signal_hide_popup_();
 }
 
-bool CellRendererPopup::on_key_press_event(const Glib::RefPtr<Gdk::EventKey>& event)
+bool CellRendererPopup::on_popup_window_key_pressed(guint keyval, guint, Gdk::ModifierType)
 {
-  switch (event->get_keyval())
+  switch (keyval)
   {
     case GDK_KEY_Escape:
       editing_canceled_ = true; break;

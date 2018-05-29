@@ -35,8 +35,12 @@ ExampleWindow::ExampleWindow()
   m_search_bar.connect_entry(m_entry);
 
   // Connect signals
-  signal_key_press_event().connect(sigc::mem_fun(*this, &ExampleWindow::on_window_key_press), true);
-  m_search_bar.property_search_mode_enabled().signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_search_bar_reveal_changed));
+  auto controller = Gtk::EventControllerKey::create();
+  controller->signal_key_pressed().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_window_key_pressed), true);
+  add_controller(controller);
+  m_search_bar.property_search_mode_enabled().signal_changed().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_search_bar_reveal_changed));
 
   // Switches
   m_search_mode_switch.set_active(false);
@@ -85,9 +89,13 @@ ExampleWindow::~ExampleWindow()
 {
 }
 
-bool ExampleWindow::on_window_key_press(const Glib::RefPtr<Gdk::EventKey>& key_event)
+bool ExampleWindow::on_window_key_pressed(guint, guint, Gdk::ModifierType)
 {
-  return m_search_bar.handle_event(key_event);
+  Glib::RefPtr<Gdk::Event> current_event = Glib::wrap(gtk_get_current_event());
+  if (current_event->get_event_type() == Gdk::Event::Type::KEY_PRESS)
+    return m_search_bar.handle_event(std::static_pointer_cast<Gdk::EventKey>(current_event));
+  else
+    return false;
 }
 
 void ExampleWindow::on_search_bar_reveal_changed()

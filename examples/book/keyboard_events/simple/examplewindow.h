@@ -27,8 +27,8 @@ public:
   virtual ~ExampleWindow();
 
 private:
-  //Override default signal handler:
-  bool on_key_press_event(const Glib::RefPtr<Gdk::EventKey>& event) override;
+  // Signal handler:
+  bool on_window_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state);
 
   Gtk::Grid m_container;
   Gtk::RadioButton m_first;

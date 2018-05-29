@@ -42,14 +42,14 @@ public:
   type_signal_arrow_clicked& signal_arrow_clicked();
 
 protected:
-  bool on_key_press_event(const Glib::RefPtr<Gdk::EventKey>& key_event) override;
+  bool on_popup_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state);
   void start_editing_vfunc(const Glib::RefPtr<const Gdk::Event>& event) override;
 
 private:
   typedef PopupEntry Self;
 
   void on_entry_activate();
-  bool on_entry_key_press_event(const Glib::RefPtr<Gdk::EventKey>& event);
+  bool on_entry_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state);
   void on_button_clicked();
 
   Glib::ustring path_;

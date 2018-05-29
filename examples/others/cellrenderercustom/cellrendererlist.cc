@@ -47,10 +47,11 @@ CellRendererList::CellRendererList()
   tree_view_.set_headers_visible(false);
   tree_view_.append_column("", popup_columns().item);
 
-  gesture_ = Gtk::GestureMultiPress::create(tree_view_);
+  gesture_ = Gtk::GestureMultiPress::create();
   gesture_->set_button(GDK_BUTTON_PRIMARY);
   gesture_->signal_released().connect(
     sigc::mem_fun(*this, &Self::on_tree_view_released));
+  tree_view_.add_controller(gesture_);
 
   const auto selection = tree_view_.get_selection();
   selection->set_mode(Gtk::SelectionMode::BROWSE);

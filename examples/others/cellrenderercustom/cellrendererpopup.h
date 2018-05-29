@@ -72,7 +72,7 @@ private:
   Glib::RefPtr<Gtk::GestureMultiPress> gesture_;
 
   void on_popup_window_pressed(int n_press, double x, double y);
-  bool on_key_press_event(const Glib::RefPtr<Gdk::EventKey>& event);
+  bool on_popup_window_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state);
   void on_style_updated();
 
   void on_popup_editing_done();

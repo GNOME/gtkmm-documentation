@@ -34,39 +34,42 @@ ExampleWindow::ExampleWindow()
   m_container.add(m_second);
 
   // Events.
-  // We override the default event signal handler.
+  auto controller = Gtk::EventControllerKey::create();
+  controller->signal_key_pressed().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_window_key_pressed), false);
+  add_controller(controller);
 }
 
-bool ExampleWindow::on_key_press_event(const Glib::RefPtr<Gdk::EventKey>& key_event)
+bool ExampleWindow::on_window_key_pressed(guint keyval, guint, Gdk::ModifierType state)
 {
   //Gdk::ModifierType::MOD1_MASK -> the 'Alt' key(mask)
   //GDK_KEY_1 -> the '1' key
   //GDK_KEY_2 -> the '2' key
 
   //select the first radio button, when we press alt + 1
-  if((key_event->get_keyval() == GDK_KEY_1) &&
-    (key_event->get_state() & (Gdk::ModifierType::SHIFT_MASK | Gdk::ModifierType::CONTROL_MASK | Gdk::ModifierType::MOD1_MASK)) == Gdk::ModifierType::MOD1_MASK)
+  if((keyval == GDK_KEY_1) &&
+    (state & (Gdk::ModifierType::SHIFT_MASK | Gdk::ModifierType::CONTROL_MASK | Gdk::ModifierType::MOD1_MASK)) == Gdk::ModifierType::MOD1_MASK)
   {
     m_first.set_active();
     //returning true, cancels the propagation of the event
     return true;
   }
-  else if((key_event->get_keyval() == GDK_KEY_2) &&
-    (key_event->get_state() & (Gdk::ModifierType::SHIFT_MASK | Gdk::ModifierType::CONTROL_MASK | Gdk::ModifierType::MOD1_MASK)) == Gdk::ModifierType::MOD1_MASK)
+  else if((keyval == GDK_KEY_2) &&
+    (state & (Gdk::ModifierType::SHIFT_MASK | Gdk::ModifierType::CONTROL_MASK | Gdk::ModifierType::MOD1_MASK)) == Gdk::ModifierType::MOD1_MASK)
   {
     //and the second radio button, when we press alt + 2
     m_second.set_active();
     return true;
   }
-  else if(key_event->get_keyval() == GDK_KEY_Escape)
+  else if(keyval == GDK_KEY_Escape)
   {
     //close the window, when the 'esc' key is pressed
     hide();
     return true;
   }
 
-  //if the event has not been handled, call the base class
-  return Gtk::Window::on_key_press_event(key_event);
+  //the event has not been handled
+  return false;
 }
 
 ExampleWindow::~ExampleWindow()
