@@ -8025,7 +8025,7 @@ any aspect of &gtkmm; that does not already have documentation, please
 consider contributing to this document.
 </para>
 <para>
-Ideally, we would like you to <ulink url="http://www.gtkmm.org/bugs.shtml">provide a patch</ulink> to the
+Ideally, we would like you to <ulink url="http://www.gtkmm.org/en/bugs.shtml">provide a patch</ulink> to the
 <filename>docs/tutorial/C/index-in.docbook</filename> file. This file is currently
 in the <literal>gtkmm-documentation</literal> module in GNOME git.
 </para>
