@@ -58,8 +58,8 @@ DnDWindow::~DnDWindow()
 }
 
 void DnDWindow::on_button_drag_data_get(
-        const Glib::RefPtr<Gdk::DragContext>&,
-        Gtk::SelectionData& selection_data, guint)
+        const Glib::RefPtr<Gdk::Drag>&,
+        Gtk::SelectionData& selection_data)
 {
   selection_data.set(selection_data.get_target(), 8 /* 8 bits format */,
           (const guchar*)"I'm Data!",
@@ -67,8 +67,8 @@ void DnDWindow::on_button_drag_data_get(
 }
 
 void DnDWindow::on_label_drop_drag_data_received(
-        const Glib::RefPtr<Gdk::DragContext>& context,
-        const Gtk::SelectionData& selection_data, guint time)
+        const Glib::RefPtr<Gdk::Drop>& drop,
+        const Gtk::SelectionData& selection_data)
 {
   const int length = selection_data.get_length();
   if((length >= 0) && (selection_data.get_format() == 8))
@@ -77,5 +77,5 @@ void DnDWindow::on_label_drop_drag_data_received(
         << "\" in label " << std::endl;
   }
 
-  context->drag_finish(false, time);
+  drop->failed();
 }

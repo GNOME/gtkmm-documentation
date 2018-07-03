@@ -27,8 +27,7 @@ public:
 
 protected:
   //Signal handlers:
-  void on_icon_pressed(Gtk::Entry::IconPosition icon_pos,
-    const Glib::RefPtr<const Gdk::EventButton>& event);
+  void on_icon_pressed(Gtk::Entry::IconPosition icon_pos);
   void on_button_close();
 
   //Child widgets:

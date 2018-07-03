@@ -44,8 +44,7 @@ ExampleWindow::~ExampleWindow()
 {
 }
 
-void ExampleWindow::on_icon_pressed(Gtk::Entry::IconPosition /* icon_pos */,
-  const Glib::RefPtr<const Gdk::EventButton>& /* event */)
+void ExampleWindow::on_icon_pressed(Gtk::Entry::IconPosition /* icon_pos */)
 {
   std::cout << "Icon pressed." << std::endl;
 }

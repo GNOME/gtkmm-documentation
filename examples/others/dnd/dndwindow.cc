@@ -100,7 +100,7 @@ DnDWindow::~DnDWindow()
 }
 
 
-void DnDWindow::on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, const Gtk::SelectionData& selection_data, guint time)
+void DnDWindow::on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::Drop>& drop, const Gtk::SelectionData& selection_data)
 {
   const int length = selection_data.get_length();
   const guchar* data = selection_data.get_data();
@@ -110,10 +110,10 @@ void DnDWindow::on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::DragCon
     g_print ("Received \"%s\" in label\n", (gchar *)data);
   }
 
-  context->drag_finish(false, time);
+  drop->failed();
 }
 
-bool DnDWindow::on_label_popup_drag_motion(const Glib::RefPtr<Gdk::DragContext>&, int, int, guint)
+bool DnDWindow::on_label_popup_drag_motion(const Glib::RefPtr<Gdk::Drop>&, int, int)
 {
   if(!m_popup_timer)
     m_popup_timer = Glib::signal_timeout().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_timeout), 500);
@@ -121,7 +121,7 @@ bool DnDWindow::on_label_popup_drag_motion(const Glib::RefPtr<Gdk::DragContext>&
   return true;
 }
 
-void DnDWindow::on_label_popup_drag_leave(const Glib::RefPtr<Gdk::DragContext>&, guint)
+void DnDWindow::on_label_popup_drag_leave(const Glib::RefPtr<Gdk::Drop>&)
 {
  if(m_in_popup)
  {
@@ -134,7 +134,7 @@ void DnDWindow::on_label_popup_drag_leave(const Glib::RefPtr<Gdk::DragContext>&,
  }
 }
 
-void DnDWindow::on_image_drag_data_received(const Glib::RefPtr<Gdk::DragContext>& context, const Gtk::SelectionData& selection_data, guint time)
+void DnDWindow::on_image_drag_data_received(const Glib::RefPtr<Gdk::Drop>& drop, const Gtk::SelectionData& selection_data)
 {
   const int length = selection_data.get_length();
   const guchar* data = selection_data.get_data();
@@ -144,10 +144,10 @@ void DnDWindow::on_image_drag_data_received(const Glib::RefPtr<Gdk::DragContext>
     g_print ("Received \"%s\" in trashcan\n", (gchar*)data);
   }
 
-  context->drag_finish(false, time);
+  drop->failed();
 }
 
-bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& context, int, int, guint time)
+bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::Drop>& drop, int, int)
 {
   if(!m_have_drag)
   {
@@ -155,45 +155,45 @@ bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::DragContext>& conte
     m_Image.set(m_trashcan_open);
   }
 
-  auto source_widget = Gtk::Widget::drag_get_source_widget(context);
+  auto source_widget = Gtk::Widget::drag_get_source_widget(drop->get_drag());
   g_print ("motion, source %s\n", source_widget ?
            G_OBJECT_TYPE_NAME (source_widget) :
            "NULL");
 
-  for(const auto& name : context->get_formats()->get_mime_types())
+  for(const auto& name : drop->get_formats()->get_mime_types())
   {
     g_print ("%s\n", name.c_str());
   }
 
-  context->drag_status(context->get_suggested_action(), time);
+  drop->status(drop->get_drag()->get_suggested_action());
   return true;
 }
 
-void DnDWindow::on_image_drag_leave(const Glib::RefPtr<Gdk::DragContext>&, guint)
+void DnDWindow::on_image_drag_leave(const Glib::RefPtr<Gdk::Drop>&)
 {
   g_print("leave\n");
   m_have_drag = false;
   m_Image.set(m_trashcan_closed);
 }
 
-bool DnDWindow::on_image_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context, int, int, guint time)
+bool DnDWindow::on_image_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int, int)
 {
   g_print("drop\n");
   m_have_drag = false;
 
   m_Image.set(m_trashcan_closed);
 
-  const auto targets = context->get_formats()->get_mime_types();
+  const auto targets = drop->get_formats()->get_mime_types();
   if(!targets.empty())
   {
-    m_Image.drag_get_data(context, targets[0], time);
+    m_Image.drag_get_data(drop, targets[0]);
   }
 
   return true;
 }
 
 
-void DnDWindow::on_button_drag_data_get(const Glib::RefPtr<Gdk::DragContext>&, Gtk::SelectionData& selection_data, guint)
+void DnDWindow::on_button_drag_data_get(const Glib::RefPtr<Gdk::Drag>&, Gtk::SelectionData& selection_data)
 {
   if(selection_data.get_target() == "application/x-rootwin-drop")
     g_print ("I was dropped on the rootwin\n");
@@ -202,7 +202,7 @@ void DnDWindow::on_button_drag_data_get(const Glib::RefPtr<Gdk::DragContext>&, G
                        8 /* 8-bits format */, (const guchar*)"I'm Data!", 9 /* The length of I'm Data in bytes */);
 }
 
-void DnDWindow::on_button_drag_data_delete(const Glib::RefPtr<Gdk::DragContext>&)
+void DnDWindow::on_button_drag_data_delete(const Glib::RefPtr<Gdk::Drag>&)
 {
   g_print ("Delete the data!\n");
 }
@@ -258,7 +258,7 @@ void DnDWindow::create_popup()
   m_PopupWindow.add(*pGrid);
 }
 
-bool DnDWindow::on_popup_button_drag_motion(const Glib::RefPtr<Gdk::DragContext>&, int, int, guint)
+bool DnDWindow::on_popup_button_drag_motion(const Glib::RefPtr<Gdk::Drop>&, int, int)
 {
   if(!m_in_popup)
   {
@@ -273,7 +273,7 @@ bool DnDWindow::on_popup_button_drag_motion(const Glib::RefPtr<Gdk::DragContext>
   return true;
 }
 
-void DnDWindow::on_popup_button_drag_leave(const Glib::RefPtr<Gdk::DragContext>&, guint)
+void DnDWindow::on_popup_button_drag_leave(const Glib::RefPtr<Gdk::Drop>&)
 {
  if(m_in_popup)
  {
