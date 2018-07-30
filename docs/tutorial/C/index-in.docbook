@@ -5,6 +5,7 @@
   <!ENTITY url_refdocs_base_glib "&url_refdocs_base_glib_html;classGlib_1_1">
   <!ENTITY url_refdocs_base_gio "&url_refdocs_base_glib_html;classGio_1_1">
   <!ENTITY url_refdocs_base_gtk_html "http://developer.gnome.org/gtkmm/unstable/">
+  <!ENTITY url_refdocs_base_gdk "&url_refdocs_base_gtk_html;classGdk_1_1">
   <!ENTITY url_refdocs_base_gtk "&url_refdocs_base_gtk_html;classGtk_1_1">
   <!ENTITY url_figures_base "figures/">
   <!ENTITY url_examples_base "http://git.gnome.org/browse/gtkmm-documentation/tree/examples/book/">
@@ -4666,19 +4667,13 @@ prefixed with "drag_". These are used for Drag and Drop.
 Things are dragged from <literal>sources</literal> to be dropped on
 <literal>destinations</literal>. Each source and destination has information
 about the data formats that it can send or receive, provided by
-<classname>Gtk::TargetEntry</classname> items. A drop destination will only
-accept a dragged item if they both share a compatible
-<classname>Gtk::TargetEntry</classname> item. Appropriate signals will then be
-emitted, telling the signal handlers which
-<classname>Gtk::TargetEntry</classname> was used.
+<classname>Gdk::ContentFormats</classname>. A drop destination will only
+accept a dragged item if they both share a compatible format. Appropriate
+signals will then be emitted, telling the signal handlers which format was used.
 </para>
 <para>
-<classname>Gtk::TargetEntry</classname> objects contain this information:
-<itemizedlist>
-<listitem><para>target: A name, such as &quot;STRING&quot;</para></listitem>
-<listitem><para>info: An identifier which will be sent to your signals to tell you which TargetEntry was used.</para></listitem>
-<listitem><para>flags: Used only for drag and drop, this specifies whether the data may be dragged to other widgets and applications, or only to the same ones.</para></listitem>
-</itemizedlist>
+<classname>Gdk::ContentFormats</classname> objects contain information about
+available <type>GType</type>s and mime types (media types).
 </para>
 
 </sect1>
@@ -4689,14 +4684,13 @@ emitted, telling the signal handlers which
 <classname>Widget</classname>s can be identified as sources or destinations
 using these <classname>Gtk::Widget</classname> methods:
 </para>
-<programlisting>void drag_source_set(const std::vector&lt;Gtk::TargetEntry&gt;&amp; targets,
+<programlisting>void drag_source_set(const Glib::RefPtr&lt;Gdk::ContentFormats&gt;&amp; targets,
       Gdk::ModifierType start_button_mask, Gdk::DragAction actions);</programlisting>
 
 <itemizedlist>
 <listitem>
     <para>
-        <literal>targets</literal> is a vector of
-        <classname>Gtk::TargetEntry</classname> elements.
+        <literal>targets</literal> is a <classname>Gdk::ContentFormats</classname> object.
     </para>
 </listitem>
 <listitem>
@@ -4718,7 +4712,7 @@ using these <classname>Gtk::Widget</classname> methods:
 </listitem>
 </itemizedlist>
 
-<programlisting>void drag_dest_set(const std::vector&lt;Gtk::TargetEntry&gt;&amp; targets,
+<programlisting>void drag_dest_set(const Glib::RefPtr&lt;Gdk::ContentFormats&gt;&amp; targets,
     Gtk::DestDefaults flags, Gdk::DragAction actions);</programlisting>
 
 <itemizedlist>
@@ -4735,6 +4729,15 @@ using these <classname>Gtk::Widget</classname> methods:
     </para>
 </listitem>
 </itemizedlist>
+<para>There are several methods to add source formats and destination formats.
+Examples:
+<itemizedlist>
+  <listitem><methodname>drag_source_add_text_targets()</methodname></listitem>
+  <listitem><methodname>drag_source_add_image_targets()</methodname></listitem>
+  <listitem><methodname>drag_dest_add_text_targets()</methodname></listitem>
+  <listitem><methodname>drag_dest_add_image_targets()</methodname></listitem>
+</itemizedlist>
+</para>
 </sect1>
 
 <sect1 id="sec-dnd-signals">
@@ -4754,29 +4757,29 @@ the user can only select the actions which you have specified in your calls to
 <para>
 The source widget will emit these signals, in this order:
 <itemizedlist>
-<listitem><para><literal>drag_begin</literal>: Provides DragContext.</para></listitem>
-<listitem><para><literal>drag_data_get</literal>: Provides <literal>info</literal> about the dragged data format, and a <literal>Gtk::SelectionData</literal> structure, in which you should put the requested data.</para></listitem>
-<listitem><para><literal>drag_end</literal>: Provides DragContext.</para></listitem>
+<listitem><para><literal>drag_begin</literal>: Provides a <classname>Gdk::Drag</classname>.</para></listitem>
+<listitem><para><literal>drag_data_get</literal>: Provides a <classname>Gdk::Drag</classname>,
+  and a <classname>Gtk::SelectionData</classname> object, in which you should put the requested data.</para></listitem>
+<listitem><para><literal>drag_end</literal>: Provides a <classname>Gdk::Drag</classname>.</para></listitem>
 </itemizedlist>
 </para>
 <para>
 The destination widget will emit these signals, in this order:
 <itemizedlist>
-<listitem><para><literal>drag_motion</literal>: Provides DragContext and coordinates.
-  You can call the <methodname>drag_status()</methodname> method of the DragContext
+<listitem><para><literal>drag_motion</literal>: Provides a <classname>Gdk::Drop</classname> and coordinates.
+  You can call the <methodname>status()</methodname> method of the <classname>Gdk::Drop</classname>
   to indicate which action will be accepted.</para></listitem>
-<listitem><para><literal>drag_drop</literal>: Provides DragContext and coordinates.
+<listitem><para><literal>drag_drop</literal>: Provides a <classname>Gdk::Drop</classname> and coordinates.
   You can call <methodname>drag_get_data()</methodname>, which triggers the
   <literal>drag_data_get</literal> signal in the source widget, and then the
   <literal>drag_data_received</literal> signal in the destination widget.</para></listitem>
 <listitem>
     <para>
-        <literal>drag_data_received</literal>: Provides <literal>info</literal>
-        about the dragged data format, and a
-        <literal>Gtk::SelectionData</literal> structure which contains the
-        dropped data. You should  call the <methodname>drag_finish()</methodname>
-        method of the <literal>DragContext</literal> to indicate whether the
-        operation was successful.
+        <literal>drag_data_received</literal>: Provides a <classname>Gdk::Drop</classname>,
+        and a <methodname>Gtk::SelectionData</methodname> object which contains the
+        dropped data. You should  call the <methodname>finish()</methodname> or
+        <methodname>failed()</methodname> method of the <classname>Gdk::Drop</classname>
+        to indicate whether the operation was successful.
     </para>
 </listitem>
 </itemizedlist>
@@ -4799,19 +4802,6 @@ The destination widget will emit these signals, in this order:
 <para>TODO: Find an example or documentation.</para>
 </sect2>
 -->
-</sect1>
-
-<sect1 id="sec-dragcontext">
-<title>DragContext</title>
-<para>
-The drag and drop signals provide a DragContext, which contains some
-information about the drag and drop operation and can be used to influence the
-process. For instance, you can discover the source widget, or  change the drag
-and drop icon, by using the <methodname>set_icon()</methodname> methods. More
-importantly, you should call the <methodname>drag_finish()</methodname> method from
-your <literal>drag_data_received</literal> signal handler to indicate whether
-the drop was successful.
-</para>
 </sect1>
 
 <sect1 id="sec-dnd-example">
@@ -4844,86 +4834,55 @@ a drawing program would need special code to allow copy and paste within a view,
 or between documents.</para>
 
 <para>
-You can usually pretend that <classname>Gtk::Clipboard</classname> is a singleton.
-You can get the default clipboard instance with <methodname>Gtk::Clipboard::get()</methodname>.
-This is probably the only clipboard you will ever need.
+You can get a clipboard instance with <methodname>Gtk::Widget::get_clipboard()</methodname>
+or <methodname>Gdk::Display::get_clipboard()</methodname>.
 </para>
 
 <para>
 Your application doesn't need to wait for clipboard operations, particularly
-between the time when the user chooses Copy and then later chooses Paste. Most
-<classname>Gtk::Clipboard</classname> methods take
-<classname>sigc::slot</classname>s which specify callback methods. When
-<classname>Gtk::Clipboard</classname> is ready, it will call these methods,
-either providing the requested data, or asking for data.
+between the time when the user chooses Copy and then later chooses Paste. Many
+<classname>Gdk::Clipboard</classname> methods take <classname>sigc::slot</classname>s
+which specify callback methods. When <classname>Gdk::Clipboard</classname> is ready,
+it will call these methods, providing the requested data.
 </para>
 
-<para><ulink url="&url_refdocs_base_gtk;Clipboard.html">Reference</ulink></para>
+<para><ulink url="&url_refdocs_base_gdk;Clipboard.html">Reference</ulink></para>
 
-<sect1 id="sec-clipboard-targets">
-<title>Targets</title>
+<sect1 id="sec-clipboard-formats">
+<title>Formats</title>
 <para>
 Different applications contain different types of data, and they might make that data available in
-a variety of formats. &gtkmm; calls these data types <literal>target</literal>s.</para>
+a variety of formats. &gtkmm; calls these data types <literal>format</literal>s.</para>
 
 <para>
-For instance, <application>gedit</application> can supply and receive the <literal>&quot;UTF8_STRING&quot;</literal>
-target, so you can paste data into <application>gedit</application> from any application that supplies that target.
-Or two different image editing applications might supply and receive a variety of image formats as targets.
-As long as one application can receive one of the targets that the other supplies then you will be able to copy data from one to the other.
+For instance, <application>gedit</application> can supply and receive the <literal>text/plain</literal> mime type,
+so you can paste data into <application>gedit</application> from any application that supplies that format.
+Or two different image editing applications might supply and receive a variety of image formats.
+As long as one application can receive one of the formats that the other supplies
+then you will be able to copy data from one to the other.
 </para>
 
 <para>
-A target can be in a variety of binary formats. This chapter, and the examples,
+Clipboard data can be in a variety of binary formats. This chapter, and the examples,
 assume that the data is 8-bit text. This would allow us to use an XML format
 for the clipboard data. However this would probably not be appropriate for
-binary data such as images. <classname>Gtk::Clipboard</classname> provides
-overloads that allow you to specify the format in more detail if
-necessary.
+binary data such as images.
 </para>
 
 <para>The <link linkend="chapter-draganddrop">Drag and Drop</link> API uses the same mechanism.
-You should probably use the same data targets and formats for both Clipboard and Drag and Drop operations.</para>
+You should probably use the same data formats for both Clipboard and Drag and Drop operations.</para>
 </sect1>
 
 <sect1 id="sec-clipboard-copy">
 <title>Copy</title>
 <para>
-When the user asks to copy some data, you should tell the
-<classname>Clipboard</classname> what targets are available, and provide the
-callback methods that it can use to get the data. At this point you should
-store a copy of the data, to be provided when the clipboard calls your callback
-method in response to a paste.
+When the user asks to copy some data, you should copy the data to the
+<classname>Clipboard</classname>. For instance,
 </para>
-<para>For instance,
-</para>
-<programlisting>Glib::RefPtr&lt;Gtk::Clipboard&gt; refClipboard = Gtk::Clipboard::get();
-
-//Targets:
-std::vector&lt;Gtk::TargetEntry&gt; targets;
-targets.push_back( Gtk::TargetEntry(&quot;example_custom_target&quot;) );
-targets.push_back( Gtk::TargetEntry("UTF8_STRING") );
-
-refClipboard-&gt;set( targets,
-    sigc::mem_fun(*this, &amp;ExampleWindow::on_clipboard_get),
-    sigc::mem_fun(*this, &amp;ExampleWindow::on_clipboard_clear) );</programlisting>
-
-<para>Your callback will then provide the stored data when the user chooses to paste the data. For instance:
-</para>
-<programlisting>void ExampleWindow::on_clipboard_get(
-    Gtk::SelectionData&amp; selection_data, guint /* info */)
+<programlisting>void ExampleWindow::on_button_copy()
 {
-  const std::string target = selection_data.get_target();
-
-  if(target == &quot;example_custom_target&quot;)
-    selection_data.set(&quot;example_custom_target&quot;, m_ClipboardStore);
+  get_clipboard()-&gt;set_text("example_custom_target");
 }</programlisting>
-<para>
-The <literal>ideal</literal> example below can supply more than one clipboard target.
-</para>
-
-<para>The clear callback allows you to free the memory used by your stored data when the clipboard replaces its data with something else.
-</para>
 
 </sect1>
 
@@ -4934,42 +4893,28 @@ When the user asks to paste data from the <classname>Clipboard</classname>, you
 should request a specific format and provide a callback method which will be
 called with the actual data. For instance:
 </para>
-<programlisting>refClipboard-&gt;request_contents(&quot;example_custom_target&quot;,
-    sigc::mem_fun(*this, &amp;ExampleWindow::on_clipboard_received) );</programlisting>
+<programlisting>void ExampleWindow::on_button_paste()
+{
+  get_clipboard()-&gt;read_text_async(sigc::mem_fun(*this,
+              &amp;ExampleWindow::on_clipboard_received));
+}</programlisting>
 
 <para>Here is an example callback method:
 </para>
-<programlisting>void ExampleWindow::on_clipboard_received(
-    const Gtk::SelectionData&amp; selection_data)
+<programlisting>void ExampleWindow::on_clipboard_received(Glib::RefPtr&lt;Gio::AsyncResult&gt;&amp; result)
 {
-  Glib::ustring clipboard_data = selection_data.get_data_as_string();
+  Glib::ustring text = get_clipboard()-&gt;read_text_finish(result);
   //Do something with the pasted data.
 }</programlisting>
 
-<sect2 id="dnd-discovering-targets">
-<title>Discovering the available targets</title>
+<sect2 id="sec-clipboard-discovering-formats">
+<title>Discovering the available formats</title>
 <para>
-To find out what targets are currently available on the
-<classname>Clipboard</classname> for pasting, call the
-<methodname>request_targets()</methodname> method, specifying a method to be called
-with the information. For instance:
+To find out what formats are currently available on the <classname>Clipboard</classname>
+for pasting, call the <methodname>get_formats()</methodname> method. Then call a
+<classname>Gdk::ContentFormats</classname> method to find out if a format that
+your application supports is available.
 </para>
-<programlisting>refClipboard-&gt;request_targets( sigc::mem_fun(*this,
-    &amp;ExampleWindow::on_clipboard_received_targets) );</programlisting>
-
-<para>
-In your callback, compare the vector of available targets with those that your application supports for pasting. You could enable or disable a Paste menu item, depending on whether pasting is currently possible. For instance:
-</para>
-<programlisting>void ExampleWindow::on_clipboard_received_targets(
-  const std::vector&lt;Glib::ustring&gt;&amp; targets)
-{
-  const bool bPasteIsPossible =
-    std::find(targets.begin(), targets.end(),
-      example_target_custom) != targets.end();
-
-  // Enable/Disable the Paste button appropriately:
-  m_Button_Paste.set_sensitive(bPasteIsPossible);
-}</programlisting>
 </sect2>
 
 </sect1>
@@ -4979,7 +4924,7 @@ In your callback, compare the vector of available targets with those that your a
 <sect2 id="sec-clipboard-example-simple"><title>Simple</title>
 <para>
 This example allows copy and pasting of application-specific data, using the
-standard text target. Although this is simple, it's not ideal because it does
+standard text format. Although this is simple, it's not ideal because it does
 not identify the <classname>Clipboard</classname> data as being of a particular
 type.
 </para>
@@ -4998,9 +4943,9 @@ type.
 <sect2 id="sec-clipboard-example-ideal"><title>Ideal</title>
 <para>This is like the simple example, but it
 <orderedlist>
-<listitem><simpara>Defines a custom clipboard target, though the format of that target is still text.</simpara></listitem>
-<listitem><simpara>It supports pasting of 2 targets - both the custom one and a text one that creates an arbitrary text representation of the custom data.</simpara></listitem>
-<listitem><simpara>It uses <methodname>request_targets()</methodname> and the <literal>owner_change</literal> signal and disables the Paste button if it can't use anything on the clipboard.</simpara></listitem>
+<listitem><simpara>Defines a custom clipboard target, though the format is still text.</simpara></listitem>
+<listitem><simpara>It uses the <methodname>Gdk::ContentFormats::signal_changed()</methodname>
+  signal and disables the Paste button if it can't use anything on the clipboard.</simpara></listitem>
 </orderedlist>
 </para>
 
