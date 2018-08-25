@@ -155,7 +155,7 @@ bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::Drop>& drop, int, i
     m_Image.set(m_trashcan_open);
   }
 
-  auto source_widget = Gtk::Widget::drag_get_source_widget(drop->get_drag());
+  auto source_widget = Gtk::DnD::get_source_widget(drop->get_drag());
   g_print ("motion, source %s\n", source_widget ?
            G_OBJECT_TYPE_NAME (source_widget) :
            "NULL");
@@ -165,7 +165,7 @@ bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::Drop>& drop, int, i
     g_print ("%s\n", name.c_str());
   }
 
-  drop->status(drop->get_drag()->get_suggested_action());
+  drop->status(drop->get_drag()->get_selected_action());
   return true;
 }
 
