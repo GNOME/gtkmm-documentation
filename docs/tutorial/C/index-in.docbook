@@ -419,7 +419,15 @@ Most of the chapters in this book deal with specific widgets. See the <link link
 <para>Although you can specify the layout and appearance of windows and widgets with C++ code, you will probably find it more convenient to design your user interfaces with <literal>Glade</literal> and load them at runtime with <literal>Gtk::Builder</literal>. See the <link linkend="chapter-builder">Glade and Gtk::Builder</link> chapter.
 </para>
 
-<para>Although &gtkmm; widget instances have lifetimes and scopes just like those of other C++ classes, &gtkmm; has an optional time-saving feature that you will see in some of the examples. <function>Gtk::manage()</function> allows you to say that a child widget is owned by the container into which you place it. This allows you to <function>new</function> the widget, add it to the container and forget about deleting it. You can learn more about &gtkmm; memory management techniques in the <link linkend="chapter-memory">Memory Management chapter</link>.
+<para>Although &gtkmm; widget instances have lifetimes and scopes just like
+those of other C++ classes, &gtkmm; has an optional time-saving feature that you
+will see in some of the examples. The <function>Gtk::make_managed()</function>
+allows you to create a new widget and state that it will become owned by the
+container into which you place it. This allows you to create the widget, add it
+to the container and not be concerned about deleting it, since that will occur
+when the parent container (which may itself be managed) is deleted. You can
+learn more about &gtkmm; memory management techniques in the
+<link linkend="chapter-memory">Memory Management chapter</link>.
 </para>
 
 </sect1>
@@ -509,7 +517,8 @@ The C++ wrapper shall be explicitly deleted if
 <itemizedlist>
 <listitem><para>it's a widget or other class that inherits from <classname>Gtk::Object</classname>, and</para></listitem>
 <listitem><para>the C instance has a floating reference when the wrapper is created, and</para></listitem>
-<listitem><para><function>Gtk::manage()</function> is not called.</para></listitem>
+<listitem><para>it was not created using <function>Gtk::make_managed()</function>, and</para></listitem>
+<listitem><para><function>Gtk::manage()</function> has not been called on it.</para></listitem>
 </itemizedlist>
 <function>Glib::wrap()</function> binds the C and C++ instances to each other.
 Don't delete the C++ instance before you want the C instance to die.
@@ -976,9 +985,9 @@ public:
 RadioButtons::RadioButtons()
 {
   Gtk::RadioButton::Group group;
-  Gtk::RadioButton* m_rb1 = Gtk::manage(new Gtk::RadioButton(group, "button1"));
-  Gtk::RadioButton* m_rb2 = Gtk::manage(new Gtk::RadioButton(group, "button2"));
-  Gtk::RadioButton* m_rb3 = Gtk::manage(new Gtk::RadioButton(group, "button3"));
+  Gtk::RadioButton* m_rb1 = Gtk::make_managed<Gtk::RadioButton>(group, "button1");
+  Gtk::RadioButton* m_rb2 = Gtk::make_managed<Gtk::RadioButton>(group, "button2");
+  Gtk::RadioButton* m_rb3 = Gtk::make_managed<Gtk::RadioButton>(group, "button3");
 }</programlisting>
 
 <para>
@@ -2538,7 +2547,7 @@ Here is some example code from
 icon and a text name in the same column:
 </para>
 <programlisting>Gtk::TreeView::Column* pColumn =
-  Gtk::manage(new Gtk::TreeView::Column("Icon Name"));
+  Gtk::make_managed<Gtk::TreeView::Column>("Icon Name");
 
 // m_columns.icon and m_columns.iconname are columns in the model.
 // pColumn is the column in the TreeView:
@@ -2572,7 +2581,7 @@ if(pColumn)
 actions. For instance:
 </para>
 <programlisting>Gtk::CellRendererToggle* pRenderer =
-    Gtk::manage( new Gtk::CellRendererToggle() );
+    Gtk::make_managed<Gtk::CellRendererToggle>();
 pRenderer-&gt;signal_toggled().connect(
     sigc::bind( sigc::mem_fun(*this,
         &amp;Example_TreeView_TreeStore::on_cell_toggled), m_columns.dave)
@@ -3538,7 +3547,7 @@ to a container. For instance:
 <programlisting>
 <![CDATA[Glib::RefPtr<Glib::Object> object = m_refBuilder->get_object("menubar");
 Glib::RefPtr<Gio::Menu> gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
-Gtk::MenuBar* pMenuBar = Gtk::manage(new Gtk::MenuBar(gmenu));
+Gtk::MenuBar* pMenuBar = Gtk::make_managed<Gtk::MenuBar>(gmenu);
 m_Box.pack_start(*pMenuBar, Gtk::PACK_SHRINK);
 
 Gtk::Toolbar* toolbar = nullptr;
@@ -5475,7 +5484,7 @@ Gtk::Widget* CustomPrintOperation::on_create_custom_widget()
   Gtk::Box* hbox = new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 8);
   hbox-&gt;set_border_width(6);
 
-  Gtk::Label* label = Gtk::manage(new Gtk::Label("Enter some text: "));
+  Gtk::Label* label = Gtk::make_managed<Gtk::Label>("Enter some text: ");
   hbox-&gt;pack_start(*label, false, false);
   label-&gt;show();
 
@@ -6378,11 +6387,13 @@ increased data hiding and reduced dependencies.
 <title>Dynamic allocation with new and delete</title>
 
 <para>
-Although, in most cases, the programmer will prefer to allow containers to
-automatically destroy their children using <function>Gtk::manage()</function> (see
-below), the programmer is not required to use <function>Gtk::manage()</function>.
-The traditional <literal>new</literal> and <literal>delete</literal> operators
-may also be used.
+Usually, the programmer will prefer to allow containers to automatically destroy
+their children by creating them using <function>Gtk::make_managed()</function>
+(see below). This is not strictly required, as the <literal>new</literal> and
+<literal>delete</literal> operators may also be used, but modern C++ style
+discourages those in favour of safer models of memory management, so it is
+better to create widgets using <function>Gtk::make_managed()</function> and
+let their parent destroy them, than to manually perform dynamic allocation.
 <programlisting>
 Gtk::Button* pButton = new Gtk::Button("Test");
 
@@ -6403,29 +6414,46 @@ Here, the programmer deletes <varname>pButton</varname> to prevent a memory leak
 Alternatively, you can let a widget's container control when the widget is
 destroyed. In most cases, you want a widget to last only as long as the
 container it is in. To delegate the management of a widget's lifetime to its
-container, first create it with <function>Gtk::manage()</function> and
+container, create it with <function>Gtk::make_managed()</function> and then
 pack it into its container with <methodname>Gtk::Container::add()</methodname>,
 <methodname>Gtk::Box::pack_start()</methodname>, or a similar method. Now the
 widget will be destroyed whenever its container is destroyed.
 </para>
 
 <sect3 id="memory-managed-dynamic">
-<title>Dynamic allocation with manage() and add()</title>
+<title>Dynamic allocation with make_managed() and add()</title>
 
 <para>
-&gtkmm; provides the <function>manage()</function> function and
-<methodname>add()</methodname> methods to create and destroy widgets. Every widget
-except a top-level window must be added or packed into a container in order to
-be displayed. The <function>manage()</function> function marks a widget
-so that when the widget is added to a container, the container becomes
-responsible for deleting the widget.
+&gtkmm; provides the <function>make_managed()</function> function and
+<methodname>add()</methodname> methods to create and destroy widgets.
+</para>
+
+<para>
+Every widget except a top-level window must be added or packed into a container
+in order to be displayed. The <function>manage()</function> function marks an
+existing widget so that when the widget is added to a container, the container
+becomes responsible for deleting the widget, so the user need not do that
+themselves. The old way of creating widgets whose lifetime is managed by their
+parent in this way was to call <function>manage()</function>, passing in a
+<literal>new</literal> expression that created a dynamically allocated widget.
+</para>
+
+<para>
+However, usually, when you create such a widget, you will already know that its
+parent container should be responsible for destroying it, In addition, modern
+C++ style discourages use of the <literal>new</literal> operator, which was
+required when passing a newly created widget to <function>manage()</function>.
+Therefore, &gtkmm; has added <function>make_managed()</function>, which combines
+creation and marking with <function>manage()</function> into a single step. This
+avoids you having to write <literal>new</literal>, which is discouraged in
+modern C++ style, and more clearly expresses intent to create a managed widget.
 </para>
 
 <para>
 <programlisting>
 MyContainer::MyContainer()
 {
-  Gtk::Button* pButton = Gtk::manage(new Gtk::Button("Test"));
+  Gtk::Button* pButton = Gtk::make_managed<Gtk::Button>("Test");
   add(*pButton); //add *pButton to MyContainer
 }
 </programlisting>
@@ -9843,7 +9871,11 @@ _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)
 </programlisting>
 </para>
 <para>You will typically use this macro when the class already derives from Gtk::Object. For instance, you will use it when wrapping a GTK+ Widget, because Gtk::Widget derives from Gtk::Object.</para>
-<para>You might also derive non-widget classes from Gtk::Object so they can be used without <classname>Glib::RefPtr</classname>. For instance, they could then be instantiated with <function>Gtk::manage()</function> or on the stack as a member variable. This is convenient, but you should use this only when you are sure that true reference-counting is not needed. We consider it useful for widgets.</para>
+<para>You might also derive non-widget classes from <classname>Gtk::Object</classname>
+    so they can be used without <classname>Glib::RefPtr</classname>. For instance,
+    they could then be instantiated with <function>Gtk::make_managed()</function> or on the stack
+    as a member variable. This is convenient, but you should use this only when you are sure
+    that true reference-counting is not needed. We consider it useful for widgets.</para>
 </sect3>
 
 <sect3 id="gmmproc-class-boxedtype">
