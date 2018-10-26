@@ -2,7 +2,7 @@
 
 AC_PREREQ([2.59])
 AC_INIT([gtkmm-documentation], [3.22.0],
-        [http://bugzilla.gnome.org/enter_bug.cgi?product=gtkmm],
+        [https://gitlab.gnome.org/GNOME/gtkmm-documentation/issues/],
         [gtkmm-documentation], [http://www.gtkmm.org/])
 
 AC_CONFIG_SRCDIR([examples/book/box/packbox.cc])
