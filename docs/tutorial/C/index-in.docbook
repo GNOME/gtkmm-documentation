@@ -509,7 +509,8 @@ The C++ wrapper shall be explicitly deleted if
 <itemizedlist>
 <listitem><para>it's a widget or other class that inherits from <classname>Gtk::Object</classname>, and</para></listitem>
 <listitem><para>the C instance has a floating reference when the wrapper is created, and</para></listitem>
-<listitem><para><function>Gtk::manage()</function> is not called.</para></listitem>
+<listitem><para><function>Gtk::manage()</function> has not been called on it, or</para></listitem>
+<listitem><para><function>Gtk::manage()</function> was called on it, but it was never added to, or was later removed from, its parent.</para></listitem>
 </itemizedlist>
 <function>Glib::wrap()</function> binds the C and C++ instances to each other.
 Don't delete the C++ instance before you want the C instance to die.
@@ -6414,11 +6415,11 @@ widget will be destroyed whenever its container is destroyed.
 
 <para>
 &gtkmm; provides the <function>manage()</function> function and
-<methodname>add()</methodname> methods to create and destroy widgets. Every widget
+<methodname>add()</methodname> and similar methods to create and destroy widgets. Every widget
 except a top-level window must be added or packed into a container in order to
 be displayed. The <function>manage()</function> function marks a widget
 so that when the widget is added to a container, the container becomes
-responsible for deleting the widget.
+responsible for deleting the widget, meaning the user no longer needs to do so.
 </para>
 
 <para>
@@ -6433,6 +6434,14 @@ Now, when objects of type <classname>MyContainer</classname> are destroyed, the
 button will also be deleted. It is no longer necessary to delete <varname>pButton</varname>
 to free the button's memory; its deletion has been delegated to the
 <classname>MyContainer</classname> object.
+</para>
+
+<para>
+Note that if you never added the widget to any parent container, or you did but
+later <methodname>Gtk::Container::remove()</methodname>d it from said parent,
+&gtkmm; restores the widget’s lifetime management to whatever state it had
+before <function>manage()</function> was called, which typically means that the
+responsibility for <literal>delete</literal>ing the widget returns to the user.
 </para>
 
 <para>
