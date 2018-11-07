@@ -1,3 +1,20 @@
+3.22.1: (stable)
+
+* Headers and Linking section: Replace broken link
+  (Kjell Ahlstedt) Bug #777879 (Ramana Venkata)
+* Fix buildapp/Makefile.am and buildapp/README
+  Fix the build of resources.c in steps 8 and 9.
+  (Kjell Ahlstedt)
+* Mixing C & C++: Clarify ownership of wrap() result
+  (Daniel Boles, Kjell Ahlstedt) Bug #788646
+* Don't use the deprecated Gdk::screen_width() and screen_height()
+  (Kjell Ahlstedt)
+* Clarify: ColumnRecords can be static *singletons*
+  (Daniel Boles) Bug #792482 = Issue #3
+* Fix a broken link to www.gtkmm.org
+  (Kjell Ahlstedt) Bug #794714 = Issue #2 (Ray)
+
+
 3.22.0: (stable)
 
 * Add the "Building applications" chapter with example code.
