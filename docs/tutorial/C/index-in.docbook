@@ -423,7 +423,15 @@ Most of the chapters in this book deal with specific widgets. See the <link link
 <para>Although you can specify the layout and appearance of windows and widgets with C++ code, you will probably find it more convenient to design your user interfaces with <literal>Glade</literal> and load them at runtime with <literal>Gtk::Builder</literal>. See the <link linkend="chapter-builder">Glade and Gtk::Builder</link> chapter.
 </para>
 
-<para>Although &gtkmm; widget instances have lifetimes and scopes just like those of other C++ classes, &gtkmm; has an optional time-saving feature that you will see in some of the examples. <function>Gtk::manage()</function> allows you to say that a child widget is owned by the container into which you place it. This allows you to <function>new</function> the widget, add it to the container and forget about deleting it. You can learn more about &gtkmm; memory management techniques in the <link linkend="chapter-memory">Memory Management chapter</link>.
+<para>Although &gtkmm; widget instances have lifetimes and scopes just like
+those of other C++ classes, &gtkmm; has an optional time-saving feature that you
+will see in some of the examples. The <function>Gtk::make_managed()</function>
+allows you to create a new widget and state that it will become owned by the
+container into which you place it. This allows you to create the widget, add it
+to the container and not be concerned about deleting it, since that will occur
+when the parent container (which may itself be managed) is deleted. You can
+learn more about &gtkmm; memory management techniques in the
+<link linkend="chapter-memory">Memory Management chapter</link>.
 </para>
 
 </sect1>
@@ -483,8 +491,8 @@ To use a &gtkmm; instance with a C function that requires a C
 <function>gobj()</function> function to obtain a pointer to the underlying C
 instance. For example:
 <programlisting>
-Gtk::Button* button = new Gtk::Button("example");
-gtk_button_do_something_that_gtkmm_cannot(button-&gt;gobj());
+Gtk::Button button("example");
+gtk_button_do_something_that_gtkmm_cannot(button.gobj());
 </programlisting>
 </para>
 
@@ -503,7 +511,7 @@ The C++ wrapper shall be explicitly deleted if
 <itemizedlist>
 <listitem><para>it's a widget or other class that inherits from <classname>Gtk::Object</classname>, and</para></listitem>
 <listitem><para>the C instance has a floating reference when the wrapper is created, and</para></listitem>
-<listitem><para><function>Gtk::manage()</function> has not been called on it, or</para></listitem>
+<listitem><para><function>Gtk::manage()</function> has not been called on it (which includes if it was created with <function>Gtk::make_managed()</function>), or</para></listitem>
 <listitem><para><function>Gtk::manage()</function> was called on it, but it was never added to, or was later removed from, its parent.</para></listitem>
 </itemizedlist>
 <function>Glib::wrap()</function> binds the C and C++ instances to each other.
@@ -980,9 +988,9 @@ public:
 RadioButtons::RadioButtons()
 {
   Gtk::RadioButton::Group group;
-  Gtk::RadioButton* m_rb1 = Gtk::manage(new Gtk::RadioButton(group, "button1"));
-  Gtk::RadioButton* m_rb2 = Gtk::manage(new Gtk::RadioButton(group, "button2"));
-  Gtk::RadioButton* m_rb3 = Gtk::manage(new Gtk::RadioButton(group, "button3"));
+  auto m_rb1 = Gtk::make_managed<Gtk::RadioButton>(group, "button1");
+  auto m_rb2 = Gtk::make_managed<Gtk::RadioButton>(group, "button2");
+  auto m_rb3 = Gtk::make_managed<Gtk::RadioButton>(group, "button3");
 }</programlisting>
 
 <para>
@@ -2400,17 +2408,17 @@ on-demand, whenever the first model accesses it.
 Add rows to the model with the <methodname>append()</methodname>,
 <methodname>prepend()</methodname>, or <methodname>insert()</methodname> methods.
 </para>
-<programlisting>Gtk::TreeModel::iterator iter = m_refListStore-&gt;append();</programlisting>
+<programlisting>auto iter = m_refListStore-&gt;append();</programlisting>
 <para>You can dereference the iterator to get the Row:
 </para>
-<programlisting>Gtk::TreeModel::Row row = *iter;</programlisting>
+<programlisting>auto row = *iter;</programlisting>
 <sect3 id="treeview-adding-child-rows"><title>Adding child rows</title>
 <para>
 <classname>Gtk::TreeStore</classname> models can have child items. Add them
 with the <methodname>append()</methodname>, <methodname>prepend()</methodname>, or
 <methodname>insert()</methodname> methods, like so:
 </para>
-<programlisting>Gtk::TreeModel::iterator iter_child =
+<programlisting>auto iter_child =
     m_refTreeStore-&gt;append(row.children());</programlisting>
 </sect3>
 
@@ -2433,8 +2441,8 @@ You can use the <methodname>operator[]</methodname> overload to get the data in 
 particular column in a row, specifying the
 <classname>TreeModelColumn</classname> used to create the model.
 </para>
-<programlisting>Glib::ustring strText = row[m_Columns.m_col_text];
-int number = row[m_Columns.m_col_number];</programlisting>
+<programlisting>auto strText = row[m_Columns.m_col_text];
+auto number = row[m_Columns.m_col_number];</programlisting>
 <para>
 The compiler will complain if you use an inappropriate type. For
 instance, this would generate a compiler error:
@@ -2515,8 +2523,8 @@ appropriate <classname>Gtk::TreeView::Column</classname> widget.
 <para>
 Here is some example code, which has a pixbuf icon and a text name in the same column:
 </para>
-<programlisting>Gtk::TreeView::Column* pColumn =
-  Gtk::manage(new Gtk::TreeView::Column("Icon Name"));
+<programlisting>
+auto pColumn = Gtk::make_managed<Gtk::TreeView::Column>("Icon Name");
 
 // m_columns.icon and m_columns.iconname are columns in the model.
 // pColumn is the column in the TreeView:
@@ -2536,12 +2544,11 @@ instance, this example code from
 <classname>Gtk::CellRenderer</classname> widget and instructs it to render the
 data from various model columns through various aspects of its appearance.
 </para>
-<programlisting>int cols_count = m_TreeView.append_column_editable("Alex", m_columns.alex);
-Gtk::TreeViewColumn* pColumn = m_TreeView.get_column(cols_count-1);
+<programlisting>auto cols_count = m_TreeView.append_column_editable("Alex", m_columns.alex);
+auto pColumn = m_TreeView.get_column(cols_count-1);
 if(pColumn)
 {
-  Gtk::CellRendererToggle* pRenderer =
-    static_cast&lt;Gtk::CellRendererToggle*&gt;(pColumn->get_first_cell());
+  auto pRenderer = static_cast&lt;Gtk::CellRendererToggle*&gt;(pColumn->get_first_cell());
   pColumn-&gt;add_attribute(pRenderer->property_visible(), m_columns.visible);
   pColumn-&gt;add_attribute(pRenderer->property_activatable(), m_columns.world);</programlisting>
 
@@ -2549,8 +2556,8 @@ if(pColumn)
     You can also connect to <classname>CellRenderer</classname> signals to detect user
 actions. For instance:
 </para>
-<programlisting>Gtk::CellRendererToggle* pRenderer =
-    Gtk::manage( new Gtk::CellRendererToggle() );
+<programlisting>
+auto pRenderer = Gtk::make_managed<Gtk::CellRendererToggle>();
 pRenderer-&gt;signal_toggled().connect(
     sigc::bind( sigc::mem_fun(*this,
         &amp;Example_TreeView_TreeStore::on_cell_toggled), m_columns.dave)
@@ -2627,12 +2634,18 @@ children, via the <methodname>children()</methodname> method. You can use the
 familiar <methodname>begin()</methodname> and <methodname>end()</methodname> methods
 iterator incrementing, like so:
 </para>
-<programlisting>typedef Gtk::TreeModel::Children type_children; //minimise code length.
-type_children children = refModel-&gt;children();
-for(type_children::iterator iter = children.begin();
-    iter != children.end(); ++iter)
+<programlisting>
+auto children = refModel-&gt;children();
+for (auto iter = children.begin(), end = children.end(); iter != end; ++iter)
 {
-  Gtk::TreeModel::Row row = *iter;
+  auto row = *iter;
+  //Do something with the row - see above for set/get.
+}</programlisting>
+If you always want to iterate across the entire range, much more succinct syntax
+is possible using C++'s range-based <literal>for</literal> loop:
+<programlisting>
+for (auto row: refModel-&gt;children())
+{
   //Do something with the row - see above for set/get.
 }</programlisting>
 
@@ -2655,8 +2668,7 @@ To find out what rows the user has selected, get the
 <classname>Gtk::TreeView::Selection</classname> object from the
 <classname>TreeView</classname>, like so:
 </para>
-<programlisting>Glib::RefPtr&lt;Gtk::TreeSelection&gt; refTreeSelection =
-    m_TreeView.get_selection();</programlisting>
+<programlisting>auto refTreeSelection = m_TreeView.get_selection();</programlisting>
 
 <sect2 id="treeview-selection-mode">
 <title>Single or multiple selection</title>
@@ -2673,10 +2685,10 @@ multiple selection by setting the mode, like so:
 For single-selection, you can just call <methodname>get_selected()</methodname>,
 like so:
 </para>
-<programlisting>Gtk::TreeModel::iterator iter = refTreeSelection-&gt;get_selected();
+<programlisting>auto iter = refTreeSelection-&gt;get_selected();
 if(iter) //If anything is selected
 {
-  Gtk::TreeModel::Row row = *iter;
+  auto row = *iter;
   //Do something with the row.
 }</programlisting>
 
@@ -2693,7 +2705,7 @@ or define a callback, and give it to
 void TheClass::selected_row_callback(
     const Gtk::TreeModel::const_iterator&amp; iter)
 {
-  TreeModel::ConstRow row = *iter;
+  auto row = *iter;
   //Do something with the row.
 }</programlisting>
 
@@ -2731,7 +2743,7 @@ and then
     const Glib::RefPtr&lt;Gtk::TreeModel&gt;&amp; model,
     const Gtk::TreeModel::Path&amp; path, bool)
 {
-  const Gtk::TreeModel::iterator iter = model-&gt;get_iter(path);
+  const auto iter = model-&gt;get_iter(path);
   return iter-&gt;children().empty(); // only allow leaf nodes to be selected
 }</programlisting>
 </sect2>
@@ -2743,13 +2755,13 @@ To change the selection, specify a
 <classname>Gtk::TreeModel::iterator</classname> or
 <classname>Gtk::TreeModel::Row</classname>, like so:
 </para>
-<programlisting>Gtk::TreeModel::Row row = m_refModel-&gt;children()[5]; //The sixth row.
+<programlisting>auto row = m_refModel-&gt;children()[5]; //The sixth row.
 if(row)
   refTreeSelection-&gt;select(row.get_iter());</programlisting>
 <para>
 or
 </para>
-<programlisting>Gtk::TreeModel::iterator iter = m_refModel-&gt;children().begin()
+<programlisting>auto iter = m_refModel-&gt;children().begin()
 if(iter)
   refTreeSelection-&gt;select(iter);</programlisting>
 </sect2>
@@ -2770,7 +2782,7 @@ The standard tree models (<classname>TreeStore</classname> and <classname>ListSt
 <para>
 So that a user can click on a <classname>TreeView</classname>'s column header to sort the <classname>TreeView</classname>'s contents, call <methodname>Gtk::TreeView::Column::set_sort_column()</methodname>, supplying the model column on which model should be sorted when the header is clicked. For instance:
 </para>
-<programlisting>Gtk::TreeView::Column* pColumn = treeview.get_column(0);
+<programlisting>auto pColumn = treeview.get_column(0);
 if(pColumn)
   pColumn->set_sort_column(m_columns.m_col_id);</programlisting>
 </sect2>
@@ -2785,8 +2797,7 @@ for instance, <methodname>Gtk::TreeViewColumn::set_sort_column()</methodname>.
 <classname>TreeModelSort</classname> is a model that contains another model, presenting a sorted version
 of that model. For instance, you might add a sorted version of a model to a <classname>TreeView</classname> like so:
 </para>
-<programlisting>Glib::RefPtr&lt;Gtk::TreeModelSort&gt; sorted_model =
-    Gtk::TreeModelSort::create(model);
+<programlisting>auto sorted_model = Gtk::TreeModelSort::create(model);
 sorted_model->set_sort_column(columns.m_col_name, Gtk::SORT_ASCENDING);
 treeview.set_model(sorted_model);</programlisting>
 
@@ -2794,16 +2805,13 @@ treeview.set_model(sorted_model);</programlisting>
 </para>
 <programlisting>void ExampleWindow::on_button_delete()
 {
-  Glib::RefPtr&lt;Gtk::TreeSelection&gt; refTreeSelection =
-      m_treeview.get_selection();
+  auto refTreeSelection = m_treeview.get_selection();
   if(refTreeSelection)
   {
-    Gtk::TreeModel::iterator sorted_iter =
-        m_refTreeSelection->get_selected();
+    auto sorted_iter = m_refTreeSelection->get_selected();
     if(sorted_iter)
     {
-      Gtk::TreeModel::iterator iter =
-          m_refModelSort->convert_iter_to_child_iter(sorted_iter);
+      auto iter = m_refModelSort->convert_iter_to_child_iter(sorted_iter);
       m_refModel->erase(iter);
     }
   }
@@ -3015,11 +3023,11 @@ ModelColumns m_columns;</programlisting>
 <programlisting>Gtk::TreeModel::iterator iter = m_Combo.get_active();
 if(iter)
 {
-  Gtk::TreeModel::Row row = *iter;
+  auto row = *iter;
 
   //Get the data for the selected row, using our knowledge
   //of the tree model:
-  int id = row[m_Columns.m_col_id];
+  auto id = row[m_Columns.m_col_id];
   set_something_id_chosen(id); //Your own function.
 }
 else
@@ -3092,7 +3100,7 @@ moving the keyboard focus to another widget may signal that the user has finishe
 entering text. To be notified of these events, connect to the
 <classname>Entry</classname>'s <literal>activate</literal> and
 <literal>focus_out_event</literal> signals, like so
-<programlisting>Gtk::Entry* entry = m_Combo.get_entry();
+<programlisting>auto entry = m_Combo.get_entry();
 if (entry)
 {
   // Alternatively you can connect to m_Combo.signal_changed().
@@ -3199,8 +3207,7 @@ across buffer modifications. To preserve a position, use <classname>Gtk::TextBuf
 <para>
 To specify that some text in the buffer should have specific formatting, you must define a tag to hold that formatting information, and then apply that tag to the region of text. For instance, to define the tag and its properties:
 </para>
-<programlisting>Glib::RefPtr&lt;Gtk::TextBuffer::Tag&gt; refTagMatch =
-    Gtk::TextBuffer::Tag::create();
+<programlisting>auto refTagMatch = Gtk::TextBuffer::Tag::create();
 refTagMatch-&gt;property_background() = "orange";</programlisting>
 <para>
 You can specify a name for the <classname>Tag</classname> when using the
@@ -3226,13 +3233,11 @@ Each <classname>Gtk::TextBuffer</classname> uses a
 <classname>TagTable</classname>. When you create <classname>Tag</classname>s
 you should add them to the <classname>TagTable</classname>. For instance:
 </para>
-<programlisting>Glib::RefPtr&lt;Gtk::TextBuffer::TagTable&gt; refTagTable =
-    Gtk::TextBuffer::TagTable::create();
+<programlisting>auto refTagTable = Gtk::TextBuffer::TagTable::create();
 refTagTable-&gt;add(refTagMatch);
 //Hopefully a future version of &gtkmm; will have a set_tag_table() method,
 //for use after creation of the buffer.
-Glib::RefPtr&lt;Gtk::TextBuffer&gt; refBuffer =
-    Gtk::TextBuffer::create(refTagTable);</programlisting>
+auto refBuffer = Gtk::TextBuffer::create(refTagTable);</programlisting>
 
 <para>
 You can also use <methodname>get_tag_table()</methodname> to get, and maybe modify,
@@ -3277,8 +3282,7 @@ conflicts by using <methodname>Tag::set_priority()</methodname>.
 text changes, but you can use a <classname>Gtk::TextBuffer::Mark</classname> to
 remember a position in these situations. For instance,
 </para>
-<programlisting>Glib::RefPtr&lt;Gtk::TextBuffer::Mark&gt; refMark =
-    refBuffer-&gt;create_mark(iter);</programlisting>
+<programlisting>auto refMark = refBuffer-&gt;create_mark(iter);</programlisting>
 
 <para>
 You can then use the <methodname>get_iter()</methodname> method later to create an
@@ -3351,8 +3355,7 @@ ChildAnchors are associated with <classname>iterators</classname>. For
 instance, to create a child anchor at a particular position, use
 <methodname>Gtk::TextBuffer::create_child_anchor()</methodname>:
 </para>
-<programlisting>Glib::RefPtr&lt;Gtk::TextChildAnchor&gt; refAnchor =
-    refBuffer-&gt;create_child_anchor(iter);</programlisting>
+<programlisting>auto refAnchor = refBuffer-&gt;create_child_anchor(iter);</programlisting>
 
 <para>
 Then, to add a widget at that position, use
@@ -3452,7 +3455,7 @@ by using <methodname>Gtk::Application::set_accel_for_action()</methodname>.
 <para>For instance,
 </para>
 <programlisting>
-<![CDATA[Glib::RefPtr<Gtk::Builder> m_refBuilder = Gtk::Builder::create();
+<![CDATA[m_refBuilder = Gtk::Builder::create();
 
 app->set_accel_for_action("example.new", "<Primary>n");
 app->set_accel_for_action("example.quit", "<Primary>q");
@@ -3474,7 +3477,7 @@ string&quot; uses an XML format, in which you should mention the names of the
 actions that you have already created. For instance:
 </para>
 <programlisting>
-<![CDATA[const char* ui_info =
+<![CDATA[Glib::ustring ui_info =
   "<interface>"
   "  <menu id='menubar'>"
   "    <submenu>"
@@ -3526,9 +3529,9 @@ the <methodname>Builder::get_object()</methodname> and
 to a container. For instance:
 </para>
 <programlisting>
-<![CDATA[Glib::RefPtr<Glib::Object> object = m_refBuilder->get_object("menubar");
-Glib::RefPtr<Gio::Menu> gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
-Gtk::MenuBar* pMenuBar = Gtk::manage(new Gtk::MenuBar(gmenu));
+<![CDATA[auto object = m_refBuilder->get_object("menubar");
+auto gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+auto pMenuBar = Gtk::make_managed<Gtk::MenuBar>(gmenu);
 m_Box.pack_start(*pMenuBar, Gtk::PACK_SHRINK);
 
 Gtk::Toolbar* toolbar = nullptr;
@@ -3572,8 +3575,8 @@ mouse button.
 
 m_refBuilder->add_from_string(ui_info);
 
-Glib::RefPtr<Glib::Object> object = m_refBuilder->get_object("menu-examplepopup");
-Glib::RefPtr<Gio::Menu> gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+auto object = m_refBuilder->get_object("menu-examplepopup");
+auto gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
 m_pMenuPopup = new Gtk::Menu(gmenu);]]>
 </programlisting>
 
@@ -4120,8 +4123,8 @@ search-and-replace dialog is non-modal.
     </para>
     <programlisting>
 <![CDATA[Gtk::DrawingArea myArea;
-Glib::RefPtr<Gdk::CairoContext> gdkCairoContext = myArea.get_surface()->create_cairo_context();
-Cairo::RefPtr<Cairo::Context> myContext = gdkCairoContext->cairo_create();
+auto gdkCairoContext = myArea.get_surface()->create_cairo_context();
+auto myContext = gdkCairoContext->cairo_create();
 myContext->set_source_rgb(1.0, 0.0, 0.0);
 myContext->set_line_width(2.0);]]>
     </programlisting>
@@ -4562,7 +4565,7 @@ context->restore();</programlisting>
           </para>
           <programlisting>void MyArea::on_draw(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; cr, int width, int height)
 {
-  Glib::RefPtr&lt;Gdk::Pixbuf&gt; image = Gdk::Pixbuf::create_from_file("myimage.png");
+  auto image = Gdk::Pixbuf::create_from_file("myimage.png");
   // Draw the image at 110, 90, except for the outermost 10 pixels.
   Gdk::Cairo::set_source_pixbuf(cr, image, 100, 80);
   cr-&gt;rectangle(110, 90, image-&gt;get_width()-20, image-&gt;get_height()-20);
@@ -4904,7 +4907,7 @@ called with the actual data. For instance:
 </para>
 <programlisting>void ExampleWindow::on_clipboard_received(Glib::RefPtr&lt;Gio::AsyncResult&gt;&amp; result)
 {
-  Glib::ustring text = get_clipboard()-&gt;read_text_finish(result);
+  auto text = get_clipboard()-&gt;read_text_finish(result);
   //Do something with the pasted data.
 }</programlisting>
 
@@ -5102,7 +5105,7 @@ so you can use it again if the page setup dialog is shown again.</para>
 <para>For instance,
 <programlisting>
 //Within a class that inherits from Gtk::Window and keeps m_refPageSetup and m_refSettings as members...
-Glib::RefPtr&lt;Gtk::PageSetup&gt; new_page_setup = Gtk::run_page_setup_dialog(*this, m_refPageSetup, m_refSettings);
+auto new_page_setup = Gtk::run_page_setup_dialog(*this, m_refPageSetup, m_refSettings);
 m_refPageSetup = new_page_setup;
 </programlisting>
 </para>
@@ -5167,7 +5170,7 @@ the <literal>done</literal> and <literal>status_changed</literal> signals:
 <para>For instance,
 <programlisting>
 // in class ExampleWindow's method...
-Glib::RefPtr&lt;PrintOperation&gt; op = PrintOperation::create();
+auto op = PrintOperation::create();
 // ...set up op...
 op->signal_done().connect(sigc::bind(sigc::mem_fun(*this, &amp;ExampleWindow::on_printoperation_done), op));
 // run the op
@@ -5211,10 +5214,10 @@ void ExampleWindow::on_printoperation_status_changed(const Glib::RefPtr&lt;Print
 The 'Print to file' option is available in the print dialog, without the need for extra implementation. However, it is sometimes useful to generate a pdf file directly from code. For instance,
 
 <programlisting>
-Glib::RefPtr&lt;Gtk::PrintOperation&gt; op = Gtk::PrintOperation::create();
+auto op = Gtk::PrintOperation::create();
 // ...set up op...
 op->set_export_filename(&quot;test.pdf&quot;);
-Gtk::PrintOperationResult res = op-&gt;run(Gtk::PRINT_OPERATION_ACTION_EXPORT);
+auto res = op-&gt;run(Gtk::PRINT_OPERATION_ACTION_EXPORT);
 </programlisting>
 
 </para>
@@ -5259,10 +5262,10 @@ Gtk::Widget* CustomPrintOperation::on_create_custom_widget()
 {
   set_custom_tab_label(&quot;My custom tab&quot;);
 
-  Gtk::Box* hbox = new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 8);
+  auto hbox = new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 8);
   hbox-&gt;set_margin(6);
 
-  Gtk::Label* label = Gtk::manage(new Gtk::Label("Enter some text: "));
+  auto label = Gtk::make_managed<Gtk::Label>("Enter some text: ");
   hbox-&gt;pack_start(*label, false, false);
 
   hbox-&gt;pack_start(m_Entry, false, false);
@@ -5272,7 +5275,7 @@ Gtk::Widget* CustomPrintOperation::on_create_custom_widget()
 
 void CustomPrintOperation::on_custom_widget_apply(Gtk::Widget* /* widget */)
 {
-  Glib::ustring user_input = m_Entry.get_text();
+  auto user_input = m_Entry.get_text();
   //...
 }
 </programlisting>
@@ -5294,7 +5297,7 @@ a preview directly from an application:
 
 <programlisting>
 // in a class that inherits from Gtk::Window...
-Glib::RefPtr&lt;PrintOperation&gt; op = PrintOperation::create();
+auto op = PrintOperation::create();
 // ...set up op...
 op->run(Gtk::PRINT_OPERATION_ACTION_PREVIEW, *this);
 </programlisting>
@@ -5371,7 +5374,7 @@ and update the print settings.
         To add a new file to the list of recent documents, in the simplest case,
         you only need to provide the URI. For example:
       </para>
-      <programlisting>Glib::RefPtr&lt;Gtk::RecentManager&gt; recent_manager = Gtk::RecentManager::get_default();
+      <programlisting>auto recent_manager = Gtk::RecentManager::get_default();
 recent_manager->add_item(uri);</programlisting>
       <para>
         If you want to register a file with metadata, you can pass a
@@ -5455,7 +5458,7 @@ if (info)
         recently used files. The following code demonstrates how you might get a
         list of recently used files:
       </para>
-      <programlisting>std::vector&lt; Glib::RefPtr&lt;Gtk::RecentInfo&gt; &gt; info_list = recent_manager-&gt;get_items();</programlisting>
+      <programlisting>auto info_list = recent_manager-&gt;get_items();</programlisting>
       <para>
         The maximum age of items in the recently used files list can be set with
         <methodname>Gtk::Settings::property_gtk_recent_files_max_age()</methodname>.
@@ -5993,13 +5996,15 @@ increased data hiding and reduced dependencies.
 <title>Dynamic allocation with new and delete</title>
 
 <para>
-Although, in most cases, the programmer will prefer to allow containers to
-automatically destroy their children using <function>Gtk::manage()</function> (see
-below), the programmer is not required to use <function>Gtk::manage()</function>.
-The traditional <literal>new</literal> and <literal>delete</literal> operators
-may also be used.
+Usually, the programmer will prefer to allow containers to automatically destroy
+their children by creating them using <function>Gtk::make_managed()</function>
+(see below). This is not strictly required, as the <literal>new</literal> and
+<literal>delete</literal> operators may also be used, but modern C++ style
+discourages those in favour of safer models of memory management, so it is
+better to create widgets using <function>Gtk::make_managed()</function> and
+let their parent destroy them, than to manually perform dynamic allocation.
 <programlisting>
-Gtk::Button* pButton = new Gtk::Button("Test");
+auto pButton = new Gtk::Button("Test");
 
 // do something useful with pButton
 
@@ -6018,29 +6023,47 @@ Here, the programmer deletes <varname>pButton</varname> to prevent a memory leak
 Alternatively, you can let a widget's container control when the widget is
 destroyed. In most cases, you want a widget to last only as long as the
 container it is in. To delegate the management of a widget's lifetime to its
-container, first create it with <function>Gtk::manage()</function> and
+container, create it with <function>Gtk::make_managed()</function> and then
 pack it into its container with <methodname>Gtk::Container::add()</methodname>,
 <methodname>Gtk::Box::pack_start()</methodname>, or a similar method. Now the
 widget will be destroyed whenever its container is destroyed.
 </para>
 
 <sect3 id="memory-managed-dynamic">
-<title>Dynamic allocation with manage() and add()</title>
+<title>Dynamic allocation with make_managed() and add()</title>
 
 <para>
-&gtkmm; provides the <function>manage()</function> function and
-<methodname>add()</methodname> and similar methods to create and destroy widgets. Every widget
-except a top-level window must be added or packed into a container in order to
-be displayed. The <function>manage()</function> function marks a widget
-so that when the widget is added to a container, the container becomes
+&gtkmm; provides ways including the <function>make_managed()</function> function
+and <methodname>Gtk::Container::add()</methodname> method to simplify creation
+and destruction of widgets whose lifetime can be managed by a parent.
+</para>
+
+<para>
+Every widget except a top-level window must be added to a parent container in
+order to be displayed. The <function>manage()</function> function marks a widget
+so that when that widget is added to a parent container, said container becomes
 responsible for deleting the widget, meaning the user no longer needs to do so.
+The original way to create widgets whose lifetime is managed by their parent in
+this way was to call <function>manage()</function>, passing in the result of a
+<literal>new</literal> expression that created a dynamically allocated widget.
+</para>
+
+<para>
+However, usually, when you create such a widget, you will already know that its
+parent container should be responsible for destroying it, In addition, modern
+C++ style discourages use of the <literal>new</literal> operator, which was
+required when passing a newly created widget to <function>manage()</function>.
+Therefore, &gtkmm; has added <function>make_managed()</function>, which combines
+creation and marking with <function>manage()</function> into a single step. This
+avoids you having to write <literal>new</literal>, which is discouraged in
+modern C++ style, and more clearly expresses intent to create a managed widget.
 </para>
 
 <para>
 <programlisting>
 MyContainer::MyContainer()
 {
-  Gtk::Button* pButton = Gtk::manage(new Gtk::Button("Test"));
+  auto pButton = Gtk::make_managed<Gtk::Button>("Test");
   add(*pButton); //add *pButton to MyContainer
 }
 </programlisting>
@@ -6086,7 +6109,7 @@ smartpointer, <classname>Cairo::RefPtr&lt;&gt;</classname>.
 Objects such as <classname>Gdk::Pixbuf</classname> can only be instantiated
 with a <methodname>create()</methodname> function. For instance,
 <programlisting>
-Glib::RefPtr&lt;Gdk::Pixbuf&gt; pixbuf = Gdk::Pixbuf::create_from_file(filename);
+auto pixbuf = Gdk::Pixbuf::create_from_file(filename);
 </programlisting>
 </para>
 
@@ -6095,7 +6118,7 @@ You have no way of getting a bare <classname>Gdk::Pixbuf</classname>. In the
 example, <varname>pixbuf</varname> is a smart pointer, so you can do this, much
 like a normal pointer:
 <programlisting>
-int width = 0;
+auto width = 0;
 if(pixbuf)
 {
   width = pixbuf-&gt;get_width();
@@ -6112,7 +6135,7 @@ to worry about it anymore. There's no <literal>new</literal> so there's no
 <para>
 If you copy a <classname>RefPtr</classname>, for instance
 <programlisting>
-Glib::RefPtr&lt;Gdk::Pixbuf&gt; pixbuf2 = pixbuf;
+auto pixbuf2 = pixbuf;
 </programlisting>
 , or if you pass it as a method argument or a return type, then
 <classname>RefPtr</classname> will do any necessary referencing to ensure that
@@ -6171,7 +6194,7 @@ layout allows you to focus on implementing that functionality.
 <classname>Glib::RefPtr</classname>. Like all such classes, you need to use a
 <methodname>create()</methodname> method to instantiate it. For instance,
 <programlisting>
-Glib::RefPtr&lt;Gtk::Builder&gt; builder = Gtk::Builder::create_from_file(&quot;basic.glade&quot;);
+auto builder = Gtk::Builder::create_from_file(&quot;basic.glade&quot;);
 </programlisting>
 This will instantiate the windows defined in the .glade file, though they will
 not be shown immediately unless you have specified that via the <guilabel>Properties</guilabel>
@@ -6180,7 +6203,7 @@ window in <application>Glade</application>.
 
 <para>To instantiate just one window, or just one of the child widgets, you can specify the name of a widget as the second parameter. For instance,
 <programlisting>
-Glib::RefPtr&lt;Gtk::Builder&gt; builder = Gtk::Builder::create_from_file(&quot;basic.glade&quot;, &quot;treeview_products&quot;);
+auto builder = Gtk::Builder::create_from_file(&quot;basic.glade&quot;, &quot;treeview_products&quot;);
 </programlisting>
 </para>
 
@@ -8021,8 +8044,8 @@ instance.
 </para>
 <para>
 <programlisting>
-Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf = Gdk::Pixbuf::create_from_file(filename);
-Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf2 = refPixbuf;
+auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);
+auto refPixbuf2 = refPixbuf;
 </programlisting>
 </para>
 <para>
@@ -8032,7 +8055,7 @@ standard containers, such as <classname>std::vector</classname> or
 <para>
 <programlisting>
 std::list&lt;Glib::RefPtr&lt;Gdk::Pixbuf&gt;&gt; listPixbufs;
-Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf = Gdk::Pixbuf::create_from_file(filename);
+auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);
 listPixbufs.push_back(refPixbuf);
 </programlisting>
 </para>
@@ -8044,8 +8067,8 @@ call the methods of the underlying instance, just like a normal pointer.
 </para>
 <para>
 <programlisting>
-Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf = Gdk::Pixbuf::create_from_file(filename);
-int width = refPixbuf-&gt;get_width();
+auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);
+auto width = refPixbuf-&gt;get_width();
 </programlisting>
 </para>
 <para>You can also use the * operator and the <methodname>get()</methodname> method
@@ -8055,8 +8078,8 @@ in the reference count.
 </para>
 <para>
 <programlisting>
-Glib::RefPtr&lt;Gdk::Pixbuf&gt; refPixbuf = Gdk::Pixbuf::create_from_file(filename);
-Gdk::Pixbuf&amp; underlying = *refPixbuf; // Possible, but not recommended
+auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);
+auto&amp; underlying = *refPixbuf; // Possible, but not recommended
 </programlisting>
 </para>
 </sect1>
@@ -8068,7 +8091,7 @@ pointers.
 </para>
 <para>
 <programlisting>
-Glib::RefPtr&lt;Gtk::TreeStore&gt; refStore = Gtk::TreeStore::create(columns);
+auto refStore = Gtk::TreeStore::create(columns);
 Glib::RefPtr&lt;Gtk::TreeModel&gt; refModel = refStore;
 </programlisting>
 </para>
@@ -8081,10 +8104,8 @@ a little different than with a normal pointer.
 </para>
 <para>
 <programlisting>
-Glib::RefPtr&lt;Gtk::TreeStore&gt; refStore =
-  std::dynamic_pointer_cast&lt;Gtk::TreeStore&gt;(refModel);
-Glib::RefPtr&lt;Gtk::TreeStore&gt; refStore2 =
-  std::static_pointer_cast&lt;Gtk::TreeStore&gt;(refModel);
+auto refStore = std::dynamic_pointer_cast&lt;Gtk::TreeStore&gt;(refModel);
+auto refStore2 = std::static_pointer_cast&lt;Gtk::TreeStore&gt;(refModel);
 </programlisting>
 </para>
 </sect1>
@@ -8096,10 +8117,10 @@ Just like normal pointers, you can check whether a
 </para>
 <para>
 <programlisting>
-Glib::RefPtr&lt;Gtk::TreeModel&gt; refModel = m_TreeView.get_model();
+auto refModel = m_TreeView.get_model();
 if (refModel)
 {
-  int cols_count = refModel-&gt;get_n_columns();
+  auto cols_count = refModel-&gt;get_n_columns();
   ...
 }
 </programlisting>
@@ -9452,11 +9473,13 @@ _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)
     <classname>Gtk::Object</classname>. For instance, you will use it when wrapping
     a GTK+ Widget, because <classname>Gtk::Widget</classname> derives from
     <classname>Gtk::Object</classname>.</para>
-<para>You might also derive non-widget classes from <classname>Gtk::Object</classname>
-    so they can be used without <classname>Glib::RefPtr</classname>. For instance,
-    they could then be instantiated with <function>Gtk::manage()</function> or on the stack
-    as a member variable. This is convenient, but you should use this only when you are sure
-    that true reference-counting is not needed. We consider it useful for widgets.</para>
+<para>You might also derive non-widget classes from
+    <classname>Gtk::Object</classname> so they can be used without
+    <classname>Glib::RefPtr</classname>. For instance, they could then be
+    instantiated with <function>Gtk::make_managed()</function> or on the stack
+    as a member variable. This is convenient, but you should use this only when
+    you are sure that true reference-counting is not needed. We consider it
+    useful for widgets.</para>
 </sect3>
 
 <sect3 id="gmmproc-class-boxedtype">
