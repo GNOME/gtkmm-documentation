@@ -988,9 +988,9 @@ public:
 RadioButtons::RadioButtons()
 {
   Gtk::RadioButton::Group group;
-  auto m_rb1 = Gtk::make_managed<Gtk::RadioButton>(group, "button1");
-  auto m_rb2 = Gtk::make_managed<Gtk::RadioButton>(group, "button2");
-  auto m_rb3 = Gtk::make_managed<Gtk::RadioButton>(group, "button3");
+  auto m_rb1 = Gtk::make_managed&lt;Gtk::RadioButton&gt;(group, "button1");
+  auto m_rb2 = Gtk::make_managed&lt;Gtk::RadioButton&gt;(group, "button2");
+  auto m_rb3 = Gtk::make_managed&lt;Gtk::RadioButton&gt;(group, "button3");
 }</programlisting>
 
 <para>
@@ -2524,7 +2524,7 @@ appropriate <classname>Gtk::TreeView::Column</classname> widget.
 Here is some example code, which has a pixbuf icon and a text name in the same column:
 </para>
 <programlisting>
-auto pColumn = Gtk::make_managed<Gtk::TreeView::Column>("Icon Name");
+auto pColumn = Gtk::make_managed&lt;Gtk::TreeView::Column&gt;("Icon Name");
 
 // m_columns.icon and m_columns.iconname are columns in the model.
 // pColumn is the column in the TreeView:
@@ -2557,7 +2557,7 @@ if(pColumn)
 actions. For instance:
 </para>
 <programlisting>
-auto pRenderer = Gtk::make_managed<Gtk::CellRendererToggle>();
+auto pRenderer = Gtk::make_managed&lt;Gtk::CellRendererToggle&gt;();
 pRenderer-&gt;signal_toggled().connect(
     sigc::bind( sigc::mem_fun(*this,
         &amp;Example_TreeView_TreeStore::on_cell_toggled), m_columns.dave)
@@ -5265,7 +5265,7 @@ Gtk::Widget* CustomPrintOperation::on_create_custom_widget()
   auto hbox = new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 8);
   hbox-&gt;set_margin(6);
 
-  auto label = Gtk::make_managed<Gtk::Label>("Enter some text: ");
+  auto label = Gtk::make_managed&lt;Gtk::Label&gt;("Enter some text: ");
   hbox-&gt;pack_start(*label, false, false);
 
   hbox-&gt;pack_start(m_Entry, false, false);
@@ -6063,7 +6063,7 @@ modern C++ style, and more clearly expresses intent to create a managed widget.
 <programlisting>
 MyContainer::MyContainer()
 {
-  auto pButton = Gtk::make_managed<Gtk::Button>("Test");
+  auto pButton = Gtk::make_managed&lt;Gtk::Button&gt;("Test");
   add(*pButton); //add *pButton to MyContainer
 }
 </programlisting>
