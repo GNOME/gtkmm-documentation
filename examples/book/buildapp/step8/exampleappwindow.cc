@@ -129,11 +129,11 @@ void ExampleAppWindow::open_file_view(const Glib::RefPtr<Gio::File>& file)
 {
   const auto basename = file->get_basename();
 
-  auto scrolled = Gtk::manage(new Gtk::ScrolledWindow());
+  auto scrolled = Gtk::make_managed<Gtk::ScrolledWindow>();
   scrolled->set_hexpand(true);
   scrolled->set_vexpand(true);
   scrolled->show();
-  auto view = Gtk::manage(new Gtk::TextView());
+  auto view = Gtk::make_managed<Gtk::TextView>();
   view->set_editable(false);
   view->set_cursor_visible(false);
   view->show();
@@ -262,7 +262,7 @@ void ExampleAppWindow::update_words()
   // Add new child buttons, one per unique word.
   for (const auto& word : words)
   {
-    auto row = Gtk::manage(new Gtk::Button(word));
+    auto row = Gtk::make_managed<Gtk::Button>(word);
     row->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,
       &ExampleAppWindow::on_find_word), row));
     row->show();

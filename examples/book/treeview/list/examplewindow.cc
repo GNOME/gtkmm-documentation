@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -76,7 +74,7 @@ ExampleWindow::ExampleWindow()
           "%010d" /* 10 digits, using leading zeroes. */);
 
   //Display a progress bar instead of a decimal number:
-  auto cell = Gtk::manage(new Gtk::CellRendererProgress);
+  auto cell = Gtk::make_managed<Gtk::CellRendererProgress>();
   int cols_count = m_TreeView.append_column("Some percentage", *cell);
   auto pColumn = m_TreeView.get_column(cols_count - 1);
   if(pColumn)

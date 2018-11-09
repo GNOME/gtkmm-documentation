@@ -1,5 +1,3 @@
-/* -*- Mode: C++; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
-
 /* gtkmm example Copyright (C) 2007 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -58,7 +56,7 @@ ExampleWindow::ExampleWindow()
   //Button's custom tooltip window:
   m_button_tooltip_window.set_default_size(250, 30);
   Gtk::Label* label =
-    Gtk::manage(new Gtk::Label("A label in a custom tooltip window"));
+    Gtk::make_managed<Gtk::Label>("A label in a custom tooltip window");
   label->show();
   m_button_tooltip_window.add(*label);
 

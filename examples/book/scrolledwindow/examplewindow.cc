@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -51,8 +49,8 @@ ExampleWindow::ExampleWindow()
      {
         char buffer[32];
         sprintf(buffer, "button (%d,%d)\n", i, j);
-        auto pButton = Gtk::manage(new Gtk::ToggleButton(buffer));
-        m_Grid.attach(*pButton, i, j, 1, 1);
+        auto pButton = Gtk::make_managed<Gtk::ToggleButton>(buffer);
+        m_Grid.attach(*pButton, i, j);
      }
   }
 

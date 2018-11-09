@@ -99,15 +99,15 @@ ExampleWindow::ExampleWindow() :
   m_ListBox.signal_row_activated().connect(sigc::mem_fun(*this, &ExampleWindow::on_row_activated));
 
   // Add some rows to the ListBox.
-  auto row = Gtk::manage(new ExampleRow("blah4", 4));
+  auto row = Gtk::make_managed<ExampleRow>("blah4", 4);
   m_ListBox.append(*row);
   m_ListBox.append(m_Row3); // blah3
-  row = Gtk::manage(new ExampleRow("blah1", 1));
+  row = Gtk::make_managed<ExampleRow>("blah1", 1);
   m_ListBox.append(*row);
-  row = Gtk::manage(new ExampleRow("blah2", 2));
+  row = Gtk::make_managed<ExampleRow>("blah2", 2);
   m_ListBox.append(*row);
 
-  row = Gtk::manage(new ExampleRow("", 0));
+  row = Gtk::make_managed<ExampleRow>("", 0);
   m_HBox_Row.pack_start(m_Label_Row, Gtk::PACK_SHRINK);
   m_HBox_Row.pack_start(m_CheckButton_Row1, Gtk::PACK_SHRINK);
   m_HBox_Row.pack_start(m_Button_Row1, Gtk::PACK_SHRINK);
@@ -116,7 +116,7 @@ ExampleWindow::ExampleWindow() :
   row->add(m_VBox_Row);
   m_ListBox.append(*row);
 
-  row = Gtk::manage(new ExampleRow("", 0));
+  row = Gtk::make_managed<ExampleRow>("", 0);
   m_Button_Row2.set_hexpand(false);
   m_Button_Row2.set_halign(Gtk::ALIGN_START);
   row->add(m_Button_Row2);
@@ -227,7 +227,7 @@ void ExampleWindow::on_add_clicked()
 {
   static int new_button_nr = 1;
   const Glib::ustring text = "blah2 new " + Glib::ustring::format(new_button_nr);
-  auto new_row = Gtk::manage(new ExampleRow(text, new_button_nr));
+  auto new_row = Gtk::make_managed<ExampleRow>(text, new_button_nr);
   new_row->show_all();
   m_ListBox.append(*new_row);
   ++new_button_nr;
@@ -251,10 +251,10 @@ void ExampleWindow::update_header_func(Gtk::ListBoxRow* row, Gtk::ListBoxRow* be
     // Create header if needed.
     if (!row->get_header())
     {
-      auto hbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL));
-      auto label = Gtk::manage(new Gtk::Label("Header"));
+      auto hbox = Gtk::make_managed<Gtk::Box>(Gtk::ORIENTATION_HORIZONTAL);
+      auto label = Gtk::make_managed<Gtk::Label>("Header");
       hbox->pack_start(*label, Gtk::PACK_SHRINK);
-      auto button = Gtk::manage(new Gtk::Button("button"));
+      auto button = Gtk::make_managed<Gtk::Button>("button");
       hbox->pack_start(*button, Gtk::PACK_SHRINK);
       hbox->show_all();
       row->set_header(*hbox);

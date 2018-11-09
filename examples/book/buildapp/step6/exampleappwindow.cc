@@ -75,11 +75,11 @@ void ExampleAppWindow::open_file_view(const Glib::RefPtr<Gio::File>& file)
 {
   const auto basename = file->get_basename();
 
-  auto scrolled = Gtk::manage(new Gtk::ScrolledWindow());
+  auto scrolled = Gtk::make_managed<Gtk::ScrolledWindow>();
   scrolled->set_hexpand(true);
   scrolled->set_vexpand(true);
   scrolled->show();
-  auto view = Gtk::manage(new Gtk::TextView());
+  auto view = Gtk::make_managed<Gtk::TextView>();
   view->set_editable(false);
   view->set_cursor_visible(false);
   view->show();

@@ -16,7 +16,7 @@ main (int argc, char *argv[])
 {
   auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
 
-  auto ttt = manage( new TicTacToe );
+  auto ttt = Gtk::make_managed<TicTacToe>();
   ttt->tictactoe.connect( sigc::bind (sigc::ptr_fun(&win), ttt) );
 
   Gtk::Window window;

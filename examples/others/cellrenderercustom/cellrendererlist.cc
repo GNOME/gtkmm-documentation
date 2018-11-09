@@ -1,5 +1,3 @@
-//$Id: cellrendererlist.cc 156 2004-03-12 10:11:35Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -55,8 +53,8 @@ CellRendererList::CellRendererList()
   selection->set_mode(Gtk::SELECTION_BROWSE);
   selection->signal_changed().connect(sigc::mem_fun(*this, &Self::on_tree_selection_changed));
 
-  Gtk::Frame *const frame = new Gtk::Frame();
-  get_popup_window()->add(*Gtk::manage(frame));
+  Gtk::Frame *const frame = Gtk::make_managed<Gtk::Frame>();
+  get_popup_window()->add(*frame);
 
   frame->add(tree_view_);
   frame->set_shadow_type(Gtk::SHADOW_OUT);

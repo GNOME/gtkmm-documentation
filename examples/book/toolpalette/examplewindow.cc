@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 870 2007-07-13 19:08:46Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -38,8 +36,7 @@ void ExampleWindow::load_icon_items()
   for (type_stringvec::const_iterator iter = contexts.begin(); iter != contexts.end(); ++iter)
   {
     const Glib::ustring context_name = *iter;
-    Gtk::ToolItemGroup* group =
-      Gtk::manage(new Gtk::ToolItemGroup(context_name));
+    auto group = Gtk::make_managed<Gtk::ToolItemGroup>(context_name);
     m_ToolPalette.add(*group);
 
     // Iterate through the icon names, populating the ToolItemGroup as appropriate.
@@ -66,8 +63,8 @@ void ExampleWindow::load_icon_items()
           pixbuf->get_height() > 2*requested_icon_size)
         continue;
 
-      auto image = Gtk::manage(new Gtk::Image(pixbuf));
-      auto button = Gtk::manage(new Gtk::ToolButton(*image, icon_name));
+      auto image = Gtk::make_managed<Gtk::Image>(pixbuf);
+      auto button = Gtk::make_managed<Gtk::ToolButton>(*image, icon_name);
       button->set_tooltip_text(icon_name);
       button->set_is_important();
       group->insert(*button);
@@ -83,8 +80,7 @@ void ExampleWindow::load_icon_items()
 
 void ExampleWindow::load_toggle_items()
 {
-  auto group =
-    Gtk::manage(new Gtk::ToolItemGroup("Radio Item"));
+  auto group = Gtk::make_managed<Gtk::ToolItemGroup>("Radio Item");
   m_ToolPalette.add(*group);
 
   Gtk::RadioToolButton::Group radio_group;
@@ -92,7 +88,7 @@ void ExampleWindow::load_toggle_items()
   for(int i = 1; i <= 10; ++i)
   {
     const Glib::ustring label = Glib::ustring::compose("#%1", i);
-    auto button = Gtk::manage(new Gtk::RadioToolButton());
+    auto button = Gtk::make_managed<Gtk::RadioToolButton>();
     button->set_group(radio_group);
     button->set_label(label);
 
@@ -103,11 +99,11 @@ void ExampleWindow::load_toggle_items()
 
 static Gtk::ToolItem* create_entry_item(const Glib::ustring& text)
 {
-  auto entry = Gtk::manage(new Gtk::Entry());
+  auto entry = Gtk::make_managed<Gtk::Entry>();
   entry->set_text(text);
   entry->set_width_chars(5);
 
-  auto item = Gtk::manage(new Gtk::ToolItem());
+  auto item = Gtk::make_managed<Gtk::ToolItem>();
   item->add(*entry);
 
   return item;
@@ -115,9 +111,9 @@ static Gtk::ToolItem* create_entry_item(const Glib::ustring& text)
 
 void ExampleWindow::load_special_items()
 {
-  auto group = Gtk::manage(new Gtk::ToolItemGroup());
+  auto group = Gtk::make_managed<Gtk::ToolItemGroup>();
 
-  Gtk::Button *label_button = Gtk::manage(new Gtk::Button("Advanced Features"));
+  Gtk::Button *label_button = Gtk::make_managed<Gtk::Button>("Advanced Features");
   label_button->show();
   group->set_label_widget(*label_button);
   m_ToolPalette.add(*group);
@@ -146,26 +142,26 @@ void ExampleWindow::load_special_items()
                            "homogeneous", FALSE, "expand", TRUE,
                            "new-row", TRUE, NULL);
 
-  Gtk::ToolButton *button = Gtk::manage(new Gtk::ToolButton());
+  auto button = Gtk::make_managed<Gtk::ToolButton>();
   button->set_icon_name("go-up");
   button->set_tooltip_text("Show on vertical palettes only");
   group->insert(*button);
   button->set_visible_horizontal(false);
 
-  button = Gtk::manage(new Gtk::ToolButton());
+  button = Gtk::make_managed<Gtk::ToolButton>();
   button->set_icon_name("go-next");
   button->set_tooltip_text("Show on horizontal palettes only");
   group->insert(*button);
   button->set_visible_vertical(false);
 
-  button = Gtk::manage(new Gtk::ToolButton());
+  button = Gtk::make_managed<Gtk::ToolButton>();
   button->set_icon_name("edit-delete");
   button->set_tooltip_text("Do not show at all");
   button->set_no_show_all();
   group->insert(*button);
   button->set_visible_vertical(false);
 
-  button = Gtk::manage(new Gtk::ToolButton());
+  button = Gtk::make_managed<Gtk::ToolButton>();
   button->set_icon_name("view-fullscreen");
   button->set_tooltip_text("Expanded this item");
   group->insert(*button);
@@ -174,7 +170,7 @@ void ExampleWindow::load_special_items()
                            "expand", TRUE,
                            NULL);
 
-  button = Gtk::manage(new Gtk::ToolButton());
+  button = Gtk::make_managed<Gtk::ToolButton>();
   button->set_icon_name("help-contents");
   button->set_tooltip_text("A regular item");
   group->insert(*button);

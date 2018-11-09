@@ -52,8 +52,8 @@ ExampleWindow::~ExampleWindow()
 
 Gtk::Button* ExampleWindow::create_color_swatch(int swatch_i)
 {
-  auto drawing_area = Gtk::manage(new Gtk::DrawingArea());
-  auto color_swatch = Gtk::manage(new Gtk::Button());
+  auto drawing_area = Gtk::make_managed<Gtk::DrawingArea>();
+  auto color_swatch = Gtk::make_managed<Gtk::Button>();
 
   drawing_area->set_size_request(24, 24);
 

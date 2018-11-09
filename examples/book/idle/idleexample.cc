@@ -1,5 +1,3 @@
-//$Id: idleexample.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2003 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -28,17 +26,17 @@ IdleExample::IdleExample() :
 
   // Adding a few widgets:
   add(m_Box);
-  m_Box.pack_start( *Gtk::manage(new Gtk::Label("Formatting Windows drive C:")));
-  m_Box.pack_start( *Gtk::manage(new Gtk::Label("100 MB")) );
+  m_Box.pack_start(*Gtk::make_managed<Gtk::Label>("Formatting Windows drive C:"));
+  m_Box.pack_start(*Gtk::make_managed<Gtk::Label>("100 MB"));
   m_Box.pack_start(m_ProgressBar_c);
 
-  m_Box.pack_start( *Gtk::manage(new Gtk::Label("")) );
+  m_Box.pack_start(*Gtk::make_managed<Gtk::Label>(""));
 
-  m_Box.pack_start( *Gtk::manage(new Gtk::Label("Formatting Windows drive D:")));
-  m_Box.pack_start( *Gtk::manage(new Gtk::Label("5000 MB")) );
+  m_Box.pack_start(*Gtk::make_managed<Gtk::Label>("Formatting Windows drive D:"));
+  m_Box.pack_start(*Gtk::make_managed<Gtk::Label>("5000 MB"));
   m_Box.pack_start(m_ProgressBar_d);
 
-  auto hbox = Gtk::manage( new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL,10));
+  auto hbox = Gtk::make_managed<Gtk::Box>(Gtk::ORIENTATION_HORIZONTAL,10);
   m_Box.pack_start(*hbox);
   hbox->pack_start(m_ButtonQuit, Gtk::PACK_EXPAND_PADDING);
 

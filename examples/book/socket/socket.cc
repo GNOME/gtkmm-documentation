@@ -27,7 +27,7 @@ class MySocketWindow : public Gtk::Window
       ifstream infile(id_filename);
       if (infile)
       {
-        auto socket = Gtk::manage(new Gtk::Socket());
+        auto socket = Gtk::make_managed<Gtk::Socket>();
         add(*socket);
         socket->signal_plug_added().connect(sigc::ptr_fun(plug_added));
         socket->signal_plug_removed().connect(sigc::ptr_fun(plug_removed));
@@ -38,9 +38,8 @@ class MySocketWindow : public Gtk::Window
       }
       else
       {
-        auto label = Gtk::manage(
-            new Gtk::Label(
-              "Plug id file not found.\n Make sure plug is running."));
+        auto label = Gtk::make_managed<Gtk::Label>(
+              "Plug id file not found.\n Make sure plug is running.");
         add(*label);
         set_size_request(150, 50);
       }

@@ -40,20 +40,20 @@ IdleExample::IdleExample() :
   m_quit.signal_clicked().connect(sigc::mem_fun(*this, &Gtk::Widget::hide));
 
   // put buttons into container
-  Gtk::Box *vbox = manage( new Gtk::Box(Gtk::ORIENTATION_VERTICAL,5));
+  Gtk::Box *vbox = Gtk::make_managed<Gtk::Box>(Gtk::ORIENTATION_VERTICAL, 5);
 
   // adding a few widgets
-  vbox->pack_start(* manage(new Gtk::Label("Formatting windows drive C:")));
-  vbox->pack_start(* manage(new Gtk::Label("100 MB")));
+  vbox->pack_start(*Gtk::make_managed<Gtk::Label>("Formatting windows drive C:"));
+  vbox->pack_start(*Gtk::make_managed<Gtk::Label>("100 MB"));
   vbox->pack_start(m_progressbar_c);
 
-  vbox->pack_start(* manage(new Gtk::Label("")));
+  vbox->pack_start(*Gtk::make_managed<Gtk::Label>(""));
 
-  vbox->pack_start(* manage(new Gtk::Label("Formatting windows drive D:")));
-  vbox->pack_start(* manage(new Gtk::Label("5000 MB")));
+  vbox->pack_start(*Gtk::make_managed<Gtk::Label>("Formatting windows drive D:"));
+  vbox->pack_start(*Gtk::make_managed<Gtk::Label>("5000 MB"));
   vbox->pack_start(m_progressbar_d);
 
-  Gtk::Box *hbox = manage( new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL,10));
+  Gtk::Box *hbox = Gtk::make_managed<Gtk::Box>(Gtk::ORIENTATION_HORIZONTAL,10);
   hbox->pack_start(m_quit, Gtk::PACK_EXPAND_PADDING);
   vbox->pack_start(*hbox);
 

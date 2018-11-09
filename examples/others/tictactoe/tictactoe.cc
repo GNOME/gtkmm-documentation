@@ -26,7 +26,7 @@
 TicTacToe::TicTacToe()
 : Gtk::Box(Gtk::ORIENTATION_VERTICAL)
 {
-  auto grid = Gtk::manage( new Gtk::Grid() );
+  auto grid = Gtk::make_managed<Gtk::Grid>();
   grid->set_row_homogeneous(true);
   grid->set_column_homogeneous(true);
   add( *grid);
@@ -36,7 +36,7 @@ TicTacToe::TicTacToe()
     for(int j=0;j<3; j++)
     {
       Gtk::ToggleButton* button = nullptr;
-      buttons[i][j] = button = Gtk::manage( new Gtk::ToggleButton());
+      buttons[i][j] = button = Gtk::make_managed<Gtk::ToggleButton>();
       grid->attach(*button, i, j, 1, 1);
       button->signal_toggled().connect( sigc::bind(
                                      sigc::mem_fun(*this, &TicTacToe::toggle),

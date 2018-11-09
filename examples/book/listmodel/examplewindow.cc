@@ -87,7 +87,7 @@ Gtk::Widget* ExampleWindow::on_create_widget1(const Glib::RefPtr<Glib::Object>& 
     std::cout << "on_create_widget1(): item is not a MyObject" << std::endl;
     return nullptr;
   }
-  auto label = Gtk::manage(new Gtk::Label());
+  auto label = Gtk::make_managed<Gtk::Label>();
   Glib::Binding::bind_property(obj->property_label(), label->property_label(),
     Glib::BINDING_SYNC_CREATE);
   return label;
@@ -101,7 +101,7 @@ Gtk::Widget* ExampleWindow::on_create_widget2(const Glib::RefPtr<MyObject>& item
     std::cout << "on_create_widget2(): item is empty" << std::endl;
     return nullptr;
   }
-  auto label = Gtk::manage(new Gtk::Label());
+  auto label = Gtk::make_managed<Gtk::Label>();
   Glib::Binding::bind_property(item->property_label(), label->property_label(),
     Glib::BINDING_SYNC_CREATE);
   return label;
