@@ -1,3 +1,13 @@
+3.24.0: (stable)
+
+* Add Gtk::FileChooserNative example
+  (Kjell Ahlstedt) Bug #783801 (Alexander Shaduri)
+* Document Gtk::make_managed()
+  (Daniel Boles) Merge request !1
+* Require gtkmm-3.0 >= 3.24.0
+  (Kjell Ahlstedt)
+
+
 3.22.1: (stable)
 
 * Headers and Linking section: Replace broken link
