@@ -25,8 +25,8 @@ MM_AX_CXX_COMPILE_STDCXX([14], [noext], [mandatory])
 AC_PATH_PROG([PERL], [perl], [perl])
 AC_PROG_SED
 
-PKG_CHECK_MODULES([GIOMM], [giomm-2.4 >= 2.50.0])
-PKG_CHECK_MODULES([GTKMM], [gtkmm-3.0 >= 3.22.0])
+PKG_CHECK_MODULES([GIOMM], [giomm-2.4 >= 2.54.0])
+PKG_CHECK_MODULES([GTKMM], [gtkmm-3.0 >= 3.24.0])
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
 
 # glib-compile-resources and C compiler are needed to generate and compile

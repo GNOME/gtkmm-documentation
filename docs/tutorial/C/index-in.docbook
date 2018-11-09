@@ -4,12 +4,12 @@
   <!ENTITY url_refdocs_base_glib_html "http://developer.gnome.org/glibmm/2.58/">
   <!ENTITY url_refdocs_base_glib "&url_refdocs_base_glib_html;classGlib_1_1">
   <!ENTITY url_refdocs_base_gio "&url_refdocs_base_glib_html;classGio_1_1">
-  <!ENTITY url_refdocs_base_gtk_html "http://developer.gnome.org/gtkmm/3.22/">
+  <!ENTITY url_refdocs_base_gtk_html "http://developer.gnome.org/gtkmm/3.24/">
   <!ENTITY url_refdocs_base_gtk "&url_refdocs_base_gtk_html;classGtk_1_1">
   <!ENTITY url_refdocs_base_gtk_namespace "&url_refdocs_base_gtk_html;namespaceGtk_1_1">
   <!ENTITY url_figures_base "figures/">
   <!ENTITY url_examples_base "http://git.gnome.org/browse/gtkmm-documentation/tree/examples/book/">
-  <!ENTITY url_examples_branchsuffix "gtkmm-3-22">
+  <!ENTITY url_examples_branchsuffix "gtkmm-3-24">
   <!ENTITY gtkmm "<application>gtkmm</application>">
   <!ENTITY uuml "&#252;" >
   <!ENTITY szlig "&#223;" >
@@ -17,6 +17,13 @@
   <!ENTITY copy "&#169;" >
   <!ENTITY nbsp "&#160;" >
 ]>
+
+<!-- At present (2018-11-09) links to git.gnome.org are redirected to the
+corresponding part of gitlab.gnome.org. If url_examples_base is updated to
+point to gitlab.gnome.org, insert_example_code.pl must also be updated.
+The search path after xxx.gnome.org/ is not the same in gitlab.gnome.org
+as in git.gnome.org. /Kjell Ahlstedt
+-->
 
 <!--
 NOTE TO TUTORIAL DOCUMENTATION AUTHORS:
@@ -9416,7 +9423,7 @@ $ jhbuild sanitycheck</screen>
   copying the <ulink url="http://git.gnome.org/browse/mm-common/tree/skeletonmm">skeleton
   source tree</ulink> from the mm-common module.
 <programlisting>
-  $ git clone git://git.gnome.org/mm-common
+  $ git clone https://gitlab.gnome.org/GNOME/mm-common.git
   $ cp -a mm-common/skeletonmm libsomethingmm
 </programlisting>
 </para>
