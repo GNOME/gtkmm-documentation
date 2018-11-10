@@ -124,7 +124,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   if (gmenu)
   {
     //Menubar:
-    auto pMenubar = Gtk::manage(new Gtk::MenuBar(gmenu));
+    auto pMenubar = Gtk::make_managed<Gtk::MenuBar>(gmenu);
     m_Box.pack_start(*pMenubar, Gtk::PackOptions::SHRINK);
   }
   else

@@ -238,7 +238,7 @@ void DnDWindow::create_popup()
   m_PopupWindow.set_position(Gtk::WindowPosition::MOUSE);
 
   //Create Grid and fill it:
-  auto pGrid = Gtk::manage(new Gtk::Grid());
+  auto pGrid = Gtk::make_managed<Gtk::Grid>();
 
   for(int i = 0; i < 3; i++)
   {
@@ -246,7 +246,7 @@ void DnDWindow::create_popup()
     {
       char buffer[128];
       g_snprintf(buffer, sizeof(buffer), "%d,%d", i, j);
-      auto pButton = Gtk::manage(new Gtk::Button(buffer));
+      auto pButton = Gtk::make_managed<Gtk::Button>(buffer);
       pGrid->attach(*pButton, i, j, 1, 1);
 
       pButton->drag_dest_set(Gdk::ContentFormats::create(m_listTargetsNoRoot), Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);

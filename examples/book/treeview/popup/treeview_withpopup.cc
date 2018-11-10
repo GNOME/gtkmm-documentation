@@ -41,17 +41,17 @@ TreeView_WithPopup::TreeView_WithPopup()
   append_column("Name", m_Columns.m_col_name);
 
   //Fill popup menu:
-  auto item = Gtk::manage(new Gtk::MenuItem("_Edit", true));
+  auto item = Gtk::make_managed<Gtk::MenuItem>("_Edit", true);
   item->signal_activate().connect(
     sigc::mem_fun(*this, &TreeView_WithPopup::on_menu_file_popup_generic) );
   m_Menu_Popup.append(*item);
 
-  item = Gtk::manage(new Gtk::MenuItem("_Process", true));
+  item = Gtk::make_managed<Gtk::MenuItem>("_Process", true);
   item->signal_activate().connect(
     sigc::mem_fun(*this, &TreeView_WithPopup::on_menu_file_popup_generic) );
   m_Menu_Popup.append(*item);
 
-  item = Gtk::manage(new Gtk::MenuItem("_Remove", true));
+  item = Gtk::make_managed<Gtk::MenuItem>("_Remove", true);
   item->signal_activate().connect(
     sigc::mem_fun(*this, &TreeView_WithPopup::on_menu_file_popup_generic) );
   m_Menu_Popup.append(*item);

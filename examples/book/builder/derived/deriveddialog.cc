@@ -38,7 +38,7 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Bu
 : DerivedDialog(cobject, refGlade) // Delegate to the other constructor
 {
   // Show an icon.
-  auto pImage = Gtk::manage(new Gtk::Image());
+  auto pImage = Gtk::make_managed<Gtk::Image>();
   pImage->set_from_icon_name(is_glad ? "face-smile" : "face-sad");
   pImage->set_icon_size(Gtk::IconSize::LARGE);
   get_content_area()->pack_start(*pImage, Gtk::PackOptions::EXPAND_WIDGET);

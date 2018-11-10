@@ -106,14 +106,14 @@ ExampleWindow::ExampleWindow()
 
   m_VBox2.pack_start(m_HBox_Combo, Gtk::PackOptions::SHRINK);
   m_HBox_Combo.pack_start(
-    *Gtk::manage(new Gtk::Label("Scale Value Position:", 0)), Gtk::PackOptions::SHRINK);
+    *Gtk::make_managed<Gtk::Label>("Scale Value Position:", 0), Gtk::PackOptions::SHRINK);
   m_HBox_Combo.pack_start(m_ComboBox_Position, Gtk::PackOptions::EXPAND_WIDGET);
   m_ComboBox_Position.signal_changed().connect( sigc::mem_fun(*this, &ExampleWindow::on_combo_position) );
   m_ComboBox_Position.set_active(0); // Top
 
   //Digits:
   m_HBox_Digits.pack_start(
-    *Gtk::manage(new Gtk::Label("Scale Digits:", 0)), Gtk::PackOptions::SHRINK);
+    *Gtk::make_managed<Gtk::Label>("Scale Digits:", 0), Gtk::PackOptions::SHRINK);
   m_Scale_Digits.set_digits(0);
   m_adjustment_digits->signal_value_changed().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_adjustment1_value_changed));
@@ -121,8 +121,7 @@ ExampleWindow::ExampleWindow()
 
   //Page Size:
   m_HBox_PageSize.pack_start(
-    *Gtk::manage(new Gtk::Label("Scrollbar Page Size:", 0)),
-    Gtk::PackOptions::SHRINK);
+    *Gtk::make_managed<Gtk::Label>("Scrollbar Page Size:", 0), Gtk::PackOptions::SHRINK);
   m_Scale_PageSize.set_digits(0);
   m_adjustment_pagesize->signal_value_changed().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_adjustment2_value_changed));

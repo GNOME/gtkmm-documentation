@@ -136,7 +136,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
     g_warning("GMenu not found");
   else
   {
-    auto pMenuBar = Gtk::manage(new Gtk::MenuBar(gmenu));
+    auto pMenuBar = Gtk::make_managed<Gtk::MenuBar>(gmenu);
 
     //Add the MenuBar to the window:
     m_Box.pack_start(*pMenuBar, Gtk::PackOptions::SHRINK);

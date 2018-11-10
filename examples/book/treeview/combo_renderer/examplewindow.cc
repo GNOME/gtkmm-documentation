@@ -92,10 +92,8 @@ ExampleWindow::ExampleWindow()
   m_TreeView.append_column("Name", m_Columns.m_col_name);
 
   //Create a Combo CellRenderer, instead of the default Text CellRenderer:
-  auto pColumn = Gtk::manage(
-          new Gtk::TreeView::Column("Item Chosen") );
-  auto pRenderer = Gtk::manage(
-          new Gtk::CellRendererCombo);
+  auto pColumn = Gtk::make_managed<Gtk::TreeView::Column>("Item Chosen");
+  auto pRenderer = Gtk::make_managed<Gtk::CellRendererCombo>();
   pColumn->pack_start(*pRenderer);
   m_TreeView.append_column(*pColumn);
 

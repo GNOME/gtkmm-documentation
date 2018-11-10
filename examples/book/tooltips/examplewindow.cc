@@ -55,8 +55,7 @@ ExampleWindow::ExampleWindow()
 
   //Button's custom tooltip window:
   m_button_tooltip_window.set_default_size(250, 30);
-  Gtk::Label* label =
-    Gtk::manage(new Gtk::Label("A label in a custom tooltip window"));
+  auto label = Gtk::make_managed<Gtk::Label>("A label in a custom tooltip window");
   label->show();
   m_button_tooltip_window.add(*label);
 

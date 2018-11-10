@@ -53,7 +53,7 @@ AppWindow::AppWindow()
   set_title ("Arrow Buttons");
 
   /* Create a grid to hold the arrows/buttons */
-  grid = Gtk::manage (new Gtk::Grid ());
+  grid = Gtk::make_managed<Gtk::Grid>();
   grid->set_row_homogeneous(true);
   grid->set_column_homogeneous(true);
 
@@ -61,17 +61,17 @@ AppWindow::AppWindow()
   grid->set_margin(12);
 
   /* Pack and show all our widgets */
-  button = Gtk::manage(new ArrowButton(Gtk::ArrowType::UP));
-  grid->attach (*button, 1, 0);
+  button = Gtk::make_managed<ArrowButton>(Gtk::ArrowType::UP);
+  grid->attach(*button, 1, 0);
 
-  button = Gtk::manage(new ArrowButton(Gtk::ArrowType::LEFT));
-  grid->attach (*button, 0, 1);
+  button = Gtk::make_managed<ArrowButton>(Gtk::ArrowType::LEFT);
+  grid->attach(*button, 0, 1);
 
-  button = Gtk::manage(new ArrowButton(Gtk::ArrowType::RIGHT));
-  grid->attach (*button, 2, 1);
+  button = Gtk::make_managed<ArrowButton>(Gtk::ArrowType::RIGHT);
+  grid->attach(*button, 2, 1);
 
-  button = Gtk::manage(new ArrowButton(Gtk::ArrowType::DOWN));
-  grid->attach (*button, 1, 2);
+  button = Gtk::make_managed<ArrowButton>(Gtk::ArrowType::DOWN);
+  grid->attach(*button, 1, 2);
 
   grid->set_row_spacing(5);
   grid->set_column_spacing(5);

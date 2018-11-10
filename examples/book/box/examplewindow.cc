@@ -48,17 +48,17 @@ ExampleWindow::ExampleWindow(int which)
 
       // Create a PackBox - homogeneous = false, spacing = 0,
       // options = Gtk::PackOptions::SHRINK, margin = 0
-      pPackBox1 = Gtk::manage(new PackBox(false, 0, Gtk::PackOptions::SHRINK));
+      pPackBox1 = Gtk::make_managed<PackBox>(false, 0, Gtk::PackOptions::SHRINK);
       m_box1.pack_start(*pPackBox1, Gtk::PackOptions::SHRINK);
 
       // Create a PackBox - homogeneous = false, spacing = 0,
       // options = Gtk::PackOptions::EXPAND_PADDING, margin = 0
-      pPackBox2 = Gtk::manage(new PackBox(false, 0, Gtk::PackOptions::EXPAND_PADDING));
+      pPackBox2 = Gtk::make_managed<PackBox>(false, 0, Gtk::PackOptions::EXPAND_PADDING);
       m_box1.pack_start(*pPackBox2, Gtk::PackOptions::SHRINK);
 
       // Create a PackBox - homogeneous = false, spacing = 0,
       // options = Gtk::PackOptions::EXPAND_WIDGET, margin = 0
-      pPackBox3 = Gtk::manage(new PackBox(false, 0, Gtk::PackOptions::EXPAND_WIDGET));
+      pPackBox3 = Gtk::make_managed<PackBox>(false, 0, Gtk::PackOptions::EXPAND_WIDGET);
       m_box1.pack_start(*pPackBox3, Gtk::PackOptions::SHRINK);
 
       // pack the separator into the vbox.  Remember each of these
@@ -73,11 +73,11 @@ ExampleWindow::ExampleWindow(int which)
       m_box1.pack_start(m_Label2, Gtk::PackOptions::SHRINK);
 
       // Args are: homogeneous, spacing, options, margin
-      pPackBox4 = Gtk::manage(new PackBox(true, 0, Gtk::PackOptions::EXPAND_PADDING));
+      pPackBox4 = Gtk::make_managed<PackBox>(true, 0, Gtk::PackOptions::EXPAND_PADDING);
       m_box1.pack_start(*pPackBox4, Gtk::PackOptions::SHRINK);
 
       // Args are: homogeneous, spacing, options, margin
-      pPackBox5 = Gtk::manage(new PackBox(true, 0, Gtk::PackOptions::EXPAND_WIDGET));
+      pPackBox5 = Gtk::make_managed<PackBox>(true, 0, Gtk::PackOptions::EXPAND_WIDGET);
       m_box1.pack_start(*pPackBox5, Gtk::PackOptions::SHRINK);
 
       m_box1.pack_start(m_separator2, Gtk::PackOptions::SHRINK);
@@ -92,10 +92,10 @@ ExampleWindow::ExampleWindow(int which)
       m_Label1.set_valign(Gtk::Align::START);
       m_box1.pack_start(m_Label1, Gtk::PackOptions::SHRINK);
 
-      pPackBox1 = Gtk::manage(new PackBox(false, 10, Gtk::PackOptions::EXPAND_PADDING));
+      pPackBox1 = Gtk::make_managed<PackBox>(false, 10, Gtk::PackOptions::EXPAND_PADDING);
       m_box1.pack_start(*pPackBox1, Gtk::PackOptions::SHRINK);
 
-      pPackBox2 = Gtk::manage(new PackBox(false, 10, Gtk::PackOptions::EXPAND_WIDGET));
+      pPackBox2 = Gtk::make_managed<PackBox>(false, 10, Gtk::PackOptions::EXPAND_WIDGET);
       m_box1.pack_start(*pPackBox2, Gtk::PackOptions::SHRINK);
 
       m_box1.pack_start(m_separator1, Gtk::PackOptions::SHRINK);
@@ -105,10 +105,10 @@ ExampleWindow::ExampleWindow(int which)
       m_Label2.set_valign(Gtk::Align::START);
       m_box1.pack_start(m_Label2, Gtk::PackOptions::SHRINK);
 
-      pPackBox3 = Gtk::manage(new PackBox(false, 0, Gtk::PackOptions::SHRINK, 10));
+      pPackBox3 = Gtk::make_managed<PackBox>(false, 0, Gtk::PackOptions::SHRINK, 10);
       m_box1.pack_start(*pPackBox3, Gtk::PackOptions::SHRINK);
 
-      pPackBox4 = Gtk::manage(new PackBox(false, 0, Gtk::PackOptions::EXPAND_WIDGET, 10));
+      pPackBox4 = Gtk::make_managed<PackBox>(false, 0, Gtk::PackOptions::EXPAND_WIDGET, 10);
       m_box1.pack_start(*pPackBox4, Gtk::PackOptions::SHRINK);
 
       m_box1.pack_start(m_separator2, Gtk::PackOptions::SHRINK);
@@ -120,7 +120,7 @@ ExampleWindow::ExampleWindow(int which)
     {
       // This demonstrates the ability to use Gtk::Box::pack_end() to
       // right justify widgets.  First, we create a new box as before.
-      pPackBox1 = Gtk::manage(new PackBox(false, 0, Gtk::PackOptions::SHRINK));
+      pPackBox1 = Gtk::make_managed<PackBox>(false, 0, Gtk::PackOptions::SHRINK);
 
       // create the label that will be put at the end.
       m_Label1.set_text("end");

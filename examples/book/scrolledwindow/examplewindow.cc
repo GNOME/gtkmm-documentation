@@ -48,7 +48,7 @@ ExampleWindow::ExampleWindow()
      {
         char buffer[32];
         sprintf(buffer, "button (%d,%d)\n", i, j);
-        auto pButton = Gtk::manage(new Gtk::ToggleButton(buffer));
+        auto pButton = Gtk::make_managed<Gtk::ToggleButton>(buffer);
         m_Grid.attach(*pButton, i, j, 1, 1);
      }
   }
