@@ -26,7 +26,7 @@ m_property_label(*this, "label", label)
 
 Glib::RefPtr<MyObject> MyObject::create(int id, const Glib::ustring& label)
 {
-  return Glib::RefPtr<MyObject>(new MyObject(id, label));
+  return Glib::make_refptr_for_instance(new MyObject(id, label));
 }
 
 Glib::PropertyProxy<Glib::ustring> MyObject::property_label()
