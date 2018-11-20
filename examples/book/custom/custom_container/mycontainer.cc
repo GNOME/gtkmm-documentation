@@ -125,7 +125,7 @@ void MyContainer::measure_vfunc(Gtk::Orientation orientation, int for_size,
   }
 }
 
-void MyContainer::on_size_allocate(const Gtk::Allocation& allocation, int  baseline)
+void MyContainer::on_size_allocate(int width, int height, int  baseline)
 {
   //Do something with the space that we have actually been given:
   //(We will not be given heights or widths less than we have requested, though
@@ -151,32 +151,30 @@ void MyContainer::on_size_allocate(const Gtk::Allocation& allocation, int  basel
   Gtk::Allocation child_allocation_two;
 
   //Place the first child at the top-left:
-  child_allocation_one.set_x( allocation.get_x() );
-  child_allocation_one.set_y( allocation.get_y() );
+  child_allocation_one.set_x(0);
+  child_allocation_one.set_y(0);
 
   //Make it take up the full width available:
-  child_allocation_one.set_width( allocation.get_width() );
+  child_allocation_one.set_width(width);
 
   if (visible_one)
   {
     //Divide the height equally among the visible children.
-    child_allocation_one.set_height(allocation.get_height() / nvis_children);
+    child_allocation_one.set_height(height / nvis_children);
     m_child_one->size_allocate(child_allocation_one, baseline);
   }
   else
     child_allocation_one.set_height(0);
 
   //Place the second child below the first child:
-  child_allocation_two.set_x( allocation.get_x() );
-  child_allocation_two.set_y( allocation.get_y() +
-          child_allocation_one.get_height());
+  child_allocation_two.set_x(0);
+  child_allocation_two.set_y(child_allocation_one.get_height());
 
   //Make it take up the full width available:
-  child_allocation_two.set_width( allocation.get_width() );
+  child_allocation_two.set_width(width);
 
   //Make it take up the remaining height:
-  child_allocation_two.set_height( allocation.get_height() -
-          child_allocation_one.get_height());
+  child_allocation_two.set_height(height - child_allocation_one.get_height());
 
   if (visible_two)
   {

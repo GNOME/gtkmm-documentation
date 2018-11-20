@@ -26,9 +26,8 @@ public:
   virtual ~TreeView_WithPopup();
 
 protected:
-  // Override Signal handler:
-  // Alternatively, use signalevent().connect_notify()
-  bool on_event(const Glib::RefPtr<Gdk::Event>& event) override;
+  // Signal handler for showing popup menu:
+  void on_popup_button_pressed(int n_press, double x, double y);
 
   //Signal handler for popup menu items:
   void on_menu_file_popup_generic();

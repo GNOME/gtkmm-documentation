@@ -108,7 +108,7 @@ void MyWidget::measure_vfunc(Gtk::Orientation orientation, int /* for_size */,
   natural_baseline = -1;
 }
 
-void MyWidget::on_size_allocate(const Gtk::Allocation& allocation, int /* baseline */)
+void MyWidget::on_size_allocate(int width, int height, int /* baseline */)
 {
   //Do something with the space that we have actually been given:
   //(We will not be given heights or widths less than we have requested, though
@@ -116,8 +116,7 @@ void MyWidget::on_size_allocate(const Gtk::Allocation& allocation, int /* baseli
 
   if(m_refGdkSurface)
   {
-    m_refGdkSurface->move_resize( allocation.get_x(), allocation.get_y(),
-            allocation.get_width(), allocation.get_height() );
+    m_refGdkSurface->move_resize(0, 0, width, height);
   }
 }
 

@@ -40,6 +40,13 @@ TreeView_WithPopup::TreeView_WithPopup()
   append_column("ID", m_Columns.m_col_id);
   append_column("Name", m_Columns.m_col_name);
 
+  // Catch button press events:
+  auto refGesture = Gtk::GestureMultiPress::create();
+  refGesture->set_button(GDK_BUTTON_SECONDARY);
+  refGesture->signal_pressed().connect(
+    sigc::mem_fun(*this, &TreeView_WithPopup::on_popup_button_pressed));
+  add_controller(refGesture);
+
   //Fill popup menu:
   auto item = Gtk::make_managed<Gtk::MenuItem>("_Edit", true);
   item->signal_activate().connect(
@@ -63,18 +70,9 @@ TreeView_WithPopup::~TreeView_WithPopup()
 {
 }
 
-bool TreeView_WithPopup::on_event(const Glib::RefPtr<Gdk::Event>& event)
+void TreeView_WithPopup::on_popup_button_pressed(int /* n_press */, double /* x */, double /* y */)
 {
-  //Call base class, to allow normal handling,
-  //such as allowing the row to be selected by the right-click:
-  const bool return_value = TreeView::on_event(event);
-
-  //Then do our custom stuff:
-  if (event->get_event_type() == Gdk::Event::Type::BUTTON_PRESS &&
-      std::static_pointer_cast<Gdk::EventButton>(event)->shall_trigger_context_menu())
-    m_Menu_Popup.popup_at_pointer(event);
-
-  return return_value;
+  m_Menu_Popup.popup_at_pointer();
 }
 
 void TreeView_WithPopup::on_menu_file_popup_generic()
