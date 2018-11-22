@@ -18,6 +18,13 @@
   <!ENTITY nbsp "&#160;" >
 ]>
 
+<!-- At present (2018-11-22) links to git.gnome.org are redirected to the
+corresponding part of gitlab.gnome.org. If url_examples_base is updated to
+point to gitlab.gnome.org, insert_example_code.pl must also be updated.
+The search path after gitlab.gnome.org/ is not the same as after git.gnome.org/.
+/Kjell Ahlstedt
+-->
+
 <!--
 NOTE TO TUTORIAL DOCUMENTATION AUTHORS:
 When referring to the gtkmm project in this document, please use the form
@@ -181,10 +188,10 @@ See the <ulink url="https://wiki.gnome.org/Projects/gtkmm/FAQ">FAQ</ulink> for m
 <itemizedlist>
   <listitem><para><application>libsigc++-3.0</application></para></listitem>
   <listitem><para><application>gtk+-4.0</application></para></listitem>
-  <listitem><para><application>glibmm-2.54</application></para></listitem>
+  <listitem><para><application>glibmm-2.60</application></para></listitem>
   <listitem><para><application>cairomm-1.16</application></para></listitem>
-  <listitem><para><application>pangomm-2.42</application></para></listitem>
-  <listitem><para><application>atkmm-2.26</application></para></listitem>
+  <listitem><para><application>pangomm-2.44</application></para></listitem>
+  <listitem><para><application>atkmm-2.30</application></para></listitem>
 </itemizedlist>
 <para>
 These dependencies have their own dependencies, including the following
@@ -691,22 +698,23 @@ orientation (vertical or horizontal) to be specified without requiring the use o
 </chapter>
 
 <chapter id="changes-gtkmm4">
-<title>Changes in &gtkmm;-4.0 and <application>glibmm-2.54</application></title>
+<title>Changes in &gtkmm;-4.0 and <application>glibmm-2.60</application></title>
 
 <para>&gtkmm;-4.0 is a new version of the &gtkmm; API that installs in parallel with the
 older &gtkmm;-2.4 and &gtkmm;-3.0 APIs. The last version of the &gtkmm;-3.0 API
-is &gtkmm; 3.22. &gtkmm; 4 has no major fundamental differences to &gtkmm; 3 but
-does make several small changes that were not possible while maintaining binary
-compatibility. If you never used the &gtkmm;-3.0 API then you can safely ignore this chapter.
+is &gtkmm; 3.24. &gtkmm; 4 has no major fundamental differences to &gtkmm; 3 but
+does make several changes (both small and large ones) that were not possible while
+maintaining binary compatibility. If you never used the &gtkmm;-3.0 API then you
+can safely ignore this chapter.
 </para>
 
 <para>&gtkmm; 4's library is called <literal>libgtkmm-4.0</literal> rather than
 <literal>libgtkmm-3.0</literal> and installs its headers in a similarly-versioned
-directory, so your pkg-config check should ask for <literal>gtkmm-4.0</literal>
-rather than <literal>gtkmm-3.0</literal>.
+directory, so your <application>pkg-config</application> check should ask for
+<literal>gtkmm-4.0</literal> rather than <literal>gtkmm-3.0</literal>.
 </para>
 
-<para>&gtkmm;-4.0 is used in combination with <application>glibmm-2.54</application>,
+<para>&gtkmm;-4.0 is used in combination with <application>glibmm-2.60</application>,
 which sets the global locale for your program. The older <application>glibmm-2.4</application>
 does not do that, and &gtkmm;-3.0 does it only to some extent. What this means is
 briefly that if your &gtkmm;-3.0 program contains a call to
@@ -718,20 +726,37 @@ to set the global locale for you, you should add a call to
 </para>
 <para><ulink url="&url_refdocs_base_glib_html;namespaceGlib.html">Reference</ulink></para>
 
-<para>Some new classes were added in &gtkmm; 4 and <application>glibmm</application> 2.54:</para>
+<para>There are lots and lots of differences between &gtkmm;-3.0 and &gtkmm;-4.0.
+The following lists are not complete.</para>
+
+<para>Some new classes were added in &gtkmm; 4 and <application>glibmm</application> 2.60:</para>
 
 <orderedlist>
-<listitem><simpara><classname>Glib::ExtraClassInit</classname>, <classname>Gtk::WidgetCustomDraw</classname>,
-  <classname>Gtk::WidgetCustomSnapshot</classname> and <classname>Gtk::Snapshot</classname>:
+<listitem><simpara><classname>Glib::ExtraClassInit</classname> and <classname>Gtk::Snapshot</classname>:
   These classes are needed only for writing custom widgets. See the
   <link linkend="sec-custom-widgets">Custom Widgets</link> section.</simpara></listitem>
+<listitem><simpara><classname>Gtk::EventControllerKey</classname>,
+  <classname>Gtk::EventControllerMotion</classname>, <classname>Gtk::EventControllerScroll</classname>
+  and <classname>Gtk::GestureStylus</classname></simpara></listitem>
+<listitem><simpara><classname>Gdk::Paintable</classname>, <classname>Gdk::Texture</classname>,
+  <classname>Gtk::Picure</classname> and <classname>Gtk::WidgetPaintable</classname>
+  </simpara></listitem>
+<listitem><simpara><classname>Gdk::Window</classname> has been renamed to <classname>Gdk::Surface</classname>.
+  (<classname>Gtk::Window</classname> keeps its name.)</simpara></listitem>
+<listitem><simpara><classname>Gdk::DrawContext</classname> and <classname>Gdk::CairoContext</classname>
+  are new. <classname>Gdk::DrawingContext</classname> has been removed.</simpara></listitem>
+<listitem><simpara><classname>Gtk::Clipboard</classname> has been replaced by the new
+  <classname>Gdk::Clipboard</classname>.</simpara></listitem>
+<listitem><simpara><classname>Gdk::DragContext</classname> has been split into
+  <classname>Gdk::Drag</classname> and <classname>Gdk::Drop</classname>.</simpara></listitem>
 </orderedlist>
 
-<para>There have also been several small changes to the API, which you will probably encounter
+<para>There have also been several changes to the API, which you will probably encounter
 when porting code that used &gtkmm;-3.0 and <application>glibmm</application>-2.4. Here is a short list:</para>
 
 <para>
 <orderedlist>
+<listitem><simpara>A C++17 compiler is required.</simpara></listitem>
 <listitem><simpara><classname>Gtk::Button</classname>, <classname>Gtk::ToolButton</classname>,
   <classname>Gtk::MenuItem</classname> and <classname>Gtk::Switch</classname>
   implement the <classname>Gtk::Actionable</classname> interface instead of the removed
@@ -747,10 +772,26 @@ when porting code that used &gtkmm;-3.0 and <application>glibmm</application>-2.
   <classname>Glib::ListHandle</classname> and <classname>Glib::SListHandle</classname> have been removed.
   They were used in <application>glibmm</application>-2.4, but not used in &gtkmm;-3.0.
   If you've ever used these classes, replace them with a standard C++ container, such as <classname>std::vector</classname>.</simpara></listitem>
+<listitem><simpara><methodname>Gtk::Container::show_all_children()</methodname> and
+  <methodname>Gtk::Widget::show_all()</methodname> have been removed. The default value
+  of <methodname>Gtk::Widget::property_visible()</methodname>has been changed from
+  <literal>false</literal> to <literal>true</literal>.</simpara></listitem>
+<listitem><simpara>All event signals have been removed from <classname>Gtk::Widget</classname>.
+  In most cases you can use one of the subclasses of <classname>Gtk::EventController</classname>
+  as a replacement. For instance, use <classname>Gtk::GestureMultiPress</classname>
+  instead of <methodname>signal_button_press_event()</methodname> and
+  <methodname>signal_button_release_event()</methodname>, and <classname>Gtk::EventControllerKey</classname>
+  instead of <methodname>signal_key_press_event()</methodname> and
+  <methodname>signal_key_release_event()</methodname>.</simpara></listitem>
+<listitem><simpara><classname>Glib::RefPtr</classname> is an alias for <classname>std::shared_ptr</classname>.
+  If you make your own <classname>Glib::ObjectBase</classname>-derived classes with
+  <methodname>create()</methodname> methods that return a <classname>Glib::RefPtr</classname>,
+  you must use <methodname>Glib::make_refptr_for_instance()</methodname> in your
+  <methodname>create()</methodname> methods.</simpara></listitem>
 </orderedlist>
 </para>
 
-<para>All deprecated API was removed in &gtkmm; 4.0 and <application>glibmm</application> 2.54,
+<para>All deprecated API was removed in &gtkmm; 4.0 and <application>glibmm</application> 2.60,
   though there will be new deprecations in future versions.</para>
 
 <para>As a first step to porting your source code to &gtkmm;-4.0 you should probably ensure
@@ -758,8 +799,11 @@ that your application builds with the deprecated &gtkmm;-3.0 and <application>gl
 API disabled, by defining the macros GTKMM_DISABLE_DEPRECATED, GDKMM_DISABLE_DEPRECATED,
 GLIBMM_DISABLE_DEPRECATED and GIOMM_DISABLE_DEPRECATED. There are some autotools macros
 that can help with this by defining them optionally at build time. See the
-<ulink url="https://wiki.gnome.org/Projects/gtkmm/PortingToGtkmm4">gtkmm 4 porting wiki page</ulink>
-for more details.</para>
+<ulink url="https://wiki.gnome.org/Projects/gtkmm/PortingToGtkmm3">Porting from
+gtkmm-2.4 to gtkmm-3.0</ulink> wiki page for more details.</para>
+
+<para>See also <ulink url="https://developer.gnome.org/gtk4/unstable/gtk-migrating-3-to-4.html">
+Migrating from GTK+ 3.x to GTK+ 4</ulink>.</para>
 
 </chapter>
 
@@ -9361,7 +9405,7 @@ public:
     automatically when using the above build structure:
 <programlisting>
 $ cd gtk/src
-$ /usr/lib/glibmm-2.54/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtkmm
+$ /usr/lib/glibmm-2.60/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtkmm
 </programlisting>
 </para>
 <para>Notice that we provided <command>gmmproc</command> with the path to the
