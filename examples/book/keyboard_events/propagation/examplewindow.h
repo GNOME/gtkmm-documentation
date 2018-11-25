@@ -28,17 +28,17 @@ public:
 
 private:
   // Signal handlers:
-  bool entry_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state);
-  bool grid_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state);
-  bool window_key_pressed_capture(guint keyval, guint keycode, Gdk::ModifierType state);
-  bool window_key_pressed_target(guint keyval, guint keycode, Gdk::ModifierType state);
-  bool window_key_pressed_bubble(guint keyval, guint keycode, Gdk::ModifierType state);
+  bool label2_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state, const Glib::ustring& phase);
+  bool grid_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state, const Glib::ustring& phase);
+  bool window_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state, const Glib::ustring& phase);
 
+  bool m_first = true;
   Gtk::Grid m_container;
-
-  Gtk::Label m_label;
-  Gtk::Entry m_entry;
-  Gtk::CheckButton m_checkbutton_can_propagate;
+  Gtk::Frame m_frame;
+  Gtk::Label m_label1;
+  Gtk::Label m_label2;
+  Gtk::CheckButton m_checkbutton_can_propagate_down;
+  Gtk::CheckButton m_checkbutton_can_propagate_up;
 };
 
 #endif //GTKMM_EVENT_PROPAGATION_H
