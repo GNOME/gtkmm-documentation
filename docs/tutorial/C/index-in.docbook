@@ -10318,9 +10318,38 @@ _WRAP_ENUM(WindowType, GtkWindowType)
         function for the C enum, but be careful that you don't just need to
         include an extra header for that function. You should also file a bug
         against the C API, because all enums should be registered as GTypes.</para>
+      <para>If you specify <literal>NO_GTYPE</literal>, don't use that enum as the
+        type in _WRAP_PROPERTY or _WRAP_CHILD_PROPERTY. It would cause a runtime error,
+        when the generated <methodname>property_*()</methodname> method is called.</para>
       <para>For example, from <filename>icontheme.hg</filename>:
       <programlisting>
 _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
+      </programlisting>
+      </para>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>gtype_func &lt;function_name&gt;</term>
+    <listitem>
+      <para>Specifies the name of the <function>*_get_type()</function> function
+        for the C enum. Use this parameter if <command>gmmproc</command> can't
+        deduce the correct function name from the name of the C enum type.</para>
+      <para>For example, from <filename>dbusproxy.hg</filename> in glibmm:
+      <programlisting>
+_WRAP_ENUM(ProxyFlags, GDBusProxyFlags, gtype_func g_dbus_proxy_flags_get_type)
+      </programlisting>
+      </para>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>CONV_TO_INT</term>
+    <listitem>
+      <para>"Convertible to int." Generates a plain enum (not an enum class)
+        within a class. Such an enum is scoped like an enum class, but unlike an
+        enum class, it can be implicitly converted to <type>int</type>.</para>
+      <para>For example, from <filename>dialog.hg</filename>:
+      <programlisting>
+_WRAP_ENUM(ResponseType, GtkResponseType, CONV_TO_INT)
       </programlisting>
       </para>
     </listitem>
@@ -10361,10 +10390,10 @@ _WRAP_ENUM(SeekType, GSeekType, NO_GTYPE, s#^SEEK_#SEEK_TYPE_#)
   This is useful for enums that can't be wrapped with
   <function>_WRAP_ENUM()</function> because they are complexly defined (maybe
   using C macros) but including the generated enum documentation is still
-  desired.  It is used with the same syntax as
-  <function>_WRAP_ENUM()</function> and also process the same options (though
-  NO_GTYPE is just ignored because it makes no difference when just generating
-  the enum's documentation).
+  desired. It is used with the same syntax as
+  <function>_WRAP_ENUM()</function> and also processes the same options (though
+  NO_GTYPE, gtype_func &lt;function_name&gt; and CONV_TO_INT are ignored because
+  they make no difference when just generating the enum's documentation).
 </para>
 </sect3>
 
@@ -10380,7 +10409,9 @@ _WRAP_METHOD() with the errthrow option.</para>
 _WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)
 </programlisting>
 </para>
-<para>_WRAP_GERROR() accepts the same optional arguments as _WRAP_ENUM().</para>
+<para>_WRAP_GERROR() accepts the same optional arguments as _WRAP_ENUM() (though
+CONV_TO_INT is ignored because all exception class enums are plain enums within a class).
+</para>
 </sect3>
 
 <sect3 id="gmmproc-member-set-get">
