@@ -28,11 +28,11 @@ ExampleWindow::ExampleWindow()
   m_VBox.set_margin(6);
   add(m_VBox);
 
-  m_VBox.pack_start(m_ProgressBar, Gtk::PackOptions::SHRINK);
-  m_VBox.pack_start(m_ButtonBox, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_ProgressBar);
+  m_VBox.add(m_ButtonBox);
 
-  m_ButtonBox.pack_start(m_Button_Quit, Gtk::PackOptions::SHRINK);
-  m_ButtonBox.pack_start(m_Button_Start, Gtk::PackOptions::SHRINK);
+  m_ButtonBox.add(m_Button_Quit);
+  m_ButtonBox.add(m_Button_Start);
   m_ButtonBox.set_margin(6);
   m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
   m_Button_Quit.signal_clicked().connect(sigc::mem_fun(*this,

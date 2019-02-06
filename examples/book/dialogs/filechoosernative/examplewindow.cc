@@ -25,11 +25,13 @@ ExampleWindow::ExampleWindow()
 
   add(m_ButtonBox);
 
-  m_ButtonBox.pack_start(m_Button_File_Open, Gtk::PackOptions::EXPAND_WIDGET);
+  m_ButtonBox.add(m_Button_File_Open);
+  m_Button_File_Open.set_expand(true);
   m_Button_File_Open.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,
     &ExampleWindow::on_button_file_clicked), Gtk::FileChooser::Action::OPEN));
 
-  m_ButtonBox.pack_start(m_Button_File_Save, Gtk::PackOptions::EXPAND_WIDGET);
+  m_ButtonBox.add(m_Button_File_Save);
+  m_Button_File_Save.set_expand(true);
   m_Button_File_Save.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,
     &ExampleWindow::on_button_file_clicked), Gtk::FileChooser::Action::SAVE));
 }

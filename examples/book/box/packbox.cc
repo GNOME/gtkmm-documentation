@@ -15,38 +15,35 @@
  */
 
 #include "packbox.h"
+#include <map>
 
-PackBox::PackBox(bool homogeneous, int spacing, Gtk::PackOptions options,
-        int margin)
-: Gtk::Box(Gtk::Orientation::HORIZONTAL, spacing),
-  m_button1("box.pack_start("),
-  m_button2("button,"),
-  m_button3((options == Gtk::PackOptions::SHRINK) ? "Gtk::PackOptions::SHRINK);" :
-            ((options == Gtk::PackOptions::EXPAND_PADDING) ?
-             "Gtk::PackOptions::EXPAND_PADDING);" : "Gtk::PackOptions::EXPAND_WIDGET);"))
+namespace
+{
+  const std::map<Gtk::Align, Glib::ustring> align_string = {
+    {Gtk::Align::FILL, "Gtk::Align::FILL"},
+    {Gtk::Align::START, "Gtk::Align::START"},
+    {Gtk::Align::END, "Gtk::Align::END"},
+    {Gtk::Align::CENTER, "Gtk::Align::CENTER"},
+    {Gtk::Align::BASELINE, "Gtk::Align::BASELINE"},
+  };
+}
+
+PackBox::PackBox(bool homogeneous, int spacing, bool expand, Gtk::Align align, int margin)
+: Gtk::Box(Gtk::Orientation::HORIZONTAL, spacing)
 {
   set_homogeneous(homogeneous);
 
-  m_button1.set_margin_start(margin);
-  m_button1.set_margin_end(margin);
-  pack_start(m_button1, options);
+  m_buttons[0].set_label("box.add(button);");
+  m_buttons[1].set_label("expand=" + Glib::ustring(expand ? "true" : "false"));
+  m_buttons[2].set_label(align_string.at(align));
+  m_buttons[3].set_label("margin=" + Glib::ustring::format(margin));
 
-  m_button2.set_margin_start(margin);
-  m_button2.set_margin_end(margin);
-  pack_start(m_button2, options);
-
-  m_button3.set_margin_start(margin);
-  m_button3.set_margin_end(margin);
-  pack_start(m_button3, options);
-
-  m_pbutton4 = new Gtk::Button("margin=" + Glib::ustring::format(margin));
-  m_pbutton4->set_margin_start(margin);
-  m_pbutton4->set_margin_end(margin);
-  pack_start(*m_pbutton4, options);
+  for (auto& button : m_buttons)
+  {
+    add(button);
+    button.set_hexpand(expand);
+    button.set_halign(align);
+    button.set_margin_start(margin);
+    button.set_margin_end(margin);
+  }
 }
-
-PackBox::~PackBox()
-{
-  delete m_pbutton4;
-}
-

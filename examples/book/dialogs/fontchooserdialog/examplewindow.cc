@@ -26,13 +26,15 @@ ExampleWindow::ExampleWindow()
 
   add(m_ButtonBox);
 
-  m_ButtonBox.pack_start(m_FontButton, Gtk::PackOptions::EXPAND_WIDGET);
+  m_ButtonBox.add(m_FontButton);
+  m_FontButton.set_expand(true);
   m_FontButton.set_use_font(true);
   m_FontButton.set_use_size(true);
   m_FontButton.signal_font_set().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_font_button_font_set) );
 
-  m_ButtonBox.pack_start(m_Button_Dialog, Gtk::PackOptions::EXPAND_WIDGET);
+  m_ButtonBox.add(m_Button_Dialog);
+  m_Button_Dialog.set_expand(true);
   m_Button_Dialog.signal_clicked().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_button_dialog_clicked) );
 }

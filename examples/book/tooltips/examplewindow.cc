@@ -38,11 +38,11 @@ ExampleWindow::ExampleWindow()
 
   //Check button with markup in tooltip:
   m_checkbutton.set_tooltip_text(non_markedup_tip);
-  m_vbox.pack_start(m_checkbutton, Gtk::PackOptions::SHRINK);
+  m_vbox.add(m_checkbutton);
 
   //Label:
   m_label.set_tooltip_text("Another tooltip");
-  m_vbox.pack_start(m_label, Gtk::PackOptions::SHRINK);
+  m_vbox.add(m_label);
 
   //Textview:
   prepare_textview();
@@ -51,7 +51,7 @@ ExampleWindow::ExampleWindow()
   // set_tooltip_window(), like set_tooltip_text(),
   // will call set_has_tooltip() for us.
   m_button.set_tooltip_window(m_button_tooltip_window);
-  m_vbox.pack_start(m_button, Gtk::PackOptions::SHRINK);
+  m_vbox.add(m_button);
 
   //Button's custom tooltip window:
   m_button_tooltip_window.set_default_size(250, 30);
@@ -74,7 +74,8 @@ void ExampleWindow::prepare_textview()
   //Set up a scrolled window:
   m_scrolled_window.add(m_text_view);
   m_scrolled_window.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
-  m_vbox.pack_start(m_scrolled_window, Gtk::PackOptions::EXPAND_WIDGET);
+  m_scrolled_window.set_expand();
+  m_vbox.add(m_scrolled_window);
 
   //Create a text buffer with some text:
   m_ref_text_buffer = Gtk::TextBuffer::create();

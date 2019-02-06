@@ -40,9 +40,10 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
 
   build_main_menu(app);
 
-  m_VBox.pack_start(m_Grid, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox.add(m_Grid);
 
   //Arrange the widgets inside the grid:
+  m_Grid.set_expand(true);
   m_Grid.set_row_spacing(5);
   m_Grid.set_column_spacing(5);
   m_Grid.attach(m_NameLabel, 0, 0);
@@ -59,13 +60,13 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
 
   m_Grid.attach(m_CommentsLabel, 0, 2);
   m_Grid.attach(m_ScrolledWindow, 1, 2);
-  m_ScrolledWindow.set_hexpand(true);
-  m_ScrolledWindow.set_vexpand(true);
+  m_ScrolledWindow.set_expand(true);
 
   m_refTextBuffer = Gtk::TextBuffer::create();
   m_TextView.set_buffer(m_refTextBuffer);
 
-  m_VBox.pack_start(m_Statusbar, Gtk::PackOptions::EXPAND_WIDGET);
+  m_Statusbar.set_expand(true);
+  m_VBox.add(m_Statusbar);
 }
 
 ExampleWindow::~ExampleWindow()
@@ -229,7 +230,7 @@ void ExampleWindow::build_main_menu(const Glib::RefPtr<Gtk::Application>& app)
     auto pMenuBar = Gtk::make_managed<Gtk::MenuBar>(gmenu);
 
     // Add the MenuBar to the window:
-    m_VBox.pack_start(*pMenuBar, Gtk::PackOptions::SHRINK);
+    m_VBox.add(*pMenuBar);
   }
 
   // Get the toolbar and add it to a container widget:
@@ -238,7 +239,7 @@ void ExampleWindow::build_main_menu(const Glib::RefPtr<Gtk::Application>& app)
   if (!toolbar)
     g_warning("GtkToolbar not found");
   else
-    m_VBox.pack_start(*toolbar, Gtk::PackOptions::SHRINK);
+    m_VBox.add(*toolbar);
 }
 
 void ExampleWindow::on_printoperation_status_changed()

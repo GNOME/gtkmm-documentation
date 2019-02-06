@@ -36,8 +36,7 @@ ExampleWindow::ExampleWindow()
   configure_form_popover();
 
   // Calendar
-  m_calendar.set_hexpand();
-  m_calendar.set_vexpand();
+  m_calendar.set_expand();
 
   // Calendar popover
   configure_cal_popover();
@@ -84,18 +83,15 @@ void ExampleWindow::configure_form_buttons()
   m_toggle_form_buttons[1].set_image_from_icon_name("format-justify-center-symbolic", Gtk::IconSize::INHERIT, true);
   m_toggle_form_buttons[2].set_image_from_icon_name("format-justify-right-symbolic", Gtk::IconSize::INHERIT, true);
 
-  m_toggle_form_buttons[0].set_draw_indicator(false);
-  m_toggle_form_buttons[1].set_draw_indicator(false);
-  m_toggle_form_buttons[2].set_draw_indicator(false);
-
   m_toggle_form_buttons[1].join_group(m_toggle_form_buttons[0]);
   m_toggle_form_buttons[2].join_group(m_toggle_form_buttons[0]);
 
-  m_format_buttons_box.pack_start(m_toggle_form_buttons[0], Gtk::PackOptions::EXPAND_WIDGET);
-  m_format_buttons_box.pack_start(m_toggle_form_buttons[1], Gtk::PackOptions::EXPAND_WIDGET);
-  m_format_buttons_box.pack_start(m_toggle_form_buttons[2], Gtk::PackOptions::EXPAND_WIDGET);
-
-  m_format_buttons_box.set_hexpand();
+  for (auto& button : m_toggle_form_buttons)
+  {
+    button.set_draw_indicator(false);
+    button.set_expand(true);
+    m_format_buttons_box.add(button);
+  }
 
   // Group format buttons so that they appear that they belong together
   auto style_context = m_format_buttons_box.get_style_context();

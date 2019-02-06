@@ -30,11 +30,12 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
   editing_canceled_ (false)
 {
   entry_ = new Gtk::Entry();
-  pack_start(*Gtk::manage(entry_), Gtk::PackOptions::EXPAND_WIDGET);
+  add(*Gtk::manage(entry_));
   entry_->set_has_frame(false);
+  entry_->set_expand(true);
 
   button_ = new Gtk::Button();
-  pack_start(*Gtk::manage(button_), Gtk::PackOptions::SHRINK);
+  add(*Gtk::manage(button_));
   button_->set_image_from_icon_name("pan-down-symbolic", Gtk::IconSize::INHERIT, true);
 
   set_can_focus();

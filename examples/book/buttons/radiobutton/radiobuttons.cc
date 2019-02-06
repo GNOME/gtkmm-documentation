@@ -38,24 +38,29 @@ RadioButtons::RadioButtons() :
   add(m_Box_Top);
 
   //Put the inner boxes and the separator in the outer box:
-  m_Box_Top.pack_start(m_Box1, Gtk::PackOptions::EXPAND_WIDGET);
-  m_Box_Top.pack_start(m_Separator, Gtk::PackOptions::EXPAND_WIDGET);
-  m_Box_Top.pack_start(m_Box2, Gtk::PackOptions::EXPAND_WIDGET);
+  m_Box_Top.add(m_Box1);
+  m_Box_Top.add(m_Separator);
+  m_Box_Top.add(m_Box2);
+  m_Separator.set_expand();
 
   // Set the inner boxes' margins
   m_Box1.set_margin(10);
   m_Box2.set_margin(10);
 
   // Put the radio buttons in Box1:
-  m_Box1.pack_start(m_RadioButton1, Gtk::PackOptions::EXPAND_WIDGET);
-  m_Box1.pack_start(m_RadioButton2, Gtk::PackOptions::EXPAND_WIDGET);
-  m_Box1.pack_start(m_RadioButton3, Gtk::PackOptions::EXPAND_WIDGET);
+  m_Box1.add(m_RadioButton1);
+  m_Box1.add(m_RadioButton2);
+  m_Box1.add(m_RadioButton3);
+  m_RadioButton1.set_expand();
+  m_RadioButton2.set_expand();
+  m_RadioButton3.set_expand();
 
   // Set the second button active
   m_RadioButton2.set_active();
 
   // Put Close button in Box2:
-  m_Box2.pack_start(m_Button_Close, Gtk::PackOptions::EXPAND_WIDGET);
+  m_Box2.add(m_Button_Close);
+  m_Button_Close.set_expand();
 
   // Make the button the default widget
   m_Button_Close.set_can_default();

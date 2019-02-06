@@ -28,11 +28,13 @@ ExampleWindow::ExampleWindow()
 
   add(m_ButtonBox);
 
-  m_ButtonBox.pack_start(m_Button_Info, Gtk::PackOptions::EXPAND_WIDGET);
+  m_ButtonBox.add(m_Button_Info);
+  m_Button_Info.set_expand(true);
   m_Button_Info.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_info_clicked) );
 
-  m_ButtonBox.pack_start(m_Button_Question, Gtk::PackOptions::EXPAND_WIDGET);
+  m_ButtonBox.add(m_Button_Question);
+  m_Button_Question.set_expand(true);
   m_Button_Question.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_question_clicked) );
 }

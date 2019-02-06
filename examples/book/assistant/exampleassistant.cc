@@ -26,8 +26,10 @@ ExampleAssistant::ExampleAssistant()
   set_title("Gtk::Assistant example");
   set_default_size(400, 300);
 
-  m_box.pack_start(m_label1, Gtk::PackOptions::EXPAND_WIDGET);
-  m_box.pack_start(m_entry, Gtk::PackOptions::EXPAND_WIDGET);
+  m_box.add(m_label1);
+  m_box.add(m_entry);
+  m_label1.set_expand();
+  m_entry.set_expand();
 
   append_page(m_box);
   append_page(m_check);

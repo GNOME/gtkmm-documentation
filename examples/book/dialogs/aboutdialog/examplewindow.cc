@@ -28,12 +28,15 @@ ExampleWindow::ExampleWindow()
 
   add(m_VBox);
 
-  m_VBox.pack_start(m_Label, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox.add(m_Label);
+  m_Label.set_expand(true);
   m_Label.set_line_wrap(true);
   m_Label.set_selectable(true);
 
-  m_VBox.pack_start(m_ButtonBox, Gtk::PackOptions::EXPAND_WIDGET);
-  m_ButtonBox.pack_start(m_Button, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox.add(m_ButtonBox);
+  m_ButtonBox.set_expand(true);
+  m_ButtonBox.add(m_Button);
+  m_Button.set_expand(true);
   m_Button.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_clicked) );
 

@@ -33,15 +33,16 @@ ExampleWindow::ExampleWindow()
 
   //Only show the scrollbars when they are necessary:
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
+  m_ScrolledWindow.set_expand();
 
-  m_VBox.pack_start(m_ScrolledWindow, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox.add(m_ScrolledWindow);
 
   //Add buttons:
-  m_VBox.pack_start(m_ButtonBox, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_ButtonBox);
 
-  m_ButtonBox.pack_start(m_Button_Buffer1, Gtk::PackOptions::SHRINK);
-  m_ButtonBox.pack_start(m_Button_Buffer2, Gtk::PackOptions::SHRINK);
-  m_ButtonBox.pack_start(m_Button_Quit, Gtk::PackOptions::SHRINK);
+  m_ButtonBox.add(m_Button_Buffer1);
+  m_ButtonBox.add(m_Button_Buffer2);
+  m_ButtonBox.add(m_Button_Quit);
   m_ButtonBox.set_margin(5);
   m_ButtonBox.set_spacing(5);
   m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);

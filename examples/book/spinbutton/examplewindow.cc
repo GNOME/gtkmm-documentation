@@ -56,7 +56,7 @@ ExampleWindow::ExampleWindow()
   m_VBox_Main.set_margin(10);
   add(m_VBox_Main);
 
-  m_VBox_Main.pack_start(m_Frame_NotAccelerated, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox_Main.add(m_Frame_NotAccelerated);
 
   m_VBox.set_margin(5);
   m_Frame_NotAccelerated.add(m_VBox);
@@ -64,91 +64,104 @@ ExampleWindow::ExampleWindow()
   /* Day, month, year spinners */
 
   m_VBox.set_spacing(5);
-  m_VBox.pack_start(m_HBox_NotAccelerated, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox.add(m_HBox_NotAccelerated);
 
-  m_VBox_Day.pack_start(m_Label_Day, Gtk::PackOptions::EXPAND_WIDGET);
+  m_Label_Day.set_expand();
+  m_VBox_Day.add(m_Label_Day);
 
   m_SpinButton_Day.set_wrap();
-
-  m_VBox_Day.pack_start(m_SpinButton_Day, Gtk::PackOptions::EXPAND_WIDGET);
+  m_SpinButton_Day.set_expand();
+  m_VBox_Day.add(m_SpinButton_Day);
 
   m_HBox_NotAccelerated.set_spacing(5);
-  m_HBox_NotAccelerated.pack_start(m_VBox_Day, Gtk::PackOptions::EXPAND_WIDGET);
+  m_HBox_NotAccelerated.add(m_VBox_Day);
 
-  m_VBox_Month.pack_start(m_Label_Month, Gtk::PackOptions::EXPAND_WIDGET);
+  m_Label_Month.set_expand();
+  m_VBox_Month.add(m_Label_Month);
 
   m_SpinButton_Month.set_wrap();
-  m_VBox_Month.pack_start(m_SpinButton_Month, Gtk::PackOptions::EXPAND_WIDGET);
+  m_SpinButton_Month.set_expand();
+  m_VBox_Month.add(m_SpinButton_Month);
 
-  m_HBox_NotAccelerated.pack_start(m_VBox_Month, Gtk::PackOptions::EXPAND_WIDGET);
+  m_HBox_NotAccelerated.add(m_VBox_Month);
 
-  m_VBox_Year.pack_start(m_Label_Year, Gtk::PackOptions::EXPAND_WIDGET);
+  m_Label_Year.set_expand();
+  m_VBox_Year.add(m_Label_Year);
 
   m_SpinButton_Year.set_wrap();
+  m_SpinButton_Year.set_expand();
   m_SpinButton_Year.set_size_request(55, -1);
-  m_VBox_Year.pack_start(m_SpinButton_Year, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox_Year.add(m_SpinButton_Year);
 
-  m_HBox_NotAccelerated.pack_start(m_VBox_Year, Gtk::PackOptions::EXPAND_WIDGET);
+  m_HBox_NotAccelerated.add(m_VBox_Year);
 
   //Accelerated:
-  m_VBox_Main.pack_start(m_Frame_Accelerated, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox_Main.add(m_Frame_Accelerated);
 
   m_VBox_Accelerated.set_margin(5);
   m_Frame_Accelerated.add(m_VBox_Accelerated);
 
   m_VBox_Accelerated.set_spacing(5);
-  m_VBox_Accelerated.pack_start(m_HBox_Accelerated, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox_Accelerated.add(m_HBox_Accelerated);
 
-  m_HBox_Accelerated.pack_start(m_VBox_Value, Gtk::PackOptions::EXPAND_WIDGET);
+  m_HBox_Accelerated.add(m_VBox_Value);
 
-  m_VBox_Value.pack_start(m_Label_Value, Gtk::PackOptions::EXPAND_WIDGET);
+  m_Label_Value.set_expand();
+  m_VBox_Value.add(m_Label_Value);
 
   m_SpinButton_Value.set_wrap();
+  m_SpinButton_Value.set_expand();
   m_SpinButton_Value.set_size_request(100, -1);
-  m_VBox_Value.pack_start(m_SpinButton_Value, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox_Value.add(m_SpinButton_Value);
 
-  m_HBox_Accelerated.pack_start(m_VBox_Digits, Gtk::PackOptions::EXPAND_WIDGET);
+  m_HBox_Accelerated.add(m_VBox_Digits);
 
-  m_VBox_Digits.pack_start(m_Label_Digits, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox_Digits.add(m_Label_Digits);
+  m_Label_Digits.set_expand();
 
   m_SpinButton_Digits.set_wrap();
   m_adjustment_digits->signal_value_changed().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_spinbutton_digits_changed) );
 
-  m_VBox_Digits.pack_start(m_SpinButton_Digits, Gtk::PackOptions::EXPAND_WIDGET);
-
+  m_VBox_Digits.add(m_SpinButton_Digits);
+  m_SpinButton_Digits.set_expand();
 
   //CheckButtons:
-  m_VBox_Accelerated.pack_start(m_CheckButton_Snap, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox_Accelerated.add(m_CheckButton_Snap);
+  m_CheckButton_Snap.set_expand();
   m_CheckButton_Snap.set_active();
   m_CheckButton_Snap.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_snap) );
 
-  m_VBox_Accelerated.pack_start(m_CheckButton_Numeric, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox_Accelerated.add(m_CheckButton_Numeric);
+  m_CheckButton_Numeric.set_expand();
   m_CheckButton_Numeric.set_active();
   m_CheckButton_Numeric.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_numeric) );
 
 
   //Buttons:
-  m_VBox_Accelerated.pack_start (m_HBox_Buttons, Gtk::PackOptions::SHRINK);
+  m_VBox_Accelerated.add(m_HBox_Buttons);
 
   m_Button_Int.signal_clicked().connect( sigc::bind( sigc::mem_fun(*this,
                   &ExampleWindow::on_button_getvalue), VALUE_FORMAT_INT) );
   m_HBox_Buttons.set_spacing(5);
-  m_HBox_Buttons.pack_start(m_Button_Int, Gtk::PackOptions::EXPAND_WIDGET);
+  m_HBox_Buttons.add(m_Button_Int);
+  m_Button_Int.set_expand();
 
   m_Button_Float.signal_clicked().connect( sigc::bind( sigc::mem_fun(*this,
                   &ExampleWindow::on_button_getvalue), VALUE_FORMAT_FLOAT) );
-  m_HBox_Buttons.pack_start(m_Button_Float, Gtk::PackOptions::EXPAND_WIDGET);
+  m_HBox_Buttons.add(m_Button_Float);
+  m_Button_Float.set_expand();
 
-  m_VBox_Accelerated.pack_start(m_Label_ShowValue, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox_Accelerated.add(m_Label_ShowValue);
+  m_Label_ShowValue.set_expand();
   m_Label_ShowValue.set_text("0");
 
   //Close button:
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
-  m_VBox_Main.pack_start(m_Button_Close, Gtk::PackOptions::SHRINK);
+  m_VBox_Main.add(m_Button_Close);
 }
 
 ExampleWindow::~ExampleWindow()

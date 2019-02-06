@@ -184,16 +184,16 @@ CalendarExample::CalendarExample()
    */
 
   auto hbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, DEF_PAD);
-  vbox->pack_start(*hbox, Gtk::PackOptions::EXPAND_WIDGET);
+  vbox->add(*hbox);
   auto hbbox = Gtk::make_managed<Gtk::ButtonBox>();
-  hbox->pack_start(*hbbox, Gtk::PackOptions::SHRINK);
+  hbox->add(*hbbox);
   hbbox->set_margin_end(DEF_PAD);
   hbbox->set_layout(Gtk::ButtonBoxStyle::SPREAD);
   hbbox->set_spacing(5);
 
   /* Calendar widget */
   auto frame = Gtk::make_managed<Gtk::Frame>("Calendar");
-  hbbox->pack_start(*frame, Gtk::PackOptions::EXPAND_WIDGET);
+  hbbox->add(*frame);
   frame->set_margin_start(DEF_PAD);
   frame->set_margin_end(DEF_PAD);
   calendar_ = new Gtk::Calendar();
@@ -205,17 +205,17 @@ CalendarExample::CalendarExample()
   calendar_->signal_day_selected_double_click().connect(sigc::mem_fun(*this, &CalendarExample::day_selected_double_click));
 
   auto separator = Gtk::make_managed<Gtk::Separator>(Gtk::Orientation::VERTICAL);
-  hbox->pack_start (*separator, Gtk::PackOptions::SHRINK);
+  hbox->add(*separator);
 
   auto vbox2 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, DEF_PAD);
-  hbox->pack_start(*vbox2, Gtk::PackOptions::SHRINK);
+  hbox->add(*vbox2);
   vbox2->set_margin_start(DEF_PAD);
   vbox2->set_margin_end(DEF_PAD);
 
   /* Build the Right frame with the flags in */
 
   auto frameFlags = Gtk::make_managed<Gtk::Frame>("Flags");
-  vbox2->pack_start(*frameFlags, Gtk::PackOptions::EXPAND_WIDGET);
+  vbox2->add(*frameFlags);
   frameFlags->set_margin_end(DEF_PAD);
   auto vbox3 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, DEF_PAD_SMALL);
   frameFlags->add(*vbox3);
@@ -235,14 +235,14 @@ CalendarExample::CalendarExample()
   {
     auto toggle = new Gtk::CheckButton(flags[i].label);
     toggle->signal_toggled().connect(sigc::bind(sigc::mem_fun(*this, &CalendarExample::toggle_flag), toggle));
-    vbox3->pack_start(*toggle, Gtk::PackOptions::EXPAND_WIDGET);
+    vbox3->add(*toggle);
     flag_checkboxes_[i] = toggle;
   }
 
   /* Build the right font-button */
   font_button_ = Gtk::make_managed<Gtk::FontButton>();
   font_button_->signal_font_set().connect(sigc::mem_fun(*this, &CalendarExample::on_font_button_font_set));
-  vbox2->pack_start(*font_button_, Gtk::PackOptions::SHRINK);
+  vbox2->add(*font_button_);
 
   // Add a StyleProvider to the Gtk::Calendar, so we can change the font.
   // This was easier before Gtk::Widget::override_font() was deprecated.
@@ -259,33 +259,33 @@ CalendarExample::CalendarExample()
    *  Build the Signal-event part.
    */
   frame = Gtk::make_managed<Gtk::Frame>("Signal events");
-  vbox->pack_start(*frame, Gtk::PackOptions::EXPAND_WIDGET);
+  vbox->add(*frame);
   vbox2 = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL, DEF_PAD_SMALL);
   frame->add(*vbox2);
 
   hbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 5);
-  vbox2->pack_start (*hbox, Gtk::PackOptions::SHRINK);
+  vbox2->add(*hbox);
   auto label = Gtk::make_managed<Gtk::Label>("Day selected:");
-  hbox->pack_start (*label, Gtk::PackOptions::SHRINK);
+  hbox->add(*label);
   label_selected_ = new Gtk::Label("");
-  hbox->pack_start (*label_selected_, Gtk::PackOptions::SHRINK);
+  hbox->add(*label_selected_);
 
   hbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 5);
-  vbox2->pack_start (*hbox, Gtk::PackOptions::SHRINK);
+  vbox2->add(*hbox);
   label = Gtk::make_managed<Gtk::Label>("Day selected double click:");
-  hbox->pack_start (*label, Gtk::PackOptions::SHRINK);
+  hbox->add(*label);
   label_selected_double_click_ = new Gtk::Label("");
-  hbox->pack_start (*label_selected_double_click_, Gtk::PackOptions::SHRINK);
+  hbox->add(*label_selected_double_click_);
 
   hbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 5);
-  vbox2->pack_start (*hbox, Gtk::PackOptions::SHRINK);
+  vbox2->add(*hbox);
   label = Gtk::make_managed<Gtk::Label>("Month change:");
-  hbox->pack_start (*label, Gtk::PackOptions::SHRINK);
+  hbox->add(*label);
   label_month_ = new Gtk::Label("");
-  hbox->pack_start(*label_month_, Gtk::PackOptions::SHRINK);
+  hbox->add(*label_month_);
 
   auto bbox = Gtk::make_managed<Gtk::ButtonBox>();
-  vbox->pack_start(*bbox, Gtk::PackOptions::SHRINK);
+  vbox->add(*bbox);
   bbox->set_layout(Gtk::ButtonBoxStyle::END);
 
   auto button = Gtk::make_managed<Gtk::Button>("Close");

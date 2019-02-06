@@ -41,23 +41,23 @@ ExampleWindow::ExampleWindow()
   m_HBox.set_margin(5);
   add(m_HBox);
 
-  m_HBox.pack_start(m_VBox, Gtk::PackOptions::SHRINK);
+  m_HBox.add(m_VBox);
 
   m_Frame_Normal.add(m_Label_Normal);
-  m_VBox.pack_start(m_Frame_Normal, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_Frame_Normal);
 
   m_Frame_Multi.add(m_Label_Multi);
-  m_VBox.pack_start(m_Frame_Multi, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_Frame_Multi);
 
   m_Label_Left.set_justify(Gtk::Justification::LEFT);
   m_Frame_Left.add(m_Label_Left);
-  m_VBox.pack_start(m_Frame_Left, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_Frame_Left);
 
   m_Label_Right.set_justify(Gtk::Justification::RIGHT);
   m_Frame_Right.add(m_Label_Right);
-  m_VBox.pack_start(m_Frame_Right, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_Frame_Right);
 
-  m_HBox.pack_start(m_VBox2, Gtk::PackOptions::SHRINK);
+  m_HBox.add(m_VBox2);
 
   m_Label_LineWrapped.set_text(
           "This is an example of a line-wrapped label.  It "
@@ -73,7 +73,7 @@ ExampleWindow::ExampleWindow()
           "many          extra  spaces. ");
   m_Label_LineWrapped.set_line_wrap();
   m_Frame_LineWrapped.add(m_Label_LineWrapped);
-  m_VBox2.pack_start(m_Frame_LineWrapped, Gtk::PackOptions::SHRINK);
+  m_VBox2.add(m_Frame_LineWrapped);
 
   m_Label_FilledWrapped.set_text(
           "This is an example of a line-wrapped, filled label.  "
@@ -89,14 +89,14 @@ ExampleWindow::ExampleWindow()
   m_Label_FilledWrapped.set_justify(Gtk::Justification::FILL);
   m_Label_FilledWrapped.set_line_wrap();
   m_Frame_FilledWrapped.add(m_Label_FilledWrapped);
-  m_VBox2.pack_start(m_Frame_FilledWrapped, Gtk::PackOptions::SHRINK);
+  m_VBox2.add(m_Frame_FilledWrapped);
 
   m_Label_Underlined.set_justify(Gtk::Justification::LEFT);
   m_Label_Underlined.set_pattern (
           "_________________________ _ _________ _ ______"
           "     __ _______ ___");
   m_Frame_Underlined.add(m_Label_Underlined);
-  m_VBox2.pack_start(m_Frame_Underlined, Gtk::PackOptions::SHRINK);
+  m_VBox2.add(m_Frame_Underlined);
 }
 
 ExampleWindow::~ExampleWindow()

@@ -33,7 +33,7 @@ ExampleWindow::ExampleWindow()
 
   m_Grid.attach(m_ButtonBox, 0, 2, 2, 1);
 
-  m_ButtonBox.pack_start(m_Button_Quit, Gtk::PackOptions::SHRINK);
+  m_ButtonBox.add(m_Button_Quit);
   m_ButtonBox.set_margin(6);
   m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
   m_Button_Quit.signal_clicked().connect( sigc::mem_fun(*this, &ExampleWindow::on_button_quit) );

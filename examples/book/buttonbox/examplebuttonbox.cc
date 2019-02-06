@@ -33,7 +33,7 @@ ExampleButtonBox::ExampleButtonBox(bool horizontal,
     set_margin_start(5);
     set_margin_end(5);
   }
-  bbox->property_margin() = 5;
+  bbox->set_margin(5);
 
   add(*bbox);
 

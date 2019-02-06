@@ -39,10 +39,11 @@ ExampleWindow::ExampleWindow()
   m_VBox.set_margin(12);
   add(m_VBox);
 
-  m_VBox.pack_start(m_Label, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_Label);
 
   //Fill Grid:
-  m_VBox.pack_start(m_Grid, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox.add(m_Grid);
+  m_Grid.set_expand(true);
   m_Grid.set_row_homogeneous(true);
   m_Grid.set_column_homogeneous(true);
   m_Grid.attach(m_ButtonA1, 0, 0);
@@ -51,15 +52,15 @@ ExampleWindow::ExampleWindow()
   m_Grid.attach(m_ButtonB2, 1, 1);
 
   //Add ButtonBox to bottom:
-  m_VBox.pack_start(m_ButtonBox, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_ButtonBox);
   m_VBox.set_spacing(6);
 
   //Fill ButtonBox:
   m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
-  m_ButtonBox.pack_start(m_Button_Copy, Gtk::PackOptions::SHRINK);
+  m_ButtonBox.add(m_Button_Copy);
   m_Button_Copy.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_copy) );
-  m_ButtonBox.pack_start(m_Button_Paste, Gtk::PackOptions::SHRINK);
+  m_ButtonBox.add(m_Button_Paste);
   m_Button_Paste.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_paste) );
 

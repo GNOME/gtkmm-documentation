@@ -25,36 +25,33 @@ HelloWorld::HelloWorld()
   set_title("Hello Buttons!");
 
   // Sets the margin around the box.
-  m_box1.property_margin() = 10;
+  m_box1.set_margin(10);
 
   // put the box into the main window.
   add(m_box1);
 
-  // Now when the button is clicked, we call the "on_button_clicked" function
-  // with a pointer to "button 1" as its argument
+  // Now when the button is clicked, we call the on_button_clicked() function
+  // with a pointer to "button 1" as its argument.
   m_button1.signal_clicked().connect(sigc::bind(
               sigc::mem_fun(*this, &HelloWorld::on_button_clicked), "button 1"));
 
-  // instead of gtk_container_add, we pack this button into the invisible
-  // box, which has been packed into the window.
-  // note that the pack_start default arguments are Gtk::EXPAND | Gtk::FILL, 0
-  m_box1.pack_start(m_button1, Gtk::PackOptions::EXPAND_WIDGET);
-
-  // always remember this step, this tells GTK that our preparation
-  // for this button is complete, and it can be displayed now.
-  m_button1.show();
+  // We use Gtk::Container::add() to pack this button into the  box,
+  // which has been packed into the window.
+  // A widget's default behaviour is not to expand if extra space is available.
+  // A container widget by default expands if any of the contained widgets
+  // wants to expand.
+  m_box1.add(m_button1);
+  m_button1.set_expand();
 
   // call the same signal handler with a different argument,
   // passing a pointer to "button 2" instead.
   m_button2.signal_clicked().connect(sigc::bind(
               sigc::mem_fun(*this, &HelloWorld::on_button_clicked), "button 2"));
 
-  m_box1.pack_start(m_button2, Gtk::PackOptions::EXPAND_WIDGET);
+  m_box1.add(m_button2);
+  m_button2.set_expand();
 
-  // Show the widgets.
-  // They will not really be shown until this Window is shown.
-  m_button2.show();
-  m_box1.show();
+  // Gtk::Widget::show() is seldom needed. All widgets are visible by default.
 }
 
 HelloWorld::~HelloWorld()

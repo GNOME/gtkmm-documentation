@@ -42,13 +42,15 @@ PreviewDialog::PreviewDialog(
   m_VBox.set_margin(2);
   add(m_VBox);
 
-  m_HBox.pack_start(m_PageSpin, Gtk::PackOptions::EXPAND_WIDGET);
+  m_HBox.add(m_PageSpin);
+  m_PageSpin.set_hexpand(true);
   m_PageSpin.set_vexpand(false);
-  m_HBox.pack_start(m_CloseButton, Gtk::PackOptions::SHRINK);
-  m_VBox.pack_start(m_HBox, Gtk::PackOptions::SHRINK);
+  m_HBox.add(m_CloseButton);
+  m_VBox.add(m_HBox);
 
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
-  m_VBox.pack_start(m_ScrolledWindow, Gtk::PackOptions::EXPAND_WIDGET);
+  m_ScrolledWindow.set_expand(true);
+  m_VBox.add(m_ScrolledWindow);
   m_DrawingArea.set_content_width(300);
   m_DrawingArea.set_content_height(600);
   m_ScrolledWindow.add(m_DrawingArea);

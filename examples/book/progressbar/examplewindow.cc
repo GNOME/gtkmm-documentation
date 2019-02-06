@@ -31,7 +31,7 @@ ExampleWindow::ExampleWindow()
   m_VBox.set_margin(10);
   add(m_VBox);
 
-  m_VBox.pack_start(m_ProgressBar, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_ProgressBar);
   m_ProgressBar.set_margin_end(5);
   m_ProgressBar.set_halign(Gtk::Align::CENTER);
   m_ProgressBar.set_valign(Gtk::Align::CENTER);
@@ -43,8 +43,9 @@ ExampleWindow::ExampleWindow()
   m_connection_timeout = Glib::signal_timeout().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_timeout), 50 );
 
-  m_VBox.pack_start(m_Separator, Gtk::PackOptions::SHRINK);
-  m_VBox.pack_start(m_Grid, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox.add(m_Separator);
+  m_VBox.add(m_Grid);
+  m_Grid.set_expand(true);
   m_Grid.set_row_homogeneous(true);
 
   //Add a check button to select displaying of the trough text:
@@ -66,7 +67,7 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::on_checkbutton_inverted) );
 
   //Add a button to exit the program.
-  m_VBox.pack_start(m_Button_Close, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_Button_Close);
   m_Button_Close.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
   m_Button_Close.set_can_default();

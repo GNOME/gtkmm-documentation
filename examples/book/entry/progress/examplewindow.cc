@@ -27,7 +27,7 @@ ExampleWindow::ExampleWindow()
 
   m_Entry.set_max_length(50);
   m_Entry.set_text("Hello world");
-  m_VBox.pack_start(m_Entry, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_Entry);
 
   //Change the progress fraction every 0.1 second:
   Glib::signal_timeout().connect(
@@ -37,7 +37,7 @@ ExampleWindow::ExampleWindow()
 
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
-  m_VBox.pack_start(m_Button_Close, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_Button_Close);
   m_Button_Close.set_can_default();
   m_Button_Close.grab_default();
 }

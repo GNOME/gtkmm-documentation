@@ -26,11 +26,11 @@ ExampleWindow::ExampleWindow()
 
   add(m_VBox);
 
-  m_VBox.pack_start(m_ColorButton, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_ColorButton);
   m_ColorButton.signal_color_set().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_color_button_color_set) );
 
-  m_VBox.pack_start(m_Button_Dialog, Gtk::PackOptions::SHRINK);
+  m_VBox.add(m_Button_Dialog);
   m_Button_Dialog.signal_clicked().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_button_dialog_clicked) );
 
@@ -41,7 +41,8 @@ ExampleWindow::ExampleWindow()
   m_Color.set_alpha(1.0); //opaque
   m_ColorButton.set_rgba(m_Color);
 
-  m_VBox.pack_start(m_DrawingArea, Gtk::PackOptions::EXPAND_WIDGET);
+  m_VBox.add(m_DrawingArea);
+  m_DrawingArea.set_expand(true);
   m_DrawingArea.set_draw_func(sigc::mem_fun(*this, &ExampleWindow::on_drawing_area_draw));
 }
 

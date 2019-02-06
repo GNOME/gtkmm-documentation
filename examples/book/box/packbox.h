@@ -22,12 +22,11 @@
 class PackBox : public Gtk::Box
 {
 public:
-  PackBox(bool homogeneous, int spacing, Gtk::PackOptions options, int margin = 0);
-  virtual ~PackBox();
+  PackBox(bool homogeneous = false, int spacing = 0, bool expand = false,
+    Gtk::Align align = Gtk::Align::FILL, int margin = 0);
 
 protected:
-  Gtk::Button m_button1, m_button2, m_button3;
-  Gtk::Button* m_pbutton4;
+  Gtk::Button m_buttons[4];
 };
 
 #endif //GTKMM_EXAMPLE_PACKBOX_H

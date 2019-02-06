@@ -30,8 +30,9 @@ ExampleWindow::ExampleWindow()
    * there.  The first one is the horizontal scrollbar, the second,
    * the vertical. */
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::ALWAYS);
+  m_ScrolledWindow.set_expand();
 
-  get_content_area()->pack_start(m_ScrolledWindow, Gtk::PackOptions::EXPAND_WIDGET);
+  get_content_area()->add(m_ScrolledWindow);
 
   /* set the spacing to 10 on x and 10 on y */
   m_Grid.set_row_spacing(10);

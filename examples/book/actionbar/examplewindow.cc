@@ -38,9 +38,9 @@ ExampleWindow::ExampleWindow()
   m_prev_button.set_image_from_icon_name("go-previous-symbolic", Gtk::IconSize::INHERIT, true);
   m_next_button.set_image_from_icon_name("go-next-symbolic", Gtk::IconSize::INHERIT, true);
   m_photo_button.set_image_from_icon_name("media-record-symbolic", Gtk::IconSize::INHERIT, true);
-  m_photo_box.pack_start(m_prev_button, Gtk::PackOptions::SHRINK);
-  m_photo_box.pack_start(m_photo_button, Gtk::PackOptions::SHRINK);
-  m_photo_box.pack_start(m_next_button, Gtk::PackOptions::SHRINK);
+  m_photo_box.add(m_prev_button);
+  m_photo_box.add(m_photo_button);
+  m_photo_box.add(m_next_button);
   auto style_context = m_photo_box.get_style_context();
   style_context->add_class("raised");
   style_context->add_class("linked");
@@ -52,8 +52,9 @@ ExampleWindow::ExampleWindow()
 
   // Layout
   m_box.set_homogeneous(false);
-  m_box.pack_start(m_face_image, Gtk::PackOptions::EXPAND_WIDGET);
-  m_box.pack_end(m_action_bar, Gtk::PackOptions::SHRINK);
+  m_face_image.set_expand();
+  m_box.add(m_face_image);
+  m_box.add(m_action_bar);
   add(m_box);
 }
 

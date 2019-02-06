@@ -26,19 +26,24 @@ IdleExample::IdleExample() :
 
   // Adding a few widgets:
   add(m_Box);
-  m_Box.pack_start(*Gtk::make_managed<Gtk::Label>("Formatting Windows drive C:"));
-  m_Box.pack_start(*Gtk::make_managed<Gtk::Label>("100 MB"));
-  m_Box.pack_start(m_ProgressBar_c, Gtk::PackOptions::EXPAND_WIDGET);
+  m_Box.add(*Gtk::make_managed<Gtk::Label>("Formatting Windows drive C:"));
+  m_Box.add(*Gtk::make_managed<Gtk::Label>("100 MB"));
+  m_Box.add(m_ProgressBar_c);
+  m_ProgressBar_c.set_expand();
 
-  m_Box.pack_start(*Gtk::make_managed<Gtk::Label>(""));
+  m_Box.add(*Gtk::make_managed<Gtk::Label>(""));
 
-  m_Box.pack_start(*Gtk::make_managed<Gtk::Label>("Formatting Windows drive D:"));
-  m_Box.pack_start(*Gtk::make_managed<Gtk::Label>("5000 MB"));
-  m_Box.pack_start(m_ProgressBar_d, Gtk::PackOptions::EXPAND_WIDGET);
+  m_Box.add(*Gtk::make_managed<Gtk::Label>("Formatting Windows drive D:"));
+  m_Box.add(*Gtk::make_managed<Gtk::Label>("5000 MB"));
+  m_Box.add(m_ProgressBar_d);
+  m_ProgressBar_d.set_expand();
 
   auto hbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL,10);
-  m_Box.pack_start(*hbox, Gtk::PackOptions::EXPAND_WIDGET);
-  hbox->pack_start(m_ButtonQuit, Gtk::PackOptions::EXPAND_PADDING);
+  m_Box.add(*hbox);
+  hbox->add(m_ButtonQuit);
+  m_ButtonQuit.set_expand();
+  m_ButtonQuit.set_halign(Gtk::Align::END);
+  m_ButtonQuit.set_valign(Gtk::Align::END);
 
   // Connect the signal handlers:
   m_ButtonQuit.signal_clicked().connect( sigc::mem_fun(*this,

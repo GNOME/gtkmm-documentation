@@ -125,7 +125,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   {
     //Menubar:
     auto pMenubar = Gtk::make_managed<Gtk::MenuBar>(gmenu);
-    m_Box.pack_start(*pMenubar, Gtk::PackOptions::SHRINK);
+    m_Box.add(*pMenubar);
   }
   else
     g_warning("GMenu not found");
@@ -134,7 +134,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   m_refBuilder->get_widget("toolbar", pToolbar);
   if (pToolbar)
     //Toolbar:
-    m_Box.pack_start(*pToolbar, Gtk::PackOptions::SHRINK);
+    m_Box.add(*pToolbar);
   else
     g_warning("GtkToolbar not found");
 }
