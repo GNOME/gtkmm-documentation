@@ -19,7 +19,6 @@ check_PROGRAMS =					\
 	book/box/example				\
 	book/builder/basic/example			\
 	book/builder/derived/example			\
-	book/buttonbox/example				\
 	book/buttons/button/buttons			\
 	book/buttons/checkbutton/example		\
 	book/buttons/filechooserbutton/example		\
@@ -197,13 +196,6 @@ book_builder_derived_example_SOURCES =		\
 	book/builder/derived/deriveddialog.cc	\
 	book/builder/derived/deriveddialog.h	\
 	book/builder/derived/main.cc
-
-book_buttonbox_example_SOURCES =		\
-	book/buttonbox/examplebuttonbox.cc	\
-	book/buttonbox/examplebuttonbox.h	\
-	book/buttonbox/examplewindow.cc		\
-	book/buttonbox/examplewindow.h		\
-	book/buttonbox/main.cc
 
 book_buttons_button_buttons_SOURCES =		\
 	book/buttons/button/buttons.cc		\

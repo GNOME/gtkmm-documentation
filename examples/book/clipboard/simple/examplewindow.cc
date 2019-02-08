@@ -46,8 +46,9 @@ ExampleWindow::ExampleWindow()
   m_VBox.set_spacing(6);
 
   //Fill ButtonBox:
-  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
   m_ButtonBox.add(m_Button_Copy);
+  m_Button_Copy.set_hexpand(true);
+  m_Button_Copy.set_halign(Gtk::Align::END);
   m_Button_Copy.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_copy) );
   m_ButtonBox.add(m_Button_Paste);

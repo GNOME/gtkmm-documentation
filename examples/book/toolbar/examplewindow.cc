@@ -30,10 +30,12 @@ ExampleWindow::ExampleWindow()
   //Put a toolbar at the top, and a button underneath:
   m_VBox.add(m_Toolbar);
   m_ButtonBox.set_margin(5);
-  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
   m_VBox.add(m_ButtonBox);
 
   m_ButtonBox.add(m_Button_Close);
+  m_Button_Close.set_expand(true);
+  m_Button_Close.set_halign(Gtk::Align::END);
+  m_Button_Close.set_valign(Gtk::Align::END);
 
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );

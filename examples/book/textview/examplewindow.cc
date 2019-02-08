@@ -40,12 +40,13 @@ ExampleWindow::ExampleWindow()
   //Add buttons:
   m_VBox.add(m_ButtonBox);
 
+  m_Button_Buffer1.set_hexpand(true);
+  m_Button_Buffer1.set_halign(Gtk::Align::END);
   m_ButtonBox.add(m_Button_Buffer1);
   m_ButtonBox.add(m_Button_Buffer2);
   m_ButtonBox.add(m_Button_Quit);
   m_ButtonBox.set_margin(5);
   m_ButtonBox.set_spacing(5);
-  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
 
   //Connect signals:
   m_Button_Quit.signal_clicked().connect(sigc::mem_fun(*this,

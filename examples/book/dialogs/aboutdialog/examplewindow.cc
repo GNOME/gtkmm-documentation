@@ -34,9 +34,10 @@ ExampleWindow::ExampleWindow()
   m_Label.set_selectable(true);
 
   m_VBox.add(m_ButtonBox);
-  m_ButtonBox.set_expand(true);
   m_ButtonBox.add(m_Button);
   m_Button.set_expand(true);
+  m_Button.set_halign(Gtk::Align::CENTER);
+  m_Button.set_valign(Gtk::Align::CENTER);
   m_Button.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_clicked) );
 

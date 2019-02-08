@@ -43,7 +43,7 @@ protected:
   Gtk::InfoBar m_InfoBar;
   Gtk::Label m_Message_Label;
 
-  Gtk::ButtonBox m_ButtonBox;
+  Gtk::Box m_ButtonBox;
   Gtk::Button m_Button_Quit, m_Button_Clear;
 };
 

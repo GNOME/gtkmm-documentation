@@ -41,7 +41,7 @@ private:
 
   // Member data.
   Gtk::Box m_VBox;
-  Gtk::ButtonBox m_ButtonBox;
+  Gtk::Box m_ButtonBox;
   Gtk::Button m_ButtonStart;
   Gtk::Button m_ButtonStop;
   Gtk::Button m_ButtonQuit;

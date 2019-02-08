@@ -36,6 +36,8 @@ ExampleWindow::ExampleWindow()
   m_VBox.add(m_ButtonBox);
 
   m_ButtonBox.add(m_Button_Quit);
+  m_Button_Quit.set_hexpand(true);
+  m_Button_Quit.set_halign(Gtk::Align::CENTER);
   m_Button_Quit.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_quit) );
 

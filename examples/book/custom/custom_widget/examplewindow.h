@@ -34,7 +34,7 @@ protected:
   Gtk::Grid m_Grid;
   MyWidget m_MyWidgetS1;
   MyWidget m_MyWidgetS2;
-  Gtk::ButtonBox m_ButtonBox;
+  Gtk::Box m_ButtonBox;
   Gtk::Button m_Button_Quit;
 };
 

@@ -185,10 +185,9 @@ CalendarExample::CalendarExample()
 
   auto hbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, DEF_PAD);
   vbox->add(*hbox);
-  auto hbbox = Gtk::make_managed<Gtk::ButtonBox>();
+  auto hbbox = Gtk::make_managed<Gtk::Box>();
   hbox->add(*hbbox);
   hbbox->set_margin_end(DEF_PAD);
-  hbbox->set_layout(Gtk::ButtonBoxStyle::SPREAD);
   hbbox->set_spacing(5);
 
   /* Calendar widget */
@@ -196,6 +195,8 @@ CalendarExample::CalendarExample()
   hbbox->add(*frame);
   frame->set_margin_start(DEF_PAD);
   frame->set_margin_end(DEF_PAD);
+  frame->set_hexpand();
+  frame->set_halign(Gtk::Align::CENTER);
   calendar_ = new Gtk::Calendar();
   set_flags();
   calendar_->mark_day(19);
@@ -284,14 +285,15 @@ CalendarExample::CalendarExample()
   label_month_ = new Gtk::Label("");
   hbox->add(*label_month_);
 
-  auto bbox = Gtk::make_managed<Gtk::ButtonBox>();
+  auto bbox = Gtk::make_managed<Gtk::Box>();
   vbox->add(*bbox);
-  bbox->set_layout(Gtk::ButtonBoxStyle::END);
 
   auto button = Gtk::make_managed<Gtk::Button>("Close");
   button->signal_clicked().connect(
     sigc::mem_fun(*this, &CalendarExample::on_button_close));
   bbox->add(*button);
+  button->set_hexpand();
+  button->set_halign(Gtk::Align::END);
   button->set_can_default();
   button->grab_default();
 }

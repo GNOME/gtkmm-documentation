@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 858 2007-06-22 08:37:15Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -59,7 +57,7 @@ protected:
   Gtk::TreeView m_TreeView;
   Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
 
-  Gtk::ButtonBox m_ButtonBox;
+  Gtk::Box m_ButtonBox;
   Gtk::Button m_Button_Quit;
 
   //For the validated column:

@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 705 2006-07-19 02:55:32Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -75,7 +73,7 @@ protected:
   Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
   Glib::RefPtr<Gtk::TreeModelFilter> m_refTreeModelFilter;
 
-  Gtk::ButtonBox m_ButtonBox;
+  Gtk::Box m_ButtonBox;
   Gtk::Button m_Button_Quit;
 };
 

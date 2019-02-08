@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 810 2007-03-30 10:10:25Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -37,7 +35,7 @@ protected:
   Gtk::Notebook m_Notebook;
   Gtk::Label m_Label1, m_Label2;
 
-  Gtk::ButtonBox m_ButtonBox;
+  Gtk::Box m_ButtonBox;
   Gtk::Button m_Button_Quit;
 };
 

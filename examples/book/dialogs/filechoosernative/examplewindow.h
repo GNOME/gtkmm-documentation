@@ -29,7 +29,7 @@ protected:
   void on_button_file_clicked(Gtk::FileChooser::Action action);
 
   // Child widgets:
-  Gtk::ButtonBox m_ButtonBox;
+  Gtk::Box m_ButtonBox;
   Gtk::Button m_Button_File_Open;
   Gtk::Button m_Button_File_Save;
 };

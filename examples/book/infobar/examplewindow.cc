@@ -58,7 +58,8 @@ ExampleWindow::ExampleWindow()
   m_ButtonBox.add(m_Button_Clear);
   m_ButtonBox.add(m_Button_Quit);
   m_ButtonBox.set_spacing(6);
-  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
+  m_Button_Clear.set_hexpand(true);
+  m_Button_Clear.set_halign(Gtk::Align::END);
 
   // Connect signals:
   m_InfoBar.signal_response().connect(sigc::mem_fun(*this,

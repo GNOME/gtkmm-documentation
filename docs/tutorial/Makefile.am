@@ -38,7 +38,6 @@ HELP_MEDIA =					\
 	figures/buildapp_search_bar.png \
 	figures/buildapp_side_bar.png \
 	figures/buildapp_trivial_app.png \
-	figures/buttonbox.png			\
 	figures/buttons.png			\
 	figures/cairo_clock.png			\
 	figures/cairo_joins.png			\

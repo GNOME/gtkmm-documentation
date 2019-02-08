@@ -38,7 +38,8 @@ ExampleWindow::ExampleWindow()
 
   m_ButtonBox.add(m_Button_Quit);
   m_ButtonBox.set_margin(6);
-  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
+  m_Button_Quit.set_hexpand(true);
+  m_Button_Quit.set_halign(Gtk::Align::END);
   m_Button_Quit.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_quit) );
 }

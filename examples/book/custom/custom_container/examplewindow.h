@@ -37,7 +37,7 @@ protected:
   // A restriction with MyContainer is that it must be deleted before
   // its children, meaning that it must be declared after its children.
   MyContainer m_MyContainer;
-  Gtk::ButtonBox m_ButtonBox;
+  Gtk::Box m_ButtonBox;
   Gtk::Button m_Button_Quit;
 };
 

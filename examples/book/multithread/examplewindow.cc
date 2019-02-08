@@ -60,7 +60,8 @@ ExampleWindow::ExampleWindow() :
   m_ButtonBox.add(m_ButtonQuit);
   m_ButtonBox.set_margin(5);
   m_ButtonBox.set_spacing(5);
-  m_ButtonBox.set_layout(Gtk::ButtonBoxStyle::END);
+  m_ButtonStart.set_hexpand(true);
+  m_ButtonStart.set_halign(Gtk::Align::END);
 
   // Connect the signal handlers to the buttons.
   m_ButtonStart.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_start_button_clicked));
