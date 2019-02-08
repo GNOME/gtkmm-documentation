@@ -6,8 +6,8 @@
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="use-header-bar">1</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="vbox">
+    <child internal-child="content_area">
+      <object class="GtkBox" id="content_area">
         <child>
           <object class="GtkGrid" id="grid">
             <property name="visible">True</property>

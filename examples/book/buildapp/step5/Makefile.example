@@ -5,8 +5,8 @@ CXXFILES = main.cc exampleappwindow.cc exampleapplication.cc exampleappprefs.cc
 BUILT_SRC = resources.c
 OBJS = $(BUILT_SRC:.c=.o) $(CXXFILES:.cc=.o)
 DEPDIR = .deps
-CXXFLAGS = `pkg-config --cflags gtkmm-4.0` -std=c++14 -Wall -g
-CFLAGS = `pkg-config --cflags gtk+-4.0`
+CXXFLAGS = `pkg-config --cflags gtkmm-4.0` -std=c++17 -Wall -g
+CFLAGS = `pkg-config --cflags gtk4`
 LIBS = `pkg-config --libs gtkmm-4.0`
 GLIB_COMPILE_RESOURCES = $(shell pkg-config --variable=glib_compile_resources gio-2.0)
 GLIB_COMPILE_SCHEMAS   = $(shell pkg-config --variable=glib_compile_schemas gio-2.0)
