@@ -418,8 +418,8 @@ in the <link linkend="chapter-building-applications">Building applications</link
 <title>Widgets</title>
 <para>&gtkmm; applications consist of windows containing widgets, such as buttons and text boxes. In some other systems, widgets are called "controls". For each widget in your application's windows, there is a C++ object in your application's code. So you just need to call a method of the widget's class to affect the visible widget.</para>
  <para>Widgets are arranged inside container widgets such as frames and notebooks, in a hierarchy of widgets within widgets. Some of these container widgets, such as <classname>Gtk::Grid</classname>, are not visible - they exist only to arrange other widgets. Here is some example code that adds 2 <classname>Gtk::Button</classname> widgets to a <classname>Gtk::Box</classname> container widget:
-<programlisting>m_box.pack_start(m_Button1);
-m_box.pack_start(m_Button2);</programlisting>
+<programlisting>m_box.add(m_Button1);
+m_box.add(m_Button2);</programlisting>
 and here is how to add the <classname>Gtk::Box</classname>, containing those buttons, to a <classname>Gtk::Frame</classname>, which has a visible frame and title:
 <programlisting>m_frame.add(m_box);</programlisting>
 </para>
@@ -739,7 +739,7 @@ The following lists are not complete.</para>
   <classname>Gtk::EventControllerMotion</classname>, <classname>Gtk::EventControllerScroll</classname>
   and <classname>Gtk::GestureStylus</classname></simpara></listitem>
 <listitem><simpara><classname>Gdk::Paintable</classname>, <classname>Gdk::Texture</classname>,
-  <classname>Gtk::Picure</classname> and <classname>Gtk::WidgetPaintable</classname>
+  <classname>Gtk::Picture</classname> and <classname>Gtk::WidgetPaintable</classname>
   </simpara></listitem>
 <listitem><simpara><classname>Gdk::Window</classname> has been renamed to <classname>Gdk::Surface</classname>.
   (<classname>Gtk::Window</classname> keeps its name.)</simpara></listitem>
@@ -788,6 +788,12 @@ when porting code that used &gtkmm;-3.0 and <application>glibmm</application>-2.
   <methodname>create()</methodname> methods that return a <classname>Glib::RefPtr</classname>,
   you must use <methodname>Glib::make_refptr_for_instance()</methodname> in your
   <methodname>create()</methodname> methods.</simpara></listitem>
+<listitem><simpara><methodname>Gtk::Box::pack_start()</methodname> and <methodname>Gtk::Box::pack_end()</methodname>
+  have been removed. Use <methodname>Gtk::Container::add()</methodname> or the new
+  <classname>Gtk::Box</classname> methods <methodname>insert_child_after()</methodname>
+  and <methodname>insert_child_at_start()</methodname>.
+  </simpara></listitem>
+<listitem><simpara><classname>Gtk::ButtonBox</classname> has been removed.</simpara></listitem>
 </orderedlist>
 </para>
 
@@ -1947,9 +1953,8 @@ insert child widgets.
 
 <listitem>
 <para>
-<classname>Gtk::Box</classname> arranges its child widgets vertically or horizontally. Use
-<methodname>pack_start()</methodname> and <methodname>pack_end()</methodname> to insert
-child widgets.
+<classname>Gtk::Box</classname> arranges its child widgets vertically or horizontally.
+Use <methodname>add()</methodname> to insert child widgets.
 </para>
 </listitem>
 
@@ -1986,9 +1991,10 @@ Let's take a look at a slightly improved <literal>helloworld</literal>, showing 
 
 <para>
 After building and running this program, try resizing the window to see the
-behaviour. Also, try playing with the options to
-<methodname>pack_start()</methodname> while reading the <link
-    linkend="sec-boxes">Boxes</link> section.
+behaviour. Also, try playing with <methodname>set_expand()</methodname>,
+<methodname>set_hexpand()</methodname>, <methodname>set_vexpand()</methodname>,
+<methodname>set_halign()</methodname> and <methodname>set_valign()</methodname>
+while reading the <link linkend="sec-boxes">Boxes</link> section.
 </para>
 
 </sect2>
@@ -2000,33 +2006,33 @@ behaviour. Also, try playing with the options to
 Most packing uses boxes as in the above example. These
 are invisible containers into which we can pack our widgets. When
 packing widgets into a horizontal box, the objects are inserted
-horizontally from left to right or right to left depending on whether
-<methodname>pack_start()</methodname> or <methodname>pack_end()</methodname> is used.
-In a vertical box, widgets are packed from top to bottom or vice
-versa. You may use any combination of boxes inside or beside other
+horizontally from left to right. In a vertical box, widgets are packed from
+top to bottom. You may use any combination of boxes inside or beside other
 boxes to create the desired effect.
 </para>
 
 <sect3 id="boxes-adding-widgets"><title>Adding widgets</title>
 <sect4 id="per-child-packing-options"><title>Per-child packing options</title>
 <para>
-The <methodname>pack_start()</methodname> and
-<methodname>pack_end()</methodname> methods place widgets inside these
-containers. The <methodname>pack_start()</methodname> method will start at
-the top and work its way down in a <classname>Box</classname> with vertical
-orientation, or pack left to right in a <classname>Box</classname> with horizontal
-orientation. <methodname>pack_end()</methodname> will do the opposite, packing from
-bottom to top or from right to left. Using these methods allows us to right justify or
-left justify our widgets. We will use <methodname>pack_start()</methodname>
-in most of our examples.
+The <methodname>add()</methodname> method places widgets inside these
+containers. It will start at the top and work its way down in a
+<classname>Box</classname> with vertical orientation, or pack left to right in
+a <classname>Box</classname> with horizontal orientation. If it's inconvenient
+to add widgets in this order, use <methodname>insert_child_after()</methodname>
+or <methodname>insert_child_at_start()</methodname>. We will use
+<methodname>add()</methodname> in our examples.
 </para>
 
 <para>
-There are several options governing how  widgets are to be packed, and this can
-be confusing at first. If you have difficulties then it is sometimes a good
-idea to play with the <application>glade</application> GUI designer to see what
-is possible. You might even decide to use the
-<classname>Gtk::Builder</classname> API to load your GUI at runtime.
+There are several options governing how widgets are to be packed, and this can
+be confusing at first. You can modify the packing by using <methodname>set_expand()</methodname>,
+<methodname>set_hexpand()</methodname>, <methodname>set_vexpand()</methodname>,
+<methodname>set_halign()</methodname>, <methodname>set_valign()</methodname>
+and/or <methodname>set_margin()</methodname> on the child widgets. If you have
+difficulties, then it is sometimes a good idea to play with the
+<application>glade</application> GUI designer to see what is possible.
+You might even decide to use the <classname>Gtk::Builder</classname>
+API to load your GUI at runtime.
 </para>
 
 <para>
@@ -2045,31 +2051,9 @@ different styles, as shown in this picture:
 Each line contains one horizontal <classname>Box</classname> with
 several buttons. Each of the buttons on a line is packed into the
 <classname>Box</classname> with the same arguments to the
-<methodname>pack_start()</methodname> method.
-</para>
-
-<para>
-This is the declaration of the <methodname>pack_start()</methodname> method:
-</para>
-<programlisting>void pack_start(Gtk::Widget&amp; child,
-                Gtk::PackOptions options = Gtk::PACK_EXPAND_WIDGET);</programlisting>
-
-<para>
-The first argument is the widget you're packing. In our example these are all <classname>Button</classname>s.
-</para>
-
-<para>
-The <parameter>options</parameter> argument can take one of these three options:
-<itemizedlist>
-<listitem><para><literal>Gtk::PACK_SHRINK</literal>: Space is contracted to the child widget size. The widget will take up just-enough space and never expand.</para></listitem>
-<listitem><para><literal>Gtk::PACK_EXPAND_PADDING</literal>: Extra space is filled with padding. The widgets will be spaced out evenly, but their sizes won't change - there will be empty space between the widgets instead. </para></listitem>
-<listitem><para><literal>Gtk::PACK_EXPAND_WIDGET</literal>: Extra space is taken up by increasing the child widget size, without changing the amount of space between widgets.</para></listitem>
-</itemizedlist>
-</para>
-
-<para>
-Margins are set with the child widget's <methodname>set_margin()</methodname>,
-<methodname>set_margin_start()</methodname> etc. methods.
+<methodname>set_hexpand()</methodname>, <methodname>set_halign()</methodname>,
+<methodname>set_margin_start()</methodname> and <methodname>set_margin_end()</methodname>
+methods.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;Box.html">Reference</ulink></para>
@@ -2080,7 +2064,8 @@ Margins are set with the child widget's <methodname>set_margin()</methodname>,
 <para>
 Here's the constructor for the <classname>Box</classname> widget,
 and methods that set per-container packing options:
-<programlisting>Gtk::Box(Gtk::Orientation orientation = Gtk::ORIENTATION_HORIZONTAL, int spacing = 0);
+<programlisting>Gtk::Box(Gtk::Orientation orientation = Gtk::Orientation::HORIZONTAL, int spacing = 0);
+void set_orientation(Gtk::Orientation orientation);
 void set_spacing(int spacing);
 void set_homogeneous(bool homogeneous = true);</programlisting>
 Passing <literal>true</literal> to <methodname>set_homogeneous()</methodname> will
@@ -2123,7 +2108,7 @@ in the call to <methodname>Gtk::Application::run()</methodname>.
 
 <listitem><para>
 Give all command-line options to <methodname>Gtk::Application::run()</methodname>
-and add the flag <literal>Gio::APPLICATION_HANDLES_COMMAND_LINE</literal>
+and add the flag <literal>Gio::Application::Flags::HANDLES_COMMAND_LINE</literal>
 to <methodname>Gtk::Application::create()</methodname>.
 Connect a signal handler to the <literal>command_line</literal> signal, and
 handle the command-line options in the signal handler.</para>
@@ -2145,48 +2130,6 @@ unless you want your application to exit without showing its main window.
 Here is the source code for the example that produced the screenshots above. When you run this example, provide a number between 1 and 3 as a command-line option, to see different packing options in use.</para>
 
 <para><ulink url="&url_examples_base;box">Source Code</ulink></para>
-</sect3>
-
-</sect2>
-
-<sect2 id="sec-buttonbox">
-<title>ButtonBoxes</title>
-
-<para>
-Button boxes are a convenient way to quickly arrange a group of buttons. Their
-orientation can be either horizontal or vertical.
-</para>
-
-<para>
-<classname>ButtonBox</classname>es help to make applications appear consistent
-because they use standard settings, such as inter-button spacing and packing.
-</para>
-
-<para>
-Buttons are added to a <classname>ButtonBox</classname> with the
-<methodname>add()</methodname> method.
-</para>
-
-<para>
-Button boxes support several layout styles. The style can be retrieved and
-changed using <methodname>get_layout()</methodname> and
-<methodname>set_layout()</methodname>.
-</para>
-
-<para><ulink url="&url_refdocs_base_gtk;ButtonBox.html">Reference</ulink></para>
-
-<sect3 id="buttonbox-example">
-<title>Example</title>
-
-<figure id="figure-buttonbox">
-  <title>ButtonBox</title>
-  <screenshot>
-    <graphic format="PNG" fileref="&url_figures_base;buttonbox.png"/>
-  </screenshot>
-</figure>
-
-<para><ulink url="&url_examples_base;buttonbox">Source Code</ulink></para>
-
 </sect3>
 
 </sect2>
@@ -3574,13 +3517,13 @@ to a container. For instance:
 </para>
 <programlisting>
 <![CDATA[auto object = m_refBuilder->get_object("menubar");
-auto gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+auto gmenu = std::dynamic_pointer_cast<Gio::Menu>(object);
 auto pMenuBar = Gtk::make_managed<Gtk::MenuBar>(gmenu);
-m_Box.pack_start(*pMenuBar, Gtk::PACK_SHRINK);
+m_Box.add(*pMenuBar);
 
 Gtk::Toolbar* toolbar = nullptr;
 m_refBuilder->get_widget("toolbar", toolbar);
-m_Box.pack_start(*toolbar, Gtk::PACK_SHRINK);]]>
+m_Box.add(*toolbar);]]>
 </programlisting>
 
 </sect1>
@@ -5306,13 +5249,13 @@ Gtk::Widget* CustomPrintOperation::on_create_custom_widget()
 {
   set_custom_tab_label(&quot;My custom tab&quot;);
 
-  auto hbox = new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 8);
+  auto hbox = new Gtk::Box(Gtk::Orientation::HORIZONTAL, 8);
   hbox-&gt;set_margin(6);
 
   auto label = Gtk::make_managed&lt;Gtk::Label&gt;("Enter some text: ");
-  hbox-&gt;pack_start(*label, false, false);
+  hbox-&gt;add(*label);
 
-  hbox-&gt;pack_start(m_Entry, false, false);
+  hbox-&gt;add(m_Entry);
 
   return hbox;
 }
@@ -6068,9 +6011,8 @@ Alternatively, you can let a widget's container control when the widget is
 destroyed. In most cases, you want a widget to last only as long as the
 container it is in. To delegate the management of a widget's lifetime to its
 container, create it with <function>Gtk::make_managed()</function> and then
-pack it into its container with <methodname>Gtk::Container::add()</methodname>,
-<methodname>Gtk::Box::pack_start()</methodname>, or a similar method. Now the
-widget will be destroyed whenever its container is destroyed.
+pack it into its container with <methodname>Gtk::Container::add()</methodname> or
+a similar method. Now the widget will be destroyed whenever its container is destroyed.
 </para>
 
 <sect3 id="memory-managed-dynamic">
@@ -7479,8 +7421,7 @@ Connect any signals you wish to use to the appropriate handlers.
 <listitem>
 <para>
 Pack the widget into a container using the appropriate call,
-e.g. <methodname>Gtk::Container::add()</methodname> or
-<methodname>Gtk::Box::pack_start()</methodname>.
+e.g. <methodname>Gtk::Container::add()</methodname>.
 </para>
 </listitem>
 
