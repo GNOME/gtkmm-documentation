@@ -31,12 +31,12 @@ ExampleWindow::ExampleWindow()
   // Entries
   m_title_entry.set_text("HeaderBar title");
   m_subtitle_entry.set_text("HeaderBar subtitle");
-  m_title_entry.signal_activate().connect(sigc::mem_fun(*this, &ExampleWindow::on_title_entry_activate));
-  m_subtitle_entry.signal_activate().connect(sigc::mem_fun(*this, &ExampleWindow::on_subtitle_entry_activate));
+  m_title_entry.signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_title_entry_changed));
+  m_subtitle_entry.signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_subtitle_entry_changed));
 
   // Header bar
-  on_title_entry_activate();
-  on_subtitle_entry_activate();
+  on_title_entry_changed();
+  on_subtitle_entry_changed();
   m_header_bar.set_show_title_buttons();
   m_header_bar.pack_start(m_button);
 
@@ -70,7 +70,7 @@ void ExampleWindow::on_switch_active_changed()
   m_header_bar.set_show_title_buttons(show_title_buttons);
 }
 
-void ExampleWindow::on_title_entry_activate()
+void ExampleWindow::on_title_entry_changed()
 {
   const auto title = m_title_entry.get_text();
   if(!title.empty())
@@ -79,7 +79,7 @@ void ExampleWindow::on_title_entry_activate()
   }
 }
 
-void ExampleWindow::on_subtitle_entry_activate()
+void ExampleWindow::on_subtitle_entry_changed()
 {
   const auto subtitle = m_subtitle_entry.get_text();
   m_header_bar.set_subtitle(subtitle);

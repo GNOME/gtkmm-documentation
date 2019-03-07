@@ -29,7 +29,7 @@ public:
 protected:
   //Signal handlers:
   void on_combo_changed();
-  void on_entry_activate();
+  void on_entry_changed();
   void on_entry_has_focus_changed();
 
   //Signal connection:

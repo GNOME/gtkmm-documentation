@@ -31,14 +31,14 @@ ExampleWindow::ExampleWindow()
   add(m_Combo);
 
   //Connect signal handlers:
-  auto entry = m_Combo.get_entry();
-  // Alternatively you can connect to entry->signal_changed().
   m_Combo.signal_changed().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_combo_changed) );
+
+  auto entry = m_Combo.get_entry();
   if (entry)
   {
-    entry->signal_activate().connect(sigc::mem_fun(*this,
-      &ExampleWindow::on_entry_activate) );
+    entry->signal_changed().connect(sigc::mem_fun(*this,
+      &ExampleWindow::on_entry_changed));
     m_ConnectionHasFocusChanged = entry->property_has_focus().signal_changed().
       connect(sigc::mem_fun(*this, &ExampleWindow::on_entry_has_focus_changed));
   }
@@ -62,9 +62,9 @@ void ExampleWindow::on_combo_changed()
     << ", Text=" << m_Combo.get_active_text() << std::endl;
 }
 
-void ExampleWindow::on_entry_activate()
+void ExampleWindow::on_entry_changed()
 {
-  std::cout << "on_entry_activate(): Row=" << m_Combo.get_active_row_number()
+  std::cout << "on_entry_changed(): Row=" << m_Combo.get_active_row_number()
     << ", Text=" << m_Combo.get_active_text() << std::endl;
 }
 

@@ -141,7 +141,8 @@ void PopupEntry::start_editing_vfunc(const Glib::RefPtr<const Gdk::Event>&)
   entry_->select_region(0, -1);
 
   // Although this is a key-binding signal, it's acceptable to use it in applications.
-  entry_->signal_activate().connect(sigc::mem_fun(*this, &Self::on_entry_activate));
+  // 2019-03-07: No longer true in gtk4.
+  //entry_->signal_activate().connect(sigc::mem_fun(*this, &Self::on_entry_activate));
 
   auto controller = Gtk::EventControllerKey::create();
   controller->signal_key_pressed().connect(

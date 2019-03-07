@@ -148,8 +148,8 @@ void MyWidget::on_realize()
     m_refGdkSurface = Gdk::Surface::create_child(get_parent_surface(), get_allocation());
     set_surface(m_refGdkSurface);
 
-    //make the widget receive expose events
-    m_refGdkSurface->set_user_data(gobj());
+    // Make the widget receive expose events
+    register_surface(m_refGdkSurface);
   }
 
   //Call base class:

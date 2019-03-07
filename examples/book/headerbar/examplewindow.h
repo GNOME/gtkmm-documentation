@@ -26,10 +26,10 @@ public:
   virtual ~ExampleWindow();
 
 protected:
-  // Slots
+  // Signal handlers
   void on_switch_active_changed();
-  void on_title_entry_activate();
-  void on_subtitle_entry_activate();
+  void on_title_entry_changed();
+  void on_subtitle_entry_changed();
   void on_button_clicked();
 
   // Containers
