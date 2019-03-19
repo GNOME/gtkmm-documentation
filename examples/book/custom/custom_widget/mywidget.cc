@@ -22,18 +22,25 @@
 
 // The MyWidget class uses API which was added in gtkmm 3.15.3 (Gtk::CssProviderError,
 // Gtk::CssProvider::signal_parsing_error() and Gtk::CssSection) and in gtkmm 3.15.2
-// (Gtk::StyleProperty).
+// (Gtk::StyleProperty) and in glibmm 2.60.0 (Glib::ExtraClassInit).
 
 MyWidget::MyWidget() :
   //The GType name will actually be gtkmm__CustomObject_mywidget
   Glib::ObjectBase("mywidget"),
+#if HAS_EXTRA_CLASS_INIT
+  MyExtraInit("my-widget-class"), // CSS node name, which must be used in the CSS file.
+#endif
   Gtk::Widget(),
   //Install a style property so that an aspect of this widget may be themed
   //via a CSS style sheet file:
   m_scale_prop(*this, "example_scale", 500),
   m_scale(1000)
 {
+#if HAS_EXTRA_CLASS_INIT == 0
   set_has_window(true);
+  // Set the widget name to use in the CSS file.
+  set_name("my-widget-instance");
+#endif
 
   //This shows the GType name, which must be used in the CSS file.
   std::cout << "GType name: " << G_OBJECT_TYPE_NAME(gobj()) << std::endl;
@@ -41,15 +48,13 @@ MyWidget::MyWidget() :
   //This shows that the GType still derives from GtkWidget:
   //std::cout << "Gtype is a GtkWidget?:" << GTK_IS_WIDGET(gobj()) << std::endl;
 
-  // Set the widget name to use in the CSS file.
-  set_name("my-widget");
-
-  // If you make a custom widget in C code, based on gtk+'s GtkWidget, there is
-  // an alternative to gtk_widget_set_name(): Set a CSS name for your custom
-  // class (instead of the widget instance) with gtk_widget_class_set_css_name()
-  // (new in gtk+ 3.19.1). That's not possible for custom widgets defined in gtkmm.
-  // gtk_widget_class_set_css_name() must be called in the class init function,
-  // which can't be customized, when the widget is based on gtkmm's Gtk::Widget.
+  // The CSS name can be set either
+  // - for a GType (in this case for your custom class) with gtk_widget_class_set_css_name(), or
+  // - for a widget instance with gtk_widget_set_name() (Gtk::Widget::set_name()).
+  //
+  // gtk_widget_class_set_css_name() (new in gtk+ 3.19.1), if used, must be called
+  // in the class init function. It has not been wrapped in a C++ function.
+  // Gtk::Widget::set_name() can be called in a C++ constructor.
   //
   // Another alternative: The custom widget inherits the CSS name "widget" from
   // GtkWidget. That name can be used in the CSS file. This is not a very good

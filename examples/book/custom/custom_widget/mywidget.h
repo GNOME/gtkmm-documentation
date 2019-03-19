@@ -20,8 +20,13 @@
 #include <gtkmm/widget.h>
 #include <gtkmm/cssprovider.h>
 #include <gtkmm/styleproperty.h>
+#include "myextrainit.h"
 
+#if HAS_EXTRA_CLASS_INIT
+class MyWidget : public MyExtraInit, public Gtk::Widget
+#else
 class MyWidget : public Gtk::Widget
+#endif
 {
 public:
   MyWidget();
