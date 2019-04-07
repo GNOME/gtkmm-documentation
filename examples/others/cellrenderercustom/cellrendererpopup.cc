@@ -165,7 +165,10 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
 {
   // I'm not sure this is ok to do, but we need to show the window to be
   // able to get the allocation right.
-  popup_window_.move(-500, -500);
+  // 2019-04-07: gtk_window_move() and Gtk::Window::move() have been removed.
+  // Use set_position() for the time being.
+  //popup_window_.move(-500, -500);
+  popup_window_.set_position(Gtk::WindowPosition::MOUSE);
   popup_window_.show();
 
   const auto alloc = popup_window_.get_allocation();
@@ -204,7 +207,8 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
 
   popup_window_.add_modal_grab();
 
-  popup_window_.move(x, y);
+  //popup_window_.move(x, y);
+  (void)x; (void)y; // Pretend that x and y are used.
   popup_window_.show();
 
   shown_ = true;

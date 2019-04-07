@@ -85,7 +85,7 @@ int PopupEntry::get_button_width()
   button->set_image_from_icon_name("pan-down-symbolic", Gtk::IconSize::INHERIT, true);
 
   // Urgh.  Hackish :/
-  window.move(-500, -500);
+  //window.move(-500, -500);
 
   //TODO: Support natural-size:
   Gtk::Requisition requisition_min, requisition_natural;

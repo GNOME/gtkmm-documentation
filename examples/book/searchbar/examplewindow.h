@@ -26,8 +26,7 @@ public:
   virtual ~ExampleWindow();
 
 private:
-  // Slots
-  bool on_window_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state);
+  // Signal handlers
   void on_search_mode_changed();
   void on_show_close_button_changed();
   void on_search_bar_reveal_changed();
@@ -49,8 +48,6 @@ private:
   Gtk::Switch m_close_button_switch;
   Gtk::Label m_close_button_label;
   Gtk::Separator m_separator;
-
 };
 
 #endif // GTKMM_EXAMPLEWINDOW_H
-
