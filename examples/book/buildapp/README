@@ -5,23 +5,34 @@
 The examples in this directory are built with 'make check' alongside the rest of
 the examples in gtkmm-documentation.
 
-The examples in the step[1-9] directories can also be built independently,
-by doing:
+The examples in the step[1-9] directories can also be built separately.
+You can then choose to build with make or with meson and ninja.
 
   $ cd step1  # or step2, step3, etc.
   $ make -f Makefile.example
+or
+  $ cd step1  # or step2, step3, etc.
+  $ meson build  # or another name for the build directory
+  $ cd build
+  $ ninja
 
 To make gnome-shell use the desktop file and icon for one of the examples
 while running it uninstalled, do the following:
 
   $ cd step1  # or step2, step3, etc.
   $ make -f Makefile.example install-desktop-file
+or
+  $ cd step1/build  # or step2/build, step3/build, etc.
+  $ ninja install-desktop-file
 
 To make Gio::Settings find the preferences in step[5-9], they must be stored
 where they can be found via one of the environment variables XDG_DATA_DIRS,
 XDG_DATA_HOME or GSETTINGS_SCHEMA_DIR. One way to achieve this is:
 
   $ cd step5  # or step6, step7, etc.
+  $ export GSETTINGS_SCHEMA_DIR=.
+or
+  $ cd step5/build  # or step6/build, step7/build, etc.
   $ export GSETTINGS_SCHEMA_DIR=.
 
 But then the program can only be run from that directory. Alternatively,
@@ -33,3 +44,6 @@ and do the following:
 
   $ cd step5  # or step6, step7, etc.
   $ make -f Makefile.example install-gschema-file
+or
+  $ cd step5/build  # or step6/build, step7/build, etc.
+  $ ninja install-gschema-file
