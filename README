@@ -1,2 +1,35 @@
-This is the documentation for gtkmm, a C++ API for GTK+.
+This is the documentation for gtkmm, a C++ API for GTK.
 See http://www.gtkmm.org/
+
+Building with meson
+-------------------
+This is experimental and incomplete.
+Use autotools for production builds.
+
+Create a build directory:
+  $ cd gtkmm-documentation
+  $ meson <build-dir>
+Do not call the build-dir gtkmm-documenation/build. There is already such a
+directory, used when building with autotools.
+
+Create the html files of the tutorial:
+  $ cd <build-dir>
+  $ ninja
+
+Install them:
+  $ ninja install
+
+Build the example programs:
+  $ ninja examples
+
+Print a list of configuration options:
+  $ meson configure
+
+Example of changing options:
+  $ meson configure --prefix=/opt/gnome -Dwarnings=fatal
+
+Make a tarball:
+  $ ninja dist
+This tarball is not identical to one made with "make dist" or "make distcheck".
+There is e.g. no "configure" file. If you want to use a tarball made with
+"ninja dist" for building with autotools, you have to start with ./autogen.sh.

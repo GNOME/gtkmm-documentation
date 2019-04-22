@@ -1,0 +1,7 @@
+option('warnings', type: 'combo', choices : ['no', 'min', 'max', 'fatal'], value : 'min',
+  description : 'Set compiler pedantry level')
+option('build-examples', type: 'boolean', value: false,
+  description : 'Build all example programs by default')
+option('build-translations', type: 'boolean', value: true,
+  description : 'Build translated tutorials by default')
+
