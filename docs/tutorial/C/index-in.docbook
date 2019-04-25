@@ -2628,8 +2628,10 @@ for (auto iter = children.begin(), end = children.end(); iter != end; ++iter)
   auto row = *iter;
   //Do something with the row - see above for set/get.
 }</programlisting>
+<para>
 If you always want to iterate across the entire range, much more succinct syntax
 is possible using C++'s range-based <literal>for</literal> loop:
+</para>
 <programlisting>
 for (auto row: refModel-&gt;children())
 {
@@ -4723,10 +4725,10 @@ using these <classname>Gtk::Widget</classname> methods:
 <para>There are several methods to add source formats and destination formats.
 Examples:
 <itemizedlist>
-  <listitem><methodname>drag_source_add_text_targets()</methodname></listitem>
-  <listitem><methodname>drag_source_add_image_targets()</methodname></listitem>
-  <listitem><methodname>drag_dest_add_text_targets()</methodname></listitem>
-  <listitem><methodname>drag_dest_add_image_targets()</methodname></listitem>
+  <listitem><para><methodname>drag_source_add_text_targets()</methodname></para></listitem>
+  <listitem><para><methodname>drag_source_add_image_targets()</methodname></para></listitem>
+  <listitem><para><methodname>drag_dest_add_text_targets()</methodname></para></listitem>
+  <listitem><para><methodname>drag_dest_add_image_targets()</methodname></para></listitem>
 </itemizedlist>
 </para>
 </sect1>
