@@ -1285,7 +1285,7 @@ echoed on the screen, calling <methodname>set_visibility()</methodname> with
 You might want to be notified whenever the user types in a text entry widget.
 <classname>Gtk::Entry</classname> provides two signals,
 <literal>activate</literal> and <literal>changed</literal>, for this purpose.
-<literal>activate</literal> is emitted when the user presses the Enter key in
+<literal>activate</literal> is emitted when the user presses the <keycap>Enter</keycap> key in
 a text-entry widget; <literal>changed</literal> is emitted when the text in
 the widget changes. You can use these, for instance, to validate or filter
 the text the user types. Moving the keyboard focus to another widget may also
@@ -1298,7 +1298,7 @@ contains example programs that use these signals.
 
 <para>
 If you pass <literal>true</literal> to the <methodname>set_activates_default()</methodname>
-method, pressing Enter in the <classname>Gtk::Entry</classname> will activate
+method, pressing <keycap>Enter</keycap> in the <classname>Gtk::Entry</classname> will activate
 the default widget for the window containing the <classname>Gtk::Entry</classname>.
 This is especially useful in dialog boxes. The default widget is usually one of
 the dialog buttons, which e.g. will close the dialog box. To set a widget as the
@@ -3084,7 +3084,7 @@ When you select a choice from the drop-down menu, the value from this column wil
 <para>
 When the user enters arbitrary text, it may not be enough to connect to the
 <literal>changed</literal> signal, which is emitted for every typed character.
-It is not emitted when the user presses the Enter key. Pressing the Enter key or
+It is not emitted when the user presses the <keycap>Enter</keycap> key. Pressing the <keycap>Enter</keycap> key or
 moving the keyboard focus to another widget may signal that the user has finished
 entering text. To be notified of these events, connect to the
 <classname>Entry</classname>'s <literal>activate</literal> and
