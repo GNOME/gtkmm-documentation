@@ -128,20 +128,7 @@ void CalendarExample::on_font_button_font_set()
     (font_size == 0 ? "" : "    font-size: " + std::to_string(font_size / PANGO_SCALE) + "pt;\n") +
     "}";
 
-  try
-  {
-    css_provider_->load_from_data(css);
-  }
-  catch (const Gtk::CssProviderError& ex)
-  {
-    std::cerr << "CssProviderError, Gtk::CssProvider::load_from_data() failed: "
-              << ex.what() << std::endl;
-  }
-  catch (const Glib::Error& ex)
-  {
-    std::cerr << "Error, Gtk::CssProvider::load_from_data() failed: "
-              << ex.what() << std::endl;
-  }
+  css_provider_->load_from_data(css);
 }
 
 void CalendarExample::on_button_close()
@@ -160,10 +147,12 @@ void CalendarExample::on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>
       std::cerr << "  URI = " << file->get_uri() << std::endl;
     }
 
-    std::cerr << "  start_line = " << section->get_start_line()+1
-              << ", end_line = " << section->get_end_line()+1 << std::endl;
-    std::cerr << "  start_position = " << section->get_start_position()
-              << ", end_position = " << section->get_end_position() << std::endl;
+    auto start_location = section->get_start_location();
+    auto end_location = section->get_end_location();
+    std::cerr << "  start_line = " << start_location.get_lines()+1
+              << ", end_line = " << end_location.get_lines()+1 << std::endl;
+    std::cerr << "  start_position = " << start_location.get_line_chars()
+              << ", end_position = " << end_location.get_line_chars() << std::endl;
   }
 }
 

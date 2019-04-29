@@ -16,6 +16,7 @@
 
 #include "mywidget.h"
 #include <gdkmm/general.h>  // for cairo helper functions
+#include <gtkmm/container.h>
 #include <gtkmm/snapshot.h>
 #include <iostream>
 //#include <gtk/gtkwidget.h> //For GTK_IS_WIDGET()
@@ -59,20 +60,7 @@ MyWidget::MyWidget() :
   m_refCssProvider->signal_parsing_error().connect(
     sigc::mem_fun(*this, &MyWidget::on_parsing_error));
 
-  try
-  {
-    m_refCssProvider->load_from_path("custom_gtk.css");
-  }
-  catch(const Gtk::CssProviderError& ex)
-  {
-    std::cerr << "CssProviderError, Gtk::CssProvider::load_from_path() failed: "
-              << ex.what() << std::endl;
-  }
-  catch(const Glib::Error& ex)
-  {
-    std::cerr << "Error, Gtk::CssProvider::load_from_path() failed: "
-              << ex.what() << std::endl;
-  }
+  m_refCssProvider->load_from_path("custom_gtk.css");
 }
 
 MyWidget::~MyWidget()
@@ -145,7 +133,7 @@ void MyWidget::on_realize()
   if(!m_refGdkSurface)
   {
     //Create the GdkSurface:
-    m_refGdkSurface = Gdk::Surface::create_child(get_parent_surface(), get_allocation());
+    m_refGdkSurface = Gdk::Surface::create_child(get_parent()->get_surface(), get_allocation());
     set_surface(m_refGdkSurface);
 
     // Make the widget receive expose events
@@ -214,9 +202,11 @@ void MyWidget::on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& secti
       std::cerr << "  URI = " << file->get_uri() << std::endl;
     }
 
-    std::cerr << "  start_line = " << section->get_start_line()+1
-              << ", end_line = " << section->get_end_line()+1 << std::endl;
-    std::cerr << "  start_position = " << section->get_start_position()
-              << ", end_position = " << section->get_end_position() << std::endl;
+    auto start_location = section->get_start_location();
+    auto end_location = section->get_end_location();
+    std::cerr << "  start_line = " << start_location.get_lines()+1
+              << ", end_line = " << end_location.get_lines()+1 << std::endl;
+    std::cerr << "  start_position = " << start_location.get_line_chars()
+              << ", end_position = " << end_location.get_line_chars() << std::endl;
   }
 }

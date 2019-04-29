@@ -50,16 +50,6 @@ void MyArea::fix_lines(bool fix)
   // to get the width right, we have to draw in the middle of the pixel
   m_fix = fix ? 0.5 : 0.0;
 
-  force_redraw();
-}
-
-// force the redraw of the image
-void MyArea::force_redraw()
-{
-  auto surface = get_surface();
-  if (surface)
-  {
-    Gdk::Rectangle rect(0, 0, get_allocation().get_width(), get_allocation().get_height());
-    surface->invalidate_rect(rect);
-  }
+  // force the redraw of the image
+  queue_draw();
 }

@@ -26,7 +26,6 @@ public:
   virtual ~MyArea();
 
   void fix_lines(bool fix = true);
-  void force_redraw();
 
 protected:
   void on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);

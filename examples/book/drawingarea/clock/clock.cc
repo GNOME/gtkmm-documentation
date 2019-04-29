@@ -118,16 +118,9 @@ void Clock::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int heig
   cr->fill();
 }
 
-
 bool Clock::on_timeout()
 {
-    // force our program to redraw the entire clock.
-    auto surface = get_surface();
-    if (surface)
-    {
-        Gdk::Rectangle rect(0, 0, get_allocation().get_width(),
-                get_allocation().get_height());
-        surface->invalidate_rect(rect);
-    }
-    return true;
+  // force our program to redraw the entire clock.
+  queue_draw();
+  return true;
 }
