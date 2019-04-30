@@ -117,15 +117,23 @@ foreach ex : examples_book
     endif
   endforeach
 
-  # multi-threaded programs need thread support
-  deps = (ex[0][0] == 'multithread') ? [gtkmm_dep, thread_dep] : gtkmm_dep
+  if ex[0][0] == 'input'
+    # input/main.cc includes build/config.h.
+    exe_file = executable(ex_name, ex_sources, resources,
+      dependencies: gtkmm_dep,
+      include_directories: config_include_dir,
+      build_by_default: build_examples_by_default
+    )
+  else
+    # multi-threaded programs need thread support
+    deps = (ex[0][0] == 'multithread') ? [gtkmm_dep, thread_dep] : gtkmm_dep
 
-  exe_file = executable(ex_name, ex_sources, resources,
-    dependencies: deps,
-    gui_app: true,
-    include_directories: config_include_dir, # only input/example needs this
-    build_by_default: build_examples_by_default
-  )
+    exe_file = executable(ex_name, ex_sources, resources,
+      dependencies: deps,
+      gui_app: true,
+      build_by_default: build_examples_by_default
+    )
+  endif
 
   stamp_file_name = ex_name + '_copy.stamp'
   custom_target(stamp_file_name,

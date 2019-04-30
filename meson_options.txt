@@ -1,7 +1,14 @@
 option('warnings', type: 'combo', choices : ['no', 'min', 'max', 'fatal'], value : 'min',
-  description : 'Set compiler pedantry level')
+  description : 'Compiler warning level')
+option('dist-warnings', type: 'combo', choices : ['no', 'min', 'max', 'fatal'], value : 'fatal',
+  description : 'Compiler warning level when creating distribution tarball')
 option('build-examples', type: 'boolean', value: false,
-  description : 'Build all example programs by default')
+  description : 'Build all example programs')
+option('build-dist-examples', type: 'boolean', value: true,
+  description : 'Build all example programs when creating distribution tarball')
+option('validation', type: 'boolean', value: true,
+  description : 'Validate generated XML files')
 option('build-translations', type: 'boolean', value: true,
-  description : 'Build translated tutorials by default')
-
+  description : 'Build translated tutorials')
+option('build-pdf', type: 'boolean', value: false,
+  description : 'Build tutorial PDF file')

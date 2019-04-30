@@ -1,15 +1,23 @@
 # docs/tutorial
 
 # input: gtkmm_datadir, gtkmm_pcname, tutorial_custom_cmd_sh
-# output: tutorial_languages
+# output: can_parse_and_validate, build_translations_by_default, can_build_translations,
+#         build_pdf_by_default, can_build_pdf, tutorial_languages
 
 xsltproc = find_program('xsltproc', required: true)
 perl = find_program('perl', required: true)
 xmllint = find_program('xmllint', required: false)
 
+can_parse_and_validate = xmllint.found()
+
 can_build_translations = find_program('msgfmt', required: false).found() and \
                          find_program('itstool', required: false).found()
 build_translations_by_default = get_option('build-translations')
+validate = get_option('validation') ? 'true' : 'false'
+
+can_build_pdf = find_program('docbook2pdf', required: false).found() and \
+                xmllint.found()
+build_pdf_by_default = get_option('build-pdf')
 
 tutorial_languages = ['cs', 'de', 'el', 'es', 'fr', 'pt_BR', 'sl', 'zh_CN']
 
@@ -141,6 +149,7 @@ xslt_params = [
   '--stringparam', 'use.id.as.filename', '1',
 ]
 
+# Create a DocBook C locale XML file with the examples' source code included.
 index_docbook = custom_target('index.docbook',
   input: join_paths('C', 'index-in.docbook'),
   output: 'index.docbook',
@@ -154,6 +163,7 @@ index_docbook = custom_target('index.docbook',
   build_by_default: true
 )
 
+# Create an html version of the C locale's version of the DocBook.
 custom_target('html_index.html',
   input: index_docbook,
   output: 'html',
@@ -171,13 +181,14 @@ custom_target('html_index.html',
   install_dir: tutorialdir
 )
 
-if xmllint.found()
+if can_parse_and_validate
+  # Parse and possibly validate the C locale's version of the DocBook.
   custom_target('C-xmllint',
     input: index_docbook,
     output: 'C_xmllint.stamp',
     command: [
-      tutorial_custom_cmd_sh,
-      'xmllint',
+      tutorial_custom_cmd_sh, 'xmllint',
+      validate,
       '@INPUT@',
       '@OUTPUT@'
     ],
@@ -186,13 +197,14 @@ if xmllint.found()
 endif
 
 if can_build_translations
+  # Create XML files with translations.
   foreach lang : tutorial_languages
+    # Create .mo files.
     po2mo = custom_target(lang + '-po2mo',
       input: join_paths(lang, lang + '.po'),
       output: lang + '_mo.stamp',
       command: [
-        tutorial_custom_cmd_sh,
-        'po2mo',
+        tutorial_custom_cmd_sh, 'po2mo',
         lang,
         meson.current_build_dir(),
         '@INPUT@',
@@ -202,12 +214,12 @@ if can_build_translations
       build_by_default: build_translations_by_default,
     )
 
+  # Create XML files.
     lang_index_docbook = custom_target(lang + '-index.docbook',
       input: [po2mo, index_docbook],
       output: lang + '_docbook.stamp',
       command: [
-        tutorial_custom_cmd_sh,
-        'docbook',
+        tutorial_custom_cmd_sh, 'docbook',
         join_paths(meson.current_build_dir(), lang, lang + '.mo'),
         '@INPUT1@',
         join_paths(meson.current_build_dir(), lang),
@@ -216,13 +228,14 @@ if can_build_translations
       build_by_default: build_translations_by_default,
     )
 
-    if xmllint.found()
+    if can_parse_and_validate
+      # Parse and possibly validate the translated version of the DocBook.
       custom_target(lang + '-xmllint',
         input: lang_index_docbook,
         output: lang + '_xmllint.stamp',
         command: [
-          tutorial_custom_cmd_sh,
-          'xmllint',
+          tutorial_custom_cmd_sh, 'xmllint',
+          validate,
           join_paths(meson.current_build_dir(), lang, 'index.docbook'),
           '@OUTPUT@'
         ],
@@ -231,6 +244,21 @@ if can_build_translations
     endif
   endforeach # lang
 endif # can_build_translations
+
+if can_build_pdf
+  # Create a PDF file of the C locale's version of the DocBook.
+  custom_target('C-pdf',
+    input: index_docbook,
+    output: 'programming-with-gtkmm.pdf',
+    command: [
+      tutorial_custom_cmd_sh, 'pdf',
+      '@INPUT@',
+      join_paths(meson.current_source_dir(), 'C', 'figures'),
+      '@OUTPUT@'
+    ],
+    build_by_default: build_pdf_by_default,
+  )
+endif
 
 install_data('style.css', install_dir: tutorial_htmldir)
 install_data(tutorial_figures, install_dir: tutorial_figuresdir)

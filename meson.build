@@ -1,5 +1,4 @@
-# Building gtkmm-documentation with meson is experimental.
-# Use autotools for production builds.
+# This file is part of gtkmm-documentation.
 
 project('gtkmm-documentation', 'c', 'cpp',
   version: '3.89.0',
@@ -24,7 +23,12 @@ tutorial_custom_cmd_sh = files(join_paths('tools', 'meson_aux', 'tutorial-custom
 
 cpp_compiler = meson.get_compiler('cpp')
 
-warning_level = get_option('warnings')
+# Is this configuration done during creation of a tarball (ninja dist)?
+# The "real" source directory contains a .git subdirectory. The temporary
+# source directory created by "ninja dist" does not.
+is_dist = run_command('test', '-d', join_paths(meson.current_source_dir(), '.git')).returncode() != 0
+
+warning_level = get_option(is_dist ? 'dist-warnings' : 'warnings')
 warning_flags = []
 if warning_level == 'min'
   warning_flags = [ '-Wall' ]
@@ -42,36 +46,51 @@ endif
 warning_flags = cpp_compiler.get_supported_arguments(warning_flags)
 add_project_arguments(warning_flags, language: 'cpp')
 
-# This fix is necessary to make examples/book/input/example compile.
-# TODO: Improve it.
-has_mkfifo = cpp_compiler.has_function('mkfifo')
-conf_data = configuration_data()
-conf_data.set('HAVE_MKFIFO', has_mkfifo)
-conf_file = configure_file(
-  output: 'config.h',
-  configuration: conf_data
-)
-custom_target('build_config',
-  input: conf_file,
-  output: 'config.stamp',
-  command: [
-    copy_to_subdir_sh,
-    '@INPUT@',
-    'build',
-    'config.h',
-    '@OUTPUT@',
-  ],
-  build_by_default: true
-)
-config_include_dir = include_directories('.')
-# end of examples/book/input/example fix
-
 subdir('docs/tutorial')
 subdir('examples')
 
+# Modify the contents of the distribution directory.
 meson.add_dist_script(
   join_paths('tools', 'meson_aux', 'extra-dist-cmd.sh'),
+  meson.current_source_dir(),
   meson.current_build_dir(),
   join_paths('meson-dist', meson.project_name() + '-' + meson.project_version()),
   ' '.join(tutorial_languages)
 )
+
+# Print a summary.
+validate = get_option('validation') and can_parse_and_validate
+explain_val = ''
+if get_option('validation') and not validate
+  explain_val = ' (requires xmllint)'
+endif
+
+build_translations = build_translations_by_default and can_build_translations
+explain_trans = ''
+if build_translations_by_default and not build_translations
+  explain_trans = ' (requires msgfmt and itstool)'
+endif
+
+build_pdf = build_pdf_by_default and can_build_pdf
+explain_pdf = ''
+if build_pdf_by_default and not build_pdf
+  explain_pdf = ' (requires xmllint and docbook2pdf)'
+endif
+
+summary = [
+  '',
+  '------',
+  meson.project_name() + ' ' + meson.project_version(),
+  '',
+  '    Build examples: @0@'.format(build_examples_by_default),
+  ' Compiler warnings: @0@'.format(warning_level),
+  '    XML validation: @0@@1@'.format(validate, explain_val),
+  'Build translations: @0@@1@'.format(build_translations, explain_trans),
+  '         Build PDF: @0@@1@'.format(build_pdf, explain_pdf),
+  'Directories:',
+  '            prefix: @0@'.format(gtkmm_prefix),
+  '           datadir: @0@'.format(gtkmm_datadir),
+  '------'
+]
+
+message('\n'.join(summary))
