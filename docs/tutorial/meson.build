@@ -4,6 +4,7 @@
 # output: can_parse_and_validate, build_translations_by_default, can_build_translations,
 #         build_pdf_by_default, can_build_pdf, tutorial_languages
 
+# xsltproc is required because it is called by tutorial_custom_cmd_sh html.
 xsltproc = find_program('xsltproc', required: true)
 perl = find_program('perl', required: true)
 xmllint = find_program('xmllint', required: false)
@@ -15,8 +16,9 @@ can_build_translations = find_program('msgfmt', required: false).found() and \
 build_translations_by_default = get_option('build-translations')
 validate = get_option('validation') ? 'true' : 'false'
 
-can_build_pdf = find_program('docbook2pdf', required: false).found() and \
-                xmllint.found()
+dblatex = find_program('dblatex', required: false)
+can_build_pdf = dblatex.found() or (xmllint.found() and \
+                find_program('docbook2pdf', required: false).found())
 build_pdf_by_default = get_option('build-pdf')
 
 tutorial_languages = ['cs', 'de', 'el', 'es', 'fr', 'pt_BR', 'sl', 'zh_CN']
@@ -131,24 +133,6 @@ foreach i : tutorial_iconfiles
   tutorial_icons += join_paths('icons', i)
 endforeach
 
-# Set the use.id.as.filename param so that we don't use the chapter / section
-# number as the filename, otherwise the url will change every time anything is
-# re-ordered or inserted in the documentation
-xslt_params = [
-  '--param', 'toc.section.depth', '1',
-  '--stringparam', 'html.stylesheet', 'style.css',
-  '--stringparam', 'admon.graphics', '1',
-  '--stringparam', 'admon.graphics.path', 'icons/',
-  '--stringparam', 'admon.graphics.extension', '.png',
-  '--stringparam', 'chunker.output.indent', 'yes',
-  '--stringparam', 'chunker.output.encoding', 'UTF-8',
-  '--stringparam', 'navig.graphics', 'yes',
-  '--stringparam', 'navig.graphics.extension', '.png',
-  '--stringparam', 'navig.graphics.path', 'icons/',
-  '--stringparam', 'toc.list.type', 'ul',
-  '--stringparam', 'use.id.as.filename', '1',
-]
-
 # Create a DocBook C locale XML file with the examples' source code included.
 index_docbook = custom_target('index.docbook',
   input: join_paths('C', 'index-in.docbook'),
@@ -168,13 +152,11 @@ custom_target('html_index.html',
   input: index_docbook,
   output: 'html',
   command: [
-    xsltproc,
-    xslt_params,
-    '-o', '@OUTPUT@/',
-    '--xinclude',
-    '--catalogs',
-    'http://docbook.sourceforge.net/release/xsl/current/html/chunk.xsl',
+    tutorial_custom_cmd_sh, 'html',
+    'html',
+    meson.current_build_dir(),
     '@INPUT@',
+    '@OUTPUT@',    
   ],
   build_by_default: true,
   install: true,
@@ -199,7 +181,7 @@ endif
 if can_build_translations
   # Create XML files with translations.
   foreach lang : tutorial_languages
-    # Create .mo files.
+    # Create .mo file.
     po2mo = custom_target(lang + '-po2mo',
       input: join_paths(lang, lang + '.po'),
       output: lang + '_mo.stamp',
@@ -214,12 +196,12 @@ if can_build_translations
       build_by_default: build_translations_by_default,
     )
 
-  # Create XML files.
+    # Create XML file.
     lang_index_docbook = custom_target(lang + '-index.docbook',
       input: [po2mo, index_docbook],
       output: lang + '_docbook.stamp',
       command: [
-        tutorial_custom_cmd_sh, 'docbook',
+        tutorial_custom_cmd_sh, 'xmltrans',
         join_paths(meson.current_build_dir(), lang, lang + '.mo'),
         '@INPUT1@',
         join_paths(meson.current_build_dir(), lang),
@@ -247,11 +229,13 @@ endif # can_build_translations
 
 if can_build_pdf
   # Create a PDF file of the C locale's version of the DocBook.
+  # Prefer dblatex, if both dblatex and docbook2pdf are available.
   custom_target('C-pdf',
     input: index_docbook,
     output: 'programming-with-gtkmm.pdf',
     command: [
-      tutorial_custom_cmd_sh, 'pdf',
+      tutorial_custom_cmd_sh,
+      dblatex.found() ? 'dblatex' : 'docbook2pdf',
       '@INPUT@',
       join_paths(meson.current_source_dir(), 'C', 'figures'),
       '@OUTPUT@'
