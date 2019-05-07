@@ -38,8 +38,7 @@ ExampleWindow::ExampleWindow()
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
   m_VBox.add(m_Button_Close);
-  m_Button_Close.set_can_default();
-  m_Button_Close.grab_default();
+  set_default_widget(m_Button_Close);
 }
 
 ExampleWindow::~ExampleWindow()

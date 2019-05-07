@@ -138,8 +138,7 @@ ExampleWindow::ExampleWindow()
   m_VBox_Top.add(m_Separator);
   m_VBox_Top.add(m_Button_Quit);
 
-  m_Button_Quit.set_can_default();
-  m_Button_Quit.grab_default();
+  set_default_widget(m_Button_Quit);
   m_Button_Quit.signal_clicked().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_button_quit));
   m_Button_Quit.set_margin(10);

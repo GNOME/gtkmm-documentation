@@ -63,8 +63,7 @@ RadioButtons::RadioButtons() :
   m_Button_Close.set_expand();
 
   // Make the button the default widget
-  m_Button_Close.set_can_default();
-  m_Button_Close.grab_default();
+  set_default_widget(m_Button_Close);
 
   // Connect the clicked signal of the button to
   // RadioButtons::on_button_clicked()

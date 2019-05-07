@@ -283,8 +283,7 @@ CalendarExample::CalendarExample()
   bbox->add(*button);
   button->set_hexpand();
   button->set_halign(Gtk::Align::END);
-  button->set_can_default();
-  button->grab_default();
+  set_default_widget(*button);
 }
 
 Glib::Date CalendarExample::get_date() const

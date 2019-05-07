@@ -53,8 +53,7 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::on_button_close) );
   m_VBox.add(m_Button_Close);
   m_Button_Close.set_expand();
-  m_Button_Close.set_can_default();
-  m_Button_Close.grab_default();
+  set_default_widget(m_Button_Close);
 }
 
 ExampleWindow::~ExampleWindow()
