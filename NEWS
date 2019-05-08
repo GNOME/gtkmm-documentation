@@ -1,3 +1,46 @@
+3.95.1: (unstable)
+Distro packagers should probably not package this yet.
+
+* Prepare for gtkmm-4.0.
+  Require giomm-2.62 and gtkmm-4.0. Require C++17
+  (Kjell Ahlstedt)
+* Remove the "Plugs and Sockets" chapter and example
+  (Kjell Ahlstedt)
+* Update most chapters and example programs.
+  (Kjell Ahlstedt, Murray Cumming)
+* Add "Changes in gtkmm 4" chapter (incomplete)
+  (Kjell Ahlstedt)
+* Headers and Linking section: Replace broken link
+  (Kjell Ahlstedt) Bug #777879 (Ramana Venkata)
+* Use auto instead of explicit types where appropriate.
+  Adapt to Glib::RefPtr as std::shared_ptr.
+  (Murray Cumming)
+* Adapt to enums in classes.
+  (Murray Cumming, Kjell Ahlsedt) Bug #86864
+* Add Gtk::FileChooserNative example
+  (Kjell Ahlstedt) Bug #783801 (Alexander Shaduri)
+* Remove Gtk::EventBox example, PlacesSidebar example,
+  ToolPalette example and chapter, ButtonBox example.
+  (Kjell Ahlstedt)
+* Mixing C & C++: Clarify ownership of wrap() result
+  (Daniel Boles, Kjell Ahlstedt) Bug #788646
+* Clarify: ColumnRecords can be static *singletons*
+  (Daniel Boles) Bug #792482 = Issue gtkmm#29 = Issue #3
+* Fix a broken link to www.gtkmm.org
+  (Kjell Ahlstedt) Bug #794714 = Issue gtkmm#32 = Issue #2 (Ray)
+* Clarify that user sometimes must delete if managed
+  (Daniel Boles) Merge request !4
+* Document the new Gtk::make_managed()
+  (Daniel Boles) Bug #795816 = Issue gtkmm#33, Merge request !2
+* Add meson.build files and scripts for meson builds (experimental)
+  (Kjell Ahlstedt)
+
+Updated translations:
+* Czech (Marek Cernocky)
+* German (Mario Blättermann)
+* Spanish (Daniel Mustieles)
+
+
 3.22.0: (stable)
 
 * Add the "Building applications" chapter with example code.
@@ -469,141 +512,5 @@ This is the master branch. See also the gtkmm-2-22 branch.
 	* docs/tutorial/C/gtkmm-tutorial-in.xml: Update copyright years to
 	include all years, not a range.
 
-2.20.1:
-
-* Multiple-Item Widgets chapter: Added Assistant sub-section.
-  (David King, Openismus)
-
-2.20.0:
-
-* Update the code to use only non-deprecated API.
-  (Murray Cumming)
-
-2.19.3:
-
-* Basics: Add mixing C and C++ APIs section.
-* Removed Drawing With GDK (deprecated) appendix.
-* Custom Signals appendix: Really show the example.
-* Building from svn chapter: Mention git instead.
-* Remove FAQ - moved to live.gnome.org/gtkmm/FAQ
-(Murray Cumming)
-
-2.19.2:
-
-* Added ToolPalette chapter.
-  (Murray Cumming)
-* examples:
-  - Do not use deprecated API.
-  (Murray Cumming)
-  - InfoBar Example: Move the bar to the top of the window.
-  (José Alburquerque)
-* Build:
-  - Support Automake silent rules
-  - Create output subdirectories automatically
-  (Daniel Elstner)
-
-2.17.4:
-
-* Added an InfoBar example.
-  (José Alburquerque)
-* Removed unnecessary virtual keywords from examples.
-  (Murray Cumming)
-
-2.17.3:
-
-* The tutorial links to the example sources now point to the cgit Web
-  interface of git.gnome.org.
-* The figures and icons show up again in the locally installed HTML
-  documentation.
-
-2.17.2:
-
-* Abstract: Put useful text here, to not look silly on library.gnome.org.
-* Entry: Mention completion, icons, and progress bars.
-
-2.17.1:
-
-* The Docbook XML files of the tutorial have been renamed in order to
-  ease the integration with library.gnome.org.
-
-2.17.0:
-
-* A number of example programs have been corrected.
-* All libglademm examples have been removed in favor of Gtk::Builder.
-* The build system is now largely based on non-recursive make.
-* The source archive now ships with the generated HTML files of the tutorial.
-* The appendix in the tutorial on the creation of new C++ binding modules
-  has been updated for the new mm-common build infrastructure.
-
-2.16.0:
-
-* Added entry/progress and entry/icon examples, just to test that API.
-
-2.14.2:
-
-* gmmproc appendix: Mention pygobject instead of pygtk  for the codegen stuff
-  such as h2def.py and docextract_to_xml.py. Noticed by Krzesimir Nowak.
-* Notebook chapter: Mention set_current_page() instead of set_page(), which does
-  not exist. Noticed by Jason Curole.
-  (Murray Cumming)
-* examples/book/range_widgets/examplewindow.cc: Remove unnecessary casts to int.
-  (Fabrício Godoy)
-* Windows build fixes. (Armin Burgmeier).
-
-2.14.1:
-
-* Removed the appendix about Dev-C++ because it was outdated.
-  Instead, refer to the online instructions on live.gnome.org.
-  (Armin Burgmeier)
-
-2.14.0:
-
-* AboutDialog example: Respond to the close button.
-  (Murray Cumming, Götz Waschk) Bug #550675
-
-2.13.2:
-
-* Timeouts: Updated the inline example code and text.
-  (Ainsley Pereira) Bug #537858
-* Add a COPYING.examples and corrected COPYING to GFDL-1.2, as
-  used in the documentation text.
-  (Deng Xiyue) Bug #545892
-* Install generated html, as we did when this was in the gtkmm tarball.
-  (Deng Xiyue)
-* Remove index.html because the definitive copy of this is on the website.
-  (Murray Cumming)
-* Fix the examples build for gcc 4.3, adding headers.
-  (Deng Xiyue)
-* Update the links for Visual C++ 2005.
-  (Deng Xiyue)
-
-2.13.1:
-
-* Uses gnome-doc-utils, so it can be translated and installed properly.
-  (Murray Cumming)
-* Addition to the gmmproc chapter about non-GType-registered enums.
-  (Hubert Figuiere
-* Corrected the link to jhbuild.
-  (Jonathon Jongsma)
-
-2.13.0:
-
-Initial release.
-This book and examples were previously in the gtkmm module itself.
-They are now in their own gtkmm-documentation module so that that book may
-contain examples of other libraries such as libgdamm.
-
-Recent Changes:
-* Added full example in the libglademm section.
-* Several new giomm examples in examples/book/giomm, not yet mentioned in the
-  book.
-  (Jonathon Jongsma, Murray Cumming)
-* examples/book/custom/custom_widget:
-  make the class name in the .gtkrc file begin with a lower-case 'gtkmm__'
-  so that the rc file is parsed properly.
-  Jonathon Jongsma (Bug #396198)
-* Additions to the gmmproc chapter, about conversions, _CLASS_INTERFACE(),
-  _WRAP_GERROR(), and _MEMBER_GET/SET().
-  (Murray Cumming)
-* Added a warning about not making TreeColumnRecords static.
-  (Murray Cumming) Bug #443586 (Robert Pearce).
+gtkmm-documentation-2 news has been removed. It can be found in releases
+prior to gtkmm-documentation 3.95.1.
