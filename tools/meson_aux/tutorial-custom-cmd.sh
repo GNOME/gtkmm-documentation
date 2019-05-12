@@ -1,8 +1,13 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # External command, intended to be called with custom_target() in meson.build
 
 case $1 in
+insert_example_code)
+  # tutorial-custom-cmd.sh insert_example_code <perl_script_file> <examples_book_dir> <input_xml_file> <output_xml_file>
+  perl -- "$2" "$3" "$4" >"$5"
+  cp "$5" "$(dirname "$4")/$(basename "$5")"
+  ;;
 html)
   # tutorial-custom-cmd.sh html <relative_dir_name> <build_dir>  <input_xml_file> <output_html_dir>
 
@@ -30,18 +35,6 @@ html)
   # is selected, which is the normal case.
   set -o pipefail # Return the exit status of xsltproc, if sed succeeds.
   xsltproc $xslt_params -o "$5/" --xinclude $xslt_stylesheet "$4" |& sed '/^Writing /d'
-  ;;
-po2mo)
-  # tutorial-custom-cmd.sh po2mo <relative_dir_name> <build_dir> <input_po_file> <output_mo_file> <stamp_file_path>
-  ( cd "$3"; mkdir --parents "$2" )
-  msgfmt -o "$5" "$4"
-  touch "$6"
-  ;;
-xmltrans)
-  # tutorial-custom-cmd.sh docbook <input_mo_file> <input_xml_file> <output_xml_dir> <stamp_file_path>
-  # Create XML file with translation.
-  itstool -m "$2" -o "$4" "$3"
-  touch "$5"
   ;;
 xmllint)
   # tutorial-custom-cmd.sh xmllint <validate> <input_xml_file> <stamp_file_path>

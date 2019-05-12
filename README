@@ -31,7 +31,8 @@ Example of changing options:
 Create a PDF file
   $ meson -Dbuild-pdf=true
   $ ninja
-This requires that you have the xmllint and docbook2pdf commands installed.
+This requires that you have either the dblatex or the xmllint and docbook2pdf
+commands installed.
 
 Make a tarball:
   $ ninja dist

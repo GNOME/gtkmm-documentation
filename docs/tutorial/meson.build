@@ -1,11 +1,12 @@
 # docs/tutorial
 
-# input: gtkmm_datadir, gtkmm_pcname, tutorial_custom_cmd_sh
+# input: gnome, gtkmm_datadir, gtkmm_pcname, tutorial_custom_cmd_sh
 # output: can_parse_and_validate, build_translations_by_default, can_build_translations,
-#         build_pdf_by_default, can_build_pdf, tutorial_languages
+#         build_pdf_by_default, can_build_pdf
 
-# xsltproc is required because it is called by tutorial_custom_cmd_sh html.
+# xsltproc is required by tutorial_custom_cmd_sh html.
 xsltproc = find_program('xsltproc', required: true)
+# perl is required by tutorial_custom_cmd_sh insert_example_code.
 perl = find_program('perl', required: true)
 xmllint = find_program('xmllint', required: false)
 
@@ -20,8 +21,6 @@ dblatex = find_program('dblatex', required: false)
 can_build_pdf = dblatex.found() or (xmllint.found() and \
                 find_program('docbook2pdf', required: false).found())
 build_pdf_by_default = get_option('build-pdf')
-
-tutorial_languages = ['cs', 'de', 'el', 'es', 'fr', 'pt_BR', 'sl', 'zh_CN']
 
 # Installation directories
 tutorialdir = join_paths(gtkmm_datadir, 'doc', gtkmm_pcname, 'tutorial')
@@ -113,8 +112,10 @@ tutorial_figurefiles = [
   'update_ui.png',
 ]
 tutorial_figures = []
+tutorial_C_figures = []
 foreach f : tutorial_figurefiles
-  tutorial_figures += join_paths('C', 'figures', f)
+  tutorial_figures += join_paths('figures', f)
+  tutorial_C_figures += join_paths('C', 'figures', f)
 endforeach
 
 tutorial_iconfiles = [
@@ -134,16 +135,17 @@ foreach i : tutorial_iconfiles
 endforeach
 
 # Create a DocBook C locale XML file with the examples' source code included.
+# Copy it to the source directory, where gnome.yelp() expects to find it.
 index_docbook = custom_target('index.docbook',
   input: join_paths('C', 'index-in.docbook'),
   output: 'index.docbook',
   command: [
-    perl, '--',
+    tutorial_custom_cmd_sh, 'insert_example_code',
     join_paths(meson.current_source_dir(), 'insert_example_code.pl'),
     join_paths(meson.source_root(), 'examples', 'book'),
     '@INPUT@',
+    '@OUTPUT@',
   ],
-  capture: true,
   build_by_default: true
 )
 
@@ -178,55 +180,6 @@ if can_parse_and_validate
   )
 endif
 
-if can_build_translations
-  # Create XML files with translations.
-  foreach lang : tutorial_languages
-    # Create .mo file.
-    po2mo = custom_target(lang + '-po2mo',
-      input: join_paths(lang, lang + '.po'),
-      output: lang + '_mo.stamp',
-      command: [
-        tutorial_custom_cmd_sh, 'po2mo',
-        lang,
-        meson.current_build_dir(),
-        '@INPUT@',
-        join_paths(meson.current_build_dir(), lang, lang + '.mo'),
-        '@OUTPUT@'      
-      ],
-      build_by_default: build_translations_by_default,
-    )
-
-    # Create XML file.
-    lang_index_docbook = custom_target(lang + '-index.docbook',
-      input: [po2mo, index_docbook],
-      output: lang + '_docbook.stamp',
-      command: [
-        tutorial_custom_cmd_sh, 'xmltrans',
-        join_paths(meson.current_build_dir(), lang, lang + '.mo'),
-        '@INPUT1@',
-        join_paths(meson.current_build_dir(), lang),
-        '@OUTPUT@'      
-      ],
-      build_by_default: build_translations_by_default,
-    )
-
-    if can_parse_and_validate
-      # Parse and possibly validate the translated version of the DocBook.
-      custom_target(lang + '-xmllint',
-        input: lang_index_docbook,
-        output: lang + '_xmllint.stamp',
-        command: [
-          tutorial_custom_cmd_sh, 'xmllint',
-          validate,
-          join_paths(meson.current_build_dir(), lang, 'index.docbook'),
-          '@OUTPUT@'
-        ],
-        build_by_default: build_translations_by_default,
-      )
-    endif
-  endforeach # lang
-endif # can_build_translations
-
 if can_build_pdf
   # Create a PDF file of the C locale's version of the DocBook.
   # Prefer dblatex, if both dblatex and docbook2pdf are available.
@@ -244,7 +197,21 @@ if can_build_pdf
   )
 endif
 
+if can_build_translations and build_translations_by_default
+  # Build translations. Install help documentation using Yelp.
+  # C/index.docbook is copied from the source directory.
+  # <lang>/index.docbook are written to the build directory, and copied from there.
+  # It's bad that gnome.yelp() builds only at install time.
+  # See https://github.com/mesonbuild/meson/issues/2775
+  gnome.yelp('gtkmm-tutorial',
+    sources: 'index.docbook',
+    media: tutorial_figures,
+    symlink_media: true
+)
+endif
+
+# Install extra files in the html directory.
 install_data('style.css', install_dir: tutorial_htmldir)
-install_data(tutorial_figures, install_dir: tutorial_figuresdir)
+install_data(tutorial_C_figures, install_dir: tutorial_figuresdir)
 install_data(tutorial_icons, install_dir: tutorial_iconsdir)
 

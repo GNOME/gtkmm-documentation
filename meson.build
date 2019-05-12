@@ -1,7 +1,7 @@
 # This file is part of gtkmm-documentation.
 
 project('gtkmm-documentation', 'c', 'cpp',
-  version: '3.89.0',
+  version: '3.95.1',
   default_options: [
     'cpp_std=c++17'
   ],
@@ -10,7 +10,7 @@ project('gtkmm-documentation', 'c', 'cpp',
 )
 
 gtkmm_pcname = 'gtkmm-4.0'
-gtkmm_dep = dependency(gtkmm_pcname, version: '>=3.93.0')
+gtkmm_dep = dependency(gtkmm_pcname, version: '>=3.95.1')
 giomm_dep = dependency('giomm-2.62', version: '>=2.61.1')
 gnome = import('gnome')
 
@@ -55,7 +55,6 @@ meson.add_dist_script(
   meson.current_source_dir(),
   meson.current_build_dir(),
   join_paths('meson-dist', meson.project_name() + '-' + meson.project_version()),
-  ' '.join(tutorial_languages)
 )
 
 # Print a summary.

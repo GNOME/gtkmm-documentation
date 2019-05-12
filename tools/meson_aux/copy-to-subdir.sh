@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # External command, intended to be called with custom_target() in meson.build
 

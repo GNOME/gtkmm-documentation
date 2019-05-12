@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # External command, intended to be called with add_dist_script() in meson.build
 
-# extra-dist-cmd.sh <root_source_dir> <root_build_dir> <relative_dist_dir> <tutorial_languages>
+# extra-dist-cmd.sh <root_source_dir> <root_build_dir> <relative_dist_dir>
 
 # relative_dist_dir is the distribution directory path relative to root_build_dir.
 # Meson does not preserve timestamps on distributed files. Neither does this script.
@@ -19,17 +19,32 @@ dist_docs_tutorial="$3/docs/tutorial"
 cp "docs/tutorial/index.docbook" "$dist_docs_tutorial/C/"
 cp --recursive "docs/tutorial/html/" "$dist_docs_tutorial/"
 
-# .mo files with translations and translated index.docbook files.
-for lang in $4; do
-  cp "docs/tutorial/$lang/$lang.mo" "docs/tutorial/$lang/index.docbook" "$dist_docs_tutorial/$lang/"
+# Read the distributed LINGUAS file, containing a list of available translations.
+linguas="$dist_docs_tutorial/LINGUAS"
+langs=
+if [ -f "$linguas" ]; then
+  langs="$(sed '/^ *#/d' "$linguas")"
+else
+  echo "=== Warning: File $linguas not found."
+fi
+
+# .gmo files with translations and translated index.docbook files.
+for lang in $langs; do
+  for file in "$lang.gmo" "index.docbook"; do
+    cp "docs/tutorial/$lang/$file" "$dist_docs_tutorial/$lang/"
+  done
 done
 
 # If there is an updated PDF file, include it in the tarball.
 pdf_file="docs/tutorial/programming-with-gtkmm.pdf"
 if [ -f "$pdf_file" -a "$pdf_file" -nt "docs/tutorial/index.docbook" ]; then
   cp "$pdf_file" "$dist_docs_tutorial/C/"
+else
+  echo "--- Info: No updated PDF file found."
 fi
 
 # Remove all .gitignore files and an empty $3/build directory.
 find "$3" -name ".gitignore" -exec rm '{}' \;
-rmdir --ignore-fail-on-non-empty "$3/build"
+if [ -d "$3/build" ]; then
+  rmdir --ignore-fail-on-non-empty "$3/build"
+fi
