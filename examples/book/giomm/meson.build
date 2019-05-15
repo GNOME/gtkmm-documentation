@@ -1,6 +1,7 @@
 # examples/book/giomm
 
-# input: gnome, giomm_dep, build_examples_by_default, copy_to_subdir_sh
+# input: gnome, giomm_dep, build_examples_by_default, copy_to_subdir_sh,
+#        meson_backend, project_build_root
 # input and output: examples_targets
 
 examples_book_giomm = [
@@ -53,5 +54,12 @@ foreach ex : examples_book_giomm
     build_by_default: build_examples_by_default
   )
 
-  examples_targets += join_paths('examples', 'book', 'giomm', stamp_file_name)
+  target_name = join_paths('examples', 'book', 'giomm', stamp_file_name)
+  examples_targets += target_name
+
+  # These example programs build quite fast. No need for extra timeout time.
+  test('book_giomm_' + ex_name, meson_backend,
+    args: target_name,
+    workdir: project_build_root
+  )
 endforeach

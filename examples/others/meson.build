@@ -1,6 +1,7 @@
 # examples/others
 
-# input: gnome, gtkmm_dep, build_examples_by_default, copy_to_subdir_sh
+# input: gnome, gtkmm_dep, build_examples_by_default, copy_to_subdir_sh,
+#        meson_backend, test_timeout, project_build_root
 # input and output: examples_targets
 
 examples_others = [
@@ -59,5 +60,12 @@ foreach ex : examples_others
     build_by_default: build_examples_by_default
   )
 
-  examples_targets += join_paths('examples', 'others', stamp_file_name)
+  target_name = join_paths('examples', 'others', stamp_file_name)
+  examples_targets += target_name
+
+  test('others_' + ex_name, meson_backend,
+    args: target_name,
+    workdir: project_build_root,
+    timeout: test_timeout
+  )
 endforeach

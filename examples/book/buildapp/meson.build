@@ -1,7 +1,7 @@
 # examples/book/buildapp
 
 # input: gnome, gtkmm_dep, build_examples_by_default, compile_schemas_sh,
-#        copy_to_subdir_sh
+#        copy_to_subdir_sh, meson_backend, test_timeout, project_build_root
 # input and output: examples_targets
 
 exapp_main = ['exampleapplication.cc', 'exampleappwindow.cc', 'main.cc']
@@ -77,6 +77,13 @@ foreach ex : examples_book_buildapp
     build_by_default: build_examples_by_default
   )
 
-  examples_targets += join_paths('examples', 'book', 'buildapp', stamp_file_name)
+  target_name = join_paths('examples', 'book', 'buildapp', stamp_file_name)
+  examples_targets += target_name
+
+  test('book_buildapp_' + ex_name, meson_backend,
+    args: target_name,
+    workdir: project_build_root,
+    timeout: test_timeout
+  )
 endforeach
 

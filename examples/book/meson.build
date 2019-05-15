@@ -1,7 +1,8 @@
 # examples/book
 
 # input: gnome, gtkmm_dep, giomm_dep, build_examples_by_default,
-#        compile_schemas_sh, copy_to_subdir_sh, config_include_dir
+#        compile_schemas_sh, copy_to_subdir_sh, config_include_dir,
+#        meson_backend, test_timeout, project_build_root
 # input and output: examples_targets
 
 subdir('buildapp')
@@ -60,8 +61,8 @@ examples_book = [
   [['expander'], 'example', exwindow_main],
   [['flowbox'], 'example', exwindow_main],
   [['frame'], 'example', exwindow_main],
-  [['headerbar'], 'example', exwindow_main],
   [['grid'], 'example', exwindow_main],
+  [['headerbar'], 'example', exwindow_main],
   [['helloworld'], 'helloworld', ['helloworld.cc', 'main.cc']],
   [['helloworld2'], 'helloworld2', ['helloworld.cc', 'main.cc']],
   [['iconview'], 'example', exwindow_main],
@@ -90,6 +91,7 @@ examples_book = [
   [['searchbar'], 'example', exwindow_main],
   [['signals', 'custom'], 'example', ['client.cc', 'main.cc', 'server.cc']],
   [['spinbutton'], 'example', exwindow_main],
+  [['textview'], 'example', exwindow_main],
   [['timeout'], 'timeout', ['main.cc', 'timerexample.cc']],
   [['toolbar'], 'example', exwindow_main],
   [['tooltips'], 'example', exwindow_main],
@@ -149,5 +151,12 @@ foreach ex : examples_book
     build_by_default: build_examples_by_default
   )
 
-  examples_targets += join_paths('examples', 'book', stamp_file_name)
+  target_name = join_paths('examples', 'book', stamp_file_name)
+  examples_targets += target_name
+
+  test('book_' + ex_name, meson_backend,
+    args: target_name,
+    workdir: project_build_root,
+    timeout: test_timeout
+  )
 endforeach

@@ -21,14 +21,12 @@ compile_schemas_sh = files(join_paths('tools', 'meson_aux', 'compile-schemas.sh'
 copy_to_subdir_sh = files(join_paths('tools', 'meson_aux', 'copy-to-subdir.sh'))
 tutorial_custom_cmd_sh = files(join_paths('tools', 'meson_aux', 'tutorial-custom-cmd.sh'))
 
+project_source_root = meson.current_source_dir()
+project_build_root = meson.current_build_dir()
+
 cpp_compiler = meson.get_compiler('cpp')
 
-# Is this configuration done during creation of a tarball (ninja dist)?
-# The "real" source directory contains a .git subdirectory. The temporary
-# source directory created by "ninja dist" does not.
-is_dist = run_command('test', '-d', join_paths(meson.current_source_dir(), '.git')).returncode() != 0
-
-warning_level = get_option(is_dist ? 'dist-warnings' : 'warnings')
+warning_level = get_option('warnings')
 warning_flags = []
 if warning_level == 'min'
   warning_flags = [ '-Wall' ]

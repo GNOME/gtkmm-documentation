@@ -1,6 +1,6 @@
 # docs/tutorial
 
-# input: gnome, gtkmm_datadir, gtkmm_pcname, tutorial_custom_cmd_sh
+# input: gnome, gtkmm_datadir, gtkmm_pcname, tutorial_custom_cmd_sh, project_source_root
 # output: can_parse_and_validate, build_translations_by_default, can_build_translations,
 #         build_pdf_by_default, can_build_pdf
 
@@ -142,7 +142,7 @@ index_docbook = custom_target('index.docbook',
   command: [
     tutorial_custom_cmd_sh, 'insert_example_code',
     join_paths(meson.current_source_dir(), 'insert_example_code.pl'),
-    join_paths(meson.source_root(), 'examples', 'book'),
+    join_paths(project_source_root, 'examples', 'book'),
     '@INPUT@',
     '@OUTPUT@',
   ],

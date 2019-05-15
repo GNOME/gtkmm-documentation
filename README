@@ -21,6 +21,8 @@ Install them:
 
 Build the example programs:
   $ ninja examples
+or (probably slower)
+  $ ninja test
 
 Print a list of configuration options:
   $ meson configure

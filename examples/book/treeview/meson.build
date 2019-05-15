@@ -1,12 +1,12 @@
 # examples/book/treeview
 
-# input: gnome, gtkmm_dep, build_examples_by_default,
-#        compile_schemas_sh, copy_to_subdir_sh
+# input: gnome, gtkmm_dep, build_examples_by_default, compile_schemas_sh,
+#        copy_to_subdir_sh, meson_backend, test_timeout, project_build_root
 # input and output: examples_targets
 
 exwindow_main = ['examplewindow.cc', 'main.cc']
 
-examples_book = [
+examples_book_treeview = [
 # [[dir-name], exe-name, [sources]]
   [['combo_renderer'], 'example', exwindow_main],
   [['drag_and_drop'], 'example', exwindow_main + ['treemodel_dnd.cc']],
@@ -20,7 +20,7 @@ examples_book = [
   [['tree'], 'example', exwindow_main],
 ]
 
-foreach ex : examples_book
+foreach ex : examples_book_treeview
   dir = ''
   foreach dir_part : ex[0]
     dir = join_paths(dir, dir_part)
@@ -59,5 +59,12 @@ foreach ex : examples_book
     build_by_default: build_examples_by_default
   )
 
-  examples_targets += join_paths('examples', 'book', 'treeview', stamp_file_name)
+  target_name = join_paths('examples', 'book', 'treeview', stamp_file_name)
+  examples_targets += target_name
+
+  test('book_treeview_' + ex_name, meson_backend,
+    args: target_name,
+    workdir: project_build_root,
+    timeout: test_timeout
+  )
 endforeach
