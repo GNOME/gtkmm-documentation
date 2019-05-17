@@ -122,9 +122,7 @@ check_PROGRAMS =					\
 	others/treemodelcustom/example
 #Waiting for a gdk_cairo_region_from_surface(): others/window/wheelbarrow
 
-dist_noinst_DATA =				\
-	README					\
-	book/README				\
+dist_noinst_DATA = \
 	book/builder/basic/basic.glade		\
 	book/builder/derived/derived.glade	\
 	book/buttons/button/info.xpm		\
