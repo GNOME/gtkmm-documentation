@@ -3,14 +3,19 @@ See http://www.gtkmm.org/
 
 Building with meson
 -------------------
-This is experimental, but it's believed to work correctly.
-You're encouraged to test it.
-
 Create a build directory:
   $ cd gtkmm-documentation
-  $ meson <build-dir>
+  $ meson [options] <build-dir>
 Do not call the build-dir gtkmm-documentation/build. There is already such a
 directory, used when building with autotools.
+
+Print a list of configuration options:
+  $ cd <build-dir>
+  $ meson configure
+
+Example of changing options:
+  $ cd <build-dir>
+  $ meson configure --prefix=/opt/gnome -Dbuild-translations=true
 
 Create the html files of the tutorial:
   $ cd <build-dir>
@@ -18,19 +23,17 @@ Create the html files of the tutorial:
 
 Install them:
   $ ninja install
+If you have chosen to build translated XML files (build-translations=true),
+installation can take some time, because the translations are built
+by 'ninja install'. This may change in the future.
+See https://github.com/mesonbuild/meson/issues/2775
 
 Build the example programs:
   $ ninja examples
 or (probably slower)
   $ ninja test
 
-Print a list of configuration options:
-  $ meson configure
-
-Example of changing options:
-  $ meson configure --prefix=/opt/gnome -Dwarnings=fatal
-
-Create a PDF file
+Create a PDF file:
   $ meson -Dbuild-pdf=true
   $ ninja
 This requires that you have either the dblatex or the xmllint and docbook2pdf
@@ -38,6 +41,9 @@ commands installed.
 
 Make a tarball:
   $ ninja dist
+In addition to the files in the git repository, the tarball will contain some
+built files. These files must already exist. 'ninja dist' will fail, unless you
+have previously run 'ninja' and 'ninja install' with build-translations=true.
 
 This tarball is not identical to one made with "make dist" or "make distcheck".
 There is e.g. no "configure" file. If you want to use a tarball made with
