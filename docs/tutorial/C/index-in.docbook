@@ -3518,13 +3518,11 @@ the <methodname>Builder::get_object()</methodname> and
 to a container. For instance:
 </para>
 <programlisting>
-<![CDATA[auto object = m_refBuilder->get_object("menubar");
-auto gmenu = std::dynamic_pointer_cast<Gio::Menu>(object);
+<![CDATA[auto gmenu = m_refBuilder->get_object<Gio::Menu>("menubar");
 auto pMenuBar = Gtk::make_managed<Gtk::MenuBar>(gmenu);
 m_Box.add(*pMenuBar);
 
-Gtk::Toolbar* toolbar = nullptr;
-m_refBuilder->get_widget("toolbar", toolbar);
+auto toolbar = m_refBuilder->get_widget<Gtk::Toolbar>("toolbar");
 m_Box.add(*toolbar);]]>
 </programlisting>
 
@@ -3564,8 +3562,7 @@ mouse button.
 
 m_refBuilder->add_from_string(ui_info);
 
-auto object = m_refBuilder->get_object("menu-examplepopup");
-auto gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
+auto gmenu = m_refBuilder->get_object<Gio::Menu>("menu-examplepopup");
 m_pMenuPopup = new Gtk::Menu(gmenu);]]>
 </programlisting>
 
@@ -6207,8 +6204,7 @@ name should be specified in the <application>Glade</application> Properties
 window. If the widget could not be found, or is of the wrong type, then the
 pointer will be set to nullptr.
 <programlisting>
-Gtk::Dialog* pDialog = nullptr;
-builder-&gt;get_widget(&quot;DialogBasic&quot;, pDialog);
+<![CDATA[auto pDialog = builder->get_widget<Gtk::Dialog>("DialogBasic");]]>
 </programlisting>
 </para>
 
@@ -6265,8 +6261,7 @@ its location and child widgets and the properties of its &gtkmm; base class.
 
 <para>Use <methodname>Gtk::Builder::get_widget_derived()</methodname> like so:
 <programlisting>
-DerivedDialog* pDialog = nullptr;
-builder-&gt;get_widget_derived(&quot;DialogBasic&quot;, pDialog);
+<![CDATA[auto pDialog = Gtk::Builder::get_widget_derived<DerivedDialog>(builder, "DialogDerived");]]>
 </programlisting>
 </para>
 
@@ -6293,18 +6288,18 @@ You could then encapsulate the manipulation of the child widgets in the
 constructor of the derived class, maybe using <methodname>get_widget()</methodname>
 or <methodname>get_widget_derived()</methodname> again. For instance,
 <programlisting>
-DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)
+<![CDATA[DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder)
 : Gtk::Dialog(cobject),
   m_builder(builder),
   m_pButton(nullptr)
 {
   //Get the Glade-instantiated Button, and connect a signal handler:
-  m_builder-&gt;get_widget(&quot;quit_button&quot;, m_pButton);
+  m_pButton = m_builder->get_widget<Gtk::Button>("quit_button");
   if(m_pButton)
   {
-    m_pButton-&gt;signal_clicked().connect( sigc::mem_fun(*this, &amp;DerivedDialog::on_button_quit) );
+    m_pButton->signal_clicked().connect( sigc::mem_fun(*this, &DerivedDialog::on_button_quit) );
   }
-}
+}]]>
 </programlisting>
 </para>
 
@@ -6313,8 +6308,7 @@ It's possible to pass additional arguments from
 <methodname>get_widget_derived()</methodname> to the constructor of the derived
 widget. For instance, this call to <methodname>get_widget_derived()</methodname>
 <programlisting>
-<![CDATA[DerivedDialog* pDialog = nullptr;
-builder->get_widget_derived("DialogBasic", pDialog, true);]]>
+<![CDATA[auto pDialog = Gtk::Builder::get_widget_derived<DerivedDialog>(builder, "DialogDerived", true);]]>
 </programlisting>
 can invoke this constructor
 <programlisting>
@@ -7862,8 +7856,7 @@ key. In <classname>ExampleAppWindow</classname>'s constructor:
 // to the win.show-words action and the "Words" menu item.
 // (The connection between action and menu item is specified in gears_menu.ui.)
 auto menu_builder = Gtk::Builder::create_from_resource("/org/gtkmm/exampleapp/gears_menu.ui");
-auto object = menu_builder->get_object("menu");
-auto menu = Glib::RefPtr<Gio::MenuModel>::cast_dynamic(object);
+auto menu = menu_builder->get_object<Gio::MenuModel>("menu");
 m_gears->set_menu_model(menu);
 add_action(m_settings->create_action("show-words"));]]>
 </programlisting>
