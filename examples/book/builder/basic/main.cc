@@ -37,12 +37,11 @@ int main (int argc, char **argv)
   }
 
   //Get the GtkBuilder-instantiated Dialog:
-  refBuilder->get_widget("DialogBasic", pDialog);
+  pDialog = refBuilder->get_widget<Gtk::Dialog>("DialogBasic");
   if(pDialog)
   {
     //Get the GtkBuilder-instantiated Button, and connect a signal handler:
-    Gtk::Button* pButton = nullptr;
-    refBuilder->get_widget("quit_button", pButton);
+    auto pButton = refBuilder->get_widget<Gtk::Button>("quit_button");
     if(pButton)
     {
       pButton->signal_clicked().connect( sigc::ptr_fun(on_button_clicked) );

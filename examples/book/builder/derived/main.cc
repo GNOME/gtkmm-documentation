@@ -66,10 +66,9 @@ int main (int argc, char **argv)
   //Get the GtkBuilder-instantiated dialog:
   DerivedDialog* pDialog = nullptr;
   if (show_icon)
-    // This call to get_widget_derived() requires gtkmm 3.19.7 or higher.
-    Gtk::Builder::get_widget_derived(refBuilder, "DialogDerived", pDialog, is_glad);
+    pDialog = Gtk::Builder::get_widget_derived<DerivedDialog>(refBuilder, "DialogDerived", is_glad);
   else
-    Gtk::Builder::get_widget_derived(refBuilder, "DialogDerived", pDialog);
+    pDialog = Gtk::Builder::get_widget_derived<DerivedDialog>(refBuilder, "DialogDerived");
   if(pDialog)
   {
     //Start:

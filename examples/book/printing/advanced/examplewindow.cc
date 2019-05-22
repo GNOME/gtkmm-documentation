@@ -221,8 +221,7 @@ void ExampleWindow::build_main_menu(const Glib::RefPtr<Gtk::Application>& app)
   }
 
   // Get the toolbar and add it to a container widget:
-  Gtk::Toolbar* toolbar = nullptr;
-  m_refBuilder->get_widget("toolbar", toolbar);
+  auto toolbar = m_refBuilder->get_widget<Gtk::Toolbar>("toolbar");
   if (!toolbar)
     g_warning("GtkToolbar not found");
   else

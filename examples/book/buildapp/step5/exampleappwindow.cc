@@ -24,7 +24,7 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
   m_settings(),
   m_stack(nullptr)
 {
-  m_refBuilder->get_widget("stack", m_stack);
+  m_stack = m_refBuilder->get_widget<Gtk::Stack>("stack");
   if (!m_stack)
     throw std::runtime_error("No \"stack\" object in window.ui");
 
@@ -38,8 +38,7 @@ ExampleAppWindow* ExampleAppWindow::create()
   // Load the Builder file and instantiate its widgets.
   auto refBuilder = Gtk::Builder::create_from_resource("/org/gtkmm/exampleapp/window.ui");
 
-  ExampleAppWindow* window = nullptr;
-  Gtk::Builder::get_widget_derived(refBuilder, "app_window", window);
+  auto window = Gtk::Builder::get_widget_derived<ExampleAppWindow>(refBuilder, "app_window");
   if (!window)
     throw std::runtime_error("No \"app_window\" object in window.ui");
 

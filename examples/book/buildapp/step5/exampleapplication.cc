@@ -70,8 +70,7 @@ void ExampleApplication::on_startup()
     return;
   }
 
-  auto object = refBuilder->get_object("appmenu");
-  auto app_menu = std::dynamic_pointer_cast<Gio::MenuModel>(object);
+  auto app_menu = refBuilder->get_object<Gio::MenuModel>("appmenu");
   if (app_menu)
     set_app_menu(app_menu);
   else

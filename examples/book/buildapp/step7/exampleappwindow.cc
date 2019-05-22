@@ -33,31 +33,31 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
   m_prop_binding()
 {
   // Get widgets from the Gtk::Builder file.
-  m_refBuilder->get_widget("stack", m_stack);
+  m_stack = m_refBuilder->get_widget<Gtk::Stack>("stack");
   if (!m_stack)
     throw std::runtime_error("No \"stack\" object in window.ui");
 
-  m_refBuilder->get_widget("search", m_search);
+  m_search = m_refBuilder->get_widget<Gtk::ToggleButton>("search");
   if (!m_search)
     throw std::runtime_error("No \"search\" object in window.ui");
 
-  m_refBuilder->get_widget("searchbar", m_searchbar);
+  m_searchbar = m_refBuilder->get_widget<Gtk::SearchBar>("searchbar");
   if (!m_searchbar)
     throw std::runtime_error("No \"searchbar\" object in window.ui");
 
-  m_refBuilder->get_widget("searchentry", m_searchentry);
+  m_searchentry = m_refBuilder->get_widget<Gtk::SearchEntry>("searchentry");
   if (!m_searchentry)
     throw std::runtime_error("No \"searchentry\" object in window.ui");
 
-  m_refBuilder->get_widget("gears", m_gears);
+  m_gears = m_refBuilder->get_widget<Gtk::MenuButton>("gears");
   if (!m_gears)
     throw std::runtime_error("No \"gears\" object in window.ui");
 
-  m_refBuilder->get_widget("sidebar", m_sidebar);
+  m_sidebar = m_refBuilder->get_widget<Gtk::Revealer>("sidebar");
   if (!m_sidebar)
     throw std::runtime_error("No \"sidebar\" object in window.ui");
 
-  m_refBuilder->get_widget("words", m_words);
+  m_words = m_refBuilder->get_widget<Gtk::ListBox>("words");
   if (!m_words)
     throw std::runtime_error("No \"words\" object in window.ui");
 
@@ -82,8 +82,7 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
   // to the win.show-words action and the "Words" menu item.
   // (The connection between action and menu item is specified in gears_menu.ui.)
   auto menu_builder = Gtk::Builder::create_from_resource("/org/gtkmm/exampleapp/gears_menu.ui");
-  auto object = menu_builder->get_object("menu");
-  auto menu = std::dynamic_pointer_cast<Gio::MenuModel>(object);
+  auto menu = menu_builder->get_object<Gio::MenuModel>("menu");
   if (!menu)
     throw std::runtime_error("No \"menu\" object in gears_menu.ui");
 
@@ -97,8 +96,7 @@ ExampleAppWindow* ExampleAppWindow::create()
   // Load the Builder file and instantiate its widgets.
   auto refBuilder = Gtk::Builder::create_from_resource("/org/gtkmm/exampleapp/window.ui");
 
-  ExampleAppWindow* window = nullptr;
-  Gtk::Builder::get_widget_derived(refBuilder, "app_window", window);
+  auto window = Gtk::Builder::get_widget_derived<ExampleAppWindow>(refBuilder, "app_window");
   if (!window)
     throw std::runtime_error("No \"app_window\" object in window.ui");
 
