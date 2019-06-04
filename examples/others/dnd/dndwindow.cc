@@ -235,8 +235,6 @@ bool DnDWindow::on_popup_timeout()
 
 void DnDWindow::create_popup()
 {
-  m_PopupWindow.set_position(Gtk::WindowPosition::MOUSE);
-
   //Create Grid and fill it:
   auto pGrid = Gtk::make_managed<Gtk::Grid>();
 

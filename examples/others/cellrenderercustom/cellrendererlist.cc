@@ -47,7 +47,7 @@ CellRendererList::CellRendererList()
   tree_view_.set_headers_visible(false);
   tree_view_.append_column("", popup_columns().item);
 
-  gesture_ = Gtk::GestureMultiPress::create();
+  gesture_ = Gtk::GestureClick::create();
   gesture_->set_button(GDK_BUTTON_PRIMARY);
   gesture_->signal_released().connect(
     sigc::mem_fun(*this, &Self::on_tree_view_released));

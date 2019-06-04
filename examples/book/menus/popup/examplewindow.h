@@ -36,7 +36,7 @@ protected:
   Gtk::Label m_Label;
 
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
-  Glib::RefPtr<Gtk::GestureMultiPress> m_refGesture;
+  Glib::RefPtr<Gtk::GestureClick> m_refGesture;
 
   Gtk::Menu* m_pMenuPopup;
 };

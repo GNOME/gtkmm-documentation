@@ -28,33 +28,28 @@ MyArea::~MyArea()
 
 void MyArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height)
 {
-  // This is where we draw on the surface
-  auto surface = get_surface();
-  if(surface)
-  {
-    cr->set_line_width(10.0);
+  cr->set_line_width(10.0);
 
-    // Scale to unit square
-    cr->scale(width, height);
-    cr->save();
-    cr->set_source_rgb(1, 1, 1);
-    cr->paint();
-    cr->restore();
-    cr->set_line_width(0.12);
-    cr->move_to(0.3, 0.3);
-    cr->rel_line_to(0.2, -0.2);
-    cr->rel_line_to(0.2, 0.2);
-    cr->set_line_join(Cairo::Context::LineJoin::MITER); /* default */
-    cr->stroke();
-    cr->move_to(0.3, 0.6);
-    cr->rel_line_to(0.2, -0.2);
-    cr->rel_line_to(0.2, 0.2);
-    cr->set_line_join(Cairo::Context::LineJoin::BEVEL);
-    cr->stroke();
-    cr->move_to(0.3, 0.9);
-    cr->rel_line_to(0.2, -0.2);
-    cr->rel_line_to(0.2, 0.2);
-    cr->set_line_join(Cairo::Context::LineJoin::ROUND);
-    cr->stroke();
-  }
+  // Scale to unit square
+  cr->scale(width, height);
+  cr->save();
+  cr->set_source_rgb(1, 1, 1);
+  cr->paint();
+  cr->restore();
+  cr->set_line_width(0.12);
+  cr->move_to(0.3, 0.3);
+  cr->rel_line_to(0.2, -0.2);
+  cr->rel_line_to(0.2, 0.2);
+  cr->set_line_join(Cairo::Context::LineJoin::MITER); /* default */
+  cr->stroke();
+  cr->move_to(0.3, 0.6);
+  cr->rel_line_to(0.2, -0.2);
+  cr->rel_line_to(0.2, 0.2);
+  cr->set_line_join(Cairo::Context::LineJoin::BEVEL);
+  cr->stroke();
+  cr->move_to(0.3, 0.9);
+  cr->rel_line_to(0.2, -0.2);
+  cr->rel_line_to(0.2, 0.2);
+  cr->set_line_join(Cairo::Context::LineJoin::ROUND);
+  cr->stroke();
 }

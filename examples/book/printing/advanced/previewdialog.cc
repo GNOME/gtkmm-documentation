@@ -80,18 +80,22 @@ PreviewDialog::~PreviewDialog()
 
 void PreviewDialog::on_drawing_area_realized()
 {
-  auto gdk_surface = m_DrawingArea.get_surface();
-  if (gdk_surface)
+  auto gtk_native = m_DrawingArea.get_native();
+  if (gtk_native)
   {
-    const int scale = gdk_surface->get_scale_factor();
-    const int width = gdk_surface->get_width() * scale;
-    const int height = gdk_surface->get_height() * scale;
-    auto cairo_surface = gdk_surface->create_similar_surface(
-      Cairo::Content::CONTENT_COLOR, width, height);
-    m_refCairoContext = Cairo::Context::create(cairo_surface);
+    auto gdk_surface = gtk_native->get_surface();
+    if (gdk_surface)
+    {
+      const int scale = gdk_surface->get_scale_factor();
+      const int width = gdk_surface->get_width() * scale;
+      const int height = gdk_surface->get_height() * scale;
+      auto cairo_surface = gdk_surface->create_similar_surface(
+        Cairo::Content::CONTENT_COLOR, width, height);
+      m_refCairoContext = Cairo::Context::create(cairo_surface);
 
-    if (m_refPrintContext)
-      m_refPrintContext->set_cairo_context(m_refCairoContext, 72, 72);
+      if (m_refPrintContext)
+        m_refPrintContext->set_cairo_context(m_refCairoContext, 72, 72);
+    }
   }
 }
 

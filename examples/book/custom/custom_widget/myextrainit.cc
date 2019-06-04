@@ -38,7 +38,9 @@ void instance_init_function(GTypeInstance* instance, void* /* g_class */)
 {
   g_return_if_fail(GTK_IS_WIDGET(instance));
 
-  gtk_widget_set_has_surface(GTK_WIDGET(instance), true);
+  // Nothing to do here.
+  // This extra instance init function just shows how such a function can
+  // be added to a custom widget, if necessary.
 }
 
 } // anonymous namespace

@@ -55,7 +55,7 @@ CellRendererPopup::CellRendererPopup()
   signal_show_popup_.connect(sigc::mem_fun(*this, &Self::on_show_popup));
   signal_hide_popup_.connect(sigc::mem_fun(*this, &Self::on_hide_popup));
 
-  gesture_ = Gtk::GestureMultiPress::create();
+  gesture_ = Gtk::GestureClick::create();
   gesture_->set_button(GDK_BUTTON_PRIMARY);
   gesture_->signal_pressed().connect(
     sigc::mem_fun(*this, &Self::on_popup_window_pressed));
@@ -165,10 +165,6 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
 {
   // I'm not sure this is ok to do, but we need to show the window to be
   // able to get the allocation right.
-  // 2019-04-07: gtk_window_move() and Gtk::Window::move() have been removed.
-  // Use set_position() for the time being.
-  //popup_window_.move(-500, -500);
-  popup_window_.set_position(Gtk::WindowPosition::MOUSE);
   popup_window_.show();
 
   const auto alloc = popup_window_.get_allocation();
@@ -179,7 +175,7 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
   const int button_height = y2 - y1;
 
   auto display = Gdk::Display::get_default();
-  auto monitor = display->get_monitor_at_point(x2, y2);
+  auto monitor = display->get_primary_monitor();
   Gdk::Rectangle workarea;
   monitor->get_workarea(workarea);
   int monitor_height = workarea.get_height() - y;
@@ -236,24 +232,21 @@ void CellRendererPopup::on_hide_popup()
   editing_canceled_ = false;
 }
 
-void CellRendererPopup::on_popup_window_pressed(int /* n_press */, double /* x */, double /* y */)
+void CellRendererPopup::on_popup_window_pressed(int /* n_press */, double x, double y)
 {
   // If the event happened outside the popup, cancel editing.
 
   // The (x,y) coords passed to this method are based on Gdk::EventButton::get_coords(),
   // which can't be trusted when input is grabbed by the popup window.
   // Use Gdk::EventButton::get_root_coords().
+  // 2019-06-03: Gdk::EventButton::get_root_coords() is gone. Use the input coords.
 
   auto event = gesture_->get_last_event(gesture_->get_current_sequence());
   if (!(event && event->get_event_type() == Gdk::Event::Type::BUTTON_PRESS))
     return;
 
-  double x = 0.0;
-  double y = 0.0;
-  std::static_pointer_cast<const Gdk::EventButton>(event)->get_root_coords(x, y);
-
   int xoffset = 0, yoffset = 0;
-  popup_window_.get_surface()->get_root_origin(xoffset, yoffset);
+  //popup_window_.get_surface()->get_root_origin(xoffset, yoffset);
 
   const auto alloc = popup_window_.get_allocation();
 
@@ -317,13 +310,14 @@ void CellRendererPopup::on_popup_arrow_clicked()
     return;
   }
 
-  if(!grab_on_window(popup_entry_->get_surface()))
+  auto native = popup_entry_->get_native();
+  if(!native || !grab_on_window(native->get_surface()))
     return;
 
   popup_entry_->select_region(0, 0);
 
   int x = 0, y = 0;
-  popup_entry_->get_surface()->get_origin(x, y);
+  native->get_surface()->get_position(x, y);
 
   const auto alloc = popup_entry_->get_allocation();
 

@@ -30,7 +30,7 @@ ExampleWindow::ExampleWindow()
   // Catch button_press events:
   m_Box.add(m_Label);
   m_Label.set_expand();
-  m_refGesture = Gtk::GestureMultiPress::create();
+  m_refGesture = Gtk::GestureClick::create();
   m_refGesture->set_button(GDK_BUTTON_SECONDARY);
   m_refGesture->signal_pressed().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_label_pressed));

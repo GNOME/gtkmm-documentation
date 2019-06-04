@@ -37,7 +37,7 @@ private:
 
   Glib::RefPtr<Gtk::ListStore>  list_store_;
   Gtk::TreeView                 tree_view_;
-  Glib::RefPtr<Gtk::GestureMultiPress> gesture_;
+  Glib::RefPtr<Gtk::GestureClick> gesture_;
 
   void on_tree_view_released(int n_press, double x, double y);
   void on_tree_selection_changed();

@@ -69,7 +69,7 @@ private:
   PopupEntry*   popup_entry_;
   bool          shown_;
   bool          editing_canceled_;
-  Glib::RefPtr<Gtk::GestureMultiPress> gesture_;
+  Glib::RefPtr<Gtk::GestureClick> gesture_;
 
   void on_popup_window_pressed(int n_press, double x, double y);
   bool on_popup_window_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state);

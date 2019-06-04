@@ -96,18 +96,6 @@ void MyWidget::measure_vfunc(Gtk::Orientation orientation, int /* for_size */,
   natural_baseline = -1;
 }
 
-void MyWidget::on_size_allocate(int width, int height, int /* baseline */)
-{
-  //Do something with the space that we have actually been given:
-  //(We will not be given heights or widths less than we have requested, though
-  //we might get more)
-
-  if(m_refGdkSurface)
-  {
-    m_refGdkSurface->move_resize(0, 0, width, height);
-  }
-}
-
 void MyWidget::on_map()
 {
   //Call base class:
@@ -130,24 +118,12 @@ void MyWidget::on_realize()
     << ", bottom=" << m_padding.get_bottom()
     << ", left=" << m_padding.get_left() << std::endl;
 
-  if(!m_refGdkSurface)
-  {
-    //Create the GdkSurface:
-    m_refGdkSurface = Gdk::Surface::create_child(get_parent()->get_surface(), get_allocation());
-    set_surface(m_refGdkSurface);
-
-    // Make the widget receive expose events
-    register_surface(m_refGdkSurface);
-  }
-
   //Call base class:
   Gtk::Widget::on_realize();
 }
 
 void MyWidget::on_unrealize()
 {
-  m_refGdkSurface.reset();
-
   //Call base class:
   Gtk::Widget::on_unrealize();
 }

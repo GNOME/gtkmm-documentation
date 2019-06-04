@@ -74,7 +74,7 @@ void ExampleWindow::configure_form_popover()
   m_toggle_form_popover.add(m_toggle_form_grid);
   m_toggle_form_popover.set_position(Gtk::PositionType::BOTTOM);
   m_toggle_form_popover.set_margin(6);
-  m_toggle_form_popover.set_modal(false);
+  m_toggle_form_popover.set_autohide(false);
 }
 
 void ExampleWindow::configure_form_buttons()
@@ -153,7 +153,6 @@ void ExampleWindow::on_day_selected()
   double x = 0.0;
   double y = 0.0;
   current_event_button->get_coords(x, y);
-  current_event_button->get_surface()->coords_to_parent(x, y, x, y);
   Gdk::Rectangle rect;
   auto allocation = m_calendar.get_allocation();
   rect.set_x(x - allocation.get_x());

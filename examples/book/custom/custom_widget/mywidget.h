@@ -36,7 +36,6 @@ protected:
   Gtk::SizeRequestMode get_request_mode_vfunc() const override;
   void measure_vfunc(Gtk::Orientation orientation, int for_size, int& minimum, int& natural,
     int& minimum_baseline, int& natural_baseline) const override;
-  void on_size_allocate(int width, int height, int baseline) override;
   void on_map() override;
   void on_unmap() override;
   void on_realize() override;
@@ -47,7 +46,6 @@ protected:
   void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error);
 
   Gtk::Border m_padding;
-  Glib::RefPtr<Gdk::Surface> m_refGdkSurface;
   Glib::RefPtr<Gtk::CssProvider> m_refCssProvider;
 };
 

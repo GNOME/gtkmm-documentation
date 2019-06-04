@@ -41,7 +41,7 @@ TreeView_WithPopup::TreeView_WithPopup()
   append_column("Name", m_Columns.m_col_name);
 
   // Catch button press events:
-  auto refGesture = Gtk::GestureMultiPress::create();
+  auto refGesture = Gtk::GestureClick::create();
   refGesture->set_button(GDK_BUTTON_SECONDARY);
   refGesture->signal_pressed().connect(
     sigc::mem_fun(*this, &TreeView_WithPopup::on_popup_button_pressed));
