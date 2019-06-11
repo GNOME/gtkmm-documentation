@@ -36,7 +36,7 @@ elif warning_level == 'max' or warning_level == 'fatal'
     warning_flags += [ '-Werror' ]
     deprecations = 'G PANGO ATK GDK GDK_PIXBUF GTK GLIBMM GIOMM GDKMM ATKMM PANGOMM GTKMM SIGCXX'.split()
     foreach d : deprecations
-      warning_flags += '-D@0@_DISABLED_DEPRECATED'.format(d)
+      warning_flags += '-D@0@_DISABLE_DEPRECATED'.format(d)
     endforeach
   endif
 endif
