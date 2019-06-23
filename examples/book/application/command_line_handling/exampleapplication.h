@@ -41,6 +41,13 @@ protected:
   bool on_option_arg_filename(const Glib::ustring& option_name,
     const std::string& value, bool has_value);
 
+  // These members should live as long as the OptionGroup to which they are added,
+  // and as long as the Application to which that OptionGroup is added.
+  int m_arg_int = 0;
+  Glib::ustring m_arg_ustring;
+  bool m_arg_boolean = false;
+  Glib::OptionGroup m_option_group;
+
 private:
   void create_window(const Glib::RefPtr<Gio::File>& file = Glib::RefPtr<Gio::File>());
 
