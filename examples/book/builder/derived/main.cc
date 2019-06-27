@@ -18,6 +18,9 @@
 #include <iostream>
 #include <cstring>
 
+// Not really used anywhere, but force an instance to be created.
+DerivedButton* my_globally_accessible_button = nullptr;
+
 int main (int argc, char **argv)
 {
   bool show_icon = false;
@@ -40,6 +43,10 @@ int main (int argc, char **argv)
   }
 
   auto app = Gtk::Application::create("org.gtkmm.example");
+
+  // Create a dummy instance before the call to refBuilder->add_from_file().
+  // This creation registers DerivedButton's class in the GType system.
+  my_globally_accessible_button = new DerivedButton();
 
   //Load the Glade file and instantiate its widgets:
   auto refBuilder = Gtk::Builder::create();

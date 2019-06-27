@@ -22,7 +22,7 @@ examples_book = [
   [['base'], 'base', ['base.cc']],
   [['box'], 'example', exwindow_main + ['packbox.cc']],
   [['builder', 'basic'], 'example', ['main.cc']],
-  [['builder', 'derived'], 'example', ['deriveddialog.cc', 'main.cc']],
+  [['builder', 'derived'], 'example', ['deriveddialog.cc', 'derivedbutton.cc', 'main.cc']],
   [['buttons', 'button'], 'buttons', ['buttons.cc', 'main.cc']],
   [['buttons', 'checkbutton'], 'example', exwindow_main],
   [['buttons', 'filechooserbutton'], 'example', exwindow_main],
