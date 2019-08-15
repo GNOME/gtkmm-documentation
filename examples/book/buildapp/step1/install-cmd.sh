@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh -e
 
 # External command, intended to be called from
 #   ninja install-desktop-file
