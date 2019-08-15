@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/sh -e
 
 # External command, intended to be called with add_dist_script() in meson.build
 
