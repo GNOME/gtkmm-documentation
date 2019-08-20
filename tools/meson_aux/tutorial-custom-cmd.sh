@@ -30,7 +30,8 @@ html)
     --stringparam use.id.as.filename 1'
   xslt_stylesheet='http://docbook.sourceforge.net/release/xsl/current/html/chunk.xsl'
 
-  ( cd "$3"; rm --force --recursive "$2"; mkdir --parents "$2" )
+  # -fR == --force --recursive; -p == --parents (Posix does not support long options.)
+  ( cd "$3"; rm -fR "$2"; mkdir -p "$2" )
   # Don't use grep instead of sed. grep returns a non-zero exit status if no line
   # is selected, which is the normal case.
   set -o pipefail # Return the exit status of xsltproc, if sed succeeds.
@@ -64,13 +65,13 @@ docbook2pdf)
   xml_file="$output_dir/$output_basename.xml"
 
   # We need to produce a full examples XML with all of the XIncludes done.
-	xmllint --xinclude --postvalid --output "$xml_file" "$2"
+  xmllint --xinclude --postvalid --output "$xml_file" "$2"
 
-	# We also need to copy the figures from the source directory, so they
-	# can be found from the XML file.
-	cp --preserve --recursive "$3" "$output_dir/$(basename "$3")"
+  # We also need to copy the figures from the source directory, so they
+  # can be found from the XML file.
+  # -R -p == --recursive --preserve
+  cp -R -p "$3" "$output_dir/$(basename "$3")"
 
-	docbook2pdf --output "$output_dir" "$xml_file"
-	;;
+  docbook2pdf --output "$output_dir" "$xml_file"
+  ;;
 esac
-
