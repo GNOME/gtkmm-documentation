@@ -4,7 +4,7 @@
 
 # extra-dist-cmd.sh <root_source_dir> <root_build_dir> <relative_dist_dir>
 
-# relative_dist_dir is the distribution directory path relative to root_build_dir.
+# <relative_dist_dir> is the distribution directory path relative to root_build_dir.
 # Meson does not preserve timestamps on distributed files. Neither does this script.
 
 # Make a ChangeLog file for distribution.
@@ -17,7 +17,8 @@ dist_docs_tutorial="$3/docs/tutorial"
 
 # English index.docbook and html files.
 cp "docs/tutorial/index.docbook" "$dist_docs_tutorial/C/"
-cp --recursive "docs/tutorial/html/" "$dist_docs_tutorial/"
+# -R == --recursive (Posix does not support long options.)
+cp -R "docs/tutorial/html/" "$dist_docs_tutorial/"
 
 # Read the distributed LINGUAS file, containing a list of available translations.
 linguas="$dist_docs_tutorial/LINGUAS"
@@ -46,5 +47,6 @@ fi
 # Remove all .gitignore files and an empty $3/build directory.
 find "$3" -name ".gitignore" -exec rm '{}' \;
 if [ -d "$3/build" ]; then
-  rmdir --ignore-fail-on-non-empty "$3/build"
+  # Ignore the error, if not empty.
+  rmdir "$3/build" 2>/dev/null || true
 fi
