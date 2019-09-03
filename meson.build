@@ -14,13 +14,16 @@ gtkmm_dep = dependency(gtkmm_pcname, version: '>=3.95.1')
 giomm_dep = dependency('giomm-2.62', version: '>=2.61.1')
 gnome = import('gnome')
 
-gtkmm_prefix = get_option('prefix')
-gtkmm_datadir = join_paths(gtkmm_prefix, get_option('datadir'))
+# Installation directories are relative to {prefix}.
+install_prefix = get_option('prefix')
+install_datadir = get_option('datadir')
 
-compile_schemas_sh = files(join_paths('tools', 'meson_aux', 'compile-schemas.sh'))
-copy_to_subdir_sh = files(join_paths('tools', 'meson_aux', 'copy-to-subdir.sh'))
-tutorial_custom_cmd_sh = files(join_paths('tools', 'meson_aux', 'tutorial-custom-cmd.sh'))
+compile_schemas_sh = files('tools' / 'meson_aux' / 'compile-schemas.sh')
+copy_to_subdir_sh = files('tools' / 'meson_aux' / 'copy-to-subdir.sh')
+tutorial_custom_cmd_sh = files('tools' / 'meson_aux' / 'tutorial-custom-cmd.sh')
 
+# Use these instead of meson.source_root() and meson.build_root() in subdirectories.
+# source_root() and build_root() are not useful, if this is a subproject.
 project_source_root = meson.current_source_dir()
 project_build_root = meson.current_build_dir()
 
@@ -47,13 +50,14 @@ add_project_arguments(warning_flags, language: 'cpp')
 subdir('docs/tutorial')
 subdir('examples')
 
-# Modify the contents of the distribution directory.
-meson.add_dist_script(
-  join_paths('tools', 'meson_aux', 'extra-dist-cmd.sh'),
-  meson.current_source_dir(),
-  meson.current_build_dir(),
-  join_paths('meson-dist', meson.project_name() + '-' + meson.project_version()),
-)
+if not meson.is_subproject()
+  # Modify the contents of the distribution directory. (not allowed in a subproject)
+  meson.add_dist_script(
+    'tools' / 'meson_aux' / 'extra-dist-cmd.sh',
+    meson.current_source_dir(),
+    meson.current_build_dir(),
+  )
+endif
 
 # Print a summary.
 validate = get_option('validation') and can_parse_and_validate
@@ -85,8 +89,9 @@ summary = [
   'Build translations: @0@@1@'.format(build_translations, explain_trans),
   '         Build PDF: @0@@1@'.format(build_pdf, explain_pdf),
   'Directories:',
-  '            prefix: @0@'.format(gtkmm_prefix),
-  '           datadir: @0@'.format(gtkmm_datadir),
+  '            prefix: @0@'.format(install_prefix),
+  '           datadir: @0@'.format(install_prefix / install_datadir),
+  '       tutorialdir: @0@'.format(install_prefix / tutorialdir),
   '------'
 ]
 

@@ -23,19 +23,19 @@ examples_book_treeview = [
 foreach ex : examples_book_treeview
   dir = ''
   foreach dir_part : ex[0]
-    dir = join_paths(dir, dir_part)
+    dir = dir / dir_part
   endforeach
-  ex_name = join_paths(dir, ex[1]).underscorify()
+  ex_name = (dir / ex[1]).underscorify()
   ex_sources = []
   resources = []
   foreach src : ex[2]
     if src.endswith('.gresource.xml')
       resources = gnome.compile_resources(dir.underscorify() + '_resources',
-        join_paths(dir, src),
+        dir / src,
         source_dir: dir
       )
     else
-      ex_sources += join_paths(dir, src)
+      ex_sources += dir / src
     endif
   endforeach
 
@@ -59,7 +59,7 @@ foreach ex : examples_book_treeview
     build_by_default: build_examples_by_default
   )
 
-  target_name = join_paths('examples', 'book', 'treeview', stamp_file_name)
+  target_name = 'examples' / 'book' / 'treeview' / stamp_file_name
   examples_targets += target_name
 
   test('book_treeview_' + ex_name, meson_backend,

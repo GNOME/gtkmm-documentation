@@ -1,8 +1,8 @@
 # docs/tutorial
 
-# input: gnome, gtkmm_datadir, gtkmm_pcname, tutorial_custom_cmd_sh, project_source_root
+# input: gnome, install_datadir, gtkmm_pcname, tutorial_custom_cmd_sh, project_source_root
 # output: can_parse_and_validate, build_translations_by_default, can_build_translations,
-#         build_pdf_by_default, can_build_pdf
+#         build_pdf_by_default, can_build_pdf, tutorialdir
 
 # xsltproc is required by tutorial_custom_cmd_sh html.
 xsltproc = find_program('xsltproc', required: true)
@@ -22,11 +22,11 @@ can_build_pdf = dblatex.found() or (xmllint.found() and \
                 find_program('docbook2pdf', required: false).found())
 build_pdf_by_default = get_option('build-pdf')
 
-# Installation directories
-tutorialdir = join_paths(gtkmm_datadir, 'doc', gtkmm_pcname, 'tutorial')
-tutorial_htmldir = join_paths(tutorialdir, 'html')
-tutorial_figuresdir = join_paths(tutorial_htmldir, 'figures')
-tutorial_iconsdir = join_paths(tutorial_htmldir, 'icons')
+# Installation directories are relative to {prefix}.
+tutorialdir = install_datadir / 'doc' / gtkmm_pcname / 'tutorial'
+tutorial_htmldir = tutorialdir / 'html'
+tutorial_figuresdir = tutorial_htmldir / 'figures'
+tutorial_iconsdir = tutorial_htmldir / 'icons'
 
 tutorial_figurefiles = [
   'aspectframe.png',
@@ -114,8 +114,8 @@ tutorial_figurefiles = [
 tutorial_figures = []
 tutorial_C_figures = []
 foreach f : tutorial_figurefiles
-  tutorial_figures += join_paths('figures', f)
-  tutorial_C_figures += join_paths('C', 'figures', f)
+  tutorial_figures += 'figures' / f
+  tutorial_C_figures += 'C' / 'figures' / f
 endforeach
 
 tutorial_iconfiles = [
@@ -131,18 +131,18 @@ tutorial_iconfiles = [
 ]
 tutorial_icons = []
 foreach i : tutorial_iconfiles
-  tutorial_icons += join_paths('icons', i)
+  tutorial_icons += 'icons' / i
 endforeach
 
 # Create a DocBook C locale XML file with the examples' source code included.
 # Copy it to the source directory, where gnome.yelp() expects to find it.
 index_docbook = custom_target('index.docbook',
-  input: join_paths('C', 'index-in.docbook'),
+  input: 'C' / 'index-in.docbook',
   output: 'index.docbook',
   command: [
     tutorial_custom_cmd_sh, 'insert_example_code',
-    join_paths(meson.current_source_dir(), 'insert_example_code.pl'),
-    join_paths(project_source_root, 'examples', 'book'),
+    meson.current_source_dir() / 'insert_example_code.pl',
+    project_source_root / 'examples' / 'book',
     '@INPUT@',
     '@OUTPUT@',
   ],
@@ -190,7 +190,7 @@ if can_build_pdf
       tutorial_custom_cmd_sh,
       dblatex.found() ? 'dblatex' : 'docbook2pdf',
       '@INPUT@',
-      join_paths(meson.current_source_dir(), 'C', 'figures'),
+      meson.current_source_dir() / 'C' / 'figures',
       '@OUTPUT@'
     ],
     build_by_default: build_pdf_by_default,
