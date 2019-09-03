@@ -2,18 +2,17 @@
 
 # External command, intended to be called with add_dist_script() in meson.build
 
-# extra-dist-cmd.sh <root_source_dir> <root_build_dir> <relative_dist_dir>
+# extra-dist-cmd.sh <root_source_dir> <root_build_dir>
 
-# <relative_dist_dir> is the distribution directory path relative to root_build_dir.
 # Meson does not preserve timestamps on distributed files. Neither does this script.
 
 # Make a ChangeLog file for distribution.
 git --git-dir="$1/.git" --work-tree="$1" log --no-merges --date=short --max-count=200 \
-    --pretty='tformat:%cd  %an  <%ae>%n%n  %s%n%w(0,0,2)%+b' > "$2/$3/ChangeLog"
+    --pretty='tformat:%cd  %an  <%ae>%n%n  %s%n%w(0,0,2)%+b' > "$MESON_DIST_ROOT/ChangeLog"
 
 # Distribute some built files in addition to the files in the local git clone.
 cd "$2"
-dist_docs_tutorial="$3/docs/tutorial"
+dist_docs_tutorial="$MESON_DIST_ROOT/docs/tutorial"
 
 # English index.docbook and html files.
 cp "docs/tutorial/index.docbook" "$dist_docs_tutorial/C/"
@@ -44,9 +43,9 @@ else
   echo "--- Info: No updated PDF file found."
 fi
 
-# Remove all .gitignore files and an empty $3/build directory.
-find "$3" -name ".gitignore" -exec rm '{}' \;
-if [ -d "$3/build" ]; then
+# Remove all .gitignore files and an empty $MESON_DIST_ROOT/build directory.
+find "$MESON_DIST_ROOT" -name ".gitignore" -exec rm '{}' \;
+if [ -d "$MESON_DIST_ROOT/build" ]; then
   # Ignore the error, if not empty.
-  rmdir "$3/build" 2>/dev/null || true
+  rmdir "$MESON_DIST_ROOT/build" 2>/dev/null || true
 fi
