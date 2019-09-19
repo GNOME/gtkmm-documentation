@@ -6641,15 +6641,15 @@ widgets are instantiated during <methodname>Gtk::Builder::create_from_file()</me
 <methodname>get_widget()</methodname> returns child widgets that are
 <function>manage()</function>ed (see the <link linkend="chapter-memory">Memory
 Management</link> chapter), so they will be deleted when their parent
-container is deleted. So, if you get only a child widget from
-<application>Gtk::Builder</application>, instead of a whole window, then you must
-either put it in a <classname>Container</classname> or delete it.
-<classname>Windows</classname> (such as <classname>Dialogs</classname>) cannot
-be managed because they have no parent container, so you must delete them at
-some point.
+container is deleted. <classname>Windows</classname> (such as <classname>Dialogs</classname>)
+cannot be managed because they have no parent container, so you must delete them at
+some point. The documentation of <classname>Gtk::Builder</classname> has more to say
+about the memory management of different kinds of objects.
 </para>
 
-<sect2 id="builder-example-loading">
+<para><ulink url="&url_refdocs_base_gtk;Builder.html">Reference</ulink></para>
+
+<sect2 id="builder-example-basic">
 <title>Example</title>
 <para>
 This simple example shows how to load a <application>Glade</application> file at runtime and access the widgets with
@@ -6661,7 +6661,6 @@ This simple example shows how to load a <application>Glade</application> file at
 </sect2>
 
 </sect1>
-
 
 <sect1 id="sec-builder-using-derived-widgets">
 <title>Using derived widgets</title>
@@ -6738,10 +6737,39 @@ can invoke this constructor
 </programlisting>
 </para>
 
-<sect2 id="builder-example-accessing">
+<sect2 id="sec-builder-and-property">
+<title>Gtk::Builder and Glib::Property</title>
+<note><para>
+User-defined properties will be read correctly from the <filename>.glade</filename>
+file only if you use <application>glibmm</application> 2.62.0 or newer.
+</para></note>
+<para>
+If your derived widget uses <classname>Glib::Property</classname>, it becomes slightly
+more complicated. A derived widget that contains <classname>Glib::Property</classname>
+members must be registered with its own name in the <type>GType</type> system.
+It must be registered before any of the <methodname>create_from_*()</methodname> or
+<methodname>add_from_*()</methodname> methods are called, meaning that you may have
+to create an instance of your derived widget just to have its class registered.
+Your derived widget must have a constructor that has the parameters required by
+<methodname>get_widget_derived()</methodname> and calls the <classname>Glib::ObjectBase</classname>
+constructor to register the <type>GType</type>.
+<programlisting>
+<![CDATA[DerivedButton::DerivedButton(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder)
+: Glib::ObjectBase("MyButton"), // The GType name will be gtkmm__CustomObject_MyButton.
+  Gtk::Button(cobject),
+  prop_ustring(*this, "button-ustring"),
+  prop_int(*this, "button-int", 10)
+{
+  // ....
+}]]>
+</programlisting>
+</para>
+</sect2>
+
+<sect2 id="builder-example-derived">
 <title>Example</title>
 <para>
-This example shows how to load a <application>Glade</application> file at runtime and access the widgets via a derived class.
+This example shows how to load a <application>Glade</application> file at runtime and access the widgets via derived classes.
 </para>
 
 <para><ulink url="&url_examples_base;builder/derived">Source Code</ulink></para>
