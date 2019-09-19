@@ -18,9 +18,13 @@
 #include "examplewindow.h"
 #include <iostream>
 
+#define HAS_ADD_OPTION_GROUP (GLIBMM_MAJOR_VERSION > 2 || \
+  (GLIBMM_MAJOR_VERSION == 2 && GLIBMM_MINOR_VERSION >= 62))
+
 ExampleApplication::ExampleApplication()
 : Gtk::Application("org.gtkmm.examples.application",
-    Gio::ApplicationFlags(Gio::APPLICATION_HANDLES_OPEN | Gio::APPLICATION_HANDLES_COMMAND_LINE))
+    Gio::ApplicationFlags(Gio::APPLICATION_HANDLES_OPEN | Gio::APPLICATION_HANDLES_COMMAND_LINE)),
+  m_option_group("extra-options", "Extra options", "Show extra options")
 {
   Glib::set_application_name("Gtk::Application Example");
 
@@ -53,6 +57,33 @@ ExampleApplication::ExampleApplication()
     "string", 's', "The string to use", "string", Glib::OptionEntry::FLAG_OPTIONAL_ARG);
   add_main_option_entry_filename(sigc::mem_fun(*this, &ExampleApplication::on_option_arg_filename),
     "name", 'n', "The filename to use", "file");
+
+  // Command-line arguments in a separate OptionGroup.
+  Glib::OptionEntry entry;
+  entry.set_long_name("xint");
+  entry.set_short_name('i');
+  entry.set_description("Extra integer");
+  entry.set_arg_description("number");
+  m_option_group.add_entry(entry, m_arg_int);
+
+  entry.set_long_name("xustring");
+  entry.set_short_name('u');
+  entry.set_description("Extra UTF8 string");
+  entry.set_arg_description("string");
+  m_option_group.add_entry(entry, m_arg_ustring);
+
+  entry.set_long_name("xbool");
+  entry.set_short_name('l');
+  entry.set_description("Extra boolean");
+  entry.set_arg_description("");
+  m_option_group.add_entry(entry, m_arg_boolean);
+
+#if HAS_ADD_OPTION_GROUP
+  add_option_group(m_option_group);
+#else
+  // This is what you can do, if you use a glibmm version older than 2.62.0.
+  g_application_add_option_group(Gio::Application::gobj(), m_option_group.gobj_give_ownership());
+#endif
 }
 
 Glib::RefPtr<ExampleApplication> ExampleApplication::create()
@@ -172,6 +203,14 @@ int ExampleApplication::on_command_line(const Glib::RefPtr<Gio::ApplicationComma
   std::vector<std::string> vec_remaining;
   get_arg_value(options, G_OPTION_REMAINING, vec_remaining);
 
+  // The options in m_option_group are not stored in the options VariantDict.
+  // They are available in the data members used in m_option_group.add_entry().
+  // Their values show the options given when the primary instance was started.
+  // To see the difference between the values in on_command_line(), executed in
+  // the primary instance, and the values in on_handle_local_options(), executed
+  // in the local instance, first start one instance of the application.
+  // While that instance is running, start a second instance with other options.
+
   //Note that "foo" and "goo" will not be false/empty here because we
   //handled them in on_handle_local_options() and therefore removed them from
   //the options VariantDict.
@@ -181,6 +220,9 @@ int ExampleApplication::on_command_line(const Glib::RefPtr<Gio::ApplicationComma
     "  hoo = " << hoo_value << std::endl <<
     "  bar = " << bar_value << std::endl <<
     "  version = " << (version_value ? "true" : "false") << std::endl <<
+    "  xint = " << m_arg_int << std::endl <<
+    "  xustring = " << m_arg_ustring << std::endl <<
+    "  xbool = " << (m_arg_boolean ? "true" : "false") << std::endl <<
     "  remaining =";
   for (std::size_t i = 0; i < vec_remaining.size(); ++i)
     std::cout << ' ' << vec_remaining[i];
@@ -219,12 +261,18 @@ int ExampleApplication::on_handle_local_options(const Glib::RefPtr<Glib::Variant
   bool version_value = false;
   get_arg_value(options, "version", version_value);
 
+  // The options in m_option_group are not stored in the options VariantDict.
+  // They are available in the data members used in m_option_group.add_entry().
+
   std::cout << "on_handle_local_options(), parsed values: " << std::endl <<
     "  foo = " << (foo_value ? "true" : "false") << std::endl <<
     "  goo = " << goo_value << std::endl <<
     "  hoo = " << hoo_value << std::endl <<
     "  bar = " << bar_value << std::endl <<
-    "  version = " << (version_value ? "true" : "false") << std::endl;
+    "  version = " << (version_value ? "true" : "false") << std::endl <<
+    "  xint = " << m_arg_int << std::endl <<
+    "  xustring = " << m_arg_ustring << std::endl <<
+    "  xbool = " << (m_arg_boolean ? "true" : "false") << std::endl;
 
   //Remove some options to show that we have handled them in the local instance,
   //so they won't be passed to the primary (remote) instance:
@@ -243,7 +291,7 @@ int ExampleApplication::on_handle_local_options(const Glib::RefPtr<Glib::Variant
   }
 
   //If the command line parameters were invalid,
-  //complain and exist with a failure code:
+  //complain and exit with a failure code:
   if(goo_value == "ungoo")
   {
      std::cerr << "goo cannot be ungoo." << std::endl;
