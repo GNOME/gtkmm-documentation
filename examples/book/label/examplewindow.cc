@@ -71,7 +71,7 @@ ExampleWindow::ExampleWindow()
           "     It supports multiple paragraphs correctly, "
           "and  correctly   adds "
           "many          extra  spaces. ");
-  m_Label_LineWrapped.set_line_wrap();
+  m_Label_LineWrapped.set_wrap();
   m_Frame_LineWrapped.add(m_Label_LineWrapped);
   m_VBox2.add(m_Frame_LineWrapped);
 
@@ -87,7 +87,7 @@ ExampleWindow::ExampleWindow()
           "paragraph.  It is coming to an end, "
           "unfortunately.");
   m_Label_FilledWrapped.set_justify(Gtk::Justification::FILL);
-  m_Label_FilledWrapped.set_line_wrap();
+  m_Label_FilledWrapped.set_wrap();
   m_Frame_FilledWrapped.add(m_Label_FilledWrapped);
   m_VBox2.add(m_Frame_FilledWrapped);
 

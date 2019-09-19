@@ -30,7 +30,7 @@ ExampleWindow::ExampleWindow()
 
   m_VBox.add(m_Label);
   m_Label.set_expand(true);
-  m_Label.set_line_wrap(true);
+  m_Label.set_wrap(true);
   m_Label.set_selectable(true);
 
   m_VBox.add(m_ButtonBox);
