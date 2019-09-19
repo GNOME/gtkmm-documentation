@@ -15,17 +15,25 @@
  */
 
 #include "deriveddialog.h"
+#include <iostream>
 
 DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
 : Gtk::Dialog(cobject),
   m_refGlade(refGlade),
   m_pButton(nullptr)
 {
-  //Get the Glade-instantiated Button, and connect a signal handler:
-  m_refGlade->get_widget("quit_button", m_pButton);
-  if(m_pButton)
+  // Get the Glade-instantiated Button, and connect a signal handler:
+  m_refGlade->get_widget_derived("quit_button", m_pButton);
+  if (m_pButton)
   {
+    // The user-defined properties in DerivedButton are read correctly from the
+    // derived.glade file only if you use glibmm 2.62.0 or newer.
     m_pButton->signal_clicked().connect( sigc::mem_fun(*this, &DerivedDialog::on_button_quit) );
+    std::cout << "ustring, int: " << m_pButton->property_ustring()
+              << ", " << m_pButton->property_int() << std::endl;
+    m_pButton->property_int() = 99;
+    std::cout << "ustring, int: " << m_pButton->property_ustring()
+              << ", " << m_pButton->property_int() << std::endl;
   }
 }
 

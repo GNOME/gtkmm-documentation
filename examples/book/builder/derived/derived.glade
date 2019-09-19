@@ -19,13 +19,15 @@
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="quit_button">
+              <object class="gtkmm__CustomObject_MyButton" id="quit_button">
                 <property name="label">_Quit</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">False</property>
                 <property name="use_underline">True</property>
+                <property name="button-ustring">Button with extra properties</property>
+                <property name="button-int">85</property>
               </object>
               <packing>
                 <property name="expand">False</property>

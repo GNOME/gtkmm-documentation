@@ -205,6 +205,8 @@ book_builder_basic_example_SOURCES =		\
 book_builder_derived_example_SOURCES =		\
 	book/builder/derived/deriveddialog.cc	\
 	book/builder/derived/deriveddialog.h	\
+	book/builder/derived/derivedbutton.cc	\
+	book/builder/derived/derivedbutton.h	\
 	book/builder/derived/main.cc
 
 book_buttonbox_example_SOURCES =		\

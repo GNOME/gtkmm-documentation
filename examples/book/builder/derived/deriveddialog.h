@@ -18,6 +18,7 @@
 #define GTKMM_EXAMPLE_DERIVED_DIALOG_H
 
 #include <gtkmm.h>
+#include "derivedbutton.h"
 
 class DerivedDialog : public Gtk::Dialog
 {
@@ -32,7 +33,7 @@ protected:
   void on_button_quit();
 
   Glib::RefPtr<Gtk::Builder> m_refGlade;
-  Gtk::Button* m_pButton;
+  DerivedButton* m_pButton;
 };
 
-#endif //GTKMM_EXAMPLE_DERIVED_WINDOW_H
+#endif //GTKMM_EXAMPLE_DERIVED_DIALOG_H
