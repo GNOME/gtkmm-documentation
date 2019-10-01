@@ -1,7 +1,7 @@
 # examples/book/treeview
 
-# input: gnome, gtkmm_dep, build_examples_by_default, compile_schemas_sh,
-#        copy_to_subdir_sh, meson_backend, test_timeout, project_build_root
+# input: gnome, gtkmm_dep, build_examples_by_default, compile_schemas, python3,
+#        copy_to_subdir, meson_backend, test_timeout, project_build_root
 # input and output: examples_targets
 
 exwindow_main = ['examplewindow.cc', 'main.cc']
@@ -50,7 +50,7 @@ foreach ex : examples_book_treeview
     input: exe_file,
     output: stamp_file_name,
     command: [
-      copy_to_subdir_sh,
+      python3, copy_to_subdir,
       '@INPUT@',
       dir,
       ex[1],

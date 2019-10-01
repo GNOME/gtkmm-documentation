@@ -1,7 +1,7 @@
 # examples/book
 
 # input: gnome, gtkmm_dep, giomm_dep, build_examples_by_default,
-#        compile_schemas_sh, copy_to_subdir_sh, config_include_dir,
+#        compile_schemas, copy_to_subdir, config_include_dir, python3,
 #        meson_backend, test_timeout, project_build_root
 # input and output: examples_targets
 
@@ -142,7 +142,7 @@ foreach ex : examples_book
     input: exe_file,
     output: stamp_file_name,
     command: [
-      copy_to_subdir_sh,
+      python3, copy_to_subdir,
       '@INPUT@',
       dir,
       ex[1],

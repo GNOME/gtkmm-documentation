@@ -1,7 +1,7 @@
 # examples/book/giomm
 
-# input: gnome, giomm_dep, build_examples_by_default, copy_to_subdir_sh,
-#        meson_backend, project_build_root
+# input: gnome, giomm_dep, build_examples_by_default, copy_to_subdir,
+#        meson_backend, project_build_root, python3
 # input and output: examples_targets
 
 examples_book_giomm = [
@@ -45,7 +45,7 @@ foreach ex : examples_book_giomm
     input: exe_file,
     output: stamp_file_name,
     command: [
-      copy_to_subdir_sh,
+      python3, copy_to_subdir,
       '@INPUT@',
       dir,
       ex[1],
