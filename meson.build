@@ -5,9 +5,16 @@ project('gtkmm-documentation', 'c', 'cpp',
   default_options: [
     'cpp_std=c++14'
   ],
-  meson_version: '>= 0.49.0',
+  meson_version: '>= 0.50.0', # required for python3.path()
   license: 'GPLv2'
 )
+
+python3 = import('python').find_installation('python3')
+python_version = python3.language_version()
+python_version_req = '>= 3.5'
+if not python_version.version_compare(python_version_req)
+  error('Requires Python @0@, found @1@.'.format(python_version_req, python_version))
+endif
 
 gtkmm_pcname = 'gtkmm-3.0'
 gtkmm_dep = dependency(gtkmm_pcname, version: '>=3.24.0')
@@ -18,25 +25,27 @@ gnome = import('gnome')
 install_prefix = get_option('prefix')
 install_datadir = get_option('datadir')
 
-compile_schemas_sh = files('tools' / 'meson_aux' / 'compile-schemas.sh')
-copy_to_subdir_sh = files('tools' / 'meson_aux' / 'copy-to-subdir.sh')
-tutorial_custom_cmd_sh = files('tools' / 'meson_aux' / 'tutorial-custom-cmd.sh')
- 
 # Use these instead of meson.source_root() and meson.build_root() in subdirectories.
 # source_root() and build_root() are not useful, if this is a subproject.
 project_source_root = meson.current_source_dir()
 project_build_root = meson.current_build_dir()
+
+script_dir = project_source_root / 'tools' / 'meson_aux'
+compile_schemas = script_dir / 'compile-schemas.py'
+copy_to_subdir = script_dir / 'copy-to-subdir.py'
+tutorial_custom_cmd = script_dir / 'tutorial-custom-cmd.py'
+extra_dist_cmd = script_dir / 'extra-dist-cmd.py'
 
 cpp_compiler = meson.get_compiler('cpp')
 
 warning_level = get_option('warnings')
 warning_flags = []
 if warning_level == 'min'
-  warning_flags = [ '-Wall' ]
+  warning_flags = ['-Wall']
 elif warning_level == 'max' or warning_level == 'fatal'
   warning_flags = '-pedantic -Wall -Wextra -Wformat-security -Wsuggest-override -Wshadow -Wno-long-long'.split()
   if warning_level == 'fatal'
-    warning_flags += [ '-Werror' ]
+    warning_flags += ['-Werror']
     deprecations = 'G PANGO ATK GDK GDK_PIXBUF GTK GLIBMM GIOMM GDKMM ATKMM PANGOMM GTKMM SIGCXX'.split()
     foreach d : deprecations
       warning_flags += '-D@0@_DISABLE_DEPRECATED'.format(d)
@@ -53,9 +62,9 @@ subdir('examples')
 if not meson.is_subproject()
   # Modify the contents of the distribution directory. (not allowed in a subproject)
   meson.add_dist_script(
-    'tools' / 'meson_aux' / 'extra-dist-cmd.sh',
-    meson.current_source_dir(),
-    meson.current_build_dir(),
+    python3.path(), extra_dist_cmd,
+    project_source_root,
+    project_build_root,
   )
 endif
 

@@ -1,7 +1,7 @@
 # examples
 
-# input: gnome, gtkmm_dep, giomm_dep, compile_schemas_sh, copy_to_subdir_sh,
-#        project_build_root
+# input: gnome, gtkmm_dep, giomm_dep, compile_schemas, copy_to_subdir,
+#        project_build_root, python3
 # output: build_examples_by_default
 
 # examples/book/input/main.cc includes build/config.h.
@@ -16,7 +16,7 @@ custom_target('build_config',
   input: conf_file,
   output: 'config.stamp',
   command: [
-    copy_to_subdir_sh,
+    python3, copy_to_subdir,
     '@INPUT@',
     'build',
     'config.h',

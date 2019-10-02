@@ -1,12 +1,13 @@
 # docs/tutorial
 
-# input: gnome, install_datadir, gtkmm_pcname, tutorial_custom_cmd_sh, project_source_root
+# input: gnome, install_datadir, gtkmm_pcname, tutorial_custom_cmd,
+#        project_source_root, python3
 # output: can_parse_and_validate, build_translations_by_default, can_build_translations,
 #         build_pdf_by_default, can_build_pdf, tutorialdir
 
-# xsltproc is required by tutorial_custom_cmd_sh html.
+# xsltproc is required by tutorial_custom_cmd html.
 xsltproc = find_program('xsltproc', required: true)
-# perl is required by tutorial_custom_cmd_sh insert_example_code.
+# perl is required by tutorial_custom_cmd insert_example_code.
 perl = find_program('perl', required: true)
 xmllint = find_program('xmllint', required: false)
 
@@ -146,7 +147,7 @@ index_docbook = custom_target('index.docbook',
   input: 'C' / 'index-in.docbook',
   output: 'index.docbook',
   command: [
-    tutorial_custom_cmd_sh, 'insert_example_code',
+    python3, tutorial_custom_cmd, 'insert_example_code',
     meson.current_source_dir() / 'insert_example_code.pl',
     project_source_root / 'examples' / 'book',
     '@INPUT@',
@@ -160,9 +161,7 @@ custom_target('html_index.html',
   input: index_docbook,
   output: 'html',
   command: [
-    tutorial_custom_cmd_sh, 'html',
-    'html',
-    meson.current_build_dir(),
+    python3, tutorial_custom_cmd, 'html',
     '@INPUT@',
     '@OUTPUT@',    
   ],
@@ -177,7 +176,7 @@ if can_parse_and_validate
     input: index_docbook,
     output: 'C_xmllint.stamp',
     command: [
-      tutorial_custom_cmd_sh, 'xmllint',
+      python3, tutorial_custom_cmd, 'xmllint',
       validate,
       '@INPUT@',
       '@OUTPUT@'
@@ -193,7 +192,7 @@ if can_build_pdf
     input: index_docbook,
     output: 'programming-with-gtkmm.pdf',
     command: [
-      tutorial_custom_cmd_sh,
+      python3, tutorial_custom_cmd,
       dblatex.found() ? 'dblatex' : 'docbook2pdf',
       '@INPUT@',
       meson.current_source_dir() / 'C' / 'figures',
