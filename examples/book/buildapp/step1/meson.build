@@ -20,12 +20,22 @@ executable(program_name,
   dependencies: gtkmm_dep
 )
 
-install_cmd = './install-cmd.sh'
+python3 = import('python').find_installation('python3')
+install_cmd = meson.current_source_dir() / 'install-cmd.py'
+
+conf_data = configuration_data()
+conf_data.set('bindir', meson.current_build_dir())
+desktop_file = configure_file(
+  input: 'exampleapp.desktop.in',
+  output: '@BASENAME@',
+  configuration: conf_data,
+)
 
 run_target('install-desktop-file',
-  command: [install_cmd, 'desktop',
+  command: [
+    python3, install_cmd, 'desktop',
     program_name,
-    'exampleapp.desktop',
-    'exampleapp.png'
+    desktop_file,
+    meson.current_source_dir() / 'exampleapp.png',
   ]
 )
