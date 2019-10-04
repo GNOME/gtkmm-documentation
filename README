@@ -1,13 +1,16 @@
 This is the documentation for gtkmm, a C++ API for GTK+.
 See http://www.gtkmm.org/
 
-Building with meson
+gtkmm-documentation can be built with Autotools or Meson.
+Building with Autotools may be phased out in the future.
+
+Building with Meson
 -------------------
 Create a build directory:
   $ cd gtkmm-3-documentation
   $ meson [options] <build-dir>
 Do not call the build-dir gtkmm-3-documentation/build. There is already such a
-directory, used when building with autotools.
+directory, used when building with Autotools.
 
 Print a list of configuration options:
   $ cd <build-dir>
@@ -47,5 +50,4 @@ have previously run 'ninja' and 'ninja install' with build-translations=true.
 
 This tarball is not identical to one made with "make dist" or "make distcheck".
 There is e.g. no "configure" file. If you want to use a tarball made with
-"ninja dist" for building with autotools, you have to start with ./autogen.sh.
-"make dist" and "make distcheck" don't distribute the meson.build files.
+"ninja dist" for building with Autotools, you have to start with ./autogen.sh.
