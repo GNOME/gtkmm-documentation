@@ -42,6 +42,19 @@ dist_noinst_DATA = \
   step9/Makefile.example \
   $(gsettings_SCHEMAS)
 
+# Distribute files needed when building with Meson.
+EXTRA_DIST = \
+  step1/install-cmd.py \
+  step1/meson.build \
+  step2/meson.build \
+  step3/meson.build \
+  step4/meson.build \
+  step5/meson.build \
+  step6/meson.build \
+  step7/meson.build \
+  step8/meson.build \
+  step9/meson.build
+
 step1_exampleapp_SOURCES = \
   step1/exampleapplication.cc \
   step1/exampleapplication.h \
