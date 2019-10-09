@@ -34,11 +34,9 @@ def gschema():
   gschema_file = sys.argv[2]
 
   # Don't do anything, if GSETTINGS_SCHEMA_DIR is not set,
-  # or if it is set to the current directory.
-  if 'GSETTINGS_SCHEMA_DIR' not in os.environ:
-    return 0
-  gschema_install_dir = os.environ['GSETTINGS_SCHEMA_DIR']
-  if not gschema_install_dir or gschema_install_dir == '.':
+  # or if it is set to the current directory ('.').
+  gschema_install_dir = os.environ.get('GSETTINGS_SCHEMA_DIR', None)
+  if not gschema_install_dir or gschema_install_dir == os.curdir:
     return 0
 
   # Create the installation directory, if it does not exist.
