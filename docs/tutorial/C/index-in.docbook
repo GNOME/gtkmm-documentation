@@ -7993,7 +7993,7 @@ This does not look very impressive yet, but our application is already presentin
 on the session bus, it has single-instance semantics, and it accepts files as commandline arguments.
 </para>
 
-<para><ulink url="&url_examples_base;buildapp/step1">Source Code</ulink></para> <!-- Insert exampleapp.desktop -->
+<para><ulink url="&url_examples_base;buildapp/step1">Source Code</ulink></para> <!-- Insert exampleapp.desktop.in -->
 
 </sect1>
 

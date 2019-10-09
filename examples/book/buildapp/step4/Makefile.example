@@ -37,6 +37,6 @@ clean:
 
 install-desktop-file:
 	@mkdir -p ~/.local/share/applications
-	sed -e "s#@bindir@#$$PWD#" ../step1/exampleapp.desktop > ~/.local/share/applications/$(PROGRAM).desktop
+	sed -e "s#@bindir@#$$PWD#" ../step1/exampleapp.desktop.in > ~/.local/share/applications/$(PROGRAM).desktop
 	@mkdir -p ~/.local/share/icons/hicolor/48x48/apps
 	cp ../step1/exampleapp.png ~/.local/share/icons/hicolor/48x48/apps
