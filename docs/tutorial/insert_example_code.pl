@@ -74,7 +74,10 @@ sub process_source_file($$$)
   print "</para>\n";
   print "<programlisting>\n";
 
-  open(SOURCE_FILE, "$directory/$source_file");
+  if (!open(SOURCE_FILE, "$directory/$source_file"))
+  {
+    print STDERR "Can't open $directory/$source_file\n";
+  }
 
   while(<SOURCE_FILE>)
   {
