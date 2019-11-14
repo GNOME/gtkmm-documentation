@@ -33,11 +33,10 @@ ExampleAppWindow* ExampleApplication::create_appwindow()
   // Make sure that the application runs for as long this window is still open.
   add_window(*appwindow);
 
-  // Gtk::Application::add_window() connects a signal handler to the window's
-  // signal_hide(). That handler removes the window from the application.
-  // If it's the last window to be removed, the application stops running.
-  // Gtk::Window::set_application() does not connect a signal handler, but is
-  // otherwise equivalent to Gtk::Application::add_window().
+  // A window can be added to an application with Gtk::Application::add_window()
+  // or Gtk::Window::set_application(). When all added windows have been hidden
+  // or removed, the application stops running (Gtk::Application::run() returns()),
+  // unless Gio::Application::hold() has been called.
 
   // Delete the window when it is hidden.
   appwindow->signal_hide().connect(sigc::bind(sigc::mem_fun(*this,
