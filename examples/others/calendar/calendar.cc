@@ -128,7 +128,7 @@ void CalendarExample::on_font_button_font_set()
     (font_size == 0 ? "" : "    font-size: " + std::to_string(font_size / PANGO_SCALE) + "pt;\n") +
     "}";
 
-  css_provider_->load_from_data(css);
+  css_provider_->load_from_data(css.raw());
 }
 
 void CalendarExample::on_button_close()

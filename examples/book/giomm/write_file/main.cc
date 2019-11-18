@@ -43,7 +43,7 @@ int main(int /* argc */, char** /* argv */)
       std::cerr << "Gio::File::create_file() returned an empty RefPtr." << std::endl;
 
     Glib::ustring contents = "This is some test output";
-    const gsize bytes_read = stream->write(contents);
+    const gsize bytes_read = stream->write(contents.raw());
 
     if(bytes_read)
       std::cout << "File contents written: " << contents << std::endl;

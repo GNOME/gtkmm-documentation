@@ -72,7 +72,7 @@ ExampleAppWindow* ExampleAppWindow::create()
 
 void ExampleAppWindow::open_file_view(const Glib::RefPtr<Gio::File>& file)
 {
-  const auto basename = file->get_basename();
+  const Glib::ustring basename = file->get_basename();
 
   auto scrolled = Gtk::make_managed<Gtk::ScrolledWindow>();
   scrolled->set_hexpand(true);
