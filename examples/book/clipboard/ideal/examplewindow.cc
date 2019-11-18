@@ -136,8 +136,8 @@ void ExampleWindow::on_clipboard_get(Gtk::SelectionData& selection_data,
 
   if(target == example_target_custom)
   {
-    // This set() override uses an 8-bit text format for the data.
-    selection_data.set(example_target_custom, m_ClipboardStore);
+    // This set() overload uses an 8-bit text format for the data.
+    selection_data.set(example_target_custom, m_ClipboardStore.raw());
   }
   else if(target == example_target_text)
   {

@@ -181,7 +181,7 @@ bool DnDWindow::on_image_drag_drop(const Glib::RefPtr<Gdk::DragContext>& context
   std::vector<std::string> targets = context->list_targets();
   if(!targets.empty())
   {
-    drag_get_data( context, targets[0], time );
+    drag_get_data( context, Glib::ustring(targets[0]), time );
   }
 
   return true;

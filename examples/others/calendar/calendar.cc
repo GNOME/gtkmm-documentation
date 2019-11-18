@@ -130,7 +130,7 @@ void CalendarExample::on_font_button_font_set()
 
   try
   {
-    css_provider_->load_from_data(css);
+    css_provider_->load_from_data(css.raw());
   }
   catch (const Gtk::CssProviderError& ex)
   {
