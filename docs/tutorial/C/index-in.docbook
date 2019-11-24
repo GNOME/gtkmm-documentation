@@ -3563,7 +3563,7 @@ mouse button.
 m_refBuilder->add_from_string(ui_info);
 
 auto gmenu = m_refBuilder->get_object<Gio::Menu>("menu-examplepopup");
-m_pMenuPopup = new Gtk::Menu(gmenu);]]>
+m_pMenuPopup = std::make_unique<Gtk::Menu>(gmenu);]]>
 </programlisting>
 
 <para>
