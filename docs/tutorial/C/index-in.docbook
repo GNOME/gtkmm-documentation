@@ -887,7 +887,7 @@ or set it later with <methodname>set_label()</methodname>.
 
 <para>To define an accelerator key for keyboard navigation, place an underscore before one of the label's characters and specify <literal>true</literal> for the optional <literal>mnemonic</literal> parameter. For instance:
 </para>
-<programlisting>Gtk::Button* pButton = new Gtk::Button("_Something", true);</programlisting>
+<programlisting>auto pButton = Gtk::make_managed&lt;Gtk::Button&gt;("_Something", true);</programlisting>
 
 <para>
 <classname>Gtk::Button</classname> is also
