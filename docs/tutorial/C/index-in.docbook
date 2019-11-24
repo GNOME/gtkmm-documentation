@@ -3600,7 +3600,7 @@ m_refBuilder->add_from_string(ui_info);
 
 Glib::RefPtr<Glib::Object> object = m_refBuilder->get_object("menu-examplepopup");
 Glib::RefPtr<Gio::Menu> gmenu = Glib::RefPtr<Gio::Menu>::cast_dynamic(object);
-m_pMenuPopup = new Gtk::Menu(gmenu);]]>
+m_pMenuPopup = std::make_unique<Gtk::Menu>(gmenu);]]>
 </programlisting>
 
 <para>
