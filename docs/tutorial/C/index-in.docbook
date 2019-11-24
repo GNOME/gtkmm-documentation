@@ -6665,11 +6665,11 @@ This simple example shows how to load a <application>Glade</application> file at
 <sect1 id="sec-builder-using-derived-widgets">
 <title>Using derived widgets</title>
 <para>
-You can use <application>Glade</application> to layout your own custom widgets
+You can use <classname>Gtk::Builder</classname> and
+<application>Glade</application> to layout your own custom widgets
 derived from &gtkmm; widget classes. This keeps your code organized and
-encapsulated. Of course you won't see the exact appearance and properties of
-your derived widget in <application>Glade</application>, but you can specify
-its location and child widgets and the properties of its &gtkmm; base class.
+encapsulated, separating declarative presentation from business logic, avoiding
+having most of your source just be setting properties and packing in containers.
 </para>
 
 <para>Use <methodname>Gtk::Builder::get_widget_derived()</methodname> like so:
@@ -6709,6 +6709,7 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk:
 {
   //Get the Glade-instantiated Button, and connect a signal handler:
   m_builder-&gt;get_widget(&quot;quit_button&quot;, m_pButton);
+
   if(m_pButton)
   {
     m_pButton-&gt;signal_clicked().connect( sigc::mem_fun(*this, &amp;DerivedDialog::on_button_quit) );
@@ -6763,6 +6764,16 @@ constructor to register the <type>GType</type>.
   // ....
 }]]>
 </programlisting>
+</para>
+<para>
+When using &gtkmm; with a version of <application>glibmm</application> from 2.62
+onwards, it is possible also to specify properties of derived widgets, declared
+in C++ using &gtkmm;, within <filename>.glade</filename> files and load/set
+these using <classname>Gtk::Builder</classname>. See the documentation of
+<classname>Gtk::Builder</classname> for more details on how to achieve this.
+Glade won’t recognise such properties as-is, but it should be able to through
+use of <ulink url="https://developer.gnome.org/gladeui/stable/properties.html">
+property class definitions</ulink> and a catalog declaring those new properties.
 </para>
 </sect2>
 
