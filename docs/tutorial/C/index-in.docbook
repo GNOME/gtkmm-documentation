@@ -989,28 +989,17 @@ one RadioButton in a group can be selected at any one time.
 There are two ways to set up a group of radio buttons. The first way
 is to create the buttons, and set up their groups afterwards. Only
 the constructors without a <classname>Gtk::RadioButton::Group</classname>
-parameter are used. In the following example, we
-make a new window class called <classname>RadioButtons</classname>, and then
-put three radio buttons in it:
+parameter are used. In the following example, we put 3 radio buttons in a group:
 </para>
 
-<programlisting>class RadioButtons : public Gtk::Window
-{
-public:
-  RadioButtons();
+<programlisting>
+auto rb1 = Gtk::make_managed&lt;Gtk::RadioButton&gt;("button1");
+auto rb2 = Gtk::make_managed&lt;Gtk::RadioButton&gt;("button2");
+auto rb3 = Gtk::make_managed&lt;Gtk::RadioButton&gt;("button3");
+rb2-&gt;join_group(*rb1);
+rb3-&gt;join_group(*rb1);
+</programlisting>
 
-protected:
-  Gtk::RadioButton m_rb1, m_rb2, m_rb3;
-};
-
-RadioButtons::RadioButtons()
-: m_rb1("button1"),
-  m_rb2("button2"),
-  m_rb3("button3")
-{
-  m_rb2.join_group(m_rb1);
-  m_rb3.join_group(m_rb1);
-}</programlisting>
 <para>
 We told &gtkmm; to put all three <classname>RadioButton</classname>s in the
 same group by using <methodname>join_group()</methodname> to tell the other
@@ -1020,7 +1009,7 @@ same group by using <methodname>join_group()</methodname> to tell the other
 
 <para>
 Note that you can't do
-<programlisting>m_rb2.set_group(m_rb1.get_group()); //doesn't work</programlisting>
+<programlisting>rb2-&gt;set_group(rb1-&gt;get_group());</programlisting>
 because <methodname>get_group()</methodname> returns a <classname>RadioButton::Group</classname>
 which is modified by <methodname>set_group()</methodname> and therefore is non-const.
 </para>
@@ -1029,19 +1018,13 @@ which is modified by <methodname>set_group()</methodname> and therefore is non-c
 The second way to set up radio buttons is to make a group first, and
 then add radio buttons to it. Here's an example:
 </para>
-<programlisting>class RadioButtons : public Gtk::Window
-{
-public:
-  RadioButtons();
-};
 
-RadioButtons::RadioButtons()
-{
-  Gtk::RadioButton::Group group;
-  auto m_rb1 = Gtk::make_managed&lt;Gtk::RadioButton&gt;(group, "button1");
-  auto m_rb2 = Gtk::make_managed&lt;Gtk::RadioButton&gt;(group, "button2");
-  auto m_rb3 = Gtk::make_managed&lt;Gtk::RadioButton&gt;(group, "button3");
-}</programlisting>
+<programlisting>
+Gtk::RadioButton::Group group;
+auto rb1 = Gtk::make_managed&lt;Gtk::RadioButton&gt;(group, "button1");
+auto rb2 = Gtk::make_managed&lt;Gtk::RadioButton&gt;(group, "button2");
+auto rb3 = Gtk::make_managed&lt;Gtk::RadioButton&gt;(group, "button3");
+</programlisting>
 
 <para>
 We made a new group by simply declaring a variable, <literal>group</literal>,
