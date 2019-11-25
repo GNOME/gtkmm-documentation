@@ -6288,10 +6288,9 @@ or <methodname>get_widget_derived()</methodname> again. For instance,
 <![CDATA[DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder)
 : Gtk::Dialog(cobject),
   m_builder(builder),
-  m_pButton(nullptr)
-{
   //Get the Glade-instantiated Button, and connect a signal handler:
-  m_pButton = m_builder->get_widget<Gtk::Button>("quit_button");
+  m_pButton(m_builder->get_widget<Gtk::Button>("quit_button"))
+{
   if(m_pButton)
   {
     m_pButton->signal_clicked().connect( sigc::mem_fun(*this, &DerivedDialog::on_button_quit) );
@@ -6312,7 +6311,7 @@ can invoke this constructor
 <![CDATA[DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, bool warning)
 : Gtk::Dialog(cobject),
   m_builder(builder),
-  m_pButton(nullptr)
+  m_pButton(m_builder->get_widget<Gtk::Button>("quit_button"))
 {
   // ....
 }]]>
