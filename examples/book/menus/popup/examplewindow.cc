@@ -98,7 +98,7 @@ ExampleWindow::ExampleWindow()
   if(!gmenu)
     g_warning("GMenu not found");
 
-  m_pMenuPopup = new Gtk::Menu(gmenu);
+  m_pMenuPopup = std::make_unique<Gtk::Menu>(gmenu);
 
   show_all_children();
 }

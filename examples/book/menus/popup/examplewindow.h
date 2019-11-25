@@ -21,6 +21,8 @@
 
 #include <gtkmm.h>
 
+#include <memory>
+
 class ExampleWindow : public Gtk::Window
 {
 public:
@@ -40,7 +42,7 @@ protected:
 
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
 
-  Gtk::Menu* m_pMenuPopup;
+  std::unique_ptr<Gtk::Menu> m_pMenuPopup;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H
