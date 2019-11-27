@@ -9689,8 +9689,12 @@ to the wrapped C object in <function>_CLASS_BOXEDTYPE</function> and
 <function>_CLASS_BOXEDTYPE_STATIC</function>.
 </para>
 <para>Suppresses definition of the constructor that takes a pointer to the
-wrapped C object in <function>_CLASS_GOBJECT</function>, <function>_CLASS_GTKOBJECT</function>,
-<function>_CLASS_INTERFACE</function> and <function>_CLASS_OPAQUE_COPYABLE</function>.
+wrapped C object in <function>_CLASS_INTERFACE</function> and
+<function>_CLASS_OPAQUE_COPYABLE</function>.
+</para>
+<para>Suppresses definition of the constructor that takes a pointer to the
+wrapped C object and the constructor that takes construct_params in
+<function>_CLASS_GOBJECT</function> and <function>_CLASS_GTKOBJECT</function>.
 </para>
 </sect3>
 
@@ -9704,7 +9708,8 @@ wrapped C object in <function>_CLASS_GOBJECT</function>, <function>_CLASS_GTKOBJ
 <sect3 id="gmmproc-custom-move-operations">
 <title>_CUSTOM_MOVE_OPERATIONS</title>
 <para>Suppresses declaration and definition of move constructor and move
-assignment operator in <function>_CLASS_GOBJECT</function>.
+assignment operator in <function>_CLASS_GOBJECT</function> and
+<function>_CLASS_GTKOBJECT</function>.
 </para>
 <para>For example:
 <programlisting>
