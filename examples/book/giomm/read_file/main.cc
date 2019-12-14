@@ -45,7 +45,7 @@ int main(int /* argc */, char** /* argv */)
       std::cerr << "Gio::InputStream::read() read 0 bytes." << std::endl;
 
   }
-  catch(const Glib::Exception& ex)
+  catch(const Glib::Error& ex)
   {
     std::cerr << "Exception caught: " << ex.what() << std::endl;
   }

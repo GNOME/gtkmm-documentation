@@ -58,7 +58,7 @@ int main(int /* argc */, char** /* argv */)
     stream->close();
     stream.reset(); //Stream can't be used after we have closed it.
   }
-  catch(const Glib::Exception& ex)
+  catch(const Glib::Error& ex)
   {
     std::cerr << "Exception caught: " << ex.what() << std::endl;
   }

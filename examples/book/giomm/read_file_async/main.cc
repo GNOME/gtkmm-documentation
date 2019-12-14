@@ -41,7 +41,7 @@ void on_stream_read_async_ready(Glib::RefPtr<Gio::AsyncResult>& result)
       std::cerr << "Gio::InputStream::read() read 0 bytes." << std::endl;
 
   }
-  catch(const Glib::Exception& ex)
+  catch(const Glib::Error& ex)
   {
     std::cerr << "Exception caught: " << ex.what() << std::endl;
   }
@@ -59,7 +59,7 @@ void on_file_read_async_ready(Glib::RefPtr<Gio::AsyncResult>& result)
     if(!stream)
       std::cerr << "Gio::File::read() returned an empty RefPtr." << std::endl;
   }
-  catch(const Glib::Exception& ex)
+  catch(const Glib::Error& ex)
   {
     std::cerr << "Exception caught: " << ex.what() << std::endl;
     mainloop->quit();
@@ -82,7 +82,7 @@ int main(int /* argc */, char** /* argv */)
     if(!file)
       std::cerr << "Gio::File::create_for_path() returned an empty RefPtr." << std::endl;
   }
-  catch(const Glib::Exception& ex)
+  catch(const Glib::Error& ex)
   {
     std::cerr << "Exception caught: " << ex.what() << std::endl;
   }

@@ -42,7 +42,7 @@ int main(int /* argc */, char** /* argv */)
     }
 
   }
-  catch(const Glib::Exception& ex)
+  catch(const Glib::Error& ex)
   {
     std::cerr << "Exception caught: " << ex.what() << std::endl;
   }
