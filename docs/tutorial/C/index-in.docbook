@@ -8,8 +8,8 @@
   <!ENTITY url_refdocs_base_gdk "&url_refdocs_base_gtk_html;classGdk_1_1">
   <!ENTITY url_refdocs_base_gtk "&url_refdocs_base_gtk_html;classGtk_1_1">
   <!ENTITY url_figures_base "figures/">
-  <!ENTITY url_examples_base "http://git.gnome.org/browse/gtkmm-documentation/tree/examples/book/">
-  <!ENTITY url_examples_branchsuffix "master">
+  <!ENTITY url_examples_branch "master">
+  <!ENTITY url_examples_base "https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/&url_examples_branch;/examples/book/">
   <!ENTITY gtkmm "<application>gtkmm</application>">
   <!ENTITY uuml "&#252;" >
   <!ENTITY szlig "&#223;" >
@@ -17,13 +17,6 @@
   <!ENTITY copy "&#169;" >
   <!ENTITY nbsp "&#160;" >
 ]>
-
-<!-- At present (2018-11-22) links to git.gnome.org are redirected to the
-corresponding part of gitlab.gnome.org. If url_examples_base is updated to
-point to gitlab.gnome.org, insert_example_code.pl must also be updated.
-The search path after gitlab.gnome.org/ is not the same as after git.gnome.org/.
-/Kjell Ahlstedt
--->
 
 <!--
 NOTE TO TUTORIAL DOCUMENTATION AUTHORS:
@@ -6431,7 +6424,7 @@ This example shows how to load a <application>Glade</application> file at runtim
         <application>automake</application> and
         <application>autoconf</application>) to build your project, and
         that you are using <ulink
-          url="http://git.gnome.org/browse/gnome-common/tree/autogen.sh">
+          url="https://gitlab.gnome.org/GNOME/gnome-common/blob/master/autogen.sh">
           <literal>./autogen.sh</literal> from
           <application>gnome-common</application></ulink>
         or a similar <literal>autogen.sh</literal> file, which, among other
@@ -9020,10 +9013,10 @@ $ jhbuild sanitycheck</screen>
 <title>Copying the skeleton project</title>
 
 <para>Typically our wrapper library would be called libsomethingmm. We can start by
-  copying the <ulink url="http://git.gnome.org/browse/mm-common/tree/skeletonmm">skeleton
-  source tree</ulink> from the <application>mm-common</application> module.
+  copying the <ulink url="https://gitlab.gnome.org/GNOME/mm-common/tree/master/skeletonmm">
+  skeleton source tree</ulink> from the <application>mm-common</application> module.
 <programlisting>
-  $ git clone git://git.gnome.org/mm-common
+  $ git clone https://gitlab.gnome.org/GNOME/mm-common.git
   $ cp -a mm-common/skeletonmm libsomethingmm
 </programlisting>
 </para>
