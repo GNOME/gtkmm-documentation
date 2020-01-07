@@ -9,6 +9,7 @@ exwindow_main = ['examplewindow.cc', 'main.cc']
 examples_book_treeview = [
 # [[dir-name], exe-name, [sources]]
   [['combo_renderer'], 'example', exwindow_main],
+  [['custom_treemodel'], 'example', exwindow_main + ['exampletreemodel.cc']],
   [['drag_and_drop'], 'example', exwindow_main + ['treemodel_dnd.cc']],
   [['editable_cells'], 'example', exwindow_main],
   [['filter'], 'example', exwindow_main],

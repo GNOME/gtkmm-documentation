@@ -107,6 +107,7 @@ check_PROGRAMS =					\
 	book/toolpalette/example			\
 	book/tooltips/example				\
 	book/treeview/combo_renderer/example		\
+	book/treeview/custom_treemodel/example	\
 	book/treeview/drag_and_drop/example		\
 	book/treeview/editable_cells/example		\
 	book/treeview/filter/example			\
@@ -665,6 +666,13 @@ book_treeview_combo_renderer_example_SOURCES =		\
 	book/treeview/combo_renderer/examplewindow.cc	\
 	book/treeview/combo_renderer/examplewindow.h	\
 	book/treeview/combo_renderer/main.cc
+
+book_treeview_custom_treemodel_example_SOURCES = \
+	book/treeview/custom_treemodel/examplewindow.cc \
+	book/treeview/custom_treemodel/examplewindow.h \
+	book/treeview/custom_treemodel/main.cc \
+	book/treeview/custom_treemodel/exampletreemodel.cc \
+	book/treeview/custom_treemodel/exampletreemodel.h
 
 book_treeview_drag_and_drop_example_SOURCES =		\
 	book/treeview/drag_and_drop/examplewindow.cc	\

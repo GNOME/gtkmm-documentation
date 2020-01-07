@@ -2898,12 +2898,21 @@ so that the right-click will cause the row to be selected first.
 
 <sect1 id="sec-treeview-examples"><title>Examples</title>
 
+<para>Some <classname>TreeView</classname> examples are shown here. There are
+more examples in the <ulink url="&url_examples_base;treeview/">treeview directory</ulink>
+in <application>gtkmm-documentation</application>'s examples.</para>
+
+<para>If neither <classname>ListStore</classname> nor <classname>TreeStore</classname>
+is suitable for your application, look at the
+<ulink url="&url_examples_base;treeview/custom_treemodel">custom TreeModel</ulink>
+example. It shows how you can make your own implementation of the <classname>TreeModel</classname>
+interface.</para>
+
 <sect2 id="liststore-example"><title>ListStore</title>
 <para>
 This example has a <classname>Gtk::TreeView</classname> widget, with a
 <classname>Gtk::ListStore</classname> model.
 </para>
-
 
 <figure id="figure-treeview-liststore">
   <title>TreeView - ListStore</title>
@@ -2997,12 +3006,8 @@ section.
 <para><ulink url="&url_examples_base;treeview/popup/">Source Code</ulink></para>
 
 </sect2>
-
-
 </sect1>
-
 </chapter>
-
 
 <chapter id="chapter-combobox">
 <title>Combo Boxes</title>
