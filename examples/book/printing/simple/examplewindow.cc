@@ -60,8 +60,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
 
   m_Grid.attach(m_CommentsLabel, 0, 2);
   m_Grid.attach(m_ScrolledWindow, 1, 2);
-  m_ScrolledWindow.set_hexpand(true);
-  m_ScrolledWindow.set_vexpand(true);
+  m_ScrolledWindow.set_expand(true);
 
   m_refTextBuffer = Gtk::TextBuffer::create();
   m_TextView.set_buffer(m_refTextBuffer);
@@ -215,9 +214,9 @@ void ExampleWindow::build_main_menu(const Glib::RefPtr<Gtk::Application>& app)
     g_warning("GMenu not found");
   else
   {
-    auto pMenuBar = Gtk::make_managed<Gtk::MenuBar>(gmenu);
+    auto pMenuBar = Gtk::make_managed<Gtk::PopoverMenuBar>(gmenu);
 
-    // Add the MenuBar to the window:
+    // Add the PopoverMenuBar to the window:
     m_VBox.add(*pMenuBar);
   }
 

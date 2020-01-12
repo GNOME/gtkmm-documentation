@@ -1,5 +1,3 @@
-/* -*- Mode: C++; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
-
 /* gtkmm example Copyright (C) 2007 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -51,9 +49,7 @@ protected:
   Glib::RefPtr<Gtk::TextTag> m_ref_bold_tag;
 
   Gtk::Button m_button;
-  Gtk::Window m_button_tooltip_window;
-
+  Gtk::Box m_button_tooltip_widget;
 };
 
 #endif // GTKMM_EXAMPLEWINDOW_H
-

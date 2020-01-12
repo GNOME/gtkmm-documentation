@@ -18,6 +18,7 @@
 #include <iostream>
 
 TreeView_WithPopup::TreeView_WithPopup()
+: m_MenuPopup(*this)
 {
   //Create the Tree model:
   m_refTreeModel = Gtk::ListStore::create(m_Columns);
@@ -47,32 +48,37 @@ TreeView_WithPopup::TreeView_WithPopup()
     sigc::mem_fun(*this, &TreeView_WithPopup::on_popup_button_pressed));
   add_controller(refGesture);
 
-  //Fill popup menu:
-  auto item = Gtk::make_managed<Gtk::MenuItem>("_Edit", true);
-  item->signal_activate().connect(
-    sigc::mem_fun(*this, &TreeView_WithPopup::on_menu_file_popup_generic) );
-  m_Menu_Popup.append(*item);
+  // Fill popup menu:
+  auto gmenu = Gio::Menu::create();
+  gmenu->append("_Edit", "popup.edit");
+  gmenu->append("_Process", "popup.process");
+  gmenu->append("_Remove", "popup.remove");
 
-  item = Gtk::make_managed<Gtk::MenuItem>("_Process", true);
-  item->signal_activate().connect(
-    sigc::mem_fun(*this, &TreeView_WithPopup::on_menu_file_popup_generic) );
-  m_Menu_Popup.append(*item);
+  m_MenuPopup.set_menu_model(gmenu);
+  m_MenuPopup.set_has_arrow(false);
 
-  item = Gtk::make_managed<Gtk::MenuItem>("_Remove", true);
-  item->signal_activate().connect(
-    sigc::mem_fun(*this, &TreeView_WithPopup::on_menu_file_popup_generic) );
-  m_Menu_Popup.append(*item);
+  // Create actions:
+  auto refActionGroup = Gio::SimpleActionGroup::create();
 
-  m_Menu_Popup.accelerate(*this);
+  refActionGroup->add_action("edit",
+    sigc::mem_fun(*this, &TreeView_WithPopup::on_menu_file_popup_generic));
+  refActionGroup->add_action("process",
+    sigc::mem_fun(*this, &TreeView_WithPopup::on_menu_file_popup_generic));
+  refActionGroup->add_action("remove",
+    sigc::mem_fun(*this, &TreeView_WithPopup::on_menu_file_popup_generic));
+
+  insert_action_group("popup", refActionGroup);
 }
 
 TreeView_WithPopup::~TreeView_WithPopup()
 {
 }
 
-void TreeView_WithPopup::on_popup_button_pressed(int /* n_press */, double /* x */, double /* y */)
+void TreeView_WithPopup::on_popup_button_pressed(int /* n_press */, double x, double y)
 {
-  m_Menu_Popup.popup_at_pointer();
+  const Gdk::Rectangle rect(x, y, 1, 1);
+  m_MenuPopup.set_pointing_to(rect);
+  m_MenuPopup.popup();
 }
 
 void TreeView_WithPopup::on_menu_file_popup_generic()

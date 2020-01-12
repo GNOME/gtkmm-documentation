@@ -34,10 +34,8 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   m_refActionGroup->add_action("open",
     sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
 
-
   m_refActionRain = m_refActionGroup->add_action_bool("rain",
-    sigc::mem_fun(*this, &ExampleWindow::on_action_toggle),
-    false);
+    sigc::mem_fun(*this, &ExampleWindow::on_action_toggle), false);
 
   m_refActionGroup->add_action("quit",
     sigc::mem_fun(*this, &ExampleWindow::on_action_file_quit) );
@@ -111,7 +109,6 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   // automatically fetched from the Gio::Menu.
   // See the examples/book/menus/main_menu example for an alternative way of
   // adding the menubar when using Gtk::ApplicationWindow.
-  // Gtk::Application::set_accel_for_action() is new in gtkmm 3.11.9.
   app->set_accel_for_action("example.new", "<Primary>n");
   app->set_accel_for_action("example.open", "<Primary>o");
   app->set_accel_for_action("example.quit", "<Primary>q");
@@ -136,9 +133,9 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
     g_warning("GMenu not found");
   else
   {
-    auto pMenuBar = Gtk::make_managed<Gtk::MenuBar>(gmenu);
+    auto pMenuBar = Gtk::make_managed<Gtk::PopoverMenuBar>(gmenu);
 
-    //Add the MenuBar to the window:
+    //Add the PopoverMenuBar to the window:
     m_Box.add(*pMenuBar);
   }
 

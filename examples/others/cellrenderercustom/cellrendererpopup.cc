@@ -23,15 +23,16 @@
 namespace
 {
 
-bool grab_on_window(const Glib::RefPtr<Gdk::Surface>& surface)
+bool grab_on_window(const Glib::RefPtr<Gdk::Surface>& /* surface */)
 {
   Glib::RefPtr<Gdk::Device> device (Glib::wrap(gtk_get_current_event_device(), true));
 
   if(device)
   {
     auto seat = device->get_seat();
-    if (seat &&
-        seat->grab(surface, Gdk::Seat::Capabilities::ALL, true) == Gdk::GrabStatus::SUCCESS)
+//    if (seat &&
+//        seat->grab(surface, Gdk::Seat::Capabilities::ALL, true) == Gdk::GrabStatus::SUCCESS)
+    if (seat)
       return true;
   }
 

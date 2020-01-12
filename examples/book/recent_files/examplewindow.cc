@@ -24,7 +24,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   set_title("Recent files example");
   set_default_size(300, 150);
 
-  //We can put a MenuBar at the top of the box and other stuff below it.
+  //We can put a PopoverMenuBar at the top of the box and other stuff below it.
   add(m_Box);
 
   //Create actions for menus and toolbars:
@@ -117,7 +117,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   if (gmenu)
   {
     //Menubar:
-    auto pMenubar = Gtk::make_managed<Gtk::MenuBar>(gmenu);
+    auto pMenubar = Gtk::make_managed<Gtk::PopoverMenuBar>(gmenu);
     m_Box.add(*pMenubar);
   }
   else

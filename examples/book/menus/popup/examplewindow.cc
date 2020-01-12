@@ -17,10 +17,10 @@
 #include "examplewindow.h"
 #include <iostream>
 
-ExampleWindow::ExampleWindow()
+ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
 : m_Box(Gtk::Orientation::VERTICAL),
   m_Label("Right-click to see the popup menu."),
-  m_pMenuPopup(nullptr)
+  m_MenuPopup(m_Label)
 {
   set_title("popup example");
   set_default_size(200, 200);
@@ -37,9 +37,6 @@ ExampleWindow::ExampleWindow()
   m_Label.add_controller(m_refGesture);
 
   //Create actions:
-
-  //Fill menu:
-
   auto refActionGroup = Gio::SimpleActionGroup::create();
 
   //File|New sub menu:
@@ -50,7 +47,7 @@ ExampleWindow::ExampleWindow()
   refActionGroup->add_action("edit",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
 
-  refActionGroup->add_action("process", //TODO: How to specify "<control>P" as an accelerator.
+  refActionGroup->add_action("process",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_popup_generic));
 
   refActionGroup->add_action("remove",
@@ -58,6 +55,10 @@ ExampleWindow::ExampleWindow()
 
   insert_action_group("examplepopup", refActionGroup);
 
+  // Set accelerator keys:
+  app->set_accel_for_action("examplepopup.edit", "<Primary>e");
+  app->set_accel_for_action("examplepopup.process", "<Primary>p");
+  app->set_accel_for_action("examplepopup.remove", "<Primary>r");
 
   m_refBuilder = Gtk::Builder::create();
 
@@ -99,7 +100,8 @@ ExampleWindow::ExampleWindow()
   if(!gmenu)
     g_warning("GMenu not found");
 
-  m_pMenuPopup = std::make_unique<Gtk::Menu>(gmenu);
+  m_MenuPopup.set_menu_model(gmenu);
+  m_MenuPopup.set_has_arrow(false);
 }
 
 ExampleWindow::~ExampleWindow()
@@ -111,12 +113,9 @@ void ExampleWindow::on_menu_file_popup_generic()
    std::cout << "A popup menu item was selected." << std::endl;
 }
 
-void ExampleWindow::on_label_pressed(int /* n_press */, double /* x */, double /* y */)
+void ExampleWindow::on_label_pressed(int /* n_press */, double x, double y)
 {
-  if (m_pMenuPopup && !m_pMenuPopup->get_attach_widget())
-    m_pMenuPopup->attach_to_widget(*this);
-
-  if (m_pMenuPopup)
-    m_pMenuPopup->popup_at_pointer();
+  const Gdk::Rectangle rect(x, y, 1, 1);
+  m_MenuPopup.set_pointing_to(rect);
+  m_MenuPopup.popup();
 }
-

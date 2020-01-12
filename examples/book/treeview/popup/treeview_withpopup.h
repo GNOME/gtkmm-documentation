@@ -50,7 +50,7 @@ protected:
   //The Tree model:
   Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
 
-  Gtk::Menu m_Menu_Popup;
+  Gtk::PopoverMenu m_MenuPopup;
 };
 
 #endif //GTKMM_EXAMPLE_TREEVIEW_WITHPOPUP_H

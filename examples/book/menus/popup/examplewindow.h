@@ -24,7 +24,7 @@
 class ExampleWindow : public Gtk::Window
 {
 public:
-  ExampleWindow();
+  ExampleWindow(const Glib::RefPtr<Gtk::Application>& app);
   virtual ~ExampleWindow();
 
 protected:
@@ -36,11 +36,10 @@ protected:
   //Child widgets:
   Gtk::Box m_Box;
   Gtk::Label m_Label;
+  Gtk::PopoverMenu m_MenuPopup;
 
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
   Glib::RefPtr<Gtk::GestureClick> m_refGesture;
-
-  std::unique_ptr<Gtk::Menu> m_pMenuPopup;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

@@ -15,7 +15,6 @@
  */
 
 #include "examplewindow.h"
-
 #include <vector>
 
 const Glib::ustring app_title = "gtkmm tooltips example";
@@ -27,8 +26,7 @@ ExampleWindow::ExampleWindow()
   m_vbox(Gtk::Orientation::VERTICAL, 3),
   m_checkbutton("Click to alternate markup in tooltip"),
   m_label("A label"),
-  m_button("Custom widget in tooltip window"),
-  m_button_tooltip_window(Gtk::WindowType::POPUP)
+  m_button("Button with a custom tooltip widget")
 {
   //Set up window and the top-level container:
   set_title(app_title);
@@ -48,16 +46,15 @@ ExampleWindow::ExampleWindow()
   prepare_textview();
 
   //Button:
-  // set_tooltip_window(), like set_tooltip_text(),
-  // will call set_has_tooltip() for us.
-  m_button.set_tooltip_window(m_button_tooltip_window);
+  //When only connecting to the query-tooltip signal, and not using any
+  //of set_tooltip_text() or set_tooltip_markup(), we need to explicitly
+  //tell GTK that the widget has a tooltip which we'll show.
+  m_button.set_has_tooltip();
   m_vbox.add(m_button);
 
-  //Button's custom tooltip window:
-  m_button_tooltip_window.set_default_size(250, 30);
-  auto label = Gtk::make_managed<Gtk::Label>("A label in a custom tooltip window");
-  label->show();
-  m_button_tooltip_window.add(*label);
+  //Button's custom tooltip widget:
+  auto label = Gtk::make_managed<Gtk::Label>("A label in a custom tooltip widget");
+  m_button_tooltip_widget.add(*label);
 
   connect_signals();
 }
@@ -69,7 +66,7 @@ ExampleWindow::~ExampleWindow()
 void ExampleWindow::prepare_textview()
 {
   Gtk::TextIter iter;
-  std::vector< Glib::RefPtr<Gtk::TextTag> > tags;
+  std::vector<Glib::RefPtr<Gtk::TextTag>> tags;
 
   //Set up a scrolled window:
   m_scrolled_window.add(m_text_view);
@@ -102,9 +99,8 @@ void ExampleWindow::prepare_textview()
   m_text_view.set_size_request(320, 50);
 
   //When only connecting to the query-tooltip signal, and not using any
-  //of set_tooltip_text(), set_tooltip_markup() or set_tooltip_window(),
-  //we need to explicitly tell GTK+ that the widget has a tooltip which
-  //we'll show.
+  //of set_tooltip_text() or set_tooltip_markup(), we need to explicitly
+  //tell GTK that the widget has a tooltip which we'll show.
   m_text_view.set_has_tooltip();
 }
 
@@ -164,8 +160,8 @@ bool ExampleWindow::on_textview_query_tooltip(int x, int y, bool keyboard_toolti
   return true;
 }
 
-bool ExampleWindow::on_button_query_tooltip(int, int, bool, const Glib::RefPtr<Gtk::Tooltip>&)
+bool ExampleWindow::on_button_query_tooltip(int, int, bool, const Glib::RefPtr<Gtk::Tooltip>& tooltip)
 {
-  //We already have a custom window ready, just return true to show it:
+  tooltip->set_custom(m_button_tooltip_widget);
   return true;
 }
