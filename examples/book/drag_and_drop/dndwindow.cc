@@ -15,11 +15,15 @@
  */
 
 #include "dndwindow.h"
+#include <gdkmm/contentformats.h>
+#include <gdkmm/contentprovider.h>
+#include <gtkmm/dragsource.h>
+#include <gtkmm/droptarget.h>
 #include <iostream>
 
 DnDWindow::DnDWindow()
-: m_Button_Drag("Drag Here\n"),
-  m_Label_Drop("Drop here\n")
+: m_Label_Drag("Drag Here\n"),
+  m_Button_Drop("Drop here\n")
 {
   set_title("DnD example");
 
@@ -27,57 +31,63 @@ DnDWindow::DnDWindow()
 
   //Drag site:
 
-  //Make m_Button_Drag a DnD drag source:
-  m_Button_Drag.drag_source_set(Glib::RefPtr<Gdk::ContentFormats>());
-  m_Button_Drag.drag_source_add_text_targets();
+  //Make m_Label_Drag a DnD drag source:
+  const GType ustring_type = Glib::Value<Glib::ustring>::value_type();
+  auto source = Gtk::DragSource::create();
+  auto content = Gdk::ContentProvider::create(ustring_type,
+    sigc::mem_fun(*this, &DnDWindow::on_label_drag_get_data));
+  source->set_content(content);
+  m_Label_Drag.add_controller(source);
 
-  //Connect signals:
-  m_Button_Drag.signal_drag_data_get().connect(sigc::mem_fun(*this,
-              &DnDWindow::on_button_drag_data_get));
-
-  m_HBox.add(m_Button_Drag);
-  m_Button_Drag.set_expand(true);
+  m_HBox.add(m_Label_Drag);
+  m_Label_Drag.set_expand(true);
 
   //Drop site:
 
-  //Make m_Label_Drop a DnD drop destination:
-  // Don't do this: m_Label_Drop.drag_dest_set({}).
-  // It would call the wrong overload of drag_dest_set() with the wrong
-  // default values of flags and actions (wrong in this simple example).
-  m_Label_Drop.drag_dest_set(Glib::RefPtr<Gdk::ContentFormats>());
-  m_Label_Drop.drag_dest_add_text_targets();
+  //Make m_Button_Drop a DnD drop destination:
+  auto formats = Gdk::ContentFormats::create(ustring_type);
+  auto target = Gtk::DropTarget::create(formats, Gdk::DragAction::COPY);
+  target->signal_drag_drop().connect(
+    sigc::mem_fun(*this, &DnDWindow::on_button_drop_drag_drop), false);
+  m_Button_Drop.add_controller(target);
 
-  //Connect signals:
-  m_Label_Drop.signal_drag_data_received().connect(sigc::mem_fun(*this,
-              &DnDWindow::on_label_drop_drag_data_received) );
-
-  m_HBox.add(m_Label_Drop);
-  m_Label_Drop.set_expand(true);
+  m_HBox.add(m_Button_Drop);
+  m_Button_Drop.set_expand(true);
 }
 
 DnDWindow::~DnDWindow()
 {
 }
 
-void DnDWindow::on_button_drag_data_get(
-        const Glib::RefPtr<Gdk::Drag>&,
-        Gtk::SelectionData& selection_data)
+// In this simple example where just a small amount of data is copied,
+// it would be reasonable to store the data in the ContentProvider.
+// Then this callback routine would be unnecessary.
+void DnDWindow::on_label_drag_get_data(Glib::ValueBase& value)
 {
-  selection_data.set(selection_data.get_target(), 8 /* 8 bits format */,
-          (const guchar*)"I'm Data!",
-          9 /* the length of I'm Data! in bytes */);
+  Glib::Value<Glib::ustring> ustring_value;
+  ustring_value.init(value.gobj());
+  ustring_value.set("I'm Data!");
+  value = ustring_value;
 }
 
-void DnDWindow::on_label_drop_drag_data_received(
-        const Glib::RefPtr<Gdk::Drop>& drop,
-        const Gtk::SelectionData& selection_data)
+bool DnDWindow::on_button_drop_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int, int)
 {
-  const int length = selection_data.get_length();
-  if((length >= 0) && (selection_data.get_format() == 8))
-  {
-    std::cout << "Received \"" << selection_data.get_data_as_string()
-        << "\" in label " << std::endl;
-  }
+  drop->read_text_async(sigc::bind(sigc::mem_fun(*this, &DnDWindow::on_button_drop_got_data), drop));
+  return true;
+}
 
-  drop->failed();
+void DnDWindow::on_button_drop_got_data(Glib::RefPtr<Gio::AsyncResult>& result,
+  const Glib::RefPtr<Gdk::Drop>& drop)
+{
+  try
+  {
+    const Glib::ustring dropped_string = drop->read_text_finish(result);
+    std::cout << "Received \"" << dropped_string << "\" in button " << std::endl;
+    drop->finish(Gdk::DragAction::COPY);
+  }
+  catch (const std::exception& ex)
+  {
+    std::cout << "Drop failed: " << ex.what() << std::endl;
+    drop->failed();
+  }
 }

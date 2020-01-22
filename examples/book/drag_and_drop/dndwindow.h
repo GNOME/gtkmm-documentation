@@ -17,6 +17,7 @@
 #ifndef GTKMM_EXAMPLE_DNDWINDOW_H
 #define GTKMM_EXAMPLE_DNDWINDOW_H
 
+#include <gdkmm/drop.h>
 #include <gtkmm/box.h>
 #include <gtkmm/label.h>
 #include <gtkmm/window.h>
@@ -30,18 +31,16 @@ public:
   virtual ~DnDWindow();
 
 protected:
-  //Signal handlers:
-  void on_button_drag_data_get(
-          const Glib::RefPtr<Gdk::Drag>& drag,
-          Gtk::SelectionData& selection_data);
-  void on_label_drop_drag_data_received(
-          const Glib::RefPtr<Gdk::Drop>& drop,
-          const Gtk::SelectionData& selection_data);
+  //Signal handlers and callbacks:
+  void on_label_drag_get_data(Glib::ValueBase& value);
+  bool on_button_drop_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int x, int y);
+  void on_button_drop_got_data(Glib::RefPtr<Gio::AsyncResult>& result,
+    const Glib::RefPtr<Gdk::Drop>& drop);
 
   //Member widgets:
   Gtk::Box m_HBox;
-  Gtk::Button m_Button_Drag;
-  Gtk::Label m_Label_Drop;
+  Gtk::Label m_Label_Drag;
+  Gtk::Button m_Button_Drop;
 };
 
 #endif // GTKMM_EXAMPLE_DNDWINDOW_H

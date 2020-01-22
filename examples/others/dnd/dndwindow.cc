@@ -19,14 +19,16 @@
 #include <gtkmm/application.h>
 #include <iostream>
 
+// This example is similar to gtk+/tests/testdnd.
+
 DnDWindow::DnDWindow()
-: m_Label_Drop("Drop here\n"), m_Label_Popup("Popup\n"),
-  m_Button("Drag Here\n"),
-  m_have_drag(false),
+: m_Label_Drop("Drop here\n"),
+  m_Label_Drag("Drag Here\n"),
+  m_Label_Popup("Popup\n"),
   m_PopupWindow(Gtk::WindowType::POPUP)
 {
-  m_popped_up = false;
-  m_in_popup = false;
+  set_title("Drag-and-drop example");
+  set_default_size(300, 150);
 
   add(m_Grid);
 
@@ -49,48 +51,56 @@ DnDWindow::DnDWindow()
   //Targets without rootwin:
   m_listTargetsNoRoot.assign(m_listTargets.begin(), --m_listTargets.end());
 
-  m_Label_Drop.drag_dest_set(Gdk::ContentFormats::create(m_listTargetsNoRoot), Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
+  // Drop site
 
-  m_Label_Drop.signal_drag_data_received().connect( sigc::mem_fun(*this, &DnDWindow::on_label_drop_drag_data_received) );
+  auto formats = Gdk::ContentFormats::create(m_listTargetsNoRoot);
+  auto dest = Gtk::DropTarget::create(formats, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
+  dest->signal_drag_drop().connect(sigc::mem_fun(*this, &DnDWindow::on_label_drop_drag_drop), false);
+  m_Label_Drop.add_controller(dest);
 
   m_Grid.attach(m_Label_Drop, 0, 0);
-  m_Label_Drop.set_hexpand(true);
-  m_Label_Drop.set_vexpand(true);
+  m_Label_Drop.set_expand(true);
 
-  m_Label_Popup.drag_dest_set(Gdk::ContentFormats::create(m_listTargetsNoRoot), Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
+  // Popup site
+
+  dest = Gtk::DropTarget::create(formats, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
+  dest->signal_accept().connect(sigc::mem_fun(*this, &DnDWindow::on_label_popup_accept), false);
+  dest->signal_drag_enter().connect(sigc::mem_fun(*this, &DnDWindow::on_label_popup_drag_enter));
+  dest->signal_drag_leave().connect(sigc::mem_fun(*this, &DnDWindow::on_label_popup_drag_leave));
+  m_Label_Popup.add_controller(dest);
 
   m_Grid.attach(m_Label_Popup, 1, 1);
-  m_Label_Popup.set_hexpand(true);
-  m_Label_Popup.set_vexpand(true);
+  m_Label_Popup.set_expand(true);
 
-  m_Label_Popup.signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_label_popup_drag_motion), true );
-  m_Label_Popup.signal_drag_leave().connect( sigc::mem_fun(*this, &DnDWindow::on_label_popup_drag_leave) );
+  // Image
+
+  formats = Gdk::ContentFormats::create();
+  dest = Gtk::DropTarget::create(formats, Gdk::DragAction::MOVE);
+  dest->signal_accept().connect(sigc::mem_fun(*this, &DnDWindow::on_image_accept), false);
+  dest->signal_drag_leave().connect(sigc::mem_fun(*this, &DnDWindow::on_image_drag_leave));
+  dest->signal_drag_drop().connect(sigc::mem_fun(*this, &DnDWindow::on_image_drag_drop), false);
+  m_Image.add_controller(dest);
 
   m_Image.set(m_trashcan_closed);
-  m_Image.drag_dest_set();
 
   m_Grid.attach(m_Image, 1, 0);
-  m_Image.set_hexpand(true);
-  m_Image.set_vexpand(true);
+  m_Image.set_expand(true);
 
-  m_Image.signal_drag_leave().connect( sigc::mem_fun(*this, &DnDWindow::on_image_drag_leave) );
-  m_Image.signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_image_drag_motion), true );
-  m_Image.signal_drag_drop().connect( sigc::mem_fun(*this, &DnDWindow::on_image_drag_drop), true );
-  m_Image.signal_drag_data_received().connect( sigc::mem_fun(*this, &DnDWindow::on_image_drag_data_received) );
+  // Drag site
 
-  /* Drag site */
+  auto source = Gtk::DragSource::create();
+  Glib::Value<Glib::ustring> value;
+  value.init(value.value_type());
+  value.set("I'm data!");
+  auto content = Gdk::ContentProvider::create(value);
+  source->set_content(content);
+  source->set_actions(Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
+  source->set_icon(Gdk::Texture::create_for_pixbuf(m_drag_icon), 0, 0);
+  source->signal_drag_end().connect(sigc::mem_fun(*this, &DnDWindow::on_label_drag_drag_end));
+  m_Label_Drag.add_controller(source);
 
-  m_Button.drag_source_set(Gdk::ContentFormats::create(m_listTargets), Gdk::ModifierType::BUTTON1_MASK | Gdk::ModifierType::BUTTON3_MASK,
-                           Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
-
-  m_Button.drag_source_set_icon(Gdk::Texture::create_for_pixbuf(m_drag_icon));
-
-  m_Grid.attach(m_Button, 0, 1);
-  m_Button.set_hexpand(true);
-  m_Button.set_vexpand(true);
-
-  m_Button.signal_drag_data_get().connect( sigc::mem_fun(*this, &DnDWindow::on_button_drag_data_get));
-  m_Button.signal_drag_data_delete().connect( sigc::mem_fun(*this, &DnDWindow::on_button_drag_data_delete));
+  m_Grid.attach(m_Label_Drag, 0, 1);
+  m_Label_Drag.set_expand(true);
 
   create_popup();
 }
@@ -99,112 +109,176 @@ DnDWindow::~DnDWindow()
 {
 }
 
-
-void DnDWindow::on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::Drop>& drop, const Gtk::SelectionData& selection_data)
+void DnDWindow::create_popup()
 {
-  const int length = selection_data.get_length();
-  const guchar* data = selection_data.get_data();
+  //Create Grid and fill it:
+  auto pGrid = Gtk::make_managed<Gtk::Grid>();
 
-  if((length >= 0) && (selection_data.get_format() == 8))
+  auto formats = Gdk::ContentFormats::create(Glib::Value<Glib::ustring>::value_type());
+
+  for (int i = 0; i < 3; i++)
   {
-    g_print ("Received \"%s\" in label\n", (gchar *)data);
+    for (int j = 0; j < 3; j++)
+    {
+      char buffer[128];
+      g_snprintf(buffer, sizeof(buffer), "%d,%d", i, j);
+      auto pButton = Gtk::make_managed<Gtk::Button>(buffer);
+      pButton->set_expand(true);
+      pGrid->attach(*pButton, i, j);
+
+      auto dest = Gtk::DropTarget::create(formats, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
+      dest->signal_accept().connect(sigc::mem_fun(*this, &DnDWindow::on_button_popup_accept), false);
+      dest->signal_drag_enter().connect(sigc::mem_fun(*this, &DnDWindow::on_button_popup_drag_enter));
+      dest->signal_drag_leave().connect(sigc::mem_fun(*this, &DnDWindow::on_button_popup_drag_leave));
+      dest->signal_drag_drop().connect(sigc::mem_fun(*this, &DnDWindow::on_button_popup_drag_drop), false);
+      pButton->add_controller(dest);
+    }
   }
 
-  drop->failed();
+  m_PopupWindow.add(*pGrid);
 }
 
-bool DnDWindow::on_label_popup_drag_motion(const Glib::RefPtr<Gdk::Drop>&, int, int)
+bool DnDWindow::on_label_drop_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int, int)
 {
-  if(!m_popup_timer)
-    m_popup_timer = Glib::signal_timeout().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_timeout), 500);
-
+  drop->read_text_async(sigc::bind(sigc::mem_fun(*this, &DnDWindow::on_label_drop_got_data), drop));
   return true;
 }
 
-void DnDWindow::on_label_popup_drag_leave(const Glib::RefPtr<Gdk::Drop>&)
+void DnDWindow::on_label_drop_got_data(Glib::RefPtr<Gio::AsyncResult>& result,
+  const Glib::RefPtr<Gdk::Drop>& drop)
 {
- if(m_in_popup)
- {
-   m_in_popup = false;
-   if(!m_popdown_timer)
-   {
-     g_print ("added popdown\n");
-     m_popdown_timer = Glib::signal_timeout().connect( sigc::mem_fun(*this, &DnDWindow::on_popdown_timeout), 500);
-   }
- }
-}
-
-void DnDWindow::on_image_drag_data_received(const Glib::RefPtr<Gdk::Drop>& drop, const Gtk::SelectionData& selection_data)
-{
-  const int length = selection_data.get_length();
-  const guchar* data = selection_data.get_data();
-
-  if( (length >= 0) && (selection_data.get_format() == 8) )
+  try
   {
-    g_print ("Received \"%s\" in trashcan\n", (gchar*)data);
+    const Glib::ustring dropped_string = drop->read_text_finish(result);
+    std::cout << "Received \"" << dropped_string << "\" in label " << std::endl;
+    drop->finish(Gdk::DragAction::COPY);
   }
-
-  drop->failed();
+  catch (const std::exception& ex)
+  {
+    std::cout << "Drop failed: " << ex.what() << std::endl;
+    drop->failed();
+  }
 }
 
-bool DnDWindow::on_image_drag_motion(const Glib::RefPtr<Gdk::Drop>& drop, int, int)
+bool DnDWindow::on_label_popup_accept(const Glib::RefPtr<Gdk::Drop>& /* drop */)
 {
-  if(!m_have_drag)
+  return true;
+}
+
+void DnDWindow::on_label_popup_drag_enter(const Glib::RefPtr<Gdk::Drop>& /* drop */)
+{
+  std::cout << "popsite enter" << std::endl;
+  if (!m_popup_timer)
+    m_popup_timer = Glib::signal_timeout().connect(sigc::mem_fun(*this, &DnDWindow::on_popup_timeout), 500);
+}
+
+void DnDWindow::on_label_popup_drag_leave(const Glib::RefPtr<Gdk::Drop>& /* drop */)
+{
+  std::cout << "popsite leave" << std::endl;
+  if (m_popup_timer)
+    m_popup_timer.disconnect();
+}
+
+bool DnDWindow::on_button_popup_accept(const Glib::RefPtr<Gdk::Drop>& drop)
+{
+  drop->status(Gdk::DragAction::COPY);
+  return true;
+}
+
+void DnDWindow::on_button_popup_drag_enter(const Glib::RefPtr<Gdk::Drop>& /* drop */)
+{
+  std::cout << "popup enter" << std::endl;
+  if (!m_in_popup)
+  {
+    m_in_popup = true;
+    if (m_popdown_timer)
+    {
+      std::cout << "removed popdown" << std::endl;
+      m_popdown_timer.disconnect();
+    }
+  }
+}
+
+void DnDWindow::on_button_popup_drag_leave(const Glib::RefPtr<Gdk::Drop>& /* drop */)
+{
+  std::cout << "popup leave" << std::endl;
+  if (m_in_popup)
+  {
+    m_in_popup = false;
+    if (!m_popdown_timer)
+    {
+      std::cout << "added popdown" << std::endl;
+      m_popdown_timer = Glib::signal_timeout().connect(sigc::mem_fun(*this, &DnDWindow::on_popdown_timeout), 500);
+    }
+  }
+}
+
+bool DnDWindow::on_button_popup_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int, int)
+{
+  drop->finish(Gdk::DragAction::COPY);
+  on_popdown_timeout();
+  return true;
+}
+
+bool DnDWindow::on_image_accept(const Glib::RefPtr<Gdk::Drop>& drop)
+{
+  if (!m_have_drag)
   {
     m_have_drag = true;
     m_Image.set(m_trashcan_open);
   }
 
-  auto source_widget = Gtk::DnD::get_source_widget(drop->get_drag());
-  g_print ("motion, source %s\n", source_widget ?
-           G_OBJECT_TYPE_NAME (source_widget) :
-           "NULL");
+  std::cout << drop->get_formats()->to_string() << std::endl;
 
-  for(const auto& name : drop->get_formats()->get_mime_types())
-  {
-    g_print ("%s\n", name.c_str());
-  }
-
-  drop->status(drop->get_drag()->get_selected_action());
+  drop->status(Gdk::DragAction::MOVE);
   return true;
 }
 
-void DnDWindow::on_image_drag_leave(const Glib::RefPtr<Gdk::Drop>&)
+void DnDWindow::on_image_drag_leave(const Glib::RefPtr<Gdk::Drop>& /* drop */)
 {
-  g_print("leave\n");
+  std::cout << "trashcan leave" << std::endl;
   m_have_drag = false;
   m_Image.set(m_trashcan_closed);
 }
 
 bool DnDWindow::on_image_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int, int)
 {
-  g_print("drop\n");
+  std::cout << "trashcan drop" << std::endl;
   m_have_drag = false;
 
   m_Image.set(m_trashcan_closed);
 
   const auto targets = drop->get_formats()->get_mime_types();
-  if(!targets.empty())
+  if (!targets.empty())
   {
-    m_Image.drag_get_data(drop, targets[0]);
+    drop->read_text_async(sigc::bind(sigc::mem_fun(*this, &DnDWindow::on_image_got_data), drop));
+    return true;
   }
-
-  return true;
+  drop->status(static_cast<Gdk::DragAction>(0));
+  return false;
 }
 
-
-void DnDWindow::on_button_drag_data_get(const Glib::RefPtr<Gdk::Drag>&, Gtk::SelectionData& selection_data)
+void DnDWindow::on_image_got_data(Glib::RefPtr<Gio::AsyncResult>& result,
+  const Glib::RefPtr<Gdk::Drop>& drop)
 {
-  if(selection_data.get_target() == "application/x-rootwin-drop")
-    g_print ("I was dropped on the rootwin\n");
-  else
-    selection_data.set(selection_data.get_target(),
-                       8 /* 8-bits format */, (const guchar*)"I'm Data!", 9 /* The length of I'm Data in bytes */);
+  try
+  {
+    const Glib::ustring dropped_string = drop->read_text_finish(result);
+    std::cout << "Received \"" << dropped_string << "\" in trashcan " << std::endl;
+    drop->finish(Gdk::DragAction::MOVE);
+  }
+  catch (const std::exception& ex)
+  {
+    std::cout << "Drop failed: " << ex.what() << std::endl;
+    drop->failed();
+  }
 }
 
-void DnDWindow::on_button_drag_data_delete(const Glib::RefPtr<Gdk::Drag>&)
+void DnDWindow::on_label_drag_drag_end(const Glib::RefPtr<Gdk::Drag>& /* drag */,
+  bool delete_data)
 {
-  g_print ("Delete the data!\n");
+  if (delete_data)
+    std::cout << "Delete the data!" << std::endl;
 }
 
 bool DnDWindow::on_popdown_timeout()
@@ -219,67 +293,14 @@ bool DnDWindow::on_popdown_timeout()
 
 bool DnDWindow::on_popup_timeout()
 {
-  if(!m_popped_up)
+  if (!m_popped_up)
   {
+    m_PopupWindow.set_transient_for(*this);
     m_PopupWindow.show();
     m_popped_up = true;
   }
 
-  m_popdown_timer = Glib::signal_timeout().connect( sigc::mem_fun(*this, &DnDWindow::on_popdown_timeout), 500);
-  g_print ("added popdown\n");
-
   m_popup_timer.disconnect();
 
   return false;
-}
-
-void DnDWindow::create_popup()
-{
-  //Create Grid and fill it:
-  auto pGrid = Gtk::make_managed<Gtk::Grid>();
-
-  for(int i = 0; i < 3; i++)
-  {
-    for(int j = 0; j < 3; j++)
-    {
-      char buffer[128];
-      g_snprintf(buffer, sizeof(buffer), "%d,%d", i, j);
-      auto pButton = Gtk::make_managed<Gtk::Button>(buffer);
-      pGrid->attach(*pButton, i, j, 1, 1);
-
-      pButton->drag_dest_set(Gdk::ContentFormats::create(m_listTargetsNoRoot), Gtk::DestDefaults::ALL, Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
-      pButton->signal_drag_motion().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_button_drag_motion), true );
-      pButton->signal_drag_leave().connect( sigc::mem_fun(*this, &DnDWindow::on_popup_button_drag_leave) );
-    }
-  }
-
-  m_PopupWindow.add(*pGrid);
-}
-
-bool DnDWindow::on_popup_button_drag_motion(const Glib::RefPtr<Gdk::Drop>&, int, int)
-{
-  if(!m_in_popup)
-  {
-    m_in_popup = true;
-    if(m_popdown_timer)
-    {
-      g_print ("removed popdown\n");
-      m_popdown_timer.disconnect();
-    }
-  }
-
-  return true;
-}
-
-void DnDWindow::on_popup_button_drag_leave(const Glib::RefPtr<Gdk::Drop>&)
-{
- if(m_in_popup)
- {
-   m_in_popup = false;
-   if(!m_popdown_timer)
-   {
-     g_print ("added popdown\n");
-     m_popdown_timer = Glib::signal_timeout().connect( sigc::mem_fun(*this, &DnDWindow::on_popdown_timeout), 500);
-   }
- }
 }

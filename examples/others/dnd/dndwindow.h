@@ -22,7 +22,6 @@
 
 class DnDWindow : public Gtk::Window
 {
-
 public:
   DnDWindow();
   virtual ~DnDWindow();
@@ -30,46 +29,53 @@ public:
 protected:
   void create_popup();
 
-  //Signal handlers:
-  void on_label_drop_drag_data_received(const Glib::RefPtr<Gdk::Drop>& drop, const Gtk::SelectionData& selection_data);
-  bool on_label_popup_drag_motion(const Glib::RefPtr<Gdk::Drop>& drop, int x, int y);
+  //Signal handlers and callback functions:
+  bool on_label_drop_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int x, int y);
+  void on_label_drop_got_data(Glib::RefPtr<Gio::AsyncResult>& result,
+    const Glib::RefPtr<Gdk::Drop>& drop);
+
+  bool on_label_popup_accept(const Glib::RefPtr<Gdk::Drop>& drop);
+  void on_label_popup_drag_enter(const Glib::RefPtr<Gdk::Drop>& drop);
   void on_label_popup_drag_leave(const Glib::RefPtr<Gdk::Drop>& drop);
 
-  void on_image_drag_data_received(const Glib::RefPtr<Gdk::Drop>& drop, const Gtk::SelectionData& selection_data);
-  bool on_image_drag_motion(const Glib::RefPtr<Gdk::Drop>& drop, int x, int y);
+  bool on_button_popup_accept(const Glib::RefPtr<Gdk::Drop>& drop);
+  void on_button_popup_drag_enter(const Glib::RefPtr<Gdk::Drop>& drop);
+  void on_button_popup_drag_leave(const Glib::RefPtr<Gdk::Drop>& drop);
+  bool on_button_popup_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int x, int y);
+
+  bool on_image_accept(const Glib::RefPtr<Gdk::Drop>& drop);
   void on_image_drag_leave(const Glib::RefPtr<Gdk::Drop>& drop);
   bool on_image_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int x, int y);
+  void on_image_got_data(Glib::RefPtr<Gio::AsyncResult>& result,
+    const Glib::RefPtr<Gdk::Drop>& drop);
 
-  void on_button_drag_data_get(const Glib::RefPtr<Gdk::Drag>& drag, Gtk::SelectionData& selection_data);
-  void on_button_drag_data_delete(const Glib::RefPtr<Gdk::Drag>& drag);
+  void on_label_drag_drag_end(const Glib::RefPtr<Gdk::Drag>& drag, bool delete_data);
 
   bool on_popdown_timeout();
   bool on_popup_timeout();
 
-  bool on_popup_button_drag_motion(const Glib::RefPtr<Gdk::Drop>& drop, int x, int y);
-  void on_popup_button_drag_leave(const Glib::RefPtr<Gdk::Drop>& drop);
-
-
   //Member widgets:
   Gtk::Grid m_Grid;
-  Gtk::Label m_Label_Drop, m_Label_Popup;
+  Gtk::Label m_Label_Drop;
   Gtk::Image m_Image;
-  Gtk::Button m_Button;
+  Gtk::Label m_Label_Drag;
+  Gtk::Label m_Label_Popup;
 
   Glib::RefPtr<Gdk::Pixbuf> m_drag_icon;
   Glib::RefPtr<Gdk::Pixbuf> m_trashcan_open;
   Glib::RefPtr<Gdk::Pixbuf> m_trashcan_closed;
 
-  bool m_have_drag;
+  bool m_have_drag = false;
 
   Gtk::Window m_PopupWindow;  //This is a candidate for being a separate class.
-  bool m_popped_up;
-  bool m_in_popup;
+  bool m_popped_up = false;
+  bool m_in_popup = false;
   sigc::connection m_popdown_timer;
   sigc::connection m_popup_timer;
 
   //Targets:
-  std::vector<Glib::ustring> m_listTargets, m_listTargetsNoRoot;
+  std::vector<Glib::ustring> m_listTargets;
+  std::vector<Glib::ustring> m_listTargetsNoRoot;
 };
 
 #endif // GTKMM_EXAMPLE_DNDWINDOW_H
