@@ -34,6 +34,9 @@ examples_targets = []
 subdir('book')
 subdir('others')
 
+# 'ninja examples' builds all example programs.
+# alias_target(), added in Meson 0.52.0, is an alternative to run_target().
 run_target('examples',
-  command: ['bash', '-c', 'cd ' + project_build_root + '; ' + meson.backend() + ' ' + ' '.join(examples_targets)]
+  depends: examples_targets,
+  command: [ python3, '-c', '# Dummy program' ]
 )

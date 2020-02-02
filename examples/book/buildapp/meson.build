@@ -63,7 +63,7 @@ foreach ex : examples_book_buildapp
   )
 
   stamp_file_name = ex_name + '_copy.stamp'
-  custom_target(stamp_file_name,
+  examples_targets += custom_target(stamp_file_name,
     input: exe_file,
     output: stamp_file_name,
     command: [
@@ -77,12 +77,9 @@ foreach ex : examples_book_buildapp
   )
 
   target_name = 'examples' / 'book' / 'buildapp' / stamp_file_name
-  examples_targets += target_name
-
   test('book_buildapp_' + ex_name, meson_backend,
     args: target_name,
     workdir: project_build_root,
     timeout: test_timeout
   )
 endforeach
-

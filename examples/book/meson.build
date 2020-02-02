@@ -145,7 +145,7 @@ foreach ex : examples_book
   endif
 
   stamp_file_name = ex_name + '_copy.stamp'
-  custom_target(stamp_file_name,
+  examples_targets += custom_target(stamp_file_name,
     input: exe_file,
     output: stamp_file_name,
     command: [
@@ -159,8 +159,6 @@ foreach ex : examples_book
   )
 
   target_name = 'examples' / 'book' / stamp_file_name
-  examples_targets += target_name
-
   test('book_' + ex_name, meson_backend,
     args: target_name,
     workdir: project_build_root,
