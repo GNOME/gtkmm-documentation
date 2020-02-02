@@ -37,7 +37,7 @@ or (probably slower)
   $ ninja test
 
 Create a PDF file:
-  $ meson -Dbuild-pdf=true
+  $ meson configure -Dbuild-pdf=true
   $ ninja
 This requires that you have either the dblatex or the xmllint and docbook2pdf
 commands installed.
