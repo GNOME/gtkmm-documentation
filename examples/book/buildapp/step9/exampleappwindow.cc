@@ -113,7 +113,7 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
   set_show_menubar(true);
 
   // Set the window icon.
-  Gtk::IconTheme::get_default()->add_resource_path("/org/gtkmm/exampleapp");
+  Gtk::IconTheme::get_for_display(get_display())->add_resource_path("/org/gtkmm/exampleapp");
   set_icon_name("exampleapp");
 }
 

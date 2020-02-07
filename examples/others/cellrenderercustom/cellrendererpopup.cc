@@ -67,7 +67,10 @@ CellRendererPopup::CellRendererPopup()
     sigc::mem_fun(*this, &Self::on_popup_window_key_pressed), true);
   popup_window_.add_controller(controller);
 
-  popup_window_.signal_style_updated().connect(sigc::mem_fun(*this, &Self::on_style_updated));
+  // GtkWidget::style-updated has been replaced with the css_changed vfunc,
+  // which can't be wrapped in gtkmm. It has a GtkCssStyleChange parameter.
+  // GtkCssStyleChange is private in gtk.
+  //popup_window_.signal_style_updated().connect(sigc::mem_fun(*this, &Self::on_style_updated));
 }
 
 CellRendererPopup::~CellRendererPopup()
@@ -176,7 +179,7 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
   const int button_height = y2 - y1;
 
   auto display = Gdk::Display::get_default();
-  auto monitor = display->get_primary_monitor();
+  auto monitor = display->get_monitor(0);
   Gdk::Rectangle workarea;
   monitor->get_workarea(workarea);
   int monitor_height = workarea.get_height() - y;
