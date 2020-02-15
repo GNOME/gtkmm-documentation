@@ -46,34 +46,32 @@ ExampleWindow::ExampleWindow()
     //toolbars together, because toolbar items should just be a way to do what
     //is also in a menu.
 
-    m_Toolbar.set_toolbar_style(Gtk::ToolbarStyle::BOTH);
-
-    auto item = Gtk::make_managed<Gtk::ToolButton>("Click me");
-    //item.set_tooltips(*tooltips, "Toolbar item");
-    m_Toolbar.append(*item);
+    auto item = Gtk::make_managed<Gtk::Button>("Click me");
+    item->set_tooltip_text("Toolbar item");
+    m_Toolbar.add(*item);
     item->signal_clicked().connect( sigc::mem_fun(*this,
                 &ExampleWindow::on_toolbar_item) );
 
-    m_Toolbar.append(*Gtk::make_managed<Gtk::SeparatorToolItem>());
+    m_Toolbar.add(*Gtk::make_managed<Gtk::Separator>());
 
-    item = Gtk::make_managed<Gtk::ToolButton>("_Save");
+    item = Gtk::make_managed<Gtk::Button>("_Save");
     item->set_use_underline();
+    item->set_tooltip_text("Save");
     item->set_icon_name("document-save");
-    item->set_homogeneous(false);
-    m_Toolbar.append(*item);
+    m_Toolbar.add(*item);
     item->signal_clicked().connect( sigc::mem_fun(*this,
                 &ExampleWindow::on_toolbar_item) );
 
-    item = Gtk::make_managed<Gtk::ToggleToolButton>("Toggle me");
-    //item.set_tooltips(*tooltips, "toggle duh");
-    m_Toolbar.append(*item);
+    item = Gtk::make_managed<Gtk::ToggleButton>("Toggle me");
+    item->set_tooltip_text("toggle duh");
+    m_Toolbar.add(*item);
     item->signal_clicked().connect( sigc::mem_fun(*this,
                 &ExampleWindow::on_toolbar_item) );
 
     Gtk::RadioButtonGroup group;
-    m_Toolbar.append(*Gtk::make_managed<Gtk::RadioToolButton>(group, "Radio 1"));
-    m_Toolbar.append(*Gtk::make_managed<Gtk::RadioToolButton>(group, "Radio 2"));
-    m_Toolbar.append(*Gtk::make_managed<Gtk::RadioToolButton>(group, "Radio 3"));
+    m_Toolbar.add(*Gtk::make_managed<Gtk::RadioButton>(group, "Radio 1"));
+    m_Toolbar.add(*Gtk::make_managed<Gtk::RadioButton>(group, "Radio 2"));
+    m_Toolbar.add(*Gtk::make_managed<Gtk::RadioButton>(group, "Radio 3"));
   }
 }
 

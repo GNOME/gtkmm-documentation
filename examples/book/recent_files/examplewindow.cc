@@ -77,26 +77,24 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
     "      </item>"
     "    </submenu>"
     "  </menu>"
-    "  <object class='GtkToolbar' id='toolbar'>"
+    "  <object class='GtkBox' id='toolbar'>"
     "    <property name='can_focus'>False</property>"
     "    <child>"
-    "      <object class='GtkToolButton' id='toolbutton_new'>"
+    "      <object class='GtkButton' id='toolbutton_new'>"
     "        <property name='can_focus'>False</property>"
     "        <property name='tooltip_text' translatable='yes'>New</property>"
     "        <property name='action_name'>example.new</property>"
     "        <property name='icon_name'>document-new</property>"
     "        <property name='expand'>False</property>"
-    "        <property name='homogeneous'>True</property>"
     "      </object>"
     "    </child>"
     "    <child>"
-    "      <object class='GtkToolButton' id='toolbutton_quit'>"
+    "      <object class='GtkButton' id='toolbutton_quit'>"
     "        <property name='can_focus'>False</property>"
     "        <property name='tooltip_text' translatable='yes'>Quit</property>"
     "        <property name='action_name'>example.quit</property>"
     "        <property name='icon_name'>application-exit</property>"
     "        <property name='expand'>False</property>"
-    "        <property name='homogeneous'>True</property>"
     "      </object>"
     "    </child>"
     "  </object>"
@@ -123,12 +121,12 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   else
     g_warning("GMenu not found");
 
-  auto pToolbar = m_refBuilder->get_widget<Gtk::Toolbar>("toolbar");
+  auto pToolbar = m_refBuilder->get_widget<Gtk::Box>("toolbar");
   if (pToolbar)
     //Toolbar:
     m_Box.add(*pToolbar);
   else
-    g_warning("GtkToolbar not found");
+    g_warning("toolbar not found");
 }
 
 ExampleWindow::~ExampleWindow()

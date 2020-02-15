@@ -61,26 +61,24 @@ ExampleWindow::ExampleWindow()
     "<!-- Generated with glade 3.18.3 and then changed manually -->"
     "<interface>"
     "  <requires lib='gtk' version='3.94'/>"
-    "  <object class='GtkToolbar' id='toolbar'>"
+    "  <object class='GtkBox' id='toolbar'>"
     "    <property name='can_focus'>False</property>"
     "    <child>"
-    "      <object class='GtkToolButton' id='toolbutton_new'>"
+    "      <object class='GtkButton' id='toolbutton_new'>"
     "        <property name='can_focus'>False</property>"
     "        <property name='tooltip_text' translatable='yes'>New Standard</property>"
     "        <property name='action_name'>app.newstandard</property>"
     "        <property name='icon_name'>document-new</property>"
     "        <property name='expand'>False</property>"
-    "        <property name='homogeneous'>True</property>"
     "      </object>"
     "    </child>"
     "    <child>"
-    "      <object class='GtkToolButton' id='toolbutton_quit'>"
+    "      <object class='GtkButton' id='toolbutton_quit'>"
     "        <property name='can_focus'>False</property>"
     "        <property name='tooltip_text' translatable='yes'>Quit</property>"
     "        <property name='action_name'>app.quit</property>"
     "        <property name='icon_name'>application-exit</property>"
     "        <property name='expand'>False</property>"
-    "        <property name='homogeneous'>True</property>"
     "      </object>"
     "    </child>"
     "  </object>"
@@ -95,9 +93,9 @@ ExampleWindow::ExampleWindow()
     std::cerr << "Building toolbar failed: " <<  ex.what();
   }
 
-  auto toolbar = m_refBuilder->get_widget<Gtk::Toolbar>("toolbar");
+  auto toolbar = m_refBuilder->get_widget<Gtk::Box>("toolbar");
   if (!toolbar)
-    g_warning("GtkToolbar not found");
+    g_warning("toolbar not found");
   else
     m_Box.add(*toolbar);
 }

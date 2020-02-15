@@ -17,7 +17,7 @@ if not python_version.version_compare(python_version_req)
 endif
 
 gtkmm_pcname = 'gtkmm-4.0'
-gtkmm_dep = dependency(gtkmm_pcname, version: '>=3.95.1')
+gtkmm_dep = dependency(gtkmm_pcname, version: '>=3.97.1')
 giomm_dep = dependency('giomm-2.64', version: '>=2.63.1')
 gnome = import('gnome')
 

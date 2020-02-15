@@ -43,8 +43,9 @@ protected:
   void on_button_close();
   void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error);
 
-  Gtk::CheckButton* flag_checkboxes_[5];
-  bool settings_[5];
+  static const int n_checkboxes = 3;
+  Gtk::CheckButton* flag_checkboxes_[n_checkboxes];
+  bool settings_[n_checkboxes];
 
   Glib::RefPtr<Gtk::CssProvider> css_provider_;
 
@@ -54,12 +55,12 @@ protected:
   Gtk::Label* label_selected_double_click_;
   Gtk::Label* label_month_;
 
-  Glib::Date get_date() const;
+  Glib::DateTime get_date() const;
 };
 
 CalendarExample::~CalendarExample()
 {
-  for (int i = 0; i < 5; i++)
+  for (int i = 0; i < n_checkboxes; i++)
   {
 	  delete flag_checkboxes_[i];
   }
@@ -76,39 +77,33 @@ CalendarExample::~CalendarExample()
 
 void CalendarExample::month_changed()
 {
-  label_month_->set_text(get_date().format_string("%x"));
+  label_month_->set_text(get_date().format("%x"));
 }
 
 void CalendarExample::day_selected()
 {
-  label_selected_->set_text(get_date().format_string("%x"));
+  label_selected_->set_text(get_date().format("%x"));
 }
 
 void CalendarExample::day_selected_double_click()
 {
-  label_selected_double_click_->set_text(get_date().format_string("%x"));
+  label_selected_double_click_->set_text(get_date().format("%x"));
 }
 
 void CalendarExample::set_flags()
 {
-  int options = 0;
-
-  for (int i = 0; i < 5; i++)
-  {
-    if (settings_[i])
-    {
-      options = options + (1 << i);
-    }
-  }
-
   if (calendar_)
-    calendar_->set_display_options((Gtk::Calendar::DisplayOptions)options);
+  {
+    calendar_->set_show_heading(settings_[0]);
+    calendar_->set_show_day_names(settings_[1]);
+    calendar_->set_show_week_numbers(settings_[2]);
+  }
 }
 
 void CalendarExample::toggle_flag(Gtk::CheckButton *toggle)
 {
   int j = 0;
-  for (int i = 0; i < 5; i++)
+  for (int i = 0; i < n_checkboxes; i++)
     if (flag_checkboxes_[i] == (Gtk::CheckButton *)toggle)
       j = i;
 
@@ -158,7 +153,7 @@ void CalendarExample::on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>
 
 CalendarExample::CalendarExample()
 {
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < n_checkboxes; i++) {
     settings_[i] = 0;
   }
 
@@ -190,9 +185,10 @@ CalendarExample::CalendarExample()
   set_flags();
   calendar_->mark_day(19);
   frame->add(*calendar_);
-  calendar_->signal_month_changed().connect(sigc::mem_fun(*this, &CalendarExample::month_changed));
+  calendar_->signal_prev_month().connect(sigc::mem_fun(*this, &CalendarExample::month_changed));
+  calendar_->signal_next_month().connect(sigc::mem_fun(*this, &CalendarExample::month_changed));
   calendar_->signal_day_selected().connect(sigc::mem_fun(*this, &CalendarExample::day_selected));
-  calendar_->signal_day_selected_double_click().connect(sigc::mem_fun(*this, &CalendarExample::day_selected_double_click));
+  //calendar_->signal_day_selected_double_click().connect(sigc::mem_fun(*this, &CalendarExample::day_selected_double_click));
 
   auto separator = Gtk::make_managed<Gtk::Separator>(Gtk::Orientation::VERTICAL);
   hbox->add(*separator);
@@ -211,17 +207,15 @@ CalendarExample::CalendarExample()
   frameFlags->add(*vbox3);
 
   struct {
-    const char *label;
-  } flags[] =
+    const char* label;
+  } flags[n_checkboxes] =
     {
       { "Show Heading" },
       { "Show Day Names" },
-      { "No Month Change" },
       { "Show Week Numbers" },
-      { "Week Start Monday" }
     };
 
-  for (int i = 0; i < 5; i++)
+  for (int i = 0; i < n_checkboxes; i++)
   {
     auto toggle = new Gtk::CheckButton(flags[i].label);
     toggle->signal_toggled().connect(sigc::bind(sigc::mem_fun(*this, &CalendarExample::toggle_flag), toggle));
@@ -286,13 +280,9 @@ CalendarExample::CalendarExample()
   set_default_widget(*button);
 }
 
-Glib::Date CalendarExample::get_date() const
+Glib::DateTime CalendarExample::get_date() const
 {
-  using Glib::Date;
-  Date date;
-  calendar_->get_date(date);
-
-  return date;
+  return calendar_->get_date();
 }
 
 int main(int argc, char** argv)

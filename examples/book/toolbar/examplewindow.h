@@ -33,7 +33,7 @@ protected:
   //Child widgets:
   Gtk::Box m_VBox;
   Gtk::Box m_ButtonBox;
-  Gtk::Toolbar m_Toolbar;
+  Gtk::Box m_Toolbar;
   Gtk::Button m_Button_Close;
 };
 

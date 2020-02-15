@@ -28,6 +28,7 @@ ExampleWindow::ExampleWindow()
   m_VBox.set_margin(6);
   add(m_VBox);
 
+  m_ProgressBar.set_show_text(true);
   m_VBox.add(m_ProgressBar);
   m_VBox.add(m_ButtonBox);
 
@@ -53,20 +54,20 @@ void ExampleWindow::on_button_quit()
 
 void ExampleWindow::on_button_start()
 {
-  const double max = 10000;
-  //Do intensive work, while still keeping the user interface updated and
-  //responsive.
+  const double max = 20000;
+  // Do intensive work, while still keeping the user interface updated and responsive.
+  // An alternative would be to do the intensive work in a separate thread.
   for(double i = 0; i < max; ++i)
   {
-     std::cout << "gtkmm example: example output: " << i << " of "
-         << max << std::endl;
+    std::cout << "gtkmm example: example output: " << i << " of "
+      << max << std::endl;
 
-     m_ProgressBar.set_fraction(i / max);
+    m_ProgressBar.set_fraction(i / max);
 
-     // Allow GTK+ to perform all updates for us. Without this, the progress bar
-     // will appear to do nothing and then suddenly fill completely.
-     while(Gtk::Main::events_pending())
-         Gtk::Main::iteration();
+    // Allow GTK+ to perform all updates for us. Without this, the progress bar
+    // will appear to do nothing and then suddenly fill completely.
+    auto main_context = Glib::MainContext::get_default();
+    while (main_context->pending())
+      main_context->iteration(true);
   }
 }
-

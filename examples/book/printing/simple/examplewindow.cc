@@ -155,44 +155,41 @@ void ExampleWindow::build_main_menu(const Glib::RefPtr<Gtk::Application>& app)
   Glib::ustring ui_toolbar_info =
     "<!-- Generated with glade 3.18.3 and then changed manually -->"
     "<interface>"
-      "<requires lib='gtk' version='3.94'/>"
-      "<object class='GtkToolbar' id='toolbar'>"
+      "<requires lib='gtk' version='3.98'/>"
+      "<object class='GtkBox' id='toolbar'>"
         "<property name='can_focus'>False</property>"
+        "<property name='spacing'>3</property>"
         "<child>"
-          "<object class='GtkToolButton' id='toolbutton_new'>"
+          "<object class='GtkButton' id='toolbutton_new'>"
             "<property name='can_focus'>False</property>"
             "<property name='tooltip_text' translatable='yes'>New</property>"
             "<property name='action_name'>example.new</property>"
             "<property name='icon_name'>document-new</property>"
             "<property name='expand'>False</property>"
-            "<property name='homogeneous'>True</property>"
           "</object>"
         "</child>"
         "<child>"
-          "<object class='GtkToolButton' id='toolbutton_print'>"
+          "<object class='GtkButton' id='toolbutton_print'>"
             "<property name='can_focus'>False</property>"
             "<property name='tooltip_text' translatable='yes'>Print</property>"
             "<property name='action_name'>example.print</property>"
             "<property name='icon_name'>document-print</property>"
             "<property name='expand'>False</property>"
-            "<property name='homogeneous'>True</property>"
           "</object>"
         "</child>"
         "<child>"
-          "<object class='GtkSeparatorToolItem' id='separator1'>"
+          "<object class='GtkSeparator' id='separator1'>"
             "<property name='can_focus'>False</property>"
             "<property name='expand'>False</property>"
-            "<property name='homogeneous'>False</property>"
           "</object>"
         "</child>"
         "<child>"
-          "<object class='GtkToolButton' id='toolbutton_quit'>"
+          "<object class='GtkButton' id='toolbutton_quit'>"
             "<property name='can_focus'>False</property>"
             "<property name='tooltip_text' translatable='yes'>Quit</property>"
             "<property name='action_name'>example.quit</property>"
             "<property name='icon_name'>application-exit</property>"
             "<property name='expand'>False</property>"
-            "<property name='homogeneous'>True</property>"
           "</object>"
         "</child>"
       "</object>"
@@ -221,9 +218,9 @@ void ExampleWindow::build_main_menu(const Glib::RefPtr<Gtk::Application>& app)
   }
 
   // Get the toolbar and add it to a container widget:
-  auto toolbar = m_refBuilder->get_widget<Gtk::Toolbar>("toolbar");
+  auto toolbar = m_refBuilder->get_widget<Gtk::Box>("toolbar");
   if (!toolbar)
-    g_warning("GtkToolbar not found");
+    g_warning("toolbar not found");
   else
     m_VBox.add(*toolbar);
 }
