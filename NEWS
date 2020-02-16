@@ -1,3 +1,45 @@
+3.97.1: (unstable)
+Distro packagers should probably not package this yet.
+
+Apart from the changes listed below there are lots of small changes.
+Most changes are caused by changes in gtkmm-4.0.
+All example programs are compatible with gtkmm 3.97.1.
+docs/tutorial/C/index-in.docbook is not fully updated.
+
+* Use glibmm-2.64 instead of glibmm-2.62
+  Require gtkmm-4.0 >= 3.97.1
+  (Kjell Ahlstedt)
+* meson.build: "ninja test" builds the example programs
+  README files: meson is the recommended build system
+  (Kjell Ahlstedt)
+* Builder, example and description: Update use of get_widget() and
+  get_widget_derived(). Describe combination with Glib::Property
+  (Kjell Ahlstedt)
+* Application example: Use Gio::Application::add_option_group()
+  (Kjell Ahlstedt) Issue glibmm#46 (Patrick Storz)
+* Meson build: Replace shell scripts with Python scripts
+  Makefile.am: Distribute files needed when building with Meson
+  (Kjell Ahlstedt)
+* Builder: Using derived widgets: Update for glibmm
+  (Daniel Boles) Merge request !5
+* Drop pointless/confusing class around RadioButtons
+  (Daniel Boles) Merge request !6
+* Don't recommend `new` for an in-class member
+  (Daniel Boles) Merge request !7
+* Replace Glib::Exception by Glib::Error
+  (Kjell Ahlstedt) Issue glibmm#23
+* index-in.docbook: Change git.gnome.org to gitlab.gnome.org
+  (Kjell Ahlstedt)
+* Add examples/book/treeview/custom_treemodel
+  (Kjell Ahlstedt) Issue #9 (Danny van Elsen)
+* Use Gtk::PopoverMenu and Gtk::PopoverMenuBar instead of the removed
+  Gtk::Menu and Gtk::MenuBar.
+  Update drag-and-drop examples: Use Gtk::DragSource and DropTarget.
+  Examples with toolbars: Replace removed Toolbar and *ToolButton
+  by Box and *Button.
+  (Kjell Ahlstedt)
+
+
 3.95.1: (unstable)
 Distro packagers should probably not package this yet.
 
