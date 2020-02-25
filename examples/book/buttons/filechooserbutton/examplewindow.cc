@@ -26,13 +26,8 @@ ExampleWindow::ExampleWindow()
 
   m_button.set_margin(10);
   add(m_button);
-
-  //Allow our file chooser to select remote URIs,
-  //for instance via bookmarked servers:
-  m_button.set_local_only(false);
 }
 
 ExampleWindow::~ExampleWindow()
 {
 }
-

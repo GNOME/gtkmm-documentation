@@ -56,7 +56,7 @@ void ExampleWindow::on_button_file_clicked(Gtk::FileChooser::Action action)
     std::cout << (open ? "Open" : "Save") << " clicked." << std::endl;
 
     // Notice that this is a std::string, not a Glib::ustring.
-    auto filename = dialog->get_filename();
+    auto filename = dialog->get_file()->get_path();
     std::cout << "File selected: " <<  filename << std::endl;
     break;
   }

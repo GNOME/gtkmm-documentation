@@ -60,8 +60,7 @@ void ExampleWindow::on_button_folder_clicked()
     case Gtk::ResponseType::OK:
     {
       std::cout << "Select clicked." << std::endl;
-      std::cout << "Folder selected: " << dialog.get_filename()
-          << std::endl;
+      std::cout << "Folder selected: " << dialog.get_file()->get_path() << std::endl;
       break;
     }
     case Gtk::ResponseType::CANCEL:
@@ -117,7 +116,7 @@ void ExampleWindow::on_button_file_clicked()
       std::cout << "Open clicked." << std::endl;
 
       //Notice that this is a std::string, not a Glib::ustring.
-      auto filename = dialog.get_filename();
+      auto filename = dialog.get_file()->get_path();
       std::cout << "File selected: " <<  filename << std::endl;
       break;
     }

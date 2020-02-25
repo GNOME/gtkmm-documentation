@@ -47,7 +47,7 @@ CellRendererPopup::CellRendererPopup()
   Glib::ObjectBase      (typeid(CellRendererPopup)),
   Gtk::CellRendererText (),
   button_width_         (-1),
-  popup_window_         (Gtk::WindowType::POPUP),
+  popup_window_         (),
   focus_widget_         (nullptr),
   popup_entry_          (nullptr),
   shown_                (false),

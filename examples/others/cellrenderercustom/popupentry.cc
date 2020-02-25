@@ -77,7 +77,7 @@ bool PopupEntry::get_editing_canceled() const
 // static
 int PopupEntry::get_button_width()
 {
-  Gtk::Window window (Gtk::WindowType::POPUP);
+  Gtk::Window window;
 
   Gtk::Button *const button = new Gtk::Button();
   window.add(*Gtk::manage(button));

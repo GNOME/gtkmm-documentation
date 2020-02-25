@@ -51,7 +51,7 @@ TreeModel_Dnd::row_draggable_vfunc(const Gtk::TreeModel::Path& path) const
 
 bool
 TreeModel_Dnd::row_drop_possible_vfunc(const Gtk::TreeModel::Path& dest,
-        const Gtk::SelectionData& selection_data) const
+        const Glib::ValueBase& value) const
 {
   //Make the value of the "receives drags" column determine whether a row can be
   //dragged into it:
@@ -77,18 +77,13 @@ TreeModel_Dnd::row_drop_possible_vfunc(const Gtk::TreeModel::Path& dest,
     }
   }
 
-  // You could also examine the row being dragged (via selection_data)
+  // You could also examine the row being dragged (via value)
   // if you must look at both rows to see whether a drop should be allowed.
   // You could use
   //   Glib::RefPtr<const Gtk::TreeModel> model_dragged_row;
   //   Gtk::TreeModel::Path path_dragged_row;
-  //   Gtk::TreeModel::Path::get_from_selection_data(selection_data,
+  //   Gtk::TreeModel::Path::get_row_drag_data(value,
   //     model_dragged_row, path_dragged_row);
-  // This is risky, though. If the row being dragged, and thus selection_data,
-  // does not originate in the process that's calling get_from_selection_data(),
-  // you'll most likely get a segmentation fault. See the documentation of
-  // Gtk::TreePath::get_from_selection_data() or gtk_tree_get_row_drag_data().
 
-  return Gtk::TreeStore::row_drop_possible_vfunc(dest, selection_data);
+  return Gtk::TreeStore::row_drop_possible_vfunc(dest, value);
 }
-

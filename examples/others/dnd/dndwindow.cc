@@ -25,7 +25,7 @@ DnDWindow::DnDWindow()
 : m_Label_Drop("Drop here\n"),
   m_Label_Drag("Drag Here\n"),
   m_Label_Popup("Popup\n"),
-  m_PopupWindow(Gtk::WindowType::POPUP)
+  m_PopupWindow()
 {
   set_title("Drag-and-drop example");
   set_default_size(300, 150);

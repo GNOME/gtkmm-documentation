@@ -1,5 +1,3 @@
-//$Id: treemodel_dnd.h 852 2007-06-10 09:12:36Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -49,8 +47,7 @@ public:
 protected:
   //Overridden virtual functions:
   bool row_draggable_vfunc(const Gtk::TreeModel::Path& path) const override;
-  bool row_drop_possible_vfunc(const Gtk::TreeModel::Path& dest, const Gtk::SelectionData& selection_data) const override;
-
+  bool row_drop_possible_vfunc(const Gtk::TreeModel::Path& dest, const Glib::ValueBase& value) const override;
 };
 
 #endif //GTKMM_EXAMPLE_TREEMODEL_DND_H

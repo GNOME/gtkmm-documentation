@@ -154,10 +154,9 @@ void ExampleWindow::on_menu_file_files_dialog()
   dialog.hide();
   if (response == Gtk::ResponseType::OK)
   {
-    auto selected_uri = dialog.get_uri();
+    auto selected_uri = dialog.get_file()->get_uri();
     std::cout << "URI selected = " << selected_uri << std::endl;
     std::cout << (m_refRecentManager->has_item(selected_uri) ? "A" : "Not a")
       << " recently used file" << std::endl;
   }
 }
-

@@ -34,9 +34,8 @@ DnDWindow::DnDWindow()
   //Make m_Label_Drag a DnD drag source:
   const GType ustring_type = Glib::Value<Glib::ustring>::value_type();
   auto source = Gtk::DragSource::create();
-  auto content = Gdk::ContentProvider::create(ustring_type,
-    sigc::mem_fun(*this, &DnDWindow::on_label_drag_get_data));
-  source->set_content(content);
+  source->signal_prepare().connect(
+    sigc::mem_fun(*this, &DnDWindow::on_label_drag_prepare_data), false);
   m_Label_Drag.add_controller(source);
 
   m_HBox.add(m_Label_Drag);
@@ -60,14 +59,14 @@ DnDWindow::~DnDWindow()
 }
 
 // In this simple example where just a small amount of data is copied,
-// it would be reasonable to store the data in the ContentProvider.
-// Then this callback routine would be unnecessary.
-void DnDWindow::on_label_drag_get_data(Glib::ValueBase& value)
+// it would be reasonable to store the ContentProvider in the DragSource.
+// Then this signal handler would be unnecessary.
+Glib::RefPtr<Gdk::ContentProvider> DnDWindow::on_label_drag_prepare_data(double, double)
 {
   Glib::Value<Glib::ustring> ustring_value;
-  ustring_value.init(value.gobj());
+  ustring_value.init(ustring_value.value_type());
   ustring_value.set("I'm Data!");
-  value = ustring_value;
+  return Gdk::ContentProvider::create(ustring_value);
 }
 
 bool DnDWindow::on_button_drop_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int, int)
