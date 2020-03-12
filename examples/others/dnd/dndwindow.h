@@ -30,24 +30,18 @@ protected:
   void create_popup();
 
   //Signal handlers and callback functions:
-  bool on_label_drop_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int x, int y);
-  void on_label_drop_got_data(Glib::RefPtr<Gio::AsyncResult>& result,
-    const Glib::RefPtr<Gdk::Drop>& drop);
+  bool on_label_drop_drop(const Glib::ValueBase& value, double x, double y);
 
-  bool on_label_popup_accept(const Glib::RefPtr<Gdk::Drop>& drop);
-  void on_label_popup_drag_enter(const Glib::RefPtr<Gdk::Drop>& drop);
-  void on_label_popup_drag_leave(const Glib::RefPtr<Gdk::Drop>& drop);
+  void on_label_popup_enter(double x, double y);
+  void on_label_popup_leave();
 
-  bool on_button_popup_accept(const Glib::RefPtr<Gdk::Drop>& drop);
-  void on_button_popup_drag_enter(const Glib::RefPtr<Gdk::Drop>& drop);
-  void on_button_popup_drag_leave(const Glib::RefPtr<Gdk::Drop>& drop);
-  bool on_button_popup_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int x, int y);
+  Gdk::DragAction on_button_popup_enter(double x, double y);
+  void on_button_popup_leave();
+  bool on_button_popup_drop(const Glib::ValueBase& value, double x, double y);
 
-  bool on_image_accept(const Glib::RefPtr<Gdk::Drop>& drop);
+  Gdk::DragAction on_image_drag_enter(const Glib::RefPtr<Gdk::Drop>& drop, double x, double y);
   void on_image_drag_leave(const Glib::RefPtr<Gdk::Drop>& drop);
-  bool on_image_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int x, int y);
-  void on_image_got_data(Glib::RefPtr<Gio::AsyncResult>& result,
-    const Glib::RefPtr<Gdk::Drop>& drop);
+  bool on_image_drop(const Glib::RefPtr<Gdk::Drop>& drop, double x, double y);
 
   void on_label_drag_drag_end(const Glib::RefPtr<Gdk::Drag>& drag, bool delete_data);
 

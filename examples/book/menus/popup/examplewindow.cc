@@ -19,8 +19,7 @@
 
 ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
 : m_Box(Gtk::Orientation::VERTICAL),
-  m_Label("Right-click to see the popup menu."),
-  m_MenuPopup(m_Label)
+  m_Label("Right-click to see the popup menu.")
 {
   set_title("popup example");
   set_default_size(200, 200);
@@ -100,6 +99,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   if(!gmenu)
     g_warning("GMenu not found");
 
+  m_MenuPopup.set_parent(m_Label);
   m_MenuPopup.set_menu_model(gmenu);
   m_MenuPopup.set_has_arrow(false);
 }

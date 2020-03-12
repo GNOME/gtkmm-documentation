@@ -33,9 +33,7 @@ public:
 protected:
   //Signal handlers:
   Glib::RefPtr<Gdk::ContentProvider> on_label_drag_prepare_data(double x, double y);
-  bool on_button_drop_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int x, int y);
-  void on_button_drop_got_data(Glib::RefPtr<Gio::AsyncResult>& result,
-    const Glib::RefPtr<Gdk::Drop>& drop);
+  bool on_button_drop_drop_data(const Glib::ValueBase& value, double x, double y);
 
   //Member widgets:
   Gtk::Box m_HBox;

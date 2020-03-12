@@ -11,7 +11,8 @@
         <property name="tooltip_text" translatable="yes">New</property>
         <property name="action_name">example.new</property>
         <property name="icon_name">document-new</property>
-        <property name="expand">False</property>
+        <property name="hexpand">False</property>
+        <property name="vexpand">False</property>
       </object>
     </child>
     <child>
@@ -19,7 +20,8 @@
         <property name="can_focus">False</property>
         <property name="tooltip_text" translatable="yes">Stay dry in the rain</property>
         <property name="action_name">example.rain</property>
-        <property name="expand">False</property>
+        <property name="hexpand">False</property>
+        <property name="vexpand">False</property>
         <child>
           <object class="GtkImage" id="image_rain">
             <property name="can_focus">False</property>
@@ -34,7 +36,8 @@
         <property name="tooltip_text" translatable="yes">Quit</property>
         <property name="action_name">example.quit</property>
         <property name="icon_name">application-exit</property>
-        <property name="expand">False</property>
+        <property name="hexpand">False</property>
+        <property name="vexpand">False</property>
       </object>
     </child>
   </object>

@@ -205,7 +205,8 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
   x -= alloc.get_width();
   x = std::max(0, x);
 
-  popup_window_.add_modal_grab();
+  popup_window_.set_can_focus(true);
+  popup_window_.grab_focus();
 
   //popup_window_.move(x, y);
   (void)x; (void)y; // Pretend that x and y are used.
@@ -221,7 +222,7 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
 
 void CellRendererPopup::on_hide_popup()
 {
-  popup_window_.remove_modal_grab();
+  popup_window_.set_can_focus(false);
   popup_window_.hide();
 
   if(popup_entry_)

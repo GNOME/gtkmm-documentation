@@ -19,10 +19,8 @@
 ExampleWindow::ExampleWindow()
  : m_format_buttons_box(Gtk::Orientation::HORIZONTAL),
    m_toggle_button("Button"),
-   m_toggle_form_popover(m_toggle_button),
    m_toggle_form_label("Non-modal Popover"),
    m_toggle_form_combo_label("Popover position:"),
-   m_calendar_popover(m_calendar),
    m_calendar_popover_label("Label:")
 {
   // Window properties
@@ -71,6 +69,7 @@ void ExampleWindow::configure_form_popover()
   m_toggle_form_grid.attach(m_toggle_form_combo_label, 0, 2, 1, 1);
   m_toggle_form_grid.attach(m_toggle_form_combo, 1, 2, 1, 1);
 
+  m_toggle_form_popover.set_parent(m_toggle_button);
   m_toggle_form_popover.add(m_toggle_form_grid);
   m_toggle_form_popover.set_position(Gtk::PositionType::BOTTOM);
   m_toggle_form_popover.set_margin(6);
@@ -131,6 +130,7 @@ void ExampleWindow::configure_cal_popover()
   m_calendar_form_grid.attach(m_calendar_popover_label, 0, 0, 1, 1);
   m_calendar_form_grid.attach(m_calendar_popover_entry, 1, 0, 1, 1);
 
+  m_calendar_popover.set_parent(m_calendar);
   m_calendar_popover.add(m_calendar_form_grid);
   m_calendar_popover.set_margin(6);
 }

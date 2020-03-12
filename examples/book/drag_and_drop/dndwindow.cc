@@ -15,7 +15,6 @@
  */
 
 #include "dndwindow.h"
-#include <gdkmm/contentformats.h>
 #include <gdkmm/contentprovider.h>
 #include <gtkmm/dragsource.h>
 #include <gtkmm/droptarget.h>
@@ -32,8 +31,8 @@ DnDWindow::DnDWindow()
   //Drag site:
 
   //Make m_Label_Drag a DnD drag source:
-  const GType ustring_type = Glib::Value<Glib::ustring>::value_type();
   auto source = Gtk::DragSource::create();
+  source->set_actions(Gdk::DragAction::COPY);
   source->signal_prepare().connect(
     sigc::mem_fun(*this, &DnDWindow::on_label_drag_prepare_data), false);
   m_Label_Drag.add_controller(source);
@@ -44,10 +43,10 @@ DnDWindow::DnDWindow()
   //Drop site:
 
   //Make m_Button_Drop a DnD drop destination:
-  auto formats = Gdk::ContentFormats::create(ustring_type);
-  auto target = Gtk::DropTarget::create(formats, Gdk::DragAction::COPY);
-  target->signal_drag_drop().connect(
-    sigc::mem_fun(*this, &DnDWindow::on_button_drop_drag_drop), false);
+  const GType ustring_type = Glib::Value<Glib::ustring>::value_type();
+  auto target = Gtk::DropTarget::create(ustring_type, Gdk::DragAction::COPY);
+  target->signal_drop().connect(
+    sigc::mem_fun(*this, &DnDWindow::on_button_drop_drop_data), false);
   m_Button_Drop.add_controller(target);
 
   m_HBox.add(m_Button_Drop);
@@ -69,24 +68,22 @@ Glib::RefPtr<Gdk::ContentProvider> DnDWindow::on_label_drag_prepare_data(double,
   return Gdk::ContentProvider::create(ustring_value);
 }
 
-bool DnDWindow::on_button_drop_drag_drop(const Glib::RefPtr<Gdk::Drop>& drop, int, int)
+bool DnDWindow::on_button_drop_drop_data(const Glib::ValueBase& value, double, double)
 {
-  drop->read_text_async(sigc::bind(sigc::mem_fun(*this, &DnDWindow::on_button_drop_got_data), drop));
-  return true;
-}
+  if (G_VALUE_HOLDS(value.gobj(), Glib::Value<Glib::ustring>::value_type()))
+  {
+    // We got the value type that we expected.
+    Glib::Value<Glib::ustring> ustring_value;
+    ustring_value.init(value.gobj());
+    const Glib::ustring dropped_string = ustring_value.get();
 
-void DnDWindow::on_button_drop_got_data(Glib::RefPtr<Gio::AsyncResult>& result,
-  const Glib::RefPtr<Gdk::Drop>& drop)
-{
-  try
-  {
-    const Glib::ustring dropped_string = drop->read_text_finish(result);
     std::cout << "Received \"" << dropped_string << "\" in button " << std::endl;
-    drop->finish(Gdk::DragAction::COPY);
+    return true;
   }
-  catch (const std::exception& ex)
+  else
   {
-    std::cout << "Drop failed: " << ex.what() << std::endl;
-    drop->failed();
+    std::cout << "Received unexpected data type \""
+      << G_VALUE_TYPE_NAME(value.gobj()) << "\" in button " << std::endl;
+    return false;
   }
 }

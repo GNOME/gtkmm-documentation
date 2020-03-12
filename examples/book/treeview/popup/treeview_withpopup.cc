@@ -18,7 +18,6 @@
 #include <iostream>
 
 TreeView_WithPopup::TreeView_WithPopup()
-: m_MenuPopup(*this)
 {
   //Create the Tree model:
   m_refTreeModel = Gtk::ListStore::create(m_Columns);
@@ -54,6 +53,7 @@ TreeView_WithPopup::TreeView_WithPopup()
   gmenu->append("_Process", "popup.process");
   gmenu->append("_Remove", "popup.remove");
 
+  m_MenuPopup.set_parent(*this);
   m_MenuPopup.set_menu_model(gmenu);
   m_MenuPopup.set_has_arrow(false);
 
