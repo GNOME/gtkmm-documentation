@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
   "http://docbook.org/docbook/xml/4.5/docbookx.dtd" [
-  <!ENTITY url_refdocs_base_glib_html "http://developer.gnome.org/glibmm/2.58/">
+  <!ENTITY url_refdocs_base_glib_html "http://developer.gnome.org/glibmm/2.64/">
   <!ENTITY url_refdocs_base_glib "&url_refdocs_base_glib_html;classGlib_1_1">
   <!ENTITY url_refdocs_base_gio "&url_refdocs_base_glib_html;classGio_1_1">
   <!ENTITY url_refdocs_base_gtk_html "http://developer.gnome.org/gtkmm/3.24/">
@@ -179,12 +179,12 @@ See the <ulink url="https://wiki.gnome.org/Projects/gtkmm/FAQ">FAQ</ulink> for m
   packages.
 </para>
 <itemizedlist>
-  <listitem><para><application>libsigc++ 2.0</application></para></listitem>
-  <listitem><para><application>GTK+ 3.0</application></para></listitem>
-  <listitem><para><application>glibmm</application></para></listitem>
-  <listitem><para><application>cairomm</application></para></listitem>
-  <listitem><para><application>pangomm</application></para></listitem>
-  <listitem><para><application>atkmm</application></para></listitem>
+  <listitem><para><application>sigc++-2.0</application></para></listitem>
+  <listitem><para><application>gtk+-3.0</application></para></listitem>
+  <listitem><para><application>glibmm-2.4</application></para></listitem>
+  <listitem><para><application>cairomm-1.0</application></para></listitem>
+  <listitem><para><application>pangomm-1.4</application></para></listitem>
+  <listitem><para><application>atkmm-1.6</application></para></listitem>
 </itemizedlist>
 <para>
 These dependencies have their own dependencies, including the following
@@ -192,11 +192,11 @@ applications and libraries:
 </para>
 <itemizedlist>
   <listitem><para><application>pkg-config</application></para></listitem>
-  <listitem><para><application>glib</application></para></listitem>
-  <listitem><para><application>ATK</application></para></listitem>
-  <listitem><para><application>Pango</application></para></listitem>
+  <listitem><para><application>glib-2.0</application></para></listitem>
+  <listitem><para><application>atk</application></para></listitem>
+  <listitem><para><application>pango</application></para></listitem>
   <listitem><para><application>cairo</application></para></listitem>
-  <listitem><para><application>gdk-pixbuf</application></para></listitem>
+  <listitem><para><application>gdk-pixbuf-2.0</application></para></listitem>
 </itemizedlist>
 </sect1>
 
