@@ -322,7 +322,9 @@ void CellRendererPopup::on_popup_arrow_clicked()
   popup_entry_->select_region(0, 0);
 
   int x = 0, y = 0;
-  native->get_surface()->get_position(x, y);
+  // Gdk::Surface::get_position() has been replaced by Gdk::Popup::get_position_x()
+  // and get_position_y(). How do you get a RefPtr to Gdk::Popup?
+  //native->get_surface()->get_position(x, y);
 
   const auto alloc = popup_entry_->get_allocation();
 

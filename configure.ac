@@ -25,7 +25,7 @@ MM_AX_CXX_COMPILE_STDCXX([17], [noext], [mandatory])
 AC_PATH_PROG([PERL], [perl], [perl])
 AC_PROG_SED
 
-PKG_CHECK_MODULES([GIOMM], [giomm-2.64 >= 2.63.1])
+PKG_CHECK_MODULES([GIOMM], [giomm-2.66 >= 2.65.2])
 PKG_CHECK_MODULES([GTKMM], [gtkmm-4.0  >= 3.97.1])
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
 
