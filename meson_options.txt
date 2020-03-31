@@ -1,10 +1,12 @@
-option('warnings', type: 'combo', choices : ['no', 'min', 'max', 'fatal'], value : 'fatal',
-  description : 'Compiler warning level')
+option('warnings', type: 'combo', choices: ['no', 'min', 'max', 'fatal'], value: 'min',
+  description: 'Compiler warning level')
+option('dist-warnings', type: 'combo', choices: ['no', 'min', 'max', 'fatal'], value: 'fatal',
+  description: 'Compiler warning level when a tarball is created')
 option('build-examples', type: 'boolean', value: false,
-  description : 'Build all example programs')
+  description: 'Build all example programs')
 option('validation', type: 'boolean', value: true,
-  description : 'Validate the untranslated XML file')
+  description: 'Validate the untranslated XML file')
 option('build-translations', type: 'boolean', value: true,
-  description : 'Build translated tutorials (built during installation)')
+  description: 'Build translated tutorials (built during installation)')
 option('build-pdf', type: 'boolean', value: false,
-  description : 'Build tutorial PDF file')
+  description: 'Build tutorial PDF file')
