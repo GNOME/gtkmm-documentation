@@ -9,7 +9,7 @@ project('gtkmm-documentation', 'c', 'cpp',
   license: 'GPLv2'
 )
 
-python3 = import('python').find_installation('python3')
+python3 = import('python').find_installation()
 python_version = python3.language_version()
 python_version_req = '>= 3.5'
 if not python_version.version_compare(python_version_req)
@@ -38,7 +38,19 @@ extra_dist_cmd = script_dir / 'extra-dist-cmd.py'
 
 cpp_compiler = meson.get_compiler('cpp')
 
-warning_level = get_option('warnings')
+# Are we testing a dist tarball while it's being built?
+# There ought to be a better way. https://github.com/mesonbuild/meson/issues/6866
+is_dist_check = project_source_root.contains('dist-unpack') and \
+                project_build_root.contains('dist-build')
+
+if is_dist_check
+  message('Looks like a tarball is being tested. ' + \
+          'Option "dist-warnings" is used instead of "warnings".')
+  warning_level = get_option('dist-warnings')
+else
+  warning_level = get_option('warnings')
+endif
+
 warning_flags = []
 if warning_level == 'min'
   warning_flags = ['-Wall']
