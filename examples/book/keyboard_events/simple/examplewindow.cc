@@ -42,20 +42,20 @@ ExampleWindow::ExampleWindow()
 
 bool ExampleWindow::on_window_key_pressed(guint keyval, guint, Gdk::ModifierType state)
 {
-  //Gdk::ModifierType::MOD1_MASK -> the 'Alt' key(mask)
+  //Gdk::ModifierType::ALT_MASK -> the 'Alt' key(mask)
   //GDK_KEY_1 -> the '1' key
   //GDK_KEY_2 -> the '2' key
 
   //select the first radio button, when we press alt + 1
   if((keyval == GDK_KEY_1) &&
-    (state & (Gdk::ModifierType::SHIFT_MASK | Gdk::ModifierType::CONTROL_MASK | Gdk::ModifierType::MOD1_MASK)) == Gdk::ModifierType::MOD1_MASK)
+    (state & (Gdk::ModifierType::SHIFT_MASK | Gdk::ModifierType::CONTROL_MASK | Gdk::ModifierType::ALT_MASK)) == Gdk::ModifierType::ALT_MASK)
   {
     m_first.set_active();
     //returning true, cancels the propagation of the event
     return true;
   }
   else if((keyval == GDK_KEY_2) &&
-    (state & (Gdk::ModifierType::SHIFT_MASK | Gdk::ModifierType::CONTROL_MASK | Gdk::ModifierType::MOD1_MASK)) == Gdk::ModifierType::MOD1_MASK)
+    (state & (Gdk::ModifierType::SHIFT_MASK | Gdk::ModifierType::CONTROL_MASK | Gdk::ModifierType::ALT_MASK)) == Gdk::ModifierType::ALT_MASK)
   {
     //and the second radio button, when we press alt + 2
     m_second.set_active();
