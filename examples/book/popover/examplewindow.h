@@ -26,10 +26,11 @@ public:
   virtual ~ExampleWindow();
 
 protected:
-  // Slots
-  void on_button_toggled();
+  // Signal handlers
   void on_combo_changed();
   void on_day_selected();
+  void on_button_pressed(int n_press, double x, double y);
+  void on_button_released(int n_press, double x, double y);
 
   // Containers
   Gtk::Grid m_grid;
@@ -38,7 +39,7 @@ protected:
   Gtk::Grid m_calendar_form_grid;
 
   // Widgets
-  Gtk::ToggleButton m_toggle_button;
+  Gtk::MenuButton m_menu_button;
 
   Gtk::Popover m_toggle_form_popover;
   Gtk::Label m_toggle_form_label;
@@ -51,13 +52,21 @@ protected:
   Gtk::Label m_calendar_popover_label;
   Gtk::Entry m_calendar_popover_entry;
 
+  // Event controller
+  Glib::RefPtr<Gtk::GestureClick> m_calendar_event_controller;
+
 private:
   void configure_form_popover();
   void configure_form_buttons();
   void configure_form_combo();
-
   void configure_cal_popover();
+
+  void show_calendar_popover(double x, double y);
+
+  double m_button_pressed_x;
+  double m_button_pressed_y;
+  bool m_button_pressed_called = false;
+  bool m_day_selected_called = false;
 };
 
 #endif // GTKMM_EXAMPLEWINDOW_H
-

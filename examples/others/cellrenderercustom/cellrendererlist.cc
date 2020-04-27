@@ -18,7 +18,6 @@
 #include "cellrendererlist.h"
 #include "popupentry.h"
 
-
 namespace
 {
 
@@ -61,7 +60,6 @@ CellRendererList::CellRendererList()
   get_popup_window()->add(*frame);
 
   frame->add(tree_view_);
-  frame->set_shadow_type(Gtk::ShadowType::OUT);
 
   set_focus_widget(tree_view_);
 }

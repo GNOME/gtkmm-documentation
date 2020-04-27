@@ -17,7 +17,7 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_AspectFrame("2x1", /* label */
+: m_AspectFrame(
     Gtk::Align::CENTER, /* center x */
     Gtk::Align::CENTER, /* center y */
     2.0, /* xsize/ysize = 2 */

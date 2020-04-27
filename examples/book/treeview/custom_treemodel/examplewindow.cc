@@ -36,7 +36,7 @@ ExampleWindow::ExampleWindow()
 
   // Only show the scrollbars when they are necessary:
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
-  m_ScrolledWindow.set_shadow_type(Gtk::ShadowType::ETCHED_IN);
+  m_ScrolledWindow.set_has_frame(true);
   m_ScrolledWindow.set_expand();
 
   m_VBox.add(m_ScrolledWindow);

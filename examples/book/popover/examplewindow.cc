@@ -18,7 +18,7 @@
 
 ExampleWindow::ExampleWindow()
  : m_format_buttons_box(Gtk::Orientation::HORIZONTAL),
-   m_toggle_button("Button"),
+   m_menu_button(),
    m_toggle_form_label("Non-modal Popover"),
    m_toggle_form_combo_label("Popover position:"),
    m_calendar_popover_label("Label:")
@@ -28,7 +28,8 @@ ExampleWindow::ExampleWindow()
   set_default_size(500, -1);
 
   // Button
-  m_toggle_button.signal_toggled().connect(sigc::mem_fun(*this, &ExampleWindow::on_button_toggled));
+  m_menu_button.set_label("Button");
+  m_menu_button.set_popover(m_toggle_form_popover);
 
   // Form popover
   configure_form_popover();
@@ -41,7 +42,7 @@ ExampleWindow::ExampleWindow()
 
   // Layout
   m_grid.set_row_spacing(6);
-  m_grid.attach(m_toggle_button, 0, 0, 1, 1);
+  m_grid.attach(m_menu_button, 0, 0, 1, 1);
   m_grid.attach(m_calendar, 0, 1, 6, 1);
   m_grid.set_margin(12);
   add(m_grid);
@@ -49,12 +50,7 @@ ExampleWindow::ExampleWindow()
 
 ExampleWindow::~ExampleWindow()
 {
-}
-
-void ExampleWindow::on_button_toggled()
-{
-  bool active = m_toggle_button.get_active();
-  m_toggle_form_popover.set_visible(active);
+  m_calendar_popover.unparent();
 }
 
 void ExampleWindow::configure_form_popover()
@@ -69,7 +65,6 @@ void ExampleWindow::configure_form_popover()
   m_toggle_form_grid.attach(m_toggle_form_combo_label, 0, 2, 1, 1);
   m_toggle_form_grid.attach(m_toggle_form_combo, 1, 2, 1, 1);
 
-  m_toggle_form_popover.set_parent(m_toggle_button);
   m_toggle_form_popover.add(m_toggle_form_grid);
   m_toggle_form_popover.set_position(Gtk::PositionType::BOTTOM);
   m_toggle_form_popover.set_margin(6);
@@ -124,11 +119,16 @@ void ExampleWindow::on_combo_changed()
 
 void ExampleWindow::configure_cal_popover()
 {
+  m_calendar_event_controller = Gtk::GestureClick::create();
+  m_calendar_event_controller->signal_pressed().connect(sigc::mem_fun(*this, &ExampleWindow::on_button_pressed));
+  m_calendar_event_controller->signal_released().connect(sigc::mem_fun(*this, &ExampleWindow::on_button_released));
+  m_calendar.add_controller(m_calendar_event_controller);
+
   m_calendar.signal_day_selected().connect(sigc::mem_fun(*this, &ExampleWindow::on_day_selected));
 
   m_calendar_form_grid.set_column_spacing(6);
-  m_calendar_form_grid.attach(m_calendar_popover_label, 0, 0, 1, 1);
-  m_calendar_form_grid.attach(m_calendar_popover_entry, 1, 0, 1, 1);
+  m_calendar_form_grid.attach(m_calendar_popover_label, 0, 0);
+  m_calendar_form_grid.attach(m_calendar_popover_entry, 1, 0);
 
   m_calendar_popover.set_parent(m_calendar);
   m_calendar_popover.add(m_calendar_form_grid);
@@ -137,24 +137,44 @@ void ExampleWindow::configure_cal_popover()
 
 void ExampleWindow::on_day_selected()
 {
-  const auto current_event = Glib::wrap(gtk_get_current_event(), false);
+  if (m_button_pressed_called)
+  {
+    // on_button_pressed() was called before on_day_selected().
+    show_calendar_popover(m_button_pressed_x, m_button_pressed_y);
+    m_button_pressed_called = false;
+  }
+  else
+  {
+    m_day_selected_called = true;
+  }
+}
 
-  if (current_event->get_event_type() != Gdk::Event::Type::BUTTON_PRESS)
-    return;
+void ExampleWindow::on_button_pressed(int, double x, double y)
+{
+  if (m_day_selected_called)
+  {
+    // on_day_selected() was called before on_button_pressed().
+    show_calendar_popover(x, y);
+    m_day_selected_called = false;
+  }
+  else
+  {
+    m_button_pressed_x = x;
+    m_button_pressed_y = y;
+    m_button_pressed_called = true;
+  }
+}
 
-  double x = 0.0;
-  double y = 0.0;
-  current_event->get_position(x, y);
-  Gdk::Rectangle rect;
-  auto allocation = m_calendar.get_allocation();
-  rect.set_x(x - allocation.get_x());
-  rect.set_y(y - allocation.get_y());
-  rect.set_width(1);
-  rect.set_height(1);
+void ExampleWindow::on_button_released(int, double, double)
+{
+  m_button_pressed_called = false;
+}
 
+void ExampleWindow::show_calendar_popover(double x, double y)
+{
+  const Gdk::Rectangle rect(x, y, 1, 1);
   m_calendar_popover.set_pointing_to(rect);
   m_calendar_popover.set_visible(true);
 
   m_calendar_popover_entry.set_text("");
 }
-

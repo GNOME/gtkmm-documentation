@@ -33,8 +33,9 @@ ExampleWindow::ExampleWindow()
   m_Label_Multi("This is a Multi-line label.\nSecond line\nThird line"),
   m_Label_Left("This is a Left-Justified\nMulti-line label.\nThird line"),
   m_Label_Right("This is a Right-Justified\nMulti-line label.\nThird line"),
-  m_Label_Underlined("This label is underlined!\n"
-          "This one is underlined in quite a funky fashion")
+  m_Label_Underlined("<u>This label is underlined!</u>\n"
+          "<u>T</u>h<u>is one is</u> <u>u</u>n<u>derlin</u>ed "
+          "in<u> q</u>u<u>ite a f</u>u<u>nky</u> fashion")
 {
   set_title("Label");
 
@@ -92,9 +93,7 @@ ExampleWindow::ExampleWindow()
   m_VBox2.add(m_Frame_FilledWrapped);
 
   m_Label_Underlined.set_justify(Gtk::Justification::LEFT);
-  m_Label_Underlined.set_pattern (
-          "_________________________ _ _________ _ ______"
-          "     __ _______ ___");
+  m_Label_Underlined.set_use_markup(true);
   m_Frame_Underlined.add(m_Label_Underlined);
   m_VBox2.add(m_Frame_Underlined);
 }

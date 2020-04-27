@@ -25,6 +25,9 @@ namespace
 
 bool grab_on_window(const Glib::RefPtr<Gdk::Surface>& /* surface */)
 {
+/*
+  // gtk_get_current_event_device() has been replaced by
+  // Gtk::EventController::get_current_event_device().
   Glib::RefPtr<Gdk::Device> device (Glib::wrap(gtk_get_current_event_device(), true));
 
   if(device)
@@ -35,7 +38,7 @@ bool grab_on_window(const Glib::RefPtr<Gdk::Surface>& /* surface */)
     if (seat)
       return true;
   }
-
+*/
   return false;
 }
 
