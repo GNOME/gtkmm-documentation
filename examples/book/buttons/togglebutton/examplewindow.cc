@@ -26,7 +26,7 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::on_button_clicked) );
 
   m_button.set_margin(10);
-  add(m_button);
+  set_child(m_button);
 }
 
 ExampleWindow::~ExampleWindow()

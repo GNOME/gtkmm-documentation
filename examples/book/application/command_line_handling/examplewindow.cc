@@ -23,8 +23,8 @@ ExampleWindow::ExampleWindow()
   set_title("Gtk::Application example");
   set_default_size(300,200);
 
-  add(m_scrolledwindow);
-  m_scrolledwindow.add(m_view);
+  set_child(m_scrolledwindow);
+  m_scrolledwindow.set_child(m_view);
 }
 
 bool ExampleWindow::load_file(const Glib::RefPtr<Gio::File>& file)

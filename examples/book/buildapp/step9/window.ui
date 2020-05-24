@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <object class="GtkApplicationWindow" id="app_window">
+    <property name="title" translatable="yes">Example Application</property>
     <property name="default-width">600</property>
     <property name="default-height">400</property>
+    <property name="hide-on-close">True</property>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="header">
-        <property name="title" translatable="yes">Example Application</property>
         <property name="show-title-buttons">True</property>
         <property name="decoration-layout">menu:close</property>
         <child>

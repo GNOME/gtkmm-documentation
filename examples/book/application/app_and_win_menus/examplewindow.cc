@@ -40,6 +40,8 @@ ExampleWindow::ExampleWindow()
     sigc::mem_fun(*this, &ExampleWindow::on_action_send_notification) );
   add_action("withdraw-note",
     sigc::mem_fun(*this, &ExampleWindow::on_action_withdraw_notification) );
+
+  set_show_menubar(true);
 }
 
 void ExampleWindow::on_action_something()

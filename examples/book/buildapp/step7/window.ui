@@ -4,6 +4,7 @@
     <property name="title" translatable="yes">Example Application</property>
     <property name="default-width">600</property>
     <property name="default-height">400</property>
+    <property name="hide-on-close">True</property>
     <child>
       <object class="GtkBox" id="content_box">
         <property name="orientation">vertical</property>

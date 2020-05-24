@@ -15,11 +15,26 @@
  */
 
 #include "buttons.h"
+#include <gtkmm/box.h>
+#include <gtkmm/image.h>
+#include <gtkmm/label.h>
 #include <iostream>
 
 Buttons::Buttons()
 {
-  m_button.add_pixlabel("info.xpm", "cool button");
+  // This corresponds to Gtk::Bin::add_pixlabel("info.xpm", "cool button") in gtkmm3.
+  //Create Image and Label widgets:
+  auto pmap = Gtk::make_managed<Gtk::Image>("info.xpm");
+  auto label = Gtk::make_managed<Gtk::Label>("cool button");
+  label->set_expand(true);
+
+  //Put them in a Box:
+  auto hbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 5);
+  hbox->append(*pmap);
+  hbox->append(*label);
+
+  //And put that Box in the button:
+  m_button.set_child(*hbox);
 
   set_title("Pixmap'd buttons!");
 
@@ -27,7 +42,7 @@ Buttons::Buttons()
               &Buttons::on_button_clicked) );
 
   m_button.set_margin(10);
-  add(m_button);
+  set_child(m_button);
 }
 
 Buttons::~Buttons()

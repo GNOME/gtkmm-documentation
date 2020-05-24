@@ -25,7 +25,7 @@ ExampleWindow::ExampleWindow()
   set_title("FileChooserButton example");
 
   m_button.set_margin(10);
-  add(m_button);
+  set_child(m_button);
 }
 
 ExampleWindow::~ExampleWindow()

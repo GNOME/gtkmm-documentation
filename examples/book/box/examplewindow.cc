@@ -42,44 +42,44 @@ ExampleWindow::ExampleWindow(int which)
       // Pack the label into the vertical box (vbox box1).  Remember that
       // widgets added to a vbox will be packed one on top of the other in
       // order.
-      m_box1.add(m_Label1);
+      m_box1.append(m_Label1);
 
       // Create a PackBox - homogeneous = false, spacing = 0,
       // expand = false, Gtk::Align::FILL, margin = 0
       // These are the default values.
       auto pPackBox = Gtk::make_managed<PackBox>();
-      m_box1.add(*pPackBox);
+      m_box1.append(*pPackBox);
 
       // Create a PackBox - homogeneous = false, spacing = 0,
       // expand = true, Gtk::Align::CENTER, margin = 0
       pPackBox = Gtk::make_managed<PackBox>(false, 0, true, Gtk::Align::CENTER);
-      m_box1.add(*pPackBox);
+      m_box1.append(*pPackBox);
 
       // Create a PackBox - homogeneous = false, spacing = 0,
       // expand = true, Gtk::Align::FILL, margin = 0
       pPackBox = Gtk::make_managed<PackBox>(false, 0, true);
-      m_box1.add(*pPackBox);
+      m_box1.append(*pPackBox);
 
       // pack the separator into the vbox.  Remember each of these
       // widgets are being packed into a vbox, so they'll be stacked
       // vertically.
-      m_box1.add(m_separator1);
+      m_box1.append(m_separator1);
 
       // create another new label, and show it.
       m_Label2.set_text("Gtk::Box(Gtk::Orientation::HORIZONTAL, 0); set_homogeneous(true);");
       m_Label2.set_halign(Gtk::Align::START);
       m_Label2.set_valign(Gtk::Align::START);
-      m_box1.add(m_Label2);
+      m_box1.append(m_Label2);
 
       // Args are: homogeneous, spacing, expand, align, margin
       pPackBox = Gtk::make_managed<PackBox>(true, 0, true, Gtk::Align::CENTER);
-      m_box1.add(*pPackBox);
+      m_box1.append(*pPackBox);
 
       // Args are: homogeneous, spacing, expand, align, margin
       pPackBox = Gtk::make_managed<PackBox>(true, 0, true);
-      m_box1.add(*pPackBox);
+      m_box1.append(*pPackBox);
 
-      m_box1.add(m_separator2);
+      m_box1.append(m_separator2);
 
       break;
     }
@@ -89,28 +89,28 @@ ExampleWindow::ExampleWindow(int which)
       m_Label1.set_text("Gtk::Box(Gtk::Orientation::HORIZONTAL, 10); set_homogeneous(false);");
       m_Label1.set_halign(Gtk::Align::START);
       m_Label1.set_valign(Gtk::Align::START);
-      m_box1.add(m_Label1);
+      m_box1.append(m_Label1);
 
       auto pPackBox = Gtk::make_managed<PackBox>(false, 10, true, Gtk::Align::CENTER);
-      m_box1.add(*pPackBox);
+      m_box1.append(*pPackBox);
 
       pPackBox = Gtk::make_managed<PackBox>(false, 10, true);
-      m_box1.add(*pPackBox);
+      m_box1.append(*pPackBox);
 
-      m_box1.add(m_separator1);
+      m_box1.append(m_separator1);
 
       m_Label2.set_text("Gtk::Box(Gtk::Orientation::HORIZONTAL, 0); set_homogeneous(false);");
       m_Label2.set_halign(Gtk::Align::START);
       m_Label2.set_valign(Gtk::Align::START);
-      m_box1.add(m_Label2);
+      m_box1.append(m_Label2);
 
       pPackBox = Gtk::make_managed<PackBox>(false, 0, false, Gtk::Align::FILL, 10);
-      m_box1.add(*pPackBox);
+      m_box1.append(*pPackBox);
 
       pPackBox = Gtk::make_managed<PackBox>(false, 0, true, Gtk::Align::FILL, 10);
-      m_box1.add(*pPackBox);
+      m_box1.append(*pPackBox);
 
-      m_box1.add(m_separator2);
+      m_box1.append(m_separator2);
 
       break;
     }
@@ -128,9 +128,9 @@ ExampleWindow::ExampleWindow(int which)
       // of the PackBox.
       m_Label1.set_halign(Gtk::Align::END);
       m_Label1.set_hexpand(true);
-      pPackBox->add(m_Label1);
+      pPackBox->append(m_Label1);
 
-      m_box1.add(*pPackBox);
+      m_box1.append(*pPackBox);
 
       // This explicitly sets the separator to 700 pixels wide by 5 pixels
       // high.  This is so the hbox we created will also be 700 pixels wide,
@@ -140,7 +140,7 @@ ExampleWindow::ExampleWindow(int which)
       m_separator1.set_size_request(700, 5);
 
       // pack the separator into the vbox.
-      m_box1.add(m_separator1);
+      m_box1.append(m_separator1);
 
       break;
     }
@@ -157,14 +157,14 @@ ExampleWindow::ExampleWindow(int which)
               &ExampleWindow::on_button_quit_clicked) );
 
   // pack the button into the quitbox.
-  m_boxQuit.add(m_buttonQuit);
+  m_boxQuit.append(m_buttonQuit);
   m_buttonQuit.set_hexpand(true);
   m_buttonQuit.set_halign(Gtk::Align::CENTER);
-  m_box1.add(m_boxQuit);
+  m_box1.append(m_boxQuit);
 
   // pack the vbox (box1) which now contains all our widgets, into the
   // main window.
-  add(m_box1);
+  set_child(m_box1);
 }
 
 ExampleWindow::~ExampleWindow()

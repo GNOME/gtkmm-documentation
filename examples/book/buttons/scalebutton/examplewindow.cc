@@ -33,7 +33,7 @@ ExampleWindow::ExampleWindow()
   m_button.set_icons(icons);
 
   m_grid.set_margin(12);
-  add(m_grid);
+  set_child(m_grid);
   m_grid.set_vexpand(true);
   m_grid.set_hexpand(true);
 

@@ -48,7 +48,7 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Bu
   pImage->set_from_icon_name(is_glad ? "face-smile" : "face-sad");
   pImage->set_icon_size(Gtk::IconSize::LARGE);
   pImage->set_expand();
-  get_content_area()->add(*pImage);
+  get_content_area()->append(*pImage);
 }
 
 DerivedDialog::~DerivedDialog()

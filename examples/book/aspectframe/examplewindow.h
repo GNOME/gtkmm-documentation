@@ -31,6 +31,7 @@ protected:
 
   //Child widgets:
   Gtk::AspectFrame m_AspectFrame;
+  Gtk::Frame m_Frame;
   Gtk::DrawingArea m_DrawingArea;
 };
 

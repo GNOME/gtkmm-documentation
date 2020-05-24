@@ -42,7 +42,7 @@ ExampleWindow::ExampleWindow()
   m_grid.attach(m_entry, 1, 2, 1, 1);
   m_entry.set_hexpand(true);
 
-  add(m_grid);
+  set_child(m_grid);
 
   m_button.signal_clicked().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_button_clicked));

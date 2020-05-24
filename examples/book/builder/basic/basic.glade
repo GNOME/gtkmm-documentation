@@ -7,7 +7,7 @@
     <property name="title" translatable="yes">Basic Builder example</property>
     <property name="default_width">250</property>
     <property name="default_height">100</property>
-    <property name="type_hint">normal</property>
+    <property name="hide_on_close">True</property>
     <child internal-child="content_area">
       <object class="GtkBox" id="dialog-vbox2">
         <property name="can_focus">False</property>

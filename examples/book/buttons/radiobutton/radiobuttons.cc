@@ -35,12 +35,12 @@ RadioButtons::RadioButtons() :
 
   // Add outer box to the window (because the window
   // can only contain a single widget)
-  add(m_Box_Top);
+  set_child(m_Box_Top);
 
   //Put the inner boxes and the separator in the outer box:
-  m_Box_Top.add(m_Box1);
-  m_Box_Top.add(m_Separator);
-  m_Box_Top.add(m_Box2);
+  m_Box_Top.append(m_Box1);
+  m_Box_Top.append(m_Separator);
+  m_Box_Top.append(m_Box2);
   m_Separator.set_expand();
 
   // Set the inner boxes' margins
@@ -48,9 +48,9 @@ RadioButtons::RadioButtons() :
   m_Box2.set_margin(10);
 
   // Put the radio buttons in Box1:
-  m_Box1.add(m_RadioButton1);
-  m_Box1.add(m_RadioButton2);
-  m_Box1.add(m_RadioButton3);
+  m_Box1.append(m_RadioButton1);
+  m_Box1.append(m_RadioButton2);
+  m_Box1.append(m_RadioButton3);
   m_RadioButton1.set_expand();
   m_RadioButton2.set_expand();
   m_RadioButton3.set_expand();
@@ -59,7 +59,7 @@ RadioButtons::RadioButtons() :
   m_RadioButton2.set_active();
 
   // Put Close button in Box2:
-  m_Box2.add(m_Button_Close);
+  m_Box2.append(m_Button_Close);
   m_Button_Close.set_expand();
 
   // Make the button the default widget

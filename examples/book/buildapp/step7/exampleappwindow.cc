@@ -108,14 +108,11 @@ void ExampleAppWindow::open_file_view(const Glib::RefPtr<Gio::File>& file)
   const Glib::ustring basename = file->get_basename();
 
   auto scrolled = Gtk::make_managed<Gtk::ScrolledWindow>();
-  scrolled->set_hexpand(true);
-  scrolled->set_vexpand(true);
-  scrolled->show();
+  scrolled->set_expand(true);
   auto view = Gtk::make_managed<Gtk::TextView>();
   view->set_editable(false);
   view->set_cursor_visible(false);
-  view->show();
-  scrolled->add(*view);
+  scrolled->set_child(*view);
   m_stack->add(*scrolled, basename, basename);
 
   auto buffer = view->get_buffer();
@@ -228,12 +225,8 @@ void ExampleAppWindow::update_words()
   }
 
   // Remove old children from the ListBox.
-  auto old_children = m_words->get_children();
-  for (auto child : old_children)
-  {
+  while (auto child = m_words->get_first_child())
     m_words->remove(*child);
-    delete child;
-  }
 
   // Add new child buttons, one per unique word.
   for (const auto& word : words)
@@ -241,7 +234,6 @@ void ExampleAppWindow::update_words()
     auto row = Gtk::make_managed<Gtk::Button>(word);
     row->signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,
       &ExampleAppWindow::on_find_word), row));
-    row->show();
-    m_words->add(*row);
+    m_words->append(*row);
   }
 }

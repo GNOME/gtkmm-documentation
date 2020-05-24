@@ -26,7 +26,7 @@ ExampleWindow::ExampleWindow()
   set_title("VolumeButton Example");
 
   m_grid.set_margin(12);
-  add(m_grid);
+  set_child(m_grid);
   m_button.set_vexpand(true);
   m_button.set_hexpand(true);
 

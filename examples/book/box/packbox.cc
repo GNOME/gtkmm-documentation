@@ -33,14 +33,14 @@ PackBox::PackBox(bool homogeneous, int spacing, bool expand, Gtk::Align align, i
 {
   set_homogeneous(homogeneous);
 
-  m_buttons[0].set_label("box.add(button);");
+  m_buttons[0].set_label("box.append(button);");
   m_buttons[1].set_label("expand=" + Glib::ustring(expand ? "true" : "false"));
   m_buttons[2].set_label(align_string.at(align));
   m_buttons[3].set_label("margin=" + Glib::ustring::format(margin));
 
   for (auto& button : m_buttons)
   {
-    add(button);
+    append(button);
     button.set_hexpand(expand);
     button.set_halign(align);
     button.set_margin_start(margin);
