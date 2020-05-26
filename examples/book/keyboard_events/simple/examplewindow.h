@@ -30,7 +30,7 @@ private:
   // Signal handler:
   bool on_window_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state);
 
-  Gtk::Grid m_container;
+  Gtk::Box m_container;
   Gtk::RadioButton m_first;
   Gtk::RadioButton m_second;
 };

@@ -40,25 +40,25 @@ ExampleWindow::ExampleWindow()
   set_title("Label");
 
   m_HBox.set_margin(5);
-  add(m_HBox);
+  set_child(m_HBox);
 
-  m_HBox.add(m_VBox);
+  m_HBox.append(m_VBox);
 
-  m_Frame_Normal.add(m_Label_Normal);
-  m_VBox.add(m_Frame_Normal);
+  m_Frame_Normal.set_child(m_Label_Normal);
+  m_VBox.append(m_Frame_Normal);
 
-  m_Frame_Multi.add(m_Label_Multi);
-  m_VBox.add(m_Frame_Multi);
+  m_Frame_Multi.set_child(m_Label_Multi);
+  m_VBox.append(m_Frame_Multi);
 
   m_Label_Left.set_justify(Gtk::Justification::LEFT);
-  m_Frame_Left.add(m_Label_Left);
-  m_VBox.add(m_Frame_Left);
+  m_Frame_Left.set_child(m_Label_Left);
+  m_VBox.append(m_Frame_Left);
 
   m_Label_Right.set_justify(Gtk::Justification::RIGHT);
-  m_Frame_Right.add(m_Label_Right);
-  m_VBox.add(m_Frame_Right);
+  m_Frame_Right.set_child(m_Label_Right);
+  m_VBox.append(m_Frame_Right);
 
-  m_HBox.add(m_VBox2);
+  m_HBox.append(m_VBox2);
 
   m_Label_LineWrapped.set_text(
           "This is an example of a line-wrapped label.  It "
@@ -73,8 +73,8 @@ ExampleWindow::ExampleWindow()
           "and  correctly   adds "
           "many          extra  spaces. ");
   m_Label_LineWrapped.set_wrap();
-  m_Frame_LineWrapped.add(m_Label_LineWrapped);
-  m_VBox2.add(m_Frame_LineWrapped);
+  m_Frame_LineWrapped.set_child(m_Label_LineWrapped);
+  m_VBox2.append(m_Frame_LineWrapped);
 
   m_Label_FilledWrapped.set_text(
           "This is an example of a line-wrapped, filled label.  "
@@ -89,13 +89,13 @@ ExampleWindow::ExampleWindow()
           "unfortunately.");
   m_Label_FilledWrapped.set_justify(Gtk::Justification::FILL);
   m_Label_FilledWrapped.set_wrap();
-  m_Frame_FilledWrapped.add(m_Label_FilledWrapped);
-  m_VBox2.add(m_Frame_FilledWrapped);
+  m_Frame_FilledWrapped.set_child(m_Label_FilledWrapped);
+  m_VBox2.append(m_Frame_FilledWrapped);
 
   m_Label_Underlined.set_justify(Gtk::Justification::LEFT);
   m_Label_Underlined.set_use_markup(true);
-  m_Frame_Underlined.add(m_Label_Underlined);
-  m_VBox2.add(m_Frame_Underlined);
+  m_Frame_Underlined.set_child(m_Label_Underlined);
+  m_VBox2.append(m_Frame_Underlined);
 }
 
 ExampleWindow::~ExampleWindow()

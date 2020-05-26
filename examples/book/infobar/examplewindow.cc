@@ -25,35 +25,35 @@ ExampleWindow::ExampleWindow()
   set_default_size(400, 200);
 
   m_VBox.set_margin(6);
-  add(m_VBox);
+  set_child(m_VBox);
 
   // Add the message label to the InfoBar:
-  m_InfoBar.add(m_Message_Label);
+  m_InfoBar.add_child(m_Message_Label);
 
   // Add an ok button to the InfoBar:
   m_InfoBar.add_button("_OK", 0);
 
   // Add the InfoBar to the vbox:
-  m_VBox.add(m_InfoBar);
+  m_VBox.append(m_InfoBar);
 
   // Create the buffer and set it for the TextView:
   m_refTextBuffer = Gtk::TextBuffer::create();
   m_TextView.set_buffer(m_refTextBuffer);
 
   // Add the TreeView, inside a ScrolledWindow:
-  m_ScrolledWindow.add(m_TextView);
+  m_ScrolledWindow.set_child(m_TextView);
 
   // Show the scrollbars only when they are necessary:
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
   m_ScrolledWindow.set_expand();
 
-  m_VBox.add(m_ScrolledWindow);
+  m_VBox.append(m_ScrolledWindow);
 
   // Add button box:
-  m_VBox.add(m_ButtonBox);
+  m_VBox.append(m_ButtonBox);
 
-  m_ButtonBox.add(m_Button_Clear);
-  m_ButtonBox.add(m_Button_Quit);
+  m_ButtonBox.append(m_Button_Clear);
+  m_ButtonBox.append(m_Button_Quit);
   m_ButtonBox.set_spacing(6);
   m_Button_Clear.set_hexpand(true);
   m_Button_Clear.set_halign(Gtk::Align::END);

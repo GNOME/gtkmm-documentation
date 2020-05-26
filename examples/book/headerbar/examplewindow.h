@@ -29,7 +29,6 @@ protected:
   // Signal handlers
   void on_switch_active_changed();
   void on_title_entry_changed();
-  void on_subtitle_entry_changed();
   void on_button_clicked();
 
   // Containers
@@ -42,11 +41,7 @@ protected:
   Gtk::Switch m_switch;
   Gtk::Label m_title_label;
   Gtk::Entry m_title_entry;
-  Gtk::Label m_subtitle_label;
-  Gtk::Entry m_subtitle_entry;
-
-private:
+  Gtk::MessageDialog m_dialog;
 };
 
 #endif // GTKMM_EXAMPLEWINDOW_H
-

@@ -28,19 +28,19 @@ HelloWorld::HelloWorld()
   m_box1.set_margin(10);
 
   // put the box into the main window.
-  add(m_box1);
+  set_child(m_box1);
 
   // Now when the button is clicked, we call the on_button_clicked() function
   // with a pointer to "button 1" as its argument.
   m_button1.signal_clicked().connect(sigc::bind(
               sigc::mem_fun(*this, &HelloWorld::on_button_clicked), "button 1"));
 
-  // We use Gtk::Container::add() to pack this button into the  box,
+  // We use Gtk::Box::append() to pack this button into the box,
   // which has been packed into the window.
   // A widget's default behaviour is not to expand if extra space is available.
   // A container widget by default expands if any of the contained widgets
   // wants to expand.
-  m_box1.add(m_button1);
+  m_box1.append(m_button1);
   m_button1.set_expand();
 
   // call the same signal handler with a different argument,
@@ -48,7 +48,7 @@ HelloWorld::HelloWorld()
   m_button2.signal_clicked().connect(sigc::bind(
               sigc::mem_fun(*this, &HelloWorld::on_button_clicked), "button 2"));
 
-  m_box1.add(m_button2);
+  m_box1.append(m_button2);
   m_button2.set_expand();
 
   // Gtk::Widget::show() is seldom needed. All widgets are visible by default.

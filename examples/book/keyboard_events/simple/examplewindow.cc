@@ -20,7 +20,7 @@ ExampleWindow::ExampleWindow()
 {
   set_title("Keyboard Events");
   m_container.set_margin(10);
-  add(m_container);
+  set_child(m_container);
 
   // Radio buttons:
   m_first.set_label("First");
@@ -30,8 +30,9 @@ ExampleWindow::ExampleWindow()
   m_first.set_active();
 
   // Main Container:
-  m_container.add(m_first);
-  m_container.add(m_second);
+  m_container.set_orientation(Gtk::Orientation::HORIZONTAL);
+  m_container.append(m_first);
+  m_container.append(m_second);
 
   // Events.
   auto controller = Gtk::EventControllerKey::create();

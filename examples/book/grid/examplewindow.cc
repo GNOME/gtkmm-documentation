@@ -26,10 +26,10 @@ ExampleWindow::ExampleWindow()
   set_title("Gtk::Grid");
 
   m_grid.set_margin(12);
-  add(m_grid);
+  set_child(m_grid);
 
-  m_grid.add(m_button_1);
-  m_grid.add(m_button_2);
+  m_grid.attach(m_button_1, 0, 0);
+  m_grid.attach(m_button_2, 1, 0);
   m_grid.attach_next_to(m_button_quit, m_button_1, Gtk::PositionType::BOTTOM, 2, 1);
 
   m_button_1.signal_clicked().connect(

@@ -33,31 +33,31 @@ ExampleWindow::ExampleWindow() :
   set_default_size(300, 300);
 
   m_VBox.set_margin(5);
-  add(m_VBox);
+  set_child(m_VBox);
 
   // Add the ProgressBar.
-  m_VBox.add(m_ProgressBar);
+  m_VBox.append(m_ProgressBar);
 
   m_ProgressBar.set_text("Fraction done");
   m_ProgressBar.set_show_text();
 
   // Add the TextView, inside a ScrolledWindow.
-  m_ScrolledWindow.add(m_TextView);
+  m_ScrolledWindow.set_child(m_TextView);
 
   // Only show the scrollbars when they are necessary.
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
   m_ScrolledWindow.set_expand();
 
-  m_VBox.add(m_ScrolledWindow);
+  m_VBox.append(m_ScrolledWindow);
 
   m_TextView.set_editable(false);
 
   // Add the buttons to the ButtonBox.
-  m_VBox.add(m_ButtonBox);
+  m_VBox.append(m_ButtonBox);
 
-  m_ButtonBox.add(m_ButtonStart);
-  m_ButtonBox.add(m_ButtonStop);
-  m_ButtonBox.add(m_ButtonQuit);
+  m_ButtonBox.append(m_ButtonStart);
+  m_ButtonBox.append(m_ButtonStop);
+  m_ButtonBox.append(m_ButtonQuit);
   m_ButtonBox.set_margin(5);
   m_ButtonBox.set_spacing(5);
   m_ButtonStart.set_hexpand(true);

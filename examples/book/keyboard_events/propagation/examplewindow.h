@@ -33,7 +33,7 @@ private:
   bool window_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state, const Glib::ustring& phase);
 
   bool m_first = true;
-  Gtk::Grid m_container;
+  Gtk::Box m_container;
   Gtk::Frame m_frame;
   Gtk::Label m_label1;
   Gtk::Label m_label2;

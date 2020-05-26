@@ -26,24 +26,24 @@ ExampleWindow::ExampleWindow()
   set_size_request(200, 100);
   set_title("Gtk::Entry");
 
-  add(m_VBox);
+  set_child(m_VBox);
 
   m_Entry.set_max_length(50);
   m_Entry.set_text("hello");
   m_Entry.set_text(m_Entry.get_text() + " world");
   m_Entry.select_region(0, m_Entry.get_text_length());
   m_Entry.set_expand(true);
-  m_VBox.add(m_Entry);
+  m_VBox.append(m_Entry);
 
-  m_VBox.add(m_HBox);
+  m_VBox.append(m_HBox);
 
-  m_HBox.add(m_CheckButton_Editable);
+  m_HBox.append(m_CheckButton_Editable);
   m_CheckButton_Editable.set_expand(true);
   m_CheckButton_Editable.signal_toggled().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_checkbox_editable_toggled) );
   m_CheckButton_Editable.set_active(true);
 
-  m_HBox.add(m_CheckButton_Visible);
+  m_HBox.append(m_CheckButton_Visible);
   m_CheckButton_Visible.set_expand(true);
   m_CheckButton_Visible.signal_toggled().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_checkbox_visibility_toggled) );
@@ -51,7 +51,7 @@ ExampleWindow::ExampleWindow()
 
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
-  m_VBox.add(m_Button_Close);
+  m_VBox.append(m_Button_Close);
   m_Button_Close.set_expand();
   set_default_widget(m_Button_Close);
 }

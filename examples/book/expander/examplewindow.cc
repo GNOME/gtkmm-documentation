@@ -25,8 +25,8 @@ ExampleWindow::ExampleWindow()
   /* Sets the margin around the expander. */
   m_Expander.set_margin(6);
 
-  add(m_Expander);
-  m_Expander.add(m_Label);
+  set_child(m_Expander);
+  m_Expander.set_child(m_Label);
 
   /* Set the label */
   m_Expander.set_label("Gtk::Expander Widget");

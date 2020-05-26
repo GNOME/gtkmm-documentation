@@ -30,19 +30,19 @@ m_checkbutton_can_propagate_up("Can propagate up")
 {
   set_title("Event Propagation");
   m_container.set_margin(10);
-  add(m_container);
+  set_child(m_container);
 
-  m_frame.add(m_label2);
+  m_frame.set_child(m_label2);
   m_label2.set_selectable();
   m_checkbutton_can_propagate_down.set_active();
   m_checkbutton_can_propagate_up.set_active();
 
   // Main container
   m_container.set_orientation(Gtk::Orientation::VERTICAL);
-  m_container.add(m_label1);
-  m_container.add(m_frame);
-  m_container.add(m_checkbutton_can_propagate_down);
-  m_container.add(m_checkbutton_can_propagate_up);
+  m_container.append(m_label1);
+  m_container.append(m_frame);
+  m_container.append(m_checkbutton_can_propagate_down);
+  m_container.append(m_checkbutton_can_propagate_up);
 
   // Events
   const bool after = false; // Run before or after the default signal handlers.

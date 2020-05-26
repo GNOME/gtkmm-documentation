@@ -24,7 +24,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   set_title("main_menu example");
   set_default_size(200, 200);
 
-  add(m_Box); //We can put a MenuBar at the top of the box and other stuff below it.
+  set_child(m_Box); //We can put a MenuBar at the top of the box and other stuff below it.
 
   //Define the actions:
   m_refActionGroup = Gio::SimpleActionGroup::create();
@@ -136,7 +136,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
     auto pMenuBar = Gtk::make_managed<Gtk::PopoverMenuBar>(gmenu);
 
     //Add the PopoverMenuBar to the window:
-    m_Box.add(*pMenuBar);
+    m_Box.append(*pMenuBar);
   }
 
   //Get the toolbar and add it to a container widget:
@@ -144,7 +144,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   if (!toolbar)
     g_warning("toolbar not found");
   else
-    m_Box.add(*toolbar);
+    m_Box.append(*toolbar);
 }
 
 ExampleWindow::~ExampleWindow()

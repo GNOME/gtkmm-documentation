@@ -26,7 +26,7 @@ ExampleWindow::ExampleWindow()
 
   // ExampleApplication displays the menubar. Other stuff, such as a toolbar,
   // is put into the box.
-  add(m_Box);
+  set_child(m_Box);
 
   // Create actions for menus and toolbars.
   // We can use add_action() because Gtk::ApplicationWindow derives from Gio::ActionMap.
@@ -99,7 +99,7 @@ ExampleWindow::ExampleWindow()
   if (!toolbar)
     g_warning("toolbar not found");
   else
-    m_Box.add(*toolbar);
+    m_Box.append(*toolbar);
 }
 
 ExampleWindow::~ExampleWindow()

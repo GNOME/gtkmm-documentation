@@ -25,15 +25,15 @@ ExampleWindow::ExampleWindow()
   //set_size_request(200, 100);
   set_title("Gtk::EntryCompletion");
 
-  add(m_VBox);
-  m_VBox.add(m_Entry);
+  set_child(m_VBox);
+  m_VBox.append(m_Entry);
 
-  m_VBox.add(m_Label);
+  m_VBox.append(m_Label);
   m_Label.set_expand(true);
 
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
-  m_VBox.add(m_Button_Close);
+  m_VBox.append(m_Button_Close);
   set_default_widget(m_Button_Close);
 
   //Add an EntryCompletion:

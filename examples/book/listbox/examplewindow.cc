@@ -63,15 +63,15 @@ ExampleWindow::ExampleWindow() :
   set_default_size(300, 300);
 
   m_HBox.set_margin(5);
-  add(m_HBox);
-  m_HBox.add(m_VBox1);
+  set_child(m_HBox);
+  m_HBox.append(m_VBox1);
 
   // ComboBox for selection mode.
   for (std::size_t i = 0; i < G_N_ELEMENTS(selectionModes); ++i)
     m_ComboBox.append(selectionModes[i].text);
 
   m_ComboBox.signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_selection_mode_changed));
-  m_VBox1.add(m_ComboBox);
+  m_VBox1.append(m_ComboBox);
 
   const auto mode = m_ListBox.get_selection_mode();
   int index = 0;
@@ -88,12 +88,12 @@ ExampleWindow::ExampleWindow() :
   // Check button for single click.
   m_CheckButton_SingleClick.set_active(m_ListBox.get_activate_on_single_click());
   m_CheckButton_SingleClick.signal_toggled().connect(sigc::mem_fun(*this, &ExampleWindow::on_single_click_toggled));
-  m_VBox1.add(m_CheckButton_SingleClick);
+  m_VBox1.append(m_CheckButton_SingleClick);
 
   // Put the ListBox in a ScrolledWindow.
   m_ScrolledWindow.set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC);
-  m_ScrolledWindow.add(m_ListBox);
-  m_HBox.add(m_ScrolledWindow);
+  m_ScrolledWindow.set_child(m_ListBox);
+  m_HBox.append(m_ScrolledWindow);
 
   m_ListBox.signal_row_selected().connect(sigc::mem_fun(*this, &ExampleWindow::on_row_selected));
   m_ListBox.signal_row_activated().connect(sigc::mem_fun(*this, &ExampleWindow::on_row_activated));
@@ -108,39 +108,39 @@ ExampleWindow::ExampleWindow() :
   m_ListBox.append(*row);
 
   row = Gtk::make_managed<ExampleRow>("", 0);
-  m_HBox_Row.add(m_Label_Row);
-  m_HBox_Row.add(m_CheckButton_Row1);
-  m_HBox_Row.add(m_Button_Row1);
-  m_VBox_Row.add(m_HBox_Row);
-  m_VBox_Row.add(m_CheckButton_Row2);
-  row->add(m_VBox_Row);
+  m_HBox_Row.append(m_Label_Row);
+  m_HBox_Row.append(m_CheckButton_Row1);
+  m_HBox_Row.append(m_Button_Row1);
+  m_VBox_Row.append(m_HBox_Row);
+  m_VBox_Row.append(m_CheckButton_Row2);
+  row->set_child(m_VBox_Row);
   m_ListBox.append(*row);
 
   row = Gtk::make_managed<ExampleRow>("", 0);
   m_Button_Row2.set_hexpand(false);
   m_Button_Row2.set_halign(Gtk::Align::START);
-  row->add(m_Button_Row2);
+  row->set_child(m_Button_Row2);
   m_ListBox.append(*row);
 
   // Put buttons in a vertical box, and connect signal handlers.
-  m_HBox.add(m_VBox2);
-  m_VBox2.add(m_Button_Sort);
+  m_HBox.append(m_VBox2);
+  m_VBox2.append(m_Button_Sort);
   m_Button_Sort.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_sort_clicked));
-  m_VBox2.add(m_Button_ReverseSort);
+  m_VBox2.append(m_Button_ReverseSort);
   m_Button_ReverseSort.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_reverse_sort_clicked));
-  m_VBox2.add(m_Button_Change);
+  m_VBox2.append(m_Button_Change);
   m_Button_Change.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_change_clicked));
-  m_VBox2.add(m_Button_Filter);
+  m_VBox2.append(m_Button_Filter);
   m_Button_Filter.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_filter_clicked));
-  m_VBox2.add(m_Button_Unfilter);
+  m_VBox2.append(m_Button_Unfilter);
   m_Button_Unfilter.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_unfilter_clicked));
-  m_VBox2.add(m_Button_Add);
+  m_VBox2.append(m_Button_Add);
   m_Button_Add.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_add_clicked));
-  m_VBox2.add(m_Button_Separate);
+  m_VBox2.append(m_Button_Separate);
   m_Button_Separate.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_separate_clicked));
-  m_VBox2.add(m_Button_Unseparate);
+  m_VBox2.append(m_Button_Unseparate);
   m_Button_Unseparate.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_unseparate_clicked));
-  m_VBox2.add(m_Button_Visibility);
+  m_VBox2.append(m_Button_Visibility);
   m_Button_Visibility.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_visibility_clicked));
 }
 
@@ -250,19 +250,19 @@ void ExampleWindow::update_header_func(Gtk::ListBoxRow* row, Gtk::ListBoxRow* be
     {
       auto hbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL);
       auto label = Gtk::make_managed<Gtk::Label>("Header");
-      hbox->add(*label);
+      hbox->append(*label);
       auto button = Gtk::make_managed<Gtk::Button>("button");
-      hbox->add(*button);
+      hbox->append(*button);
       row->set_header(*hbox);
     }
 
-    auto header = dynamic_cast<Gtk::Container*>(row->get_header());
+    auto header = row->get_header();
     if (header)
     {
-      std::vector<Gtk::Widget*> children = header->get_children();
-      if (children.size() > 0)
+      auto first_child = header->get_first_child();
+      if (first_child)
       {
-        auto label = dynamic_cast<Gtk::Label*>(children[0]);
+        auto label = dynamic_cast<Gtk::Label*>(first_child);
         if (label && xrow)
           label->set_text("Header " + Glib::ustring::format(xrow->get_sort_id()));
       }

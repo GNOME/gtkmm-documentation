@@ -27,15 +27,15 @@ ExampleWindow::ExampleWindow()
   set_default_size(400, 200);
 
   m_VBox.set_margin(10);
-  add(m_VBox);
+  set_child(m_VBox);
 
   //Add the Notebook, with the button underneath:
   m_Notebook.set_margin(10);
   m_Notebook.set_expand();
-  m_VBox.add(m_Notebook);
-  m_VBox.add(m_ButtonBox);
+  m_VBox.append(m_Notebook);
+  m_VBox.append(m_ButtonBox);
 
-  m_ButtonBox.add(m_Button_Quit);
+  m_ButtonBox.append(m_Button_Quit);
   m_Button_Quit.set_hexpand(true);
   m_Button_Quit.set_halign(Gtk::Align::CENTER);
   m_Button_Quit.signal_clicked().connect(sigc::mem_fun(*this,

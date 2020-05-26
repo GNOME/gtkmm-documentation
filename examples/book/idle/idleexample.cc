@@ -25,22 +25,22 @@ IdleExample::IdleExample() :
   // Put buttons into container
 
   // Adding a few widgets:
-  add(m_Box);
-  m_Box.add(*Gtk::make_managed<Gtk::Label>("Formatting Windows drive C:"));
-  m_Box.add(*Gtk::make_managed<Gtk::Label>("100 MB"));
-  m_Box.add(m_ProgressBar_c);
+  set_child(m_Box);
+  m_Box.append(*Gtk::make_managed<Gtk::Label>("Formatting Windows drive C:"));
+  m_Box.append(*Gtk::make_managed<Gtk::Label>("100 MB"));
+  m_Box.append(m_ProgressBar_c);
   m_ProgressBar_c.set_expand();
 
-  m_Box.add(*Gtk::make_managed<Gtk::Label>(""));
+  m_Box.append(*Gtk::make_managed<Gtk::Label>(""));
 
-  m_Box.add(*Gtk::make_managed<Gtk::Label>("Formatting Windows drive D:"));
-  m_Box.add(*Gtk::make_managed<Gtk::Label>("5000 MB"));
-  m_Box.add(m_ProgressBar_d);
+  m_Box.append(*Gtk::make_managed<Gtk::Label>("Formatting Windows drive D:"));
+  m_Box.append(*Gtk::make_managed<Gtk::Label>("5000 MB"));
+  m_Box.append(m_ProgressBar_d);
   m_ProgressBar_d.set_expand();
 
   auto hbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL,10);
-  m_Box.add(*hbox);
-  hbox->add(m_ButtonQuit);
+  m_Box.append(*hbox);
+  hbox->append(m_ButtonQuit);
   m_ButtonQuit.set_expand();
   m_ButtonQuit.set_halign(Gtk::Align::END);
   m_ButtonQuit.set_valign(Gtk::Align::END);

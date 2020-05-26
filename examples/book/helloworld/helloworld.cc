@@ -29,7 +29,7 @@ HelloWorld::HelloWorld()
               &HelloWorld::on_button_clicked));
 
   // This packs the button into the Window (a container).
-  add(m_button);
+  set_child(m_button);
 }
 
 HelloWorld::~HelloWorld()

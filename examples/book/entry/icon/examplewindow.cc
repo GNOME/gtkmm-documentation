@@ -23,11 +23,11 @@ ExampleWindow::ExampleWindow()
 {
   set_title("Gtk::Entry");
 
-  add(m_VBox);
+  set_child(m_VBox);
 
   m_Entry.set_max_length(50);
   m_Entry.set_text("Hello world");
-  m_VBox.add(m_Entry);
+  m_VBox.append(m_Entry);
 
   m_Entry.set_icon_from_icon_name("edit-find");
   m_Entry.signal_icon_press().connect( sigc::mem_fun(*this, &ExampleWindow::on_icon_pressed) );
@@ -35,7 +35,7 @@ ExampleWindow::ExampleWindow()
 
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
-  m_VBox.add(m_Button_Close);
+  m_VBox.append(m_Button_Close);
   set_default_widget(m_Button_Close);
 }
 

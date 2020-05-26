@@ -35,13 +35,13 @@ ExampleWindow::ExampleWindow()
   for(std::size_t i = 0; i != m_color_names.size(); ++i)
   {
     auto color_swatch = create_color_swatch(i);
-    m_flow_box.add(*color_swatch);
+    m_flow_box.insert(*color_swatch, -1);
   }
 
   // Layout
-  m_scrolled_window.add(m_flow_box);
+  m_scrolled_window.set_child(m_flow_box);
   m_scrolled_window.set_margin(6);
-  add(m_scrolled_window);
+  set_child(m_scrolled_window);
 }
 
 ExampleWindow::~ExampleWindow()
@@ -56,7 +56,7 @@ Gtk::Button* ExampleWindow::create_color_swatch(int swatch_i)
   drawing_area->set_content_width(24);
   drawing_area->set_content_height(24);
 
-  color_swatch->add(*drawing_area);
+  color_swatch->set_child(*drawing_area);
   drawing_area->set_draw_func(sigc::bind(sigc::mem_fun(*this,
     &ExampleWindow::on_drawing_area_draw), swatch_i));
 

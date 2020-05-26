@@ -21,7 +21,6 @@ ExampleRow::ExampleRow(const Glib::ustring& text, int sort_id)
 {
   if (!text.empty())
   {
-    add(m_label);
-    m_label.show();
+    set_child(m_label);
   }
 }

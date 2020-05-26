@@ -25,7 +25,7 @@ ExampleWindow::ExampleWindow()
   /* Sets the margin around the frame. */
   m_Frame.set_margin(10);
 
-  add(m_Frame);
+  set_child(m_Frame);
 
   /* Set the frames label */
   m_Frame.set_label("Gtk::Frame Widget");

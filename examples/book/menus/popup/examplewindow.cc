@@ -24,10 +24,10 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   set_title("popup example");
   set_default_size(200, 200);
 
-  add(m_Box);
+  set_child(m_Box);
 
   // Catch button_press events:
-  m_Box.add(m_Label);
+  m_Box.append(m_Label);
   m_Label.set_expand();
   m_refGesture = Gtk::GestureClick::create();
   m_refGesture->set_button(GDK_BUTTON_SECONDARY);

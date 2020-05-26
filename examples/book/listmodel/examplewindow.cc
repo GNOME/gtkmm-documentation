@@ -39,7 +39,7 @@ m_button_quit("_Quit", true)
   std::srand(std::time(nullptr));
 
   m_grid.set_margin(5);
-  add(m_grid);
+  set_child(m_grid);
 
   // Select bind_model() or bind_list_store() randomly.
   const bool use_bind_model = std::rand() & 2;
@@ -50,7 +50,7 @@ m_button_quit("_Quit", true)
   m_scrolled_window_list_box.set_hexpand(true);
   m_scrolled_window_list_box.set_vexpand(true);
   m_grid.attach(m_scrolled_window_list_box, 0, 0, 1 ,1);
-  m_scrolled_window_list_box.add(m_list_box);
+  m_scrolled_window_list_box.set_child(m_list_box);
   if (use_bind_model)
     m_list_box.bind_model(m_store, sigc::ptr_fun(&ExampleWindow::on_create_widget1));
   else
@@ -61,7 +61,7 @@ m_button_quit("_Quit", true)
   m_scrolled_window_flow_box.set_hexpand(true);
   m_scrolled_window_flow_box.set_vexpand(true);
   m_grid.attach(m_scrolled_window_flow_box, 1, 0, 1 ,1);
-  m_scrolled_window_flow_box.add(m_flow_box);
+  m_scrolled_window_flow_box.set_child(m_flow_box);
   if (use_bind_model)
     m_flow_box.bind_model(m_store, sigc::ptr_fun(&ExampleWindow::on_create_widget1));
   else
