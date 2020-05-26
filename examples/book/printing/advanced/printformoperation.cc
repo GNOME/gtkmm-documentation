@@ -30,7 +30,7 @@ PrintFormOperation::~PrintFormOperation()
 
 Glib::RefPtr<PrintFormOperation> PrintFormOperation::create()
 {
-  return Glib::RefPtr<PrintFormOperation>(new PrintFormOperation());
+  return Glib::make_refptr_for_instance<PrintFormOperation>(new PrintFormOperation());
 }
 
 void PrintFormOperation::on_begin_print(const Glib::RefPtr<Gtk::PrintContext>&
@@ -158,14 +158,14 @@ Gtk::Widget* PrintFormOperation::on_create_custom_widget()
   vbox->set_margin(12);
 
   auto hbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 8);
-  vbox->add(*hbox);
+  vbox->append(*hbox);
   hbox->set_margin(6);
 
   auto label = Gtk::make_managed<Gtk::Label>("Choose a font: ");
-  hbox->add(*label);
+  hbox->append(*label);
 
   m_FontButton.set_font(m_Font);
-  hbox->add(m_FontButton);
+  hbox->append(m_FontButton);
 
   return vbox;
 }

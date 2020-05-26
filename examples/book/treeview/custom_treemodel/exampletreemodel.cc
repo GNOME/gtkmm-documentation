@@ -103,7 +103,7 @@ MemoryTreeModel::~MemoryTreeModel()
 
 Glib::RefPtr<MemoryTreeModel> MemoryTreeModel::create()
 {
-  return Glib::RefPtr<MemoryTreeModel>(new MemoryTreeModel);
+  return Glib::make_refptr_for_instance<MemoryTreeModel>(new MemoryTreeModel);
 }
 
 void MemoryTreeModel::set_memory(const Memory* m)

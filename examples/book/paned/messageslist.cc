@@ -22,7 +22,7 @@ MessagesList::MessagesList()
   /* Create a new scrolled window, with scrollbars only if needed */
   set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
-  add(m_TreeView);
+  set_child(m_TreeView);
 
   /* create list store */
   m_refListStore = Gtk::ListStore::create(m_Columns);

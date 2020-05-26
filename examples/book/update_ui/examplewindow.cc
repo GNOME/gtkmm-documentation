@@ -26,14 +26,14 @@ ExampleWindow::ExampleWindow()
   set_default_size(400, -1);
 
   m_VBox.set_margin(6);
-  add(m_VBox);
+  set_child(m_VBox);
 
   m_ProgressBar.set_show_text(true);
-  m_VBox.add(m_ProgressBar);
-  m_VBox.add(m_ButtonBox);
+  m_VBox.append(m_ProgressBar);
+  m_VBox.append(m_ButtonBox);
 
-  m_ButtonBox.add(m_Button_Quit);
-  m_ButtonBox.add(m_Button_Start);
+  m_ButtonBox.append(m_Button_Quit);
+  m_ButtonBox.append(m_Button_Start);
   m_ButtonBox.set_margin(6);
   m_Button_Quit.set_hexpand(true);
   m_Button_Quit.set_halign(Gtk::Align::END);

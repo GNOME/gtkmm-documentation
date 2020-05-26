@@ -18,6 +18,7 @@
 #define GTKMM_EXAMPLEWINDOW_H
 
 #include <gtkmm.h>
+#include <memory>
 
 class ExampleWindow : public Gtk::Window
 {
@@ -30,6 +31,7 @@ protected:
   void on_menu_file_files_dialog();
   void on_menu_file_quit();
   void on_menu_file_new();
+  void on_dialog_response(int response_id);
 
   //Child widgets:
   Gtk::Box m_Box;
@@ -38,6 +40,8 @@ protected:
   Glib::RefPtr<Gio::SimpleActionGroup> m_refActionGroup;
 
   Glib::RefPtr<Gtk::RecentManager> m_refRecentManager;
+
+  std::unique_ptr<Gtk::FileChooserDialog> m_pDialog;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

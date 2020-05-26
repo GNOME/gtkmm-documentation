@@ -56,13 +56,13 @@ ExampleWindow::ExampleWindow()
   m_options_grid.attach(m_close_button_switch, 1, 1);
 
   // Searchbar Layout
-  m_search_box.add(m_entry);
+  m_search_box.append(m_entry);
   m_entry.set_expand();
-  m_up_down_box.add(m_go_down_button);
-  m_up_down_box.add(m_go_up_button);
-  m_search_box.add(m_up_down_box);
+  m_up_down_box.append(m_go_down_button);
+  m_up_down_box.append(m_go_up_button);
+  m_search_box.append(m_up_down_box);
   m_search_box.set_spacing(6);
-  m_search_bar.add(m_search_box);
+  m_search_bar.set_child(m_search_box);
 
   // Match style of epiphany's search bar
   m_up_down_box.get_style_context()->add_class("raised");
@@ -73,16 +73,16 @@ ExampleWindow::ExampleWindow()
   m_go_down_button.set_image_from_icon_name("go-down-symbolic", Gtk::IconSize::INHERIT, true);
 
   m_vbox.set_spacing(6);
-  m_vbox.add(m_search_bar);
-  m_vbox.add(m_label);
-  m_vbox.add(m_separator);
+  m_vbox.append(m_search_bar);
+  m_vbox.append(m_label);
+  m_vbox.append(m_separator);
   m_separator.set_margin_start(6);
   m_separator.set_margin_end(6);
-  m_vbox.add(m_options_grid);
+  m_vbox.append(m_options_grid);
   m_options_grid.set_margin_start(6);
   m_options_grid.set_margin_end(6);
   m_vbox.set_margin(12);
-  add(m_vbox);
+  set_child(m_vbox);
 }
 
 ExampleWindow::~ExampleWindow()

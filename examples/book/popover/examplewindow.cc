@@ -45,7 +45,7 @@ ExampleWindow::ExampleWindow()
   m_grid.attach(m_menu_button, 0, 0, 1, 1);
   m_grid.attach(m_calendar, 0, 1, 6, 1);
   m_grid.set_margin(12);
-  add(m_grid);
+  set_child(m_grid);
 }
 
 ExampleWindow::~ExampleWindow()
@@ -65,7 +65,7 @@ void ExampleWindow::configure_form_popover()
   m_toggle_form_grid.attach(m_toggle_form_combo_label, 0, 2, 1, 1);
   m_toggle_form_grid.attach(m_toggle_form_combo, 1, 2, 1, 1);
 
-  m_toggle_form_popover.add(m_toggle_form_grid);
+  m_toggle_form_popover.set_child(m_toggle_form_grid);
   m_toggle_form_popover.set_position(Gtk::PositionType::BOTTOM);
   m_toggle_form_popover.set_margin(6);
   m_toggle_form_popover.set_autohide(false);
@@ -84,7 +84,7 @@ void ExampleWindow::configure_form_buttons()
   {
     button.set_draw_indicator(false);
     button.set_expand(true);
-    m_format_buttons_box.add(button);
+    m_format_buttons_box.append(button);
   }
 
   // Group format buttons so that they appear that they belong together
@@ -131,7 +131,7 @@ void ExampleWindow::configure_cal_popover()
   m_calendar_form_grid.attach(m_calendar_popover_entry, 1, 0);
 
   m_calendar_popover.set_parent(m_calendar);
-  m_calendar_popover.add(m_calendar_form_grid);
+  m_calendar_popover.set_child(m_calendar_form_grid);
   m_calendar_popover.set_margin(6);
 }
 

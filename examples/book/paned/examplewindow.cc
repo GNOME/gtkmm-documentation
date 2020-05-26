@@ -24,11 +24,11 @@ ExampleWindow::ExampleWindow()
   m_VPaned.set_margin(10);
 
   /* Add a vpaned widget to our toplevel window */
-  add(m_VPaned);
+  set_child(m_VPaned);
 
   /* Now add the contents of the two halves of the window */
-  m_VPaned.add1(m_MessagesList);
-  m_VPaned.add2(m_MessageText);
+  m_VPaned.set_start_child(m_MessagesList);
+  m_VPaned.set_end_child(m_MessageText);
 }
 
 ExampleWindow::~ExampleWindow()

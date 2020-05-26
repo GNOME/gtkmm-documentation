@@ -28,25 +28,25 @@ ExampleWindow::ExampleWindow()
   set_default_size(650, 400);
 
   m_VBox.set_margin(8);
-  add(m_VBox);
-  m_VBox.add(m_Label);
+  set_child(m_VBox);
+  m_VBox.append(m_Label);
 
   // Add the TreeView, inside a ScrolledWindow, with the button underneath:
-  m_ScrolledWindow.add(m_TreeView);
+  m_ScrolledWindow.set_child(m_TreeView);
 
   // Only show the scrollbars when they are necessary:
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
   m_ScrolledWindow.set_has_frame(true);
   m_ScrolledWindow.set_expand();
 
-  m_VBox.add(m_ScrolledWindow);
-  m_VBox.add(m_ButtonBox);
+  m_VBox.append(m_ScrolledWindow);
+  m_VBox.append(m_ButtonBox);
 
   m_Button_Add.set_hexpand(true);
   m_Button_Add.set_halign(Gtk::Align::END);
-  m_ButtonBox.add(m_Button_Add);
-  m_ButtonBox.add(m_Button_Remove);
-  m_ButtonBox.add(m_Button_Quit);
+  m_ButtonBox.append(m_Button_Add);
+  m_ButtonBox.append(m_Button_Remove);
+  m_ButtonBox.append(m_Button_Quit);
   m_ButtonBox.set_margin(5);
   m_ButtonBox.set_spacing(5);
 

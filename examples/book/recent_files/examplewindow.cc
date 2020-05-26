@@ -25,7 +25,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   set_default_size(300, 150);
 
   //We can put a PopoverMenuBar at the top of the box and other stuff below it.
-  add(m_Box);
+  set_child(m_Box);
 
   //Create actions for menus and toolbars:
   m_refActionGroup = Gio::SimpleActionGroup::create();
@@ -118,7 +118,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   {
     //Menubar:
     auto pMenubar = Gtk::make_managed<Gtk::PopoverMenuBar>(gmenu);
-    m_Box.add(*pMenubar);
+    m_Box.append(*pMenubar);
   }
   else
     g_warning("GMenu not found");
@@ -126,7 +126,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   auto pToolbar = m_refBuilder->get_widget<Gtk::Box>("toolbar");
   if (pToolbar)
     //Toolbar:
-    m_Box.add(*pToolbar);
+    m_Box.append(*pToolbar);
   else
     g_warning("toolbar not found");
 }
@@ -147,16 +147,28 @@ void ExampleWindow::on_menu_file_quit()
 
 void ExampleWindow::on_menu_file_files_dialog()
 {
-  Gtk::FileChooserDialog dialog(*this, "Files", Gtk::FileChooser::Action::OPEN,
-    /* use_header_bar= */ true);
-  dialog.add_button("Select File", Gtk::ResponseType::OK);
-  dialog.add_button("_Cancel", Gtk::ResponseType::CANCEL);
-
-  const int response = dialog.run();
-  dialog.hide();
-  if (response == Gtk::ResponseType::OK)
+  if (!m_pDialog)
   {
-    auto selected_uri = dialog.get_file()->get_uri();
+    m_pDialog.reset(new Gtk::FileChooserDialog(*this, "Files",
+      Gtk::FileChooser::Action::OPEN, /* use_header_bar= */ true));
+    m_pDialog->set_transient_for(*this);
+    m_pDialog->set_modal(true);
+    m_pDialog->signal_response().connect(
+      sigc::mem_fun(*this, &ExampleWindow::on_dialog_response));
+
+    m_pDialog->add_button("Select File", Gtk::ResponseType::OK);
+    m_pDialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
+  }
+  m_pDialog->show();
+}
+
+void ExampleWindow::on_dialog_response(int response_id)
+{
+  m_pDialog->hide();
+
+  if (response_id == Gtk::ResponseType::OK)
+  {
+    auto selected_uri = m_pDialog->get_file()->get_uri();
     std::cout << "URI selected = " << selected_uri << std::endl;
     std::cout << (m_refRecentManager->has_item(selected_uri) ? "A" : "Not a")
       << " recently used file" << std::endl;

@@ -32,15 +32,15 @@ ExampleWindow::ExampleWindow()
   set_title(app_title);
 
   m_vbox.set_margin(10);
-  add(m_vbox);
+  set_child(m_vbox);
 
   //Check button with markup in tooltip:
   m_checkbutton.set_tooltip_text(non_markedup_tip);
-  m_vbox.add(m_checkbutton);
+  m_vbox.append(m_checkbutton);
 
   //Label:
   m_label.set_tooltip_text("Another tooltip");
-  m_vbox.add(m_label);
+  m_vbox.append(m_label);
 
   //Textview:
   prepare_textview();
@@ -50,11 +50,11 @@ ExampleWindow::ExampleWindow()
   //of set_tooltip_text() or set_tooltip_markup(), we need to explicitly
   //tell GTK that the widget has a tooltip which we'll show.
   m_button.set_has_tooltip();
-  m_vbox.add(m_button);
+  m_vbox.append(m_button);
 
   //Button's custom tooltip widget:
   auto label = Gtk::make_managed<Gtk::Label>("A label in a custom tooltip widget");
-  m_button_tooltip_widget.add(*label);
+  m_button_tooltip_widget.append(*label);
 
   connect_signals();
 }
@@ -69,10 +69,10 @@ void ExampleWindow::prepare_textview()
   std::vector<Glib::RefPtr<Gtk::TextTag>> tags;
 
   //Set up a scrolled window:
-  m_scrolled_window.add(m_text_view);
+  m_scrolled_window.set_child(m_text_view);
   m_scrolled_window.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
   m_scrolled_window.set_expand();
-  m_vbox.add(m_scrolled_window);
+  m_vbox.append(m_scrolled_window);
 
   //Create a text buffer with some text:
   m_ref_text_buffer = Gtk::TextBuffer::create();

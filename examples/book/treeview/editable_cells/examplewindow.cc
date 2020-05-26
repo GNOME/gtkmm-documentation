@@ -31,19 +31,19 @@ ExampleWindow::ExampleWindow()
   set_default_size(400, 200);
 
   m_VBox.set_margin(5);
-  add(m_VBox);
+  set_child(m_VBox);
 
   //Add the TreeView, inside a ScrolledWindow, with the button underneath:
-  m_ScrolledWindow.add(m_TreeView);
+  m_ScrolledWindow.set_child(m_TreeView);
 
   //Only show the scrollbars when they are necessary:
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
   m_ScrolledWindow.set_expand();
 
-  m_VBox.add(m_ScrolledWindow);
-  m_VBox.add(m_ButtonBox);
+  m_VBox.append(m_ScrolledWindow);
+  m_VBox.append(m_ButtonBox);
 
-  m_ButtonBox.add(m_Button_Quit);
+  m_ButtonBox.append(m_Button_Quit);
   m_ButtonBox.set_margin(5);
   m_Button_Quit.set_hexpand(true);
   m_Button_Quit.set_halign(Gtk::Align::END);
@@ -87,7 +87,7 @@ ExampleWindow::ExampleWindow()
   //For this column, we create the CellRenderer ourselves, and connect our own
   //signal handlers, so that we can validate the data that the user enters, and
   //control how it is displayed.
-  m_treeviewcolumn_validated.set_title("validated (<10)");
+  m_treeviewcolumn_validated.set_title("validated (&lt;10)");
   m_treeviewcolumn_validated.pack_start(m_cellrenderer_validated);
   m_TreeView.append_column(m_treeviewcolumn_validated);
 
@@ -159,7 +159,6 @@ void ExampleWindow::cellrenderer_validated_on_editing_started(
       m_invalid_text_for_retry.clear();
     }
   }
-
 }
 
 void ExampleWindow::cellrenderer_validated_on_edited(
@@ -172,15 +171,18 @@ void ExampleWindow::cellrenderer_validated_on_edited(
   char* pchEnd = nullptr;
   int new_value = strtol(new_text.c_str(), &pchEnd, 10);
 
-  if(new_value > 10)
+  if(new_value >= 10)
   {
     //Prevent entry of numbers higher than 10.
 
     //Tell the user:
-    Gtk::MessageDialog dialog(*this,
+    auto dialog = new Gtk::MessageDialog(*this,
             "The number must be less than 10. Please try again.",
-            false, Gtk::MessageType::ERROR);
-    dialog.run();
+            false, Gtk::MessageType::ERROR, Gtk::ButtonsType::OK, true /* modal */);
+    dialog->signal_response().connect(sigc::bind(
+      sigc::mem_fun(*this, &ExampleWindow::on_message_response), dialog));
+
+    dialog->show();
 
     //Start editing again, with the bad text, so that the user can correct it.
     //A real application should probably allow the user to revert to the
@@ -190,7 +192,7 @@ void ExampleWindow::cellrenderer_validated_on_edited(
     m_invalid_text_for_retry = new_text;
     m_validate_retry = true;
 
-    //Start editing again:
+    //Start editing again, when the message dialog has been closed:
     m_TreeView.set_cursor(path, m_treeviewcolumn_validated,
             m_cellrenderer_validated, true /* start_editing */);
   }
@@ -208,3 +210,7 @@ void ExampleWindow::cellrenderer_validated_on_edited(
   }
 }
 
+void ExampleWindow::on_message_response(int /* response_id */, Gtk::MessageDialog* dialog)
+{
+  delete dialog;
+}

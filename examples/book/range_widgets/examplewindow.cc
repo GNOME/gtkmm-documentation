@@ -64,31 +64,31 @@ ExampleWindow::ExampleWindow()
   m_HScale.set_value_pos(Gtk::PositionType::TOP);
   m_HScale.set_draw_value();
 
-  add(m_VBox_Top);
-  m_VBox_Top.add(m_VBox2);
+  set_child(m_VBox_Top);
+  m_VBox_Top.append(m_VBox2);
   m_VBox2.set_expand(true);
   m_VBox2.set_margin(10);
-  m_VBox2.add(m_HBox_Scales);
+  m_VBox2.append(m_HBox_Scales);
   m_HBox_Scales.set_expand(true);
 
   //Put VScale and HScale (above scrollbar) side-by-side.
-  m_HBox_Scales.add(m_VScale);
+  m_HBox_Scales.append(m_VScale);
   m_VScale.set_expand(true);
-  m_HBox_Scales.add(m_VBox_HScale);
+  m_HBox_Scales.append(m_VBox_HScale);
   m_VBox_HScale.set_expand(true);
 
-  m_VBox_HScale.add(m_HScale);
+  m_VBox_HScale.append(m_HScale);
   m_HScale.set_expand(true);
 
   //Scrollbar:
-  m_VBox_HScale.add(m_Scrollbar);
+  m_VBox_HScale.append(m_Scrollbar);
   m_Scrollbar.set_expand(true);
 
   //CheckButton:
   m_CheckButton.set_active();
   m_CheckButton.signal_toggled().connect( sigc::mem_fun(*this,
     &ExampleWindow::on_checkbutton_toggled) );
-  m_VBox2.add(m_CheckButton);
+  m_VBox2.append(m_CheckButton);
 
   //Position ComboBox:
   //Create the Tree model:
@@ -110,33 +110,33 @@ ExampleWindow::ExampleWindow()
   row[m_Columns.m_col_position_type] = Gtk::PositionType::RIGHT;
   row[m_Columns.m_col_title] = "Right";
 
-  m_VBox2.add(m_HBox_Combo);
-  m_HBox_Combo.add(*Gtk::make_managed<Gtk::Label>("Scale Value Position:", 0));
-  m_HBox_Combo.add(m_ComboBox_Position);
+  m_VBox2.append(m_HBox_Combo);
+  m_HBox_Combo.append(*Gtk::make_managed<Gtk::Label>("Scale Value Position:", 0));
+  m_HBox_Combo.append(m_ComboBox_Position);
   m_ComboBox_Position.signal_changed().connect( sigc::mem_fun(*this, &ExampleWindow::on_combo_position) );
   m_ComboBox_Position.set_active(0); // Top
   m_ComboBox_Position.set_expand(true);
 
   //Digits:
-  m_HBox_Digits.add(*Gtk::make_managed<Gtk::Label>("Scale Digits:", 0));
+  m_HBox_Digits.append(*Gtk::make_managed<Gtk::Label>("Scale Digits:", 0));
   m_Scale_Digits.set_digits(0);
   m_Scale_Digits.set_expand(true);
   m_adjustment_digits->signal_value_changed().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_adjustment1_value_changed));
-  m_HBox_Digits.add(m_Scale_Digits);
+  m_HBox_Digits.append(m_Scale_Digits);
 
   //Page Size:
-  m_HBox_PageSize.add(*Gtk::make_managed<Gtk::Label>("Scrollbar Page Size:", 0));
+  m_HBox_PageSize.append(*Gtk::make_managed<Gtk::Label>("Scrollbar Page Size:", 0));
   m_Scale_PageSize.set_digits(0);
   m_Scale_PageSize.set_expand(true);
   m_adjustment_pagesize->signal_value_changed().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_adjustment2_value_changed));
-  m_HBox_PageSize.add(m_Scale_PageSize);
+  m_HBox_PageSize.append(m_Scale_PageSize);
 
-  m_VBox2.add(m_HBox_Digits);
-  m_VBox2.add(m_HBox_PageSize);
-  m_VBox_Top.add(m_Separator);
-  m_VBox_Top.add(m_Button_Quit);
+  m_VBox2.append(m_HBox_Digits);
+  m_VBox2.append(m_HBox_PageSize);
+  m_VBox_Top.append(m_Separator);
+  m_VBox_Top.append(m_Button_Quit);
 
   set_default_widget(m_Button_Quit);
   m_Button_Quit.signal_clicked().connect(sigc::mem_fun(*this,

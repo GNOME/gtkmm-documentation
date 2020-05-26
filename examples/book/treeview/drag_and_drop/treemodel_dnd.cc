@@ -29,7 +29,7 @@ TreeModel_Dnd::TreeModel_Dnd()
 
 Glib::RefPtr<TreeModel_Dnd> TreeModel_Dnd::create()
 {
-  return Glib::RefPtr<TreeModel_Dnd>( new TreeModel_Dnd() );
+  return Glib::make_refptr_for_instance<TreeModel_Dnd>( new TreeModel_Dnd() );
 }
 
 bool

@@ -26,12 +26,13 @@ TimerExample::TimerExample() :
   timeout_value(1500) // 1500 ms = 1.5 seconds
 {
   m_Box.set_margin(10);
-  add(m_Box);
-  m_Box.add(m_ButtonAddTimer);
-  m_Box.add(m_ButtonDeleteTimer);
-  m_Box.add(m_ButtonQuit);
-  for (auto child : m_Box.get_children())
-    child->set_expand();
+  set_child(m_Box);
+  m_Box.append(m_ButtonAddTimer);
+  m_Box.append(m_ButtonDeleteTimer);
+  m_Box.append(m_ButtonQuit);
+  m_ButtonAddTimer.set_expand();
+  m_ButtonDeleteTimer.set_expand();
+  m_ButtonQuit.set_expand();
 
   // Connect the three buttons:
   m_ButtonQuit.signal_clicked().connect(sigc::mem_fun(*this,

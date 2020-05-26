@@ -32,14 +32,14 @@ ExampleWindow::ExampleWindow()
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::ALWAYS);
   m_ScrolledWindow.set_expand();
 
-  get_content_area()->add(m_ScrolledWindow);
+  get_content_area()->append(m_ScrolledWindow);
 
   /* set the spacing to 10 on x and 10 on y */
   m_Grid.set_row_spacing(10);
   m_Grid.set_column_spacing(10);
 
   /* pack the grid into the scrolled window */
-  m_ScrolledWindow.add(m_Grid);
+  m_ScrolledWindow.set_child(m_Grid);
 
   /* this simply creates a grid of toggle buttons
    * to demonstrate the scrolled window. */

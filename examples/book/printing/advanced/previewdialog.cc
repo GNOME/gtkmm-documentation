@@ -40,20 +40,20 @@ PreviewDialog::PreviewDialog(
   set_size_request(300, 300);
 
   m_VBox.set_margin(2);
-  add(m_VBox);
+  set_child(m_VBox);
 
-  m_HBox.add(m_PageSpin);
+  m_HBox.append(m_PageSpin);
   m_PageSpin.set_hexpand(true);
   m_PageSpin.set_vexpand(false);
-  m_HBox.add(m_CloseButton);
-  m_VBox.add(m_HBox);
+  m_HBox.append(m_CloseButton);
+  m_VBox.append(m_HBox);
 
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
   m_ScrolledWindow.set_expand(true);
-  m_VBox.add(m_ScrolledWindow);
+  m_VBox.append(m_ScrolledWindow);
   m_DrawingArea.set_content_width(300);
   m_DrawingArea.set_content_height(600);
-  m_ScrolledWindow.add(m_DrawingArea);
+  m_ScrolledWindow.set_child(m_DrawingArea);
 
   m_refPreview->signal_ready().connect(
     sigc::mem_fun(*this, &PreviewDialog::on_popreview_ready));

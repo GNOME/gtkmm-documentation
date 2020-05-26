@@ -25,14 +25,14 @@ ExampleWindow::ExampleWindow()
   //The toolbar will not demand any size, because it has an overflow menu.
   set_size_request(300, 200);
 
-  add(m_VBox);
+  set_child(m_VBox);
 
   //Put a toolbar at the top, and a button underneath:
-  m_VBox.add(m_Toolbar);
+  m_VBox.append(m_Toolbar);
   m_ButtonBox.set_margin(5);
-  m_VBox.add(m_ButtonBox);
+  m_VBox.append(m_ButtonBox);
 
-  m_ButtonBox.add(m_Button_Close);
+  m_ButtonBox.append(m_Button_Close);
   m_Button_Close.set_expand(true);
   m_Button_Close.set_halign(Gtk::Align::END);
   m_Button_Close.set_valign(Gtk::Align::END);
@@ -48,30 +48,30 @@ ExampleWindow::ExampleWindow()
 
     auto item = Gtk::make_managed<Gtk::Button>("Click me");
     item->set_tooltip_text("Toolbar item");
-    m_Toolbar.add(*item);
+    m_Toolbar.append(*item);
     item->signal_clicked().connect( sigc::mem_fun(*this,
                 &ExampleWindow::on_toolbar_item) );
 
-    m_Toolbar.add(*Gtk::make_managed<Gtk::Separator>());
+    m_Toolbar.append(*Gtk::make_managed<Gtk::Separator>());
 
     item = Gtk::make_managed<Gtk::Button>("_Save");
     item->set_use_underline();
     item->set_tooltip_text("Save");
     item->set_icon_name("document-save");
-    m_Toolbar.add(*item);
+    m_Toolbar.append(*item);
     item->signal_clicked().connect( sigc::mem_fun(*this,
                 &ExampleWindow::on_toolbar_item) );
 
     item = Gtk::make_managed<Gtk::ToggleButton>("Toggle me");
     item->set_tooltip_text("toggle duh");
-    m_Toolbar.add(*item);
+    m_Toolbar.append(*item);
     item->signal_clicked().connect( sigc::mem_fun(*this,
                 &ExampleWindow::on_toolbar_item) );
 
     Gtk::RadioButtonGroup group;
-    m_Toolbar.add(*Gtk::make_managed<Gtk::RadioButton>(group, "Radio 1"));
-    m_Toolbar.add(*Gtk::make_managed<Gtk::RadioButton>(group, "Radio 2"));
-    m_Toolbar.add(*Gtk::make_managed<Gtk::RadioButton>(group, "Radio 3"));
+    m_Toolbar.append(*Gtk::make_managed<Gtk::RadioButton>(group, "Radio 1"));
+    m_Toolbar.append(*Gtk::make_managed<Gtk::RadioButton>(group, "Radio 2"));
+    m_Toolbar.append(*Gtk::make_managed<Gtk::RadioButton>(group, "Radio 3"));
   }
 }
 

@@ -46,20 +46,20 @@ ExampleWindow::ExampleWindow()
   m_controls.attach(m_switch, 1, 2);
 
   // Revealer
-  m_revealer.add(m_label);
+  m_revealer.set_child(m_label);
   m_revealer.set_reveal_child(true);
 
   // Layout
   m_controls.set_row_spacing(6);
   m_controls.set_column_spacing(12);
-  m_vbox.add(m_controls);
-  m_vbox.add(m_separator);
+  m_vbox.append(m_controls);
+  m_vbox.append(m_separator);
   m_separator.set_margin_start(12);
   m_separator.set_margin_end(18);
-  m_vbox.add(m_revealer);
+  m_vbox.append(m_revealer);
   m_revealer.set_expand(true);
   m_vbox.set_margin(12);
-  add(m_vbox);
+  set_child(m_vbox);
 }
 
 ExampleWindow::~ExampleWindow()

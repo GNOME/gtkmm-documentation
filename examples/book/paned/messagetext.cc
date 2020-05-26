@@ -20,7 +20,7 @@ MessageText::MessageText()
 {
   set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
-  add(m_TextView);
+  set_child(m_TextView);
   insert_text();
 }
 

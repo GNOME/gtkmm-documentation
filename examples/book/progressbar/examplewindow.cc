@@ -29,9 +29,9 @@ ExampleWindow::ExampleWindow()
   set_title("Gtk::ProgressBar");
 
   m_VBox.set_margin(10);
-  add(m_VBox);
+  set_child(m_VBox);
 
-  m_VBox.add(m_ProgressBar);
+  m_VBox.append(m_ProgressBar);
   m_ProgressBar.set_margin_end(5);
   m_ProgressBar.set_halign(Gtk::Align::CENTER);
   m_ProgressBar.set_valign(Gtk::Align::CENTER);
@@ -43,8 +43,8 @@ ExampleWindow::ExampleWindow()
   m_connection_timeout = Glib::signal_timeout().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_timeout), 50 );
 
-  m_VBox.add(m_Separator);
-  m_VBox.add(m_Grid);
+  m_VBox.append(m_Separator);
+  m_VBox.append(m_Grid);
   m_Grid.set_expand(true);
   m_Grid.set_row_homogeneous(true);
 
@@ -67,7 +67,7 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::on_checkbutton_inverted) );
 
   //Add a button to exit the program.
-  m_VBox.add(m_Button_Close);
+  m_VBox.append(m_Button_Close);
   m_Button_Close.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
   set_default_widget(m_Button_Close);

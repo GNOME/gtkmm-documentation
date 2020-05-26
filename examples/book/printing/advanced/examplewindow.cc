@@ -36,11 +36,11 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   set_title(app_title);
   set_default_size(400, 300);
 
-  add(m_VBox);
+  set_child(m_VBox);
 
   build_main_menu(app);
 
-  m_VBox.add(m_Grid);
+  m_VBox.append(m_Grid);
 
   //Arrange the widgets inside the grid:
   m_Grid.set_expand(true);
@@ -53,7 +53,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   m_Grid.attach(m_SurnameEntry, 1, 1);
 
   //Add the TextView, inside a ScrolledWindow:
-  m_ScrolledWindow.add(m_TextView);
+  m_ScrolledWindow.set_child(m_TextView);
 
   //Only show the scrollbars when they are necessary:
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
@@ -66,7 +66,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   m_TextView.set_buffer(m_refTextBuffer);
 
   m_Statusbar.set_expand(true);
-  m_VBox.add(m_Statusbar);
+  m_VBox.append(m_Statusbar);
 }
 
 ExampleWindow::~ExampleWindow()
@@ -218,7 +218,7 @@ void ExampleWindow::build_main_menu(const Glib::RefPtr<Gtk::Application>& app)
     auto pMenuBar = Gtk::make_managed<Gtk::PopoverMenuBar>(gmenu);
 
     // Add the PopoverMenuBar to the window:
-    m_VBox.add(*pMenuBar);
+    m_VBox.append(*pMenuBar);
   }
 
   // Get the toolbar and add it to a container widget:
@@ -226,7 +226,7 @@ void ExampleWindow::build_main_menu(const Glib::RefPtr<Gtk::Application>& app)
   if (!toolbar)
     g_warning("toolbar not found");
   else
-    m_VBox.add(*toolbar);
+    m_VBox.append(*toolbar);
 }
 
 void ExampleWindow::on_printoperation_status_changed()
@@ -252,9 +252,16 @@ void ExampleWindow::on_printoperation_done(Gtk::PrintOperation::Result result)
 
   if (result == Gtk::PrintOperation::Result::ERROR)
   {
-    Gtk::MessageDialog err_dialog(*this, "Error printing form", false,
-            Gtk::MessageType::ERROR, Gtk::ButtonsType::OK, true);
-    err_dialog.run();
+    if (!m_pDialog)
+    {
+      m_pDialog.reset(new Gtk::MessageDialog(*this, "Error printing form",
+        false /* use_markup */, Gtk::MessageType::ERROR, Gtk::ButtonsType::OK,
+        true /* modal */));
+      m_pDialog->set_hide_on_close(true);
+      m_pDialog->signal_response().connect(
+        sigc::hide(sigc::mem_fun(*m_pDialog, &Gtk::Widget::hide)));
+    }
+    m_pDialog->show();
   }
   else if (result == Gtk::PrintOperation::Result::APPLY)
   {

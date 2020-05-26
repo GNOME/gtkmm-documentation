@@ -20,6 +20,7 @@
 // This file is part of the printing/simple and printing/advanced examples
 
 #include <gtkmm.h>
+#include <memory>
 
 class PrintFormOperation;
 
@@ -73,6 +74,8 @@ protected:
   Gtk::Statusbar m_Statusbar;
 
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
+
+  std::unique_ptr<Gtk::MessageDialog> m_pDialog;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

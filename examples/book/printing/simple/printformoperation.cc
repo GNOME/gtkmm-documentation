@@ -26,7 +26,7 @@ PrintFormOperation::~PrintFormOperation()
 
 Glib::RefPtr<PrintFormOperation> PrintFormOperation::create()
 {
-  return Glib::RefPtr<PrintFormOperation>(new PrintFormOperation());
+  return Glib::make_refptr_for_instance<PrintFormOperation>(new PrintFormOperation());
 }
 
 void PrintFormOperation::on_begin_print(
