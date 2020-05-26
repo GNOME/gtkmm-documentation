@@ -25,7 +25,7 @@ ExampleApplication::ExampleApplication()
 
 Glib::RefPtr<ExampleApplication> ExampleApplication::create()
 {
-  return Glib::RefPtr<ExampleApplication>(new ExampleApplication());
+  return Glib::make_refptr_for_instance<ExampleApplication>(new ExampleApplication());
 }
 
 ExampleAppWindow* ExampleApplication::create_appwindow()

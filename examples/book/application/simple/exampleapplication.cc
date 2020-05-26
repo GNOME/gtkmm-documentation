@@ -26,7 +26,7 @@ ExampleApplication::ExampleApplication()
 
 Glib::RefPtr<ExampleApplication> ExampleApplication::create()
 {
-  return Glib::RefPtr<ExampleApplication>( new ExampleApplication() );
+  return Glib::make_refptr_for_instance<ExampleApplication>( new ExampleApplication() );
 }
 
 void ExampleApplication::create_window(const Glib::RefPtr<Gio::File>& file)
