@@ -247,7 +247,7 @@ AppWindow::AppWindow()
   list_store_   (Gtk::ListStore::create(list_columns_)),
   tree_view_    (list_store_)
 {
-  add(tree_view_);
+  set_child(tree_view_);
 
   tree_view_.append_column("Text", list_columns_.text);
 

@@ -57,9 +57,9 @@ CellRendererList::CellRendererList()
   selection->signal_changed().connect(sigc::mem_fun(*this, &Self::on_tree_selection_changed));
 
   Gtk::Frame *const frame = Gtk::make_managed<Gtk::Frame>();
-  get_popup_window()->add(*frame);
+  get_popup_window()->set_child(*frame);
 
-  frame->add(tree_view_);
+  frame->set_child(tree_view_);
 
   set_focus_widget(tree_view_);
 }

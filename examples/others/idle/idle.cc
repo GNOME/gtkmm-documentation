@@ -43,26 +43,26 @@ IdleExample::IdleExample() :
   auto vbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::VERTICAL,5);
 
   // adding a few widgets
-  vbox->add(*Gtk::make_managed<Gtk::Label>("Formatting windows drive C:"));
-  vbox->add(*Gtk::make_managed<Gtk::Label>("100 MB"));
-  vbox->add(m_progressbar_c);
+  vbox->append(*Gtk::make_managed<Gtk::Label>("Formatting windows drive C:"));
+  vbox->append(*Gtk::make_managed<Gtk::Label>("100 MB"));
+  vbox->append(m_progressbar_c);
   m_progressbar_c.set_expand();
 
-  vbox->add(*Gtk::make_managed<Gtk::Label>(""));
+  vbox->append(*Gtk::make_managed<Gtk::Label>(""));
 
-  vbox->add(*Gtk::make_managed<Gtk::Label>("Formatting windows drive D:"));
-  vbox->add(*Gtk::make_managed<Gtk::Label>("5000 MB"));
-  vbox->add(m_progressbar_d);
+  vbox->append(*Gtk::make_managed<Gtk::Label>("Formatting windows drive D:"));
+  vbox->append(*Gtk::make_managed<Gtk::Label>("5000 MB"));
+  vbox->append(m_progressbar_d);
   m_progressbar_d.set_expand();
 
   auto hbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL,10);
-  hbox->add(m_quit);
+  hbox->append(m_quit);
   m_quit.set_expand();
-  vbox->add(*hbox);
+  vbox->append(*hbox);
 
   // set margin and display all
   vbox->set_margin(5);
-  add(*vbox);
+  set_child(*vbox);
 
   // formatting drive c in timeout callback ;-)
   Glib::signal_timeout().connect(sigc::mem_fun(*this, &IdleExample::timer_callback), 50);

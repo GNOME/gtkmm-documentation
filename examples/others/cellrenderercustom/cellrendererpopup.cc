@@ -182,7 +182,7 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
   const int button_height = y2 - y1;
 
   auto display = Gdk::Display::get_default();
-  auto monitor = display->get_monitor(0);
+  auto monitor = display->get_monitor_at_surface(display->get_default_group());
   Gdk::Rectangle workarea;
   monitor->get_workarea(workarea);
   int monitor_height = workarea.get_height() - y;

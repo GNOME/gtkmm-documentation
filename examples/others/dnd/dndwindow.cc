@@ -30,7 +30,7 @@ DnDWindow::DnDWindow()
   set_title("Drag-and-drop example");
   set_default_size(300, 150);
 
-  add(m_Grid);
+  set_child(m_Grid);
 
   m_drag_icon = Gdk::Pixbuf::create_from_xpm_data(drag_icon_xpm);
   m_trashcan_open = Gdk::Pixbuf::create_from_xpm_data(trashcan_open_xpm);
@@ -118,7 +118,7 @@ void DnDWindow::create_popup()
     }
   }
 
-  m_PopupWindow.add(*pGrid);
+  m_PopupWindow.set_child(*pGrid);
 }
 
 bool DnDWindow::on_label_drop_drop(const Glib::ValueBase& value, double, double)

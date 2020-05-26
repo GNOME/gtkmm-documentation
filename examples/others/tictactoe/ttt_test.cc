@@ -22,7 +22,7 @@ main (int argc, char *argv[])
   Gtk::Window window;
   window.set_title("Tic-Tac-Toe");
   ttt->set_margin(10);
-  window.add(*ttt);
+  window.set_child(*ttt);
 
   return app->run(window, argc, argv);
 }

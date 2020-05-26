@@ -27,7 +27,7 @@ TicTacToe::TicTacToe()
   auto grid = Gtk::make_managed<Gtk::Grid>();
   grid->set_row_homogeneous(true);
   grid->set_column_homogeneous(true);
-  add(*grid);
+  append(*grid);
 
   for(int i=0;i<3; i++)
   {

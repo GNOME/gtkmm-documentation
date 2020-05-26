@@ -98,7 +98,7 @@ int main(int argc, char** argv)
 
   Gtk::Box *const box = new Gtk::Box(Gtk::Orientation::VERTICAL, 5);
   box->set_margin(10);
-  window.add(*Gtk::manage(box));
+  window.set_child(*Gtk::manage(box));
 
   // New exception handlers are inserted at the front of the per-thread
   // handler list.  Thus, in this example handler2() is executed before
@@ -108,17 +108,17 @@ int main(int argc, char** argv)
 
 
   Gtk::Button *const button1 = new MyButton("From virtual method");
-  box->add(*Gtk::manage(button1));
+  box->append(*Gtk::manage(button1));
   Gtk::Button *const button2 = new Gtk::Button("From signal handler");
-  box->add(*Gtk::manage(button2));
+  box->append(*Gtk::manage(button2));
   Gtk::Button *const button3 = new Gtk::Button("Unhandled Glib::Error");
-  box->add(*Gtk::manage(button3));
+  box->append(*Gtk::manage(button3));
   Gtk::Button *const button4 = new Gtk::Button("Unhandled std::exception (crash!)");
-  box->add(*Gtk::manage(button4));
+  box->append(*Gtk::manage(button4));
   Gtk::Button *const button5 = new Gtk::Button("Disconnect handler 1");
-  box->add(*Gtk::manage(button5));
+  box->append(*Gtk::manage(button5));
   Gtk::Button *const button6 = new Gtk::Button("Disconnect handler 2");
-  box->add(*Gtk::manage(button6));
+  box->append(*Gtk::manage(button6));
 
   button2->signal_clicked().connect(&global_on_clicked);
   button3->signal_clicked().connect(&global_on_clicked_throw_glib_error);

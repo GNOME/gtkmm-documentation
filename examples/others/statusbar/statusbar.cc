@@ -35,18 +35,18 @@ StatusBarExample::StatusBarExample()
   set_size_request(200, 100);
   set_title("gtkmm Statusbar Example");
 
-  add(m_vbox);
+  set_child(m_vbox);
 
-  m_vbox.add(m_status_bar);
+  m_vbox.append(m_status_bar);
   m_status_bar.set_expand();
 
   m_bPush.signal_clicked().connect( sigc::bind(sigc::mem_fun(*this, &StatusBarExample::push_item), m_context_id) );
   m_bPush.set_expand();
-  m_vbox.add(m_bPush);
+  m_vbox.append(m_bPush);
 
   m_bPop.signal_clicked().connect( sigc::bind(sigc::mem_fun(*this, &StatusBarExample::pop_item), m_context_id) );
   m_bPop.set_expand();
-  m_vbox.add(m_bPop);
+  m_vbox.append(m_bPop);
 }
 
 void

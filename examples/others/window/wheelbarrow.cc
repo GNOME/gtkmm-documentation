@@ -159,7 +159,7 @@ Wheelbarrow::Wheelbarrow()
       Gdk::Pixbuf::create_from_xpm_data(drawable, transparent, wheelbarrow_xpm);
 
   Gtk::Image *const image = new Gtk::Image(pixbuf);
-  add(*Gtk::manage(image));
+  set_child(*Gtk::manage(image));
 
   image->set_size_request(48, 48);
   image->show();

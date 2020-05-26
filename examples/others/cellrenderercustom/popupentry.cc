@@ -30,12 +30,12 @@ PopupEntry::PopupEntry(const Glib::ustring& path)
   editing_canceled_ (false)
 {
   entry_ = new Gtk::Entry();
-  add(*Gtk::manage(entry_));
+  append(*Gtk::manage(entry_));
   entry_->set_has_frame(false);
   entry_->set_expand(true);
 
   button_ = new Gtk::Button();
-  add(*Gtk::manage(button_));
+  append(*Gtk::manage(button_));
   button_->set_image_from_icon_name("pan-down-symbolic", Gtk::IconSize::INHERIT, true);
 
   set_can_focus();
@@ -80,7 +80,7 @@ int PopupEntry::get_button_width()
   Gtk::Window window;
 
   Gtk::Button *const button = new Gtk::Button();
-  window.add(*Gtk::manage(button));
+  window.set_child(*Gtk::manage(button));
 
   button->set_image_from_icon_name("pan-down-symbolic", Gtk::IconSize::INHERIT, true);
 

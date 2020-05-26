@@ -76,7 +76,7 @@ AppWindow::AppWindow()
   grid->set_row_spacing(5);
   grid->set_column_spacing(5);
 
-  add (*grid);
+  set_child (*grid);
 }
 
 AppWindow::~AppWindow()
