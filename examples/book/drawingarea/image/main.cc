@@ -27,8 +27,7 @@ int main(int argc, char** argv)
   win.set_default_size(300, 200);
 
   MyArea area;
-  win.add(area);
-  area.show();
+  win.set_child(area);
 
   return app->run(win, argc, argv);
 }

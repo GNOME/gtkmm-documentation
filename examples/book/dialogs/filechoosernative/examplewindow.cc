@@ -23,14 +23,14 @@ ExampleWindow::ExampleWindow()
 {
   set_title("Gtk::FileChooserNative example");
 
-  add(m_ButtonBox);
+  set_child(m_ButtonBox);
 
-  m_ButtonBox.add(m_Button_File_Open);
+  m_ButtonBox.append(m_Button_File_Open);
   m_Button_File_Open.set_expand(true);
   m_Button_File_Open.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,
     &ExampleWindow::on_button_file_clicked), Gtk::FileChooser::Action::OPEN));
 
-  m_ButtonBox.add(m_Button_File_Save);
+  m_ButtonBox.append(m_Button_File_Save);
   m_Button_File_Save.set_expand(true);
   m_Button_File_Save.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this,
     &ExampleWindow::on_button_file_clicked), Gtk::FileChooser::Action::SAVE));
@@ -42,21 +42,28 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_file_clicked(Gtk::FileChooser::Action action)
 {
-  const bool open = (action == Gtk::FileChooser::Action::OPEN);
-  auto dialog = Gtk::FileChooserNative::create("Please choose a file", *this, action);
+  m_pDialog = Gtk::FileChooserNative::create("Please choose a file", *this, action);
+  m_pDialog->set_modal(true);
+  m_pDialog->signal_response().connect(sigc::mem_fun(*this, &ExampleWindow::on_dialog_response));
 
   // Show the dialog and wait for a user response:
-  const int result = dialog->run();
+  m_pDialog->show();
+}
+
+void ExampleWindow::on_dialog_response(int response_id)
+{
+  m_pDialog->hide();
 
   // Handle the response:
-  switch (result)
+  switch (response_id)
   {
   case Gtk::ResponseType::ACCEPT:
   {
+    const bool open = m_pDialog->get_action() == Gtk::FileChooser::Action::OPEN;
     std::cout << (open ? "Open" : "Save") << " clicked." << std::endl;
 
     // Notice that this is a std::string, not a Glib::ustring.
-    auto filename = dialog->get_file()->get_path();
+    auto filename = m_pDialog->get_file()->get_path();
     std::cout << "File selected: " <<  filename << std::endl;
     break;
   }

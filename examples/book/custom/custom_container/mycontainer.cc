@@ -124,7 +124,7 @@ void MyContainer::measure_vfunc(Gtk::Orientation orientation, int for_size,
   }
 }
 
-void MyContainer::on_size_allocate(int width, int height, int  baseline)
+void MyContainer::size_allocate_vfunc(int width, int height, int  baseline)
 {
   //Do something with the space that we have actually been given:
   //(We will not be given heights or widths less than we have requested, though
@@ -180,7 +180,7 @@ void MyContainer::on_size_allocate(int width, int height, int  baseline)
     m_child_two->size_allocate(child_allocation_two, baseline);
   }
 }
-
+#if 0
 void MyContainer::forall_vfunc(const ForeachSlot& slot)
 {
   if (m_child_one)
@@ -244,3 +244,4 @@ GType MyContainer::child_type_vfunc() const
     return G_TYPE_NONE;
   }
 }
+#endif

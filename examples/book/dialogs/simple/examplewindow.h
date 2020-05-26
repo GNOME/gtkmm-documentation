@@ -33,6 +33,8 @@ protected:
 
   //Child widgets:
   Gtk::Button m_Button;
+
+  Gtk::Dialog m_Dialog;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

@@ -27,16 +27,16 @@ ExampleWindow::ExampleWindow()
   set_default_size(400, 200);
 
   m_VBox.set_margin(6);
-  add(m_VBox);
+  set_child(m_VBox);
 
   //Add the child widgets to the custom container:
   m_MyContainer.set_child_widgets(m_Button_One, m_Label_Two);
   m_MyContainer.set_expand();
 
-  m_VBox.add(m_MyContainer);
-  m_VBox.add(m_ButtonBox);
+  m_VBox.append(m_MyContainer);
+  m_VBox.append(m_ButtonBox);
 
-  m_ButtonBox.add(m_Button_Quit);
+  m_ButtonBox.append(m_Button_Quit);
   m_ButtonBox.set_margin(6);
   m_Button_Quit.set_hexpand(true);
   m_Button_Quit.set_halign(Gtk::Align::END);

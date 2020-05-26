@@ -26,8 +26,7 @@ int main(int argc, char** argv)
    win.set_title("Cairomm Clock");
 
    Clock c;
-   win.add(c);
-   c.show();
+   win.set_child(c);
 
    return app->run(win, argc, argv);
 }

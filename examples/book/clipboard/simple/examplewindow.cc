@@ -27,12 +27,12 @@ ExampleWindow::ExampleWindow()
   set_title("Gtk::Clipboard example");
 
   m_VBox.set_margin(12);
-  add(m_VBox);
+  set_child(m_VBox);
 
-  m_VBox.add(m_Label);
+  m_VBox.append(m_Label);
 
   //Fill Grid:
-  m_VBox.add(m_Grid);
+  m_VBox.append(m_Grid);
   m_Grid.set_expand(true);
   m_Grid.set_row_homogeneous(true);
   m_Grid.set_column_homogeneous(true);
@@ -42,16 +42,16 @@ ExampleWindow::ExampleWindow()
   m_Grid.attach(m_ButtonB2, 1, 1);
 
   //Add ButtonBox to bottom:
-  m_VBox.add(m_ButtonBox);
+  m_VBox.append(m_ButtonBox);
   m_VBox.set_spacing(6);
 
   //Fill ButtonBox:
-  m_ButtonBox.add(m_Button_Copy);
+  m_ButtonBox.append(m_Button_Copy);
   m_Button_Copy.set_hexpand(true);
   m_Button_Copy.set_halign(Gtk::Align::END);
   m_Button_Copy.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_copy) );
-  m_ButtonBox.add(m_Button_Paste);
+  m_ButtonBox.append(m_Button_Paste);
   m_Button_Paste.signal_clicked().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_button_paste) );
 }

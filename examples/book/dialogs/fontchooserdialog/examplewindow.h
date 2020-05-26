@@ -18,6 +18,7 @@
 #define GTKMM_EXAMPLEWINDOW_H
 
 #include <gtkmm.h>
+#include <memory>
 
 class ExampleWindow : public Gtk::Window
 {
@@ -29,11 +30,14 @@ protected:
   //Signal handlers:
   void on_font_button_font_set();
   void on_button_dialog_clicked();
+  void on_dialog_response(int response_id);
 
   //Child widgets:
   Gtk::Box m_ButtonBox;
   Gtk::FontButton m_FontButton;
   Gtk::Button m_Button_Dialog;
+
+  std::unique_ptr<Gtk::FontChooserDialog> m_pDialog;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

@@ -73,7 +73,7 @@ ExampleWindow::ExampleWindow()
   m_Combo.pack_start(m_cell);
 
   //Add the ComboBox to the window.
-  add(m_Combo);
+  set_child(m_Combo);
 
   //Connect signal handler:
   m_Combo.signal_changed().connect( sigc::mem_fun(*this, &ExampleWindow::on_combo_changed) );

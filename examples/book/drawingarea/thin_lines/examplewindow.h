@@ -18,7 +18,7 @@
 #define GTKMM_EXAMPLEWINDOW_H
 
 #include <gtkmm/window.h>
-#include <gtkmm/grid.h>
+#include <gtkmm/box.h>
 #include <gtkmm/checkbutton.h>
 #include "myarea.h"
 
@@ -33,7 +33,7 @@ protected:
   void on_button_toggled();
 
 private:
-  Gtk::Grid m_Container;
+  Gtk::Box m_HBox;
   MyArea m_Area_Lines;
   Gtk::CheckButton m_Button_FixLines;
 };

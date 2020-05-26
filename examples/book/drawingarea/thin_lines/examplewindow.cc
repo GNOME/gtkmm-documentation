@@ -17,16 +17,15 @@
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
-: m_Button_FixLines("Fix lines")
+: m_HBox(Gtk::Orientation::HORIZONTAL),
+  m_Button_FixLines("Fix lines")
 {
   set_title("Thin lines example");
 
-  m_Container.set_orientation(Gtk::Orientation::HORIZONTAL);
+  m_HBox.append(m_Area_Lines);
+  m_HBox.append(m_Button_FixLines);
 
-  m_Container.add(m_Area_Lines);
-  m_Container.add(m_Button_FixLines);
-
-  add(m_Container);
+  set_child(m_HBox);
 
   m_Button_FixLines.signal_toggled().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_button_toggled));

@@ -26,8 +26,7 @@ int main(int argc, char** argv)
    win.set_title("DrawingArea");
 
    MyArea area;
-   win.add(area);
-   area.show();
+   win.set_child(area);
 
    return app->run(win, argc, argv);
 }

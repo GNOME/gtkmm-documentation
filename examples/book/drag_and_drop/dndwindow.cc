@@ -26,7 +26,7 @@ DnDWindow::DnDWindow()
 {
   set_title("DnD example");
 
-  add(m_HBox);
+  set_child(m_HBox);
 
   //Drag site:
 
@@ -37,7 +37,7 @@ DnDWindow::DnDWindow()
     sigc::mem_fun(*this, &DnDWindow::on_label_drag_prepare_data), false);
   m_Label_Drag.add_controller(source);
 
-  m_HBox.add(m_Label_Drag);
+  m_HBox.append(m_Label_Drag);
   m_Label_Drag.set_expand(true);
 
   //Drop site:
@@ -49,7 +49,7 @@ DnDWindow::DnDWindow()
     sigc::mem_fun(*this, &DnDWindow::on_button_drop_drop_data), false);
   m_Button_Drop.add_controller(target);
 
-  m_HBox.add(m_Button_Drop);
+  m_HBox.append(m_Button_Drop);
   m_Button_Drop.set_expand(true);
 }
 

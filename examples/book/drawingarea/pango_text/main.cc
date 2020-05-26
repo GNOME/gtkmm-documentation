@@ -26,8 +26,7 @@ int main(int argc, char* argv[])
   window.set_title("Drawing text example");
 
   MyArea area;
-  window.add(area);
-  area.show();
+  window.set_child(area);
 
   return app->run(window, argc, argv);
 }

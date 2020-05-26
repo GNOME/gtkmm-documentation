@@ -18,6 +18,7 @@
 #define GTKMM_EXAMPLEWINDOW_H
 
 #include <gtkmm.h>
+#include <memory>
 
 class ExampleWindow : public Gtk::Window
 {
@@ -29,6 +30,7 @@ protected:
   //Signal handlers:
   void on_color_button_color_set();
   void on_button_dialog_clicked();
+  void on_dialog_response(int response_id);
 
   //Draw function:
   void on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);
@@ -39,6 +41,7 @@ protected:
   Gtk::Button m_Button_Dialog;
   Gtk::DrawingArea m_DrawingArea; //To show the color.
 
+  std::unique_ptr<Gtk::ColorChooserDialog> m_pDialog;
   Gdk::RGBA m_Color;
 };
 

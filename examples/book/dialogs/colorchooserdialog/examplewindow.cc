@@ -24,13 +24,13 @@ ExampleWindow::ExampleWindow()
   set_title("Gtk::ColorChooserDialog example");
   set_default_size(200, 200);
 
-  add(m_VBox);
+  set_child(m_VBox);
 
-  m_VBox.add(m_ColorButton);
+  m_VBox.append(m_ColorButton);
   m_ColorButton.signal_color_set().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_color_button_color_set) );
 
-  m_VBox.add(m_Button_Dialog);
+  m_VBox.append(m_Button_Dialog);
   m_Button_Dialog.signal_clicked().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_button_dialog_clicked) );
 
@@ -41,7 +41,7 @@ ExampleWindow::ExampleWindow()
   m_Color.set_alpha(1.0); //opaque
   m_ColorButton.set_rgba(m_Color);
 
-  m_VBox.add(m_DrawingArea);
+  m_VBox.append(m_DrawingArea);
   m_DrawingArea.set_expand(true);
   m_DrawingArea.set_draw_func(sigc::mem_fun(*this, &ExampleWindow::on_drawing_area_draw));
 }
@@ -54,26 +54,39 @@ void ExampleWindow::on_color_button_color_set()
 {
   //Store the chosen color:
   m_Color = m_ColorButton.get_rgba();
+  m_DrawingArea.queue_draw();
 }
 
 void ExampleWindow::on_button_dialog_clicked()
 {
-  Gtk::ColorChooserDialog dialog("Please choose a color");
-  dialog.set_transient_for(*this);
+  if (!m_pDialog)
+  {
+    m_pDialog.reset(new Gtk::ColorChooserDialog("Please choose a color", *this));
+    m_pDialog->set_modal(true);
+    m_pDialog->set_hide_on_close(true);
+    m_pDialog->signal_response().connect(
+      sigc::mem_fun(*this, &ExampleWindow::on_dialog_response));
+  }
 
   //Get the previously selected color:
-  dialog.set_rgba(m_Color);
+  m_pDialog->set_rgba(m_Color);
 
-  const int result = dialog.run();
+  m_pDialog->show();
+}
+
+void ExampleWindow::on_dialog_response(int response_id)
+{
+  m_pDialog->hide();
 
   //Handle the response:
-  switch(result)
+  switch (response_id)
   {
     case Gtk::ResponseType::OK:
     {
       //Store the chosen color:
-      m_Color = dialog.get_rgba();
+      m_Color = m_pDialog->get_rgba();
       m_ColorButton.set_rgba(m_Color);
+      m_DrawingArea.queue_draw();
       break;
     }
     case Gtk::ResponseType::CANCEL:
@@ -83,7 +96,7 @@ void ExampleWindow::on_button_dialog_clicked()
     }
     default:
     {
-      std::cout << "Unexpected button clicked: " << result << std::endl;
+      std::cout << "Unexpected button clicked: " << response_id << std::endl;
       break;
     }
   }

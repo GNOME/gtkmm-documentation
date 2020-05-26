@@ -26,14 +26,14 @@ ExampleWindow::ExampleWindow()
   m_Grid.set_row_spacing(10);
   m_Grid.set_column_spacing(10);
 
-  add(m_Grid);
+  set_child(m_Grid);
 
   m_Grid.attach(m_MyWidgetS1, 0, 0);
   m_Grid.attach(m_MyWidgetS2, 1, 1);
 
   m_Grid.attach(m_ButtonBox, 0, 2, 2, 1);
 
-  m_ButtonBox.add(m_Button_Quit);
+  m_ButtonBox.append(m_Button_Quit);
   m_ButtonBox.set_margin(6);
   m_Button_Quit.set_hexpand(true);
   m_Button_Quit.set_halign(Gtk::Align::END);

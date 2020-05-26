@@ -26,15 +26,15 @@ ExampleWindow::ExampleWindow()
 {
   set_title("Gtk::AboutDialog example");
 
-  add(m_VBox);
+  set_child(m_VBox);
 
-  m_VBox.add(m_Label);
+  m_VBox.append(m_Label);
   m_Label.set_expand(true);
   m_Label.set_wrap(true);
   m_Label.set_selectable(true);
 
-  m_VBox.add(m_ButtonBox);
-  m_ButtonBox.add(m_Button);
+  m_VBox.append(m_ButtonBox);
+  m_ButtonBox.append(m_Button);
   m_Button.set_expand(true);
   m_Button.set_halign(Gtk::Align::CENTER);
   m_Button.set_valign(Gtk::Align::CENTER);
@@ -42,6 +42,7 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::on_button_clicked) );
 
   m_Dialog.set_transient_for(*this);
+  m_Dialog.set_hide_on_close();
 
   m_Dialog.set_logo(Gdk::Texture::create_for_pixbuf(
     Gdk::Pixbuf::create_from_resource("/about/gtkmm_logo.gif", -1, 40, true)));

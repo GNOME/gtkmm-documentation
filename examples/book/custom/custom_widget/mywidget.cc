@@ -16,7 +16,6 @@
 
 #include "mywidget.h"
 #include <gdkmm/general.h>  // for cairo helper functions
-#include <gtkmm/container.h>
 #include <gtkmm/snapshot.h>
 #include <iostream>
 //#include <gtk/gtkwidget.h> //For GTK_IS_WIDGET()
@@ -31,8 +30,7 @@ MyWidget::MyWidget() :
   m_padding()
 {
   // Expand, if there is extra space.
-  set_hexpand(true);
-  set_vexpand(true);
+  set_expand(true);
 
   //This shows the GType name.
   std::cout << "GType name: " << G_OBJECT_TYPE_NAME(gobj()) << std::endl;

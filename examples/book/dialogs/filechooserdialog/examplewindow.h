@@ -29,6 +29,8 @@ protected:
   //Signal handlers:
   void on_button_file_clicked();
   void on_button_folder_clicked();
+  void on_file_dialog_response(int response_id, Gtk::FileChooserDialog* dialog);
+  void on_folder_dialog_response(int response_id, Gtk::FileChooserDialog* dialog);
 
   //Child widgets:
   Gtk::Box m_ButtonBox;

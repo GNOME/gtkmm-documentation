@@ -28,7 +28,7 @@ ExampleWindow::ExampleWindow()
   m_Combo.append("something or other");
   m_Combo.set_active(0);
 
-  add(m_Combo);
+  set_child(m_Combo);
 
   //Connect signal handlers:
   m_Combo.signal_changed().connect(sigc::mem_fun(*this,

@@ -27,11 +27,14 @@ public:
 protected:
   // Signal handlers:
   void on_button_file_clicked(Gtk::FileChooser::Action action);
+  void on_dialog_response(int response_id);
 
   // Child widgets:
   Gtk::Box m_ButtonBox;
   Gtk::Button m_Button_File_Open;
   Gtk::Button m_Button_File_Save;
+
+  Glib::RefPtr<Gtk::FileChooserNative> m_pDialog;
 };
 
 #endif // GTKMM_EXAMPLEWINDOW_H
