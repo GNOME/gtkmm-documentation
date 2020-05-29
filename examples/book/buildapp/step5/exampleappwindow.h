@@ -32,6 +32,7 @@ protected:
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
   Glib::RefPtr<Gio::Settings> m_settings;
   Gtk::Stack* m_stack;
+  Gtk::MenuButton* m_gears;
 };
 
 #endif /* GTKMM_EXAMPLEAPPWINDOW_H */

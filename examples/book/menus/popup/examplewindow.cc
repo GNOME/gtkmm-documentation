@@ -106,6 +106,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
 
 ExampleWindow::~ExampleWindow()
 {
+  m_MenuPopup.unparent();
 }
 
 void ExampleWindow::on_menu_file_popup_generic()

@@ -54,7 +54,7 @@ void ExampleApplication::on_startup()
 
   m_refBuilder = Gtk::Builder::create();
 
-  //Layout the actions in a menubar and an application menu:
+  //Layout the actions in a menubar and a menu:
   Glib::ustring ui_info =
     "<interface>"
     "  <!-- menubar -->"
@@ -143,45 +143,11 @@ void ExampleApplication::on_startup()
     "      <attribute name='label' translatable='yes'>_Help</attribute>"
     "      <section>"
     "        <item>"
-    "          <attribute name='label' translatable='yes'>_About</attribute>"
+    "          <attribute name='label' translatable='yes'>_About Window</attribute>"
     "          <attribute name='action'>win.about</attribute>"
     "        </item>"
-    "      </section>"
-    "    </submenu>"
-    "  </menu>"
-    ""
-    "  <!-- application menu -->"
-    "  <menu id='appmenu'>"
-    "    <submenu>"
-    "      <attribute name='label' translatable='yes'>_File</attribute>"
-    "      <section>"
     "        <item>"
-    "          <attribute name='label' translatable='yes'>New _Standard</attribute>"
-    "          <attribute name='action'>app.newstandard</attribute>"
-    "          <attribute name='accel'>&lt;Primary&gt;n</attribute>"
-    "        </item>"
-    "        <item>"
-    "          <attribute name='label' translatable='yes'>New _Foo</attribute>"
-    "          <attribute name='action'>app.newfoo</attribute>"
-    "        </item>"
-    "        <item>"
-    "          <attribute name='label' translatable='yes'>New _Goo</attribute>"
-    "          <attribute name='action'>app.newgoo</attribute>"
-    "        </item>"
-    "      </section>"
-    "      <section>"
-    "        <item>"
-    "          <attribute name='label' translatable='yes'>_Quit</attribute>"
-    "          <attribute name='action'>app.quit</attribute>"
-    "          <attribute name='accel'>&lt;Primary&gt;q</attribute>"
-    "        </item>"
-    "      </section>"
-    "    </submenu>"
-    "    <submenu>"
-    "      <attribute name='label' translatable='yes'>_Help</attribute>"
-    "      <section>"
-    "        <item>"
-    "          <attribute name='label' translatable='yes'>_About</attribute>"
+    "          <attribute name='label' translatable='yes'>_About App</attribute>"
     "          <attribute name='action'>app.about</attribute>"
     "        </item>"
     "      </section>"
@@ -201,14 +167,12 @@ void ExampleApplication::on_startup()
   //Get the menubar and the app menu, and add them to the application:
   auto object = m_refBuilder->get_object("menu-example");
   auto gmenu = std::dynamic_pointer_cast<Gio::Menu>(object);
-  object = m_refBuilder->get_object("appmenu");
-  auto appMenu = std::dynamic_pointer_cast<Gio::Menu>(object);
-  if (!(gmenu && appMenu)) {
-    g_warning("GMenu or AppMenu not found");
+  if (!gmenu)
+  {
+    g_warning("GMenu not found");
   }
   else
   {
-    set_app_menu(appMenu);
     set_menubar(gmenu);
   }
 }
@@ -234,6 +198,7 @@ void ExampleApplication::create_window()
   win->signal_hide().connect(sigc::bind(
     sigc::mem_fun(*this, &ExampleApplication::on_window_hide), win));
 
+  win->set_show_menubar();
   win->show();
 }
 
@@ -266,5 +231,5 @@ void ExampleApplication::on_menu_file_quit()
 
 void ExampleApplication::on_menu_help_about()
 {
-  std::cout << "App|Help|About was selected." << std::endl;
+  std::cout << "Help|About App was selected." << std::endl;
 }

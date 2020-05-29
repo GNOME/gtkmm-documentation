@@ -16,7 +16,7 @@ examples_book = [
   [['actionbar'], 'example', exwindow_main],
   [['application', 'simple'], 'example', ['exampleapplication.cc'] + exwindow_main],
   [['application', 'command_line_handling'], 'example', ['exampleapplication.cc'] + exwindow_main],
-  [['application', 'app_and_win_menus'], 'example', ['exampleapplication.cc'] + exwindow_main],
+  [['application', 'menubar'], 'example', ['exampleapplication.cc'] + exwindow_main],
   [['aspectframe'], 'example', exwindow_main],
   [['assistant'], 'example', ['exampleassistant.cc'] + exwindow_main],
   [['base'], 'base', ['base.cc']],

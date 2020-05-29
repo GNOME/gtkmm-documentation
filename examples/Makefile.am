@@ -12,7 +12,7 @@ check_PROGRAMS =					\
 	book/actionbar/example				\
 	book/application/simple/example \
 	book/application/command_line_handling/example \
-	book/application/app_and_win_menus/example \
+	book/application/menubar/example \
 	book/aspectframe/example			\
 	book/assistant/example				\
 	book/base/base					\
@@ -159,12 +159,12 @@ book_application_command_line_handling_example_SOURCES =		\
 	book/application/command_line_handling/examplewindow.h	\
 	book/application/command_line_handling/main.cc
 
-book_application_app_and_win_menus_example_SOURCES =		\
-	book/application/app_and_win_menus/exampleapplication.cc	\
-	book/application/app_and_win_menus/exampleapplication.h	\
-	book/application/app_and_win_menus/examplewindow.cc	\
-	book/application/app_and_win_menus/examplewindow.h	\
-	book/application/app_and_win_menus/main.cc
+book_application_menubar_example_SOURCES =		\
+	book/application/menubar/exampleapplication.cc	\
+	book/application/menubar/exampleapplication.h	\
+	book/application/menubar/examplewindow.cc	\
+	book/application/menubar/examplewindow.h	\
+	book/application/menubar/main.cc
 
 book_aspectframe_example_SOURCES =		\
 	book/aspectframe/examplewindow.cc	\

@@ -22,14 +22,30 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
 : Gtk::ApplicationWindow(cobject),
   m_refBuilder(refBuilder),
   m_settings(),
-  m_stack(nullptr)
+  m_stack(nullptr),
+  m_gears(nullptr)
 {
+  // Get widgets from the Gtk::Builder file.
   m_stack = m_refBuilder->get_widget<Gtk::Stack>("stack");
   if (!m_stack)
     throw std::runtime_error("No \"stack\" object in window.ui");
 
+  m_gears = m_refBuilder->get_widget<Gtk::MenuButton>("gears");
+  if (!m_gears)
+    throw std::runtime_error("No \"gears\" object in window.ui");
+
+  // Bind settings.
   m_settings = Gio::Settings::create("org.gtkmm.exampleapp");
   m_settings->bind("transition", m_stack->property_transition_type());
+
+  // Connect the menu to the MenuButton m_gears.
+  // (The connection between action and menu item is specified in gears_menu.ui.)
+  auto menu_builder = Gtk::Builder::create_from_resource("/org/gtkmm/exampleapp/gears_menu.ui");
+  auto menu = menu_builder->get_object<Gio::MenuModel>("menu");
+  if (!menu)
+    throw std::runtime_error("No \"menu\" object in gears_menu.ui");
+
+  m_gears->set_menu_model(menu);
 }
 
 //static

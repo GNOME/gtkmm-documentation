@@ -34,28 +34,21 @@ void ExampleApplication::on_startup()
   //Call the base class's implementation:
   Gtk::Application::on_startup();
 
-  //Create the Application menu:
-  //We can use add_action because Gtk::Application derives from ActionMap:
-  add_action("something",
-    sigc::mem_fun(*this, &ExampleApplication::on_action_something) );
-  add_action("quit",
-    sigc::mem_fun(*this, &ExampleApplication::on_action_quit) );
-
-
-  auto app_menu = Gio::Menu::create();
-  app_menu->append("_Something", "app.something");
-  app_menu->append("_Quit", "app.quit");
-
-  set_app_menu(app_menu);
-
-
-  //Create the per-Window menu:
+  //Create the menu:
   auto win_menu = Gio::Menu::create();
 
   auto submenu_file = Gio::Menu::create();
   submenu_file->append("_New", "win.new");
   submenu_file->append("_Close", "win.close");
+  submenu_file->append("_Something", "app.something");
+  submenu_file->append("_Quit", "app.quit");
   win_menu->append_submenu("File", submenu_file);
+
+  //We can use add_action because Gtk::Application derives from ActionMap:
+  add_action("something",
+    sigc::mem_fun(*this, &ExampleApplication::on_action_something) );
+  add_action("quit",
+    sigc::mem_fun(*this, &ExampleApplication::on_action_quit) );
 
   auto submenu_edit = Gio::Menu::create();
   submenu_edit->append("_Cut", "win.cut");

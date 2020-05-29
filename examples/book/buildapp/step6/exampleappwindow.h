@@ -39,6 +39,7 @@ protected:
   Gtk::ToggleButton* m_search;
   Gtk::SearchBar* m_searchbar;
   Gtk::SearchEntry* m_searchentry;
+  Gtk::MenuButton* m_gears;
   Glib::RefPtr<Glib::Binding> m_prop_binding;
 };
 

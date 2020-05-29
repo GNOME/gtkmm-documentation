@@ -53,28 +53,10 @@ void ExampleApplication::on_startup()
   // Call the base class's implementation.
   Gtk::Application::on_startup();
 
-  // Add actions and keyboard accelerators for the application menu.
+  // Add actions and keyboard accelerators for the menu.
   add_action("preferences", sigc::mem_fun(*this, &ExampleApplication::on_action_preferences));
   add_action("quit", sigc::mem_fun(*this, &ExampleApplication::on_action_quit));
   set_accel_for_action("app.quit", "<Ctrl>Q");
-
-  auto refBuilder = Gtk::Builder::create();
-  try
-  {
-    refBuilder->add_from_resource("/org/gtkmm/exampleapp/app_menu.ui");
-  }
-  catch (const Glib::Error& ex)
-  {
-    std::cerr << "ExampleApplication::on_startup(): " << ex.what() << std::endl;
-    return;
-  }
-
-  auto app_menu = refBuilder->get_object<Gio::MenuModel>("appmenu");
-  if (app_menu)
-    set_app_menu(app_menu);
-  else
-    std::cerr << "ExampleApplication::on_startup(): No \"appmenu\" object in app_menu.ui"
-              << std::endl;
 }
 
 void ExampleApplication::on_activate()

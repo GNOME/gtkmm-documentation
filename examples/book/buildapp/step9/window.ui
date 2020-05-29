@@ -34,9 +34,6 @@
         <child type="end">
           <object class="GtkMenuButton" id="gears">
             <property name="direction">none</property>
-            <style>
-              <class name="image-button"/>
-            </style>
           </object>
         </child>
       </object>

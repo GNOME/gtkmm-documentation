@@ -26,8 +26,10 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
   m_search(nullptr),
   m_searchbar(nullptr),
   m_searchentry(nullptr),
+  m_gears(nullptr),
   m_prop_binding()
 {
+  // Get widgets from the Gtk::Builder file.
   m_stack = m_refBuilder->get_widget<Gtk::Stack>("stack");
   if (!m_stack)
     throw std::runtime_error("No \"stack\" object in window.ui");
@@ -44,9 +46,15 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
   if (!m_searchentry)
     throw std::runtime_error("No \"searchentry\" object in window.ui");
 
+  m_gears = m_refBuilder->get_widget<Gtk::MenuButton>("gears");
+  if (!m_gears)
+    throw std::runtime_error("No \"gears\" object in window.ui");
+
+  // Bind settings.
   m_settings = Gio::Settings::create("org.gtkmm.exampleapp");
   m_settings->bind("transition", m_stack->property_transition_type());
 
+  // Bind properties.
   m_prop_binding = Glib::Binding::bind_property(m_search->property_active(),
     m_searchbar->property_search_mode_enabled(), Glib::Binding::Flags::BIDIRECTIONAL);
 
@@ -55,6 +63,15 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
     sigc::mem_fun(*this, &ExampleAppWindow::on_search_text_changed));
   m_stack->property_visible_child().signal_changed().connect(
     sigc::mem_fun(*this, &ExampleAppWindow::on_visible_child_changed));
+
+  // Connect the menu to the MenuButton m_gears.
+  // (The connection between action and menu item is specified in gears_menu.ui.)
+  auto menu_builder = Gtk::Builder::create_from_resource("/org/gtkmm/exampleapp/gears_menu.ui");
+  auto menu = menu_builder->get_object<Gio::MenuModel>("menu");
+  if (!menu)
+    throw std::runtime_error("No \"menu\" object in gears_menu.ui");
+
+  m_gears->set_menu_model(menu);
 }
 
 //static
