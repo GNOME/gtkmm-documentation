@@ -189,7 +189,7 @@ step3/resources.c: $(STEP3_RESOURCES)
 STEP4_RESOURCES = \
   step4/exampleapp.gresource.xml \
   step4/window.ui \
-  step4/app_menu.ui
+  step4/gears_menu.ui
 
 step4/resources.c: $(STEP4_RESOURCES)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(dir $<) --generate-source $<
@@ -197,7 +197,7 @@ step4/resources.c: $(STEP4_RESOURCES)
 STEP5_RESOURCES = \
   step5/exampleapp.gresource.xml \
   step5/window.ui \
-  step5/app_menu.ui \
+  step5/gears_menu.ui \
   step5/prefs.ui
 
 step5/resources.c: $(STEP5_RESOURCES)
@@ -206,7 +206,7 @@ step5/resources.c: $(STEP5_RESOURCES)
 STEP6_RESOURCES = \
   step6/exampleapp.gresource.xml \
   step6/window.ui \
-  step6/app_menu.ui \
+  step6/gears_menu.ui \
   step6/prefs.ui
 
 step6/resources.c: $(STEP6_RESOURCES)
@@ -215,7 +215,6 @@ step6/resources.c: $(STEP6_RESOURCES)
 STEP7_RESOURCES = \
   step7/exampleapp.gresource.xml \
   step7/window.ui \
-  step7/app_menu.ui \
   step7/gears_menu.ui \
   step7/prefs.ui
 
@@ -225,7 +224,6 @@ step7/resources.c: $(STEP7_RESOURCES)
 STEP8_RESOURCES = \
   step8/exampleapp.gresource.xml \
   step8/window.ui \
-  step8/app_menu.ui \
   step8/gears_menu.ui \
   step8/prefs.ui
 
@@ -235,7 +233,6 @@ step8/resources.c: $(STEP8_RESOURCES)
 STEP9_RESOURCES = \
   step9/exampleapp.gresource.xml \
   step9/window.ui \
-  step9/app_menu.ui \
   step9/gears_menu.ui \
   step9/prefs.ui \
   step9/exampleapp.png
