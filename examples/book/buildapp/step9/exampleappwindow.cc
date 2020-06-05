@@ -106,12 +106,6 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
   m_binding_lines_visible = Glib::Binding::bind_property(m_lines->property_visible(),
     m_lines_label->property_visible());
 
-  // Display the application menu in the application, not in the desktop environment.
-  auto gtk_settings = Gtk::Settings::get_default();
-  if (gtk_settings)
-    gtk_settings->property_gtk_shell_shows_app_menu() = false;
-  set_show_menubar(true);
-
   // Set the window icon.
   Gtk::IconTheme::get_for_display(get_display())->add_resource_path("/org/gtkmm/exampleapp");
   set_icon_name("exampleapp");

@@ -64,13 +64,15 @@ void ExampleWindow::on_button_copy()
 {
   //Build a string representation of the stuff to be copied:
   //Ideally you would use XML, with an XML parser here:
-  Glib::ustring strData;
-  strData += m_ButtonA1.get_active() ? "1" : "0";
-  strData += m_ButtonA2.get_active() ? "1" : "0";
-  strData += m_ButtonB1.get_active() ? "1" : "0";
-  strData += m_ButtonB2.get_active() ? "1" : "0";
+  m_strData = m_ButtonA1.get_active() ? "1" : "0";
+  m_strData += m_ButtonA2.get_active() ? "1" : "0";
+  m_strData += m_ButtonB1.get_active() ? "1" : "0";
+  m_strData += m_ButtonB2.get_active() ? "1" : "0";
 
-  get_clipboard()->set_text(strData);
+  // Gdk::Clipboard::set_text() does not take a copy of the text.
+  // The text can only be pasted (in this program or in some other program)
+  // for as long as it exists.
+  get_clipboard()->set_text(m_strData);
 }
 
 void ExampleWindow::on_button_paste()

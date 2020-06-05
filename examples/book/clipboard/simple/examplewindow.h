@@ -32,6 +32,8 @@ protected:
 
   void on_clipboard_text_received(Glib::RefPtr<Gio::AsyncResult>& result);
 
+  Glib::ustring m_strData;
+
   //Child widgets:
   Gtk::Box m_VBox;
 

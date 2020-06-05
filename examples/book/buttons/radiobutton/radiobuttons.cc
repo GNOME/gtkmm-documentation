@@ -56,7 +56,9 @@ RadioButtons::RadioButtons() :
   m_RadioButton3.set_expand();
 
   // Set the second button active
-  m_RadioButton2.set_active();
+  m_RadioButton1.set_active(false);
+  m_RadioButton2.set_active(true);
+  m_RadioButton3.set_active(false);
 
   // Put Close button in Box2:
   m_Box2.append(m_Button_Close);

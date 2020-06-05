@@ -33,9 +33,11 @@ protected:
   void on_clipboard_content_changed();
 
   void on_clipboard_received(Glib::RefPtr<Gio::AsyncResult>& result);
-  void on_clipboard_received_targets(Glib::RefPtr<Gio::AsyncResult>& result);
+  void on_clipboard_received_status(Glib::RefPtr<Gio::AsyncResult>& result);
 
   void update_paste_status(); //Disable the paste button if there is nothing to paste.
+
+  Glib::ustring m_strData;
 
   //Child widgets:
   Gtk::Box m_VBox;

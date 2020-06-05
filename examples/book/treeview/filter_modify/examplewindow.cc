@@ -47,10 +47,7 @@ ExampleWindow::ExampleWindow()
   //Create the Tree model:
   m_refTreeModel = Gtk::ListStore::create(m_Columns);
 
-  m_refTreeModelFilter = Gtk::TreeModelFilter::create( m_refTreeModel,
-          Gtk::TreeModel::Path() );
-  //TODO: Do not specify the empty Path, when we have added a suitable
-  //constructor to gtkmm.
+  m_refTreeModelFilter = Gtk::TreeModelFilter::create(m_refTreeModel);
   m_refTreeModelFilter->set_modify_func( m_ColumnsDisplay, sigc::mem_fun(*this,
               &ExampleWindow::on_filter_modify) );
 
@@ -113,9 +110,7 @@ void ExampleWindow::on_filter_modify(const Gtk::TreeModel::iterator& iter,
       Glib::ustring name = row_child[m_Columns.m_col_name];
 
       Glib::Value<Glib::ustring> valString;
-      //TODO: Is there any way to avoid this step? Can't it copy the type as
-      //well as the value?
-      valString.init( Glib::Value< Glib::ustring >::value_type() );
+      valString.init(valString.value_type());
 
       valString.set(name);
       value = valString;
@@ -126,9 +121,7 @@ void ExampleWindow::on_filter_modify(const Gtk::TreeModel::iterator& iter,
       bool something = row_child[m_Columns.m_col_something];
 
       Glib::Value<Glib::ustring> valString;
-      //TODO: Is there any way to avoid this step? Can't it copy the type as
-      //well as the value?
-      valString.init( Glib::Value< Glib::ustring >::value_type());
+      valString.init(valString.value_type());
 
       valString.set( (something ? "something" : "notsomething"));
       value = valString;
@@ -145,4 +138,3 @@ void ExampleWindow::on_button_quit()
 {
   hide();
 }
-
