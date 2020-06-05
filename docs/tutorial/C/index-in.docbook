@@ -7682,7 +7682,7 @@ Our application is beginning to take shape:
   </screenshot>
 </figure>
 
-<para><ulink url="&url_examples_base;buildapp/step3">Source Code</ulink></para>
+<para><ulink url="&url_examples_base;buildapp/step3">Source Code</ulink></para> <!-- Insert window.ui -->
 
 </sect1>
 
@@ -7730,7 +7730,7 @@ The application menu looks like this:
   </screenshot>
 </figure>
 
-<para><ulink url="&url_examples_base;buildapp/step4">Source Code</ulink></para> <!-- Insert exampleapp.gresource.xml app_menu.ui -->
+<para><ulink url="&url_examples_base;buildapp/step4">Source Code</ulink></para> <!-- Insert exampleapp.gresource.xml gears_menu.ui window.ui -->
 
 </sect1>
 
@@ -7908,7 +7908,7 @@ What our application looks like now:
   </screenshot>
 </figure>
 
-<para><ulink url="&url_examples_base;buildapp/step7">Source Code</ulink></para> <!-- Insert exampleapp.gresource.xml gears_menu.ui window.ui org.gtkmm.exampleapp.gschema.xml -->
+<para><ulink url="&url_examples_base;buildapp/step7">Source Code</ulink></para> <!-- Insert gears_menu.ui window.ui org.gtkmm.exampleapp.gschema.xml -->
 
 
 </sect1>
