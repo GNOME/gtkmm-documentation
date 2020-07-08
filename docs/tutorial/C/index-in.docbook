@@ -9934,19 +9934,18 @@ _WRAP_METHOD_DOCS_ONLY(gtk_container_add)
 </sect3>
 
 <sect3 id="gmmproc-ignore">
-<title>_IGNORE, _IGNORE_SIGNAL, _IGNORE_PROPERTY, _IGNORE_CHILD_PROPERTY</title>
+<title>_IGNORE, _IGNORE_SIGNAL, _IGNORE_PROPERTY</title>
 <para><command>gmmproc</command> will warn you on stdout about functions, signals,
     properties and child properties that you have forgotten to wrap, helping to
     ensure that you are wrapping the complete API. But if you don't want to wrap
     some functions, signals, properties or child properties, or if you chose
-    to hand-code some methods then you can use the _IGNORE(), _IGNORE_SIGNAL(),
-    _IGNORE_PROPERTY() or _IGNORE_CHILD_PROPERTY() macro to make
-    <command>gmmproc</command> stop complaining.</para>
+    to hand-code some methods then you can use the _IGNORE(), _IGNORE_SIGNAL()
+    or _IGNORE_PROPERTY() macro to make <command>gmmproc</command> stop complaining.
+</para>
 <para>
 <literallayout><function>_IGNORE(C function name 1, C function name 2, etc)
 _IGNORE_SIGNAL(C signal name 1, C signal name 2, etc)
-_IGNORE_PROPERTY(C property name 1, C property name 2, etc)
-_IGNORE_CHILD_PROPERTY(C child property name 1, C child property name 2, etc)</function></literallayout>
+_IGNORE_PROPERTY(C property name 1, C property name 2, etc)</function></literallayout>
 </para>
 <para>For instance, from <filename>flowbox.hg</filename>:
 <programlisting>
@@ -10231,25 +10230,6 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
     <parameter>refreturn_ctype</parameter> is required.</para>
 </sect3>
 
-<sect3 id="gmmproc-wrap-child-property">
-<title>_WRAP_CHILD_PROPERTY</title>
-<para>This macro generates the C++ method to wrap a <classname>GtkContainer</classname> child property.
-    (See <ulink url="https://developer.gnome.org/gtk3/stable/GtkContainer.html">
-    GtkContainer</ulink> for more information about child properties).
-    Similarly to _WRAP_PROPERTY, you must specify the property name and the
-    wanted C++ type for the property. <command>gmmproc</command> uses the .defs
-    file to discover the C type and the .m4 convert files to discover
-    appropriate type conversions.</para>
-<para><function>_WRAP_CHILD_PROPERTY(C child property name, C++ type)</function></para>
-<para>For instance, from <filename>notebook.hg</filename>:
-<programlisting>
-_WRAP_CHILD_PROPERTY("tab-expand", bool)
-</programlisting>
-</para>
-<para>_WRAP_CHILD_PROPERTY() accepts the same optional arguments as _WRAP_PROPERTY().
-</para>
-</sect3>
-
 </sect2>
 
 <sect2 id="gmmproc-other-macros">
@@ -10295,8 +10275,8 @@ _WRAP_ENUM(WindowType, GtkWindowType)
         include an extra header for that function. You should also file a bug
         against the C API, because all enums should be registered as GTypes.</para>
       <para>If you specify <literal>NO_GTYPE</literal>, don't use that enum as the
-        type in _WRAP_PROPERTY or _WRAP_CHILD_PROPERTY. It would cause a runtime error,
-        when the generated <methodname>property_*()</methodname> method is called.</para>
+        type in _WRAP_PROPERTY. It would cause a runtime error, when the generated
+        <methodname>property_*()</methodname> method is called.</para>
       <para>For example, from <filename>icontheme.hg</filename>:
       <programlisting>
 _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
@@ -10660,7 +10640,7 @@ _INITIALIZATION(`Gdk::Rectangle&amp;',`GdkRectangle',`$3 = Glib::wrap(&amp;($4))
 <programlisting>
 void init()
 {
-  Gtk::Main::init_gtkmm_internals(); //Sets up the g type system and the Glib::wrap() table.
+  Gtk::init_gtkmm_internals(); //Sets up the g type system and the Glib::wrap() table.
   wrap_init(); //Tells the Glib::wrap() table about the libsomethingmm classes.
 }
 </programlisting>
