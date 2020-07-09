@@ -9443,17 +9443,17 @@ $ jhbuild sanitycheck</screen>
     additional gtkmm-style wrappers of other glib/GObject-based
     libraries.</para>
 <para>This involves a variety of tools, some of them crufty, but at least
-    they work, and has been used successfully by several
-    projects.</para>
+    they work, and have been used successfully by several projects.</para>
 
 <sect1 id="sec-wrapping-build-structure">
 <title>The build structure</title>
 <para>Generation of the source code for a gtkmm-style wrapper API requires use
     of tools such as <command>gmmproc</command> and
-    <filename>generate_wrap_init.pl</filename>. In theory you could write your
+    <filename>generate_wrap_init.pl</filename>, which are included in
+    <application>glibmm</application>. In theory you could write your
     own build files to use these appropriately, but a much better option is to
-    make use of the build infrastructure provided by the mm-common module. To
-    get started, it helps a lot to pick an existing binding module as an example
+    make use of the build infrastructure provided by the <application>mm-common</application>
+    module. To get started, it helps a lot to pick an existing binding module as an example
     to look at.</para>
 <para>For instance, let's pretend that we are wrapping a C library called
     libsomething. It provides a <classname>GObject</classname>-based API with
@@ -9465,15 +9465,17 @@ $ jhbuild sanitycheck</screen>
 
 <para>Typically our wrapper library would be called libsomethingmm. We can start by
   copying the <ulink url="https://gitlab.gnome.org/GNOME/mm-common/tree/master/skeletonmm">
-  skeleton source tree</ulink> from the mm-common module.
+  skeleton source tree</ulink> from the <application>mm-common</application> module.
+  Starting with <application>mm-common</application> 1.0.0 this skeleton application
+  is built with the <ulink url="https://mesonbuild.com/">Meson build system</ulink>.
 <programlisting>
   $ git clone https://gitlab.gnome.org/GNOME/mm-common.git
   $ cp -a mm-common/skeletonmm libsomethingmm
 </programlisting>
 </para>
-<para>This provides a directory structure for the source .hg and .ccg files and the generated .h
-  and .cc files, with <filename>filelist.am</filename> Automake include files that can specify the
-  various files in use, in terms of generic Automake variables. The directory structure usually
+<para>This provides a directory structure for the source .hg and .ccg files and the hand-written
+  .h and .cc files, with <filename>meson.build</filename> files that can specify the
+  various files in use, in terms of Meson variables. The directory structure usually
   looks like this, after we have renamed the directories appropriately:
 <itemizedlist>
     <listitem><para><filename>libsomethingmm</filename>: The top-level directory.</para>
@@ -9481,10 +9483,7 @@ $ jhbuild sanitycheck</screen>
          <listitem><para><filename>libsomething</filename>: Contains the main include file and the pkg-config .pc file.</para>
          <itemizedlist>
              <listitem><para><filename>src</filename>: Contains .hg and .ccg source files.</para></listitem>
-             <listitem><para><filename>libsomethingmm</filename>: Contains generated and hand-written .h and .cc files.</para>
-             <itemizedlist>
-                 <listitem><para><filename>private</filename>: Contains generated <filename>*_p.h</filename> files.</para></listitem>
-             </itemizedlist>
+             <listitem><para><filename>libsomethingmm</filename>: Contains hand-written .h and .cc files.</para>
            </listitem>
          </itemizedlist>
        </listitem>
@@ -9505,6 +9504,8 @@ A number of the skeleton files must still be filled in with project-specific con
 <para>Note that files ending in <filename>.in</filename> will be used to generate
     files with the same name but without the <filename>.in</filename> suffix, by
     replacing some variables with actual values during the configure stage.</para>
+<para>Generated files are saved in the build tree, which is separated from the
+    source tree when <command>meson</command> and <command>ninja</command> are used.</para>
 </sect2>
 
 <sect2 id="modifying-build-files">
@@ -9513,7 +9514,7 @@ A number of the skeleton files must still be filled in with project-specific con
 <para>Now we edit the files to adapt them to our needs. You might prefer to use a multiple-file
   search-replace utility for this, such as <command>regexxer</command>. Note that nearly all of the
   files provided with the skeleton source tree contain placeholder text. Thus, the substitutions
-  should be performed globally, and not be limited to the Automake and Autoconf files.</para>
+  should be performed globally, and not be limited to the Meson files.</para>
 <para>All mentions of <varname>skeleton</varname> should be replaced by the correct name of the C
   library you are wrapping, such as "something" or "libsomething". In the same manner, all
   instances of <varname>SKELETON</varname> should be replaced by "SOMETHING" or "LIBSOMETHING", and
@@ -9522,79 +9523,47 @@ A number of the skeleton files must still be filled in with project-specific con
   copyright holder, which is probably you. Do the same for the <varname>joe@example.com</varname>
   email address.</para>
 
-<sect3 id="modifying-configure.ac">
-<title>configure.ac</title>
-<para>In <filename>configure.ac</filename>,
-<itemizedlist>
-  <listitem><para>The <function>AC_CONFIG_SRCDIR()</function> line must mention a file
-      in our source tree. We can edit this later if we don't yet know the
-      names of any of the files that we will create.</para></listitem>
-  <listitem><para>It is common for binding modules to track the version number
-      of the library they are wrapping. So, for instance, if the C library is
-      at version 1.23.4, then the initial version of the binding module would
-      be 1.23.0. However, avoid starting with an even minor version number as
-      that usually indicates a stable release.</para></listitem>
-  <listitem><para>The <function>AC_CONFIG_HEADERS()</function> line is used to
-      generate two or more configuration header files. The first header file
-      in the list contains all configuration macros which are set during the
-      configure run. The remaining headers in the list contain only a subset
-      of configuration macros and their corresponding <filename>config.h.in</filename>
-      file will not be autogenerated. The reason for this separation is that
-      the namespaced configuration headers are installed with your library and
-      define publically visible macros.</para></listitem>
-  <listitem><para>The <function>AC_SUBST([SOMETHINGMM_MODULES], ['...'])</function>
-      line may need to be modified to check for the correct dependencies.</para></listitem>
-  <listitem><para>The <function>AC_CONFIG_FILES()</function> block must mention
-      the correct directory names, as described above.</para></listitem>
-</itemizedlist>
+<sect3 id="modifying-top-meson.build">
+<title>meson.build in the top-level directory</title>
+<para>
+  <itemizedlist>
+    <listitem><para>It is common for binding modules to track the version number
+        of the library they are wrapping. So, for instance, if the C library is
+        at version 1.23.4, then the initial version of the binding module would
+        be 1.23.0. However, avoid starting with an even minor version number as
+        that usually indicates a stable release.</para></listitem>
+    <listitem><para>In the <function>project()</function> function, change the
+    license and the C++ version, if necessary.</para></listitem>
+    <listitem><para>You probably need to add more required modules than
+    <application>glibmm</application> and <application>skeleton</application>
+    (<application>libsomething</application>).</para></listitem>
+  </itemizedlist>
 </para>
 </sect3>
 
-<sect3 id="modifying-makefile.am">
-<title>Makefile.am files</title>
-<para>Next we must adapt the various <filename>Makefile.am</filename> files:
+<sect3 id="modifying-other-meson.build">
+<title>Other meson.build files</title>
+<para>Next we must adapt the other <filename>meson.build</filename> files:
   <itemizedlist>
-    <listitem><para>In <filename>skeleton/src/Makefile.am</filename> we
-            must mention the correct values for the generic variables that are used
-            elsewhere in the build system:</para>
-        <variablelist>
-            <varlistentry>
-                <term><varname>binding_name</varname></term>
-                <listitem><para>The name of the library, such as
-                        libsomethingmm.</para></listitem>
-            </varlistentry>
-            <varlistentry>
-                <term><varname>wrap_init_flags</varname></term>
-                <listitem><para>Additional command-line flags passed to the
-                    <filename>generate_wrap_init.pl</filename> script, such
-                    as the C++ namespace and the parent directory prefix of
-                    include files.</para></listitem>
-            </varlistentry>
-        </variablelist>
+    <listitem><para><filename>skeleton/meson.build</filename>: Perhaps not much
+    to change here more than the global name substitutions.</para>
     </listitem>
-    <listitem><para>In <filename>skeleton/skeletonmm/Makefile.am</filename> we
-            must mention the correct values for the generic variables that are used
-            elsewhere in the build system:</para>
+    <listitem><para><filename>skeleton/skeletonmm/meson.build</filename></para>
       <variablelist>
         <varlistentry>
-          <term><varname>lib_LTLIBRARIES</varname></term>
-          <listitem><para>This variable must mention the correct library
-              name, and this library name must be used to form the
-              <varname>_SOURCES</varname>, <varname>_LDFLAGS</varname>, and
-              <varname>_LIBADD</varname> variable names. It is permissible to
-              use variables substituted by <filename>configure</filename> like
-              <varname>@SOMETHINGMM_API_VERSION@</varname> as part of the
-              variable names.</para></listitem>
+          <term><varname>defs_basefiles</varname></term>
+          <listitem><para>If we have more .defs and docs.xml files,
+          we add them here.</para></listitem>
         </varlistentry>
         <varlistentry>
-          <term><varname>AM_CPPFLAGS</varname></term>
-          <listitem><para>The command line options passed to the C
-              preprocessor.</para></listitem>
+          <term><varname>hg_ccg_basenames</varname></term>
+          <listitem><para>We must mention all of our <filename>.hg</filename> and
+          <filename>.ccg</filename> files here.</para></listitem>
         </varlistentry>
         <varlistentry>
-          <term><varname>AM_CXXFLAGS</varname></term>
-          <listitem><para>The command line options passed to the C++
-              compiler.</para></listitem>
+          <term><varname>extra_cc_files, extra_h_files</varname></term>
+          <listitem><para>Any additional hand-written <filename>.h</filename> and
+          <filename>.cc</filename> source files go here.</para></listitem>
         </varlistentry>
       </variablelist>
     </listitem>
@@ -9608,16 +9577,6 @@ A number of the skeleton files must still be filled in with project-specific con
   to wrap one of the objects in the C library. One pair of example source files already exists:
   <filename>skeleton.ccg</filename> and <filename>skeleton.hg</filename>. Create copies of these
   files as necessary.</para>
-<para>We must mention all of our <filename>.hg</filename> and
-  <filename>.ccg</filename> files in the
-  <filename>skeleton/src/filelist.am</filename> file, typically in the
-  <varname>files_hg</varname> variable.</para>
-<para>Any additional non-generated <filename>.h</filename> and
-  <filename>.cc</filename> source files may be placed in
-  <filename>skeleton/skeletonmm/</filename> and listed in
-  <filename>skeleton/skeletonmm/filelist.am</filename>, typically in the
-  <varname>files_extra_h</varname> and <varname>files_extra_cc</varname>
-  variables.</para>
 <para>In the <link linkend="sec-wrapping-hg-files">.hg and .ccg files</link>
   section you can learn about the syntax used in these files.</para>
 </sect3>
@@ -9664,7 +9623,7 @@ A number of the skeleton files must still be filled in with project-specific con
         </varlistentry>
     </variablelist>
 </para>
-<para>The <filename>skeletonmm/codegen/generate_defs_and_docs.sh</filename> script
+<para>The <filename>skeletonmm/tools/generate_defs_and_docs.sh</filename> script
 generates all <filename>.defs</filename> files and the <filename>*_docs.xml</filename> file,
 described in the <link linkend="sec-wrapping-documentation">Documentation</link> section.
 </para>
@@ -9705,14 +9664,16 @@ $ ./generate_extra_defs &gt; gtk_signals.defs
 <para>You must edit the source code of your own <filename>generate_extra_defs</filename> tool
   in order to generate the <filename>.defs</filename> for the GObject C types that you wish to
   wrap. In the skeleton source tree, the source file is named
-  <filename>codegen/extradefs/generate_extra_defs_skeleton.cc</filename>. If not done so
+  <filename>tools/extra_defs_gen/generate_defs_skeleton.cc</filename>. If not done so
   already, the file should be renamed, with the basename of your new binding substituted
-  for the <varname>skeleton</varname> placeholder. The <filename>codegen/Makefile.am</filename>
+  for the <varname>skeleton</varname> placeholder. The <filename>tools/extra_defs_gen/meson.build</filename>
   file should also mention the new source filename.</para>
 <para>Then edit the <filename>.cc</filename> file to specify the correct types.
   For instance, your <function>main()</function> function might look like this:
 <programlisting>
+#include &lt;glibmm_generate_extra_defs/generate_extra_defs.h&gt;
 #include &lt;libsomething.h&gt;
+#include &lt;iostream&gt;
 
 int main(int, char**)
 {
@@ -11033,8 +10994,8 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
   generated by <command>gmmproc</command> from <filename>.hg</filename> and
   <filename>.ccg</filename> files. You can simply place these in your
   <filename>libsomething/libsomethingmm</filename> directory and mention them
-  in the <filename>Makefile.am</filename> in the
-  <varname>files_extra_h</varname> and <varname>files_extra_cc</varname>
+  in the <filename>meson.build</filename> in the
+  <varname>extra_h_files</varname> and <varname>extra_cc_files</varname>
   variables.</para>
 </sect1>
 
@@ -11174,18 +11135,20 @@ For instance,
     by copying the XML node for the function from your
     <filename>something_docs.xml</filename> file to the
     <filename>something_docs_override.xml</filename> file and changing the
-    contents.</para>
+    contents. Alternatively you can write your own documentation in the
+    <filename>.hg</filename> file.</para>
 </sect2>
 
 <sect2 id="wrapping-documentation-build-structure">
 <title>Documentation build structure</title>
-<para>If you copied the skeleton source tree in mm-common and substituted the
-  placeholder text, then you will already have suitable <filename>Makefile.am</filename>
-  and <filename>Doxyfile.in</filename> files. With the mm-common build setup, the list
+<para>If you copied the skeleton source tree in <application>mm-common</application> and substituted the
+  placeholder text, then you will already have suitable <filename>meson.build</filename>
+  and <filename>Doxyfile.in</filename> files in the <filename>doc/reference/</filename>
+  directory. You probably need to modify the <varname>tag_file_modules</varname>
+  variable in <filename>meson.build</filename>, though.
+  With the <application>mm-common</application> build setup, the list
   of Doxygen input files is not defined in the Doxygen configuration file, but passed
-  along from <command>make</command> to the standard input of <command>doxygen</command>.
-  The input file list is defined by the <varname>doc_input</varname> variable in the
-  <filename>Makefile.am</filename> file.
+  along from <command>meson/ninja</command> to the standard input of <command>doxygen</command>.
 </para>
 </sect2>
 
