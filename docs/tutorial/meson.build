@@ -35,7 +35,7 @@ tutorial_figurefiles = [
   'box_packing1.png',
   'box_packing2.png',
   'box_packing3.png',
-  'buildapp_app_menu.png',
+  'buildapp_menu.png',
   'buildapp_header_bar.png',
   'buildapp_opening_files.png',
   'buildapp_populating_window.png',

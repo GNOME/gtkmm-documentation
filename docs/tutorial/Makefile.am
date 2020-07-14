@@ -29,7 +29,7 @@ HELP_MEDIA =					\
 	figures/box_packing1.png		\
 	figures/box_packing2.png		\
 	figures/box_packing3.png		\
-	figures/buildapp_app_menu.png \
+	figures/buildapp_menu.png \
 	figures/buildapp_header_bar.png \
 	figures/buildapp_opening_files.png \
 	figures/buildapp_populating_window.png \

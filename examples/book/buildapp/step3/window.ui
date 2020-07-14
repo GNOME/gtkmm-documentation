@@ -7,7 +7,6 @@
     <property name="hide-on-close">True</property>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="header">
-        <property name="show-title-buttons">True</property>
         <child type="title">
           <object class="GtkStackSwitcher" id="tabs">
             <property name="stack">stack</property>

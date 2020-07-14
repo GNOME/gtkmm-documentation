@@ -7,7 +7,6 @@
     <property name="hide-on-close">True</property>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="header">
-        <property name="show-title-buttons">True</property>
         <child>
           <object class="GtkLabel" id="lines_label">
             <property name="visible">False</property>
@@ -56,7 +55,6 @@
                 <child>
                   <object class="GtkScrolledWindow" id="sidebar-sw">
                     <property name="hscrollbar-policy">never</property>
-                    <property name="vscrollbar-policy">automatic</property>
                     <child>
                       <object class="GtkListBox" id="words">
                         <property name="selection-mode">none</property>
