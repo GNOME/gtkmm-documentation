@@ -58,7 +58,7 @@ elif warning_level == 'max' or warning_level == 'fatal'
   warning_flags = '-pedantic -Wall -Wextra -Wformat-security -Wsuggest-override -Wshadow -Wno-long-long'.split()
   if warning_level == 'fatal'
     warning_flags += ['-Werror']
-    deprecations = 'G PANGO ATK GDK GDK_PIXBUF GTK GLIBMM GIOMM GDKMM ATKMM PANGOMM GTKMM SIGCXX'.split()
+    deprecations = 'G PANGO GDK GDK_PIXBUF GTK GLIBMM GIOMM GDKMM PANGOMM GTKMM SIGCXX'.split()
     foreach d : deprecations
       warning_flags += '-D@0@_DISABLE_DEPRECATED'.format(d)
     endforeach

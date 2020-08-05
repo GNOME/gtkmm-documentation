@@ -19,7 +19,7 @@
 
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::Orientation::VERTICAL),
-  m_Label("Press a or b to see a list of possible completions and actions."),
+  m_Label("Press a or b to see a list of possible completions."),
   m_Button_Close("Close")
 {
   //set_size_request(200, 100);
@@ -73,24 +73,6 @@ ExampleWindow::ExampleWindow()
   //  set_match_func().
   //- display text in the entry when a match is found.
   completion->set_text_column(m_Columns.m_col_name);
-
-  //Add actions to the completion:
-  //These are just extra items shown at the bottom of the list of possible
-  //completions.
-
-  //Remember them for later.
-  m_CompletionActions[0] = "Use Wizard";
-  m_CompletionActions[1] = "Browse for Filename";
-
-  for(const auto& the_pair : m_CompletionActions)
-  {
-    auto position = the_pair.first;
-    auto title = the_pair.second;
-    completion->insert_action_text(title, position);
-  }
-
-  completion->signal_action_activated().connect( sigc::mem_fun(*this,
-              &ExampleWindow::on_completion_action_activated) );
 }
 
 ExampleWindow::~ExampleWindow()
@@ -128,14 +110,3 @@ bool ExampleWindow::on_completion_match(const Glib::ustring& key, const
   return false; //No match.
 }
 */
-
-void ExampleWindow::on_completion_action_activated(int index)
-{
-  auto iter = m_CompletionActions.find(index);
-  if(iter != m_CompletionActions.end()) //If it's in the map
-  {
-    auto title = iter->second;
-    std::cout << "Action selected: " << title << std::endl;
-  }
-}
-

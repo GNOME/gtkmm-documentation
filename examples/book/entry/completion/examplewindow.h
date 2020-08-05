@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 705 2006-07-19 02:55:32Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -31,17 +29,13 @@ protected:
   //Signal handlers:
   void on_button_close();
 
-  void on_completion_action_activated(int index);
-
   //See the comment in the implementation:
   //bool on_completion_match(const Glib::ustring& key, const Gtk::TreeModel::const_iterator& iter);
-
 
   //Tree model columns, for the EntryCompletion's filter model:
   class ModelColumns : public Gtk::TreeModel::ColumnRecord
   {
   public:
-
     ModelColumns()
     { add(m_col_id); add(m_col_name); }
 
@@ -50,9 +44,6 @@ protected:
   };
 
   ModelColumns m_Columns;
-
-  typedef std::map<int, Glib::ustring> type_actions_map;
-  type_actions_map m_CompletionActions;
 
   //Child widgets:
   Gtk::Box m_HBox;
