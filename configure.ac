@@ -39,6 +39,7 @@ GLIB_GSETTINGS
 
 AC_LANG([C++])
 AC_CHECK_FUNCS([mkfifo])
+AM_CONDITIONAL([MKFIFO_EXISTS], [test "x$ac_cv_func_mkfifo" = xyes])
 
 MM_ARG_ENABLE_WARNINGS([EXAMPLES_WXXFLAGS],
                        [-Wall],

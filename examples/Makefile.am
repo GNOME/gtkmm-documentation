@@ -491,6 +491,9 @@ book_infobar_example_SOURCES =		\
 
 book_input_example_SOURCES = \
 	book/input/main.cc
+if !MKFIFO_EXISTS
+book_input_example_CXXFLAGS = -DDONT_HAVE_MKFIFO=1
+endif
 
 book_keyboard_events_simple_example_SOURCES =		\
 	book/keyboard_events/simple/examplewindow.cc	\

@@ -1,7 +1,7 @@
 # examples/book
 
 # input: gnome, gtkmm_dep, giomm_dep, build_examples_by_default,
-#        compile_schemas, copy_to_subdir, config_include_dir, python3,
+#        compile_schemas, copy_to_subdir, has_mkfifo, python3,
 #        meson_backend, test_timeout, project_build_root
 # input and output: examples_targets
 
@@ -127,10 +127,11 @@ foreach ex : examples_book
   endforeach
 
   if ex[0][0] == 'input'
-    # input/main.cc includes build/config.h.
+    # input/main.cc must know if mkfifo() exists.
+    # input/example is not a GUI app.
     exe_file = executable(ex_name, ex_sources, resources,
       dependencies: gtkmm_dep,
-      include_directories: config_include_dir,
+      cpp_args: has_mkfifo ? [] : [ '-DDONT_HAVE_MKFIFO=1' ],
       build_by_default: build_examples_by_default
     )
   else
