@@ -1,4 +1,3 @@
-#include <build/config.h>
 #include <gtkmm/application.h>
 #include <glibmm/main.h>
 #include <glibmm/iochannel.h>
@@ -51,7 +50,7 @@ int main(int argc, char *argv[])
 
   if (access("testfifo", F_OK) == -1) {
     // fifo doesn't exist - create it
-    #ifdef HAVE_MKFIFO
+    #ifndef DONT_HAVE_MKFIFO
     if (mkfifo("testfifo", 0666) != 0) {
       std::cerr << "error creating fifo" << std::endl;
       return -1;
@@ -59,7 +58,7 @@ int main(int argc, char *argv[])
     #else
       std::cerr << "error creating fifo: This platform does not have mkfifo()"
           << std::endl;
-    #endif //HAVE_MKFIFO
+    #endif //DONT_HAVE_MKFIFO
   }
 
   // Although we will only read from the fifo, we open it in read/write mode.

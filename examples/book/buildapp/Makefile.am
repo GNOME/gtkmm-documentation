@@ -21,7 +21,7 @@ check_DATA = $(GSCHEMAS_COMPILED)
 
 dist_noinst_DATA = \
   README \
-  step1/exampleapp.desktop \
+  step1/exampleapp.desktop.in \
   step1/exampleapp.png \
   step1/Makefile.example \
   $(STEP2_RESOURCES) \

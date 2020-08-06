@@ -4,27 +4,8 @@
 #        project_build_root, python3
 # output: build_examples_by_default
 
-# examples/book/input/main.cc includes build/config.h.
+# examples/book/input/main.cc must know if mkfifo() exists.
 has_mkfifo = cpp_compiler.has_function('mkfifo')
-conf_data = configuration_data()
-conf_data.set('HAVE_MKFIFO', has_mkfifo)
-conf_file = configure_file(
-  output: 'config.h',
-  configuration: conf_data
-)
-custom_target('build_config',
-  input: conf_file,
-  output: 'config.stamp',
-  command: [
-    python3, copy_to_subdir,
-    '@INPUT@',
-    'build',
-    'config.h',
-    '@OUTPUT@',
-  ],
-  build_by_default: true
-)
-config_include_dir = include_directories('.')
 
 meson_backend = find_program(meson.backend(), required: true)
 build_examples_by_default = get_option('build-examples')
