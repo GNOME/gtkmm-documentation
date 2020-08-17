@@ -7772,6 +7772,14 @@ by a <classname>std::mutex</classname>.
 Only the GUI thread updates the GUI.
 </para>
 
+<para>
+Compiling and linking a multi-threaded program can require special compiler and
+linker options. If you use the <application>g++</application> compiler, add the
+<literal>-pthread</literal> option. Other compilers may require other options.
+If you build with <application>meson</application>, it handles the multi-threading
+complications for you, if you add <function>dependency('threads')</function>.
+</para>
+
 <figure id="figure-multithread">
   <title>Multi-Threaded Program</title>
   <screenshot>
