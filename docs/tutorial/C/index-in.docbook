@@ -411,10 +411,10 @@ in the <link linkend="chapter-building-applications">Building applications</link
 <title>Widgets</title>
 <para>&gtkmm; applications consist of windows containing widgets, such as buttons and text boxes. In some other systems, widgets are called "controls". For each widget in your application's windows, there is a C++ object in your application's code. So you just need to call a method of the widget's class to affect the visible widget.</para>
  <para>Widgets are arranged inside container widgets such as frames and notebooks, in a hierarchy of widgets within widgets. Some of these container widgets, such as <classname>Gtk::Grid</classname>, are not visible - they exist only to arrange other widgets. Here is some example code that adds 2 <classname>Gtk::Button</classname> widgets to a <classname>Gtk::Box</classname> container widget:
-<programlisting>m_box.add(m_Button1);
-m_box.add(m_Button2);</programlisting>
+<programlisting>m_box.append(m_Button1);
+m_box.append(m_Button2);</programlisting>
 and here is how to add the <classname>Gtk::Box</classname>, containing those buttons, to a <classname>Gtk::Frame</classname>, which has a visible frame and title:
-<programlisting>m_frame.add(m_box);</programlisting>
+<programlisting>m_frame.set_child(m_box);</programlisting>
 </para>
 <para>
 Most of the chapters in this book deal with specific widgets. See the <link linkend="chapter-container-widgets">Container Widgets</link> section for more details about adding widgets to container widgets.
@@ -578,7 +578,7 @@ omitted:
   m_button.set_margin(10);
   m_button.signal_clicked().connect(sigc::mem_fun(*this,
     &amp;HelloWorld::on_button_clicked));
-  add(m_button);
+  set_child(m_button);
 }</programlisting>
 
 <para>
@@ -597,10 +597,9 @@ This prints our friendly greeting to <literal>stdout</literal>.
 </para>
 
 <para>
-Next, we use the Window's <methodname>add()</methodname> method to put <literal>m_button</literal> in
-the Window. (<methodname>add()</methodname> comes from <classname>Gtk::Container</classname>, which is
-described in the chapter on container widgets.)  The <methodname>add()</methodname> method
-places the Widget in the Window.
+Next, we use the Window's <methodname>set_child()</methodname> method to put
+<literal>m_button</literal> in the Window. The <methodname>set_child()</methodname>
+method places the Widget in the Window.
 </para>
 
 <para>
@@ -782,9 +781,9 @@ when porting code that used &gtkmm;-3.0 and <application>glibmm</application>-2.
   you must use <methodname>Glib::make_refptr_for_instance()</methodname> in your
   <methodname>create()</methodname> methods.</simpara></listitem>
 <listitem><simpara><methodname>Gtk::Box::pack_start()</methodname> and <methodname>Gtk::Box::pack_end()</methodname>
-  have been removed. Use <methodname>Gtk::Container::add()</methodname> or the new
-  <classname>Gtk::Box</classname> methods <methodname>insert_child_after()</methodname>
-  and <methodname>insert_child_at_start()</methodname>.
+  have been removed. Use the new <classname>Gtk::Box</classname> methods
+  <methodname>append()</methodname>, <methodname>prepend()</methodname>,
+  <methodname>insert_child_after()</methodname> and <methodname>insert_child_at_start()</methodname>.
   </simpara></listitem>
 <listitem><simpara><classname>Gtk::ButtonBox</classname> has been removed.</simpara></listitem>
 </orderedlist>
@@ -1683,10 +1682,9 @@ such as showing an image as well as text.
 <title>Container Widgets</title>
 
 <para>
-All container widgets derive from <classname>Gtk::Container</classname>, not
-always directly. Some container widgets, such as
-<classname>Gtk::Grid</classname> can hold many child widgets, so these
-typically have more complex interfaces. Others, such as
+Container widgets, like other widgets, derive from <classname>Gtk::Widget</classname>.
+Some container widgets, such as <classname>Gtk::Grid</classname> can hold many
+child widgets, so these typically have more complex interfaces. Others, such as
 <classname>Gtk::Frame</classname> contain only one child widget.
 </para>
 
@@ -1694,11 +1692,10 @@ typically have more complex interfaces. Others, such as
 <title>Single-item Containers</title>
 
 <para>
-The single-item container widgets derive from <classname>Gtk::Bin</classname>,
-which provides the <methodname>add()</methodname> and <methodname>remove()</methodname>
-methods for the child widget. Note that <classname>Gtk::Button</classname> and
-<classname>Gtk::Window</classname> are technically single-item containers, but
-we have discussed them already elsewhere.
+Most single-item container widgets have <methodname>set_child()</methodname>
+and <methodname>unset_child()</methodname> methods for the child widget.
+<classname>Gtk::Button</classname> and <classname>Gtk::Window</classname> are
+technically single-item containers, but we have discussed them already elsewhere.
 </para>
 
 <para>
@@ -1747,8 +1744,8 @@ vertically (one above the other).
 <para>
 Unlike the other widgets in this section, pane widgets contain not one but two
 child widgets, one in each pane. Therefore, you should use
-<methodname>add1()</methodname> and <methodname>add2()</methodname> instead of the
-<methodname>add()</methodname> method.
+<methodname>set_start_child()</methodname> and <methodname>set_end_child()</methodname>
+instead of a <methodname>set_child()</methodname> method.
 </para>
 
 <para>
@@ -1780,7 +1777,7 @@ so.
 <para>
 <classname>ScrolledWindow</classname> widgets create a scrollable
 area. You can insert any type of widget into a
-<classname>ScrolledWindow</classname> window, and it will be accessible
+<classname>ScrolledWindow</classname>, and it will be accessible
 regardless of its size by using the scrollbars. Note that
 <classname>ScrolledWindow</classname> is not a
 <classname>Gtk::Window</classname> despite the slightly misleading name.
@@ -1790,11 +1787,11 @@ regardless of its size by using the scrollbars. Note that
 Scrolled windows have <emphasis>scrollbar policies</emphasis> which determine
 whether the <classname>Scrollbar</classname>s will be displayed. The policies
 can be set with the <methodname>set_policy()</methodname> method. The policy may be
-one of <literal>Gtk::POLICY_AUTOMATIC</literal> or
-<literal>Gtk::POLICY_ALWAYS</literal>.
-<literal>Gtk::POLICY_AUTOMATIC</literal> will cause the scrolled window
+for instance <literal>Gtk::PolicyType::AUTOMATIC</literal> or
+<literal>Gtk::PolicyType::ALWAYS</literal>.
+<literal>Gtk::PolicyType::AUTOMATIC</literal> will cause the scrolled window
 to display the scrollbar only if the contained widget is larger than the
-visible area. <literal>Gtk::POLICY_ALWAYS</literal> will cause the
+visible area. <literal>Gtk::PolicyType::ALWAYS</literal> will cause the
 scrollbar to be displayed always.
 </para>
 
@@ -1863,7 +1860,6 @@ complete list. Here are links to some example programs that show containers,
 which are not mentioned elsewhere in this tutorial.
 </para>
 
-<para><ulink url="&url_examples_base;actionbar">Source Code, ActionBar</ulink></para>
 <para><ulink url="&url_examples_base;expander">Source Code, Expander</ulink></para>
 <para><ulink url="&url_examples_base;popover">Source Code, Popover</ulink></para>
 
@@ -1875,12 +1871,12 @@ which are not mentioned elsewhere in this tutorial.
 <title>Multiple-item Containers </title>
 
 <para>
-Multiple-item widgets inherit from <classname>Gtk::Container</classname>; just
-as with <classname>Gtk::Bin</classname>, you use the <methodname>add()</methodname>
-and <methodname>remove()</methodname> methods to add and remove contained widgets.
-Unlike <methodname>Gtk::Bin::remove()</methodname>, however, the
-<methodname>remove()</methodname> method for <classname>Gtk::Container</classname>
-takes an argument, specifying which widget to remove.
+Multiple-item container widgets have other methods than <methodname>set_child()</methodname>
+and <methodname>unset_child()</methodname>. Different containers can have different
+methods for adding and removing child widgets. For instance, <classname>Gtk::Box</classname>
+has <methodname>append()</methodname> and <methodname>remove()</methodname> as
+well as other methods. The <methodname>remove()</methodname> method for multiple-item
+containers takes an argument, specifying which widget to remove.
 </para>
 
 <sect2 id="container-packing">
@@ -1922,13 +1918,11 @@ all this information to resize and reposition everything sensibly and smoothly w
 
 <para>
 &gtkmm; arranges widgets hierarchically, using <emphasis>containers</emphasis>.
-A Container widget contains other widgets. Most &gtkmm; widgets are
+A container widget contains other widgets. Most &gtkmm; widgets are
 containers. Windows, Notebook tabs, and Buttons are all container widgets.
-There are two flavours of containers: single-child containers, which are all
-descendants of <classname>Gtk::Bin</classname>, and multiple-child containers,
-which are descendants of <classname>Gtk::Container</classname>. Most widgets
-in &gtkmm; are descendants of <classname>Gtk::Bin</classname>, including
-<classname>Gtk::Window</classname>.
+There are two flavours of containers: single-child containers and multiple-child
+containers. Most container widgets in &gtkmm; are single-child containers,
+including <classname>Gtk::Window</classname>.
 </para>
 
 <para>
@@ -1944,16 +1938,15 @@ the window. The most useful container widgets are
 <listitem>
 <para>
 <classname>Gtk::Grid</classname> arranges its child widgets in rows and
-columns. Use <methodname>attach()</methodname>,
-<methodname>attach_next_to()</methodname> and <methodname>add()</methodname> to
-insert child widgets.
+columns. Use <methodname>attach()</methodname> and
+<methodname>attach_next_to()</methodname> to insert child widgets.
 </para>
 </listitem>
 
 <listitem>
 <para>
 <classname>Gtk::Box</classname> arranges its child widgets vertically or horizontally.
-Use <methodname>add()</methodname> to insert child widgets.
+Use <methodname>append()</methodname> to insert child widgets.
 </para>
 </listitem>
 
@@ -2013,13 +2006,13 @@ boxes to create the desired effect.
 <sect3 id="boxes-adding-widgets"><title>Adding widgets</title>
 <sect4 id="per-child-packing-options"><title>Per-child packing options</title>
 <para>
-The <methodname>add()</methodname> method places widgets inside these
+The <methodname>append()</methodname> method places widgets inside these
 containers. It will start at the top and work its way down in a
 <classname>Box</classname> with vertical orientation, or pack left to right in
 a <classname>Box</classname> with horizontal orientation. If it's inconvenient
 to add widgets in this order, use <methodname>insert_child_after()</methodname>
 or <methodname>insert_child_at_start()</methodname>. We will use
-<methodname>add()</methodname> in our examples.
+<methodname>append()</methodname> in our examples.
 </para>
 
 <para>
@@ -2272,6 +2265,7 @@ complete list. Here are links to some example programs that show containers,
 which are not mentioned elsewhere in this tutorial.
 </para>
 
+<para><ulink url="&url_examples_base;actionbar">Source Code, ActionBar</ulink></para>
 <para><ulink url="&url_examples_base;flowbox">Source Code, FlowBox</ulink></para>
 <para><ulink url="&url_examples_base;iconview">Source Code, IconView</ulink></para>
 
@@ -3524,10 +3518,10 @@ to a container. For instance:
 <programlisting>
 <![CDATA[auto gmenu = m_refBuilder->get_object<Gio::Menu>("menubar");
 auto pMenuBar = Gtk::make_managed<Gtk::MenuBar>(gmenu);
-m_Box.add(*pMenuBar);
+m_Box.append(*pMenuBar);
 
 auto toolbar = m_refBuilder->get_widget<Gtk::Toolbar>("toolbar");
-m_Box.add(*toolbar);]]>
+m_Box.append(*toolbar);]]>
 </programlisting>
 
 </sect1>
@@ -5256,9 +5250,9 @@ Gtk::Widget* CustomPrintOperation::on_create_custom_widget()
   hbox-&gt;set_margin(6);
 
   auto label = Gtk::make_managed&lt;Gtk::Label&gt;("Enter some text: ");
-  hbox-&gt;add(*label);
+  hbox-&gt;append(*label);
 
-  hbox-&gt;add(m_Entry);
+  hbox-&gt;append(m_Entry);
 
   return hbox;
 }
@@ -6014,16 +6008,16 @@ Alternatively, you can let a widget's container control when the widget is
 destroyed. In most cases, you want a widget to last only as long as the
 container it is in. To delegate the management of a widget's lifetime to its
 container, create it with <function>Gtk::make_managed()</function> and then
-pack it into its container with <methodname>Gtk::Container::add()</methodname> or
+pack it into its container with <methodname>Gtk::Box::append()</methodname> or
 a similar method. Now the widget will be destroyed whenever its container is destroyed.
 </para>
 
 <sect3 id="memory-managed-dynamic">
-<title>Dynamic allocation with make_managed() and add()</title>
+<title>Dynamic allocation with make_managed() and append()</title>
 
 <para>
 &gtkmm; provides ways including the <function>make_managed()</function> function
-and <methodname>Gtk::Container::add()</methodname> method to simplify creation
+and <methodname>Gtk::Box::append()</methodname> method to simplify creation
 and destruction of widgets whose lifetime can be managed by a parent.
 </para>
 
@@ -6053,7 +6047,7 @@ modern C++ style, and more clearly expresses intent to create a managed widget.
 MyContainer::MyContainer()
 {
   auto pButton = Gtk::make_managed&lt;Gtk::Button&gt;("Test");
-  add(*pButton); //add *pButton to MyContainer
+  append(*pButton); //add *pButton to MyContainer
 }
 </programlisting>
 Now, when objects of type <classname>MyContainer</classname> are destroyed, the
@@ -6946,15 +6940,12 @@ instance, you cannot use the copyright sign (&copy;).
 
     <sect1 id="sec-custom-containers">
     <title>Custom Containers</title>
-    <para>When deriving from <classname>Gtk::Container</classname>, you should override the following virtual methods:
+    <para>When deriving a custom container widget directly from <classname>Gtk::Widget</classname>,
+      you should override the following virtual methods:
     <itemizedlist>
       <listitem><para><methodname>get_request_mode_vfunc()</methodname>: Return what <literal>Gtk::SizeRequestMode</literal> is preferred by the container.</para></listitem>
       <listitem><para><methodname>measure_vfunc()</methodname>: Calculate the minimum and natural width or height of the container.</para></listitem>
       <listitem><para><methodname>on_size_allocate()</methodname>: Position the child widgets, given the height and width that the container has actually been given.</para></listitem>
-      <listitem><para><methodname>forall_vfunc()</methodname>: Call the same callback for each of the children.</para></listitem>
-      <listitem><para><methodname>on_add()</methodname>: Add a child widget to the container.</para></listitem>
-      <listitem><para><methodname>on_remove()</methodname>: Remove a child widget from the container.</para></listitem>
-      <listitem><para><methodname>child_type_vfunc()</methodname>: Return what type of child can be added.</para></listitem>
     </itemizedlist>
     </para>
 
@@ -6990,47 +6981,6 @@ instance, you cannot use the copyright sign (&copy;).
        space and leave a blank area, or you might choose to expand your child
        widgets to fill the space, or you might choose to expand the padding
        between your widgets. It's your container, so you decide.</para>
-
-  <para>Unless your container is a top-level window that derives from
-      <classname>Gtk::Window</classname>, you should probably also call
-      <methodname>Gtk::Widget::set_has_surface(false)</methodname> in your
-      constructor. This means that your container does not create its own
-      <classname>Gdk::Surface</classname>, but uses its parent's
-      surface. If your container does need
-      its own <classname>Gdk::Surface</classname>, and does not derive from
-      <classname>Gtk::Window</classname>, you must also override the
-      <methodname>on_realize()</methodname> method as described in the
-      <link linkend="sec-custom-widgets">Custom Widgets</link> section.</para>
-
-  <para><application>GTK+</application> requires that <methodname>set_has_surface()</methodname>
-      is called in the instance init function, which is executed before your constructor.
-      If you call it in the constructor, <application>GTK+</application> may issue
-      a warning message, but at the time of writing (2018-05-07) it works as intended.
-      Adding code to the instance init function is more complicated for a &gtkmm;
-      programmer. The <link linkend="custom-widget-example">custom widget example</link>
-      shows how it can be done.</para>
-
-  <para>By overriding <methodname>forall_vfunc()</methodname> you can allow
-      applications to operate on all of the container's child widgets. For
-      instance, <methodname>get_children()</methodname> uses this to find all
-      the child widgets.</para>
-
-  <para>Although your container might have its own method to set the child
-      widgets, you should still provide an implementation for the virtual
-      <methodname>on_add()</methodname> and <methodname>on_remove()</methodname>
-      methods from the base class, so that the <methodname>add()</methodname>
-      and <methodname>remove()</methodname> methods will
-      do something appropriate if they are called.</para>
-
-  <para>Your implementation of the <methodname>child_type_vfunc()</methodname>
-      method should report the type of widget that may be added to your
-      container, if it is not yet full. This is usually
-      <methodname>Gtk::Widget::get_type()</methodname> to indicate that the
-      container may contain any class derived from
-      <classname>Gtk::Widget</classname>. If the container may not contain any
-      more widgets, then this method should return
-      <literal>G_TYPE_NONE</literal>.</para>
-
 
 <sect2 id="custom-container-example"><title>Example</title>
 
@@ -7078,16 +7028,6 @@ instance, you cannot use the copyright sign (&copy;).
         containers. They are briefly described in the
         <link linkend="sec-custom-containers">Custom Containers</link> section.
     </para>
-
-    <para>Most custom widgets need their own <classname>Gdk::Surface</classname>
-      to draw on. Then you can call
-      <methodname>Gtk::Widget::set_has_surface(true)</methodname> in your
-      constructor, or (better) call <function>gtk_widget_set_has_surface(widget, true)</function>
-      in the instance init function. If you do not call
-      <methodname>set_has_surface(false)</methodname>, you must override
-      <methodname>on_realize()</methodname> and call
-      <methodname>Gtk::Widget::set_surface()</methodname> and the base class's
-      <methodname>on_realize()</methodname> from there.</para>
 
 <sect2 id="custom-init-functions">
 <title>Class Init and Instance Init Functions</title>
@@ -7460,7 +7400,7 @@ Connect any signals you wish to use to the appropriate handlers.
 <listitem>
 <para>
 Pack the widget into a container using the appropriate call,
-e.g. <methodname>Gtk::Container::add()</methodname>.
+e.g. <methodname>Gtk::Box::append()</methodname>.
 </para>
 </listitem>
 
