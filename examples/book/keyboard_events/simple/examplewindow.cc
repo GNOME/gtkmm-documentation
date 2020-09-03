@@ -26,7 +26,7 @@ ExampleWindow::ExampleWindow()
   m_first.set_label("First");
   m_second.set_label("Second");
 
-  m_second.join_group(m_first);
+  m_second.set_group(m_first);
   m_first.set_active();
 
   // Main Container:

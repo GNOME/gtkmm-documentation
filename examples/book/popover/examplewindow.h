@@ -43,7 +43,7 @@ protected:
 
   Gtk::Popover m_toggle_form_popover;
   Gtk::Label m_toggle_form_label;
-  Gtk::RadioButton m_toggle_form_buttons[3];
+  Gtk::ToggleButton m_toggle_form_buttons[3];
   Gtk::Label m_toggle_form_combo_label;
   Gtk::ComboBoxText m_toggle_form_combo;
 

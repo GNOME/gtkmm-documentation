@@ -764,8 +764,8 @@ when porting code that used &gtkmm;-3.0 and <application>glibmm</application>-2.
   <classname>Glib::ListHandle</classname> and <classname>Glib::SListHandle</classname> have been removed.
   They were used in <application>glibmm</application>-2.4, but not used in &gtkmm;-3.0.
   If you've ever used these classes, replace them with a standard C++ container, such as <classname>std::vector</classname>.</simpara></listitem>
-<listitem><simpara><methodname>Gtk::Container::show_all_children()</methodname> and
-  <methodname>Gtk::Widget::show_all()</methodname> have been removed. The default value
+<listitem><simpara><classname>Gtk::Container</classname> has been removed.</simpara></listitem>
+<listitem><simpara><methodname>Gtk::Widget::show_all()</methodname> has been removed. The default value
   of <methodname>Gtk::Widget::property_visible()</methodname>has been changed from
   <literal>false</literal> to <literal>true</literal>.</simpara></listitem>
 <listitem><simpara>All event signals have been removed from <classname>Gtk::Widget</classname>.
@@ -786,6 +786,9 @@ when porting code that used &gtkmm;-3.0 and <application>glibmm</application>-2.
   <methodname>insert_child_after()</methodname> and <methodname>insert_child_at_start()</methodname>.
   </simpara></listitem>
 <listitem><simpara><classname>Gtk::ButtonBox</classname> has been removed.</simpara></listitem>
+<listitem><simpara><classname>Gtk::RadioButton</classname> and <classname>Gtk::RadioButtonGroup</classname>
+  have been removed. Use <classname>Gtk::CheckButton</classname> or <classname>Gtk::ToggleButton</classname>
+  with <methodname>set_group()</methodname>.</simpara></listitem>
 </orderedlist>
 </para>
 
@@ -849,21 +852,21 @@ See the <link linkend="sec-checkbuttons">CheckButton</link> section.
 <term>Radio buttons</term>
 <listitem>
 <para>
-<ulink url="&url_refdocs_base_gtk;RadioButton.html"><classname>Gtk::RadioButton</classname></ulink>.
 Named after the station selectors on old car
 radios, these buttons are used in groups for options which are
 mutually exclusive. Pressing one causes all the
-others in its group to turn off. They are similar to
+others in its group to turn off. They are similar to ToggleButtons or
 CheckButtons (a small widget with a label at the side), but usually
-look different.
-See the <link linkend="sec-radio-buttons">RadioButton</link> section.
+look different. There is no separate radio button class. Check buttons
+and toggle buttons can act as radio buttons.
+See the <link linkend="sec-radio-buttons">Radio Button</link> section.
 </para>
 </listitem>
 </varlistentry>
 </variablelist>
 
 <para>
-Note that, due to GTK+'s theming system, the appearance of these
+Note that, due to GTK's theming system, the appearance of these
 widgets will vary. In the case of check buttons and radio buttons, they
 may vary considerably.
 </para>
@@ -930,12 +933,6 @@ You can use the <methodname>toggled()</methodname> method to toggle the button, 
 forcing it to be up or down: This switches the button's state, and causes the <literal>toggled</literal> signal to be emitted.
 </para>
 
-<para>
-<classname>Gtk::ToggleButton</classname> is most useful as a base class for the
-<classname>Gtk::CheckButton</classname> and
-<classname>Gtk::RadioButton</classname> classes.
-</para>
-
 <para><ulink url="&url_refdocs_base_gtk;ToggleButton.html">Reference</ulink></para>
 
 </sect1>
@@ -944,10 +941,10 @@ forcing it to be up or down: This switches the button's state, and causes the <l
 <title>CheckButton</title>
 
 <para>
-<classname>Gtk::CheckButton</classname> inherits from
-<classname>Gtk::ToggleButton</classname>. The only real difference between the
-two is <classname>Gtk::CheckButton</classname>'s
-appearance. You can check, set, and toggle a check button using the same
+<classname>Gtk::CheckButton</classname> inherits directly from
+<classname>Gtk::Widget</classname>. It is similar to <classname>Gtk::ToggleButton</classname>.
+The only real difference between the two is <classname>Gtk::CheckButton</classname>'s
+appearance. You can check and set a check button using the same
 member methods as for <classname>Gtk::ToggleButton</classname>.
 </para>
 
@@ -968,91 +965,42 @@ member methods as for <classname>Gtk::ToggleButton</classname>.
 </sect1>
 
 <sect1 id="sec-radio-buttons">
-<title>RadioButton</title>
+<title>Radio Button</title>
 
 <para>
-Like check buttons, radio buttons also inherit from
-<classname>Gtk::ToggleButton</classname>, but these work in groups, and only
-one RadioButton in a group can be selected at any one time.
+There is no separate class for radio buttons. Check buttons and toggle buttons
+act as radio buttons when they form a group. Only one button in a group can be
+selected at any one time.
 </para>
 
 <sect2 id="radiobutton-groups"><title>Groups</title>
 <para>
-There are two ways to set up a group of radio buttons. The first way
-is to create the buttons, and set up their groups afterwards. Only
-the constructors without a <classname>Gtk::RadioButton::Group</classname>
-parameter are used. In the following example, we put 3 radio buttons in a group:
+You create the buttons, and set up their group afterwards. In the following example,
+we put 3 radio buttons in a group:
 </para>
 
 <programlisting>
-auto rb1 = Gtk::make_managed&lt;Gtk::RadioButton&gt;("button1");
-auto rb2 = Gtk::make_managed&lt;Gtk::RadioButton&gt;("button2");
-auto rb3 = Gtk::make_managed&lt;Gtk::RadioButton&gt;("button3");
-rb2-&gt;join_group(*rb1);
-rb3-&gt;join_group(*rb1);
+auto rb1 = Gtk::make_managed&lt;Gtk::CheckButton&gt;("button1");
+auto rb2 = Gtk::make_managed&lt;Gtk::CheckButton&gt;("button2");
+auto rb3 = Gtk::make_managed&lt;Gtk::CheckButton&gt;("button3");
+rb2-&gt;set_group(*rb1);
+rb3-&gt;set_group(*rb1);
 </programlisting>
 
 <para>
-We told &gtkmm; to put all three <classname>RadioButton</classname>s in the
-same group by using <methodname>join_group()</methodname> to tell the other
-<classname>RadioButton</classname>s to share group with the first
-<classname>RadioButton</classname>.
+We told &gtkmm; to put all three <classname>CheckButton</classname>s in the
+same group by using <methodname>set_group()</methodname> to tell the other
+<classname>CheckButton</classname>s to share group with the first
+<classname>CheckButton</classname>.
 </para>
 
-<para>
-The purpose of <methodname>join_group()</methodname> is to make it easier to
-express that you want a given button to use a group established by another.
-There is another way to do this, using <methodname>get_group()</methodname>
-and <methodname>set_group()</methodname>. However, this has a pitfall:
-Note that you can't do
-<programlisting>rb2-&gt;set_group(rb1-&gt;get_group());</programlisting>
-because <methodname>get_group()</methodname> returns a <classname>RadioButton::Group</classname>
-by value, and an unnamed rvalue cannot be passed as the lvalue reference needed
-by <methodname>set_group()</methodname>. Instead, you must assign the result of
-<methodname>get_group()</methodname> to a variable and pass that to
-<methodname>set_group()</methodname> as an lvalue:
-</para>
-
-<programlisting>
-auto rb1 = Gtk::make_managed&lt;Gtk::RadioButton&gt;("button1");
-auto rb2 = Gtk::make_managed&lt;Gtk::RadioButton&gt;("button2");
-auto rb3 = Gtk::make_managed&lt;Gtk::RadioButton&gt;("button3");
-auto group = rb1-&gt;get_group();
-rb2-&gt;set_group(group);
-rb3-&gt;set_group(group);
-</programlisting>
-
-<para>
-This works because the group is really a handle and therefore can be discarded
-once it has been used to tell the radio buttons to group with each other. Still,
-as <methodname>join_group()</methodname> does the same thing in one less line,
-you might not find much use for this pattern, but it is shown for completeness.
-</para>
-
-<para>
-The second way to set up radio buttons is to make a group first, and
-then add radio buttons to it. Here's an example:
-</para>
-
-<programlisting>
-Gtk::RadioButton::Group group;
-auto rb1 = Gtk::make_managed&lt;Gtk::RadioButton&gt;(group, "button1");
-auto rb2 = Gtk::make_managed&lt;Gtk::RadioButton&gt;(group, "button2");
-auto rb3 = Gtk::make_managed&lt;Gtk::RadioButton&gt;(group, "button3");
-</programlisting>
-
-<para>
-We made a new group by simply declaring a variable, <literal>group</literal>,
-of type <classname>Gtk::RadioButton::Group</classname>. Then we made three radio
-buttons, using a constructor to make each of them part of <literal>group</literal>.
-</para>
 </sect2>
 
 <sect2 id="radiobutton-methods"><title>Methods</title>
 <para>
-<classname>RadioButtons</classname> are "off" when created; this means that
-when you first make a group of them, they will all be off. Don't forget to turn
-one of them on using <methodname>set_active()</methodname>.
+<classname>CheckButton</classname>s and <classname>ToggleButton</classname>s are "off"
+when created; this means that when you first make a group of them, they will all be off.
+Don't forget to turn one of them on using <methodname>set_active()</methodname>.
 </para>
 
 <para><ulink url="&url_refdocs_base_gtk;RadioButton.html">Reference</ulink></para>
@@ -1061,8 +1009,8 @@ one of them on using <methodname>set_active()</methodname>.
 
 <sect2 id="radiobutton-example"><title>Example</title>
 <para>
-The following example demonstrates the use of
-<classname>RadioButton</classname>s:
+The following example demonstrates the use of grouped
+<classname>CheckButton</classname>s:
 </para>
 
 <figure id="figure-radiobutton">
@@ -1710,7 +1658,7 @@ two child widgets, but the number is fixed so it seems appropriate.
 <para>
 Frames can enclose one or a group of widgets within a box, optionally with a
 title. For instance, you might place a group of
-<classname>RadioButton</classname>s or <classname>CheckButton</classname>s in a
+<classname>ToggleButton</classname>s or <classname>CheckButton</classname>s in a
 <classname>Frame</classname>.
 </para>
 

@@ -22,8 +22,8 @@ ExampleWindow::ExampleWindow()
 {
   set_title("checkbutton example");
 
-  m_button.signal_clicked().connect(sigc::mem_fun(*this,
-              &ExampleWindow::on_button_clicked) );
+  m_button.signal_toggled().connect(sigc::mem_fun(*this,
+              &ExampleWindow::on_button_toggled) );
 
   m_button.set_margin(10);
   set_child(m_button);
@@ -33,9 +33,9 @@ ExampleWindow::~ExampleWindow()
 {
 }
 
-void ExampleWindow::on_button_clicked()
+void ExampleWindow::on_button_toggled()
 {
-  std::cout << "The Button was clicked: state="
+  std::cout << "The Button was toggled: state="
       << (m_button.get_active() ? "true" : "false")
       << std::endl;
 }

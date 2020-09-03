@@ -77,12 +77,12 @@ void ExampleWindow::configure_form_buttons()
   m_toggle_form_buttons[1].set_image_from_icon_name("format-justify-center-symbolic", Gtk::IconSize::INHERIT, true);
   m_toggle_form_buttons[2].set_image_from_icon_name("format-justify-right-symbolic", Gtk::IconSize::INHERIT, true);
 
-  m_toggle_form_buttons[1].join_group(m_toggle_form_buttons[0]);
-  m_toggle_form_buttons[2].join_group(m_toggle_form_buttons[0]);
+  m_toggle_form_buttons[0].set_active();
+  m_toggle_form_buttons[1].set_group(m_toggle_form_buttons[0]);
+  m_toggle_form_buttons[2].set_group(m_toggle_form_buttons[0]);
 
   for (auto& button : m_toggle_form_buttons)
   {
-    button.set_draw_indicator(false);
     button.set_expand(true);
     m_format_buttons_box.append(button);
   }

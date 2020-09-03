@@ -106,8 +106,8 @@ void ExampleWindow::prepare_textview()
 
 void ExampleWindow::connect_signals()
 {
-  m_checkbutton.signal_clicked().connect(
-    sigc::mem_fun(*this, &ExampleWindow::on_markup_checkbutton_click));
+  m_checkbutton.signal_toggled().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_markup_checkbutton_toggled));
 
   m_text_view.signal_query_tooltip().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_textview_query_tooltip), true);
@@ -116,9 +116,9 @@ void ExampleWindow::connect_signals()
     sigc::mem_fun(*this, &ExampleWindow::on_button_query_tooltip), true);
 }
 
-void ExampleWindow::on_markup_checkbutton_click()
+void ExampleWindow::on_markup_checkbutton_toggled()
 {
-  if (m_checkbutton.get_active() == true)
+  if (m_checkbutton.get_active())
   {
     m_checkbutton.set_tooltip_markup(markedup_tip);
   }

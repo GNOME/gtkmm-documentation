@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 2 2003-01-21 13:41:59Z murrayc $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -30,7 +28,7 @@ public:
 
 protected:
   //Signal handlers:
-  void on_button_clicked();
+  void on_button_toggled();
 
   //Child widgets:
   Gtk::CheckButton m_button;

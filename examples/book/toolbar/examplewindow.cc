@@ -68,10 +68,15 @@ ExampleWindow::ExampleWindow()
     item->signal_clicked().connect( sigc::mem_fun(*this,
                 &ExampleWindow::on_toolbar_item) );
 
-    Gtk::RadioButtonGroup group;
-    m_Toolbar.append(*Gtk::make_managed<Gtk::RadioButton>(group, "Radio 1"));
-    m_Toolbar.append(*Gtk::make_managed<Gtk::RadioButton>(group, "Radio 2"));
-    m_Toolbar.append(*Gtk::make_managed<Gtk::RadioButton>(group, "Radio 3"));
+    auto radio1 = Gtk::make_managed<Gtk::ToggleButton>("Radio 1");
+    auto radio2 = Gtk::make_managed<Gtk::ToggleButton>("Radio 2");
+    auto radio3 = Gtk::make_managed<Gtk::ToggleButton>("Radio 3");
+    m_Toolbar.append(*radio1);
+    m_Toolbar.append(*radio2);
+    m_Toolbar.append(*radio3);
+    radio1->set_active();
+    radio2->set_group(*radio1);
+    radio3->set_group(*radio1);
   }
 }
 

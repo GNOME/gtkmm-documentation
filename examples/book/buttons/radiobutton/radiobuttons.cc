@@ -16,7 +16,6 @@
 
 #include "radiobuttons.h"
 
-
 RadioButtons::RadioButtons() :
   m_Box_Top(Gtk::Orientation::VERTICAL),
   m_Box1(Gtk::Orientation::VERTICAL, 10),
@@ -29,9 +28,12 @@ RadioButtons::RadioButtons() :
   // Set title and border of the window
   set_title("radio buttons");
 
+  // Gtk::CheckButton and Gtk::ToggleButton have set_group() methods.
+  // They act as radio buttons, if they are included in a group.
+
   // Put radio buttons 2 and 3 in the same group as 1:
-  m_RadioButton2.join_group(m_RadioButton1);
-  m_RadioButton3.join_group(m_RadioButton1);
+  m_RadioButton2.set_group(m_RadioButton1);
+  m_RadioButton3.set_group(m_RadioButton1);
 
   // Add outer box to the window (because the window
   // can only contain a single widget)
@@ -56,9 +58,7 @@ RadioButtons::RadioButtons() :
   m_RadioButton3.set_expand();
 
   // Set the second button active
-  m_RadioButton1.set_active(false);
   m_RadioButton2.set_active(true);
-  m_RadioButton3.set_active(false);
 
   // Put Close button in Box2:
   m_Box2.append(m_Button_Close);
@@ -67,8 +67,8 @@ RadioButtons::RadioButtons() :
   // Make the button the default widget
   set_default_widget(m_Button_Close);
 
-  // Connect the clicked signal of the button to
-  // RadioButtons::on_button_clicked()
+  // Connect the toggled signal of the button to
+  // RadioButtons::on_button_toggled()
   m_Button_Close.signal_clicked().connect(sigc::mem_fun(*this,
               &RadioButtons::on_button_clicked) );
 }

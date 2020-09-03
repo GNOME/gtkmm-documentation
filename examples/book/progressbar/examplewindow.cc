@@ -51,19 +51,19 @@ ExampleWindow::ExampleWindow()
   //Add a check button to select displaying of the trough text:
   m_Grid.attach(m_CheckButton_Text, 0, 0);
   m_CheckButton_Text.set_margin(5);
-  m_CheckButton_Text.signal_clicked().connect(sigc::mem_fun(*this,
+  m_CheckButton_Text.signal_toggled().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_text) );
 
   //Add a check button to toggle activity mode:
   m_Grid.attach(m_CheckButton_Activity, 0, 1);
   m_CheckButton_Activity.set_margin(5);
-  m_CheckButton_Activity.signal_clicked().connect(sigc::mem_fun(*this,
+  m_CheckButton_Activity.signal_toggled().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_activity) );
 
   //Add a check button to select growth from left to right or from right to left:
   m_Grid.attach(m_CheckButton_Inverted, 0, 2);
   m_CheckButton_Inverted.set_margin(5);
-  m_CheckButton_Inverted.signal_clicked().connect(sigc::mem_fun(*this,
+  m_CheckButton_Inverted.signal_toggled().connect(sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_inverted) );
 
   //Add a button to exit the program.

@@ -31,8 +31,8 @@ private:
   bool on_window_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state);
 
   Gtk::Box m_container;
-  Gtk::RadioButton m_first;
-  Gtk::RadioButton m_second;
+  Gtk::CheckButton m_first;
+  Gtk::CheckButton m_second;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

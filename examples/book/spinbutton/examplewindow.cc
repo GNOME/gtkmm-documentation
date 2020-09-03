@@ -130,15 +130,14 @@ ExampleWindow::ExampleWindow()
   m_VBox_Accelerated.append(m_CheckButton_Snap);
   m_CheckButton_Snap.set_expand();
   m_CheckButton_Snap.set_active();
-  m_CheckButton_Snap.signal_clicked().connect( sigc::mem_fun(*this,
+  m_CheckButton_Snap.signal_toggled().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_snap) );
 
   m_VBox_Accelerated.append(m_CheckButton_Numeric);
   m_CheckButton_Numeric.set_expand();
   m_CheckButton_Numeric.set_active();
-  m_CheckButton_Numeric.signal_clicked().connect( sigc::mem_fun(*this,
+  m_CheckButton_Numeric.signal_toggled().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_checkbutton_numeric) );
-
 
   //Buttons:
   m_VBox_Accelerated.append(m_HBox_Buttons);
