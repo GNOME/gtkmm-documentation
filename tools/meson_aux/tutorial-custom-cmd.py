@@ -29,11 +29,10 @@ def insert_example_code():
     examples_book_dir,
     input_xml_file,
   ]
-  xml_file = open(output_xml_file, mode='w')
-  result = subprocess.run(cmd, stdout=xml_file)
-  xml_file.close()
-  if result.returncode != 0:
-    return result.returncode
+  with open(output_xml_file, mode='w') as xml_file:
+    result = subprocess.run(cmd, stdout=xml_file)
+    if result.returncode:
+      return result.returncode
 
   # Copy output_xml_file to the source directory.
   shutil.copy(output_xml_file, os.path.dirname(input_xml_file))

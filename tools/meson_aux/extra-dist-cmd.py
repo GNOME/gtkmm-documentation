@@ -2,8 +2,8 @@
 
 # External command, intended to be called with add_dist_script() in meson.build
 
-#                        argv[1]         argv[2]
-# extra-dist-cmd.py <root_source_dir> <root_build_dir>
+#                        argv[1]         argv[2]        argv[3:]
+# extra-dist-cmd.py <root_source_dir> <root_build_dir> <no_dist>...
 
 # Meson does not preserve timestamps on distributed files. Neither does this script.
 
@@ -15,6 +15,7 @@ import re
 
 root_source_dir = sys.argv[1]
 root_build_dir = sys.argv[2]
+dist_root = os.getenv('MESON_DIST_ROOT')
 
 # Make a ChangeLog file for distribution.
 cmd = [
@@ -27,15 +28,14 @@ cmd = [
   '--max-count=200',
   '--pretty=tformat:%cd  %an  <%ae>%n%n  %s%n%w(0,0,2)%+b',
 ]
-logfile = open(os.path.join(os.getenv('MESON_DIST_ROOT'), 'ChangeLog'), mode='w')
-result = subprocess.run(cmd, stdout=logfile)
-logfile.close()
-if result.returncode != 0:
-  sys.exit(result.returncode)
+with open(os.path.join(dist_root, 'ChangeLog'), mode='w') as logfile:
+  result = subprocess.run(cmd, stdout=logfile)
+  if result.returncode:
+    sys.exit(result.returncode)
 
 # Distribute some built files in addition to the files in the local git clone.
 os.chdir(root_build_dir)
-dist_docs_tutorial = os.path.join(os.getenv('MESON_DIST_ROOT'), 'docs', 'tutorial')
+dist_docs_tutorial = os.path.join(dist_root, 'docs', 'tutorial')
 dist_docs_tutorial_C = os.path.join(dist_docs_tutorial, 'C')
 docs_tutorial_index_docbook = os.path.join('docs', 'tutorial', 'index.docbook')
 
@@ -50,9 +50,8 @@ shutil.copytree(os.path.join('docs', 'tutorial', 'html'),
 linguas = os.path.join(dist_docs_tutorial, 'LINGUAS')
 langs = []
 if os.path.isfile(linguas):
-  linguas_file_obj = open(linguas)
-  buffer = linguas_file_obj.read().splitlines()
-  linguas_file_obj.close()
+  with open(linguas) as linguas_file_obj:
+    buffer = linguas_file_obj.read().splitlines()
   comment_pattern = re.compile(r'\s*(?:#|$)') # comment or blank line
   for line in buffer:
     if not comment_pattern.match(line):
@@ -75,15 +74,26 @@ else:
   print('--- Info: No updated PDF file found.')
 
 # Don't distribute .gitignore files.
-for dirpath, dirnames, filenames in os.walk(os.getenv('MESON_DIST_ROOT')):
+for dirpath, dirnames, filenames in os.walk(dist_root):
   if '.gitignore' in filenames:
     os.remove(os.path.join(dirpath, '.gitignore'))
 
 # Remove an empty MESON_DIST_ROOT/build directory.
-dist_build_dir = os.path.join(os.getenv('MESON_DIST_ROOT'), 'build')
+dist_build_dir = os.path.join(dist_root, 'build')
 if os.path.isdir(dist_build_dir):
   try:
     os.rmdir(dist_build_dir)
   except OSError:
     # Ignore the error, if not empty.
     pass
+
+# Remove specified files and directories from the MESON_DIST_ROOT directory.
+for rel_path in sys.argv[3:]:
+  abs_path = os.path.join(dist_root, rel_path)
+  if os.path.isfile(abs_path):
+    os.remove(abs_path)
+  elif os.path.isdir(abs_path):
+    shutil.rmtree(abs_path, ignore_errors=True)
+  else:
+    # Ignore non-existent files and directories.
+    print('--- Info:', abs_path, 'not found, not removed.')

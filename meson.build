@@ -72,11 +72,18 @@ subdir('docs/tutorial')
 subdir('examples')
 
 if not meson.is_subproject()
+  # Don't distribute these files and directories.
+  dont_distribute = [
+    'docs' / 'tutorial' / 'kindle_cover.jpg',
+    'docs' / 'tutorial' / 'kindle_cover.svg',
+    'tools' / 'make_screenshots',
+  ]
   # Modify the contents of the distribution directory. (not allowed in a subproject)
   meson.add_dist_script(
     python3.path(), extra_dist_cmd,
     project_source_root,
     project_build_root,
+    dont_distribute,
   )
 endif
 
