@@ -8,31 +8,25 @@
 import os
 import sys
 import subprocess
-from pathlib import Path
 import shutil
 
 subcommand = sys.argv[1]
 
-def insert_example_code():
-  #      argv[2]            argv[3]             argv[4]         argv[5]
-  # <perl_script_file> <examples_book_dir> <input_xml_file> <output_xml_file>
+def insert_ex_code():
+  #     argv[2]          argv[3]            argv[4]          argv[5]
+  # <py_script_dir> <examples_book_dir> <input_xml_file> <output_xml_file>
 
-  perl_script_file = sys.argv[2]
+  # Search for insert_example_code.py first in <py_script_dir>.
+  sys.path.insert(0, sys.argv[2])
+  from insert_example_code import insert_example_code
+
   examples_book_dir = sys.argv[3]
   input_xml_file = sys.argv[4]
   output_xml_file = sys.argv[5]
 
-  cmd = [
-    'perl',
-    '--',
-    perl_script_file,
-    examples_book_dir,
-    input_xml_file,
-  ]
-  with open(output_xml_file, mode='w') as xml_file:
-    result = subprocess.run(cmd, stdout=xml_file)
-    if result.returncode:
-      return result.returncode
+  returncode = insert_example_code(examples_book_dir, input_xml_file, output_xml_file)
+  if returncode:
+    return returncode
 
   # Copy output_xml_file to the source directory.
   shutil.copy(output_xml_file, os.path.dirname(input_xml_file))
@@ -87,6 +81,8 @@ def html():
   return result.returncode
 
 def xmllint():
+  from pathlib import Path
+
   #  argv[2]       argv[3]          argv[4]
   # <validate> <input_xml_file> <stamp_file_path>
 
@@ -182,7 +178,7 @@ def docbook2pdf():
 
 # ----- Main -----
 if subcommand == 'insert_example_code':
-  sys.exit(insert_example_code())
+  sys.exit(insert_ex_code())
 if subcommand == 'html':
   sys.exit(html())
 if subcommand == 'xmllint':

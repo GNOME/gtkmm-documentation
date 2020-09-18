@@ -7,8 +7,6 @@
 
 # xsltproc is required by tutorial_custom_cmd html.
 xsltproc = find_program('xsltproc', required: true)
-# perl is required by tutorial_custom_cmd insert_example_code.
-perl = find_program('perl', required: true)
 xmllint = find_program('xmllint', required: false)
 
 can_parse_and_validate = xmllint.found()
@@ -148,7 +146,7 @@ index_docbook = custom_target('index.docbook',
   output: 'index.docbook',
   command: [
     python3, tutorial_custom_cmd, 'insert_example_code',
-    meson.current_source_dir() / 'insert_example_code.pl',
+    meson.current_source_dir(),
     project_source_root / 'examples' / 'book',
     '@INPUT@',
     '@OUTPUT@',
