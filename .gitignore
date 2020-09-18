@@ -1,7 +1,6 @@
 Makefile
 Makefile.in
 stamp-h?
-*~
 
 /INSTALL
 /aclocal.m4
@@ -11,8 +10,8 @@ stamp-h?
 /config.status.lineno
 /configure
 /configure.lineno
-/docs/FAQ/html/
 /docs/tutorial/html/
+/docs/tutorial/__pycache__/
 /docs/tutorial/*/index.docbook
 /docs/tutorial/*/*.mo
 /docs/tutorial/*/*.stamp
