@@ -10,6 +10,7 @@
   <!ENTITY url_figures_base "figures/">
   <!ENTITY url_examples_branch "master">
   <!ENTITY url_examples_base "https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/&url_examples_branch;/examples/book/">
+  <!ENTITY url_gtkmm_base "https://gitlab.gnome.org/GNOME/gtkmm/tree/&url_examples_branch;/">
   <!ENTITY gtkmm "<application>gtkmm</application>">
   <!ENTITY uuml "&#252;" >
   <!ENTITY szlig "&#223;" >
@@ -296,8 +297,12 @@ be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
 
 <sect1 id="sec-packages-windows">
 <title>Microsoft Windows</title>
-<para>GTK+ and &gtkmm; were designed to work well with Microsoft Windows, and the developers encourage its use on the win32 platform. However, Windows has no standard installation system for development libraries. Please see the <ulink url="https://wiki.gnome.org/Projects/gtkmm/MSWindows">Windows Installation</ulink>
-page for Windows-specific installation instructions and notes.</para>
+<para>GTK and &gtkmm; were designed to work well with Microsoft Windows, and the
+developers encourage its use on the win32 platform. However, Windows has no standard
+installation system for development libraries. Please see the
+<ulink url="https://wiki.gnome.org/Projects/gtkmm/MSWindows">Windows Installation</ulink>
+page or the <link linkend="sec-windows-installation">&gtkmm; and Win32</link> appendix
+for Windows-specific installation instructions and notes.</para>
 </sect1>
 
 </chapter>
@@ -8724,19 +8729,21 @@ practical - and sensible - to subclass a button for that purpose.
       versa) with few modifications to the source.
     </para>
     <para>
-      &gtkmm; currently works with the <ulink
-        url="http://mingw.org/">MingW/GCC compiler</ulink> with a compiler version
-      that supports C++14, such as gcc 6.2. It also works with Microsoft
-      Visual C++ 2017 or later (including the freely available express
+      &gtkmm; currently works with the
+      <ulink url="http://mingw.org/">MinGW/GCC compiler</ulink> with a compiler version
+      that supports C++17, such as gcc 7 or 8. It also works with Microsoft
+      Visual C++ 2017 15.7.x or later (including the freely available express/community
       editions) on the Windows platform. There is an
       <ulink url="ftp://ftp.gnome.org/pub/GNOME/binaries/win32/gtkmm">installer</ulink>
       available for &gtkmm; on Microsoft Windows, but as of this writing
-      (February 2017) it has not been updated for a long time.
+      (October 2020) it has not been updated for a long time.
+      Please be aware that although normally it is fine to mix builds done with
+      Visual Studio 2017 and 2019, please do not do so when building
+      &gtkmm; with its -mm dependencies.
     </para>
-    <para>
-      Refer to <ulink url="https://wiki.gnome.org/Projects/gtkmm/MSWindows/">
-      https://wiki.gnome.org/Projects/gtkmm/MSWindows</ulink> for instructions on how to
-      build &gtkmm; on Windows.
+    <para>Refer to the <ulink url="&url_gtkmm_base;README.win32">README.win32</ulink>,
+    as well as the <ulink url="&url_gtkmm_base;MSVC_NMake/README">README</ulink>
+    files in the &gtkmm;, pangomm and glibmm for instructions on how to build &gtkmm; on Windows.
     </para>
 </appendix>
 
