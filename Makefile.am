@@ -12,6 +12,7 @@ dist_noinst_SCRIPTS = autogen.sh
 EXTRA_DIST = \
   meson.build \
   meson_options.txt \
+  docs/tutorial/insert_example_code.py \
   docs/tutorial/meson.build \
   docs/tutorial/LINGUAS \
   examples/meson.build \
