@@ -288,7 +288,5 @@ Glib::DateTime CalendarExample::get_date() const
 int main(int argc, char** argv)
 {
   auto app = Gtk::Application::create("org.gtkmm.example");
-  CalendarExample calendar;
-  return app->run(calendar, argc, argv);
+  return app->make_window_and_run<CalendarExample>(argc, argv);
 }
-

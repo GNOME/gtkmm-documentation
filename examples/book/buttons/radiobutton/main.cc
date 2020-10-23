@@ -21,8 +21,6 @@ int main(int argc, char *argv[])
 {
   auto app = Gtk::Application::create("org.gtkmm.example");
 
-  RadioButtons buttons;
-
   //Shows the window and returns when it is closed.
-  return app->run(buttons, argc, argv);
+  return app->make_window_and_run<RadioButtons>(argc, argv);
 }

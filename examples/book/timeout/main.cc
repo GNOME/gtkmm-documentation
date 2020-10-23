@@ -21,6 +21,5 @@ int main (int argc, char *argv[])
 {
   auto app = Gtk::Application::create("org.gtkmm.example");
 
-  TimerExample example;
-  return app->run(example, argc, argv);
+  return app->make_window_and_run<TimerExample>(argc, argv);
 }

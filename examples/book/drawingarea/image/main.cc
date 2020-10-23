@@ -18,16 +18,25 @@
 #include <gtkmm/application.h>
 #include <gtkmm/window.h>
 
+class ExampleWindow : public Gtk::Window
+{
+public:
+  ExampleWindow();
+
+protected:
+  MyArea m_area;
+};
+
+ExampleWindow::ExampleWindow()
+{
+  set_title("DrawingArea");
+  set_default_size(300, 200);
+  set_child(m_area);
+}
+
 int main(int argc, char** argv)
 {
   auto app = Gtk::Application::create("org.gtkmm.example");
 
-  Gtk::Window win;
-  win.set_title("DrawingArea");
-  win.set_default_size(300, 200);
-
-  MyArea area;
-  win.set_child(area);
-
-  return app->run(win, argc, argv);
+  return app->make_window_and_run<ExampleWindow>(argc, argv);
 }

@@ -193,7 +193,5 @@ int main(int argc, char** argv)
 {
   auto app = Gtk::Application::create("org.gtkmm.example");
 
-
-  Wheelbarrow wheelbarrow;
-  return app->run(wheelbarrow, argc, argv);
+  return app->make_window_and_run<Wheelbarrow>(argc, argv);
 }

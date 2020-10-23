@@ -61,35 +61,11 @@ ExampleWindow::ExampleWindow()
   list_authors.push_back("AN Other");
   m_Dialog.set_authors(list_authors);
 
-  m_Dialog.signal_response().connect(
-    sigc::mem_fun(*this, &ExampleWindow::on_about_dialog_response) );
-
   m_Button.grab_focus();
 }
 
 ExampleWindow::~ExampleWindow()
 {
-}
-
-void ExampleWindow::on_about_dialog_response(int response_id)
-{
-  std::cout << response_id
-    << ", close=" << Gtk::ResponseType::CLOSE
-    << ", cancel=" << Gtk::ResponseType::CANCEL
-    << ", delete_event=" << Gtk::ResponseType::DELETE_EVENT
-    << std::endl;
-
-  switch (response_id)
-  {
-  case Gtk::ResponseType::CLOSE:
-  case Gtk::ResponseType::CANCEL:
-  case Gtk::ResponseType::DELETE_EVENT:
-    m_Dialog.hide();
-    break;
-  default:
-    std::cout << "Unexpected response!" << std::endl;
-    break;
-  }
 }
 
 void ExampleWindow::on_button_clicked()

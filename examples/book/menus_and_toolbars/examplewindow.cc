@@ -153,7 +153,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_action_file_quit()
 {
-  hide(); //Closes the main window to stop the app->run().
+  hide(); //Closes the main window to stop the app->make_window_and_run().
 }
 
 void ExampleWindow::on_action_file_new()

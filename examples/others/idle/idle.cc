@@ -101,8 +101,6 @@ int main(int argc, char *argv[])
 {
   auto app = Gtk::Application::create("org.gtkmm.example");
 
-  IdleExample example;
-
-  return app->run(example, argc, argv);
+  return app->make_window_and_run<IdleExample>(argc, argv);
 }
 

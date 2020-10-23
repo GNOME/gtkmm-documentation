@@ -21,8 +21,6 @@ int main(int argc, char *argv[])
 {
   auto app = Gtk::Application::create("org.gtkmm.example");
 
-  ExampleWindow exampleWindow;
-
   //Shows the window and returns when it is closed.
-  return app->run(exampleWindow, argc, argv);
+  return app->make_window_and_run<ExampleWindow>(argc, argv);
 }

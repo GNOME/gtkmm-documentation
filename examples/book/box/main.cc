@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 #if GTK_APPLICATION_RECEIVES_COMMAND_LINE_ARGUMENTS
   // The Gio::Application::Flags::HANDLES_COMMAND_LINE flag and the
   // on_command_line() signal handler are not necessary. This program is simpler
-  // without them, and with argc = 1 in the call to Gtk::Application::run().
+  // without them, and with argc = 1 in the call to Gtk::Application::make_window_and_run().
   // They are included to show a program with Gio::Application::Flags::HANDLES_COMMAND_LINE.
   // Gio::Application::Flags::NON_UNIQUE makes it possible to run several instances of
   // this application simultaneously.
@@ -71,6 +71,6 @@ int main(int argc, char *argv[])
   auto app = Gtk::Application::create("org.gtkmm.example", Gio::Application::Flags::NON_UNIQUE);
 #endif
 
-  ExampleWindow window(std::atoi(argv[1]));
-  return app->run(window, argc1, argv); // Shows the window and returns when it is closed.
+  // Shows the window and returns when it is closed.
+  return app->make_window_and_run<ExampleWindow>(argc1, argv, std::atoi(argv[1]));
 }
