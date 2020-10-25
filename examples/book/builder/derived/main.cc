@@ -18,13 +18,67 @@
 #include <iostream>
 #include <cstring>
 
-// Not really used anywhere, but force an instance to be created.
-DerivedButton* my_globally_accessible_button = nullptr;
+namespace
+{
+bool show_icon = false;
+bool is_glad = true;
+
+DerivedDialog* pDialog = nullptr;
+Glib::RefPtr<Gtk::Application> app;
+
+void on_app_activate()
+{
+  // Create a dummy instance before the call to refBuilder->add_from_file().
+  // This creation registers DerivedButton's class in the GType system.
+  // This is necessary because DerivedButton contains user-defined properties
+  // (Glib::Property) and is created by Gtk::Builder.
+  static_cast<void>(DerivedButton());
+
+  // Load the GtkBuilder file and instantiate its widgets:
+  auto refBuilder = Gtk::Builder::create();
+  try
+  {
+    refBuilder->add_from_file("derived.glade");
+  }
+  catch(const Glib::FileError& ex)
+  {
+    std::cerr << "FileError: " << ex.what() << std::endl;
+    return;
+  }
+  catch(const Glib::MarkupError& ex)
+  {
+    std::cerr << "MarkupError: " << ex.what() << std::endl;
+    return;
+  }
+  catch(const Gtk::BuilderError& ex)
+  {
+    std::cerr << "BuilderError: " << ex.what() << std::endl;
+    return;
+  }
+
+  // Get the GtkBuilder-instantiated dialog:
+  if (show_icon)
+    pDialog = Gtk::Builder::get_widget_derived<DerivedDialog>(refBuilder, "DialogDerived", is_glad);
+  else
+    pDialog = Gtk::Builder::get_widget_derived<DerivedDialog>(refBuilder, "DialogDerived");
+
+  if (!pDialog)
+  {
+    std::cerr << "Could not get the dialog" << std::endl;
+    return;
+  }
+
+  // It's not possible to delete widgets after app->run() has returned.
+  // Delete the dialog with its child widgets before app->run() returns.
+  pDialog->signal_hide().connect([] () { delete pDialog; });
+
+  app->add_window(*pDialog);
+  pDialog->show();
+}
+} // anonymous namespace
 
 int main(int argc, char** argv)
 {
-  bool show_icon = false;
-  bool is_glad = true;
   int argc1 = argc;
   if (argc > 1)
   {
@@ -42,67 +96,13 @@ int main(int argc, char** argv)
     }
   }
 
-  auto app = Gtk::Application::create("org.gtkmm.example");
+  app = Gtk::Application::create("org.gtkmm.example");
 
-  // The application must be registered when the builder adds widgets from
-  // the derived.glade file.
-  // Calling Gio::Application::register_application() explicitly is necessary
-  // in this example because the .glade file is loaded in the main() function.
-  // There are better ways. See other examples, such as examples/book/buildapp/,
-  // and examples/book/menus/ and examples/book/menus_and_toolbars/.
-  app->register_application();
+  // Instantiate a dialog when the application has been activated.
+  // This can only be done after the application has been registered.
+  // It's possible to call app->register_application() explicitly, but
+  // usually it's easier to let app->run() do it for you.
+  app->signal_activate().connect([] () { on_app_activate(); });
 
-  // Create a dummy instance before the call to refBuilder->add_from_file().
-  // This creation registers DerivedButton's class in the GType system.
-  my_globally_accessible_button = new DerivedButton();
-
-  //Load the Glade file and instantiate its widgets:
-  auto refBuilder = Gtk::Builder::create();
-  try
-  {
-    refBuilder->add_from_file("derived.glade");
-  }
-  catch(const Glib::FileError& ex)
-  {
-    std::cerr << "FileError: " << ex.what() << std::endl;
-    return 1;
-  }
-  catch(const Glib::MarkupError& ex)
-  {
-    std::cerr << "MarkupError: " << ex.what() << std::endl;
-    return 1;
-  }
-  catch(const Gtk::BuilderError& ex)
-  {
-    std::cerr << "BuilderError: " << ex.what() << std::endl;
-    return 1;
-  }
-
-  //Get the GtkBuilder-instantiated dialog:
-  DerivedDialog* pDialog = nullptr;
-  if (show_icon)
-    pDialog = Gtk::Builder::get_widget_derived<DerivedDialog>(refBuilder, "DialogDerived", is_glad);
-  else
-    pDialog = Gtk::Builder::get_widget_derived<DerivedDialog>(refBuilder, "DialogDerived");
-
-  int status = 1;
-  if (pDialog)
-  {
-    // All widgets must be deleted before app->run() returns.
-    // This is yet another reason why you should usually not use the builder
-    // in the main() function.
-    pDialog->signal_hide().connect([pDialog, &refBuilder] ()
-    {
-      delete pDialog;
-      refBuilder.reset();
-    });
-
-    // We can call add_window() before run() because we have registered the
-    // application. (run() registers the application, if it has not been done.)
-    app->add_window(*pDialog);
-    pDialog->show();
-    status = app->run(argc1, argv);
-  }
-
-  return status;
+  return app->run(argc1, argv);
 }

@@ -1,28 +1,20 @@
 #include <gtkmm.h>
 #include <iostream>
 
+namespace
+{
 Gtk::Dialog* pDialog = nullptr;
+Glib::RefPtr<Gtk::Application> app;
 
-static
 void on_button_clicked()
 {
-  if(pDialog)
+  if (pDialog)
     pDialog->hide(); //hide() will cause Gtk::Application::run() to end.
 }
 
-int main(int argc, char** argv)
+void on_app_activate()
 {
-  auto app = Gtk::Application::create("org.gtkmm.example");
-
-  // The application must be registered when the builder adds widgets from
-  // the basic.glade file.
-  // Calling Gio::Application::register_application() explicitly is necessary
-  // in this example because the .glade file is loaded in the main() function.
-  // There are better ways. See other examples, such as examples/book/buildapp/,
-  // and examples/book/menus/ and examples/book/menus_and_toolbars/.
-  app->register_application();
-
-  //Load the GtkBuilder file and instantiate its widgets:
+  // Load the GtkBuilder file and instantiate its widgets:
   auto refBuilder = Gtk::Builder::create();
   try
   {
@@ -31,47 +23,50 @@ int main(int argc, char** argv)
   catch(const Glib::FileError& ex)
   {
     std::cerr << "FileError: " << ex.what() << std::endl;
-    return 1;
+    return;
   }
   catch(const Glib::MarkupError& ex)
   {
     std::cerr << "MarkupError: " << ex.what() << std::endl;
-    return 1;
+    return;
   }
   catch(const Gtk::BuilderError& ex)
   {
     std::cerr << "BuilderError: " << ex.what() << std::endl;
-    return 1;
+    return;
   }
 
-  //Get the GtkBuilder-instantiated Dialog:
+  // Get the GtkBuilder-instantiated dialog:
   pDialog = refBuilder->get_widget<Gtk::Dialog>("DialogBasic");
-
-  int status = 1;
-  if (pDialog)
+  if (!pDialog)
   {
-    //Get the GtkBuilder-instantiated Button, and connect a signal handler:
-    auto pButton = refBuilder->get_widget<Gtk::Button>("quit_button");
-    if(pButton)
-    {
-      pButton->signal_clicked().connect( sigc::ptr_fun(on_button_clicked) );
-    }
-
-    // All widgets must be deleted before app->run() returns.
-    // This is yet another reason why you should usually not use the builder
-    // in the main() function.
-    pDialog->signal_hide().connect([&refBuilder] ()
-    {
-      delete pDialog;
-      refBuilder.reset();
-    });
-
-    // We can call add_window() before run() because we have registered the
-    // application. (run() registers the application, if it has not been done.)
-    app->add_window(*pDialog);
-    pDialog->show();
-    status = app->run(argc, argv);
+    std::cerr << "Could not get the dialog" << std::endl;
+    return;
   }
 
-  return status;
+  // Get the GtkBuilder-instantiated button, and connect a signal handler:
+  auto pButton = refBuilder->get_widget<Gtk::Button>("quit_button");
+  if (pButton)
+    pButton->signal_clicked().connect([] () { on_button_clicked(); });
+
+  // It's not possible to delete widgets after app->run() has returned.
+  // Delete the dialog with its child widgets before app->run() returns.
+  pDialog->signal_hide().connect([] () { delete pDialog; });
+
+  app->add_window(*pDialog);
+  pDialog->show();
+}
+} // anonymous namespace
+
+int main(int argc, char** argv)
+{
+  app = Gtk::Application::create("org.gtkmm.example");
+
+  // Instantiate a dialog when the application has been activated.
+  // This can only be done after the application has been registered.
+  // It's possible to call app->register_application() explicitly, but
+  // usually it's easier to let app->run() do it for you.
+  app->signal_activate().connect([] () { on_app_activate(); });
+
+  return app->run(argc, argv);
 }
