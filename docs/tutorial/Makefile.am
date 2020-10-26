@@ -20,8 +20,13 @@ DOCBOOK_STYLESHEET_EPUB ?= http://docbook.sourceforge.net/release/xsl/current/ep
 
 HELP_ID = gtkmm-tutorial
 
-HELP_FILES = \
-	index.docbook
+# This dummy value will perhaps make Infrastructure/damned-lies create a .pot file
+# from index-in.docbook and ignore index.docbook.
+# https://gitlab.gnome.org/Infrastructure/damned-lies/-/issues/58
+HELP_FILES = $(NULL)
+
+# The 'make' command uses the last defined value.
+HELP_FILES = index.docbook
 
 HELP_MEDIA =					\
 	figures/aspectframe.png			\
