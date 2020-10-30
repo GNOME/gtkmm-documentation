@@ -20,13 +20,12 @@ DOCBOOK_STYLESHEET_EPUB ?= http://docbook.sourceforge.net/release/xsl/current/ep
 
 HELP_ID = gtkmm-tutorial
 
-# This dummy value will perhaps make Infrastructure/damned-lies create a .pot file
-# from index-in.docbook and ignore index.docbook.
+# HELP_FILES is defined in an included file instead of in Makefile.am itself.
+# Then DocFormat.source_files() in Infrastructure/damned-lies/stats/utils.py
+# won't find it. That's a good thing. The help file is not stored in the git repo.
+# damned-lies is confused, if it finds the file name but does not find the file.
 # https://gitlab.gnome.org/Infrastructure/damned-lies/-/issues/58
-HELP_FILES = $(NULL)
-
-# The 'make' command uses the last defined value.
-HELP_FILES = index.docbook
+include $(srcdir)/help-files.am
 
 HELP_MEDIA =					\
 	figures/aspectframe.png			\

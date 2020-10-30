@@ -1,0 +1,9 @@
+## This file is part of gtkmm-documentation.
+
+# When this line is located in a file included from Makefile.am instead of
+# in Makefile.am itself, DocFormat.source_files() in
+# Infrastructure/damned-lies/stats/utils.py won't find it.
+# https://gitlab.gnome.org/Infrastructure/damned-lies/-/issues/58
+
+HELP_FILES = index.docbook
+
