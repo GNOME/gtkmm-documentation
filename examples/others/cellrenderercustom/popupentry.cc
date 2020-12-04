@@ -91,7 +91,7 @@ int PopupEntry::get_button_width()
   Gtk::Requisition requisition_min, requisition_natural;
   window.get_preferred_size(requisition_min, requisition_natural);
 
-  return requisition_min.width;
+  return requisition_min.get_width();
 }
 
 PopupEntry::type_signal_arrow_clicked& PopupEntry::signal_arrow_clicked()

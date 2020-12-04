@@ -145,18 +145,13 @@ bool ExampleWindow::on_textview_query_tooltip(int x, int y, bool keyboard_toolti
     m_text_view.get_iter_at_position(iter, trailing, mouse_x, mouse_y);
   }
 
+  if (!iter.has_tag(m_ref_bold_tag))
+    return false;
+
   //Show a tooltip if the cursor or mouse pointer is over the text
   //with the specific tag:
-  if (iter.has_tag(m_ref_bold_tag))
-  {
-    tooltip->set_markup("<b>Information</b> attached to a text tag");
-    tooltip->set_icon_from_icon_name("dialog-information");
-  }
-  else
-  {
-    return false;
-  }
-
+  tooltip->set_markup("<b>Information</b> attached to a text tag");
+  tooltip->set_icon("dialog-information");
   return true;
 }
 

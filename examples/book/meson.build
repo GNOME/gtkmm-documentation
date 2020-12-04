@@ -25,7 +25,6 @@ examples_book = [
   [['builder', 'derived'], 'example', ['deriveddialog.cc', 'derivedbutton.cc', 'main.cc']],
   [['buttons', 'button'], 'buttons', ['buttons.cc', 'main.cc']],
   [['buttons', 'checkbutton'], 'example', exwindow_main],
-  [['buttons', 'filechooserbutton'], 'example', exwindow_main],
   [['buttons', 'radiobutton'], 'radiobuttons', ['main.cc', 'radiobuttons.cc']],
   [['buttons', 'scalebutton'], 'example', exwindow_main],
   [['buttons', 'togglebutton'], 'example', exwindow_main],

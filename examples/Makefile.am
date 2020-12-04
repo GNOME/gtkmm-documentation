@@ -21,7 +21,6 @@ check_PROGRAMS =					\
 	book/builder/derived/example			\
 	book/buttons/button/buttons			\
 	book/buttons/checkbutton/example		\
-	book/buttons/filechooserbutton/example		\
 	book/buttons/radiobutton/radiobuttons		\
 	book/buttons/scalebutton/example			\
 	book/buttons/togglebutton/example		\
@@ -207,11 +206,6 @@ book_buttons_checkbutton_example_SOURCES =		\
 	book/buttons/checkbutton/examplewindow.cc	\
 	book/buttons/checkbutton/examplewindow.h	\
 	book/buttons/checkbutton/main.cc
-
-book_buttons_filechooserbutton_example_SOURCES =	\
-	book/buttons/filechooserbutton/examplewindow.cc	\
-	book/buttons/filechooserbutton/examplewindow.h	\
-	book/buttons/filechooserbutton/main.cc
 
 book_buttons_radiobutton_radiobuttons_SOURCES =		\
 	book/buttons/radiobutton/main.cc		\

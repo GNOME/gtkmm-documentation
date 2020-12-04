@@ -175,13 +175,11 @@ void MyCellRendererToggle::snapshot_vfunc(const Glib::RefPtr<Gtk::Snapshot>& sna
   const unsigned int cell_xpad = property_xpad();
   const unsigned int cell_ypad = property_ypad();
 
-  int width = 0, height = 0;
-
   //TODO: Support natural size.
-  GtkRequisition requisition_min, requisition_natural;
+  Gtk::Requisition requisition_min, requisition_natural;
   get_preferred_size(widget, requisition_min, requisition_natural);
-  width = requisition_min.width;
-  height = requisition_min.height;
+  int width = requisition_min.get_width();
+  int height = requisition_min.get_height();
 
   width  -= cell_xpad * 2;
   height -= cell_ypad * 2;

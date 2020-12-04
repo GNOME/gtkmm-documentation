@@ -5434,11 +5434,10 @@ if (info)
     <para>
       <classname>FileChooser</classname> is an interface that can be
       implemented by widgets displaying a list of files.
-      &gtkmm; provides four built-in implementations for choosing recent files
+      &gtkmm; provides three built-in implementations for choosing recent files
       or other files:
       <classname>FileChooserWidget</classname>,
-      <classname>FileChooserDialog</classname>,
-      <classname>FileChooserButton</classname>, and
+      <classname>FileChooserDialog</classname>, and
       <classname>FileChooserNative</classname>.
     </para>
     <para>
