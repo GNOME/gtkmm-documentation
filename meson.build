@@ -18,7 +18,7 @@ endif
 
 gtkmm_pcname = 'gtkmm-4.0'
 gtkmm_dep = dependency(gtkmm_pcname, version: '>=3.97.1')
-giomm_dep = dependency('giomm-2.66', version: '>=2.65.2')
+giomm_dep = dependency('giomm-2.68', version: '>=2.67.1')
 gnome = import('gnome')
 
 # Installation directories are relative to {prefix}.

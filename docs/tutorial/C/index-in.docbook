@@ -182,10 +182,9 @@ See the <ulink url="https://wiki.gnome.org/Projects/gtkmm/FAQ">FAQ</ulink> for m
 <itemizedlist>
   <listitem><para><application>sigc++-3.0</application></para></listitem>
   <listitem><para><application>gtk4</application></para></listitem>
-  <listitem><para><application>glibmm-2.66</application></para></listitem>
+  <listitem><para><application>glibmm-2.68</application></para></listitem>
   <listitem><para><application>cairomm-1.16</application></para></listitem>
-  <listitem><para><application>pangomm-2.44</application></para></listitem>
-  <listitem><para><application>atkmm-2.30</application></para></listitem>
+  <listitem><para><application>pangomm-2.48</application></para></listitem>
 </itemizedlist>
 <para>
 These dependencies have their own dependencies, including the following
@@ -194,7 +193,6 @@ applications and libraries:
 <itemizedlist>
   <listitem><para><application>pkg-config</application></para></listitem>
   <listitem><para><application>glib-2.0</application></para></listitem>
-  <listitem><para><application>atk</application></para></listitem>
   <listitem><para><application>pango</application></para></listitem>
   <listitem><para><application>cairo</application></para></listitem>
   <listitem><para><application>gdk-pixbuf-2.0</application></para></listitem>
@@ -695,7 +693,7 @@ orientation (vertical or horizontal) to be specified without requiring the use o
 </chapter>
 
 <chapter id="changes-gtkmm4">
-<title>Changes in &gtkmm;-4.0 and <application>glibmm-2.66</application></title>
+<title>Changes in &gtkmm;-4.0 and <application>glibmm-2.68</application></title>
 
 <para>&gtkmm;-4.0 is a new version of the &gtkmm; API that installs in parallel with the
 older &gtkmm;-2.4 and &gtkmm;-3.0 APIs. The last version of the &gtkmm;-3.0 API
@@ -711,7 +709,7 @@ directory, so your <application>pkg-config</application> check should ask for
 <literal>gtkmm-4.0</literal> rather than <literal>gtkmm-3.0</literal>.
 </para>
 
-<para>&gtkmm;-4.0 is used in combination with <application>glibmm-2.66</application>,
+<para>&gtkmm;-4.0 is used in combination with <application>glibmm-2.68</application>,
 which sets the global locale for your program. The older <application>glibmm-2.4</application>
 does not do that, and &gtkmm;-3.0 does it only to some extent. What this means is
 briefly that if your &gtkmm;-3.0 program contains a call to
@@ -726,7 +724,7 @@ to set the global locale for you, you should add a call to
 <para>There are lots and lots of differences between &gtkmm;-3.0 and &gtkmm;-4.0.
 The following lists are not complete.</para>
 
-<para>Some new classes were added in &gtkmm; 4 and <application>glibmm</application> 2.66:</para>
+<para>Some new classes were added in &gtkmm; 4 and <application>glibmm</application> 2.68:</para>
 
 <orderedlist>
 <listitem><simpara><classname>Glib::ExtraClassInit</classname> and <classname>Gtk::Snapshot</classname>:
@@ -797,7 +795,7 @@ when porting code that used &gtkmm;-3.0 and <application>glibmm</application>-2.
 </orderedlist>
 </para>
 
-<para>All deprecated API was removed in &gtkmm; 4.0 and <application>glibmm</application> 2.66,
+<para>All deprecated API was removed in &gtkmm; 4.0 and <application>glibmm</application> 2.68,
   though there will be new deprecations in future versions.</para>
 
 <para>As a first step to porting your source code to &gtkmm;-4.0 you should probably ensure
@@ -9252,7 +9250,7 @@ public:
     automatically when using the above build structure:
 <programlisting>
 $ cd gtk/src
-$ /usr/lib/glibmm-2.66/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtkmm
+$ /usr/lib/glibmm-2.68/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtkmm
 </programlisting>
 </para>
 <para>Notice that we provided <command>gmmproc</command> with the path to the
