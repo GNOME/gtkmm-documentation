@@ -1,3 +1,32 @@
+3.24.1: (stable)
+
+The tarball for 3.24.1 has been created with 'meson dist'.
+If you build with Autotools from the tarball, please read the README
+file, especially the last paragraph.
+
+* custom_widget example: Use Glib::ExtraClassInit
+  (Kjell Ahlstedt)
+* buildapp examples: Add meson.build files
+  Add meson.build files and auxiliary scripts for meson builds
+  (Kjell Ahlstedt)
+* Gtk::Builder chapter: Describe combination with Glib::Property
+  (Kjell Ahlstedt)
+* Builder: Using derived widgets: Update for glibmm 2.62
+  (Daniel Boles) Merge request !5
+* Don't recommend `new` for an in-class member
+  (Daniel Boles) Merge request !7
+* Drop pointless/confusing class around RadioButtons
+  (Daniel Boles) Merge request !6
+* Add treeview/custom_treemodel example
+  (Kjell Ahlstedt) Issue #9 (Danny van Elsen)
+* Describe how the mm-common/skeletonmm project is built with Meson
+  (Kjell Ahlstedt)
+* input example: Don't include build/config.h
+  (Kjell Ahlstedt) Issue #11 (Keyikedalube Ndang)
+* Describe how to build a multi-threaded program
+  (Kjell Ahlstedt) Issue #12 (Keyikedalube Ndang)
+
+
 3.24.0: (stable)
 
 * Add Gtk::FileChooserNative example
