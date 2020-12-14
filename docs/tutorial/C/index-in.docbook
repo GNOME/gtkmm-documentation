@@ -226,7 +226,7 @@ applications and libraries:
 <para>
 The package names will not change when new API/ABI-compatible versions of &gtkmm;
 are released. Otherwise they would not be API/ABI-compatible. So don't be
-surprised, for instance, to find &gtkmm; 3.8 supplied by Debian's
+surprised, for instance, to find &gtkmm; 3.24 supplied by Debian's
 <application>libgtkmm-3.0-dev</application> package.
 </para>
 </note>
@@ -239,18 +239,22 @@ surprised, for instance, to find &gtkmm; 3.8 supplied by Debian's
 If your distribution does not provide a pre-built &gtkmm; package, or if you
 want to install a different version than the one provided by your distribution,
 you can also install &gtkmm; from source. The source code for &gtkmm; can
-be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
+be downloaded from <ulink url="https://download.gnome.org/sources/gtkmm/"></ulink>.
 </para>
 <para>
   After you've installed all of the dependencies, download the &gtkmm; source
-  code, unpack it, and change to the newly created directory. &gtkmm; can be
-  built and installed with the following sequence of commands:
+  code, unpack it, and change to the newly created directory. &gtkmm; 3.24.2 and
+  earlier can be built and installed with the following sequence of commands:
 </para>
 <screen>
 # ./configure
 # make
 # make install
 </screen>
+<para>
+&gtkmm; 3.24.3 and later can be built with Meson. See the <filename>README</filename>
+file in the &gtkmm; version you've downloaded.
+</para>
 <note>
 <para>
   Remember that on a Unix or Linux operating system, you will probably need to
@@ -260,12 +264,12 @@ be downloaded from <ulink url="http://www.gtkmm.org/"></ulink>.
 </para>
 </note>
 <para>
-    The <filename>configure</filename> script will check to make sure all of
-    the required dependencies are already installed. If you are missing any
-    dependencies, it will exit and display an error.
+    The <filename>configure</filename> script or <command>meson</command> will check
+    to make sure all of the required dependencies are already installed. If you are
+    missing any dependencies, it will exit and display an error.
 </para>
 <para>
-    By default, &gtkmm; will be installed under the
+    By default, &gtkmm; if built with Autotools, will be installed under the
     <filename>/usr/local</filename> directory. On some systems you may need to
     install to a different location. For instance, on Red Hat Linux systems
     you might use the <literal>--prefix</literal> option with configure, like
@@ -7962,9 +7966,11 @@ The full, buildable sources for these examples can be found in the
 <filename>examples/book/buildapp</filename> directory of the
 <application>gtkmm-documentation</application> source distribution, or online in the
 <ulink url="&url_examples_base;buildapp"><application>gtkmm-documentation</application>
-git repository</ulink>. You can build each example separately by using make with the
-<filename>Makefile.example</filename> file. For more information, see the
-<filename>README</filename> included in the <filename>buildapp</filename> directory.
+git repository</ulink>. You can build each example separately by using <command>meson</command>
+and <command>ninja</command> with the <filename>meson.build</filename> file or by using
+<command>make</command> with the <filename>Makefile.example</filename> file. For more
+information, see the <filename>README</filename> included in the <filename>buildapp</filename>
+directory.
 </para>
 
 <sect1 id="sec-buildapp-trivial-app">
@@ -8062,7 +8068,9 @@ into the application together with the other source files. To do so, we use the
 <application>glib-compile-resources</application> utility:
 <screen>$ glib-compile-resources --target=resources.c --generate-source exampleapp.gresource.xml</screen>
 The <link linkend="sec-gio-resource">Gio::Resource and glib-compile-resources</link>
-section contains more information about resource files.
+section contains more information about resource files. If you build with Meson,
+use the <function>compile_resources()</function> function in Meson's 
+<ulink url="https://mesonbuild.com/Gnome-module.html">GNOME module</ulink>.
 </para>
 
 <para>
@@ -8189,6 +8197,8 @@ Before we can make use of this schema in our application, we need to compile it 
 the binary form that <classname>Gio::Settings</classname> expects. GIO provides macros
 to do this in autotools-based projects. See the description of
 <ulink url="https://developer.gnome.org/gio/stable/GSettings.html">GSettings</ulink>.
+Meson provides the <function>compile_schemas()</function> function in the
+<ulink url="https://mesonbuild.com/Gnome-module.html">GNOME module</ulink>.
 </para>
 
 <para>
@@ -8456,15 +8466,16 @@ any aspect of &gtkmm; that does not already have documentation, please
 consider contributing to this document.
 </para>
 <para>
-Ideally, we would like you to <ulink url="http://www.gtkmm.org/en/bugs.shtml">provide a patch</ulink> to the
-<filename>docs/tutorial/C/index-in.docbook</filename> file. This file is currently
-in the <literal>gtkmm-documentation</literal> module in GNOME git.
+Ideally, we would like you to <ulink url="https://gitlab.gnome.org/GNOME/gtkmm-documentation/-/merge_requests">
+provide a merge request</ulink> to the <filename>docs/tutorial/C/index-in.docbook</filename> file.
+This file is in the <literal>gtkmm-documentation</literal> module in GNOME git.
 </para>
 
 <para>
 If you do decide to contribute, please post your contribution to the
-&gtkmm; mailing list at <ulink url="mailto:gtkmm-list@gnome.org">&#60;gtkmm-list@gnome.org&#62;</ulink>. Also, be aware that
-the entirety of this document is free, and any addition you provide
+&gtkmm; mailing list at <ulink url="mailto:gtkmm-list@gnome.org">&#60;gtkmm-list@gnome.org&#62;</ulink>
+or as an issue or merge request to <ulink url="https://gitlab.gnome.org/GNOME/gtkmm-documentation">GitLab</ulink>.
+Also, be aware that the entirety of this document is free, and any addition you provide
 must also be free. That is, people must be able to use any portion of
 your examples in their programs, and copies of this document
 (including your contribution) may be distributed freely.
