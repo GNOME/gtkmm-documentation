@@ -131,27 +131,37 @@ name
 We would very much like to hear of any problems you have learning &gtkmm;
 with this document, and would appreciate input regarding improvements. Please see the <link linkend="chapter-contributing">Contributing</link> section for further information.
 </para>
+
+<note>
+<para>
+This book describes &gtkmm; 4, but some sections have not been fully updated.
+There are paragraphs that describe &gtkmm; 3 rather than &gtkmm; 4.
+All shown example programs are compatible with &gtkmm; 4, though.
+</para>
+</note>
 </sect1>
 
 <sect1 id="sec-gtkmm">
 <title>gtkmm</title>
 <para>
 &gtkmm; is a C++ wrapper for
-<ulink url="http://www.gtk.org/">GTK+</ulink>,
+<ulink url="http://www.gtk.org/">GTK</ulink>,
 a library used to create graphical user
 interfaces. It is licensed using the LGPL license, so you can develop
 open software, free software, or even commercial non-free software
 using &gtkmm; without purchasing licenses.
 </para>
-<para>&gtkmm; was originally named gtk-- because GTK+ already has a + in the name. However, as -- is not easily indexed by search engines the package generally went by the name &gtkmm;, and that's what we stuck with.</para>
+<para>&gtkmm; was originally named gtk-- because GTK was originally named GTK+
+and had a + in the name. However, as -- is not easily indexed by search engines,
+the package generally went by the name &gtkmm;, and that's what we stuck with.</para>
 
 <sect2 id="why-use-gtkmm">
-<title>Why use &gtkmm; instead of GTK+?</title>
+<title>Why use &gtkmm; instead of GTK?</title>
 <para>&gtkmm; allows you to write code using normal C++ techniques such as encapsulation, derivation, and polymorphism. As a C++ programmer you probably already realise that this leads to clearer and better organized code.</para>
 <para>&gtkmm; is more type-safe, so the compiler can detect errors that would only be detected at run time when using C. This use of specific types also makes the API clearer because you can see what types should be used just by looking at a method's declaration.</para>
-<para>Inheritance can be used to derive new widgets. The derivation of new widgets in GTK+ C code is so complicated and error prone that almost no C coders do it. As a C++ developer you know that derivation is an essential Object Orientated technique.</para>
-<para>Member instances can be used, simplifying memory management. All GTK+ C widgets are dealt with by use of pointers. As a C++ coder you know that pointers should be avoided where possible.</para>
-<para>&gtkmm; involves less code compared to GTK+, which uses prefixed function names and lots of cast macros.</para>
+<para>Inheritance can be used to derive new widgets. The derivation of new widgets in GTK C code is so complicated and error prone that almost no C coders do it. As a C++ developer you know that derivation is an essential Object Orientated technique.</para>
+<para>Member instances can be used, simplifying memory management. All GTK C widgets are dealt with by use of pointers. As a C++ coder you know that pointers should be avoided where possible.</para>
+<para>&gtkmm; involves less code compared to GTK, which uses prefixed function names and lots of cast macros.</para>
 </sect2>
 
 <sect2 id="gtkmm-vs-qt">
@@ -165,7 +175,7 @@ See the <ulink url="https://wiki.gnome.org/Projects/gtkmm/FAQ">FAQ</ulink> for m
 <sect2 id="gtkmm-is-a-wrapper">
 <title>&gtkmm; is a wrapper</title>
 <para>
-&gtkmm; is not a native C++ toolkit, but a C++ wrapper of a C toolkit. This separation of interface and implementation has advantages. The &gtkmm; developers spend most of their time talking about how &gtkmm; can present the clearest API, without awkward compromises due to obscure technical details. We contribute a little to the underlying GTK+ code base, but so do the C coders, and the Perl coders and the Python coders, etc. Therefore GTK+ benefits from a broader user base than language-specific toolkits - there are more implementers, more developers, more testers, and more users.</para>
+&gtkmm; is not a native C++ toolkit, but a C++ wrapper of a C toolkit. This separation of interface and implementation has advantages. The &gtkmm; developers spend most of their time talking about how &gtkmm; can present the clearest API, without awkward compromises due to obscure technical details. We contribute a little to the underlying GTK code base, but so do the C coders, and the Perl coders and the Python coders, etc. Therefore GTK benefits from a broader user base than language-specific toolkits - there are more implementers, more developers, more testers, and more users.</para>
 </sect2>
 </sect1>
 
@@ -462,7 +472,7 @@ just connecting to the existing &gtkmm; signals, see the <link linkend="chapter-
 <para>std::string uses 8 bits per character, but 8 bits aren't enough to encode languages such as Arabic, Chinese, and Japanese.
 Although the encodings for these languages have been specified by the <ulink url="http://www.unicode.org/">Unicode Consortium</ulink>,
 the C and C++ languages do not yet provide any standardised Unicode support for UTF-8 encoding.
-GTK+ and GNOME chose to implement Unicode using UTF-8, and that's what is wrapped by Glib::ustring.
+GTK and GNOME chose to implement Unicode using UTF-8, and that's what is wrapped by Glib::ustring.
 It provides almost exactly the same interface as std::string, along with automatic conversions to and from std::string.</para>
 <para>One of the benefits of UTF-8 is that you don't need to use it unless you want to, so you don't need to retrofit all of your code at once. <classname>std::string</classname> will still work for 7-bit ASCII strings. But when you try to localize your application for languages like Chinese, for instance, you will start to see strange errors, and possible crashes. Then all you need to do is start using <classname>Glib::ustring</classname> instead.</para>
 <para>Note that UTF-8 isn't compatible with 8-bit encodings like ISO-8859-1. For instance, German umlauts are not in the ASCII range and need more than 1 byte in the UTF-8 encoding. If your code contains 8-bit string literals, you have to convert them to UTF-8 (e.g. the Bavarian greeting "Gr&uuml;&szlig; Gott" would be "Gr\xC3\xBC\xC3\x9F Gott").</para>
@@ -3998,7 +4008,7 @@ search-and-replace dialog is non-modal.
   </para>
 
   <para>
-      GTK+ uses the <ulink url="http://cairographics.org">Cairo</ulink> drawing API.
+      GTK uses the <ulink url="http://cairographics.org">Cairo</ulink> drawing API.
       With &gtkmm;, you may use the <ulink url="http://www.cairographics.org/cairomm/">cairomm</ulink> C++ API for cairo.
   </para>
 
@@ -5223,7 +5233,7 @@ The example in examples/book/printing/advanced demonstrates this.
 <title>Preview</title>
 
 <para>
-The native GTK+ print dialog has a preview button, but you may also start
+The native GTK print dialog has a preview button, but you may also start
 a preview directly from an application:
 
 <programlisting>
@@ -6978,8 +6988,8 @@ instance, you cannot use the copyright sign (&copy;).
 <sect2 id="custom-init-functions">
 <title>Class Init and Instance Init Functions</title>
 
-<para>Some <application>GTK+</application> functions, if called at all, must be
-called from the class init function. Some other <application>GTK+</application>
+<para>Some <application>GTK</application> functions, if called at all, must be
+called from the class init function. Some other <application>GTK</application>
 functions, if called, must be called from the instance init function.
 If your custom widget must call any of those functions, you can derive a class
 from <classname>Glib::ExtraClassInit</classname> and derive your custom class
@@ -6997,7 +7007,7 @@ modify the style of your widget without modifying the source code. Useful classe
 are <classname>Gtk::StyleContext</classname> and <classname>Gtk::CssProvider</classname>.
 With the methods of <classname>Gtk::StyleContext</classname> you can read the values
 of your widget's style information. CSS files are described in the documentation of
-<application>GTK+</application>. The following example shows a simple use of
+<application>GTK</application>. The following example shows a simple use of
 <methodname>Gtk::StyleContext::get_padding()</methodname>.</para>
 </sect2>
 
@@ -8089,7 +8099,7 @@ copying.
 your signal handler. Thanks to the flexibility of
 <application>libsigc++</application>, the callback library used by &gtkmm;, the
 signal handler can be almost any kind of function, but you will probably want
-to use a class method. Among <application>GTK+</application> C coders, these
+to use a class method. Among <application>GTK</application> C coders, these
 signal handlers are often named callbacks.
 </para>
 
@@ -8392,10 +8402,10 @@ Of course, a normal "clicked" signal handler would have no arguments.
 </para>
 <para>
 <function>sigc::bind()</function> is not commonly used, but you might find it
-helpful sometimes. If you are familiar with <application>GTK+</application>
+helpful sometimes. If you are familiar with <application>GTK</application>
 programming then you have probably noticed that this is similar to the extra
-<literal>gpointer data</literal> arguments which all GTK+ callbacks have. This
-is generally overused in <application>GTK+</application> to pass information
+<literal>gpointer data</literal> arguments which all GTK callbacks have. This
+is generally overused in <application>GTK</application> to pass information
 that should be stored as member data in a derived widget, but widget derivation
 is very difficult in C. We have far less need of this hack in &gtkmm;.
 </para>
@@ -8618,8 +8628,8 @@ own classes. That's actually very simple by using the
 <para>
 This isn't purely a &gtkmm; or GUI issue. &gtkmm; uses
 <application>libsigc++</application> to implement its proxy wrappers for the
-<application>GTK+</application> signal system, but for new,
-non-GTK+ signals, you can create pure C++ signals, using the
+<application>GTK</application> signal system, but for new,
+non-GTK signals, you can create pure C++ signals, using the
 <classname>sigc::signal&lt;&gt;</classname> template.
 </para>
 <para>
@@ -8679,7 +8689,7 @@ This is a full working example that defines and uses custom signals.
 <title>Comparison with other signalling systems</title>
 <para>
 <!-- TODO: Rewrite this paragraph and talk about Qt's moc. -->
-(An aside: <application>GTK+</application> calls this scheme "signalling"; the
+(An aside: <application>GTK</application> calls this scheme "signalling"; the
 sharp-eyed reader with GUI toolkit experience will note that this same design
 is often
 seen under the name of "broadcaster-listener" (e.g., in Metrowerks'
@@ -8693,13 +8703,13 @@ play the role of listeners - sort of. More on this later.)
 </para>
 <para>
 &gtkmm; signal handlers are strongly-typed, whereas
-<application>GTK+</application> C code allows you to connect a callback with
+<application>GTK</application> C code allows you to connect a callback with
 the wrong number and type of arguments, leading to a segfault at runtime. And,
 unlike <application>Qt</application>, &gtkmm; achieves this without modifying
 the C++ language.</para>
 <para>
-Re. Overriding signal handlers: You can do this in the straight-C world of GTK+ too; that's what GTK's
-object system is for. But in GTK+, you have to go through some
+Re. Overriding signal handlers: You can do this in the straight-C world of GTK too; that's what GTK's
+object system is for. But in GTK, you have to go through some
 complicated procedures to get object-oriented features like
 inheritance and overloading. In C++, it's simple, since those
 features are supported in the language itself; you can let the
@@ -8707,8 +8717,8 @@ compiler do the dirty work.
 </para>
 <para>
 This is one of the places where the beauty of C++ really comes out.
-One wouldn't think of subclassing a GTK+ widget simply to override its
-action method; it's just too much trouble. In GTK+, you almost always
+One wouldn't think of subclassing a GTK widget simply to override its
+action method; it's just too much trouble. In GTK, you almost always
 use signals to get things done, unless you're writing a new widget.
 But because overriding methods is so easy in C++, it's entirely
 practical - and sensible - to subclass a button for that purpose.
@@ -9357,7 +9367,7 @@ _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)
 </para>
 <para>You will typically use this macro when the class already derives from
     <classname>Gtk::Object</classname>. For instance, you will use it when wrapping
-    a GTK+ Widget, because <classname>Gtk::Widget</classname> derives from
+    a GTK Widget, because <classname>Gtk::Widget</classname> derives from
     <classname>Gtk::Object</classname>.</para>
 <para>You might also derive non-widget classes from
     <classname>Gtk::Object</classname> so they can be used without
@@ -10626,7 +10636,7 @@ void example_widget_construct(ExampleWidget* widget, int something, const char* 
   documentation to make it more appropriate for a C++ API.</para>
 <para>
 For instance,
-<programlisting>./docextract_to_xml.py -s ~/checkout/gnome/gtk+/gtk/ > gtk_docs.xml
+<programlisting>./docextract_to_xml.py -s ~/checkout/gnome/gtk/gtk/ > gtk_docs.xml
 </programlisting>
 </para>
 <para>Because this automatic transformation is not always appropriate, you might
