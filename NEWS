@@ -1,3 +1,34 @@
+4.0.0 (stable):
+
+This is the first stable release describing gtkmm-4.0.
+
+The tarball for 4.0.0 has been created with 'meson dist'.
+If you build with Autotools from the tarball, please read the README
+file, especially the last paragraph.
+
+* Lots of changes in the example programs due to changes in
+  gtk4 and gtkmm4. Most such changes are not listed in this NEWS file.
+  (Kjell Ahlstedt)
+* Use glibmm-2.68 instead of glibmm-2.64
+  Require giomm-2.68 >= 2.68.0 and gtkmm-4.0 >= 4.0.0
+  (Kjell Ahlstedt)
+* Meson build: Set default value of the 'warnings' option to 'min'
+  (Kjell Ahlstedt)
+* Describe how the mm-common/skeletonmm project is built with Meson
+  (Kjell Ahlstedt)
+* input example: Don't include build/config.h
+  (Kjell Ahlstedt) Issue #11 (Keyikedalube Ndang)
+* Describe how to build a multi-threaded program
+  (Kjell Ahlstedt) Issue #12 (Keyikedalube Ndang)
+* Remove description of Gtk::Container and Gtk::RadioButton
+  Those classes have been removed from gtkmm4
+  (Kjell Ahlstedt)
+* Meson build: Drop dependence on Perl
+  (Kjell Ahlstedt)
+* Update the "gtkmm and Win32" appendix
+  (Chun-wei Fan) Issue #4 (Daniel Boles)
+
+
 3.97.1: (unstable)
 Distro packagers should probably not package this yet.
 

@@ -1,7 +1,7 @@
 # This file is part of gtkmm-documentation.
 
 project('gtkmm-documentation', 'c', 'cpp',
-  version: '3.97.1',
+  version: '4.0.0',
   default_options: [
     'cpp_std=c++17'
   ],
@@ -17,8 +17,8 @@ if not python_version.version_compare(python_version_req)
 endif
 
 gtkmm_pcname = 'gtkmm-4.0'
-gtkmm_dep = dependency(gtkmm_pcname, version: '>=3.97.1')
-giomm_dep = dependency('giomm-2.68', version: '>=2.67.1')
+gtkmm_dep = dependency(gtkmm_pcname, version: '>=4.0.0')
+giomm_dep = dependency('giomm-2.68', version: '>=2.68.0')
 gnome = import('gnome')
 
 # Installation directories are relative to {prefix}.

@@ -1,7 +1,7 @@
 ## This file is part of gtkmm-documentation.
 
 AC_PREREQ([2.59])
-AC_INIT([gtkmm-documentation], [3.97.1],
+AC_INIT([gtkmm-documentation], [4.0.0],
         [https://gitlab.gnome.org/GNOME/gtkmm-documentation/issues/],
         [gtkmm-documentation], [http://www.gtkmm.org/])
 
@@ -25,8 +25,8 @@ MM_AX_CXX_COMPILE_STDCXX([17], [noext], [mandatory])
 AC_PATH_PROG([PERL], [perl], [perl])
 AC_PROG_SED
 
-PKG_CHECK_MODULES([GIOMM], [giomm-2.68 >= 2.67.1])
-PKG_CHECK_MODULES([GTKMM], [gtkmm-4.0  >= 3.97.1])
+PKG_CHECK_MODULES([GIOMM], [giomm-2.68 >= 2.68.0])
+PKG_CHECK_MODULES([GTKMM], [gtkmm-4.0  >= 4.0.0])
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
 
 # glib-compile-resources and C compiler are needed to generate and compile
