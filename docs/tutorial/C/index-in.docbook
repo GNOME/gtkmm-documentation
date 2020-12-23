@@ -9320,10 +9320,6 @@ practical - and sensible - to subclass a button for that purpose.
     source repository (git). For up-to-date information
     on <application>jhbuild</application>, please refer to the <ulink
       url="http://developer.gnome.org/jhbuild/unstable/">jhbuild manual</ulink>.
-    If you need assistance using <application>jhbuild</application>, you should
-    ask for help on the <ulink
-      url="http://mail.gnome.org/mailman/listinfo/gnome-love">gnome-love
-      mailing list</ulink>.
   </para>
   <note>
     <para>
@@ -9334,6 +9330,12 @@ practical - and sensible - to subclass a button for that purpose.
     though these will usually be corrected quickly if you report them.
     </para>
   </note>
+  <para>
+    <application>gnome-build-meta</application> is an alternative to
+    <application>jhbuild</application>. It is described at the
+    <ulink url="https://wiki.gnome.org/Newcomers/BuildSystemComponent">Building system components</ulink>
+    wiki page, but here we concentrate on <application>jhbuild</application>.
+  </para>
   <sect1 id="sec-setting-up-jhbuild">
     <title>Setting up jhbuild</title>
     <para>
@@ -9344,21 +9346,20 @@ practical - and sensible - to subclass a button for that purpose.
       should copy the sample <application>jhbuild</application> configuration
       file into your home directory by executing the following command from the
       <application>jhbuild</application> directory:
-      <screen>$ cp examples/sample.jhbuildrc ~/.jhbuildrc</screen>
+      <screen>$ cp examples/sample.jhbuildrc ~/.config/jhbuildrc</screen>
     </para>
     <para>
       The &gtkmm; module is defined in the
-      <filename>gnome-suites-core-deps-3.x.modules</filename> moduleset, so edit your
-      <filename>.jhbuildrc</filename> file and set your moduleset setting to the
-      latest version e.g. like so:
-      <programlisting>moduleset = 'gnome-suites-core-deps-3.12'</programlisting>
+      <filename>gnome-suites-core-deps-latest.modules</filename> moduleset. So edit your
+      <filename>jhbuildrc</filename> file and set your moduleset setting like so:
+      <programlisting>moduleset = 'gnome-suites-core-deps-latest'</programlisting>
     </para>
     <para>
       After setting the correct moduleset, you need to tell
       <application>jhbuild</application> which module or modules to build. To
-      build &gtkmm; and all of its dependencies, set <varname>modules</varname>
+      build &gtkmm; 3 and all of its dependencies, set <varname>modules</varname>
       like so:
-      <programlisting>modules = [ 'gtkmm' ]</programlisting>
+      <programlisting>modules = [ 'gtkmm-3' ]</programlisting>
     </para>
     <para>
       You can build several modules by setting the
@@ -9367,7 +9368,7 @@ practical - and sensible - to subclass a button for that purpose.
       The <varname>modules</varname> variable specifies which modules will be
       built when you don't explicitly specify anything on the command line. You
       can always build a different moduleset later by specifying it on the
-      commandline (e.g. <command>jhbuild build gtkmm</command>).
+      commandline (e.g. <command>jhbuild build gtkmm-3</command>).
     </para>
     <important>
       <title>Setting a prefix</title>
@@ -9375,7 +9376,7 @@ practical - and sensible - to subclass a button for that purpose.
         By default, <application>jhbuild</application>'s configuration is
         configured to install all software built with
         <application>jhbuild</application> under the
-        <filename>/opt/gnome</filename> prefix. You can choose a different
+        <filename>~/jhbuild/install</filename> prefix. You can choose a different
         prefix, but it is recommended that you keep this prefix different from
         other software that you've installed (don't set it to
         <filename>/usr</filename>!) If you've followed the jhbuild instructions
@@ -9412,7 +9413,7 @@ $ jhbuild sanitycheck</screen>
         all of its dependencies from git by executing <command>jhbuild
           build</command> (or, if you didn't specify &gtkmm; in the
         <varname>modules</varname> variable, with the command <command>jhbuild
-          build gtkmm</command>).
+          build gtkmm-3</command>).
       </para>
       <para>
         This command will build and install a series of modules and will probably
@@ -9421,7 +9422,7 @@ $ jhbuild sanitycheck</screen>
         files that changed since the last build. Alternatively, after you've
         built and installed &gtkmm; the first time, you can rebuild &gtkmm; by
         itself (without rebuilding all of its dependencies) with the command
-        <command>jhbuild buildone gtkmm</command>.
+        <command>jhbuild buildone gtkmm-3</command>.
       </para>
     </sect2>
     <sect2 id="jhbuild-using-gtkmm">
@@ -9430,8 +9431,8 @@ $ jhbuild sanitycheck</screen>
         After you've installed the git version of &gtkmm;, you're ready to start
         using and experimenting with it. In order to use the new version of
         &gtkmm; you've just installed, you need to set some environment
-        variables so that your <filename>configure</filename> script knows where
-        to find the new libraries. Fortunately,
+        variables so that your <filename>configure</filename> or <filename>meson.build</filename>
+        script knows where to find the new libraries. Fortunately,
         <application>jhbuild</application> offers an easy solution to this
         problem. Executing the command <command>jhbuild shell</command> will
         start a new shell with all of the correct environment variables set.
