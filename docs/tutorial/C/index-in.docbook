@@ -8770,10 +8770,6 @@ practical - and sensible - to subclass a button for that purpose.
     source repository (git). For up-to-date information
     on <application>jhbuild</application>, please refer to the <ulink
       url="http://developer.gnome.org/jhbuild/unstable/">jhbuild manual</ulink>.
-    If you need assistance using <application>jhbuild</application>, you should
-    ask for help on the <ulink
-      url="http://mail.gnome.org/mailman/listinfo/gnome-love">gnome-love
-      mailing list</ulink>.
   </para>
   <note>
     <para>
@@ -8784,6 +8780,12 @@ practical - and sensible - to subclass a button for that purpose.
     though these will usually be corrected quickly if you report them.
     </para>
   </note>
+  <para>
+    <application>gnome-build-meta</application> is an alternative to
+    <application>jhbuild</application>. It is described at the
+    <ulink url="https://wiki.gnome.org/Newcomers/BuildSystemComponent">Building system components</ulink>
+    wiki page, but here we concentrate on <application>jhbuild</application>.
+  </para>
   <sect1 id="sec-setting-up-jhbuild">
     <title>Setting up jhbuild</title>
     <para>
@@ -8798,12 +8800,9 @@ practical - and sensible - to subclass a button for that purpose.
     </para>
     <para>
       The &gtkmm; module is defined in the
-      <filename>gnome-suites-core-deps-x.y.modules</filename> moduleset, but if
-      you are interested in the latest version, it's easier to let <application>jhbuild</application>
-      read from <filename>gnome-world.modules</filename>. It always includes the
-      latest version of other <filename>.modules</filename> files. So edit your
+      <filename>gnome-suites-core-deps-latest.modules</filename> moduleset. So edit your
       <filename>jhbuildrc</filename> file and set your moduleset setting like so:
-      <programlisting>moduleset = 'gnome-world'</programlisting>
+      <programlisting>moduleset = 'gnome-suites-core-deps-latest'</programlisting>
     </para>
     <para>
       After setting the correct moduleset, you need to tell
@@ -8827,7 +8826,7 @@ practical - and sensible - to subclass a button for that purpose.
         By default, <application>jhbuild</application>'s configuration is
         configured to install all software built with
         <application>jhbuild</application> under the
-        <filename>/opt/gnome</filename> prefix. You can choose a different
+        <filename>~/jhbuild/install</filename> prefix. You can choose a different
         prefix, but it is recommended that you keep this prefix different from
         other software that you've installed (don't set it to
         <filename>/usr</filename>!) If you've followed the jhbuild instructions
@@ -8882,8 +8881,8 @@ $ jhbuild sanitycheck</screen>
         After you've installed the git version of &gtkmm;, you're ready to start
         using and experimenting with it. In order to use the new version of
         &gtkmm; you've just installed, you need to set some environment
-        variables so that your <filename>configure</filename> script knows where
-        to find the new libraries. Fortunately,
+        variables so that your <filename>configure</filename> or <filename>meson.build</filename>
+        script knows where to find the new libraries. Fortunately,
         <application>jhbuild</application> offers an easy solution to this
         problem. Executing the command <command>jhbuild shell</command> will
         start a new shell with all of the correct environment variables set.
