@@ -808,7 +808,7 @@ msgid ""
 "<filename>Makefile.example</filename> files in the <link linkend=\"chapter-"
 "building-applications\">Building applications</link> chapter."
 msgstr ""
-"如果你打算自己从小型应用程序开始试验，那么使用<link linkend=\"chapter-building-applications\"\>构建应用程序</link> "
+"如果你打算自己从小型应用程序开始试验，那么使用<link linkend=\"chapter-building-applications\"\>构建应用程序</link>"
 "章节的<filename>Makefile.example</filename>文件从MakeFile开始比较容易。"
 
 #: C/index-in.docbook:420 C/index-in.docbook:5869
@@ -2135,8 +2135,8 @@ msgid ""
 "ToggleButton</classname>."
 msgstr ""
 "<classname>Gtk::CheckButton</classname> 继承自 <classname>Gtk::Widget</"
-"classname>。它与<classname>Gtk::ToggleButton</classname>类似，二者只有外观不同。
-因此你可以像<classname>Gtk::ToggleButton</classname>一样使用同样的方法来检查、设置和转换多选按钮的状态。"
+"classname>。它与<classname>Gtk::ToggleButton</classname>类似，二者只有外观不同。"
+"因此你可以像<classname>Gtk::ToggleButton</classname>一样使用同样的方法来检查、设置和转换多选按钮的状态。"
 
 #: C/index-in.docbook:960
 msgid ""
@@ -2429,12 +2429,16 @@ msgid ""
 "<methodname>set_text()</methodname> or <methodname>set_markup()</methodname> "
 "methods."
 msgstr ""
+"标签是用于在窗口中放置不可编辑文本的主要方法，例如将标题放于<classname>Entry</classname>"
+"部件旁。你可以直接在构造函数中指定文本，也可以于稍后调用<methodname>set_text()</methodname>或"
+"<methodname>set_markup()</methodname>方法设置想要显示的文本。"
 
 #: C/index-in.docbook:1173
 msgid ""
 "The width of the label will be adjusted automatically. You can produce multi-"
 "line labels by putting line breaks (\"\\n\") in the label string."
 msgstr ""
+"标签会自动调整宽度。你也可以通过在标签锁显示的字符串中放置换行符(\"\\n\")来生成多行标签。"
 
 #: C/index-in.docbook:1177
 msgid ""
@@ -2442,6 +2446,8 @@ msgid ""
 "methodname> method. The widget is also capable of word-wrapping, which can "
 "be activated with <methodname>set_line_wrap()</methodname>."
 msgstr ""
+"标签文本可以使用<methodname>set_justify()</methodname>方法进行对齐。"
+"这个部件还具有自动换行功能，你可以使用<methodname>set_line_wrap()</methodname>激活它。"
 
 #: C/index-in.docbook:1183
 msgid ""
@@ -2452,12 +2458,16 @@ msgid ""
 "Markup syntax</ulink>. For instance, <code> &lt;b&gt;bold text&lt;/b&gt; and "
 "&lt;s&gt;strikethrough text&lt;/s&gt; </code> ."
 msgstr ""
+"Gtk::Label支持简单的格式，例如，允许你将某些文本设置成粗体，彩色，或者更大的字号。"
+"你也可以使用<ulink url=\"http://developer.gnome.org/pango/unstable/PangoMarkupFormat.html\">Pango 标记语法</ulink>。"
+"例如， <code> &lt;b&gt;bold text&lt;/b&gt; and &lt;s&gt;strikethrough text&lt;/s&gt; </code> 。"
 
 #: C/index-in.docbook:1192
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1Label.html"
 "\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1Label.html\">参考</ulink>"
 
 #: C/index-in.docbook:1195
 msgid ""
@@ -2468,20 +2478,25 @@ msgid ""
 "<literal>m_Label_Normal</literal> is shown underlined only when you press "
 "the <keycap>Alt</keycap> key."
 msgstr ""
+"下面是一个用于说明这些功能的简短示例。这个样例使用框架(Frame)部件以更好的"
+"演示标签样式。(框架部件的教程: <link linkend=\"sec-frame\">框架(Frame)部件</link>)"
+"仅当你按<keycap>Alt</keycap>键时，<literal>m_Label_Normal</literal>的第一个字符才"
+"显示为下划线的样式。"
 
 #: C/index-in.docbook:1210
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/label\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/examples/book/label\">源代码</ulink>"
 
 #: C/index-in.docbook:1217 C/index-in.docbook:1274
 msgid "Entry"
-msgstr ""
+msgstr "条目(Entry)"
 
 #: C/index-in.docbook:1220
 msgid "Simple Use"
-msgstr ""
+msgstr "简易用法"
 
 #: C/index-in.docbook:1222
 msgid ""
@@ -2489,6 +2504,8 @@ msgid ""
 "the <methodname>set_text()</methodname> method, and read the current "
 "contents with the <methodname>get_text()</methodname> method."
 msgstr ""
+"条目部件允许用户输入文本。你可以使用<methodname>set_text()</methodname>方法更改"
+"部件当前的内容，还可以使用<methodname>get_text()</methodname>方法读取当前的内容。"
 
 #: C/index-in.docbook:1227
 msgid ""
@@ -2496,6 +2513,8 @@ msgid ""
 "read-only. This can be done by passing <literal>false</literal> to the "
 "<methodname>set_editable()</methodname> method."
 msgstr ""
+"有时你可能想使<classname>Entry</classname>部件变为只读的。你可以通过向"
+"<methodname>set_editable()</methodname>方法传递<literal>false</literal>做到这点。"
 
 #: C/index-in.docbook:1233
 msgid ""
@@ -2503,6 +2522,8 @@ msgid ""
 "echoed on the screen, calling <methodname>set_visibility()</methodname> with "
 "<literal>false</literal> will cause the text to be hidden."
 msgstr ""
+"对于不想在屏幕上回显的密码、密语或者其他信息，你可以通过向<methodname>set_visibility()</methodname>"
+"方法传递<literal>false</literal>使输入文本被隐藏。"
 
 #: C/index-in.docbook:1239
 msgid ""
@@ -2520,6 +2541,14 @@ msgid ""
 "comboboxentry\">ComboBox with an Entry</link> section contains example "
 "programs that use these signals."
 msgstr ""
+"当用户在条目部件上输入文本时你可能想要收到通知。为此<classname>Gtk::Entry</classname>提供"
+"了两个信号，他们分别是<literal>activate</literal>和<literal>changed</literal>。"
+"当用户在条目部件上按下<keycap>Enter</keycap>键时，部件将发出<literal>activate</literal>信号；"
+"当部件上的文本发生更改的时候，部件将会发出<literal>changed</literal>信号。你可以利用这些信号"
+"对用户的输入进行校验或者是过滤。将键盘焦点移动到其他的部件可能表示用户已经完成了文本输入。"
+"这种时候<classname>Gtk::Entry</classname>将会发出继承自<classname>Gtk::Widget</classname>的"
+"<literal>focus_out_event</literal>信号提醒你。<link linkend=\"sec-comboboxentry\">带有条目的组合框</link>"
+"小结包含了使用这些信号的示例程序。"
 
 #: C/index-in.docbook:1254
 msgid ""
@@ -2533,16 +2562,23 @@ msgid ""
 "Widget::set_can_default()</methodname> and <methodname>Gtk::Widget::"
 "grab_default()</methodname>."
 msgstr ""
+"如果你将<literal>true</literal>传递给<methodname>set_activates_default()</methodname>方法，"
+"那么当你在<classname>Gtk::Entry</classname>中按下<keycap>Enter</keycap>的时候包涵这个"
+"<classname>Gtk::Entry</classname>的窗口将会激活其默认部件。这在对话框中特别的有用。"
+"默认部件通常会是对话框的按钮之一，例如对话框的关闭按钮。若你想主动的将某个部件设置"
+"为默认部件，请使用<methodname>Gtk::Widget::set_can_default()</methodname>和"
+"<methodname>Gtk::Widget::grab_default()</methodname>。"
 
 #: C/index-in.docbook:1264
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1Entry.html"
 "\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1Entry.html\">参考</ulink>"
 
 #: C/index-in.docbook:1266
 msgid "Simple Entry Example"
-msgstr ""
+msgstr "简单的条目示例"
 
 #: C/index-in.docbook:1267
 msgid ""
@@ -2550,16 +2586,19 @@ msgid ""
 "<classname>CheckButton</classname>s, with which you can toggle the editable "
 "and visible flags."
 msgstr ""
+"本示例使用<classname>Gtk::Entry</classname>。他还有两个<classname>CheckButton</classname>，"
+"你可以使用他们切换条目部件的可见性和可编辑性标志。"
 
 #: C/index-in.docbook:1280
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/entry/simple\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/examples/book/entry/simple\">源代码</ulink>"
 
 #: C/index-in.docbook:1287 C/index-in.docbook:1321
 msgid "Entry Completion"
-msgstr ""
+msgstr "条目补全(Entry Completion)"
 
 #: C/index-in.docbook:1288
 msgid ""
@@ -2567,6 +2606,8 @@ msgid ""
 "existing choices based on the first few characters typed by the user. For "
 "instance, a search dialog could suggest text from previous searches."
 msgstr ""
+"<classname>Entry</classname>条目组件可以通过用户输入的前几个字符提供预先准备好"
+"选项的下拉列表。例如，在搜索对话框中提供以前输入过的文本作为建议。"
 
 #: C/index-in.docbook:1293
 msgid ""
@@ -2574,6 +2615,9 @@ msgid ""
 "classname> object, and provide it to the <classname>Entry</classname> widget "
 "via the <methodname>set_completion()</methodname> method."
 msgstr ""
+"要启用此功能，你需要创建一个<classname>EntryCompletion</classname>对象，然后"
+"使用<classname>Entry</classname>部件的<methodname>set_completion()</methodname>方法"
+"将其提供给条目部件。"
 
 #: C/index-in.docbook:1298
 msgid ""
@@ -2583,6 +2627,9 @@ msgid ""
 "<methodname>set_text_column()</methodname> to specify which of your model "
 "columns should be used to match possible text entries."
 msgstr ""
+"<classname>EntryCompletion</classname>可以用<methodname>set_model()</methodname>指定一个"
+"包含所有可能的条目的<classname>TreeModel</classname>。你应该调用<methodname>set_text_column()</methodname>"
+"指定该模型的那一行用以匹配可能的文本条目。"
 
 #: C/index-in.docbook:1304
 msgid ""
@@ -2591,16 +2638,20 @@ msgid ""
 "<methodname>set_match_func()</methodname>. This is also useful if you wish "
 "to match on a part of the string other than the start."
 msgstr ""
+"或是在不方便生成补全条目列表的时候(太大或者生成太麻烦)，也可以使用"
+"<methodname>set_match_func()</methodname>指定一个回调槽。这在你想匹配字符串中"
+"开头以外的部分的时候这会很有用。"
 
 #: C/index-in.docbook:1310
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1EntryCompletion.html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1EntryCompletion.html\">参考</ulink>"
 
 #: C/index-in.docbook:1312
 msgid "Entry Completion Example"
-msgstr ""
+msgstr "条目补全示例"
 
 #: C/index-in.docbook:1313
 msgid ""
@@ -2609,16 +2660,20 @@ msgid ""
 "completion uses a <classname>Gtk::TreeModel</classname> of possible entries, "
 "and some additional actions."
 msgstr ""
+"这个示例创建一个<classname>Gtk::EntryCompletion</classname>并将其与"
+"<classname>Gtk::Entry</classname>相关联。补全使用了一个包含了可能条目的"
+"<classname>Gtk::TreeModel</classname>以及一些其他的额外的操作。"
 
 #: C/index-in.docbook:1327
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/entry/completion\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/examples/book/entry/completion\">源代码</ulink>"
 
 #: C/index-in.docbook:1333
 msgid "Entry Icons"
-msgstr ""
+msgstr "条目图标"
 
 #: C/index-in.docbook:1334
 msgid ""
@@ -2629,30 +2684,37 @@ msgid ""
 "respond to the user pressing the icon by handling the "
 "<methodname>signal_icon_press</methodname> signal."
 msgstr ""
+"<classname>Entry</classname>部件可以在文本区域的开头或结尾显示一个图标。"
+"可以使用<methodname>set_icon_from_pixbuf()</methodname>或<methodname>set_icon_from_icon_name()</methodname>"
+"之类的方法指定要显示的图标。应用程序可以通过响应<methodname>signal_icon_press</methodname>信号"
+"来处理用户按下图标事件。"
 
 #: C/index-in.docbook:1341
 msgid "Entry Icon Example"
-msgstr ""
+msgstr "条目图标示例"
 
 #: C/index-in.docbook:1342
 msgid ""
 "This example shows a <classname>Gtk::Entry</classname> widget with a named "
 "search icon, and prints text to the terminal when the icon is pressed."
 msgstr ""
+"这个示例显示带有具名搜索图标的<classname>Gtk::Entry</classname>部件，并且"
+"在按下这个图标的时候将该名称打印到终端上。"
 
 #: C/index-in.docbook:1348
 msgid "Entry with Icon"
-msgstr ""
+msgstr "带图标的条目"
 
 #: C/index-in.docbook:1354
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/entry/icon\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/examples/book/entry/icon\">源代码</ulink>"
 
 #: C/index-in.docbook:1360
 msgid "Entry Progress"
-msgstr ""
+msgstr "条目进度"
 
 #: C/index-in.docbook:1361
 msgid ""
@@ -2661,30 +2723,35 @@ msgid ""
 "<methodname>set_progress_fraction()</methodname> or "
 "<methodname>set_progress_pulse_step()</methodname> methods are called."
 msgstr ""
+"<classname>Entry</classname>部件可以在输入的文本之下显示一个进度条。"
+"当部件的<methodname>set_progress_fraction()</methodname>或<methodname>set_progress_pulse_step()</methodname>"
+"方法被调用的时候进度条将显示出来。"
 
 #: C/index-in.docbook:1366
 msgid "Entry Progress Example"
-msgstr ""
+msgstr "条目进度示例"
 
 #: C/index-in.docbook:1367
 msgid ""
 "This example shows a <classname>Gtk::Entry</classname> widget with a "
 "progress bar."
 msgstr ""
+"这个示例显示一个带有进度条的<classname>Gtk::Entry</classname>部件。"
 
 #: C/index-in.docbook:1373
 msgid "Entry with Progress Bar"
-msgstr ""
+msgstr "带有进度条的条目"
 
 #: C/index-in.docbook:1379
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/entry/progress\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/examples/book/entry/progress\">源代码</ulink>"
 
 #: C/index-in.docbook:1387 C/index-in.docbook:1509
 msgid "SpinButton"
-msgstr ""
+msgstr "微调按钮"
 
 #: C/index-in.docbook:1389
 msgid ""
@@ -2695,6 +2762,9 @@ msgid ""
 "<classname>Entry</classname> widget may also be used to enter a value "
 "directly."
 msgstr ""
+"<classname>SpinButton</classname>允许用户从一个数值范围内选择一个值。它包含了"
+"一个<classname>Entry</classname>部件在其侧边有递增和递减按钮。单击按钮会使得"
+"值在可能的范围内“旋转”。你也可以直接在<classname>Entry</classname>部件中输入一个值。"
 
 #: C/index-in.docbook:1397
 msgid ""
@@ -2704,34 +2774,36 @@ msgid ""
 "optionally cause the value to change more quickly the longer the button is "
 "held down."
 msgstr ""
+"这个值的小数位可以进行调整，步长也可以进行配置。<classname>SpinButton</classname>具有"
+"“自动重复”功能：长按递增、递减按钮该值的变化速度会越来越快。"
 
 #: C/index-in.docbook:1412
 msgid "<literal>value</literal>: value for the Spin Button"
-msgstr ""
+msgstr "<literal>value</literal>：微调按钮的值"
 
 #: C/index-in.docbook:1418
 msgid "<literal>lower</literal>: lower range value"
-msgstr ""
+msgstr "<literal>lower</literal>：微调按钮允许的最小值"
 
 #: C/index-in.docbook:1424
 msgid "<literal>upper</literal>: upper range value"
-msgstr ""
+msgstr "<literal>upper</literal>：微调按钮允许的最大值"
 
 #: C/index-in.docbook:1429
 msgid ""
 "<literal>step_increment</literal>: value to increment/decrement when "
 "pressing mouse button 1"
-msgstr ""
+msgstr "<literal>step_increment</literal>：鼠标键1(通常是左键)点击一下递增/递减的值"
 
 #: C/index-in.docbook:1436
 msgid ""
 "<literal>page_increment</literal>: value to increment/decrement when "
 "pressing mouse button 2"
-msgstr ""
+msgstr "<literal>page_increment</literal>：鼠标键2(通常是右键)点击一下递增/递减的值"
 
 #: C/index-in.docbook:1443
 msgid "<literal>page_size</literal>: unused"
-msgstr ""
+msgstr "<literal>page_size</literal>：目前没作用"
 
 #: C/index-in.docbook:1404
 msgid ""
@@ -2740,12 +2812,14 @@ msgid ""
 "These Adjustment attributes are used by the Spin Button like so: <_:"
 "itemizedlist-1/>"
 msgstr ""
+"<classname>SpinButton</classname>使用<link linkend=\"chapter-adjustment\">调整(Adjustment)</link>对象"
+"保存值的范围信息。下述调整属性由微调按钮使用：<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:1451
 msgid ""
 "Additionally, mouse button 3 can be used to jump directly to the "
 "<literal>upper</literal> or <literal>lower</literal> values."
-msgstr ""
+msgstr "另外，鼠标键3(通常是中键)用于直接跳到<literal>upper</literal>或<literal>lower</literal> values。"
 
 #: C/index-in.docbook:1456
 msgid ""
@@ -2754,12 +2828,16 @@ msgid ""
 "<methodname>get_adjustment()</methodname> method, or you can specify an "
 "existing <classname>Adjustment</classname> in the constructor."
 msgstr ""
+"<classname>SpinButton</classname>可以创建一个默认状态的<classname>Adjustment</classname>，"
+"然后你可以调用<methodname>get_adjustment()</methodname>方法访问这个<classname>Adjustment</classname>"
+"，也可以通过<classname>SpinButton</classname>的构造函数直接使用一个已经存在的<classname>Adjustment</classname>。"
 
 #: C/index-in.docbook:1466
 msgid ""
 "The number of decimal places can be altered using the "
 "<methodname>set_digits()</methodname> method."
 msgstr ""
+"数值的小数位可以使用<methodname>set_digits()</methodname>方法进行调整。"
 
 #: C/index-in.docbook:1471
 msgid ""
@@ -2767,6 +2845,8 @@ msgid ""
 "methodname> method, and retrieve it with <methodname>get_value()</"
 "methodname>."
 msgstr ""
+"你可以使用<methodname>set_value()</methodname>方法设置微调按钮的值，也可以"
+"使用<methodname>get_value()</methodname>方法获得微调按钮的值。"
 
 #: C/index-in.docbook:1476
 msgid ""
@@ -2775,6 +2855,8 @@ msgid ""
 "had been clicked. You need to specify a <classname>Gtk::SpinType</classname> "
 "to specify the direction or new position."
 msgstr ""
+"<methodname>spin()</methodname>方法的行为和手动点击递增/递减按钮一样。你需要传递"
+"一个<classname>Gtk::SpinType</classname>对象给该方法以指定是递增还是递减。"
 
 #: C/index-in.docbook:1483
 msgid ""
@@ -2782,38 +2864,45 @@ msgid ""
 "pass <literal>true</literal> to the <methodname>set_numeric()</methodname> "
 "method."
 msgstr ""
+"将<literal>true</literal>传递给<methodname>set_numeric()</methodname>方法"
+"可以阻止用户在条目框内输入非数字字符。"
 
 #: C/index-in.docbook:1488
 msgid ""
 "To make the <classname>SpinButton</classname> 'wrap' between its upper and "
 "lower bounds, use the <methodname>set_wrap()</methodname> method."
 msgstr ""
+"使用<methodname>set_wrap()</methodname>方法指定<classname>SpinButton</classname>的值到达上下限的时候是否绕回。"
 
 #: C/index-in.docbook:1493
 msgid ""
 "To force it to snap to the nearest <literal>step_increment</literal>, use "
 "<methodname>set_snap_to_ticks()</methodname>."
 msgstr ""
+"使用<methodname>set_snap_to_ticks()</methodname>方法可以在向微调按钮设置了无效值的时候强制校正到最接近"
+"<literal>step_increment</literal>策略可达到的有效值。"
 
 #: C/index-in.docbook:1498
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1SpinButton.html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1SpinButton.html\">参考</ulink>"
 
 #: C/index-in.docbook:1504
 msgid "Here's an example of a <classname>SpinButton</classname> in action:"
-msgstr ""
+msgstr "这是一个使用<classname>SpinButton</classname>的示例："
 
 #: C/index-in.docbook:1515
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/spinbutton\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/examples/book/spinbutton\">源代码</ulink>"
 
 #: C/index-in.docbook:1522 C/index-in.docbook:1570
 msgid "ProgressBar"
-msgstr ""
+msgstr "进度条"
 
 #: C/index-in.docbook:1524
 msgid ""
@@ -2843,6 +2932,7 @@ msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1ProgressBar.html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1ProgressBar.html\">参考</ulink>"
 
 #: C/index-in.docbook:1544
 msgid "Activity Mode"
