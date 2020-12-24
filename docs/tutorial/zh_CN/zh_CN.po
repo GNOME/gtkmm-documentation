@@ -808,7 +808,7 @@ msgid ""
 "<filename>Makefile.example</filename> files in the <link linkend=\"chapter-"
 "building-applications\">Building applications</link> chapter."
 msgstr ""
-"如果你打算自己从小型应用程序开始试验，那么使用<link linkend=\"chapter-building-applications\"\>构建应用程序</link>"
+"如果你打算自己从小型应用程序开始试验，那么使用<link linkend=\"chapter-building-applications\">构建应用程序</link>"
 "章节的<filename>Makefile.example</filename>文件从MakeFile开始比较容易。"
 
 #: C/index-in.docbook:420 C/index-in.docbook:5869
