@@ -17,8 +17,9 @@ if not python_version.version_compare(python_version_req)
 endif
 
 gtkmm_pcname = 'gtkmm-4.0'
-gtkmm_dep = dependency(gtkmm_pcname, version: '>=4.0.0')
-giomm_dep = dependency('giomm-2.68', version: '>=2.68.0')
+gtkmm_req = '>= 4.0.0'
+giomm_pcname = 'giomm-2.68'
+giomm_req = '>= 2.68.0'
 gnome = import('gnome')
 
 # Installation directories are relative to {prefix}.
@@ -43,6 +44,8 @@ cpp_compiler = meson.get_compiler('cpp')
 is_dist_check = project_source_root.contains('dist-unpack') and \
                 project_build_root.contains('dist-build')
 
+# Options
+build_examples_by_default = get_option('build-examples')
 if is_dist_check
   message('Looks like a tarball is being tested. ' + \
           'Option "dist-warnings" is used instead of "warnings".')
@@ -50,6 +53,12 @@ if is_dist_check
 else
   warning_level = get_option('warnings')
 endif
+
+must_be_able_to_build_examples = build_examples_by_default or is_dist_check
+
+gtkmm_dep = dependency(gtkmm_pcname, version: gtkmm_req, required: must_be_able_to_build_examples)
+giomm_dep = dependency(giomm_pcname, version: giomm_req, required: must_be_able_to_build_examples)
+can_build_examples = gtkmm_dep.found() and giomm_dep.found()
 
 warning_flags = []
 if warning_level == 'min'
@@ -88,6 +97,12 @@ if not meson.is_subproject()
 endif
 
 # Print a summary.
+explain_ex = ''
+if not can_build_examples
+  explain_ex = ' (requires @0@ @1@ and @2@ @3@)'
+  explain_ex = explain_ex.format(gtkmm_pcname, gtkmm_req, giomm_pcname, giomm_req)
+endif
+
 validate = get_option('validation') and can_parse_and_validate
 explain_val = ''
 if get_option('validation') and not validate
@@ -111,7 +126,7 @@ summary = [
   '------',
   meson.project_name() + ' ' + meson.project_version(),
   '',
-  '    Build examples: @0@'.format(build_examples_by_default),
+  '    Build examples: @0@@1@'.format(build_examples_by_default, explain_ex),
   ' Compiler warnings: @0@'.format(warning_level),
   '    XML validation: @0@@1@'.format(validate, explain_val),
   'Build translations: @0@@1@'.format(build_translations, explain_trans),
