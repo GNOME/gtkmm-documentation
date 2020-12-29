@@ -4077,17 +4077,18 @@ msgstr ""
 
 #: C/index-in.docbook:2237
 msgid "The TreeView widget"
-msgstr ""
+msgstr "树形视图部件"
 
 #: C/index-in.docbook:2238
 msgid ""
 "The <classname>Gtk::TreeView</classname> widget can contain lists or trees "
 "of data, in columns."
 msgstr ""
+" <classname>Gtk::TreeView</classname>部件的每一行都可以包含数据列表或数据树。"
 
 #: C/index-in.docbook:2244
 msgid "The Model"
-msgstr ""
+msgstr "模型(Model)"
 
 #: C/index-in.docbook:2245
 msgid ""
@@ -4100,6 +4101,12 @@ msgid ""
 "columns from the same Model data, in the same way that 2 SQL queries (or "
 "\"views\") might show different fields from the same database table."
 msgstr ""
+"每一个<classname>Gtk::TreeView</classname>都有一个与之关联的<classname>Gtk::"
+"TreeModel</classname>，模型中包含了<classname>TreeView</classname>将要显示的"
+"数据。每个<classname>Gtk::TreeModel</classname>都可以被多个<classname>Gtk::"
+"TreeView</classname>使用。例如，这将允许以多种不同的方式同时显示和编辑一致的"
+"数据。也允许不同的视图显示同一个模型的不同列的数据，就像是多个SQL查询（或“视"
+"图”）显示同一个数据库表的不同字段一样。"
 
 #: C/index-in.docbook:2255
 msgid ""
@@ -4107,56 +4114,64 @@ msgid ""
 "use either the <classname>ListStore</classname> or <classname>TreeStore</"
 "classname> model classes."
 msgstr ""
+"理论上你可以实现自己的模型，但通常情况直接使用<classname>ListStore</"
+"classname>或<classname>TreeStore</classname>可以省略很多麻烦。"
 
 #: C/index-in.docbook:2261
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TreeModel."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TreeModel."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:2264
 msgid "ListStore, for rows"
-msgstr ""
+msgstr "列表储存(ListStore)的行"
 
 #: C/index-in.docbook:2265
 msgid ""
 "The <classname>ListStore</classname> contains simple rows of data, and each "
 "row has no children."
-msgstr ""
+msgstr "<classname>ListStore</classname>包含简单的数据行，每个行都没有孩子。"
 
 #: C/index-in.docbook:2271 C/index-in.docbook:2839
 msgid "TreeView - ListStore"
-msgstr ""
+msgstr "树视图 - 列表储存"
 
 #: C/index-in.docbook:2277
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1ListStore."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1ListStore."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:2282
 msgid "TreeStore, for a hierarchy"
-msgstr ""
+msgstr "具有层次的树状储存"
 
 #: C/index-in.docbook:2283
 msgid ""
 "The <classname>TreeStore</classname> contains rows of data, and each row may "
 "have child rows."
-msgstr ""
+msgstr "<classname>TreeStore</classname>包含数据行，并且每一行都可能有子行。"
 
 #: C/index-in.docbook:2289 C/index-in.docbook:2858
 msgid "TreeView - TreeStore"
-msgstr ""
+msgstr "树状视图 - 树状储存"
 
 #: C/index-in.docbook:2295
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TreeStore."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TreeStore."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:2300
 msgid "Model Columns"
-msgstr ""
+msgstr "模型列"
 
 #: C/index-in.docbook:2301
 msgid ""
@@ -4168,6 +4183,11 @@ msgid ""
 "<classname>TreeModelColumnRecord</classname> which has your "
 "<classname>TreeModelColumn</classname> instances as member data."
 msgstr ""
+"<classname>TreeModelColumnRecord</classname>用于跟踪列和它们的数据类型。你"
+"<classname>TreeModelColumn</classname>实例添加到<classname>ColumnRecord</"
+"classname>，然后使用那些<classname>TreeModelColumns</classname>获取和设置模型"
+"列中的数据。你可能会发现，派生一个你自己的包含有<classname>TreeModelColumn</"
+"classname>数据成员的<classname>TreeModelColumnRecord</classname>会更方便。"
 
 #: C/index-in.docbook:2312
 #, no-wrap
@@ -4185,12 +4205,25 @@ msgid ""
 "\n"
 "ModelColumns m_Columns;"
 msgstr ""
+"class ModelColumns : public Gtk::TreeModelColumnRecord\n"
+"{\n"
+"public:\n"
+"\n"
+"  ModelColumns()\n"
+"    { add(m_col_text); add(m_col_number); }\n"
+"\n"
+"  Gtk::TreeModelColumn&lt;Glib::ustring&gt; m_col_text;\n"
+"  Gtk::TreeModelColumn&lt;int&gt; m_col_number;\n"
+"};\n"
+"\n"
+"ModelColumns m_Columns;"
 
 #: C/index-in.docbook:2325
 msgid ""
 "You specify the <classname>ColumnRecord</classname> when creating the Model, "
 "like so:"
 msgstr ""
+"你可以在创建模型的时候指定<classname>ColumnRecord</classname>，如下所示："
 
 #: C/index-in.docbook:2329
 #, no-wrap
@@ -4198,6 +4231,8 @@ msgid ""
 "Glib::RefPtr&lt;Gtk::ListStore&gt; refListStore =\n"
 "    Gtk::ListStore::create(m_Columns);"
 msgstr ""
+"Glib::RefPtr&lt;Gtk::ListStore&gt; refListStore =\n"
+"    Gtk::ListStore::create(m_Columns);"
 
 #: C/index-in.docbook:2331
 msgid ""
@@ -4209,10 +4244,15 @@ msgid ""
 "The best solution is to make it a lazily instantiated singleton, so that it "
 "will be constructed on-demand, whenever the first model accesses it."
 msgstr ""
+"<classname>TreeModelColumnRecord</classname>描述的是结构而不是数据，它可以在"
+"多个模型之间共享，这样效率更高。但是实例（例如此处的<varname>m_Columns</"
+"varname>）通常不是静态的，因为通常需要在<application>glibmm</application>初始"
+"化后示例化它。最好的解决方案是使他成为惰性初始化的单例，以便在第一个模型访问"
+"他的时候按需构造。"
 
 #: C/index-in.docbook:2343
 msgid "Adding Rows"
-msgstr ""
+msgstr "添加行"
 
 #: C/index-in.docbook:2344
 msgid ""
@@ -4220,24 +4260,26 @@ msgid ""
 "<methodname>prepend()</methodname>, or <methodname>insert()</methodname> "
 "methods."
 msgstr ""
+"使用<methodname>append()</methodname>、<methodname>prepend()</methodname>或"
+"<methodname>insert()</methodname>方法可以向模型添加行。"
 
 #: C/index-in.docbook:2348
 #, no-wrap
 msgid "auto iter = m_refListStore-&gt;append();"
-msgstr ""
+msgstr "auto iter = m_refListStore-&gt;append();"
 
 #: C/index-in.docbook:2349
 msgid "You can dereference the iterator to get the Row:"
-msgstr ""
+msgstr "你可以通过解引用迭代器获得行："
 
 #: C/index-in.docbook:2351
 #, no-wrap
 msgid "auto row = *iter;"
-msgstr ""
+msgstr "auto row = *iter;"
 
 #: C/index-in.docbook:2352
 msgid "Adding child rows"
-msgstr ""
+msgstr "添加子行"
 
 #: C/index-in.docbook:2353
 msgid ""
@@ -4245,6 +4287,9 @@ msgid ""
 "with the <methodname>append()</methodname>, <methodname>prepend()</"
 "methodname>, or <methodname>insert()</methodname> methods, like so:"
 msgstr ""
+"<classname>Gtk::TreeStore</classname>模型可以存在子物件。可以通过"
+"<methodname>append()</methodname>、<methodname>prepend()</methodname>或"
+"<methodname>insert()</methodname>方法添加，如下所示："
 
 #: C/index-in.docbook:2358
 #, no-wrap
@@ -4252,10 +4297,12 @@ msgid ""
 "auto iter_child =\n"
 "    m_refTreeStore-&gt;append(row.children());"
 msgstr ""
+"auto iter_child =\n"
+"    m_refTreeStore-&gt;append(row.children());"
 
 #: C/index-in.docbook:2365
 msgid "Setting values"
-msgstr ""
+msgstr "设置值"
 
 #: C/index-in.docbook:2366
 msgid ""
@@ -4263,15 +4310,17 @@ msgid ""
 "for a particular column in the row, specifying the "
 "<classname>TreeModelColumn</classname> used to create the model."
 msgstr ""
+"你可以使用<methodname>operator[]</methodname>重载设置行中的特定列的数据，你需"
+"要使用创建模型时的<classname>TreeModelColumn</classname>指定列。"
 
 #: C/index-in.docbook:2371
 #, no-wrap
 msgid "row[m_Columns.m_col_text] = \"sometext\";"
-msgstr ""
+msgstr "row[m_Columns.m_col_text] = \"sometext\";"
 
 #: C/index-in.docbook:2375
 msgid "Getting values"
-msgstr ""
+msgstr "获取值"
 
 #: C/index-in.docbook:2376
 msgid ""
@@ -4279,6 +4328,8 @@ msgid ""
 "in a particular column in a row, specifying the <classname>TreeModelColumn</"
 "classname> used to create the model."
 msgstr ""
+"你可以使用<methodname>operator[]</methodname>重载获取行中特定列的数据，你需要"
+"使用创建模型时的<classname>TreeModelColumn</classname>指定列。"
 
 #: C/index-in.docbook:2381
 #, no-wrap
@@ -4286,12 +4337,15 @@ msgid ""
 "auto strText = row[m_Columns.m_col_text];\n"
 "auto number = row[m_Columns.m_col_number];"
 msgstr ""
+"auto strText = row[m_Columns.m_col_text];\n"
+"auto number = row[m_Columns.m_col_number];"
 
 #: C/index-in.docbook:2383
 msgid ""
 "The compiler will complain if you use an inappropriate type. For instance, "
 "this would generate a compiler error:"
 msgstr ""
+"如果你使用了不合适的类型，编译器会报错。例如，编译器将生成一个编译错误："
 
 #: C/index-in.docbook:2387
 #, no-wrap
@@ -4299,20 +4353,24 @@ msgid ""
 "//compiler error - no conversion from ustring to int.\n"
 "int number = row[m_Columns.m_col_text];"
 msgstr ""
+"//compiler error - no conversion from ustring to int.\n"
+"int number = row[m_Columns.m_col_text];"
 
 #: C/index-in.docbook:2392
 msgid "\"Hidden\" Columns"
-msgstr ""
+msgstr "“隐藏”列"
 
 #: C/index-in.docbook:2393
 msgid ""
 "You might want to associate extra data with each row. If so, just add it as "
 "a Model column, but don't add it to the View."
 msgstr ""
+"你可能想要将额外的数据和每一行关联。如果是这样，你只需要将其添加到模型的一个"
+"行中而不将其添加到视图中即可。"
 
 #: C/index-in.docbook:2402 C/index-in.docbook:3248
 msgid "The View"
-msgstr ""
+msgstr "视图"
 
 #: C/index-in.docbook:2403
 msgid ""
@@ -4321,16 +4379,21 @@ msgid ""
 "the user to interact with it. The View can show all of the model's columns, "
 "or just some, and it can show them in various ways."
 msgstr ""
+"视图实际上是一个用于显示模型(<classname>Gtk::TreeModel</classname>)数据并允许"
+"用户与其交互的部件(<classname>Gtk::TreeView</classname>)。视图可以显示模型的"
+"所有列也可以只显示一部分列还可以以不同的方式显示列。"
 
 #: C/index-in.docbook:2410
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TreeView."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TreeView."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:2413
 msgid "Using a Model"
-msgstr ""
+msgstr "使用模型"
 
 #: C/index-in.docbook:2414
 msgid ""
@@ -4338,15 +4401,18 @@ msgid ""
 "the <classname>Gtk::TreeView</classname>, or you can use the "
 "<methodname>set_model()</methodname> method, like so:"
 msgstr ""
+"你可以在构造<classname>Gtk::TreeView</classname>的时候为其指定一个"
+"<classname>Gtk::TreeModel</classname>，也可以构筑完成后使用"
+"<methodname>set_model()</methodname>方法指定，如下所示："
 
 #: C/index-in.docbook:2419
 #, no-wrap
 msgid "m_TreeView.set_model(m_refListStore);"
-msgstr ""
+msgstr "m_TreeView.set_model(m_refListStore);"
 
 #: C/index-in.docbook:2423
 msgid "Adding View Columns"
-msgstr ""
+msgstr "为视图添加列"
 
 #: C/index-in.docbook:2424
 msgid ""
@@ -4354,11 +4420,13 @@ msgid ""
 "View that it should display certain Model columns, in a certain order, with "
 "a certain column title."
 msgstr ""
+"你可以使用<methodname>append_column()</methodname>方法告知视图以一定的顺序于"
+"某个列标题下显示模型的某个列。"
 
 #: C/index-in.docbook:2429
 #, no-wrap
 msgid "m_TreeView.append_column(\"Messages\", m_Columns.m_col_text);"
-msgstr ""
+msgstr "m_TreeView.append_column(\"Messages\", m_Columns.m_col_text);"
 
 #: C/index-in.docbook:2430
 msgid ""
@@ -4374,10 +4442,20 @@ msgid ""
 "not supported by default - You could use (unsigned) int or (unsigned) long "
 "as the column type instead."
 msgstr ""
+"当使用这种简单的<methodname>append_column()</methodname>重载的时候，"
+"<classname>TreeView</classname>将会使用适当的<classname>CellRenderer</"
+"classname>显示模型数据。例如将字符串和数字显示在简单的<classname>Gtk::Entry</"
+"classname>部件中，布尔量使用<classname>Gtk::CheckButton</classname>显示。这通"
+"常是你所希望的行为。对于其他类型的行，你必须使用<methodname>TreeViewColumn::"
+"set_cell_data_func()</methodname>连接一个将你的类型转换为字符串表示形式的回"
+"调，或者是从<classname>CellRenderer</classname>派生一个合适的类。请注意，默认"
+"情况下<literal>(unsigned) short</literal>不被支持 - 作为替代你可以使用"
+"<literal>(unsigned) int</literal>或者<literal>(unsigned) long</literal>作为行"
+"类型。"
 
 #: C/index-in.docbook:2446
 msgid "More than one Model Column per View Column"
-msgstr ""
+msgstr "每个视图列不不止一个模型列"
 
 #: C/index-in.docbook:2447
 msgid ""
@@ -4385,6 +4463,9 @@ msgid ""
 "the <classname>TreeView::Column</classname> widget manually, and use "
 "<methodname>pack_start()</methodname> to add the model columns to it."
 msgstr ""
+"要在一个视图列中呈现多个模型列，你需要手动创建<classname>TreeView::Column</"
+"classname>部件，并使用<methodname>pack_start()</methodname>方法向其添加模型"
+"列。"
 
 #: C/index-in.docbook:2453
 msgid ""
@@ -4395,12 +4476,17 @@ msgid ""
 "classname> from which it generates an appropriate <classname>Gtk::TreeView::"
 "Column</classname> widget."
 msgstr ""
+"然后使用<methodname>append_column()</methodname>将视图列添加到视图中。请注"
+"意，<methodname>Gtk::TreeView::append_column()</methodname>被重载为接受预建的"
+"<classname>Gtk::TreeView::Column</classname>部件，或者只接受由"
+"<classname>TreeModelColumn</classname>生成的合适的<classname>Gtk::TreeView::"
+"Column</classname>部件。"
 
 #: C/index-in.docbook:2460
 msgid ""
 "Here is some example code, which has a pixbuf icon and a text name in the "
 "same column:"
-msgstr ""
+msgstr "这是一些示例代码，在同一列中有一个像素缓冲区(pixbuf)图标和一个文本名："
 
 #: C/index-in.docbook:2463
 #, no-wrap
@@ -4415,10 +4501,19 @@ msgid ""
 "\n"
 "m_TreeView.append_column(*pColumn);"
 msgstr ""
+"\n"
+"auto pColumn = Gtk::make_managed&lt;Gtk::TreeView::Column&gt;(\"Icon Name\");\n"
+"\n"
+"// m_columns.icon and m_columns.iconname are columns in the model.\n"
+"// pColumn is the column in the TreeView:\n"
+"pColumn-&gt;pack_start(m_columns.icon, /* expand= */ false);\n"
+"pColumn-&gt;pack_start(m_columns.iconname);\n"
+"\n"
+"m_TreeView.append_column(*pColumn);"
 
 #: C/index-in.docbook:2475
 msgid "Specifying CellRenderer details"
-msgstr ""
+msgstr "指定单元格渲染器(CellRenderer)详情"
 
 #: C/index-in.docbook:2476
 msgid ""
@@ -4429,6 +4524,10 @@ msgid ""
 "CellRenderer</classname> widget and instructs it to render the data from "
 "various model columns through various aspects of its appearance."
 msgstr ""
+"默认的<classname>CellRenderers</classname>及其默认行为通常已经足够好了，但是"
+"有时你需要更精细的控制它。例如来自<filename>gtkmm/demos/gtk-demo/"
+"example_treeview_treestore.cc</filename>的示例代码，附加一个<classname>Gtk::"
+"CellRenderer</classname>部件并指示其各个模型列的外观的各个方面来呈现数据。"
 
 #: C/index-in.docbook:2484
 #, no-wrap
@@ -4441,12 +4540,21 @@ msgid ""
 "  pColumn-&gt;add_attribute(pRenderer-&gt;property_visible(), m_columns.visible);\n"
 "  pColumn-&gt;add_attribute(pRenderer-&gt;property_activatable(), m_columns.world);"
 msgstr ""
+"auto cols_count = m_TreeView.append_column_editable(\"Alex\", m_columns.alex);\n"
+"auto pColumn = m_TreeView.get_column(cols_count-1);\n"
+"if(pColumn)\n"
+"{\n"
+"  auto pRenderer = static_cast&lt;Gtk::CellRendererToggle*&gt;(pColumn-&gt;get_first_cell());\n"
+"  pColumn-&gt;add_attribute(pRenderer-&gt;property_visible(), m_columns.visible);\n"
+"  pColumn-&gt;add_attribute(pRenderer-&gt;property_activatable(), m_columns.world);"
 
 #: C/index-in.docbook:2492
 msgid ""
 "You can also connect to <classname>CellRenderer</classname> signals to "
 "detect user actions. For instance:"
 msgstr ""
+"你还可以通过连接到<classname>CellRenderer</classname>的信号以检测用户的操作。"
+"例如："
 
 #: C/index-in.docbook:2496
 #, no-wrap
@@ -4458,14 +4566,20 @@ msgid ""
 "        &amp;Example_TreeView_TreeStore::on_cell_toggled), m_columns.dave)\n"
 ");"
 msgstr ""
+"\n"
+"auto pRenderer = Gtk::make_managed&lt;Gtk::CellRendererToggle&gt;();\n"
+"pRenderer-&gt;signal_toggled().connect(\n"
+"    sigc::bind( sigc::mem_fun(*this,\n"
+"        &amp;Example_TreeView_TreeStore::on_cell_toggled), m_columns.dave)\n"
+");"
 
 #: C/index-in.docbook:2505 C/index-in.docbook:2868
 msgid "Editable Cells"
-msgstr ""
+msgstr "可编辑单元格"
 
 #: C/index-in.docbook:2508
 msgid "Automatically-stored editable cells."
-msgstr ""
+msgstr "自动储存的可编辑单元格"
 
 #: C/index-in.docbook:2509
 msgid ""
@@ -4479,10 +4593,17 @@ msgid ""
 "only be instantiated for simple column types such as <classname>Glib::"
 "ustring</classname>, int, and long."
 msgstr ""
+"用户可以就地编辑<classname>TreeView</classname>中的单元格。若要如此，请使用"
+"<classname>Gtk::TreeView</classname>的<methodname>insert_column_editable()</"
+"methodname>和<methodname>append_column_editable()</methodname>方法而不是"
+"<methodname>insert_column()</methodname>和<methodname>append_column()</"
+"methodname>方法。编辑单元格后新的值将立刻储存在模型中。请注意，这些方法是模"
+"版，只能为简单的列类型实例化（例如，<classname>Glib::ustring</classname>、"
+"<literal>int</literal>和<literal>long</literal>）。"
 
 #: C/index-in.docbook:2523
 msgid "Implementing custom logic for editable cells."
-msgstr ""
+msgstr "为可编辑单元格实现自定义逻辑。"
 
 #: C/index-in.docbook:2524
 msgid ""
@@ -4490,6 +4611,8 @@ msgid ""
 "instance, maybe you want to restrict the input to certain characters or "
 "ranges of values."
 msgstr ""
+"但是你可能不希望立刻储存新的值。例如你可能希望对输入进行检测，符合预期的范围"
+"才储存。"
 
 #: C/index-in.docbook:2529
 msgid ""
@@ -4499,6 +4622,10 @@ msgid ""
 "<methodname>get_column_cell_renderer()</methodname> to get the "
 "<classname>Gtk::CellRenderer</classname> used by that column."
 msgstr ""
+"为此，你应该使用常规的<methodname>Gtk::TreeView::insert_column()</methodname>"
+"和<methodname>Gtk::TreeView::append_column()</methodname>方法，然后使用"
+"<methodname>get_column_cell_renderer()</methodname>方法获取该列使用的"
+"<classname>Gtk::CellRenderer</classname>。"
 
 #: C/index-in.docbook:2535
 msgid ""
@@ -4506,23 +4633,30 @@ msgid ""
 "specific <classname>CellRenderer</classname> that you expect, so you can use "
 "specific API."
 msgstr ""
+"然后你应该讲<classname>Gtk::CellRenderer*</classname>转换为你期望的特定版本的"
+"<classname>CellRenderer</classname>（例如转换为<classname>CellRendererText</"
+"classname>，以便调用特定的API。"
 
 #: C/index-in.docbook:2539
 msgid ""
 "For instance, for a CellRendererText, you would set the cell's "
 "<emphasis>editable</emphasis> property to true, like so:"
 msgstr ""
+"例如，对于<classname>CellRendererText</classname>，你应该将单元格的"
+"<emphasis>editable</emphasis>属性设置为<literal>true</literal>，如下所示："
 
 #: C/index-in.docbook:2542
 #, no-wrap
 msgid "cell-&gt;property_editable() = true;"
-msgstr ""
+msgstr "cell-&gt;property_editable() = true;"
 
 #: C/index-in.docbook:2543
 msgid ""
 "For a CellRendererToggle, you would set the <emphasis>activatable</emphasis> "
 "property instead."
 msgstr ""
+"对于<classname>CellRendererToggle</classname>，你应该改为设置"
+"<emphasis>activatable</emphasis>属性。"
 
 #: C/index-in.docbook:2547
 msgid ""
@@ -4533,16 +4667,24 @@ msgid ""
 "you will need to use <methodname>Gtk::TreeView::get_column()</methodname> "
 "and then call <methodname>get_cells()</methodname> on that view Column."
 msgstr ""
+"你可以连接到适当的\"edited\"信号。例如，连接到<methodname>Gtk::"
+"CellRendererText::signal_edited()</methodname>或者是<methodname>Gtk::"
+"CellRendererToggle::signal_toggled()</methodname>。如果该列包含多个"
+"<classname>CellRenderer</classname>，则你需要在视图上使用<methodname>Gtk::"
+"TreeView::get_column()</methodname>方法然后再调用<methodname>get_cells()</"
+"methodname>获取目标单元格。"
 
 #: C/index-in.docbook:2555
 msgid ""
 "In your signal handler, you should examine the new value and then store it "
 "in the Model if that is appropriate for your application."
 msgstr ""
+"在你的信号处理函数中，你应该检查新值如果其对于你的应用程序而言是合适的则将其"
+"储存到你的模型中。"
 
 #: C/index-in.docbook:2567
 msgid "Iterating over Model Rows"
-msgstr ""
+msgstr "遍历模型行"
 
 #: C/index-in.docbook:2568
 msgid ""
@@ -4551,6 +4693,10 @@ msgid ""
 "method. You can use the familiar <methodname>begin()</methodname> and "
 "<methodname>end()</methodname> methods iterator incrementing, like so:"
 msgstr ""
+"<classname>Gtk::TreeModel</classname>通过<methodname>children()</methodname>"
+"方法提供了标准C++容器库风格的子代迭代器。你可以使用熟悉的"
+"<methodname>begin()</methodname>和<methodname>end()</methodname>方法递增迭代"
+"器，如下所示："
 
 #: C/index-in.docbook:2574
 #, no-wrap
@@ -4563,12 +4709,21 @@ msgid ""
 "  //Do something with the row - see above for set/get.\n"
 "}"
 msgstr ""
+"\n"
+"auto children = refModel-&gt;children();\n"
+"for (auto iter = children.begin(), end = children.end(); iter != end; ++iter)\n"
+"{\n"
+"  auto row = *iter;\n"
+"  //Do something with the row - see above for set/get.\n"
+"}"
 
 #: C/index-in.docbook:2581
 msgid ""
 "If you always want to iterate across the entire range, much more succinct "
 "syntax is possible using C++'s range-based <literal>for</literal> loop:"
 msgstr ""
+"如果你总是想迭代整个范围，则可以使用C++基于范围的更简洁的<literal>for</"
+"literal>循环语法："
 
 #: C/index-in.docbook:2585
 #, no-wrap
@@ -4579,15 +4734,20 @@ msgid ""
 "  //Do something with the row - see above for set/get.\n"
 "}"
 msgstr ""
+"\n"
+"for (auto row: refModel-&gt;children())\n"
+"{\n"
+"  //Do something with the row - see above for set/get.\n"
+"}"
 
 #: C/index-in.docbook:2592
 msgid "Row children"
-msgstr ""
+msgstr "子行"
 
 #: C/index-in.docbook:2597
 #, no-wrap
 msgid "Gtk::TreeModel::Children children = row.children();"
-msgstr ""
+msgstr "Gtk::TreeModel::Children children = row.children();"
 
 #: C/index-in.docbook:2593
 msgid ""
@@ -4596,10 +4756,13 @@ msgid ""
 "TreeModel::Row::children()</methodname> to get the container of child "
 "<classname>Row</classname>s: <_:programlisting-1/>"
 msgstr ""
+"在使用<classname>Gtk::TreeStore</classname>的时候，其行可以存在子行，子行也可"
+"以存在子行。使用<methodname>Gtk::TreeModel::Row::children()</methodname>方法"
+"可以获取<classname>Row</classname>的子行：<_:programlisting-1/>"
 
 #: C/index-in.docbook:2604
 msgid "The Selection"
-msgstr ""
+msgstr "选择"
 
 #: C/index-in.docbook:2605
 msgid ""
@@ -4607,36 +4770,41 @@ msgid ""
 "TreeView::Selection</classname> object from the <classname>TreeView</"
 "classname>, like so:"
 msgstr ""
+"要找出用户选择了那些行，请从<classname>TreeView</classname>的<classname>Gtk::"
+"TreeView::Selection</classname>对象获取。"
 
 #: C/index-in.docbook:2610
 #, no-wrap
 msgid "auto refTreeSelection = m_TreeView.get_selection();"
-msgstr ""
+msgstr "auto refTreeSelection = m_TreeView.get_selection();"
 
 #: C/index-in.docbook:2613
 msgid "Single or multiple selection"
-msgstr ""
+msgstr "单选或多选"
 
 #: C/index-in.docbook:2617
 #, no-wrap
 msgid "refTreeSelection-&gt;set_mode(Gtk::SELECTION_MULTIPLE);"
-msgstr ""
+msgstr "refTreeSelection-&gt;set_mode(Gtk::SELECTION_MULTIPLE);"
 
 #: C/index-in.docbook:2614
 msgid ""
 "By default, only single rows can be selected, but you can allow multiple "
 "selection by setting the mode, like so: <_:programlisting-1/>"
 msgstr ""
+"默认情况下，只能选定一行，但是你可以通过设置选择模式选择多行，如下所示：<_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:2622
 msgid "The selected rows"
-msgstr ""
+msgstr "选定的行"
 
 #: C/index-in.docbook:2623
 msgid ""
 "For single-selection, you can just call <methodname>get_selected()</"
 "methodname>, like so:"
 msgstr ""
+"对于单选模式，你可以如下所示调用<methodname>get_selected()</methodname>："
 
 #: C/index-in.docbook:2627
 #, no-wrap
@@ -4648,6 +4816,12 @@ msgid ""
 "  //Do something with the row.\n"
 "}"
 msgstr ""
+"auto iter = refTreeSelection-&gt;get_selected();\n"
+"if(iter) //If anything is selected\n"
+"{\n"
+"  auto row = *iter;\n"
+"  //Do something with the row.\n"
+"}"
 
 #: C/index-in.docbook:2634
 msgid ""
@@ -4657,6 +4831,10 @@ msgid ""
 "<methodname>selected_foreach_path()</methodname>, or "
 "<methodname>selected_foreach_iter()</methodname>, like so:"
 msgstr ""
+"对于多选模式，你需要调用<methodname>get_selected_rows()</methodname>或者定义"
+"一个回调然后将其传递给<methodname>selected_foreach()</methodname>、"
+"<methodname>selected_foreach_path()</methodname>或"
+"<methodname>selected_foreach_iter()</methodname>，如下所示："
 
 #: C/index-in.docbook:2641
 #, no-wrap
@@ -4671,16 +4849,25 @@ msgid ""
 "  //Do something with the row.\n"
 "}"
 msgstr ""
+"refTreeSelection-&gt;selected_foreach_iter(\n"
+"    sigc::mem_fun(*this, &amp;TheClass::selected_row_callback) );\n"
+"\n"
+"void TheClass::selected_row_callback(\n"
+"    const Gtk::TreeModel::const_iterator&amp; iter)\n"
+"{\n"
+"  auto row = *iter;\n"
+"  //Do something with the row.\n"
+"}"
 
 #: C/index-in.docbook:2654
 msgid "The \"changed\" signal"
-msgstr ""
+msgstr "\"changed\"信号"
 
 #: C/index-in.docbook:2655
 msgid ""
 "To respond to the user clicking on a row or range of rows, connect to the "
 "signal like so:"
-msgstr ""
+msgstr "要响应用户单击某行或者某个范围的行，请按以下方式连接信号："
 
 #: C/index-in.docbook:2659
 #, no-wrap
@@ -4695,7 +4882,7 @@ msgstr ""
 
 #: C/index-in.docbook:2665
 msgid "Preventing row selection"
-msgstr ""
+msgstr "防止行被选择"
 
 #: C/index-in.docbook:2666
 msgid ""
@@ -4703,6 +4890,8 @@ msgid ""
 "For instance, in the gtk-demo, you can select a demo to see the source code, "
 "but it doesn't make any sense to select a demo category."
 msgstr ""
+"或许用户不应该能选择列表或树中的每个项目。例如在gtk-demo中，你可以选择一个演"
+"示来查看他的源代码，但是你选一个演示类别没有意义。"
 
 #: C/index-in.docbook:2671
 msgid ""
@@ -4710,6 +4899,8 @@ msgid ""
 "<methodname>set_select_function()</methodname> method, providing a "
 "<classname>sigc::slot</classname> callback. For instance:"
 msgstr ""
+"要控制一个行是否能被选择，请使用<methodname>set_select_function()</"
+"methodname>方法为其提供一个<classname>sigc::slot</classname>回调。例如："
 
 #: C/index-in.docbook:2676
 #, no-wrap
@@ -4717,10 +4908,12 @@ msgid ""
 "m_refTreeSelection-&gt;set_select_function( sigc::mem_fun(*this,\n"
 "    &amp;DemoWindow::select_function) );"
 msgstr ""
+"m_refTreeSelection-&gt;set_select_function( sigc::mem_fun(*this,\n"
+"    &amp;DemoWindow::select_function) );"
 
 #: C/index-in.docbook:2678
 msgid "and then"
-msgstr ""
+msgstr "接着"
 
 #: C/index-in.docbook:2681
 #, no-wrap
@@ -4733,16 +4926,25 @@ msgid ""
 "  return iter-&gt;children().empty(); // only allow leaf nodes to be selected\n"
 "}"
 msgstr ""
+"bool DemoWindow::select_function(\n"
+"    const Glib::RefPtr&lt;Gtk::TreeModel&gt;&amp; model,\n"
+"    const Gtk::TreeModel::Path&amp; path, bool)\n"
+"{\n"
+"  const auto iter = model-&gt;get_iter(path);\n"
+"  return iter-&gt;children().empty(); // only allow leaf nodes to be selected\n"
+"}"
 
 #: C/index-in.docbook:2691
 msgid "Changing the selection"
-msgstr ""
+msgstr "修改选择"
 
 #: C/index-in.docbook:2692
 msgid ""
 "To change the selection, specify a <classname>Gtk::TreeModel::iterator</"
 "classname> or <classname>Gtk::TreeModel::Row</classname>, like so:"
 msgstr ""
+"要更改选择，请指定<classname>Gtk::TreeModel::iterator</classname>或"
+"<classname>Gtk::TreeModel::Row</classname>，然后如下所示："
 
 #: C/index-in.docbook:2697
 #, no-wrap
@@ -4751,10 +4953,13 @@ msgid ""
 "if(row)\n"
 "  refTreeSelection-&gt;select(row.get_iter());"
 msgstr ""
+"auto row = m_refModel-&gt;children()[5]; //The sixth row.\n"
+"if(row)\n"
+"  refTreeSelection-&gt;select(row.get_iter());"
 
 #: C/index-in.docbook:2700
 msgid "or"
-msgstr ""
+msgstr "或者"
 
 #: C/index-in.docbook:2703
 #, no-wrap
@@ -4763,10 +4968,13 @@ msgid ""
 "if(iter)\n"
 "  refTreeSelection-&gt;select(iter);"
 msgstr ""
+"auto iter = m_refModel-&gt;children().begin()\n"
+"if(iter)\n"
+"  refTreeSelection-&gt;select(iter);"
 
 #: C/index-in.docbook:2712
 msgid "Sorting"
-msgstr ""
+msgstr "排序"
 
 #: C/index-in.docbook:2713
 msgid ""
@@ -4778,16 +4986,23 @@ msgid ""
 "<methodname>set_sort_func()</methodname> to implement a more complicated "
 "sorting algorithm."
 msgstr ""
+"标准树模型（<classname>TreeStore</classname>和<classname>ListStore</"
+"classname>）派生自<classname>TreeSortable</classname>，因此它们提供了排序功"
+"能。例如，调用<methodname>set_sort_column()</methodname>按指定的列对模型进行"
+"排序。或者向<methodname>set_sort_func()</methodname>提供一个回调函数以实现更"
+"复杂的排序算法。"
 
 #: C/index-in.docbook:2717
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1TreeSortable.html\">TreeSortable Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1TreeSortable.html\">可排序树参考</ulink>"
 
 #: C/index-in.docbook:2720
 msgid "Sorting by clicking on columns"
-msgstr ""
+msgstr "单击列进行排序"
 
 #: C/index-in.docbook:2721
 msgid ""
@@ -4797,6 +5012,10 @@ msgid ""
 "the model column on which model should be sorted when the header is clicked. "
 "For instance:"
 msgstr ""
+"为了使用户可以点击<classname>TreeView</classname>的列标题以对"
+"<classname>TreeView</classname>内容进行排序，请在需要此功能的列上调用"
+"<methodname>Gtk::TreeView::Column::set_sort_column()</methodname>，以提供此功"
+"能。如下所示："
 
 #: C/index-in.docbook:2724
 #, no-wrap
@@ -4805,10 +5024,13 @@ msgid ""
 "if(pColumn)\n"
 "  pColumn-&gt;set_sort_column(m_columns.m_col_id);"
 msgstr ""
+"auto pColumn = treeview.get_column(0);\n"
+"if(pColumn)\n"
+"  pColumn-&gt;set_sort_column(m_columns.m_col_id);"
 
 #: C/index-in.docbook:2730
 msgid "Independently sorted views of the same model"
-msgstr ""
+msgstr "对同一模型进行独立排序的视图"
 
 #: C/index-in.docbook:2731
 msgid ""
@@ -4822,6 +5044,13 @@ msgid ""
 "model. For instance, you might add a sorted version of a model to a "
 "<classname>TreeView</classname> like so:"
 msgstr ""
+"<classname>TreeView</classname>可以让你用两个<classname>TreeView</classname>"
+"部件显示同一个<classname>TreeModel</classname>。如果你需要让这这些树视图对模"
+"型进行不同的排序，则你应该使用<classname>TreeModelSort</classname>而不仅仅是"
+"使用<methodname>Gtk::TreeViewColumn::set_sort_column()</methodname>。"
+"<classname>TreeModelSort</classname>是一个包含其他模型的模型，其提供了该模型"
+"的将已排序版本。你可以如下所示的将已排序版本模型添加到<classname>TreeView</"
+"classname>："
 
 #: C/index-in.docbook:2739
 #, no-wrap
@@ -4830,6 +5059,9 @@ msgid ""
 "sorted_model-&gt;set_sort_column(columns.m_col_name, Gtk::SORT_ASCENDING);\n"
 "treeview.set_model(sorted_model);"
 msgstr ""
+"auto sorted_model = Gtk::TreeModelSort::create(model);\n"
+"sorted_model-&gt;set_sort_column(columns.m_col_name, Gtk::SORT_ASCENDING);\n"
+"treeview.set_model(sorted_model);"
 
 #: C/index-in.docbook:2743
 msgid ""
@@ -4837,6 +5069,8 @@ msgid ""
 "You must convert them to iterators to the underlying child model in order to "
 "perform actions on that model. For instance:"
 msgstr ""
+"请注意，这样做树视图将会提供已排序模型的迭代器。你必须将其转换为基础的子模型"
+"迭代器以便对这个模型进行操作。例如："
 
 #: C/index-in.docbook:2745
 #, no-wrap
@@ -4855,17 +5089,32 @@ msgid ""
 "  }\n"
 "}"
 msgstr ""
+"void ExampleWindow::on_button_delete()\n"
+"{\n"
+"  auto refTreeSelection = m_treeview.get_selection();\n"
+"  if(refTreeSelection)\n"
+"  {\n"
+"    auto sorted_iter = m_refTreeSelection-&gt;get_selected();\n"
+"    if(sorted_iter)\n"
+"    {\n"
+"      auto iter = m_refModelSort-&gt;convert_iter_to_child_iter(sorted_iter);\n"
+"      m_refModel-&gt;erase(iter);\n"
+"    }\n"
+"  }\n"
+"}"
 
 #: C/index-in.docbook:2759
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1TreeModelSort.html\">TreeModelSort Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1TreeModelSort.html\">树模型排序参考</ulink>"
 
 #: C/index-in.docbook:2765 C/index-in.docbook:2887 C/index-in.docbook:4604
 #: C/index-in.docbook:4757
 msgid "Drag and Drop"
-msgstr ""
+msgstr "拖放"
 
 #: C/index-in.docbook:2766
 msgid ""
@@ -4875,10 +5124,14 @@ msgid ""
 "more complex behaviour when items are dragged and dropped, using the normal "
 "<link linkend=\"chapter-draganddrop\">Drag and Drop</link> API."
 msgstr ""
+"当使用<classname>Gtk::ListStore</classname>或者<classname>Gtk::TreeStore</"
+"classname>模型时<classname>Gtk::TreeView</classname>已经实现了简单的拖放。如"
+"果有必要，它还允许你使用常规的<link linkend=\"chapter-draganddrop\">拖放</"
+"link>API实现更复杂的拖放行为。"
 
 #: C/index-in.docbook:2775
 msgid "Reorderable rows"
-msgstr ""
+msgstr "可重排序的行"
 
 #: C/index-in.docbook:2776
 msgid ""
@@ -4886,6 +5139,9 @@ msgid ""
 "your TreeView's items can be moved within the treeview itself. This is "
 "demonstrated in the <classname>TreeStore</classname> example."
 msgstr ""
+"如果调用<methodname>Gtk::TreeView::set_reorderable()</methodname>则你可以在树"
+"视图中移动其本身的项目。<classname>TreeStore</classname>的示例对此进行了演"
+"示。"
 
 #: C/index-in.docbook:2781
 msgid ""
@@ -4899,14 +5155,21 @@ msgid ""
 "provided and allow or disallow dragging or dropping by returning "
 "<literal>true</literal> or <literal>false</literal>."
 msgstr ""
+"但是，这不允许你控制哪些项目可以拖动以及可以将他们拖动到哪里。如果你想做到这"
+"些，你需要从<literal>Gtk::TreeStore</literal>或<literal>Gtk::ListStore</"
+"literal>创建派生的<literal>Gtk::TreeModel</literal>，然后覆盖<literal>Gtk::"
+"TreeDragSource::row_draggable_vfunc()</literal>和<literal>Gtk::TreeDragDest::"
+"row_drop_possible_vfunc()</literal>虚方法。你可以检查提供的<literal>Gtk::"
+"TreeModel::Path</literal>并返回<literal>true</literal>或<literal>false</"
+"literal>来允许或禁止拖放。"
 
 #: C/index-in.docbook:2788
 msgid "This is demonstrated in the drag_and_drop example."
-msgstr ""
+msgstr "在drag_and_drop示例中对此进行了演示。"
 
 #: C/index-in.docbook:2794 C/index-in.docbook:2909
 msgid "Popup Context Menu"
-msgstr ""
+msgstr "弹出上下文菜单"
 
 #: C/index-in.docbook:2795
 msgid ""
@@ -4916,10 +5179,13 @@ msgid ""
 "normal context menu, as described in the <link linkend=\"sec-menus-popup"
 "\">menus chapter</link>."
 msgstr ""
+"很多人认为需要为<classname>TreeView</classname>实现右键单击上下文菜单，因此我"
+"们在这里说明如何做到这个以节省你的时间。其与普通的上下文菜单只有一两点不同，"
+"如<link linkend=\"sec-menus-popup\">菜单章节</link>所述。"
 
 #: C/index-in.docbook:2804
 msgid "Handling <literal>button_press_event</literal>"
-msgstr ""
+msgstr "处理<literal>button_press_event</literal>"
 
 #: C/index-in.docbook:2805
 msgid ""
@@ -4933,15 +5199,21 @@ msgid ""
 "handler before doing anything else, so that the right-click will cause the "
 "row to be selected first."
 msgstr ""
+"要检测鼠标右键的点击，你需要处理<literal>button_press_event</literal>信号，并"
+"准确的检查按下了哪个按钮。因为<classname>TreeView</classname>通常会处理这个信"
+"号，所以你需要使用<methodname>connect_notify()</methodname>或"
+"<methodname>connect(slot, /* after= */ false)</methodname>在"
+"<classname>TreeView</classname>的派生类中覆盖默认信号处理函数。你可能还想在执"
+"行任何其他操作之前先调用默认信号处理函数，以便右键时先选择该行。"
 
 #: C/index-in.docbook:2815
 msgid "This is demonstrated in the Popup Context Menu example."
-msgstr ""
+msgstr "Popup Context Menu示例中对此进行了演示。"
 
 #: C/index-in.docbook:2820 C/index-in.docbook:3314 C/index-in.docbook:3618
 #: C/index-in.docbook:4867
 msgid "Examples"
-msgstr ""
+msgstr "示例"
 
 #: C/index-in.docbook:2822
 msgid ""
@@ -4950,6 +5222,10 @@ msgid ""
 "documentation/tree/master/examples/book/treeview/\">treeview directory</"
 "ulink> in <application>gtkmm-documentation</application>'s examples."
 msgstr ""
+"这里显示了一些<classname>TreeView</classname>的示例。<application>gtkmm文档</"
+"application>示例中的<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-"
+"documentation/tree/master/examples/book/treeview/\">树视图文件夹</ulink>还有"
+"更多的示例。"
 
 #: C/index-in.docbook:2826
 msgid ""
@@ -4960,26 +5236,35 @@ msgid ""
 "how you can make your own implementation of the <classname>TreeModel</"
 "classname> interface."
 msgstr ""
+"如果<classname>ListStore</classname>和<classname>TreeStore</classname>都不适"
+"合你的应用程序，请查看<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-"
+"documentation/tree/master/examples/book/treeview/custom_treemodel\">自定义树"
+"模型</ulink>示例。它向你展示了如何实现自己的<classname>TreeModel</classname>"
+"接口"
 
 #: C/index-in.docbook:2832
 msgid "ListStore"
-msgstr ""
+msgstr "列表储存"
 
 #: C/index-in.docbook:2833
 msgid ""
 "This example has a <classname>Gtk::TreeView</classname> widget, with a "
 "<classname>Gtk::ListStore</classname> model."
 msgstr ""
+"这个例子有一个使用<classname>Gtk::ListStore</classname>模型的<classname>Gtk::"
+"TreeView</classname>部件。"
 
 #: C/index-in.docbook:2845
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/treeview/list/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/treeview/list/\">源代码</ulink>"
 
 #: C/index-in.docbook:2849
 msgid "TreeStore"
-msgstr ""
+msgstr "树储存"
 
 #: C/index-in.docbook:2851
 msgid ""
@@ -4987,12 +5272,16 @@ msgid ""
 "example, but uses a <classname>Gtk::TreeStore</classname> model instead, and "
 "adds children to the rows."
 msgstr ""
+"这个示例和<classname>ListStore</classname>示例非常的相似，但是使用的是"
+"<classname>Gtk::TreeStore</classname>模型并且添加了子行。"
 
 #: C/index-in.docbook:2864
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/treeview/tree/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/treeview/tree/\">源代码</ulink>"
 
 #: C/index-in.docbook:2870
 msgid ""
@@ -5000,16 +5289,21 @@ msgid ""
 "but it uses <methodname>TreeView::append_column_editable()</methodname> "
 "instead of <methodname>TreeView::append_column()</methodname>."
 msgstr ""
+"这个示例与<classname>ListStore</classname>示例相同，但是使用"
+"<methodname>TreeView::append_column_editable()</methodname>代替"
+"<methodname>TreeView::append_column()</methodname>。"
 
 #: C/index-in.docbook:2877
 msgid "TreeView - Editable Cells"
-msgstr ""
+msgstr "树视图 - 可编辑单元格"
 
 #: C/index-in.docbook:2883
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/treeview/editable_cells/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/treeview/editable_cells/\">源代码</ulink>"
 
 #: C/index-in.docbook:2889
 msgid ""
@@ -5020,16 +5314,22 @@ msgid ""
 "the <link linkend=\"sec-treeview-draganddrop\">TreeView Drag and Drop</link> "
 "section."
 msgstr ""
+"这个示例和<classname>TreeStore</classname>示例十分相似，但是额外有两个用于指"
+"示行是否可以进行拖放和接受拖放的列。它通过从<classname>Gtk::TreeStore</"
+"classname>来覆盖虚函数，如<link linkend=\"sec-treeview-draganddrop\">拖放树视"
+"图</link>小节所述。"
 
 #: C/index-in.docbook:2899
 msgid "TreeView - Drag And Drop"
-msgstr ""
+msgstr "树视图 - 拖放"
 
 #: C/index-in.docbook:2905
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/treeview/drag_and_drop/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/treeview/drag_and_drop/\">源代码</ulink>"
 
 #: C/index-in.docbook:2911
 msgid ""
@@ -5039,16 +5339,22 @@ msgid ""
 "model code in our derived class. See the <link linkend=\"sec-treeview-"
 "contextmenu\">TreeView Popup Context Menu</link> section."
 msgstr ""
+"这个示例和<classname>ListStore</classname>示例十分相似，但是它牌手了一个自定"
+"义的<classname>TreeView</classname>以覆盖<literal>button_press_event</"
+"literal>，并将树模型代码封装在派生类代码中，请参阅<link linkend=\"sec-"
+"treeview-contextmenu\">树视图弹出上下文菜单</link>小节。"
 
 #: C/index-in.docbook:2921
 msgid "TreeView - Popup Context Menu"
-msgstr ""
+msgstr "树视图 - 弹出上下文菜单"
 
 #: C/index-in.docbook:2927
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/treeview/popup/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/treeview/popup/\">源代码</ulink>"
 
 #: C/index-in.docbook:2934
 msgid "Combo Boxes"
