@@ -1972,7 +1972,7 @@ msgstr ""
 
 #: C/index-in.docbook:821
 msgid "Buttons"
-msgstr "按钮"
+msgstr "按钮(Buttons)"
 
 #: C/index-in.docbook:823
 msgid "<application>gtkmm</application> provides four basic types of buttons:"
@@ -1996,7 +1996,7 @@ msgstr ""
 
 #: C/index-in.docbook:839
 msgid "Toggle buttons"
-msgstr "开关按钮 (ToggleButton)"
+msgstr "开关按钮(ToggleButton)"
 
 #: C/index-in.docbook:841
 msgid ""
@@ -2033,7 +2033,7 @@ msgstr ""
 
 #: C/index-in.docbook:861
 msgid "Radio buttons"
-msgstr "单选按钮 (RadioButton)"
+msgstr "单选按钮(RadioButton)"
 
 #: C/index-in.docbook:863
 msgid ""
@@ -2062,7 +2062,7 @@ msgstr ""
 
 #: C/index-in.docbook:884
 msgid "Button"
-msgstr "Button (按钮)"
+msgstr "按钮(Button)"
 
 #: C/index-in.docbook:886
 msgid ""
@@ -2146,7 +2146,7 @@ msgstr ""
 
 #: C/index-in.docbook:929
 msgid "ToggleButton"
-msgstr "ToggleButton (开关按钮)"
+msgstr "开关按钮(ToggleButton)"
 
 #: C/index-in.docbook:931
 msgid ""
@@ -2192,7 +2192,7 @@ msgstr ""
 
 #: C/index-in.docbook:950 C/index-in.docbook:965
 msgid "CheckButton"
-msgstr "CheckButton (多选按钮)"
+msgstr "多选按钮(CheckButton)"
 
 #: C/index-in.docbook:952
 msgid ""
@@ -2226,7 +2226,7 @@ msgstr ""
 
 #: C/index-in.docbook:977
 msgid "Radio Button"
-msgstr "RadioButton (单选按钮)"
+msgstr "单选按钮(RadioButton)"
 
 #: C/index-in.docbook:979
 msgid ""
@@ -2312,7 +2312,7 @@ msgstr ""
 
 #: C/index-in.docbook:1026
 msgid "RadioButton"
-msgstr "RadioButton (单选按钮)"
+msgstr "单选按钮(RadioButton)"
 
 #: C/index-in.docbook:1032
 msgid ""
@@ -2324,7 +2324,7 @@ msgstr ""
 
 #: C/index-in.docbook:1042 C/index-in.docbook:1148
 msgid "Range Widgets"
-msgstr "Range 部件"
+msgstr "范围(Range)部件"
 
 #: C/index-in.docbook:1044
 msgid ""
@@ -2501,7 +2501,7 @@ msgstr "杂项部件"
 
 #: C/index-in.docbook:1164 C/index-in.docbook:1204
 msgid "Label"
-msgstr "标签"
+msgstr "标签(Label)"
 
 #: C/index-in.docbook:1166
 msgid ""
@@ -2854,7 +2854,7 @@ msgstr ""
 
 #: C/index-in.docbook:1387 C/index-in.docbook:1509
 msgid "SpinButton"
-msgstr "微调按钮"
+msgstr "微调按钮(SpinButton)"
 
 #: C/index-in.docbook:1389
 msgid ""
@@ -3018,7 +3018,7 @@ msgstr ""
 
 #: C/index-in.docbook:1522 C/index-in.docbook:1570
 msgid "ProgressBar"
-msgstr "进度条"
+msgstr "进度条(ProgressBar)"
 
 #: C/index-in.docbook:1524
 msgid ""
@@ -3101,7 +3101,7 @@ msgstr ""
 
 #: C/index-in.docbook:1584 C/index-in.docbook:1594
 msgid "InfoBar"
-msgstr "信息栏"
+msgstr "信息栏(InfoBar)"
 
 #: C/index-in.docbook:1586
 msgid ""
@@ -3132,7 +3132,7 @@ msgstr ""
 
 #: C/index-in.docbook:1607
 msgid "Tooltips"
-msgstr "工具提示框"
+msgstr "工具提示框(Tooltips)"
 
 #: C/index-in.docbook:1609
 msgid ""
@@ -3165,7 +3165,7 @@ msgstr ""
 
 #: C/index-in.docbook:1624
 msgid "Tooltip"
-msgstr "工具提示框"
+msgstr "工具提示框(Tooltip)"
 
 #: C/index-in.docbook:1630
 msgid ""
@@ -3177,7 +3177,7 @@ msgstr ""
 
 #: C/index-in.docbook:1639
 msgid "Container Widgets"
-msgstr "容器部件"
+msgstr "容器(Container)部件"
 
 #: C/index-in.docbook:1641
 msgid ""
@@ -4077,7 +4077,7 @@ msgstr ""
 
 #: C/index-in.docbook:2237
 msgid "The TreeView widget"
-msgstr "树形视图部件"
+msgstr "树形视图(TreeView)部件"
 
 #: C/index-in.docbook:2238
 msgid ""
@@ -4137,7 +4137,7 @@ msgstr "<classname>ListStore</classname>包含简单的数据行，每个行都�
 
 #: C/index-in.docbook:2271 C/index-in.docbook:2839
 msgid "TreeView - ListStore"
-msgstr "树视图 - 列表储存"
+msgstr "树形视图 - 列表储存"
 
 #: C/index-in.docbook:2277
 msgid ""
@@ -4159,7 +4159,7 @@ msgstr "<classname>TreeStore</classname>包含数据行，并且每一行都可�
 
 #: C/index-in.docbook:2289 C/index-in.docbook:2858
 msgid "TreeView - TreeStore"
-msgstr "树状视图 - 树状储存"
+msgstr "树形视图 - 树状储存"
 
 #: C/index-in.docbook:2295
 msgid ""
@@ -5045,7 +5045,7 @@ msgid ""
 "<classname>TreeView</classname> like so:"
 msgstr ""
 "<classname>TreeView</classname>可以让你用两个<classname>TreeView</classname>"
-"部件显示同一个<classname>TreeModel</classname>。如果你需要让这这些树视图对模"
+"部件显示同一个<classname>TreeModel</classname>。如果你需要让这这些树形视图对模"
 "型进行不同的排序，则你应该使用<classname>TreeModelSort</classname>而不仅仅是"
 "使用<methodname>Gtk::TreeViewColumn::set_sort_column()</methodname>。"
 "<classname>TreeModelSort</classname>是一个包含其他模型的模型，其提供了该模型"
@@ -5069,7 +5069,7 @@ msgid ""
 "You must convert them to iterators to the underlying child model in order to "
 "perform actions on that model. For instance:"
 msgstr ""
-"请注意，这样做树视图将会提供已排序模型的迭代器。你必须将其转换为基础的子模型"
+"请注意，这样做树形视图将会提供已排序模型的迭代器。你必须将其转换为基础的子模型"
 "迭代器以便对这个模型进行操作。例如："
 
 #: C/index-in.docbook:2745
@@ -5224,7 +5224,7 @@ msgid ""
 msgstr ""
 "这里显示了一些<classname>TreeView</classname>的示例。<application>gtkmm文档</"
 "application>示例中的<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-"
-"documentation/tree/master/examples/book/treeview/\">树视图文件夹</ulink>还有"
+"documentation/tree/master/examples/book/treeview/\">树形视图文件夹</ulink>还有"
 "更多的示例。"
 
 #: C/index-in.docbook:2826
@@ -5244,7 +5244,7 @@ msgstr ""
 
 #: C/index-in.docbook:2832
 msgid "ListStore"
-msgstr "列表储存"
+msgstr "列表储存(ListStore)"
 
 #: C/index-in.docbook:2833
 msgid ""
@@ -5264,7 +5264,7 @@ msgstr ""
 
 #: C/index-in.docbook:2849
 msgid "TreeStore"
-msgstr "树储存"
+msgstr "树储存(TreeStore)"
 
 #: C/index-in.docbook:2851
 msgid ""
@@ -5295,7 +5295,7 @@ msgstr ""
 
 #: C/index-in.docbook:2877
 msgid "TreeView - Editable Cells"
-msgstr "树视图 - 可编辑单元格"
+msgstr "树形视图 - 可编辑单元格"
 
 #: C/index-in.docbook:2883
 msgid ""
@@ -5321,7 +5321,7 @@ msgstr ""
 
 #: C/index-in.docbook:2899
 msgid "TreeView - Drag And Drop"
-msgstr "树视图 - 拖放"
+msgstr "树形视图 - 拖放"
 
 #: C/index-in.docbook:2905
 msgid ""
@@ -5342,11 +5342,11 @@ msgstr ""
 "这个示例和<classname>ListStore</classname>示例十分相似，但是它牌手了一个自定"
 "义的<classname>TreeView</classname>以覆盖<literal>button_press_event</"
 "literal>，并将树模型代码封装在派生类代码中，请参阅<link linkend=\"sec-"
-"treeview-contextmenu\">树视图弹出上下文菜单</link>小节。"
+"treeview-contextmenu\">树形视图弹出上下文菜单</link>小节。"
 
 #: C/index-in.docbook:2921
 msgid "TreeView - Popup Context Menu"
-msgstr "树视图 - 弹出上下文菜单"
+msgstr "树形视图 - 弹出上下文菜单"
 
 #: C/index-in.docbook:2927
 msgid ""
@@ -5358,7 +5358,7 @@ msgstr ""
 
 #: C/index-in.docbook:2934
 msgid "Combo Boxes"
-msgstr ""
+msgstr "组合框(Combo Boxes)"
 
 #: C/index-in.docbook:2936
 msgid ""
@@ -5370,6 +5370,10 @@ msgid ""
 "classname>, allowing the user to enter arbitrary text if none of the "
 "available choices are suitable."
 msgstr ""
+"<classname>ComboBox</classname>部件在下拉菜单中提供了选项列表（或树）。"
+"如果需要它可以为每个项目显示额外的信息，例如文本、图片、复选按钮或是进度条。"
+"<classname>ComboBox</classname>部件通常将显示用户的可选项，但是它可以有一个"
+"<classname>Entry</classname>以允许用户在没有合适的选项的时候输入任意文本。"
 
 #: C/index-in.docbook:2939
 msgid ""
@@ -5380,16 +5384,22 @@ msgid ""
 "classname> class provides a simpler text-based specialization in case that "
 "flexibility is not required."
 msgstr ""
+"这个列表通过<classname>TreeModel</classname>提供，这个模型的列通过<methodna"
+"me>ComboBox::pack_start()</methodname>方法添加到组合框的视图中。这提供了"
+"灵活性和编译时的类型安全，在不需要灵活性的情况下，<classname>ComboBoxText</"
+"classname>类提供了更简单的基于文本的特化支持。"
 
 #: C/index-in.docbook:2942
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1ComboBox."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1ComboBox."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:2945
 msgid "The model"
-msgstr ""
+msgstr "模型"
 
 #: C/index-in.docbook:2946
 msgid ""
@@ -5397,6 +5407,8 @@ msgid ""
 "<classname>TreeView</classname>. For instance, you might derive a ComboBox "
 "class with one integer and one text column, like so:"
 msgstr ""
+"可以像<classname>TreeView</classname>一样定义和填充组合框的模型。你可以与如下"
+"所示的一样派生具有一个整数行和一个文本行的组合框类："
 
 #: C/index-in.docbook:2948
 #, no-wrap
@@ -5413,6 +5425,17 @@ msgid ""
 "\n"
 "ModelColumns m_columns;"
 msgstr ""
+"class ModelColumns : public Gtk::TreeModel::ColumnRecord\n"
+"{\n"
+"public:\n"
+"  ModelColumns()\n"
+"  { add(m_col_id); add(m_col_name); }\n"
+"\n"
+"  Gtk::TreeModelColumn&lt;int&gt; m_col_id;\n"
+"  Gtk::TreeModelColumn&lt;Glib::ustring&gt; m_col_name;\n"
+"};\n"
+"\n"
+"ModelColumns m_columns;"
 
 #: C/index-in.docbook:2960
 msgid ""
@@ -5428,10 +5451,18 @@ msgid ""
 "<methodname>set_cell_data_func()</methodname>. Note that these methods are "
 "in the <classname>CellLayout</classname> base class."
 msgstr ""
+"将行追加到此模型中后，你应该使用<methodname>set_model()</methodname>方法将"
+"模型提供给<classname>ComboBox</classname>。然后使用<methodname>pack_start()"
+"</methodname>或<methodname>pack_end()</methodname>方法指定哪个行将要被组合框"
+"显示。和树状视图一样，你可以通过将<classname>TreeModelColumn</classname>传递"
+"给pack方法来使用默认的单元格渲染器，也可以实例化一个特定的<classname>CellRe"
+"nderer</classname>并使用<methodname>add_attribute()</methodname>或<methodname"
+">set_cell_data_func()</methodname>指定具体映射到哪行。请注意这些方法在<c"
+"lassname>CellLayout</classname>基类中。"
 
 #: C/index-in.docbook:2964
 msgid "The chosen item"
-msgstr ""
+msgstr "所选项"
 
 #: C/index-in.docbook:2965
 msgid ""
@@ -5443,6 +5474,11 @@ msgid ""
 "have chosen only to show the human-readable description in the ComboBox. For "
 "instance:"
 msgstr ""
+"要了解用户从组合框中选择了哪一项可以调用<methodname>ComboBox::get_active()</methodname>。"
+"这将返回一个<classname>TreeModel::iterator</classname>，你可以解引用它得到一个"
+"<classname>Row</classname>，然后从其中读取该列的值。例如，你可以在组合框中只显示"
+"人类可读的描述，然后你可以读取模型中储存于该行的整数ID值（于并未被显示的列）。"
+"例如："
 
 #: C/index-in.docbook:2967
 #, no-wrap
@@ -5460,10 +5496,22 @@ msgid ""
 "else\n"
 "  set_nothing_chosen(); //Your own function."
 msgstr ""
+"Gtk::TreeModel::iterator iter = m_Combo.get_active();\n"
+"if(iter)\n"
+"{\n"
+"  auto row = *iter;\n"
+"\n"
+"  //Get the data for the selected row, using our knowledge\n"
+"  //of the tree model:\n"
+"  auto id = row[m_Columns.m_col_id];\n"
+"  set_something_id_chosen(id); //Your own function.\n"
+"}\n"
+"else\n"
+"  set_nothing_chosen(); //Your own function."
 
 #: C/index-in.docbook:2982 C/index-in.docbook:3038
 msgid "Responding to changes"
-msgstr ""
+msgstr "响应变更"
 
 #: C/index-in.docbook:2983
 msgid ""
@@ -5471,6 +5519,8 @@ msgid ""
 "instance to update other widgets. To do so, you should handle the "
 "<literal>changed</literal> signal. For instance:"
 msgstr ""
+"你可能需要对组合框中每个选择的变更进行响应，例如更新其他的部件。为此你应该"
+"处理<literal>changed</literal>。例如："
 
 #: C/index-in.docbook:2986
 #, no-wrap
@@ -5478,38 +5528,42 @@ msgid ""
 "m_combo.signal_changed().connect( sigc::mem_fun(*this,\n"
 "      &amp;ExampleWindow::on_combo_changed) );"
 msgstr ""
+"m_combo.signal_changed().connect( sigc::mem_fun(*this,\n"
+"      &amp;ExampleWindow::on_combo_changed) );"
 
 #: C/index-in.docbook:2990 C/index-in.docbook:3071
 msgid "Full Example"
-msgstr ""
+msgstr "完整例子"
 
 #: C/index-in.docbook:2993
 msgid "ComboBox"
-msgstr ""
+msgstr "组合框(ComboBox)"
 
 #: C/index-in.docbook:2999
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/combobox/complex\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/examples/book/combobox/complex\">源代码</ulink>"
 
 #: C/index-in.docbook:3003 C/index-in.docbook:3084
 msgid "Simple Text Example"
-msgstr ""
+msgstr "简单文字示例"
 
 #: C/index-in.docbook:3006
 msgid "ComboBoxText"
-msgstr ""
+msgstr "文本组合框(ComboBoxText)"
 
 #: C/index-in.docbook:3012
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/combobox/text\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/examples/book/combobox/text\">源代码</ulink>"
 
 #: C/index-in.docbook:3017
 msgid "ComboBox with an Entry"
-msgstr ""
+msgstr "带有条目的组合框"
 
 #: C/index-in.docbook:3019
 msgid ""
@@ -5518,15 +5572,18 @@ msgid ""
 "<literal>true</literal> for the constructor's <literal>has_entry</literal> "
 "parameter."
 msgstr ""
+"通过指定<classname>ComboBox</classname>构造函数的<literal>has_entry</literal>参数"
+"为<literal>true</literal>，可以令其包涵一个<classname>Entry</classname>部件用以输入"
+"任意文本。"
 
 #: C/index-in.docbook:3022
 msgid "The text column"
-msgstr ""
+msgstr "文本列"
 
 #: C/index-in.docbook:3024
 #, no-wrap
 msgid "m_combo.set_entry_text_column(m_columns.m_col_name);"
-msgstr ""
+msgstr "m_combo.set_entry_text_column(m_columns.m_col_name);"
 
 #: C/index-in.docbook:3023
 msgid ""
@@ -5535,16 +5592,20 @@ msgid ""
 "column, with <methodname>set_entry_text_column()</methodname>. For instance: "
 "<_:programlisting-1/>"
 msgstr ""
+"为了使<classname>Entry</classname>可以与下拉列表的选项进行交互，你必须使用"
+"<methodname>set_entry_text_column()</methodname>指定哪些模型列是文本列。例如："
+"<_:programlisting-1/>"
 
 #: C/index-in.docbook:3026
 msgid ""
 "When you select a choice from the drop-down menu, the value from this column "
 "will be placed in the <classname>Entry</classname>."
 msgstr ""
+"当你从下拉菜单中选择一个选项的时候，该列的值将被放于<classname>Entry</classname>中。"
 
 #: C/index-in.docbook:3032
 msgid "The entry"
-msgstr ""
+msgstr "条目"
 
 #: C/index-in.docbook:3033
 msgid ""
@@ -5554,6 +5615,9 @@ msgid ""
 "get_entry()</methodname> method and call <methodname>get_text()</methodname> "
 "on that."
 msgstr ""
+"由于用户可以输入任意文本，被使用中的模型行可能不足以告诉我们用户输入了什么，"
+"因此，你应该使用<methodname>ComboBox::get_entry()</methodname>方法检索组合框中"
+"的<classname>Entry</classname>部件并在其上调用<methodname>get_text()</methodname>。"
 
 #: C/index-in.docbook:3047
 #, no-wrap
@@ -5572,6 +5636,19 @@ msgid ""
 "    &amp;ExampleWindow::on_entry_focus_out_event) );\n"
 "}"
 msgstr ""
+"auto entry = m_Combo.get_entry();\n"
+"if (entry)\n"
+"{\n"
+"  // Alternatively you can connect to m_Combo.signal_changed().\n"
+"  entry-&gt;signal_changed().connect(sigc::mem_fun(*this,\n"
+"    &amp;ExampleWindow::on_entry_changed) );\n"
+"\n"
+"  entry-&gt;signal_activate().connect(sigc::mem_fun(*this,\n"
+"    &amp;ExampleWindow::on_entry_activate) );\n"
+"\n"
+"  entry-&gt;signal_focus_out_event().connect(sigc::mem_fun(*this,\n"
+"    &amp;ExampleWindow::on_entry_focus_out_event) );\n"
+"}"
 
 #: C/index-in.docbook:3039
 msgid ""
@@ -5588,32 +5665,43 @@ msgid ""
 "you connect to. But only <classname>Entry</classname>'s "
 "<literal>focus_out_event</literal> signal is useful here."
 msgstr ""
+"当用户输入任意文本时，只连接到为每个键入字符而发出的<literal>changed</literal>信号可能是不够的。"
+"当用户按下<keycap>Enter</keycap>键的时候，这个信号不会被发出。而按下<keycap>Enter</keycap>或是"
+"键盘焦点被移动到另一个部件的时候，可以表示用户已经完成了输入。为了收到这些事件的通知，你需要"
+"连接到<classname>Entry</classname>的<literal>activate</literal>和<literal>focus_out_event</literal>"
+"信号像是这样<_:programlisting-1/> 每次更改<classname>ComboBox</classname>和<classname>Entry</classname>"
+"都会发出<literal>changed</literal>信号，你可以连接它们中的任意一个。但是在这里只有<classname>Entry</cl"
+"assname>的<literal>focus_out_event</literal>信号才有用。"
 
 #: C/index-in.docbook:3065
 msgid ""
 "X events are described in more detail in the <link linkend=\"sec-"
 "xeventsignals\">X Event signals</link> section in the appendix."
 msgstr ""
+"X事件在附录的<link linkend=\"sec-xeventsignals\">X事件信号</link>小节有更详细的描述。"
 
 #: C/index-in.docbook:3074
 msgid "ComboBox with Entry"
-msgstr ""
+msgstr "带条目的组合框"
 
 #: C/index-in.docbook:3080
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/combobox/entry_complex\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/examples/book/combobox/entry_complex\">源代码</ulink>"
 
 #: C/index-in.docbook:3087
 msgid "ComboBoxText with Entry"
-msgstr ""
+msgstr "带条目的文本组合框"
 
 #: C/index-in.docbook:3093
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/combobox/entry_text\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/combobox/entry_text\">源代码</ulink>"
 
 #: C/index-in.docbook:3106 C/index-in.docbook:3319
 msgid "TextView"
