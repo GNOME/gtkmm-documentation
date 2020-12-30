@@ -2358,7 +2358,7 @@ msgid ""
 "See the <link linkend=\"chapter-adjustment\">Adjustments</link> section for "
 "further details."
 msgstr ""
-"就象将在后面的<link linkend=\"chapter-adjustment\">Adjustments</link> 小节要"
+"就象将在后面的<link linkend=\"chapter-adjustment\">调整</link>小节要"
 "谈到的那样，所有的 Range 部件都有一个关联的 <classname>Adjustment</"
 "classname> 对象。如果你想修改部件的最小值、最大值以及当前值，你需要调用该部件"
 "关联的 <classname>Adjustment</classname> 对象的方法，该对象可以通过调用 "
@@ -2366,7 +2366,7 @@ msgstr ""
 "classname> 部件默认构造函数会自动的创建一个 <classname>Adjustment</"
 "classname>，当然，你也可以指定一个现有的 <classname>Adjustment</classname>，"
 "而且还可以和其它部件共享。请参看 <link linkend=\"chapter-adjustment"
-"\">Adjustments</link> 部分以得到更详细的信息。"
+"\">调整</link>部分以得到更详细的信息。"
 
 #: C/index-in.docbook:1069
 msgid ""
@@ -2483,7 +2483,7 @@ msgid ""
 "parameters mentioned above and in the section on adjustments, so you can see "
 "how they affect the way these widgets work for the user."
 msgstr ""
-"这个示例显示了一个窗口，其中有三个关联到同一个Adjustment对象，还有几个控制部"
+"这个示例显示了一个窗口，其中有三个关联到同一个调整对象，还有几个控制部"
 "件用来调整前文讨论过的一些参数，这样你可以很清楚地看到那些参数是如何影响这些"
 "部件的行为方式的。"
 
@@ -6102,7 +6102,7 @@ msgstr ""
 
 #: C/index-in.docbook:3334
 msgid "Menus and Toolbars"
-msgstr ""
+msgstr "菜单和工具栏"
 
 #: C/index-in.docbook:3336
 msgid ""
@@ -6114,6 +6114,10 @@ msgid ""
 "the action. <classname>Gtk::Builder</classname> can create menus and "
 "toolbars."
 msgstr ""
+"菜单和工具栏有特定的API，但是通常将一并处理它们，创建在菜单和工具栏都可以引用"
+"的<classname>Gio::SimpleAction</classname>。这样你可以响应动作被激活而不需要"
+"分别响应菜单和工具栏。你可以通过动作启用或者禁用菜单和工具栏项。"
+"<classname>Gtk::Builder</classname>可以创建菜单和工具栏。"
 
 #: C/index-in.docbook:3344
 msgid ""
@@ -6123,10 +6127,14 @@ msgid ""
 "<methodname>create()</methodname> methods, which return <classname>RefPtr</"
 "classname>s."
 msgstr ""
+"这涉及到了<classname>Gio::SimpleActionGroup</classname>、<classname>Gio::"
+"SimpleAction</classname>和<classname>Gtk::Builder</classname>类的使用，所有的"
+"这些类都需要通过返回<classname>RefPtr</classname>的<methodname>create()</"
+"methodname>方法进行实例化。"
 
 #: C/index-in.docbook:3352
 msgid "Actions"
-msgstr ""
+msgstr "动作(Actions)"
 
 #: C/index-in.docbook:3353
 msgid ""
@@ -6137,6 +6145,11 @@ msgid ""
 "the action group to your window with <methodname>Gtk::Widget::"
 "insert_action_group()</methodname>."
 msgstr ""
+"首先创建<classname>Gio::SimpleAction</classname>并使用<methodname>Gio::"
+"ActionMap::add_action()</methodname>方法将其加入<classname>Gio::"
+"SimpleActionGroup</classname>中（<classname>Gio::ActionMap</classname>是"
+"<classname>Gio::SimpleActionGroup</classname>的基类。）。然后将动作组使用"
+"<methodname>Gtk::Widget::insert_action_group()</methodname>加入到你的窗口中。"
 
 #: C/index-in.docbook:3361
 msgid ""
@@ -6146,10 +6159,13 @@ msgid ""
 "This signal handler will be called when the action is activated via either a "
 "menu item or a toolbar button."
 msgstr ""
+"<methodname>add_action()</methodname>的参数用于指定动作名，该名称由菜单项和工"
+"具栏按钮使用。你还可以在调用<methodname>add_action()</methodname>时指定信号处"
+"理函数。在菜单项或工具栏按钮被激活的时候此信号处理函数被调用。"
 
 #: C/index-in.docbook:3369 C/index-in.docbook:3495
 msgid "For instance:"
-msgstr ""
+msgstr "例如："
 
 #: C/index-in.docbook:3371
 #, no-wrap
@@ -6163,6 +6179,14 @@ msgid ""
 "\n"
 "insert_action_group(\"example\", m_refActionGroup);\n"
 msgstr ""
+"\n"
+"m_refActionGroup = Gio::SimpleActionGroup::create();\n"
+"\n"
+"m_refActionGroup-&gt;add_action(\"new\", sigc::mem_fun(*this, &amp;ExampleWindow::on_action_file_new));\n"
+"m_refActionGroup-&gt;add_action(\"open\", sigc::mem_fun(*this, &amp;ExampleWindow::on_action_file_open));\n"
+"m_refActionGroup-&gt;add_action(\"quit\", sigc::mem_fun(*this, &amp;ExampleWindow::on_action_file_quit));\n"
+"\n"
+"insert_action_group(\"example\", m_refActionGroup);\n"
 
 #: C/index-in.docbook:3381
 msgid ""
@@ -6171,10 +6195,13 @@ msgid ""
 "<classname>Gio::ActionMap</classname> are base classes of <classname>Gtk::"
 "ApplicationWindow</classname>."
 msgstr ""
+"如果你使用<classname>Gtk::ApplicationWindow</classname>，则你不需要自己创建动"
+"作组。因为<classname>Gio::ActionGroup</classname>和<classname>Gio::"
+"ActionMap</classname>是<classname>Gtk::ApplicationWindow</classname>的基类。"
 
 #: C/index-in.docbook:3392
 msgid "Menubar and Toolbar"
-msgstr ""
+msgstr "菜单和工具栏"
 
 #: C/index-in.docbook:3393
 msgid ""
@@ -6183,10 +6210,13 @@ msgid ""
 "shortcuts, by using <methodname>Gtk::Application::set_accel_for_action()</"
 "methodname>."
 msgstr ""
+"接下来你应该创建一个<classname>Gtk::Builder</classname>。此时使用"
+"<methodname>Gtk::Application::set_accel_for_action()</methodname>告诉应用程序"
+"响应键盘快捷键也是一个好主意。"
 
 #: C/index-in.docbook:3399
 msgid "For instance,"
-msgstr ""
+msgstr "例如："
 
 #: C/index-in.docbook:3401
 #, no-wrap
@@ -6199,6 +6229,13 @@ msgid ""
 "app-&gt;set_accel_for_action(\"example.copy\", \"&lt;Primary&gt;c\");\n"
 "app-&gt;set_accel_for_action(\"example.paste\", \"&lt;Primary&gt;v\");\n"
 msgstr ""
+"\n"
+"m_refBuilder = Gtk::Builder::create();\n"
+"\n"
+"app-&gt;set_accel_for_action(\"example.new\", \"&lt;Primary&gt;n\");\n"
+"app-&gt;set_accel_for_action(\"example.quit\", \"&lt;Primary&gt;q\");\n"
+"app-&gt;set_accel_for_action(\"example.copy\", \"&lt;Primary&gt;c\");\n"
+"app-&gt;set_accel_for_action(\"example.paste\", \"&lt;Primary&gt;v\");\n"
 
 #: C/index-in.docbook:3409
 msgid ""
@@ -6208,6 +6245,10 @@ msgid ""
 "<methodname>set_accel_for_action()</methodname>. See <link linkend=\"menu-"
 "example-main\">Application Menu and Main Menu example</link> for an example."
 msgstr ""
+"如果你的主窗口是由<classname>ApplicationWindow</classname>派生而来的，并且你"
+"使用<methodname>Gtk::Application::set_menubar()</methodname>实例化了菜单栏，"
+"则你不需要调用<methodname>set_accel_for_action()</methodname>。有关示例参见："
+"<link linkend=\"menu-example-main\">应用程序菜单和主菜单示例</link>。"
 
 #: C/index-in.docbook:3417
 msgid ""
@@ -6216,6 +6257,9 @@ msgid ""
 "\" uses an XML format, in which you should mention the names of the actions "
 "that you have already created. For instance:"
 msgstr ""
+"然后，你可以定义菜单和工具栏的实际可见布局，并将这个UI布局添加到"
+"<classname>Builder</classname>。这个\"UI字符串\"使用XML格式，你应该在其中使用"
+"你已经创建的动作的名称。例如："
 
 #: C/index-in.docbook:3423
 #, no-wrap
@@ -6260,6 +6304,45 @@ msgid ""
 "m_refBuilder-&gt;add_from_string(ui_info);\n"
 "m_refBuilder-&gt;add_from_resource(\"/toolbar/toolbar.glade\");\n"
 msgstr ""
+"\n"
+"Glib::ustring ui_info =\n"
+"  \"&lt;interface&gt;\"\n"
+"  \"  &lt;menu id='menubar'&gt;\"\n"
+"  \"    &lt;submenu&gt;\"\n"
+"  \"      &lt;attribute name='label' translatable='yes'&gt;_File&lt;/attribute&gt;\"\n"
+"  \"      &lt;section&gt;\"\n"
+"  \"        &lt;item&gt;\"\n"
+"  \"          &lt;attribute name='label' translatable='yes'&gt;_New&lt;/attribute&gt;\"\n"
+"  \"          &lt;attribute name='action'&gt;example.new&lt;/attribute&gt;\"\n"
+"  \"          &lt;attribute name='accel'&gt;&amp;lt;Primary&amp;gt;n&lt;/attribute&gt;\"\n"
+"  \"        &lt;/item&gt;\"\n"
+"  \"      &lt;/section&gt;\"\n"
+"  \"      &lt;section&gt;\"\n"
+"  \"        &lt;item&gt;\"\n"
+"  \"          &lt;attribute name='label' translatable='yes'&gt;_Quit&lt;/attribute&gt;\"\n"
+"  \"          &lt;attribute name='action'&gt;example.quit&lt;/attribute&gt;\"\n"
+"  \"          &lt;attribute name='accel'&gt;&amp;lt;Primary&amp;gt;q&lt;/attribute&gt;\"\n"
+"  \"        &lt;/item&gt;\"\n"
+"  \"      &lt;/section&gt;\"\n"
+"  \"    &lt;/submenu&gt;\"\n"
+"  \"    &lt;submenu&gt;\"\n"
+"  \"      &lt;attribute name='label' translatable='yes'&gt;_Edit&lt;/attribute&gt;\"\n"
+"  \"      &lt;item&gt;\"\n"
+"  \"        &lt;attribute name='label' translatable='yes'&gt;_Copy&lt;/attribute&gt;\"\n"
+"  \"        &lt;attribute name='action'&gt;example.copy&lt;/attribute&gt;\"\n"
+"  \"        &lt;attribute name='accel'&gt;&amp;lt;Primary&amp;gt;c&lt;/attribute&gt;\"\n"
+"  \"      &lt;/item&gt;\"\n"
+"  \"      &lt;item&gt;\"\n"
+"  \"        &lt;attribute name='label' translatable='yes'&gt;_Paste&lt;/attribute&gt;\"\n"
+"  \"        &lt;attribute name='action'&gt;example.paste&lt;/attribute&gt;\"\n"
+"  \"        &lt;attribute name='accel'&gt;&amp;lt;Primary&amp;gt;v&lt;/attribute&gt;\"\n"
+"  \"      &lt;/item&gt;\"\n"
+"  \"    &lt;/submenu&gt;\"\n"
+"  \"  &lt;/menu&gt;\"\n"
+"  \"&lt;/interface&gt;\";\n"
+"\n"
+"m_refBuilder-&gt;add_from_string(ui_info);\n"
+"m_refBuilder-&gt;add_from_resource(\"/toolbar/toolbar.glade\");\n"
 
 #: C/index-in.docbook:3464
 msgid ""
@@ -6267,6 +6350,8 @@ msgid ""
 "users in the menu. Therefore, this is where you should make strings "
 "translatable, by adding <literal>translatable='yes'</literal>."
 msgstr ""
+"这里我们指定菜单项的名称，因为用户可以在菜单中看到它们。因此你应该添加"
+"<literal>translatable='yes'</literal>使这些的字符串可以被翻译。"
 
 #: C/index-in.docbook:3468
 msgid ""
@@ -6276,6 +6361,10 @@ msgid ""
 "get_widget()</methodname> methods, and then add the widgets to a container. "
 "For instance:"
 msgstr ""
+"要实例化<classname>Gtk::MenuBar</classname>和<classname>Gtk::Toolbar</"
+"classname>并可以实际显示他们，应该使用<methodname>Builder::get_object()</"
+"methodname>和<methodname>Builder::get_widget()</methodname>方法，然后将部件加"
+"入容器中。例如："
 
 #: C/index-in.docbook:3475
 #, no-wrap
@@ -6288,10 +6377,17 @@ msgid ""
 "auto toolbar = m_refBuilder-&gt;get_widget&lt;Gtk::Toolbar&gt;(\"toolbar\");\n"
 "m_Box.append(*toolbar);\n"
 msgstr ""
+"\n"
+"auto gmenu = m_refBuilder-&gt;get_object&lt;Gio::Menu&gt;(\"menubar\");\n"
+"auto pMenuBar = Gtk::make_managed&lt;Gtk::MenuBar&gt;(gmenu);\n"
+"m_Box.append(*pMenuBar);\n"
+"\n"
+"auto toolbar = m_refBuilder-&gt;get_widget&lt;Gtk::Toolbar&gt;(\"toolbar\");\n"
+"m_Box.append(*toolbar);\n"
 
 #: C/index-in.docbook:3487
 msgid "Popup Menus"
-msgstr ""
+msgstr "弹出菜单"
 
 #: C/index-in.docbook:3488
 msgid ""
@@ -6300,6 +6396,8 @@ msgid ""
 "instance, a context menu might be displayed when the user clicks their right "
 "mouse button."
 msgstr ""
+"<classname>Menus</classname>通常将直接被加入到窗口中，但也可以通过鼠标单击来"
+"临时显示他们。例如当用户单击鼠标右键的时候，可能需要显示上下文菜单。"
 
 #: C/index-in.docbook:3497
 #, no-wrap
@@ -6330,6 +6428,31 @@ msgid ""
 "auto gmenu = m_refBuilder-&gt;get_object&lt;Gio::Menu&gt;(\"menu-examplepopup\");\n"
 "m_pMenuPopup = std::make_unique&lt;Gtk::Menu&gt;(gmenu);\n"
 msgstr ""
+"\n"
+"Glib::ustring ui_info =\n"
+"  \"&lt;interface&gt;\"\n"
+"  \"  &lt;menu id='menu-examplepopup'&gt;\"\n"
+"  \"    &lt;section&gt;\"\n"
+"  \"      &lt;item&gt;\"\n"
+"  \"        &lt;attribute name='label' translatable='yes'&gt;Edit&lt;/attribute&gt;\"\n"
+"  \"        &lt;attribute name='action'&gt;examplepopup.edit&lt;/attribute&gt;\"\n"
+"  \"      &lt;/item&gt;\"\n"
+"  \"      &lt;item&gt;\"\n"
+"  \"        &lt;attribute name='label' translatable='yes'&gt;Process&lt;/attribute&gt;\"\n"
+"  \"        &lt;attribute name='action'&gt;examplepopup.process&lt;/attribute&gt;\"\n"
+"  \"      &lt;/item&gt;\"\n"
+"  \"      &lt;item&gt;\"\n"
+"  \"        &lt;attribute name='label' translatable='yes'&gt;Remove&lt;/attribute&gt;\"\n"
+"  \"        &lt;attribute name='action'&gt;examplepopup.remove&lt;/attribute&gt;\"\n"
+"  \"      &lt;/item&gt;\"\n"
+"  \"    &lt;/section&gt;\"\n"
+"  \"  &lt;/menu&gt;\"\n"
+"  \"&lt;/interface&gt;\";\n"
+"\n"
+"m_refBuilder-&gt;add_from_string(ui_info);\n"
+"\n"
+"auto gmenu = m_refBuilder-&gt;get_object&lt;Gio::Menu&gt;(\"menu-examplepopup\");\n"
+"m_pMenuPopup = std::make_unique&lt;Gtk::Menu&gt;(gmenu);\n"
 
 #: C/index-in.docbook:3524
 msgid ""
@@ -6338,6 +6461,10 @@ msgid ""
 "the time of activation, as provided by the <literal>button_press_event</"
 "literal> signal, which you will need to handle anyway. For instance:"
 msgstr ""
+"要显示弹出菜单，请使用<classname>Gtk::Menu</classname>的<methodname>popup()</"
+"methodname>方法，无论如何你都需要处理由<literal>button_press_event</literal>"
+"信号提供的激活时机（鼠标单双三击、按下还是释放）和按钮标识（哪个鼠标按键）。"
+"例如："
 
 #: C/index-in.docbook:3530
 #, no-wrap
@@ -6357,10 +6484,24 @@ msgid ""
 "    return false;\n"
 "}\n"
 msgstr ""
+"\n"
+"bool ExampleWindow::on_button_press_event(GdkEventButton* event)\n"
+"{\n"
+"  if( (event-&gt;type == GDK_BUTTON_PRESS) &amp;&amp; (event-&gt;button == 3) )\n"
+"  {\n"
+"    if(!m_pMenuPopup-&gt;get_attach_widget())\n"
+"      m_pMenuPopup-&gt;attach_to_widget(*this);\n"
+"\n"
+"    m_pMenuPopup-&gt;popup(event-&gt;button, event-&gt;time);\n"
+"    return true; //It has been handled.\n"
+"  }\n"
+"  else\n"
+"    return false;\n"
+"}\n"
 
 #: C/index-in.docbook:3549
 msgid "Gio::Resource and glib-compile-resources"
-msgstr ""
+msgstr "Gio::Resource和glib-compile-resources"
 
 #: C/index-in.docbook:3551
 msgid ""
@@ -6372,6 +6513,11 @@ msgid ""
 "<filename class=\"directory\">$datadir/appname</filename>, or manually "
 "included as literal strings in the code."
 msgstr ""
+"应用程序和库经常包含是应用程序的一部分的二进制或文本数据，而不是用户数据。例"
+"如<classname>Gtk::Builder</classname>使用的<filename class=\"extension\">."
+"glade</filename>文件、启动画面、<classname>Gio::Menu</classname>标记XML、CSS"
+"文件、图标等。这些通常这些文件放于<filename class=\"directory\">$datadir/"
+"appname</filename>目录下，也可以将其转换为文本字面量手动包含在代码中。"
 
 #: C/index-in.docbook:3559
 msgid ""
@@ -6385,6 +6531,13 @@ msgid ""
 "like I/O errors or locate the files in the filesystem). It also makes it "
 "easier to create relocatable applications."
 msgstr ""
+"<classname>Gio::Resource</classname>API和<application>glib-compile-"
+"resources</application>程序提供了一个方便且有效的替代方案，这个方案有一些良好"
+"的性质。你可以将这些文件作为普通文件进行维护，因此你可以轻松的编辑它们，在构"
+"建过程中，这些文件将会被组合成一个二进制捆绑包，并将其链接到可执行文件中。这"
+"意味着加载资源文件会很高效（因为他们在启动时已经被加载到了内存中，并与其他实"
+"例共享）且很简单（无需对IO错误进行检查和在文件系统中查找文件）。这也使得创建"
+"可重定位应用程序变得更为简单。"
 
 #: C/index-in.docbook:3568
 msgid ""
@@ -6394,12 +6547,18 @@ msgid ""
 "files that the xml references. These are combined into a binary resource "
 "bundle."
 msgstr ""
+"资源包是由<ulink url=\"https://developer.gnome.org/gio/stable/glib-compile-"
+"resources.html\">glib-compile-resources</ulink>程序创建的，该程序使用一个XML"
+"文件描述资源包并由该XML文件指示资源包引用了那些文件。被引用的文件和XML文件将"
+"被组合为一个二进制的资源包。"
 
 #: C/index-in.docbook:3574
 msgid ""
 "<ulink url=\"http://developer.gnome.org/glibmm/unstable/classGio_1_1Resource."
 "html\">Gio::Resource Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/glibmm/unstable/classGio_1_1Resource."
+"html\">Gio::Resource参考</ulink>"
 
 #: C/index-in.docbook:3577
 #, no-wrap
@@ -6413,25 +6572,35 @@ msgid ""
 "  &lt;/gresource&gt;\n"
 "&lt;/gresources&gt;\n"
 msgstr ""
+"\n"
+"&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n"
+"&lt;gresources&gt;\n"
+"  &lt;gresource prefix=\"/toolbar\"&gt;\n"
+"    &lt;file preprocess=\"xml-stripblanks\"&gt;toolbar.glade&lt;/file&gt;\n"
+"    &lt;file&gt;rain.png&lt;/file&gt;\n"
+"  &lt;/gresource&gt;\n"
+"&lt;/gresources&gt;\n"
 
 #: C/index-in.docbook:3588
 msgid "<filename>/toolbar/toolbar.glade</filename>"
-msgstr ""
+msgstr "<filename>/toolbar/toolbar.glade</filename>"
 
 #: C/index-in.docbook:3589
 msgid "<filename>/toolbar/rain.png</filename>"
-msgstr ""
+msgstr "<filename>/toolbar/rain.png</filename>"
 
 #: C/index-in.docbook:3575
 msgid ""
 "An example: <_:programlisting-1/> This will create a resource bundle with "
 "the files <_:itemizedlist-2/>"
 msgstr ""
+"一个示例：<_:programlisting-1/> 这将创建一个包含以下文件的资源包:<_:"
+"itemizedlist-2/>"
 
 #: C/index-in.docbook:3597
 #, no-wrap
 msgid "$ glib-compile-resources --target=resources.c --generate-source toolbar.gresource.xml"
-msgstr ""
+msgstr "$ glib-compile-resources --target=resources.c --generate-source toolbar.gresource.xml"
 
 #: C/index-in.docbook:3592
 msgid ""
@@ -6442,6 +6611,10 @@ msgid ""
 "create a C source file to link directly into your application. E.g. <_:"
 "screen-1/>"
 msgstr ""
+"然后你可以使用<application>glib-compile-resources</application>将XML编译为可"
+"以用<methodname>Gio::Resource::create_from_file()</methodname>加载的二进制"
+"包。但是使用--generate-source生成C源代码文件直接链接到你的应用程序更为常见。"
+"例如：<_:screen-1/>"
 
 #: C/index-in.docbook:3599
 msgid ""
@@ -6453,6 +6626,12 @@ msgid ""
 "the data. You can also use URIs like <uri>resource:///toolbar/rain.png</uri> "
 "with <classname>Gio::File</classname> to access the resource data."
 msgstr ""
+"一旦创建并注册了<classname>Gio::Resource</classname>，就可以使用API调用（例"
+"如：<methodname>Gio::Resource::open_stream_from_global_resources()</"
+"methodname>流式获取数据或是<methodname>Gio::Resource::"
+"lookup_data_in_global_resources()</methodname>直接获取指向数据的指针）在进程"
+"的全局访问数据。你还可以使用类似于<uri>resource:///toolbar/rain.png</uri>的"
+"URI通过<classname>Gio::File</classname>访问资源数据。"
 
 #: C/index-in.docbook:3607
 msgid ""
@@ -6462,10 +6641,14 @@ msgid ""
 "add_from_resource()</methodname> and <methodname>Gtk::Image::"
 "set_from_resource()</methodname>."
 msgstr ""
+"通常你不需要<classname>Gio::Resource</classname>实例，因为可以使用"
+"<methodname>Gdk::Pixbuf::create_from_resource()</methodname>、"
+"<methodname>Gtk::Builder::add_from_resource()</methodname>和<methodname>Gtk::"
+"Image::set_from_resource()</methodname>直接加载资源数据。"
 
 #: C/index-in.docbook:3620
 msgid "Application Menu and Main Menu example"
-msgstr ""
+msgstr "应用程序菜单和主菜单实例"
 
 #: C/index-in.docbook:3621
 msgid ""
@@ -6479,47 +6662,55 @@ msgstr ""
 
 #: C/index-in.docbook:3628
 msgid "App and Main Menu"
-msgstr ""
+msgstr "应用程序和主菜单"
 
 #: C/index-in.docbook:3634
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/menus/main_menu/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/menus/main_menu/\">源代码</ulink>"
 
 #: C/index-in.docbook:3638
 msgid "Main Menu example"
-msgstr ""
+msgstr "主菜单示例"
 
 #: C/index-in.docbook:3639
 msgid ""
 "This program contains a menubar and a toolbar. A class is derived from "
 "<classname>Gtk::Window</classname>."
 msgstr ""
+"该程序包含一个菜单栏和一个工具栏。一个从<classname>Gtk::Window</classname>派"
+"生的类。"
 
 #: C/index-in.docbook:3645
 msgid "Main Menu"
-msgstr ""
+msgstr "主菜单"
 
 #: C/index-in.docbook:3651
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/menus_and_toolbars\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/menus_and_toolbars\">源代码</ulink>"
 
 #: C/index-in.docbook:3655
 msgid "Popup Menu example"
-msgstr ""
+msgstr "弹出菜单示例"
 
 #: C/index-in.docbook:3658
 msgid "Popup Menu"
-msgstr ""
+msgstr "弹出菜单"
 
 #: C/index-in.docbook:3664
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/menus/popup/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/menus/popup/\">源代码</ulink>"
 
 #: C/index-in.docbook:3673
 msgid "Adjustments"
