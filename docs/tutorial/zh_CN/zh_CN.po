@@ -5722,10 +5722,13 @@ msgid ""
 "it has a model/view design. In this case the <classname>TextBuffer</"
 "classname> is the model."
 msgstr ""
+"<classname>TextView</classname>部件可以用于显示和编辑大量的格式化文本。与"
+"<classname>TreeView</classname>一样，它具有模型/视图设计。"
+"<classname>TextBuffer</classname>是它预期的模型。"
 
 #: C/index-in.docbook:3115
 msgid "The Buffer"
-msgstr ""
+msgstr "缓冲区"
 
 #: C/index-in.docbook:3116
 msgid ""
@@ -5738,6 +5741,12 @@ msgid ""
 "<classname>Gtk::TextBuffer</classname>s and choose to display each one at "
 "different times in the same <classname>Gtk::TextView</classname> widget."
 msgstr ""
+"<classname>Gtk::TextBuffer</classname>是一个包含<classname>Gtk::TextView</"
+"classname>数据的模型，和<classname>Gtk::TreeView</classname>所使用的"
+"<classname>Gtk::TreeModel</classname>类似。这允许复数个<classname>Gtk::"
+"TextView</classname>共享同一个<classname>TextBuffer</classname>，并允许以不同"
+"方式显示文本缓冲区。你也可以维护多个<classname>Gtk::TextBuffer</classname>并"
+"让同一个<classname>Gtk::TextView</classname>部件于不同时候分别显示它们。"
 
 #: C/index-in.docbook:3126
 msgid ""
@@ -5745,16 +5754,21 @@ msgid ""
 "<classname>TextBuffer</classname>, which you can access via the "
 "<methodname>get_buffer()</methodname> method."
 msgstr ""
+"<classname>TextView</classname>会创建一个由它拥有的默认"
+"<classname>TextBuffer</classname>，你可以通过<methodname>get_buffer()</"
+"methodname>方法访问这个缓冲区。"
 
 #: C/index-in.docbook:3132
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1TextBuffer.html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1TextBuffer.html\">参考</ulink>"
 
 #: C/index-in.docbook:3135
 msgid "Iterators"
-msgstr ""
+msgstr "迭代器"
 
 #: C/index-in.docbook:3136
 msgid ""
@@ -5766,20 +5780,27 @@ msgid ""
 "positions across buffer modifications. To preserve a position, use "
 "<classname>Gtk::TextBuffer::Mark</classname>."
 msgstr ""
+"<classname>Gtk::TextBuffer::iterator</classname>和<classname>Gtk::"
+"TextBuffer::const_iterator</classname>表示文本缓冲区中两个字符之间的位置。只"
+"要以影响缓冲区中字符数量的方式修改了缓冲区，所有越过修改范围的迭代器都将失"
+"效。因此，迭代器不能用于保存越过缓冲区被修改部分的位置。如果想保存位置，请使"
+"用<classname>Gtk::TextBuffer::Mark</classname>。"
 
 #: C/index-in.docbook:3143
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TextIter."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TextIter."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:3147
 msgid "Tags and Formatting"
-msgstr ""
+msgstr "标签和格式"
 
 #: C/index-in.docbook:3150
 msgid "Tags"
-msgstr ""
+msgstr "标签(Tags)"
 
 #: C/index-in.docbook:3151
 msgid ""
@@ -5788,6 +5809,8 @@ msgid ""
 "tag to the region of text. For instance, to define the tag and its "
 "properties:"
 msgstr ""
+"要指定缓冲区中的一些文本具有特定的格式，你需要定义一个标签来保存格式信息，并"
+"将该标签应用于文本区域。例如，定义标签及其属性："
 
 #: C/index-in.docbook:3154
 #, no-wrap
@@ -5795,26 +5818,32 @@ msgid ""
 "auto refTagMatch = Gtk::TextBuffer::Tag::create();\n"
 "refTagMatch-&gt;property_background() = \"orange\";"
 msgstr ""
+"auto refTagMatch = Gtk::TextBuffer::Tag::create();\n"
+"refTagMatch-&gt;property_background() = \"orange\";"
 
 #: C/index-in.docbook:3156
 msgid ""
 "You can specify a name for the <classname>Tag</classname> when using the "
 "<methodname>create()</methodname> method, but it is not necessary."
 msgstr ""
+"你可以在使用<classname>Tag</classname>的<methodname>create()</methodname>方法"
+"时为其指定一个名称，但这不是必须的。"
 
 #: C/index-in.docbook:3161
 msgid "The <classname>Tag</classname> class has many other properties."
-msgstr ""
+msgstr "<classname>Tag</classname>类还有许多其他的特性。"
 
 #: C/index-in.docbook:3165
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TextTag."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TextTag."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:3170
 msgid "TagTable"
-msgstr ""
+msgstr "标签表(TagTable)"
 
 #: C/index-in.docbook:3172
 msgid ""
@@ -5825,6 +5854,11 @@ msgid ""
 "<classname>Tag</classname>s you should add them to the <classname>TagTable</"
 "classname>. For instance:"
 msgstr ""
+"每个<classname>Gtk::TextBuffer</classname>使用一个<classname>Gtk::"
+"TextBuffer::TagTable</classname>，其中包含了该缓冲区的<classname>Tag</"
+"classname>。复数个<classname>TextBuffer</classname>可以共享一个"
+"<classname>TagTable</classname>。当你创建<classname>Tag</classname>的时候，你"
+"应该将其加入<classname>TagTable</classname>。例如："
 
 #: C/index-in.docbook:3180
 #, no-wrap
@@ -5835,6 +5869,11 @@ msgid ""
 "//for use after creation of the buffer.\n"
 "auto refBuffer = Gtk::TextBuffer::create(refTagTable);"
 msgstr ""
+"auto refTagTable = Gtk::TextBuffer::TagTable::create();\n"
+"refTagTable-&gt;add(refTagMatch);\n"
+"//Hopefully a future version of <application>gtkmm</application> will have a set_tag_table() method,\n"
+"//for use after creation of the buffer.\n"
+"auto refBuffer = Gtk::TextBuffer::create(refTagTable);"
 
 #: C/index-in.docbook:3186
 msgid ""
@@ -5842,16 +5881,21 @@ msgid ""
 "modify, the <classname>TextBuffer</classname>'s default <classname>TagTable</"
 "classname> instead of creating one explicitly."
 msgstr ""
+"你也可以使用<methodname>get_tag_table()</methodname>获取并修改"
+"<classname>TextBuffer</classname>的默认<classname>TagTable</classname>，而不"
+"是显示创建一个。"
 
 #: C/index-in.docbook:3192
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1TextTagTable.html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1TextTagTable.html\">参考</ulink>"
 
 #: C/index-in.docbook:3197
 msgid "Applying Tags"
-msgstr ""
+msgstr "应用标签"
 
 #: C/index-in.docbook:3198
 msgid ""
@@ -5861,22 +5905,26 @@ msgid ""
 "that formatting. You define the start and end of the range of text by "
 "specifying <classname>Gtk::TextBuffer::iterator</classname>s. For instance:"
 msgstr ""
+"如果你创建了一个<classname>Tag</classname>并将其加入到<classname>TagTable</"
+"classname>，则可以将其应用于<classname>TextBuffer</classname>的一部分，以便使"
+"用该格式显示某些文本。你可以通过使用<classname>Gtk::TextBuffer::iterator</"
+"classname>指示文本的开始和结束范围。例如："
 
 #: C/index-in.docbook:3205
 #, no-wrap
 msgid "refBuffer-&gt;apply_tag(refTagMatch, iterRangeStart, iterRangeStop);"
-msgstr ""
+msgstr "refBuffer-&gt;apply_tag(refTagMatch, iterRangeStart, iterRangeStop);"
 
 #: C/index-in.docbook:3208
 #, no-wrap
 msgid "refBuffer-&gt;insert_with_tag(iter, \"Some text\", refTagMatch);"
-msgstr ""
+msgstr "refBuffer-&gt;insert_with_tag(iter, \"Some text\", refTagMatch);"
 
 #: C/index-in.docbook:3206
 msgid ""
 "Or you could specify the tag when first inserting the text: <_:"
 "programlisting-1/>"
-msgstr ""
+msgstr "或者你可以在首次插入文本的时候指定标签：<_:programlisting-1/>"
 
 #: C/index-in.docbook:3211
 msgid ""
@@ -5886,10 +5934,14 @@ msgid ""
 "might specify different values for the same properties, but you can resolve "
 "these conflicts by using <methodname>Tag::set_priority()</methodname>."
 msgstr ""
+"你可以多次使用<methodname>apply_tag()</methodname>或"
+"<methodname>insert_with_tags()</methodname>将不同的<classname>Tag</classname>"
+"应用于同一文本。<classname>Tag</classname>可能会为同一属性指定不同的值，但你"
+"可以使用<methodname>Tag::set_priority()</methodname>解决这些冲突。"
 
 #: C/index-in.docbook:3223
 msgid "Marks"
-msgstr ""
+msgstr "标记(Marks)"
 
 #: C/index-in.docbook:3224
 msgid ""
@@ -5897,17 +5949,21 @@ msgid ""
 "the text changes, but you can use a <classname>Gtk::TextBuffer::Mark</"
 "classname> to remember a position in these situations. For instance,"
 msgstr ""
+"当文本发生更改的时候<classname>TextBuffer</classname>迭代器通常会失效，但是你"
+"可以使用<classname>Gtk::TextBuffer::Mark</classname>记住位置，例如："
 
 #: C/index-in.docbook:3229
 #, no-wrap
 msgid "auto refMark = refBuffer-&gt;create_mark(iter);"
-msgstr ""
+msgstr "auto refMark = refBuffer-&gt;create_mark(iter);"
 
 #: C/index-in.docbook:3231
 msgid ""
 "You can then use the <methodname>get_iter()</methodname> method later to "
 "create an iterator for the <classname>Mark</classname>'s new position."
 msgstr ""
+"你可以在之后使用<methodname>get_iter()</methodname>方法为<classname>Mark</"
+"classname>的新位置创建迭代器。"
 
 #: C/index-in.docbook:3236
 msgid ""
@@ -5916,12 +5972,18 @@ msgid ""
 "<classname>TextBuffer</classname>'s <methodname>get_insert()</methodname> "
 "and <methodname>get_selection_bound()</methodname> methods."
 msgstr ""
+"有两个内置的<classname>Mark</classname> - <literal>insert</literal>和"
+"<literal>selection_bound</literal>，你可以使用<classname>TextBuffer</"
+"classname>的<methodname>get_insert()</methodname>和"
+"<methodname>get_selection_bound()</methodname>方法访问它们。"
 
 #: C/index-in.docbook:3243
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TextMark."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TextMark."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:3249
 msgid ""
@@ -5929,6 +5991,9 @@ msgid ""
 "<classname>TextBuffer</classname>, and one or more <classname>TextView</"
 "classname>s can share the same <classname>TextBuffer</classname>."
 msgstr ""
+"如上所述，每个<classname>TextView</classname>都有一个<classname>TextBuffer</"
+"classname>，并且多个<classname>TextView</classname>可以共享同一个"
+"<classname>TextBuffer</classname>。"
 
 #: C/index-in.docbook:3256
 msgid ""
@@ -5937,16 +6002,21 @@ msgid ""
 "classname> to allow the user to see and move around the whole text area with "
 "scrollbars."
 msgstr ""
+"和<classname>TreeView</classname>一样，你可以将<classname>TextView</"
+"classname>放入<classname>ScrolledWindow</classname>中以允许用户使用滚动条查看"
+"并在整个文本区域中移动。"
 
 #: C/index-in.docbook:3263
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TextView."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1TextView."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:3266
 msgid "Default formatting"
-msgstr ""
+msgstr "默认格式"
 
 #: C/index-in.docbook:3267
 msgid ""
@@ -5957,10 +6027,15 @@ msgid ""
 "<methodname>set_left_margin()</methodname>, <methodname>set_right_margin()</"
 "methodname>, <methodname>set_indent()</methodname>, etc."
 msgstr ""
+"<classname>TextView</classname>具有多种可以让你修改特定视图中缓冲区的显示方式"
+"的方法。如果它们指定同一区域，则其中一些可能会覆写缓冲区中的<classname>Gtk::"
+"TextTag</classname>。例如：<methodname>set_left_margin()</methodname>、"
+"<methodname>set_right_margin()</methodname>、<methodname>set_indent()</"
+"methodname>等。"
 
 #: C/index-in.docbook:3278
 msgid "Scrolling"
-msgstr ""
+msgstr "滚动"
 
 #: C/index-in.docbook:3279
 msgid ""
@@ -5970,10 +6045,13 @@ msgid ""
 "use <methodname>Gtk::TextView::scroll_to()</methodname> to show the found "
 "text."
 msgstr ""
+"<classname>Gtk::TextView</classname>有多种<methodname>scroll_to()</"
+"methodname>方法。这些可以确保你能看到缓冲区中的特定部分。例如你的应用程序可能"
+"会使用<methodname>Gtk::TextView::scroll_to()</methodname>方法显示找到的文本。"
 
 #: C/index-in.docbook:3294
 msgid "Widgets and ChildAnchors"
-msgstr ""
+msgstr "部件和子锚(ChildAnchors)"
 
 #: C/index-in.docbook:3295
 msgid ""
@@ -5983,34 +6061,44 @@ msgid ""
 "instance, to create a child anchor at a particular position, use "
 "<methodname>Gtk::TextBuffer::create_child_anchor()</methodname>:"
 msgstr ""
+"你可以在文本中嵌入小部件，例如<classname>Gtk::Button</classname>。每一个这样"
+"的子部件都需要一个<classname>ChildAnchor</classname>。子锚与迭代器相关联。例"
+"如，使用<methodname>Gtk::TextBuffer::create_child_anchor()</methodname>于特定"
+"位置创建子锚："
 
 #: C/index-in.docbook:3302
 #, no-wrap
 msgid "auto refAnchor = refBuffer-&gt;create_child_anchor(iter);"
-msgstr ""
+msgstr "auto refAnchor = refBuffer-&gt;create_child_anchor(iter);"
 
 #: C/index-in.docbook:3304
 msgid ""
 "Then, to add a widget at that position, use <methodname>Gtk::TextView::"
 "add_child_at_anchor()</methodname>:"
 msgstr ""
+"然后使用<methodname>Gtk::TextView::add_child_at_anchor()</methodname>将部件添"
+"加到该位置："
 
 #: C/index-in.docbook:3308
 #, no-wrap
 msgid "m_TextView.add_child_at_anchor(m_Button, refAnchor);"
-msgstr ""
+msgstr "m_TextView.add_child_at_anchor(m_Button, refAnchor);"
 
 #: C/index-in.docbook:3310
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1TextChildAnchor.html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1TextChildAnchor.html\">参考</ulink>"
 
 #: C/index-in.docbook:3325
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/textview/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/textview/\">源代码</ulink>"
 
 #: C/index-in.docbook:3334
 msgid "Menus and Toolbars"
