@@ -6970,7 +6970,7 @@ msgstr "adjustment-&gt;signal_changed();"
 
 #: C/index-in.docbook:3829
 msgid "Dialogs"
-msgstr ""
+msgstr "对话框(Dialogs)"
 
 #: C/index-in.docbook:3831
 msgid ""
@@ -6979,6 +6979,9 @@ msgid ""
 "packed widgets to ensure consistency, and a <methodname>run()</methodname> "
 "method which blocks until the user dismisses the dialog."
 msgstr ""
+"对话框被用作辅助窗口，以提供特定的信息或者提出问题。<classname>Gtk::Dialog</"
+"classname>窗口包含了一些预装部件以确保一致性，且有一个<methodname>run()</"
+"methodname>方法可以阻塞到用户关闭对话框。"
 
 #: C/index-in.docbook:3838
 msgid ""
@@ -6987,6 +6990,9 @@ msgid ""
 "most simple notifications. But at other times you might need to derive your "
 "own dialog class to provide more complex functionality."
 msgstr ""
+"有几个派生自<classname>Dialog</classname>的类可能对你而言很有用。"
+"<classname>Gtk::MessageDialog</classname>多被用于简单的通知。但有时候你也需要"
+"派生自己的对话框类以提供更为复杂的功能。"
 
 #: C/index-in.docbook:3845
 msgid ""
@@ -6996,6 +7002,11 @@ msgid ""
 "<classname>Button</classname> to the bottom of the <classname>Dialog</"
 "classname>, you could use the <methodname>add_button()</methodname> method."
 msgstr ""
+"若要将部件添加到自定义的对话框中，你需要将其装入通过"
+"<methodname>get_content_area()</methodname>获得的<classname>Gtk::Box</"
+"classname>中。如果你只需要向<classname>Dialog</classname>的底部添加一个"
+"<classname>Button</classname>，那么你可以直接使用<methodname>add_button()</"
+"methodname>方法。"
 
 #: C/index-in.docbook:3853
 msgid ""
@@ -7005,16 +7016,22 @@ msgid ""
 "custom response value that you specified when using "
 "<methodname>add_button()</methodname>."
 msgstr ""
+"<methodname>run()</methodname>方法返回一个<literal>int</literal>。如果用户是"
+"通过单击标准按钮关闭的对话框，则该值可能是<literal>Gtk::ResponseType</"
+"literal>中的一个也可能是使用<methodname>add_button()</methodname>时你所指定的"
+"值。"
 
 #: C/index-in.docbook:3860
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1Dialog."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1Dialog."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:3862 C/index-in.docbook:3877
 msgid "MessageDialog"
-msgstr ""
+msgstr "消息对话框(MessageDialog)"
 
 #: C/index-in.docbook:3863
 msgid ""
@@ -7024,54 +7041,69 @@ msgid ""
 "constructor, as well as specifying standard buttons via the <literal>Gtk::"
 "ButtonsType</literal> enum."
 msgstr ""
+"<classname>MessageDialog</classname>是一个便利类，用于创建包含消息、图标、以"
+"及便于用户响应的按钮的简易标准消息对话框。你可以在其构造函数中指定消息类型和"
+"消息文本，也可以通过<literal>Gtk::ButtonsType</literal>枚举指定其包含的标准按"
+"钮。"
 
 #: C/index-in.docbook:3871
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1MessageDialog.html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1MessageDialog.html\">参考</ulink>"
 
 #: C/index-in.docbook:3883
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/dialogs/messagedialog\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/dialogs/messagedialog\">源代码</ulink>"
 
 #: C/index-in.docbook:3888
 msgid "FileChooserDialog"
-msgstr ""
+msgstr "文件选择对话框(FileChooserDialog)"
 
 #: C/index-in.docbook:3889
 msgid ""
 "The <classname>FileChooserDialog</classname> is suitable for use with \"Open"
 "\" or \"Save\" menu items."
 msgstr ""
+"<classname>FileChooserDialog</classname>通常被用于\"打开\"或\"保存\"菜单项。"
 
 #: C/index-in.docbook:3893
 msgid ""
 "Most of the useful member methods for this class are actually in the "
 "<classname>Gtk::FileChooser</classname> base class."
 msgstr ""
+"该类的大部分有用的成员函数都在其基类<classname>Gtk::FileChooser</classname>"
+"中。"
 
 #: C/index-in.docbook:3898
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1FileChooserDialog.html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1FileChooserDialog.html\">参考</ulink>"
 
 #: C/index-in.docbook:3904 C/index-in.docbook:5437
 msgid "FileChooser"
-msgstr ""
+msgstr "文件选择器(FileChooser)"
 
 #: C/index-in.docbook:3910
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/dialogs/filechooserdialog\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/dialogs/filechooserdialog\">源代码</ulink>"
 
 #: C/index-in.docbook:3914 C/index-in.docbook:3927
 msgid "ColorChooserDialog"
-msgstr ""
+msgstr "颜色选择器对话框(ColorChooserDialog)"
 
 #: C/index-in.docbook:3915
 msgid ""
@@ -7079,22 +7111,28 @@ msgid ""
 "color. The <classname>ColorButton</classname> opens a color selection dialog "
 "when it is clicked."
 msgstr ""
+"<classname>ColorChooserDialog</classname>允许用户选择一个颜色。当"
+"<classname>ColorButton</classname>被点击的时会打开一个颜色选择对话框。"
 
 #: C/index-in.docbook:3921
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1ColorChooserDialog.html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1ColorChooserDialog.html\">参考</ulink>"
 
 #: C/index-in.docbook:3933
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/dialogs/colorchooserdialog\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/dialogs/colorchooserdialog\">源代码</ulink>"
 
 #: C/index-in.docbook:3938 C/index-in.docbook:3951
 msgid "FontChooserDialog"
-msgstr ""
+msgstr "字体选择器对话框(FontChooserDialog)"
 
 #: C/index-in.docbook:3939
 msgid ""
@@ -7102,22 +7140,28 @@ msgid ""
 "font. The <classname>FontButton</classname> opens a font chooser dialog when "
 "it is clicked."
 msgstr ""
+"<classname>FontChooserDialog</classname>允许用户选择一个字体。当"
+"<classname>FontButton</classname>被点击时将打开一个字体选择对话框。"
 
 #: C/index-in.docbook:3945
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1FontChooserDialog.html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1FontChooserDialog.html\">参考</ulink>"
 
 #: C/index-in.docbook:3957
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/dialogs/fontchooserdialog\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/dialogs/fontchooserdialog\">源代码</ulink>"
 
 #: C/index-in.docbook:3962
 msgid "Non-modal AboutDialog"
-msgstr ""
+msgstr "非模态关于对话框(AboutDialog)"
 
 #: C/index-in.docbook:3963
 msgid ""
@@ -7125,6 +7169,8 @@ msgid ""
 "information about a program, like its logo, name, copyright, website and "
 "license."
 msgstr ""
+"<classname>AboutDialog</classname>提供了一个简单的显示程序有关信息（例如标"
+"志、名称、版权、网站、许可证）的方式。"
 
 #: C/index-in.docbook:3967
 msgid ""
@@ -7136,22 +7182,31 @@ msgid ""
 "modal dialogs can be useful in other cases. E.g. <application>gedit</"
 "application>'s search-and-replace dialog is non-modal."
 msgstr ""
+"本章中的大部分对话框都是模态的，也就是说在显示它们的时候应用程序的其他部分是"
+"被冻结的。你也可以创建一个非模态的对话框，这样的对话框不会冻结应用程序的其他"
+"窗口。下面的示例显示了一个非模态的<classname>AboutDialog</classname>。通常你"
+"不会想要将该对话框做成非模态，但这不表示非模态对话框在其它情况下没有用。例"
+"如：在<application>gedit</application>中搜索和替换对话框就是非模态的。"
 
 #: C/index-in.docbook:3977
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1AboutDialog.html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1AboutDialog.html\">参考</ulink>"
 
 #: C/index-in.docbook:3983
 msgid "AboutDialog"
-msgstr ""
+msgstr "关于对话框"
 
 #: C/index-in.docbook:3989
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/dialogs/aboutdialog\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/dialogs/aboutdialog\">源代码</ulink>"
 
 #: C/index-in.docbook:3997
 msgid "The DrawingArea Widget"
