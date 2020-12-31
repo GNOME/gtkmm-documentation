@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkmm-documentation master\n"
-"POT-Creation-Date: 2020-12-26 00:05+8000\n"
+"POT-Creation-Date: 2020-12-30 13:36+8000\n"
 "PO-Revision-Date: 2020-12-23 11:40+8000\n"
 "Last-Translator: XiangQun Luo <Script.tar.gz@gmail.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
@@ -2358,15 +2358,15 @@ msgid ""
 "See the <link linkend=\"chapter-adjustment\">Adjustments</link> section for "
 "further details."
 msgstr ""
-"就象将在后面的<link linkend=\"chapter-adjustment\">调整</link>小节要"
-"谈到的那样，所有的 Range 部件都有一个关联的 <classname>Adjustment</"
-"classname> 对象。如果你想修改部件的最小值、最大值以及当前值，你需要调用该部件"
-"关联的 <classname>Adjustment</classname> 对象的方法，该对象可以通过调用 "
+"就象将在后面的<link linkend=\"chapter-adjustment\">调整</link>小节要谈到的那"
+"样，所有的 Range 部件都有一个关联的 <classname>Adjustment</classname> 对象。"
+"如果你想修改部件的最小值、最大值以及当前值，你需要调用该部件关联的 "
+"<classname>Adjustment</classname> 对象的方法，该对象可以通过调用 "
 "<methodname>get_adjustment()</methodname> 方法来得到。<classname>Range</"
 "classname> 部件默认构造函数会自动的创建一个 <classname>Adjustment</"
 "classname>，当然，你也可以指定一个现有的 <classname>Adjustment</classname>，"
-"而且还可以和其它部件共享。请参看 <link linkend=\"chapter-adjustment"
-"\">调整</link>部分以得到更详细的信息。"
+"而且还可以和其它部件共享。请参看 <link linkend=\"chapter-adjustment\">调整</"
+"link>部分以得到更详细的信息。"
 
 #: C/index-in.docbook:1069
 msgid ""
@@ -2483,9 +2483,9 @@ msgid ""
 "parameters mentioned above and in the section on adjustments, so you can see "
 "how they affect the way these widgets work for the user."
 msgstr ""
-"这个示例显示了一个窗口，其中有三个关联到同一个调整对象，还有几个控制部"
-"件用来调整前文讨论过的一些参数，这样你可以很清楚地看到那些参数是如何影响这些"
-"部件的行为方式的。"
+"这个示例显示了一个窗口，其中有三个关联到同一个调整对象，还有几个控制部件用来"
+"调整前文讨论过的一些参数，这样你可以很清楚地看到那些参数是如何影响这些部件的"
+"行为方式的。"
 
 #: C/index-in.docbook:1154
 msgid ""
@@ -6714,7 +6714,7 @@ msgstr ""
 
 #: C/index-in.docbook:3673
 msgid "Adjustments"
-msgstr ""
+msgstr "调整(Adjustments)"
 
 #: C/index-in.docbook:3675
 msgid ""
@@ -6726,6 +6726,11 @@ msgid ""
 "classname> widget. These widgets have <classname>Gtk::Adjustment</classname> "
 "objects that express this common part of their API."
 msgstr ""
+"<application>gtkmm</application>有各种可以使用鼠标和键盘进行视觉上的调整的部"
+"件，例如<classname>Range</classname>部件（在<link linkend=\"chapter-range-"
+"widgets\">范围部件</link>小节介绍）。还有些部件显示较大区域的可调整部分，例如"
+"<classname>Viewport</classname>部件。这些部件的<classname>Gtk::Adjustment</"
+"classname>对象表达了它的共有部分的API。"
 
 #: C/index-in.docbook:3685
 msgid ""
@@ -6734,16 +6739,22 @@ msgid ""
 "<literal>value_changed</literal> signal. You can then use the "
 "<methodname>get_value()</methodname> method to discover the new value."
 msgstr ""
+"如此一来，应用程序可以对更改做出反应。例如当用户移动滚动条的时候"
+"<classname>Gtk::Adjustment</classname>发出<literal>value_changed</literal>信"
+"号。你可以在信号处理函数中使用<methodname>get_value()</methodname>方法获取新"
+"的值。"
 
 #: C/index-in.docbook:3693
 msgid "Creating an Adjustment"
-msgstr ""
+msgstr "创建调整"
 
 #: C/index-in.docbook:3695
 msgid ""
 "The <classname>Gtk::Adjustment</classname> is created by its "
 "<methodname>create()</methodname> method which is as follows:"
 msgstr ""
+"<classname>Gtk::Adjustment</classname>由它的<methodname>create()</methodname>"
+"方法创建，该方法的声明如下："
 
 #: C/index-in.docbook:3700
 #, no-wrap
@@ -6756,6 +6767,13 @@ msgid ""
 "  double page_increment = 10,\n"
 "  double page_size = 0);"
 msgstr ""
+"Glib::RefPtr&lt;Gtk::Adjustment&gt; Gtk::Adjustment::create(\n"
+"  double value,\n"
+"  double lower,\n"
+"  double upper,\n"
+"  double step_increment = 1,\n"
+"  double page_increment = 10,\n"
+"  double page_size = 0);"
 
 #: C/index-in.docbook:3708
 msgid ""
@@ -6771,10 +6789,17 @@ msgid ""
 "argument is used to represent the bottommost or rightmost coordinate in a "
 "panning widget's child."
 msgstr ""
+"其中<parameter>value</parameter>参数是调整的初始值，通常对应于可调整部件的最"
+"上边或者最左边。<parameter>lower</parameter>和<parameter>upper</parameter>参"
+"数指定调整可以容纳的值的范围。<parameter>step_increment</parameter>和"
+"<parameter>page_increment</parameter>指定了一小一大两个增量，增量控制用户在更"
+"改调整值的时候一次可以改变的量。<parameter>page_size</parameter>参数通常以某"
+"种方式与平移部件能见到的区域大小。<parameter>upper</parameter>参数被用于表示"
+"平移子部件最底端或最右端的坐标。"
 
 #: C/index-in.docbook:3727
 msgid "Using Adjustments the Easy Way"
-msgstr ""
+msgstr "轻松使用调整"
 
 #: C/index-in.docbook:3729
 msgid ""
@@ -6782,6 +6807,7 @@ msgid ""
 "require specific units for these values, and those which treat them as "
 "arbitrary numbers."
 msgstr ""
+"可调整部件大致可以分为使用并要求这些值使用特定单位的和将它们视作任意数字的。"
 
 #: C/index-in.docbook:3734
 msgid ""
@@ -6795,6 +6821,13 @@ msgid ""
 "adjustment's <parameter>value</parameter>. By default, they will only modify "
 "the <parameter>value</parameter> of an adjustment."
 msgstr ""
+"将<parameter>value</parameter>视作任意数的部件组包括<classname>Range</"
+"classname>（<classname>Scrollbar</classname>和<classname>Scale</"
+"classname>）、<classname>ScaleButton</classname>、<classname>SpinButton</"
+"classname>。这些部件通常由用户使用鼠标和键盘直接进行\"调整\"。他们会将"
+"<parameter>lower</parameter>和<parameter>upper</parameter>视为用户可以操纵调"
+"整的<parameter>value</parameter>的范围。默认情况下它们只会修改调整的"
+"<parameter>value</parameter>。"
 
 #: C/index-in.docbook:3746
 msgid ""
@@ -6805,6 +6838,10 @@ msgid ""
 "their own adjustments or use ones you supply, you'll generally want to let "
 "this particular category of widgets create its own adjustments."
 msgstr ""
+"另一组部件包括<classname>Viewport</classname>和<classname>ScrolledWindow</"
+"classname>。所有的这些部件都将调整的值视作像素值。通常你也可以使用滚动条间接"
+"的修改调整的值。虽然所有使用调整的部件都可以创建自己的调整也可以使用你提供的"
+"调整，但是通常情况下你都会希望使用这些部件自行创建的调整。"
 
 #: C/index-in.docbook:3755
 msgid ""
@@ -6812,6 +6849,8 @@ msgid ""
 "manipulating the scrollbar will automagically adjust the TextView widget. "
 "You can set it up like this:"
 msgstr ""
+"如果你使滚动条和文本视图部件共享一个调整对象，则你操纵滚动条的时候文本视图将"
+"被自动调整。你可以这样设置："
 
 #: C/index-in.docbook:3760
 #, no-wrap
@@ -6821,10 +6860,14 @@ msgid ""
 "// uses the newly-created adjustment for the scrollbar as well\n"
 "Gtk::Scrollbar vscrollbar (textview.get_vadjustment(), Gtk::ORIENTATION_VERTICAL);"
 msgstr ""
+"// creates its own adjustments\n"
+"Gtk::TextView textview;\n"
+"// uses the newly-created adjustment for the scrollbar as well\n"
+"Gtk::Scrollbar vscrollbar (textview.get_vadjustment(), Gtk::ORIENTATION_VERTICAL);"
 
 #: C/index-in.docbook:3768
 msgid "Adjustment Internals"
-msgstr ""
+msgstr "调整的内部"
 
 #: C/index-in.docbook:3770
 msgid ""
@@ -6834,6 +6877,10 @@ msgid ""
 "Adjustment</classname>, you can use the <methodname>get_value()</methodname> "
 "and <methodname>set_value()</methodname> methods:"
 msgstr ""
+"如果你想要创建一个自己的处理函数以响应用户对<classname>Range</classname>或"
+"<classname>SpinButton</classname>部件的调整。你可以使用<classname>Gtk::"
+"Adjustment</classname>的<methodname>get_value()</methodname>和"
+"<methodname>set_value()</methodname>方法访问其值："
 
 #: C/index-in.docbook:3778
 msgid ""
@@ -6844,6 +6891,11 @@ msgid ""
 "signal handlers to their adjustment's <literal>value_changed</literal> "
 "signal, as can your program."
 msgstr ""
+"如前所述，<classname>Gtk::Adjustment</classname>可以发射信号。而所有可调整部"
+"件都会将信号处理函数连接到其调整对象的<literal>value_changed</literal>信号你"
+"的程序也可以如此。这使得当<classname>Scrollbar</classname>和其他可调整部件共"
+"享一个<classname>Adjustment</classname>对象时，如果你操纵滚动条与其共享调整对"
+"象的其他可调整部件将会自动更新。"
 
 #: C/index-in.docbook:3787
 msgid ""
@@ -6851,6 +6903,8 @@ msgid ""
 "want to change the rotation of a picture whenever its value changes, you "
 "would create a signal handler like this:"
 msgstr ""
+"因此，例如，如果你有一个<classname>Scale</classname>部件并且你想要当调整值变"
+"更以后更改图片的旋转角度，你可以创建一个如下所示的信号处理函数："
 
 #: C/index-in.docbook:3792
 #, no-wrap
@@ -6860,10 +6914,14 @@ msgid ""
 "  picture-&gt;set_rotation(adj-&gt;get_value());\n"
 "..."
 msgstr ""
+"void cb_rotate_picture (MyPicture* picture)\n"
+"{\n"
+"  picture-&gt;set_rotation(adj-&gt;get_value());\n"
+"..."
 
 #: C/index-in.docbook:3796
 msgid "and connect it to the scale widget's adjustment like this:"
-msgstr ""
+msgstr "并且将其连接到比例部件的调整对象上，如下所示："
 
 #: C/index-in.docbook:3799
 #, no-wrap
@@ -6871,6 +6929,8 @@ msgid ""
 "adj-&gt;signal_value_changed().connect(sigc::bind&lt;MyPicture*&gt;(sigc::mem_fun(*this,\n"
 "    &amp;cb_rotate_picture), picture));"
 msgstr ""
+"adj-&gt;signal_value_changed().connect(sigc::bind&lt;MyPicture*&gt;(sigc::mem_fun(*this,\n"
+"    &amp;cb_rotate_picture), picture));"
 
 #: C/index-in.docbook:3802
 msgid ""
@@ -6879,6 +6939,9 @@ msgid ""
 "classname>, such as when a user adds more text to a text widget? In this "
 "case, it emits the <literal>changed</literal> signal."
 msgstr ""
+"如果一个部件重新配置其<classname>Adjustment</classname>的<parameter>upper</"
+"parameter>和<parameter>lower</parameter>字段（例如：用户向文本部件添加了更多"
+"的文本），那么它将发出<literal>changed</literal>信号。"
 
 #: C/index-in.docbook:3809
 msgid ""
@@ -6888,17 +6951,22 @@ msgid ""
 "proportion to the difference between the <parameter>lower</parameter> and "
 "<parameter>upper</parameter> values of its <classname>Adjustment</classname>."
 msgstr ""
+"<classname>Range</classname>部件通常会将处理程序连接到此信号，并更改其外观响"
+"应变更 - 例如：滚动条中的滑块将随着<classname>Adjustment</classname>中"
+"<parameter>lower</parameter>与<parameter>upper</parameter>的差值的增大逐渐变"
+"小，反之则逐渐增大。"
 
 #: C/index-in.docbook:3818
 msgid ""
 "You probably won't ever need to attach a handler to this signal, unless "
 "you're writing a new type of range widget."
 msgstr ""
+"除非你正在编写新的范围部件，否则你可能永远不需要将处理程序连接到这个信号。"
 
 #: C/index-in.docbook:3822
 #, no-wrap
 msgid "adjustment-&gt;signal_changed();"
-msgstr ""
+msgstr "adjustment-&gt;signal_changed();"
 
 #: C/index-in.docbook:3829
 msgid "Dialogs"
