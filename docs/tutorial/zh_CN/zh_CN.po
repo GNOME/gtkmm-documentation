@@ -987,8 +987,8 @@ msgstr ""
 "当你得知<application>gtkmm</application>没有在它的接口上使用<classname>std::"
 "string</classname>而是使用了<classname>Glib::ustring</classname>的时候一定很"
 "惊讶。<classname>Glib::ustring</classname>与<classname>std::string</"
-"classname>非常相似，甚至在某些场合，你甚至可以把它当成<classname>std::"
-"string</classname>来使用，而忽略本节后面的内容。但是如果你希望在你的应用程序"
+"classname>非常相似，在某些场合，你甚至可以直接把它当做<classname>std::"
+"string</classname>来使用，并忽略本节后面的内容。但是如果你希望在你的应用程序"
 "中使用英语以外的语言的话，那么请继续读下去。"
 
 #: C/index-in.docbook:472
@@ -6613,8 +6613,8 @@ msgid ""
 msgstr ""
 "然后你可以使用<application>glib-compile-resources</application>将XML编译为可"
 "以用<methodname>Gio::Resource::create_from_file()</methodname>加载的二进制"
-"包。但是使用--generate-source生成C源代码文件直接链接到你的应用程序更为常见。"
-"例如：<_:screen-1/>"
+"包。但是使用--generate-source生成C源文件直接链接到你的应用程序更为常见。例"
+"如：<_:screen-1/>"
 
 #: C/index-in.docbook:3599
 msgid ""
@@ -7224,6 +7224,12 @@ msgid ""
 "setting a draw function with a call to the <methodname>set_draw_func()</"
 "methodname> member function."
 msgstr ""
+"<classname>DrawingArea</classname>部件是一个空白的窗口，让你可以自由的创造任"
+"何你想要的图形。伴随着这种自由而来的是绘制这个部件的责任。在部件第一次显示或"
+"者部件被覆盖后又露出的时候它需要重绘自己。大多数部件都包含执行此操作的代码，"
+"但是<classname>DrawingArea</classname>并没有。因此你可以编写自己的绘图函数来"
+"确定如何绘制绘部件的内容。你可以调用<methodname>set_draw_func()</methodname>"
+"成员函数来设置绘图函数。"
 
 #: C/index-in.docbook:4010
 msgid ""
@@ -7231,6 +7237,9 @@ msgid ""
 "API. With <application>gtkmm</application>, you may use the <ulink url="
 "\"http://www.cairographics.org/cairomm/\">cairomm</ulink> C++ API for cairo."
 msgstr ""
+"GTK使用<ulink url=\"http://cairographics.org\">Cairo</ulink>绘图API。而在"
+"<application>gtkmm</application>中你可以使用由<ulink url=\"http://www."
+"cairographics.org/cairomm/\">cairomm</ulink>提供的Cairo C++ API。"
 
 #: C/index-in.docbook:4015
 msgid ""
@@ -7242,10 +7251,14 @@ msgid ""
 "complex transformations, do compositing of images, and render antialiased "
 "text."
 msgstr ""
+"你可以使用Cairo绘制非常复杂的形状，但你只有一些很基本的方法可用。Cairo提供了"
+"绘制直线、曲线、圆弧（包括圆）的方法。你可以通过对这些图形进行组合从而创建更"
+"为复杂的形状和路径，然后用纯色、渐变、模式等进行填充。除此之外，Cairo还可以进"
+"行复杂的转换、合成图像和渲染抗锯齿文本等。"
 
 #: C/index-in.docbook:4025
 msgid "Cairo and Pango"
-msgstr ""
+msgstr "Cairo和Pango"
 
 #: C/index-in.docbook:4026
 msgid ""
@@ -7254,6 +7267,9 @@ msgid ""
 "rendering such as wrapping or ellipsizing text. Drawing text with Cairo "
 "should only be done if the text is part of a graphic."
 msgstr ""
+"虽然Cairo可以用于渲染文本，但不意味着它能替代Pango。如果你需要进行更高级的文"
+"本渲染（例如环绕和省略文本）则Pango会是更好的选择。只有当文本是图形的一部分的"
+"时候才应该使用Cairo绘制文本。"
 
 #: C/index-in.docbook:4031
 msgid ""
@@ -7262,16 +7278,20 @@ msgid ""
 "and then present a simple application that uses Cairo to draw a custom clock "
 "widget."
 msgstr ""
+"在本教程的这一部分中，我们将介绍Cairo的基本绘图模型，详细描述每个基本绘制元素"
+"（包括示例），然后介绍一个使用Cairo绘制自定义时钟部件的简单应用程序。"
 
 #: C/index-in.docbook:4038
 msgid "The Cairo Drawing Model"
-msgstr ""
+msgstr "Cairo绘制模型"
 
 #: C/index-in.docbook:4039
 msgid ""
 "The basic concept of drawing in Cairo involves defining 'invisible' paths "
 "and then stroking or filling them to make them visible."
 msgstr ""
+"Cairo的基本概念包括定义'不可见'路径然后描绘(stroking)或者填充(filling)它们使"
+"其可见。"
 
 #: C/index-in.docbook:4043
 msgid ""
@@ -7292,6 +7312,18 @@ msgid ""
 "between <classname>Gdk::CairoContext</classname> and <classname>Cairo::"
 "Context</classname>.)"
 msgstr ""
+"要在<application>gtkmm</application>中使用Cairo进行绘制，必须先获取"
+"<classname>Cairo::Context</classname>对象。这个类保存了所有描述如何进行绘制的"
+"图形状态参数。状态参数包含了诸如线宽、颜色、要绘制的表面和许多其他内容的信"
+"息。这允许实际上的绘图函数只需要使用较少的参数从而简化接口。通常你使用"
+"<methodname>set_draw_func()</methodname>设置的绘图函数将<classname>Cairo::"
+"Context</classname>作为输入数据。也可以通过调用<methodname>Gdk::Surface::"
+"create_cairo_context()</methodname>和<methodname>Gdk::CairoContext::"
+"cairo_create()</methodname>函数创建一个<classname>Cairo::Context</"
+"classname>。由于<classname>Cairo::Context</classname>是一个使用引用计数的对"
+"象，因此<methodname>cairo_create()</methodname>返回<classname>Cairo::"
+"RefPtr&lt;Cairo::Context&gt;</classname>对象（请注意区分<classname>Gdk::"
+"CairoContext</classname>与<classname>Cairo::Context</classname>。）。"
 
 #: C/index-in.docbook:4060
 msgid ""
@@ -7299,6 +7331,8 @@ msgid ""
 "color of red and a width of 2. Any drawing functions that use this context "
 "will use these settings."
 msgstr ""
+"以下示例显示如何设置一个开罗上下文(Cairo Context)的前景色为红色且宽度为2。任"
+"何使用该上下文的绘图函数都将使用这些设置。"
 
 #: C/index-in.docbook:4065
 #, no-wrap
@@ -7311,6 +7345,13 @@ msgid ""
 "myContext-&gt;set_line_width(2.0);\n"
 "    "
 msgstr ""
+"\n"
+"Gtk::DrawingArea myArea;\n"
+"auto gdkCairoContext = myArea.get_surface()-&gt;create_cairo_context();\n"
+"auto myContext = gdkCairoContext-&gt;cairo_create();\n"
+"myContext-&gt;set_source_rgb(1.0, 0.0, 0.0);\n"
+"myContext-&gt;set_line_width(2.0);\n"
+"    "
 
 #: C/index-in.docbook:4072
 msgid ""
@@ -7321,6 +7362,11 @@ msgid ""
 "<classname>Cairo::Context</classname> object. The final two lines change the "
 "graphics state of the context."
 msgstr ""
+"每一个<classname>Cairo::Context</classname>都有一个特定的<classname>Gdk::"
+"Surface</classname>与之相关联，因此上面示例的第一行创建了一个<classname>Gtk::"
+"DrawingArea</classname>部件，接下来两行使用与其相关联的<classname>Gdk::"
+"Surface</classname>创建一个<classname>Cairo::Context</classname>对象。最后两"
+"行更改上下文的图形状态。"
 
 #: C/index-in.docbook:4080
 msgid ""
@@ -7338,6 +7384,16 @@ msgid ""
 "others. For further information, see the <ulink url=\"http://www."
 "cairographics.org/cairomm/\">cairomm</ulink> API documentation."
 msgstr ""
+"可以为开罗上下文设置许多的图形状态。最常见的上下文属性是颜色（使用"
+"<methodname>set_source_rgb()</methodname>或需要半透明颜色的时候用"
+"<methodname>set_source_rgba()</methodname>）、线宽（使用"
+"<methodname>set_line_width()</methodname>）、虚线模式（使用"
+"<methodname>set_dash()</methodname>）、线帽样式（使用"
+"<methodname>set_line_cap()</methodname>）、线条连接样式（使用"
+"<methodname>set_line_join()</methodname>）以及字体样式（使用"
+"<methodname>set_font_size()</methodname>）。还有许多其他设置，例如变换矩阵、"
+"填充规则、是否执行抗锯齿规则等。更多详情请参阅<ulink url=\"http://www."
+"cairographics.org/cairomm/\">cairomm</ulink>API文档。"
 
 #: C/index-in.docbook:4112
 msgid ""
@@ -7347,6 +7403,9 @@ msgid ""
 "Context</classname> reference as an argument, you might implement it as "
 "follows:"
 msgstr ""
+"好的做法是在一组<methodname>save()</methodname>/<methodname>restore()</"
+"methodname>调用之间进行所有对图形状态的更改。例如，如果你有一个将"
+"<classname>Cairo::Context</classname>的引用作为参数的函数，你可以这样实现它："
 
 #: C/index-in.docbook:4118
 #, no-wrap
@@ -7359,6 +7418,13 @@ msgid ""
 "    context-&gt;restore();\n"
 "}"
 msgstr ""
+"void doSomething(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; context, int x)\n"
+"{\n"
+"    context-&gt;save();\n"
+"    // change graphics state\n"
+"    // perform drawing operations\n"
+"    context-&gt;restore();\n"
+"}"
 
 #: C/index-in.docbook:4095
 msgid ""
@@ -7376,6 +7442,16 @@ msgid ""
 "<methodname>restore()</methodname> restores the state from the matching "
 "paired <methodname>save()</methodname>. <_:tip-1/>"
 msgstr ""
+"可以将<classname>Cairo::Context</classname>当前的状态保存到其内部用于保存状态"
+"的栈中，并在之后将状态还原为保存时的状态。要做到这个请调用"
+"<methodname>save()</methodname>和<methodname>restore()</methodname>方法。当你"
+"需要临时更改某些图形设置（例如线宽和颜色）以绘制某些内容然后又退回到之前的状"
+"态时这将很有用。在这种情况下，你可以先调用<methodname>Cairo::Context::"
+"save()</methodname>，然后修改图形设置并绘制图形，再调用<methodname>Cairo::"
+"Context::restore()</methodname>恢复之前的图形状态。你可以多次嵌套调用"
+"<methodname>save()</methodname>和<methodname>restore()</methodname>；每次"
+"<methodname>restore()</methodname>调用都会将恢复状态到与之相对应的"
+"<methodname>save()</methodname>所保存的状态。 <_:tip-1/>"
 
 #: C/index-in.docbook:4127
 msgid ""
@@ -7384,10 +7460,14 @@ msgid ""
 "the <classname>Gtk::DrawingArea</classname> widget. It is not necessary to "
 "save and restore this Cairo context in the draw function."
 msgstr ""
+"你通过调用<methodname>set_draw_func()</methodname>所设置的绘图函数是由你要绘"
+"制的<classname>Gtk::DrawingArea</classname>部件用开罗上下文调用的。所以你不需"
+"要在绘图函数中对此开罗上下文进行保存和恢复（部件会在调用绘图函数时做保存与恢"
+"复）。"
 
 #: C/index-in.docbook:4135
 msgid "Drawing Straight Lines"
-msgstr ""
+msgstr "画直线"
 
 #: C/index-in.docbook:4144
 msgid ""
@@ -7401,6 +7481,12 @@ msgid ""
 "or some other mapping that works for your application. This can be done with "
 "the <methodname>Cairo::Context::scale()</methodname> function."
 msgstr ""
+"由于开罗图形库是为了支持多个输出目标（X window系统、PNG图片、OpenGL等）编写"
+"的，因此用户空间坐标和设备空间坐标存在一些区别。默认情况下这两个坐标系是一对"
+"一的，这样可以将整数值大致映射为屏幕上的像素值，不过有需要时可以通过"
+"<methodname>Cairo::Context::scale()</methodname>函数对此行为进行调整。例如："
+"你可能会需要使一个窗口的宽和高在调整比例后的坐标系中取值范围均处于0到1之间"
+"（单位正方形）。"
 
 #: C/index-in.docbook:4136
 msgid ""
@@ -7411,6 +7497,9 @@ msgid ""
 "located in the upper-left corner of the window with positive x values to the "
 "right and positive y values going down. <_:tip-1/>"
 msgstr ""
+"现在我们已经了解了开罗图形库的基本知识，是时候开始画图了。我们将从画最简单的"
+"元素：直线 开始。但是在此之前你需要对开罗的坐标系有所了解。开罗的坐标系原点在"
+"窗口的左上角，从左向右X的值逐渐增大，从上往下Y的值逐渐增大。 <_:tip-1/>"
 
 #: C/index-in.docbook:4159
 msgid ""
@@ -7424,6 +7513,12 @@ msgid ""
 "between the point you were at and the point you moved to. To draw a line "
 "between two points, use the <methodname>line_to()</methodname> function."
 msgstr ""
+"在这个示例中，我们将构建一个很小但功能齐全的<application>gtkmm</application>"
+"程序，并将一些线绘制到窗口中。使用函数<methodname>Cairo::Context::move_to()</"
+"methodname>和<methodname>Cairo::Context::line_to()</methodname>创建一个路径。"
+"<methodname>move_to()</methodname>函数的行为类似于将笔从纸上抬起并放到其他地"
+"方 -- 在你移动到的点和你之前所在的点直接不会画出一条线。使用"
+"<methodname>line_to()</methodname>函数可以在两点之间画线。"
 
 #: C/index-in.docbook:4171
 msgid ""
@@ -7434,6 +7529,10 @@ msgid ""
 "classname> object. After stroking, the current path will be cleared so that "
 "you can start on your next path."
 msgstr ""
+"创建完你的路径以后。你依旧没有画任何看得见的东西。要想让路径可见，你需要使用"
+"<methodname>stroke()</methodname>函数，该函数将使用你的<classname>Cairo::"
+"Context</classname>对象中保存的线宽与样式绘制当前的路径。描绘完成后，当前路径"
+"将被清除，以便你可以从下一个路径开始。"
 
 #: C/index-in.docbook:4180
 msgid ""
@@ -7444,16 +7543,23 @@ msgid ""
 "variant, the current path will be retained so that you can use the same path "
 "with the next drawing function."
 msgstr ""
+"多数的开罗绘图函数都拥有一个<methodname>_preserve()</methodname>变体。通常情"
+"况下<methodname>clip()</methodname>、<methodname>fill()</methodname>、"
+"<methodname>stroke()</methodname>函数会清除当前的路径。如果你使用他们的"
+"<methodname>_preserve()</methodname>变体，则当前路径会被保留，以便下一个绘图"
+"函数能继续在一样的路径上绘制。"
 
 #: C/index-in.docbook:4190 C/index-in.docbook:4310
 msgid "Drawing Area - Lines"
-msgstr ""
+msgstr "绘图区域 - 线"
 
 #: C/index-in.docbook:4196
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/drawingarea/simple\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/drawingarea/simple\">源代码</ulink>"
 
 #: C/index-in.docbook:4198
 msgid ""
@@ -7473,10 +7579,21 @@ msgid ""
 "methodname>, and then stroked this path with <methodname>stroke()</"
 "methodname>."
 msgstr ""
+"这个程序包含一个<classname>MyArea</classname>类，它是<classname>Gtk::"
+"DrawingArea</classname>的子类，并且包含<methodname>on_draw()</methodname>成员"
+"函数。通过在<classname>MyArea</classname>的构造函数中调用"
+"<methodname>set_draw_func()</methodname>使其变成绘制函数。每当需要重绘绘图区"
+"域的图像的时候，<methodname>on_draw()</methodname>就会被调用。这将会向我们的"
+"绘制函数传递一个指向<classname>Cairo::Context</classname>的<classname>Cairo::"
+"RefPtr</classname>指针。实际进行绘图的代码使用<methodname>set_source_rgb()</"
+"methodname>设置我们将用于绘图的颜色，这个函数接受定义颜色所需的红色、绿色、蓝"
+"色分量作为参数（参数的有效值介于0到1之间）。设置完颜色后，我们使用"
+"<methodname>move_to()</methodname>和<methodname>line_to()</methodname>函数创"
+"建一个新的路径，然后使用<methodname>stroke()</methodname>绘制了这个路径。"
 
 #: C/index-in.docbook:4217
 msgid "Drawing with relative coordinates"
-msgstr ""
+msgstr "使用相对坐标绘图"
 
 #: C/index-in.docbook:4218
 msgid ""
@@ -7484,10 +7601,13 @@ msgid ""
 "also draw using relative coordinates. For a straight line, this is done with "
 "the function <methodname>Cairo::Context::rel_line_to()</methodname>."
 msgstr ""
+"在上面的例子中，我们使用绝对坐标进行绘图。你也可以使用相对坐标进行绘图。对于"
+"直线而言，你可以通过<methodname>Cairo::Context::rel_line_to()</methodname>完"
+"成用相对坐标绘图。"
 
 #: C/index-in.docbook:4224
 msgid "Line styles"
-msgstr ""
+msgstr "线型"
 
 #: C/index-in.docbook:4225
 msgid ""
@@ -7495,6 +7615,8 @@ msgid ""
 "that you can customize about a line. You've already seen examples of setting "
 "a line's color and width, but there are others as well."
 msgstr ""
+"除了绘制基本直线以外，你还可以对线条进行很多自定义。你已经看到了对线条颜色和"
+"线条宽度的示例，但还有其他示例。"
 
 #: C/index-in.docbook:4231
 msgid ""
@@ -7502,16 +7624,21 @@ msgid ""
 "join together in a certain way. Cairo offers three different ways to join "
 "lines together: Miter, Bevel, and Round. These are show below:"
 msgstr ""
+"如果你于一个路径绘制了一系列的线条，你可能希望它们以某种方式被连接起来。开罗"
+"提供了三种不同的连接线条的方式：斜接(Miter)、斜切(Bevel)、圆(Round)。这些连接"
+"方式的示意图如下："
 
 #: C/index-in.docbook:4238
 msgid "Different join types in Cairo"
-msgstr ""
+msgstr "开罗的不同连接类型"
 
 #: C/index-in.docbook:4243
 msgid ""
 "The line join style is set using the function <methodname>Cairo::Context::"
 "set_line_join()</methodname>."
 msgstr ""
+"线条连接样式由<methodname>Cairo::Context::set_line_join()</methodname>函数进"
+"行设置。"
 
 #: C/index-in.docbook:4247
 msgid ""
@@ -7522,6 +7649,10 @@ msgid ""
 "with the center of the square at the end point). This setting is set using "
 "the function <methodname>Cairo::Context::set_line_cap()</methodname>."
 msgstr ""
+"线尾也有不同的样式。默认样式是从线条的开始到结尾准确的停止。这被叫做平端。其"
+"他的可选性有圆（使用圆形结束，以终点为圆心）和方（使用正方形结束，以终点为正"
+"方形的中心）。这可以使用<methodname>Cairo::Context::set_line_cap()</"
+"methodname>函数使用。"
 
 #: C/index-in.docbook:4257
 msgid ""
@@ -7529,10 +7660,11 @@ msgid ""
 "lines and other things. For more information, see the Cairo API "
 "documentation."
 msgstr ""
+"你还可以自定义其他内容，比如创建虚线等。更多有关信息请参阅Cairo API文档。"
 
 #: C/index-in.docbook:4264
 msgid "Drawing thin lines"
-msgstr ""
+msgstr "画细线"
 
 #: C/index-in.docbook:4265
 msgid ""
@@ -7545,6 +7677,11 @@ msgid ""
 "possible). This happens when the width of the line is an odd number of "
 "pixels (not just one pixel)."
 msgstr ""
+"如果你尝试画一条宽度为一个像素的线条，你可能会注意到这条线有时会变得模糊并且"
+"比应有的宽度更宽。发生这种情况的原因是开若尝试在所选位置向两边绘制（一边一"
+"半），因此如果你如果正好位于像素交点上，还想绘制一个像素宽度的线条，那是不可"
+"能做到的（像素是最小的单位）。所以当像素的宽度是奇数的时候就会出现这种情况"
+"（不只是一个像素的时候）。"
 
 #: C/index-in.docbook:4275
 msgid ""
@@ -7552,20 +7689,24 @@ msgid ""
 "to be drawn, and thus guaranteeing you get the desired results. See <ulink "
 "url=\"http://cairographics.org/FAQ/#sharp_lines\">Cairo FAQ</ulink>."
 msgstr ""
+"解决问题的诀窍是将像素放于要绘制的线条的中间，从而确保获得所需的结果。请参阅"
+"<ulink url=\"http://cairographics.org/FAQ/#sharp_lines\">Cairo FAQ</ulink>。"
 
 #: C/index-in.docbook:4282
 msgid "Drawing Area - Thin Lines"
-msgstr ""
+msgstr "绘图区域 - 细线"
 
 #: C/index-in.docbook:4288
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/drawingarea/thin_lines\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/drawingarea/thin_lines\">源代码</ulink>"
 
 #: C/index-in.docbook:4293
 msgid "Drawing Curved Lines"
-msgstr ""
+msgstr "画曲线"
 
 #: C/index-in.docbook:4294
 msgid ""
@@ -7576,18 +7717,24 @@ msgid ""
 "a destination point as well as coordinates for two 'control' points. This is "
 "best explained using an example, so let's dive in."
 msgstr ""
+"除了绘制直线以外，Cairo还允许你用<methodname>Cairo::Context::curve_to()</"
+"methodname>和<methodname>Cairo::Context::rel_curve_to()</methodname>函数轻松"
+"的绘制曲线（从技术上而言是三次贝塞尔曲线）。这些函数需要一个目标点的坐标和两"
+"个'控制'点的坐标。这最好用一个示例来解释，所以让我们开始吧。"
 
 #: C/index-in.docbook:4305
 msgid ""
 "This simple application draws a curve with Cairo and displays the control "
 "points for each end of the curve."
-msgstr ""
+msgstr "这个简单的示例程序使用Cairo绘制了一条曲线并显示了曲线两端的控制点。"
 
 #: C/index-in.docbook:4316
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/drawingarea/curve\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/drawingarea/curve\">源代码</ulink>"
 
 #: C/index-in.docbook:4317
 msgid ""
@@ -7595,6 +7742,8 @@ msgid ""
 "the <methodname>on_draw()</methodname> function, but there are a few new "
 "concepts and functions introduced here, so let's examine them briefly."
 msgstr ""
+"这个示例与绘制直线示例的唯一区别在它们的<methodname>on_draw()</methodname>函"
+"数，不过这里引入了一些新的概念和函数，所以让我们简要的介绍一下它们。"
 
 #: C/index-in.docbook:4323
 msgid ""
@@ -7604,6 +7753,10 @@ msgid ""
 "equal to 1.0 'units'. There's no particular reason to scale the coordinate "
 "system in this case, but sometimes it can make drawing operations easier."
 msgstr ""
+"我们调用<methodname>Cairo::Context::scale()</methodname>并传入绘图区域的宽和"
+"高，这将使用户空间坐标系被缩放为\"1个单位\"（宽高的范围变成[0.0,1.0]）。在这"
+"其实并没有什么特别的要对坐标系进行缩放的理由，只是为了使绘图操作有时候更易"
+"用。"
 
 #: C/index-in.docbook:4332
 msgid ""
@@ -7620,10 +7773,17 @@ msgid ""
 "argument specifying the alpha value of the color (valid values are between 0 "
 "and 1)."
 msgstr ""
+"对<methodname>Cairo::Context::curve_to()</methodname>的调用应该是不言自明的。"
+"第一组坐标定义了曲线起点的控制点。第二组坐标定义了曲线终点的控制点，而最后一"
+"组坐标定义了目标点。为了使控制点的概念更容易被看清，从每个控制点到与之关联的"
+"曲线上的端点上都画了一条线。请注意，这些控制点线都是半透明的。这是通过调用"
+"<methodname>set_source_rgb()</methodname>的变体函数"
+"<methodname>set_source_rgba()</methodname>实现的。这个函数使用第四个参数来接"
+"受指定颜色的alpha值（值的有效区间为0到1）。"
 
 #: C/index-in.docbook:4350
 msgid "Drawing Arcs and Circles"
-msgstr ""
+msgstr "画圆弧和圆"
 
 #: C/index-in.docbook:4351
 msgid ""
@@ -7640,6 +7800,13 @@ msgid ""
 "transformation matrix, angles increase in a clockwise direction. (Remember "
 "that the positive Y axis points downwards.)"
 msgstr ""
+"在Cairo中，画圆弧、圆、椭圆使用的是同一个函数：<methodname>Cairo::Context::"
+"arc()</methodname>。这个函数有五个参数。前两个参数是圆弧中心点的坐标，第三个"
+"参数是圆弧的半径，最后两个参数是圆弧的起点和终点。所有的角度都使用弧度制，所"
+"以画圆和画一个弧度为0到2*M_PI的圆弧是一样的。角度0沿着X轴的正方向（对于用户空"
+"间而言）。角度M_PI/2（角度制的90°）沿着Y轴的正方向（对于用户空间而言）。角度"
+"沿着X轴的正方向向Y轴的正方向逐渐增加。所以使用默认的变换矩阵的时候，角度沿着"
+"顺时针方向增加（请记住Y轴的正方向指向下方）。"
 
 #: C/index-in.docbook:4372
 #, no-wrap
@@ -7650,6 +7817,11 @@ msgid ""
 "context-&gt;arc(0.0, 0.0, 1.0, 0.0, 2 * M_PI);\n"
 "context-&gt;restore();"
 msgstr ""
+"context-&gt;save();\n"
+"context-&gt;translate(x, y);\n"
+"context-&gt;scale(width / 2.0, height / 2.0);\n"
+"context-&gt;arc(0.0, 0.0, 1.0, 0.0, 2 * M_PI);\n"
+"context-&gt;restore();"
 
 #: C/index-in.docbook:4366
 msgid ""
@@ -7658,22 +7830,28 @@ msgid ""
 "with center at <varname>x</varname>, <varname>y</varname> and size "
 "<varname>width</varname>, <varname>height</varname>: <_:programlisting-1/>"
 msgstr ""
+"想要绘制椭圆的话，你可以在X和Y方向用不同的量缩放当前的变换矩阵。例如，如果你"
+"想要绘制一个以<varname>x</varname>，<varname>y</varname>为中心，大小为"
+"<varname>width</varname>，<varname>height</varname>的椭圆： <_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:4380
 msgid ""
 "Here's an example of a simple program that draws an arc, a circle and an "
 "ellipse into a drawing area."
-msgstr ""
+msgstr "这是一个简单的示例程序，它在绘图区域绘制了一个圆弧、一个圆和一个椭圆。"
 
 #: C/index-in.docbook:4385
 msgid "Drawing Area - Arcs"
-msgstr ""
+msgstr "绘图区域 - 圆弧"
 
 #: C/index-in.docbook:4392
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/drawingarea/arcs\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/drawingarea/arcs\">源代码</ulink>"
 
 #: C/index-in.docbook:4394
 msgid ""
@@ -7683,6 +7861,9 @@ msgid ""
 "that function. In addition, the first part of the function is nearly "
 "identical to the previous examples, so we'll skip that portion."
 msgstr ""
+"关于这个示例代码有几件事需要注意。首先这个示例与之前的示例的区别也只在"
+"<methodname>on_draw()</methodname>函数中，因此我们重点接受这个函数。另外，函"
+"数的第一部分与之前的也几乎一样，所以我们将会跳过该部分。"
 
 #: C/index-in.docbook:4402
 msgid ""
@@ -7693,6 +7874,11 @@ msgid ""
 "wrapped with a <methodname>save()</methodname>/<methodname>restore()</"
 "methodname> pair so that we're back at a known state after each drawing."
 msgstr ""
+"请注意，在这个情况下我们几乎使用窗口的宽和高表示了包括线条宽度在内的所有的内"
+"容（通过缩放用户坐标系）。所以当我们调整窗口大小的时候，所有的内容都会随着窗"
+"口一同缩放。还请注意，函数中有三个进行绘图的部分都用一组<methodname>save()</"
+"methodname>/<methodname>restore()</methodname>包裹，以便我们在每次绘完图都能"
+"返回已知状态。"
 
 #: C/index-in.docbook:4411
 msgid ""
@@ -7705,10 +7891,17 @@ msgid ""
 "joined together. If you use <methodname>line_to()</methodname> instead, the "
 "lines will end at the same point, but Cairo won't do any special joining."
 msgstr ""
+"在绘制圆弧的部分介绍了一个新的函数：<methodname>close_path()</methodname>。这"
+"个函数的效果实际上就是在当前点和路径的第一个点之间画一条直线。但调用"
+"<methodname>close_path()</methodname>所绘制的线条和使用"
+"<methodname>line_to()</methodname>手工绘制一条回到起点的线条会有很大的不同。"
+"如果你使用<methodname>close_path()</methodname>，则这些线将会很好的连接到一"
+"起。如果你改用<methodname>line_to()</methodname>，那么这些线将在同一个点结束"
+"但是Cairo不会对此做任何特殊的连接。"
 
 #: C/index-in.docbook:4424
 msgid "Drawing counter-clockwise"
-msgstr ""
+msgstr "逆时针绘图"
 
 #: C/index-in.docbook:4425
 msgid ""
@@ -7716,14 +7909,17 @@ msgid ""
 "exactly the same as <methodname>Cairo::Context::arc()</methodname> but the "
 "angles go the opposite direction."
 msgstr ""
+"函数<methodname>Cairo::Context::arc_negative()</methodname>的功能与"
+"<methodname>Cairo::Context::arc()</methodname>函数完全一致，但是他们的绘制方"
+"向是相反的。"
 
 #: C/index-in.docbook:4437
 msgid "Drawing Text"
-msgstr ""
+msgstr "绘制文本"
 
 #: C/index-in.docbook:4439
 msgid "Drawing Text with Pango"
-msgstr ""
+msgstr "使用Pango绘制文本"
 
 #: C/index-in.docbook:4440
 msgid ""
@@ -7734,6 +7930,10 @@ msgid ""
 "Finally, the layout can be rendered using the <methodname>Pango::Layout::"
 "show_in_cairo_context()</methodname> method."
 msgstr ""
+"通过Pango布局绘制文本。创建一个<classname>Pango::Layout</classname>最简单的方"
+"法是使用<methodname>Gtk::Widget::create_pango_layout()</methodname>。创建布局"
+"以后，可以通过各种方式操纵布局，包括更改文本、字体等。然后可以使用"
+"<methodname>Pango::Layout::show_in_cairo_context()</methodname>方法渲染布局。"
 
 #: C/index-in.docbook:4452
 msgid ""
@@ -7741,20 +7941,24 @@ msgid ""
 "down. The Printing chapter contains another <link linkend=\"sec-printing-"
 "example\">example</link> of drawing text."
 msgstr ""
+"这是一个绘制一些文本的示例程序，其中的一些文本上下颠倒。打印一章包含了另一个"
+"绘制文本的<link linkend=\"sec-printing-example\">示例</link>。"
 
 #: C/index-in.docbook:4458
 msgid "Drawing Area - Text"
-msgstr ""
+msgstr "绘图区域 - 文本"
 
 #: C/index-in.docbook:4464
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/drawingarea/pango_text\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/drawingarea/pango_text\">源代码</ulink>"
 
 #: C/index-in.docbook:4475
 msgid "Drawing Images"
-msgstr ""
+msgstr "绘制图片"
 
 #: C/index-in.docbook:4476
 msgid ""
@@ -7763,6 +7967,9 @@ msgid ""
 "buffer is a useful wrapper around a collection of pixels, which can be read "
 "from files, and manipulated in various ways."
 msgstr ""
+"有一个方法可以将<classname>Gdk::Pixbuf</classname>绘制到<classname>Cairo::"
+"Context</classname>。<classname>Gdk::Pixbuf</classname>缓冲区是对像素集合的有"
+"效封装，它提供了从文件读取以及各种操纵像素的方式。"
 
 #: C/index-in.docbook:4483
 msgid ""
@@ -7771,6 +7978,10 @@ msgid ""
 "<methodname>Gdk::Pixbuf::create_from_resource()</methodname>, which can read "
 "an image file, such as a png file into a pixbuf ready for rendering."
 msgstr ""
+"最常见的<classname>Gdk::Pixbuf</classname>创建方法是用<methodname>Gdk::"
+"Pixbuf::create_from_file()</methodname>或<methodname>Gdk::Pixbuf::"
+"create_from_resource()</methodname>，它们可以将图像文件（例如png文件）读取到"
+"pixbuf中用于渲染。"
 
 #: C/index-in.docbook:4491
 msgid ""
@@ -7784,6 +7995,13 @@ msgid ""
 "<classname>Cairo::Context</classname>. It takes a <classname>Cairo::Context</"
 "classname> as its first parameter."
 msgstr ""
+"通过使用<methodname>Gdk::Cairo::set_source_pixbuf()</methodname>将"
+"<classname>Gdk::Pixbuf</classname>设置为开罗上下文的源模式使其可以被渲染。然"
+"后使用<methodname>Cairo::Context::paint()</methodname>（画整个图像），或者使"
+"用<methodname>Cairo::Context::rectangle()</methodname>和<methodname>Cairo::"
+"Context::fill()</methodname>（用图像填充整个矩形）。"
+"<methodname>set_source_pixbuf()</methodname>不是<classname>Cairo::Context</"
+"classname>的成员函数。<classname>Cairo::Context</classname>是它的第一个参数。"
 
 #: C/index-in.docbook:4502
 msgid ""
@@ -7791,6 +8009,8 @@ msgid ""
 "wouldn't load the image every time in the draw signal handler! It's just "
 "shown here to keep it all together.)"
 msgstr ""
+"这是一小段将他们结合在一起的代码（请注意，通常你不应该在每次调用绘制信号处理"
+"函数的时候都加载一次图片）："
 
 #: C/index-in.docbook:4507
 #, no-wrap
@@ -7804,11 +8024,19 @@ msgid ""
 "  cr-&gt;fill();\n"
 "}"
 msgstr ""
+"void MyArea::on_draw(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; cr, int width, int height)\n"
+"{\n"
+"  auto image = Gdk::Pixbuf::create_from_file(\"myimage.png\");\n"
+"  // Draw the image at 110, 90, except for the outermost 10 pixels.\n"
+"  Gdk::Cairo::set_source_pixbuf(cr, image, 100, 80);\n"
+"  cr-&gt;rectangle(110, 90, image-&gt;get_width()-20, image-&gt;get_height()-20);\n"
+"  cr-&gt;fill();\n"
+"}"
 
 #: C/index-in.docbook:4524
 #, no-wrap
 msgid "$ glib-compile-resources --target=resources.c --generate-source image.gresource.xml"
-msgstr ""
+msgstr "$ glib-compile-resources --target=resources.c --generate-source image.gresource.xml"
 
 #: C/index-in.docbook:4517
 msgid ""
@@ -7819,20 +8047,26 @@ msgid ""
 "into a C source file that can be compiled and linked with the C++ code. E.g. "
 "<_:screen-1/>"
 msgstr ""
+"这是一个绘制图像的简单示例程序。该程序从资源文件加载图像。请参阅<link "
+"linkend=\"sec-gio-resource\">Gio::Resource和glib-compile-resources</link>小"
+"节。使用<application>glib-compile-resources</application>将资源文件编译为C源"
+"文件，然后将该源文件与C++代码一起编译链接。例如：<_:screen-1/>"
 
 #: C/index-in.docbook:4527
 msgid "Drawing Area - Image"
-msgstr ""
+msgstr "绘图区域 - 图像"
 
 #: C/index-in.docbook:4533
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/drawingarea/image\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/drawingarea/image\">源代码</ulink>"
 
 #: C/index-in.docbook:4547
 msgid "Example Application: Creating a Clock with Cairo"
-msgstr ""
+msgstr "示例程序：使用Cairo创建时钟"
 
 #: C/index-in.docbook:4548
 msgid ""
@@ -7842,12 +8076,18 @@ msgid ""
 "classname> widget. The clock has a second hand, a minute hand, and an hour "
 "hand, and updates itself every second."
 msgstr ""
+"既然我们已经将使用Cairo画图的基础知识介绍完了，那么现在让我们尝试将所有的内容"
+"放在一起，创建一个可以执行某些操作的简单应用程序。以下示例使用开罗创建一个自"
+"定义的<classname>Clock</classname>部件。这个时钟有秒针、分针、时针，并且每一"
+"秒更新一次。"
 
 #: C/index-in.docbook:4559
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/drawingarea/clock\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/drawingarea/clock\">源代码</ulink>"
 
 #: C/index-in.docbook:4560
 msgid ""
@@ -7860,6 +8100,12 @@ msgid ""
 "sole responsibility of this function is to invalidate the window so that "
 "<application>gtkmm</application> will be forced to redraw it."
 msgstr ""
+"和之前一样，所有有趣的东西都在绘图函数<methodname>on_draw()</methodname>中完"
+"成。在深入研究绘图函数之前，请注意在<classname>Clock</classname>部件的构造函"
+"数中将处理函数<methodname>on_timeout()</methodname>连接到了用计时器上，该计时"
+"器的超时时间为1000毫秒（1秒）。这意味着<methodname>on_timeout()</methodname>"
+"将每秒被调用一次。这个函数的唯一任务就是使窗口无效，以便<application>gtkmm</"
+"application>强制重绘它。"
 
 #: C/index-in.docbook:4571
 msgid ""
@@ -7871,6 +8117,10 @@ msgid ""
 "Furthermore, the coordinate system is scaled over and down so that the (0, "
 "0) coordinate is in the very center of the window."
 msgstr ""
+"现在让我们研究实际执行绘图的函数。到现在<methodname>on_draw()</methodname>函"
+"数的第一部分你应该很熟悉了。此示例再次将坐标系缩放为单位正方形，以便更轻松的"
+"按窗口大小的百分比绘制时钟。此外坐标系是按比例缩放的，所以(0,0)坐标位于窗口的"
+"正中央。"
 
 #: C/index-in.docbook:4581
 msgid ""
@@ -7884,6 +8134,11 @@ msgid ""
 "then this same path is clipped to make sure that our next lines don't go "
 "outside the outline of the clock."
 msgstr ""
+"<methodname>Cairo::Context::paint()</methodname>方法用于设置窗口的背景色。这"
+"个函数不接受任何参数，并使用处于活跃状态的源颜色填充当前表面（或表面裁剪的一"
+"部分）。设置背景色以后，我们画一个圆作为时钟的轮廓，用白色填充它然后用黑色进"
+"行描边。请注意，这两个操作都用<methodname>_preserve</methodname>变体以保留当"
+"前路径，然后对相同的路径进行剪辑以确保我们下一行不会超过时钟的轮廓。"
 
 #: C/index-in.docbook:4593
 msgid ""
@@ -7893,6 +8148,9 @@ msgid ""
 "getting the current values for hours, minutes and seconds, and drawing the "
 "hands at the correct angles."
 msgstr ""
+"绘制轮廓后，我们围绕时钟为每个小时绘制可读线并为12、3、6、9绘制相对更大的刻度"
+"线。接着我们就可以实现时钟的计时功能了 -- 获取当前时间的时、分、秒然后以正确"
+"的角度将指针绘制出来。"
 
 #: C/index-in.docbook:4605
 msgid ""
