@@ -8647,7 +8647,7 @@ msgstr ""
 
 #: C/index-in.docbook:4914
 msgid "Printing"
-msgstr ""
+msgstr "打印"
 
 #: C/index-in.docbook:4916
 msgid ""
@@ -8657,10 +8657,13 @@ msgid ""
 "In the implementation of this common API, platform-specific backends and "
 "printer-specific drivers are used."
 msgstr ""
+"在应用程序级开发，<application>gtkmm</application>的打印API提供了跨应用程序兼"
+"容的对话框，并允许使用Cairo通用绘制API和Pango驱动的文本渲染。在此通用API实现"
+"中，使用了特定平台的后端和特定打印机的驱动。"
 
 #: C/index-in.docbook:4922
 msgid "PrintOperation"
-msgstr ""
+msgstr "打印操作"
 
 #: C/index-in.docbook:4924
 msgid ""
@@ -8670,6 +8673,9 @@ msgid ""
 "<classname>PrintOperation</classname> automatically handles all the settings "
 "affecting the print loop."
 msgstr ""
+"主要对象是分配给每个打印操作的<classname>Gtk::PrintOperation</classname>。要"
+"处理绘制页请连接到它的信号，或从其继承并覆盖默认的虚信号处理函数。"
+"<classname>PrintOperation</classname>将自动处理所有影响打印循环的设置。"
 
 #: C/index-in.docbook:4941
 msgid ""
@@ -8678,6 +8684,9 @@ msgid ""
 "provided <classname>Gtk::PrintContext</classname>, and break up your "
 "printing output into pages."
 msgstr ""
+"<literal>begin_print</literal>：你必须处理该信号，因为这是你使用提供的"
+"<classname>Gtk::PrintContext</classname>创建和设置<classname>Pango::Layout</"
+"classname>的地方，以及对你的打印输出进行分页的地方。"
 
 #: C/index-in.docbook:4951
 msgid ""
@@ -8685,6 +8694,9 @@ msgid ""
 "to monitor it you can call the <methodname>PrintOperation::"
 "set_show_progress()</methodname> method and handle this signal."
 msgstr ""
+"<literal>paginate</literal>：分页可能很慢，所以如果需要监视它，你可以调用"
+"<methodname>PrintOperation::set_show_progress()</methodname>方法并处理此信"
+"号。"
 
 #: C/index-in.docbook:4965
 msgid ""
@@ -8692,6 +8704,9 @@ msgid ""
 "classname>, page number and <classname>Gtk::PageSetup</classname>. Handle "
 "this signal if you need to modify page setup on a per-page basis."
 msgstr ""
+"<literal>request_page_setup</literal>：提供一个<classname>PrintContext</"
+"classname>、页码和<classname>Gtk::PageSetup</classname>。如果你需要逐页的修改"
+"页面设置，请处理此信号。"
 
 #: C/index-in.docbook:4974
 msgid ""
@@ -8702,12 +8717,18 @@ msgid ""
 "drawn. To render text, iterate over the <classname>Pango::Layout</classname> "
 "you created in the <literal>begin_print</literal> handler."
 msgstr ""
+"<literal>draw_page</literal>：你必须处理此信号，该信号提供一个"
+"<classname>PrintContext</classname>和页码。你应该使用"
+"<classname>PrintContext</classname>创建一个<classname>Cairo::Context</"
+"classname>，并将提供的页面绘制到其中。要渲染文本，请遍历你在"
+"<literal>begin_print</literal>处理程序中创建的<classname>Pango::Layout</"
+"classname>。"
 
 #: C/index-in.docbook:4960
 msgid ""
 "For each page that needs to be rendered, the following signals are emitted: "
 "<_:itemizedlist-1/>"
-msgstr ""
+msgstr "对于每个要渲染的页面，都会发出以下信号：<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:4989
 msgid ""
@@ -8716,6 +8737,10 @@ msgid ""
 "your custom class that inherits from <classname>PrintOperation</classname>, "
 "it is naturally simpler to do it in the destructor."
 msgstr ""
+"<literal>end_print</literal>：它的处理程序是用于释放与"
+"<classname>PrintOperation</classname>相关的所有资源的安全场所。如果你通过继承"
+"<classname>PrintOperation</classname>创建了自定义类，则直接在自定义类的析构函"
+"数中进行此操作会更简单。"
 
 #: C/index-in.docbook:4999
 msgid ""
@@ -8724,6 +8749,9 @@ msgid ""
 "PrintOperationResult</literal> may indicate that an error occurred. In any "
 "case you probably want to notify the user about the final status."
 msgstr ""
+"<literal>done</literal>：该信号于打印完成时（当打印数据假脱机）被发出。请注"
+"意，所提供的<literal>Gtk::PrintOperationResult</literal>可能表明发生了错误。"
+"无论如何你都应该让用户知道最终的状态。"
 
 #: C/index-in.docbook:5009
 msgid ""
@@ -8733,22 +8761,31 @@ msgid ""
 "spooling. To see the status, use <methodname>get_status()</methodname> or "
 "<methodname>get_status_string()</methodname>."
 msgstr ""
+"<literal>status_changed</literal>: 直到打印作业完成，只要打印作业状态发生了更"
+"改就会发出此信号。假脱机后可以调用<methodname>PrintOperation::"
+"set_track_print_status()</methodname>监视作业状态。要查看状态请调用"
+"<methodname>get_status()</methodname>或<methodname>get_status_string()</"
+"methodname>。"
 
 #: C/index-in.docbook:4935
 msgid ""
 "The <methodname>PrintOperation::run()</methodname> method starts the print "
 "loop, during which various signals are emitted: <_:itemizedlist-1/>"
 msgstr ""
+"<methodname>PrintOperation::run()</methodname>方法启动打印循环，在此期间会发"
+"出以下信号：<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:5022
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1PrintOperation.html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1PrintOperation.html\">参考</ulink>"
 
 #: C/index-in.docbook:5031
 msgid "Page setup"
-msgstr ""
+msgstr "页面设置"
 
 #: C/index-in.docbook:5033
 msgid ""
@@ -8761,12 +8798,22 @@ msgid ""
 "classname> and to access the selected <classname>Gtk::PaperSize</classname>, "
 "<literal>Gtk::PageOrientation</literal> and printer-specific margins."
 msgstr ""
+"<classname>PrintOperation</classname>类有一个叫做"
+"<methodname>set_default_page_setup()</methodname>的方法，其用于选择默认的纸张"
+"尺寸、方向和页边距。要在你的应用程序中显示页面设置对话框，请使用"
+"<methodname>Gtk::run_page_setup_dialog()</methodname>方法，该方法返回一个"
+"<classname>Gtk::PageSetup</classname>对象，这个对象保存了所选的设置。使用这个"
+"对象更新<classname>PrintOperation</classname>并访问所选的<classname>Gtk::"
+"PaperSize</classname>、<literal>Gtk::PageOrientation</literal>和特定打印机的"
+"边距。"
 
 #: C/index-in.docbook:5043
 msgid ""
 "You should save the chosen <classname>Gtk::PageSetup</classname> so you can "
 "use it again if the page setup dialog is shown again."
 msgstr ""
+"你应该保存所选的<classname>Gtk::PageSetup</classname>以便在下次打开页面设置对"
+"话框的时候使用。"
 
 #: C/index-in.docbook:5047
 #, no-wrap
@@ -8776,16 +8823,22 @@ msgid ""
 "auto new_page_setup = Gtk::run_page_setup_dialog(*this, m_refPageSetup, m_refSettings);\n"
 "m_refPageSetup = new_page_setup;\n"
 msgstr ""
+"\n"
+"//Within a class that inherits from Gtk::Window and keeps m_refPageSetup and m_refSettings as members...\n"
+"auto new_page_setup = Gtk::run_page_setup_dialog(*this, m_refPageSetup, m_refSettings);\n"
+"m_refPageSetup = new_page_setup;\n"
 
 #: C/index-in.docbook:5046 C/index-in.docbook:5111 C/index-in.docbook:10636
 msgid "For instance, <_:programlisting-1/>"
-msgstr ""
+msgstr "例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:5054
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1PageSetup."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1PageSetup."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:5058
 msgid ""
@@ -8796,10 +8849,14 @@ msgid ""
 "default measurement unit is device pixels. To select other units, use the "
 "<methodname>PrintOperation::set_unit()</methodname> method."
 msgstr ""
+"在<literal>draw_page</literal>处理程序中，Cairo坐标系会自动旋转到当前页的方"
+"向。它通常在打印机的页边距之内，不过你可以使用<methodname>PrintOperation::"
+"set_use_full_page()</methodname>方法来更改它。默认的度量单位是设备像素。要选"
+"择其他单位请使用<methodname>PrintOperation::set_unit()</methodname>方法。"
 
 #: C/index-in.docbook:5070
 msgid "Rendering text"
-msgstr ""
+msgstr "渲染文本"
 
 #: C/index-in.docbook:5072
 msgid ""
@@ -8815,16 +8872,26 @@ msgid ""
 "<classname>Pango::LayoutLine</classname>s that appear within the requested "
 "page number."
 msgstr ""
+"文本渲染是使用Pango完成的。<classname>Pango::Layout</classname>对象应通过调用"
+"<methodname>PrintContext::create_pango_layout()</methodname>方法来创建。"
+"<classname>PrintContext</classname>对象还通过<methodname>get_width()</"
+"methodname>和<methodname>get_height()</methodname>方法提供了页面范围。页数可"
+"以通过调用<methodname>PrintOperation::set_n_pages()</methodname>进行设置。要"
+"在<literal>on_draw_page</literal>中渲染文本，请使用<methodname>PrintContext::"
+"get_cairo_context()</methodname>获取<classname>Cairo::Context</classname>并显"
+"示在请求的页码中出现的<classname>Pango::LayoutLine</classname>。"
 
 #: C/index-in.docbook:5087
 msgid ""
 "See <link linkend=\"sec-printing-example-simple\">an example</link> of "
 "exactly how this can be done."
 msgstr ""
+"请看<link linkend=\"sec-printing-example-simple\">具体示例</link>如何做到这"
+"点。"
 
 #: C/index-in.docbook:5095
 msgid "Asynchronous operations"
-msgstr ""
+msgstr "异步操作"
 
 #: C/index-in.docbook:5097
 msgid ""
@@ -8834,6 +8901,11 @@ msgid ""
 "Note that <methodname>set_allow_async()</methodname> is not supported on all "
 "platforms, however the <literal>done</literal> signal will still be emitted."
 msgstr ""
+"在默认情况下，<methodname>PrintOperation::run()</methodname>在打印操作完成时"
+"返回。如果你需要运行非阻塞的打印操作，请调用<methodname>PrintOperation::"
+"set_allow_async()</methodname>。请注意，并非所有平台都支持"
+"<methodname>set_allow_async()</methodname>，但<literal>done</literal>信号仍然"
+"会被发出。"
 
 #: C/index-in.docbook:5104
 msgid ""
@@ -8842,6 +8914,10 @@ msgid ""
 "handle the result or error you need to implement signal handlers for the "
 "<literal>done</literal> and <literal>status_changed</literal> signals:"
 msgstr ""
+"<methodname>run()</methodname>可能会返回"
+"<literal>PRINT_OPERATION_RESULT_IN_PROGRESS</literal>。要跟踪状态并处理结果或"
+"错误，你需要实现<literal>done</literal>和<literal>status_changed</literal>信"
+"号的信号处理函数。"
 
 #: C/index-in.docbook:5112
 #, no-wrap
@@ -8853,6 +8929,12 @@ msgid ""
 "op-&gt;signal_done().connect(sigc::bind(sigc::mem_fun(*this, &amp;ExampleWindow::on_printoperation_done), op));\n"
 "// run the op\n"
 msgstr ""
+"\n"
+"// in class ExampleWindow's method...\n"
+"auto op = PrintOperation::create();\n"
+"// ...set up op...\n"
+"op-&gt;signal_done().connect(sigc::bind(sigc::mem_fun(*this, &amp;ExampleWindow::on_printoperation_done), op));\n"
+"// run the op\n"
 
 #: C/index-in.docbook:5122
 #, no-wrap
@@ -8869,12 +8951,25 @@ msgid ""
 "    op-&gt;signal_status_changed().connect(sigc::bind(sigc::mem_fun(*this, &amp;ExampleWindow::on_printoperation_status_changed), op));\n"
 "}\n"
 msgstr ""
+"\n"
+"void ExampleWindow::on_printoperation_done(Gtk::PrintOperationResult result, const Glib::RefPtr&lt;PrintOperation&gt;&amp; op)\n"
+"{\n"
+"  if (result == Gtk::PRINT_OPERATION_RESULT_ERROR)\n"
+"    //notify user\n"
+"  else if (result == Gtk::PRINT_OPERATION_RESULT_APPLY)\n"
+"    //Update PrintSettings with the ones used in this PrintOperation\n"
+"\n"
+"  if (! op-&gt;is_finished())\n"
+"    op-&gt;signal_status_changed().connect(sigc::bind(sigc::mem_fun(*this, &amp;ExampleWindow::on_printoperation_status_changed), op));\n"
+"}\n"
 
 #: C/index-in.docbook:5121
 msgid ""
 "Second, check for an error and connect to the <literal>status_changed</"
 "literal> signal. For instance: <_:programlisting-1/>"
 msgstr ""
+"然后，检查错误并连接到<literal>status_changed</literal>信号，例如：<_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:5137
 #, no-wrap
@@ -8890,14 +8985,24 @@ msgid ""
 "  //update UI\n"
 "}\n"
 msgstr ""
+"\n"
+"void ExampleWindow::on_printoperation_status_changed(const Glib::RefPtr&lt;PrintOperation&gt;&amp; op)\n"
+"{\n"
+"  if (op-&gt;is_finished())\n"
+"    //the print job is finished\n"
+"  else\n"
+"    //get the status with get_status() or get_status_string()\n"
+"\n"
+"  //update UI\n"
+"}\n"
 
 #: C/index-in.docbook:5136
 msgid "Finally, check the status. For instance, <_:programlisting-1/>"
-msgstr ""
+msgstr "最后检查状态。例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:5153
 msgid "Export to PDF"
-msgstr ""
+msgstr "导出为PDF"
 
 #: C/index-in.docbook:5157
 #, no-wrap
@@ -8908,6 +9013,11 @@ msgid ""
 "op-&gt;set_export_filename(\"test.pdf\");\n"
 "auto res = op-&gt;run(Gtk::PRINT_OPERATION_ACTION_EXPORT);\n"
 msgstr ""
+"\n"
+"auto op = Gtk::PrintOperation::create();\n"
+"// ...set up op...\n"
+"op-&gt;set_export_filename(\"test.pdf\");\n"
+"auto res = op-&gt;run(Gtk::PRINT_OPERATION_ACTION_EXPORT);\n"
 
 #: C/index-in.docbook:5154
 msgid ""
@@ -8915,10 +9025,12 @@ msgid ""
 "need for extra implementation. However, it is sometimes useful to generate a "
 "pdf file directly from code. For instance, <_:programlisting-1/>"
 msgstr ""
+"\"打印到文件\"选项在打印对话框可用，不需要额外实现。但是有时候从代码直接生成"
+"PDF文件会很有用。例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:5169
 msgid "Extending the print dialog"
-msgstr ""
+msgstr "扩展打印对话框"
 
 #: C/index-in.docbook:5176
 msgid ""
@@ -8927,16 +9039,20 @@ msgid ""
 "the <literal>create_custom_widget</literal> signal handler. You'll probably "
 "want this to be a container widget, packed with some others."
 msgstr ""
+"通过<methodname>PrintOperation::set_custom_tab_label()</methodname>设置标签的"
+"标题，创建一个新的部件然后从<literal>create_custom_widget</literal>的信号处理"
+"函数中返回它。你可能希望它是一个容器部件，在其中包含一些其他部件。"
 
 #: C/index-in.docbook:5186
 msgid ""
 "Get the data from the widgets in the <literal>custom_widget_apply</literal> "
 "signal handler."
 msgstr ""
+"从部件的<literal>custom_widget_apply</literal>的信号处理函数中获取数据。"
 
 #: C/index-in.docbook:5171
 msgid "You may add a custom tab to the print dialog: <_:itemizedlist-1/>"
-msgstr ""
+msgstr "你可以在打印对话框中添加自定义标签： <_:itemizedlist-1/>"
 
 #: C/index-in.docbook:5201
 #, no-wrap
@@ -8963,6 +9079,27 @@ msgid ""
 "  //...\n"
 "}\n"
 msgstr ""
+"\n"
+"Gtk::Widget* CustomPrintOperation::on_create_custom_widget()\n"
+"{\n"
+"  set_custom_tab_label(\"My custom tab\");\n"
+"\n"
+"  auto hbox = new Gtk::Box(Gtk::Orientation::HORIZONTAL, 8);\n"
+"  hbox-&gt;set_margin(6);\n"
+"\n"
+"  auto label = Gtk::make_managed&lt;Gtk::Label&gt;(\"Enter some text: \");\n"
+"  hbox-&gt;append(*label);\n"
+"\n"
+"  hbox-&gt;append(m_Entry);\n"
+"\n"
+"  return hbox;\n"
+"}\n"
+"\n"
+"void CustomPrintOperation::on_custom_widget_apply(Gtk::Widget* /* widget */)\n"
+"{\n"
+"  auto user_input = m_Entry.get_text();\n"
+"  //...\n"
+"}\n"
 
 #: C/index-in.docbook:5194
 msgid ""
@@ -8973,14 +9110,18 @@ msgid ""
 "literal> as a member of your <classname>CustomPrintOperation</classname> "
 "class: <_:programlisting-1/>"
 msgstr ""
+"尽管<literal>custom_widget_apply</literal>信号提供了你之前创建的部件，但是为"
+"了简化操作，你可以保存一些用户输入作为部件类的成员。例如，你可能希望你有一个"
+"叫做<literal>m_Entry</literal>的<classname>Gtk::Entry</classname>拥有"
+"<classname>CustomPrintOperation</classname>作为类成员：<_:programlisting-1/>"
 
 #: C/index-in.docbook:5226
 msgid "The example in examples/book/printing/advanced demonstrates this."
-msgstr ""
+msgstr "examples/book/printing/advanced示例对此进行了演示。"
 
 #: C/index-in.docbook:5233
 msgid "Preview"
-msgstr ""
+msgstr "预览"
 
 #: C/index-in.docbook:5239
 #, no-wrap
@@ -8991,12 +9132,19 @@ msgid ""
 "// ...set up op...\n"
 "op-&gt;run(Gtk::PRINT_OPERATION_ACTION_PREVIEW, *this);\n"
 msgstr ""
+"\n"
+"// in a class that inherits from Gtk::Window...\n"
+"auto op = PrintOperation::create();\n"
+"// ...set up op...\n"
+"op-&gt;run(Gtk::PRINT_OPERATION_ACTION_PREVIEW, *this);\n"
 
 #: C/index-in.docbook:5235
 msgid ""
 "The native GTK print dialog has a preview button, but you may also start a "
 "preview directly from an application: <_:programlisting-1/>"
 msgstr ""
+"原生的GTK打印对话框有一个预览按钮，但是你也可以自己从应用程序开始预览：<_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:5247
 msgid ""
@@ -9005,6 +9153,9 @@ msgid ""
 "override this behaviour and provide a custom preview dialog. See the example "
 "located in /examples/book/printing/advanced."
 msgstr ""
+"在Unix上，默认的预览处理程序将使用外部查看器程序。在Windows上将显示原生预览对"
+"话框。如果有必要，你可以覆盖此默认行为并为此提供一个自定义的预览对话框。请参"
+"阅位于/examples/book/printing/advanced的示例。"
 
 #: C/index-in.docbook:5262
 msgid ""
@@ -9013,16 +9164,21 @@ msgid ""
 "<literal>on_draw_page</literal>, as well as how to track print status and "
 "update the print settings."
 msgstr ""
+"以下示例演示了如何从用户界面打印一些输出。它显示了如何实现"
+"<literal>on_begin_print</literal>和<literal>on_draw_page</literal>，以及如何"
+"跟踪打印状态和更新打印设置。"
 
 #: C/index-in.docbook:5270
 msgid "Printing - Simple"
-msgstr ""
+msgstr "打印 - 简单"
 
 #: C/index-in.docbook:5276
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/printing/simple/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/printing/simple/\">源代码</ulink>"
 
 #: C/index-in.docbook:5285
 msgid "Recently Used Documents"
