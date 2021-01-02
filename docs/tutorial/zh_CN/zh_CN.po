@@ -8157,10 +8157,12 @@ msgid ""
 "<classname>Gtk::Widget</classname> has several methods and signals which are "
 "prefixed with \"drag_\". These are used for Drag and Drop."
 msgstr ""
+"<classname>Gtk::Widget</classname>提供了几个带有\"drag_\"前缀的方法和信号用以"
+"支持拖放。"
 
 #: C/index-in.docbook:4610
 msgid "Sources and Destinations"
-msgstr ""
+msgstr "源与目的地"
 
 #: C/index-in.docbook:4611
 msgid ""
@@ -8172,12 +8174,18 @@ msgid ""
 "signals will then be emitted, telling the signal handlers which format was "
 "used."
 msgstr ""
+"物件从<literal>sources</literal>被拖放到<literal>destinations</literal>。每个"
+"源与目的地都拥有由<classname>Gdk::ContentFormats</classname>提供的它们所能发"
+"送或接受的数据格式的相关信息。放置目的地只会在拖动项与其具有共同的兼容类型时"
+"才会接受它们。然后将会发出适当的信号，告诉信号处理函数使用了那种格式。"
 
 #: C/index-in.docbook:4619
 msgid ""
 "<classname>Gdk::ContentFormats</classname> objects contain information about "
 "available <type>GType</type>s and mime types (media types)."
 msgstr ""
+"<classname>Gdk::ContentFormats</classname>对象包含了可用的<type>GType</type>"
+"和MIME类型（媒体类型）的相关信息。"
 
 #: C/index-in.docbook:4628
 msgid ""
@@ -8185,7 +8193,7 @@ msgid ""
 "using these <classname>Gtk::Widget</classname> methods:"
 msgstr ""
 "<classname>Gtk::Widget</classname>的以下方法可以将<classname>Widget</"
-"classname>作为来源或者目标："
+"classname>作为源或者目标："
 
 #: C/index-in.docbook:4632
 #, no-wrap
@@ -8193,18 +8201,24 @@ msgid ""
 "void drag_source_set(const Glib::RefPtr&lt;Gdk::ContentFormats&gt;&amp; targets,\n"
 "      Gdk::ModifierType start_button_mask, Gdk::DragAction actions);"
 msgstr ""
+"void drag_source_set(const Glib::RefPtr&lt;Gdk::ContentFormats&gt;&amp; targets,\n"
+"      Gdk::ModifierType start_button_mask, Gdk::DragAction actions);"
 
 #: C/index-in.docbook:4637
 msgid ""
 "<literal>targets</literal> is a <classname>Gdk::ContentFormats</classname> "
 "object."
 msgstr ""
+"<literal>targets</literal>是一个<classname>Gdk::ContentFormats</classname>对"
+"象。"
 
 #: C/index-in.docbook:4642
 msgid ""
 "<literal>start_button_mask</literal> is an ORed combination of values, which "
 "specify which modifier key or mouse button must be pressed to start the drag."
 msgstr ""
+"<literal>start_button_mask</literal>是一组值异或后的结果，用于指定按下哪个组"
+"合键或鼠标按键才能开始拖动。"
 
 #: C/index-in.docbook:4649
 msgid ""
@@ -8215,6 +8229,10 @@ msgid ""
 "<literal>copy</literal> to <literal>move</literal>, and this will be shown "
 "by a different cursor."
 msgstr ""
+"<literal>actions</literal>是一组值异或后的结果，用于指定可以对该源进行的拖放"
+"操作 - 例如复制、移动或链接。用户可以通过组合键选择动作，比如通过按下"
+"<keycap>Shift</keycap>键将动作从<literal>copy</literal>改变为<literal>move</"
+"literal>，这还会使光标显示不同的样式。"
 
 #: C/index-in.docbook:4660
 #, no-wrap
@@ -8222,40 +8240,43 @@ msgid ""
 "void drag_dest_set(const Glib::RefPtr&lt;Gdk::ContentFormats&gt;&amp; targets,\n"
 "    Gtk::DestDefaults flags, Gdk::DragAction actions);"
 msgstr ""
+"void drag_dest_set(const Glib::RefPtr&lt;Gdk::ContentFormats&gt;&amp; targets,\n"
+"    Gtk::DestDefaults flags, Gdk::DragAction actions);"
 
 #: C/index-in.docbook:4665
 msgid ""
 "<literal>flags</literal> is an ORed combination of values which indicates "
 "how the widget will respond visually to Drag and Drop items."
-msgstr ""
+msgstr "是一组值异或后的结果，用于表示部件在视觉上如何响应拖放项。"
 
 #: C/index-in.docbook:4671
 msgid ""
 "<literal>actions</literal> indicates the Drag and Drop actions which this "
 "destination can receive - see the description above."
 msgstr ""
+"<literal>actions</literal>指示此目的地可以接受的拖放动作 - 请参阅上面的描述。"
 
 #: C/index-in.docbook:4680
 msgid "<methodname>drag_source_add_text_targets()</methodname>"
-msgstr ""
+msgstr "<methodname>drag_source_add_text_targets()</methodname>"
 
 #: C/index-in.docbook:4681
 msgid "<methodname>drag_source_add_image_targets()</methodname>"
-msgstr ""
+msgstr "<methodname>drag_source_add_image_targets()</methodname>"
 
 #: C/index-in.docbook:4682
 msgid "<methodname>drag_dest_add_text_targets()</methodname>"
-msgstr ""
+msgstr "<methodname>drag_dest_add_text_targets()</methodname>"
 
 #: C/index-in.docbook:4683
 msgid "<methodname>drag_dest_add_image_targets()</methodname>"
-msgstr ""
+msgstr "<methodname>drag_dest_add_image_targets()</methodname>"
 
 #: C/index-in.docbook:4677
 msgid ""
 "There are several methods to add source formats and destination formats. "
 "Examples: <_:itemizedlist-1/>"
-msgstr ""
+msgstr "有些添加源格式和目的地格式的方法。例如：<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:4690
 msgid ""
@@ -8267,15 +8288,21 @@ msgid ""
 "to <methodname>drag_dest_set()</methodname> and "
 "<methodname>drag_source_set()</methodname>."
 msgstr ""
+"当一个放置目的地接受了拖动项，根据被选择的动作，将发出响应的信号。例如，用户"
+"可能按住<keycap>Shift</keycap>键指定进行<literal>move</literal>而不是"
+"<literal>copy</literal>。请注意，用户只能选择你在调用"
+"<methodname>drag_dest_set()</methodname>和<methodname>drag_source_set()</"
+"methodname>时所指定的动作。"
 
 #: C/index-in.docbook:4701 C/index-in.docbook:4822
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 #: C/index-in.docbook:4705
 msgid ""
 "<literal>drag_begin</literal>: Provides a <classname>Gdk::Drag</classname>."
 msgstr ""
+"<literal>drag_begin</literal>：提供一个<classname>Gdk::Drag</classname>。"
 
 #: C/index-in.docbook:4706
 msgid ""
@@ -8283,16 +8310,20 @@ msgid ""
 "classname>, and a <classname>Gtk::SelectionData</classname> object, in which "
 "you should put the requested data."
 msgstr ""
+"<literal>drag_data_get</literal>：提供一个<classname>Gdk::Drag</classname>和"
+"一个<classname>Gtk::SelectionData</classname>对象，你应该在其中放入所请求的数"
+"据。"
 
 #: C/index-in.docbook:4708
 msgid ""
 "<literal>drag_end</literal>: Provides a <classname>Gdk::Drag</classname>."
 msgstr ""
+"<literal>drag_end</literal>：提供一个<classname>Gdk::Drag</classname>。"
 
 #: C/index-in.docbook:4702
 msgid ""
 "The source widget will emit these signals, in this order: <_:itemizedlist-1/>"
-msgstr ""
+msgstr "源部件将按以下顺序发出这些信号：<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:4714
 msgid ""
@@ -8301,6 +8332,9 @@ msgid ""
 "of the <classname>Gdk::Drop</classname> to indicate which action will be "
 "accepted."
 msgstr ""
+"<literal>drag_motion</literal>：提供一个<classname>Gdk::Drop</classname>以及"
+"坐标。你可以调用<classname>Gdk::Drop</classname>的<methodname>status()</"
+"methodname>方法来指示要接受的动作。"
 
 #: C/index-in.docbook:4717
 msgid ""
@@ -8310,6 +8344,10 @@ msgid ""
 "widget, and then the <literal>drag_data_received</literal> signal in the "
 "destination widget."
 msgstr ""
+"<literal>drag_drop</literal>：提供一个<classname>Gdk::Drop</classname>以及坐"
+"标。你可以调用<methodname>drag_get_data()</methodname>，这将触发源部件的"
+"<literal>drag_data_get</literal>信号，并在之后触发目的地部件的"
+"<literal>drag_data_received</literal>信号。"
 
 #: C/index-in.docbook:4722
 msgid ""
@@ -8320,44 +8358,52 @@ msgid ""
 "<classname>Gdk::Drop</classname> to indicate whether the operation was "
 "successful."
 msgstr ""
+"<literal>drag_data_received</literal>：提供一个<classname>Gdk::Drop</"
+"classname>和一个包含要放置的数据的<methodname>Gtk::SelectionData</methodname>"
+"对象。你应该调用<classname>Gdk::Drop</classname>的<methodname>finish()</"
+"methodname>或<methodname>failed()</methodname>方法来指示操作是否成功。"
 
 #: C/index-in.docbook:4711
 msgid ""
 "The destination widget will emit these signals, in this order: <_:"
 "itemizedlist-1/>"
-msgstr ""
+msgstr "目的地部件将按以下顺序发出这些信号：<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:4736
 msgid "Move"
-msgstr ""
+msgstr "移动"
 
 #: C/index-in.docbook:4739
 msgid ""
 "<literal>drag_data_delete</literal>: Gives the source the opportunity to "
 "delete the original data if that's appropriate."
-msgstr ""
+msgstr "<literal>drag_data_delete</literal>：给源删除原始数据的合适时机。"
 
 #: C/index-in.docbook:4737
 msgid ""
 "During a <literal>move</literal>, the source widget will also emit this "
 "signal: <_:itemizedlist-1/>"
 msgstr ""
+"在<literal>move</literal>的过程中，源部件还将会发出以下信号：<_:"
+"itemizedlist-1/>"
 
 #: C/index-in.docbook:4754
 msgid ""
 "Here is a very simple example, demonstrating a drag and drop <literal>Copy</"
 "literal> operation:"
-msgstr ""
+msgstr "这是一个非常简单的示例，演示了拖放的<literal>Copy</literal>操作："
 
 #: C/index-in.docbook:4763
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/drag_and_drop\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/drag_and_drop\">源代码</ulink>"
 
 #: C/index-in.docbook:4765
 msgid "There is a more complex example in examples/others/dnd."
-msgstr ""
+msgstr "在examples/others/dnd中有一个更复杂的示例。"
 
 #: C/index-in.docbook:4774
 msgid "The Clipboard"
