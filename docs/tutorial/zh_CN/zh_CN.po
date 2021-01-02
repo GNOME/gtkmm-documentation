@@ -8407,7 +8407,7 @@ msgstr "在examples/others/dnd中有一个更复杂的示例。"
 
 #: C/index-in.docbook:4774
 msgid "The Clipboard"
-msgstr ""
+msgstr "剪切板(Clipboard)"
 
 #: C/index-in.docbook:4775
 msgid ""
@@ -8417,6 +8417,10 @@ msgid ""
 "instance, a drawing program would need special code to allow copy and paste "
 "within a view, or between documents."
 msgstr ""
+"<classname>Gtk::Entry</classname>和<classname>Gtk::TextView</classname>之类的"
+"部件提供了简单的文本复制粘贴功能，但如果你有自己的数据格式需要处理则需要为此"
+"编写特定的代码。例如，绘图程序需要编写特定的代码以支持在视图内或文档之间进行"
+"复制粘贴。"
 
 #: C/index-in.docbook:4781
 msgid ""
@@ -8424,6 +8428,8 @@ msgid ""
 "get_clipboard()</methodname> or <methodname>Gdk::Display::get_clipboard()</"
 "methodname>."
 msgstr ""
+"你可以使用<methodname>Gtk::Widget::get_clipboard()</methodname>或"
+"<methodname>Gdk::Display::get_clipboard()</methodname>获取剪切板实例。"
 
 #: C/index-in.docbook:4786
 msgid ""
@@ -8434,16 +8440,22 @@ msgid ""
 "Clipboard</classname> is ready, it will call these methods, providing the "
 "requested data."
 msgstr ""
+"你的应用程序不需要等待剪切板操作，特别是用户选择复制然后选择粘贴的期间。"
+"<classname>Gdk::Clipboard</classname>的多数方法使用<classname>sigc::slot</"
+"classname>，它们指定了回调函数。当<classname>Gdk::Clipboard</classname>准备就"
+"绪时，它将会调用这些回调函数，并向其提供所请求的数据。"
 
 #: C/index-in.docbook:4794
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGdk_1_1Clipboard."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGdk_1_1Clipboard."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:4797
 msgid "Formats"
-msgstr ""
+msgstr "格式"
 
 #: C/index-in.docbook:4798
 msgid ""
@@ -8451,6 +8463,8 @@ msgid ""
 "that data available in a variety of formats. <application>gtkmm</"
 "application> calls these data types <literal>format</literal>s."
 msgstr ""
+"不同的应用程序包含不同类型的数据，并且它们可能使用多种可用格式提供数据。"
+"<application>gtkmm</application>称这些数据类型为<literal>format</literal>。"
 
 #: C/index-in.docbook:4802
 msgid ""
@@ -8462,6 +8476,11 @@ msgid ""
 "the formats that the other supplies then you will be able to copy data from "
 "one to the other."
 msgstr ""
+"例如，<application>gedit</application>可以提供和接收<literal>text/plain</"
+"literal>MIME类型，所以你可以从任何提供该格式的应用程序中将复制粘贴给"
+"<application>gedit</application>。或者两个不同的图像编辑程序可能会提供和接收"
+"各种图像格式。只要其中一个应用程序可以接收其他应用程序提供的一种格式，那么你"
+"就可以将数据从一个复制到另一个。"
 
 #: C/index-in.docbook:4810
 msgid ""
@@ -8470,6 +8489,8 @@ msgid ""
 "XML format for the clipboard data. However this would probably not be "
 "appropriate for binary data such as images."
 msgstr ""
+"剪切板数据可以使用多种二进制格式。本章和示例程序假定数据是8位文本。这将使我们"
+"可以对剪切板数据使用XML格式。但这可能不适合二进制数据（例如图像）。"
 
 #: C/index-in.docbook:4817
 msgid ""
@@ -8477,12 +8498,16 @@ msgid ""
 "same mechanism. You should probably use the same data formats for both "
 "Clipboard and Drag and Drop operations."
 msgstr ""
+"<link linkend=\"chapter-draganddrop\">拖放</link>API使用一样的机制。剪切板和"
+"拖放操作都应该使用一样的数据格式。"
 
 #: C/index-in.docbook:4823
 msgid ""
 "When the user asks to copy some data, you should copy the data to the "
 "<classname>Clipboard</classname>. For instance,"
 msgstr ""
+"当用户要复制某些数据的时候，你应该将数据复制到<classname>Clipboard</"
+"classname>。例如："
 
 #: C/index-in.docbook:4827
 #, no-wrap
@@ -8492,10 +8517,14 @@ msgid ""
 "  get_clipboard()-&gt;set_text(\"example_custom_target\");\n"
 "}"
 msgstr ""
+"void ExampleWindow::on_button_copy()\n"
+"{\n"
+"  get_clipboard()-&gt;set_text(\"example_custom_target\");\n"
+"}"
 
 #: C/index-in.docbook:4835
 msgid "Paste"
-msgstr ""
+msgstr "粘贴"
 
 #: C/index-in.docbook:4836
 msgid ""
@@ -8503,6 +8532,8 @@ msgid ""
 "you should request a specific format and provide a callback method which "
 "will be called with the actual data. For instance:"
 msgstr ""
+"当用户要从<classname>Clipboard</classname>中粘贴数据时，你应该请求一种特定的"
+"格式并提供一个回调函数，该回调函数将与实际数据一并被调用。例如："
 
 #: C/index-in.docbook:4841
 #, no-wrap
@@ -8513,10 +8544,15 @@ msgid ""
 "              &amp;ExampleWindow::on_clipboard_received));\n"
 "}"
 msgstr ""
+"void ExampleWindow::on_button_paste()\n"
+"{\n"
+"  get_clipboard()-&gt;read_text_async(sigc::mem_fun(*this,\n"
+"              &amp;ExampleWindow::on_clipboard_received));\n"
+"}"
 
 #: C/index-in.docbook:4847
 msgid "Here is an example callback method:"
-msgstr ""
+msgstr "这是一个回调函数的示例："
 
 #: C/index-in.docbook:4849
 #, no-wrap
@@ -8527,10 +8563,15 @@ msgid ""
 "  //Do something with the pasted data.\n"
 "}"
 msgstr ""
+"void ExampleWindow::on_clipboard_received(Glib::RefPtr&lt;Gio::AsyncResult&gt;&amp; result)\n"
+"{\n"
+"  auto text = get_clipboard()-&gt;read_text_finish(result);\n"
+"  //Do something with the pasted data.\n"
+"}"
 
 #: C/index-in.docbook:4856
 msgid "Discovering the available formats"
-msgstr ""
+msgstr "发现可用格式"
 
 #: C/index-in.docbook:4857
 msgid ""
@@ -8540,10 +8581,13 @@ msgid ""
 "ContentFormats</classname> method to find out if a format that your "
 "application supports is available."
 msgstr ""
+"要找出当前<classname>Clipboard</classname>可以用于粘贴的格式，请调用"
+"<methodname>get_formats()</methodname>方法。然后调用<classname>Gdk::"
+"ContentFormats</classname>方法来确定你的应用程序所支持的格式是否可用。"
 
 #: C/index-in.docbook:4869 C/index-in.docbook:5260
 msgid "Simple"
-msgstr ""
+msgstr "简单"
 
 #: C/index-in.docbook:4870
 msgid ""
@@ -8552,24 +8596,29 @@ msgid ""
 "does not identify the <classname>Clipboard</classname> data as being of a "
 "particular type."
 msgstr ""
+"这个示例允许使用标准文本格式复制粘贴应用程序指定的数据。尽管着很简单，但是它"
+"并不够理想，因为他不能将<classname>Clipboard</classname>的数据标识为特定的类"
+"型。"
 
 #: C/index-in.docbook:4878
 msgid "Clipboard - Simple"
-msgstr ""
+msgstr "剪切板 - 简单"
 
 #: C/index-in.docbook:4884
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/clipboard/simple/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/clipboard/simple/\">源代码</ulink>"
 
 #: C/index-in.docbook:4888
 msgid "Ideal"
-msgstr ""
+msgstr "理想"
 
 #: C/index-in.docbook:4891
 msgid "Defines a custom clipboard target, though the format is still text."
-msgstr ""
+msgstr "定义了一个自定义剪切板目标，尽管格式依旧是文本。"
 
 #: C/index-in.docbook:4892
 msgid ""
@@ -8577,20 +8626,24 @@ msgid ""
 "signal and disables the Paste button if it can't use anything on the "
 "clipboard."
 msgstr ""
+"它使用<methodname>Gdk::ContentFormats::signal_changed()</methodname>信号并在"
+"剪切板不可用的时候禁用粘贴按钮。"
 
 #: C/index-in.docbook:4889
 msgid "This is like the simple example, but it <_:orderedlist-1/>"
-msgstr ""
+msgstr "这个与简单示例类型，但是它<_:orderedlist-1/>"
 
 #: C/index-in.docbook:4898
 msgid "Clipboard - Ideal"
-msgstr ""
+msgstr "剪切板 - 理想"
 
 #: C/index-in.docbook:4904
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/clipboard/ideal/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/clipboard/ideal/\">源代码</ulink>"
 
 #: C/index-in.docbook:4914
 msgid "Printing"
