@@ -9182,7 +9182,7 @@ msgstr ""
 
 #: C/index-in.docbook:5285
 msgid "Recently Used Documents"
-msgstr ""
+msgstr "最近使用过的文件"
 
 #: C/index-in.docbook:5287
 msgid ""
@@ -9190,6 +9190,8 @@ msgid ""
 "used documents. This functionality is implemented in the <classname>Gtk::"
 "RecentManager</classname> class."
 msgstr ""
+"<application>gtkmm</application>提供了一种管理最近使用文件的简便方法。该功能"
+"在<classname>Gtk::RecentManager</classname>类中实现。"
 
 #: C/index-in.docbook:5291
 msgid ""
@@ -9199,10 +9201,13 @@ msgid ""
 "application registered it, whether it's private to the registering "
 "application, and several other things."
 msgstr ""
+"最近使用文件列表中的每一项都由其URI进行标识，并可以具有相关的元数据。元数据可"
+"以用于指定如何显示文件、如何描述文件、及其它的MIME类型、哪个应用程序注册了"
+"它、对于注册的应用程序是不是私有的等。"
 
 #: C/index-in.docbook:5299
 msgid "RecentManager"
-msgstr ""
+msgstr "最近管理器(RecentManager)"
 
 #: C/index-in.docbook:5300
 msgid ""
@@ -9211,6 +9216,9 @@ msgid ""
 "or look up recently used files. There is one list of recently used files per "
 "user."
 msgstr ""
+"<classname>RecentManager</classname>充当最近使用文件的数据库。你可以使用此类"
+"注册新文件、从列表中删除文件、查找最近使用文件。每个用户都拥有一个最近使用的"
+"文件列表。"
 
 #: C/index-in.docbook:5306
 msgid ""
@@ -9219,16 +9227,20 @@ msgid ""
 "default <classname>RecentManager</classname> with <methodname>get_default()</"
 "methodname>."
 msgstr ""
+"你可以创建一个新的<classname>RecentManager</classname>，但你可能只想用默认的"
+"那个。你可以通过<methodname>get_default()</methodname>获取默认"
+"<classname>RecentManager</classname>的引用。"
 
 #: C/index-in.docbook:5313
 msgid "Adding Items to the List of Recent Files"
-msgstr ""
+msgstr "将项目添加到最近文件列表"
 
 #: C/index-in.docbook:5314
 msgid ""
 "To add a new file to the list of recent documents, in the simplest case, you "
 "only need to provide the URI. For example:"
 msgstr ""
+"在最简单的情况下，要添加项目到最近文件列表只需要提供一个URI即可。例如："
 
 #: C/index-in.docbook:5318
 #, no-wrap
@@ -9236,6 +9248,8 @@ msgid ""
 "auto recent_manager = Gtk::RecentManager::get_default();\n"
 "recent_manager-&gt;add_item(uri);"
 msgstr ""
+"auto recent_manager = Gtk::RecentManager::get_default();\n"
+"recent_manager-&gt;add_item(uri);"
 
 #: C/index-in.docbook:5320
 msgid ""
@@ -9244,6 +9258,9 @@ msgid ""
 "<methodname>add_item()</methodname>. The metadata that can be set on a "
 "particular file item is as follows:"
 msgstr ""
+"如果你想要使用元数据注册一个文件，你可以将<classname>RecentManager::Data</"
+"classname>参数传递给<methodname>add_item()</methodname>。可以在特定的文件项上"
+"设置的元数据如下所示："
 
 #: C/index-in.docbook:5328
 msgid ""
@@ -9251,24 +9268,26 @@ msgid ""
 "resource. This string may contain the \"f\" and \"u\" escape characters "
 "which will be expanded to the resource file path and URI respectively"
 msgstr ""
+"<varname>app_exec</varname>：用于启动此资源的命令行。此字符串可以包含\"f\"和"
+"\"u\"转义字符，它们将分别扩展为资源文件路径和URI"
 
 #: C/index-in.docbook:5334
 msgid ""
 "<varname>app_name</varname>: The name of the application that registered the "
 "resource"
-msgstr ""
+msgstr "<varname>app_name</varname>：此资源注册的应用程序名"
 
 #: C/index-in.docbook:5338
 msgid ""
 "<varname>description</varname>: A short description of the resource as a "
 "UTF-8 encoded string"
-msgstr ""
+msgstr "<varname>description</varname>：资源的简单描述（UTF-8编码字符串）"
 
 #: C/index-in.docbook:5342
 msgid ""
 "<varname>display_name</varname>: The name of the resource to be used for "
 "display as a UTF-8 encoded string"
-msgstr ""
+msgstr "<varname>display_name</varname>：用于显示的资源名（UTF-8编码字符串）"
 
 #: C/index-in.docbook:5346
 msgid ""
@@ -9277,26 +9296,29 @@ msgid ""
 "resource. They can be thought of as 'categories' (such as \"email\", "
 "\"graphics\", etc) or tags for the resource."
 msgstr ""
+"<varname>groups</varname>：与该项相关联的组列表。组本质上是与特定资源相关联的"
+"任意字符串。可以将它们视为资源的类别（例如：电子邮件、图形等）或标签"
 
 #: C/index-in.docbook:5352
 msgid ""
 "<varname>is_private</varname>: Whether this resource should be visible only "
 "to applications that have registered it or not"
 msgstr ""
+"<varname>is_private</varname>：此资源是否仅对已注册该资源的应用程序可见"
 
 #: C/index-in.docbook:5356
 msgid "<varname>mime_type</varname>: The MIME type of the resource"
-msgstr ""
+msgstr "<varname>mime_type</varname>：此资源的MIME类型"
 
 #: C/index-in.docbook:5359
 msgid ""
 "In addition to adding items to the list, you can also look up items from the "
 "list and modify or remove items."
-msgstr ""
+msgstr "除了向列表中添加项目以外，你还可以从列表项中删除、修改、查找项目。"
 
 #: C/index-in.docbook:5365
 msgid "Looking up Items in the List of Recent Files"
-msgstr ""
+msgstr "在最近文件列表中查找项目"
 
 #: C/index-in.docbook:5366
 msgid ""
@@ -9307,6 +9329,11 @@ msgid ""
 "in the list of recent files, <methodname>lookup_item()</methodname> throws a "
 "<classname>RecentManagerError</classname> exception. For example:"
 msgstr ""
+"<classname>RecentManager</classname>提供了几个函数用以查找最近使用过的文件。"
+"你可以使用<methodname>lookup_item()</methodname>函数通过URI来查找特定项目，该"
+"函数将返回一个<classname>RecentInfo</classname>类对象。如果指定的URI于最近文"
+"件列表中不存在，则<methodname>lookup_item()</methodname>将抛出一个"
+"<classname>RecentManagerError</classname>异常。例如："
 
 #: C/index-in.docbook:5375
 #, no-wrap
@@ -9325,6 +9352,19 @@ msgid ""
 "  // item was found\n"
 "}"
 msgstr ""
+"Glib::RefPtr&lt;Gtk::RecentInfo&gt; info;\n"
+"try\n"
+"{\n"
+"  info = recent_manager-&gt;lookup_item(uri);\n"
+"}\n"
+"catch(const Gtk::RecentManagerError&amp; ex)\n"
+"{\n"
+"  std::cerr &lt;&lt; \"RecentManagerError: \" &lt;&lt; ex.what() &lt;&lt; std::endl;\n"
+"}\n"
+"if (info)\n"
+"{\n"
+"  // item was found\n"
+"}"
 
 #: C/index-in.docbook:5388
 msgid ""
@@ -9333,6 +9373,9 @@ msgid ""
 "use this object to look up any of the properties listed <link linkend=\"list-"
 "file-metadata\">above</link>."
 msgstr ""
+"本质上，<classname>RecentInfo</classname>是个包含了一个最近使用文件的所有元数"
+"据的对象。你可以使用该对象查找<link linkend=\"list-file-metadata\">这里</"
+"link>所列出的任何属性。"
 
 #: C/index-in.docbook:5394
 msgid ""
@@ -9343,11 +9386,15 @@ msgid ""
 "The following code demonstrates how you might get a list of recently used "
 "files:"
 msgstr ""
+"如果你不想要查找一个特定的URI，而是想获取整个最近使用的项目列表，"
+"<classname>RecentManager</classname>为此提供了<methodname>get_items()</"
+"methodname>函数。这个函数返回值是一个<classname>std::vector</classname>，其包"
+"含了所有最近使用的文件。以下代码演示了你该如何获取最近使用文件列表："
 
 #: C/index-in.docbook:5402
 #, no-wrap
 msgid "auto info_list = recent_manager-&gt;get_items();"
-msgstr ""
+msgstr "auto info_list = recent_manager-&gt;get_items();"
 
 #: C/index-in.docbook:5403
 msgid ""
@@ -9355,10 +9402,12 @@ msgid ""
 "<methodname>Gtk::Settings::property_gtk_recent_files_max_age()</methodname>. "
 "Default value: 30 days."
 msgstr ""
+"可以使用<methodname>Gtk::Settings::property_gtk_recent_files_max_age()</"
+"methodname>设置最近使用文件列表中项目的最长使用期限。默认时长是：30天。"
 
 #: C/index-in.docbook:5410
 msgid "Modifying the List of Recent Files"
-msgstr ""
+msgstr "修改最近使用文件列表"
 
 #: C/index-in.docbook:5411
 msgid ""
@@ -9368,6 +9417,9 @@ msgid ""
 "location. You can update an item's location by using "
 "<methodname>move_item()</methodname>."
 msgstr ""
+"有时候你会需要修改最近使用文件列表。例如，当一个文件被移动或重命名，你需要更"
+"新该文件在最近使用文件列表中的位置，以使其不会指向错误的位置。你可以使用"
+"<methodname>move_item()</methodname>来更新项目的位置。"
 
 #: C/index-in.docbook:5418
 msgid ""
@@ -9376,6 +9428,9 @@ msgid ""
 "accomplished with <methodname>remove_item()</methodname>, the latter with "
 "<methodname>purge_items()</methodname>."
 msgstr ""
+"除了更改文件的URI以外，你还可以从列表中删除项目或是一次性清除所有项目。前者使"
+"用<methodname>remove_item()</methodname>，后者使用<methodname>purge_items()</"
+"methodname>。"
 
 #: C/index-in.docbook:5425
 msgid ""
@@ -9384,6 +9439,9 @@ msgid ""
 "methodname> have no effect on the actual files that are referred to by the "
 "URIs, they only modify the list of recent files."
 msgstr ""
+"<methodname>move_item()</methodname>、<methodname>remove_item()</methodname>"
+"和<methodname>purge_items()</methodname>并不影响URI所引用的真实文件，它们只是"
+"对最近文件列表进行修改。"
 
 #: C/index-in.docbook:5438
 msgid ""
@@ -9394,6 +9452,11 @@ msgid ""
 "<classname>FileChooserDialog</classname>, and <classname>FileChooserNative</"
 "classname>."
 msgstr ""
+"<classname>FileChooser</classname>是一个可以由用于显示文件列表的部件实现的接"
+"口。<application>gtkmm</application>提供了三种用于选择最近文件或其他文件的内"
+"置实现：<classname>FileChooserWidget</classname>、"
+"<classname>FileChooserDialog</classname>、<classname>FileChooserNative</"
+"classname>。"
 
 #: C/index-in.docbook:5447
 msgid ""
@@ -9402,10 +9465,14 @@ msgid ""
 "classname> is the basic building block for <classname>FileChooserDialog</"
 "classname>, but you can embed it into your user interface if you want to."
 msgstr ""
+"<classname>FileChooserWidget</classname>是一个用于显示最近使用文件列表或其他"
+"文件的简单部件。<classname>FileChooserWidget</classname>是"
+"<classname>FileChooserDialog</classname>的基本构建块，但是你根据需要可以将其"
+"嵌入到用户界面中。"
 
 #: C/index-in.docbook:5455
 msgid "Simple FileChooserDialog example"
-msgstr ""
+msgstr "简单的文件选择对话框示例"
 
 #: C/index-in.docbook:5456
 msgid ""
@@ -9416,6 +9483,11 @@ msgid ""
 "of files. If you select <guimenuitem>Recent</guimenuitem> in the sidebar, "
 "the list of recently used files is shown."
 msgstr ""
+"下面显示的是一个如何在程序中使用<classname>FileChooserDialog</classname>类的"
+"简单示例。这个简单示例程序有一个带有<guimenuitem>File Chooser Dialog</"
+"guimenuitem>菜单项的菜单栏。选择此菜单项时，将弹出一个显示文件列表的对话框。"
+"如果你选中侧边栏的<guimenuitem>Recent</guimenuitem>，则对话框将显示最近使用文"
+"件列表。"
 
 #: C/index-in.docbook:5466
 msgid ""
@@ -9423,6 +9495,8 @@ msgid ""
 "framework, the dialog may be empty at first. Otherwise it should show the "
 "list of recently used documents registered by other applications."
 msgstr ""
+"如果这是你第一次使用使用了最近文件框架的应用程序，那么对话框最初可能是空的。"
+"否则它应该显示其他应用程序注册的最近使用文件列表。"
 
 #: C/index-in.docbook:5473
 msgid ""
@@ -9430,12 +9504,16 @@ msgid ""
 "and the <guimenuitem>Recent</guimenuitem> sidebar item, you should see "
 "something similar to the following window."
 msgstr ""
+"选择<guimenuitem>File Chooser Dialog</guimenuitem>菜单项和"
+"<guimenuitem>Recent</guimenuitem>侧边项后，你将看到与下方窗口类似的内容。"
 
 #: C/index-in.docbook:5481
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/recent_files\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/recent_files\">源代码</ulink>"
 
 #: C/index-in.docbook:5482
 msgid ""
@@ -9444,10 +9522,13 @@ msgid ""
 "\"chapter-menus-and-toolbars\"/> for more information). It then adds the "
 "menu and the toolbar to the window."
 msgstr ""
+"<classname>ExampleWindow</classname>的构造函数使用<classname>Builder</"
+"classname>创建菜单和工具栏（更多有关信息请参阅<xref linkend=\"chapter-menus-"
+"and-toolbars\"/>）。然后将菜单和工具栏添加到窗口中。"
 
 #: C/index-in.docbook:5490
 msgid "Filtering Files"
-msgstr ""
+msgstr "筛选文件"
 
 #: C/index-in.docbook:5491
 msgid ""
@@ -9458,6 +9539,11 @@ msgid ""
 "files by their name (<methodname>add_pattern()</methodname>), or their mime "
 "type (<methodname>add_mime_type()</methodname>)."
 msgstr ""
+"对于任意<classname>FileChooser</classname>类，如果你不想显示文件列表中的所有"
+"项目，你可以筛选列表以仅显示所需的项目。你可以使用<classname>FileFilter</"
+"classname>帮助你对列表进行筛选。这个类允许你按文件名"
+"（<methodname>add_pattern()</methodname>）或MIME类型"
+"（<methodname>add_mime_type()</methodname>）筛选文件。"
 
 #: C/index-in.docbook:5500
 msgid ""
@@ -9465,6 +9551,9 @@ msgid ""
 "you can apply a filter to a chooser widget with the <methodname>FileChooser::"
 "add_filter()</methodname> function."
 msgstr ""
+"创建并设置筛选器以使其只匹配你所需项目之后，你可以使用"
+"<methodname>FileChooser::add_filter()</methodname>函数将筛选器应用于你所选的"
+"部件。"
 
 #: C/index-in.docbook:5510
 msgid "Keyboard Events"
