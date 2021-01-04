@@ -42,9 +42,9 @@ msgid ""
 "gtkmm's Source Code\".</contrib> <contrib>Chapter on \"Recent Files\".</"
 "contrib>"
 msgstr ""
-"<firstname>Jonathon</firstname> <surname>Jongsma</surname><contrib>编写使用"
-"Cairo绘图章节。</contrib><contrib>编写使用gtkmm源代码章节。</"
-"contrib><contrib>编写\"最近的文件\"。</contrib>"
+"<firstname>Jonathon</firstname> <surname>Jongsma</surname><contrib>编写使用开"
+"罗绘图章节。</contrib><contrib>编写使用gtkmm源代码章节。</contrib><contrib>编"
+"写\"最近的文件\"。</contrib>"
 
 #: C/index-in.docbook:55
 msgid ""
@@ -6114,10 +6114,10 @@ msgid ""
 "the action. <classname>Gtk::Builder</classname> can create menus and "
 "toolbars."
 msgstr ""
-"菜单和工具栏有特定的API，但是通常将一并处理它们，创建在菜单和工具栏都可以引用"
-"的<classname>Gio::SimpleAction</classname>。这样你可以响应动作被激活而不需要"
-"分别响应菜单和工具栏。你可以通过动作启用或者禁用菜单和工具栏项。"
-"<classname>Gtk::Builder</classname>可以创建菜单和工具栏。"
+"菜单和工具栏都有特有的API，但是通常你应该创建在菜单和工具栏都可以引用的"
+"<classname>Gio::SimpleAction</classname>以便一并处理它们。这样你可以响应动作"
+"被激活而不需要分别响应菜单和工具栏。你可以通过动作启用或者禁用菜单和工具栏"
+"项。<classname>Gtk::Builder</classname>可以创建菜单和工具栏。"
 
 #: C/index-in.docbook:3344
 msgid ""
@@ -7237,9 +7237,9 @@ msgid ""
 "API. With <application>gtkmm</application>, you may use the <ulink url="
 "\"http://www.cairographics.org/cairomm/\">cairomm</ulink> C++ API for cairo."
 msgstr ""
-"GTK使用<ulink url=\"http://cairographics.org\">Cairo</ulink>绘图API。而在"
+"GTK使用<ulink url=\"http://cairographics.org\">开罗</ulink>绘图API。而在"
 "<application>gtkmm</application>中你可以使用由<ulink url=\"http://www."
-"cairographics.org/cairomm/\">cairomm</ulink>提供的Cairo C++ API。"
+"cairographics.org/cairomm/\">cairomm</ulink>提供的开罗C++ API。"
 
 #: C/index-in.docbook:4015
 msgid ""
@@ -7251,14 +7251,14 @@ msgid ""
 "complex transformations, do compositing of images, and render antialiased "
 "text."
 msgstr ""
-"你可以使用Cairo绘制非常复杂的形状，但你只有一些很基本的方法可用。Cairo提供了"
-"绘制直线、曲线、圆弧（包括圆）的方法。你可以通过对这些图形进行组合从而创建更"
-"为复杂的形状和路径，然后用纯色、渐变、模式等进行填充。除此之外，Cairo还可以进"
-"行复杂的转换、合成图像和渲染抗锯齿文本等。"
+"你可以使用开罗绘制非常复杂的形状，但你只有一些很基本的方法可用。开罗提供了绘"
+"制直线、曲线、圆弧（包括圆）的方法。你可以通过对这些图形进行组合从而创建更为"
+"复杂的形状和路径，然后用纯色、渐变、模式等进行填充。除此之外，开罗还可以进行"
+"复杂的转换、合成图像和渲染抗锯齿文本等。"
 
 #: C/index-in.docbook:4025
 msgid "Cairo and Pango"
-msgstr "Cairo和Pango"
+msgstr "开罗和Pango"
 
 #: C/index-in.docbook:4026
 msgid ""
@@ -7267,9 +7267,9 @@ msgid ""
 "rendering such as wrapping or ellipsizing text. Drawing text with Cairo "
 "should only be done if the text is part of a graphic."
 msgstr ""
-"虽然Cairo可以用于渲染文本，但不意味着它能替代Pango。如果你需要进行更高级的文"
-"本渲染（例如环绕和省略文本）则Pango会是更好的选择。只有当文本是图形的一部分的"
-"时候才应该使用Cairo绘制文本。"
+"虽然开罗可以用于渲染文本，但不意味着它能替代Pango。如果你需要进行更高级的文本"
+"渲染（例如环绕和省略文本）则Pango会是更好的选择。只有当文本是图形的一部分的时"
+"候才应该使用开罗绘制文本。"
 
 #: C/index-in.docbook:4031
 msgid ""
@@ -7278,20 +7278,20 @@ msgid ""
 "and then present a simple application that uses Cairo to draw a custom clock "
 "widget."
 msgstr ""
-"在本教程的这一部分中，我们将介绍Cairo的基本绘图模型，详细描述每个基本绘制元素"
-"（包括示例），然后介绍一个使用Cairo绘制自定义时钟部件的简单应用程序。"
+"在本教程的这一部分中，我们将介绍开罗的基本绘图模型，详细描述每个基本绘制元素"
+"（包括示例），然后介绍一个使用开罗绘制自定义时钟部件的简单应用程序。"
 
 #: C/index-in.docbook:4038
 msgid "The Cairo Drawing Model"
-msgstr "Cairo绘制模型"
+msgstr "开罗绘制模型"
 
 #: C/index-in.docbook:4039
 msgid ""
 "The basic concept of drawing in Cairo involves defining 'invisible' paths "
 "and then stroking or filling them to make them visible."
 msgstr ""
-"Cairo的基本概念包括定义'不可见'路径然后描绘(stroking)或者填充(filling)它们使"
-"其可见。"
+"开罗的基本概念包括定义'不可见'路径然后描绘(stroking)或者填充(filling)它们使其"
+"可见。"
 
 #: C/index-in.docbook:4043
 msgid ""
@@ -7312,7 +7312,7 @@ msgid ""
 "between <classname>Gdk::CairoContext</classname> and <classname>Cairo::"
 "Context</classname>.)"
 msgstr ""
-"要在<application>gtkmm</application>中使用Cairo进行绘制，必须先获取"
+"要在<application>gtkmm</application>中使用开罗进行绘制，必须先获取"
 "<classname>Cairo::Context</classname>对象。这个类保存了所有描述如何进行绘制的"
 "图形状态参数。状态参数包含了诸如线宽、颜色、要绘制的表面和许多其他内容的信"
 "息。这允许实际上的绘图函数只需要使用较少的参数从而简化接口。通常你使用"
@@ -7660,7 +7660,7 @@ msgid ""
 "lines and other things. For more information, see the Cairo API "
 "documentation."
 msgstr ""
-"你还可以自定义其他内容，比如创建虚线等。更多有关信息请参阅Cairo API文档。"
+"你还可以自定义其他内容，比如创建虚线等。更多有关信息请参阅开罗API文档。"
 
 #: C/index-in.docbook:4264
 msgid "Drawing thin lines"
@@ -7690,7 +7690,8 @@ msgid ""
 "url=\"http://cairographics.org/FAQ/#sharp_lines\">Cairo FAQ</ulink>."
 msgstr ""
 "解决问题的诀窍是将像素放于要绘制的线条的中间，从而确保获得所需的结果。请参阅"
-"<ulink url=\"http://cairographics.org/FAQ/#sharp_lines\">Cairo FAQ</ulink>。"
+"<ulink url=\"http://cairographics.org/FAQ/#sharp_lines\">开罗常见问题</"
+"ulink>。"
 
 #: C/index-in.docbook:4282
 msgid "Drawing Area - Thin Lines"
@@ -7717,7 +7718,7 @@ msgid ""
 "a destination point as well as coordinates for two 'control' points. This is "
 "best explained using an example, so let's dive in."
 msgstr ""
-"除了绘制直线以外，Cairo还允许你用<methodname>Cairo::Context::curve_to()</"
+"除了绘制直线以外，开罗还允许你用<methodname>Cairo::Context::curve_to()</"
 "methodname>和<methodname>Cairo::Context::rel_curve_to()</methodname>函数轻松"
 "的绘制曲线（从技术上而言是三次贝塞尔曲线）。这些函数需要一个目标点的坐标和两"
 "个'控制'点的坐标。这最好用一个示例来解释，所以让我们开始吧。"
@@ -7726,7 +7727,7 @@ msgstr ""
 msgid ""
 "This simple application draws a curve with Cairo and displays the control "
 "points for each end of the curve."
-msgstr "这个简单的示例程序使用Cairo绘制了一条曲线并显示了曲线两端的控制点。"
+msgstr "这个简单的示例程序使用开罗绘制了一条曲线并显示了曲线两端的控制点。"
 
 #: C/index-in.docbook:4316
 msgid ""
@@ -7800,7 +7801,7 @@ msgid ""
 "transformation matrix, angles increase in a clockwise direction. (Remember "
 "that the positive Y axis points downwards.)"
 msgstr ""
-"在Cairo中，画圆弧、圆、椭圆使用的是同一个函数：<methodname>Cairo::Context::"
+"在开罗中，画圆弧、圆、椭圆使用的是同一个函数：<methodname>Cairo::Context::"
 "arc()</methodname>。这个函数有五个参数。前两个参数是圆弧中心点的坐标，第三个"
 "参数是圆弧的半径，最后两个参数是圆弧的起点和终点。所有的角度都使用弧度制，所"
 "以画圆和画一个弧度为0到2*M_PI的圆弧是一样的。角度0沿着X轴的正方向（对于用户空"
@@ -7897,7 +7898,7 @@ msgstr ""
 "<methodname>line_to()</methodname>手工绘制一条回到起点的线条会有很大的不同。"
 "如果你使用<methodname>close_path()</methodname>，则这些线将会很好的连接到一"
 "起。如果你改用<methodname>line_to()</methodname>，那么这些线将在同一个点结束"
-"但是Cairo不会对此做任何特殊的连接。"
+"但是开罗不会对此做任何特殊的连接。"
 
 #: C/index-in.docbook:4424
 msgid "Drawing counter-clockwise"
@@ -8066,7 +8067,7 @@ msgstr ""
 
 #: C/index-in.docbook:4547
 msgid "Example Application: Creating a Clock with Cairo"
-msgstr "示例程序：使用Cairo创建时钟"
+msgstr "示例程序：使用开罗创建时钟"
 
 #: C/index-in.docbook:4548
 msgid ""
@@ -8076,7 +8077,7 @@ msgid ""
 "classname> widget. The clock has a second hand, a minute hand, and an hour "
 "hand, and updates itself every second."
 msgstr ""
-"既然我们已经将使用Cairo画图的基础知识介绍完了，那么现在让我们尝试将所有的内容"
+"既然我们已经将使用开罗画图的基础知识介绍完了，那么现在让我们尝试将所有的内容"
 "放在一起，创建一个可以执行某些操作的简单应用程序。以下示例使用开罗创建一个自"
 "定义的<classname>Clock</classname>部件。这个时钟有秒针、分针、时针，并且每一"
 "秒更新一次。"
@@ -8658,7 +8659,7 @@ msgid ""
 "printer-specific drivers are used."
 msgstr ""
 "在应用程序级开发，<application>gtkmm</application>的打印API提供了跨应用程序兼"
-"容的对话框，并允许使用Cairo通用绘制API和Pango驱动的文本渲染。在此通用API实现"
+"容的对话框，并允许使用开罗通用绘制API和Pango驱动的文本渲染。在此通用API实现"
 "中，使用了特定平台的后端和特定打印机的驱动。"
 
 #: C/index-in.docbook:4922
@@ -8849,7 +8850,7 @@ msgid ""
 "default measurement unit is device pixels. To select other units, use the "
 "<methodname>PrintOperation::set_unit()</methodname> method."
 msgstr ""
-"在<literal>draw_page</literal>处理程序中，Cairo坐标系会自动旋转到当前页的方"
+"在<literal>draw_page</literal>处理程序中，开罗坐标系会自动旋转到当前页的方"
 "向。它通常在打印机的页边距之内，不过你可以使用<methodname>PrintOperation::"
 "set_use_full_page()</methodname>方法来更改它。默认的度量单位是设备像素。要选"
 "择其他单位请使用<methodname>PrintOperation::set_unit()</methodname>方法。"
@@ -9790,11 +9791,11 @@ msgstr ""
 
 #: C/index-in.docbook:5655
 msgid "Timeouts, I/O and Idle Functions"
-msgstr ""
+msgstr "超时，I/O和空闲函数"
 
 #: C/index-in.docbook:5658
 msgid "Timeouts"
-msgstr ""
+msgstr "超时"
 
 #: C/index-in.docbook:5660
 msgid ""
@@ -9803,6 +9804,8 @@ msgid ""
 "following methods you can create a timeout method that will be called every "
 "few milliseconds."
 msgstr ""
+"你可能想知道如何使<application>gtkmm</application>在空闲的时候做一些有用的工"
+"作。幸运的是你有几种选择。你可以创建一个每几毫秒就调用的超时方法。"
 
 #: C/index-in.docbook:5667
 #, no-wrap
@@ -9811,6 +9814,9 @@ msgid ""
 "sigc::connection Glib::SignalTimeout::connect(const sigc::slot&lt;bool()&gt;&amp; slot,\n"
 "                                      unsigned int interval, int priority = Glib::PRIORITY_DEFAULT);\n"
 msgstr ""
+"\n"
+"sigc::connection Glib::SignalTimeout::connect(const sigc::slot&lt;bool()&gt;&amp; slot,\n"
+"                                      unsigned int interval, int priority = Glib::PRIORITY_DEFAULT);\n"
 
 #: C/index-in.docbook:5673
 msgid ""
@@ -9820,6 +9826,10 @@ msgid ""
 "classname> object that can be used to deactivate the connection using its "
 "<methodname>disconnect()</methodname> method:"
 msgstr ""
+"第一个参数是超时时你希望被调用的<classname>slot</classname>。第二个参数是调用"
+"该方法的时间间隔（多少毫秒）。你将收到一个<classname>sigc::connection</"
+"classname>对象，可以在该对象上调用<methodname>disconnect()</methodname>方法断"
+"开连接。"
 
 #: C/index-in.docbook:5683
 #, no-wrap
@@ -9827,6 +9837,8 @@ msgid ""
 "\n"
 "my_connection.disconnect();\n"
 msgstr ""
+"\n"
+"my_connection.disconnect();\n"
 
 #: C/index-in.docbook:5695
 #, no-wrap
@@ -9834,6 +9846,8 @@ msgid ""
 "\n"
 "bool MyCallback() { std::cout &lt;&lt; \"Hello World!\\n\" &lt;&lt; std::endl; return true; }\n"
 msgstr ""
+"\n"
+"bool MyCallback() { std::cout &lt;&lt; \"Hello World!\\n\" &lt;&lt; std::endl; return true; }\n"
 
 #: C/index-in.docbook:5688
 msgid ""
@@ -9843,6 +9857,10 @@ msgid ""
 "<literal>bool</literal>. A definition of a sample method might look like "
 "this: <_:programlisting-1/>"
 msgstr ""
+"破坏连接的另一种方法是通过你的信号处理函数的返回值。其类型必须是"
+"<classname>sigc::slot&lt;bool()&gt;</classname>。从定义可以看出信号处理函数必"
+"须返回一个<literal>bool</literal>类型的值。示例方法的定义可能如下所示：<_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:5701
 msgid ""
@@ -9850,20 +9868,25 @@ msgid ""
 "your signal handler. Therefore, if you want your method to be called "
 "repeatedly, it should return <literal>true</literal>."
 msgstr ""
+"你可以通过让你的信号处理函数返回<literal>false</literal>以停止此超时方法。因"
+"此，如果你还想重复调用此方法，则你需要让信号处理函数返回<literal>true</"
+"literal>。"
 
 #: C/index-in.docbook:5707
 msgid "Here's an example of this technique:"
-msgstr ""
+msgstr "这是此技术的示例："
 
 #: C/index-in.docbook:5711
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/timeout/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/timeout/\">源代码</ulink>"
 
 #: C/index-in.docbook:5716
 msgid "Monitoring I/O"
-msgstr ""
+msgstr "监视I/O"
 
 #: C/index-in.docbook:5718
 msgid ""
@@ -9872,6 +9895,9 @@ msgid ""
 "for you. This is especially useful for networking applications. The "
 "following method is used to do this:"
 msgstr ""
+"Glib（<application>gtkmm</application>的底层库之一）有一个很好的特性是它具有"
+"帮你检查文件描述符中的数据的能力。这对于需要联网的应用程序十分的有用。使用以"
+"下方法来执行此操作："
 
 #: C/index-in.docbook:5726
 #, no-wrap
@@ -9881,6 +9907,10 @@ msgid ""
 "                                 Glib::PollFD::fd_t fd, Glib::IOCondition condition,\n"
 "                                 int priority = Glib::PRIORITY_DEFAULT);\n"
 msgstr ""
+"\n"
+"sigc::connection Glib::SignalIO::connect(const sigc::slot&lt;bool(Glib::IOCondition)&gt;&amp; slot,\n"
+"                                 Glib::PollFD::fd_t fd, Glib::IOCondition condition,\n"
+"                                 int priority = Glib::PRIORITY_DEFAULT);\n"
 
 #: C/index-in.docbook:5733
 msgid ""
@@ -9889,36 +9919,40 @@ msgid ""
 "argument two. Argument three may be one or more (using <literal>|</literal>) "
 "of:"
 msgstr ""
+"第一个参数是你希望在第二个参数指定的文件描述符上发生指定事件（见第三个参数的"
+"描述）时被调用的槽。第三个参数可能是一下的一项或多项（若想是多项则对以下多个"
+"使用<literal>|</literal>，例如：<literal>Glib::IO_IN | Glib::IO_OUT | Glib::"
+"IO_PRI</literal>）："
 
 #: C/index-in.docbook:5743
 msgid ""
 "Glib::IO_IN - Call your method when there is data ready for reading on your "
 "file descriptor."
-msgstr ""
+msgstr "Glib::IO_IN - 当你提供的文件描述符有数据准备好被读取时调用你的方法。"
 
 #: C/index-in.docbook:5751
 msgid ""
 "Glib::IO_OUT - Call your method when the file descriptor is ready for "
 "writing."
-msgstr ""
+msgstr "Glib::IO_OUT - 当提供的文件描述符准备好被写入时调用你的方法。"
 
 #: C/index-in.docbook:5759
 msgid ""
 "Glib::IO_PRI - Call your method when the file descriptor has urgent data to "
 "be read."
-msgstr ""
+msgstr "Glib::IO_PRI - 当提供的文件描述符有紧急数据要读取时调用你的方法。"
 
 #: C/index-in.docbook:5766
 msgid ""
 "Glib::IO_ERR - Call your method when an error has occurred on the file "
 "descriptor."
-msgstr ""
+msgstr "Glib::IO_ERR - 当提供的文件描述符上发生错误的时候调用你的方法。"
 
 #: C/index-in.docbook:5773
 msgid ""
 "Glib::IO_HUP - Call your method when hung up (the connection has been broken "
 "usually for pipes and sockets)."
-msgstr ""
+msgstr "Glib::IO_HUP - 挂起时（常见于管道和套接字的连接被断开）调用你的方法。"
 
 #: C/index-in.docbook:5780
 msgid ""
@@ -9927,6 +9961,9 @@ msgid ""
 "<methodname>disconnect()</methodname> method. The <parameter>slot</"
 "parameter> signal handler should be declared as follows:"
 msgstr ""
+"返回值是一个<classname>sigc::connection</classname>对象，你可以在其上调用"
+"<methodname>disconnect()</methodname>方法以停止对该文件描述符的监视。信号处理"
+"函数<parameter>slot</parameter>应声明如下："
 
 #: C/index-in.docbook:5787
 #, no-wrap
@@ -9934,6 +9971,8 @@ msgid ""
 "\n"
 "bool input_callback(Glib::IOCondition condition);\n"
 msgstr ""
+"\n"
+"bool input_callback(Glib::IOCondition condition);\n"
 
 #: C/index-in.docbook:5792
 msgid ""
@@ -9942,6 +9981,9 @@ msgid ""
 "method of an object), or <function>sigc::ptr_fun()</function> (for a "
 "function)."
 msgstr ""
+"参数<parameter>condition</parameter>如上所述。通常使用<function>sigc::"
+"mem_fun()</function>（通过一个对象的成员函数创建）或<function>sigc::"
+"ptr_fun()</function>（通过一个普通函数创建）函数创建槽。"
 
 #: C/index-in.docbook:5799
 msgid ""
@@ -9952,22 +9994,28 @@ msgid ""
 "example will print each line you enter until you execute <literal>echo \"Q\" "
 "&gt; testfifo</literal>."
 msgstr ""
+"下面是个示例。要使用该示例，只需要在终端上执行它即可；它不会创建一个窗口。它"
+"将在当前目录创建一个名为<literal>testfifo</literal>的具名管道。然后启动另一个"
+"shell并执行<literal>echo \"Hello\" &gt; testfifo</literal>。该示例将打印你输"
+"入的每一行直到你执行<literal>echo \"Q\" &gt; testfifo</literal>"
 
 #: C/index-in.docbook:5808
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/input/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/input/\">源代码</ulink>"
 
 #: C/index-in.docbook:5813
 msgid "Idle Functions"
-msgstr ""
+msgstr "空闲函数"
 
 #: C/index-in.docbook:5815
 msgid ""
 "If you want to specify a method that gets called when nothing else is "
 "happening, use the following:"
-msgstr ""
+msgstr "如果你想要指定一个在无事发生时调用的方法，请使用以下函数："
 
 #: C/index-in.docbook:5820
 #, no-wrap
@@ -9976,6 +10024,9 @@ msgid ""
 "sigc::connection  Glib::SignalIdle::connect(const sigc::slot&lt;bool()&gt;&amp; slot,\n"
 "                                    int priority = Glib::PRIORITY_DEFAULT_IDLE);\n"
 msgstr ""
+"\n"
+"sigc::connection  Glib::SignalIdle::connect(const sigc::slot&lt;bool()&gt;&amp; slot,\n"
+"                                    int priority = Glib::PRIORITY_DEFAULT_IDLE);\n"
 
 #: C/index-in.docbook:5826
 msgid ""
@@ -9986,6 +10037,11 @@ msgid ""
 "connection</classname> object, or returning <literal>false</literal> in the "
 "signal handler, which should be declared as follows:"
 msgstr ""
+"这会导致<application>gtkmm</application>在无事发生时调用指定的方法。你可以为"
+"其添加优先级（数字越小优先级越高）。删除该信号处理程序的方法有两个：在"
+"<classname>sigc::connection</classname>对象上调用<methodname>disconnect()</"
+"methodname>、在信号处理程序中返回<literal>false</literal>，信号处理程序的声明"
+"应如下所示："
 
 #: C/index-in.docbook:5836
 #, no-wrap
@@ -9993,18 +10049,23 @@ msgid ""
 "\n"
 "bool idleFunc();\n"
 msgstr ""
+"\n"
+"bool idleFunc();\n"
 
 #: C/index-in.docbook:5841
 msgid ""
 "Since this is very similar to the methods above this explanation should be "
 "sufficient to understand what's going on. However, here's a little example:"
 msgstr ""
+"这与前一小节的方法极其类似，所以在此不再进行过多的解释。以下是个小例子："
 
 #: C/index-in.docbook:5846
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/idle/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/idle/\">源代码</ulink>"
 
 #: C/index-in.docbook:5848
 msgid ""
@@ -10014,12 +10075,17 @@ msgid ""
 "called as often as possible (like calculating a fractal in background), then "
 "use idle methods."
 msgstr ""
+"这个例子指出了空闲与超时方法的微小区别。如果你需要定期调用，并且速度并不重要"
+"则你应该使用超时方法。如果你需要尽可能多的调用方法（例如在后台计算分形）那你"
+"应该使用空闲方法。"
 
 #: C/index-in.docbook:5856
 msgid ""
 "Try executing the example and increasing the system load. The upper progress "
 "bar will increase steadily; the lower one will slow down."
 msgstr ""
+"尝试执行此示例并逐渐增加系统的负载。上方的进度条将稳定的逐渐增加；下方的则会"
+"增加的越来越慢。"
 
 #: C/index-in.docbook:5866
 msgid "Memory management"
