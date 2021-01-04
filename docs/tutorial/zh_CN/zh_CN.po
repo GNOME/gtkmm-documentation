@@ -10089,11 +10089,11 @@ msgstr ""
 
 #: C/index-in.docbook:5866
 msgid "Memory management"
-msgstr ""
+msgstr "内存管理"
 
 #: C/index-in.docbook:5872
 msgid "Normal C++ memory management"
-msgstr ""
+msgstr "标准C++内存管理"
 
 #: C/index-in.docbook:5874
 msgid ""
@@ -10107,14 +10107,20 @@ msgid ""
 "present in some C++ GUI toolkits, which restrict the programmer to only a "
 "subset of C++'s memory management features."
 msgstr ""
+"<application>gtkmm</application>允许程序员像管理任意其他C++对象一样对任意部件"
+"的生命周期（即构造和析构）进行控制。这种灵活性使你可以用<literal>new</"
+"literal>和<literal>delete</literal>动态创建和销毁对象，或使用常规的类成员（销"
+"毁类时部件将被自动销毁），或使用局部实例（当实例超出其作用域时被销毁）。这种"
+"灵活性在某些C++ GUI工具包中不存在，这些工具包限制程序员只能使用C++内存管理特"
+"性中的一部分。"
 
 #: C/index-in.docbook:5886
 msgid "Here are some examples of normal C++ memory management:"
-msgstr ""
+msgstr "以下是一些使用标准C++进行内存管理的示例："
 
 #: C/index-in.docbook:5889
 msgid "Class Scope widgets"
-msgstr ""
+msgstr "类作用域部件"
 
 #: C/index-in.docbook:5891
 msgid ""
@@ -10123,12 +10129,17 @@ msgid ""
 "scope is that memory management is grouped in one place. The programmer does "
 "not risk memory leaks from failing to <literal>delete</literal> a widget."
 msgstr ""
+"如果程序员不需要动态分配内存，则可以在类作用域中使用具有自动储存期的部件。在"
+"类作用域中使用自动储存期的部件的优点之一是内存管理被集中在一个地方。程序员不"
+"需要承担因<literal>delete</literal>部件出现差错而导致内存泄漏的风险。"
 
 #: C/index-in.docbook:5898
 msgid ""
 "The primary disadvantage of using class scope widgets is revealing the class "
 "implementation rather than the class interface in the class header."
 msgstr ""
+"使用类作用域部件的主要缺点是在包含类声明的头文件中展示了类的实现而不只是类的"
+"接口。"
 
 #: C/index-in.docbook:5904
 #, no-wrap
@@ -10143,10 +10154,19 @@ msgid ""
 "  // will be destroyed when the Foo object is destroyed\n"
 "};\n"
 msgstr ""
+"\n"
+"#include &lt;gtkmm/button.h&gt;\n"
+"#include &lt;gtkmm/window.h&gt;\n"
+"class Foo : public Gtk::Window\n"
+"{\n"
+"private:\n"
+"  Gtk::Button theButton;\n"
+"  // will be destroyed when the Foo object is destroyed\n"
+"};\n"
 
 #: C/index-in.docbook:5918
 msgid "Function scope widgets"
-msgstr ""
+msgstr "函数作用域部件"
 
 #: C/index-in.docbook:5924
 #, no-wrap
@@ -10159,6 +10179,13 @@ msgid ""
 "  app-&gt;run();\n"
 "}\n"
 msgstr ""
+"\n"
+"{\n"
+"  Gtk::Button aButton;\n"
+"  aButton.show();\n"
+"  ...\n"
+"  app-&gt;run();\n"
+"}\n"
 
 #: C/index-in.docbook:5920
 msgid ""
@@ -10166,10 +10193,12 @@ msgid ""
 "may also be used. The advantages to function scope over class scope are the "
 "increased data hiding and reduced dependencies. <_:programlisting-1/>"
 msgstr ""
+"如果程序员不需要类作用域部件，那么也可以使用函数作用域部件。函数作用域相比于"
+"类作用域的优点是增加了数据的隐蔽性和隐藏了依赖。<_:programlisting-1/>"
 
 #: C/index-in.docbook:5936
 msgid "Dynamic allocation with new and delete"
-msgstr ""
+msgstr "使用new和delete进行动态分配"
 
 #: C/index-in.docbook:5946
 #, no-wrap
@@ -10181,6 +10210,12 @@ msgid ""
 "\n"
 "delete pButton;\n"
 msgstr ""
+"\n"
+"auto pButton = new Gtk::Button(\"Test\");\n"
+"\n"
+"// do something useful with pButton\n"
+"\n"
+"delete pButton;\n"
 
 #: C/index-in.docbook:5938
 msgid ""
@@ -10194,10 +10229,16 @@ msgid ""
 "manually perform dynamic allocation. <_:programlisting-1/> Here, the "
 "programmer deletes <varname>pButton</varname> to prevent a memory leak."
 msgstr ""
+"通常，程序员更喜欢使用<function>Gtk::make_managed()</function>（参见下文）创"
+"建允许容器自动销毁的子部件。这并非强制性的要求，你也可以使用<literal>new</"
+"literal>和<literal>delete</literal>操作符，但是现代C++风格鼓励使用更安全的内"
+"存管理模型，因此最好使用<function>Gtk::make_managed()</function>创建部件，并"
+"让他们的父部件销毁它们，而不是手动执行动态内存分配。<_:programlisting-1/> 在"
+"这，程序员删除<varname>pButton</varname>以防止内存泄漏。"
 
 #: C/index-in.docbook:5960
 msgid "Managed Widgets"
-msgstr ""
+msgstr "托管部件"
 
 #: C/index-in.docbook:5962
 msgid ""
@@ -10209,10 +10250,15 @@ msgid ""
 "or a similar method. Now the widget will be destroyed whenever its container "
 "is destroyed."
 msgstr ""
+"另外，你可以让部件的容器控制部件被销毁的时机。多数情况下你会希望部件的生存周"
+"期与包含它的容器的生命周期一样长。要将部件的生命周期管理委托给其容器，请使用"
+"<function>Gtk::make_managed()</function>创建部件，然后使用诸如"
+"<methodname>Gtk::Box::append()</methodname>这类的方法将其装入容器中。这样部件"
+"就会随着容器一并销毁。"
 
 #: C/index-in.docbook:5972
 msgid "Dynamic allocation with make_managed() and append()"
-msgstr ""
+msgstr "使用make_managed()和append()进行动态分配"
 
 #: C/index-in.docbook:5974
 msgid ""
@@ -10221,6 +10267,9 @@ msgid ""
 "append()</methodname> method to simplify creation and destruction of widgets "
 "whose lifetime can be managed by a parent."
 msgstr ""
+"<application>gtkmm</application>提供了包括<function>make_managed()</function>"
+"函数和<methodname>Gtk::Box::append()</methodname>方法在内的用于简化创建和销毁"
+"部件的很多方法。这些部件的生命周期可以由其父部件进行管理。"
 
 #: C/index-in.docbook:5980
 msgid ""
@@ -10233,6 +10282,11 @@ msgid ""
 "function>, passing in the result of a <literal>new</literal> expression that "
 "created a dynamically allocated widget."
 msgstr ""
+"除了顶级窗口以外的任何部件都需要添加到一个父容器中才能够被显示。"
+"<function>manage()</function>函数对部件进行标记，以便将该部件添加到父容器时，"
+"由其父容器负责删除该部件，这意味着用户不需要如此做。创建生命周期由其父部件进"
+"行管理的部件的原始方法是调用<function>manage()</function>，并将向其传入使用"
+"<literal>new</literal>表达式创建的动态分配的部件。"
 
 #: C/index-in.docbook:5990
 msgid ""
@@ -10246,6 +10300,12 @@ msgid ""
 "you having to write <literal>new</literal>, which is discouraged in modern C+"
 "+ style, and more clearly expresses intent to create a managed widget."
 msgstr ""
+"但是通常当你创建这样的部件时，你已经知道其父部件应该负责销毁它。此外现代C++风"
+"格不推荐使用<literal>new</literal>操作符，而将新创建的部件传递给"
+"<function>manage()</function>时需要使用<literal>new</literal>。因此，"
+"<application>gtkmm</application>添加了<function>make_managed()</function>函"
+"数，这个函数将两个步骤合并到了一起。这避免了让你编写现代C++风格不建议的带有"
+"<literal>new</literal>的代码，并更清楚的表达了创建托管部件的意图。"
 
 #: C/index-in.docbook:6002
 #, no-wrap
@@ -10257,6 +10317,12 @@ msgid ""
 "  append(*pButton); //add *pButton to MyContainer\n"
 "}\n"
 msgstr ""
+"\n"
+"MyContainer::MyContainer()\n"
+"{\n"
+"  auto pButton = Gtk::make_managed&lt;Gtk::Button&gt;(\"Test\");\n"
+"  append(*pButton); //add *pButton to MyContainer\n"
+"}\n"
 
 #: C/index-in.docbook:6001
 msgid ""
@@ -10266,6 +10332,10 @@ msgid ""
 "its deletion has been delegated to the <classname>MyContainer</classname> "
 "object."
 msgstr ""
+"<_:programlisting-1/> 现在，当你销毁<classname>MyContainer</classname>类型对"
+"象时，该按钮也被销毁。不再需要主动<literal>delete</literal><varname>pButton</"
+"varname>以释放其内存；对其的删除操作委托给了<classname>MyContainer</"
+"classname>对象。"
 
 #: C/index-in.docbook:6015
 msgid ""
@@ -10276,6 +10346,11 @@ msgid ""
 "called, which typically means that the responsibility for <literal>delete</"
 "literal>ing the widget returns to the user."
 msgstr ""
+"请注意，如果你从未将该部件添加到任何父容器中，或者你添加后在其父容器调用了"
+"<methodname>Gtk::Container::remove()</methodname>将其从父容器中删除了，"
+"<application>gtkmm</application>将会使部件的生命周期管理恢复到调用"
+"<function>manage()</function>之前的状态，这通常意味着删除部件的责任被归还给了"
+"用户。"
 
 #: C/index-in.docbook:6023
 msgid ""
@@ -10284,10 +10359,13 @@ msgid ""
 "of the traditional C++ techniques. For instance, your top-level Window might "
 "just be an instance in your <function>main()</function> function."
 msgstr ""
+"当然，顶级容器不会被添加到另一个容器中。程序员负责使用一种传统的C++技术销毁顶"
+"级容器。例如，你的顶级窗口可能只是<function>main()</function>函数中的一个实"
+"例。"
 
 #: C/index-in.docbook:6035
 msgid "Shared resources"
-msgstr ""
+msgstr "共享资源"
 
 #: C/index-in.docbook:6037
 msgid ""
@@ -10299,6 +10377,11 @@ msgid ""
 "uses the <classname>Glib::RefPtr&lt;&gt;</classname> smartpointer. Cairomm "
 "has its own smartpointer, <classname>Cairo::RefPtr&lt;&gt;</classname>."
 msgstr ""
+"一些对象是从共享储存中获取的，例如<classname>Gdk::Pixbuf</classname>和"
+"<classname>Pango::Font</classname>。因此你无法实例化自己的实例。这些类通常继"
+"承自<classname>Glib::Object</classname>。<application>gtkmm</application>使用"
+"智能指针<classname>Glib::RefPtr&lt;&gt;</classname>而不是要求你引用和解引用这"
+"些对象。开罗有自己的智能指针：<classname>Cairo::RefPtr&lt;&gt;</classname>。"
 
 #: C/index-in.docbook:6050
 #, no-wrap
@@ -10306,6 +10389,8 @@ msgid ""
 "\n"
 "auto pixbuf = Gdk::Pixbuf::create_from_file(filename);\n"
 msgstr ""
+"\n"
+"auto pixbuf = Gdk::Pixbuf::create_from_file(filename);\n"
 
 #: C/index-in.docbook:6047
 msgid ""
@@ -10313,6 +10398,8 @@ msgid ""
 "with a <methodname>create()</methodname> function. For instance, <_:"
 "programlisting-1/>"
 msgstr ""
+"诸如<classname>Gdk::Pixbuf</classname>之类的对象只能通过"
+"<methodname>create()</methodname>函数进行实例化。例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:6059
 #, no-wrap
@@ -10324,6 +10411,12 @@ msgid ""
 "  width = pixbuf-&gt;get_width();\n"
 "}\n"
 msgstr ""
+"\n"
+"auto width = 0;\n"
+"if(pixbuf)\n"
+"{\n"
+"  width = pixbuf-&gt;get_width();\n"
+"}\n"
 
 #: C/index-in.docbook:6055
 msgid ""
@@ -10331,6 +10424,9 @@ msgid ""
 "example, <varname>pixbuf</varname> is a smart pointer, so you can do this, "
 "much like a normal pointer: <_:programlisting-1/>"
 msgstr ""
+"你无法暴露<classname>Gdk::Pixbuf</classname>对象。在示例中，<varname>pixbuf</"
+"varname>是一个智能指针，因此可以像正常指针一样执行此操作：<_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:6068
 msgid ""
@@ -10339,6 +10435,9 @@ msgid ""
 "it anymore. There's no <literal>new</literal> so there's no <literal>delete</"
 "literal>."
 msgstr ""
+"当<varname>pixbuf</varname>超出作用域时，将在后台调用<methodname>unref()</"
+"methodname>，你无需为它担心。没有进行<literal>new</literal>因此也不需要进行"
+"<literal>delete</literal>。"
 
 #: C/index-in.docbook:6076
 #, no-wrap
@@ -10346,6 +10445,8 @@ msgid ""
 "\n"
 "auto pixbuf2 = pixbuf;\n"
 msgstr ""
+"\n"
+"auto pixbuf2 = pixbuf;\n"
 
 #: C/index-in.docbook:6074
 msgid ""
@@ -10355,28 +10456,34 @@ msgid ""
 "to ensure that the instance will not be destroyed until the last "
 "<classname>RefPtr</classname> has gone out of scope."
 msgstr ""
+"如果你复制一个<classname>RefPtr</classname>，例如：<_:programlisting-1/>，或"
+"者你将其作为一个方法的参数或返回类型进行传递，<classname>RefPtr</classname>将"
+"做必要的引用以确保在最后一个<classname>RefPtr</classname>超出作用域之前该实例"
+"不会被销毁。"
 
 #: C/index-in.docbook:6084
 msgid ""
 "See the <link linkend=\"chapter-refptr\">appendix</link> for detailed "
 "information about RefPtr."
 msgstr ""
+"更多与RefPtr有关的信息，请参见<link linkend=\"chapter-refptr\">附录</link>。"
 
 #: C/index-in.docbook:6089
 msgid ""
 "Bjarne Stroustrup, \"The C++ Programming Language\" Forth Edition - section "
 "34.3"
-msgstr ""
+msgstr "Bjarne Stroustrup,《C++编程语言》第四版 第34章第3小节"
 
 #: C/index-in.docbook:6092
 msgid "Nicolai M. Josuttis, \"The C++ Standard Library\" - section 4.2"
-msgstr ""
+msgstr "Nicolai M. Josuttis,《C++标准库》第4章第2节"
 
 #: C/index-in.docbook:6085
 msgid ""
 "If you wish to learn more about smartpointers, you might look in these "
 "books: <_:itemizedlist-1/>"
 msgstr ""
+"如果你想了解与智能指针更多的有关信息，请阅读以下书籍：<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:6103
 msgid "Glade and Gtk::Builder"
