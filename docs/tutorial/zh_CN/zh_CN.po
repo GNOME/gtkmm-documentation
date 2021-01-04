@@ -8230,7 +8230,7 @@ msgid ""
 "by a different cursor."
 msgstr ""
 "<literal>actions</literal>是一组值异或后的结果，用于指定可以对该源进行的拖放"
-"操作 - 例如复制、移动或链接。用户可以通过组合键选择动作，比如通过按下"
+"操作 - 例如复制、移动或链接。用户可以通过修饰键选择动作，比如通过按下"
 "<keycap>Shift</keycap>键将动作从<literal>copy</literal>改变为<literal>move</"
 "literal>，这还会使光标显示不同的样式。"
 
@@ -9557,7 +9557,7 @@ msgstr ""
 
 #: C/index-in.docbook:5510
 msgid "Keyboard Events"
-msgstr ""
+msgstr "键盘事件"
 
 #: C/index-in.docbook:5511
 msgid ""
@@ -9566,16 +9566,21 @@ msgid ""
 "section in the appendix. Here we will use keyboard events to show how X "
 "events can be used in a program."
 msgstr ""
+"X事件与其他信号在某些方面有所不同。这些差异在附录的<link linkend=\"sec-"
+"xeventsignals\">X事件信号</link>小节中说明。在这，我们将使用键盘事件说明如何"
+"在程序中使用X事件。"
 
 #: C/index-in.docbook:5518
 msgid "Overview"
-msgstr ""
+msgstr "总览"
 
 #: C/index-in.docbook:5519
 msgid ""
 "Whenever you press or release a key, an event is emitted. You can connect a "
 "signal handler to handle such events."
 msgstr ""
+"每当你按下或放开一个按键，就会发出一个事件。你可以连接到信号处理函数来处理此"
+"类事件。"
 
 #: C/index-in.docbook:5523
 msgid ""
@@ -9586,6 +9591,10 @@ msgid ""
 "fully handled (<literal>true</literal>) or allow event propagation "
 "(<literal>false</literal>)."
 msgstr ""
+"事件处理函数接受的参数取决于事件的类型。对于键盘事件，它接受一个"
+"<type>GdkEventKey*</type>参数。如<link linkend=\"sec-xeventsignals\">附录</"
+"link>中所述，事件处理函数返回一个<type>bool</type>值，以表示信号已经被完全处"
+"理（返回<literal>true</literal>）或允许事件传播（<literal>false</literal>）。"
 
 #: C/index-in.docbook:5532
 msgid ""
@@ -9595,6 +9604,10 @@ msgid ""
 "modifier keys (shift, ctrl, etc.) are available as bit-flags in "
 "<varname>GdkEventKey::state</varname>."
 msgstr ""
+"要确定哪个键被按下或放开，你需要读取<varname>GdkEventKey::keyval</varname>的"
+"值并将其与头文件<filename>&lt;gdk/gdkkeysyms.h&gt;</filename>中的常量进行比"
+"较。<varname>GdkEventKey::state</varname>的位标志可以用作表示修饰键（shift、"
+"ctrl等）的状态。"
 
 #: C/index-in.docbook:5541
 #, no-wrap
@@ -9618,10 +9631,28 @@ msgid ""
 "m_entry.signal_key_press_event().connect( sigc::ptr_fun(&amp;on_key_press_or_release_event) );\n"
 "m_entry.signal_key_release_event().connect( sigc::ptr_fun(&amp;on_key_press_or_release_event) );\n"
 msgstr ""
+"\n"
+"bool on_key_press_or_release_event(GdkEventKey* event)\n"
+"{\n"
+"  if (event-&gt;type == GDK_KEY_PRESS &amp;&amp;\n"
+"    event-&gt;keyval == GDK_KEY_1 &amp;&amp;\n"
+"    (event-&gt;state &amp; (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK)) == GDK_MOD1_MASK)\n"
+"  {\n"
+"    handle_alt_1_press(); // GDK_MOD1_MASK is normally the Alt key\n"
+"    return true;\n"
+"  }\n"
+"  return false;\n"
+"}\n"
+"\n"
+"Gtk::Entry m_entry; // in a class definition\n"
+"\n"
+"// in the class constructor\n"
+"m_entry.signal_key_press_event().connect( sigc::ptr_fun(&amp;on_key_press_or_release_event) );\n"
+"m_entry.signal_key_release_event().connect( sigc::ptr_fun(&amp;on_key_press_or_release_event) );\n"
 
 #: C/index-in.docbook:5539 C/index-in.docbook:8443
 msgid "Here's a simple example: <_:programlisting-1/>"
-msgstr ""
+msgstr "这是一个简单的例子：<_:programlisting-1/>"
 
 #: C/index-in.docbook:5564
 msgid ""
@@ -9632,20 +9663,27 @@ msgid ""
 "as described in the <link linkend=\"sec-overriding-default-signal-handlers"
 "\">Overriding default signal handlers</link> section in the appendix."
 msgstr ""
+"在此示例中，有三个键盘快捷键：<keycap>Alt</keycap>+<keycap>1</keycap>选择第一"
+"个单选按钮、<keycap>Alt</keycap>+<keycap>2</keycap>选择第二个单选按钮、"
+"<keycap>Esc</keycap>隐藏（关闭）窗口。默认信号处理程序被覆盖如附录中<link "
+"linkend=\"sec-overriding-default-signal-handlers\">覆盖默认信号处理程序</"
+"link>小节所述。"
 
 #: C/index-in.docbook:5575
 msgid "Keyboard Events - Simple"
-msgstr ""
+msgstr "键盘事件 - 简单"
 
 #: C/index-in.docbook:5581
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/keyboard_events/simple/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/keyboard_events/simple/\">源代码</ulink>"
 
 #: C/index-in.docbook:5586
 msgid "Event Propagation"
-msgstr ""
+msgstr "事件传播"
 
 #: C/index-in.docbook:5587
 msgid ""
@@ -9654,6 +9692,9 @@ msgid ""
 "to its parent, and so on) and, if the parent has an event handler, that "
 "handler will be called."
 msgstr ""
+"事件传播意味着，当事件在特定的部件中发出时，它可以被传递到该部件的父部件（这"
+"个部件又可以将信号传递给它的父部件，以此类推），如果父部件有对该事件的事件处"
+"理程序，该处理程序将被调用。"
 
 #: C/index-in.docbook:5593
 msgid ""
@@ -9664,6 +9705,10 @@ msgid ""
 "event wasn't handled), it is sent to the widget which has focus, and the "
 "propagation begins from there."
 msgstr ""
+"与其他事件相反，键盘事件首先被发送到顶级窗口（<classname>Gtk::Window</"
+"classname>），在此检查任何可能被设置的键盘快捷键（用于从键盘选择菜单项的快捷"
+"键、助记符）。然后（假设事件没有被处理）将其发送到焦点部件，然后从此部件开始"
+"传播。"
 
 #: C/index-in.docbook:5601
 msgid ""
@@ -9671,12 +9716,14 @@ msgid ""
 "stop the propagation by returning <literal>true</literal> from an event "
 "handler."
 msgstr ""
+"事件将一直传播直到顶级窗口为止或直到你通过事件处理程序返回<literal>true</"
+"literal>为止。"
 
 #: C/index-in.docbook:5606
 msgid ""
 "Notice, that after canceling an event, no other function will be called "
 "(even if it is from the same widget)."
-msgstr ""
+msgstr "请注意，取消事件之后，不再会调用其他函数（哪怕它来自同一个部件）。"
 
 #: C/index-in.docbook:5613
 msgid ""
@@ -9685,6 +9732,10 @@ msgid ""
 "<classname>Gtk::Entry</classname>, one in the <classname>Gtk::Grid</"
 "classname> and one in the <classname>Gtk::Window</classname>."
 msgstr ""
+"在此示例中，<classname>Gtk::Window</classname>在默认事件处理程序之后调用了三"
+"个事件处理程序，一个在<classname>Gtk::Entry</classname>中、一个在"
+"<classname>Gtk::Grid</classname>中、一个在<classname>Gtk::Window</classname>"
+"中。"
 
 #: C/index-in.docbook:5619
 msgid ""
@@ -9693,12 +9744,15 @@ msgid ""
 "handler being called before the default handler "
 "(<methodname>windowKeyReleaseBefore()</methodname>)."
 msgstr ""
+"在<classname>Gtk::Window</classname>中我们还覆盖了默认处理程序"
+"（<methodname>on_key_release_event()</methodname>），并在调用默认处理程序之前"
+"调用了另一个处理程序（<methodname>windowKeyReleaseBefore()</methodname>）。"
 
 #: C/index-in.docbook:5625
 msgid ""
 "The purpose of this example is to show the steps the event takes when it is "
 "emitted."
-msgstr ""
+msgstr "本示例的目的是显示事件发出时进行的步骤。"
 
 #: C/index-in.docbook:5628
 msgid ""
@@ -9713,16 +9767,26 @@ msgid ""
 "handlers. If it propagates, the text you're writing will appear in the "
 "<classname>Label</classname> above the <classname>Entry</classname>."
 msgstr ""
+"当你在条目中写入的时候，将发出一个按键放开事件，该事件将先进入顶层窗口"
+"（<classname>Gtk::Window</classname>），因为我们之前设置了一个事件处理程序，"
+"所以<methodname>windowKeyReleaseBefore()</methodname>将先被调用。然后调用已被"
+"覆盖的默认信号处理程序，然后将事件传播到具有焦点的部件，也就是示例中的"
+"<classname>Entry</classname>，根据事件处理程序的返回值，该事件可以被传播到"
+"<classname>Grid</classname>和<classname>Window</classname>。如果该事件被传"
+"播，你写入的文本将出现在<classname>Entry</classname>上方的<classname>Label</"
+"classname>中。"
 
 #: C/index-in.docbook:5643
 msgid "Keyboard Events - Event Propagation"
-msgstr ""
+msgstr "键盘事件 - 事件传播"
 
 #: C/index-in.docbook:5649
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/keyboard_events/propagation/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/keyboard_events/propagation/\">源代码</ulink>"
 
 #: C/index-in.docbook:5655
 msgid "Timeouts, I/O and Idle Functions"
