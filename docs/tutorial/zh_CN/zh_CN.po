@@ -10487,7 +10487,7 @@ msgstr ""
 
 #: C/index-in.docbook:6103
 msgid "Glade and Gtk::Builder"
-msgstr ""
+msgstr "Glade和Gtk::Builder"
 
 #: C/index-in.docbook:6104
 msgid ""
@@ -10499,22 +10499,27 @@ msgid ""
 "application> API to load that XML file at runtime and obtain a pointer to "
 "specifically named widget instances."
 msgstr ""
+"尽管你可以使用C++代码对部件进行实例化和排列，但是这很快就会变得枯燥且重复。并"
+"且需要重新编译才能显示更改。<application>Glade</application>应用程序允许你在"
+"屏幕上布局部件并然后将布局保存为XML描述。你的应用程序可以在之后使用"
+"<application>Gtk::Builder</application>API在运行时加载该XML文件，并获取特定名"
+"称部件实例的指针。"
 
 #: C/index-in.docbook:6117
 msgid "Less C++ code is required."
-msgstr ""
+msgstr "需要的C++代码更少。"
 
 #: C/index-in.docbook:6118
 msgid "UI changes can be seen more quickly, so UIs are able to improve."
-msgstr ""
+msgstr "可以更快的看到UI的更改，更便于改进UI。"
 
 #: C/index-in.docbook:6119
 msgid "Designers without programming skills can create and edit UIs."
-msgstr ""
+msgstr "没有编程技能的设计人员可以创建和编辑UI。"
 
 #: C/index-in.docbook:6114
 msgid "This has the following advantages: <_:orderedlist-1/>"
-msgstr ""
+msgstr "这具有以下优点：<_:orderedlist-1/>"
 
 #: C/index-in.docbook:6123
 msgid ""
@@ -10522,10 +10527,12 @@ msgid ""
 "user actions, but using <application>Gtk::Builder</application> for the "
 "widget layout allows you to focus on implementing that functionality."
 msgstr ""
+"你仍然需要编写C++代码以处理由用户操作触发的UI更改，但是将<application>Gtk::"
+"Builder</application>用于部件布局允许你更专注的实现该功能。"
 
 #: C/index-in.docbook:6130
 msgid "Loading the .glade file"
-msgstr ""
+msgstr "加载.glade文件"
 
 #: C/index-in.docbook:6135
 #, no-wrap
@@ -10533,6 +10540,8 @@ msgid ""
 "\n"
 "auto builder = Gtk::Builder::create_from_file(\"basic.glade\");\n"
 msgstr ""
+"\n"
+"auto builder = Gtk::Builder::create_from_file(\"basic.glade\");\n"
 
 #: C/index-in.docbook:6131
 msgid ""
@@ -10542,6 +10551,10 @@ msgid ""
 "programlisting-1/> This will instantiate the windows defined in the "
 "<filename>.glade</filename> file."
 msgstr ""
+"<classname>Gtk::Builder</classname>必须通过<classname>Glib::RefPtr</"
+"classname>来使用。与所有此类类一样，你需要通过使用<methodname>create()</"
+"methodname>方法实例化它。例如：<_:programlisting-1/>这将实例化<filename>."
+"glade</filename>文件中定义的窗口。"
 
 #: C/index-in.docbook:6142
 #, no-wrap
@@ -10549,6 +10562,8 @@ msgid ""
 "\n"
 "auto builder = Gtk::Builder::create_from_file(\"basic.glade\", \"treeview_products\");\n"
 msgstr ""
+"\n"
+"auto builder = Gtk::Builder::create_from_file(\"basic.glade\", \"treeview_products\");\n"
 
 #: C/index-in.docbook:6141
 msgid ""
@@ -10556,10 +10571,12 @@ msgid ""
 "specify the name of a widget as the second parameter. For instance, <_:"
 "programlisting-1/>"
 msgstr ""
+"如果只想实例化一个窗口或实例化一个子部件，你可以将部件的名称指定为第二个参"
+"数。例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:6150
 msgid "Accessing widgets"
-msgstr ""
+msgstr "访问部件"
 
 #: C/index-in.docbook:6158
 #, no-wrap
@@ -10567,6 +10584,8 @@ msgid ""
 "\n"
 "auto pDialog = builder-&gt;get_widget&lt;Gtk::Dialog&gt;(\"DialogBasic\");\n"
 msgstr ""
+"\n"
+"auto pDialog = builder-&gt;get_widget&lt;Gtk::Dialog&gt;(\"DialogBasic\");\n"
 
 #: C/index-in.docbook:6152
 msgid ""
@@ -10577,6 +10596,10 @@ msgid ""
 "the wrong type, then the pointer will be set to nullptr. <_:programlisting-1/"
 ">"
 msgstr ""
+"要访问部件，例如<methodname>show()</methodname>一个对话框，请使用"
+"<methodname>get_widget()</methodname>方法，并向其提供一个部件名。这个名称应该"
+"在<application>Glade</application>的窗口属性中指定。如果找不到该部件或是部件"
+"的类型不对，则指针将被设为<literal>nullptr</literal>。<_:programlisting-1/>"
 
 #: C/index-in.docbook:6163
 msgid ""
@@ -10584,6 +10607,8 @@ msgid ""
 "checks that the widget is of the expected type, and will show warnings on "
 "the command line about these."
 msgstr ""
+"<application>Gtk::Builder</application>会进行空指针和部件类型检查，并在命令行"
+"上显示相关的警告。"
 
 #: C/index-in.docbook:6169
 msgid ""
@@ -10595,6 +10620,11 @@ msgid ""
 "are instantiated during <methodname>Gtk::Builder::create_from_file()</"
 "methodname>."
 msgstr ""
+"请注意，你并没有使用<methodname>get_widget()</methodname>实例化部件，你只是获"
+"得了指向已经存在的部件的指针。当你在同一个<classname>Gtk::Builder</classname>"
+"上用同一个名称调用<methodname>get_widget()</methodname>你总是会得到指向同一实"
+"例的指针。部件在函数<methodname>Gtk::Builder::create_from_file()</methodname>"
+"执行期间被实例化。"
 
 #: C/index-in.docbook:6178
 msgid ""
@@ -10607,12 +10637,20 @@ msgid ""
 "of <classname>Gtk::Builder</classname> has more to say about the memory "
 "management of different kinds of objects."
 msgstr ""
+"<methodname>get_widget()</methodname>返回一个经<function>manage()</function>"
+"处理的子部件（参阅<link linkend=\"chapter-memory\">内存管理</link>章节），因"
+"此在删除其父部件时它们将被一并删除。无法管理<classname>Windows</"
+"classname>（例如<classname>Dialogs</classname>）因为它们没有父容器，所以你必"
+"须在某个时候删除它们。<classname>Gtk::Builder</classname>的文档中有更多关于对"
+"不同类型的对象如何进行内存管理的介绍。"
 
 #: C/index-in.docbook:6188
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1Builder."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/classGtk_1_1Builder."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:6192
 msgid ""
@@ -10620,16 +10658,20 @@ msgid ""
 "file at runtime and access the widgets with <application>Gtk::Builder</"
 "application>."
 msgstr ""
+"这个简单示例展示了如何在运行时加载<application>Glade</application>文件并使用"
+"<application>Gtk::Builder</application>访问部件。"
 
 #: C/index-in.docbook:6197
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/builder/basic\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/builder/basic\">源代码</ulink>"
 
 #: C/index-in.docbook:6204
 msgid "Using derived widgets"
-msgstr ""
+msgstr "使用派生部件"
 
 #: C/index-in.docbook:6205
 msgid ""
@@ -10640,6 +10682,10 @@ msgid ""
 "business logic, avoiding having most of your source just be setting "
 "properties and packing in containers."
 msgstr ""
+"你可以使用<classname>Gtk::Builder</classname>和<application>Glade</"
+"application>布局你从<application>gtkmm</application>部件类派生的自定义部件。"
+"这使得你的代码保持有序和封装性，将声明式表述与业务逻辑分离开来，避免你的大多"
+"数源代码都是在设置属性和装填容器。"
 
 #: C/index-in.docbook:6214
 #, no-wrap
@@ -10647,12 +10693,16 @@ msgid ""
 "\n"
 "auto pDialog = Gtk::Builder::get_widget_derived&lt;DerivedDialog&gt;(builder, \"DialogDerived\");\n"
 msgstr ""
+"\n"
+"auto pDialog = Gtk::Builder::get_widget_derived&lt;DerivedDialog&gt;(builder, \"DialogDerived\");\n"
 
 #: C/index-in.docbook:6213
 msgid ""
 "Use <methodname>Gtk::Builder::get_widget_derived()</methodname> like so: <_:"
 "programlisting-1/>"
 msgstr ""
+"像这样用<methodname>Gtk::Builder::get_widget_derived()</methodname>：<_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:6219
 msgid ""
@@ -10663,6 +10713,11 @@ msgid ""
 "Dialog</classname> typedefs <classname>BaseObjectType</classname> as "
 "<type>GtkDialog</type>, for instance)."
 msgstr ""
+"你的派生类必须有一个将指向底层C类型的指针和<classname>Gtk::Builder</"
+"classname>实例作为参数的构造函数。所有与<application>gtkmm</application>相关"
+"的类的都将其的底层C类型别名(typedef)为<classname>BaseObjectType</"
+"classname>（例如：<classname>Gtk::Dialog</classname>将<type>GtkDialog</type>"
+"别名为<classname>BaseObjectType</classname>）。"
 
 #: C/index-in.docbook:6229
 #, no-wrap
@@ -10673,12 +10728,19 @@ msgid ""
 "{\n"
 "}\n"
 msgstr ""
+"\n"
+"DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)\n"
+": Gtk::Dialog(cobject)\n"
+"{\n"
+"}\n"
 
 #: C/index-in.docbook:6226
 msgid ""
 "You must call the base class's constructor in the initialization list, "
 "providing the C pointer. For instance, <_:programlisting-1/>"
 msgstr ""
+"你必须在初始化列表中调用基类的构造函数，并提供C指针。例如：<_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:6241
 #, no-wrap
@@ -10696,6 +10758,18 @@ msgid ""
 "  }\n"
 "}\n"
 msgstr ""
+"\n"
+"DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)\n"
+": Gtk::Dialog(cobject),\n"
+"  m_builder(builder),\n"
+"  //Get the Glade-instantiated Button, and connect a signal handler:\n"
+"  m_pButton(m_builder-&gt;get_widget&lt;Gtk::Button&gt;(\"quit_button\"))\n"
+"{\n"
+"  if(m_pButton)\n"
+"  {\n"
+"    m_pButton-&gt;signal_clicked().connect( sigc::mem_fun(*this, &amp;DerivedDialog::on_button_quit) );\n"
+"  }\n"
+"}\n"
 
 #: C/index-in.docbook:6237
 msgid ""
@@ -10704,6 +10778,9 @@ msgid ""
 "methodname> or <methodname>get_widget_derived()</methodname> again. For "
 "instance, <_:programlisting-1/>"
 msgstr ""
+"然后你可以将对子部件的操作封装于派生类的构造函数中，可以在构造函数中再次使用"
+"<methodname>get_widget()</methodname>或<methodname>get_widget_derived()</"
+"methodname>。例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:6260
 #, no-wrap
@@ -10711,6 +10788,8 @@ msgid ""
 "\n"
 "auto pDialog = Gtk::Builder::get_widget_derived&lt;DerivedDialog&gt;(builder, \"DialogDerived\", true);\n"
 msgstr ""
+"\n"
+"auto pDialog = Gtk::Builder::get_widget_derived&lt;DerivedDialog&gt;(builder, \"DialogDerived\", true);\n"
 
 #: C/index-in.docbook:6264
 #, no-wrap
@@ -10724,6 +10803,14 @@ msgid ""
 "  // ....\n"
 "}\n"
 msgstr ""
+"\n"
+"DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder, bool warning)\n"
+": Gtk::Dialog(cobject),\n"
+"  m_builder(builder),\n"
+"  m_pButton(m_builder-&gt;get_widget&lt;Gtk::Button&gt;(\"quit_button\"))\n"
+"{\n"
+"  // ....\n"
+"}\n"
 
 #: C/index-in.docbook:6256
 msgid ""
@@ -10733,10 +10820,13 @@ msgid ""
 "methodname> <_:programlisting-1/> can invoke this constructor <_:"
 "programlisting-2/>"
 msgstr ""
+"可以传递额外的参数给<methodname>get_widget_derived()</methodname>，他们将被转"
+"发给派生部件的构造函数。例如这样调用<methodname>get_widget_derived()</"
+"methodname>：<_:programlisting-1/>可以调用此构造函数：<_:programlisting-2/>"
 
 #: C/index-in.docbook:6276
 msgid "Gtk::Builder and Glib::Property"
-msgstr ""
+msgstr "Gtk::Builder和Glib::Property"
 
 #: C/index-in.docbook:6287
 #, no-wrap
@@ -10751,6 +10841,15 @@ msgid ""
 "  // ....\n"
 "}\n"
 msgstr ""
+"\n"
+"DerivedButton::DerivedButton(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)\n"
+": Glib::ObjectBase(\"MyButton\"), // The GType name will be gtkmm__CustomObject_MyButton.\n"
+"  Gtk::Button(cobject),\n"
+"  prop_ustring(*this, \"button-ustring\"),\n"
+"  prop_int(*this, \"button-int\", 10)\n"
+"{\n"
+"  // ....\n"
+"}\n"
 
 #: C/index-in.docbook:6277
 msgid ""
@@ -10766,6 +10865,14 @@ msgid ""
 "ObjectBase</classname> constructor to register the <type>GType</type>. <_:"
 "programlisting-1/>"
 msgstr ""
+"如果你派生的部件使用了<classname>Glib::Property</classname>，它将变得更复杂了"
+"一些。包涵<classname>Glib::Property</classname>成员的派生部件必须在"
+"<type>GType</type>系统中用自己的名称进行注册。必须在调用任何"
+"<methodname>create_from_*()</methodname>或<methodname>add_from_*()</"
+"methodname>方法之前进行注册，这意味着你可能需要完成对该类的注册才能创建派生部"
+"件的实例。你派生的部件必须有一个具有<methodname>get_widget_derived()</"
+"methodname>所需的所有参数以及调用<classname>Glib::ObjectBase</classname>构造"
+"函数以注册<type>GType</type>的构造函数。<_:programlisting-1/>"
 
 #: C/index-in.docbook:6298
 msgid ""
@@ -10780,18 +10887,29 @@ msgid ""
 "stable/properties.html\"> property class definitions</ulink> and a catalog "
 "declaring those new properties."
 msgstr ""
+"如果将<application>gtkmm</application>与<application>glibmm</application>2.62"
+"以上的版本一起使用，则还可以在<filename>.glade</filename>文件中指定使用"
+"<application>gtkmm</application>在C++代码中声明的派生部件的属性，并使用"
+"<classname>Gtk::Builder</classname>加载/设置这些属性。更多实现此功能的详细信"
+"息请参阅<classname>Gtk::Builder</classname>的文档。Glade不会按原样识别这些属"
+"性，但这应该能通过使用<ulink url=\"https://developer.gnome.org/gladeui/"
+"stable/properties.html\">属性类定义</ulink>和声明一个新属性目录来实现。"
 
 #: C/index-in.docbook:6312
 msgid ""
 "This example shows how to load a <application>Glade</application> file at "
 "runtime and access the widgets via derived classes."
 msgstr ""
+"本示例展示了如何在运行时加载<application>Glade</application>文件以及如何通过"
+"派生类访问部件。"
 
 #: C/index-in.docbook:6316
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/builder/derived\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/builder/derived\">源代码</ulink>"
 
 #: C/index-in.docbook:6325
 msgid "Internationalization and Localization"
