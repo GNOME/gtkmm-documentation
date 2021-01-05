@@ -10913,7 +10913,7 @@ msgstr ""
 
 #: C/index-in.docbook:6325
 msgid "Internationalization and Localization"
-msgstr ""
+msgstr "国际化和本地化"
 
 #: C/index-in.docbook:6327
 msgid ""
@@ -10923,6 +10923,10 @@ msgid ""
 "<application>gtkmm</application> application will use the appropriate "
 "language at runtime based on the user's environment."
 msgstr ""
+"<application>gtkmm</application>应用程序可以很轻松的支持包括非欧洲语言（如中"
+"文）和从右向左语言（如阿拉伯语）在内的多种语言。正确编写且进行翻译的"
+"<application>gtkmm</application>应用程序可以在运行时根据用户环境使用合适的语"
+"言。"
 
 #: C/index-in.docbook:6333
 msgid ""
@@ -10930,6 +10934,8 @@ msgid ""
 "can never rule it out. And it's easier to develop the application properly "
 "in the first place rather than retrofitting later."
 msgstr ""
+"你可能没有预料到需要支持其他语言，但你永远不能排除这种可能性。而且事先准备好"
+"支持多语言比后来改进要容易的多。"
 
 #: C/index-in.docbook:6339
 msgid ""
@@ -10939,6 +10945,9 @@ msgid ""
 "as <literal>l10n</literal>, provides translated text for other languages, "
 "based on that source code."
 msgstr ""
+"编写允许进行翻译的源代码的过程被称为<literal>internationalization</literal>，"
+"通常被缩写为<literal>i18n</literal>。而根据该源代码提供其他语言的翻译文本的过"
+"程<literal>Localization</literal>通常被简写为<literal>l10n</literal>。"
 
 #: C/index-in.docbook:6347
 msgid ""
@@ -10948,6 +10957,9 @@ msgid ""
 "your application will work normally regardless of how many strings you've "
 "covered."
 msgstr ""
+"国际化过程中的主要活动是查找用户能看到的字符串并将其标记为需要可翻译。你不需"
+"要一次性完成所有的操作 - 只要你的项目准备好了进行国际化无论你有多少个字符串被"
+"标记为可翻译都不会影响程序的正常运行。"
 
 #: C/index-in.docbook:6355
 msgid ""
@@ -10956,10 +10968,13 @@ msgid ""
 "utility can then extract the marked strings for translation, and substitute "
 "the translated text at runtime."
 msgstr ""
+"源代码中的字符串字面量应该以英文键入，但要使用宏包围。<application>gettext</"
+"application>（或intltool）实用程序可以提取被标记的字符串进行翻译，并在运行时"
+"将其替换为翻译后的文本。"
 
 #: C/index-in.docbook:6363
 msgid "Preparing your project"
-msgstr ""
+msgstr "准备你的项目"
 
 #: C/index-in.docbook:6366
 msgid ""
@@ -10973,6 +10988,12 @@ msgid ""
 "application> files, into standard <application>gettext</application> "
 "<filename>.pot/.po</filename> files."
 msgstr ""
+"在下面的说明中我们假定你不直接使用<application>gettext</application>，而是使"
+"用专门为<literal>GNOME</literal>编写的<application>intltool</application>。"
+"<application>intltool</application>使用<function>gettext()</function>从源代码"
+"中提取字符串，但是<application>intltool</application>也从其他文件（例如桌面菜"
+"单详情、glade的GUI资源文件）中提取字符串写入到标准的<application>gettext</"
+"application><filename>.pot/.po</filename>文件中。"
 
 #: C/index-in.docbook:6377
 msgid ""
@@ -10984,12 +11005,20 @@ msgid ""
 "<literal>autogen.sh</literal> file, which, among other things, takes care of "
 "some <application>intltool</application> initialization."
 msgstr ""
+"我们还假设你正在使用自动构建工具（例如：<application>automake</application>和"
+"<application>autoconf</application>）构建你的项目，并且你正在使用<ulink url="
+"\"https://gitlab.gnome.org/GNOME/gnome-common/blob/master/autogen.sh\">来自"
+"<application>gnome-common</application>的<literal>./autogen.sh</literal></"
+"ulink>或与之类似的<literal>autogen.sh</literal>文件，在这里它负责初始化"
+"<application>intltool</application>。"
 
 #: C/index-in.docbook:6391
 msgid ""
 "An alternative to <application>gnome-common</application>'s <literal>autogen."
 "sh</literal> may look like this:"
 msgstr ""
+"<application>gnome-common</application>的<literal>autogen.sh</literal>的替代"
+"方案可能如下所示："
 
 #: C/index-in.docbook:6395
 #, no-wrap
@@ -11003,6 +11032,14 @@ msgid ""
 "intltoolize --copy --force --automake\n"
 "test -n \"$NOCONFIGURE\" || \"$srcdir/configure\" \"$@\""
 msgstr ""
+"#! /bin/sh -e\n"
+"test -n \"$srcdir\" || srcdir=`dirname \"$0\"`\n"
+"test -n \"$srcdir\" || srcdir=.\n"
+"\n"
+"autoreconf --force --install --verbose --warnings=all \"$srcdir\"\n"
+"echo \"Running intltoolize --copy --force --automake\"\n"
+"intltoolize --copy --force --automake\n"
+"test -n \"$NOCONFIGURE\" || \"$srcdir/configure\" \"$@\""
 
 #: C/index-in.docbook:6404
 msgid ""
@@ -11013,6 +11050,10 @@ msgid ""
 "<literal>ChangeLog</literal> file in the <literal>po</literal> directory so "
 "that translators can keep track of translation changes."
 msgstr ""
+"在你项目的根目录下创建一个名称为<literal>po</literal>的子文件夹。该目录将包含"
+"你的所有翻译。在其中创建一个名为<literal>LINGUAS</literal>和一个名为"
+"<literal>POTFILES.in</literal>的文件。通常做法是在<literal>po</literal>文件夹"
+"再创建一个<literal>ChangeLog</literal>文件以便翻译人员跟踪翻译更改。"
 
 #: C/index-in.docbook:6414
 msgid ""
@@ -11023,6 +11064,11 @@ msgid ""
 "<literal>.po</literal> file. So, if your program has German and Japanese "
 "translations, your <literal>LINGUAS</literal> file would look like this:"
 msgstr ""
+"<literal>LINGUAS</literal>包含按字母顺序排列的代码列表，这些代码标识程序已翻"
+"译的语言（以<literal>#</literal>开头的行是注释将被忽略）。<literal>LINGUAS</"
+"literal>文件中每个位于代码列表中语言都需要有与之对应的<literal>.po</literal>"
+"文件。因此如果你的程序有德语和日语翻译，你的<literal>LINGUAS</literal>应如下"
+"所示："
 
 #: C/index-in.docbook:6423
 #, no-wrap
@@ -11031,6 +11077,9 @@ msgid ""
 "de\n"
 "ja"
 msgstr ""
+"# keep this file sorted alphabetically, one language code per line\n"
+"de\n"
+"ja"
 
 #: C/index-in.docbook:6426
 msgid ""
@@ -11038,6 +11087,8 @@ msgid ""
 "po</literal> in your <literal>po</literal> directory which contain the "
 "German and Japanese translations, respectively.)"
 msgstr ""
+"（此外，你的<literal>po</literal>文件夹必须有包含德语和日语翻译的<literal>ja."
+"po</literal>和<literal>de.po</literal>文件）"
 
 #: C/index-in.docbook:6433
 msgid ""
@@ -11048,6 +11099,10 @@ msgid ""
 "should be translated, your <literal>POTFILES.in</literal> file might look "
 "like this:"
 msgstr ""
+"<literal>POTFILES.in</literal>是一个开始于项目根目录，包含所有被标记为需要翻"
+"译字符串的文件路径列表。例如你的项目源代码位于<literal>src</literal>子目录"
+"中，其中有两个文件包含有需要被翻译的字符串，则你的<literal>POTFILES.in</"
+"literal>可能如下所示："
 
 #: C/index-in.docbook:6442
 #, no-wrap
@@ -11055,6 +11110,8 @@ msgid ""
 "src/main.cc\n"
 "src/other.cc"
 msgstr ""
+"src/main.cc\n"
+"src/other.cc"
 
 #: C/index-in.docbook:6445
 msgid ""
@@ -11068,6 +11125,13 @@ msgid ""
 "in <application>Glade</application> then also add your <filename>.glade</"
 "filename> files to the list in <literal>POTFILES.in</literal>."
 msgstr ""
+"如果你直接使用<application>gettext</application>，则你只能标记源代码文件中的"
+"字符串为需要被翻译。如果你使用<application>intltool</application>，则可以对多"
+"种格式的文件中的字符串进行标记，如<application>Glade</application>UI文件、"
+"XML、<ulink url=\"http://standards.freedesktop.org/desktop-entry-spec/latest/"
+"\">.desktop文件</ulink>等。因此如果你使用<application>Glade</application>设计"
+"了应用程序UI，则你还需要将<filename>.glade</filename>添加到你的"
+"<literal>POTFILES.in</literal>列表中。"
 
 #: C/index-in.docbook:6458
 msgid ""
@@ -11076,6 +11140,9 @@ msgid ""
 "Add the following code to your <literal>configure.ac</literal>, substituting "
 "'programname' with the name of your program:"
 msgstr ""
+"现在已经有了放置翻译的地方，你需要初始化<application>intltool</application>和"
+"<application>gettext</application>。将一下代码添加到你的<literal>configure."
+"ac</literal>，将\"programname\"替换为你的程序的名称："
 
 #: C/index-in.docbook:6465
 #, no-wrap
@@ -11092,6 +11159,17 @@ msgid ""
 "PROGRAMNAME_LOCALEDIR=[${datadir}/locale]\n"
 "AC_SUBST(PROGRAMNAME_LOCALEDIR)"
 msgstr ""
+"IT_PROG_INTLTOOL([0.35.0])\n"
+"\n"
+"GETTEXT_PACKAGE=programname\n"
+"AC_SUBST(GETTEXT_PACKAGE)\n"
+"AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], [\"$GETTEXT_PACKAGE\"],\n"
+"                   [The domain to use with gettext])\n"
+"AM_GNU_GETTEXT([external])\n"
+"AM_GNU_GETTEXT_VERSION([0.17])\n"
+"\n"
+"PROGRAMNAME_LOCALEDIR=[${datadir}/locale]\n"
+"AC_SUBST(PROGRAMNAME_LOCALEDIR)"
 
 #: C/index-in.docbook:6477
 msgid ""
@@ -11099,6 +11177,9 @@ msgid ""
 "the <literal>Makefile.am</literal> file, to define a macro that will be used "
 "when you initialize <application>gettext</application> in your source code."
 msgstr ""
+"<varname>PROGRAMNAME_LOCALEDIR</varname>将在稍后被<literal>Makefile.am</"
+"literal>文件使用。以定义在源代码中初始化<application>gettext</application>时"
+"将用到的宏。"
 
 #: C/index-in.docbook:6484
 msgid ""
@@ -11107,6 +11188,9 @@ msgid ""
 "literal>, but <literal>AM_GLIB_GNU_GETTEXT</literal> is now deprecated, and "
 "shall not be used in new code."
 msgstr ""
+"<literal>AM_GLIB_GNU_GETTEXT</literal>已由<literal>AM_GNU_GETTEXT</literal>和"
+"<literal>AM_GNU_GETTEXT_VERSION</literal>替代，且"
+"<literal>AM_GLIB_GNU_GETTEXT</literal>已被弃用，不应在任何新代码中使用。"
 
 #: C/index-in.docbook:6495
 msgid ""
@@ -11114,6 +11198,8 @@ msgid ""
 "Without this, your translations won't get built and installed when you build "
 "the program"
 msgstr ""
+"将<literal>po</literal>添加到<literal>SUBDIRS</literal>变量中。如果没有这个，"
+"在构建程序时不会生成和安装翻译。"
 
 #: C/index-in.docbook:6502
 #, no-wrap
@@ -11122,10 +11208,13 @@ msgid ""
 "                 intltool-merge.in \\\n"
 "                 intltool-update.in"
 msgstr ""
+"INTLTOOL_FILES = intltool-extract.in \\\n"
+"                 intltool-merge.in \\\n"
+"                 intltool-update.in"
 
 #: C/index-in.docbook:6500
 msgid "Define <literal>INTLTOOL_FILES</literal> as: <_:programlisting-1/>"
-msgstr ""
+msgstr "定义<literal>INTLTOOL_FILES</literal>为：<_:programlisting-1/>"
 
 #: C/index-in.docbook:6508
 msgid ""
@@ -11133,6 +11222,8 @@ msgid ""
 "list of files. This ensures that when you do a <command>make dist</command>, "
 "these files will be included in the source tarball."
 msgstr ""
+"将<literal>INTLTOOL_FILES</literal>添加到<literal>EXTRA_DIST</literal>文件列"
+"表。这样可以确保执行<command>make dist</command>时这些文件包含在源压缩包中。"
 
 #: C/index-in.docbook:6518
 #, no-wrap
@@ -11142,10 +11233,14 @@ msgid ""
 "                 intltool-update \\\n"
 "                 po/.intltool-merge-cache"
 msgstr ""
+"DISTCLEANFILES = ... intltool-extract \\\n"
+"                 intltool-merge \\\n"
+"                 intltool-update \\\n"
+"                 po/.intltool-merge-cache"
 
 #: C/index-in.docbook:6516
 msgid "Update your <literal>DISTCLEANFILES</literal>: <_:programlisting-1/>"
-msgstr ""
+msgstr "更新你的<literal>DISTCLEANFILES</literal>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:6528
 #, no-wrap
@@ -11155,16 +11250,20 @@ msgid ""
 "desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)\n"
 "@INTLTOOL_DESKTOP_RULE@"
 msgstr ""
+"desktopdir = $(datadir)/applications\n"
+"desktop_in_files = programname.desktop.in\n"
+"desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)\n"
+"@INTLTOOL_DESKTOP_RULE@"
 
 #: C/index-in.docbook:6525
 msgid ""
 "Depending on the types of files that contain translatable strings, add code "
 "such as <_:programlisting-1/>"
-msgstr ""
+msgstr "根据包含可翻译字符串的文件类型，添加以下代码：<_:programlisting-1/>"
 
 #: C/index-in.docbook:6491
 msgid "In the top-level Makefile.am: <_:itemizedlist-1/>"
-msgstr ""
+msgstr "在顶层<literal>Makefile.am</literal>中：<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:6537
 msgid ""
@@ -11172,21 +11271,23 @@ msgid ""
 "<literal>AM_CPPFLAGS</literal> to add the following preprocessor macro "
 "definition:"
 msgstr ""
+"在你的<literal>src/Makefile.am</literal>中，更新你的<literal>AM_CPPFLAGS</"
+"literal>以添加以下预处理宏定义："
 
 #: C/index-in.docbook:6542
 #, no-wrap
 msgid "AM_CPPFLAGS = ... -DPROGRAMNAME_LOCALEDIR=\\\"${PROGRAMNAME_LOCALEDIR}\\\""
-msgstr ""
+msgstr "AM_CPPFLAGS = ... -DPROGRAMNAME_LOCALEDIR=\\\"${PROGRAMNAME_LOCALEDIR}\\\""
 
 #: C/index-in.docbook:6543
 msgid ""
 "This macro will be used when you initialize <literal>gettext</literal> in "
 "your source code."
-msgstr ""
+msgstr "在你的源代码中初始化<literal>gettext</literal>时将使用这个宏。"
 
 #: C/index-in.docbook:6550
 msgid "Marking strings for translation"
-msgstr ""
+msgstr "标记要翻译的字符串"
 
 #: C/index-in.docbook:6552
 msgid ""
@@ -11195,6 +11296,9 @@ msgid ""
 "function. These strings will be extracted for translation and the "
 "translations may be used at runtime instead of the original English strings."
 msgstr ""
+"源代码中的字符串字面量应该以英文键入，但应将其包含在对<function>gettext()</"
+"function>函数的调用中。这些字符串将被提取以进行翻译，并且在运行时翻译可以替代"
+"原始的英文字符串。"
 
 #: C/index-in.docbook:6560
 msgid ""
@@ -11202,16 +11306,18 @@ msgid ""
 "strings in source code, extract those strings for translation, and use the "
 "translated strings in your application."
 msgstr ""
+"<application>GNU gettext</application>允许你标记源代码中的字符串，提取这些字"
+"符串进行翻译，并在你的应用程序中使用翻译好的字符串。"
 
 #: C/index-in.docbook:6572
 #, no-wrap
 msgid "display_message(\"Getting ready for i18n.\");"
-msgstr ""
+msgstr "display_message(\"Getting ready for i18n.\");"
 
 #: C/index-in.docbook:6574
 #, no-wrap
 msgid "display_message(_(\"Getting ready for i18n.\"));"
-msgstr ""
+msgstr "display_message(_(\"Getting ready for i18n.\"));"
 
 #: C/index-in.docbook:6566
 msgid ""
@@ -11221,11 +11327,14 @@ msgid ""
 "then, for example, substitute: <_:programlisting-1/> with: <_:"
 "programlisting-2/>"
 msgstr ""
+"<application>Glib</application>定义了<function>gettext()</function>支持宏，这"
+"些宏更为简单易用，要使用这些宏请<literal>#include &lt;glibmm/i18n.h&gt;</"
+"literal>然后将：<_:programlisting-1/>替换为：<_:programlisting-2/>"
 
 #: C/index-in.docbook:6585
 #, no-wrap
 msgid "xgettext -a -o my-strings --omit-header *.cc *.h"
-msgstr ""
+msgstr "xgettext -a -o my-strings --omit-header *.cc *.h"
 
 #: C/index-in.docbook:6577
 msgid ""
@@ -11235,6 +11344,9 @@ msgid ""
 "named <literal>my-strings</literal>, execute the following command, within "
 "the source code directory: <_:programlisting-1/>"
 msgstr ""
+"可以生成一个包含代码中出现的所有字符串（即使没有被标记为需要翻译）以及其文件"
+"名与行号引用的文件作为参考。要生成名为<literal>my-strings</literal>的文件，请"
+"在源代码目录执行以下命令：<_:programlisting-1/>"
 
 #: C/index-in.docbook:6592
 #, no-wrap
@@ -11243,6 +11355,9 @@ msgid ""
 "bind_textdomain_codeset(GETTEXT_PACKAGE, \"UTF-8\");\n"
 "textdomain(GETTEXT_PACKAGE);"
 msgstr ""
+"bindtextdomain(GETTEXT_PACKAGE, PROGRAMNAME_LOCALEDIR);\n"
+"bind_textdomain_codeset(GETTEXT_PACKAGE, \"UTF-8\");\n"
+"textdomain(GETTEXT_PACKAGE);"
 
 #: C/index-in.docbook:6588
 msgid ""
@@ -11250,10 +11365,13 @@ msgid ""
 "this code to the beginning of your <filename>main.cc</filename> file, to "
 "initialize gettext. <_:programlisting-1/>"
 msgstr ""
+"最后，要让你的程序使用当前环境的翻译，请将以下代码添加到你的<filename>main."
+"cc</filename>文件的开头，以初始化<function>gettext()</function>。<_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:6598
 msgid "How gettext works"
-msgstr ""
+msgstr "gettext如何工作"
 
 #: C/index-in.docbook:6600
 msgid ""
@@ -11268,6 +11386,14 @@ msgid ""
 "application> script is used to update the <filename>localename.po</filename> "
 "files from the regenerated <filename>.pot</filename> file."
 msgstr ""
+"<application>intltool-update</application>或<application>xgettext</"
+"application>脚本提取字符串并将其放入<filename>mypackage.pot</filename>文件"
+"中。应用程序的翻译人员首先将此<filename>.pot</filename>文件复制到"
+"<filename>localename.po</filename>中以创建翻译。语言环境标识一种语言和该语言"
+"使用的编码，包括日期和数字使用的格式。在之后，当源代码中的文本更改时，使用"
+"<application>msgmerge</application>或<application>intltool-update</"
+"application>脚本重新生成的<filename>.pot</filename>文件更新"
+"<filename>localename.po</filename>文件。"
 
 #: C/index-in.docbook:6614
 msgid ""
@@ -11276,6 +11402,9 @@ msgid ""
 "system-wide directory for locale files, for example <filename>/usr/share/"
 "locale/</filename>."
 msgstr ""
+"在安装时，<filename>.po</filename>将被转换为二进制格式（扩展名为<filename>."
+"mo</filename>），并将其放置于系统所有的区域设置文件夹中，例如<filename>/usr/"
+"share/locale/</filename>。"
 
 #: C/index-in.docbook:6621
 msgid ""
@@ -11287,15 +11416,20 @@ msgid ""
 "translation of a particular string. If none is found, the original string is "
 "used."
 msgstr ""
+"当应用程序运行时，<application>gettext</application>将检查系统目录是否存在与"
+"用户语言环境对应的<filename>.mo</filename>文件（你可以使用以下命令指定语言环"
+"境，例如：在bash控制台上输入<command>export LANG=de_DE.UTF-8</command>）。稍"
+"后在程序到达<literal>gettext</literal>调用时，它将从中寻找特定字符串的翻译，"
+"如果未找到则使用原始字符串。"
 
 #: C/index-in.docbook:6633
 msgid "Testing and adding translations"
-msgstr ""
+msgstr "测试和添加翻译"
 
 #: C/index-in.docbook:6640
 #, no-wrap
 msgid "intltool-update --pot"
-msgstr ""
+msgstr "intltool-update --pot"
 
 #: C/index-in.docbook:6635
 msgid ""
@@ -11304,6 +11438,8 @@ msgid ""
 "filename> subdirectory of your project and execute the following command: <_:"
 "programlisting-1/>"
 msgstr ""
+"为了说服自己做得很好，你可能希望为新的语言环境添加翻译。为此请转到项目的"
+"<filename>po</filename>子文件夹并执行以下命令：<_:programlisting-1/>"
 
 #: C/index-in.docbook:6643
 msgid ""
@@ -11316,6 +11452,12 @@ msgid ""
 "filename> file (specified in the header, but also as content) to "
 "<literal>UTF-8</literal>."
 msgstr ""
+"这将创建一个名为<filename>programname.pot</filename>的文件。现在将该文件复制"
+"到<filename>languagecode.po</filename>，例如<filename>de.po</filename>或"
+"<filename>hu.po</filename>。接着将该语言代码添加到<literal>LINGUAS</literal>"
+"文件中。<filename>.po</filename>文件包含标头和英语字符串列表，并为翻译文本预"
+"留了空间。请确保将<filename>.po</filename>文件的编码设置（在标头中指定，但也"
+"指定其内容的编码）为了<literal>UTF-8</literal>。"
 
 #: C/index-in.docbook:6656
 msgid ""
@@ -11324,56 +11466,72 @@ msgid ""
 "substitute the original string. To make them appear, simply remove the "
 "<literal>fuzzy</literal> tag."
 msgstr ""
+"<filename>.po</filename>文件中有些字符串可能被标记为<literal>fuzzy</"
+"literal>。这些翻译将不会替代原始字符串。如果要使其显示，只需要将"
+"<literal>fuzzy</literal>标记删除即可（通常该标记意味着翻译需要更新，不检查翻"
+"译直接删除标记是不对的）。"
 
 #: C/index-in.docbook:6666
 msgid "Resources"
-msgstr ""
+msgstr "资源"
 
 #: C/index-in.docbook:6674
 msgid ""
 "<ulink url=\"https://wiki.gnome.org/TranslationProject/DevGuidelines\"> L10N "
 "Guidelines for Developers</ulink>"
 msgstr ""
+"<ulink url=\"https://wiki.gnome.org/TranslationProject/DevGuidelines\">本地化"
+"开发人员指南</ulink>"
 
 #: C/index-in.docbook:6681
 msgid ""
 "<ulink url=\"http://bazaar.launchpad.net/~intltool/intltool/trunk/view/head:/"
 "README\">Intltool README</ulink>"
 msgstr ""
+"<ulink url=\"http://bazaar.launchpad.net/~intltool/intltool/trunk/view/head:/"
+"README\">Intltool自述文件</ulink>"
 
 #: C/index-in.docbook:6687
 msgid ""
 "<ulink url=\"https://wiki.gnome.org/TranslationProject/GitHowTo\">How to use "
 "Git for GNOME translators</ulink>"
 msgstr ""
+"<ulink url=\"https://wiki.gnome.org/TranslationProject/GitHowTo\">GNOME译者如"
+"何使用Git</ulink>"
 
 #: C/index-in.docbook:6693
 msgid ""
 "<ulink url=\"http://www.gnu.org/software/gettext/manual/gettext.html"
 "\">gettext manual</ulink>"
 msgstr ""
+"<ulink url=\"http://www.gnu.org/software/gettext/manual/gettext.html"
+"\">gettext手册</ulink>"
 
 #: C/index-in.docbook:6699
 msgid ""
 "<ulink url=\"http://ftp.gnome.org/pub/GNOME/sources/gtkmm_hello/"
 "\"><literal>gtkmm_hello</literal> example package</ulink>"
 msgstr ""
+"<ulink url=\"http://ftp.gnome.org/pub/GNOME/sources/gtkmm_hello/"
+"\"><literal>gtkmm_hello</literal>示例包</ulink>"
 
 #: C/index-in.docbook:6705
 msgid ""
 "<ulink url=\"http://ftp.gnome.org/pub/GNOME/sources/gnomemm_hello/"
 "\"><literal>gnomemm_hello</literal> example package</ulink>"
 msgstr ""
+"<ulink url=\"http://ftp.gnome.org/pub/GNOME/sources/gnomemm_hello/"
+"\"><literal>gnomemm_hello</literal>示例包</ulink>"
 
 #: C/index-in.docbook:6668
 msgid ""
 "More information about what lies behind the internationalization and "
 "localization process is presented and demonstrated in: <_:itemizedlist-1/>"
-msgstr ""
+msgstr "更多与国际化与本地化有关的信息，请参阅以下内容：<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:6716
 msgid "Expecting UTF8"
-msgstr ""
+msgstr "期望使用UTF8"
 
 #: C/index-in.docbook:6717
 msgid ""
@@ -11383,6 +11541,10 @@ msgid ""
 "shouldn't use <classname>std::string</classname> or standard C functions "
 "such as <function>strlen()</function> because they make the same assumption."
 msgstr ""
+"好的国际化应用程序不会假设字符中的字节数。这意味着你不应该使用指针算数遍历字"
+"符串中的字符，也意味着你不应该使用<classname>std::string</classname>以及像"
+"<function>strlen()</function>这样的与字符串有关的标准C函数，因为他们都对字符"
+"的字节数做了假设。"
 
 #: C/index-in.docbook:6724
 msgid ""
@@ -11392,10 +11554,14 @@ msgid ""
 "basics-ustring\">Basics</link> chapter about <classname>Glib::ustring</"
 "classname>."
 msgstr ""
+"你可能已经通过使用<classname>std::string</classname>避免了使用原始的<literal"
+">char*</literal>和<literal>char[]</literal>进行指针算数。那么你只需要换"
+"成使用<classname>Glib::ustring</classname>即可。更多详情请参阅<link linkend="
+"\"sec-basics-ustring\">Glib::ustring基础</link>章节。"
 
 #: C/index-in.docbook:6733
 msgid "Glib::ustring and std::iostreams"
-msgstr ""
+msgstr "Glib::ustring和std::iostreams"
 
 #: C/index-in.docbook:6750
 #, no-wrap
@@ -11407,6 +11573,12 @@ msgid ""
 "output &lt;&lt; percentage &lt;&lt; \" % done\";\n"
 "label-&gt;set_text(Glib::locale_to_utf8(output.str()));"
 msgstr ""
+"std::locale::global(std::locale(\"\")); // Set the global locale to the user's preferred locale.\n"
+"                                      // Usually unnecessary here, because Glib::init()\n"
+"                                      // or Gtk::Application::create() does it for you.\n"
+"std::ostringstream output;\n"
+"output &lt;&lt; percentage &lt;&lt; \" % done\";\n"
+"label-&gt;set_text(Glib::locale_to_utf8(output.str()));"
 
 #: C/index-in.docbook:6735
 msgid ""
@@ -11427,20 +11599,33 @@ msgid ""
 "string</classname> from a <classname>ostringstream</classname>: <_:"
 "programlisting-1/>"
 msgstr ""
+"不幸的是，与标准<classname>iostreams</classname>的集成并非绝对安全的。如果你"
+"将<classname>Glib::ustring</classname>使用<function>operator&lt;&lt;</"
+"function>输出到<classname>ostream</classname>中，则<application>gtkmm</"
+"application>会将<classname>Glib::ustring</classname>转换为使用特定语言编码"
+"（通常不会是UTF-8编码）。而使用<function>operator&gt;&gt;</function>将"
+"<classname>istream</classname>输入到<classname>Glib::ustring</classname>会发"
+"生相反的转换。但是如果你通过<classname>std::string</classname>进行则该方案会"
+"失效，例如，从文本输入流转换成<classname>std::string</classname>再隐式转换为"
+"<classname>Glib::ustring</classname>。如果该字符串中包含非ASCII字符且当前的语"
+"言环境不使用UTF-8编码，则得到的结果是一个损坏的<classname>Glib::ustring</"
+"classname>。你可以通过手动转换编码解决此问题。例如，若要从"
+"<classname>ostringstream</classname>中接受<classname>std::string</"
+"classname>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:6762
 msgid "Pitfalls"
-msgstr ""
+msgstr "陷阱"
 
 #: C/index-in.docbook:6764
 msgid ""
 "There are a few common mistakes that you would discover eventually yourself. "
 "But this section might help you to avoid them."
-msgstr ""
+msgstr "有几个你最终会自己发现的错误。但本小节可能能帮助你避免它们。"
 
 #: C/index-in.docbook:6767
 msgid "Same strings, different semantics"
-msgstr ""
+msgstr "不同语义的同一字符串。"
 
 #: C/index-in.docbook:6769
 msgid ""
@@ -11448,6 +11633,8 @@ msgid ""
 "different contexts, so they would probably not be identical when translated. "
 "Since the English strings are used as look-up keys, this causes problems."
 msgstr ""
+"有时，两个英文字符串是相同的但是在不同的上下文中有不同的含义，因此他们的译文"
+"不一定相同。此时用英文字符串作为查找键会引起问题。"
 
 #: C/index-in.docbook:6773
 msgid ""
@@ -11459,6 +11646,11 @@ msgid ""
 "the <function>gettext</function> call. Such comments will be shown in the "
 "<filename>.po</filename> files. For instance:"
 msgstr ""
+"在这个情况下，你应该在字符串中添加额外的字符。例如，使用<literal>"
+"\"jumps[noun]\"</literal>和<literal>\"jumps[verb]\"</literal>而不是用"
+"<literal>\"jumps\"</literal>并在调用<function>gettext</function>后将它们剥"
+"离。如果你添加了额外的字符，你还应该在调用<function>gettext</function>之前为"
+"译者添加注释。这样的注释将被显示于<filename>.po</filename>中。例如："
 
 #: C/index-in.docbook:6782
 #, no-wrap
@@ -11467,6 +11659,9 @@ msgid ""
 "// just here to distinguish the string from another \"jumps\" string\n"
 "text = strip(gettext(\"jumps[noun]\"), \"[noun]\");"
 msgstr ""
+"// note to translators: don't translate the \"[noun]\" part - it is\n"
+"// just here to distinguish the string from another \"jumps\" string\n"
+"text = strip(gettext(\"jumps[noun]\"), \"[noun]\");"
 
 #: C/index-in.docbook:6786
 msgid ""
@@ -11474,15 +11669,17 @@ msgid ""
 "Use <function>C_()</function> instead of <function>_()</function>. For "
 "instance:"
 msgstr ""
+"如果你使用<application>Glib</application>宏，将会更为方便。你只需要使用"
+"<function>C_()</function>替换<function>_()</function>。例如："
 
 #: C/index-in.docbook:6790
 #, no-wrap
 msgid "GLib::ustring text(C_(\"noun\", \"jumps\"));"
-msgstr ""
+msgstr "GLib::ustring text(C_(\"noun\", \"jumps\"));"
 
 #: C/index-in.docbook:6795
 msgid "Composition of strings"
-msgstr ""
+msgstr "合成字符串"
 
 #: C/index-in.docbook:6797
 msgid ""
@@ -11492,10 +11689,13 @@ msgid ""
 "separately, without allowing the translators to rearrange them according to "
 "the grammar of the language."
 msgstr ""
+"C程序员使用<function>sprintf()</function>合成和拼接字符串。而C++支持流，不幸"
+"的是，使用这种方法生成的字符串将给翻译带来困难，因为文本被分成了多个片段，译"
+"者必须分开翻译多个片段而不能进行重新排列，这会导致很多字符串无法被正确翻译。"
 
 #: C/index-in.docbook:6804
 msgid "For instance, this code would be problematic:"
-msgstr ""
+msgstr "例如，此代码将会出现问题："
 
 #: C/index-in.docbook:6806
 #, no-wrap
@@ -11505,6 +11705,10 @@ msgid ""
 "\n"
 "label.set_text(_(\"Really delete \") + filename + _(\" now?\"));"
 msgstr ""
+"std::cout &lt;&lt; _(\"Current amount: \") &lt;&lt; amount\n"
+"          &lt;&lt; _(\" Future: \") &lt;&lt; future &lt;&lt; std::endl;\n"
+"\n"
+"label.set_text(_(\"Really delete \") + filename + _(\" now?\"));"
 
 #: C/index-in.docbook:6815
 #, no-wrap
@@ -11514,6 +11718,10 @@ msgid ""
 "\n"
 "label.set_text(Glib::ustring::compose(_(\"Really delete %1 now?\"), filename));"
 msgstr ""
+"std::cout &lt;&lt; Glib::ustring::compose(\n"
+"             _(\"Current amount: %1 Future: %2\"), amount, future) &lt;&lt; std::endl;\n"
+"\n"
+"label.set_text(Glib::ustring::compose(_(\"Really delete %1 now?\"), filename));"
 
 #: C/index-in.docbook:6811
 msgid ""
@@ -11522,10 +11730,13 @@ msgid ""
 "\"><function>Glib::ustring::compose()</function></ulink> which supports "
 "syntax such as: <_:programlisting-1/>"
 msgstr ""
+"因此你应该避免这种情况的出现或者使用<ulink url=\"http://developer.gnome.org/"
+"glibmm/unstable/classGlib_1_1ustring.html\"><function>Glib::ustring::"
+"compose()</function></ulink>以支持如下所示的语法：<_:programlisting-1/>"
 
 #: C/index-in.docbook:6823
 msgid "Assuming the displayed size of strings"
-msgstr ""
+msgstr "假设显示字符串所需的空间"
 
 #: C/index-in.docbook:6825
 msgid ""
@@ -11534,10 +11745,13 @@ msgid ""
 "Luckily, most <application>gtkmm</application> widgets will expand at "
 "runtime to the required size."
 msgstr ""
+"你永远不知道一个字符串被翻译后要在屏幕上显示它需要消耗多少空间。它可能是原始"
+"英文字符串的两倍甚至更多。幸运的是 <application>gtkmm</application>的多数部件"
+"都能在运行时自动扩展到需要的尺寸。"
 
 #: C/index-in.docbook:6829
 msgid "Unusual words"
-msgstr ""
+msgstr "\"黑话\""
 
 #: C/index-in.docbook:6831
 msgid ""
@@ -11545,10 +11759,13 @@ msgid ""
 "difficult to translate, and are often difficult for even native speakers to "
 "understand. For instance, prefer \"application\" to \"app\""
 msgstr ""
+"你应该避免使用不常见的用于例如缩写、俚语、行话。通常它们对于译者来说很难翻"
+"译，甚至将该语言作为母语的译者也无法理解。例如，最好使用\"application\"而不是"
+"\"app\""
 
 #: C/index-in.docbook:6837
 msgid "Using non-ASCII characters in strings"
-msgstr ""
+msgstr "在字符串中使用非ASCII字符"
 
 #: C/index-in.docbook:6839
 msgid ""
@@ -11556,6 +11773,8 @@ msgid ""
 "characters (i.e. any characters with a code above 127) in source code. For "
 "instance, you cannot use the copyright sign (©)."
 msgstr ""
+"当前，<application>gettext</application>并不支持在源代码中使用非ASCII字符。例"
+"如，你不能使用版权标志（©）"
 
 #: C/index-in.docbook:6845
 msgid ""
@@ -11565,10 +11784,12 @@ msgid ""
 "American English <filename>en_US.po</filename> translation which used that "
 "special character."
 msgstr ""
+"要解决这个问题你可以使用注释提醒译者可以使用他们语言中可用的特殊字符。对于英"
+"语用户你可以在美国英语<filename>en_US.po</filename>翻译中使用特殊字符。"
 
 #: C/index-in.docbook:6853
 msgid "Getting help with translations"
-msgstr ""
+msgstr "获取翻译帮助"
 
 #: C/index-in.docbook:6855
 msgid ""
@@ -11577,6 +11798,9 @@ msgid ""
 "\"https://wiki.gnome.org/TranslationProject/\"><literal>GNOME</literal> "
 "Translation Project</ulink>."
 msgstr ""
+"如果你的程序是免费软件，有一个致力于帮助你制作翻译的<literal>GNOME</literal>"
+"子项目：<ulink url=\"https://wiki.gnome.org/TranslationProject/"
+"\"><literal>GNOME</literal>翻译项目</ulink>。"
 
 #: C/index-in.docbook:6860
 msgid ""
@@ -11585,6 +11809,9 @@ msgid ""
 "and ask to have your program added to the <ulink url=\"http://l10n.gnome.org/"
 "module/\">list of modules to translate</ulink>."
 msgstr ""
+"它的工作方式是将你的源代码上传到git储存库，以便翻译人员可以访问它，然后联系"
+"gnome-i18n请求将你的程序添加到<ulink url=\"http://l10n.gnome.org/module/\">待"
+"翻译模块列表</ulink>中。"
 
 #: C/index-in.docbook:6865
 msgid ""
@@ -11597,6 +11824,12 @@ msgid ""
 "popular it is, the translations will then start to tick in as "
 "<filename>languagename.po</filename> files."
 msgstr ""
+"然后请确保更新<filename>po/</filename>子目录下的<filename>POTFILES.in</"
+"filename>（<command>intltool-update -m</command>可以提供帮助），以便译者始终"
+"可以访问更新好的<filename>myprogram.pot</filename>文件，并在发布新版本之前的"
+"两三天在gnome-i18n邮件列表上宣布冻结字符串更改。根据程序所包含的字符串数数量"
+"以及程序的受欢迎程度，译者将逐渐向你提交<filename>languagename.po</filename>"
+"文件。"
 
 #: C/index-in.docbook:6877
 msgid ""
@@ -11607,6 +11840,9 @@ msgid ""
 "your project as being really serious (in the sense that it is polished and "
 "being maintained) they may decide to spend their time on some other project."
 msgstr ""
+"请注意，大多数语言的翻译团队仅有1-3位成员，所以如果你的程序包含了很多的字符"
+"串，则可能需要很长时间才有译者查看它。此外，大多数译者都不想浪费时间，因此如"
+"果他们认为你的项目质量很低，他们可能不会想为你提供翻译。"
 
 #: C/index-in.docbook:6889 C/index-in.docbook:6960
 msgid "Custom Widgets"
