@@ -11554,10 +11554,10 @@ msgid ""
 "basics-ustring\">Basics</link> chapter about <classname>Glib::ustring</"
 "classname>."
 msgstr ""
-"你可能已经通过使用<classname>std::string</classname>避免了使用原始的<literal"
-">char*</literal>和<literal>char[]</literal>进行指针算数。那么你只需要换"
-"成使用<classname>Glib::ustring</classname>即可。更多详情请参阅<link linkend="
-"\"sec-basics-ustring\">Glib::ustring基础</link>章节。"
+"你可能已经通过使用<classname>std::string</classname>避免了使用原始的"
+"<literal>char*</literal>和<literal>char[]</literal>进行指针算数。那么你只需要"
+"换成使用<classname>Glib::ustring</classname>即可。更多详情请参阅<link "
+"linkend=\"sec-basics-ustring\">Glib::ustring基础</link>章节。"
 
 #: C/index-in.docbook:6733
 msgid "Glib::ustring and std::iostreams"
@@ -11846,7 +11846,7 @@ msgstr ""
 
 #: C/index-in.docbook:6889 C/index-in.docbook:6960
 msgid "Custom Widgets"
-msgstr ""
+msgstr "自定义部件"
 
 #: C/index-in.docbook:6891
 msgid ""
@@ -11857,28 +11857,36 @@ msgid ""
 "suitable starting point already exists. In this case, you can implement a "
 "widget from scratch."
 msgstr ""
+"<application>gtkmm</application>可以很轻松的通过继承现有部件类、从容器派生并"
+"向其中添加子部件、从单项部件派生并修改其行为等手段派生新的部件。但有时你会发"
+"现找不到合适的起点。在这种情况下你可以从头实现部件。"
 
 #: C/index-in.docbook:6898
 msgid "Custom Containers"
-msgstr ""
+msgstr "自定义容器"
 
 #: C/index-in.docbook:6902
 msgid ""
 "<methodname>get_request_mode_vfunc()</methodname>: Return what <literal>Gtk::"
 "SizeRequestMode</literal> is preferred by the container."
 msgstr ""
+"<methodname>get_request_mode_vfunc()</methodname>：返回容器的<literal>Gtk::"
+"SizeRequestMode</literal>偏好。"
 
 #: C/index-in.docbook:6903
 msgid ""
 "<methodname>measure_vfunc()</methodname>: Calculate the minimum and natural "
 "width or height of the container."
 msgstr ""
+"<methodname>measure_vfunc()</methodname>：返回容器的最小自然宽度或高度。"
 
 #: C/index-in.docbook:6904
 msgid ""
 "<methodname>on_size_allocate()</methodname>: Position the child widgets, "
 "given the height and width that the container has actually been given."
 msgstr ""
+"<methodname>on_size_allocate()</methodname>：根据容器实际宽度和高度定位子部"
+"件。"
 
 #: C/index-in.docbook:6899
 msgid ""
@@ -11886,6 +11894,8 @@ msgid ""
 "Widget</classname>, you should override the following virtual methods: <_:"
 "itemizedlist-1/>"
 msgstr ""
+"直接从<classname>Gtk::Widget</classname>派生自定义容器部件时，应重写一下虚方"
+"法：<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:6908
 msgid ""
@@ -11904,6 +11914,15 @@ msgid ""
 "examining each widget's parent, and its parent, this logic will eventually "
 "decide the size of the top-level window."
 msgstr ""
+"<methodname>get_request_mode_vfunc()</methodname>、"
+"<methodname>measure_vfunc()</methodname>、<methodname>on_size_allocate()</"
+"methodname>虚方法控制子部件的布局。例如，如果你的容器有两个子部件，一个在另一"
+"个的下方，则你的<methodname>get_request_mode_vfunc()</methodname>可能会请求布"
+"局高度适应宽度。然后你的<methodname>measure_vfunc()</methodname>可能会要求报"
+"告宽度的时候报告子部件的最大宽度，在要求报告高度的时候要求子部件的高度之和。"
+"如果你想要在子部件之间进行填充，则你应将填充部分算入宽高中。你的容器部件将用"
+"这个结果确保部件获得足够的空间。通过对每个部件的父部件进行检查最终确认顶级窗"
+"口的大小。"
 
 #: C/index-in.docbook:6925
 msgid ""
@@ -11914,6 +11933,11 @@ msgid ""
 "see also the description of <methodname>Gtk::Widget::measure()</methodname>, "
 "which may be better documented than <methodname>measure_vfunc()</methodname>."
 msgstr ""
+"你无法确保得到你请求的<literal>Gtk::SizeRequestMode</literal>。因此，"
+"<methodname>measure_vfunc()</methodname>必须为其所有合理的输入参数值返回合适"
+"的值。有关<methodname>measure_vfunc()</methodname>参数的描述，查看"
+"<methodname>Gtk::Widget::measure()</methodname>的描述可能比查看"
+"<methodname>measure_vfunc()</methodname>的文档更好。"
 
 #: C/index-in.docbook:6932
 msgid ""
@@ -11925,6 +11949,10 @@ msgid ""
 "your child widgets to fill the space, or you might choose to expand the "
 "padding between your widgets. It's your container, so you decide."
 msgstr ""
+"<methodname>on_size_allocate()</methodname>接收父容器决定给你的部件的实际高度"
+"和宽度。例如，如果顶层窗口被扩展，则该值将大于最小值，甚至大于自然大小。你可"
+"以选择忽略多余的空间留出一个空白区域，或者选择扩展子部件以填充该空间，或者是"
+"选择扩展部件之间的填充。"
 
 #: C/index-in.docbook:6943
 msgid ""
@@ -11932,16 +11960,21 @@ msgid ""
 "other. Of course, in this case it would be far simpler just to use a "
 "vertical <classname>Gtk::Box</classname> or <classname>Gtk::Grid</classname>."
 msgstr ""
+"本示例实现了一个具有两个子部件的容器，一个在另一个上面。当然在这种情况下直接"
+"使用垂直<classname>Gtk::Box</classname>或<classname>Gtk::Grid</classname>会更"
+"简单。"
 
 #: C/index-in.docbook:6948
 msgid "Custom Container"
-msgstr ""
+msgstr "自定义容器"
 
 #: C/index-in.docbook:6954
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/custom/custom_container/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/custom/custom_container/\">源代码</ulink>"
 
 #: C/index-in.docbook:6961
 msgid ""
@@ -11950,50 +11983,64 @@ msgid ""
 "widgets. For instance, a <classname>Gtk::Label</classname> draws the text of "
 "the label, but does not do this by using other widgets."
 msgstr ""
+"通过从<classname>Gtk::Widget</classname>派生部件你可以为部件绘制所有的图形，"
+"而不仅仅是排列子部件。例如：<classname>Gtk::Label</classname>不需要使用其他部"
+"件即可绘制标签文本。"
 
 #: C/index-in.docbook:6972
 msgid ""
 "<methodname>get_request_mode_vfunc()</methodname>: (optional) Return what "
 "<literal>Gtk::SizeRequestMode</literal> is preferred by the widget."
 msgstr ""
+"<methodname>get_request_mode_vfunc()</methodname>：覆写此虚函数是可选的，返回"
+"此部件的<literal>Gtk::SizeRequestMode</literal>偏好。"
 
 #: C/index-in.docbook:6973
 msgid ""
 "<methodname>measure_vfunc()</methodname>: Calculate the minimum and natural "
 "width or height of the widget."
 msgstr ""
+"<methodname>measure_vfunc()</methodname>：计算此部件的最小自然高度或宽度。"
 
 #: C/index-in.docbook:6974
 msgid ""
 "<methodname>on_size_allocate()</methodname>: Position the widget, given the "
 "height and width that it has actually been given."
 msgstr ""
+"<methodname>on_size_allocate()</methodname>：提供将实际给予部件的宽度和高度以"
+"定位部件。"
 
 #: C/index-in.docbook:6975
 msgid ""
 "<methodname>on_realize()</methodname>: Associate a <classname>Gdk::Surface</"
 "classname> with the widget."
 msgstr ""
+"<methodname>on_realize()</methodname>：将一个<classname>Gdk::Surface</"
+"classname>与部件相关联。"
 
 #: C/index-in.docbook:6976
 msgid ""
 "<methodname>on_unrealize()</methodname>: (optional) Break the association "
 "with the <classname>Gdk::Surface</classname>."
 msgstr ""
+"<methodname>on_unrealize()</methodname>：覆写此虚函数是可选的，断开"
+"<classname>Gdk::Surface</classname>与部件的关联。"
 
 #: C/index-in.docbook:6977
 msgid "<methodname>on_map()</methodname>: (optional)"
-msgstr ""
+msgstr "<methodname>on_map()</methodname>：覆写此虚函数是可选的。"
 
 #: C/index-in.docbook:6978
 msgid "<methodname>on_unmap()</methodname>: (optional)"
-msgstr ""
+msgstr "<methodname>on_unmap()</methodname>：覆写此虚函数是可选的。"
 
 #: C/index-in.docbook:6979
 msgid ""
 "<methodname>snapshot_vfunc()</methodname>: Create a render node, e.g. a "
 "<classname>Cairo::Context</classname> node, and draw on it."
 msgstr ""
+"<methodname>snapshot_vfunc()</methodname>：创建一个渲染节点（例如：一个"
+"<classname>Cairo::Context</classname>节点），并在其上进行绘制。"
 
 #: C/index-in.docbook:6967
 msgid ""
@@ -12002,6 +12049,9 @@ msgid ""
 "overridden in all custom widgets. The base class's methods may be "
 "appropriate. <_:itemizedlist-1/>"
 msgstr ""
+"当你从<classname>Gtk::Widget</classname>派生部件时，你应该覆写以下虚函数。其"
+"中标记为可选的的虚函数不必在所有自定义部件中都进行覆写。它们的基类方法通常情"
+"况下已经很合适。<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:6983
 msgid ""
@@ -12009,10 +12059,12 @@ msgid ""
 "containers. They are briefly described in the <link linkend=\"sec-custom-"
 "containers\">Custom Containers</link> section."
 msgstr ""
+"上述前三个函数在自定义容器中也被覆写。它们在<link linkend=\"sec-custom-"
+"containers\">自定义容器</link>小节做了简要说明。"
 
 #: C/index-in.docbook:6989
 msgid "Class Init and Instance Init Functions"
-msgstr ""
+msgstr "类初始化和实例初始化函数"
 
 #: C/index-in.docbook:6991
 msgid ""
@@ -12024,10 +12076,15 @@ msgid ""
 "your custom class from that class. The following example shows how that's "
 "done."
 msgstr ""
+"一些<application>GTK</application>函数必须在类的init函数中才能调用。另一些"
+"<application>GTK</application>函数必须在实例的init函数中才能调用。如果你的自"
+"定义部件必须调用这些函数中的任意一个，那么你可以从<classname>Glib::"
+"ExtraClassInit</classname>派生一个类，并从该类派生你的自定义类。以下示例演示"
+"了如何完成这些操作。"
 
 #: C/index-in.docbook:7000
 msgid "Custom Style Information"
-msgstr ""
+msgstr "自定义样式信息"
 
 #: C/index-in.docbook:7002
 msgid ""
@@ -12043,20 +12100,30 @@ msgid ""
 "The following example shows a simple use of <methodname>Gtk::StyleContext::"
 "get_padding()</methodname>."
 msgstr ""
+"无论你的部件类是从<classname>Gtk::Widget</classname>还是从其他部件类派生的，"
+"它都可以从CSS文件中读取样式信息。然后对于使用你的部件的用户或是使用你的部件的"
+"应用程序的用户而言，他们可以不需要修改源代码就能修改部件的样式。用于实现此功"
+"能的类是<classname>Gtk::StyleContext</classname>和<classname>Gtk::"
+"CssProvider</classname>。你可以使用<classname>Gtk::StyleContext</classname>类"
+"的方法读取部件样式信息。<application>GTK</application>文档描述了其对于CSS文件"
+"的支持情况。以下是示例演示了<methodname>Gtk::StyleContext::get_padding()</"
+"methodname>的简单用法。"
 
 #: C/index-in.docbook:7016
 msgid "This example implements a widget which draws Penrose triangles."
-msgstr ""
+msgstr "本示例实现了绘制彭罗斯三角形的部件"
 
 #: C/index-in.docbook:7019
 msgid "Custom Widget"
-msgstr ""
+msgstr "自定义部件"
 
 #: C/index-in.docbook:7025
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/custom/custom_widget/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/custom/custom_widget/\">源代码</ulink>"
 
 #: C/index-in.docbook:7033
 msgid "Multi-threaded programs"
