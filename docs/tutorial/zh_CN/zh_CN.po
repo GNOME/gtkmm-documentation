@@ -12455,13 +12455,15 @@ msgstr ""
 
 #: C/index-in.docbook:7279
 msgid "Recommended Techniques"
-msgstr ""
+msgstr "推荐技术"
 
 #: C/index-in.docbook:7281
 msgid ""
 "This section is simply a gathering of wisdom, general style guidelines and "
 "hints for creating <application>gtkmm</application> applications."
 msgstr ""
+"本小节将向你展示一些创建<application>gtkmm</application>应用程序的智慧、风格"
+"指南和提示。"
 
 #: C/index-in.docbook:7285
 msgid ""
@@ -12473,6 +12475,11 @@ msgid ""
 "of software installation, handling a large number of system quirks to "
 "increase portability."
 msgstr ""
+"使用GNU <application>autoconf</application>和<application>automake</"
+"application>。<application>Automake</application>检查C文件，确定它们之间的依"
+"赖关系，并生成<filename>Makefile</filename>，从而以正确的顺序编译文件。"
+"<application>Autoconf</application>允许自动配置软件的安装，处理大量来自系统本"
+"身的差异以增强可移植性。"
 
 #: C/index-in.docbook:7295
 msgid ""
@@ -12480,6 +12487,8 @@ msgid ""
 "your main <classname>Window</classname> at least. Then you can make your "
 "child Widgets and signal handlers members of that class."
 msgstr ""
+"子类部件可以更好的组织你的代码。至少你的主窗口类应该继承<classname>Window</"
+"classname>。这样你可以使主窗口的子部件和信号处理函数成为该类的成员。"
 
 #: C/index-in.docbook:7300
 msgid ""
@@ -12491,10 +12500,15 @@ msgid ""
 "<classname>sigc::signal</classname>s, as described in the "
 "<application>libsigc++</application> documentation."
 msgstr ""
+"创建你自己的信号而不是传递指针。对象可以通过信号和信号处理函数相互通信。这比"
+"持有指向彼此的指针并以此调用彼此的成员函数要简单明了的多。"
+"<application>gtkmm</application>类使用特殊版本的<classname>sigc::signal</"
+"classname>，但你应该使用<application>libsigc++</application>所述的正常"
+"<classname>sigc::signal</classname>。"
 
 #: C/index-in.docbook:7309
 msgid "Application Lifetime"
-msgstr ""
+msgstr "应用程序生命周期"
 
 #: C/index-in.docbook:7310
 msgid ""
@@ -12509,20 +12523,30 @@ msgid ""
 "changes) by overriding <methodname>Gtk::Window::on_delete_event()</"
 "methodname>."
 msgstr ""
+"大多数应用程序只有一个<classname>Window</classname>或一个主窗口。这些应用程序"
+"可以使用<methodname>Gtk::Application::run(Gtk::Window&amp; window)</"
+"methodname>或<methodname>Gtk::Application::run(Gtk::Window&amp; window, int "
+"argc, char** argv)</methodname>重载。它们显示窗口并当用户关闭窗口或你的代码决"
+"定调用<methodname>hide()</methodname>时返回。你可以通过覆写<methodname>Gtk::"
+"Window::on_delete_event()</methodname>成员函数来阻止用户关闭窗口（例如，当有"
+"未保存变更你可能想弹出对话框询问用户是否确定要关闭窗口，再根据用户选择确定是"
+"否要关闭窗口）。"
 
 #: C/index-in.docbook:7319
 msgid "Most of our examples use this technique."
-msgstr ""
+msgstr "我们的大多数示例都是用这种技术。"
 
 #: C/index-in.docbook:7323
 msgid "Using a <application>gtkmm</application> widget"
-msgstr ""
+msgstr "使用<application>gtkmm</application>部件"
 
 #: C/index-in.docbook:7325
 msgid ""
 "Our examples all tend to have the same structure. They follow these steps "
 "for using a <classname>Widget</classname>:"
 msgstr ""
+"我们的示例都倾向于使用相同的结构。它们按以下步骤使用<classname>Widget</"
+"classname>："
 
 #: C/index-in.docbook:7334
 msgid ""
@@ -12533,6 +12557,10 @@ msgid ""
 "pointer, it's still probably best to make that pointer a member variable of "
 "a container class so that you can access it later."
 msgstr ""
+"声明一个你想要使用的<classname>Widget</classname>类型变量，通常是作为容器派生"
+"类的成员变量。你还可以声明一个指向部件类型的指针，然后在你的代码中使用"
+"<literal>new</literal>创建它。即使通过指针使用部件，也应该使该指针成为容器类"
+"的成员变量，以便你后续访问它。"
 
 #: C/index-in.docbook:7345
 msgid ""
@@ -12540,16 +12568,20 @@ msgid ""
 "then you will need to initialize the widget in the initalizer list of your "
 "container class's constructor."
 msgstr ""
+"设置部件的属性。如果部件没有默认构造函数，则你需要在容器类的构造函数的初始化"
+"列表中初始化部件。"
 
 #: C/index-in.docbook:7351
 msgid "Connect any signals you wish to use to the appropriate handlers."
-msgstr ""
+msgstr "为所以你需要使用的信号连接合适的信号处理函数。"
 
 #: C/index-in.docbook:7357
 msgid ""
 "Pack the widget into a container using the appropriate call, e.g. "
 "<methodname>Gtk::Box::append()</methodname>."
 msgstr ""
+"调用适当的函数将部件装入容器中，例如：<methodname>Gtk::Box::append()</"
+"methodname>。"
 
 #: C/index-in.docbook:7367
 msgid ""
@@ -12558,6 +12590,9 @@ msgid ""
 "container widget is hidden, all of its child widgets are also hidden, even "
 "if <methodname>hide()</methodname> is not called on the child widgets."
 msgstr ""
+"如果你不希望显示部件，请对不想要显示的部件调用<methodname>Gtk::Widget::"
+"hide()</methodname>可以将其隐藏，当一个容器部件被隐藏，它的所有子部件将一并被"
+"隐藏，即便你没有在那些子部件上调用<methodname>hide()</methodname>。"
 
 #: C/index-in.docbook:7378
 msgid "Building applications"
