@@ -5052,7 +5052,8 @@ so you can use it again if the page setup dialog is shown again.</para>
 
 <para>For instance,</para>
 <programlisting>
-//Within a class that inherits from Gtk::Window and keeps m_refPageSetup and m_refSettings as members...
+// Within a class that inherits from Gtk::Window and keeps m_refPageSetup
+// and m_refSettings as members...
 auto new_page_setup = Gtk::run_page_setup_dialog(*this, m_refPageSetup, m_refSettings);
 m_refPageSetup = new_page_setup;
 </programlisting>
@@ -5109,7 +5110,7 @@ on all platforms, however the <literal>done</literal> signal will still be emitt
 
 <para>
 <methodname>run()</methodname> may return
-<literal>PRINT_OPERATION_RESULT_IN_PROGRESS</literal>. To track status
+<literal>PrintOperation::Result::IN_PROGRESS</literal>. To track status
 and handle the result or error you need to implement signal handlers for
 the <literal>done</literal> and <literal>status_changed</literal> signals:
 </para>
@@ -5119,22 +5120,25 @@ the <literal>done</literal> and <literal>status_changed</literal> signals:
 // in class ExampleWindow's method...
 auto op = PrintOperation::create();
 // ...set up op...
-op->signal_done().connect(sigc::bind(sigc::mem_fun(*this, &amp;ExampleWindow::on_printoperation_done), op));
+op->signal_done().connect(sigc::bind(sigc::mem_fun(
+  *this, &amp;ExampleWindow::on_printoperation_done), op));
 // run the op
 </programlisting>
 
 <para>Second, check for an error and connect to the <literal>status_changed</literal> signal. For instance:
 </para>
 <programlisting>
-void ExampleWindow::on_printoperation_done(Gtk::PrintOperationResult result, const Glib::RefPtr&lt;PrintOperation&gt;&amp; op)
+void ExampleWindow::on_printoperation_done(Gtk::PrintOperationResult result,
+  const Glib::RefPtr&lt;PrintOperation&gt;&amp; op)
 {
-  if (result == Gtk::PRINT_OPERATION_RESULT_ERROR)
+  if (result == Gtk::PrintOperation::Result::ERROR)
     //notify user
-  else if (result == Gtk::PRINT_OPERATION_RESULT_APPLY)
+  else if (result == Gtk::PrintOperation::Result::APPLY)
     //Update PrintSettings with the ones used in this PrintOperation
 
   if (! op->is_finished())
-    op->signal_status_changed().connect(sigc::bind(sigc::mem_fun(*this, &amp;ExampleWindow::on_printoperation_status_changed), op));
+    op->signal_status_changed().connect(sigc::bind(sigc::mem_fun(
+      *this, &amp;ExampleWindow::on_printoperation_status_changed), op));
 }
 </programlisting>
 
@@ -5162,7 +5166,7 @@ The 'Print to file' option is available in the print dialog, without the need fo
 auto op = Gtk::PrintOperation::create();
 // ...set up op...
 op->set_export_filename(&quot;test.pdf&quot;);
-auto res = op-&gt;run(Gtk::PRINT_OPERATION_ACTION_EXPORT);
+auto res = op-&gt;run(Gtk::PrintOperation::Action::EXPORT);
 </programlisting>
 
 </sect1>
@@ -5240,7 +5244,7 @@ a preview directly from an application:</para>
 // in a class that inherits from Gtk::Window...
 auto op = PrintOperation::create();
 // ...set up op...
-op->run(Gtk::PRINT_OPERATION_ACTION_PREVIEW, *this);
+op->run(Gtk::PrintOperation::Action::PREVIEW, *this);
 </programlisting>
 
 <para>
@@ -9140,19 +9144,19 @@ int main(int, char**)
         roughly like this:</para>
 
 <programlisting>
-#include &lt;gtkmm/bin.h&gt;
+#include &lt;gtkmm/widget.h&gt;
 #include &lt;gtkmm/actionable.h&gt;
 _DEFS(gtkmm,gtk)
-_PINCLUDE(gtkmm/private/bin_p.h)
+_PINCLUDE(gtkmm/private/widget_p.h)
 
 namespace Gtk
 {
 
 class Button
-  : public Bin,
+  : public Widget,
     public Actionable
 {
-  _CLASS_GTKOBJECT(Button,GtkButton,GTK_BUTTON,Gtk::Bin,GtkBin)
+  _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Widget, GtkWidget)
   _IMPLEMENTS_INTERFACE(Actionable)
 public:
 
@@ -9298,9 +9302,9 @@ _INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')
     <classname>GObject</classname>, but whose wrapper is not derived from
     <classname>Gtk::Object</classname>.</para>
 <para><function>_CLASS_GOBJECT( C++ class, C class, C casting macro, C++ base class, C base class )</function></para>
-<para>For instance, from <filename>accelgroup.hg</filename>:</para>
+<para>For instance, from <filename>adjustment.hg</filename>:</para>
 <programlisting>
-_CLASS_GOBJECT(AccelGroup, GtkAccelGroup, GTK_ACCEL_GROUP, Glib::Object, GObject)
+_CLASS_GOBJECT(Adjustment, GtkAdjustment, GTK_ADJUSTMENT, Glib::Object, GObject)
 </programlisting>
 </sect3>
 
@@ -9311,7 +9315,7 @@ _CLASS_GOBJECT(AccelGroup, GtkAccelGroup, GTK_ACCEL_GROUP, Glib::Object, GObject
 <para><function>_CLASS_GTKOBJECT( C++ class, C class, C casting macro, C++ base class, C base class )</function></para>
 <para>For instance, from <filename>button.hg</filename>:</para>
 <programlisting>
-_CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)
+_CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Widget, GtkWidget)
 </programlisting>
 <para>You will typically use this macro when the class already derives from
     <classname>Gtk::Object</classname>. For instance, you will use it when wrapping
@@ -9357,9 +9361,9 @@ _CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle)
     functions. The new, copy and free functions will be used to instantiate the
     default constructor, copy constructor and destructor.</para>
 <para><function>_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, copy function, free function )</function></para>
-<para>For instance, from <classname>Glib::Checksum</classname>:</para>
+<para>For instance, from <classname>Glib::VariantType</classname>:</para>
 <programlisting>
-_CLASS_OPAQUE_COPYABLE(Checksum, GChecksum, NONE, g_checksum_copy, g_checksum_free)
+_CLASS_OPAQUE_COPYABLE(VariantType, GVariantType, NONE, g_variant_type_copy, g_variant_type_free)
 </programlisting>
 </sect3>
 
@@ -9369,9 +9373,9 @@ _CLASS_OPAQUE_COPYABLE(Checksum, GChecksum, NONE, g_checksum_copy, g_checksum_fr
     C++ wrapper cannot be directly instantiated and can only be used with
     <classname>Glib::RefPtr</classname>.</para>
 <para><function>_CLASS_OPAQUE_REFCOUNTED( C++ class, C class, new function, ref function, unref function )</function></para>
-<para>For instance, for <classname>Pango::Coverage</classname>:</para>
+<para>For instance, for <classname>Gtk::CssSection</classname>:</para>
 <programlisting>
-_CLASS_OPAQUE_REFCOUNTED(Coverage, PangoCoverage, pango_coverage_new, pango_coverage_ref, pango_coverage_unref)
+_CLASS_OPAQUE_REFCOUNTED(CssSection, GtkCssSection, NONE, gtk_css_section_ref, gtk_css_section_unref)
 </programlisting>
 </sect3>
 
@@ -9380,9 +9384,9 @@ _CLASS_OPAQUE_REFCOUNTED(Coverage, PangoCoverage, pango_coverage_new, pango_cove
 <para>This macro can be used to wrap structs which don't fit into any
     specialized category.</para>
 <para><function>_CLASS_GENERIC( C++ class, C class )</function></para>
-<para>For instance, for <classname>Pango::AttrIter</classname>:</para>
+<para>For instance, for <classname>Gdk::TimeCoord</classname>:</para>
 <programlisting>
-_CLASS_GENERIC(AttrIter, PangoAttrIterator)
+_CLASS_GENERIC(TimeCoord, GdkTimeCoord)
 </programlisting>
 </sect3>
 
@@ -9397,9 +9401,12 @@ For instance, from <filename>celleditable.hg</filename>:</para>
 <programlisting>
 _CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)
 </programlisting>
-<para>Two extra parameters are optional, for the case that the interface derives from another interface,
-which should be the case when the GInterface has another GInterface as a prerequisite.
-For instance, from <filename>loadableicon.hg</filename>:</para>
+<para>Two extra optional parameters were once added, for the case that the interface derives
+from another interface, which was believed to be the case when the GInterface has another
+GInterface as a prerequisite. This is a misunderstanding, though.
+When GInterface A has GInterface B as a prerequisite, it means that every class
+that implements A shall also implement B.
+For instance, from <filename>loadableicon.hg</filename> in glibmm-2.4:</para>
 <programlisting>
 _CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)
 </programlisting>
@@ -9712,9 +9719,9 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
     when you must hand-code the method, but you want to use the documentation
     that would be generated if the method was generated.</para>
 <para><function>_WRAP_METHOD_DOCS_ONLY(C function name)</function></para>
-<para>For instance, from <filename>container.hg</filename>:</para>
+<para>For instance, from <filename>recentinfo.hg</filename>:</para>
 <programlisting>
-_WRAP_METHOD_DOCS_ONLY(gtk_container_add)
+_WRAP_METHOD_DOCS_ONLY(gtk_recent_info_get_applications)
 </programlisting>
 <para>There are some optional extra arguments:
 <variablelist>
@@ -10073,7 +10080,7 @@ _IMPLEMENTS_INTERFACE(Orientable)
     the name of the underlying C enum.</para>
 <para>For instance, from <filename>enums.hg</filename>:</para>
 <programlisting>
-_WRAP_ENUM(WindowType, GtkWindowType)
+_WRAP_ENUM(Orientation, GtkOrientation)
 </programlisting>
 <para>There are some optional extra arguments:
 <variablelist>
