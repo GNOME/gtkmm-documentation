@@ -13541,14 +13541,15 @@ msgstr ""
 "智能指针。你可能对<classname>std::unique_ptr&lt;&gt;</classname>和"
 "<classname>std::shared_ptr&lt;&gt;</classname>十分熟悉，它们也是智能指针。在"
 "<application>gtkmm</application>-4.0中<classname>Glib::RefPtr&lt;&gt;</"
-"classname>是<classname>std::shared_ptr&lt;&gt;</classname>的别名。<classname>Glib::"
-"RefPtr&lt;&gt;</classname>在C++标准库还没有添加引用计数智能指针的时候就已经存"
-"在于<application>glibmm</application>了（译注：事实上Glib::RefPtr的行为与"
-"std::shared_ptr的行为并不完全一致，且因glibmm等库的文档是由C文档直接生成而"
-"来，在一些C库中可以接受NULL作为参数的函数在对应的C++绑定库中的文档中都是可以"
-"接受nullptr作为参数，但实际上并不一定能接受nullptr作为参数，有时候需要传递"
-"Glib::RefPtr&lt;FOO&gt;()、Gdk::Event()、空的字符串等。参见：<ulink url=\"https://"
-"gitlab.gnome.org/GNOME/glibmm/-/issues/24\">问题24</ulink>）。"
+"classname>是<classname>std::shared_ptr&lt;&gt;</classname>的别名。"
+"<classname>Glib::RefPtr&lt;&gt;</classname>在C++标准库还没有添加引用计数智能"
+"指针的时候就已经存在于<application>glibmm</application>了（译注：事实上Glib::"
+"RefPtr的行为与std::shared_ptr的行为并不完全一致，且因glibmm等库的文档是由C文"
+"档直接生成而来，在一些C库中可以接受NULL作为参数的函数在对应的C++绑定库中的文"
+"档中都是可以接受nullptr作为参数，但实际上并不一定能接受nullptr作为参数，有时"
+"候需要传递Glib::RefPtr&lt;FOO&gt;()、Gdk::Event()、空的字符串等。参见："
+"<ulink url=\"https://gitlab.gnome.org/GNOME/glibmm/-/issues/24\">问题24</"
+"ulink>）。"
 
 #: C/index-in.docbook:7966
 msgid ""
@@ -13783,7 +13784,7 @@ msgstr ""
 
 #: C/index-in.docbook:8095
 msgid "Connecting signal handlers"
-msgstr ""
+msgstr "连接到信号处理函数"
 
 #: C/index-in.docbook:8096
 msgid ""
@@ -13796,10 +13797,16 @@ msgid ""
 "<application>GTK</application> C coders, these signal handlers are often "
 "named callbacks."
 msgstr ""
+"<application>gtkmm</application>的部件类拥有信号访问器方法，例如:"
+"<methodname>Gtk::Button::signal_clicked()</methodname>。这些方法允许你将你的"
+"信号处理函数与信号相连接。<application>gtkmm</application>所使用的的"
+"<application>libsigc++</application>回调库提供了非常强的灵活性，它几乎允许你"
+"使用任何函数作为信号的处理程序，不过通常你会希望使用类的成员函数。在"
+"<application>GTK</application>的C代码中，这些信号处理程序被称为回调。"
 
 #: C/index-in.docbook:8106
 msgid "Here's an example of a signal handler being connected to a signal:"
-msgstr ""
+msgstr "这是将信号处理函数与信号相连接的示例："
 
 #: C/index-in.docbook:8111
 #, no-wrap
@@ -13818,32 +13825,49 @@ msgid ""
 "    button.signal_clicked().connect(sigc::ptr_fun(&amp;on_button_clicked));\n"
 "}\n"
 msgstr ""
+"\n"
+"#include &lt;gtkmm/button.h&gt;\n"
+"\n"
+"void on_button_clicked()\n"
+"{\n"
+"    std::cout &lt;&lt; \"Hello World\" &lt;&lt; std::endl;\n"
+"}\n"
+"\n"
+"int main()\n"
+"{\n"
+"    Gtk::Button button(\"Hello World\");\n"
+"    button.signal_clicked().connect(sigc::ptr_fun(&amp;on_button_clicked));\n"
+"}\n"
 
 #: C/index-in.docbook:8127
 msgid ""
 "There's rather a lot to think about in this (non-functional) code. First "
 "let's identify the parties involved:"
-msgstr ""
+msgstr "在此代码（非功能性）中有很多事情要考虑，首先让我们确定代码的行为："
 
 #: C/index-in.docbook:8135
 msgid "The signal handler is <methodname>on_button_clicked()</methodname>."
-msgstr ""
+msgstr "信号处理函数是<methodname>on_button_clicked()</methodname>。"
 
 #: C/index-in.docbook:8141
 msgid ""
 "We're hooking it up to the <classname>Gtk::Button</classname> object called "
 "<varname>button</varname>."
 msgstr ""
+"我们将其连接到一个名为<varname>button</varname>的<classname>Gtk::Button</"
+"classname>对象。"
 
 #: C/index-in.docbook:8148
 msgid ""
 "When the Button emits its <literal>clicked</literal> signal, "
 "<methodname>on_button_clicked()</methodname> will be called."
 msgstr ""
+"当<varname>button</varname>发出<literal>clicked</literal>信号时，"
+"<methodname>on_button_clicked()</methodname>将被调用。"
 
 #: C/index-in.docbook:8156
 msgid "Now let's look at the connection again:"
-msgstr ""
+msgstr "现在，我们再次看一下连接："
 
 #: C/index-in.docbook:8161
 #, no-wrap
@@ -13853,6 +13877,10 @@ msgid ""
 "    button.signal_clicked().connect(sigc::ptr_fun(&amp;on_button_clicked));\n"
 "    ...\n"
 msgstr ""
+"\n"
+"    ...\n"
+"    button.signal_clicked().connect(sigc::ptr_fun(&amp;on_button_clicked));\n"
+"    ...\n"
 
 #: C/index-in.docbook:8168
 msgid ""
@@ -13861,6 +13889,10 @@ msgid ""
 "method. Instead, we call <function>sigc::ptr_fun()</function>, and pass the "
 "result to <methodname>connect()</methodname>."
 msgstr ""
+"请注意，我们不会直接将一个指向<methodname>on_button_clicked()</methodname>的"
+"指针传递给信号的<methodname>connect()</methodname>方法。我们将调用"
+"<function>sigc::ptr_fun()</function>并将其返回值传递给<methodname>connect()</"
+"methodname>。"
 
 #: C/index-in.docbook:8175
 msgid ""
@@ -13871,10 +13903,14 @@ msgid ""
 "standalone function or static method. <function>sigc::mem_fun()</function> "
 "generates a slot for a member method of a particular instance."
 msgstr ""
+"<function>sigc::ptr_fun()</function>生成一个<classname>sigc::slot</"
+"classname>。槽对象看起来很像一个函数，但实际上是一个对象。这类对象也被称为函"
+"数对象或是函子。<function>sigc::ptr_fun()</function>为独立函数或静态成员函数"
+"生成槽。<function>sigc::mem_fun()</function>为特定实例的成员函数生成槽。"
 
 #: C/index-in.docbook:8184
 msgid "Here's a slightly larger example of slots in action:"
-msgstr ""
+msgstr "这是一个在动作中使用槽的较大示例："
 
 #: C/index-in.docbook:8189
 #, no-wrap
@@ -13896,12 +13932,29 @@ msgid ""
 "    button.signal_clicked().connect( sigc::mem_fun(some_object, &amp;some_class::on_button_clicked) );\n"
 "}\n"
 msgstr ""
+"\n"
+"void on_button_clicked();\n"
+"\n"
+"class some_class\n"
+"{\n"
+"    void on_button_clicked();\n"
+"};\n"
+"\n"
+"some_class some_object;\n"
+"\n"
+"int main()\n"
+"{\n"
+"    Gtk::Button button;\n"
+"    button.signal_clicked().connect( sigc::ptr_fun(&amp;on_button_clicked) );\n"
+"    button.signal_clicked().connect( sigc::mem_fun(some_object, &amp;some_class::on_button_clicked) );\n"
+"}\n"
 
 #: C/index-in.docbook:8208
 msgid ""
 "The first call to <methodname>connect()</methodname> is just like the one we "
 "saw last time; nothing new here."
 msgstr ""
+"第一个<methodname>connect()</methodname>调用与我们之前看到的没有什么区别。"
 
 #: C/index-in.docbook:8211
 msgid ""
@@ -13913,6 +13966,12 @@ msgid ""
 "\"called\", call the pointed-to method of the specified object, in this case "
 "<methodname>some_object.on_button_clicked()</methodname>."
 msgstr ""
+"接下来的一个调用更有趣些。使用两个参数调用<function>sigc::mem_fun()</"
+"function>。第一个参数是<parameter>some_object</parameter>，这是我们新的槽将指"
+"向的对象。第二个参数是指向其成员函数之一的指针。这个特定版本的"
+"<function>sigc::mem_fun()</function>将会创建一个槽，这个槽在被调用的时候将会"
+"调用指定对象上函数指针所指向的成员函数，在这个情况下调用的是"
+"<methodname>some_object.on_button_clicked()</methodname>。"
 
 #: C/index-in.docbook:8221
 msgid ""
@@ -13921,6 +13980,9 @@ msgid ""
 "perfectly fine - when the button is clicked, both signal handlers will be "
 "called."
 msgstr ""
+"另一个与此示例有关的注意事项是，我们对同一个信号对象调用了两次"
+"<methodname>connect()</methodname>。所以当该按钮被点击时，这两个信号处理函数"
+"都将被调用。"
 
 #: C/index-in.docbook:8228
 msgid ""
@@ -13931,10 +13993,14 @@ msgid ""
 "function>, of course). Therefore, it's important to know what type of signal "
 "handler you'll be expected to connect to a given signal."
 msgstr ""
+"你应该已经注意到了，按钮的<literal>clicked</literal>信号期望调用一个不接受任"
+"何参数的函数。事实上所有的信号都有这样的要求。所以你不能将一个接受两个参数的"
+"函数与期望所调用函数不接受参数的信号相关联，当然你可以通过使用"
+"<function>sigc::bind()</function>之类的适配器在一定程度上绕过这个限制。"
 
 #: C/index-in.docbook:8240
 msgid "Writing signal handlers"
-msgstr ""
+msgstr "编写信号处理函数"
 
 #: C/index-in.docbook:8242
 msgid ""
@@ -13943,6 +14009,9 @@ msgid ""
 "example of a signal declaration you might see in the <application>gtkmm</"
 "application> headers:"
 msgstr ""
+"要找到你可以连接到信号的信号处理函数类型，你可以查看它的参考文档或者是头文"
+"件。这是一个你可能在<application>gtkmm</application>头文件中看到的信号声明示"
+"例："
 
 #: C/index-in.docbook:8249
 #, no-wrap
@@ -13950,6 +14019,8 @@ msgid ""
 "\n"
 "Glib::SignalProxy&lt;bool(Gtk::DirectionType)&gt; signal_focus()\n"
 msgstr ""
+"\n"
+"Glib::SignalProxy&lt;bool(Gtk::DirectionType)&gt; signal_focus()\n"
 
 #: C/index-in.docbook:8254
 msgid ""
@@ -13960,12 +14031,18 @@ msgid ""
 "first, and only, argument. By looking at the reference documentation, you "
 "can see the names of the arguments too."
 msgstr ""
+"除了信号名为<literal>focus</literal>之外，这里的膜拜参数很重要。第一个参数"
+"<type>bool</type>，表示信号处理函数的返回值应该是个<type>bool</type>类型。而"
+"括号中的<type>Gtk::DirectionType</type>表示信号所期望调用的函数的第一个也是唯"
+"一一个参数的类型。通过查看参考文档你还可以看到参数的名称。"
 
 #: C/index-in.docbook:8263
 msgid ""
 "The same principles apply for signals which have more arguments. Here's one "
 "with three (taken from <filename>&lt;gtkmm/textbuffer.h&gt;</filename>):"
 msgstr ""
+"对于接受期望调用的函数有更多参数的信号也是一样的阅读规则。以下声明取自"
+"<filename>&lt;gtkmm/textbuffer.h&gt;</filename>："
 
 #: C/index-in.docbook:8269
 #, no-wrap
@@ -13973,6 +14050,8 @@ msgid ""
 "\n"
 "Glib::SignalProxy&lt;void(TextBuffer::iterator&amp;, const Glib::ustrin&amp;, int)&gt; signal_insert();\n"
 msgstr ""
+"\n"
+"Glib::SignalProxy&lt;void(TextBuffer::iterator&amp;, const Glib::ustrin&amp;, int)&gt; signal_insert();\n"
 
 #: C/index-in.docbook:8274
 msgid ""
@@ -13981,6 +14060,9 @@ msgid ""
 "the argument types, in order. Our signal handler's prototype could look like "
 "this:"
 msgstr ""
+"以一样的阅读规则阅读后可知，该信号所期望调用的函数的返回值类型为<type>void</"
+"type>，括号内三种类型为函数的三个参数类型。所以我们的信号处理函数原型可能如下"
+"所示："
 
 #: C/index-in.docbook:8282
 #, no-wrap
@@ -13988,15 +14070,17 @@ msgid ""
 "\n"
 "void on_insert(TextBuffer::iterator&amp; pos, const Glib::ustring&amp; text, int bytes)\n"
 msgstr ""
+"\n"
+"void on_insert(TextBuffer::iterator&amp; pos, const Glib::ustring&amp; text, int bytes)\n"
 
 #: C/index-in.docbook:8289
 msgid "Disconnecting signal handlers"
-msgstr ""
+msgstr "断开信号处理函数"
 
 #: C/index-in.docbook:8291
 msgid ""
 "Let's take another look at a Signal's <literal>connect</literal> method:"
-msgstr ""
+msgstr "让我们再来看看信号的<literal>connect</literal>成员函数："
 
 #: C/index-in.docbook:8296
 #, no-wrap
@@ -14004,6 +14088,8 @@ msgid ""
 "\n"
 "sigc::connection signal&lt;void(int)&gt;::connect(const sigc::slot&lt;void(int)&gt;&amp;);\n"
 msgstr ""
+"\n"
+"sigc::connection signal&lt;void(int)&gt;::connect(const sigc::slot&lt;void(int)&gt;&amp;);\n"
 
 #: C/index-in.docbook:8301
 msgid ""
@@ -14012,10 +14098,13 @@ msgid ""
 "associated signal handler using the <methodname>sigc::connection::"
 "disconnect()</methodname> method."
 msgstr ""
+"该函数返回的<classname>sigc::connection</classname>对象可以控制连接。通过保存"
+"连接对象就可以断开与其相关联的信号处理函数的连接。若你想如此做，只需对对象调"
+"用<methodname>sigc::connection::disconnect()</methodname>成员函数即可。"
 
 #: C/index-in.docbook:8309
 msgid "Overriding default signal handlers"
-msgstr ""
+msgstr "覆写默认信号处理函数"
 
 #: C/index-in.docbook:8311
 msgid ""
@@ -14023,6 +14112,8 @@ msgid ""
 "the like by handling signals. That's certainly a good way to do things, but "
 "it's not the only way."
 msgstr ""
+"到现在为止，你已经学会了通过将自定义的信号处理函数连接到信号来响应按钮按下等"
+"动作。这是一种好方法，但不是唯一的方法。"
 
 #: C/index-in.docbook:8318
 msgid ""
@@ -14031,6 +14122,8 @@ msgid ""
 "override the default signal handler, such as Button::on_clicked(). This can "
 "be a lot simpler than hooking up signal handlers for everything."
 msgstr ""
+"你还可以创建一个从部件继承而来的新类，然后覆盖默认的信号处理函数（例如，"
+"Button::on_clicked()），这样你就可以省去将信号处理函数连接到信号的步骤。"
 
 #: C/index-in.docbook:8325
 msgid ""
@@ -14041,6 +14134,10 @@ msgid ""
 "handle the same signal, or if you want one signal handler to respond to the "
 "same signal from different objects."
 msgstr ""
+"子类化并不是银弹。它只在你只希望由部件自身来处理自己的信号时才好用。如果你需"
+"要用其他的类来处理信号，你还是需要为此将函数连接到目标信号上。这在你需要用多"
+"个对象处理同一个信号或者需要一个信号处理函数处理不同的对象的信号的时候会很不"
+"方便。"
 
 #: C/index-in.docbook:8330
 msgid ""
@@ -14048,10 +14145,12 @@ msgid ""
 "mind; they contain virtual member methods specifically intended to be "
 "overridden."
 msgstr ""
+"<application>gtkmm</application>类在设计的时候已经考虑到了覆写；它们包含了专"
+"门用于被覆写的虚成员函数。"
 
 #: C/index-in.docbook:8335
 msgid "Let's look at an example of overriding:"
-msgstr ""
+msgstr "让我们看一个覆写的例子："
 
 #: C/index-in.docbook:8340
 #, no-wrap
@@ -14073,6 +14172,22 @@ msgid ""
 "  Gtk::Button::on_clicked();\n"
 "}\n"
 msgstr ""
+"\n"
+"#include &lt;gtkmm/button.h&gt;\n"
+"\n"
+"class OverriddenButton : public Gtk::Button\n"
+"{\n"
+"protected:\n"
+"  void on_clicked() override;\n"
+"}\n"
+"\n"
+"void OverriddenButton::on_clicked()\n"
+"{\n"
+"  std::cout &lt;&lt; \"Hello World\" &lt;&lt; std::endl;\n"
+"\n"
+"  // call the base class's version of the method:\n"
+"  Gtk::Button::on_clicked();\n"
+"}\n"
 
 #: C/index-in.docbook:8359
 msgid ""
@@ -14085,6 +14200,12 @@ msgid ""
 "<classname>Gtk::Button</classname> do what it would have done had we not "
 "overridden."
 msgstr ""
+"在这我们定义了一个名为<classname>OverriddenButton</classname>的新类，该类继承"
+"自<classname>Gtk::Button</classname>。我们对其唯一的更改是"
+"<methodname>on_clicked()</methodname>成员函数，只要<classname>Gtk::Button</"
+"classname>发出<literal>clicked</literal>信号该成员函数就会被调用。这个成员函"
+"数将字符串\"Hello World\"打印到<literal>stdout</literal>，然后调用"
+"<classname>Gtk::Button</classname>已被覆写本该被调用的成员函数。"
 
 #: C/index-in.docbook:8370
 msgid ""
@@ -14097,10 +14218,14 @@ msgid ""
 "with connected signal handlers: you can call the parent method in the "
 "<emphasis>middle</emphasis> of your custom code."
 msgstr ""
+"调用父方法不是必须的，你可以在不想做的时候不调用它。请注意在此我们在做完了想"
+"做的事情<emphasis>之后</emphasis>调用了父方法，而你当然可以在此函数的中间或是"
+"任何你想调用父方法的位置调用它。这对于通过连接到信号调用的信号处理函数是无法"
+"做到的。"
 
 #: C/index-in.docbook:8384
 msgid "Binding extra arguments"
-msgstr ""
+msgstr "绑定额外参数"
 
 #: C/index-in.docbook:8391
 #, no-wrap
@@ -14117,6 +14242,8 @@ msgid ""
 "\n"
 "void on_button_clicked(const Glib::ustring&amp; data);\n"
 msgstr ""
+"\n"
+"void on_button_clicked(const Glib::ustring&amp; data);\n"
 
 #: C/index-in.docbook:8385
 msgid ""
@@ -14131,6 +14258,14 @@ msgid ""
 "extra argument to the declaration of our signal handler: <_:programlisting-2/"
 "> Of course, a normal \"clicked\" signal handler would have no arguments."
 msgstr ""
+"如果你想使用一个信号处理函数从多个部件捕获同一个信号，你可能希望信号处理函数"
+"能收到一些额外的信息。例如，你可能想知道那个按钮被点击了。你可以使用"
+"<function>sigc::bind()</function>。这是<link linkend=\"sec-"
+"helloworld2\">helloworld2</link>示例的部分代码：<_:programlisting-1/> 这表示"
+"我们希望信号向信号处理函数发送一个额外的<classname>Glib::ustring</classname>"
+"参数，并且该参数的值为\"button 1\"。当然，我们将会需要向信号处理函数的声明中"
+"添加额外的参数:<_:programlisting-2/>。当然，正常的\"clicked\"信号处理函数是没"
+"有参数的。"
 
 #: C/index-in.docbook:8403
 msgid ""
@@ -14143,10 +14278,18 @@ msgid ""
 "widget, but widget derivation is very difficult in C. We have far less need "
 "of this hack in <application>gtkmm</application>."
 msgstr ""
+"<function>sigc::bind()</function>并不常用，不过偶尔会对你有所帮助（译注：很多"
+"时候直接使用lambda比调用sigc::bind要好）。如果你对使用<application>GTK</"
+"application>编程很熟悉，就会注意到，这和<application>GTK</application>中所有"
+"的回调函数都具有一个额外的<literal>gpointer data</literal>参数十分的类似。因"
+"为在C语言中要派生一个部件十分的困难，通过让<application>GTK</application>中所"
+"有回调函数都具有一个这样的额外参数用于传递本该储存于派生部件成员中的数据可以"
+"有效降低代码复杂度。而在<application>gtkmm</application>中派生部件类十分的简"
+"单，所以这种强侵入式的写法不再需要了。"
 
 #: C/index-in.docbook:8415
 msgid "X Event signals"
-msgstr ""
+msgstr "X事件信号"
 
 #: C/index-in.docbook:8416
 msgid ""
@@ -14155,6 +14298,9 @@ msgid ""
 "<literal>_event</literal>; for instance, <methodname>Widget::"
 "signal_button_press_event()</methodname>."
 msgstr ""
+"<classname>Widget</classname>有一些对应底层X-Windows事件的特殊信号。它们具有"
+"<literal>_event</literal>后缀。例如：<methodname>Widget::"
+"signal_button_press_event()</methodname>。"
 
 #: C/index-in.docbook:8422
 msgid ""
@@ -14165,6 +14311,10 @@ msgid ""
 "<literal>button_press_event</literal> if you needed this information. X "
 "events are also often used to handle key-presses."
 msgstr ""
+"当有些事情你无法使用常规信号完成时，你可能会发现X事件信号非常有用。例如："
+"<classname>Gtk::Button</classname>的<literal>clicked</literal>信号不会发送鼠"
+"标指针的坐标，而<literal>button_press_event</literal>信号会。X事件也用于处理"
+"按键。"
 
 #: C/index-in.docbook:8431
 msgid ""
@@ -14174,6 +14324,10 @@ msgid ""
 "pass the event on to the next signal handler. If the value is <literal>true</"
 "literal> then no other signal handlers will need to be called."
 msgstr ""
+"这些信号的行为有所不同。它们的信号处理函数将通过返回值指示有没有完全处理事"
+"件。如果返回值为<literal>false</literal>，则<application>gtkmm</application>"
+"将会把事件再次发送到下一个信号处理函数。如果返回值为<literal>true</literal>则"
+"不再传播信号不再调用其他的信号处理函数。"
 
 #: C/index-in.docbook:8436
 msgid ""
@@ -14182,6 +14336,9 @@ msgid ""
 "classname>, you'll still be able to get the <literal>clicked</literal> "
 "signal. They are emitted at (nearly) the same time."
 msgstr ""
+"处理X事件不会影响部件的其他信号。如果你处理<classname>Gtk::Button</classname>"
+"的<literal>button_press_event</literal>信号，你依旧可以得到<literal>clicked</"
+"literal>信号。这两个信号将几乎于同一时间被发出。"
 
 #: C/index-in.docbook:8445
 #, no-wrap
@@ -14191,12 +14348,18 @@ msgid ""
 "Gtk::Button button(\"label\");\n"
 "button.signal_button_press_event().connect( sigc::ptr_fun(&amp;on_button_press) );\n"
 msgstr ""
+"\n"
+"bool on_button_press(GdkEventButton* event);\n"
+"Gtk::Button button(\"label\");\n"
+"button.signal_button_press_event().connect( sigc::ptr_fun(&amp;on_button_press) );\n"
 
 #: C/index-in.docbook:8451
 msgid ""
 "When the mouse is over the button and a mouse button is pressed, "
 "<methodname>on_button_press()</methodname> will be called."
 msgstr ""
+"当鼠标悬停在鼠标上方并按下鼠标按钮时，<methodname>on_button_press()</"
+"methodname>将被调用。"
 
 #: C/index-in.docbook:8456
 msgid ""
@@ -14205,10 +14368,13 @@ msgid ""
 "button was pressed. There are several different types of <type>GdkEvent</"
 "type> structures for the various events."
 msgstr ""
+"<type>GdkEventButton</type>是一个包含事件参数的结构体，其中包含按下按钮时鼠标"
+"指针的坐标等一系列信息。对于不同的事件，有不同的<type>GdkEvent</type>结构体类"
+"型与之对应。"
 
 #: C/index-in.docbook:8464
 msgid "Signal Handler sequence"
-msgstr ""
+msgstr "信号处理函数序列"
 
 #: C/index-in.docbook:8472
 #, no-wrap
@@ -14216,6 +14382,8 @@ msgid ""
 "\n"
 "button.signal_button_press_event().connect( sigc::ptr_fun(&amp;on_mywindow_button_press), false );\n"
 msgstr ""
+"\n"
+"button.signal_button_press_event().connect( sigc::ptr_fun(&amp;on_mywindow_button_press), false );\n"
 
 #: C/index-in.docbook:8465
 msgid ""
@@ -14228,6 +14396,11 @@ msgid ""
 "<literal>false</literal> for the optional <literal>after</literal> "
 "parameter. For instance, <_:programlisting-1/>"
 msgstr ""
+"默认情况下，你的信号处理函数将于所有之前连接到信号的信号处理函数之后被调用。"
+"但是这对于X事件信号可能会出问题。例如，现有的信号处理函数或默认信号处理函数如"
+"果返回了<literal>true</literal>将会停止事件传播，这时候你的信号处理函数就不会"
+"被调用。你可以指定可选参数<literal>after</literal>为<literal>false</"
+"literal>，这样你的信号处理函数就总是会被调用。例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:8476
 msgid ""
@@ -14237,10 +14410,13 @@ msgid ""
 "the parent widget and emitted there. This continues all the way up to the "
 "top-level widget if no one handles the event."
 msgstr ""
+"这个事件将首先被发送到发生事件的部件中。如果该部件的所有信号处理函数都返回"
+"<literal>false</literal>。则该信号将被传播到部件的父部件中。如果后续没有人处"
+"理事件，信号会一直传播到顶级窗口部件。"
 
 #: C/index-in.docbook:8487
 msgid "Exceptions in signal handlers"
-msgstr ""
+msgstr "信号处理函数中的异常"
 
 #: C/index-in.docbook:8488
 msgid ""
@@ -14249,6 +14425,8 @@ msgid ""
 "exception was thrown. This is more difficult than usual if the exception was "
 "thrown from a signal handler."
 msgstr ""
+"当程序因未处理C++异常而终止时，有时候可以使用调试器查找抛出异常的位置。但是如"
+"果异常是在信号处理函数中抛出的，这将会比平常困难的多。"
 
 #: C/index-in.docbook:8493
 msgid ""
@@ -14256,6 +14434,8 @@ msgid ""
 "you use <ulink url=\"http://www.gnu.org/software/gdb/\">the gdb debugger</"
 "ulink>."
 msgstr ""
+"本小节组要介绍使用<ulink url=\"http://www.gnu.org/software/gdb/\">gdb调试器</"
+"ulink>在Linux系统上调试异常。"
 
 #: C/index-in.docbook:8500
 #, no-wrap
@@ -14277,12 +14457,30 @@ msgid ""
 "  return app-&gt;run();\n"
 "}\n"
 msgstr ""
+"\n"
+"// without_signal.cc\n"
+"#include &lt;gtkmm.h&gt;\n"
+"\n"
+"bool throwSomething()\n"
+"{\n"
+"  throw \"Something\";\n"
+"  return true;\n"
+"}\n"
+"\n"
+"int main(int argc, char** argv)\n"
+"{\n"
+"  throwSomething();\n"
+"  auto app = Gtk::Application::create(\"org.gtkmm.without_signal\");\n"
+"  return app-&gt;run();\n"
+"}\n"
 
 #: C/index-in.docbook:8497
 msgid ""
 "First, let's look at a simple example where an exception is thrown from a "
 "normal function (no signal handler). <_:programlisting-1/>"
 msgstr ""
+"首先让我们看一个简单的示例，其中的一个普通函数（非信号处理函数）抛出异常：<_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:8521
 #, no-wrap
@@ -14297,6 +14495,15 @@ msgid ""
 "#7  0x08048864 in throwSomething () at without_signal.cc:6\n"
 "#8  0x0804887d in main (argc=1, argv=0xbfffecd4) at without_signal.cc:12\n"
 msgstr ""
+"\n"
+"&gt; gdb without_signal\n"
+"(gdb) run\n"
+"terminate called after throwing an instance of 'char const*'\n"
+"\n"
+"Program received signal SIGABRT, Aborted.\n"
+"(gdb) backtrace\n"
+"#7  0x08048864 in throwSomething () at without_signal.cc:6\n"
+"#8  0x0804887d in main (argc=1, argv=0xbfffecd4) at without_signal.cc:12\n"
 
 #: C/index-in.docbook:8518
 msgid ""
@@ -14305,6 +14512,9 @@ msgid ""
 "can see that the exception was thrown from <filename>without_signal.cc</"
 "filename>, line 6 (<code>throw \"Something\";</code>)."
 msgstr ""
+"这是<application>gdb</application>会话的摘要。只显示输出中最有趣的部分：<_:"
+"programlisting-1/> 你可以看到在<filename>without_signal.cc</filename>的第六行"
+"抛出了异常(<code>throw \"Something\";</code>)。"
 
 #: C/index-in.docbook:8537
 #, no-wrap
@@ -14327,12 +14537,31 @@ msgid ""
 "  return app-&gt;run();\n"
 "}\n"
 msgstr ""
+"\n"
+"// with_signal.cc\n"
+"#include &lt;gtkmm.h&gt;\n"
+"\n"
+"bool throwSomething()\n"
+"{\n"
+"  throw \"Something\";\n"
+"  return true;\n"
+"}\n"
+"\n"
+"int main(int argc, char** argv)\n"
+"{\n"
+"  Glib::signal_timeout().connect(sigc::ptr_fun(throwSomething), 500);\n"
+"  auto app = Gtk::Application::create(\"org.gtkmm.with_signal\");\n"
+"  app-&gt;hold();\n"
+"  return app-&gt;run();\n"
+"}\n"
 
 #: C/index-in.docbook:8534
 msgid ""
 "Now let's see what happens when an exception is thrown from a signal "
 "handler. Here's the source code. <_:programlisting-1/>"
 msgstr ""
+"现在，让我们看看从信号处理函数中抛出异常会发生什么。这是源代码：<_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:8558
 #, no-wrap
@@ -14351,6 +14580,19 @@ msgid ""
 "#13 0x002e1b31 in Gtk::Application::run (this=0x804f300) at application.cc:178\n"
 "#14 0x08048ccc in main (argc=1, argv=0xbfffecd4) at with_signal.cc:16\n"
 msgstr ""
+"\n"
+"&gt; gdb with_signal\n"
+"(gdb) run\n"
+"(with_signal:2703): glibmm-ERROR **:\n"
+"unhandled exception (type unknown) in signal handler\n"
+"\n"
+"Program received signal SIGTRAP, Trace/breakpoint trap.\n"
+"(gdb) backtrace\n"
+"#2  0x0063c6ab in glibmm_unexpected_exception () at exceptionhandler.cc:77\n"
+"#3  Glib::exception_handlers_invoke () at exceptionhandler.cc:150\n"
+"#4  0x0063d370 in glibmm_source_callback (data=0x804d620) at main.cc:212\n"
+"#13 0x002e1b31 in Gtk::Application::run (this=0x804f300) at application.cc:178\n"
+"#14 0x08048ccc in main (argc=1, argv=0xbfffecd4) at with_signal.cc:16\n"
 
 #: C/index-in.docbook:8556
 msgid ""
@@ -14362,6 +14604,11 @@ msgid ""
 "application> or <application>gtkmm</application>, and <application>gdb</"
 "application> can't see where it was thrown."
 msgstr ""
+"这是<application>gdb</application>会话的摘录：<_:programlisting-1/> "
+"<application>glibmm</application>将捕获了异常，并调用<function>g_error()</"
+"function>结束了程序。其他的异常行为可能不一样，不过所有从信号处理函数中抛出的"
+"异常都会被<application>glibmm</application>或<application>gtkmm</application>"
+"所捕获，并且<application>gdb</application>将无法看到异常被抛出的具体位置。"
 
 #: C/index-in.docbook:8581
 #, no-wrap
@@ -14382,6 +14629,21 @@ msgid ""
 "\n"
 "Program received signal SIGTRAP, Trace/breakpoint trap.\n"
 msgstr ""
+"\n"
+"&gt; gdb with_signal\n"
+"(gdb) catch throw\n"
+"Catchpoint 1 (throw)\n"
+"(gdb) run\n"
+"Catchpoint 1 (exception thrown), 0x00714ff0 in __cxa_throw ()\n"
+"(gdb) backtrace\n"
+"#0  0x00714ff0 in __cxa_throw () from /usr/lib/i386-linux-gnu/libstdc++.so.6\n"
+"#1  0x08048bd4 in throwSomething () at with_signal.cc:6\n"
+"(gdb) continue\n"
+"Continuing.\n"
+"(with_signal:2375): glibmm-ERROR **\n"
+"unhandled exception (type unknown) in signal handler\n"
+"\n"
+"Program received signal SIGTRAP, Trace/breakpoint trap.\n"
 
 #: C/index-in.docbook:8578
 msgid ""
@@ -14389,6 +14651,8 @@ msgid ""
 "application> command <userinput>catch throw</userinput>. <_:programlisting-1/"
 ">"
 msgstr ""
+"要查看哪里抛出了异常，你可以使用<application>gdb</application>的"
+"<userinput>catch throw</userinput>命令。<_:programlisting-1/>"
 
 #: C/index-in.docbook:8602
 #, no-wrap
@@ -14402,6 +14666,14 @@ msgid ""
 "(gdb) set pagination off\n"
 "(gdb) run\n"
 msgstr ""
+"\n"
+"(gdb) catch throw\n"
+"(gdb) commands\n"
+"(gdb)   backtrace\n"
+"(gdb)   continue\n"
+"(gdb)   end\n"
+"(gdb) set pagination off\n"
+"(gdb) run\n"
 
 #: C/index-in.docbook:8598
 msgid ""
@@ -14412,6 +14684,10 @@ msgid ""
 "The backtrace from the last (or possibly the last but one) <code>throw</"
 "code> before the program stops, is the interesting one."
 msgstr ""
+"如果在感兴趣的未捕获异常之前有多个捕获异常，这个方法将会非常的枯燥。可以使用"
+"以下<application>gdb</application>命令自动化进行这个工作。<_:"
+"programlisting-1/> 这些命令将在每次抛出时打印回溯信息并继续。通常最后一个或第"
+"一个<code>throw</code>是你所需要的。"
 
 #: C/index-in.docbook:8621
 msgid "Creating your own signals"
