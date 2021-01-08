@@ -13478,7 +13478,7 @@ msgstr ""
 
 #: C/index-in.docbook:7927
 msgid "Contributing"
-msgstr ""
+msgstr "贡献"
 
 #: C/index-in.docbook:7929
 msgid ""
@@ -13487,6 +13487,9 @@ msgid ""
 "<application>gtkmm</application> that does not already have documentation, "
 "please consider contributing to this document."
 msgstr ""
+"本文档和其他出色的软件一样，是由志愿者免费创建的。如果你对任何一个"
+"<application>gtkmm</application>没有文档的部分有所了解，请考虑帮助编写/翻译本"
+"文档。"
 
 #: C/index-in.docbook:7935
 msgid ""
@@ -13495,6 +13498,10 @@ msgid ""
 "the <filename>docs/tutorial/C/index-in.docbook</filename> file. This file is "
 "in the <literal>gtkmm-documentation</literal> module in GNOME git."
 msgstr ""
+"理想情况下，我们希望你前往此<ulink url=\"https://gitlab.gnome.org/GNOME/"
+"gtkmm-documentation/-/merge_requests\">仓库</ulink>为<filename>docs/tutorial/"
+"C/index-in.docbook</filename>提供MR。该文件位于GNOME的gitlab <literal>gtkmm-"
+"documentation</literal>模块中。"
 
 #: C/index-in.docbook:7941
 msgid ""
@@ -13508,6 +13515,12 @@ msgid ""
 "and copies of this document (including your contribution) may be distributed "
 "freely."
 msgstr ""
+"如果你决定做出贡献，请将你的贡献发送到<application>gtkmm</application>邮件列"
+"表，网址为<ulink url=\"mailto:gtkmm-list@gnome.org\">&lt;gtkmm-list@gnome."
+"org&gt;</ulink>，或者前往<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-"
+"documentation\">GitLab</ulink>新建issue/MR。另外请注意，本文档的全部内容都是"
+"免费的，你添加所有内容也需要是免费的。也就是说人们必须能够在程序中使用示例的"
+"任何部分，以及自由分发本文档的副本。"
 
 #: C/index-in.docbook:7954
 msgid "The RefPtr smartpointer"
