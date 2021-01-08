@@ -13524,7 +13524,7 @@ msgstr ""
 
 #: C/index-in.docbook:7954
 msgid "The RefPtr smartpointer"
-msgstr ""
+msgstr "RefPtr智能指针"
 
 #: C/index-in.docbook:7955
 msgid ""
@@ -13537,21 +13537,35 @@ msgid ""
 "<classname>Glib::RefPtr&lt;&gt;</classname> was introduced long before there "
 "was a reference-counting smartpointer in the C++ Standard Library."
 msgstr ""
+"<classname>Glib::RefPtr</classname>是一个智能指针。准确的说，它是一个引用计数"
+"智能指针。你可能对<classname>std::unique_ptr&lt;&gt;</classname>和"
+"<classname>std::shared_ptr&lt;&gt;</classname>十分熟悉，它们也是智能指针。在"
+"<application>gtkmm</application>-4.0中<classname>Glib::RefPtr&lt;&gt;</"
+"classname>是<classname>std::shared_ptr&lt;&gt;</classname>的别名。<classname>Glib::"
+"RefPtr&lt;&gt;</classname>在C++标准库还没有添加引用计数智能指针的时候就已经存"
+"在于<application>glibmm</application>了（译注：事实上Glib::RefPtr的行为与"
+"std::shared_ptr的行为并不完全一致，且因glibmm等库的文档是由C文档直接生成而"
+"来，在一些C库中可以接受NULL作为参数的函数在对应的C++绑定库中的文档中都是可以"
+"接受nullptr作为参数，但实际上并不一定能接受nullptr作为参数，有时候需要传递"
+"Glib::RefPtr&lt;FOO&gt;()、Gdk::Event()、空的字符串等。参见：<ulink url=\"https://"
+"gitlab.gnome.org/GNOME/glibmm/-/issues/24\">问题24</ulink>）。"
 
 #: C/index-in.docbook:7966
 msgid ""
 "<ulink url=\"http://developer.gnome.org/glibmm/unstable/classGlib_1_1RefPtr."
 "html\">Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/glibmm/unstable/classGlib_1_1RefPtr."
+"html\">参考</ulink>"
 
 #: C/index-in.docbook:7968
 msgid ""
 "A smartpointer acts much like a normal pointer. Here are a few examples."
-msgstr ""
+msgstr "智能指针的行为很像普通指针。这里有几个例子。"
 
 #: C/index-in.docbook:7971
 msgid "Copying"
-msgstr ""
+msgstr "复制"
 
 #: C/index-in.docbook:7972
 msgid ""
@@ -13559,6 +13573,8 @@ msgid ""
 "unlike normal pointers, you don't need to worry about deleting the "
 "underlying instance."
 msgstr ""
+"你可以像复制普通指针一样复制<classname>RefPtr</classname>，你不需要担心删除底"
+"层实例。"
 
 #: C/index-in.docbook:7978
 #, no-wrap
@@ -13567,6 +13583,9 @@ msgid ""
 "auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);\n"
 "auto refPixbuf2 = refPixbuf;\n"
 msgstr ""
+"\n"
+"auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);\n"
+"auto refPixbuf2 = refPixbuf;\n"
 
 #: C/index-in.docbook:7983
 msgid ""
@@ -13574,6 +13593,8 @@ msgid ""
 "standard containers, such as <classname>std::vector</classname> or "
 "<classname>std::list</classname>."
 msgstr ""
+"这意味着你可以将<classname>RefPtr</classname>储存于标准容器中，例如："
+"<classname>std::vector</classname>或<classname>std::list</classname>。"
 
 #: C/index-in.docbook:7988
 #, no-wrap
@@ -13583,16 +13604,21 @@ msgid ""
 "auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);\n"
 "listPixbufs.push_back(refPixbuf);\n"
 msgstr ""
+"\n"
+"std::list&lt;Glib::RefPtr&lt;Gdk::Pixbuf&gt;&gt; listPixbufs;\n"
+"auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);\n"
+"listPixbufs.push_back(refPixbuf);\n"
 
 #: C/index-in.docbook:7996
 msgid "Dereferencing"
-msgstr ""
+msgstr "解引用"
 
 #: C/index-in.docbook:7997
 msgid ""
 "You can dereference a smartpointer with the -&gt; operator, to call the "
 "methods of the underlying instance, just like a normal pointer."
 msgstr ""
+"你可以使用-&gt;操作符解引用智能指针，就像使用普通指针访问底层实例的方法一样。"
 
 #: C/index-in.docbook:8001
 #, no-wrap
@@ -13601,6 +13627,9 @@ msgid ""
 "auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);\n"
 "auto width = refPixbuf-&gt;get_width();\n"
 msgstr ""
+"\n"
+"auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);\n"
+"auto width = refPixbuf-&gt;get_width();\n"
 
 #: C/index-in.docbook:8006
 msgid ""
@@ -13609,6 +13638,9 @@ msgid ""
 "so. Unless you are careful, you can end up with a pointer or a reference "
 "which is not included in the reference count."
 msgstr ""
+"你还可以使用*操作符和<methodname>get()</methodname>方法访问底层实例，不过通常"
+"这不是一个好主意。除非你非常的谨慎没有犯错，否则你将得到一个不存在于引用计数"
+"中的指向底层实例的指针或底层实例的引用。"
 
 #: C/index-in.docbook:8012
 #, no-wrap
@@ -13617,16 +13649,21 @@ msgid ""
 "auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);\n"
 "auto&amp; underlying = *refPixbuf; // Possible, but not recommended\n"
 msgstr ""
+"\n"
+"auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);\n"
+"auto&amp; underlying = *refPixbuf; // Possible, but not recommended\n"
 
 #: C/index-in.docbook:8019
 msgid "Casting"
-msgstr ""
+msgstr "类型转换"
 
 #: C/index-in.docbook:8020
 msgid ""
 "You can cast <classname>RefPtr</classname>s to base types, just like normal "
 "pointers."
 msgstr ""
+"你可以像对正常指针进行类型转换一样，将<classname>RefPtr</classname>转换到基础"
+"类型。"
 
 #: C/index-in.docbook:8025
 #, no-wrap
@@ -13635,6 +13672,9 @@ msgid ""
 "auto refStore = Gtk::TreeStore::create(columns);\n"
 "Glib::RefPtr&lt;Gtk::TreeModel&gt; refModel = refStore;\n"
 msgstr ""
+"\n"
+"auto refStore = Gtk::TreeStore::create(columns);\n"
+"Glib::RefPtr&lt;Gtk::TreeModel&gt; refModel = refStore;\n"
 
 #: C/index-in.docbook:8030
 msgid ""
@@ -13643,12 +13683,15 @@ msgid ""
 "RefPtr&lt;DerivedType&gt;&amp;</type>. The cast is implicit, just as it "
 "would be for a normal pointer."
 msgstr ""
+"这意味着任何接受<type>const Glib::RefPtr&lt;BaseType&gt;&amp;</type>参数的函"
+"数也能接受<type>const Glib::RefPtr&lt;DerivedType&gt;&amp;</type>对象。此转换"
+"和普通指针一样是隐式的。"
 
 #: C/index-in.docbook:8034
 msgid ""
 "You can also cast to a derived type, but the syntax is a little different "
 "than with a normal pointer."
-msgstr ""
+msgstr "你还可以将其转换为派生类型，但是语法和普通指针的语法略有不同。"
 
 #: C/index-in.docbook:8038
 #, no-wrap
@@ -13657,16 +13700,20 @@ msgid ""
 "auto refStore = std::dynamic_pointer_cast&lt;Gtk::TreeStore&gt;(refModel);\n"
 "auto refStore2 = std::static_pointer_cast&lt;Gtk::TreeStore&gt;(refModel);\n"
 msgstr ""
+"\n"
+"auto refStore = std::dynamic_pointer_cast&lt;Gtk::TreeStore&gt;(refModel);\n"
+"auto refStore2 = std::static_pointer_cast&lt;Gtk::TreeStore&gt;(refModel);\n"
 
 #: C/index-in.docbook:8045
 msgid "Checking for nullptr"
-msgstr ""
+msgstr "nullptr检查"
 
 #: C/index-in.docbook:8046
 msgid ""
 "Just like normal pointers, you can check whether a <classname>RefPtr</"
 "classname> points to anything."
 msgstr ""
+"就像普通指针一样，你可以检查<classname>RefPtr</classname>是否指向了任何东西。"
 
 #: C/index-in.docbook:8051
 #, no-wrap
@@ -13679,6 +13726,13 @@ msgid ""
 "  ...\n"
 "}\n"
 msgstr ""
+"\n"
+"auto refModel = m_TreeView.get_model();\n"
+"if (refModel)\n"
+"{\n"
+"  auto cols_count = refModel-&gt;get_n_columns();\n"
+"  ...\n"
+"}\n"
 
 #: C/index-in.docbook:8060
 msgid ""
@@ -13686,10 +13740,12 @@ msgid ""
 "initialized to <literal>nullptr</literal> so you don't need to remember to "
 "do that yourself."
 msgstr ""
+"和普通指针不一样的是，<classname>RefPtr</classname>将会自动初始化为"
+"<literal>nullptr</literal>，不需要你自己进行置空。"
 
 #: C/index-in.docbook:8066
 msgid "Constness"
-msgstr ""
+msgstr "常数"
 
 #: C/index-in.docbook:8067
 msgid ""
@@ -13698,6 +13754,9 @@ msgid ""
 "to a <type>const Something</type>. The pointer can be changed, but not the "
 "<type>Something</type> that it points to."
 msgstr ""
+"在C++中<literal>const</literal>关键字的使用并不总是很清晰。你可能没有意识到"
+"<type>const Something*</type>声明了一个指向<type>const Something</type>的指"
+"针。这个指针的指向是可以被改变的，其指向的<type>Something</type>不能被改变。"
 
 #: C/index-in.docbook:8073
 msgid ""
@@ -13706,6 +13765,10 @@ msgid ""
 "&amp;</type>, and the equivalent of <type>const Something*</type> is "
 "<type>const Glib::RefPtr&lt;const Something&gt;&amp;</type>."
 msgstr ""
+"因此，在方法参数中与<type>Something*</type>等效的<classname>RefPtr</"
+"classname>是<type>const Glib::RefPtr&lt;Something&gt;&amp;</type>，而与"
+"<type>const Something*</type>等效的是<type>const Glib::RefPtr&lt;const "
+"Something&gt;&amp;</type>。"
 
 #: C/index-in.docbook:8080
 msgid ""
@@ -13714,6 +13777,9 @@ msgid ""
 "<classname>std::string</classname> for a method parameter to avoid "
 "unnecessary copying."
 msgstr ""
+"用<literal>const ... &amp;</literal>包围是处于效率考虑，就像在方法参数中使用"
+"<classname>const std::string&amp;</classname>而不是用<classname>std::string</"
+"classname>一样，这是为了避免不必要的复制。"
 
 #: C/index-in.docbook:8095
 msgid "Connecting signal handlers"
