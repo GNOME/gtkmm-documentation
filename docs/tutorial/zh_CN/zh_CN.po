@@ -12596,7 +12596,7 @@ msgstr ""
 
 #: C/index-in.docbook:7378
 msgid "Building applications"
-msgstr ""
+msgstr "构建应用程序"
 
 #: C/index-in.docbook:7380
 msgid ""
@@ -12605,18 +12605,20 @@ msgid ""
 "Manual</ulink>. The same application is built, but <application>gtkmm</"
 "application> is used instead of <application>GTK</application>."
 msgstr ""
+"本章节与<ulink url=\"https://developer.gnome.org/gtk4/unstable/\">GTK4参考文"
+"档</ulink>的\"Building applications\"章节十分类似。"
 
 #: C/index-in.docbook:7389
 msgid "The binary file"
-msgstr ""
+msgstr "二进制文件"
 
 #: C/index-in.docbook:7390
 msgid "This gets installed in <filename>/usr/bin</filename>."
-msgstr ""
+msgstr "这将被安装在<filename>/usr/bin</filename>。"
 
 #: C/index-in.docbook:7393
 msgid "A desktop file"
-msgstr ""
+msgstr "桌面文件"
 
 #: C/index-in.docbook:7394
 msgid ""
@@ -12624,20 +12626,25 @@ msgid ""
 "desktop shell, such as its name, icon, D-Bus name, commandline to launch it, "
 "etc. It is installed in <filename>/usr/share/applications</filename>."
 msgstr ""
+"桌面文件为桌面shell提供了于应用程序有关的重要信息，例如应用程序的名称、图标D-"
+"Bus名、启动时的命令行等。此文件将安装在<filename>/usr/share/applications</"
+"filename>。"
 
 #: C/index-in.docbook:7399
 msgid "An icon"
-msgstr ""
+msgstr "图标"
 
 #: C/index-in.docbook:7400
 msgid ""
 "The icon gets installed in <filename>/usr/share/icons/hicolor/48x48/apps</"
 "filename>, where it will be found regardless of the current theme."
 msgstr ""
+"图标将被安装在<filename>/usr/share/icons/hicolor/48x48/apps</filename>，无论"
+"当前主题是什么你都可以在其中找到图标。"
 
 #: C/index-in.docbook:7404
 msgid "A settings schema"
-msgstr ""
+msgstr "设置模式"
 
 #: C/index-in.docbook:7405
 msgid ""
@@ -12645,10 +12652,13 @@ msgid ""
 "install its schema in <filename>/usr/share/glib-2.0/schemas</filename>, so "
 "that tools like dconf-editor can find it."
 msgstr ""
+"如果应用程序使用了<classname>Gio::Settings</classname>，它需要将它的模式安装"
+"到<filename>/usr/share/glib-2.0/schemas</filename>，以便dconf-editor之类的工"
+"具可以找到它。"
 
 #: C/index-in.docbook:7410
 msgid "Other resources"
-msgstr ""
+msgstr "其他资源"
 
 #: C/index-in.docbook:7411
 msgid ""
@@ -12658,10 +12668,13 @@ msgid ""
 "installed in an application-specific location in <filename>/usr/share</"
 "filename>."
 msgstr ""
+"像<classname>Gtk::Builder</classname>UI文件这样的其他文件，最好从储存应用程序"
+"自身的二进制中加载。这样就不需要按照传统将大多数文件安装在<filename>/usr/"
+"share</filename>中特定应用程序的位置。"
 
 #: C/index-in.docbook:7385
 msgid "An application consists of a number of files: <_:variablelist-1/>"
-msgstr ""
+msgstr "一个应用程序由许多文件组成：<_:variablelist-1/>"
 
 #: C/index-in.docbook:7419
 msgid ""
@@ -12674,6 +12687,13 @@ msgid ""
 "Stack</classname>, <classname>Gtk::SearchBar</classname>, <classname>Gtk::"
 "ListBox</classname>, and more."
 msgstr ""
+"<application>gtkmm</application>包括构建在<classname>Gio::Application</"
+"classname>上的应用程序支持。在本章中我们将从头开始构建一个简单的应用程序。然"
+"后逐渐向其中添加更多内容。在此过程中我们将学习<classname>Gtk::Application</"
+"classname>、<classname>Gtk::Builder</classname>、资源、菜单、设置、"
+"<classname>Gtk::HeaderBar</classname>、<classname>Gtk::Stack</classname>、"
+"<classname>Gtk::SearchBar</classname>、<classname>Gtk::ListBox</classname>等"
+"内容。"
 
 #: C/index-in.docbook:7428
 msgid ""
@@ -12689,10 +12709,19 @@ msgid ""
 "For more information, see the <filename>README</filename> included in the "
 "<filename>buildapp</filename> directory."
 msgstr ""
+"这些示例的完整可构建源代码可以从<application>gtkmm-documentation</"
+"application>源目录的<filename>examples/book/buildapp</filename>文件夹中找到，"
+"或者在<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/"
+"master/examples/book/buildapp\"><application>gtkmm-documentation</"
+"application>git仓库</ulink>可以找到。你可以通过<filename>meson.build</"
+"filename>文件使用<command>meson</command>和<command>ninja</command>，或是通过"
+"<filename>Makefile.example</filename>文件使用<command>make</command>以编译每"
+"一个示例。更多有关信息，请参见<filename>buildapp</filename>目录中包含的"
+"<filename>README</filename>文件。"
 
 #: C/index-in.docbook:7441 C/index-in.docbook:7485
 msgid "A trivial application"
-msgstr ""
+msgstr "简单的应用程序"
 
 #: C/index-in.docbook:7443
 msgid ""
@@ -12700,6 +12729,9 @@ msgid ""
 "function> function can be very simple. We just call <methodname>Gtk::"
 "Application::run()</methodname> on an instance of our application class."
 msgstr ""
+"使用<classname>Gtk::Application</classname>时，<function>main()</function>函"
+"数可以非常简单。我们只是在应用程序类实例上调用<methodname>Gtk::Application::"
+"run()</methodname>。"
 
 #: C/index-in.docbook:7449
 msgid ""
@@ -12711,6 +12743,11 @@ msgid ""
 "files, but our subclassed application window does not yet do what it's told "
 "to do.)"
 msgstr ""
+"应用程序的所有逻辑都在应用程序类中，该类是<classname>Gtk::Application</"
+"classname>的子类。现在在我们的示例中还没有任何很有趣的功能。它要做的事就是在"
+"没有参数的情况下打开一个窗口，或在有参数的启动状态下打开给定的文件（准确的说"
+"我们的应用程序类尝试打开文件，但是应用程序的窗口子类并没有执行应执行的操"
+"作）。"
 
 #: C/index-in.docbook:7458
 msgid ""
@@ -12720,18 +12757,25 @@ msgid ""
 "methodname>'s default handler, which gets called when the application is "
 "launched with commandline arguments."
 msgstr ""
+"为了处理这两种情况，我们覆写了<methodname>signal_activate()</methodname>和"
+"<methodname>signal_open()</methodname>的默认处理函数，在没有命令行参数时前者"
+"的处理函数被调用，有命令行参数时后者的处理函数被调用。"
 
 #: C/index-in.docbook:7465
 msgid ""
 "<ulink url=\"http://developer.gnome.org/glibmm/unstable/"
 "classGio_1_1Application.html\">Gio::Application Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/glibmm/unstable/"
+"classGio_1_1Application.html\">Gio::Application参考</ulink>"
 
 #: C/index-in.docbook:7466
 msgid ""
 "<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
 "classGtk_1_1Application.html\">Gtk::Application Reference</ulink>"
 msgstr ""
+"<ulink url=\"http://developer.gnome.org/gtkmm/unstable/"
+"classGtk_1_1Application.html\">Gtk::Application参考</ulink>"
 
 #: C/index-in.docbook:7468
 msgid ""
@@ -12740,6 +12784,9 @@ msgid ""
 "classname>. It is typically subclassed as well. Our subclass does not do "
 "anything yet, so we will just get an empty window."
 msgstr ""
+"作为<application>gtkmm</application>应用程序支持的另一个重要的类是"
+"<classname>Gtk::ApplicationWindow</classname>。通常我们也会将其子类化。此时我"
+"们的子类还没有做任何事，所以我们只会得到一个空白的窗口。"
 
 #: C/index-in.docbook:7474
 msgid ""
@@ -12747,10 +12794,12 @@ msgid ""
 "a desktop file. Note that @bindir@ in the desktop file needs to be replaced "
 "with the actual path to the binary before this desktop file can be used."
 msgstr ""
+"作为应用程序初始设置的一部分，我们还为其创建了一个图标和桌面文件。请注意在使"
+"用这个桌面文件之前你还需要将文件中的@bindir@替换为应用程序二进制的实际路径。"
 
 #: C/index-in.docbook:7480
 msgid "Here is what we've achieved so far:"
-msgstr ""
+msgstr "到目前为止我们做到了："
 
 #: C/index-in.docbook:7491
 msgid ""
@@ -12758,16 +12807,20 @@ msgid ""
 "presenting itself on the session bus, it has single-instance semantics, and "
 "it accepts files as commandline arguments."
 msgstr ""
+"这看起来还无法让人印象深刻，但是我们的应用程序已经在会话总线上展示了自己。现"
+"在它具有单实例语义，并且接受命令行参数作为文件路径。"
 
 #: C/index-in.docbook:7496
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/buildapp/step1\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/buildapp/step1\">源代码</ulink>"
 
 #: C/index-in.docbook:7501 C/index-in.docbook:7544
 msgid "Populating the window"
-msgstr ""
+msgstr "填充窗口"
 
 #: C/index-in.docbook:7503
 msgid ""
@@ -12775,12 +12828,16 @@ msgid ""
 "associate a <classname>Gtk::Builder</classname> ui file with our application "
 "window class."
 msgstr ""
+"再次步骤中，我们使用<classname>Gtk::Builder</classname>实例将<classname>Gtk::"
+"Builder</classname> UI文件和我们的应用程序窗口类相关联。"
 
 #: C/index-in.docbook:7508
 msgid ""
 "Our simple ui file gives the window a title, and puts a <classname>Gtk::"
 "Stack</classname> widget as the main content."
 msgstr ""
+"我们的简单UI文件为窗口设定了一个标题，并将一个<classname>Gtk::Stack</"
+"classname>文件放入了窗口中。"
 
 #: C/index-in.docbook:7513
 msgid ""
@@ -12793,11 +12850,19 @@ msgid ""
 "builder-using-derived-widgets\">Using derived widgets</link> section for "
 "more information about <methodname>get_widget_derived()</methodname>."
 msgstr ""
+"为了在我们的应用程序中使用这个文件，我们重访<classname>Gtk::"
+"ApplicationWindow</classname>子类，并在<methodname>ExampleAppWindow::"
+"create()</methodname>成员函数中调用<methodname>Gtk::Builder::"
+"create_from_resource()</methodname>和<methodname>Gtk::Builder::"
+"get_widget_derived()</methodname>以获取我们的<classname>Gtk::"
+"ApplicationWindow</classname>子类的实例。更多有关的"
+"<methodname>get_widget_derived()</methodname>的信息，请参见<link linkend="
+"\"sec-builder-using-derived-widgets\">使用派生部件</link>小节。"
 
 #: C/index-in.docbook:7532
 #, no-wrap
 msgid "$ glib-compile-resources --target=resources.c --generate-source exampleapp.gresource.xml"
-msgstr ""
+msgstr "$ glib-compile-resources --target=resources.c --generate-source exampleapp.gresource.xml"
 
 #: C/index-in.docbook:7524
 msgid ""
@@ -12814,26 +12879,37 @@ msgid ""
 "<function>compile_resources()</function> function in Meson's <ulink url="
 "\"https://mesonbuild.com/Gnome-module.html\">GNOME module</ulink>."
 msgstr ""
+"你可能已经注意到了，我们使用<methodname>_from_resource()</methodname>变体方法"
+"读取UI文件。现在，我们要使用<application>GLib</application>资源功能将这个UI文"
+"件放入二进制中。通常我们通过在.gresource.xml文件中列出所有资源来完成此操作。"
+"该文件必须被转换为C源文件，并将其与其他源文件一并编译链接到应用程序中去。为"
+"此，我们使用了<application>glib-compile-resources</application>实用程序：<_:"
+"screen-1/> <link linkend=\"sec-gio-resource\">Gio::Resource和glib-compile-"
+"resources</link>小节包含了与资源文件有关的信息。如果你使用Meson进行编译，请使"
+"用Meson <ulink url=\"https://mesonbuild.com/Gnome-module.html\">GNOME模块</"
+"ulink>中的<function>compile_resources()</function>函数。"
 
 #: C/index-in.docbook:7539
 msgid "Our application now looks like this:"
-msgstr ""
+msgstr "我们的应用程序现在看起来像这样："
 
 #: C/index-in.docbook:7550
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/buildapp/step2\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/buildapp/step2\">源代码</ulink>"
 
 #: C/index-in.docbook:7555 C/index-in.docbook:7591
 msgid "Opening files"
-msgstr ""
+msgstr "打开文件"
 
 #: C/index-in.docbook:7557
 msgid ""
 "In this step, we make our application show the contents of all the files "
 "that it is given on the commandline."
-msgstr ""
+msgstr "在这一步中，我们使我们的应用程序显示由命令行参数给定的文件的所有内容。"
 
 #: C/index-in.docbook:7562
 msgid ""
@@ -12842,6 +12918,9 @@ msgid ""
 "with a call to <methodname>Gtk::Builder::get_widget()</methodname> in the "
 "application window's constructor."
 msgstr ""
+"为此，我们向我们的应用程序窗口中添加一个数据成员，此保持一个指向"
+"<classname>Gtk::Stack</classname>的指针。我们通过在应用程序窗口的构造函数中调"
+"用<methodname>Gtk::Builder::get_widget()</methodname>获得指向该子部件的指针。"
 
 #: C/index-in.docbook:7568
 msgid ""
@@ -12850,12 +12929,17 @@ msgid ""
 "construct a <classname>Gtk::TextView</classname> that we then add as a page "
 "to the stack."
 msgstr ""
+"现在我们重访对每个命令行参数都会调用的<methodname>ExampleAppWindow::"
+"open_file_view()</methodname>成员函数，并构造一个<classname>Gtk::TextView</"
+"classname>然后将其作为页面添加到<classname>Gtk::Stack</classname>中。"
 
 #: C/index-in.docbook:7574
 msgid ""
 "Lastly, we add a <classname>Gtk::StackSwitcher</classname> to the titlebar "
 "area in the ui file, and we tell it to display information about our stack."
 msgstr ""
+"最后，我们将<classname>Gtk::StackSwitcher</classname>添加到UI文件的标题栏区"
+"域，并告诉它如何显示<classname>Gtk::Stack</classname>的相关信息。"
 
 #: C/index-in.docbook:7579
 msgid ""
@@ -12864,32 +12948,39 @@ msgid ""
 "each file as the last argument to the <methodname>Gtk::Stack::add()</"
 "methodname> method."
 msgstr ""
+"堆切换器(StackSwitcher)从其所属的堆(Stack)中获取其所需的关于显示选项卡的相关"
+"信息。在这，作为<methodname>Gtk::Stack::add()</methodname>方法的最后一个参"
+"数，我们为每个显示的文件传递一个标签。"
 
 #: C/index-in.docbook:7586
 msgid "Our application is beginning to take shape:"
-msgstr ""
+msgstr "我们的应用程序开始成形："
 
 #: C/index-in.docbook:7597
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/buildapp/step3\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/buildapp/step3\">源代码</ulink>"
 
 #: C/index-in.docbook:7602 C/index-in.docbook:7637
 msgid "A menu"
-msgstr ""
+msgstr "菜单"
 
 #: C/index-in.docbook:7604
 msgid ""
 "The menu is shown at the right side of the headerbar. It is meant to collect "
 "infrequently used actions that affect the whole application."
-msgstr ""
+msgstr "菜单显示在标题栏的右侧。它旨在放置所有应用程序不常用的动作。"
 
 #: C/index-in.docbook:7609
 msgid ""
 "Just like the application window, we specify our menu in a ui file, and add "
 "it as a resource to our binary."
 msgstr ""
+"就像应用程序窗口一样，我们在UI文件中指定一个菜单，并将其作为资源添加到二进制"
+"中。"
 
 #: C/index-in.docbook:7614
 msgid ""
@@ -12898,6 +12989,9 @@ msgid ""
 "Since menus work by activating <classname>Gio::Action</classname>s, we also "
 "have to add a suitable set of actions to our application."
 msgstr ""
+"为了使菜单出现，我们必须加载UI文件，并将生成的菜单模型与添加到标题栏右侧的菜"
+"单按钮相关联。由于菜单通过激活<classname>Gio::Action</classname>工作，我们还"
+"需要向应用程序中添加一组合适的动作。"
 
 #: C/index-in.docbook:7621
 msgid ""
@@ -12905,6 +12999,8 @@ msgid ""
 "default signal handler, which is guaranteed to be called once for each "
 "primary application instance."
 msgstr ""
+"最好在<methodname>on_startup()</methodname>的默认信号处理函数中完成添加动作，"
+"并确保每个应用程序实例都只调用一次。"
 
 #: C/index-in.docbook:7626
 msgid ""
@@ -12913,20 +13009,25 @@ msgid ""
 "The shortcut is added with <methodname>Gtk::Application::"
 "set_accel_for_action()</methodname>."
 msgstr ""
+"现在我们的首选项菜单还什么都不做，但是退出菜单项是有效的。也可以用常用的Ctrl-"
+"Q快捷键激活它。快捷键通过<methodname>Gtk::Application::"
+"set_accel_for_action()</methodname>添加。"
 
 #: C/index-in.docbook:7632
 msgid "The menu looks like this:"
-msgstr ""
+msgstr "菜单如下所示"
 
 #: C/index-in.docbook:7643
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/buildapp/step4\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/buildapp/step4\">源代码</ulink>"
 
 #: C/index-in.docbook:7648
 msgid "A preference dialog"
-msgstr ""
+msgstr "首选项对话框"
 
 #: C/index-in.docbook:7650
 msgid ""
@@ -12934,6 +13035,8 @@ msgid ""
 "from one run to the next. Even for our simple example application, we may "
 "want to change the font that is used for the content."
 msgstr ""
+"经典的应用程序会有一些首选项，它们应该被记住而不需要在下次运行时在进行设置。"
+"即使对于我们这个简单的应用程序示例，我们可能也想改变用于文本内容的字体。"
 
 #: C/index-in.docbook:7656
 msgid ""
@@ -12942,6 +13045,9 @@ msgid ""
 "describes our settings, in our case the <filename>org.gtkmm.exampleapp."
 "gschema.xml</filename> file."
 msgstr ""
+"我们将使用<classname>Gio::Settings</classname>来储存我们的首选项。"
+"<classname>Gio::Settings</classname>需要一个用于描述我们的设置的模式，在本例"
+"中为<filename>org.gtkmm.exampleapp.gschema.xml</filename>文件。"
 
 #: C/index-in.docbook:7662
 msgid ""
@@ -12953,6 +13059,12 @@ msgid ""
 "function> function in the <ulink url=\"https://mesonbuild.com/Gnome-module."
 "html\">GNOME module</ulink>."
 msgstr ""
+"在我们应用程序使用模式之前，我们需要将其编译为<classname>Gio::Settings</"
+"classname>能期望的二进制格式。GUI为此提供了基于autotools项目的宏来执行此操"
+"作。具体信息请参阅<ulink url=\"https://developer.gnome.org/gio/stable/"
+"GSettings.html\">GSettings</ulink>。而Meson在<ulink url=\"https://mesonbuild."
+"com/Gnome-module.html\">GNOME模块</ulink>中提供了"
+"<function>compile_schemas()</function>执行此操作。"
 
 #: C/index-in.docbook:7676
 #, no-wrap
@@ -12961,6 +13073,9 @@ msgid ""
 "m_settings = Gio::Settings::create(\"org.gtkmm.exampleapp\");\n"
 "m_settings-&gt;bind(\"transition\", m_stack-&gt;property_transition_type());\n"
 msgstr ""
+"\n"
+"m_settings = Gio::Settings::create(\"org.gtkmm.exampleapp\");\n"
+"m_settings-&gt;bind(\"transition\", m_stack-&gt;property_transition_type());\n"
 
 #: C/index-in.docbook:7671
 msgid ""
@@ -12970,6 +13085,10 @@ msgid ""
 "we do for the transition setting in <classname>ExampleAppWindow</"
 "classname>'s constructor. <_:programlisting-1/>"
 msgstr ""
+"接下来，我们需要将设置连接到应该被控制的部件上。一种很方便的方法是使用"
+"<methodname>Gio::Settings::bind()</methodname>将对象的属性和设置键相互绑定，"
+"就像我们在<classname>ExampleAppWindow</classname>的构造函数中做的过渡设置一"
+"样。<_:programlisting-1/>"
 
 #: C/index-in.docbook:7686
 #, no-wrap
@@ -12979,6 +13098,10 @@ msgid ""
 "m_settings-&gt;bind(\"font\", tag-&gt;property_font());\n"
 "buffer-&gt;apply_tag(tag, buffer-&gt;begin(), buffer-&gt;end());\n"
 msgstr ""
+"\n"
+"auto tag = buffer-&gt;create_tag();\n"
+"m_settings-&gt;bind(\"font\", tag-&gt;property_font());\n"
+"buffer-&gt;apply_tag(tag, buffer-&gt;begin(), buffer-&gt;end());\n"
 
 #: C/index-in.docbook:7682
 msgid ""
@@ -12987,6 +13110,9 @@ msgid ""
 "that we must first create. The code is in <methodname>ExampleAppWindow::"
 "open_file_view()</methodname>. <_:programlisting-1/>"
 msgstr ""
+"字体设置的连接要麻烦的多，因为我们需要先创建对应的对象属性的<classname>Gtk::"
+"TextTag</classname>。以下代码在<methodname>ExampleAppWindow::"
+"open_file_view()</methodname>函数中。<_:programlisting-1/>"
 
 #: C/index-in.docbook:7693
 msgid ""
@@ -12998,6 +13124,12 @@ msgid ""
 "we've already seen in <classname>ExampleAppWindow</classname>: a "
 "<classname>Gtk::Builder</classname> ui file and settings bindings."
 msgstr ""
+"此时，如果你更改其中一项设置（例如：使用<command>gsettings</command>命令行工"
+"具。），则应用程序会做出反应。当然，我们会希望应用程序为这些首选项提供一个对"
+"话框。所以我们现在就如此做。我们的首选项对话框将是<classname>Gtk::Dialog</"
+"classname>的子类，并且使用我们之前已经在<classname>ExampleAppWindow</"
+"classname>中看到的技术：<classname>Gtk::Builder</classname> UI文件和设置绑"
+"定。"
 
 #: C/index-in.docbook:7706
 #, no-wrap
@@ -13006,6 +13138,9 @@ msgid ""
 "auto prefs_dialog = ExampleAppPrefs::create(*get_active_window());\n"
 "prefs_dialog-&gt;present();\n"
 msgstr ""
+"\n"
+"auto prefs_dialog = ExampleAppPrefs::create(*get_active_window());\n"
+"prefs_dialog-&gt;present();\n"
 
 #: C/index-in.docbook:7702
 msgid ""
@@ -13015,26 +13150,32 @@ msgid ""
 "in our application class, and make it open a new preference dialog. <_:"
 "programlisting-1/>"
 msgstr ""
+"我们创建<filename>prefs.ui</filename>文件和<classname>ExampleAppPrefs</"
+"classname>子类之后，我们重访<methodname>ExampleApplication::"
+"on_action_preferences()</methodname>成员函数，并使其打开一个新的首选项对话"
+"框。<_:programlisting-1/>"
 
 #: C/index-in.docbook:7712
 msgid ""
 "After all this work, our application can now show a preference dialog like "
 "this:"
-msgstr ""
+msgstr "完成所有工作后，我们的应用程序现在可以显示如下所示的首选项对话框："
 
 #: C/index-in.docbook:7717
 msgid "An preference dialog"
-msgstr ""
+msgstr "首选项对话框"
 
 #: C/index-in.docbook:7723
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/buildapp/step5\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/buildapp/step5\">源代码</ulink>"
 
 #: C/index-in.docbook:7728 C/index-in.docbook:7771
 msgid "Adding a search bar"
-msgstr ""
+msgstr "添加搜索栏"
 
 #: C/index-in.docbook:7730
 msgid ""
@@ -13044,6 +13185,10 @@ msgid ""
 "classname>. The search bar is a widget that can slide in from the top to "
 "present a search entry."
 msgstr ""
+"我们将继续充实我们的应用程序的功能。现在，我们向其中添加搜索功能。"
+"<application>gtkmm</application>通过<classname>Gtk::SearchEntry</classname>和"
+"<classname>Gtk::SearchBar</classname>对此提供了支持。搜索栏是一个部件，可以从"
+"从顶部滑入以显示搜索条目。"
 
 #: C/index-in.docbook:7736
 msgid ""
@@ -13051,6 +13196,8 @@ msgid ""
 "search bar below the header bar. The new widgets are added in the "
 "<filename>window.ui</filename> file."
 msgstr ""
+"我们向标题栏添加了一个开关按钮，可以用于滑出位于标题栏下方的搜索栏。新的部件"
+"将添加到<filename>window.ui</filename>文件中。"
 
 #: C/index-in.docbook:7745
 #, no-wrap
@@ -13074,6 +13221,24 @@ msgid ""
 "  }\n"
 "}\n"
 msgstr ""
+"\n"
+"void ExampleAppWindow::on_search_text_changed()\n"
+"{\n"
+"  const auto text = m_searchentry-&gt;get_text();\n"
+"  auto tab = dynamic_cast&lt;Gtk::ScrolledWindow*&gt;(m_stack-&gt;get_visible_child());\n"
+"  auto view = dynamic_cast&lt;Gtk::TextView*&gt;(tab-&gt;get_child());\n"
+"\n"
+"  // Very simple-minded search implementation.\n"
+"  auto buffer = view-&gt;get_buffer();\n"
+"  Gtk::TextIter match_start;\n"
+"  Gtk::TextIter match_end;\n"
+"  if (buffer-&gt;begin().forward_search(text, Gtk::TextSearchFlags::CASE_INSENSITIVE,\n"
+"      match_start, match_end))\n"
+"  {\n"
+"    buffer-&gt;select_range(match_start, match_end);\n"
+"    view-&gt;scroll_to(match_start);\n"
+"  }\n"
+"}\n"
 
 #: C/index-in.docbook:7741
 msgid ""
@@ -13082,20 +13247,25 @@ msgid ""
 "is a signal handler that listens for text changes in the search entry, shown "
 "here without error handling. <_:programlisting-1/>"
 msgstr ""
+"实现搜索需要进行大量的代码更改，在此我们不对其进行详细的介绍。实现搜索的核心"
+"部分是一个信号处理函数，它监听搜索条目的变更，此处显示的示例没有进行错误处"
+"理。<_:programlisting-1/>"
 
 #: C/index-in.docbook:7766
 msgid "With the search bar, our application now looks like this:"
-msgstr ""
+msgstr "有了搜索栏后，我们的应用程序看起来像这样："
 
 #: C/index-in.docbook:7777
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/buildapp/step6\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/buildapp/step6\">源代码</ulink>"
 
 #: C/index-in.docbook:7782 C/index-in.docbook:7817
 msgid "Adding a side bar"
-msgstr ""
+msgstr "添加侧边栏"
 
 #: C/index-in.docbook:7784
 msgid ""
@@ -13104,6 +13274,9 @@ msgid ""
 "ListBox</classname>. The new widgets are added in the <filename>window.ui</"
 "filename> file."
 msgstr ""
+"作为另一项功能，我们向应用程序中添加了侧边栏，用于演示<classname>Gtk::"
+"Revealer</classname>和<classname>Gtk::ListBox</classname>。新的部件将被添加到"
+"<filename>window.ui</filename>文件中。"
 
 #: C/index-in.docbook:7790
 msgid ""
@@ -13112,6 +13285,9 @@ msgid ""
 "add a checkbutton for the new feature to the menu. A menu item is added to "
 "the ui file <filename>gears_menu.ui</filename>."
 msgstr ""
+"在每个文件中用找到的单词生成按钮填充侧边栏的代码很复杂，这里我们不进行介绍。"
+"我们将对为菜单中添加新功能的多选按钮的代码进行介绍。菜单项将被添加到"
+"<filename>gears_menu.ui</filename> UI文件中。"
 
 #: C/index-in.docbook:7801
 #, no-wrap
@@ -13125,6 +13301,14 @@ msgid ""
 "m_gears-&gt;set_menu_model(menu);\n"
 "add_action(m_settings-&gt;create_action(\"show-words\"));\n"
 msgstr ""
+"\n"
+"// Connect the menu to the MenuButton m_gears, and bind the show-words setting\n"
+"// to the win.show-words action and the \"Words\" menu item.\n"
+"// (The connection between action and menu item is specified in gears_menu.ui.)\n"
+"auto menu_builder = Gtk::Builder::create_from_resource(\"/org/gtkmm/exampleapp/gears_menu.ui\");\n"
+"auto menu = menu_builder-&gt;get_object&lt;Gio::MenuModel&gt;(\"menu\");\n"
+"m_gears-&gt;set_menu_model(menu);\n"
+"add_action(m_settings-&gt;create_action(\"show-words\"));\n"
 
 #: C/index-in.docbook:7797
 msgid ""
@@ -13133,20 +13317,25 @@ msgid ""
 "<classname>Gio::Settings</classname> key. In <classname>ExampleAppWindow</"
 "classname>'s constructor: <_:programlisting-1/>"
 msgstr ""
+"我们使用<classname>Gio::Action</classname>与给定的<classname>Gio::Settings</"
+"classname>键相关联，以使菜单项与新的<literal>show-words</literal>设置向连接。"
+"在<classname>ExampleAppWindow</classname>构造函数中：<_:programlisting-1/>"
 
 #: C/index-in.docbook:7812
 msgid "What our application looks like now:"
-msgstr ""
+msgstr "现在我们的应用程序看起来像这样："
 
 #: C/index-in.docbook:7823
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/buildapp/step7\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/buildapp/step7\">源代码</ulink>"
 
 #: C/index-in.docbook:7829 C/index-in.docbook:7871
 msgid "Properties"
-msgstr ""
+msgstr "属性"
 
 #: C/index-in.docbook:7831
 msgid ""
@@ -13155,6 +13344,9 @@ msgid ""
 "<classname>Gio::PropertyAction</classname> or by binding them with "
 "<classname>Glib::Binding</classname>."
 msgstr ""
+"部件和其他对象有很多有用的属性。在这里，我们通过一些新颖的使用方法展示了使用"
+"它们的方法。例如，将它们包装在<classname>Gio::PropertyAction</classname>动作"
+"中或将它们与<classname>Glib::Binding</classname>绑定。"
 
 #: C/index-in.docbook:7837
 msgid ""
@@ -13164,6 +13356,10 @@ msgid ""
 "as we've seen a couple of times by now. We add a new \"Lines\" menu item to "
 "the gears menu, which triggers the <literal>show-lines</literal> action."
 msgstr ""
+"我们在<filename>window.ui</filename>文件中的标题栏中添加了两个标签，分别命名"
+"为<literal>lines_label</literal>和<literal>lines</literal>，并在应用程序窗口"
+"的构造函数中获取指向它们的指针。接着我们向齿轮菜单中添加了一个新的\"Lines\"菜"
+"单项，该菜单项会触发<literal>show-lines</literal>动作。"
 
 #: C/index-in.docbook:7854
 #, no-wrap
@@ -13173,6 +13369,10 @@ msgid ""
 "  m_lines_label-&gt;property_visible());\n"
 "\n"
 msgstr ""
+"add_action(Gio::PropertyAction::create(\"show-lines\", m_lines-&gt;property_visible()));\n"
+"m_binding_lines_visible = Glib::Binding::bind_property(m_lines-&gt;property_visible(),\n"
+"  m_lines_label-&gt;property_visible());\n"
+"\n"
 
 #: C/index-in.docbook:7845
 msgid ""
@@ -13185,6 +13385,12 @@ msgid ""
 "widget to the same property of the <literal>lines</literal> widget. In "
 "<classname>ExampleAppWindow</classname>'s constructor: <_:programlisting-1/>"
 msgstr ""
+"为了使此菜单项能执行某些操作，我们为<literal>lines</literal>标签的"
+"<literal>visible</literal>属性创建了一个属性动作，并将其添加到窗口动作中。这"
+"样做的效果是，每当动作被激活，标签的可见性就会改变。由于我们希望两个标签的可"
+"见性一致，因此我们将<literal>lines_label</literal>部件的<literal>visible</"
+"literal>属性绑定到<literal>lines</literal>部件的相同属性上。在"
+"<classname>ExampleAppWindow</classname>的构造函数中：<_:programlisting-1/>"
 
 #: C/index-in.docbook:7861
 msgid ""
@@ -13192,20 +13398,24 @@ msgid ""
 "and updates the <literal>lines</literal> label. See the full source if you "
 "are interested in the details."
 msgstr ""
+"我们还需要一个函数对当前标签页的行进行计数，并更新<literal>lines</literal>标"
+"签。如果你对此感兴趣请阅读完整源代码。"
 
 #: C/index-in.docbook:7866
 msgid "This brings our example application to this appearance:"
-msgstr ""
+msgstr "现在我们的示例应用程序看起来如下："
 
 #: C/index-in.docbook:7877
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/buildapp/step8\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/buildapp/step8\">源代码</ulink>"
 
 #: C/index-in.docbook:7882 C/index-in.docbook:7908
 msgid "Header bar"
-msgstr ""
+msgstr "标题栏"
 
 #: C/index-in.docbook:7884
 msgid ""
@@ -13214,6 +13424,9 @@ msgid ""
 "window, and its type is <literal>titlebar</literal>. This is set in the "
 "<filename>window.ui</filename> file."
 msgstr ""
+"我们的应用程序使用了<classname>Gtk::HeaderBar</classname>而不是普通的窗口标题"
+"栏。标题栏是窗口的直接子项，其类型为<literal>titlebar</literal>。这些由"
+"<filename>window.ui</filename>文件进行设置。"
 
 #: C/index-in.docbook:7897
 #, no-wrap
@@ -13222,6 +13435,9 @@ msgid ""
 "set_icon_name(\"exampleapp\");\n"
 "\n"
 msgstr ""
+"Gtk::IconTheme::get_for_display(get_display())-&gt;add_resource_path(\"/org/gtkmm/exampleapp\");\n"
+"set_icon_name(\"exampleapp\");\n"
+"\n"
 
 #: C/index-in.docbook:7891
 msgid ""
@@ -13232,10 +13448,14 @@ msgid ""
 "this icon as the window icon. In <classname>ExampleAppWindow</classname>'s "
 "constructor: <_:programlisting-1/>"
 msgstr ""
+"在这里我们对标题栏进行了两个小的更改。<literal>decoration-layout</literal>属"
+"性在<filename>window.ui</filename>文件中设置，使标题栏只显示关闭按钮，并隐藏"
+"最小化和最大化按钮。我们还在资源文件中包含了一个图标，并将其设置为窗口图标。"
+"在<classname>ExampleAppWindow</classname>的构造函数中：<_:programlisting-1/>"
 
 #: C/index-in.docbook:7903
 msgid "Here is how the application now looks:"
-msgstr ""
+msgstr "现在应用程序看起来如下所示："
 
 #: C/index-in.docbook:7914
 msgid ""
@@ -13244,12 +13464,17 @@ msgid ""
 "<literal>title</literal>. The stack switcher becomes a custom title that "
 "hides the title label."
 msgstr ""
+"<filename>window.ui</filename>文件设置了标题栏标题，但是此标题未显示。这是因"
+"为堆切换器是<literal>title</literal>的子类型。此时堆切换器成为了自定义标题并"
+"将正常的标题标签隐藏。"
 
 #: C/index-in.docbook:7920
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/buildapp/step9\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/buildapp/step9\">源代码</ulink>"
 
 #: C/index-in.docbook:7927
 msgid "Contributing"
