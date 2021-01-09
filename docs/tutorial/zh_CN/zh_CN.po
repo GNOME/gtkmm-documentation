@@ -14691,7 +14691,7 @@ msgstr ""
 
 #: C/index-in.docbook:8621
 msgid "Creating your own signals"
-msgstr ""
+msgstr "创建属于你的信号"
 
 #: C/index-in.docbook:8622
 msgid ""
@@ -14700,6 +14700,9 @@ msgid ""
 "between your own classes. That's actually very simple by using the "
 "<application>libsigc++</application> library directly."
 msgstr ""
+"现在你已经看到了<application>gtkmm</application>中的信号于信号处理函数，你可"
+"能希望你自己的类使用相同的技术进行交互。你可以很轻松的使用"
+"<application>libsigc++</application>库实现这个需求。"
 
 #: C/index-in.docbook:8628
 msgid ""
@@ -14709,6 +14712,11 @@ msgid ""
 "signal system, but for new, non-GTK signals, you can create pure C++ "
 "signals, using the <classname>sigc::signal&lt;&gt;</classname> template."
 msgstr ""
+"这不是单纯的<application>gtkmm</application>或GUI问题。<application>gtkmm</"
+"application>使用<application>libsigc++</application>实现对<application>GTK</"
+"application>信号系统的代理封装。而对于新的非<application>GTK</application>信"
+"号，你可以使用<classname>sigc::signal&lt;&gt;</classname>模版创建属于自己的C+"
+"+信号。"
 
 #: C/index-in.docbook:8639
 #, no-wrap
@@ -14716,6 +14724,8 @@ msgid ""
 "\n"
 "sigc::signal&lt;void(bool, int)&gt; signal_something;\n"
 msgstr ""
+"\n"
+"sigc::signal&lt;void(bool, int)&gt; signal_something;\n"
 
 #: C/index-in.docbook:8635
 msgid ""
@@ -14723,6 +14733,9 @@ msgid ""
 "type> and an <type>int</type>, just declare a <classname>sigc::signal</"
 "classname>, like so: <_:programlisting-1/>"
 msgstr ""
+"例如，要创建一个发送参数类型分别为<type>bool</type>和<type>int</type>的信号，"
+"只需要按如下所示声明一个<classname>sigc::signal</classname>即可：<_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:8647
 #, no-wrap
@@ -14744,6 +14757,22 @@ msgid ""
 "  return m_signal_something;\n"
 "}\n"
 msgstr ""
+"\n"
+"class Server\n"
+"{\n"
+"public:\n"
+"  //signal accessor:\n"
+"  using type_signal_something = sigc::signal&lt;void(bool, int)&gt;;\n"
+"  type_signal_something signal_something();\n"
+"\n"
+"protected:\n"
+"  type_signal_something m_signal_something;\n"
+"};\n"
+"\n"
+"Server::type_signal_something Server::signal_something()\n"
+"{\n"
+"  return m_signal_something;\n"
+"}\n"
 
 #: C/index-in.docbook:8643
 msgid ""
@@ -14751,6 +14780,8 @@ msgid ""
 "people find that distasteful and prefer to make it available via an accessor "
 "method, like so: <_:programlisting-1/>"
 msgstr ""
+"你可以简单的将信号声明为公有成员变量，但是有些人讨厌这种声明，他们更喜欢如下"
+"所示的访问器方法：<_:programlisting-1/>"
 
 #: C/index-in.docbook:8669
 #, no-wrap
@@ -14759,6 +14790,9 @@ msgid ""
 "server.signal_something().connect(\n"
 "  sigc::mem_fun(client, &amp;Client::on_server_something) );\n"
 msgstr ""
+"\n"
+"server.signal_something().connect(\n"
+"  sigc::mem_fun(client, &amp;Client::on_server_something) );\n"
 
 #: C/index-in.docbook:8666
 msgid ""
@@ -14766,16 +14800,20 @@ msgid ""
 "connecting to <application>gtkmm</application> signals. For instance, <_:"
 "programlisting-1/>"
 msgstr ""
+"然后你可以使用与连接<application>gtkmm</application>信号一样的语法连接到这个"
+"信号。例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:8677
 msgid "This is a full working example that defines and uses custom signals."
-msgstr ""
+msgstr "这是一个完整的定义了并使用了自定义信号的示例。"
 
 #: C/index-in.docbook:8681
 msgid ""
 "<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
 "examples/book/signals/custom/\">Source Code</ulink>"
 msgstr ""
+"<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/master/"
+"examples/book/signals/custom/\">源代码</ulink>"
 
 #: C/index-in.docbook:8689
 msgid "Comparison with other signalling systems"
