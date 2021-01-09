@@ -14817,7 +14817,7 @@ msgstr ""
 
 #: C/index-in.docbook:8689
 msgid "Comparison with other signalling systems"
-msgstr ""
+msgstr "与其他信号系统的比较"
 
 #: C/index-in.docbook:8690
 msgid ""
@@ -14833,6 +14833,13 @@ msgid ""
 "broadcasters, and slots play the role of listeners - sort of. More on this "
 "later.)"
 msgstr ""
+"<application>GTK</application>将自己的信号系统方案称为\"信号传递\"；有使用其"
+"他GUI工具包经验的读者可能会注意到，这种设计经常会被称作\"广播者-监听者\"。它"
+"的工作方式大致为：先设置<literal>广播者(broadcasters)</literal>，然后将"
+"<literal>监听者(listeners)</literal>与它连接。广播者会保留一个监听者对象列"
+"表，当有某人向广播者发送消息时，它将向列表中所有对象发送消息。在"
+"<application>gtkmm</application>中，信号对象扮演广播者的角色，而槽扮演监听者"
+"的角色。"
 
 #: C/index-in.docbook:8704
 msgid ""
@@ -14842,6 +14849,10 @@ msgid ""
 "And, unlike <application>Qt</application>, <application>gtkmm</application> "
 "achieves this without modifying the C++ language."
 msgstr ""
+"<application>gtkmm</application>的信号处理函数是强类型的，而"
+"<application>gtk</application>的C代码啊运行你连接到一个使用错误参数数量和类型"
+"的回调函数，这会导致运行时出现段错误。并且和<application>Qt</application>不"
+"同，<application>gtkmm</application>不需要对C++语言进行修改即可达到此目的。"
 
 #: C/index-in.docbook:8710
 msgid ""
@@ -14851,6 +14862,9 @@ msgid ""
 "inheritance and overloading. In C++, it's simple, since those features are "
 "supported in the language itself; you can let the compiler do the dirty work."
 msgstr ""
+"虽然你也能在C语言中覆写信号处理函数（这是GTK使用对象系统的目的），但是由于语"
+"言对于高级特性的支持特别弱，你需要编写一系列复杂的代码才能做到继承和重载。而"
+"在C++中，因为语言本身就支持这些特性，所以你可以让编译器代为完成肮脏的工作。"
 
 #: C/index-in.docbook:8718
 msgid ""
@@ -14861,6 +14875,10 @@ msgid ""
 "methods is so easy in C++, it's entirely practical - and sensible - to "
 "subclass a button for that purpose."
 msgstr ""
+"这是真正体现C++魅力的地方之一。没有人会只为了覆写GTK部件的成员函数就将其子类"
+"化，这过于麻烦。除非是为了编写新的部件否则基本上都是利用信号完成任务。而在C+"
+"+中覆写成员函数非常简单，因此为了修改部件的某个行为而将其子类化是完全可行且明"
+"智的。"
 
 #: C/index-in.docbook:8729
 msgid "<application>gtkmm</application> and Win32"
