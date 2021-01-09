@@ -14882,7 +14882,7 @@ msgstr ""
 
 #: C/index-in.docbook:8729
 msgid "<application>gtkmm</application> and Win32"
-msgstr ""
+msgstr "<application>gtkmm</application>与Win32"
 
 #: C/index-in.docbook:8730
 msgid ""
@@ -14891,6 +14891,9 @@ msgid ""
 "platforms such as GNU/Linux can generally be transferred to Windows (and "
 "vice versa) with few modifications to the source."
 msgstr ""
+"<application>gtkmm</application>的主要优点之一是它是跨平台的。在其他平台编写"
+"的<application>gtkmm</application>程序只需要修改很少一部分的源代码就可以从"
+"GNU/Linux移植到Windows，当然反之亦然。"
 
 #: C/index-in.docbook:8735
 msgid ""
@@ -14906,6 +14909,14 @@ msgid ""
 "Studio 2017 and 2019, please do not do so when building <application>gtkmm</"
 "application> with its -mm dependencies."
 msgstr ""
+"<application>gtkmm</application>当前可以与支持C++17的<ulink url=\"http://"
+"mingw.org/\">MinGW/GCC编译器</ulink>一起使用。也可以与VS 2017 15.7.X或更高版"
+"本一起使用（免费提供的Express/Community版本也可以）。在Windows平台上有一个"
+"<application>gtkmm</application>的<ulink url=\"ftp://ftp.gnome.org/pub/GNOME/"
+"binaries/win32/gtkmm\">安装器</ulink>，不过到撰写本章时（2020年10月），这个安"
+"装器已经很久没有人维护了（译注：朋友，MSYS2了解一下）。值得注意的是，尽管通常"
+"情况下可以混合使用VS2017和2019完成构建，但是在构建带有-mm依赖的"
+"<application>gtkmm</application>时千万不要如此做。"
 
 #: C/index-in.docbook:8748
 msgid ""
@@ -14915,6 +14926,10 @@ msgid ""
 "files in the <application>gtkmm</application>, pangomm and glibmm for "
 "instructions on how to build <application>gtkmm</application> on Windows."
 msgstr ""
+"请参阅<ulink url=\"https://gitlab.gnome.org/GNOME/gtkmm/tree/master/README."
+"win32\">README.win32</ulink>以及此<ulink url=\"https://gitlab.gnome.org/"
+"GNOME/gtkmm/tree/master/MSVC_NMake/README\">自述文件</ulink>中关于如何在"
+"WIndwos上构建<application>gtkmm</application>的说明。"
 
 #: C/index-in.docbook:8755
 msgid "Working with gtkmm's Source Code"
