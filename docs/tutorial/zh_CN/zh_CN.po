@@ -14933,7 +14933,7 @@ msgstr ""
 
 #: C/index-in.docbook:8755
 msgid "Working with gtkmm's Source Code"
-msgstr ""
+msgstr "使用gtkmm源代码"
 
 #: C/index-in.docbook:8756
 msgid ""
@@ -14945,6 +14945,10 @@ msgid ""
 "alongside your existing <application>gtkmm</application> installation, in a "
 "separate path."
 msgstr ""
+"如果你有兴趣协助开发<application>gtkmm</application>或修复"
+"<application>gtkmm</application>中的bug，你可能需要构建<application>gtkmm</"
+"application>的开发版。但是你不应该将开发版本覆盖稳定版。你应该选择已存在"
+"<application>gtkmm</application>版本的目录外的路径安装开发版。"
 
 #: C/index-in.docbook:8763
 msgid ""
@@ -14958,6 +14962,14 @@ msgid ""
 "application>, please refer to the <ulink url=\"http://developer.gnome.org/"
 "jhbuild/unstable/\">jhbuild manual</ulink>."
 msgstr ""
+"构建gtkmm的最简单方法是使用<ulink url=\"https://wiki.gnome.org/Projects/"
+"Jhbuild\">jhbuild</ulink>编译。<application>jhbuild</application>是一个可以使"
+"构建Gnome软件更容易的程序，它可以通过计算依赖关系做到按正确的顺序进行构建。本"
+"小节将简要说明如何设置<application>jhbuild</application>从"
+"<application>gtkmm</application>的源代码仓库构建并安装开发版的<"
+"application>gtkmm</application>。想了解<application>jhbuild</application>的最"
+"新信息，请参考<ulink url=\"http://developer.gnome.org/jhbuild/unstable/"
+"\">jhbuild手册</ulink>。"
 
 #: C/index-in.docbook:8775
 msgid ""
@@ -14968,6 +14980,10 @@ msgid ""
 "probably encounter build problems, though these will usually be corrected "
 "quickly if you report them."
 msgstr ""
+"请注意，要从git构建<application>gtkmm</application>，通常你还需要从git构建许"
+"多的依赖项。<application>jhbuild</application>使此操作比平常更容易，但是构建"
+"和安装这些依赖依旧需要相当长的时间。在这过程中你可能会遇到构建问题，因为"
+"master分支并不总是能构建成功的，当然构建问题通常很快就会被修复。"
 
 #: C/index-in.docbook:8783
 msgid ""
@@ -14977,15 +14993,19 @@ msgid ""
 "components</ulink> wiki page, but here we concentrate on "
 "<application>jhbuild</application>."
 msgstr ""
+"<application>gnome-build-meta</application>是<application>jhbuild</"
+"application>的替代方案。<ulink url=\"https://wiki.gnome.org/Newcomers/"
+"BuildSystemComponent\">构建系统组件</ulink>维基页面对其进行了详细的介绍，在这"
+"里我们只介绍<application>jhbuild</application>。"
 
 #: C/index-in.docbook:8790
 msgid "Setting up jhbuild"
-msgstr ""
+msgstr "设置jhbuild"
 
 #: C/index-in.docbook:8799
 #, no-wrap
 msgid "$ cp examples/sample.jhbuildrc ~/.config/jhbuildrc"
-msgstr ""
+msgstr "$ cp examples/sample.jhbuildrc ~/.config/jhbuildrc"
 
 #: C/index-in.docbook:8791
 msgid ""
@@ -14997,11 +15017,16 @@ msgid ""
 "directory by executing the following command from the <application>jhbuild</"
 "application> directory: <_:screen-1/>"
 msgstr ""
+"要设置<application>jhbuild</application>，请遵循<ulink url=\"http://"
+"developer.gnome.org/jhbuild/unstable/\">jhbuild手册</ulink>中的基本安装说明。"
+"安装<application>jhbuild</application>后，应通过在<application>jhbuild</"
+"application>目录执行以下命令将示例<application>jhbuild</application>配置文件"
+"复制到你的主目录中：<_:screen-1/>"
 
 #: C/index-in.docbook:8805
 #, no-wrap
 msgid "moduleset = 'gnome-suites-core-deps-latest'"
-msgstr ""
+msgstr "moduleset = 'gnome-suites-core-deps-latest'"
 
 #: C/index-in.docbook:8801
 msgid ""
@@ -15010,11 +15035,14 @@ msgid ""
 "edit your <filename>jhbuildrc</filename> file and set your moduleset setting "
 "like so: <_:programlisting-1/>"
 msgstr ""
+"<application>gtkmm</application>模块在文件<filename>gnome-suites-core-deps-"
+"latest.modules</filename>中的模块组(moduleset)定义。因此你需要按以下方式编辑"
+"你的<filename>jhbuildrc</filename>文件并设置你的模块组：<_:programlisting-1/>"
 
 #: C/index-in.docbook:8812
 #, no-wrap
 msgid "modules = [ 'gtkmm' ]"
-msgstr ""
+msgstr "modules = [ 'gtkmm' ]"
 
 #: C/index-in.docbook:8807
 msgid ""
@@ -15023,6 +15051,9 @@ msgid ""
 "application> and all of its dependencies, set <varname>modules</varname> "
 "like so: <_:programlisting-1/>"
 msgstr ""
+"正确设置模块组之后，你需要告诉<application>jhbuild</application>哪些模块需要"
+"构建。想要构建<application>gtkmm</application>以及所有相关的依赖项，请按如下"
+"所示设置<varname>modules</varname>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:8814
 msgid ""
@@ -15034,10 +15065,14 @@ msgid ""
 "later by specifying it on the commandline (e.g. <command>jhbuild build "
 "gtkmm</command>)."
 msgstr ""
+"你可以通过设置<varname>modules</varname>为元包(meta-package)来构建多个模块。"
+"当你未在命令行上指定任何内容的时候，<varname>modules</varname>变量将指定构建"
+"哪些模块。你始终可以用命令行指定其他模块组来构建其他模块组（例如："
+"<command>jhbuild build gtkmm</command>）。"
 
 #: C/index-in.docbook:8824
 msgid "Setting a prefix"
-msgstr ""
+msgstr "设置前缀"
 
 #: C/index-in.docbook:8825
 msgid ""
@@ -15050,6 +15085,11 @@ msgid ""
 "belongs to your user, so you don't need to run jhbuild as <literal>root</"
 "literal>."
 msgstr ""
+"在默认情况下，<application>jhbuild</application>被配置为在<filename>~/"
+"jhbuild/install</filename>前缀安装所有由<application>jhbuild</application>构"
+"建的软件。你可以选择其他的前缀，但建议你选择的新前缀与旧前缀保持不同，且不将"
+"前缀设置为<filename>/usr</filename>。如果你遵循jhbuild的说明进行操作，该前缀"
+"属于你的用户，你将无需以<literal>root</literal>用户权限运行jhbuild。"
 
 #: C/index-in.docbook:8837
 msgid ""
@@ -15061,11 +15101,17 @@ msgid ""
 "you don't want it, use the <varname>use_local_modulesets</varname> variable "
 "in <filename>.jhbuildrc</filename>."
 msgstr ""
+"当你从git仓库下载<application>jhbuild</application>时，你会得到许多的"
+"<filename>.modules</filename>文件，这些文件指定了模块之间的依赖关系。在默认情"
+"况下<application>jhbuild</application>不使用这些文件的下载版本，而是从git仓库"
+"中读取最新的版本。这通常是你想要的行为，如果你不想要如此做，你可以在"
+"<filename>.jhbuildrc</filename>文件中定义<varname>use_local_modulesets</"
+"varname>以修改此行为。"
 
 #: C/index-in.docbook:8848
 msgid ""
 "Installing and Using the git version of <application>gtkmm</application>"
-msgstr ""
+msgstr "安装和使用<application>gtkmm</application>的git版本"
 
 #: C/index-in.docbook:8856
 #, no-wrap
@@ -15073,6 +15119,8 @@ msgid ""
 "$ jhbuild bootstrap\n"
 "$ jhbuild sanitycheck"
 msgstr ""
+"$ jhbuild bootstrap\n"
+"$ jhbuild sanitycheck"
 
 #: C/index-in.docbook:8849
 msgid ""
@@ -15083,12 +15131,17 @@ msgid ""
 "<application>jhbuild</application> has the required tools and verify that it "
 "is set up correctly: <_:screen-1/>"
 msgstr ""
+"如上所述，配置好<application>jhbuild</application>后，构建"
+"<application>gtkmm</application>会非常简单。首次运行<application>jhbuild</"
+"application>时，你应运行以下命令序列，以确保<application>jhbuild</"
+"application>拥有所有所需的工具以及验证设置是否正确：<_:screen-1/>"
 
 #: C/index-in.docbook:8860
 msgid ""
 "Installing <application>gtkmm</application> with <application>jhbuild</"
 "application>"
 msgstr ""
+"用<application>jhbuild</application>安装<application>gtkmm</application>"
 
 #: C/index-in.docbook:8861
 msgid ""
@@ -15098,6 +15151,10 @@ msgid ""
 "<application>gtkmm</application> in the <varname>modules</varname> variable, "
 "with the command <command>jhbuild build gtkmm</command>)."
 msgstr ""
+"如果一切正常，你应该已经可以通过执行<command>jhbuild build</command>（如果你"
+"没有在<varname>modules</varname>变量中指定<application>gtkmm</application>，"
+"那也可以使用命令<command>jhbuild build gtkmm</command>来进行构建）来从git构建"
+"<application>gtkmm</application>以及所有有关的依赖项。"
 
 #: C/index-in.docbook:8868
 msgid ""
@@ -15110,10 +15167,15 @@ msgid ""
 "of its dependencies) with the command <command>jhbuild buildone gtkmm</"
 "command>."
 msgstr ""
+"此命令将构建并安装一系列模块，第一次运行可能需要很长的时间。但是之后运行就会"
+"快很多，因为之后他只会重新编译自上次构建依赖变更过的文件。在第一次构建并安装"
+"<application>gtkmm</application>后你可以使用命令<command>jhbuild buildone "
+"gtkmm</command>重新构建<application>gtkmm</application>（不需要重新构建相关依"
+"赖）。"
 
 #: C/index-in.docbook:8879
 msgid "Using the git version of <application>gtkmm</application>"
-msgstr ""
+msgstr "使用git版本的<application>gtkmm</application>"
 
 #: C/index-in.docbook:8880
 msgid ""
@@ -15130,6 +15192,13 @@ msgid ""
 "to your previous environment, simply exit the <application>jhbuild</"
 "application> shell."
 msgstr ""
+"安装git版本的<application>gtkmm</application>后，你就可以开始使用并进行试验"
+"了。为了使用刚安装的新版本<application>gtkmm</application>，你需要设置一些环"
+"境变量以便你的<filename>configure</filename>或<filename>meson.build</"
+"filename>脚本可以找到新的库。<application>jhbuild</application>为此提供了一个"
+"简单的解决方案。执行命令<command>jhbuild shell</command>将启动一个设置好了所"
+"有环境变量的shell。现在如果你和往常一样重新配置并构建你的项目，它应该链接到新"
+"的库。要返回之前的环境你只需要<application>jhbuild</application> shell即可。"
 
 #: C/index-in.docbook:8894
 msgid ""
@@ -15143,6 +15212,12 @@ msgid ""
 "variables set, but will return to your previous environment after the "
 "program exits."
 msgstr ""
+"构建完你的软件后，你还需要在jhbuild环境中运行你的程序。为此，你可以再次使用"
+"<command>jhbuild shell</command>命令在设置了<application>jhbuild</"
+"application>环境的情况下启动新的shell。或者你可以用以下命令在"
+"<application>jhbuild</application>环境下执行单次命令：<command>jhbuild run "
+"command-name</command>。在这种情况下，命令将在设置了正确的环境变量的环境中运"
+"行，命令退出后，环境将恢复到之前的状态。"
 
 #: C/index-in.docbook:8911
 msgid "Wrapping C Libraries with gmmproc"
