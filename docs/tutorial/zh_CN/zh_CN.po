@@ -14966,9 +14966,9 @@ msgstr ""
 "Jhbuild\">jhbuild</ulink>编译。<application>jhbuild</application>是一个可以使"
 "构建Gnome软件更容易的程序，它可以通过计算依赖关系做到按正确的顺序进行构建。本"
 "小节将简要说明如何设置<application>jhbuild</application>从"
-"<application>gtkmm</application>的源代码仓库构建并安装开发版的<"
-"application>gtkmm</application>。想了解<application>jhbuild</application>的最"
-"新信息，请参考<ulink url=\"http://developer.gnome.org/jhbuild/unstable/"
+"<application>gtkmm</application>的源代码仓库构建并安装开发版的"
+"<application>gtkmm</application>。想了解<application>jhbuild</application>的"
+"最新信息，请参考<ulink url=\"http://developer.gnome.org/jhbuild/unstable/"
 "\">jhbuild手册</ulink>。"
 
 #: C/index-in.docbook:8775
@@ -15221,7 +15221,7 @@ msgstr ""
 
 #: C/index-in.docbook:8911
 msgid "Wrapping C Libraries with gmmproc"
-msgstr ""
+msgstr "使用gmmproc封装C库"
 
 #: C/index-in.docbook:8912
 msgid ""
@@ -15230,16 +15230,21 @@ msgid ""
 "<classname>GObject</classname>-based libraries. So it's quite easy to create "
 "additional gtkmm-style wrappers of other glib/GObject-based libraries."
 msgstr ""
+"<application>gtkmm</application>的大部分源代码是使用<command>gmmproc</"
+"command>工具生成的，它们使用.defs文件定义基于<classname>GObject</classname>的"
+"库的API。因此，可以很容易为其他基于glib/Gobject的库创建类似于gtkmm风格的封"
+"装。"
 
 #: C/index-in.docbook:8917
 msgid ""
 "This involves a variety of tools, some of them crufty, but at least they "
 "work, and has been used successfully by several projects."
 msgstr ""
+"这涉及到很多工具，其中有一些很笨重，不过还算能用，并且已经被多个项目使用。"
 
 #: C/index-in.docbook:8922
 msgid "The build structure"
-msgstr ""
+msgstr "构建结构"
 
 #: C/index-in.docbook:8923
 msgid ""
@@ -15251,6 +15256,11 @@ msgid ""
 "the <application>mm-common</application> module. To get started, it helps a "
 "lot to pick an existing binding module as an example to look at."
 msgstr ""
+"要生成gtkmm风格的API封装源代码需要使用包含在<application>glibmm</application>"
+"的工具，例如<command>gmmproc</command>和<filename>generate_wrap_init.pl</"
+"filename>。理论上来说你可以自己编写构建文本以更好的使用它们，不过更好的选择是"
+"利用<application>mm-common</application>模块提供的构建基础设施。选择一个已经"
+"存在绑定的模块作为示例对于开始使用gmmproc很有帮助。"
 
 #: C/index-in.docbook:8931
 msgid ""
@@ -15259,10 +15269,13 @@ msgid ""
 "types named, for instance, <classname>SomeWidget</classname> and "
 "<classname>SomeStuff</classname>."
 msgstr ""
+"假设，我们封装了一个名为libsomething的C库。它提供了基于<classname>GObject</"
+"classname> API的具名类型，例如类型名为：<classname>SomeWidget</classname>和"
+"<classname>SomeStuff</classname>。"
 
 #: C/index-in.docbook:8937
 msgid "Copying the skeleton project"
-msgstr ""
+msgstr "复制skeleton项目"
 
 #: C/index-in.docbook:8944
 #, no-wrap
@@ -15271,6 +15284,9 @@ msgid ""
 "  $ git clone https://gitlab.gnome.org/GNOME/mm-common.git\n"
 "  $ cp -a mm-common/skeletonmm libsomethingmm\n"
 msgstr ""
+"\n"
+"  $ git clone https://gitlab.gnome.org/GNOME/mm-common.git\n"
+"  $ cp -a mm-common/skeletonmm libsomethingmm\n"
 
 #: C/index-in.docbook:8939
 msgid ""
@@ -15281,25 +15297,32 @@ msgid ""
 "application> 1.0.0 this skeleton application is built with the <ulink url="
 "\"https://mesonbuild.com/\">Meson build system</ulink>. <_:programlisting-1/>"
 msgstr ""
+"我们封装的库名为libsomethingmm。我们可以从在<application>mm-common</"
+"application>模块中复制<ulink url=\"https://gitlab.gnome.org/GNOME/mm-common/"
+"tree/master/skeletonmm\">skeleton源代码树</ulink>开始。自<application>mm-"
+"common</application> 1.0.0开始skeleton应用程序使用<ulink url=\"https://"
+"mesonbuild.com/\">Meson构建系统</ulink>进行构建。<_:programlisting-1/>"
 
 #: C/index-in.docbook:8954
 msgid "<filename>libsomethingmm</filename>: The top-level directory."
-msgstr ""
+msgstr "<filename>libsomethingmm</filename>：顶级目录。"
 
 #: C/index-in.docbook:8956
 msgid ""
 "<filename>libsomething</filename>: Contains the main include file and the "
 "pkg-config .pc file."
 msgstr ""
+"<filename>libsomething</filename>：包含主要的被包含文件(被#include的文件)和由"
+"<application>pkg-config</application>所需的.pc文件。"
 
 #: C/index-in.docbook:8958
 msgid "<filename>src</filename>: Contains .hg and .ccg source files."
-msgstr ""
+msgstr "<filename>src</filename>：包含.hg和.ccg源文件。"
 
 #: C/index-in.docbook:8959
 msgid ""
 "<filename>libsomethingmm</filename>: Contains hand-written .h and .cc files."
-msgstr ""
+msgstr "<filename>libsomethingmm</filename>：包含手写的.h和.cc文件。"
 
 #: C/index-in.docbook:8949
 msgid ""
@@ -15309,6 +15332,9 @@ msgid ""
 "variables. The directory structure usually looks like this, after we have "
 "renamed the directories appropriately: <_:itemizedlist-1/>"
 msgstr ""
+"这为源.hg和.ccg文件、手写的.h和.cc文件提供了目录结构，<filename>meson.build</"
+"filename>文件可以通过各种变量指定Meson使用哪些文件进行编译。适当的重命名目录"
+"后，目录结构将如下所示：<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:8970
 #, no-wrap
@@ -15318,6 +15344,10 @@ msgid ""
 "    d=\"${f%/*}\"; b=\"${f##*/}\"; mv \"$f\" \"$d/${b//skeleton/libsomething}\"; \\\n"
 "  done\n"
 msgstr ""
+"\n"
+"$ for f in $(find libsomethingmm -depth -name '*skeleton*'); do \\\n"
+"    d=\"${f%/*}\"; b=\"${f##*/}\"; mv \"$f\" \"$d/${b//skeleton/libsomething}\"; \\\n"
+"  done\n"
 
 #: C/index-in.docbook:8968
 msgid ""
@@ -15325,6 +15355,8 @@ msgid ""
 "files. For instance: <_:programlisting-1/> A number of the skeleton files "
 "must still be filled in with project-specific content later."
 msgstr ""
+"除了重命名目录外，我们还应该重命名一些源文件。例如：<_:programlisting-1/>然"
+"后，还有些skeleton文件需要在特定项目内容完成后填写。"
 
 #: C/index-in.docbook:8977
 msgid ""
@@ -15332,6 +15364,8 @@ msgid ""
 "files with the same name but without the <filename>.in</filename> suffix, by "
 "replacing some variables with actual values during the configure stage."
 msgstr ""
+"请注意，在配置阶段中某些变量将会替换为实际值，这将会生成与<filename>.in</"
+"filename>相同名称但不带<filename>.in</filename>后缀的文件。"
 
 #: C/index-in.docbook:8980
 msgid ""
@@ -15339,10 +15373,12 @@ msgid ""
 "source tree when <command>meson</command> and <command>ninja</command> are "
 "used."
 msgstr ""
+"生成的文件被保存在构建树中，当使用<command>meson</command>和<command>ninja</"
+"command>时构建树会与源树分离。"
 
 #: C/index-in.docbook:8985
 msgid "Modifying build files"
-msgstr ""
+msgstr "修改构建文件"
 
 #: C/index-in.docbook:8987
 msgid ""
@@ -15352,6 +15388,10 @@ msgid ""
 "source tree contain placeholder text. Thus, the substitutions should be "
 "performed globally, and not be limited to the Meson files."
 msgstr ""
+"现在我们修改构建文件以适应我们的需求。在这个时候你可能喜欢使用类似于"
+"<command>regexxer</command>这样的多文件搜索替换工具。请注意，skeleton源代码树"
+"提供的所有文件几乎都包含了占位符。因此，应该进行全局替换而不是仅对Meson文件替"
+"换。"
 
 #: C/index-in.docbook:8991
 msgid ""
@@ -15361,6 +15401,10 @@ msgid ""
 "varname> should be replaced by \"SOMETHING\" or \"LIBSOMETHING\", and all "
 "occurrences of <varname>Skeleton</varname> changed to \"Something\"."
 msgstr ""
+"所有提到<varname>skeleton</varname>的地方都应该替换成你想要封装的C库的名称，"
+"例如替换成\"something\"或\"libsomething\"。同样的，所有的<varname>SKELETON</"
+"varname>都应该被替换成\"SOMETHING\"或\"LIBSOMETHING\"，以及所有的"
+"<varname>Skeleton</varname>都应该被替换为\"Something\"。"
 
 #: C/index-in.docbook:8995
 msgid ""
@@ -15368,10 +15412,13 @@ msgid ""
 "of the intended copyright holder, which is probably you. Do the same for the "
 "<varname>joe@example.com</varname> email address."
 msgstr ""
+"同样的，将所有的<varname>Joe Hacker</varname>替换为预期的版权所有者的名称，也"
+"就是你的名称。然后对<varname>joe@example.com</varname>邮件地址进行同样的操"
+"作。"
 
 #: C/index-in.docbook:9000
 msgid "meson.build in the top-level directory"
-msgstr ""
+msgstr "顶级目录中的meson.build"
 
 #: C/index-in.docbook:9003
 msgid ""
@@ -15381,12 +15428,16 @@ msgid ""
 "avoid starting with an even minor version number as that usually indicates a "
 "stable release."
 msgstr ""
+"使绑定模块的版本跟踪被封装的库的版本很常见。例如，C库版本是1.23.4，则绑定模块"
+"的初始版本为1.23.0。但是请尽量避免以偶数次要版本开始，因为这通常意味着该版本"
+"是稳定版本。"
 
 #: C/index-in.docbook:9008
 msgid ""
 "In the <function>project()</function> function, change the license and the C+"
 "+ version, if necessary."
 msgstr ""
+"如果有必要，请在<function>project()</function>函数中修改许可证和C++版本。"
 
 #: C/index-in.docbook:9010
 msgid ""
@@ -15394,58 +15445,67 @@ msgid ""
 "application> and <application>skeleton</application> "
 "(<application>libsomething</application>)."
 msgstr ""
+"你可能需要添加除<application>glibmm</application>和"
+"<application>skeleton(libsomething)</application>以外的必需模块。"
 
 #: C/index-in.docbook:9018
 msgid "Other meson.build files"
-msgstr ""
+msgstr "其他meson.build文件"
 
 #: C/index-in.docbook:9021
 msgid ""
 "<filename>skeleton/meson.build</filename>: Perhaps not much to change here "
 "more than the global name substitutions."
 msgstr ""
+"<filename>skeleton/meson.build</filename>：在这除了全局替换以外基本上不需要做"
+"什么。"
 
 #: C/index-in.docbook:9024
 msgid "<filename>skeleton/skeletonmm/meson.build</filename>"
-msgstr ""
+msgstr "<filename>skeleton/skeletonmm/meson.build</filename>"
 
 #: C/index-in.docbook:9027
 msgid "<varname>defs_basefiles</varname>"
-msgstr ""
+msgstr "<varname>defs_basefiles</varname>"
 
 #: C/index-in.docbook:9028
 msgid "If we have more .defs and docs.xml files, we add them here."
-msgstr ""
+msgstr "在这添加额外的.defs和docs.xml文件"
 
 #: C/index-in.docbook:9032
 msgid "<varname>hg_ccg_basenames</varname>"
-msgstr ""
+msgstr "<varname>hg_ccg_basenames</varname>"
 
 #: C/index-in.docbook:9033
 msgid ""
 "We must mention all of our <filename>.hg</filename> and <filename>.ccg</"
 "filename> files here."
 msgstr ""
+"必须在这里提及所有的<filename>.hg</filename>和<filename>.ccg</filename>。"
 
 #: C/index-in.docbook:9037
 msgid "<varname>extra_cc_files, extra_h_files</varname>"
-msgstr ""
+msgstr "<varname>extra_cc_files, extra_h_files</varname>"
 
 #: C/index-in.docbook:9038
 msgid ""
 "Any additional hand-written <filename>.h</filename> and <filename>.cc</"
 "filename> source files go here."
 msgstr ""
+"所有手写的<filename>.h</filename>和<filename>.cc</filename>源文件都需要写在"
+"这。"
 
 #: C/index-in.docbook:9019
 msgid ""
 "Next we must adapt the other <filename>meson.build</filename> files: <_:"
 "itemizedlist-1/>"
 msgstr ""
+"接下来我们必须对其他的<filename>meson.build</filename>文件进行修改：<_:"
+"itemizedlist-1/>"
 
 #: C/index-in.docbook:9048
 msgid "Creating .hg and .ccg files"
-msgstr ""
+msgstr "创建.hg个.ccg文件"
 
 #: C/index-in.docbook:9049
 msgid ""
@@ -15454,86 +15514,94 @@ msgid ""
 "example source files already exists: <filename>skeleton.ccg</filename> and "
 "<filename>skeleton.hg</filename>. Create copies of these files as necessary."
 msgstr ""
+"现在我们应该创建第一个<filename>.hg</filename>和<filename>.ccg</filename>，用"
+"以对一个C库中的对象进行封装。存在一对可供参考的示例源文件："
+"<filename>skeleton.ccg</filename>和<filename>skeleton.hg</filename>。请根据需"
+"要创建这些文件的副本。"
 
 #: C/index-in.docbook:9053
 msgid ""
 "In the <link linkend=\"sec-wrapping-hg-files\">.hg and .ccg files</link> "
 "section you can learn about the syntax used in these files."
 msgstr ""
+"在<link linkend=\"sec-wrapping-hg-files\">.hg和.ccg文件</link>小节你可以学到"
+"这些文件使用的语法。"
 
 #: C/index-in.docbook:9060
 msgid "Generating the .defs files."
-msgstr ""
+msgstr "生成.defs文件"
 
 #: C/index-in.docbook:9064
 msgid "objects (GObjects, widgets, interfaces, boxed-types and plain structs)"
-msgstr ""
+msgstr "对象(GObjects、部件、接口、装箱类型、普通结构体)"
 
 #: C/index-in.docbook:9065
 msgid "functions"
-msgstr ""
+msgstr "函数"
 
 #: C/index-in.docbook:9066
 msgid "enums"
-msgstr ""
+msgstr "枚举"
 
 #: C/index-in.docbook:9067
 msgid "signals"
-msgstr ""
+msgstr "信号"
 
 #: C/index-in.docbook:9068
 msgid "properties"
-msgstr ""
+msgstr "属性"
 
 #: C/index-in.docbook:9069
 msgid "vfuncs"
-msgstr ""
+msgstr "虚函数(vfuncs)"
 
 #: C/index-in.docbook:9061
 msgid ""
 "The <filename>.defs</filename> files are text files, in a lisp format, that "
 "describe the API of a C library, including its <_:itemizedlist-1/>"
 msgstr ""
+"<filename>.defs</filename>是一种使用lisp格式的文本文件，它描述了C库的API，其"
+"中包括了以下内容：<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:9078
 msgid "<filename>gtk.defs</filename>"
-msgstr ""
+msgstr "<filename>gtk.defs</filename>"
 
 #: C/index-in.docbook:9079
 msgid "Includes the other files."
-msgstr ""
+msgstr "包含其他文件。"
 
 #: C/index-in.docbook:9082
 msgid "<filename>gtk_methods.defs</filename>"
-msgstr ""
+msgstr "<filename>gtk_methods.defs</filename>"
 
 #: C/index-in.docbook:9083
 msgid "Objects and functions."
-msgstr ""
+msgstr "对象和函数。"
 
 #: C/index-in.docbook:9086
 msgid "<filename>gtk_enums.defs</filename>"
-msgstr ""
+msgstr "<filename>gtk_enums.defs</filename>"
 
 #: C/index-in.docbook:9087
 msgid "Enumerations."
-msgstr ""
+msgstr "枚举。"
 
 #: C/index-in.docbook:9090
 msgid "<filename>gtk_signals.defs</filename>"
-msgstr ""
+msgstr "<filename>gtk_signals.defs</filename>"
 
 #: C/index-in.docbook:9091
 msgid "Signals and properties."
-msgstr ""
+msgstr "信号和属性。"
 
 #: C/index-in.docbook:9094
 msgid "<filename>gtk_vfuncs.defs</filename>"
-msgstr ""
+msgstr "<filename>gtk_vfuncs.defs</filename>"
 
 #: C/index-in.docbook:9095
 msgid "vfuncs (function pointer member fields in structs), written by hand."
-msgstr ""
+msgstr "虚函数(结构体中的函数指针字段)，手动编写。"
 
 #: C/index-in.docbook:9072
 msgid ""
@@ -15543,6 +15611,9 @@ msgid ""
 "<application>gtkmm</application> sources, you will find these files: <_:"
 "variablelist-1/>"
 msgstr ""
+"目前我们有一些单独的工具用于生成<filename>.defs</filename>文件的一部分，因此"
+"我们将它们拆分为单独的文件，例如在gtkmm源的<filename>gtk/src</filename>目录中"
+"你将看到以下文件：<_:variablelist-1/>"
 
 #: C/index-in.docbook:9099
 msgid ""
@@ -15551,10 +15622,13 @@ msgid ""
 "filename> file, described in the <link linkend=\"sec-wrapping-documentation"
 "\">Documentation</link> section."
 msgstr ""
+"<filename>skeletonmm/tools/generate_defs_and_docs.sh</filename>将生成所有的这"
+"些<filename>.defs</filename>以及<filename>*_docs.xml</filename>文件，如该小节"
+"的<link linkend=\"sec-wrapping-documentation\">文档</link>所述。"
 
 #: C/index-in.docbook:9105
 msgid "Generating the methods .defs"
-msgstr ""
+msgstr "生成_methods.defs文件"
 
 #: C/index-in.docbook:9109
 #, no-wrap
@@ -15562,6 +15636,8 @@ msgid ""
 "\n"
 "$ ./h2def.py /usr/include/gtk-4.0/gtk/*.h &gt; gtk_methods.defs\n"
 msgstr ""
+"\n"
+"$ ./h2def.py /usr/include/gtk-4.0/gtk/*.h &gt; gtk_methods.defs\n"
 
 #: C/index-in.docbook:9106
 msgid ""
@@ -15570,10 +15646,13 @@ msgid ""
 "in glibmm's <filename>tools/defs_gen</filename> directory. For instance, <_:"
 "programlisting-1/>"
 msgstr ""
+"这个<filename>.defs</filename>文件描述了对象及其函数。它是由<command>h2def."
+"py</command>脚本生成的，你可以在glibmm的<filename>tools/defs_gen</filename>文"
+"件夹中找到该脚本。例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9116
 msgid "Generating the enums .defs"
-msgstr ""
+msgstr "生成_enums.defs文件"
 
 #: C/index-in.docbook:9120
 #, no-wrap
@@ -15581,6 +15660,8 @@ msgid ""
 "\n"
 "$ ./enum.pl /usr/include/gtk-4.0/gtk/*.h &gt; gtk_enums.defs\n"
 msgstr ""
+"\n"
+"$ ./enum.pl /usr/include/gtk-4.0/gtk/*.h &gt; gtk_enums.defs\n"
 
 #: C/index-in.docbook:9117
 msgid ""
@@ -15589,10 +15670,13 @@ msgid ""
 "can find in glibmm's <filename>tools</filename> directory. For instance, <_:"
 "programlisting-1/>"
 msgstr ""
+"这个<filename>.defs</filename>文件描述了枚举类型及其可能的值。它是由"
+"<filename>enum.pl</filename>脚本生成的，你可以在glibmm的<filename>tools</"
+"filename>文件夹中找到该脚本。例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9127
 msgid "Generating the signals and properties .defs"
-msgstr ""
+msgstr "生成_signals.defs文件"
 
 #: C/index-in.docbook:9132
 #, no-wrap
@@ -15601,6 +15685,9 @@ msgid ""
 "$ cd tools/extra_defs_gen\n"
 "$ ./generate_extra_defs &gt; gtk_signals.defs\n"
 msgstr ""
+"\n"
+"$ cd tools/extra_defs_gen\n"
+"$ ./generate_extra_defs &gt; gtk_signals.defs\n"
 
 #: C/index-in.docbook:9128
 msgid ""
@@ -15609,6 +15696,10 @@ msgid ""
 "that is in every wrapping project, such as <filename>gtkmm/tools/"
 "extra_defs_gen/</filename>. For instance <_:programlisting-1/>"
 msgstr ""
+"这个<filename>.defs</filename>文件描述了信号和属性。它是由封装项目自有的"
+"<filename>generate_extra_defs</filename>实用程序生成的，你可以在类似于"
+"<filename>gtkmm/tools/extra_defs_gen/</filename>的目录下找到它。例如：<_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:9137
 msgid ""
@@ -15621,6 +15712,11 @@ msgid ""
 "placeholder. The <filename>tools/extra_defs_gen/meson.build</filename> file "
 "should also mention the new source filename."
 msgstr ""
+"你必须编辑自己的<filename>generate_extra_defs</filename>工具的源代码才能为需"
+"要封装的GObject C类型生成<filename>.defs</filename>文件。在skeleton源代码树"
+"中，源文件名为<filename>tools/extra_defs_gen/generate_defs_skeleton.cc</"
+"filename>。你需要将文件重命名为正确的文件名（按前一小节所述），然后在"
+"<filename>tools/extra_defs_gen/meson.build</filename>文件中提到新的源文件名。"
 
 #: C/index-in.docbook:9146
 #, no-wrap
@@ -15639,6 +15735,19 @@ msgid ""
 "  return 0;\n"
 "}\n"
 msgstr ""
+"\n"
+"#include &lt;glibmm_generate_extra_defs/generate_extra_defs.h&gt;\n"
+"#include &lt;libsomething.h&gt;\n"
+"#include &lt;iostream&gt;\n"
+"\n"
+"int main(int, char**)\n"
+"{\n"
+"  something_init();\n"
+"\n"
+"  std::cout &lt;&lt; get_defs(SOME_TYPE_WIDGET)\n"
+"            &lt;&lt; get_defs(SOME_TYPE_STUFF);\n"
+"  return 0;\n"
+"}\n"
 
 #: C/index-in.docbook:9144
 msgid ""
@@ -15646,10 +15755,12 @@ msgid ""
 "For instance, your <function>main()</function> function might look like "
 "this: <_:programlisting-1/>"
 msgstr ""
+"然后编辑<filename>.cc</filename>以指定正确的类型。例如，你的"
+"<function>main()</function>函数可能如下所示：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9164
 msgid "Writing the vfuncs .defs"
-msgstr ""
+msgstr "编写_vfunc.defs文件"
 
 #: C/index-in.docbook:9165
 msgid ""
@@ -15659,10 +15770,14 @@ msgid ""
 "<application>gtkmm</application>'s <filename>gtk/src/gtk_vfuncs.defs</"
 "filename> file."
 msgstr ""
+"<filename>.defs</filename>文件描述了虚函数（vfuncs）。它必须手写。你可以从"
+"<filename>skeleton/src/skeleton_vfunc.defs</filename>文件开始进行修改。你也可"
+"以从<application>gtkmm</application>的<filename>gtk/src/gtk_vfuncs.defs</"
+"filename>文件开始。"
 
 #: C/index-in.docbook:9176
 msgid "The .hg and .ccg files"
-msgstr ""
+msgstr ".hg和.ccg文件"
 
 #: C/index-in.docbook:9177
 msgid ""
@@ -15673,6 +15788,10 @@ msgid ""
 "the same position in the header. Any additional C++ source code will be "
 "copied verbatim into the corresponding .h or .cc file."
 msgstr ""
+".hg和.ccg源文件与C++的.h和.cc源文件非常相似，但是它们包含额外的宏，例如"
+"<function>_CLASS_GOBJECT()</function>和<function>_WRAP_METHOD()</function>，"
+"<command>gmmproc</command>会使用这些宏在头文件中的相同位置生成合适的C++源代"
+"码。而所有其他的C++源代码会按原样复制到相应的.h或.cc文件中。"
 
 #: C/index-in.docbook:9190
 #, no-wrap
@@ -15710,6 +15829,38 @@ msgid ""
 "\n"
 "} // namespace Gtk\n"
 msgstr ""
+"\n"
+"#include &lt;gtkmm/bin.h&gt;\n"
+"#include &lt;gtkmm/actionable.h&gt;\n"
+"_DEFS(gtkmm,gtk)\n"
+"_PINCLUDE(gtkmm/private/bin_p.h)\n"
+"\n"
+"namespace Gtk\n"
+"{\n"
+"\n"
+"class Button\n"
+"  : public Bin,\n"
+"    public Actionable\n"
+"{\n"
+"  _CLASS_GTKOBJECT(Button,GtkButton,GTK_BUTTON,Gtk::Bin,GtkBin)\n"
+"  _IMPLEMENTS_INTERFACE(Actionable)\n"
+"public:\n"
+"\n"
+"  _CTOR_DEFAULT\n"
+"  explicit Button(const Glib::ustring&amp; label, bool mnemonic = false);\n"
+"\n"
+"  _WRAP_METHOD(void set_label(const Glib::ustring&amp; label), gtk_button_set_label)\n"
+"\n"
+"  ...\n"
+"\n"
+"  _WRAP_SIGNAL(void clicked(), \"clicked\")\n"
+"\n"
+"  ...\n"
+"\n"
+"  _WRAP_PROPERTY(\"label\", Glib::ustring)\n"
+"};\n"
+"\n"
+"} // namespace Gtk\n"
 
 #: C/index-in.docbook:9185
 msgid ""
@@ -15718,68 +15869,79 @@ msgid ""
 "<application>gtkmm</application>'s <filename>button.hg</filename> looks "
 "roughly like this: <_:programlisting-1/>"
 msgstr ""
+".hg文件通常包含了一些头文件和声明一个类，并使用一些宏向类中添加API或行为。例"
+"如，<application>gtkmm</application>的<filename>button.hg</filename>文件看起"
+"来大概这样：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9227
 msgid "<function>_DEFS()</function>"
-msgstr ""
+msgstr "<function>_DEFS()</function>"
 
 #: C/index-in.docbook:9228
 msgid ""
 "Specifies the destination directory for generated sources, and the name of "
 "the main .defs file that <command>gmmproc</command> should parse."
 msgstr ""
+"指定所生成源代码的目标目录，以及<command>gmmproc</command>应该解析的主要.defs"
+"文件的名称。"
 
 #: C/index-in.docbook:9231
 msgid "<function>_PINCLUDE()</function>"
-msgstr ""
+msgstr "<function>_PINCLUDE()</function>"
 
 #: C/index-in.docbook:9232
 msgid ""
 "Tells <command>gmmproc</command> to include a header in the generated "
 "<filename>private/button_p.h</filename> file."
 msgstr ""
+"告诉<command>gmmproc</command>在生成的文件中包含<filename>private/button_p."
+"h</filename>头文件。"
 
 #: C/index-in.docbook:9235
 msgid "<function>_CLASS_GTKOBJECT()</function>"
-msgstr ""
+msgstr "<function>_CLASS_GTKOBJECT()</function>"
 
 #: C/index-in.docbook:9236
 msgid ""
 "Tells <command>gmmproc</command> to add some typedefs, constructors, and "
 "standard methods to this class, as appropriate when wrapping a widget."
 msgstr ""
+"告诉<command>gmmproc</command>在封装部件类时在类中添加一些类型定义(typedef)、"
+"构造函数、标准方法。"
 
 #: C/index-in.docbook:9239
 msgid "<function>_IMPLEMENTS_INTERFACE()</function>"
-msgstr ""
+msgstr "<function>_IMPLEMENTS_INTERFACE()</function>"
 
 #: C/index-in.docbook:9240
 msgid ""
 "Tells <command>gmmproc</command> to add initialization code for the "
 "interface."
-msgstr ""
+msgstr "告诉<command>gmmproc</command>为接口添加初始化代码。"
 
 #: C/index-in.docbook:9243
 msgid "<function>_CTOR_DEFAULT</function>"
-msgstr ""
+msgstr "<function>_CTOR_DEFAULT</function>"
 
 #: C/index-in.docbook:9244
 msgid "Adds a default constructor."
-msgstr ""
+msgstr "添加默认构造函数。"
 
 #: C/index-in.docbook:9247
 msgid ""
 "<function>_WRAP_METHOD()</function>, <function>_WRAP_SIGNAL()</function>, "
 "and <function>_WRAP_PROPERTY()</function>"
 msgstr ""
+"<function>_WRAP_METHOD()</function>、<function>_WRAP_SIGNAL()</function>和"
+"<function>_WRAP_PROPERTY()</function>"
 
 #: C/index-in.docbook:9250
 msgid "Add methods to wrap parts of the C API."
-msgstr ""
+msgstr "添加用于封装C API的一部分的方法。"
 
 #: C/index-in.docbook:9224
 msgid "The macros in this example do the following: <_:variablelist-1/>"
-msgstr ""
+msgstr "本示例中的宏执行下述操作：<_:variablelist-1/>"
 
 #: C/index-in.docbook:9257
 #, no-wrap
@@ -15788,6 +15950,9 @@ msgid ""
 "$ cd gtk/src\n"
 "$ /usr/lib/glibmm-2.68/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtkmm\n"
 msgstr ""
+"\n"
+"$ cd gtk/src\n"
+"$ /usr/lib/glibmm-2.68/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtkmm\n"
 
 #: C/index-in.docbook:9254
 msgid ""
@@ -15795,6 +15960,9 @@ msgid ""
 "processing them with <command>gmmproc</command> like so, though this happens "
 "automatically when using the above build structure: <_:programlisting-1/>"
 msgstr ""
+"通过这样使用<command>gmmproc</command>处理.hg和.ccg文件，可以从.hg和.ccg文件"
+"生成.h和.cc文件，尽管这在使用上述的构建结构时会自动进行：<_:programlisting-1/"
+">"
 
 #: C/index-in.docbook:9262
 msgid ""
@@ -15802,6 +15970,8 @@ msgid ""
 "convert files, the path to the .defs file, the name of a .hg file, the "
 "source directory, and the destination directory."
 msgstr ""
+"请注意我们为<command>gmmproc</command>提供了.m4转换文件、.defs文件路径、.hg文"
+"件名、源代码目录、目标目录。"
 
 #: C/index-in.docbook:9265
 msgid ""
@@ -15810,14 +15980,16 @@ msgid ""
 "API. But you will need to include the necessary C headers from your .ccg "
 "file."
 msgstr ""
+"你应该避免在C++头文件中包含C头文件，以免污染全局名称空间，以免导出不必要的公"
+"共API。但是你需要在你的.ccg文件中包含必要的C头文件。"
 
 #: C/index-in.docbook:9270
 msgid "The macros are explained in more detail in the following sections."
-msgstr ""
+msgstr "以下各节将对宏进行详细说明。"
 
 #: C/index-in.docbook:9273
 msgid "m4 Conversions"
-msgstr ""
+msgstr "m4转换"
 
 #: C/index-in.docbook:9281
 #, no-wrap
@@ -15825,6 +15997,8 @@ msgid ""
 "\n"
 "_CONVERSION(`GtkTreeView*',`TreeView*',`Glib::wrap($3)')\n"
 msgstr ""
+"\n"
+"_CONVERSION(`GtkTreeView*',`TreeView*',`Glib::wrap($3)')\n"
 
 #: C/index-in.docbook:9274
 msgid ""
@@ -15837,12 +16011,20 @@ msgid ""
 "command> how to convert a <classname>GtkTreeView</classname> pointer to a "
 "<classname>Gtk::TreeView</classname> pointer: <_:programlisting-1/>"
 msgstr ""
+"在.hg和.ccg文件中使用的宏通常需要知道如何将C++类型转换为C类型，反之亦然。"
+"<command>gmmproc</command>会从你的<literal>tools/m4/</literal>或"
+"<literal>codegen/m4/</literal>目录的.m4文件读取此信息。这样它就可以在C++方法"
+"的实现中调用C函数，并将适当的参数传递给该C函数。例如：这告诉"
+"<command>gmmproc</command>如何将<classname>GtkTreeView</classname>指针转换为"
+"<classname>Gtk::TreeView</classname>指针：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9286
 msgid ""
 "<literal>$3</literal> will be replaced by the parameter name when this "
 "conversion is used by <command>gmmproc</command>."
 msgstr ""
+"当此转换被<command>gmmproc</command>使用时，<literal>$3</literal>将会被参数名"
+"称替换。"
 
 #: C/index-in.docbook:9293
 #, no-wrap
@@ -15852,6 +16034,10 @@ msgid ""
 "_CONVERSION(`const PrintSettings&amp;',`GtkPrintSettings*',__FCR2P)\n"
 "_CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REFPTR_TO_P($3))\n"
 msgstr ""
+"\n"
+"_CONVERSION(`PrintSettings&amp;',`GtkPrintSettings*',__FR2P)\n"
+"_CONVERSION(`const PrintSettings&amp;',`GtkPrintSettings*',__FCR2P)\n"
+"_CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REFPTR_TO_P($3))\n"
 
 #: C/index-in.docbook:9290
 msgid ""
@@ -15859,6 +16045,8 @@ msgid ""
 "<application>gtkmm</application>'s .m4 files for examples. For instance: <_:"
 "programlisting-1/>"
 msgstr ""
+"使用一些额外的宏可以使其变得更简单和一致。例如<application>gtkmm</"
+"application>中的.m4文件：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9302
 msgid "m4 Initializations"
@@ -15874,6 +16062,10 @@ msgid ""
 "initialization macros must be included to tell <command>gmmproc</command> "
 "how to initialize the C++ parameter from the return of the C function."
 msgstr ""
+"在封装方法时，通常最好将C函数的返回值储存在被称为输出参数的参数中。在本例中，"
+"C++方法返回<type>void</type>但是有一个用于储存C函数值的输出参数。"
+"<command>gmmproc</command>支持此功能，但是必须使用适当的初始化宏来告诉"
+"<command>gmmproc</command>如何从C函数的返回值初始化C++参数。"
 
 #: C/index-in.docbook:9318
 #, no-wrap
@@ -15881,6 +16073,8 @@ msgid ""
 "\n"
 "_INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')\n"
 msgstr ""
+"\n"
+"_INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')\n"
 
 #: C/index-in.docbook:9312
 msgid ""
@@ -15890,6 +16084,9 @@ msgid ""
 "specified output parameter, an initialization macro such as the following "
 "would be necessary: <_:programlisting-1/>"
 msgstr ""
+"例如，如果一个C函数返回了一个<type>GtkWidget*</type>，并且由于某种原因，不想"
+"让C++方法返回此部件，而是希望C++方法将此部件放入指定的输出参数中，则如下所示"
+"的初始化宏是必须的：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9323
 msgid ""
@@ -15900,10 +16097,14 @@ msgid ""
 "without the ampersand (&amp;) and <literal>$2</literal> will be replaced by "
 "the C type."
 msgstr ""
+"<literal>$3</literal>将被C++方法的输出参数名替换，<literal>$4</literal>将在此"
+"初始化被<command>gmmproc</command>使用时被C函数的返回值替代。为了方便起见，"
+"<literal>$1</literal>也将被不带<literal>&amp;</literal>符的C++类型替换，而"
+"<literal>$2</literal>将被替换为C类型。"
 
 #: C/index-in.docbook:9334
 msgid "Class macros"
-msgstr ""
+msgstr "类宏"
 
 #: C/index-in.docbook:9335
 msgid ""
@@ -15913,6 +16114,10 @@ msgid ""
 "accessors, type registration, and the <function>Glib::wrap()</function> "
 "method, among other things."
 msgstr ""
+"类宏声明了类本身与其底层C类型的关系。它会生成一些内部构造函数、"
+"<varname>gobject_</varname>成员、类型定义(typedef)、<function>gobj()</"
+"function>访问器、<function>Glib::wrap()</function>成员函数、并进行类型注册"
+"等。"
 
 #: C/index-in.docbook:9340
 msgid ""
@@ -15920,10 +16125,12 @@ msgid ""
 "<function>_WRAP_SIGNAL()</function> may only be used after a call to a "
 "<function>_CLASS_*</function> macro."
 msgstr ""
+"其他像<function>_WRAP_METHOD()</function>和<function>_WRAP_SIGNAL()</"
+"function>这样的宏只能在调用<function>_CLASS_*</function>宏之后使用。"
 
 #: C/index-in.docbook:9345
 msgid "_CLASS_GOBJECT"
-msgstr ""
+msgstr "_CLASS_GOBJECT"
 
 #: C/index-in.docbook:9346
 msgid ""
@@ -15931,12 +16138,15 @@ msgid ""
 "<classname>GObject</classname>, but whose wrapper is not derived from "
 "<classname>Gtk::Object</classname>."
 msgstr ""
+"这个宏为从<classname>GObject</classname>派生的类型声明了一个类型包装器，但是"
+"此包装器并不会派生自<classname>Gtk::Object</classname>。"
 
 #: C/index-in.docbook:9349
 msgid ""
 "<function>_CLASS_GOBJECT( C++ class, C class, C casting macro, C++ base "
 "class, C base class )</function>"
 msgstr ""
+"<function>_CLASS_GOBJECT( C++类, C类, C转换宏, C++基类, C基类 )</function>"
 
 #: C/index-in.docbook:9351
 #, no-wrap
@@ -15944,27 +16154,33 @@ msgid ""
 "\n"
 "_CLASS_GOBJECT(AccelGroup, GtkAccelGroup, GTK_ACCEL_GROUP, Glib::Object, GObject)\n"
 msgstr ""
+"\n"
+"_CLASS_GOBJECT(AccelGroup, GtkAccelGroup, GTK_ACCEL_GROUP, Glib::Object, GObject)\n"
 
 #: C/index-in.docbook:9350
 msgid ""
 "For instance, from <filename>accelgroup.hg</filename>: <_:programlisting-1/>"
 msgstr ""
+"来自<filename>accelgroup.hg</filename>文件中的例子：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9358
 msgid "_CLASS_GTKOBJECT"
-msgstr ""
+msgstr "_CLASS_GTKOBJECT"
 
 #: C/index-in.docbook:9359
 msgid ""
 "This macro declares a wrapper for a type whose wrapper is derived from "
 "<classname>Gtk::Object</classname>, such as a widget or dialog."
 msgstr ""
+"这个宏为类型声明了一个类型派生包装器，此包装器将派生自<classname>Gtk::"
+"Object</classname>，例如部件(Widget)和对话框(Dialog)。"
 
 #: C/index-in.docbook:9361
 msgid ""
 "<function>_CLASS_GTKOBJECT( C++ class, C class, C casting macro, C++ base "
 "class, C base class )</function>"
 msgstr ""
+"<function>_CLASS_GTKOBJECT( C++类, C类, C转换宏, C++基类, C基类 )</function>"
 
 #: C/index-in.docbook:9363
 #, no-wrap
@@ -15972,11 +16188,13 @@ msgid ""
 "\n"
 "_CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)\n"
 msgstr ""
+"\n"
+"_CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)\n"
 
 #: C/index-in.docbook:9362 C/index-in.docbook:9847 C/index-in.docbook:9952
 msgid ""
 "For instance, from <filename>button.hg</filename>: <_:programlisting-1/>"
-msgstr ""
+msgstr "来自<filename>button.hg</filename>文件中的例子：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9367
 msgid ""
@@ -15985,6 +16203,9 @@ msgid ""
 "wrapping a GTK Widget, because <classname>Gtk::Widget</classname> derives "
 "from <classname>Gtk::Object</classname>."
 msgstr ""
+"当类已从<classname>Gtk::Object</classname>派生时，你通常会使用此宏。例如：你"
+"将在封装GTK部件时使用它，因为<classname>Gtk::Widget</classname>派生自"
+"<classname>Gtk::Object</classname>。"
 
 #: C/index-in.docbook:9371
 msgid ""
@@ -15995,22 +16216,31 @@ msgid ""
 "convenient, but you should use this only when you are sure that true "
 "reference-counting is not needed. We consider it useful for widgets."
 msgstr ""
+"你还可以从<classname>Gtk::Object</classname>派生非部件类，这样你就可以在不通"
+"过<classname>Glib::RefPtr</classname>直接使用它们。例如：它们将可以使用"
+"<function>Gtk::make_managed()</function>实例化也可以作为成员变量在栈上实例"
+"化。这样你可以自行决定是否对它们使用引用计数。我们认为对部件使用引用计数很有"
+"用。"
 
 #: C/index-in.docbook:9381
 msgid "_CLASS_BOXEDTYPE"
-msgstr ""
+msgstr "_CLASS_BOXEDTYPE"
 
 #: C/index-in.docbook:9382
 msgid ""
 "This macro declares a wrapper for a non-<classname>GObject</classname> "
 "struct, registered with <function>g_boxed_type_register_static()</function>."
 msgstr ""
+"这个宏声明了一个非<classname>GObject</classname>结构体类型的包装器，并使用"
+"<function>g_boxed_type_register_static()</function>对该类型进行注册。"
 
 #: C/index-in.docbook:9385
 msgid ""
 "<function>_CLASS_BOXEDTYPE( C++ class, C class, new function, copy function, "
 "free function )</function>"
 msgstr ""
+"<function>_CLASS_BOXEDTYPE( C++类, C类, new函数, copy函数, free函数 )</"
+"function>"
 
 #: C/index-in.docbook:9387
 #, no-wrap
@@ -16018,15 +16248,17 @@ msgid ""
 "\n"
 "_CLASS_BOXEDTYPE(RGBA, GdkRGBA, NONE, gdk_rgba_copy, gdk_rgba_free)\n"
 msgstr ""
+"\n"
+"_CLASS_BOXEDTYPE(RGBA, GdkRGBA, NONE, gdk_rgba_copy, gdk_rgba_free)\n"
 
 #: C/index-in.docbook:9386
 msgid ""
 "For instance, from <classname>Gdk::RGBA</classname>: <_:programlisting-1/>"
-msgstr ""
+msgstr "示例来自<classname>Gdk::RGBA</classname>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9394
 msgid "_CLASS_BOXEDTYPE_STATIC"
-msgstr ""
+msgstr "_CLASS_BOXEDTYPE_STATIC"
 
 #: C/index-in.docbook:9395
 msgid ""
@@ -16035,10 +16267,13 @@ msgid ""
 "<function>_CLASS_BOXEDTYPE</function>, but the C struct is not allocated "
 "dynamically."
 msgstr ""
+"这个宏为类似于<classname>GdkRectangle</classname>这样的简单可赋值结构体声明了"
+"一个包装器。它和<function>_CLASS_BOXEDTYPE</function>类似，不过其包装的C结构"
+"体不是动态分配的。"
 
 #: C/index-in.docbook:9399
 msgid "<function>_CLASS_BOXEDTYPE_STATIC( C++ class, C class )</function>"
-msgstr ""
+msgstr "<function>_CLASS_BOXEDTYPE_STATIC( C++类, C类 )</function>"
 
 #: C/index-in.docbook:9401
 #, no-wrap
@@ -16046,16 +16281,18 @@ msgid ""
 "\n"
 "_CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle)\n"
 msgstr ""
+"\n"
+"_CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle)\n"
 
 #: C/index-in.docbook:9400
 msgid ""
 "For instance, for <classname>Gdk::Rectangle</classname>: <_:programlisting-1/"
 ">"
-msgstr ""
+msgstr "示例来自<classname>Gdk::Rectangle</classname>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9408
 msgid "_CLASS_OPAQUE_COPYABLE"
-msgstr ""
+msgstr "_CLASS_OPAQUE_COPYABLE"
 
 #: C/index-in.docbook:9409
 msgid ""
@@ -16063,12 +16300,16 @@ msgid ""
 "functions. The new, copy and free functions will be used to instantiate the "
 "default constructor, copy constructor and destructor."
 msgstr ""
+"这个宏为具有复制和释放函数的不透明结构体声明了一个包装器。新建(new)、复制"
+"(copy)、释放(free)函数将用于实例化默认构造函数、复制构造函数、析构函数。"
 
 #: C/index-in.docbook:9412
 msgid ""
 "<function>_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, copy "
 "function, free function )</function>"
 msgstr ""
+"<function>_CLASS_OPAQUE_COPYABLE( C++类, C类, new函数, copy函数, free函数 )</"
+"function>"
 
 #: C/index-in.docbook:9414
 #, no-wrap
@@ -16076,16 +16317,18 @@ msgid ""
 "\n"
 "_CLASS_OPAQUE_COPYABLE(Checksum, GChecksum, NONE, g_checksum_copy, g_checksum_free)\n"
 msgstr ""
+"\n"
+"_CLASS_OPAQUE_COPYABLE(Checksum, GChecksum, NONE, g_checksum_copy, g_checksum_free)\n"
 
 #: C/index-in.docbook:9413
 msgid ""
 "For instance, from <classname>Glib::Checksum</classname>: <_:"
 "programlisting-1/>"
-msgstr ""
+msgstr "示例来自<classname>Glib::Checksum</classname>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9421
 msgid "_CLASS_OPAQUE_REFCOUNTED"
-msgstr ""
+msgstr "_CLASS_OPAQUE_REFCOUNTED"
 
 #: C/index-in.docbook:9422
 msgid ""
@@ -16093,12 +16336,16 @@ msgid ""
 "wrapper cannot be directly instantiated and can only be used with "
 "<classname>Glib::RefPtr</classname>."
 msgstr ""
+"这个宏为使用引用计数的不透明结构体声明了一个包装器。C++包装器将不能直接实例"
+"化，需要与<classname>Glib::RefPtr</classname>一起使用。"
 
 #: C/index-in.docbook:9425
 msgid ""
 "<function>_CLASS_OPAQUE_REFCOUNTED( C++ class, C class, new function, ref "
 "function, unref function )</function>"
 msgstr ""
+"<function>_CLASS_OPAQUE_REFCOUNTED( C++函数, C函数, new函数, ref函数, unref函"
+"数 )</function>"
 
 #: C/index-in.docbook:9427
 #, no-wrap
@@ -16106,26 +16353,28 @@ msgid ""
 "\n"
 "_CLASS_OPAQUE_REFCOUNTED(Coverage, PangoCoverage, pango_coverage_new, pango_coverage_ref, pango_coverage_unref)\n"
 msgstr ""
+"\n"
+"_CLASS_OPAQUE_REFCOUNTED(Coverage, PangoCoverage, pango_coverage_new, pango_coverage_ref, pango_coverage_unref)\n"
 
 #: C/index-in.docbook:9426
 msgid ""
 "For instance, for <classname>Pango::Coverage</classname>: <_:"
 "programlisting-1/>"
-msgstr ""
+msgstr "示例来自<classname>Pango::Coverage</classname>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9434
 msgid "_CLASS_GENERIC"
-msgstr ""
+msgstr "_CLASS_GENERIC"
 
 #: C/index-in.docbook:9435
 msgid ""
 "This macro can be used to wrap structs which don't fit into any specialized "
 "category."
-msgstr ""
+msgstr "这个宏用于包装任何不属于专用包装宏的结构体。"
 
 #: C/index-in.docbook:9437
 msgid "<function>_CLASS_GENERIC( C++ class, C class )</function>"
-msgstr ""
+msgstr "<function>_CLASS_GENERIC( C++类, C类 )</function>"
 
 #: C/index-in.docbook:9439
 #, no-wrap
@@ -16133,28 +16382,33 @@ msgid ""
 "\n"
 "_CLASS_GENERIC(AttrIter, PangoAttrIterator)\n"
 msgstr ""
+"\n"
+"_CLASS_GENERIC(AttrIter, PangoAttrIterator)\n"
 
 #: C/index-in.docbook:9438
 msgid ""
 "For instance, for <classname>Pango::AttrIter</classname>: <_:"
 "programlisting-1/>"
-msgstr ""
+msgstr "示例来自<classname>Pango::AttrIter</classname>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9446
 msgid "_CLASS_INTERFACE"
-msgstr ""
+msgstr "_CLASS_INTERFACE"
 
 #: C/index-in.docbook:9447
 msgid ""
 "This macro declares a wrapper for a type that is derived from "
 "<classname>GTypeInterface</classname>."
 msgstr ""
+"这个宏为派生自<classname>GTypeInterface</classname>的类型声明了一个包装器。"
 
 #: C/index-in.docbook:9450
 msgid ""
 "<function>_CLASS_INTERFACE( C++ class, C class, C casting macro, C interface "
 "struct, Base C++ class (optional), Base C class (optional) )</function>"
 msgstr ""
+"<function>_CLASS_INTERFACE( C++类, C类, C转换宏, C接口结构体, C++基类(可选"
+"的), C基类(可选的) )</function>"
 
 #: C/index-in.docbook:9453
 #, no-wrap
@@ -16162,12 +16416,14 @@ msgid ""
 "\n"
 "_CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)\n"
 msgstr ""
+"\n"
+"_CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)\n"
 
 #: C/index-in.docbook:9451
 msgid ""
 "For instance, from <filename>celleditable.hg</filename>: <_:programlisting-1/"
 ">"
-msgstr ""
+msgstr "示例来自与<filename>celleditable.hg</filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9460
 #, no-wrap
@@ -16175,6 +16431,8 @@ msgid ""
 "\n"
 "_CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)\n"
 msgstr ""
+"\n"
+"_CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)\n"
 
 #: C/index-in.docbook:9457
 msgid ""
@@ -16183,10 +16441,13 @@ msgid ""
 "another GInterface as a prerequisite. For instance, from "
 "<filename>loadableicon.hg</filename>: <_:programlisting-1/>"
 msgstr ""
+"对于接口是从其他接口派生的情况，两个附加参数是可选的，GInterface有另一个"
+"GInterface作为先决条件时属于此情况。示例来自于<filename>loadableicon.hg</"
+"filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9469
 msgid "Constructor macros"
-msgstr ""
+msgstr "构造函数宏"
 
 #: C/index-in.docbook:9470
 msgid ""
@@ -16201,6 +16462,12 @@ msgid ""
 "<function>*_new()</function> C functions are meant only as convenience "
 "functions for C programmers."
 msgstr ""
+"<function>_CTOR_DEFAULT()</function>和<function>_WRAP_CTOR()</function>宏封装"
+"指定的<function>*_new()</function> C函数并添加构造函数。这些宏假定C对象具有与"
+"函数参数名一样的属性名，这样它就可以直接向<function>g_object_new()</function>"
+"调用提供参数。这些构造函数实际上从不会调用<function>*_new()</function> C函"
+"数，因为<application>gtkmm</application>必须实例化派生的GType，而"
+"<function>*_new()</function> C函数只是用于给C程序员提供便利。"
 
 #: C/index-in.docbook:9485
 #, no-wrap
@@ -16216,6 +16483,16 @@ msgid ""
 "public:\n"
 "  _WRAP_CREATE(const Glib::ustring&amp; name, bool left_gravity = true)\n"
 msgstr ""
+"\n"
+"class TextMark : public Glib::Object\n"
+"{\n"
+"  _CLASS_GOBJECT(TextMark, GtkTextMark, GTK_TEXT_MARK, Glib::Object, GObject)\n"
+"\n"
+"protected:\n"
+"  _WRAP_CTOR(TextMark(const Glib::ustring&amp; name, bool left_gravity = true), gtk_text_mark_new)\n"
+"\n"
+"public:\n"
+"  _WRAP_CREATE(const Glib::ustring&amp; name, bool left_gravity = true)\n"
 
 #: C/index-in.docbook:9480
 msgid ""
@@ -16225,18 +16502,22 @@ msgid ""
 "This prevents the class from being instantiated without using a "
 "<classname>RefPtr</classname>. For instance: <_:programlisting-1/>"
 msgstr ""
+"在使用<function>_CLASS_GOBJECT()</function>时，其构造函数应该是保护"
+"(protected)的而不是公有(public)。并且每个公有(public)的构造函数都应该有"
+"<function>_WRAP_CREATE()</function>。这样可以防止在不使用<classname>RefPtr</"
+"classname>的情况下直接实例化这个类。例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9499
 msgid "_CTOR_DEFAULT"
-msgstr ""
+msgstr "_CTOR_DEFAULT"
 
 #: C/index-in.docbook:9500
 msgid "This macro creates a default constructor with no arguments."
-msgstr ""
+msgstr "这个宏创建一个不接受参数的默认构造函数"
 
 #: C/index-in.docbook:9505
 msgid "_WRAP_CTOR"
-msgstr ""
+msgstr "_WRAP_CTOR"
 
 #: C/index-in.docbook:9506
 msgid ""
@@ -16246,10 +16527,13 @@ msgid ""
 "constructor with the same argument types. It takes a C++ constructor "
 "signature, and a C function name."
 msgstr ""
+"这个宏创建一个接受参数的构造函数，与<function>*_new()</function> C函数等效。"
+"但是他不会调用<function>*_new()</function>函数，只会创建有相同参数类型的构造"
+"函数。它需要一个C++构造函数签名和一个C函数名。"
 
 #: C/index-in.docbook:9516 C/index-in.docbook:10020
 msgid "errthrow"
-msgstr ""
+msgstr "errthrow"
 
 #: C/index-in.docbook:9518
 msgid ""
@@ -16257,14 +16541,16 @@ msgid ""
 "function> has a final <type>GError**</type> parameter which should be "
 "ignored."
 msgstr ""
+"这告诉<command>gmmproc</command>，<function>*_new()</function>的最后一个 "
+"<type>GError**</type>是否应该被忽略。"
 
 #: C/index-in.docbook:9513
 msgid "It also takes an optional extra argument: <_:variablelist-1/>"
-msgstr ""
+msgstr "他还有需要额外的可选参数：<_:variablelist-1/>"
 
 #: C/index-in.docbook:9527
 msgid "Hand-coding constructors"
-msgstr ""
+msgstr "手工编码构造函数"
 
 #: C/index-in.docbook:9536
 #, no-wrap
@@ -16275,6 +16561,11 @@ msgid ""
 "  _CONSTRUCT(\"label\", label.c_str(), \"use_underline\", gboolean(mnemonic))\n"
 "{}\n"
 msgstr ""
+"\n"
+"Button::Button(const Glib::ustring&amp; label, bool mnemonic)\n"
+":\n"
+"  _CONSTRUCT(\"label\", label.c_str(), \"use_underline\", gboolean(mnemonic))\n"
+"{}\n"
 
 #: C/index-in.docbook:9528
 msgid ""
@@ -16287,10 +16578,16 @@ msgid ""
 "property names and values. For instance, from <filename>button.ccg</"
 "filename>: <_:programlisting-1/>"
 msgstr ""
+"有时因为<function>*_new()</function> C函数的参数不与对象属性直接对应，或是"
+"<function>*_new()</function> C函数不只是简单的调用<function>g_object_new()</"
+"function>，你将必须手写一部分构造函数。在此时你可以在》ccg文件中使用"
+"<function>_CONSTRUCT()</function>宏来保存一些工作。<function>_CONSTRUCT</"
+"function>宏接受一系列属性名与值作为参数。示例来自<filename>button.ccg</"
+"filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9548
 msgid "Macros that suppress generation of some code"
-msgstr ""
+msgstr "抑制某些代码生成的宏"
 
 #: C/index-in.docbook:9549
 msgid ""
@@ -16299,10 +16596,13 @@ msgid ""
 "generated .cc file, others suppress both the declaration in the .h file and "
 "the definition in the .cc file."
 msgstr ""
+"在某些宏在<function>_CLASS_*</function>宏之后使用时，它们会抑制某些代码的生"
+"成。一些抑制在.cc文件中生成定义，另一些抑制在.h文件中生成的声明和.cc文件中生"
+"成的定义。"
 
 #: C/index-in.docbook:9556
 msgid "_CUSTOM_DEFAULT_CTOR"
-msgstr ""
+msgstr "_CUSTOM_DEFAULT_CTOR"
 
 #: C/index-in.docbook:9557
 msgid ""
@@ -16310,10 +16610,13 @@ msgid ""
 "<function>_CLASS_BOXEDTYPE</function>, <function>_CLASS_BOXEDTYPE_STATIC</"
 "function> and <function>_CLASS_OPAQUE_COPYABLE</function>."
 msgstr ""
+"抑制<function>_CLASS_BOXEDTYPE</function>、"
+"<function>_CLASS_BOXEDTYPE_STATIC</function>、"
+"<function>_CLASS_OPAQUE_COPYABLE</function>生成默认构造函数的声明和定义。"
 
 #: C/index-in.docbook:9564
 msgid "_CUSTOM_CTOR_CAST"
-msgstr ""
+msgstr "_CUSTOM_CTOR_CAST"
 
 #: C/index-in.docbook:9565
 msgid ""
@@ -16321,6 +16624,9 @@ msgid ""
 "pointer to the wrapped C object in <function>_CLASS_BOXEDTYPE</function> and "
 "<function>_CLASS_BOXEDTYPE_STATIC</function>."
 msgstr ""
+"抑制<function>_CLASS_BOXEDTYPE</function>和"
+"<function>_CLASS_BOXEDTYPE_STATIC</function>生成接受指向其所包装的C类型的指针"
+"的构造函数的声明和定义。"
 
 #: C/index-in.docbook:9569
 msgid ""
@@ -16328,6 +16634,8 @@ msgid ""
 "C object in <function>_CLASS_INTERFACE</function> and "
 "<function>_CLASS_OPAQUE_COPYABLE</function>."
 msgstr ""
+"抑制<function>_CLASS_INTERFACE</function>和<function>_CLASS_OPAQUE_COPYABLE</"
+"function>生成接受指向其所包装的C类型的指针的构造函数的定义。"
 
 #: C/index-in.docbook:9573
 msgid ""
@@ -16336,20 +16644,25 @@ msgid ""
 "<function>_CLASS_GOBJECT</function> and <function>_CLASS_GTKOBJECT</"
 "function>."
 msgstr ""
+"抑制<function>_CLASS_GOBJECT</function>和<function>_CLASS_GTKOBJECT</"
+"function>生成接受指向其所包装的C类型的指针且接受其他构造参数的构造函数的定"
+"义。"
 
 #: C/index-in.docbook:9580
 msgid "_CUSTOM_DTOR"
-msgstr ""
+msgstr "_CUSTOM_DTOR"
 
 #: C/index-in.docbook:9581
 msgid ""
 "Suppresses definition of destructor in <function>_CLASS_GOBJECT</function> "
 "and <function>_CLASS_GTKOBJECT</function>."
 msgstr ""
+"抑制<function>_CLASS_GOBJECT</function>和<function>_CLASS_GTKOBJECT</"
+"function>生成析构函数的定义"
 
 #: C/index-in.docbook:9587
 msgid "_CUSTOM_MOVE_OPERATIONS"
-msgstr ""
+msgstr "_CUSTOM_MOVE_OPERATIONS"
 
 #: C/index-in.docbook:9588
 msgid ""
@@ -16357,6 +16670,8 @@ msgid ""
 "assignment operator in <function>_CLASS_GOBJECT</function> and "
 "<function>_CLASS_GTKOBJECT</function>."
 msgstr ""
+"抑制<function>_CLASS_GOBJECT</function><function>_CLASS_GTKOBJECT</function>"
+"生成移动构造函数和移动赋值运算符的声明和定义。"
 
 #: C/index-in.docbook:9593
 #, no-wrap
@@ -16374,24 +16689,38 @@ msgid ""
 "  // ...\n"
 "};\n"
 msgstr ""
+"\n"
+"class Derived : public Glib::Object\n"
+"{\n"
+"  _CLASS_GOBJECT(Derived, GDerived, G_DERIVED, Glib::Object, GObject)\n"
+"\n"
+"  _CUSTOM_MOVE_OPERATIONS\n"
+"\n"
+"public:\n"
+"  Derived(Derived&amp;&amp; src) noexcept;\n"
+"  Derived&amp; operator=(Derived&amp;&amp; src) noexcept;\n"
+"  // ...\n"
+"};\n"
 
 #: C/index-in.docbook:9592
 msgid "For example: <_:programlisting-1/>"
-msgstr ""
+msgstr "例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9610
 msgid "_CUSTOM_WRAP_NEW"
-msgstr ""
+msgstr "_CUSTOM_WRAP_NEW"
 
 #: C/index-in.docbook:9611
 msgid ""
 "Suppresses definition of <function>Glib::wrap_new()</function> function in "
 "<function>_CLASS_GOBJECT</function>."
 msgstr ""
+"抑制<function>_CLASS_GOBJECT</function>生成<function>Glib::wrap_new()</"
+"function>的定义。"
 
 #: C/index-in.docbook:9617
 msgid "_CUSTOM_WRAP_FUNCTION"
-msgstr ""
+msgstr "_CUSTOM_WRAP_FUNCTION"
 
 #: C/index-in.docbook:9618
 msgid ""
@@ -16399,10 +16728,12 @@ msgid ""
 "<function>_CLASS_GOBJECT</function> and <function>_CLASS_GTKOBJECT</"
 "function>."
 msgstr ""
+"抑制<function>_CLASS_GOBJECT</function>和<function>_CLASS_GTKOBJECT</"
+"function>生成<function>Glib::wrap()</function>函数的定义。"
 
 #: C/index-in.docbook:9624
 msgid "_NO_WRAP_FUNCTION"
-msgstr ""
+msgstr "_NO_WRAP_FUNCTION"
 
 #: C/index-in.docbook:9625
 msgid ""
@@ -16412,23 +16743,28 @@ msgid ""
 "<function>_CLASS_OPAQUE_COPYABLE</function>, <function>_CLASS_INTERFACE</"
 "function> and <function>_CLASS_GTKOBJECT</function>."
 msgstr ""
+"抑制<function>_CLASS_GOBJECT</function>、<function>_CLASS_BOXEDTYPE</"
+"function>、<function>_CLASS_BOXEDTYPE_STATIC</function>、"
+"<function>_CLASS_OPAQUE_COPYABLE</function>、<function>_CLASS_INTERFACE</"
+"function>和<function>_CLASS_GTKOBJECT</function>生成<function>Glib::wrap()</"
+"function>函数的声明和定义。"
 
 #: C/index-in.docbook:9635
 msgid "Method macros"
-msgstr ""
+msgstr "方法宏"
 
 #: C/index-in.docbook:9638
 msgid "_WRAP_METHOD"
-msgstr ""
+msgstr "_WRAP_METHOD"
 
 #: C/index-in.docbook:9639
 msgid "This macro generates the C++ method to wrap a C function."
-msgstr ""
+msgstr "这个宏用于生成封装C函数的C++方法。"
 
 #: C/index-in.docbook:9640
 msgid ""
 "<function>_WRAP_METHOD( C++ method signature, C function name)</function>"
-msgstr ""
+msgstr "<function>_WRAP_METHOD( C++方法签名, C函数名)</function>"
 
 #: C/index-in.docbook:9642
 #, no-wrap
@@ -16436,10 +16772,12 @@ msgid ""
 "\n"
 "_WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)\n"
 msgstr ""
+"\n"
+"_WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)\n"
 
 #: C/index-in.docbook:9641
 msgid "For instance, from <filename>entry.hg</filename>: <_:programlisting-1/>"
-msgstr ""
+msgstr "示例来自于<filename>entry.hg</filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9646
 msgid ""
@@ -16450,20 +16788,24 @@ msgid ""
 "based on the <filename>*_docs.xml</filename> and <filename>*_docs_override."
 "xml</filename> files."
 msgstr ""
+"在.defs文件中有对C函数更全面的描述，<filename>convert*.m4</filename>文件中包"
+"含了从C++参数类型到C参数类型的必要转换。这个宏还基于<filename>*_docs.xml</"
+"filename>和<filename>*_docs_override.xml</filename>文件生成doxygen文档注释。"
 
 #: C/index-in.docbook:9655 C/index-in.docbook:9885 C/index-in.docbook:9995
 msgid "refreturn"
-msgstr ""
+msgstr "refreturn"
 
 #: C/index-in.docbook:9657
 msgid ""
 "Do an extra <function>reference()</function> on the return value, in case "
 "the C function does not provide a reference."
 msgstr ""
+"在C函数不提供引用时，对其返回值额外调用一次<function>reference()</function>。"
 
 #: C/index-in.docbook:9662 C/index-in.docbook:9785
 msgid "errthrow [\"&lt;exceptions&gt;\"]"
-msgstr ""
+msgstr "errthrow [\"&lt;exceptions&gt;\"]"
 
 #: C/index-in.docbook:9664
 msgid ""
@@ -16475,11 +16817,16 @@ msgid ""
 "Example: <code>errthrow \"Glib::OptionError Hello\\, world, Glib::"
 "ConvertError\"</code>"
 msgstr ""
+"使用C函数的最后一个GError**参数抛出异常，可选的\"&lt;exceptions&gt;\"是一个以"
+"逗号分隔的可抛出异常列表。它决定了哪些@throws Doxygen命令将被加入文档。默认抛"
+"出的是<classname>Glib::Error</classname>异常。如果你需要在异常描述中使用逗"
+"号，请使用反斜杠对其进行转义。例如：<code>errthrow \"Glib::OptionError Hello"
+"\\, world, Glib::ConvertError\"</code>"
 
 #: C/index-in.docbook:9675 C/index-in.docbook:9893 C/index-in.docbook:9960
 #: C/index-in.docbook:10206
 msgid "deprecated [\"&lt;text&gt;\"]"
-msgstr ""
+msgstr "deprecated [\"&lt;text&gt;\"]"
 
 #: C/index-in.docbook:9677 C/index-in.docbook:9895 C/index-in.docbook:9962
 #: C/index-in.docbook:10208
@@ -16487,42 +16834,43 @@ msgid ""
 "Puts the generated code in #ifdef blocks. Text about the deprecation can be "
 "specified as an optional parameter."
 msgstr ""
+"将生成的代码放入#ifdef块中。text是可选参数，用于提供与弃用有关的文本信息。"
 
 #: C/index-in.docbook:9683
 msgid "constversion"
-msgstr ""
+msgstr "constversion"
 
 #: C/index-in.docbook:9685
 msgid ""
 "Just call the non-const version of the same function, instead of generating "
 "almost duplicate code."
-msgstr ""
+msgstr "直接调用同一个函数的非const版本，而不是生成几乎相同的代码。"
 
 #: C/index-in.docbook:9690 C/index-in.docbook:9798 C/index-in.docbook:9900
 #: C/index-in.docbook:9967 C/index-in.docbook:10213
 msgid "newin \"&lt;version&gt;\""
-msgstr ""
+msgstr "newin \"&lt;version&gt;\""
 
 #: C/index-in.docbook:9692 C/index-in.docbook:9800 C/index-in.docbook:9902
 #: C/index-in.docbook:9969 C/index-in.docbook:10215
 msgid ""
 "Adds a @newin Doxygen command to the documentation, or replaces the @newin "
 "command generated from the C documentation."
-msgstr ""
+msgstr "在文档中添加@newin Doxygen命令，或替换从C文档中生成的@newin命令。"
 
 #: C/index-in.docbook:9697 C/index-in.docbook:9907 C/index-in.docbook:10042
 #: C/index-in.docbook:10129
 msgid "ifdef &lt;identifier&gt;"
-msgstr ""
+msgstr "ifdef &lt;identifier&gt;"
 
 #: C/index-in.docbook:9699 C/index-in.docbook:9909 C/index-in.docbook:10044
 #: C/index-in.docbook:10131
 msgid "Puts the generated code in #ifdef blocks."
-msgstr ""
+msgstr "将生成的代码放入ifdef &lt;identifier&gt;块中。"
 
 #: C/index-in.docbook:9703 C/index-in.docbook:10048
 msgid "slot_name &lt;parameter_name&gt;"
-msgstr ""
+msgstr "slot_name &lt;parameter_name&gt;"
 
 #: C/index-in.docbook:9705 C/index-in.docbook:10050
 msgid ""
@@ -16533,10 +16881,14 @@ msgid ""
 "used to specify the name of the glue callback function to also pass on to "
 "the C function."
 msgstr ""
+"如果方法存在一个槽参数，指定该槽参数的名称。这使得<command>gmmproc</command>"
+"可以生成用于复制槽并将其复制传递给C函数的<literal>gpointer user_data</"
+"literal>参数的代码。<literal>slot_callback</literal>参数需要使用此选项指定的"
+"名称。"
 
 #: C/index-in.docbook:9715 C/index-in.docbook:10060
 msgid "slot_callback &lt;function_name&gt;"
-msgstr ""
+msgstr "slot_callback &lt;function_name&gt;"
 
 #: C/index-in.docbook:9717 C/index-in.docbook:10062
 msgid ""
@@ -16545,10 +16897,13 @@ msgid ""
 "then calling it. The address of this callback is also passed on to the C "
 "function that the method wraps."
 msgstr ""
+"与<literal>slot_name</literal>选项一起使用。用<literal>slot_name</literal>所"
+"指定的胶水回调函数处理提取槽然后调用它。这个回调函数的函数指针也将被传递给封"
+"装此C函数的方法。"
 
 #: C/index-in.docbook:9725 C/index-in.docbook:10070
 msgid "no_slot_copy"
-msgstr ""
+msgstr "no_slot_copy"
 
 #: C/index-in.docbook:9727 C/index-in.docbook:10072
 msgid ""
@@ -16558,11 +16913,14 @@ msgid ""
 "the <literal>slot_name</literal> and <literal>slot_callback</literal> "
 "options respectively."
 msgstr ""
+"告知<command>gmmproc</command>如果此方法有槽，不要将槽的副本传递给C函数。而是"
+"直接传递槽本身。槽的参数名和胶水回调函数必须分别使用<literal>slot_name</"
+"literal>和<literal>slot_callback</literal>选项指定。"
 
 #: C/index-in.docbook:9652 C/index-in.docbook:9782 C/index-in.docbook:9855
 #: C/index-in.docbook:9957 C/index-in.docbook:9992 C/index-in.docbook:10147
 msgid "There are some optional extra arguments: <_:variablelist-1/>"
-msgstr ""
+msgstr "有一些可选的额外参数：<_:variablelist-1/>"
 
 #: C/index-in.docbook:9740
 msgid ""
@@ -16570,6 +16928,9 @@ msgid ""
 "classname> as a const reference. For instance, <code>const Glib::RefPtr&lt;"
 "Gtk::FileFilter&gt;&amp; filter</code>."
 msgstr ""
+"通过<classname>RefPtr</classname>使用的对象：传递<classname>RefPtr</"
+"classname>的const引用。例如：<code>const Glib::RefPtr&lt;Gtk::FileFilter&gt;"
+"&amp; filter</code>。"
 
 #: C/index-in.docbook:9744
 msgid ""
@@ -16578,6 +16939,10 @@ msgid ""
 "even if the <classname>RefPtr</classname> is already const. For instance, "
 "<code>const Glib::RefPtr&lt;const Gtk::FileFilter&gt;&amp; filter</code>."
 msgstr ""
+"通过<classname>RefPtr</classname>使用的const对象：如果函数不应该修改此对象，"
+"即使对象已经是const的，也应该确保对象的<classname>RefPtr</classname>是const"
+"的。例如：<code>const Glib::RefPtr&lt;const Gtk::FileFilter&gt;&amp; filter</"
+"code>。"
 
 #: C/index-in.docbook:9749
 msgid ""
@@ -16589,11 +16954,16 @@ msgid ""
 "Pixbuf&gt;&gt;</code>. You may need to define a Traits type to specify how "
 "the C and C++ types should be converted."
 msgstr ""
+"包装<classname>GList*</classname>和<classname>GSList*</classname>参数：首先你"
+"需要阅读C函数的文档，确定列表中每项的数据字段包含了那些对象。然后确定如何用"
+"<classname>std::vector</classname>进行包装。例如包装为<code>std::vector&lt;"
+"Glib::RefPtr&lt;Gdk::Pixbuf&gt;&gt;</code>。你可能需要定义一个Traits类型来指"
+"示C类型和C++类型如何相互转换。"
 
 #: C/index-in.docbook:9765
 #, no-wrap
 msgid "#m4 _CONVERSION(`GSList*',`std::vector&lt;Widget*&gt;',`Glib::SListHandler&lt;Widget*&gt;::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')"
-msgstr ""
+msgstr "#m4 _CONVERSION(`GSList*',`std::vector&lt;Widget*&gt;',`Glib::SListHandler&lt;Widget*&gt;::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')"
 
 #: C/index-in.docbook:9757
 msgid ""
@@ -16605,6 +16975,11 @@ msgid ""
 "should probably put directly into the .hg file because the ownership depends "
 "on the function rather than the type. For instance: <_:programlisting-1/>"
 msgstr ""
+"包装<classname>GList*</classname>和<classname>GSList*</classname>返回值：你需"
+"要在此阅读C函数文档，确定调用方是否需要负责释放列表和列表中的项目。然后根据这"
+"些信息，选择m4转换规则的所有权（无(none)、浅(shallow)、深(deep)），你可能应该"
+"将其直接放在.hg文件中，因为所有权取决于函数本身而不是其类型。例如：<_:"
+"programlisting-1/>"
 
 #: C/index-in.docbook:9736
 msgid ""
@@ -16612,10 +16987,12 @@ msgid ""
 "API. Though it's usually obvious what C++ types should be used in the C++ "
 "method, here are some hints: <_:itemizedlist-1/>"
 msgstr ""
+"封装C API时，选择对应的C++类型也很重要。尽管多数时候应该在C++方法中使用什么C+"
+"+类型是很明显的，但我们还是想给你一些提示：<_:itemizedlist-1/>"
 
 #: C/index-in.docbook:9771
 msgid "_WRAP_METHOD_DOCS_ONLY"
-msgstr ""
+msgstr "_WRAP_METHOD_DOCS_ONLY"
 
 #: C/index-in.docbook:9772
 msgid ""
@@ -16624,10 +17001,12 @@ msgid ""
 "when you must hand-code the method, but you want to use the documentation "
 "that would be generated if the method was generated."
 msgstr ""
+"这个宏类似于<function>_WRAP_METHOD()</function>，但是它只生成封装C函数的C++方"
+"法的文档。当你需要手动编写该方法又不想手动编写文档时，请使用这个宏。"
 
 #: C/index-in.docbook:9776
 msgid "<function>_WRAP_METHOD_DOCS_ONLY(C function name)</function>"
-msgstr ""
+msgstr "<function>_WRAP_METHOD_DOCS_ONLY(C function name)</function>"
 
 #: C/index-in.docbook:9778
 #, no-wrap
@@ -16635,11 +17014,13 @@ msgid ""
 "\n"
 "_WRAP_METHOD_DOCS_ONLY(gtk_container_add)\n"
 msgstr ""
+"\n"
+"_WRAP_METHOD_DOCS_ONLY(gtk_container_add)\n"
 
 #: C/index-in.docbook:9777
 msgid ""
 "For instance, from <filename>container.hg</filename>: <_:programlisting-1/>"
-msgstr ""
+msgstr "示例来自于<filename>container.hg</filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9787
 msgid ""
@@ -16651,10 +17032,15 @@ msgid ""
 "Example: <code>errthrow \"Glib::OptionError Hello\\, world, Glib::"
 "ConvertError\"</code>"
 msgstr ""
+"不要在文档中包含C函数的最后一个GError**参数的文档。可选的 \"&lt;"
+"exceptions&gt;\"是一个以逗号分隔的可抛出异常列表。它决定了哪些@throws Doxygen"
+"命令将被加入文档。默认抛出的是<classname>Glib::Error</classname>异常。如果你"
+"需要在异常描述中使用逗号，请使用反斜杠对其进行转义。例如：<code>errthrow "
+"\"Glib::OptionError Hello\\, world, Glib::ConvertError\"</code>"
 
 #: C/index-in.docbook:9805
 msgid "voidreturn"
-msgstr ""
+msgstr "voidreturn"
 
 #: C/index-in.docbook:9807
 msgid ""
@@ -16662,10 +17048,12 @@ msgid ""
 "wrapped C function returns a value, but the corresponding C++ method returns "
 "<type>void</type>."
 msgstr ""
+"不要再文档中包含@return Doxygen命令。如果被封装的C函数有返回而封装它的C++方法"
+"返回<type>void</type>，这将很有用。"
 
 #: C/index-in.docbook:9817
 msgid "_IGNORE, _IGNORE_SIGNAL, _IGNORE_PROPERTY"
-msgstr ""
+msgstr "_IGNORE, _IGNORE_SIGNAL, _IGNORE_PROPERTY"
 
 #: C/index-in.docbook:9818
 msgid ""
@@ -16676,6 +17064,11 @@ msgid ""
 "hand-code some methods then you can use the _IGNORE(), _IGNORE_SIGNAL() or "
 "_IGNORE_PROPERTY() macro to make <command>gmmproc</command> stop complaining."
 msgstr ""
+"<command>gmmproc</command>会在stdout上警告你忘了封装相关的函数、信号、属性、"
+"子属性，这有助于确保API被完整的封装。但有时候你会不想对某些函数、信号、属性、"
+"子属性封装，或者你想要手动编写一些函数，那么你可以使用_IGNORE()、"
+"_IGNORE_SIGNAL()、_IGNORE_PROPERTY()宏使<command>gmmproc</command>停止发出部"
+"分警告。"
 
 #: C/index-in.docbook:9826
 #, no-wrap
@@ -16684,6 +17077,9 @@ msgid ""
 "_IGNORE_SIGNAL(C signal name 1, C signal name 2, etc)\n"
 "_IGNORE_PROPERTY(C property name 1, C property name 2, etc)</function>"
 msgstr ""
+"<function>_IGNORE(C属性名1, C属性名2, ...)\n"
+"_IGNORE_SIGNAL(C属性名1, C属性名2, ...)\n"
+"_IGNORE_PROPERTY(C属性名1, C属性名2, ...)</function>"
 
 #: C/index-in.docbook:9831
 #, no-wrap
@@ -16692,15 +17088,18 @@ msgid ""
 "_IGNORE(gtk_flow_box_set_filter_func, gtk_flow_box_set_sort_func)\n"
 "_IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)\n"
 msgstr ""
+"\n"
+"_IGNORE(gtk_flow_box_set_filter_func, gtk_flow_box_set_sort_func)\n"
+"_IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)\n"
 
 #: C/index-in.docbook:9830
 msgid ""
 "For instance, from <filename>flowbox.hg</filename>: <_:programlisting-1/>"
-msgstr ""
+msgstr "示例来自<filename>flowbox.hg</filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9839
 msgid "_WRAP_SIGNAL"
-msgstr ""
+msgstr "_WRAP_SIGNAL"
 
 #: C/index-in.docbook:9840
 msgid ""
@@ -16710,12 +17109,16 @@ msgid ""
 "<command>gmmproc</command> uses the .defs file to discover the C parameter "
 "types and the .m4 convert files to discover appropriate type conversions."
 msgstr ""
+"这个宏生成用来封装C GObject信号的C++ libsigc++风格的信号。实际上它会生成一个"
+"公有访问器方法，例如<function>signal_clicked()</function>，它返回一个代理对"
+"象。<command>gmmproc</command>使用.defs文件寻找C参数类型并使用.m4转换文件查找"
+"如何将其转换为适当的类型。"
 
 #: C/index-in.docbook:9846
 msgid ""
 "<function>_WRAP_SIGNAL( C++ signal handler signature, C signal name)</"
 "function>"
-msgstr ""
+msgstr "<function>_WRAP_SIGNAL( C++信号处理函数签名, C信号名)</function>"
 
 #: C/index-in.docbook:9848
 #, no-wrap
@@ -16723,6 +17126,8 @@ msgid ""
 "\n"
 "_WRAP_SIGNAL(void clicked(),\"clicked\")\n"
 msgstr ""
+"\n"
+"_WRAP_SIGNAL(void clicked(),\"clicked\")\n"
 
 #: C/index-in.docbook:9852
 msgid ""
@@ -16730,10 +17135,12 @@ msgid ""
 "corresponding enum value and a <function>g_signal_new()</function> in the .c "
 "file."
 msgstr ""
+"信号通常在GTK结构体中具有函数指针，在.c文件中有对应的枚举值和"
+"<function>g_signal_new()</function>函数。"
 
 #: C/index-in.docbook:9858
 msgid "no_default_handler"
-msgstr ""
+msgstr "no_default_handler"
 
 #: C/index-in.docbook:9860
 msgid ""
@@ -16743,10 +17150,13 @@ msgid ""
 "size of the class's virtual function table, and when adding a signal without "
 "a public C default handler."
 msgstr ""
+"不要生成<function>on_something()</function>虚成员函数以允许简单的覆写默认信号"
+"处理函数。可以在添加一个具有默认信号处理函数的信号会使虚函数表尺寸变大以至于"
+"破坏ABI的时候，或是在需要添加一个非公共C默认处理函数的时候，使用此可选参数。"
 
 #: C/index-in.docbook:9869
 msgid "custom_default_handler"
-msgstr ""
+msgstr "custom_default_handler"
 
 #: C/index-in.docbook:9871
 msgid ""
@@ -16755,16 +17165,20 @@ msgid ""
 "in the <filename>.cc</filename> file. Use this when you must generate the "
 "definition by hand."
 msgstr ""
+"在<filename>.h</filename>文件中生成<function>on_something()</function>虚成员"
+"函数的声明，但不在<filename>.cc</filename>文件中生成该函数的定义。请在你需要"
+"手动编写函数定义的时候使用此可选参数。"
 
 #: C/index-in.docbook:9878
 msgid "custom_c_callback"
-msgstr ""
+msgstr "custom_c_callback"
 
 #: C/index-in.docbook:9880
 msgid ""
 "Do not generate a C callback function for the signal. Use this when you must "
 "generate the callback function by hand."
 msgstr ""
+"不要为信号生成C回调函数。请在你需要手动编写回调函数的时候使用此可选参数。"
 
 #: C/index-in.docbook:9887
 msgid ""
@@ -16772,10 +17186,12 @@ msgid ""
 "<function>on_something()</function> virtual method, in case the C function "
 "does not provide a reference."
 msgstr ""
+"当C函数没有提供引用的时候，在<function>on_something()</function>虚成员函数的"
+"返回值上额外调用一次<function>reference()</function>。"
 
 #: C/index-in.docbook:9913 C/index-in.docbook:10096
 msgid "exception_handler &lt;method_name&gt;"
-msgstr ""
+msgstr "exception_handler &lt;method_name&gt;"
 
 #: C/index-in.docbook:9915 C/index-in.docbook:10098
 msgid ""
@@ -16783,10 +17199,12 @@ msgid ""
 "might be rethrown by user-defined handler, and it will be caught by default "
 "handler."
 msgstr ""
+"允许使用自定义异常处理函数而不是使用默认异常处理函数。如果异常被用户自定义的"
+"处理函数程序抛出，则该异常将被默认异常处理函数捕获。"
 
 #: C/index-in.docbook:9921
 msgid "detail_name &lt;parameter_name&gt;"
-msgstr ""
+msgstr "detail_name &lt;parameter_name&gt;"
 
 #: C/index-in.docbook:9923
 msgid ""
@@ -16795,10 +17213,14 @@ msgid ""
 "accepts a detailed signal name, i.e. if the underlying C code registers the "
 "signal with the <literal>G_SIGNAL_DETAILED</literal> flag."
 msgstr ""
+"向<methodname>signal_something()</methodname>成员函数添加一个<type>const "
+"Glib::ustring&amp;</type>参数。如果信号接受详细信号名，也就是说底层C代码使用"
+"了<literal>G_SIGNAL_DETAILED</literal>标志注册这个信号，则使用该参数作为详细"
+"信号名。"
 
 #: C/index-in.docbook:9930
 msgid "two_signal_methods"
-msgstr ""
+msgstr "two_signal_methods"
 
 #: C/index-in.docbook:9932
 msgid ""
@@ -16809,10 +17231,15 @@ msgid ""
 "a parameter with default value. Use the <literal>two_signal_methods</"
 "literal> option, if it's necessary in order to preserve ABI."
 msgstr ""
+"需与<literal>detail_name</literal>选项一起使用。生成两个"
+"<methodname>signal_something()</methodname>成员函数，其中一个不带任何参数，而"
+"另一个接受一个参数但该参数没有默认值。如果只使用<literal>detail_name</"
+"literal>选项，则只生成一个成员函数，此成员函数将接受一个参数且此参数有默认"
+"值。请再需要保持ABI不变的情况下使用此选项。"
 
 #: C/index-in.docbook:9946
 msgid "_WRAP_PROPERTY"
-msgstr ""
+msgstr "_WRAP_PROPERTY"
 
 #: C/index-in.docbook:9947
 msgid ""
@@ -16821,10 +17248,13 @@ msgid ""
 "<command>gmmproc</command> uses the .defs file to discover the C type and "
 "the .m4 convert files to discover appropriate type conversions."
 msgstr ""
+"这个宏生成用于包装C GObject属性的C++方法。你需要为该属性指定属性名以及其值所"
+"需的C++类型。<command>gmmproc</command>使用.defs文件寻找C参数类型并使用.m4转"
+"换文件查找如何将其转换为适当的类型。"
 
 #: C/index-in.docbook:9951
 msgid "<function>_WRAP_PROPERTY(C property name, C++ type)</function>"
-msgstr ""
+msgstr "<function>_WRAP_PROPERTY(C属性名, C++类型)</function>"
 
 #: C/index-in.docbook:9953
 #, no-wrap
@@ -16832,19 +17262,21 @@ msgid ""
 "\n"
 "_WRAP_PROPERTY(\"label\", Glib::ustring)\n"
 msgstr ""
+"\n"
+"_WRAP_PROPERTY(\"label\", Glib::ustring)\n"
 
 #: C/index-in.docbook:9978
 msgid "_WRAP_VFUNC"
-msgstr ""
+msgstr "_WRAP_VFUNC"
 
 #: C/index-in.docbook:9979
 msgid "This macro generates the C++ method to wrap a virtual C function."
-msgstr ""
+msgstr "这个宏生成用于封装C虚函数的C++成员函数。"
 
 #: C/index-in.docbook:9980
 msgid ""
 "<function>_WRAP_VFUNC( C++ method signature, C function name)</function>"
-msgstr ""
+msgstr "<function>_WRAP_VFUNC( C++成员函数签名, C函数名)</function>"
 
 #: C/index-in.docbook:9982
 #, no-wrap
@@ -16852,11 +17284,13 @@ msgid ""
 "\n"
 "_WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)\n"
 msgstr ""
+"\n"
+"_WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)\n"
 
 #: C/index-in.docbook:9981
 msgid ""
 "For instance, from <filename>widget.hg</filename>: <_:programlisting-1/>"
-msgstr ""
+msgstr "示例来自于<filename>widget.hg</filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:9986
 msgid ""
@@ -16867,6 +17301,10 @@ msgid ""
 "written in the .hg file. Virtual functions often require special conversions "
 "that are best kept local to the .hg file where they are used."
 msgstr ""
+"在<filename>*_vfuncs.defs</filename>文件中有对C函数更全面的描述，"
+"<filename>convert*.m4</filename>文件中包含了从C++参数类型到C参数类型的必要转"
+"换。转换也可以写入.hg文件。虚函数通常需要额外的转换，这些转换最好保存在使用这"
+"些虚函数的.hg文件文件中。"
 
 #: C/index-in.docbook:9997
 msgid ""
@@ -16874,10 +17312,12 @@ msgid ""
 "<function>something_vfunc()</function> function, in case the virtual C "
 "function does not provide a reference."
 msgstr ""
+"当C虚函数没有提供引用的时候，在<function>something_vfunc()</function>函数的返"
+"回值上额外调用一次<function>reference()</function>。"
 
 #: C/index-in.docbook:10003
 msgid "refreturn_ctype"
-msgstr ""
+msgstr "refreturn_ctype"
 
 #: C/index-in.docbook:10005
 msgid ""
@@ -16885,54 +17325,61 @@ msgid ""
 "overridden <function>something_vfunc()</function> function in the C callback "
 "function, in case the calling C function expects it to provide a reference."
 msgstr ""
+"当被调用的C函数期望其提供一个引用的时候，在C回调函数当中，对被覆写的"
+"<function>something_vfunc()</function>函数的返回值额外调用一次"
+"<function>reference()</function>。"
 
 #: C/index-in.docbook:10012
 msgid "keep_return"
-msgstr ""
+msgstr "keep_return"
 
 #: C/index-in.docbook:10014
 msgid ""
 "Keep a copy of the return value in the C callback function, in case the "
 "calling C function does not expect to get its own reference."
 msgstr ""
+"当被调用的C函数不想要得到属于它的引用的时候，在C回调函数中保留一份返回值的副"
+"本。"
 
 #: C/index-in.docbook:10022
 msgid ""
 "Use the last GError** parameter of the C virtual function (if there is one) "
 "to throw an exception."
-msgstr ""
+msgstr "如果C虚函数的参数中的最后有一个GError**参数，则使用此参数抛出异常。"
 
 #: C/index-in.docbook:10027
 msgid "custom_vfunc"
-msgstr ""
+msgstr "custom_vfunc"
 
 #: C/index-in.docbook:10029
 msgid ""
 "Do not generate a definition of the vfunc in the <filename>.cc</filename> "
 "file. Use this when you must generate the vfunc by hand."
 msgstr ""
+"不在<filename>.cc</filename>文件中生成虚函数的定义。请在你需要手写虚函数的时"
+"候使用此可选参数。"
 
 #: C/index-in.docbook:10035
 msgid "custom_vfunc_callback"
-msgstr ""
+msgstr "custom_vfunc_callback"
 
 #: C/index-in.docbook:10037
 msgid ""
 "Do not generate a C callback function for the vfunc. Use this when you must "
 "generate the callback function by hand."
-msgstr ""
+msgstr "不为虚函数生成C回调函数。请在你需要手写回调函数时使用此可选参数。"
 
 #: C/index-in.docbook:10080
 msgid "return_value &lt;value&gt;"
-msgstr ""
+msgstr "return_value &lt;value&gt;"
 
 #: C/index-in.docbook:10082
 msgid "Defines a non-default return value."
-msgstr ""
+msgstr "定义非默认的返回值。"
 
 #: C/index-in.docbook:10086
 msgid "err_return_value &lt;value&gt;"
-msgstr ""
+msgstr "err_return_value &lt;value&gt;"
 
 #: C/index-in.docbook:10088
 msgid ""
@@ -16942,6 +17389,9 @@ msgid ""
 "err_return_value is not, then return_value is used also when an exception is "
 "propagated."
 msgstr ""
+"定义一个只在C++ <function>something_vfunc()</function>函数抛出异常，且传播到"
+"了C回调函数中的时候才使用的非默认返回值。如果指定了return_value但没有指定"
+"err_return_value，则将err_return_value的值视作return_value的值。"
 
 #: C/index-in.docbook:10105
 msgid ""
@@ -16952,22 +17402,26 @@ msgid ""
 "arguments <parameter>refreturn</parameter> or <parameter>refreturn_ctype</"
 "parameter> is required."
 msgstr ""
+"一个可能有例外的规则：如果一个C虚函数返回了指向派生自<classname>GObject</"
+"classname>的对象的指针，也即一个引用计数对象的指针，那么C++虚函数应该返回"
+"<classname>Glib::RefPtr&lt;&gt;</classname>对象。且需要<parameter>refreturn</"
+"parameter>或<parameter>refreturn_ctype</parameter>额外参数。"
 
 #: C/index-in.docbook:10116
 msgid "Other macros"
-msgstr ""
+msgstr "其他宏"
 
 #: C/index-in.docbook:10118
 msgid "_IMPLEMENTS_INTERFACE"
-msgstr ""
+msgstr "_IMPLEMENTS_INTERFACE"
 
 #: C/index-in.docbook:10119
 msgid "This macro generates initialization code for the interface."
-msgstr ""
+msgstr "这个宏为接口生成初始化代码"
 
 #: C/index-in.docbook:10120
 msgid "<function>_IMPLEMENTS_INTERFACE(C++ interface name)</function>"
-msgstr ""
+msgstr "<function>_IMPLEMENTS_INTERFACE(C++接口名)</function>"
 
 #: C/index-in.docbook:10122
 #, no-wrap
@@ -16975,24 +17429,27 @@ msgid ""
 "\n"
 "_IMPLEMENTS_INTERFACE(Orientable)\n"
 msgstr ""
+"\n"
+"_IMPLEMENTS_INTERFACE(Orientable)\n"
 
 #: C/index-in.docbook:10121
 msgid "For instance, from <filename>grid.hg</filename>: <_:programlisting-1/>"
-msgstr ""
+msgstr "示例来自于<filename>grid.hg</filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:10126
 msgid "There is one optional extra argument: <_:variablelist-1/>"
-msgstr ""
+msgstr "有一个可选的额外参数：<_:variablelist-1/>"
 
 #: C/index-in.docbook:10139
 msgid "_WRAP_ENUM"
-msgstr ""
+msgstr "_WRAP_ENUM"
 
 #: C/index-in.docbook:10140
 msgid ""
 "This macro generates a C++ enum to wrap a C enum. You must specify the "
 "desired C++ name and the name of the underlying C enum."
 msgstr ""
+"这个宏生成一个C++枚举以包装C枚举。你必须指定所需的C++名称和底层C枚举的名称。"
 
 #: C/index-in.docbook:10143
 #, no-wrap
@@ -17000,14 +17457,16 @@ msgid ""
 "\n"
 "_WRAP_ENUM(WindowType, GtkWindowType)\n"
 msgstr ""
+"\n"
+"_WRAP_ENUM(WindowType, GtkWindowType)\n"
 
 #: C/index-in.docbook:10142
 msgid "For instance, from <filename>enums.hg</filename>: <_:programlisting-1/>"
-msgstr ""
+msgstr "示例来自于<filename>enums.hg</filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:10150
 msgid "NO_GTYPE"
-msgstr ""
+msgstr "NO_GTYPE"
 
 #: C/index-in.docbook:10152
 msgid ""
@@ -17017,6 +17476,9 @@ msgid ""
 "for that function. You should also file a bug against the C API, because all "
 "enums should be registered as GTypes."
 msgstr ""
+"如果枚举不是一个<classname>GType</classname>，则需使用此选项。在这个情况下C枚"
+"举没有<function>*_get_type()</function>函数，你不需要为该函数额外包含头文件。"
+"但你应该此为对C API提交一个bug，因为所有的枚举都应该被注册为GTypes。"
 
 #: C/index-in.docbook:10157
 msgid ""
@@ -17024,6 +17486,9 @@ msgid ""
 "in _WRAP_PROPERTY. It would cause a runtime error, when the generated "
 "<methodname>property_*()</methodname> method is called."
 msgstr ""
+"如果你指定了<literal>NO_GTYPE</literal>，不要再_WRAP_PROPERTY中使用此枚举类"
+"型。这会导致生成的<methodname>property_*()</methodname>成员函数被调用时出现运"
+"行时错误。"
 
 #: C/index-in.docbook:10161
 #, no-wrap
@@ -17032,15 +17497,18 @@ msgid ""
 "_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)\n"
 "      "
 msgstr ""
+"\n"
+"_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)\n"
+"      "
 
 #: C/index-in.docbook:10160
 msgid ""
 "For example, from <filename>icontheme.hg</filename>: <_:programlisting-1/>"
-msgstr ""
+msgstr "示例来自于<filename>icontheme.hg</filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:10168
 msgid "gtype_func &lt;function_name&gt;"
-msgstr ""
+msgstr "gtype_func &lt;function_name&gt;"
 
 #: C/index-in.docbook:10170
 msgid ""
@@ -17048,6 +17516,8 @@ msgid ""
 "C enum. Use this parameter if <command>gmmproc</command> can't deduce the "
 "correct function name from the name of the C enum type."
 msgstr ""
+"指定C枚举的<function>*_get_type()</function>函数名。如果<command>gmmproc</"
+"command>无法从C枚举类型的名称推断出正确的函数名，请使用此额外参数。"
 
 #: C/index-in.docbook:10174
 #, no-wrap
@@ -17056,16 +17526,20 @@ msgid ""
 "_WRAP_ENUM(ProxyFlags, GDBusProxyFlags, gtype_func g_dbus_proxy_flags_get_type)\n"
 "      "
 msgstr ""
+"\n"
+"_WRAP_ENUM(ProxyFlags, GDBusProxyFlags, gtype_func g_dbus_proxy_flags_get_type)\n"
+"      "
 
 #: C/index-in.docbook:10173
 msgid ""
 "For example, from <filename>dbusproxy.hg</filename> in glibmm: <_:"
 "programlisting-1/>"
 msgstr ""
+"示例来自于glibmm的<filename>dbusproxy.hg</filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:10181
 msgid "CONV_TO_INT"
-msgstr ""
+msgstr "CONV_TO_INT"
 
 #: C/index-in.docbook:10183
 msgid ""
@@ -17073,6 +17547,8 @@ msgid ""
 "class. Such an enum is scoped like an enum class, but unlike an enum class, "
 "it can be implicitly converted to <type>int</type>."
 msgstr ""
+"在一个类中生成普通枚举而不是生成枚举类。这将允许该枚举类型的值可以直接转换为"
+"<type>int</type>类型的值，且这样的枚举还拥有与枚举类类似的作用域。"
 
 #: C/index-in.docbook:10187
 #, no-wrap
@@ -17081,20 +17557,23 @@ msgid ""
 "_WRAP_ENUM(ResponseType, GtkResponseType, CONV_TO_INT)\n"
 "      "
 msgstr ""
+"\n"
+"_WRAP_ENUM(ResponseType, GtkResponseType, CONV_TO_INT)\n"
+"      "
 
 #: C/index-in.docbook:10186
 msgid "For example, from <filename>dialog.hg</filename>: <_:programlisting-1/>"
-msgstr ""
+msgstr "示例来自于<filename>dialog.hg</filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:10194
 msgid "s#&lt;from&gt;#&lt;to&gt;#"
-msgstr ""
+msgstr "s#&lt;from&gt;#&lt;to&gt;#"
 
 #: C/index-in.docbook:10196
 msgid ""
 "Substitutes (part of) the name of one or more enum constants. You can add "
 "any number of substitutions."
-msgstr ""
+msgstr "替换一个或多个枚举常量名称的全部或一部分。你可以添加任意数量的替换。"
 
 #: C/index-in.docbook:10199
 #, no-wrap
@@ -17103,16 +17582,20 @@ msgid ""
 "_WRAP_ENUM(SeekType, GSeekType, NO_GTYPE, s#^SEEK_#SEEK_TYPE_#)\n"
 "      "
 msgstr ""
+"\n"
+"_WRAP_ENUM(SeekType, GSeekType, NO_GTYPE, s#^SEEK_#SEEK_TYPE_#)\n"
+"      "
 
 #: C/index-in.docbook:10198
 msgid ""
 "For example, from <filename>iochannel.hg</filename> in glibmm: <_:"
 "programlisting-1/>"
 msgstr ""
+"示例来自于glibmm中的<filename>iochannel.hg</filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:10224
 msgid "_WRAP_ENUM_DOCS_ONLY"
-msgstr ""
+msgstr "_WRAP_ENUM_DOCS_ONLY"
 
 #: C/index-in.docbook:10225
 msgid ""
@@ -17125,10 +17608,14 @@ msgid ""
 "CONV_TO_INT are ignored because they make no difference when just generating "
 "the enum's documentation)."
 msgstr ""
+"这个宏只是为枚举生成一个Doxygen文档块。这对于因为过于复杂（这通常是因为使用了"
+"C宏）而无法使用<function>_WRAP_ENUM()</function>包装，且依然需要包含为枚举生"
+"成的文档的枚举类型很有用。它与<function>_WRAP_ENUM()</function>使用同一语法，"
+"也处理一样的参数（尽管有些额外参数因为没有作用会被忽略）"
 
 #: C/index-in.docbook:10237
 msgid "_WRAP_GERROR"
-msgstr ""
+msgstr "_WRAP_GERROR"
 
 #: C/index-in.docbook:10238
 msgid ""
@@ -17137,12 +17624,15 @@ msgid ""
 "methodname> method. You must specify the desired C++ name, the name of the "
 "corresponding C enum, and the prefix for the C enum values."
 msgstr ""
+"这个宏会生成一个C++异常类，生成的类派生自<classname>Glib::Error</classname>，"
+"并具有一个<type>Code</type>枚举成员变量和一个<methodname>code()</methodname>"
+"成员函数。你必须指定所需的C++名称、以及与其对应的C枚举名、C枚举值前缀。"
 
 #: C/index-in.docbook:10241
 msgid ""
 "This exception can then be thrown by methods which are generated from "
 "_WRAP_METHOD() with the errthrow option."
-msgstr ""
+msgstr "然后可以由带有errthrow选项的_WRAP_METHOD()生成的成员函数抛出此异常。"
 
 #: C/index-in.docbook:10244
 #, no-wrap
@@ -17150,11 +17640,13 @@ msgid ""
 "\n"
 "_WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)\n"
 msgstr ""
+"\n"
+"_WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)\n"
 
 #: C/index-in.docbook:10243
 msgid ""
 "For instance, from <filename>pixbuf.hg</filename>: <_:programlisting-1/>"
-msgstr ""
+msgstr "示例来自于<filename>pixbuf.hg</filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:10248
 msgid ""
@@ -17162,10 +17654,12 @@ msgid ""
 "CONV_TO_INT is ignored because all exception class enums are plain enums "
 "within a class)."
 msgstr ""
+"_WRAP_GERROR()接受与_WRAP_ENUM()一样的可选参数（尽管CONV_TO_INT参数因为没有作"
+"用而被忽略）。"
 
 #: C/index-in.docbook:10254
 msgid "_MEMBER_GET / _MEMBER_SET"
-msgstr ""
+msgstr "_MEMBER_GET / _MEMBER_SET"
 
 #: C/index-in.docbook:10255
 msgid ""
@@ -17173,28 +17667,30 @@ msgid ""
 "provides direct access to its data members, to create getters and setters "
 "for the data members."
 msgstr ""
+"如果要包装可以被直接访问其数据成员的简单结构体或装箱类型，请使用这些宏。这些"
+"宏会为其数据成员创建访问器成员函数（getter和setter）。"
 
 #: C/index-in.docbook:10259
 msgid "<function>_MEMBER_GET(C++ name, C name, C++ type, C type)</function>"
-msgstr ""
+msgstr "<function>_MEMBER_GET(C++名, C名, C++类型, C类型)</function>"
 
 #: C/index-in.docbook:10260
 msgid "<function>_MEMBER_SET(C++ name, C name, C++ type, C type)</function>"
-msgstr ""
+msgstr "<function>_MEMBER_SET(C++名, C名, C++类型, C类型)</function>"
 
 #: C/index-in.docbook:10263
 #, no-wrap
 msgid "_MEMBER_GET(x, x, int, int)"
-msgstr ""
+msgstr "_MEMBER_GET(x, x, int, int)"
 
 #: C/index-in.docbook:10261
 msgid ""
 "For example, in <filename>rectangle.hg</filename>: <_:programlisting-1/>"
-msgstr ""
+msgstr "示例来自于<filename>rectangle.hg</filename>：<_:programlisting-1/>"
 
 #: C/index-in.docbook:10267
 msgid "_MEMBER_GET_PTR / _MEMBER_SET_PTR"
-msgstr ""
+msgstr "_MEMBER_GET_PTR / _MEMBER_SET_PTR"
 
 #: C/index-in.docbook:10268
 msgid ""
@@ -17202,16 +17698,19 @@ msgid ""
 "member that is a pointer type. For the getter function, it will create two "
 "methods, one const and one non-const."
 msgstr ""
+"使用这些宏可以自动为指针类型的数据成员提供访问器（getter和setter）。对于"
+"getter函数，将创建两个版本，一个const版本一个非const版本。"
 
 #: C/index-in.docbook:10273
 msgid ""
 "<function>_MEMBER_GET_PTR(C++ name, C name, C++ type, C type)</function>"
-msgstr ""
+msgstr "<function>_MEMBER_GET_PTR(C++名, C名, C++类型, C类型)</function>"
 
 #: C/index-in.docbook:10274
+#, fuzzy
 msgid ""
 "<function>_MEMBER_SET_PTR(C++ name, C name, C++ type, C type)</function>"
-msgstr ""
+msgstr "<function>_MEMBER_GET_PTR(C++名, C名, C++类型, C类型)</function>"
 
 #: C/index-in.docbook:10276
 #, no-wrap
@@ -17220,16 +17719,21 @@ msgid ""
 "// _MEMBER_GET_PTR(engine_lang, lang_engine, EngineLang*, PangoEngineLang*)\n"
 "// It's just a comment. It's difficult to find a real-world example.\n"
 msgstr ""
+"\n"
+"// _MEMBER_GET_PTR(engine_lang, lang_engine, EngineLang*, PangoEngineLang*)\n"
+"// It's just a comment. It's difficult to find a real-world example.\n"
 
 #: C/index-in.docbook:10275
 msgid ""
 "For example, for <classname>Pango::Analysis</classname> in <filename>item."
 "hg</filename>: <_:programlisting-1/>"
 msgstr ""
+"示例来自于<filename>item.hg</filename>文件中的<classname>Pango::Analysis</"
+"classname>： <_:programlisting-1/>"
 
 #: C/index-in.docbook:10283
 msgid "_MEMBER_GET_GOBJECT / _MEMBER_SET_GOBJECT"
-msgstr ""
+msgstr "_MEMBER_GET_GOBJECT / _MEMBER_SET_GOBJECT"
 
 #: C/index-in.docbook:10284
 msgid ""
@@ -17237,16 +17741,18 @@ msgid ""
 "<classname>GObject</classname> type that must be referenced before being "
 "returned."
 msgstr ""
+"使用这些宏可以为返回之前必须被引用的<classname>GObject</classname>类型数据成"
+"员提供访问器（getters和setters）。"
 
 #: C/index-in.docbook:10289
 msgid ""
 "<function>_MEMBER_GET_GOBJECT(C++ name, C name, C++ type, C type)</function>"
-msgstr ""
+msgstr "<function>_MEMBER_GET_GOBJECT(C++名, C名, C++类型, C类型)</function>"
 
 #: C/index-in.docbook:10290
 msgid ""
 "<function>_MEMBER_SET_GOBJECT(C++ name, C name, C++ type, C type)</function>"
-msgstr ""
+msgstr "<function>_MEMBER_SET_GOBJECT(C++名, C名, C++类型, C类型)</function>"
 
 #: C/index-in.docbook:10292
 #, no-wrap
@@ -17254,16 +17760,20 @@ msgid ""
 "\n"
 "_MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)\n"
 msgstr ""
+"\n"
+"_MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)\n"
 
 #: C/index-in.docbook:10291
 msgid ""
 "For example, in Pangomm, <filename>layoutline.hg</filename>: <_:"
 "programlisting-1/>"
 msgstr ""
+"示例来自于Pangomm中的<filename>layoutline.hg</filename>：<_:programlisting-1/"
+">"
 
 #: C/index-in.docbook:10301
 msgid "gmmproc Parameter Processing"
-msgstr ""
+msgstr "gmmproc参数处理"
 
 #: C/index-in.docbook:10302
 msgid ""
@@ -17272,10 +17782,13 @@ msgid ""
 "<function>_WRAP_METHOD()</function>, <function>_WRAP_CTOR()</function> and "
 "<function>_WRAP_CREATE()</function>) in a variety of ways:"
 msgstr ""
+"<command>gmmproc</command>允许以各种方式为处理成员函数签名的宏（如"
+"<function>_WRAP_METHOD()</function>、<function>_WRAP_CTOR()</function>、"
+"<function>_WRAP_CREATE()</function>）处理成员函数签名中的参数："
 
 #: C/index-in.docbook:10309
 msgid "Parameter Reordering"
-msgstr ""
+msgstr "对参数重新排序"
 
 #: C/index-in.docbook:10316
 #, no-wrap
@@ -17284,6 +17797,9 @@ msgid ""
 "void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device,\n"
 "  GdkEventMask events);\n"
 msgstr ""
+"\n"
+"void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device,\n"
+"  GdkEventMask events);\n"
 
 #: C/index-in.docbook:10323
 #, no-wrap
@@ -17293,6 +17809,10 @@ msgid ""
 "  const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{device}),\n"
 "  gtk_widget_set_device_events)\n"
 msgstr ""
+"\n"
+"_WRAP_METHOD(void set_device_events(Gdk::EventMask events{events},\n"
+"  const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{device}),\n"
+"  gtk_widget_set_device_events)\n"
 
 #: C/index-in.docbook:10333
 #, no-wrap
@@ -17302,6 +17822,10 @@ msgid ""
 "  const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{.}),\n"
 "  gtk_widget_set_device_events)\n"
 msgstr ""
+"\n"
+"_WRAP_METHOD(void set_device_events(Gdk::EventMask events{.},\n"
+"  const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{.}),\n"
+"  gtk_widget_set_device_events)\n"
 
 #: C/index-in.docbook:10310
 msgid ""
@@ -17318,6 +17842,13 @@ msgid ""
 "literal>. Since the C++ parameter names correspond to the C ones, the above "
 "could be re-written as: <_:programlisting-3/>"
 msgstr ""
+"对于所有处理成员函数签名的宏，可以为C++参数指定一个与C函数、虚函数、信号中现"
+"有顺序不同的顺序。例如，假设如下所示的C函数将被封装为<classname>Gtk::Widget</"
+"classname>类的C++成员函数：<_:programlisting-1/>但是必须改变C++成员函数中两个"
+"参数的顺序。如下所示的代码会将函数封装为C++成员函数但两个参数的顺序会有所不"
+"同：<_:programlisting-2/>成员函数参数后的<literal>{c_param_name}</literal>告"
+"知<command>gmmproc</command>将C++参数映射到<literal>{}</literal>内的C参数。由"
+"于C++参数名与C参数名相对应，所以上述代码可以被重写为：<_:programlisting-3/>"
 
 #: C/index-in.docbook:10340
 msgid ""
@@ -17328,10 +17859,14 @@ msgid ""
 "no matter what the C API's parameter names may be. It's how the utility is "
 "written presently."
 msgstr ""
+"请注意，当为使用<function>_WRAP_SIGNAL()</function>的成员函数签名重排参数时，"
+"C参数名总是<literal>p0</literal>、<literal>p1</literal>等。因为这些参数名由"
+"<filename>generate_extra_defs</filename>实用工具使用，而该实用工具不在乎C API"
+"中的参数名是什么。"
 
 #: C/index-in.docbook:10352
 msgid "Optional Parameter Processing"
-msgstr ""
+msgstr "可选参数处理"
 
 #: C/index-in.docbook:10361
 #, no-wrap
@@ -17339,6 +17874,8 @@ msgid ""
 "\n"
 "GtkToolItem* gtk_tool_button_new(GtkWidget* icon_widget, const gchar* label);\n"
 msgstr ""
+"\n"
+"GtkToolItem* gtk_tool_button_new(GtkWidget* icon_widget, const gchar* label);\n"
 
 #: C/index-in.docbook:10370
 #, no-wrap
@@ -17347,6 +17884,9 @@ msgid ""
 "_WRAP_CTOR(ToolButton(Widget&amp; icon_widget, const Glib::ustring&amp; label{?}),\n"
 "  gtk_tool_button_new)\n"
 msgstr ""
+"\n"
+"_WRAP_CTOR(ToolButton(Widget&amp; icon_widget, const Glib::ustring&amp; label{?}),\n"
+"  gtk_tool_button_new)\n"
 
 #: C/index-in.docbook:10353
 msgid ""
@@ -17364,10 +17904,19 @@ msgid ""
 "parameter name like so: <_:programlisting-2/> In this case, two constructors "
 "would be generated: One with the optional parameter and one without it."
 msgstr ""
+"对于除了<function>_WRAP_SIGNAL()</function>和<function>_WRAP_VFUNC()</"
+"function>以外的所有处理成员函数签名的宏，都可以讲参数设为可选的，这样就可以在"
+"没有指定可选参数的情况下额外生成C++成员函数。例如，假设以下所示的"
+"<function>*_new()</function>将被封装为<classname>Gtk::ToolButton</classname>"
+"类的构造函数：<_:programlisting-1/> 另外，假设C API允许函数的"
+"<parameter>label</parameter>参数为NULL，这样该参数就是可选的。通过在参数名后"
+"附加一个<literal>{?}</literal>可以使<command>gmmproc</command>生成具有所有参"
+"数的原始构造函数和一个带有可选参数的构造函数。在如下所示的情况下：<_:"
+"programlisting-2/> 将生成两个构造函数：一个带可选参数，另一个不带可选参数。"
 
 #: C/index-in.docbook:10380
 msgid "Output Parameter Processing"
-msgstr ""
+msgstr "输出参数处理"
 
 #: C/index-in.docbook:10390
 #, no-wrap
@@ -17375,6 +17924,8 @@ msgid ""
 "\n"
 "GtkSizeRequestMode gtk_widget_get_request_mode(GtkWidget* widget);\n"
 msgstr ""
+"\n"
+"GtkSizeRequestMode gtk_widget_get_request_mode(GtkWidget* widget);\n"
 
 #: C/index-in.docbook:10396
 #, no-wrap
@@ -17383,6 +17934,9 @@ msgid ""
 "_WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{OUT}) const,\n"
 "  gtk_widget_get_request_mode)\n"
 msgstr ""
+"\n"
+"_WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{OUT}) const,\n"
+"  gtk_widget_get_request_mode)\n"
 
 #: C/index-in.docbook:10405
 #, no-wrap
@@ -17390,6 +17944,8 @@ msgid ""
 "\n"
 "_INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = (SizeRequestMode)($4)')\n"
 msgstr ""
+"\n"
+"_INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = (SizeRequestMode)($4)')\n"
 
 #: C/index-in.docbook:10409
 #, no-wrap
@@ -17397,6 +17953,8 @@ msgid ""
 "\n"
 "_INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')\n"
 msgstr ""
+"\n"
+"_INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')\n"
 
 #: C/index-in.docbook:10381
 msgid ""
@@ -17417,6 +17975,16 @@ msgid ""
 "specified: <_:programlisting-3/> Which could also be written as: <_:"
 "programlisting-4/>"
 msgstr ""
+"使用<function>_WRAP_METHOD()</function>也可以将封装好的C函数的返回值放到C++成"
+"员函数的输出参数中，而不是让C++成员函数和C函数一样返回一个值。要做到这个，只"
+"需要在C++成员函数参数列表中的输出参数名后附加<literal>{OUT}</literal>即可。例"
+"如，如果<function>gtk_widget_get_request_mode()</function>的声明如下所示：<_:"
+"programlisting-1/> 想要让C++成员函数使用输出参数而不是返回一个"
+"<type>SizeRequestMode</type>。可以用如下所示的方法：<_:programlisting-2/>附加"
+"在名为<parameter>mode</parameter>的输出参数之后的<literal>{OUT}</literal>，告"
+"知<command>gmmproc</command>将C函数的返回值放在输出参数中。但是在这种情况下还"
+"必须指定必要的初始化宏。如下所示：<_:programlisting-3/>也可以写成：<_:"
+"programlisting-4/>"
 
 #: C/index-in.docbook:10419
 #, no-wrap
@@ -17425,6 +17993,9 @@ msgid ""
 "gboolean gtk_icon_view_get_cell_rect(GtkIconView* icon_view,\n"
 "  GtkTreePath* path, GtkCellRenderer* cell, GdkRectangle* rect);\n"
 msgstr ""
+"\n"
+"gboolean gtk_icon_view_get_cell_rect(GtkIconView* icon_view,\n"
+"  GtkTreePath* path, GtkCellRenderer* cell, GdkRectangle* rect);\n"
 
 #: C/index-in.docbook:10426
 #, no-wrap
@@ -17434,6 +18005,10 @@ msgid ""
 "  const CellRenderer&amp; cell, Gdk::Rectangle&amp; rect{&gt;&gt;}) const,\n"
 "  gtk_icon_view_get_cell_rect)\n"
 msgstr ""
+"\n"
+"_WRAP_METHOD(bool get_cell_rect(const TreeModel::Path&amp; path,\n"
+"  const CellRenderer&amp; cell, Gdk::Rectangle&amp; rect{&gt;&gt;}) const,\n"
+"  gtk_icon_view_get_cell_rect)\n"
 
 #: C/index-in.docbook:10441
 #, no-wrap
@@ -17441,6 +18016,8 @@ msgid ""
 "\n"
 "_INITIALIZATION(`Gdk::Rectangle&amp;',`GdkRectangle',`$3 = Glib::wrap(&amp;($4))')\n"
 msgstr ""
+"\n"
+"_INITIALIZATION(`Gdk::Rectangle&amp;',`GdkRectangle',`$3 = Glib::wrap(&amp;($4))')\n"
 
 #: C/index-in.docbook:10413
 msgid ""
@@ -17462,10 +18039,22 @@ msgid ""
 "from a <classname>GdkRectangle*</classname> such as the following: <_:"
 "programlisting-3/>"
 msgstr ""
+"如果被封装的C函数有输出参数，<function>_WRAP_METHOD()</function>也支持将C输出"
+"参数设置为C++输出参数。例如，假设我们想封装以下C函数，该函数在C输出参数"
+"<parameter>rect</parameter>中返回一个值：<_:programlisting-1/>要让"
+"<command>gmmproc</command>将返回值放于C++ <parameter>rect</parameter>输出参数"
+"中，可以使用如下所示的<function>_WRAP_METHOD()</function>宏：<_:"
+"programlisting-2/><parameter>rect</parameter>参数名后面的<literal>{&gt;&gt;}"
+"</literal>表示C++输出参数应该用C函数的C参数返回的值来设置。<command>gmmproc</"
+"command>将生成一个用于储存C输出参数的值的临时变量的声明，以及一条使用临时变量"
+"设置C++输出参数的语句。在这种情况下，可能需要使用"
+"<function>_INITIALIZATION()</function>描述如何从一个"
+"<classname>GdkRectangle*</classname>设置一个<classname>Gdk::Rectangle&amp;</"
+"classname>。如下所示：<_:programlisting-3/>"
 
 #: C/index-in.docbook:10448
 msgid "String Parameter Processing"
-msgstr ""
+msgstr "处理字符串参数"
 
 #: C/index-in.docbook:10449
 msgid ""
@@ -17478,18 +18067,26 @@ msgid ""
 "literal>, and interpret it in a special way. Other parameters must not be "
 "<literal>nullptr</literal>."
 msgstr ""
+"在C++成员函数中的字符串值的输入参数通常是<type>const Glib::ustring&amp;</"
+"type>或者是<type>const std::string&amp;</type>。而在C代码中，它是<type>const "
+"gchar*</type>。在将空字符串转换为<type>const gchar*</type>的时候，可以将其转"
+"换为<literal>nullptr</literal>或者是一个指向空字符串的指针（用"
+"<methodname>c_str()</methodname>）。一些C函数的一些参数接受<literal>nullptr</"
+"literal>，并以特殊方式解释它。其他参数不能为<literal>nullptr</literal>。"
 
 #: C/index-in.docbook:10462
 msgid ""
 "for mandatory parameters (with or without default values): empty string to "
 "empty string,"
-msgstr ""
+msgstr "对于带有或不带有默认值的强制性参数：空字符串到空字符串"
 
 #: C/index-in.docbook:10464
 msgid ""
 "for optional parameters (with appended <literal>{?}</literal>): empty string "
 "to <literal>nullptr</literal>."
 msgstr ""
+"对于附加了<literal>{?}</literal>的可选参数：空字符串到<literal>nullptr</"
+"literal>。"
 
 #: C/index-in.docbook:10458
 msgid ""
@@ -17501,10 +18098,15 @@ msgid ""
 "name and <literal>NULL</literal>, separate them with a space: "
 "<literal>{c_param_name NULL}</literal>."
 msgstr ""
+"<function>_WRAP_METHOD()</function>和类似的宏的默认转换是：<_:itemizedlist-1/"
+">如果默认转换不够好，可以将<literal>{NULL}</literal>附加到强制性参数之后，或"
+"是将<literal>{?!NULL}</literal>附加到可选参数之后（<literal>!NULL</literal>意"
+"为非<literal>NULL</literal>）。如果想同时添加C参数名和<literal>NULL</"
+"literal>，则用空格对它们进行分隔：<literal>{c_param_name NULL}</literal>。"
 
 #: C/index-in.docbook:10478
 msgid "Basic Types"
-msgstr ""
+msgstr "基本类型"
 
 #: C/index-in.docbook:10479
 msgid ""
@@ -17513,64 +18115,68 @@ msgid ""
 "has <type>bool</type>. The following list shows some commonly-used types in "
 "C APIs and what you might convert them to in a C++ wrapper library."
 msgstr ""
+"C API中使用的一些基本类型在C++中有更好的替代类型。例如，C++中有<type>bool</"
+"type>类型，所以不需要<type>gboolean</type>类型。以下列表显示了C API中的一些常"
+"用类型，以及你可以在C++封装库中将它们转换为哪些类型。"
 
 #: C/index-in.docbook:10484
 msgid "Basic Type equivalents"
-msgstr ""
+msgstr "基本类型的等效项"
 
 #: C/index-in.docbook:10486
 msgid "C type"
-msgstr ""
+msgstr "C 类型"
 
 #: C/index-in.docbook:10487
 msgid "C++ type"
-msgstr ""
+msgstr "C++类型"
 
 #: C/index-in.docbook:10488
 msgid "<type>gboolean</type>"
-msgstr ""
+msgstr "<type>gboolean</type>"
 
 #: C/index-in.docbook:10488
 msgid "<type>bool</type>"
-msgstr ""
+msgstr "<type>bool</type>"
 
 #: C/index-in.docbook:10489
 msgid "<type>gint</type>"
-msgstr ""
+msgstr "<type>gint</type>"
 
 #: C/index-in.docbook:10489
 msgid "<type>int</type>"
-msgstr ""
+msgstr "<type>int</type>"
 
 #: C/index-in.docbook:10490
 msgid "<type>guint</type>"
-msgstr ""
+msgstr "<type>guint</type>"
 
 #: C/index-in.docbook:10491
 msgid "<type>gdouble</type>"
-msgstr ""
+msgstr "<type>gdouble</type>"
 
 #: C/index-in.docbook:10491
 msgid "<type>double</type>"
-msgstr ""
+msgstr "<type>double</type>"
 
 #: C/index-in.docbook:10492
 msgid "<type>gunichar</type>"
-msgstr ""
+msgstr "<type>gunichar</type>"
 
 #: C/index-in.docbook:10493
 msgid "<type>gchar*</type>"
-msgstr ""
+msgstr "<type>gchar*</type>"
 
 #: C/index-in.docbook:10493
 msgid ""
 "<classname>Glib::ustring</classname> (or <classname>std::string</classname> "
 "for filenames)"
 msgstr ""
+"<classname>Glib::ustring</classname>(或<classname>std::string</classname>)"
 
 #: C/index-in.docbook:10500
 msgid "Hand-coded source files"
-msgstr ""
+msgstr "手工编码源文件"
 
 #: C/index-in.docbook:10501
 msgid ""
@@ -17581,10 +18187,15 @@ msgid ""
 "in the <filename>meson.build</filename> in the <varname>extra_h_files</"
 "varname> and <varname>extra_cc_files</varname> variables."
 msgstr ""
+"你可能想包括<command>gmmproc</command>不会从<filename>.hg</filename>和"
+"<filename>.ccg</filename>文件中生成的额外源文件。你可以将它们放到你的"
+"<filename>libsomething/libsomethingmm</filename>文件夹中，并在"
+"<filename>meson.build</filename>的<varname>extra_h_files</varname>和"
+"<varname>extra_cc_files</varname>变量提到它们。"
 
 #: C/index-in.docbook:10511
 msgid "Initialization"
-msgstr ""
+msgstr "初始化"
 
 #: C/index-in.docbook:10520
 #, no-wrap
@@ -17596,6 +18207,12 @@ msgid ""
 "  wrap_init(); //Tells the Glib::wrap() table about the libsomethingmm classes.\n"
 "}\n"
 msgstr ""
+"\n"
+"void init()\n"
+"{\n"
+"  Gtk::init_gtkmm_internals(); //Sets up the g type system and the Glib::wrap() table.\n"
+"  wrap_init(); //Tells the Glib::wrap() table about the libsomethingmm classes.\n"
+"}\n"
 
 #: C/index-in.docbook:10512
 msgid ""
@@ -17609,6 +18226,11 @@ msgid ""
 "<function>wrap_init()</function> function. For instance: <_:programlisting-1/"
 ">"
 msgstr ""
+"你必须初始化你的库，以便注册库提供给的新类型，这样你才能使用它。另外你所封装"
+"的C库可能有自己需要调用的初始化函数。你可以将其放在手动编码的<filename>init."
+"h</filename>和<filename>init.cc</filename>文件中的<function>init()</function>"
+"函数中完成此操作。这个函数应该初始化你的依赖项和调用你生成的"
+"<function>wrap_init()</function>函数。例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:10528
 msgid ""
@@ -17619,10 +18241,15 @@ msgid ""
 "<filename>wrap_init.h</filename> so that the <function>wrap_init()</"
 "function> function appears in the correct C++ namespace."
 msgstr ""
+"<filename>wrap_init.cc</filename>文件中的<function>wrap_init()</function>方法"
+"是由<filename>generate_wrap_init.pl</filename>生成的，但是它的声明所在的"
+"<filename>wrap_init.h</filename>文件需要手动编码。因此你需要调整"
+"<filename>wrap_init.h</filename>文件以使<function>wrap_init()</function>函数"
+"出现在正确的C++命名空间中。"
 
 #: C/index-in.docbook:10537
 msgid "Problems in the C API."
-msgstr ""
+msgstr "C API中的问题"
 
 #: C/index-in.docbook:10538
 msgid ""
@@ -17630,10 +18257,12 @@ msgid ""
 "wrapping, particularly if it is a new project. Here are some common "
 "problems, with solutions."
 msgstr ""
+"你可能会在封装库的过程中遇到一些问题。特别是它是一个新项目的时候。以下是一些"
+"常见问题以及解决方案。"
 
 #: C/index-in.docbook:10540
 msgid "Unable to predeclare structs"
-msgstr ""
+msgstr "无法提前声明的结构体"
 
 #: C/index-in.docbook:10542
 #, no-wrap
@@ -17646,12 +18275,20 @@ msgid ""
 "  ...\n"
 "};\n"
 msgstr ""
+"\n"
+"typedef struct _ExampleWidget ExampleWidget;\n"
+"\n"
+"struct _ExampleWidget\n"
+"{\n"
+"  ...\n"
+"};\n"
 
 #: C/index-in.docbook:10541
 msgid ""
 "By convention, structs are declared in glib/GTK-style headers like so: <_:"
 "programlisting-1/>"
 msgstr ""
+"按照约定，glib/GTK风格的头文件中结构体声明应如下所示：<_:programlisting-1/>"
 
 #: C/index-in.docbook:10551
 msgid ""
@@ -17662,6 +18299,10 @@ msgid ""
 "assumes that this technique was used, so you will see compiler errors if "
 "that is not the case."
 msgstr ""
+"额外的typedef允许在头文件中使用该结构体而不需要包含其完整定义，只需要通过重复"
+"这个typedef预先声明它即可。这意味着你不需要在你的C++头文件中包含C库的头文"
+"件。，从而将其排除在你的公共API之外。<command>gmmproc</command>假定使用了这个"
+"技术，因此如果没使用这种技术就会遇到编译错误。"
 
 #: C/index-in.docbook:10558
 #, no-wrap
@@ -17671,6 +18312,10 @@ msgid ""
 "../../libexample/libexamplemm/example-widget.h:34: error: 'ExampleWidget' has a previous declaration here\n"
 "make[4]: *** [example-widget.lo] Error 1\n"
 msgstr ""
+"\n"
+"example-widget.h:56: error: using typedef-name 'ExampleWidget' after 'struct'\n"
+"../../libexample/libexamplemm/example-widget.h:34: error: 'ExampleWidget' has a previous declaration here\n"
+"make[4]: *** [example-widget.lo] Error 1\n"
 
 #: C/index-in.docbook:10564
 #, no-wrap
@@ -17679,22 +18324,27 @@ msgid ""
 "example-widget.h:60: error: '_ExampleWidget ExampleWidget' redeclared as different kind of symbol\n"
 "../../libexample/libexamplemm/example-widget.h:34: error: previous declaration of 'typedef struct _ExampleWidget ExampleWidget'\n"
 msgstr ""
+"\n"
+"example-widget.h:60: error: '_ExampleWidget ExampleWidget' redeclared as different kind of symbol\n"
+"../../libexample/libexamplemm/example-widget.h:34: error: previous declaration of 'typedef struct _ExampleWidget ExampleWidget'\n"
 
 #: C/index-in.docbook:10556
 msgid ""
 "This compiler error might look like this: <_:programlisting-1/> or this: <_:"
 "programlisting-2/>"
 msgstr ""
+"编译错误看起来可能如下所示：<_:programlisting-1/>或如下所示：<_:"
+"programlisting-2/>"
 
 #: C/index-in.docbook:10569
 msgid ""
 "This is easy to correct in the C library, so do send a patch to the relevant "
 "maintainer."
-msgstr ""
+msgstr "这很容易在C库中修复，你可以向相关库的维护者发送补丁。"
 
 #: C/index-in.docbook:10573
 msgid "Lack of properties"
-msgstr ""
+msgstr "缺少属性"
 
 #: C/index-in.docbook:10580
 #, no-wrap
@@ -17705,6 +18355,11 @@ msgid ""
 "        return g_object_new (EXAMPLE_TYPE_WIDGET, \"something\", something, \"thing\", thing, NULL);\n"
 "}\n"
 msgstr ""
+"\n"
+"GtkWidget* example_widget_new(int something, const char* thing)\n"
+"{\n"
+"        return g_object_new (EXAMPLE_TYPE_WIDGET, \"something\", something, \"thing\", thing, NULL);\n"
+"}\n"
 
 #: C/index-in.docbook:10574
 msgid ""
@@ -17715,6 +18370,10 @@ msgid ""
 "along with the names of the properties for which they are values. For "
 "instance, <_:programlisting-1/>"
 msgstr ""
+"按照约定，glib/GTK风格对象应具有<function>*_new()</function>函数，例如"
+"<function>example_widget_new()</function>仅调用<function>g_object_new()</"
+"function>并返回其结果。输入参数为<function>g_object_new()</function>函数提供"
+"属性名和属性值。例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:10587
 msgid ""
@@ -17723,6 +18382,9 @@ msgid ""
 "This is often necessary so that they can actually instantiate a derived "
 "GType, to add their own hooks for signal handlers and vfuncs."
 msgstr ""
+"这允许语言绑定实现自己的等效项（例如C++构造函数），而不需要使用"
+"<function>*_new()</function>函数。这通常是必须的，这是为了让它们可以实例化派"
+"生的GType，这样就可以为信号处理函数和虚函数添加自己的钩子。"
 
 #: C/index-in.docbook:10591
 msgid ""
@@ -17732,6 +18394,9 @@ msgid ""
 "<function>_new()</function> function as long as those lines of code use API "
 "that is available to us."
 msgstr ""
+"<function>_new()</function>函数不应该使用任何只在.c文件中的私有API。即使没有"
+"对应的函数，有时我们也可以在<function>_new()</function>函数中重新实现2到3行代"
+"码，只要这些行使用的API是可用的。"
 
 #: C/index-in.docbook:10599
 #, no-wrap
@@ -17751,6 +18416,20 @@ msgid ""
 "        do_something(something);\n"
 "}\n"
 msgstr ""
+"\n"
+"GtkWidget* example_widget_new(int something, const char* thing)\n"
+"{\n"
+"        ExampleWidget* widget;\n"
+"        widget = g_object_new (EXAMPLE_TYPE_WIDGET, NULL);\n"
+"        example_widget_construct(widget, \"something\", something, \"thing\", thing);\n"
+"}\n"
+"\n"
+"void example_widget_construct(ExampleWidget* widget, int something, const char* thing)\n"
+"{\n"
+"        //Do stuff that uses private API:\n"
+"        widget-&gt;priv-&gt;thing = thing;\n"
+"        do_something(something);\n"
+"}\n"
 
 #: C/index-in.docbook:10596
 msgid ""
@@ -17758,6 +18437,8 @@ msgid ""
 "that the C++ constructor can call after instantiating its own type. For "
 "instance, <_:programlisting-1/>"
 msgstr ""
+"另一个解决方法是添加一个C++构造函数可以在实例化自身类型后调用的"
+"<function>*_construct()</function>函数。例如：<_:programlisting-1/>"
 
 #: C/index-in.docbook:10615
 msgid ""
@@ -17765,10 +18446,13 @@ msgid ""
 "is relatively difficult to correct in the C library, but it is possible, so "
 "do file a bug and try to send a patch to the relevant maintainer."
 msgstr ""
+"在C库中，添加属性并确保它们之间正确的进行交互相对来说比较困难。但还是能做到"
+"的。若你发现了一个bug请联系相关的维护人员并向其提供相关信息以便尽快修复该"
+"bug。"
 
 #: C/index-in.docbook:10623
 msgid "Documentation"
-msgstr ""
+msgstr "文档"
 
 #: C/index-in.docbook:10624
 msgid ""
@@ -17776,10 +18460,12 @@ msgid ""
 "formatted C++ comments and generates HTML documentation. You may write these "
 "doxygen comments directly in the header files."
 msgstr ""
+"通常，gtkmm风格项目使用Doxygen生成文档，它会读取特殊格式的C++注释并生成HTML文"
+"档。你可以直接将这些doxygen可读的注释写到头文件中。"
 
 #: C/index-in.docbook:10627
 msgid "Reusing C documentation"
-msgstr ""
+msgstr "重用C文档"
 
 #: C/index-in.docbook:10628
 msgid ""
@@ -17792,11 +18478,17 @@ msgid ""
 "doxygen comments. <command>gmmproc</command> will even try to transform the "
 "documentation to make it more appropriate for a C++ API."
 msgstr ""
+"你可能想重用所封装C库的现有文档。GTK风格的C库通常直接使用gtk-doc，因此在.sgml"
+"和.xml文件中有一些gtk-doc格式的源代码注释和一些额外的文档。在glibmm的"
+"<filename>tools/defs_gen</filename>目录中的docextract_to_xml.py脚本，可以读取"
+"这些文件并生成一个.xml文件，<command>gmmproc</command>可以使用这个文件生成"
+"doxygen注释。<command>gmmproc</command>甚至会尝试转换文档以使其更适合C++ "
+"API。"
 
 #: C/index-in.docbook:10638
 #, no-wrap
 msgid "./docextract_to_xml.py -s ~/checkout/gnome/gtk/gtk/ &gt; gtk_docs.xml\n"
-msgstr ""
+msgstr "./docextract_to_xml.py -s ~/checkout/gnome/gtk/gtk/ &gt; gtk_docs.xml\n"
 
 #: C/index-in.docbook:10641
 msgid ""
@@ -17807,10 +18499,14 @@ msgid ""
 "file and changing the contents. Alternatively you can write your own "
 "documentation in the <filename>.hg</filename> file."
 msgstr ""
+"由于此自动转换并不总是合适的，所以你可能希望对特定的方法提供手写的文本。为此"
+"可以将函数的XML节点从<filename>something_docs.xml</filename>文件复制到"
+"<filename>something_docs_override.xml</filename>文件并更改其内容。你也可以在"
+"<filename>.hg</filename>文件中编写自己的文档。"
 
 #: C/index-in.docbook:10651
 msgid "Documentation build structure"
-msgstr ""
+msgstr "文档构建结构"
 
 #: C/index-in.docbook:10652
 msgid ""
@@ -17824,6 +18520,13 @@ msgid ""
 "the Doxygen configuration file, but passed along from <command>meson/ninja</"
 "command> to the standard input of <command>doxygen</command>."
 msgstr ""
+"如果你已经从<application>mm-common</application>中复制skeleton源代码树并替换"
+"占位文本，那么在<filename>doc/reference/</filename>目录中已经拥有了合适的"
+"<filename>meson.build</filename>和<filename>Doxyfile.in</filename>文件。你可"
+"能需要修改<filename>meson.build</filename>文件中的<varname>tag_file_modules</"
+"varname>变量，虽然在<application>mm-common</application>构建设置中，Doxygen输"
+"入文件不是通过Doxygen配置文件定义的，而是由<command>meson/ninja</command>传递"
+"文件内容到<command>doxygen</command>的标准输入。"
 
 #~ msgid "Murray"
 #~ msgstr "Murray"
