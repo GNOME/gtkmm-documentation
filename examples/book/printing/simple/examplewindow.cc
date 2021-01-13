@@ -155,7 +155,6 @@ void ExampleWindow::build_main_menu(const Glib::RefPtr<Gtk::Application>& app)
   Glib::ustring ui_toolbar_info =
     "<!-- Generated with glade 3.18.3 and then changed manually -->"
     "<interface>"
-      "<requires lib='gtk' version='3.98'/>"
       "<object class='GtkBox' id='toolbar'>"
         "<property name='can_focus'>False</property>"
         "<property name='spacing'>3</property>"

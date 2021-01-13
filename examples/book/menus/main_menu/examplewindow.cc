@@ -60,7 +60,6 @@ ExampleWindow::ExampleWindow()
   Glib::ustring ui_info =
     "<!-- Generated with glade 3.18.3 and then changed manually -->"
     "<interface>"
-    "  <requires lib='gtk' version='3.94'/>"
     "  <object class='GtkBox' id='toolbar'>"
     "    <property name='can_focus'>False</property>"
     "    <child>"
