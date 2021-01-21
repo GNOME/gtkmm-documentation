@@ -32,7 +32,6 @@ HELP_MEDIA =					\
 	figures/assistant.png			\
 	figures/box_packing1.png		\
 	figures/box_packing2.png		\
-	figures/box_packing3.png		\
 	figures/buildapp_menu.png \
 	figures/buildapp_header_bar.png \
 	figures/buildapp_opening_files.png \
@@ -48,7 +47,6 @@ HELP_MEDIA =					\
 	figures/checkbutton.png			\
 	figures/clipboard_ideal.png		\
 	figures/clipboard_simple.png		\
-	figures/combo.png			\
 	figures/combobox_complex.png		\
 	figures/combobox_text.png		\
 	figures/comboboxentry_complex.png	\
@@ -60,26 +58,21 @@ HELP_MEDIA =					\
 	figures/dialogs_filechooser.png		\
 	figures/dialogs_fontchooserdialog.png	\
 	figures/dialogs_messagedialog.png	\
-	figures/dialogs_simple.png		\
 	figures/drag_and_drop.png		\
 	figures/drawingarea_arcs.png		\
 	figures/drawingarea_curve.png		\
 	figures/drawingarea_image.png		\
 	figures/drawingarea_lines.png		\
 	figures/drawingarea_pango_text.png		\
-	figures/drawingarea_text.png		\
 	figures/drawingarea_thin_lines.png		\
 	figures/entry.png			\
 	figures/entry_completion.png		\
 	figures/entry_icon.png		\
 	figures/entry_progress.png		\
-	figures/expander.png			\
-	figures/filechooserbutton.png		\
 	figures/frame.png			\
 	figures/grid.png			\
 	figures/helloworld.png			\
 	figures/helloworld2.png			\
-	figures/idle.png			\
 	figures/infobar.png			\
 	figures/keyboardevents_simple.png			\
 	figures/keyboardevents_propagation.png		\
@@ -87,8 +80,6 @@ HELP_MEDIA =					\
 	figures/main_menu.png			\
 	figures/menu_popup.png			\
 	figures/menus_and_toolbars.png		\
-	figures/menus_menu.png			\
-	figures/menus_menubar.png		\
 	figures/multithread.png		\
 	figures/notebook.png			\
 	figures/paned.png			\
@@ -100,15 +91,12 @@ HELP_MEDIA =					\
 	figures/scrolledwindow.png		\
 	figures/spinbutton.png			\
 	figures/textview.png			\
-	figures/toolbar.png			\
 	figures/tooltip.png			\
-	figures/treeview_combo_renderer.png	\
 	figures/treeview_draganddrop.png	\
 	figures/treeview_editablecells.png	\
 	figures/treeview_list.png		\
 	figures/treeview_popup.png		\
-	figures/treeview_tree.png		\
-	figures/update_ui.png
+	figures/treeview_tree.png
 
 # Do not define the environment variable LINGUAS.
 # If the environment variable LINGUAS exists, YELP_HELP_RULES generate
