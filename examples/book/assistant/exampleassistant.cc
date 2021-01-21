@@ -24,12 +24,13 @@ ExampleAssistant::ExampleAssistant()
   m_check("Optional extra information")
 {
   set_title("Gtk::Assistant example");
-  set_default_size(400, 300);
+  set_default_size(400, 200);
 
   m_box.append(m_label1);
   m_box.append(m_entry);
-  m_label1.set_expand();
-  m_entry.set_expand();
+  m_label1.set_wrap();
+  m_label1.set_valign(Gtk::Align::CENTER);
+  m_entry.set_valign(Gtk::Align::CENTER);
 
   append_page(m_box);
   append_page(m_check);
