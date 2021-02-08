@@ -48,6 +48,8 @@ protected:
   bool on_popdown_timeout();
   bool on_popup_timeout();
 
+  static Gdk::DragAction action_make_unique(Gdk::DragAction actions, bool print);
+
   //Member widgets:
   Gtk::Grid m_Grid;
   Gtk::Label m_Label_Drop;

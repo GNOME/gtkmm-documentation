@@ -18,8 +18,10 @@
 #include "dnd_images.h"
 #include <gtkmm/application.h>
 #include <iostream>
+#include <map>
+#include <initializer_list>
 
-// This example is similar to gtk+/tests/testdnd.
+// This example is similar to gtk/tests/testdnd.
 
 DnDWindow::DnDWindow()
 : m_Label_Drop("Drop here\n"),
@@ -58,7 +60,8 @@ DnDWindow::DnDWindow()
 
   // Image
 
-  auto async = Gtk::DropTargetAsync::create();
+  auto async = Gtk::DropTargetAsync::create(
+    Gdk::ContentFormats::create(ustring_type), Gdk::DragAction::COPY | Gdk::DragAction::MOVE);
   async->signal_drag_enter().connect(sigc::mem_fun(*this, &DnDWindow::on_image_drag_enter), false);
   async->signal_drag_leave().connect(sigc::mem_fun(*this, &DnDWindow::on_image_drag_leave));
   async->signal_drop().connect(sigc::mem_fun(*this, &DnDWindow::on_image_drop), false);
@@ -200,7 +203,7 @@ Gdk::DragAction DnDWindow::on_image_drag_enter(const Glib::RefPtr<Gdk::Drop>& dr
     m_Image.set(m_trashcan_open);
   }
 
-  return Gdk::DragAction::MOVE;
+  return action_make_unique(drop->get_actions(), true);
 }
 
 void DnDWindow::on_image_drag_leave(const Glib::RefPtr<Gdk::Drop>& drop)
@@ -218,15 +221,14 @@ bool DnDWindow::on_image_drop(const Glib::RefPtr<Gdk::Drop>& drop, double, doubl
 
   m_Image.set(m_trashcan_closed);
 
-  drop->finish(Gdk::DragAction::MOVE);
+  drop->finish(action_make_unique(drop->get_actions(), true));
   return true;
 }
 
 void DnDWindow::on_label_drag_drag_end(const Glib::RefPtr<Gdk::Drag>& /* drag */,
   bool delete_data)
 {
-  if (delete_data)
-    std::cout << "Delete the data!" << std::endl;
+  std::cout << (delete_data ? "D" : "Don't d") << "elete the data!" << std::endl;
 }
 
 bool DnDWindow::on_popdown_timeout()
@@ -251,4 +253,38 @@ bool DnDWindow::on_popup_timeout()
   m_popup_timer.disconnect();
 
   return false;
+}
+
+//static
+Gdk::DragAction DnDWindow::action_make_unique(Gdk::DragAction actions, bool print)
+{
+  if (!print && Gdk::Drag::action_is_unique(actions))
+    return actions;
+
+  if (print)
+    std::cout << "Possible actions:";
+
+  std::map<Gdk::DragAction, Glib::ustring> action_strings;
+  action_strings[Gdk::DragAction::COPY] = " COPY";
+  action_strings[Gdk::DragAction::MOVE] = " MOVE";
+  action_strings[Gdk::DragAction::LINK] = " LINK";
+
+  auto unique_action = static_cast<Gdk::DragAction>(0);
+
+  for (const auto tested_action :
+      {Gdk::DragAction::COPY, Gdk::DragAction::MOVE, Gdk::DragAction::LINK})
+  {
+    if (static_cast<int>(actions & tested_action))
+    {
+      if (print)
+        std::cout << action_strings[tested_action];
+      else
+        return tested_action;
+      if (static_cast<int>(unique_action) == 0)
+        unique_action = tested_action;
+    }
+  }
+  if (print)
+    std::cout << "; Selected action:" << action_strings[unique_action] << std::endl;
+  return unique_action;
 }
