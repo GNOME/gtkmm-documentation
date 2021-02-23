@@ -1,3 +1,23 @@
+4.0.1 (stable):
+
+The tarball for 4.0.1 has been created with 'meson dist'.
+If you build with Autotools from the tarball, please read the README
+file, especially the last paragraph.
+
+* Update the "Working with gtkmm's Source Code" appendix
+  (Kjell Ahlstedt)
+* Meson build: Don't require gtkmm unconditionally
+  (Kjell Ahlstedt)
+* Avoid a translation problem with <programlisting>
+  (Kjell Ahlstedt) Merge request !11 (CCTV-1)
+* Update AboutDialog and Assistant example programs
+  (Kjell Ahlstedt)
+
+Updated translations:
+* Simplified Chinese (CCTV-1), merge requests !8, !9, !10, !11
+* Spanish (Daniel Mustieles)
+
+
 4.0.0 (stable):
 
 This is the first stable release describing gtkmm-4.0.
