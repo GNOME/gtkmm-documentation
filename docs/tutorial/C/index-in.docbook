@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-  "http://docbook.org/docbook/xml/4.5/docbookx.dtd" [
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
   <!ENTITY url_refdocs_base_glib_html "http://developer.gnome.org/glibmm/unstable/">
   <!ENTITY url_refdocs_base_glib "&url_refdocs_base_glib_html;classGlib_1_1">
   <!ENTITY url_refdocs_base_gio "&url_refdocs_base_glib_html;classGio_1_1">
@@ -35,6 +35,7 @@ tools (itstool and friends) can't create translated index.docbook files if
 a <programlisting> element occurs in a <para> element.
 <programlisting> can be a direct child of e.g. <chapter>, <sect1>, <sect2>,
 <sect3>, <sect4>, <sect5>.
+See https://gitlab.gnome.org/GNOME/gtkmm-documentation/-/merge_requests/11
 -->
 
 <!-- The XSL for developer.gnome.org requires this id. -->
