@@ -15,7 +15,9 @@ import re
 
 root_source_dir = sys.argv[1]
 root_build_dir = sys.argv[2]
-dist_root = os.getenv('MESON_DIST_ROOT')
+
+# MESON_PROJECT_DIST_ROOT is set only if meson.version() >= 0.58.0.
+project_dist_root = os.getenv('MESON_PROJECT_DIST_ROOT', os.getenv('MESON_DIST_ROOT'))
 
 # Make a ChangeLog file for distribution.
 cmd = [
@@ -28,14 +30,14 @@ cmd = [
   '--max-count=200',
   '--pretty=tformat:%cd  %an  <%ae>%n%n  %s%n%w(0,0,2)%+b',
 ]
-with open(os.path.join(dist_root, 'ChangeLog'), mode='w') as logfile:
+with open(os.path.join(project_dist_root, 'ChangeLog'), mode='w') as logfile:
   result = subprocess.run(cmd, stdout=logfile)
   if result.returncode:
     sys.exit(result.returncode)
 
 # Distribute some built files in addition to the files in the local git clone.
 os.chdir(root_build_dir)
-dist_docs_tutorial = os.path.join(dist_root, 'docs', 'tutorial')
+dist_docs_tutorial = os.path.join(project_dist_root, 'docs', 'tutorial')
 dist_docs_tutorial_C = os.path.join(dist_docs_tutorial, 'C')
 docs_tutorial_index_docbook = os.path.join('docs', 'tutorial', 'index.docbook')
 
@@ -74,12 +76,12 @@ else:
   print('--- Info: No updated PDF file found.')
 
 # Don't distribute .gitignore files.
-for dirpath, dirnames, filenames in os.walk(dist_root):
+for dirpath, dirnames, filenames in os.walk(project_dist_root):
   if '.gitignore' in filenames:
     os.remove(os.path.join(dirpath, '.gitignore'))
 
-# Remove an empty MESON_DIST_ROOT/build directory.
-dist_build_dir = os.path.join(dist_root, 'build')
+# Remove an empty MESON_PROJECT_DIST_ROOT/build directory.
+dist_build_dir = os.path.join(project_dist_root, 'build')
 if os.path.isdir(dist_build_dir):
   try:
     os.rmdir(dist_build_dir)
@@ -87,9 +89,9 @@ if os.path.isdir(dist_build_dir):
     # Ignore the error, if not empty.
     pass
 
-# Remove specified files and directories from the MESON_DIST_ROOT directory.
+# Remove specified files and directories from the MESON_PROJECT_DIST_ROOT directory.
 for rel_path in sys.argv[3:]:
-  abs_path = os.path.join(dist_root, rel_path)
+  abs_path = os.path.join(project_dist_root, rel_path)
   if os.path.isfile(abs_path):
     os.remove(abs_path)
   elif os.path.isdir(abs_path):

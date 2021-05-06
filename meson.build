@@ -77,17 +77,20 @@ endif
 warning_flags = cpp_compiler.get_supported_arguments(warning_flags)
 add_project_arguments(warning_flags, language: 'cpp')
 
+# add_dist_script() is not allowed in a subproject if meson.version() < 0.58.0.
+can_add_dist_script = not meson.is_subproject() or meson.version().version_compare('>= 0.58.0')
+
 subdir('docs/tutorial')
 subdir('examples')
 
-if not meson.is_subproject()
+if can_add_dist_script
   # Don't distribute these files and directories.
   dont_distribute = [
     'docs' / 'tutorial' / 'kindle_cover.jpg',
     'docs' / 'tutorial' / 'kindle_cover.svg',
     'tools' / 'make_screenshots',
   ]
-  # Modify the contents of the distribution directory. (not allowed in a subproject)
+  # Modify the contents of the distribution directory.
   meson.add_dist_script(
     python3.path(), extra_dist_cmd,
     project_source_root,
