@@ -62,12 +62,10 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
     "        <item>"
     "          <attribute name='label' translatable='yes'>_New</attribute>"
     "          <attribute name='action'>example.new</attribute>"
-    "          <attribute name='accel'>&lt;Primary&gt;n</attribute>"
     "        </item>"
     "        <item>"
     "          <attribute name='label' translatable='yes'>_Open</attribute>"
     "          <attribute name='action'>example.open</attribute>"
-    "          <attribute name='accel'>&lt;Primary&gt;o</attribute>"
     "        </item>"
     "      </section>"
     "      <section>"
@@ -80,7 +78,6 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
     "        <item>"
     "          <attribute name='label' translatable='yes'>_Quit</attribute>"
     "          <attribute name='action'>example.quit</attribute>"
-    "          <attribute name='accel'>&lt;Primary&gt;q</attribute>"
     "        </item>"
     "      </section>"
     "    </submenu>"
@@ -89,26 +86,20 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
     "      <item>"
     "        <attribute name='label' translatable='yes'>_Cut</attribute>"
     "        <attribute name='action'>example.cut</attribute>"
-    "        <attribute name='accel'>&lt;Primary&gt;x</attribute>"
     "      </item>"
     "      <item>"
     "        <attribute name='label' translatable='yes'>_Copy</attribute>"
     "        <attribute name='action'>example.copy</attribute>"
-    "        <attribute name='accel'>&lt;Primary&gt;c</attribute>"
     "      </item>"
     "      <item>"
     "        <attribute name='label' translatable='yes'>_Paste</attribute>"
     "        <attribute name='action'>example.paste</attribute>"
-    "        <attribute name='accel'>&lt;Primary&gt;v</attribute>"
     "      </item>"
     "    </submenu>"
     "  </menu>"
     "</interface>";
 
-  // When the menubar is a child of a Gtk::Window, keyboard accelerators are not
-  // automatically fetched from the Gio::Menu.
-  // See the examples/book/menus/main_menu example for an alternative way of
-  // adding the menubar when using Gtk::ApplicationWindow.
+  // Set accelerator keys:
   app->set_accel_for_action("example.new", "<Primary>n");
   app->set_accel_for_action("example.open", "<Primary>o");
   app->set_accel_for_action("example.quit", "<Primary>q");

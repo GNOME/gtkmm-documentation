@@ -52,6 +52,11 @@ void ExampleApplication::on_startup()
   //Help menu:
   add_action("about", sigc::mem_fun(*this, &ExampleApplication::on_menu_help_about));
 
+  // Set accelerator keys:
+  set_accel_for_action("app.newstandard", "<Primary>n");
+  set_accel_for_action("app.quit", "<Primary>q");
+  set_accel_for_action("win.copy", "<Primary>c");
+  set_accel_for_action("win.paste", "<Primary>v");
   m_refBuilder = Gtk::Builder::create();
 
   //Layout the actions in a menubar and a menu:
