@@ -341,7 +341,7 @@ program possible. This program will create an empty 200 x 200 pixel window.
 
 <para><ulink url="&url_examples_base;base">Source Code</ulink></para>
 
-<para>We will now explain each line of the example</para>
+<para>We will now explain each part of the example</para>
 <programlisting>#include &lt;gtkmm.h&gt;</programlisting>
 <para>
 All &gtkmm; programs must include certain &gtkmm; headers; <literal>gtkmm.h</literal>
@@ -350,43 +350,62 @@ it includes a megabyte or so of headers, but for simple programs, it
 suffices.
 </para>
 
-<para>
-The next statement:
+<para>The next part of the program:</para>
+<programlisting>class MyWindow : public Gtk::Window
+{
+public:
+  MyWindow();
+};
 
+MyWindow::MyWindow()
+{
+  set_title("Basic application");
+  set_default_size(200, 200);
+}</programlisting>
+<para>
+defines the <classname>MyWindow</classname> class. Its default constructor sets the
+window's title and default (initial) size.
+</para>
+
+<para>The <function>main()</function> function's first statement:</para>
 <programlisting>auto app = Gtk::Application::create("org.gtkmm.examples.base");</programlisting>
-
-creates a <classname>Gtk::Application</classname> object, stored in a <classname>Glib::RefPtr</classname> smartpointer. This is needed in all &gtkmm;
-applications. The <methodname>create()</methodname> method for this object initializes &gtkmm;.
+<para>
+creates a <classname>Gtk::Application</classname> object, stored in a <classname>Glib::RefPtr</classname> smartpointer.
+This is needed in all &gtkmm; applications. The <methodname>create()</methodname> method for this object initializes &gtkmm;.
 </para>
 
 <para>
-The next two lines of code create a window and set its default (initial) size:
-</para>
-<programlisting>Gtk::Window window;
-window.set_default_size(200, 200);</programlisting>
-<para>
-The last line shows the window and enters the &gtkmm; main processing loop, which will finish when the window is closed.
+The last line creates and shows a window and enters the &gtkmm; main processing loop, which will finish when the window is closed.
 Your <function>main()</function> function will then return with an appropriate success or error code.
 The <parameter>argc</parameter> and <parameter>argv</parameter> arguments, passed to your application on the command line,
-can be checked when <methodname>run()</methodname> is called, but this simple application does not use those arguments.
+can be checked when <methodname>make_window_and_run()</methodname> is called, but this simple application does not use those arguments.
 </para>
-
-<programlisting>return app->run(window, argc, argv);</programlisting>
+<programlisting>return app->make_window_and_run&lt;MyWindow&gt;(argc, argv);</programlisting>
 
 <para>
 After putting the source code in <literal>simple.cc</literal> you can compile
 the above program with <application>gcc</application> using:
-<programlisting>g++ simple.cc -o simple `pkg-config gtkmm-4.0 --cflags --libs`</programlisting>
+</para>
+<programlisting>g++ simple.cc -o simple `pkg-config --cflags --libs gtkmm-4.0` -std=c++17</programlisting>
+<para>
 Note that you must surround the <literal>pkg-config</literal> invocation with backquotes.
 Backquotes cause the shell to execute the command inside them, and to use
 the command's output as part of the command line.
 Note also that <literal>simple.cc</literal> must come before the <literal>pkg-config</literal>
-invocation on the command line.
+invocation on the command line. <literal>-std=c++17</literal> is necessary only if
+your compiler is not C++17 compliant by default.
 </para>
 </sect1>
 
 <sect1 id="sec-headers-and-linking">
 <title>Headers and Linking</title>
+<note>
+<para>
+This section describes building with Autotools. The newer
+<ulink url="https://mesonbuild.com/">Meson build system</ulink> is a good alternative.
+</para>
+</note>
+
 <para>
 Although we have shown the compilation command for the simple example, you really should use the automake and autoconf tools, as described in "Autoconf, Automake, Libtool", by G. V. Vaughan et al. The examples used in this book are included in the <application>gtkmm-documentation</application> package, with appropriate build files, so we won't show the build commands in future. You'll just need to find the appropriate directory and type <literal>make</literal>.
 </para>
@@ -530,7 +549,7 @@ The C++ wrapper shall be explicitly deleted if
 <listitem><para>it's a widget or other class that inherits from <classname>Gtk::Object</classname>, and</para></listitem>
 <listitem><para>the C instance has a floating reference when the wrapper is created, and</para></listitem>
 <listitem><para><function>Gtk::manage()</function> has not been called on it (which includes if it was created with <function>Gtk::make_managed()</function>), or</para></listitem>
-<listitem><para><function>Gtk::manage()</function> was called on it, but it was never added to, or was later removed from, its parent.</para></listitem>
+<listitem><para><function>Gtk::manage()</function> was called on it, but it was never added to a parent.</para></listitem>
 </itemizedlist>
 <function>Glib::wrap()</function> binds the C and C++ instances to each other.
 Don't delete the C++ instance before you want the C instance to die.
@@ -628,27 +647,26 @@ without comments:
 <programlisting>int main(int argc, char* argv[])
 {
   auto app = Gtk::Application::create("org.gtkmm.example");
-  HelloWorld helloworld;
-  return app-&gt;run(helloworld, argc, argv);
+  return app->make_window_and_run&lt;HelloWorld&gt;(argc, argv);
 }</programlisting>
 
 <para>
-First we instantiate an object stored in a <classname>RefPtr</classname> smartpointer called <literal>app</literal>. This is of type
+First we instantiate an object stored in a <classname>Glib::RefPtr</classname> smartpointer called <literal>app</literal>. This is of type
 <classname>Gtk::Application</classname>. Every &gtkmm; program must have one of these.
 </para>
 
 <para>
-Next we make an object of our <classname>HelloWorld</classname> class, whose constructor
-takes no arguments, but it isn't visible yet. When we call <methodname>Gtk::Application::run()</methodname>,
-giving it the helloworld Window and the command-line arguments, it shows the Window and starts the &gtkmm; <emphasis>event loop</emphasis>.
-During the event loop &gtkmm; idles, waiting for actions from the user, and responding appropriately.
-When the user closes the Window, <methodname>run()</methodname> will return,
-causing the final line of our <function>main()</function> function be to executed. The application will then finish.
+Next we call <methodname>make_window_and_run()</methodname> which creates an object
+of our <classname>HelloWorld</classname> class, shows that Window and starts the &gtkmm;
+<emphasis>event loop</emphasis>. During the event loop &gtkmm; idles, waiting for actions
+from the user, and responding appropriately.
+When the user closes the Window, <methodname>make_window_and_run()</methodname> will return,
+causing our <function>main()</function> function to return. The application will then finish.
 </para>
 
 <para>
 Like the simple example we showed earlier, this Hello World program does not use
-the command-line parameters. It's not necessary to pass them to <methodname>run()</methodname>.
+the command-line parameters.
 </para>
 
 </sect1>
