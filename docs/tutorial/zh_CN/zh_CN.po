@@ -10,7 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2020-12-23 11:40+8000\n"
 "Last-Translator: XiangQun Luo <Script.tar.gz@gmail.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
-"Language: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -753,8 +753,8 @@ msgstr ""
 "序：<_:programlisting-1/> 注意，你必须将 <literal>pkg-config</literal> 的调用"
 "包含在一对反单引号中。反单引号会导致其内的命令由 shell 执行，并且将命令的输出"
 "做为该命令行的一部分来使用。另外请注意，在命令行中<literal>simple.cc</"
-"literal>必须位于<literal>pkg-config</literal>调用之前。<literal>-std=c++17</l“
-”iteral>只在你的编译器默认不启用C++17标准的时候才需要。"
+"literal>必须位于<literal>pkg-config</literal>调用之前。<literal>-std=c++17</l"
+"iteral>只在你的编译器默认不启用C++17标准的时候才需要。"
 
 #: index-in.docbook:401
 msgid "Headers and Linking"
@@ -18653,24 +18653,6 @@ msgstr ""
 
 #~ msgid "GTK+ 2.4"
 #~ msgstr "GTK+ 2.4"
-
-#~ msgid "cairomm"
-#~ msgstr "cairomm"
-
-#~ msgid "pkg-config"
-#~ msgstr "pkg-config"
-
-#~ msgid "glib"
-#~ msgstr "glib"
-
-#~ msgid "ATK"
-#~ msgstr "ATK"
-
-#~ msgid "Pango"
-#~ msgstr "Pango"
-
-#~ msgid "cairo"
-#~ msgstr "cairo"
 
 #~ msgid "cairomm"
 #~ msgstr "cairomm"
