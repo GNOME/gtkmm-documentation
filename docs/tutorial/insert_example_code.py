@@ -20,7 +20,7 @@ start_of_source_pattern = re.compile(r'[#\w]')
 def process_source_file(source_directory, source_basename, outfile, skip_leading_comments):
   found_start = not skip_leading_comments
   source_filename = os.path.join(source_directory, source_basename)
-  with open(source_filename, mode='r') as srcfile:
+  with open(source_filename, mode='r', encoding='utf-8', errors='surrogateescape') as srcfile:
     outfile.write('<para>File: <filename>' + source_basename + '</filename> (For use with gtkmm 4)</para>\n')
     outfile.write('<programlisting>\n<![CDATA[')
 
@@ -35,12 +35,16 @@ def process_source_file(source_directory, source_basename, outfile, skip_leading
     outfile.write(']]></programlisting>\n')
 
 def insert_example_code(examples_base_dir, input_xml_files, output_xml_file):
-  if not isinstance(input_xml_files, list):
-    input_xml_files = [input_xml_files]
+  if not (isinstance(input_xml_files, list) or isinstance(input_xml_files, tuple)):
+    input_xml_files = [] if input_xml_files == None else [input_xml_files]
 
-  with open(output_xml_file, mode='w') as outfile:
+  # Assume that all files are UTF-8 encoded.
+  # If illegal UTF-8 bytes in the range 0x80..0xff are encountered, they are
+  # replaced by Unicode Private Use characters in the range 0xdc80..0xdcff
+  # and restored to their original values when the file is rewritten.
+  with open(output_xml_file, mode='w', encoding='utf-8', errors='surrogateescape') as outfile:
     for input_xml_file in input_xml_files:
-      with open(input_xml_file, mode='r') as infile:
+      with open(input_xml_file, mode='r', encoding='utf-8', errors='surrogateescape') as infile:
         for line in infile:
           # Look for
           # <para><ulink url="&url_examples_base;helloworld">Source Code</ulink></para> [<!-- Insert filenames... -->]

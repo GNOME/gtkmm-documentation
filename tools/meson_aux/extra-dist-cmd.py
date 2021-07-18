@@ -30,7 +30,8 @@ cmd = [
   '--max-count=200',
   '--pretty=tformat:%cd  %an  <%ae>%n%n  %s%n%w(0,0,2)%+b',
 ]
-with open(os.path.join(project_dist_root, 'ChangeLog'), mode='w') as logfile:
+logfilename = os.path.join(project_dist_root, 'ChangeLog')
+with open(logfilename, mode='w', encoding='utf-8') as logfile:
   result = subprocess.run(cmd, stdout=logfile)
   if result.returncode:
     sys.exit(result.returncode)
@@ -52,8 +53,8 @@ shutil.copytree(os.path.join('docs', 'tutorial', 'html'),
 linguas = os.path.join(dist_docs_tutorial, 'LINGUAS')
 langs = []
 if os.path.isfile(linguas):
-  with open(linguas) as linguas_file_obj:
-    buffer = linguas_file_obj.read().splitlines()
+  with open(linguas, mode='r', encoding='utf-8') as linguas_file_obj:
+    buffer = linguas_file_obj.readlines()
   comment_pattern = re.compile(r'\s*(?:#|$)') # comment or blank line
   for line in buffer:
     if not comment_pattern.match(line):
