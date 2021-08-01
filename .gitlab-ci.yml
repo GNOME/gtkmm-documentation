@@ -1,0 +1,61 @@
+stages:
+  - validate
+  - build
+  - deploy
+
+.build-default:
+  image: "fedora:34"
+  before_script:
+    - export PATH="$HOME/.local/bin:$PATH"
+    - dnf install -y ${FEDORA_DEPS}
+    - pip install --user meson==${MESON_VERSION}
+  script:
+    - meson setup ${MESON_OPTIONS} _build .
+    - ninja -C _build
+
+docs-validation:
+  extends: .build-default
+  stage: validate
+  variables:
+    FEDORA_DEPS:
+      gcc
+      gcc-c++
+      gettext
+      itstool
+      libxml2
+      libxslt
+      ninja-build
+      python3
+      python3-pip
+      python3-wheel
+    MESON_VERSION: "0.50.0"
+    MESON_OPTIONS: "-Dbuild-examples=false -Dvalidation=true -Dbuild-translations=true -Dbuild-pdf=false"
+
+html-tutorial:
+  extends: .build-default
+  stage: build
+  variables:
+    FEDORA_DEPS:
+      gcc
+      gcc-c++
+      libxslt
+      ninja-build
+      python3
+      python3-pip
+      python3-wheel
+    MESON_VERSION: "0.50.0"
+    MESON_OPTIONS: "-Dbuild-examples=false -Dvalidation=false -Dbuild-translations=false -Dbuild-pdf=false"
+  artifacts:
+    when: always
+    paths:
+      - _build/docs/tutorial
+
+pages:
+  stage: deploy
+  needs: ["html-tutorial"]
+  script:
+    - mkdir public
+    - mv _build/docs/tutorial public
+  only:
+    refs:
+      - master
