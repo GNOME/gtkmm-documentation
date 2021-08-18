@@ -56,6 +56,9 @@ pages:
   script:
     - mkdir public
     - mv _build/docs/tutorial public
+  artifacts:
+    paths:
+      - public
   only:
     refs:
       - master
