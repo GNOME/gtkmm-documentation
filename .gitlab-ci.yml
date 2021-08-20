@@ -9,9 +9,6 @@ stages:
     - export PATH="$HOME/.local/bin:$PATH"
     - dnf install -y ${FEDORA_DEPS}
     - pip install --user meson==${MESON_VERSION}
-  script:
-    - meson setup ${MESON_OPTIONS} _build .
-    - ninja -C _build
 
 docs-validation:
   extends: .build-default
@@ -30,6 +27,12 @@ docs-validation:
       python3-wheel
     MESON_VERSION: "0.50.0"
     MESON_OPTIONS: "-Dbuild-examples=false -Dvalidation=true -Dbuild-translations=true -Dbuild-pdf=false"
+  script:
+    - meson setup ${MESON_OPTIONS} _build .
+    - ninja -C _build
+    # Translations are built on installation as long as issue
+    # https://github.com/mesonbuild/meson/issues/2775 has not been fixed.
+    - ninja -C _build install
 
 html-tutorial:
   extends: .build-default
@@ -45,17 +48,24 @@ html-tutorial:
       python3-wheel
     MESON_VERSION: "0.50.0"
     MESON_OPTIONS: "-Dbuild-examples=false -Dvalidation=false -Dbuild-translations=false -Dbuild-pdf=false"
+  script:
+    - meson setup --prefix=/usr --datadir=share ${MESON_OPTIONS} _build .
+    - ninja -C _build
+    # Installation copies all documentation files to one directory.
+    - ninja -C _build install
+    - mkdir -p _build/docs/installed-tutorial
+    - mv /usr/share/doc/gtkmm-4.0/tutorial/html _build/docs/installed-tutorial
   artifacts:
     when: always
     paths:
-      - _build/docs/tutorial
+      - _build/docs/installed-tutorial
 
 pages:
   stage: deploy
   needs: ["html-tutorial"]
   script:
     - mkdir public
-    - mv _build/docs/tutorial public
+    - mv _build/docs/installed-tutorial/html/* public
   artifacts:
     paths:
       - public
