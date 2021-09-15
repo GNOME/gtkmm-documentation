@@ -7142,6 +7142,8 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
       <literal>fuzzy</literal> in the <filename>.po</filename> file.
       These translations will not substitute the original string. To make
       them appear, simply remove the <literal>fuzzy</literal> tag.
+      A <literal>Fuzzy</literal> tag appears if a string content changed, 
+      but the location is still the same.
       </para>
     </note>
   </sect2>
