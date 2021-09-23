@@ -11,7 +11,7 @@ import shutil
 
 # Where to insert example code.
 source_include_pattern = re.compile(
-  r'\s*<para><ulink url="&url_examples_base;([/\w]+)">Source Code</ulink></para>\s*(?:<!--\s*Insert\s+(.*?)-->)?')
+  r'\s*<para><link xlink:href="&url_examples_base;([/\w]+)">Source Code</link></para>\s*(?:<!--\s*Insert\s+(.*?)-->)?')
 
 # First line not part of leading comment in a source code file.
 # The comment typically consists of copyright and license text.
@@ -47,7 +47,7 @@ def insert_example_code(examples_base_dir, input_xml_files, output_xml_file):
       with open(input_xml_file, mode='r', encoding='utf-8', errors='surrogateescape') as infile:
         for line in infile:
           # Look for
-          # <para><ulink url="&url_examples_base;helloworld">Source Code</ulink></para> [<!-- Insert filenames... -->]
+          # <para><link xlink:href="&url_examples_base;helloworld">Source Code</link></para> [<!-- Insert filenames... -->]
           source_include_match = source_include_pattern.match(line)
           if not source_include_match:
             # Print the line without changes.
@@ -57,7 +57,7 @@ def insert_example_code(examples_base_dir, input_xml_files, output_xml_file):
             # url_examples_base is assumed to be a GitLab URL. The git branch is then
             # included in url_examples_base. No need to add it here.
             outfile.write(source_include_match.expand(
-              '<para><ulink url="&url_examples_base;\\1">Source Code</ulink></para>\n'))
+              '<para><link xlink:href="&url_examples_base;\\1">Source Code</link></para>\n'))
             outfile.write('<!-- start inserted example code -->\n')
 
             # List all the source files in the examples directory.

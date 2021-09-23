@@ -17,8 +17,8 @@ build_translations_by_default = get_option('build-translations')
 validate = get_option('validation') ? 'true' : 'false'
 
 dblatex = find_program('dblatex', required: false)
-can_build_pdf = dblatex.found() or (xmllint.found() and \
-                find_program('docbook2pdf', required: false).found())
+can_build_pdf = dblatex.found() or (xsltproc.found() and \
+                find_program('fop', required: false).found())
 build_pdf_by_default = get_option('build-pdf')
 
 # Installation directories are relative to {prefix}.
@@ -167,13 +167,13 @@ endif
 
 if can_build_pdf
   # Create a PDF file of the C locale's version of the DocBook.
-  # Prefer dblatex, if both dblatex and docbook2pdf are available.
+  # Prefer dblatex, if both dblatex and fop are available.
   custom_target('C-pdf',
     input: index_docbook,
     output: 'programming-with-gtkmm.pdf',
     command: [
       python3, tutorial_custom_cmd,
-      dblatex.found() ? 'dblatex' : 'docbook2pdf',
+      dblatex.found() ? 'dblatex' : 'fop',
       '@INPUT@',
       meson.current_source_dir() / 'C' / 'figures',
       '@OUTPUT@'

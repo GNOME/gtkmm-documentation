@@ -15,14 +15,14 @@ use strict;
     while(<FILE>)
     {
       # Look for
-      # <para><ulink url="&url_examples_base;helloworld">Source Code</ulink></para> [<!-- Insert filenames... -->]
+      # <para><link xlink:href="&url_examples_base;helloworld">Source Code</link></para> [<!-- Insert filenames... -->]
 
-      if(/<para><ulink url=\"&url_examples_base;([\/\w]+)\">Source Code<\/ulink><\/para>\s*(?:<!--\s*Insert\s+(.*?)-->)?/)
+      if(/<para><link xlink:href=\"&url_examples_base;([\/\w]+)\">Source Code<\/link><\/para>\s*(?:<!--\s*Insert\s+(.*?)-->)?/)
       {
         # Modify the line to remove the trailing comment, if any.
         # url_examples_base is assumed to be a GitLab URL. The branch is then
         # included in url_examples_base. No need to add it here.
-        print "<para><ulink url=\"&url_examples_base;$1\">Source Code</ulink></para>\n";
+        print "<para><link xlink:href=\"&url_examples_base;$1\">Source Code</link></para>\n";
 
         #List all the source files in that directory:
         my $directory = $examples_base . $1;
