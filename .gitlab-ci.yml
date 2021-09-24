@@ -20,6 +20,7 @@ docs-validation:
       gettext
       itstool
       libxml2
+      docbook5-schemas
       libxslt
       ninja-build
       python3
