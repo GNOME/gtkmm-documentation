@@ -7,14 +7,32 @@
 
 # xsltproc is required by tutorial_custom_cmd html.
 xsltproc = find_program('xsltproc', required: true)
-xmllint = find_program('xmllint', required: false)
 
+xmllint = find_program('xmllint', required: false)
 can_parse_and_validate = xmllint.found()
+validate = get_option('validation') ? 'true' : 'false'
+
+# Check if xmllint can be used.
+if xmllint.found()
+  can_parse_and_validate = run_command(
+    python3, tutorial_custom_cmd, 'xmllint',
+    validate,
+    meson.current_source_dir() / 'can_use_xmllint.xml',
+    meson.current_build_dir() / 'can_use_xmllint.stamp',
+  ).returncode() == 0
+  if not can_parse_and_validate
+    # The DocBook V5.0 package is called docbook5-xml in Ubuntu,
+    # docbook5-schemas in Fedora. It may have other names in other distros.
+    warning('Can\'t validate XML file.\n' +
+      'xmllint does not support Relax NG schemas and DocBook V5.0.\n' +
+      'DocBook V5.0 support may require docbook5-xml, docbook5-schemas or a similar package.'
+    )
+  endif
+endif
 
 can_build_translations = find_program('msgfmt', required: false).found() and \
                          find_program('itstool', required: false).found()
 build_translations_by_default = get_option('build-translations')
-validate = get_option('validation') ? 'true' : 'false'
 
 dblatex = find_program('dblatex', required: false)
 can_build_pdf = dblatex.found() or (xsltproc.found() and \
