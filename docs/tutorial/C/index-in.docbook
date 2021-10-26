@@ -230,7 +230,7 @@ surprised, for instance, to find &gtkmm; 3.24 supplied by Debian's
 If your distribution does not provide a pre-built &gtkmm; package, or if you
 want to install a different version than the one provided by your distribution,
 you can also install &gtkmm; from source. The source code for &gtkmm; can
-be downloaded from <uri xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://download.gnome.org/sources/gtkmm/">https://download.gnome.org/sources/gtkmm/</uri>.
+be downloaded from <link xlink:href="https://download.gnome.org/sources/gtkmm/"/>.
 </para>
 <para>
   After you've installed all of the dependencies, download the &gtkmm; source
@@ -260,12 +260,14 @@ file in the &gtkmm; version you've downloaded.
     missing any dependencies, it will exit and display an error.
 </para>
 <para>
-    By default, &gtkmm; if built with Autotools, will be installed under the
+    By default, &gtkmm; if built with Meson or Autotools, will be installed under the
     <filename>/usr/local</filename> directory. On some systems you may need to
     install to a different location. For instance, on Red Hat Linux systems
     you might use the <literal>--prefix</literal> option with configure, like
-    so:
+    one of:
 <screen>
+# meson setup --prefix=/usr &lt;builddir&gt; &lt;srcdir&gt;
+# meson configure --prefix=/usr
 # ./configure --prefix=/usr
 </screen>
 </para>
@@ -371,7 +373,12 @@ invocation on the command line.
 <title>Headers and Linking</title>
 
 <para>
-Although we have shown the compilation command for the simple example, you really should use the automake and autoconf tools, as described in "Autoconf, Automake, Libtool", by G. V. Vaughan et al. The examples used in this book are included in the <application>gtkmm-documentation</application> package, with appropriate build files, so we won't show the build commands in future. You'll just need to find the appropriate directory and type <literal>make</literal>.
+Although we have shown the compilation command for the simple example, you really
+should use the <link xlink:href="https://mesonbuild.com/">Meson build system</link>.
+The examples used in this book are included in the <application>gtkmm-documentation</application>
+package, with appropriate build files, so we won't show the build commands in future.
+The <filename>README</filename> file in <application>gtkmm-documentation</application>
+describes how to build the examples.
 </para>
 <para>
 To simplify compilation, we use <literal>pkg-config</literal>, which
@@ -384,22 +391,31 @@ list of libraries for the compiler to link with and the directories to
 find them in. Try running it from your shell-prompt to see the results on your system.
 </para>
 <para>
-However, this is even simpler when using the <function>PKG_CHECK_MODULES()</function> macro in a standard configure.ac file with autoconf and automake.
-For instance:
-<programlisting>PKG_CHECK_MODULES([MYAPP], [gtkmm-3.0 &gt;= 3.8.0])</programlisting>
-This checks for the presence of gtkmm and defines MYAPP_LIBS and MYAPP_CFLAGS for use in your Makefile.am files.
+However, this is even simpler when using the <function>dependency()</function> function
+in a <filename>meson.build</filename> file with Meson. For instance:
 </para>
+<programlisting>gtkmm_dep = dependency('gtkmm-3.0', version: '>= 3.24.0')</programlisting>
+<para>
+This checks for the presence of gtkmm and defines <literal>gtkmm_dep</literal> for use
+in your <filename>meson.build</filename> files. For instance:
+</para>
+<programlisting>exe_file = executable('my_program', 'my_source1.cc', 'my_source2.cc',
+  dependencies: gtkmm_dep,
+  win_subsystem: 'windows',
+)</programlisting>
 <para>gtkmm-3.0 is the name of the current stable API. There was an older API called gtkmm-2-4 which installs in parallel when it is available. There were several versions of gtkmm-2.4, such as gtkmm 2.10 and there are several versions of the gtkmm-3.0 API. Note that the API name does not change for every version because that would be an incompatible API and ABI break. Theoretically, there might be a future gtkmm-4.0 API which would install in parallel with gtkmm-3.0 without affecting existing applications.
 </para>
-<para>Note that if you mention extra modules in addition to gtkmm-3.0, they should be separated by spaces, not commas.
+<para>If you start by experimenting with a small application that you plan to use just for yourself,
+it's easier to start with a <filename>meson.build</filename> similar to the <filename>meson.build</filename> files
+in the <link linkend="chapter-building-applications">Building applications</link> chapter.
 </para>
 
-<para>The GNU site has more information about <link xlink:href="https://www.gnu.org/software/autoconf/">autoconf</link>
+<para>If you use the older Autotools build system, see also the GNU site. It has more
+information about <link xlink:href="https://www.gnu.org/software/autoconf/">autoconf</link>
 and <link xlink:href="https://www.gnu.org/software/automake/">automake</link>.
-</para>
-<para>If you start by experimenting with a small application that you plan to use just for yourself,
-it's easier to start with a Makefile similar to the <filename>Makefile.example</filename> files
-in the <link linkend="chapter-building-applications">Building applications</link> chapter.
+There are also some books describing Autotools: "GNU Autoconf, Automake, and Libtool"
+by Gary Vaughan et al. and "Autotools, A Practitioner's Guide to GNU Autoconf,
+Automake, and Libtool" by John Calcote.
 </para>
 
 </section>
@@ -6979,15 +6995,21 @@ This example shows how to load a <application>Glade</application> file at runtim
         <application>gettext</application> <filename>.pot/.po</filename> files.
       </para>
       <para>
-        We also assume that you are using autotools (e.g.
-        <application>automake</application> and
-        <application>autoconf</application>) to build your project, and
+        We also assume that you are using autotools (<application>automake</application>
+        and <application>autoconf</application>) to build your project (although
+        autotools is not recommended for new applications), and
         that you are using <link xlink:href="https://gitlab.gnome.org/GNOME/gnome-common/blob/master/autogen.sh">
-          <literal>./autogen.sh</literal> from
-          <application>gnome-common</application></link>
+          <literal>./autogen.sh</literal> from <application>gnome-common</application></link>
         or a similar <literal>autogen.sh</literal> file, which, among other
         things, takes care of some <application>intltool</application>
         initialization.
+      </para>
+    </note>
+    <note>
+      <para>
+        If you are using <application>meson</application> (recommended), see the
+        <link xlink:href="https://mesonbuild.com/Localisation.html">Localisation</link>
+        chapter in Meson's manual. You can then skip this section.
       </para>
     </note>
 
@@ -7027,8 +7049,8 @@ test -n "$NOCONFIGURE" || "$srcdir/configure" "$@"</programlisting>
 de
 ja</programlisting>
     <para>
-      (In addition, you'd have the files <literal>ja.po</literal> and
-      <literal>de.po</literal> in your
+      (In addition, you'd have the files <literal>de.po</literal> and
+      <literal>ja.po</literal> in your
       <literal>po</literal> directory which contain the German and Japanese
       translations, respectively.)
     </para>
@@ -7930,14 +7952,12 @@ complications for you, if you add <function>dependency('threads')</function>.
 and hints for creating &gtkmm; applications.
 </para>
 
-<para>Use GNU <application>autoconf</application> and
-    <application>automake</application>! They are your friends :)
-    <application>Automake</application> examines C files, determines how they
-    depend on each other, and generates a <filename>Makefile</filename> so the
-    files can be compiled in the correct order.
-    <application>Autoconf</application> permits automatic configuration of
-    software installation, handling a large number of system quirks to increase
-    portability.
+<para>Use <application>Meson</application>! It is your friend :)
+    It examines C and C++ files, determines how they depend on each other,
+    and generates <filename>build.ninja</filename> or an equivalent file so the
+    files can be compiled in the correct order. <application>Meson</application>
+    permits automatic configuration of software installation, handling a large
+    number of system quirks to increase portability.
 </para>
 
 <para>Subclass Widgets to better organize your code. You should probably
