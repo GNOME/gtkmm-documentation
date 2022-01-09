@@ -14,6 +14,9 @@ docs-validation:
   extends: .build-default
   stage: validate
   variables:
+    # If docbook-style-xsl is installed, the xsltproc command reads
+    # stylesheets from local files instead of http://docbook.sourceforge.net.
+    # Faster and safer. Reading from docbook.sourceforge.net sometimes fails.
     FEDORA_DEPS:
       gcc
       gcc-c++
@@ -21,6 +24,7 @@ docs-validation:
       itstool
       libxml2
       docbook5-schemas
+      docbook-style-xsl
       libxslt
       ninja-build
       python3
@@ -42,6 +46,7 @@ html-tutorial:
     FEDORA_DEPS:
       gcc
       gcc-c++
+      docbook-style-xsl
       libxslt
       ninja-build
       python3
@@ -61,6 +66,7 @@ html-tutorial:
     paths:
       - _build/docs/installed-tutorial
 
+# Publish the gtkmm tutorial at gnome.pages.gitlab.gnome.org/gtkmm-documentation
 pages:
   stage: deploy
   needs: ["html-tutorial"]
