@@ -68,6 +68,7 @@ def html():
   ] + xslt_params + [
     '-o', output_html_dir + '/',
     '--xinclude',
+    '--nonet',
     xslt_stylesheet,
     input_xml_file,
   ]
@@ -185,6 +186,7 @@ def fop():
   ] + xslt_params + [
     '-o', fo_file,
     '--xinclude',
+    '--nonet',
     xslt_stylesheet,
     input_xml_file,
   ]
