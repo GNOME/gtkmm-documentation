@@ -43,6 +43,7 @@ html-tutorial:
     FEDORA_DEPS:
       gcc
       gcc-c++
+      docbook-style-xsl
       libxslt
       ninja-build
       python3
