@@ -21,6 +21,7 @@ docs-validation:
       itstool
       libxml2
       docbook5-schemas
+      docbook-style-xsl
       libxslt
       ninja-build
       python3
