@@ -24,10 +24,11 @@ schemas = gnome.compile_schemas(depend_files: 'org.gtkmm.exampleapp.gschema.xml'
 
 executable(program_name,
   cpp_sources, resources, schemas,
-  dependencies: gtkmm_dep
+  dependencies: gtkmm_dep,
+  win_subsystem: 'windows',
 )
 
-python3 = import('python').find_installation('python3')
+python3 = import('python').find_installation()
 source_step1_dir = meson.current_source_dir() / '..' / 'step1'
 install_cmd = source_step1_dir / 'install-cmd.py'
 

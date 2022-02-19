@@ -123,6 +123,7 @@ foreach ex : examples_book
     # input/example is not a GUI app.
     exe_file = executable(ex_name, ex_sources, resources,
       dependencies: gtkmm_dep,
+      win_subsystem: 'console',
       cpp_args: has_mkfifo ? [] : [ '-DDONT_HAVE_MKFIFO=1' ],
       build_by_default: build_examples_by_default
     )
@@ -132,7 +133,7 @@ foreach ex : examples_book
 
     exe_file = executable(ex_name, ex_sources, resources,
       dependencies: deps,
-      gui_app: true,
+      win_subsystem: 'windows',
       build_by_default: build_examples_by_default
     )
   endif
