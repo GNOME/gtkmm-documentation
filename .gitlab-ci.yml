@@ -8,7 +8,7 @@ stages:
   before_script:
     - export PATH="$HOME/.local/bin:$PATH"
     - dnf install -y ${FEDORA_DEPS}
-    - pip install --user meson==${MESON_VERSION}
+    - pip install --user "meson>=0.56.0"
 
 docs-validation:
   extends: .build-default
@@ -30,7 +30,6 @@ docs-validation:
       python3
       python3-pip
       python3-wheel
-    MESON_VERSION: "0.50.0"
     MESON_OPTIONS: "-Dbuild-examples=false -Dvalidation=true -Dbuild-translations=true -Dbuild-pdf=false"
   script:
     - meson setup ${MESON_OPTIONS} _build .
@@ -52,7 +51,6 @@ html-tutorial:
       python3
       python3-pip
       python3-wheel
-    MESON_VERSION: "0.50.0"
     MESON_OPTIONS: "-Dbuild-examples=false -Dvalidation=false -Dbuild-translations=false -Dbuild-pdf=false"
   script:
     - meson setup --prefix=/usr --datadir=share ${MESON_OPTIONS} _build .
