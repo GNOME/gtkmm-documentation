@@ -2,11 +2,11 @@
 
 project('gtkmm-documentation', 'c', 'cpp',
   version: '3.24.1',
+  license: 'GPLv2',
   default_options: [
     'cpp_std=c++14'
   ],
-  meson_version: '>= 0.50.0', # required for python3.path()
-  license: 'GPLv2'
+  meson_version: '>= 0.56.0', # required for executable(win_subsystem:)
 )
 
 python3 = import('python').find_installation()
@@ -92,7 +92,7 @@ if can_add_dist_script
   ]
   # Modify the contents of the distribution directory.
   meson.add_dist_script(
-    python3.path(), extra_dist_cmd,
+    python3, extra_dist_cmd,
     project_source_root,
     project_build_root,
     dont_distribute,

@@ -37,6 +37,7 @@ foreach ex : examples_book_giomm
 
   exe_file = executable(ex_name, ex_sources, resources,
     dependencies: giomm_dep,
+    win_subsystem: 'console',
     build_by_default: build_examples_by_default
   )
 

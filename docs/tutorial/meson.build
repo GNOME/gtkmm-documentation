@@ -19,6 +19,7 @@ if xmllint.found()
     validate,
     meson.current_source_dir() / 'can_use_xmllint.xml',
     meson.current_build_dir() / 'can_use_xmllint.stamp',
+    check: false,
   ).returncode() == 0
   if not can_parse_and_validate
     # The DocBook V5.0 package is called docbook5-xml in Ubuntu,

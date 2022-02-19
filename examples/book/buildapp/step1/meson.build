@@ -17,10 +17,11 @@ cpp_sources = [
 
 executable(program_name,
   cpp_sources,
-  dependencies: gtkmm_dep
+  dependencies: gtkmm_dep,
+  win_subsystem: 'windows',
 )
 
-python3 = import('python').find_installation('python3')
+python3 = import('python').find_installation()
 install_cmd = meson.current_source_dir() / 'install-cmd.py'
 
 conf_data = configuration_data()

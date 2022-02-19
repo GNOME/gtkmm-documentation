@@ -58,7 +58,7 @@ foreach ex : examples_book_buildapp
 
   exe_file = executable(ex_name, ex_sources, resources, schemas,
     dependencies: gtkmm_dep,
-    gui_app: true,
+    win_subsystem: 'windows',
     build_by_default: build_examples_by_default
   )
 
