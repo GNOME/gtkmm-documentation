@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# External command, intended to be called with custom_target() in meson.build
+# External command, intended to be called in meson.build
 
 #                           argv[1]   argv[2:]
 # tutorial-custom-cmd.py <subcommand> <xxx>...
@@ -9,9 +9,32 @@ import os
 import sys
 import subprocess
 import shutil
+from pathlib import Path
 
 subcommand = sys.argv[1]
 
+# Called from run_command()
+def get_languages():
+  #   argv[2]
+  # <input_dir>
+
+  input_dir = sys.argv[2]
+
+  # Syntax of the LINGUAS file is documented here:
+  # https://www.gnu.org/software/gettext/manual/html_node/po_002fLINGUAS.html
+  linguas_file = os.path.join(input_dir, 'LINGUAS')
+  try:
+    with open(linguas_file, encoding='utf-8') as f:
+      for line in f:
+        line = line.strip()
+        if line and not line.startswith('#'):
+          print(line, end=' ')
+  except (FileNotFoundError, PermissionError):
+    print('Could not find file LINGUAS in', input_dir, file=sys.stderr)
+    return 1
+  return 0
+
+# Called from custom_target()
 def insert_ex_code():
   #     argv[2]          argv[3]            argv[4]          argv[5]
   # <py_script_dir> <examples_book_dir> <input_xml_file> <output_xml_file>
@@ -24,14 +47,9 @@ def insert_ex_code():
   input_xml_file = sys.argv[4]
   output_xml_file = sys.argv[5]
 
-  returncode = insert_example_code(examples_book_dir, input_xml_file, output_xml_file)
-  if returncode:
-    return returncode
+  return insert_example_code(examples_book_dir, input_xml_file, output_xml_file)
 
-  # Copy output_xml_file to the source directory.
-  shutil.copy(output_xml_file, os.path.dirname(input_xml_file))
-  return 0
-
+# Called from custom_target()
 def html():
   #      argv[2]          argv[3]
   # <input_xml_file> <output_html_dir>
@@ -80,8 +98,8 @@ def html():
 
   return result.returncode
 
+# Called from custom_target()
 def xmllint():
-  from pathlib import Path
 
   #  argv[2]       argv[3]          argv[4]
   # <validate> <input_xml_file> <stamp_file_path>
@@ -118,9 +136,49 @@ def xmllint():
   Path(stamp_file_path).touch(exist_ok=True)
   return 0
 
+# Called from custom_target()
+def translate_xml():
+  #      argv[2]         argv[3]          argv[4]          argv[5]
+  # <input_po_file> <input_xml_file> <output_xml_dir> <stamp_file_path>
+
+  input_po_file = sys.argv[2]
+  input_xml_file = sys.argv[3]
+  output_xml_dir = sys.argv[4] # Absolute path
+  stamp_file_path = sys.argv[5]
+  input_xml_dir, input_xml_basename = os.path.split(input_xml_file)
+
+  # Create the destination directory, if it does not exist.
+  os.makedirs(output_xml_dir, exist_ok=True)
+
+  # Create an .mo file.
+  language = os.path.splitext(os.path.basename(input_po_file))[0]
+  mo_file = os.path.join(output_xml_dir, language + '.mo')
+  cmd = [
+    'msgfmt',
+    '-o', mo_file,
+    input_po_file,
+  ]
+  result = subprocess.run(cmd)
+  if result.returncode:
+    return result.returncode
+
+  # Create translated XML files.
+  cmd = [
+    'itstool',
+    '-m', mo_file,
+    '-o', output_xml_dir,
+  ] + [input_xml_basename]
+  result = subprocess.run(cmd, cwd=input_xml_dir)
+  if result.returncode:
+    return result.returncode
+
+  Path(stamp_file_path).touch(exist_ok=True)
+  return 0
+
 # dblatex and xsltproc+fop generate a PDF file.
 # docbook2pdf can generate PDF files from DocBook4 files, but not from DocBook5 files.
 # xsltproc+xmlroff (version 0.6.3) does not seem to work acceptably.
+# Called from custom_target()
 def dblatex():
   #      argv[2]        argv[3]        argv[4]
   # <input_xml_file> <figures_dir> <output_pdf_file>
@@ -149,6 +207,7 @@ def dblatex():
   ]
   return subprocess.run(cmd).returncode
 
+# Called from custom_target()
 def fop():
   #      argv[2]        argv[3]        argv[4]
   # <input_xml_file> <figures_dir> <output_pdf_file>
@@ -199,16 +258,57 @@ def fop():
   ]
   return subprocess.run(cmd).returncode
 
+# Called from meson.add_install_script()
+def install():
+  #      argv[2]           argv[3]              argv[4]         argv[5]       argv[6:]
+  # <input_xml_dir> <rel_install_xml_dir> <input_xml_file> <symlink_src_dir> <figures>...
+
+  # <rel_install_xml_dir> is the installation directory, relative to {prefix}.
+  input_xml_dir = sys.argv[2]
+  rel_install_xml_dir = sys.argv[3]
+  input_xml_file =  sys.argv[4]
+  symlink_src_dir = sys.argv[5]
+  figures = sys.argv[6:]
+  destdir_xmldir = os.path.join(os.getenv('MESON_INSTALL_DESTDIR_PREFIX'), rel_install_xml_dir)
+  symlink_dest_dir = os.path.join(destdir_xmldir, 'figures')
+
+  # Create the installation directory, if it does not exist.
+  os.makedirs(symlink_dest_dir, exist_ok=True)
+
+  quiet = bool(os.getenv('MESON_INSTALL_QUIET'))
+  input_xml_path = os.path.join(input_xml_dir, input_xml_file)
+  if not quiet:
+    print('Installing ', input_xml_path, ' to ', destdir_xmldir)
+  # shutil.copy2() copies timestamps and some other file metadata.
+  shutil.copy2(input_xml_path, destdir_xmldir)
+
+  # Create symlinks from figure files in destdir_xmldir to the C locale's
+  # figure files.
+  if not quiet:
+    print('Installing symlinks pointing to ', symlink_src_dir, ' to ', symlink_dest_dir)
+  for f in figures:
+    symlink_dest_file = os.path.join(symlink_dest_dir, f)
+    if os.path.lexists(symlink_dest_file):
+      os.remove(symlink_dest_file)
+    os.symlink(os.path.join(symlink_src_dir, f), symlink_dest_file)
+  return 0
+
 # ----- Main -----
+if subcommand == 'get_languages':
+  sys.exit(get_languages())
 if subcommand == 'insert_example_code':
   sys.exit(insert_ex_code())
 if subcommand == 'html':
   sys.exit(html())
 if subcommand == 'xmllint':
   sys.exit(xmllint())
+if subcommand == 'translate_xml':
+  sys.exit(translate_xml())
 if subcommand == 'dblatex':
   sys.exit(dblatex())
 if subcommand == 'fop':
   sys.exit(fop())
+if subcommand == 'install':
+  sys.exit(install())
 print(sys.argv[0], ': illegal subcommand,', subcommand)
 sys.exit(1)

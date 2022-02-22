@@ -1,6 +1,6 @@
 # docs/tutorial
 
-# input: gnome, install_datadir, gtkmm_pcname, tutorial_custom_cmd,
+# input: install_datadir, gtkmm_pcname, tutorial_custom_cmd,
 #        project_source_root, python3
 # output: can_parse_and_validate, build_translations_by_default, can_build_translations,
 #         build_pdf_by_default, can_build_pdf, tutorialdir
@@ -41,10 +41,12 @@ can_build_pdf = dblatex.found() or (xsltproc.found() and \
 build_pdf_by_default = get_option('build-pdf')
 
 # Installation directories are relative to {prefix}.
+gtkmm_tutorial = 'gtkmm-tutorial'
 tutorialdir = install_datadir / 'doc' / gtkmm_pcname / 'tutorial'
 tutorial_htmldir = tutorialdir / 'html'
 tutorial_figuresdir = tutorial_htmldir / 'figures'
 tutorial_iconsdir = tutorial_htmldir / 'icons'
+tutorial_C_xmldir = install_datadir / 'help' / 'C' / gtkmm_tutorial
 
 tutorial_figurefiles = [
   'aspectframe.png',
@@ -140,8 +142,22 @@ foreach i : tutorial_iconfiles
   tutorial_icons += 'icons' / i
 endforeach
 
+if can_build_translations and build_translations_by_default
+  # Get a list of translated languages.
+  language_obj = run_command(
+    python3, tutorial_custom_cmd, 'get_languages',
+    meson.current_source_dir(),
+    check: false,
+  )
+  if language_obj.stderr() != ''
+    warning(language_obj.stderr())
+  endif
+  languages = language_obj.stdout().split()
+else
+  languages = []
+endif
+
 # Create a DocBook C locale XML file with the examples' source code included.
-# Copy it to the source directory, where gnome.yelp() expects to find it.
 index_docbook = custom_target('index.docbook',
   input: 'C' / 'index-in.docbook',
   output: 'index.docbook',
@@ -152,8 +168,13 @@ index_docbook = custom_target('index.docbook',
     '@INPUT@',
     '@OUTPUT@',
   ],
-  build_by_default: true
+  build_by_default: true,
+  install: true,
+  install_dir: tutorial_C_xmldir,
 )
+
+# Install extra files in the C locale XML file directory.
+install_data(tutorial_C_figures, install_dir: tutorial_C_xmldir / 'figures')
 
 # Create an html version of the C locale's version of the DocBook.
 custom_target('html_index.html',
@@ -168,6 +189,11 @@ custom_target('html_index.html',
   install: true,
   install_dir: tutorialdir
 )
+
+# Install extra files in the html directory.
+install_data('style.css', install_dir: tutorial_htmldir)
+install_data(tutorial_C_figures, install_dir: tutorial_figuresdir)
+install_data(tutorial_icons, install_dir: tutorial_iconsdir)
 
 if can_parse_and_validate
   # Parse and possibly validate the C locale's version of the DocBook.
@@ -201,21 +227,43 @@ if can_build_pdf
   )
 endif
 
-if can_build_translations and build_translations_by_default
-  # Build translations. Install help documentation using Yelp.
-  # C/index.docbook is copied from the source directory.
-  # <lang>/index.docbook are written to the build directory, and copied from there.
-  # It's bad that gnome.yelp() builds only at install time.
-  # See https://github.com/mesonbuild/meson/issues/2775
-  gnome.yelp('gtkmm-tutorial',
-    sources: 'index.docbook',
-    media: tutorial_figures,
-    symlink_media: true
-)
-endif
+# gnome.yelp() is not used. After issue https://github.com/mesonbuild/meson/issues/2775
+# was fixed in meson 0.61.0, gnome.yelp() can't be used on a generated XML file.
+# See https://github.com/mesonbuild/meson/issues/10017
 
-# Install extra files in the html directory.
-install_data('style.css', install_dir: tutorial_htmldir)
-install_data(tutorial_C_figures, install_dir: tutorial_figuresdir)
-install_data(tutorial_icons, install_dir: tutorial_iconsdir)
+foreach language : languages
+  # Create translated XML files.
+  translated_xml_target = custom_target(language + '_xml_index.docbook',
+    input: [language / language + '.po', index_docbook],
+    output: language + '_xml.stamp',
+    command: [
+      python3, tutorial_custom_cmd, 'translate_xml',
+      '@INPUT0@',
+      '@INPUT1@',
+      meson.current_build_dir() / language, # Absolute path
+      '@OUTPUT@',
+    ],
+    build_by_default: true,
+    install: false,
+  )
 
+  # Install the translated XML file.
+  # Install extra symlinks in the translated XML file directory.
+  tutorial_language_xmldir = install_datadir / 'help' / language / gtkmm_tutorial
+  meson.add_install_script(
+    python3, tutorial_custom_cmd, 'install',
+    meson.current_build_dir() / language,
+    tutorial_language_xmldir,
+    'index.docbook',
+    '..' / '..' / '..' / 'C' / gtkmm_tutorial / 'figures', # relative symlink dir
+    tutorial_figurefiles,
+  )
+  # Install extra symlinks in the translated XML file directory.
+  # install_symlink() requires meson >= 0.61.0
+  #foreach figure : tutorial_figurefiles
+  #  install_symlink(figure,
+  #    install_dir: tutorial_language_xmldir / 'figures',
+  #    pointing_to: '..' / '..' / '..' / 'C' / gtkmm_tutorial / 'figures' / figure,
+  #  )
+  #endforeach
+endforeach
