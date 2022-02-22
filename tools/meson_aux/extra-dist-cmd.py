@@ -11,7 +11,6 @@ import os
 import sys
 import shutil
 import subprocess
-import re
 
 root_source_dir = sys.argv[1]
 root_build_dir = sys.argv[2]
@@ -52,19 +51,18 @@ shutil.copytree(os.path.join('docs', 'tutorial', 'html'),
 # Read the distributed LINGUAS file, containing a list of available translations.
 linguas = os.path.join(dist_docs_tutorial, 'LINGUAS')
 langs = []
-if os.path.isfile(linguas):
-  with open(linguas, mode='r', encoding='utf-8') as linguas_file_obj:
-    buffer = linguas_file_obj.readlines()
-  comment_pattern = re.compile(r'\s*(?:#|$)') # comment or blank line
-  for line in buffer:
-    if not comment_pattern.match(line):
-      langs += line.split()
-else:
+try:
+  with open(linguas, encoding='utf-8') as f:
+    for line in f:
+      line = line.strip()
+      if line and not line.startswith('#'):
+        langs += line.split()
+except (FileNotFoundError, PermissionError):
   print('=== Warning: File', linguas, 'not found.')
 
-# .gmo files with translations and translated index.docbook files.
+# .mo files with translations and translated index.docbook files.
 for lang in langs:
-  for file in [lang + '.gmo', 'index.docbook']:
+  for file in [lang + '.mo', 'index.docbook']:
     shutil.copy(os.path.join('docs', 'tutorial', lang, file),
                 os.path.join(dist_docs_tutorial, lang))
 
