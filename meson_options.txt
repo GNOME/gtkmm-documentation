@@ -6,6 +6,8 @@ option('build-examples', type: 'boolean', value: false,
   description: 'Build all example programs')
 option('validation', type: 'boolean', value: true,
   description: 'Validate the untranslated XML file')
+option('allow-network-access', type: 'boolean', value: true,
+  description: 'Allow xmllint and xsltproc to fetch files over the network')
 option('build-translations', type: 'boolean', value: true,
   description: 'Build translated tutorials (built during installation)')
 option('build-pdf', type: 'boolean', value: false,
