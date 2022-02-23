@@ -51,11 +51,12 @@ def insert_ex_code():
 
 # Called from custom_target()
 def html():
-  #      argv[2]          argv[3]
-  # <input_xml_file> <output_html_dir>
+  #      argv[2]               argv[3]           argv[4]
+  # <allow_network_access> <input_xml_file> <output_html_dir>
 
-  input_xml_file = sys.argv[2]
-  output_html_dir = sys.argv[3]
+  allow_network_access = sys.argv[2] == 'true'
+  input_xml_file = sys.argv[3]
+  output_html_dir = sys.argv[4]
 
   # Set the use.id.as.filename param so that we don't use the chapter / section
   # number as the filename, otherwise the url will change every time anything is
@@ -86,6 +87,10 @@ def html():
   ] + xslt_params + [
     '-o', output_html_dir + '/',
     '--xinclude',
+  ]
+  if not allow_network_access:
+    cmd += ['--nonet']
+  cmd += [
     xslt_stylesheet,
     input_xml_file,
   ]
@@ -101,12 +106,13 @@ def html():
 # Called from custom_target()
 def xmllint():
 
-  #  argv[2]       argv[3]          argv[4]
-  # <validate> <input_xml_file> <stamp_file_path>
+  #  argv[2]          argv[3]              argv[4]          argv[5]
+  # <validate> <allow_network_access> <input_xml_file> <stamp_file_path>
 
   validate = sys.argv[2]
-  input_xml_file = sys.argv[3]
-  stamp_file_path = sys.argv[4]
+  allow_network_access = sys.argv[3] == 'true'
+  input_xml_file = sys.argv[4]
+  stamp_file_path = sys.argv[5]
 
   relax_ng_schema = 'http://docbook.org/xml/5.0/rng/docbook.rng'
   # schematron_schema = 'http://docbook.org/xml/5.0/sch/docbook.sch'
@@ -128,6 +134,8 @@ def xmllint():
       '--relaxng', relax_ng_schema,
       #'--schematron', schematron_schema,
     ]
+  if not allow_network_access:
+    cmd += ['--nonet']
   cmd += [input_xml_file]
   result = subprocess.run(cmd)
   if result.returncode:
@@ -180,13 +188,14 @@ def translate_xml():
 # xsltproc+xmlroff (version 0.6.3) does not seem to work acceptably.
 # Called from custom_target()
 def dblatex():
-  #      argv[2]        argv[3]        argv[4]
-  # <input_xml_file> <figures_dir> <output_pdf_file>
+  #        argv[2]              argv[3]        argv[4]         argv[5]
+  # <allow_network_access> <input_xml_file> <figures_dir> <output_pdf_file>
   # Create a PDF file, using dblatex.
 
-  input_xml_file = sys.argv[2]
-  figures_dir = sys.argv[3]
-  output_pdf_file = sys.argv[4]
+  allow_network_access = sys.argv[2] == 'true'
+  input_xml_file = sys.argv[3]
+  figures_dir = sys.argv[4]
+  output_pdf_file = sys.argv[5]
 
   # For a list of available parameters, see http://dblatex.sourceforge.net/doc/manual/
   dblatex_params = [
@@ -203,19 +212,24 @@ def dblatex():
     '-I', figures_dir_parent,
     '-o', output_pdf_file,
     '--pdf',
+  ]
+  if not allow_network_access:
+    cmd += ['-x', '--nonet'] # --nonet is passed to xsltproc
+  cmd += [
     input_xml_file,
   ]
   return subprocess.run(cmd).returncode
 
 # Called from custom_target()
 def fop():
-  #      argv[2]        argv[3]        argv[4]
-  # <input_xml_file> <figures_dir> <output_pdf_file>
+  #         argv[2]            argv[3]         argv[4]         argv[5]
+  # <allow_network_access> <input_xml_file> <figures_dir> <output_pdf_file>
   # Create a PDF file, using fop.
 
-  input_xml_file = sys.argv[2]
-  figures_dir = sys.argv[3]
-  output_pdf_file = sys.argv[4]
+  allow_network_access = sys.argv[2] == 'true'
+  input_xml_file = sys.argv[3]
+  figures_dir = sys.argv[4]
+  output_pdf_file = sys.argv[5]
 
   fo_file = os.path.splitext(output_pdf_file)[0] + '.fo'
 
@@ -244,6 +258,10 @@ def fop():
   ] + xslt_params + [
     '-o', fo_file,
     '--xinclude',
+  ]
+  if not allow_network_access:
+    cmd += ['--nonet']
+  cmd += [
     xslt_stylesheet,
     input_xml_file,
   ]

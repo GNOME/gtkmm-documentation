@@ -121,7 +121,7 @@ endif
 build_pdf = build_pdf_by_default and can_build_pdf
 explain_pdf = ''
 if build_pdf_by_default and not build_pdf
-  explain_pdf = ' (requires dblatex or (xsltproc and fop))'
+  explain_pdf = ' (requires xsltproc and (dblatex or fop))'
 endif
 
 summary = [
@@ -129,15 +129,16 @@ summary = [
   '------',
   meson.project_name() + ' ' + meson.project_version(),
   '',
-  '    Build examples: @0@@1@'.format(build_examples_by_default, explain_ex),
-  ' Compiler warnings: @0@'.format(warning_level),
-  '    XML validation: @0@@1@'.format(validate, explain_val),
-  'Build translations: @0@@1@'.format(build_translations, explain_trans),
-  '         Build PDF: @0@@1@'.format(build_pdf, explain_pdf),
+  '      Build examples: @0@@1@'.format(build_examples_by_default, explain_ex),
+  '   Compiler warnings: @0@'.format(warning_level),
+  '      XML validation: @0@@1@'.format(validate, explain_val),
+  'Allow network access: @0@'.format(get_option('allow-network-access')),
+  '  Build translations: @0@@1@'.format(build_translations, explain_trans),
+  '           Build PDF: @0@@1@'.format(build_pdf, explain_pdf),
   'Directories:',
-  '            prefix: @0@'.format(install_prefix),
-  '           datadir: @0@'.format(install_prefix / install_datadir),
-  '       tutorialdir: @0@'.format(install_prefix / tutorialdir),
+  '              prefix: @0@'.format(install_prefix),
+  '             datadir: @0@'.format(install_prefix / install_datadir),
+  '         tutorialdir: @0@'.format(install_prefix / tutorialdir),
   '------'
 ]
 

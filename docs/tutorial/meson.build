@@ -11,12 +11,14 @@ xsltproc = find_program('xsltproc', required: true)
 xmllint = find_program('xmllint', required: false)
 can_parse_and_validate = xmllint.found()
 validate = get_option('validation') ? 'true' : 'false'
+allow_network_access = get_option('allow-network-access') ? 'true' : 'false'
 
 # Check if xmllint can be used.
 if xmllint.found()
   can_parse_and_validate = run_command(
     python3, tutorial_custom_cmd, 'xmllint',
     validate,
+    allow_network_access,
     meson.current_source_dir() / 'can_use_xmllint.xml',
     meson.current_build_dir() / 'can_use_xmllint.stamp',
     check: false,
@@ -36,7 +38,7 @@ can_build_translations = find_program('msgfmt', required: false).found() and \
 build_translations_by_default = get_option('build-translations')
 
 dblatex = find_program('dblatex', required: false)
-can_build_pdf = dblatex.found() or (xsltproc.found() and \
+can_build_pdf = xsltproc.found() and (dblatex.found() or \
                 find_program('fop', required: false).found())
 build_pdf_by_default = get_option('build-pdf')
 
@@ -182,6 +184,7 @@ custom_target('html_index.html',
   output: 'html',
   command: [
     python3, tutorial_custom_cmd, 'html',
+    allow_network_access,
     '@INPUT@',
     '@OUTPUT@',    
   ],
@@ -203,6 +206,7 @@ if can_parse_and_validate
     command: [
       python3, tutorial_custom_cmd, 'xmllint',
       validate,
+      allow_network_access,
       '@INPUT@',
       '@OUTPUT@'
     ],
@@ -219,6 +223,7 @@ if can_build_pdf
     command: [
       python3, tutorial_custom_cmd,
       dblatex.found() ? 'dblatex' : 'fop',
+      allow_network_access,
       '@INPUT@',
       meson.current_source_dir() / 'C' / 'figures',
       '@OUTPUT@'
