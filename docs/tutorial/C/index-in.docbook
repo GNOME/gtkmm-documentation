@@ -10400,6 +10400,15 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
         </listitem>
     </varlistentry>
     <varlistentry>
+        <term>ignore_deprecations</term>
+        <listitem>
+            <para>Puts the generated code in the .cc file in a
+                G_GNUC_BEGIN_IGNORE_DEPRECATIONS / G_GNUC_END_IGNORE_DEPRECATIONS
+                block. (Only in glibmm&nbsp;2.66.x where x&nbsp;>=&nbsp;3 and in
+                glibmm&nbsp;>=&nbsp;2.70.1)</para>
+        </listitem>
+    </varlistentry>
+    <varlistentry>
         <term>constversion</term>
         <listitem>
             <para>Just call the non-const version of the same function,
