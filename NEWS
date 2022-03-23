@@ -1,3 +1,22 @@
+3.24.2: (stable)
+
+* PO-files: added: why `fuzzy` tag appears
+  (DarkTrick) Merge request !14
+* Update the "Working with gtkmm's Source Code" appendix
+* index-in.docbook: Upgrade from DocBook 4.5 to DocBook 5.0
+* Recommend Meson instead of Autotools
+* "The .hg and .ccg files" section: Describe 'ignore_deprecations'
+  (Kjell Ahlstedt)
+
+Meson build:
+* Require Meson >= 0.56.0
+* Don't require gtkmm unconditionally
+* Specify 'check' option in run_command()
+* Don't use gnome.yelp()
+  In Meson >= 0.61.0, it can't be used with a generated XML file.
+* Add allow-network-access option
+  (Kjell Ahlstedt)
+
 3.24.1: (stable)
 
 The tarball for 3.24.1 has been created with 'meson dist'.
