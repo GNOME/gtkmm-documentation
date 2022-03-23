@@ -4,6 +4,17 @@ See http://www.gtkmm.org/
 gtkmm-documentation can be built with Autotools or Meson.
 Building with Autotools may be phased out in the future.
 
+docs/tutorial/C/index-in.docbook and the built index.docbook files are
+DocBook 5.0 documents. index.docbook requires these packages:
+  * docbook5-xml
+  * docbook-xsl
+(Ubuntu names, can have other names in other distros).
+It may be possible to build without these packages, but it will be much slower.
+The xmllint command is told to read files from http://docbook.org.
+The xsltproc command is told to read files from http://docbook.sourceforge.net.
+The commands first search for local copies of those files. If local copies exist
+and are installed at expected locations, the commands make no network accesses.
+
 Building with Meson
 -------------------
 Create a build directory:
@@ -26,10 +37,6 @@ Create the html files of the tutorial:
 
 Install them:
   $ ninja install
-If you have chosen to build translated XML files (build-translations=true),
-installation can take some time, because the translations are built
-by 'ninja install'. This may change in the future.
-See https://github.com/mesonbuild/meson/issues/2775
 
 Build the example programs:
   $ ninja examples
@@ -39,8 +46,8 @@ or (probably slower)
 Create a PDF file:
   $ meson configure -Dbuild-pdf=true
   $ ninja
-This requires that you have either the dblatex or the xmllint and docbook2pdf
-commands installed.
+This requires that you have xsltproc and either the dblatex or fop command
+installed.
 
 Make a tarball:
   $ ninja dist
