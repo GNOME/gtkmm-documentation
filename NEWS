@@ -1,3 +1,29 @@
+4.0.2: (stable)
+
+* Main menu example: Make the keyboard shortcuts work
+  (Kjell Ahlstedt)
+* Update the Basics chapter
+  (Kjell Ahlstedt) Issue #15 (Zachary Roman)
+* PO-files: added: why `fuzzy` tag appears
+  (DarkTrick) Merge request !14
+* index-in.docbook: Upgrade from DocBook 4.5 to DocBook 5.0
+* Recommend Meson instead of Autotools
+* "The .hg and .ccg files" section: Describe 'ignore_deprecations'
+* Update the README file
+  (Kjell Ahlstedt)
+
+Meson build:
+* Require Meson >= 0.56.0
+* Specify 'check' option in run_command()
+* Don't use gnome.yelp()
+  In Meson >= 0.61.0, it can't be used with a generated XML file.
+* Add allow-network-access option
+  (Kjell Ahlstedt)
+
+Updated translation:
+* Simplified Chinese (CCTV-1), merge request !12
+
+
 4.0.1 (stable):
 
 The tarball for 4.0.1 has been created with 'meson dist'.

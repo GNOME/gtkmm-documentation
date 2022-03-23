@@ -1,7 +1,7 @@
 # This file is part of gtkmm-documentation.
 
 project('gtkmm-documentation', 'c', 'cpp',
-  version: '4.0.1',
+  version: '4.0.2',
   license: 'GPLv2',
   default_options: [
     'cpp_std=c++17'
@@ -89,6 +89,7 @@ if can_add_dist_script
     'docs' / 'tutorial' / 'kindle_cover.jpg',
     'docs' / 'tutorial' / 'kindle_cover.svg',
     'tools' / 'make_screenshots',
+    '.gitlab-ci.yml',
   ]
   # Modify the contents of the distribution directory.
   meson.add_dist_script(
