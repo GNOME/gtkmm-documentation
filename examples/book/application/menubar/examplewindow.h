@@ -29,6 +29,8 @@ private:
   void on_action_close();
   void on_action_send_notification();
   void on_action_withdraw_notification();
+
+  Gtk::Box m_box;
 };
 
 #endif /* GTKMM_EXAMPLEWINDOW_H */

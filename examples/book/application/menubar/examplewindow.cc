@@ -21,6 +21,11 @@
 ExampleWindow::ExampleWindow()
 {
   set_title("Gtk::Application example");
+  set_default_size(350, 100);
+
+  // Some GTK functions can misbehave if a window does not have a child.
+  // An empty Box is acceptable.
+  set_child(m_box);
 
   // We can use add_action because Gtk::ApplicationWindow derives from ActionMap.
   // This Action Map uses a "win." prefix for the actions.

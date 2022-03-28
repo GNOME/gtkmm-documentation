@@ -52,14 +52,8 @@ void ExampleApplication::on_startup()
 
   auto submenu_edit = Gio::Menu::create();
   submenu_edit->append("_Cut", "win.cut");
-  auto item = Gio::MenuItem::create("_Copy", "win.copy");
-  //Setting "accel" works, but might be deprecated soon: See https://bugzilla.gnome.org/show_bug.cgi?id=708908
-  //When it is deprecated, use Gtk::Application::set_accel_for_action() instead.
-  item->set_attribute_value("accel", Glib::Variant<Glib::ustring>::create("<Primary>c"));
-  submenu_edit->append_item(item);
-  item = Gio::MenuItem::create("_Paste", "win.paste");
-  item->set_attribute_value("accel", Glib::Variant<Glib::ustring>::create("<Primary>v"));
-  submenu_edit->append_item(item);
+  submenu_edit->append("_Copy", "win.copy");
+  submenu_edit->append("_Paste", "win.paste");
   win_menu->append_submenu("Edit", submenu_edit);
 
   auto submenu_notification = Gio::Menu::create();
@@ -68,6 +62,12 @@ void ExampleApplication::on_startup()
   win_menu->append_submenu("Notification", submenu_notification);
 
   set_menubar(win_menu);
+
+  // Set accelerator keys:
+  set_accel_for_action("app.quit", "<Primary>q");
+  set_accel_for_action("win.cut", "<Primary>x");
+  set_accel_for_action("win.copy", "<Primary>c");
+  set_accel_for_action("win.paste", "<Primary>v");
 
   //Create an action with a parameter. This action can be activated from
   //a Gio::Notification, sent by the Notification/win.send-note menu selection.
@@ -81,7 +81,6 @@ void ExampleApplication::on_startup()
 void ExampleApplication::create_window()
 {
   auto window = new ExampleWindow();
-  window->set_default_size(300, 100);
 
   //Make sure that the application runs for as long this window is still open:
   add_window(*window);
