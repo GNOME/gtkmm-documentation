@@ -4,7 +4,8 @@ project('gtkmm-documentation', 'c', 'cpp',
   version: '3.24.2',
   license: 'GPLv2',
   default_options: [
-    'cpp_std=c++14'
+    'cpp_std=c++14',
+    'warning_level=1',
   ],
   meson_version: '>= 0.56.0', # required for executable(win_subsystem:)
 )
@@ -37,6 +38,7 @@ copy_to_subdir = script_dir / 'copy-to-subdir.py'
 tutorial_custom_cmd = script_dir / 'tutorial-custom-cmd.py'
 extra_dist_cmd = script_dir / 'extra-dist-cmd.py'
 
+c_compiler = meson.get_compiler('c')
 cpp_compiler = meson.get_compiler('cpp')
 
 # Are we testing a dist tarball while it's being built?
@@ -49,10 +51,12 @@ build_examples_by_default = get_option('build-examples')
 if is_dist_check
   message('Looks like a tarball is being tested. ' + \
           'Option "dist-warnings" is used instead of "warnings".')
-  warning_level = get_option('dist-warnings')
+  cpp_warnings = get_option('dist-warnings')
 else
-  warning_level = get_option('warnings')
+  cpp_warnings = get_option('warnings')
 endif
+warning_level = get_option('warning_level').to_int()
+werror = get_option('werror')
 
 must_be_able_to_build_examples = build_examples_by_default or is_dist_check
 
@@ -60,13 +64,25 @@ gtkmm_dep = dependency(gtkmm_pcname, version: gtkmm_req, required: must_be_able_
 giomm_dep = dependency(giomm_pcname, version: giomm_req, required: must_be_able_to_build_examples)
 can_build_examples = gtkmm_dep.found() and giomm_dep.found()
 
+# Set compiler warnings.
+# Meson warns if any of the /W1, /W2, /W3, /W4, /Wall, -Wall, -Wextra, -Werror
+# compiler options are added with add_project_arguments().
+# Avoid such warnings, when possible.
+# See _warn_about_builtin_args() in meson/mesonbuild/interpreter/interpreter.py.
 warning_flags = []
-if warning_level == 'min'
-  warning_flags = ['-Wall']
-elif warning_level == 'max' or warning_level == 'fatal'
-  warning_flags = '-pedantic -Wall -Wextra -Wformat-security -Wsuggest-override -Wshadow -Wno-long-long'.split()
-  if warning_level == 'fatal'
-    warning_flags += ['-Werror']
+if cpp_warnings == 'min'
+  if warning_level == 0
+    warning_flags = ['-Wall']
+  endif
+elif cpp_warnings == 'max' or cpp_warnings == 'fatal'
+  if warning_level < 3
+    warning_flags = ['-pedantic', '-Wall', '-Wextra']
+  endif
+  warning_flags += '-Wformat-security -Wsuggest-override -Wshadow -Wno-long-long'.split()
+  if cpp_warnings == 'fatal'
+    if not werror
+      warning_flags += ['-Werror']
+    endif
     deprecations = 'G PANGO ATK GDK GDK_PIXBUF GTK GLIBMM GIOMM GDKMM ATKMM PANGOMM GTKMM SIGCXX'.split()
     foreach d : deprecations
       warning_flags += '-D@0@_DISABLE_DEPRECATED'.format(d)
@@ -76,6 +92,11 @@ endif
 
 warning_flags = cpp_compiler.get_supported_arguments(warning_flags)
 add_project_arguments(warning_flags, language: 'cpp')
+
+# Don't warn about a long string in a C file.
+# gnome.compile_resources() generates such a file.
+c_warning_flags = ['-Wno-overlength-strings']
+add_project_arguments(c_compiler.get_supported_arguments(c_warning_flags), language: 'c')
 
 # add_dist_script() is not allowed in a subproject if meson.version() < 0.58.0.
 can_add_dist_script = not meson.is_subproject() or meson.version().version_compare('>= 0.58.0')
@@ -130,7 +151,8 @@ summary = [
   meson.project_name() + ' ' + meson.project_version(),
   '',
   '      Build examples: @0@@1@'.format(build_examples_by_default, explain_ex),
-  '   Compiler warnings: @0@'.format(warning_level),
+  '   Compiler warnings: @0@ (warning_level: @1@, werror: @2@)'. \
+                         format(cpp_warnings, warning_level, werror),
   '      XML validation: @0@@1@'.format(validate, explain_val),
   'Allow network access: @0@'.format(get_option('allow-network-access')),
   '  Build translations: @0@@1@'.format(build_translations, explain_trans),
