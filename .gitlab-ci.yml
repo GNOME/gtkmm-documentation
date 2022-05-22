@@ -1,10 +1,12 @@
+# 2022-05-22: fedora:latest = 36, fedora:rawhide = 37
+# See https://hub.docker.com/_/fedora
 stages:
   - validate
   - build
   - deploy
 
 .build-default:
-  image: "fedora:34"
+  image: "fedora:latest"
   before_script:
     - export PATH="$HOME/.local/bin:$PATH"
     - dnf install -y ${FEDORA_DEPS}
@@ -34,9 +36,6 @@ docs-validation:
   script:
     - meson setup ${MESON_OPTIONS} _build .
     - ninja -C _build
-    # Translations are built on installation as long as issue
-    # https://github.com/mesonbuild/meson/issues/2775 has not been fixed.
-    - ninja -C _build install
 
 html-tutorial:
   extends: .build-default
