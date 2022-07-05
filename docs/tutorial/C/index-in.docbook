@@ -4708,19 +4708,18 @@ context-&gt;restore();</programlisting>
 
 <chapter xml:id="chapter-draganddrop">
 <title>Drag and Drop</title>
-
 <para>
-<classname>Gtk::Widget</classname> has several methods and signals which are
-prefixed with "drag_". These are used for Drag and Drop.
+The <classname>Gtk::DragSource</classname> and <classname>Gtk::DropTarget</classname>
+event controllers have methods and signals which are used for Drag and Drop.
 </para>
-<section xml:id="sec-dnd-sources-destinations">
-<title>Sources and Destinations</title>
 
+<section xml:id="sec-dnd-sources-targets">
+<title>Sources and Targets</title>
 <para>
 Things are dragged from <literal>sources</literal> to be dropped on
-<literal>destinations</literal>. Each source and destination has information
+<literal>targets</literal>. Each source and target has information
 about the data formats that it can send or receive, provided by
-<classname>Gdk::ContentFormats</classname>. A drop destination will only
+<classname>Gdk::ContentFormats</classname>. A drop target will only
 accept a dragged item if they both share a compatible format. Appropriate
 signals will then be emitted, telling the signal handlers which format was used.
 </para>
@@ -4735,61 +4734,70 @@ available <type>GType</type>s and mime types (media types).
 <title>Methods</title>
 
 <para>
-<classname>Widget</classname>s can be identified as sources or destinations
-using these <classname>Gtk::Widget</classname> methods:
+<classname>Widget</classname>s can be identified as sources or targets using
+<classname>Gtk::DragSource</classname> and <classname>Gtk::DropTarget</classname>
+event controllers.
 </para>
-<programlisting>void drag_source_set(const Glib::RefPtr&lt;Gdk::ContentFormats&gt;&amp; targets,
-      Gdk::ModifierType start_button_mask, Gdk::DragAction actions);</programlisting>
+<programlisting>auto source = Gtk::DragSource::create();
+m_source_widget.add_controller(source);</programlisting>
 
+<para>
+Some <classname>DragSource</classname> methods:
 <itemizedlist>
 <listitem>
     <para>
-        <literal>targets</literal> is a <classname>Gdk::ContentFormats</classname> object.
+        <literal>void set_content(const Glib::RefPtr&lt;Gdk::ContentProvider&gt;&amp; content)</literal>:
+        Sets a content provider on the drag source.
     </para>
 </listitem>
 <listitem>
     <para>
-        <literal>start_button_mask</literal> is an ORed combination of values,
-        which specify which modifier key or mouse button must be pressed to
-        start the drag.
+        <literal>void set_actions(Gdk::DragAction actions)</literal>:
+        Sets the actions on the drag source. For instance <literal>Gdk::DragAction::COPY
+        | Gdk::DragAction::MOVE</literal>.
     </para>
 </listitem>
 <listitem>
     <para>
-        <literal>actions</literal> is an ORed combination of values, which
-        specify which Drag and Drop operations will be possible from this
-        source - for instance, copy, move, or link. The user can choose between
-        the actions by using modifier keys, such as <keycap>Shift</keycap> to
-        change from <literal>copy</literal> to <literal>move</literal>, and
-        this will be shown by a different cursor.
+        <literal>void set_icon(const Glib::RefPtr&lt;const Gdk::Paintable&gt;&amp; paintable, int hot_x, int hot_y)</literal>:
+        Sets a paintable to use as icon during DND operations.
     </para>
 </listitem>
 </itemizedlist>
+</para>
 
-<programlisting>void drag_dest_set(const Glib::RefPtr&lt;Gdk::ContentFormats&gt;&amp; targets,
-    Gtk::DestDefaults flags, Gdk::DragAction actions);</programlisting>
+<programlisting>auto target = Gtk::DropTarget::create(gtype, actions);
+m_target_widget.add_controller(target);</programlisting>
 
+<para>
+Some <classname>DropTarget</classname> methods:
 <itemizedlist>
 <listitem>
     <para>
-        <literal>flags</literal> is an ORed combination of values which
-        indicates how the widget will respond visually to Drag and Drop items.
+        <literal>void set_gtypes(const std::vector&lt;GType&gt;&amp; types)</literal>:
+        Sets the supported types for this drop target.
     </para>
 </listitem>
 <listitem>
     <para>
-        <literal>actions</literal> indicates the Drag and Drop actions which
-        this destination can receive - see the description above.
+        <literal>void set_actions(Gdk::DragAction actions)</literal>:
+        Sets the actions that this drop target supports.
     </para>
 </listitem>
-</itemizedlist>
-<para>There are several methods to add source formats and destination formats.
-Examples:
-<itemizedlist>
-  <listitem><para><methodname>drag_source_add_text_targets()</methodname></para></listitem>
-  <listitem><para><methodname>drag_source_add_image_targets()</methodname></para></listitem>
-  <listitem><para><methodname>drag_dest_add_text_targets()</methodname></para></listitem>
-  <listitem><para><methodname>drag_dest_add_image_targets()</methodname></para></listitem>
+<listitem>
+    <para>
+        <literal>Glib::ValueBase get_value() const</literal>:
+        Gets the current drop data, as a <classname>Glib::Value</classname>.
+    </para>
+</listitem>
+<listitem>
+    <para>
+        <literal>void reject()</literal>:
+        Rejects the ongoing drop operation. This function should be used when
+        delaying the decision on whether to accept a drag or not until after
+        reading the data. 
+    </para>
+</listitem>
 </itemizedlist>
 </para>
 </section>
@@ -4798,67 +4806,57 @@ Examples:
 <title>Signals</title>
 
 <para>
-When a drop destination has accepted a dragged item, certain signals will be
+When a drop target has accepted a dragged item, certain signals will be
 emitted, depending on what action has been selected. For instance, the user
 might have held down the <keycap>Shift</keycap> key to specify a
 <literal>move</literal> rather than a <literal>copy</literal>. Remember that
 the user can only select the actions which you have specified in your calls to
-<methodname>drag_dest_set()</methodname> and
-<methodname>drag_source_set()</methodname>.
+<methodname>Gtk::DragSource::set_actions()</methodname> and
+<methodname>Gtk::DropTarget::set_actions()</methodname>.
 </para>
 
-<section xml:id="sec-dnd-signals-copy">
-<title>Copy</title>
-
 <para>
-The source widget will emit these signals, in this order:
+The source widget will emit these <classname>DragSource</classname> signals:
 <itemizedlist>
 <listitem><para><literal>drag_begin</literal>: Provides a <classname>Gdk::Drag</classname>.</para></listitem>
-<listitem><para><literal>drag_data_get</literal>: Provides a <classname>Gdk::Drag</classname>,
-  and a <classname>Gtk::SelectionData</classname> object, in which you should put the requested data.</para></listitem>
-<listitem><para><literal>drag_end</literal>: Provides a <classname>Gdk::Drag</classname>.</para></listitem>
+<listitem><para><literal>prepare</literal>: Shall return a <classname>Gdk::ContentProvider</classname>,
+  with the data to use for the drag that is about to start.</para></listitem>
+<listitem><para><literal>drag_end</literal>: Provides a <classname>Gdk::Drag</classname>,
+  and a <type>bool</type> that tells if the drag was performing a <literal>move</literal>
+  and the data should be deleted.</para></listitem>
+<listitem><para><literal>drag_cancel</literal>: Emitted on the drag source when a drag has failed.</para></listitem>
 </itemizedlist>
 </para>
 <para>
-The destination widget will emit these signals, in this order:
+The target widget will emit these <classname>DropTarget</classname> signals:
 <itemizedlist>
-<listitem><para><literal>drag_motion</literal>: Provides a <classname>Gdk::Drop</classname> and coordinates.
-  You can call the <methodname>status()</methodname> method of the <classname>Gdk::Drop</classname>
-  to indicate which action will be accepted.</para></listitem>
-<listitem><para><literal>drag_drop</literal>: Provides a <classname>Gdk::Drop</classname> and coordinates.
-  You can call <methodname>drag_get_data()</methodname>, which triggers the
-  <literal>drag_data_get</literal> signal in the source widget, and then the
-  <literal>drag_data_received</literal> signal in the destination widget.</para></listitem>
-<listitem>
-    <para>
-        <literal>drag_data_received</literal>: Provides a <classname>Gdk::Drop</classname>,
-        and a <methodname>Gtk::SelectionData</methodname> object which contains the
-        dropped data. You should  call the <methodname>finish()</methodname> or
-        <methodname>failed()</methodname> method of the <classname>Gdk::Drop</classname>
-        to indicate whether the operation was successful.
-    </para>
-</listitem>
+<listitem><para><literal>enter</literal>: Provides coordinates.
+  Shall return the preferred <type>Gdk::DragAction</type>.</para></listitem>
+<listitem><para><literal>motion</literal>: Provides coordinates.
+  Shall return the preferred <type>Gdk::DragAction</type>.</para></listitem>
+<listitem><para><literal>leave</literal>: Emitted on the drop site when the pointer
+  leaves the widget.</para></listitem>
+<listitem><para><literal>accept</literal>: Provides a <classname>Gdk::Drop</classname>.
+  You can call the <methodname>status()</methodname> method of the
+  <classname>Gdk::Drop</classname> to indicate which actions will be accepted.</para></listitem>
+<listitem><para><literal>drop</literal>: Provides the data being dropped and coordinates.
+  Shall return a <type>bool</type> indicating whether the drop was accepted.</para></listitem>
+</itemizedlist>
+</para>
+<para>
+  The following signals call only one signal handler when emitted. When you connect
+  a handler to such a signal, your signal handler must be called before (instead of)
+  the default handler, otherwise it won't be called. Set the <literal>after</literal>
+  parameter in <methodname>connect()</methodname> to <literal>false</literal>.
+<itemizedlist>
+<listitem><para><methodname>Gtk::DragSource::signal_prepare()</methodname></para></listitem>
+<listitem><para><methodname>Gtk::DropTarget::signal_enter()</methodname></para></listitem>
+<listitem><para><methodname>Gtk::DropTarget::signal_motion()</methodname></para></listitem>
+<listitem><para><methodname>Gtk::DropTarget::signal_accept()</methodname></para></listitem>
+<listitem><para><methodname>Gtk::DropTarget::signal_drop()</methodname></para></listitem>
 </itemizedlist>
 </para>
 
-</section>
-
-<section xml:id="dnd-signal-move">
-<title>Move</title>
-
-<para>During a <literal>move</literal>, the source widget will also emit this signal:
-<itemizedlist>
-<listitem><para><literal>drag_data_delete</literal>: Gives the source the opportunity to delete the original data if that's appropriate.</para></listitem>
-</itemizedlist>
-</para>
-</section>
-
-<!--
-<sect2 id="dnd-signal-link">
-<title>Link</title>
-<para>TODO: Find an example or documentation.</para>
-</sect2>
--->
 </section>
 
 <section xml:id="sec-dnd-example">
