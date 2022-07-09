@@ -1072,9 +1072,10 @@ The following example demonstrates the use of grouped
 <title>Range Widgets</title>
 
 <para>
-<classname>Gtk::Scale</classname> and <classname>Gtk::Scrollbar</classname>
-both inherit from <classname>Gtk::Range</classname> and share much
-functionality. They contain a "trough" and a "slider" (sometimes called a
+<classname>Gtk::Scale</classname> inherits from <classname>Gtk::Range</classname>.
+<classname>Gtk::Scrollbar</classname> does not inherit from <classname>Gtk::Range</classname>,
+but it shares much functionality with <classname>Gtk::Scale</classname>.
+They both contain a "trough" and a "slider" (sometimes called a
 "thumbwheel" in other GUI environments). Dragging the slider with the pointer
 moves it within the trough, while clicking in the trough advances the slider
 towards the location of the click, either completely, or by a designated
@@ -1084,11 +1085,11 @@ scrollbar behaviour.
 
 <para>
 As will be explained in the <link linkend="chapter-adjustment">Adjustments</link>
-section, all Range widgets are associated with an
+section, all range widgets are associated with an
 <classname>Adjustment</classname> object. To change the lower, upper, and
 current values used by the widget you need to use the methods of its
 <classname>Adjustment</classname>, which you can get with the
-<methodname>get_adjustment()</methodname> method. The <classname>Range</classname>
+<methodname>get_adjustment()</methodname> method. The range
 widgets' default constructors create an <classname>Adjustment</classname>
 automatically, or you can specify an existing
 <classname>Adjustment</classname>, maybe to share it with another widget. See
@@ -1207,13 +1208,13 @@ The width of the label will be adjusted automatically. You can produce multi-lin
 <para>
 The label text can be justified using the <methodname>set_justify()</methodname>
 method. The widget is also capable of word-wrapping, which can be activated
-with <methodname>set_line_wrap()</methodname>.
+with <methodname>set_wrap()</methodname>.
 </para>
 
 <para>
 Gtk::Label supports some simple formatting, for instance allowing you to make some
 text bold, colored, or larger. You can do this by providing a string to
-<methodname>set_markup()</methodname>, using the <link xlink:href="http://developer.gnome.org/pango/unstable/PangoMarkupFormat.html">Pango Markup syntax</link>. For instance,
+<methodname>set_markup()</methodname>, using the <link xlink:href="https://docs.gtk.org/Pango/pango_markup.html">Pango Markup syntax</link>. For instance,
 <code>
 &lt;b&gt;bold text&lt;/b&gt; and &lt;s&gt;strikethrough text&lt;/s&gt;
 </code>
@@ -1270,16 +1271,15 @@ echoed on the screen, calling <methodname>set_visibility()</methodname> with
 <para>
 You might want to be notified whenever the user types in a text entry widget.
 <classname>Gtk::Entry</classname> provides two signals,
-<literal>activate</literal> and <literal>changed</literal>, for this purpose.
+<literal>activate</literal> (since &gtkmm; 4.8.0) and <literal>changed</literal>, for this purpose.
 <literal>activate</literal> is emitted when the user presses the <keycap>Enter</keycap> key in
 a text-entry widget; <literal>changed</literal> is emitted when the text in
 the widget changes. You can use these, for instance, to validate or filter
 the text the user types. Moving the keyboard focus to another widget may also
-signal that the user has finished entering text. The <literal>focus_out_event</literal>
-signal that <classname>Gtk::Entry</classname> inherits from
-<classname>Gtk::Widget</classname> can notify you when that happens.
-The <link linkend="sec-comboboxentry">ComboBox with an Entry</link> section
-contains example programs that use these signals.
+signal that the user has finished entering text. The <literal>leave</literal>
+signal in a <classname>Gtk::EventControllerFocus</classname> can notify you when
+that happens. The <link linkend="sec-comboboxentry">ComboBox with an Entry</link>
+section contains example programs that use these signals.
 </para>
 
 <para>
@@ -1288,8 +1288,7 @@ method, pressing <keycap>Enter</keycap> in the <classname>Gtk::Entry</classname>
 the default widget for the window containing the <classname>Gtk::Entry</classname>.
 This is especially useful in dialog boxes. The default widget is usually one of
 the dialog buttons, which e.g. will close the dialog box. To set a widget as the
-default widget, use <methodname>Gtk::Widget::set_can_default()</methodname> and
-<methodname>Gtk::Widget::grab_default()</methodname>.
+default widget, use <methodname>Gtk::Window::set_default_widget()</methodname>.
 </para>
 
 <para><link xlink:href="&url_refdocs_base_gtk;Entry.html">Reference</link></para>
@@ -1368,7 +1367,7 @@ actions.
 
 <para>An <classname>Entry</classname> widget can show an icon at the start or
 end of the text area. The icon can be specifed by methods such as
-<methodname>set_icon_from_pixbuf()</methodname> or
+<methodname>set_icon_from_paintable()</methodname> or
 <methodname>set_icon_from_icon_name()</methodname>. An application can respond to the
 user pressing the icon by handling the
 <methodname>signal_icon_press</methodname> signal.</para>
