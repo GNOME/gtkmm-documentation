@@ -19,22 +19,26 @@
 
 #include <gtkmm/window.h>
 #include <gtkmm/comboboxtext.h>
+#include <gtkmm/version.h>
+
+#define HAS_SIGNAL_ACTIVATE GTKMM_CHECK_VERSION(4,8,0)
 
 class ExampleWindow : public Gtk::Window
 {
 public:
   ExampleWindow();
-  virtual ~ExampleWindow();
+  ~ExampleWindow() override;
 
 protected:
   //Signal handlers:
   void on_combo_changed();
-  void on_entry_changed();
-  void on_entry_has_focus_changed();
+#if HAS_SIGNAL_ACTIVATE
+  void on_entry_activate();
+#endif
+  void on_entry_focus_leave();
 
   //Signal connection:
-  sigc::connection m_ConnectionHasFocusChanged;
-  bool m_entry_had_focus {false};
+  sigc::connection m_ConnectionFocusLeave;
 
   //Child widgets:
   Gtk::ComboBoxText m_Combo;

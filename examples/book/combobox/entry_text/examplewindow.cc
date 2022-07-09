@@ -15,6 +15,7 @@
  */
 
 #include "examplewindow.h"
+#include <gtkmm/eventcontrollerfocus.h>
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
@@ -31,16 +32,22 @@ ExampleWindow::ExampleWindow()
   set_child(m_Combo);
 
   //Connect signal handlers:
+  auto entry = m_Combo.get_entry();
+  // Alternatively you can connect to entry->signal_changed().
   m_Combo.signal_changed().connect(sigc::mem_fun(*this,
     &ExampleWindow::on_combo_changed) );
 
-  auto entry = m_Combo.get_entry();
   if (entry)
   {
-    entry->signal_changed().connect(sigc::mem_fun(*this,
-      &ExampleWindow::on_entry_changed));
-    m_ConnectionHasFocusChanged = entry->property_has_focus().signal_changed().
-      connect(sigc::mem_fun(*this, &ExampleWindow::on_entry_has_focus_changed));
+#if HAS_SIGNAL_ACTIVATE
+    entry->signal_activate().connect(sigc::mem_fun(*this,
+      &ExampleWindow::on_entry_activate));
+#endif
+    // The Entry shall receive focus-leave events.
+    auto controller = Gtk::EventControllerFocus::create();
+    m_ConnectionFocusLeave = controller->signal_leave().connect(
+      sigc::mem_fun(*this, &ExampleWindow::on_entry_focus_leave));
+    entry->add_controller(controller);
   }
   else
     std::cout << "No Entry ???" << std::endl;
@@ -50,10 +57,10 @@ ExampleWindow::ExampleWindow()
 
 ExampleWindow::~ExampleWindow()
 {
-  // The has_focus changed signal may be emitted while m_Combo is being destructed.
+  // The focus-leave signal may be emitted while m_Combo is being destructed.
   // The signal handler can generate critical messages, if it's called when
   // m_Combo has been partly destructed.
-  m_ConnectionHasFocusChanged.disconnect();
+  m_ConnectionFocusLeave.disconnect();
 }
 
 void ExampleWindow::on_combo_changed()
@@ -62,24 +69,16 @@ void ExampleWindow::on_combo_changed()
     << ", Text=" << m_Combo.get_active_text() << std::endl;
 }
 
-void ExampleWindow::on_entry_changed()
+#if HAS_SIGNAL_ACTIVATE
+void ExampleWindow::on_entry_activate()
 {
-  std::cout << "on_entry_changed(): Row=" << m_Combo.get_active_row_number()
+  std::cout << "on_entry_activate(): Row=" << m_Combo.get_active_row_number()
     << ", Text=" << m_Combo.get_active_text() << std::endl;
 }
+#endif
 
-void ExampleWindow::on_entry_has_focus_changed()
+void ExampleWindow::on_entry_focus_leave()
 {
-  auto entry = m_Combo.get_entry();
-  if (entry)
-  {
-    const bool entry_has_focus = entry->has_focus();
-    if (m_entry_had_focus && !entry_has_focus)
-    {
-      // entry->has_focus() has changed from true to false; entry has lost focus.
-      std::cout << "on_entry_has_focus_changed() to not focused: Row="
-        << m_Combo.get_active_row_number() << ", ID=" << entry->get_text() << std::endl;
-    }
-    m_entry_had_focus = entry_has_focus;
-  }
+  std::cout << "on_entry_focus_leave(): Row=" << m_Combo.get_active_row_number()
+    << ", Text=" << m_Combo.get_active_text() << std::endl;
 }
