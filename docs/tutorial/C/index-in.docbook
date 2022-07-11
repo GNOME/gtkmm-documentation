@@ -2675,7 +2675,7 @@ To find out what rows the user has selected, get the
 By default, only single rows can be selected, but you can allow
 multiple selection by setting the mode, like so:
 </para>
-<programlisting>refTreeSelection-&gt;set_mode(Gtk::SELECTION_MULTIPLE);</programlisting>
+<programlisting>refTreeSelection-&gt;set_mode(Gtk::SelectionMode::MULTIPLE);</programlisting>
 </section>
 
 <section xml:id="treeview-selected-rows">
@@ -2802,7 +2802,7 @@ for instance, <methodname>Gtk::TreeViewColumn::set_sort_column()</methodname>.
 of that model. For instance, you might add a sorted version of a model to a <classname>TreeView</classname> like so:
 </para>
 <programlisting>auto sorted_model = Gtk::TreeModelSort::create(model);
-sorted_model-&gt;set_sort_column(columns.m_col_name, Gtk::SORT_ASCENDING);
+sorted_model-&gt;set_sort_column(columns.m_col_name, Gtk::SortType::ASCENDING);
 treeview.set_model(sorted_model);</programlisting>
 
 <para>Note, however, that the TreeView will provide iterators to the sorted model. You must convert them to iterators to the underlying child model in order to perform actions on that model. For instance:
@@ -2829,6 +2829,14 @@ treeview.set_model(sorted_model);</programlisting>
 <section xml:id="sec-treeview-draganddrop">
 <title>Drag and Drop</title>
 
+<note>
+  <para>
+  At the time of writing (July 2022) drag-and-drop in <classname>Gtk::TreeView</classname>s
+  does not work. See the
+  <link xlink:href="https://gitlab.gnome.org/GNOME/gtk/-/issues/3649">gtk#3649 issue</link>
+  for the latest info.
+  </para>
+</note>
 <para>
 <classname>Gtk::TreeView</classname> already implements simple drag-and-drop
 when used with the <classname>Gtk::ListStore</classname> or
@@ -2862,27 +2870,14 @@ or dropping by returning <literal>true</literal> or <literal>false</literal>.</p
 
 <para>
 Lots of people need to implement right-click context menus for
-<classname>TreeView</classname>'s so we will explain how to do that  here to
-save you some time. Apart from one or two points, it's  much the same as a
-normal context menu, as described in the <link linkend="sec-menus-popup">menus
-    chapter</link>.
+<classname>TreeView</classname>s so we will explain how to do that here to
+save you some time. It's much the same as a normal context menu, as described
+in the <link linkend="sec-menus-popup">menus chapter</link>. You use a
+<classname>Gtk::GestureClick</classname> to detect the mouse click.
 </para>
-
-<section xml:id="treeview-button-press-event">
-<title>Handling <literal>button_press_event</literal></title>
-
-<para>
-To detect a click of the right mouse button, you need to handle the
-<literal>button_press_event</literal> signal, and check exactly which button
-was pressed. Because the <classname>TreeView</classname> normally handles this
-signal completely, you need to either override the default signal handler in a
-derived <classname>TreeView</classname> class, use <methodname>connect_notify()</methodname>
-or use <methodname>connect(slot, /* after= */ false)</methodname>.
-You probably also want to call the default handler before doing anything else,
-so that the right-click will cause the row to be selected first.
+<para>This is demonstrated in the Popup Context Menu example. In that example
+a derived <classname>TreeView</classname> is used, but that's not necessary.
 </para>
-<para>This is demonstrated in the Popup Context Menu example.</para>
-</section>
 
 </section>
 
@@ -2985,10 +2980,9 @@ described in the <link linkend="sec-treeview-draganddrop">TreeView Drag and
 
 <para>
 This example is much like the <classname>ListStore</classname> example, but
-derives a custom <classname>TreeView</classname> in order to override the
-<literal>button_press_event</literal>, and also to encapsulate the tree model
-code in our derived class. See the <link linkend="sec-treeview-contextmenu">TreeView Popup Context Menu</link>
-section.
+derives a custom <classname>TreeView</classname> to encapsulate the tree model
+code and popup menu code in our derived class. See the
+<link linkend="sec-treeview-contextmenu">TreeView Popup Context Menu</link> section.
 </para>
 
 <figure xml:id="figure-treeview-popup">
