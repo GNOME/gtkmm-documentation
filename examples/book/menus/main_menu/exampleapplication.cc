@@ -57,6 +57,7 @@ void ExampleApplication::on_startup()
   set_accel_for_action("app.quit", "<Primary>q");
   set_accel_for_action("win.copy", "<Primary>c");
   set_accel_for_action("win.paste", "<Primary>v");
+
   m_refBuilder = Gtk::Builder::create();
 
   //Layout the actions in a menubar and a menu:
@@ -170,8 +171,7 @@ void ExampleApplication::on_startup()
   }
 
   //Get the menubar and the app menu, and add them to the application:
-  auto object = m_refBuilder->get_object("menu-example");
-  auto gmenu = std::dynamic_pointer_cast<Gio::Menu>(object);
+  auto gmenu = m_refBuilder->get_object<Gio::Menu>("menu-example");
   if (!gmenu)
   {
     g_warning("GMenu not found");

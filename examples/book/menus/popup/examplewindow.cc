@@ -92,10 +92,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   }
 
   //Get the menu:
-  auto object =
-    m_refBuilder->get_object("menu-examplepopup");
-  auto gmenu =
-    std::dynamic_pointer_cast<Gio::Menu>(object);
+  auto gmenu = m_refBuilder->get_object<Gio::Menu>("menu-examplepopup");
   if(!gmenu)
     g_warning("GMenu not found");
 

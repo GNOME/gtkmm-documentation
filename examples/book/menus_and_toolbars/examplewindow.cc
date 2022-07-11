@@ -53,7 +53,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   m_refBuilder = Gtk::Builder::create();
 
   //Layout the actions in a menubar and toolbar:
-  const char* ui_info =
+  const Glib::ustring ui_info =
     "<interface>"
     "  <menu id='menubar'>"
     "    <submenu>"
@@ -118,8 +118,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   }
 
   //Get the menubar:
-  auto object = m_refBuilder->get_object("menubar");
-  auto gmenu = std::dynamic_pointer_cast<Gio::Menu>(object);
+  auto gmenu = m_refBuilder->get_object<Gio::Menu>("menubar");
   if (!gmenu)
     g_warning("GMenu not found");
   else
