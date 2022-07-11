@@ -3115,32 +3115,32 @@ When you select a choice from the drop-down menu, the value from this column wil
 <para>
 When the user enters arbitrary text, it may not be enough to connect to the
 <literal>changed</literal> signal, which is emitted for every typed character.
-It is not emitted when the user presses the <keycap>Enter</keycap> key. Pressing the <keycap>Enter</keycap> key or
-moving the keyboard focus to another widget may signal that the user has finished
-entering text. To be notified of these events, connect to the
-<classname>Entry</classname>'s <literal>activate</literal> and
-<literal>focus_out_event</literal> signals, like so
-<programlisting>auto entry = m_Combo.get_entry();
+It is not emitted when the user presses the <keycap>Enter</keycap> key.
+Pressing the <keycap>Enter</keycap> key or moving the keyboard focus to another
+widget may signal that the user has finished entering text. To be notified of
+these events, connect to the <classname>Entry</classname>'s <literal>activate</literal>
+signal (available since &gtkmm; 4.8.0), and add a <classname>Gtk::EventControllerFocus</classname>
+and connect to its <literal>leave</literal> signal, like so
+</para>
+<programlisting><![CDATA[auto entry = m_Combo.get_entry();
 if (entry)
 {
   // Alternatively you can connect to m_Combo.signal_changed().
-  entry-&gt;signal_changed().connect(sigc::mem_fun(*this,
-    &amp;ExampleWindow::on_entry_changed) );
-
-  entry-&gt;signal_activate().connect(sigc::mem_fun(*this,
-    &amp;ExampleWindow::on_entry_activate) );
-
-  entry-&gt;signal_focus_out_event().connect(sigc::mem_fun(*this,
-    &amp;ExampleWindow::on_entry_focus_out_event) );
-}</programlisting>
+  entry->signal_changed().connect(sigc::mem_fun(*this,
+    &ExampleWindow::on_entry_changed));
+  entry->signal_activate().connect(sigc::mem_fun(*this,
+    &ExampleWindow::on_entry_activate));
+  // The Entry shall receive focus-leave events.
+  auto controller = Gtk::EventControllerFocus::create();
+  m_ConnectionFocusLeave = controller->signal_leave().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_entry_focus_leave));
+  entry->add_controller(controller);
+}]]></programlisting>
+<para>
 The <literal>changed</literal> signals of <classname>ComboBox</classname> and
 <classname>Entry</classname> are both emitted for every change. It doesn't matter
-which one you connect to. But only <classname>Entry</classname>'s
-<literal>focus_out_event</literal> signal is useful here.
-</para>
-<para>
-X events are described in more detail in the
-<link linkend="sec-xeventsignals">X Event signals</link> section in the appendix.
+which one you connect to. But the <classname>EventControllerFocus</classname>
+must be added to the <classname>Entry</classname>.
 </para>
 </section>
 
@@ -3491,6 +3491,8 @@ app-&gt;set_accel_for_action("example.quit", "&lt;Primary&gt;q");
 app-&gt;set_accel_for_action("example.copy", "&lt;Primary&gt;c");
 app-&gt;set_accel_for_action("example.paste", "&lt;Primary&gt;v");
 </programlisting>
+
+<!-- Not true in gtkmm4 (July 2022). Will it become true in the future?
 <para>
 If your main window is derived from <classname>ApplicationWindow</classname> and
 you instantiate your menubar with <methodname>Gtk::Application::set_menubar()</methodname>,
@@ -3498,6 +3500,7 @@ then you don't have to call <methodname>set_accel_for_action()</methodname>.
 See <link linkend="menu-example-main">Application Menu and Main Menu example</link>
 for an example.
 </para>
+-->
 
 <para>
 Then, you can define the actual visible layout of the menus and toolbars, and
@@ -3515,14 +3518,12 @@ Glib::ustring ui_info =
   "        &lt;item&gt;"
   "          &lt;attribute name='label' translatable='yes'&gt;_New&lt;/attribute&gt;"
   "          &lt;attribute name='action'&gt;example.new&lt;/attribute&gt;"
-  "          &lt;attribute name='accel'&gt;&amp;lt;Primary&amp;gt;n&lt;/attribute&gt;"
   "        &lt;/item&gt;"
   "      &lt;/section&gt;"
   "      &lt;section&gt;"
   "        &lt;item&gt;"
   "          &lt;attribute name='label' translatable='yes'&gt;_Quit&lt;/attribute&gt;"
   "          &lt;attribute name='action'&gt;example.quit&lt;/attribute&gt;"
-  "          &lt;attribute name='accel'&gt;&amp;lt;Primary&amp;gt;q&lt;/attribute&gt;"
   "        &lt;/item&gt;"
   "      &lt;/section&gt;"
   "    &lt;/submenu&gt;"
@@ -3531,12 +3532,10 @@ Glib::ustring ui_info =
   "      &lt;item&gt;"
   "        &lt;attribute name='label' translatable='yes'&gt;_Copy&lt;/attribute&gt;"
   "        &lt;attribute name='action'&gt;example.copy&lt;/attribute&gt;"
-  "        &lt;attribute name='accel'&gt;&amp;lt;Primary&amp;gt;c&lt;/attribute&gt;"
   "      &lt;/item&gt;"
   "      &lt;item&gt;"
   "        &lt;attribute name='label' translatable='yes'&gt;_Paste&lt;/attribute&gt;"
   "        &lt;attribute name='action'&gt;example.paste&lt;/attribute&gt;"
-  "        &lt;attribute name='accel'&gt;&amp;lt;Primary&amp;gt;v&lt;/attribute&gt;"
   "      &lt;/item&gt;"
   "    &lt;/submenu&gt;"
   "  &lt;/menu&gt;"
@@ -3551,18 +3550,18 @@ by users in the menu. Therefore, this is where you should make strings
 translatable, by adding <literal>translatable='yes'</literal>.
 </para>
 <para>
-To instantiate a <classname>Gtk::MenuBar</classname> and
-<classname>Gtk::Toolbar</classname> which you can actually show, you should use
+To instantiate a <classname>Gtk::PopoverMenuBar</classname> and toolbar (a horizontal
+<classname>Gtk::Box</classname>) which you can actually show, you should use
 the <methodname>Builder::get_object()</methodname> and
 <methodname>Builder::get_widget()</methodname> methods, and then add the widgets
 to a container. For instance:
 </para>
 <programlisting>
 auto gmenu = m_refBuilder-&gt;get_object&lt;Gio::Menu&gt;("menubar");
-auto pMenuBar = Gtk::make_managed&lt;Gtk::MenuBar&gt;(gmenu);
+auto pMenuBar = Gtk::make_managed&lt;Gtk::PopoverMenuBar&gt;(gmenu);
 m_Box.append(*pMenuBar);
 
-auto toolbar = m_refBuilder-&gt;get_widget&lt;Gtk::Toolbar&gt;("toolbar");
+auto toolbar = m_refBuilder-&gt;get_widget&lt;Gtk::Box&gt;("toolbar");
 m_Box.append(*toolbar);
 </programlisting>
 
@@ -3604,30 +3603,22 @@ Glib::ustring ui_info =
 m_refBuilder-&gt;add_from_string(ui_info);
 
 auto gmenu = m_refBuilder-&gt;get_object&lt;Gio::Menu&gt;("menu-examplepopup");
-m_pMenuPopup = std::make_unique&lt;Gtk::Menu&gt;(gmenu);
+m_MenuPopup.set_menu_model(gmenu);
 </programlisting>
 
 <para>
-To show the popup menu, use <classname>Gtk::Menu</classname>'s
-<methodname>popup()</methodname> method, providing the button identifier and the
-time of activation, as provided by the <literal>button_press_event</literal>
-signal, which you will need to handle anyway. For instance:
+To show the popup menu, use  a <classname>Gtk::EventControllerClick</classname>
+and connect to its <literal>pressed</literal> signal. In the signal handler,
+use <classname>Gtk::PopoverMenu</classname>'s
+<methodname>popup()</methodname> method. For instance:
 </para>
 <programlisting>
-bool ExampleWindow::on_button_press_event(GdkEventButton* event)
+void ExampleWindow::on_label_pressed(int /* n_press */, double x, double y)
 {
-  if( (event-&gt;type == GDK_BUTTON_PRESS) &amp;&amp; (event-&gt;button == 3) )
-  {
-    if(!m_pMenuPopup-&gt;get_attach_widget())
-      m_pMenuPopup-&gt;attach_to_widget(*this);
-
-    m_pMenuPopup-&gt;popup(event-&gt;button, event-&gt;time);
-    return true; //It has been handled.
-  }
-  else
-    return false;
-}
-</programlisting>
+  const Gdk::Rectangle rect(x, y, 1, 1);
+  m_MenuPopup.set_pointing_to(rect);
+  m_MenuPopup.popup();
+}</programlisting>
 
 </section>
 
@@ -3651,8 +3642,11 @@ the resource files is efficient (as they are already in memory, shared with othe
 simple (no need to check for things like I/O errors or locate the files in the filesystem). It
 also makes it easier to create relocatable applications.
 </para>
+<!-- TODO: Update the link to the description of glib-compile-resources, if it will
+be described in https://docs.gtk.org/glib/ or https://docs.gtk.org/gio/.
+-->
 <para>
-Resource bundles are created by the <link xlink:href="https://developer.gnome.org/gio/stable/glib-compile-resources.html">glib-compile-resources</link>
+Resource bundles are created by the <link xlink:href="https://developer-old.gnome.org/gio/stable/glib-compile-resources.html">glib-compile-resources</link>
 program which takes an xml file that describes the bundle, and a set of files that the xml references.
 These are combined into a binary resource bundle.
 </para>
@@ -3846,7 +3840,7 @@ widget. You can set it up like this:
 <programlisting>// creates its own adjustments
 Gtk::TextView textview;
 // uses the newly-created adjustment for the scrollbar as well
-Gtk::Scrollbar vscrollbar (textview.get_vadjustment(), Gtk::ORIENTATION_VERTICAL);</programlisting>
+Gtk::Scrollbar vscrollbar(textview.get_vadjustment(), Gtk::Orientation::VERTICAL);</programlisting>
 
 </section>
 
@@ -3875,7 +3869,7 @@ So, for example, if you have a <classname>Scale</classname> widget, and you
 want to change the rotation of a picture whenever its value changes, you would
 create a signal handler like this:
 </para>
-<programlisting>void cb_rotate_picture (MyPicture* picture)
+<programlisting>void cb_rotate_picture(MyPicture* picture)
 {
   picture-&gt;set_rotation(adj-&gt;get_value());
 ...</programlisting>
