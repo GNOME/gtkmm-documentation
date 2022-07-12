@@ -99,7 +99,7 @@ void ExampleWindow::on_file_dialog_response(int response_id, Gtk::FileChooserDia
     }
     default:
     {
-      std::cout << "Unexpected button clicked." << std::endl;
+      std::cout << "Unexpected button clicked: " << response_id << std::endl;
       break;
     }
   }
@@ -141,7 +141,7 @@ void ExampleWindow::on_folder_dialog_response(int response_id, Gtk::FileChooserD
     }
     default:
     {
-      std::cout << "Unexpected button clicked." << std::endl;
+      std::cout << "Unexpected button clicked: " << response_id << std::endl;
       break;
     }
   }

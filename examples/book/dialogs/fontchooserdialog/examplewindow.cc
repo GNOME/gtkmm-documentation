@@ -53,7 +53,7 @@ void ExampleWindow::on_button_dialog_clicked()
 {
   if (!m_pDialog)
   {
-    m_pDialog.reset(new Gtk::FontChooserDialog("Please choose a font", *this));
+    m_pDialog = std::make_unique<Gtk::FontChooserDialog>("Please choose a font", *this);
     m_pDialog->set_modal(true);
     m_pDialog->set_hide_on_close(true);
     m_pDialog->signal_response().connect(

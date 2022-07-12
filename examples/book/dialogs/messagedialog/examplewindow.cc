@@ -45,7 +45,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_info_clicked()
 {
-  m_pDialog.reset(new Gtk::MessageDialog(*this, "This is an INFO MessageDialog"));
+  m_pDialog = std::make_unique<Gtk::MessageDialog>(*this, "This is an INFO MessageDialog");
   m_pDialog->set_secondary_text(
           "And this is the secondary text that explains things.");
   m_pDialog->set_modal(true);
@@ -58,9 +58,9 @@ void ExampleWindow::on_button_info_clicked()
 
 void ExampleWindow::on_button_question_clicked()
 {
-  m_pDialog.reset(new Gtk::MessageDialog(*this, "This is a QUESTION MessageDialog",
+  m_pDialog = std::make_unique<Gtk::MessageDialog>(*this, "This is a QUESTION MessageDialog",
           false /* use_markup */, Gtk::MessageType::QUESTION,
-          Gtk::ButtonsType::OK_CANCEL, true /* modal */));
+          Gtk::ButtonsType::OK_CANCEL, true /* modal */);
   m_pDialog->set_secondary_text(
           "And this is the secondary text that explains things.");
   m_pDialog->set_hide_on_close(true);
@@ -87,9 +87,14 @@ void ExampleWindow::on_question_dialog_response(int response_id)
       std::cout << "Cancel clicked." << std::endl;
       break;
     }
+    case Gtk::ResponseType::DELETE_EVENT:
+    {
+      std::cout << "Dialog closed." << std::endl;
+      break;
+    }
     default:
     {
-      std::cout << "Unexpected button clicked." << std::endl;
+      std::cout << "Unexpected button clicked: " << response_id << std::endl;
       break;
     }
   }

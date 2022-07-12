@@ -61,7 +61,7 @@ void ExampleWindow::on_button_dialog_clicked()
 {
   if (!m_pDialog)
   {
-    m_pDialog.reset(new Gtk::ColorChooserDialog("Please choose a color", *this));
+    m_pDialog = std::make_unique<Gtk::ColorChooserDialog>("Please choose a color", *this);
     m_pDialog->set_modal(true);
     m_pDialog->set_hide_on_close(true);
     m_pDialog->signal_response().connect(

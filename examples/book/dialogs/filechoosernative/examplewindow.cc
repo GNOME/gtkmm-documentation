@@ -77,7 +77,7 @@ void ExampleWindow::on_dialog_response(int response_id)
     break;
 
   default:
-    std::cout << "Unexpected button clicked." << std::endl;
+    std::cout << "Unexpected button clicked: " << response_id << std::endl;
     break;
   }
 }
