@@ -3911,8 +3911,8 @@ writing a new type of range widget.
 <para>
 Dialogs are used as secondary windows, to provide specific information or to
 ask questions. <classname>Gtk::Dialog</classname> windows contain a few pre-packed
-widgets to ensure consistency, and a <methodname>run()</methodname> method which
-blocks until the user dismisses the dialog.
+widgets to ensure consistency, and a <literal>response</literal> signal which
+is emitted when the user dismisses the dialog.
 </para>
 
 <para>
@@ -3931,10 +3931,19 @@ to the bottom of the <classname>Dialog</classname>, you could use the
 </para>
 
 <para>
-The <methodname>run()</methodname> method returns an <literal>int</literal>. This
-may be a value from the <literal>Gtk::ResponseType</literal> if the user
+The <literal>response</literal> signal handler receives an <literal>int</literal>. This
+may be a value from the <type>Gtk::ResponseType</type> if the user
 closed the dialog by clicking a standard button, or it could be the custom
 response value that you specified when using <methodname>add_button()</methodname>.
+</para>
+
+<para>
+To show the dialog, call <methodname>show()</methodname>. If the same dialog instance
+will be shown several times, you must also call <methodname>set_hide_on_close()</methodname>,
+or else the dialog will be destroyed when it's closed.
+Connect to the <literal>response</literal> signal, if you want to know which button
+was pressed. The <literal>response</literal> signal handler is also where you
+should hide the dialog.
 </para>
 
 <para><link xlink:href="&url_refdocs_base_gtk;Dialog.html">Reference</link></para>
@@ -3943,10 +3952,9 @@ response value that you specified when using <methodname>add_button()</methodnam
 <title>MessageDialog</title>
 <para>
 <classname>MessageDialog</classname> is a convenience class, used to create
-simple, standard message dialogs, with a message, an icon, and buttons for user
+simple, standard message dialogs, with a message and buttons for user
 response. You can specify the type of message and the text in the constructor,
-as well as specifying standard buttons via the
-<literal>Gtk::ButtonsType</literal> enum.
+as well as specifying standard buttons via the <type>Gtk::ButtonsType</type> enum.
 </para>
 
 <para><link xlink:href="&url_refdocs_base_gtk;MessageDialog.html">Reference</link></para>
