@@ -5110,7 +5110,7 @@ during which various signals are emitted:
     <para>
       <literal>done</literal>: This signal is emitted when printing is finished, meaning when the
       print data is spooled. Note that the provided
-      <literal>Gtk::PrintOperationResult</literal> may indicate that
+      <literal>Gtk::PrintOperation::Result</literal> may indicate that
       an error occurred. In any case you probably want to notify the user
       about the final status.
     </para>
@@ -5232,7 +5232,7 @@ op-&gt;signal_done().connect(sigc::bind(sigc::mem_fun(
 <para>Second, check for an error and connect to the <literal>status_changed</literal> signal. For instance:
 </para>
 <programlisting>
-void ExampleWindow::on_printoperation_done(Gtk::PrintOperationResult result,
+void ExampleWindow::on_printoperation_done(Gtk::PrintOperation::Result result,
   const Glib::RefPtr&lt;PrintOperation&gt;&amp; op)
 {
   if (result == Gtk::PrintOperation::Result::ERROR)
@@ -5849,42 +5849,32 @@ using argument two. Argument three may be one or more (using
 
 <itemizedlist>
 <listitem>
-
 <para>
-Glib::IO_IN - Call your method when there is data ready for
+Glib::IOCondition::IO_IN - Call your method when there is data ready for
 reading on your file descriptor.
-
 </para>
 </listitem>
 <listitem>
-
 <para>
-Glib::IO_OUT - Call your method when the file descriptor is
+Glib::IOCondition::IO_OUT - Call your method when the file descriptor is
 ready for writing.
-
 </para>
 </listitem>
 <listitem>
-
 <para>
-Glib::IO_PRI - Call your method when the file descriptor has urgent data to be read.
-
+Glib::IOCondition::IO_PRI - Call your method when the file descriptor has urgent data to be read.
 </para>
 </listitem>
 <listitem>
-
 <para>
-Glib::IO_ERR - Call your method when an error has occurred on the file descriptor.
-
+Glib::IOCondition::IO_ERR - Call your method when an error has occurred on the file descriptor.
 </para>
 </listitem>
 <listitem>
-
 <para>
-Glib::IO_HUP - Call your method when hung up (the connection has been broken usually for pipes and sockets).
+Glib::IOCondition::IO_HUP - Call your method when hung up (the connection has been broken usually for pipes and sockets).
 </para>
 </listitem>
-
 </itemizedlist>
 
 <para>
@@ -5901,7 +5891,9 @@ bool input_callback(Glib::IOCondition condition);
 where <parameter>condition</parameter> is as
 specified above. As usual the slot is created with
 <function>sigc::mem_fun()</function> (for a member method of an object), or
-<function>sigc::ptr_fun()</function> (for a function).
+<function>sigc::ptr_fun()</function> (for a function). A lambda expression can
+be used, if you don't need the automatic disconnection that <function>sigc::mem_fun()</function>
+provides when the object goes out of scope.
 </para>
 
 <para>
@@ -6032,6 +6024,13 @@ increased data hiding and reduced dependencies.
   app-&gt;run();
 }
 </programlisting>
+<para>
+However, this technique is rarely useful. Most widgets can't safely be created
+before the application has been registered or activated. They can't safely be
+deleted after <methodname>Gtk::Application::run()</methodname> or
+<methodname>Gtk::Application::make_window_and_run()</methodname> returns.
+</para>
+
 </section>
 
 <section xml:id="memory-dynamic-allocation">
@@ -6091,7 +6090,7 @@ this way was to call <function>manage()</function>, passing in the result of a
 
 <para>
 However, usually, when you create such a widget, you will already know that its
-parent container should be responsible for destroying it, In addition, modern
+parent container should be responsible for destroying it. In addition, modern
 C++ style discourages use of the <literal>new</literal> operator, which was
 required when passing a newly created widget to <function>manage()</function>.
 Therefore, &gtkmm; has added <function>make_managed()</function>, which combines
@@ -6115,18 +6114,17 @@ to free the button's memory; its deletion has been delegated to the
 </para>
 
 <para>
-Note that if you never added the widget to any parent container, or you did but
-later <methodname>Gtk::Container::remove()</methodname>d it from said parent,
-&gtkmm; restores the widget’s lifetime management to whatever state it had
-before <function>manage()</function> was called, which typically means that the
-responsibility for <literal>delete</literal>ing the widget returns to the user.
+If you never added the widget to any parent container, it's your responsibility
+to delete it. If you add it to a container widget, and later
+remove it (for instance with <methodname>Gtk::Box::remove()</methodname>),
+it's deleted by the container.
 </para>
 
 <para>
 Of course, a top-level container will not be added to another container. The
 programmer is responsible for destroying the top-level container using one of
-the traditional C++ techniques. For instance, your top-level Window might just
-be an instance in your <function>main()</function> function.
+the traditional C++ techniques. Or you can let <methodname>Gtk::Application::make_window_and_run()</methodname>
+create a top-level window and delete it when it's hidden.
 </para>
 
 </section>
@@ -6409,7 +6407,7 @@ in C++ using &gtkmm;, within <filename>.glade</filename> files and load/set
 these using <classname>Gtk::Builder</classname>. See the documentation of
 <classname>Gtk::Builder</classname> for more details on how to achieve this.
 Glade won’t recognise such properties as-is, but it should be able to through
-use of <link xlink:href="https://developer.gnome.org/gladeui/stable/properties.html">
+use of <link xlink:href="https://developer-old.gnome.org/gladeui/stable/properties.html">
 property class definitions</link> and a catalog declaring those new properties.
 </para>
 </section>
@@ -7418,7 +7416,7 @@ and hints for creating &gtkmm; applications.
 <para>Create your own signals instead of passing pointers around. Objects can
     communicate with each other via signals and signal handlers. This is much
     simpler than objects holding pointers to each other and calling each
-    other's methods. &gtkmm;'s classes uses special versions of
+    other's methods. &gtkmm;'s classes use special versions of
     <classname>sigc::signal</classname>, but you should use normal
     <classname>sigc::signal</classname>s, as described in the
     <application>libsigc++</application> documentation.</para>
@@ -7426,14 +7424,14 @@ and hints for creating &gtkmm; applications.
 <section xml:id="sec-application-lifetime">
 <title>Application Lifetime</title>
 <para>Most applications will have only one <classname>Window</classname>, or
-    only one main window. These applications can use the
-    <methodname>Gtk::Application::run(Gtk::Window&amp; window)</methodname> or
-    <methodname>Gtk::Application::run(Gtk::Window&amp; window, int argc, char** argv)</methodname>
-    overloads. They show the window and return when the window has been hidden.
+    only one main window. These applications can use
+    <methodname>Gtk::Application::make_window_and_run(int argc, char** argv, T_Args&amp;&amp;... args)</methodname>.
+    It creates and shows a window. When the window is hidden, <methodname>make_window_and_run()</methodname>
+    deletes the window and returns to the caller.
     This might happen when the user closes the window, or when your code decides to
     <methodname>hide()</methodname> the window. You can prevent the user from
     closing the window (for instance, if there are unsaved changes) by
-    overriding <methodname>Gtk::Window::on_delete_event()</methodname>.</para>
+    overriding <methodname>Gtk::Window::on_close_request()</methodname>.</para>
 <para>Most of our examples use this technique.</para>
 </section>
 
@@ -7453,15 +7451,15 @@ and hints for creating &gtkmm; applications.
 Declare a variable of the type of <classname>Widget</classname> you wish to
 use, generally as member variable of a derived container class. You could also
 declare a pointer to the widget type, and then create it with
-<literal>new</literal> in your code. Even when using the widget via a pointer,
-it's still probably best to make that pointer a member variable of a container
-class so that you can access it later.
+<literal>new</literal> or <function>Gtk::make_managed()</function> in your code.
 </para>
 </listitem>
 
 <listitem>
 <para>
- Set the attributes of the widget. If the widget has no default constructor, then you will need to initialize the widget in the initalizer list of your container class's constructor.
+ Set the attributes of the widget. If the widget has no default constructor,
+ then you will need to initialize the widget in the initializer list of your
+ container class's constructor.
 </para>
 </listitem>
 
@@ -7496,8 +7494,9 @@ not called on the child widgets.
 <title>Building applications</title>
 
 <para>
-This chapter is similar to the "Building applications" chapter in the
-<link xlink:href="https://developer.gnome.org/gtk4/unstable/">GTK4 Reference Manual</link>.
+This chapter is similar to <emphasis>Building applications</emphasis> and following sections in the
+<link xlink:href="https://docs.gtk.org/gtk4/getting_started.html">Getting Started</link>
+chapter in the GTK documentation.
 The same application is built, but &gtkmm; is used instead of <application>GTK</application>.
 </para>
 <para>
@@ -7781,7 +7780,7 @@ in our case the <filename>org.gtkmm.exampleapp.gschema.xml</filename> file.
 Before we can make use of this schema in our application, we need to compile it into
 the binary form that <classname>Gio::Settings</classname> expects. GIO provides macros
 to do this in autotools-based projects. See the description of
-<link xlink:href="https://developer.gnome.org/gio/stable/GSettings.html">GSettings</link>.
+<link xlink:href="https://docs.gtk.org/gio/class.Settings.html">GSettings</link>.
 Meson provides the <function>compile_schemas()</function> function in the
 <link xlink:href="https://mesonbuild.com/Gnome-module.html">GNOME module</link>.
 </para>
