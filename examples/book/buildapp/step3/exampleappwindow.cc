@@ -20,8 +20,7 @@
 ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
   const Glib::RefPtr<Gtk::Builder>& refBuilder)
 : Gtk::ApplicationWindow(cobject),
-  m_refBuilder(refBuilder),
-  m_stack(nullptr)
+  m_refBuilder(refBuilder)
 {
   m_stack = m_refBuilder->get_widget<Gtk::Stack>("stack");
   if (!m_stack)

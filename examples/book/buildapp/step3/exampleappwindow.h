@@ -30,7 +30,7 @@ public:
 
 protected:
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
-  Gtk::Stack* m_stack;
+  Gtk::Stack* m_stack {nullptr};
 };
 
 #endif /* GTKMM_EXAMPLEAPPWINDOW_H */

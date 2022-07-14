@@ -20,10 +20,7 @@
 ExampleAppPrefs::ExampleAppPrefs(BaseObjectType* cobject,
   const Glib::RefPtr<Gtk::Builder>& refBuilder)
 : Gtk::Dialog(cobject),
-  m_refBuilder(refBuilder),
-  m_settings(),
-  m_font(nullptr),
-  m_transition(nullptr)
+  m_refBuilder(refBuilder)
 {
   m_font = m_refBuilder->get_widget<Gtk::FontButton>("font");
   if (!m_font)

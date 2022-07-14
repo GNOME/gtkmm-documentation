@@ -29,8 +29,8 @@ public:
 protected:
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
   Glib::RefPtr<Gio::Settings> m_settings;
-  Gtk::FontButton* m_font;
-  Gtk::ComboBoxText* m_transition;
+  Gtk::FontButton* m_font {nullptr};
+  Gtk::ComboBoxText* m_transition {nullptr};
 };
 
 #endif /* GTKMM_EXAMPLEAPPPREFS_H_ */

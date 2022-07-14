@@ -40,15 +40,15 @@ protected:
 
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
   Glib::RefPtr<Gio::Settings> m_settings;
-  Gtk::Stack* m_stack;
-  Gtk::ToggleButton* m_search;
-  Gtk::SearchBar* m_searchbar;
-  Gtk::SearchEntry* m_searchentry;
-  Gtk::MenuButton* m_gears;
-  Gtk::Revealer* m_sidebar;
-  Gtk::ListBox* m_words;
-  Gtk::Label* m_lines;
-  Gtk::Label* m_lines_label;
+  Gtk::Stack* m_stack {nullptr};
+  Gtk::ToggleButton* m_search {nullptr};
+  Gtk::SearchBar* m_searchbar {nullptr};
+  Gtk::SearchEntry* m_searchentry {nullptr};
+  Gtk::MenuButton* m_gears {nullptr};
+  Gtk::Revealer* m_sidebar {nullptr};
+  Gtk::ListBox* m_words {nullptr};
+  Gtk::Label* m_lines {nullptr};
+  Gtk::Label* m_lines_label {nullptr};
   Glib::RefPtr<Glib::Binding> m_binding_search_enabled;
   Glib::RefPtr<Glib::Binding> m_binding_lines_visible;
 };

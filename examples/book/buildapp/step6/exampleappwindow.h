@@ -35,11 +35,11 @@ protected:
 
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
   Glib::RefPtr<Gio::Settings> m_settings;
-  Gtk::Stack* m_stack;
-  Gtk::ToggleButton* m_search;
-  Gtk::SearchBar* m_searchbar;
-  Gtk::SearchEntry* m_searchentry;
-  Gtk::MenuButton* m_gears;
+  Gtk::Stack* m_stack {nullptr};
+  Gtk::ToggleButton* m_search {nullptr};
+  Gtk::SearchBar* m_searchbar {nullptr};
+  Gtk::SearchEntry* m_searchentry {nullptr};
+  Gtk::MenuButton* m_gears {nullptr};
   Glib::RefPtr<Glib::Binding> m_prop_binding;
 };
 
