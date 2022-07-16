@@ -5624,7 +5624,7 @@ if (info)
 <title>Keyboard Events</title>
   <para>
     X events differ in some ways from other signals. These differences are described
-    in the <link linkend="sec-xeventsignals">X Event signals</link> section in
+    in the <link linkend="sec-eventsignals">Event signals</link> section in
     the appendix. Here we will use keyboard events to show how X events can be
     used in a program.
   </para>
@@ -5639,7 +5639,7 @@ if (info)
       The event signal handler will
       receive an argument that depends on the type of event. For keyboard
       events it's a <type>GdkEventKey*</type>. As discribed in the
-      <link linkend="sec-xeventsignals">appendix</link>, the event signal handler
+      <link linkend="sec-eventsignals">appendix</link>, the event signal handler
       returns a <type>bool</type> value, to indicate that the signal is fully
       handled (<literal>true</literal>) or allow event propagation
       (<literal>false</literal>).
@@ -8080,6 +8080,14 @@ which is reference-counting. <classname>Glib::RefPtr&lt;&gt;</classname> was int
 long before there was a reference-counting smartpointer in the C++ Standard Library.
 </para>
 
+<para>
+If you make your own <classname>Glib::ObjectBase</classname>-derived classes with
+<methodname>create()</methodname> methods that return a <classname>Glib::RefPtr</classname>,
+you must use <function>Glib::make_refptr_for_instance()</function> in your
+<methodname>create()</methodname> methods. This function creates a <classname>std::shared_ptr</classname>
+with a special deleter, which handles the reference-count for the wrapped C object.
+</para>
+
 <para><link xlink:href="&url_refdocs_base_glib;RefPtr.html">Reference</link></para>
 
 <para>A smartpointer acts much like a normal pointer. Here are a few examples.</para>
@@ -8214,20 +8222,25 @@ signal handlers are often named callbacks.
 Here's an example of a signal handler being connected to a signal:
 </para>
 
-<programlisting>
-#include &lt;gtkmm/button.h&gt;
+<programlisting><![CDATA[
+#include <gtkmm/button.h>
 
 void on_button_clicked()
 {
-    std::cout &lt;&lt; "Hello World" &lt;&lt; std::endl;
+  std::cout << "Hello World" << std::endl;
 }
 
-int main()
+class some_class
 {
-    Gtk::Button button("Hello World");
-    button.signal_clicked().connect(sigc::ptr_fun(&amp;on_button_clicked));
-}
-</programlisting>
+public:
+  some_class
+  {
+    button.signal_clicked().connect(sigc::ptr_fun(&on_button_clicked));
+  }
+private:
+  Gtk::Button button {"Hello World"};
+};
+]]></programlisting>
 
 <para>
 There's rather a lot to think about in this (non-functional) code.
@@ -8285,38 +8298,50 @@ known as function objects, or functors.
 </para>
 
 <para>
+A C++ lambda expression is a functor which can be implicitly converted to a
+<classname>sigc::slot</classname> in the call to <methodname>connect()</methodname>.
+A lambda expression can be used instead of <function>sigc::ptr_fun()</function>.
+It's also possible to use a lambda expression instead of <function>sigc::mem_fun()</function>,
+but then you won't get automatic disconnection of the signal handler when a
+<classname>sigc::trackable</classname>-derived object goes out of scope.
+</para>
+
+<para>
 Here's a slightly larger example of slots in action:
 </para>
 
-<programlisting>
-void on_button_clicked();
+<programlisting><![CDATA[
+#include <gtkmm/button.h>
+
+void on_button_clicked()
+{
+  std::cout << "Hello World" << std::endl;
+}
 
 class some_class
 {
-    void on_button_clicked();
+public:
+  some_class
+  {
+    button.signal_clicked().connect(sigc::ptr_fun(&on_button_clicked));
+    button.signal_clicked().connect(sigc::mem_fun(*this, &some_class::on_button_clicked));
+  }
+  void on_button_clicked();
+private:
+  Gtk::Button button {"Hello World"};
 };
-
-some_class some_object;
-
-int main()
-{
-    Gtk::Button button;
-    button.signal_clicked().connect( sigc::ptr_fun(&amp;on_button_clicked) );
-    button.signal_clicked().connect( sigc::mem_fun(some_object, &amp;some_class::on_button_clicked) );
-}
-</programlisting>
+]]></programlisting>
 
 <para>
 The first call to <methodname>connect()</methodname> is just like the one we saw
 last time; nothing new here.</para>
 <para>The next is more interesting.
 <function>sigc::mem_fun()</function> is called with two arguments. The first
-argument is <parameter>some_object</parameter>, which is the object that our
+argument is <parameter>*this</parameter>, which is the object that our
 new slot will be pointing at. The second argument is a pointer to one of its
 methods. This particular version of <function>sigc::mem_fun()</function>
 creates a slot which will, when "called", call the pointed-to method of the
-specified object, in this case
-<methodname>some_object.on_button_clicked()</methodname>.
+specified object.
 </para>
 
 <para>
@@ -8502,32 +8527,37 @@ is very difficult in C. We have far less need of this hack in &gtkmm;.
 </para>
 </section>
 
-<section xml:id="sec-xeventsignals">
-<title>X Event signals</title>
+<section xml:id="sec-eventsignals">
+<title>Event signals</title>
 
 <para>
-The <classname>Widget</classname> class has some special signals which
-correspond to the underlying X-Windows events. These are suffixed by
-<literal>_event</literal>; for instance,
-<methodname>Widget::signal_button_press_event()</methodname>.
+Event signals are emitted as a result of some user input, for instance a key press
+or a mouse motion. Usually you don't handle these events directly. Instead, you use
+a subclass of <classname>Gtk::EventController</classname>, such as <classname>Gtk::EventControllerKey</classname>
+or <classname>Gtk::GestureClick</classname>. Event controllers can be added to a
+widget with <methodname>Gtk::Widget::add_controller()</methodname>.
 </para>
 <para>
-You might occasionally find it useful to handle X events when there's something
+You might occasionally find it useful to handle events when there's something
 you can't accomplish with normal signals. <classname>Gtk::Button</classname>,
 for example, does not send mouse-pointer coordinates with its
 <literal>clicked</literal> signal, but you could handle
-<literal>button_press_event</literal> if you needed this
-information. X events are also often used to handle key-presses.
+<methodname>Gtk::GestureClick::signal_pressed()</methodname> if you needed this
+information. <methodname>Gtk::EventControllerKey::signal_key_pressed()</methodname>
+is often used to handle key-presses.
 </para>
 
 <para>
-These signals behave slightly differently. The value returned from the signal handler indicates whether it has fully "handled"
-the event. If the value is <literal>false</literal> then &gtkmm; will pass the event on to the next signal handler. If the value is <literal>true</literal> then no other signal handlers will need to be called.
+Some event controller signals behave slightly differently. The value returned from
+the signal handler indicates whether it has fully "handled" the event. If the value
+is <literal>false</literal> then &gtkmm; will pass the event on to the next
+signal handler. If the value is <literal>true</literal> then no other signal handlers
+will need to be called.
 </para>
 
 <para>
-Handling an X event doesn't affect the Widget's other signals. If you handle
-<literal>button_press_event</literal> for
+Handling an event doesn't affect the Widget's other signals. If you handle
+<methodname>Gtk::GestureClick::signal_pressed()</methodname> for
 <classname>Gtk::Button</classname>, you'll still be able to get the
 <literal>clicked</literal> signal. They are emitted at (nearly) the same time.
 </para>
@@ -8535,41 +8565,43 @@ Handling an X event doesn't affect the Widget's other signals. If you handle
 <para>
 Here's a simple example:</para>
 <programlisting>
-bool on_button_press(GdkEventButton* event);
+void on_button_press(int n_press, double x, double y);
 Gtk::Button button("label");
-button.signal_button_press_event().connect( sigc::ptr_fun(&amp;on_button_press) );
+auto controller = Gtk::GestureClick::create();
+controller->signal_pressed().connect(sigc::ptr_fun(&amp;on_button_press));
+button.add_controller(controller);
 </programlisting>
 <para>
 When the mouse is over the button and a mouse button is pressed,
 <methodname>on_button_press()</methodname> will be called.
 </para>
 
-<para>
-<type>GdkEventButton</type> is a structure containing the event's parameters,
-such as the coordinates of the mouse pointer at the time the button was
-pressed. There are several different types of <type>GdkEvent</type> structures
-for the various events.
-</para>
-
 <section xml:id="signal-handler-sequence">
 <title>Signal Handler sequence</title>
 
-<para>By default, your signal handlers are called after any previously-connected
-signal handlers. However, this can be a problem with the X Event signals. For instance,
-the existing signal handlers, or the default signal handler, might return <literal>true</literal>
-to stop other signal handlers from being called. To specify that your signal handler
-should be called before the other signal handlers, so that it will always be called,
-you can specify <literal>false</literal> for the optional <literal>after</literal>
-parameter. For instance,
+<para>By default, signal handlers that return <type>void</type> are called after
+any previously-connected signal handlers. However, this can be a problem with
+event signals that can stop event propagation by returning <literal>true</literal>.
+For instance, the existing signal handlers, or the default signal handler, might return
+<literal>true</literal> to stop other signal handlers from being called.
+To specify that your signal handler should be called before the other signal handlers,
+you can specify <literal>false</literal> for the <literal>after</literal> parameter.
+This <methodname>connect()</methodname> parameter is optional, if the signal handler
+returns <type>void</type>. For instance,
 </para>
 <programlisting>
-button.signal_button_press_event().connect( sigc::ptr_fun(&amp;on_mywindow_button_press), false );
+key_controller->signal_key_pressed().connect(sigc::ptr_fun(&amp;on_mywindow_key_pressed), false);
 </programlisting>
-<para>The event is delivered first to the widget the event occurred in. If all
-signal handlers in that widget return <literal>false</literal> (indicating that
-the event has not been handled), then the signal will be propagated to the parent
-widget and emitted there. This continues all the way up to the top-level widget
-if no one handles the event.
+<para>The event is propagated between widgets in 3 phases.
+<orderedlist inheritnum="ignore" continuation="restarts">
+<listitem><simpara>Capture phase - runs from the toplevel down to the event widget.</simpara></listitem>
+<listitem><simpara>Target phase - runs only on the event widget.</simpara></listitem>
+<listitem><simpara>Bubble phase - runs from the event widget up to the toplevel.</simpara></listitem>
+</orderedlist>
+</para>
+<para>
+The <link xlink:href="https://docs.gtk.org/gtk4/input-handling.html">Input Handling</link>
+chapter in the GTK documentation describes user input handling in more detail.
 </para>
 </section>
 
@@ -8862,7 +8894,7 @@ practical - and sensible - to subclass a button for that purpose.
     correct order. This section will give a brief explanation of how to set up
     <application>jhbuild</application> to build and install &gtkmm; from the
     source repository (git). For up-to-date information
-    on <application>jhbuild</application>, please refer to the <link xlink:href="http://developer.gnome.org/jhbuild/unstable/">jhbuild manual</link>.
+    on <application>jhbuild</application>, please refer to the <link xlink:href="http://developer-old.gnome.org/jhbuild/unstable/">jhbuild manual</link>.
   </para>
   <note>
     <para>
@@ -8884,7 +8916,7 @@ practical - and sensible - to subclass a button for that purpose.
 
     <para>
       To set up <application>jhbuild</application>, follow the basic
-      installation instructions from the <link xlink:href="http://developer.gnome.org/jhbuild/unstable/">jhbuild manual</link>.
+      installation instructions from the <link xlink:href="http://developer-old.gnome.org/jhbuild/unstable/">jhbuild manual</link>.
       After you have installed <application>jhbuild</application>, you
       should copy the sample <application>jhbuild</application> configuration
       file into your home directory by executing the following command from the
@@ -8928,13 +8960,23 @@ practical - and sensible - to subclass a button for that purpose.
       </para>
     </important>
     <para>
+      You should also set <varname>buildroot</varname> in <filename>jhbuildrc</filename>.
+      <application>jhbuild</application> builds &gtkmm; and many of its dependencies
+      with Meson. Meson does not allow building in the source tree.
+      <application>jhbuild</application>'s default action is to build in a
+      <filename>build</filename> directory directly below the source root directory.
+      Some modules have a <filename>build</filename> directory with files
+      used when building with Autotools. Those files can be destroyed if you
+      let <application>jhbuild</application> build in that directory.
+    </para>
+    <para>
       When you downloaded <application>jhbuild</application> from the git repository,
       you got a number of <filename>.modules</filename> files, specifying
       dependencies between modules. By default <application>jhbuild</application>
       does not use the downloaded versions of these files, but reads the
       latest versions in the git repository. This is usually what you want.
       If you don't want it, use the <varname>use_local_modulesets</varname>
-      variable in <filename>.jhbuildrc</filename>.
+      variable in <filename>jhbuildrc</filename>.
     </para>
   </section>
   <section xml:id="sec-installing-jhbuild">
@@ -9219,11 +9261,11 @@ $ ./h2def.py /usr/include/gtk-4.0/gtk/*.h &gt; gtk_methods.defs
 <title>Generating the enums .defs</title>
 
 <para>This <filename>.defs</filename> file describes enum types and their possible
-  values. It is generated by the <filename>enum.pl</filename> script which you can
-  find in glibmm's <filename>tools</filename> directory. For instance,
+  values. It is generated by the <filename>enumextract.py</filename> script which you can
+  also find in glibmm's <filename>tools/defs_gen</filename> directory. For instance,
 </para>
 <programlisting>
-$ ./enum.pl /usr/include/gtk-4.0/gtk/*.h &gt; gtk_enums.defs
+$ ./enumextract.py /usr/include/gtk-4.0/gtk/*.h &gt; gtk_enums.defs
 </programlisting>
 </section>
 
@@ -10757,8 +10799,8 @@ void example_widget_construct(ExampleWidget* widget, int something, const char* 
 <title>Reusing C documentation</title>
 
 <para>You might wish to reuse documentation that exists for the C library that
-  you are wrapping. GTK-style C libraries typically use gtk-doc and therefore
-  have source code comments formatted for gtk-doc and some extra documentation
+  you are wrapping. GTK-style C libraries typically use gtk-doc or gi-docgen and therefore
+  have source code comments formatted for gtk-doc or gi-docgen and some extra documentation
   in .sgml and .xml files. The docextract_to_xml.py script, from glibmm's
   <filename>tools/defs_gen</filename> directory, can read these files and
   generate an .xml file that <command>gmmproc</command> can use to generate
