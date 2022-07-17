@@ -125,13 +125,6 @@ We would very much like to hear of any problems you have learning &gtkmm;
 with this document, and would appreciate input regarding improvements. Please see the <link linkend="chapter-contributing">Contributing</link> section for further information.
 </para>
 
-<note>
-<para>
-This book describes &gtkmm; 4, but some sections have not been fully updated.
-There are paragraphs that describe &gtkmm; 3 rather than &gtkmm; 4.
-All shown example programs are compatible with &gtkmm; 4, though.
-</para>
-</note>
 </section>
 
 <section xml:id="sec-gtkmm">
@@ -7007,13 +7000,13 @@ instance, you cannot use the copyright sign (&copy;).
     <itemizedlist>
       <listitem><para><methodname>get_request_mode_vfunc()</methodname>: Return what <literal>Gtk::SizeRequestMode</literal> is preferred by the container.</para></listitem>
       <listitem><para><methodname>measure_vfunc()</methodname>: Calculate the minimum and natural width or height of the container.</para></listitem>
-      <listitem><para><methodname>on_size_allocate()</methodname>: Position the child widgets, given the height and width that the container has actually been given.</para></listitem>
+      <listitem><para><methodname>size_allocate_vfunc()</methodname>: Position the child widgets, given the height and width that the container has actually been given.</para></listitem>
     </itemizedlist>
     </para>
 
     <para>The <methodname>get_request_mode_vfunc()</methodname>,
         <methodname>measure_vfunc()</methodname>, and
-        <methodname>on_size_allocate()</methodname> virtual methods control the
+        <methodname>size_allocate_vfunc()</methodname> virtual methods control the
         layout of the child widgets. For instance, if your container has 2
         child widgets, with one below the other, your
         <methodname>get_request_mode_vfunc()</methodname> might request
@@ -7035,7 +7028,7 @@ instance, you cannot use the copyright sign (&copy;).
         also the description of <methodname>Gtk::Widget::measure()</methodname>, which
         may be better documented than <methodname>measure_vfunc()</methodname>.</para>
 
-   <para><methodname>on_size_allocate()</methodname> receives the actual
+   <para><methodname>size_allocate_vfunc()</methodname> receives the actual
        height and width that the parent container has decided to give to your
        widget. This might be more than the minimum, or even more than the natural
        size, for instance if the
@@ -7079,9 +7072,9 @@ instance, you cannot use the copyright sign (&copy;).
     <itemizedlist>
       <listitem><para><methodname>get_request_mode_vfunc()</methodname>: (optional) Return what <literal>Gtk::SizeRequestMode</literal> is preferred by the widget.</para></listitem>
       <listitem><para><methodname>measure_vfunc()</methodname>: Calculate the minimum and natural width or height of the widget.</para></listitem>
-      <listitem><para><methodname>on_size_allocate()</methodname>: Position the widget, given the height and width that it has actually been given.</para></listitem>
-      <listitem><para><methodname>on_realize()</methodname>: Associate a <classname>Gdk::Surface</classname> with the widget.</para></listitem>
-      <listitem><para><methodname>on_unrealize()</methodname>: (optional) Break the association with the <classname>Gdk::Surface</classname>. </para></listitem>
+      <listitem><para><methodname>size_allocate_vfunc()</methodname>: (optional) Position the widget, given the height and width that it has actually been given.</para></listitem>
+      <listitem><para><methodname>on_realize()</methodname>:  (optional)</para></listitem>
+      <listitem><para><methodname>on_unrealize()</methodname>: (optional)</para></listitem>
       <listitem><para><methodname>on_map()</methodname>: (optional)</para></listitem>
       <listitem><para><methodname>on_unmap()</methodname>: (optional)</para></listitem>
       <listitem><para><methodname>snapshot_vfunc()</methodname>: Create a render node, e.g. a <classname>Cairo::Context</classname> node, and draw on it.</para></listitem>
