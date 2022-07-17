@@ -24,21 +24,21 @@ class ExampleWindow : public Gtk::Window
 public:
 
   ExampleWindow();
-  virtual ~ExampleWindow();
+  ~ExampleWindow() override;
 
 private:
   // Signal handlers:
   bool label2_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state, const Glib::ustring& phase);
-  bool grid_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state, const Glib::ustring& phase);
+  bool box_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state, const Glib::ustring& phase);
   bool window_key_pressed(guint keyval, guint keycode, Gdk::ModifierType state, const Glib::ustring& phase);
 
   bool m_first = true;
   Gtk::Box m_container;
   Gtk::Frame m_frame;
-  Gtk::Label m_label1;
-  Gtk::Label m_label2;
-  Gtk::CheckButton m_checkbutton_can_propagate_down;
-  Gtk::CheckButton m_checkbutton_can_propagate_up;
+  Gtk::Label m_label1 {"A label"};
+  Gtk::Label m_label2 {"Write here"};
+  Gtk::CheckButton m_checkbutton_can_propagate_down {"Can propagate down in the capture phase"};
+  Gtk::CheckButton m_checkbutton_can_propagate_up {"Can propagate up in the bubble phase"};
 };
 
 #endif //GTKMM_EVENT_PROPAGATION_H

@@ -15,18 +15,13 @@
  */
 
 // In gtkmm3, this example used an Entry instead of m_label2. This would not work
-// as intended in gtkmm4. GtkEntry in gtk+4 marks a key press signal as handled
-// in the bubble phase. It's not propagated further up to the Grid and the Window.
+// as intended in gtkmm4. GtkEntry in gtk4 marks a key press signal as handled
+// in the target phase. It's not propagated further up to the Box and the Window.
 
 #include "examplewindow.h"
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-:
-m_label1("A label"),
-m_label2("Write here"),
-m_checkbutton_can_propagate_down("Can propagate down"),
-m_checkbutton_can_propagate_up("Can propagate up")
 {
   set_title("Event Propagation");
   m_container.set_margin(10);
@@ -44,7 +39,7 @@ m_checkbutton_can_propagate_up("Can propagate up")
   m_container.append(m_checkbutton_can_propagate_down);
   m_container.append(m_checkbutton_can_propagate_up);
 
-  // Events
+  // Event controllers
   const bool after = false; // Run before or after the default signal handlers.
 
   // Called in the capture phase of the event handling.
@@ -57,7 +52,7 @@ m_checkbutton_can_propagate_up("Can propagate up")
   controller = Gtk::EventControllerKey::create();
   controller->set_propagation_phase(Gtk::PropagationPhase::CAPTURE);
   controller->signal_key_pressed().connect(
-    sigc::bind(sigc::mem_fun(*this, &ExampleWindow::grid_key_pressed), "capture"), after);
+    sigc::bind(sigc::mem_fun(*this, &ExampleWindow::box_key_pressed), "capture"), after);
   m_container.add_controller(controller);
 
   controller = Gtk::EventControllerKey::create();
@@ -76,7 +71,7 @@ m_checkbutton_can_propagate_up("Can propagate up")
   controller = Gtk::EventControllerKey::create();
   controller->set_propagation_phase(Gtk::PropagationPhase::TARGET);
   controller->signal_key_pressed().connect(
-    sigc::bind(sigc::mem_fun(*this, &ExampleWindow::grid_key_pressed), "target"), after);
+    sigc::bind(sigc::mem_fun(*this, &ExampleWindow::box_key_pressed), "target"), after);
   m_container.add_controller(controller);
 
   controller = Gtk::EventControllerKey::create();
@@ -96,7 +91,7 @@ m_checkbutton_can_propagate_up("Can propagate up")
   controller = Gtk::EventControllerKey::create();
   controller->set_propagation_phase(Gtk::PropagationPhase::BUBBLE);
   controller->signal_key_pressed().connect(
-    sigc::bind(sigc::mem_fun(*this, &ExampleWindow::grid_key_pressed), "bubble"), after);
+    sigc::bind(sigc::mem_fun(*this, &ExampleWindow::box_key_pressed), "bubble"), after);
   m_container.add_controller(controller);
 
   controller = Gtk::EventControllerKey::create();
@@ -136,9 +131,9 @@ bool ExampleWindow::label2_key_pressed(guint keyval, guint, Gdk::ModifierType, c
   return false;
 }
 
-bool ExampleWindow::grid_key_pressed(guint, guint, Gdk::ModifierType, const Glib::ustring& phase)
+bool ExampleWindow::box_key_pressed(guint, guint, Gdk::ModifierType, const Glib::ustring& phase)
 {
-  std::cout << "Grid,   " << phase << " phase" << std::endl;
+  std::cout << "Box,    " << phase << " phase" << std::endl;
 
   // Let it propagate
   return false;
@@ -156,8 +151,8 @@ bool ExampleWindow::window_key_pressed(guint, guint, Gdk::ModifierType, const Gl
   // even if m_checkbutton_can_propagate_up wasn't active.
   if (phase == "bubble" && m_label2.has_focus())
   {
-    m_label1.set_text(m_label2.get_text());
-    std::cout << ", " << m_label2.get_text();
+    m_label1.set_label(m_label2.get_label());
+    std::cout << ", " << m_label2.get_label();
   }
   std::cout << std::endl;
 
@@ -169,4 +164,3 @@ bool ExampleWindow::window_key_pressed(guint, guint, Gdk::ModifierType, const Gl
 ExampleWindow::~ExampleWindow()
 {
 }
-
