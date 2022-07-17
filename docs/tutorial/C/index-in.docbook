@@ -5623,56 +5623,57 @@ if (info)
 <chapter xml:id="chapter-keyboardevents">
 <title>Keyboard Events</title>
   <para>
-    X events differ in some ways from other signals. These differences are described
+    Event signals differ in some ways from other signals. These differences are described
     in the <link linkend="sec-eventsignals">Event signals</link> section in
-    the appendix. Here we will use keyboard events to show how X events can be
+    the appendix. Here we will use keyboard events to show how events can be
     used in a program.
   </para>
   <section xml:id="sec-keyboardevents-overview">
   <title>Overview</title>
 
     <para>
-      Whenever you press or release a key, an event is emitted. You can connect
-      a signal handler to handle such events.
+      Whenever you press or release a key, an event is emitted. You can add an
+      event controller and connect a signal handler to handle such events.
     </para>
     <para>
-      The event signal handler will
-      receive an argument that depends on the type of event. For keyboard
-      events it's a <type>GdkEventKey*</type>. As discribed in the
-      <link linkend="sec-eventsignals">appendix</link>, the event signal handler
-      returns a <type>bool</type> value, to indicate that the signal is fully
-      handled (<literal>true</literal>) or allow event propagation
+      The event signal handler will receive arguments that depend on the type of event.
+      For key press events the arguments are (<type>guint</type> <varname>keyval</varname>,
+      <type>guint</type> <varname>keycode</varname>, <type>Gdk::ModifierType</type> <varname>state</varname>).
+      As described in the <link linkend="sec-eventsignals">appendix</link>,
+      the key press event signal handler returns a <type>bool</type> value, to indicate that
+      the signal is fully handled (<literal>true</literal>) or allow event propagation
       (<literal>false</literal>).
     </para>
     <para>
       To determine which key was pressed or released, you read the value of
-      <varname>GdkEventKey::keyval</varname> and compare it with a constant in the
-      <filename>&lt;gdk/gdkkeysyms.h&gt;</filename> header file. The states of
+      the <varname>keyval</varname> argument and compare it with a constant in the
+      <link xlink:href="https://gitlab.gnome.org/GNOME/gtk/tree/main/gdk/gdkkeysyms.h">
+      <filename>&lt;gdk/gdkkeysyms.h&gt;</filename></link> header file. The states of
       modifier keys (shift, ctrl, etc.) are available as bit-flags in
-      <varname>GdkEventKey::state</varname>.
+      <varname>state</varname>.
     </para>
     <para>
       Here's a simple example:
     </para>
-<programlisting>
-bool on_key_press_or_release_event(GdkEventKey* event)
+<programlisting><![CDATA[
+bool MyClass::on_key_pressed(guint keyval, guint, Gdk::ModifierType state)
 {
-  if (event-&gt;type == GDK_KEY_PRESS &amp;&amp;
-    event-&gt;keyval == GDK_KEY_1 &amp;&amp;
-    (event-&gt;state &amp; (GDK_SHIFT_MASK | GDK_CONTROL_MASK | GDK_MOD1_MASK)) == GDK_MOD1_MASK)
+  if (keyval == GDK_KEY_1 &&
+    (state & (Gdk::ModifierType::SHIFT_MASK | Gdk::ModifierType::CONTROL_MASK |
+     Gdk::ModifierType::ALT_MASK)) == Gdk::ModifierType::ALT_MASK)
   {
-    handle_alt_1_press(); // GDK_MOD1_MASK is normally the Alt key
+    handle_alt_press();
     return true;
   }
   return false;
 }
 
-Gtk::Entry m_entry; // in a class definition
-
-// in the class constructor
-m_entry.signal_key_press_event().connect( sigc::ptr_fun(&amp;on_key_press_or_release_event) );
-m_entry.signal_key_release_event().connect( sigc::ptr_fun(&amp;on_key_press_or_release_event) );
-</programlisting>
+// in MyClass constructor
+auto controller = Gtk::EventControllerKey::create();
+controller->signal_key_pressed().connect(
+  sigc::mem_fun(*this, &MyClass::on_key_pressed), false);
+add_controller(controller);
+]]></programlisting>
 
     <section xml:id="keyboardevents-simple-example">
     <title>Example</title>
@@ -5682,9 +5683,6 @@ m_entry.signal_key_release_event().connect( sigc::ptr_fun(&amp;on_key_press_or_r
         <keycap>Alt</keycap>+<keycap>1</keycap> selects the first radio button,
         <keycap>Alt</keycap>+<keycap>2</keycap> selects the second one, and the
         <keycap>Esc</keycap> key hides (closes) the window.
-        The default event signal handler is overridden, as described in the
-        <link linkend="sec-overriding-default-signal-handlers">Overriding default signal handlers</link>
-        section in the appendix.
       </para>
 
       <figure xml:id="figure-keyboardevents-simple">
@@ -5702,23 +5700,23 @@ m_entry.signal_key_release_event().connect( sigc::ptr_fun(&amp;on_key_press_or_r
   <title>Event Propagation</title>
 
     <para>
-      Event propagation means that, when an event is emitted on a particular
-      widget, it can be passed to its parent widget (and that widget can pass
-      it to its parent, and so on) and, if the parent has an event handler,
-      that handler will be called.
+      As described in the <link linkend="signal-handler-sequence">appendix</link>
+      event signals are propagated in 3 phases:
+      <orderedlist inheritnum="ignore" continuation="restarts">
+      <listitem><simpara>Capture phase - runs from the toplevel down to the event widget.</simpara></listitem>
+      <listitem><simpara>Target phase - runs only on the event widget.</simpara></listitem>
+      <listitem><simpara>Bubble phase - runs from the event widget up to the toplevel.</simpara></listitem>
+      </orderedlist>
     </para>
     <para>
-      Contrary to other events, keyboard events are first sent to the toplevel window
+      A keyboard event is first sent to the toplevel window
       (<classname>Gtk::Window</classname>), where it will be checked
       for any keyboard shortcuts that may be set (accelerator keys and mnemonics,
       used for selecting menu items from the keyboard). After this (and assuming
-      the event wasn't handled), it is sent to the widget which has focus,
-      and the propagation begins from there.
-    </para>
-    <para>
-      The event will propagate until it reaches the top-level widget, or until
-      you stop the propagation by returning <literal>true</literal> from an
-      event handler.
+      the event wasn't handled), it is propagated down until it reaches the widget
+      which has keyboard focus. The event will then propagate up until it reaches
+      the top-level widget, or until you stop the propagation by returning
+      <literal>true</literal> from an event handler.
     </para>
     <para>
       Notice, that after canceling an event, no other function will be called
@@ -5729,32 +5727,26 @@ m_entry.signal_key_release_event().connect( sigc::ptr_fun(&amp;on_key_press_or_r
     <title>Example</title>
 
       <para>
-        In this example there are three event handlers that are called after
-        <classname>Gtk::Window</classname>'s default event handler, one in the
-        <classname>Gtk::Entry</classname>, one in the <classname>Gtk::Grid</classname>
-        and one in the <classname>Gtk::Window</classname>.
-      </para>
-      <para>
-        In the <classname>Gtk::Window</classname>, we have also the default handler
-        overridden (<methodname>on_key_release_event()</methodname>), and
-        another handler being called before the default handler
-        (<methodname>windowKeyReleaseBefore()</methodname>).
+        In this example there are 9 <classname>EventControllerKey</classname>s,
+        3 in each of a <classname>Gtk::Window</classname>, a <classname>Gtk::Box</classname>
+        and a <classname>Gtk::Label</classname>. In each of the widgets there is
+        one event controller for each propagation phase.
       </para>
       <para>
         The purpose of this example is to show the steps the event takes when it is emitted.
       </para>
       <para>
-        When you write in the entry, a key release event will be emitted,
-        which will go first to the toplevel window (<classname>Gtk::Window</classname>),
-        since we have one event handler set to be called before, that's what is
-        called first (<methodname>windowKeyReleaseBefore()</methodname>).
-        Then the default handler is called (which we have overridden), and after
-        that the event is sent to the widget that has focus,
-        the <classname>Entry</classname> in our example and, depending on whether we let
-        it propagate, it can reach the <classname>Grid</classname>'s and the
-        <classname>Window</classname>'s event handlers. If it propagates,
+        When you write in the label, a key press event will be emitted,
+        which will go first, in the capture phase, to the toplevel window
+        (<classname>Gtk::Window</classname>), then down to its child, the
+        box, then to the box's child, the label with the keyboard focus.
+        In the target phase the event goes only to the widget with the keyboard
+        focus (the label). In the bubble phase the event goes first to the widget
+        with the keyboard focus (the label), then to its parent (the box), then
+        to the box's parent (the window). If the event propagates all the way
+        down to the label and then up to the window without being stopped,
         the text you're writing will appear in the <classname>Label</classname>
-        above the <classname>Entry</classname>.
+        above the <classname>Label</classname> you're writing in.
       </para>
 
       <figure xml:id="figure-keyboardevents-propagation">
