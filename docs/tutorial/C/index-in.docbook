@@ -1208,7 +1208,7 @@ with <methodname>set_line_wrap()</methodname>.
 <para>
 Gtk::Label support some simple formatting, for instance allowing you to make some
 text bold, colored, or larger. You can do this by providing a string to
-<methodname>set_markup()</methodname>, using the <link xlink:href="http://developer.gnome.org/pango/unstable/PangoMarkupFormat.html">Pango Markup syntax</link>. For instance,
+<methodname>set_markup()</methodname>, using the <link xlink:href="https://docs.gtk.org/Pango/pango_markup.html">Pango Markup syntax</link>. For instance,
 <code>
 &lt;b&gt;bold text&lt;/b&gt; and &lt;s&gt;strikethrough text&lt;/s&gt;
 </code>
@@ -3746,7 +3746,7 @@ simple (no need to check for things like I/O errors or locate the files in the f
 also makes it easier to create relocatable applications.
 </para>
 <para>
-Resource bundles are created by the <link xlink:href="https://developer.gnome.org/gio/stable/glib-compile-resources.html">glib-compile-resources</link>
+Resource bundles are created by the <link xlink:href="https://developer-old.gnome.org/gio/stable/glib-compile-resources.html">glib-compile-resources</link>
 program which takes an xml file that describes the bundle, and a set of files that the xml references.
 These are combined into a binary resource bundle.
 </para>
@@ -6922,7 +6922,7 @@ in C++ using &gtkmm;, within <filename>.glade</filename> files and load/set
 these using <classname>Gtk::Builder</classname>. See the documentation of
 <classname>Gtk::Builder</classname> for more details on how to achieve this.
 Glade won’t recognise such properties as-is, but it should be able to through
-use of <link xlink:href="https://developer.gnome.org/gladeui/stable/properties.html">
+use of <link xlink:href="https://developer-old.gnome.org/gladeui/stable/properties.html">
 property class definitions</link> and a catalog declaring those new properties.
 </para>
 </section>
@@ -8056,9 +8056,10 @@ first see a blank window, into which the widgets will be gradually drawn.
 <title>Building applications</title>
 
 <para>
-This chapter is similar to the "Building applications" chapter in the
-<link xlink:href="https://developer.gnome.org/gtk3/stable/">GTK+ 3 Reference Manual</link>.
-The same application is built, but &gtkmm; is used instead of <application>GTK+</application>.
+This chapter is similar to <emphasis>Building applications</emphasis> and following sections in the
+<link xlink:href="https://docs.gtk.org/gtk3/getting_started.html">Getting Started</link>
+chapter in the GTK3 documentation.
+The same application is built, but &gtkmm; is used instead of <application>GTK</application>.
 </para>
 <para>
 An application consists of a number of files:
@@ -8338,7 +8339,7 @@ in our case the <filename>org.gtkmm.exampleapp.gschema.xml</filename> file.
 Before we can make use of this schema in our application, we need to compile it into
 the binary form that <classname>Gio::Settings</classname> expects. GIO provides macros
 to do this in autotools-based projects. See the description of
-<link xlink:href="https://developer.gnome.org/gio/stable/GSettings.html">GSettings</link>.
+<link xlink:href="https://docs.gtk.org/gio/class.Settings.html">GSettings</link>.
 Meson provides the <function>compile_schemas()</function> function in the
 <link xlink:href="https://mesonbuild.com/Gnome-module.html">GNOME module</link>.
 </para>
@@ -9467,7 +9468,7 @@ practical - and sensible - to subclass a button for that purpose.
     correct order. This section will give a brief explanation of how to set up
     <application>jhbuild</application> to build and install &gtkmm; from the
     source repository (git). For up-to-date information
-    on <application>jhbuild</application>, please refer to the <link xlink:href="http://developer.gnome.org/jhbuild/unstable/">jhbuild manual</link>.
+    on <application>jhbuild</application>, please refer to the <link xlink:href="http://developer-old.gnome.org/jhbuild/unstable/">jhbuild manual</link>.
   </para>
   <note>
     <para>
@@ -9489,7 +9490,7 @@ practical - and sensible - to subclass a button for that purpose.
   <title>Setting up jhbuild</title>
     <para>
       To set up <application>jhbuild</application>, follow the basic
-      installation instructions from the <link xlink:href="http://developer.gnome.org/jhbuild/unstable/">jhbuild manual</link>.
+      installation instructions from the <link xlink:href="http://developer-old.gnome.org/jhbuild/unstable/">jhbuild manual</link>.
       After you have installed <application>jhbuild</application>, you
       should copy the sample <application>jhbuild</application> configuration
       file into your home directory by executing the following command from the
@@ -9533,13 +9534,23 @@ practical - and sensible - to subclass a button for that purpose.
       </para>
     </important>
     <para>
+      You should also set <varname>buildroot</varname> in <filename>jhbuildrc</filename>.
+      <application>jhbuild</application> builds &gtkmm; and many of its dependencies
+      with Meson. Meson does not allow building in the source tree.
+      <application>jhbuild</application>'s default action is to build in a
+      <filename>build</filename> directory directly below the source root directory.
+      Some modules have a <filename>build</filename> directory with files
+      used when building with Autotools. Those files can be destroyed if you
+      let <application>jhbuild</application> build in that directory.
+    </para>
+    <para>
       When you downloaded <application>jhbuild</application> from the git repository,
       you got a number of <filename>.modules</filename> files, specifying
       dependencies between modules. By default <application>jhbuild</application>
       does not use the downloaded versions of these files, but reads the
       latest versions in the git repository. This is usually what you want.
       If you don't want it, use the <varname>use_local_modulesets</varname>
-      variable in <filename>.jhbuildrc</filename>.
+      variable in <filename>jhbuildrc</filename>.
     </para>
   </section>
 
@@ -9824,11 +9835,14 @@ $ ./h2def.py /usr/include/gtk-3.0/gtk/*.h &gt; gtk_methods.defs
 
 <para>This <filename>.defs</filename> file describes enum types and their possible
   values. It is generated by the <filename>enum.pl</filename> script which you can
-  find in glibmm's <filename>tools</filename> directory. For instance,
+  find in glibmm's <filename>tools</filename> directory, or (if <application>glibmm</application>
+  is version 2.66.1 or newer) the <filename>enumextract.py</filename> script in the
+  <filename>tools/defs_gen</filename> directory. For instance,
+</para>
 <programlisting>
 $ ./enum.pl /usr/include/gtk-3.0/gtk/*.h &gt; gtk_enums.defs
+$ ./enumextract.py /usr/include/gtk-3.0/gtk/*.h &gt; gtk_enums.defs
 </programlisting>
-</para>
 </section>
 
 <section xml:id="generating-defs-signals-properties">
