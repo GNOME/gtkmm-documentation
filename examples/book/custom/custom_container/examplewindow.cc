@@ -14,13 +14,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#include <iostream>
 #include "examplewindow.h"
 
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::Orientation::VERTICAL),
-  m_Button_One("Child One"),
-  m_Label_Two("Child 2", Gtk::Align::END, Gtk::Align::CENTER),
+  m_Button_Child("Child button"),
+  m_Label_Child("Child label", Gtk::Align::END, Gtk::Align::CENTER),
   m_Button_Quit("Quit")
 {
   set_title("Custom Container example");
@@ -30,7 +29,10 @@ ExampleWindow::ExampleWindow()
   set_child(m_VBox);
 
   //Add the child widgets to the custom container:
-  m_MyContainer.set_child_widgets(m_Button_One, m_Label_Two);
+  m_MyContainer.append(m_Button_Child);
+  m_MyContainer.append(m_Label_Child);
+  m_MyContainer.prepend(*Gtk::make_managed<Gtk::Label>(
+    "First line\nSecond line\nThird line"));
   m_MyContainer.set_expand();
 
   m_VBox.append(m_MyContainer);
@@ -52,4 +54,3 @@ void ExampleWindow::on_button_quit()
 {
   hide();
 }
-

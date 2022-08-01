@@ -24,7 +24,7 @@ class ExampleWindow : public Gtk::Window
 {
 public:
   ExampleWindow();
-  virtual ~ExampleWindow();
+  ~ExampleWindow() override;
 
 protected:
   //Signal handlers:
@@ -32,11 +32,9 @@ protected:
 
   //Child widgets:
   Gtk::Box m_VBox;
-  Gtk::Button m_Button_One;
-  Gtk::Label m_Label_Two;
-  // A restriction with MyContainer is that it must be deleted before
-  // its children, meaning that it must be declared after its children.
   MyContainer m_MyContainer;
+  Gtk::Button m_Button_Child;
+  Gtk::Label m_Label_Child;
   Gtk::Box m_ButtonBox;
   Gtk::Button m_Button_Quit;
 };

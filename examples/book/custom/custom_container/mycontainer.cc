@@ -15,34 +15,35 @@
  */
 
 #include <iostream>
-#include <algorithm> // std::max
 #include "mycontainer.h"
 
+// This example container is a simplified vertical Box.
+//
+// It can't be used as a managed widget, managed by another container.
+// It would cause an error like
+// Gtk-WARNING **: 08:31:48.137: Finalizing gtkmm__GtkWidget 0x561b777462c0, but it still has children left:
+
 MyContainer::MyContainer()
-: m_child_one(nullptr), m_child_two(nullptr)
 {
 }
 
 MyContainer::~MyContainer()
 {
-  if (m_child_one)
-    m_child_one->unparent();
-
-  if (m_child_two)
-    m_child_two->unparent();
+  while (Widget* child = get_first_child())
+    child->unparent();
 }
 
-void MyContainer::set_child_widgets(Gtk::Widget& child_one,
-        Gtk::Widget& child_two)
+// Get number of visible children.
+int MyContainer::get_nvis_children() const
 {
-  m_child_one = &child_one;
-  m_child_two = &child_two;
+  int nvis_children = 0;
+  for (const Widget* child = get_first_child(); child; child = child->get_next_sibling())
+    if (child->get_visible())
+      ++nvis_children;
 
-  m_child_one->set_parent(*this);
-  m_child_two->set_parent(*this);
+  return nvis_children;
 }
 
-// This example container is a simplified vertical Box with at most two children.
 Gtk::SizeRequestMode MyContainer::get_request_mode_vfunc() const
 {
   return Gtk::SizeRequestMode::HEIGHT_FOR_WIDTH;
@@ -57,6 +58,9 @@ void MyContainer::measure_vfunc(Gtk::Orientation orientation, int for_size,
   minimum_baseline = -1;
   natural_baseline = -1;
 
+  minimum = 0;
+  natural = 0;
+
   int dummy_minimum_baseline = 0;
   int dummy_natural_baseline = 0;
 
@@ -66,78 +70,60 @@ void MyContainer::measure_vfunc(Gtk::Orientation orientation, int for_size,
 
     if (for_size >= 0)
     {
-      int nvis_children = 0;
-
-      // Get number of visible children.
-      if (m_child_one && m_child_one->get_visible())
-        ++nvis_children;
-      if (m_child_two && m_child_two->get_visible())
-        ++nvis_children;
+      // Number of visible children.
+      const int nvis_children = get_nvis_children();
 
       // Divide the height equally among the visible children.
       if (nvis_children > 0)
         height_per_child = for_size / nvis_children;
     }
 
-    int child_minimum_width[2] = {0, 0};
-    int child_natural_width[2] = {0, 0};
-
-    if (m_child_one && m_child_one->get_visible())
-      m_child_one->measure(orientation, height_per_child, child_minimum_width[0],
-        child_natural_width[0], dummy_minimum_baseline, dummy_natural_baseline);
-
-    if (m_child_two && m_child_two->get_visible())
-      m_child_two->measure(orientation, height_per_child, child_minimum_width[1],
-        child_natural_width[1], dummy_minimum_baseline, dummy_natural_baseline);
-
     // Request a width equal to the width of the widest visible child.
-    minimum = std::max(child_minimum_width[0], child_minimum_width[1]);
-    natural = std::max(child_natural_width[0], child_natural_width[1]);
+    for (const Widget* child = get_first_child(); child; child = child->get_next_sibling())
+      if (child->get_visible())
+      {
+        int child_minimum_width = 0;
+        int child_natural_width = 0;
+        child->measure(orientation, height_per_child, child_minimum_width,
+          child_natural_width, dummy_minimum_baseline, dummy_natural_baseline);
+        if (child_minimum_width > minimum)
+          minimum = child_minimum_width;
+        if (child_natural_width > natural)
+          natural = child_natural_width;
+      }
   }
   else // Gtk::Orientation::VERTICAL
   {
-    int child_minimum_height[2] = {0, 0};
-    int child_natural_height[2] = {0, 0};
-    int nvis_children = 0;
-
-    if (m_child_one && m_child_one->get_visible())
-    {
-      ++nvis_children;
-      m_child_one->measure(orientation, for_size, child_minimum_height[0],
-        child_natural_height[0], dummy_minimum_baseline, dummy_natural_baseline);
-    }
-
-    if (m_child_two && m_child_two->get_visible())
-    {
-      ++nvis_children;
-      m_child_two->measure(orientation, for_size, child_minimum_height[1],
-        child_natural_height[1], dummy_minimum_baseline, dummy_natural_baseline);
-    }
-
     // The allocated height will be divided equally among the visible children.
     // Request a height equal to the number of visible children times the height
     // of the highest child.
-    minimum = nvis_children * std::max(child_minimum_height[0],
-                                       child_minimum_height[1]);
-    natural = nvis_children * std::max(child_natural_height[0],
-                                       child_natural_height[1]);
+    int nvis_children = 0;
+    for (const Widget* child = get_first_child(); child; child = child->get_next_sibling())
+      if (child->get_visible())
+      {
+        ++nvis_children;
+        int child_minimum_height = 0;
+        int child_natural_height = 0;
+        child->measure(orientation, for_size, child_minimum_height,
+          child_natural_height, dummy_minimum_baseline, dummy_natural_baseline);
+        if (child_minimum_height > minimum)
+          minimum = child_minimum_height;
+        if (child_natural_height > natural)
+          natural = child_natural_height;
+      }
+    minimum *= nvis_children;
+    natural *= nvis_children;
   }
 }
 
-void MyContainer::size_allocate_vfunc(int width, int height, int  baseline)
+void MyContainer::size_allocate_vfunc(int width, int height, int baseline)
 {
   //Do something with the space that we have actually been given:
   //(We will not be given heights or widths less than we have requested, though
   //we might get more.)
 
-  //Get number of visible children.
-  const bool visible_one = m_child_one && m_child_one->get_visible();
-  const bool visible_two = m_child_two && m_child_two->get_visible();
-  int nvis_children = 0;
-  if (visible_one)
-    ++nvis_children;
-  if (visible_two)
-    ++nvis_children;
+  // Number of visible children.
+  const int nvis_children = get_nvis_children();
 
   if (nvis_children <= 0)
   {
@@ -146,102 +132,37 @@ void MyContainer::size_allocate_vfunc(int width, int height, int  baseline)
   }
 
   //Assign space to the children:
-  Gtk::Allocation child_allocation_one;
-  Gtk::Allocation child_allocation_two;
+  Gtk::Allocation child_allocation;
+  const int height_per_child = height / nvis_children;
 
-  //Place the first child at the top-left:
-  child_allocation_one.set_x(0);
-  child_allocation_one.set_y(0);
-
-  //Make it take up the full width available:
-  child_allocation_one.set_width(width);
-
-  if (visible_one)
-  {
-    //Divide the height equally among the visible children.
-    child_allocation_one.set_height(height / nvis_children);
-    m_child_one->size_allocate(child_allocation_one, baseline);
-  }
-  else
-    child_allocation_one.set_height(0);
-
-  //Place the second child below the first child:
-  child_allocation_two.set_x(0);
-  child_allocation_two.set_y(child_allocation_one.get_height());
+  //Place the first visible child at the top-left:
+  child_allocation.set_x(0);
+  child_allocation.set_y(0);
 
   //Make it take up the full width available:
-  child_allocation_two.set_width(width);
+  child_allocation.set_width(width);
+  child_allocation.set_height(height_per_child);
 
-  //Make it take up the remaining height:
-  child_allocation_two.set_height(height - child_allocation_one.get_height());
-
-  if (visible_two)
-  {
-    m_child_two->size_allocate(child_allocation_two, baseline);
-  }
-}
-#if 0
-void MyContainer::forall_vfunc(const ForeachSlot& slot)
-{
-  if (m_child_one)
-    slot(*m_child_one);
-
-  if (m_child_two)
-    slot(*m_child_two);
-}
-
-void MyContainer::on_add(Gtk::Widget* child)
-{
-  if(!m_child_one)
-  {
-    m_child_one = child;
-    m_child_one->set_parent(*this);
-  }
-  else if(!m_child_two)
-  {
-    m_child_two = child;
-    m_child_two->set_parent(*this);
-  }
-}
-
-void MyContainer::on_remove(Gtk::Widget* child)
-{
-  if(child)
-  {
-    const bool visible = child->get_visible();
-    bool found = false;
-
-    if(child == m_child_one)
+  //Divide the height equally among the visible children.
+  for (Widget* child = get_first_child(); child; child = child->get_next_sibling())
+    if (child->get_visible())
     {
-      m_child_one = nullptr;
-      found = true;
+      child->size_allocate(child_allocation, baseline);
+      child_allocation.set_y(child_allocation.get_y() + height_per_child);
     }
-    else if(child == m_child_two)
-    {
-      m_child_two = nullptr;
-      found = true;
-    }
-
-    if(found)
-    {
-      child->unparent();
-
-      if(visible)
-        queue_resize();
-    }
-  }
 }
 
-GType MyContainer::child_type_vfunc() const
+void MyContainer::append(Gtk::Widget& child)
 {
-  //If there is still space for one widget, then report the type of widget that
-  //may be added.
-  if(!m_child_one || !m_child_two)
-    return Gtk::Widget::get_type();
-  else
-  {
-    //No more widgets may be added.
-    return G_TYPE_NONE;
-  }
+   child.insert_at_end(*this);
 }
-#endif
+
+void MyContainer::prepend(Gtk::Widget& child)
+{
+   child.insert_at_start(*this);
+}
+
+void MyContainer::remove(Gtk::Widget& child)
+{
+  child.unparent();
+}
