@@ -14,24 +14,42 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#include <iostream>
 #include "mycontainer.h"
 
 // This example container is a simplified vertical Box.
 //
-// It can't be used as a managed widget, managed by another container.
+// It can't be used as a managed widget, managed by another container
+// unless Gtk::Widget::signal_destroy() exists.
 // It would cause an error like
 // Gtk-WARNING **: 08:31:48.137: Finalizing gtkmm__GtkWidget 0x561b777462c0, but it still has children left:
 
 MyContainer::MyContainer()
 {
+#if HAS_SIGNAL_DESTROY
+  signal_destroy().connect(sigc::mem_fun(*this, &MyContainer::on_container_destroy));
+#endif
 }
 
 MyContainer::~MyContainer()
 {
+  // If MyContainer is a managed widget, the underlying C object is destructed
+  // before this C++ destructor is executed.
+  if (!gobj())
+    return;
+
+  // If MyContainer is not a managed widget, unparent all children here.
   while (Widget* child = get_first_child())
     child->unparent();
 }
+
+#if HAS_SIGNAL_DESTROY
+// This signal handler is called only if MyContainer is a managed widget.
+void MyContainer::on_container_destroy()
+{
+  while (Widget* child = get_first_child())
+    child->unparent();
+}
+#endif
 
 // Get number of visible children.
 int MyContainer::get_nvis_children() const

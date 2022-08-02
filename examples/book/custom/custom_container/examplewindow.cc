@@ -34,8 +34,15 @@ ExampleWindow::ExampleWindow()
   m_MyContainer.prepend(*Gtk::make_managed<Gtk::Label>(
     "First line\nSecond line\nThird line"));
   m_MyContainer.set_expand();
-
   m_VBox.append(m_MyContainer);
+
+#if HAS_SIGNAL_DESTROY
+  // A managed custom container.
+  auto container = Gtk::make_managed<MyContainer>();
+  container->prepend(*Gtk::make_managed<Gtk::Label>("Second custom container"));
+  container->set_expand();
+  m_VBox.append(*container);
+#endif
   m_VBox.append(m_ButtonBox);
 
   m_ButtonBox.append(m_Button_Quit);

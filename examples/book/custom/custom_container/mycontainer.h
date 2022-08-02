@@ -18,6 +18,9 @@
 #define GTKMM_CUSTOM_CONTAINER_MYCONTAINER_H
 
 #include <gtkmm/widget.h>
+#include <gtkmm/version.h>
+
+#define HAS_SIGNAL_DESTROY GTKMM_CHECK_VERSION(4,8,0)
 
 class MyContainer : public Gtk::Widget
 {
@@ -37,6 +40,11 @@ protected:
   void measure_vfunc(Gtk::Orientation orientation, int for_size, int& minimum, int& natural,
     int& minimum_baseline, int& natural_baseline) const override;
   void size_allocate_vfunc(int width, int height, int baseline) override;
+
+#if HAS_SIGNAL_DESTROY
+  // Signal handler:
+  void on_container_destroy();
+#endif
 };
 
 #endif //GTKMM_CUSTOM_CONTAINER_MYCONTAINER_H
