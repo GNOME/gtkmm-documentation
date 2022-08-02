@@ -7037,10 +7037,19 @@ instance, you cannot use the copyright sign (&copy;).
        widgets to fill the space, or you might choose to expand the padding
        between your widgets. It's your container, so you decide.</para>
 
+   <para>Your container must unparent its children before the underlying C object
+       (a <classname>gtkmm__GtkWidget</classname>) is finalized. If your container
+       is used as a managed widget, it shall unparent its children in a
+       <methodname>Gtk::Widget::signal_destroy()</methodname> handler (available
+       since &gtkmm; 4.8.0). If your container is not managed, that signal handler
+       is not called. Instead the children shall be unparented in the C++ destructor.
+       If you want your container to be useful both ways, unparent the children
+       both in the destructor and in a signal handler. See the example code.</para>
+
 <section xml:id="custom-container-example">
 <title>Example</title>
 
-    <para>This example implements a container with two child widgets, one above
+    <para>This example implements a container with child widgets, one above
         the other. Of course, in this case it would be far simpler just to use
         a vertical <classname>Gtk::Box</classname> or <classname>Gtk::Grid</classname>.</para>
 
