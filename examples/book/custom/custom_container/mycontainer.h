@@ -20,7 +20,7 @@
 #include <gtkmm/widget.h>
 #include <gtkmm/version.h>
 
-#define HAS_SIGNAL_DESTROY GTKMM_CHECK_VERSION(4,8,0)
+#define HAS_SIGNAL_DESTROY GTKMM_CHECK_VERSION(4,7,1)
 
 class MyContainer : public Gtk::Widget
 {

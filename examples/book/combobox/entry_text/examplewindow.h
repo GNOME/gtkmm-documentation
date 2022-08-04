@@ -21,7 +21,7 @@
 #include <gtkmm/comboboxtext.h>
 #include <gtkmm/version.h>
 
-#define HAS_SIGNAL_ACTIVATE GTKMM_CHECK_VERSION(4,8,0)
+#define HAS_SIGNAL_ACTIVATE GTKMM_CHECK_VERSION(4,7,1)
 
 class ExampleWindow : public Gtk::Window
 {
