@@ -219,9 +219,9 @@ applications and libraries:
 <para>
     The names of the &gtkmm; packages vary from distribution to distribution
     (e.g. <application>libgtkmm-4.0-dev</application> on Debian and Ubuntu or
-    <application>gtkmm40-devel</application> on Red Hat Fedora), so check with
-    your distribution's package management program for the correct package name
-    and install it like you would any other package.
+    <application>gtkmm4.0-devel</application> on Red Hat and Fedora), so check
+    with your distribution's package management program for the correct package
+    name and install it like you would any other package.
 </para>
 <note>
 <para>
@@ -679,7 +679,7 @@ the command-line parameters.
 <orderedlist inheritnum="ignore" continuation="restarts">
 <listitem><simpara><classname>Gtk::AppChooser</classname>, <classname>Gtk::AppChooserButton</classname>, <classname>Gtk::AppChooserDialog</classname> allow the user to select an installed application to open a particular type of content.</simpara></listitem>
 <listitem><simpara><classname>Gtk::Grid</classname> is a new container widget that will eventually replace <classname>Gtk::Box</classname> and <classname>Gtk::Table</classname>. It arranges its children according to properties of those children rather than its own layout details.</simpara></listitem>
-<listitem><simpara><classname>Gtk::Switch</classname> displays On/Off states more explictly than <classname>Gtk::CheckButton</classname>. It may be useful, for instance, when allowing users to activate hardware.</simpara></listitem>
+<listitem><simpara><classname>Gtk::Switch</classname> displays On/Off states more explicitly than <classname>Gtk::CheckButton</classname>. It may be useful, for instance, when allowing users to activate hardware.</simpara></listitem>
 </orderedlist>
 
 <para>&gtkmm; 3 also made several small changes to the API, which you will probably encounter when porting code that used &gtkmm;-2.4. Here is a short list:</para>
@@ -796,7 +796,7 @@ when porting code that used &gtkmm;-3.0 and <application>glibmm</application>-2.
   If you've ever used these classes, replace them with a standard C++ container, such as <classname>std::vector</classname>.</simpara></listitem>
 <listitem><simpara><classname>Gtk::Container</classname> has been removed.</simpara></listitem>
 <listitem><simpara><methodname>Gtk::Widget::show_all()</methodname> has been removed. The default value
-  of <methodname>Gtk::Widget::property_visible()</methodname>has been changed from
+  of <methodname>Gtk::Widget::property_visible()</methodname> has been changed from
   <literal>false</literal> to <literal>true</literal>.</simpara></listitem>
 <listitem><simpara>All event signals have been removed from <classname>Gtk::Widget</classname>.
   In most cases you can use one of the subclasses of <classname>Gtk::EventController</classname>
@@ -1359,7 +1359,7 @@ actions.
 <title>Entry Icons</title>
 
 <para>An <classname>Entry</classname> widget can show an icon at the start or
-end of the text area. The icon can be specifed by methods such as
+end of the text area. The icon can be specified by methods such as
 <methodname>set_icon_from_paintable()</methodname> or
 <methodname>set_icon_from_icon_name()</methodname>. An application can respond to the
 user pressing the icon by handling the
@@ -1575,7 +1575,7 @@ but you can change it to a vertical progress bar by using the
 <title>Activity Mode</title>
 
 <para>
-Besides indicating the amount of progress that has occured, the
+Besides indicating the amount of progress that has occurred, the
 progress bar can also be used to indicate that there is some activity;
 this is done by placing the progress bar in <emphasis>activity mode</emphasis>. In
 this mode, the progress bar displays a small rectangle which moves
@@ -2343,7 +2343,7 @@ The <classname>TreeModelColumnRecord</classname> class is used to keep track
 of the columns and their data types. You add
 <classname>TreeModelColumn</classname> instances to the
 <classname>ColumnRecord</classname> and then use those
-<classname>TreeModelColumns</classname> when getting and setting the data in
+<classname>TreeModelColumn</classname>s when getting and setting the data in
 model rows. You will probably find it convenient to derive a new
 <classname>TreeModelColumnRecord</classname> which has your
 <classname>TreeModelColumn</classname> instances as member data.
@@ -2524,7 +2524,7 @@ m_TreeView.append_column(*pColumn);</programlisting>
 <title>Specifying CellRenderer details</title>
 
 <para>
-The default <classname>CellRenderers</classname> and their default behaviour
+The default <classname>CellRenderer</classname>s and their default behaviour
 will normally suffice, but you might occasionally need finer control. For
 instance, this example code from
 <filename>gtkmm/demos/gtk-demo/example_treeview_treestore.cc</filename>, appends a
@@ -3371,7 +3371,7 @@ show the found text.
 <para>
 You can embed widgets, such as <classname>Gtk::Button</classname>s, in the
 text. Each such child widget needs a <classname>ChildAnchor</classname>.
-ChildAnchors are associated with <classname>iterators</classname>. For
+ChildAnchors are associated with <classname>iterator</classname>s. For
 instance, to create a child anchor at a particular position, use
 <methodname>Gtk::TextBuffer::create_child_anchor()</methodname>:
 </para>
@@ -3564,7 +3564,7 @@ m_Box.append(*toolbar);
 <section xml:id="sec-menus-popup">
 <title>Popup Menus</title>
 <para>
-<classname>Menus</classname> are normally just added to a window, but they can
+<classname>Menu</classname>s are normally just added to a window, but they can
 also be displayed temporarily as the result of a mouse button click. For
 instance, a context menu might be displayed when the user clicks their right
 mouse button.
@@ -6172,7 +6172,7 @@ If you wish to learn more about smartpointers, you might look in these
 books:
 <itemizedlist>
 <listitem><para>
-Bjarne Stroustrup, "The C++ Programming Language" Forth Edition - section 34.3
+Bjarne Stroustrup, "The C++ Programming Language" Fourth Edition - section 34.3
 </para></listitem>
 <listitem><para>
 Nicolai M. Josuttis, "The C++ Standard Library" - section 4.2
@@ -6266,7 +6266,7 @@ widgets are instantiated during <methodname>Gtk::Builder::create_from_file()</me
 <methodname>get_widget()</methodname> returns child widgets that are
 <function>manage()</function>ed (see the <link linkend="chapter-memory">Memory
 Management</link> chapter), so they will be deleted when their parent
-container is deleted. <classname>Windows</classname> (such as <classname>Dialogs</classname>)
+container is deleted. <classname>Window</classname>s (such as <classname>Dialog</classname>s)
 cannot be managed because they have no parent container, so you must delete them at
 some point. The documentation of <classname>Gtk::Builder</classname> has more to say
 about the memory management of different kinds of objects.
@@ -7825,7 +7825,7 @@ After all this work, our application can now show a preference dialog like this:
 </para>
 
 <figure xml:id="figure-buildapp-pref-dialog">
-  <title>An preference dialog</title>
+  <title>A preference dialog</title>
   <screenshot>
     <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;buildapp_pref_dialog.png"/></imageobject></mediaobject>
   </screenshot>
@@ -9417,7 +9417,7 @@ $ /usr/lib/glibmm-2.68/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtk
 to convert a C++ type to a C type, or vice-versa. <command>gmmproc</command> takes this information
 from an .m4 file in your <literal>tools/m4/</literal> or <literal>codegen/m4/</literal> directory.
 This allows it to call a C function in the implementation of your C++ method,
-passing the appropriate parameters to that C functon. For instance, this
+passing the appropriate parameters to that C function. For instance, this
 tells <command>gmmproc</command> how to convert a <classname>GtkTreeView</classname>
 pointer to a <classname>Gtk::TreeView</classname> pointer:
 </para>
@@ -10382,7 +10382,7 @@ _WRAP_ENUM(SeekType, GSeekType, NO_GTYPE, s#^SEEK_#SEEK_TYPE_#)
 <section xml:id="gmmproc-wrap-enum-docs-only">
 <title>_WRAP_ENUM_DOCS_ONLY</title>
 
-<para>This macro just generates a Doxygen documentationn block for the enum.
+<para>This macro just generates a Doxygen documentation block for the enum.
   This is useful for enums that can't be wrapped with
   <function>_WRAP_ENUM()</function> because they are complexly defined (maybe
   using C macros) but including the generated enum documentation is still
