@@ -1,60 +1,80 @@
+# gtkmm-documentation
 This is the documentation for gtkmm, a C++ API for GTK.
 See http://www.gtkmm.org/
 
 gtkmm-documentation can be built with Autotools or Meson.
-Building with Autotools may be phased out in the future.
+Autotools support may be dropped in the future.
 
 docs/tutorial/C/index-in.docbook and the built index.docbook files are
-DocBook 5.0 documents. index.docbook requires these packages:
+DocBook 5.0 documents. index.docbook requires these packages (Ubuntu names,
+can have other names in other distros):
   * docbook5-xml
   * docbook-xsl
-(Ubuntu names, can have other names in other distros).
+
 It may be possible to build without these packages, but it will be much slower.
 The xmllint command is told to read files from http://docbook.org.
 The xsltproc command is told to read files from http://docbook.sourceforge.net.
 The commands first search for local copies of those files. If local copies exist
 and are installed at expected locations, the commands make no network accesses.
 
-Building with Meson
--------------------
+# Building with Meson
+
 Create a build directory:
+```
   $ cd gtkmm-documentation
   $ meson [options] <build-dir>
+```
 Do not call the build-dir gtkmm-documentation/build. There is already such a
 directory, used when building with Autotools.
 
 Print a list of configuration options:
+```
   $ cd <build-dir>
   $ meson configure
+```
 
 Example of changing options:
+```
   $ cd <build-dir>
   $ meson configure --prefix=/opt/gnome -Dbuild-translations=true
+```
 
 Create the html files of the tutorial:
+```
   $ cd <build-dir>
   $ ninja
+```
 
 Install them:
+```
   $ ninja install
+```
 
 Build the example programs:
+```
   $ ninja examples
+```
 or (probably slower)
+```
   $ ninja test
+```
 
 Create a PDF file:
+```
   $ meson configure -Dbuild-pdf=true
   $ ninja
-This requires that you have xsltproc and either the dblatex or fop command
+```
+This requires that you have xsltproc and either the dblatex or fop commands
 installed.
 
 Make a tarball:
+```
   $ ninja dist
+```
 In addition to the files in the git repository, the tarball will contain some
-built files. These files must already exist. 'ninja dist' will fail, unless you
-have previously run 'ninja' and 'ninja install' with build-translations=true.
+built files. These files must already exist. `ninja dist` will fail, unless you
+have previously run `ninja` and `ninja install` with build-translations=true.
 
-This tarball is not identical to one made with "make dist" or "make distcheck".
-There is e.g. no "configure" file. If you want to use a tarball made with
-"ninja dist" for building with Autotools, you have to start with ./autogen.sh.
+This tarball is not identical to one made with `make dist` or `make distcheck`.
+There is e.g. no `configure` file. If you want to use a tarball made with
+`ninja dist` for building with Autotools, you have to start with ./autogen.sh.
