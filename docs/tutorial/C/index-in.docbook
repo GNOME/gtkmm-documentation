@@ -2822,18 +2822,10 @@ treeview.set_model(sorted_model);</programlisting>
 <section xml:id="sec-treeview-draganddrop">
 <title>Drag and Drop</title>
 
-<note>
-  <para>
-  At the time of writing (July 2022) drag-and-drop in <classname>Gtk::TreeView</classname>s
-  does not work. See the
-  <link xlink:href="https://gitlab.gnome.org/GNOME/gtk/-/issues/3649">gtk#3649 issue</link>
-  for the latest info.
-  </para>
-</note>
 <para>
 <classname>Gtk::TreeView</classname> already implements simple drag-and-drop
 when used with the <classname>Gtk::ListStore</classname> or
-<classname>Gtk::TreeStore</classname> models. If necessary, it also allows you
+<classname>Gtk::TreeStore</classname> models (since gtk 4.8.0). If necessary, it also allows you
 to implement more complex behaviour when items are dragged and dropped, using
 the normal <link linkend="chapter-draganddrop">Drag and Drop</link> API.
 </para>
