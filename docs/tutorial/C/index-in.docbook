@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE book [
-  <!ENTITY url_refdocs_base_glib_html "http://developer.gnome.org/glibmm/unstable/">
+  <!ENTITY url_refdocs_base_glib_html "https://gnome.pages.gitlab.gnome.org/glibmm/">
   <!ENTITY url_refdocs_base_glib "&url_refdocs_base_glib_html;classGlib_1_1">
   <!ENTITY url_refdocs_base_gio "&url_refdocs_base_glib_html;classGio_1_1">
-  <!ENTITY url_refdocs_base_gtk_html "http://developer.gnome.org/gtkmm/unstable/">
+  <!ENTITY url_refdocs_base_gtk_html "https://gnome.pages.gitlab.gnome.org/gtkmm/">
   <!ENTITY url_refdocs_base_gdk "&url_refdocs_base_gtk_html;classGdk_1_1">
   <!ENTITY url_refdocs_base_gtk "&url_refdocs_base_gtk_html;classGtk_1_1">
   <!ENTITY url_figures_base "figures/">
@@ -8074,7 +8074,7 @@ you must use <function>Glib::make_refptr_for_instance()</function> in your
 with a special deleter, which handles the reference-count for the wrapped C object.
 </para>
 
-<para><link xlink:href="&url_refdocs_base_glib;RefPtr.html">Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_glib_html;group__RefPtr.html">Reference</link></para>
 
 <para>A smartpointer acts much like a normal pointer. Here are a few examples.</para>
 
@@ -8880,7 +8880,7 @@ practical - and sensible - to subclass a button for that purpose.
     correct order. This section will give a brief explanation of how to set up
     <application>jhbuild</application> to build and install &gtkmm; from the
     source repository (git). For up-to-date information
-    on <application>jhbuild</application>, please refer to the <link xlink:href="http://developer-old.gnome.org/jhbuild/unstable/">jhbuild manual</link>.
+    on <application>jhbuild</application>, please refer to the <link xlink:href="https://gnome.pages.gitlab.gnome.org/jhbuild/">jhbuild manual</link>.
   </para>
   <note>
     <para>
@@ -8902,7 +8902,7 @@ practical - and sensible - to subclass a button for that purpose.
 
     <para>
       To set up <application>jhbuild</application>, follow the basic
-      installation instructions from the <link xlink:href="http://developer-old.gnome.org/jhbuild/unstable/">jhbuild manual</link>.
+      installation instructions from the <link xlink:href="https://gnome.pages.gitlab.gnome.org/jhbuild/">jhbuild manual</link>.
       After you have installed <application>jhbuild</application>, you
       should copy the sample <application>jhbuild</application> configuration
       file into your home directory by executing the following command from the
