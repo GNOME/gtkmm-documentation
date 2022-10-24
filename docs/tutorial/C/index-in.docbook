@@ -8614,9 +8614,11 @@ This file is in the <literal>gtkmm-documentation</literal> module in GNOME git.
 </para>
 
 <para>
-If you do decide to contribute, please post your contribution to the
-&gtkmm; mailing list at <link xlink:href="mailto:gtkmm-list@gnome.org">&lt;gtkmm-list@gnome.org&gt;</link>
-or as an issue or merge request to <link xlink:href="https://gitlab.gnome.org/GNOME/gtkmm-documentation">GitLab</link>.
+If you do decide to contribute, please post your contribution as an issue or merge request
+to <link xlink:href="https://gitlab.gnome.org/GNOME/gtkmm-documentation">GitLab</link>.
+You can also discuss your ideas on GNOME's <link xlink:href="https://discourse.gnome.org">Discourse</link>
+instance, under the <link xlink:href="https://discourse.gnome.org/c/platform/language-bindings">
+Platform/Language bindings</link> category with a <literal>cplusplus</literal> tag.
 Also, be aware that the entirety of this document is free, and any addition you provide
 must also be free. That is, people must be able to use any portion of
 your examples in their programs, and copies of this document
