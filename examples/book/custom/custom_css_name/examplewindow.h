@@ -1,0 +1,44 @@
+/* gtkmm example Copyright (C) 2022 gtkmm development team
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+ */
+
+#ifndef GTKMM_EXAMPLEWINDOW_H
+#define GTKMM_EXAMPLEWINDOW_H
+
+#include <gtkmm.h>
+#include "mybutton.h"
+
+class ExampleWindow : public Gtk::Window
+{
+public:
+  ExampleWindow();
+  ~ExampleWindow() override;
+
+protected:
+  // Signal handlers:
+  void on_button_quit();
+  void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section,
+    const Glib::Error& error);
+
+  // Child widgets:
+  Gtk::Box m_VBox;
+  MyButton m_Button_Child;
+  Gtk::Label m_Label_Child;
+  Gtk::Box m_ButtonBox;
+  Gtk::Button m_Button_Quit;
+
+  Glib::RefPtr<Gtk::CssProvider> m_refCssProvider;
+};
+
+#endif //GTKMM_EXAMPLEWINDOW_H

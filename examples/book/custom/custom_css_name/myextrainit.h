@@ -1,4 +1,4 @@
-/* gtkmm example Copyright (C) 2017 gtkmm development team
+/* gtkmm example Copyright (C) 2022 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2
@@ -13,14 +13,13 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef GTKMM_CUSTOM_WIDGET_MYEXTRAINIT_H
-#define GTKMM_CUSTOM_WIDGET_MYEXTRAINIT_H
+#ifndef GTKMM_EXAMPLE_MYEXTRAINIT_H
+#define GTKMM_EXAMPLE_MYEXTRAINIT_H
 
 #include <glibmm/extraclassinit.h>
 #include <glibmm/ustring.h>
 
-// Calls gtk_widget_class_set_css_name() in the class init function
-// and gtk_set_has_window() in the instance init function.
+// Calls gtk_widget_class_set_css_name() in the class init function.
 class MyExtraInit : public Glib::ExtraClassInit
 {
 public:
@@ -30,4 +29,4 @@ private:
   Glib::ustring m_css_name;
 };
 
-#endif //GTKMM_CUSTOM_WIDGET_MYEXTRAINIT_H
+#endif //GTKMM_EXAMPLE_MYEXTRAINIT_H

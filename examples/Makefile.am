@@ -32,6 +32,7 @@ check_PROGRAMS =					\
 	book/combobox/entry_complex/example		\
 	book/combobox/entry_text/example		\
 	book/custom/custom_container/example		\
+	book/custom/custom_css_name/example \
 	book/custom/custom_widget/example		\
 	book/dialogs/aboutdialog/example		\
 	book/dialogs/colorchooserdialog/example	\
@@ -126,7 +127,7 @@ dist_noinst_DATA = \
 	book/builder/basic/basic.glade		\
 	book/builder/derived/derived.glade	\
 	book/buttons/button/info.xpm		\
-	book/custom/custom_widget/custom_gtk.css	\
+	book/custom/custom_css_name/custom_gtkmm.css	\
 	$(DIALOGS_ABOUTDIALOG_RESOURCES) \
 	$(DRAWINGAREA_IMAGE_RESOURCES) \
 	book/iconview/gnome-dice-1.svg		\
@@ -264,12 +265,19 @@ book_custom_custom_container_example_SOURCES =		\
 	book/custom/custom_container/mycontainer.cc	\
 	book/custom/custom_container/mycontainer.h
 
+book_custom_custom_css_name_example_SOURCES =		\
+	book/custom/custom_css_name/examplewindow.cc	\
+	book/custom/custom_css_name/examplewindow.h	\
+	book/custom/custom_css_name/main.cc		\
+	book/custom/custom_css_name/myextrainit.cc \
+	book/custom/custom_css_name/myextrainit.h \
+	book/custom/custom_css_name/mybutton.cc		\
+	book/custom/custom_css_name/mybutton.h
+
 book_custom_custom_widget_example_SOURCES =		\
 	book/custom/custom_widget/examplewindow.cc	\
 	book/custom/custom_widget/examplewindow.h	\
 	book/custom/custom_widget/main.cc		\
-	book/custom/custom_widget/myextrainit.cc \
-	book/custom/custom_widget/myextrainit.h \
 	book/custom/custom_widget/mywidget.cc		\
 	book/custom/custom_widget/mywidget.h
 

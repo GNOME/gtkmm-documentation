@@ -18,21 +18,17 @@
 #define GTKMM_CUSTOM_WIDGET_MYWIDGET_H
 
 #include <gtkmm/widget.h>
-#include <gtkmm/cssprovider.h>
-#include "myextrainit.h"
+#include <gtkmm/border.h>
+#include <gdkmm/rgba.h>
 
-class MyWidget
-:
-public MyExtraInit,
-public Gtk::Widget
+class MyWidget : public Gtk::Widget
 {
 public:
   MyWidget();
-  virtual ~MyWidget();
+  ~MyWidget() override;
 
 protected:
-
-  //Overrides:
+  // Overrides:
   Gtk::SizeRequestMode get_request_mode_vfunc() const override;
   void measure_vfunc(Gtk::Orientation orientation, int for_size, int& minimum, int& natural,
     int& minimum_baseline, int& natural_baseline) const override;
@@ -42,11 +38,9 @@ protected:
   void on_unrealize() override;
   void snapshot_vfunc(const Glib::RefPtr<Gtk::Snapshot>& snapshot) override;
 
-  //Signal handler:
-  void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error);
-
   Gtk::Border m_padding;
-  Glib::RefPtr<Gtk::CssProvider> m_refCssProvider;
+  Gdk::RGBA m_foreground{0.0, 0.0, 1.0};
+  Gdk::RGBA m_background{1.0, 0.0, 0.0};
 };
 
 #endif //GTKMM_CUSTOM_WIDGET_MYWIDGET_H

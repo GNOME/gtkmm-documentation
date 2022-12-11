@@ -1,0 +1,20 @@
+/* Example of a CSS style sheet. */
+
+my-button {
+  background-color: red;
+  color:            blue;
+  padding:          10px 15px 20px 5px; /* top right bottom left */
+  border:           solid black 2px;
+  border-radius:    8px;   
+}
+my-button:active {
+  background-color: rgb(0,255,0);
+}
+#my-label {
+  background-color: rgb(180,180,180);
+  color:            rgb(0,255,255);
+  padding:          10px 15px 10px 25px; /* top right bottom left */
+}
+#my-label:hover {
+  background-color: rgb(220,220,220);
+}
