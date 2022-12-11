@@ -37,7 +37,7 @@ protected:
   Gtk::Revealer m_revealer;
   Gtk::Label m_label;
   Gtk::Separator m_separator;
-  Gtk::ComboBoxText m_transition_type;
+  Gtk::DropDown m_transition_type;
   Gtk::Label m_transition_type_label;
   Gtk::SpinButton m_transition_duration;
   Gtk::Label m_transition_duration_label;

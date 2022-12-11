@@ -26,7 +26,6 @@ ExampleWindow::ExampleWindow()
 {
   // Window properties
   set_title("Revealer Example");
-  set_resizable(false);
 
   // Transition type selector
   compose_transition_selector();
@@ -35,12 +34,14 @@ ExampleWindow::ExampleWindow()
 
   // Transition duration selector
   m_transition_duration.set_range(10.0, 10000.0); // Up to 10 secs
+  m_transition_duration.set_increments(10.0, 100.0);
   m_transition_duration.set_value(1000.0);
   m_controls.attach(m_transition_duration_label, 0, 1);
   m_controls.attach(m_transition_duration, 1, 1);
 
   // Switch
   m_switch.set_active(true);
+  m_switch.set_halign(Gtk::Align::START);
   m_switch.property_active().signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_switch_active_changed));
   m_controls.attach(m_switch_label, 0, 2);
   m_controls.attach(m_switch, 1, 2);
@@ -68,14 +69,17 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::compose_transition_selector()
 {
-  m_transition_type.append("None (NONE)");
-  m_transition_type.append("Fade in (CROSSFADE)");
-  m_transition_type.append("Slide in from the left (SLIDE_RIGHT)");
-  m_transition_type.append("Slide in from the right (SLIDE_LEFT)");
-  m_transition_type.append("Slide in from the bottom (SLIDE_UP)");
-  m_transition_type.append("Slide in from the top (SLIDE_DOWN)");
+  const std::vector<Glib::ustring> strings{
+    "None (NONE)",
+    "Fade in (CROSSFADE)",
+    "Slide in from the left (SLIDE_RIGHT)",
+    "Slide in from the right (SLIDE_LEFT)",
+    "Slide in from the bottom (SLIDE_UP)",
+    "Slide in from the top (SLIDE_DOWN)"
+  };
+  m_transition_type.set_model(Gtk::StringList::create(strings));
 
-  m_transition_type.set_active(0);
+  m_transition_type.set_selected(0);
 }
 
 void ExampleWindow::on_switch_active_changed()
@@ -92,7 +96,7 @@ void ExampleWindow::on_switch_active_changed()
 Gtk::RevealerTransitionType ExampleWindow::get_selected_transition_type()
 {
   auto transition_type = Gtk::RevealerTransitionType::NONE;
-  const int active_row = m_transition_type.get_active_row_number();
+  const auto active_row = m_transition_type.get_selected();
 
   switch (active_row)
   {

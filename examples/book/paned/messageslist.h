@@ -1,5 +1,3 @@
-//$Id: messageslist.h 705 2006-07-19 02:55:32Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -25,22 +23,14 @@ class MessagesList: public Gtk::ScrolledWindow
 {
 public:
   MessagesList();
-  virtual ~MessagesList();
-
-  class ModelColumns : public Gtk::TreeModel::ColumnRecord
-  {
-  public:
-
-    ModelColumns()
-    { add(m_col_text); }
-
-    Gtk::TreeModelColumn<Glib::ustring> m_col_text;
-  };
-
-  ModelColumns m_Columns;
+  ~MessagesList() override;
 
 protected:
-  Glib::RefPtr<Gtk::ListStore> m_refListStore; //The Tree Model.
-  Gtk::TreeView m_TreeView; //The Tree View.
+  // Signal handlers:
+  void on_setup_message(const Glib::RefPtr<Gtk::ListItem>& list_item);
+  void on_bind_message(const Glib::RefPtr<Gtk::ListItem>& list_item);
+
+  Glib::RefPtr<Gtk::StringList> m_refStringList; // The List Model.
+  Gtk::ListView m_ListView; // The List View.
 };
 #endif //GTKMM_EXAMPLE_MESSAGESLIST_H

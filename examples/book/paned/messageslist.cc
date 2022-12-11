@@ -15,34 +15,48 @@
  */
 
 #include "messageslist.h"
-#include <sstream>
 
 MessagesList::MessagesList()
 {
   /* Create a new scrolled window, with scrollbars only if needed */
   set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
 
-  set_child(m_TreeView);
+  set_child(m_ListView);
 
   /* create list store */
-  m_refListStore = Gtk::ListStore::create(m_Columns);
-
-  m_TreeView.set_model(m_refListStore);
+  m_refStringList = Gtk::StringList::create({});
+  auto selection_model = Gtk::SingleSelection::create(m_refStringList);
+  m_ListView.set_model(selection_model);
 
   /* Add some messages to the window */
-  for(int i = 0; i < 10; ++i)
-  {
-    std::ostringstream text;
-    text << "message #" << i;
+  for (int i = 1; i <= 10; ++i)
+    m_refStringList->append(Glib::ustring::format("message #", i));
 
-    auto row = *(m_refListStore->append());
-    row[m_Columns.m_col_text] = text.str();
-  }
-
-  //Add the Model's column to the View's columns:
-  m_TreeView.append_column("Messages", m_Columns.m_col_text);
+  // Create a ListItemFactory to use for populating list items.
+  auto factory = Gtk::SignalListItemFactory::create();
+  factory->signal_setup().connect(sigc::mem_fun(*this, &MessagesList::on_setup_message));
+  factory->signal_bind().connect(sigc::mem_fun(*this, &MessagesList::on_bind_message));
+  m_ListView.set_factory(factory);
 }
 
 MessagesList::~MessagesList()
 {
+}
+
+void MessagesList::on_setup_message(const Glib::RefPtr<Gtk::ListItem>& list_item)
+{
+  auto label = Gtk::make_managed<Gtk::Label>();
+  label->set_halign(Gtk::Align::START);
+  list_item->set_child(*label);
+}
+
+void MessagesList::on_bind_message(const Glib::RefPtr<Gtk::ListItem>& list_item)
+{
+  auto pos = list_item->get_position();
+  if (pos == GTK_INVALID_LIST_POSITION)
+    return;
+  auto label = dynamic_cast<Gtk::Label*>(list_item->get_child());
+  if (!label)
+    return;
+  label->set_text(m_refStringList->get_string(pos));
 }

@@ -20,7 +20,7 @@ ExampleWindow::ExampleWindow()
  : m_format_buttons_box(Gtk::Orientation::HORIZONTAL),
    m_menu_button(),
    m_toggle_form_label("Non-modal Popover"),
-   m_toggle_form_combo_label("Popover position:"),
+   m_toggle_form_drop_down_label("Popover position:"),
    m_calendar_popover_label("Label:")
 {
   // Window properties
@@ -56,14 +56,14 @@ ExampleWindow::~ExampleWindow()
 void ExampleWindow::configure_form_popover()
 {
   configure_form_buttons();
-  configure_form_combo();
+  configure_form_drop_down();
 
   m_toggle_form_grid.set_row_spacing(6);
   m_toggle_form_grid.set_column_spacing(6);
   m_toggle_form_grid.attach(m_toggle_form_label, 0, 0, 2, 1);
   m_toggle_form_grid.attach(m_format_buttons_box, 0, 1, 2, 1);
-  m_toggle_form_grid.attach(m_toggle_form_combo_label, 0, 2, 1, 1);
-  m_toggle_form_grid.attach(m_toggle_form_combo, 1, 2, 1, 1);
+  m_toggle_form_grid.attach(m_toggle_form_drop_down_label, 0, 2, 1, 1);
+  m_toggle_form_grid.attach(m_toggle_form_drop_down, 1, 2, 1, 1);
 
   m_toggle_form_popover.set_child(m_toggle_form_grid);
   m_toggle_form_popover.set_position(Gtk::PositionType::BOTTOM);
@@ -88,24 +88,24 @@ void ExampleWindow::configure_form_buttons()
   }
 
   // Group format buttons so that they appear that they belong together
-  auto style_context = m_format_buttons_box.get_style_context();
-  style_context->add_class("raised");
-  style_context->add_class("linked");
+  m_format_buttons_box.add_css_class("raised");
+  m_format_buttons_box.add_css_class("linked");
 }
 
-void ExampleWindow::configure_form_combo()
+void ExampleWindow::configure_form_drop_down()
 {
-  m_toggle_form_combo.append("Bottom");
-  m_toggle_form_combo.append("Right");
+  const std::vector<Glib::ustring> strings{"Bottom", "Right"};
+  m_toggle_form_drop_down.set_model(Gtk::StringList::create(strings));
 
-  m_toggle_form_combo.set_active(0);
+  m_toggle_form_drop_down.set_selected(0);
 
-  m_toggle_form_combo.signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_combo_changed));
+  m_toggle_form_drop_down.property_selected().signal_changed().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_drop_down_changed));
 }
 
-void ExampleWindow::on_combo_changed()
+void ExampleWindow::on_drop_down_changed()
 {
-  int active_entry = m_toggle_form_combo.get_active_row_number();
+  const auto active_entry = m_toggle_form_drop_down.get_selected();
 
   if (active_entry == 0)
   {

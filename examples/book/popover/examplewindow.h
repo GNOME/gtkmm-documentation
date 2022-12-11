@@ -27,7 +27,7 @@ public:
 
 protected:
   // Signal handlers
-  void on_combo_changed();
+  void on_drop_down_changed();
   void on_day_selected();
   void on_button_pressed(int n_press, double x, double y);
   void on_button_released(int n_press, double x, double y);
@@ -44,8 +44,8 @@ protected:
   Gtk::Popover m_toggle_form_popover;
   Gtk::Label m_toggle_form_label;
   Gtk::ToggleButton m_toggle_form_buttons[3];
-  Gtk::Label m_toggle_form_combo_label;
-  Gtk::ComboBoxText m_toggle_form_combo;
+  Gtk::Label m_toggle_form_drop_down_label;
+  Gtk::DropDown m_toggle_form_drop_down;
 
   Gtk::Calendar m_calendar;
   Gtk::Popover m_calendar_popover;
@@ -58,7 +58,7 @@ protected:
 private:
   void configure_form_popover();
   void configure_form_buttons();
-  void configure_form_combo();
+  void configure_form_drop_down();
   void configure_cal_popover();
 
   void show_calendar_popover(double x, double y);
