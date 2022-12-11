@@ -76,6 +76,7 @@ tutorial_figurefiles = [
   'comboboxentry_text.png',
   'custom_container.png',
   'custom_widget.png',
+  'custom_css_name.png',
   'dialogs_about.png',
   'dialogs_colorchooserdialog.png',
   'dialogs_filechooser.png',

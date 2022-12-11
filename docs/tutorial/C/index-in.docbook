@@ -7095,22 +7095,8 @@ called from the class init function. Some other <application>GTK</application>
 functions, if called, must be called from the instance init function.
 If your custom widget must call any of those functions, you can derive a class
 from <classname>Glib::ExtraClassInit</classname> and derive your custom class
-from that class. The following example shows how that's done.</para>
-</section>
-
-<section xml:id="custom-style-information">
-<title>Custom Style Information</title>
-
-<para>Your widget class, whether it's derived directly from
-<classname>Gtk::Widget</classname> or from another widget class,
-can read some style information from a CSS (Cascading Style Sheets) file. The users
-of your widget, or the users of an application program with your widget, can then
-modify the style of your widget without modifying the source code. Useful classes
-are <classname>Gtk::StyleContext</classname> and <classname>Gtk::CssProvider</classname>.
-With the methods of <classname>Gtk::StyleContext</classname> you can read the values
-of your widget's style information. CSS files are described in the documentation of
-<application>GTK</application>. The following example shows a simple use of
-<methodname>Gtk::StyleContext::get_padding()</methodname>.</para>
+from that class. The <link linkend="custom-css-name-example">custom CSS name example</link>
+shows how that's done.</para>
 </section>
 
 <section xml:id="custom-widget-example">
@@ -7125,9 +7111,63 @@ of your widget's style information. CSS files are described in the documentation
   </screenshot>
 </figure>
 
-<para><link xlink:href="&url_examples_base;custom/custom_widget/">Source Code</link></para> <!-- Insert custom_gtk.css -->
+<para><link xlink:href="&url_examples_base;custom/custom_widget/">Source Code</link></para>
+</section>
 </section>
 
+<section xml:id="sec-custom-css-names">
+<title>Custom CSS Names</title>
+
+<para>Many aspects of the look of widgets are controled by CSS (Cascading Style
+Sheet) files. With CSS files you can choose color, font, line thickness, etc.
+If you give some widgets their own names, you can define CSS rules that apply
+only to those widgets, for instance certain buttons, without affecting
+other similar widgets.</para>
+
+<section xml:id="widget-name-css-node-name">
+<title>Widget Name and CSS Node Name</title>
+
+<para>There are two ways of giving a widget a name that you can refer to from a CSS file:
+  <itemizedlist>
+    <listitem><para><methodname>Gtk::Widget::set_name()</methodname>
+    can be called from a C++ constructor. It sets the name of
+    a widget instance.</para></listitem>
+    <listitem><para><methodname>gtk_widget_class_set_css_name()</methodname>
+    can only be called from the class init function. It sets the CSS node name
+    of all instances of a class (a GType). See the <link linkend="custom-init-functions">
+    Class Init and Instance Init Functions</link> section.</para></listitem>
+  </itemizedlist>
+The following example shows a button with its own CSS node name and a label with
+a widget name.</para>
+</section>
+
+<section xml:id="custom-style-information">
+<title>Custom Style Information</title>
+
+<para>To add a style sheet to an application, use one of the
+<methodname>Gtk::CssProvider::load_from_*()</methodname> methods.
+Then add it with <methodname>Gtk::StyleProvider::add_provider_for_display()</methodname>
+(available since &gtkmm; 4.10.0) or <methodname>Gtk::StyleContext::add_provider_for_display()</methodname>.
+<classname>Gtk::StyleContext</classname> also contains methods to read some style
+information, but this class is deprecated since &gtkmm; 4.10.0.</para>
+
+<para>CSS files are described in the documentation of GTK.</para>
+</section>
+
+<section xml:id="custom-css-name-example">
+<title>Example</title>
+
+<para>This example implements a button and a babel with custom style information.</para>
+
+<figure xml:id="figure-custom-css-name">
+  <title>Custom CSS Name</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;custom_css_name.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;custom/custom_css_name/">Source Code</link></para> <!-- Insert custom_gtkmm.css -->
+</section>
 </section>
 
 </chapter>

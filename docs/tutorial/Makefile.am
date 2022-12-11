@@ -52,6 +52,7 @@ HELP_MEDIA =					\
 	figures/comboboxentry_complex.png	\
 	figures/comboboxentry_text.png		\
 	figures/custom_container.png		\
+	figures/custom_css_name.png \
 	figures/custom_widget.png		\
 	figures/dialogs_about.png		\
 	figures/dialogs_colorchooserdialog.png\
