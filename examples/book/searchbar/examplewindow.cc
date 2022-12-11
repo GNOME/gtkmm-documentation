@@ -65,8 +65,8 @@ ExampleWindow::ExampleWindow()
   m_search_bar.set_child(m_search_box);
 
   // Match style of epiphany's search bar
-  m_up_down_box.get_style_context()->add_class("raised");
-  m_up_down_box.get_style_context()->add_class("linked");
+  m_up_down_box.add_css_class("raised");
+  m_up_down_box.add_css_class("linked");
 
   // Buttons
   m_go_up_button.set_image_from_icon_name("go-up-symbolic", Gtk::IconSize::INHERIT, true);

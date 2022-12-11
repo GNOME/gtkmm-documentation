@@ -41,9 +41,8 @@ ExampleWindow::ExampleWindow()
   m_photo_box.append(m_prev_button);
   m_photo_box.append(m_photo_button);
   m_photo_box.append(m_next_button);
-  auto style_context = m_photo_box.get_style_context();
-  style_context->add_class("raised");
-  style_context->add_class("linked");
+  m_photo_box.add_css_class("raised");
+  m_photo_box.add_css_class("linked");
 
   // ActionBar layout
   m_action_bar.pack_start(m_gallery_button);
