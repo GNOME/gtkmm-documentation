@@ -17,13 +17,32 @@
 #include "examplewindow.h"
 #include <iostream>
 
+namespace
+{
+struct PositionTypeStruct
+{
+  Gtk::PositionType position;
+  Glib::ustring text;
+};
+
+const PositionTypeStruct positionTypes[] =
+{
+  { Gtk::PositionType::TOP,    "Top" },
+  { Gtk::PositionType::BOTTOM, "Bottom" },
+  { Gtk::PositionType::LEFT,   "Left" },
+  { Gtk::PositionType::RIGHT,  "Right" }
+};
+
+} // anonymous namespace
+
+
 ExampleWindow::ExampleWindow()
 :
   m_VBox_Top(Gtk::Orientation::VERTICAL, 0),
   m_VBox2(Gtk::Orientation::VERTICAL, 20),
   m_VBox_HScale(Gtk::Orientation::VERTICAL, 10),
   m_HBox_Scales(Gtk::Orientation::HORIZONTAL, 10),
-  m_HBox_Combo(Gtk::Orientation::HORIZONTAL, 10),
+  m_HBox_DropDown(Gtk::Orientation::HORIZONTAL, 10),
   m_HBox_Digits(Gtk::Orientation::HORIZONTAL, 10),
   m_HBox_PageSize(Gtk::Orientation::HORIZONTAL, 10),
 
@@ -90,32 +109,22 @@ ExampleWindow::ExampleWindow()
     &ExampleWindow::on_checkbutton_toggled) );
   m_VBox2.append(m_CheckButton);
 
-  //Position ComboBox:
-  //Create the Tree model:
-  m_refTreeModel = Gtk::ListStore::create(m_Columns);
-  m_ComboBox_Position.set_model(m_refTreeModel);
-  m_ComboBox_Position.pack_start(m_Columns.m_col_title);
+  //Position DropDown:
+  //Create the StringList:
+  auto string_list = Gtk::StringList::create({});
+  m_DropDown_Position.set_model(string_list);
 
-  //Fill the ComboBox's Tree Model:
-  auto row = *(m_refTreeModel->append());
-  row[m_Columns.m_col_position_type] = Gtk::PositionType::TOP;
-  row[m_Columns.m_col_title] = "Top";
-  row = *(m_refTreeModel->append());
-  row[m_Columns.m_col_position_type] = Gtk::PositionType::BOTTOM;
-  row[m_Columns.m_col_title] = "Bottom";
-  row = *(m_refTreeModel->append());
-  row[m_Columns.m_col_position_type] = Gtk::PositionType::LEFT;
-  row[m_Columns.m_col_title] = "Left";
-  row = *(m_refTreeModel->append());
-  row[m_Columns.m_col_position_type] = Gtk::PositionType::RIGHT;
-  row[m_Columns.m_col_title] = "Right";
+  // Fill the DropDown's list model:
+  for (std::size_t i = 0; i < G_N_ELEMENTS(positionTypes); ++i)
+    string_list->append(positionTypes[i].text);
 
-  m_VBox2.append(m_HBox_Combo);
-  m_HBox_Combo.append(*Gtk::make_managed<Gtk::Label>("Scale Value Position:", 0));
-  m_HBox_Combo.append(m_ComboBox_Position);
-  m_ComboBox_Position.signal_changed().connect( sigc::mem_fun(*this, &ExampleWindow::on_combo_position) );
-  m_ComboBox_Position.set_active(0); // Top
-  m_ComboBox_Position.set_expand(true);
+  m_VBox2.append(m_HBox_DropDown);
+  m_HBox_DropDown.append(*Gtk::make_managed<Gtk::Label>("Scale Value Position:", 0));
+  m_HBox_DropDown.append(m_DropDown_Position);
+  m_DropDown_Position.property_selected().signal_changed().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_dropdown_position));
+  m_DropDown_Position.set_selected(0); // Top
+  m_DropDown_Position.set_expand(true);
 
   //Digits:
   m_HBox_Digits.append(*Gtk::make_managed<Gtk::Label>("Scale Digits:", 0));
@@ -154,18 +163,13 @@ void ExampleWindow::on_checkbutton_toggled()
   m_HScale.set_draw_value(m_CheckButton.get_active());
 }
 
-void ExampleWindow::on_combo_position()
+void ExampleWindow::on_dropdown_position()
 {
-  const auto iter = m_ComboBox_Position.get_active();
-  if(!iter)
+  const auto selected = m_DropDown_Position.get_selected();
+  if (selected == GTK_INVALID_LIST_POSITION)
     return;
 
-  const auto row = *iter;
-  if(!row)
-    return;
-
-  const auto postype = row[m_Columns.m_col_position_type];
-
+  const auto postype = positionTypes[selected].position;
   m_VScale.set_value_pos(postype);
   m_HScale.set_value_pos(postype);
 }

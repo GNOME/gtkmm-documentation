@@ -26,9 +26,10 @@ struct SelectionModeStruct
 
 const SelectionModeStruct selectionModes[] =
 {
-  { Gtk::SelectionMode::NONE,   "SelectionMode::NONE" },
-  { Gtk::SelectionMode::SINGLE, "SelectionMode::SINGLE" },
-  { Gtk::SelectionMode::BROWSE, "SelectionMode::BROWSE" }
+  { Gtk::SelectionMode::NONE,     "SelectionMode::NONE" },
+  { Gtk::SelectionMode::SINGLE,   "SelectionMode::SINGLE" },
+  { Gtk::SelectionMode::BROWSE,   "SelectionMode::BROWSE" },
+  { Gtk::SelectionMode::MULTIPLE, "SelectionMode::MULTIPLE" }
 };
 
 } // anonymous namespace
@@ -38,7 +39,7 @@ ExampleWindow::ExampleWindow() :
   m_VBox1(Gtk::Orientation::VERTICAL),
   m_VBox2(Gtk::Orientation::VERTICAL),
   m_ListBox(),
-  m_ComboBox(/* has_entry= */ false),
+  m_DropDown(),
   m_CheckButton_SingleClick("single click mode", /* mnemonic= */ false),
   m_ScrolledWindow(),
   m_Row3("blah3", 3),
@@ -66,12 +67,15 @@ ExampleWindow::ExampleWindow() :
   set_child(m_HBox);
   m_HBox.append(m_VBox1);
 
-  // ComboBox for selection mode.
+  // DropDown for selection mode.
+  auto string_list = Gtk::StringList::create({});
   for (std::size_t i = 0; i < G_N_ELEMENTS(selectionModes); ++i)
-    m_ComboBox.append(selectionModes[i].text);
+    string_list->append(selectionModes[i].text);
 
-  m_ComboBox.signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_selection_mode_changed));
-  m_VBox1.append(m_ComboBox);
+  m_DropDown.set_model(string_list);
+  m_DropDown.property_selected().signal_changed().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_selection_mode_changed));
+  m_VBox1.append(m_DropDown);
 
   const auto mode = m_ListBox.get_selection_mode();
   int index = 0;
@@ -83,7 +87,7 @@ ExampleWindow::ExampleWindow() :
       break;
     }
   }
-  m_ComboBox.set_active(index);
+  m_DropDown.set_selected(index);
 
   // Check button for single click.
   m_CheckButton_SingleClick.set_active(m_ListBox.get_activate_on_single_click());
@@ -146,8 +150,8 @@ ExampleWindow::ExampleWindow() :
 
 void ExampleWindow::on_selection_mode_changed()
 {
-  int index = m_ComboBox.get_active_row_number();
-  if (index < 0 || static_cast<std::size_t>(index) >= G_N_ELEMENTS(selectionModes))
+  auto index = m_DropDown.get_selected();
+  if (index == GTK_INVALID_LIST_POSITION)
     index = 0;
   m_ListBox.set_selection_mode(selectionModes[index].mode);
 }

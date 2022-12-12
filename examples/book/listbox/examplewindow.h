@@ -48,7 +48,7 @@ private:
   Gtk::Box m_VBox1;
   Gtk::Box m_VBox2;
   Gtk::ListBox m_ListBox;
-  Gtk::ComboBoxText m_ComboBox;
+  Gtk::DropDown m_DropDown;
   Gtk::CheckButton m_CheckButton_SingleClick;
   Gtk::ScrolledWindow m_ScrolledWindow;
   ExampleRow m_Row3;
