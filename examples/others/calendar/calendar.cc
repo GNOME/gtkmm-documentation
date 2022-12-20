@@ -16,7 +16,10 @@
 
 #include <gtkmm.h>
 #include <iostream>
+#include <algorithm>
 
+#define HAS_STYLE_PROVIDER_ADD_PROVIDER_FOR_DISPLAY GTKMM_CHECK_VERSION(4,9,0)
+#define HAS_FONT_DIALOG_BUTTON GTKMM_CHECK_VERSION(4,9,0)
 
 enum { DEF_PAD = 10 };
 enum { DEF_PAD_SMALL = 5 };
@@ -29,16 +32,16 @@ class CalendarExample : public Gtk::Window
 
 public:
   CalendarExample();
-  virtual ~CalendarExample();
+  ~CalendarExample() override;
 
   void set_flags();
   void toggle_flag(Gtk::CheckButton *toggle);
 
   void month_changed();
   void day_selected();
-  void day_selected_double_click();
 
 protected:
+  static Glib::ustring font_style_to_string(Pango::Style font_style);
   void on_font_button_font_set();
   void on_button_close();
   void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error);
@@ -49,10 +52,13 @@ protected:
 
   Glib::RefPtr<Gtk::CssProvider> css_provider_;
 
+#if HAS_FONT_DIALOG_BUTTON
+  Gtk::FontDialogButton* font_button_;
+#else
   Gtk::FontButton* font_button_;
+#endif
   Gtk::Calendar* calendar_;
   Gtk::Label* label_selected_;
-  Gtk::Label* label_selected_double_click_;
   Gtk::Label* label_month_;
 
   Glib::DateTime get_date() const;
@@ -67,7 +73,6 @@ CalendarExample::~CalendarExample()
 
   delete calendar_;
   delete label_selected_;
-  delete label_selected_double_click_;
   delete label_month_;
 }
 
@@ -83,11 +88,6 @@ void CalendarExample::month_changed()
 void CalendarExample::day_selected()
 {
   label_selected_->set_text(get_date().format("%x"));
-}
-
-void CalendarExample::day_selected_double_click()
-{
-  label_selected_double_click_->set_text(get_date().format("%x"));
 }
 
 void CalendarExample::set_flags()
@@ -113,17 +113,31 @@ void CalendarExample::toggle_flag(Gtk::CheckButton *toggle)
 
 void CalendarExample::on_font_button_font_set()
 {
-  const auto font_name = font_button_->get_font();
-  const Pango::FontDescription font_desc(font_name);
+  const Pango::FontDescription font_desc = font_button_->get_font_desc();
   const auto font_family = font_desc.get_family();
   const auto font_size = font_desc.get_size();
-  const auto css =
-    "* {\n" +
-    (font_family.empty() ? "" : "    font-family: " + font_desc.get_family() + ";\n") +
+  const auto font_style = font_desc.get_style();
+  const auto font_weight = font_desc.get_weight();
+  // See https://www.w3.org/TR/css-fonts-3/
+  const Glib::ustring css =
+    "calendar {\n" +
+    (font_family.empty() ? "" : "    font-family: " + font_family + ";\n") +
     (font_size == 0 ? "" : "    font-size: " + std::to_string(font_size / PANGO_SCALE) + "pt;\n") +
+    ("    font-style: " + font_style_to_string(font_style) + ";\n") +
+    ("    font-weight: " + std::to_string(std::clamp(static_cast<int>(font_weight), 100, 900)) + ";\n") +
     "}";
 
   css_provider_->load_from_data(css.raw());
+}
+
+Glib::ustring CalendarExample::font_style_to_string(Pango::Style font_style)
+{
+  switch (font_style)
+  {
+  case Pango::Style::OBLIQUE: return "oblique";
+  case Pango::Style::ITALIC: return "italic";
+  default: return "normal";
+  }
 }
 
 void CalendarExample::on_button_close()
@@ -188,7 +202,6 @@ CalendarExample::CalendarExample()
   calendar_->signal_prev_month().connect(sigc::mem_fun(*this, &CalendarExample::month_changed));
   calendar_->signal_next_month().connect(sigc::mem_fun(*this, &CalendarExample::month_changed));
   calendar_->signal_day_selected().connect(sigc::mem_fun(*this, &CalendarExample::day_selected));
-  //calendar_->signal_day_selected_double_click().connect(sigc::mem_fun(*this, &CalendarExample::day_selected_double_click));
 
   auto separator = Gtk::make_managed<Gtk::Separator>(Gtk::Orientation::VERTICAL);
   hbox->append(*separator);
@@ -224,15 +237,27 @@ CalendarExample::CalendarExample()
   }
 
   /* Build the right font-button */
+#if HAS_FONT_DIALOG_BUTTON
+  auto font_dialog = Gtk::FontDialog::create();
+  font_button_ = Gtk::make_managed<Gtk::FontDialogButton>(font_dialog);
+  font_button_->property_font_desc().signal_changed().connect(
+    sigc::mem_fun(*this, &CalendarExample::on_font_button_font_set));
+#else
   font_button_ = Gtk::make_managed<Gtk::FontButton>();
-  font_button_->signal_font_set().connect(sigc::mem_fun(*this, &CalendarExample::on_font_button_font_set));
+  font_button_->signal_font_set().connect(
+    sigc::mem_fun(*this, &CalendarExample::on_font_button_font_set));
+#endif
   vbox2->append(*font_button_);
 
   // Add a StyleProvider to the Gtk::Calendar, so we can change the font.
-  // This was easier before Gtk::Widget::override_font() was deprecated.
   css_provider_ = Gtk::CssProvider::create();
-  auto refStyleContext = calendar_->get_style_context();
-  refStyleContext->add_provider(css_provider_, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+#if HAS_STYLE_PROVIDER_ADD_PROVIDER_FOR_DISPLAY
+  Gtk::StyleProvider::add_provider_for_display(
+    calendar_->get_display(), css_provider_, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+#else
+  Gtk::StyleContext::add_provider_for_display(
+    calendar_->get_display(), css_provider_, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+#endif
   css_provider_->signal_parsing_error().connect(
     sigc::mem_fun(*this, &CalendarExample::on_parsing_error));
 
@@ -253,13 +278,6 @@ CalendarExample::CalendarExample()
   hbox->append(*label);
   label_selected_ = new Gtk::Label("");
   hbox->append(*label_selected_);
-
-  hbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 5);
-  vbox2->append(*hbox);
-  label = Gtk::make_managed<Gtk::Label>("Day selected double click:");
-  hbox->append(*label);
-  label_selected_double_click_ = new Gtk::Label("");
-  hbox->append(*label_selected_double_click_);
 
   hbox = Gtk::make_managed<Gtk::Box>(Gtk::Orientation::HORIZONTAL, 5);
   vbox2->append(*hbox);
