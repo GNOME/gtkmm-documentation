@@ -1,7 +1,7 @@
 # This file is part of gtkmm-documentation.
 
 project('gtkmm-documentation', 'c', 'cpp',
-  version: '3.24.2',
+  version: '3.24.3',
   license: 'GPLv2',
   default_options: [
     'cpp_std=c++14',

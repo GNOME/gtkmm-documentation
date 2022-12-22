@@ -1,3 +1,15 @@
+3.24.3: (stable)
+
+* Update links to gtk and glib documentation
+  (Kjell Ahlstedt)
+
+Meson build:
+* insert_example_code.py: Sort input file list
+  (Bernhard M. Wiedemann) Merge request !15
+* Avoid configuration warnings
+  (Kjell Ahlstedt)
+
+
 3.24.2: (stable)
 
 * PO-files: added: why `fuzzy` tag appears
