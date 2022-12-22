@@ -1,3 +1,27 @@
+4.0.3: (stable)
+
+* application/menubar example: Make the keyboard shortcuts work
+* ComboBox examples: Use Gtk::EventcontrollerFocus
+* Update the Custom Widgets chapter, add the  Custom CSS Names section,
+  update the corresponding examples, add the Custom CSS Name example
+  (Kjell Ahlstedt)
+* Typo and spacing fixes
+  (Anders Jonsson) Merge request !16
+* Many chapters have been updated. All of the tutorial now describes
+  gtkmm4, rather than gtkmm3.
+* Many classes and methods are deprecated since gtk/gtkmm 4.9.
+  Deprecated API has been replaced by non-deprecated API in some examples.
+  Deprecated API is still used elsewhere. If you build with gtkmm > 4.8,
+  it's not possible to build all examples with -Dwarnings=fatal.
+  (Kjell Ahlstedt)
+
+Meson build:
+* insert_example_code.py: Sort input file list
+  (Bernhard M. Wiedemann) Merge request !15
+* Avoid configuration warnings
+  (Kjell Ahlstedt)
+
+
 4.0.2: (stable)
 
 * Main menu example: Make the keyboard shortcuts work
