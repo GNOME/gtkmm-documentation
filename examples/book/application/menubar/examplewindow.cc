@@ -58,7 +58,7 @@ void ExampleWindow::on_action_close()
 {
   std::cout << G_STRFUNC << std::endl;
 
-  hide();
+  set_visible(false);
 }
 
 void ExampleWindow::on_action_send_notification()

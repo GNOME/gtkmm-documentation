@@ -17,7 +17,7 @@
 #include <iostream>
 #include <gtkmm/version.h>
 
-#define HAS_STYLE_PROVIDER_ADD_PROVIDER_FOR_DISPLAY GTKMM_CHECK_VERSION(4,9,0)
+#define HAS_STYLE_PROVIDER_ADD_PROVIDER_FOR_DISPLAY GTKMM_CHECK_VERSION(4,9,1)
 
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::Orientation::VERTICAL),

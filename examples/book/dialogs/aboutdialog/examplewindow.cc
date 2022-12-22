@@ -70,7 +70,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_clicked()
 {
-  m_Dialog.show();
+  m_Dialog.set_visible(true);
 
   //Bring it to the front, in case it was already shown:
   m_Dialog.present();

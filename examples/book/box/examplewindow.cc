@@ -173,6 +173,6 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_quit_clicked()
 {
-  hide();
+  set_visible(false);
 }
 

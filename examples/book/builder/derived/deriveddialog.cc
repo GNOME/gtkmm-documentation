@@ -57,5 +57,5 @@ DerivedDialog::~DerivedDialog()
 
 void DerivedDialog::on_button_quit()
 {
-  hide(); //hide() will cause Gtk::Application::run() to end.
+  set_visible(false); // set_visible(false) will cause Gtk::Application::run() to end.
 }

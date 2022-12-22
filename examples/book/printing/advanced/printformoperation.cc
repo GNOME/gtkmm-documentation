@@ -196,7 +196,7 @@ bool PrintFormOperation::on_preview(const
   m_pDialog->signal_hide().connect(sigc::mem_fun(*this,
               &PrintFormOperation::on_preview_window_hide));
 
-  m_pDialog->show();
+  m_pDialog->set_visible(true);
 
   return true;
 }

@@ -18,8 +18,8 @@
 #include <iostream>
 #include <algorithm>
 
-#define HAS_STYLE_PROVIDER_ADD_PROVIDER_FOR_DISPLAY GTKMM_CHECK_VERSION(4,9,0)
-#define HAS_FONT_DIALOG_BUTTON GTKMM_CHECK_VERSION(4,9,0)
+#define HAS_STYLE_PROVIDER_ADD_PROVIDER_FOR_DISPLAY GTKMM_CHECK_VERSION(4,9,1)
+#define HAS_FONT_DIALOG_BUTTON GTKMM_CHECK_VERSION(4,9,1)
 
 enum { DEF_PAD = 10 };
 enum { DEF_PAD_SMALL = 5 };
@@ -142,7 +142,7 @@ Glib::ustring CalendarExample::font_style_to_string(Pango::Style font_style)
 
 void CalendarExample::on_button_close()
 {
-  hide();
+  set_visible(false);
 }
 
 void CalendarExample::on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error)

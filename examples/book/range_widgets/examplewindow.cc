@@ -193,5 +193,5 @@ void ExampleWindow::on_adjustment2_value_changed()
 
 void ExampleWindow::on_button_quit()
 {
-  hide();
+  set_visible(false);
 }

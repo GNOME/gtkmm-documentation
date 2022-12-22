@@ -86,7 +86,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_close()
 {
-  hide();
+  set_visible(false);
 }
 
 void ExampleWindow::on_toolbar_item()

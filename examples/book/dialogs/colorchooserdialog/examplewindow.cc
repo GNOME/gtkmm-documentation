@@ -71,12 +71,12 @@ void ExampleWindow::on_button_dialog_clicked()
   //Get the previously selected color:
   m_pDialog->set_rgba(m_Color);
 
-  m_pDialog->show();
+  m_pDialog->set_visible(true);
 }
 
 void ExampleWindow::on_dialog_response(int response_id)
 {
-  m_pDialog->hide();
+  m_pDialog->set_visible(false);
 
   //Handle the response:
   switch (response_id)

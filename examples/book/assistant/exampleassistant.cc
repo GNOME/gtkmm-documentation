@@ -79,14 +79,14 @@ void ExampleAssistant::on_assistant_cancel()
 {
   std::cout << "Cancel was clicked";
   print_status();
-  hide();
+  set_visible(false);
 }
 
 void ExampleAssistant::on_assistant_close()
 {
   std::cout << "Assistant was closed";
   print_status();
-  hide();
+  set_visible(false);
 }
 
 void ExampleAssistant::on_assistant_prepare(Gtk::Widget* /* widget */)

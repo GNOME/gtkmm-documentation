@@ -258,9 +258,9 @@ void ExampleWindow::on_printoperation_done(Gtk::PrintOperation::Result result)
         true /* modal */));
       m_pDialog->set_hide_on_close(true);
       m_pDialog->signal_response().connect(
-        sigc::hide(sigc::mem_fun(*m_pDialog, &Gtk::Widget::hide)));
+        [this](int /* response_id */){ m_pDialog->set_visible(false); });
     }
-    m_pDialog->show();
+    m_pDialog->set_visible(true);
   }
   else if (result == Gtk::PrintOperation::Result::APPLY)
   {
@@ -339,5 +339,5 @@ void ExampleWindow::on_menu_file_print()
 
 void ExampleWindow::on_menu_file_quit()
 {
-  hide();
+  set_visible(false);
 }

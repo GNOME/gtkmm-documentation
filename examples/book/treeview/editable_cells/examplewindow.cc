@@ -116,7 +116,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_quit()
 {
-  hide();
+  set_visible(false);
 }
 
 void ExampleWindow::treeviewcolumn_validated_on_cell_data(
@@ -182,7 +182,7 @@ void ExampleWindow::cellrenderer_validated_on_edited(
     dialog->signal_response().connect(sigc::bind(
       sigc::mem_fun(*this, &ExampleWindow::on_message_response), dialog));
 
-    dialog->show();
+    dialog->set_visible(true);
 
     //Start editing again, with the bad text, so that the user can correct it.
     //A real application should probably allow the user to revert to the

@@ -90,7 +90,7 @@ void ExampleWindow::on_button_remove()
 
 void ExampleWindow::on_button_quit()
 {
-  hide();
+  set_visible(false);
 }
 
 void ExampleWindow::fill_memory(int n_top_level_rows)

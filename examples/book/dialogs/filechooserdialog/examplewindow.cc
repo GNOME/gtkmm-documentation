@@ -75,7 +75,7 @@ void ExampleWindow::on_button_file_clicked()
   dialog->add_filter(filter_any);
 
   //Show the dialog and wait for a user response:
-  dialog->show();
+  dialog->set_visible(true);
 }
 
 void ExampleWindow::on_file_dialog_response(int response_id, Gtk::FileChooserDialog* dialog)
@@ -120,7 +120,7 @@ void ExampleWindow::on_button_folder_clicked()
   dialog->add_button("Select", Gtk::ResponseType::OK);
 
   //Show the dialog and wait for a user response:
-  dialog->show();
+  dialog->set_visible(true);
 }
 
 void ExampleWindow::on_folder_dialog_response(int response_id, Gtk::FileChooserDialog* dialog)

@@ -162,7 +162,7 @@ Wheelbarrow::Wheelbarrow()
   set_child(*Gtk::manage(image));
 
   image->set_size_request(48, 48);
-  image->show();
+  image->set_visible(true);
 
   // Mask out transparent parts of the pixmap.
   //TODO: Use gdk_cairo_region_from_surface() or suchlike when it exists.
@@ -180,7 +180,7 @@ bool Wheelbarrow::on_button_press_event(GdkEventButton* event)
   switch(event->button)
   {
     case 1: begin_move_drag(event->button, int(event->x_root), int(event->y_root), event->time); break;
-    case 3: hide(); break;
+    case 3: set_visible(false); break;
   }
 
   return false;

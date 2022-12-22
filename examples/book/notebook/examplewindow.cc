@@ -55,7 +55,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_quit()
 {
-  hide();
+  set_visible(false);
 }
 
 void ExampleWindow::on_notebook_switch_page(Gtk::Widget* /* page */, guint page_num)

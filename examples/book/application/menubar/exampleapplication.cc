@@ -90,7 +90,7 @@ void ExampleApplication::create_window()
   window->signal_hide().connect(sigc::bind(sigc::mem_fun(*this,
     &ExampleApplication::on_window_hide), window));
 
-  window->show();
+  window->set_visible(true);
 }
 
 void ExampleApplication::on_window_hide(Gtk::Window* window)
@@ -115,7 +115,7 @@ void ExampleApplication::on_action_something()
 void ExampleApplication::on_action_quit()
 {
   std::cout << G_STRFUNC << std::endl;
-  quit(); // Not really necessary, when Gtk::Widget::hide() is called.
+  quit(); // Not really necessary, when Gtk::Widget::set_visible(false) is called.
 
   // Gio::Application::quit() will make Gio::Application::run() return,
   // but it's a crude way of ending the program. The window is not removed
@@ -126,7 +126,7 @@ void ExampleApplication::on_action_quit()
   // is to hide the window.
   auto windows = get_windows();
   if (windows.size() > 0)
-    windows[0]->hide(); // In this simple case, we know there is only one window.
+    windows[0]->set_visible(false); // In this simple case, we know there is only one window.
 }
 
 void ExampleApplication::on_action_print(const Glib::VariantBase& parameter)

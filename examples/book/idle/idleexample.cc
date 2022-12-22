@@ -60,7 +60,7 @@ IdleExample::IdleExample() :
 
 void IdleExample::on_button_clicked()
 {
-  hide();
+  set_visible(false);
 }
 
 // this timer callback function is executed once every 50ms (set in connection

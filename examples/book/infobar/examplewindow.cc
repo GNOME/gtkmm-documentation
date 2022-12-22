@@ -69,7 +69,7 @@ ExampleWindow::ExampleWindow()
               &ExampleWindow::on_textbuffer_changed) );
 
   // Keep the InfoBar hidden until a message needs to be shown:
-  m_InfoBar.hide();
+  m_InfoBar.set_visible(false);
 
   // Make the clear button insensitive until text is typed in the buffer.  When
   // the button is sensitive and it is pressed, the InfoBar is displayed with a
@@ -85,12 +85,12 @@ void ExampleWindow::on_infobar_response(int)
 {
   // Clear the message and hide the info bar:
   m_Message_Label.set_text("");
-  m_InfoBar.hide();
+  m_InfoBar.set_visible(false);
 }
 
 void ExampleWindow::on_button_quit()
 {
-  hide();
+  set_visible(false);
 }
 
 void ExampleWindow::on_button_clear()
@@ -98,7 +98,7 @@ void ExampleWindow::on_button_clear()
   m_refTextBuffer->set_text("");
   m_Message_Label.set_text("Cleared the text.");
   m_InfoBar.set_message_type(Gtk::MessageType::INFO);
-  m_InfoBar.show();
+  m_InfoBar.set_visible(true);
 }
 
 void ExampleWindow::on_textbuffer_changed()

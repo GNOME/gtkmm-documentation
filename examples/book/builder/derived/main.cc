@@ -73,7 +73,7 @@ void on_app_activate()
   pDialog->signal_hide().connect([] () { delete pDialog; });
 
   app->add_window(*pDialog);
-  pDialog->show();
+  pDialog->set_visible(true);
 }
 } // anonymous namespace
 

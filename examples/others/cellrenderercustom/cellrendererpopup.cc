@@ -160,7 +160,7 @@ Gtk::CellEditable* CellRendererPopup::start_editing_vfunc(const Glib::RefPtr<con
 
   popup_entry->set_text(property_text());
 
-  popup_entry->show();
+  popup_entry->set_visible(true);
 
   // Release unique_ptr<> ownership, and let gtkmm manage the widget.
   popup_entry_ = Gtk::manage(popup_entry.release());
@@ -172,7 +172,7 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
 {
   // I'm not sure this is ok to do, but we need to show the window to be
   // able to get the allocation right.
-  popup_window_.show();
+  popup_window_.set_visible(true);
 
   const auto alloc = popup_window_.get_allocation();
 
@@ -213,7 +213,7 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
 
   //popup_window_.move(x, y);
   (void)x; (void)y; // Pretend that x and y are used.
-  popup_window_.show();
+  popup_window_.set_visible(true);
 
   shown_ = true;
 
@@ -226,7 +226,7 @@ void CellRendererPopup::on_show_popup(const Glib::ustring&, int, int y1, int x2,
 void CellRendererPopup::on_hide_popup()
 {
   popup_window_.set_can_focus(false);
-  popup_window_.hide();
+  popup_window_.set_visible(false);
 
   if(popup_entry_)
     popup_entry_->editing_done();

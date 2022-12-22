@@ -41,7 +41,7 @@ void ExampleApplication::create_window(const Glib::RefPtr<Gio::File>& file)
   window->signal_hide().connect(sigc::bind(sigc::mem_fun(*this,
     &ExampleApplication::on_window_hide), window));
 
-  window->show();
+  window->set_visible(true);
 
   if(!file)
   {

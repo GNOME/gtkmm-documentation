@@ -131,5 +131,5 @@ void ExampleWindow::on_remove_some()
 
 void ExampleWindow::on_quit()
 {
-  hide();
+  set_visible(false);
 }

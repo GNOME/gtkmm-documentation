@@ -63,12 +63,12 @@ void ExampleWindow::on_button_dialog_clicked()
   //Get the previously selected font name from the FontButton:
   m_pDialog->set_font(m_FontButton.get_font());
 
-  m_pDialog->show();
+  m_pDialog->set_visible(true);
 }
 
 void ExampleWindow::on_dialog_response(int response_id)
 {
-  m_pDialog->hide();
+  m_pDialog->set_visible(false);
 
   //Handle the response:
   switch (response_id)

@@ -73,7 +73,7 @@ void ExampleWindow::on_dialog_response(int response_id)
   {
   case Gtk::ResponseType::CLOSE:
   case Gtk::ResponseType::DELETE_EVENT:
-    hide();
+    set_visible(false);
     break;
   default:
     std::cout << "Unexpected response_id=" << response_id << std::endl;

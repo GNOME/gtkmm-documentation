@@ -204,7 +204,7 @@ void ExampleApplication::create_window()
     sigc::mem_fun(*this, &ExampleApplication::on_window_hide), win));
 
   win->set_show_menubar();
-  win->show();
+  win->set_visible(true);
 }
 
 void ExampleApplication::on_window_hide(Gtk::Window* window)
@@ -220,7 +220,7 @@ void ExampleApplication::on_menu_file_new_generic()
 void ExampleApplication::on_menu_file_quit()
 {
   std::cout << G_STRFUNC << std::endl;
-  quit(); // Not really necessary, when Gtk::Widget::hide() is called.
+  quit(); // Not really necessary, when Gtk::Widget::set_visible(false) is called.
 
   // Gio::Application::quit() will make Gio::Application::run() return,
   // but it's a crude way of ending the program. The window is not removed
@@ -231,7 +231,7 @@ void ExampleApplication::on_menu_file_quit()
   // is to hide the window.
   std::vector<Gtk::Window*> windows = get_windows();
   if (windows.size() > 0)
-    windows[0]->hide(); // In this simple case, we know there is only one window.
+    windows[0]->set_visible(false); // In this simple case, we know there is only one window.
 }
 
 void ExampleApplication::on_menu_help_about()

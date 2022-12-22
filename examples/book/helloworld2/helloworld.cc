@@ -51,7 +51,7 @@ HelloWorld::HelloWorld()
   m_box1.append(m_button2);
   m_button2.set_expand();
 
-  // Gtk::Widget::show() is seldom needed. All widgets are visible by default.
+  // Gtk::Widget::set_visible(true) is seldom needed. All widgets are visible by default.
 }
 
 HelloWorld::~HelloWorld()

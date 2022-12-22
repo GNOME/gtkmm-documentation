@@ -42,6 +42,7 @@ ExampleWindow::ExampleWindow()
 
   // Switch
   m_switch.set_active(true);
+  m_switch.set_halign(Gtk::Align::START);
   m_switch.property_active().signal_changed().connect(sigc::mem_fun(*this, &ExampleWindow::on_switch_active_changed));
 
   // Layout
@@ -59,7 +60,7 @@ ExampleWindow::ExampleWindow()
   m_dialog.set_modal();
   m_dialog.set_hide_on_close();
   m_dialog.signal_response().connect(
-    sigc::hide(sigc::mem_fun(m_dialog, &Gtk::Widget::hide)));
+    [this](int /* response_id */){ m_dialog.set_visible(false); });
 }
 
 ExampleWindow::~ExampleWindow()
@@ -83,5 +84,5 @@ void ExampleWindow::on_title_entry_changed()
 
 void ExampleWindow::on_button_clicked()
 {
-  m_dialog.show();
+  m_dialog.set_visible(true);
 }

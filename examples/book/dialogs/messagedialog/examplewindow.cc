@@ -51,9 +51,9 @@ void ExampleWindow::on_button_info_clicked()
   m_pDialog->set_modal(true);
   m_pDialog->set_hide_on_close(true);
   m_pDialog->signal_response().connect(
-    sigc::hide(sigc::mem_fun(*m_pDialog, &Gtk::Widget::hide)));
+    [this](int /* response_id */){ m_pDialog->set_visible(false); });
 
-  m_pDialog->show();
+  m_pDialog->set_visible(true);
 }
 
 void ExampleWindow::on_button_question_clicked()
@@ -67,12 +67,12 @@ void ExampleWindow::on_button_question_clicked()
   m_pDialog->signal_response().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_question_dialog_response));
 
-  m_pDialog->show();
+  m_pDialog->set_visible(true);
 }
 
 void ExampleWindow::on_question_dialog_response(int response_id)
 {
-  m_pDialog->hide();
+  m_pDialog->set_visible(false);
 
   //Handle the response:
   switch (response_id)

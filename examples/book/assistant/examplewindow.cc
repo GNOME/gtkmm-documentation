@@ -69,5 +69,5 @@ void ExampleWindow::on_assistant_apply()
 
 void ExampleWindow::on_button_clicked()
 {
-  m_assistant.show();
+  m_assistant.set_visible(true);
 }

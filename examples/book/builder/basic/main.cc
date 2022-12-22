@@ -9,7 +9,7 @@ Glib::RefPtr<Gtk::Application> app;
 void on_button_clicked()
 {
   if (pDialog)
-    pDialog->hide(); //hide() will cause Gtk::Application::run() to end.
+    pDialog->set_visible(false); // set_visible(false) will cause Gtk::Application::run() to end.
 }
 
 void on_app_activate()
@@ -54,7 +54,7 @@ void on_app_activate()
   pDialog->signal_hide().connect([] () { delete pDialog; });
 
   app->add_window(*pDialog);
-  pDialog->show();
+  pDialog->set_visible(true);
 }
 } // anonymous namespace
 

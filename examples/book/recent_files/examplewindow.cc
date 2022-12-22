@@ -142,7 +142,7 @@ void ExampleWindow::on_menu_file_new()
 
 void ExampleWindow::on_menu_file_quit()
 {
-  hide(); //Closes the main window to stop the app->make_window_and_run().
+  set_visible(false); //Closes the main window to stop the app->make_window_and_run().
 }
 
 void ExampleWindow::on_menu_file_files_dialog()
@@ -159,12 +159,12 @@ void ExampleWindow::on_menu_file_files_dialog()
     m_pDialog->add_button("Select File", Gtk::ResponseType::OK);
     m_pDialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
   }
-  m_pDialog->show();
+  m_pDialog->set_visible(true);
 }
 
 void ExampleWindow::on_dialog_response(int response_id)
 {
-  m_pDialog->hide();
+  m_pDialog->set_visible(false);
 
   if (response_id == Gtk::ResponseType::OK)
   {

@@ -59,6 +59,6 @@ bool ExampleWindow::on_timeout()
 
 void ExampleWindow::on_button_close()
 {
-  hide();
+  set_visible(false);
 }
 

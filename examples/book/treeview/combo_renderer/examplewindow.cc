@@ -130,7 +130,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_quit()
 {
-  hide();
+  set_visible(false);
 }
 
 void ExampleWindow::on_cellrenderer_choice_edited(

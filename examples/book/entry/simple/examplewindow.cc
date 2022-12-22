@@ -72,6 +72,6 @@ void ExampleWindow::on_checkbox_visibility_toggled()
 
 void ExampleWindow::on_button_close()
 {
-  hide();
+  set_visible(false);
 }
 

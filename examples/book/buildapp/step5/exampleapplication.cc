@@ -147,10 +147,10 @@ void ExampleApplication::on_action_quit()
   // is to hide the window. See comment in create_appwindow().
   auto windows = get_windows();
   for (auto window : windows)
-    window->hide();
+    window->set_visible(false);
 
-  // Not really necessary, when Gtk::Widget::hide() is called, unless
-  // Gio::Application::hold() has been called without a corresponding call
-  // to Gio::Application::release().
+  // Not really necessary, when Gtk::Widget::set_visible(false) is called,
+  // unless Gio::Application::hold() has been called without a corresponding
+  // call to Gio::Application::release().
   quit();
 }

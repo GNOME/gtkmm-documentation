@@ -56,11 +56,11 @@ bool ExampleWindow::load_file(const Glib::RefPtr<Gio::File>& file)
     //this application, so it can forget about it. The instance might then exit
     //if this is its last open window.
     //Note that we must be careful that the caller only calls this method _after_
-    //calling show(), or this would be useless:
-    hide();
+    //calling set_visible(true), or this would be useless:
+    set_visible(false);
     return false;
   }
 
-  show();
+  set_visible(true);
   return true;
 }

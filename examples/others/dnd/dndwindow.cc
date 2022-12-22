@@ -235,7 +235,7 @@ bool DnDWindow::on_popdown_timeout()
 {
   m_popdown_timer.disconnect();
 
-  m_PopupWindow.hide();
+  m_PopupWindow.set_visible(false);
   m_popped_up = false;
 
   return false;
@@ -246,7 +246,7 @@ bool DnDWindow::on_popup_timeout()
   if (!m_popped_up)
   {
     m_PopupWindow.set_transient_for(*this);
-    m_PopupWindow.show();
+    m_PopupWindow.set_visible(true);
     m_popped_up = true;
   }
 

@@ -32,7 +32,7 @@ ExampleWindow::ExampleWindow()
   m_Dialog.set_modal();
   m_Dialog.set_hide_on_close();
   m_Dialog.signal_response().connect(
-    sigc::hide(sigc::mem_fun(m_Dialog, &Gtk::Widget::hide)));
+    [this](int /* response_id */){ m_Dialog.set_visible(false); });
 }
 
 ExampleWindow::~ExampleWindow()
@@ -41,5 +41,5 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_clicked()
 {
-  m_Dialog.show();
+  m_Dialog.set_visible(true);
 }
