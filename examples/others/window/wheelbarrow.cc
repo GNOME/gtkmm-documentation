@@ -1,12 +1,11 @@
-/*
- * gtkmm version of the "wheelbarrow" example from the gtk+ tutorial
- */
+// A wheelbarrow on a transparent background
 
 #include <gdkmm.h>
 #include <gtkmm/image.h>
 #include <gtkmm/application.h>
 #include <gtkmm/window.h>
-
+#include <gtkmm/cssprovider.h>
+#include <iostream>
 
 namespace
 {
@@ -128,15 +127,19 @@ const char *const wheelbarrow_xpm[] =
   "                                                "
 };
 
+const char *const transparent_background_css =
+  "#wheelbarrow-window { background-color: rgba(0,0,0,0.0); }";
 
 class Wheelbarrow : public Gtk::Window
 {
 public:
   Wheelbarrow();
-  virtual ~Wheelbarrow();
+  ~Wheelbarrow() override;
 
 protected:
   bool on_button_press_event(GdkEventButton* button_event) override;
+  void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section,
+    const Glib::Error& error);
 };
 
 
@@ -147,27 +150,37 @@ Wheelbarrow::Wheelbarrow()
   set_resizable(false);
   set_decorated(false);
   set_position(Gtk::WIN_POS_CENTER);
-  set_icon(Gdk::Pixbuf::create_from_xpm_data(wheelbarrow_xpm));
+  const auto pixbuf = Gdk::Pixbuf::create_from_xpm_data(wheelbarrow_xpm);
+  set_icon(pixbuf);
 
-  realize(); // the widget must be realized to create the GDK window
-  const Glib::RefPtr<const Gdk::Window> window = get_window();
+  set_name("wheelbarrow-window"); // CSS name, which must be used in the CSS file.
 
-  //TODO: Use get_style_context() and Gdk::RGBA instead?
-  const Gdk::Color transparent = Gtk::Widget::get_default_style()->get_bg(Gtk::STATE_NORMAL);
+  // Load extra CSS data.
+  auto css_provider = Gtk::CssProvider::create();
+  Gtk::StyleContext::add_provider_for_screen(get_screen(), css_provider,
+    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-  const auto pixbuf =
-      Gdk::Pixbuf::create_from_xpm_data(drawable, transparent, wheelbarrow_xpm);
+  css_provider->signal_parsing_error().connect(
+    sigc::mem_fun(*this, &Wheelbarrow::on_parsing_error));
+  try
+  {
+    css_provider->load_from_data(transparent_background_css);
+  }
+  catch(const Gtk::CssProviderError& ex)
+  {
+    std::cerr << "CssProviderError, Gtk::CssProvider::load_from_path() failed: "
+              << ex.what() << std::endl;
+  }
+  catch(const Glib::Error& ex)
+  {
+    std::cerr << "Error, Gtk::CssProvider::load_from_path() failed: "
+              << ex.what() << std::endl;
+  }
 
-  Gtk::Image *const image = new Gtk::Image(pixbuf);
-  add(*Gtk::manage(image));
-
+  Gtk::Image *const image = Gtk::make_managed<Gtk::Image>(pixbuf);
   image->set_size_request(48, 48);
   image->show();
-
-  // Mask out transparent parts of the pixmap.
-  //TODO: Use gdk_cairo_region_from_surface() or suchlike when it exists.
-  //TODO: Use a Gtk::Widget::shape_combine_region() when it exists.
-  window->shape_combine_region(shape_region)
+  add(*image);
 
   add_events(Gdk::BUTTON_PRESS_MASK);
 }
@@ -179,11 +192,31 @@ bool Wheelbarrow::on_button_press_event(GdkEventButton* event)
 {
   switch(event->button)
   {
-    case 1: begin_move_drag(event->button, int(event->x_root), int(event->y_root), event->time); break;
+    case 1:
+      begin_move_drag(event->button, int(event->x_root), int(event->y_root), event->time);
+      break;
     case 3: hide(); break;
   }
-
   return false;
+}
+
+void Wheelbarrow::on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section,
+  const Glib::Error& error)
+{
+  std::cerr << "on_parsing_error(): " << error.what() << std::endl;
+  if (section)
+  {
+    const auto file = section->get_file();
+    if (file)
+    {
+      std::cerr << "  URI = " << file->get_uri() << std::endl;
+    }
+
+    std::cerr << "  start_line = " << section->get_start_line()+1
+              << ", end_line = " << section->get_end_line()+1 << std::endl;
+    std::cerr << "  start_position = " << section->get_start_position()
+              << ", end_position = " << section->get_end_position() << std::endl;
+  }
 }
 
 } // anonymous namespace
@@ -192,7 +225,6 @@ bool Wheelbarrow::on_button_press_event(GdkEventButton* event)
 int main(int argc, char** argv)
 {
   auto app = Gtk::Application::create(argc, argv, "org.gtkmm.example");
-
 
   Wheelbarrow wheelbarrow;
   return app->run(wheelbarrow);

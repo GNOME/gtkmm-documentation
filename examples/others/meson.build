@@ -17,8 +17,7 @@ examples_others = [
   [['statusbar'], 'statusbar', ['statusbar.cc']],
   [['tictactoe'], 'ttt_test', ['tictactoe.cc', 'ttt_test.cc']],
   [['treemodelcustom'], 'example', ['exampletreemodel.cc', 'examplewindow.cc', 'main.cc']],
-  # Waiting for a gdk_cairo_region_from_surface():
-  # [['window'], 'wheelbarrow', ['wheelbarrow.cc']],
+  [['window'], 'wheelbarrow', ['wheelbarrow.cc']],
 ]
 
 foreach ex : examples_others

@@ -127,8 +127,8 @@ check_PROGRAMS =					\
 	others/idle/idle				\
 	others/statusbar/statusbar			\
 	others/tictactoe/ttt_test			\
-	others/treemodelcustom/example
-#Waiting for a gdk_cairo_region_from_surface(): others/window/wheelbarrow
+	others/treemodelcustom/example \
+	others/window/wheelbarrow
 
 dist_noinst_DATA = \
 	book/builder/basic/basic.glade		\
@@ -779,8 +779,8 @@ others_treemodelcustom_example_SOURCES =		\
 	others/treemodelcustom/examplewindow.h		\
 	others/treemodelcustom/main.cc
 
-#others_window_wheelbarrow_SOURCES = \
-#	others/window/wheelbarrow.cc
+others_window_wheelbarrow_SOURCES = \
+	others/window/wheelbarrow.cc
 
 DISTCLEANFILES = \
   book/dialogs/aboutdialog/resources.c \
