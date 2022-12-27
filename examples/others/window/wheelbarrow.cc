@@ -1,12 +1,16 @@
-/*
- * gtkmm version of the "wheelbarrow" example from the gtk+ tutorial
- */
+// A wheelbarrow on a transparent background
 
 #include <gdkmm.h>
 #include <gtkmm/image.h>
 #include <gtkmm/application.h>
 #include <gtkmm/window.h>
+#include <gtkmm/cssprovider.h>
+#include <gtkmm/stylecontext.h>
+#include <gtkmm/gestureclick.h>
+#include <gtkmm/version.h>
+#include <iostream>
 
+#define HAS_STYLE_PROVIDER_ADD_PROVIDER_FOR_DISPLAY GTKMM_CHECK_VERSION(4,9,1)
 
 namespace
 {
@@ -128,62 +132,94 @@ const char *const wheelbarrow_xpm[] =
   "                                                "
 };
 
+const char *const transparent_background_css =
+  "#wheelbarrow-window { background-color: rgba(0,0,0,0.0); }";
 
 class Wheelbarrow : public Gtk::Window
 {
 public:
   Wheelbarrow();
-  virtual ~Wheelbarrow();
+  ~Wheelbarrow() override;
 
 protected:
-  bool on_button_press_event(GdkEventButton* button_event) override;
+  void on_button_pressed(int n_press, double x, double y);
+  void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section,
+    const Glib::Error& error);
+
+  Glib::RefPtr<Gtk::GestureClick> m_gesture_click;
 };
 
 
 Wheelbarrow::Wheelbarrow()
-:
-  Gtk::Window(Gtk::WINDOW_TOPLEVEL)
 {
   set_resizable(false);
   set_decorated(false);
-  set_position(Gtk::WIN_POS_CENTER);
-  set_icon(Gdk::Pixbuf::create_from_xpm_data(wheelbarrow_xpm));
 
-  realize(); // the widget must be realized to create the GDK window
-  const auto window = get_window();
+  set_name("wheelbarrow-window"); // CSS name, which must be used in the CSS file.
 
-  //TODO: Use get_style_context() and Gdk::RGBA instead?
-  const auto transparent = Gtk::Widget::get_default_style()->get_bg(Gtk::STATE_NORMAL);
+  // Load extra CSS data.
+  auto css_provider = Gtk::CssProvider::create();
+#if HAS_STYLE_PROVIDER_ADD_PROVIDER_FOR_DISPLAY
+  Gtk::StyleProvider::add_provider_for_display(get_display(), css_provider,
+    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+#else
+  Gtk::StyleContext::add_provider_for_display(get_display(), css_provider,
+    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+#endif
+  css_provider->signal_parsing_error().connect(
+    sigc::mem_fun(*this, &Wheelbarrow::on_parsing_error));
+  css_provider->load_from_data(transparent_background_css);
 
-  const auto pixbuf =
-      Gdk::Pixbuf::create_from_xpm_data(drawable, transparent, wheelbarrow_xpm);
-
-  Gtk::Image *const image = new Gtk::Image(pixbuf);
-  set_child(*Gtk::manage(image));
-
+  const auto pixbuf = Gdk::Pixbuf::create_from_xpm_data(wheelbarrow_xpm);
+  Gtk::Image *const image = Gtk::make_managed<Gtk::Image>(pixbuf);
   image->set_size_request(48, 48);
-  image->set_visible(true);
+  set_child(*image);
 
-  // Mask out transparent parts of the pixmap.
-  //TODO: Use gdk_cairo_region_from_surface() or suchlike when it exists.
-  //TODO: Use a Gtk::Widget::shape_combine_region() when it exists.
-  window->shape_combine_region(shape_region)
-
-  add_events(Gdk::BUTTON_PRESS_MASK);
+  m_gesture_click = Gtk::GestureClick::create();
+  m_gesture_click->set_button(0); // All mouse buttons
+  m_gesture_click->signal_pressed().connect(sigc::mem_fun(*this, &Wheelbarrow::on_button_pressed));
+  add_controller(m_gesture_click);
 }
 
 Wheelbarrow::~Wheelbarrow()
 {}
 
-bool Wheelbarrow::on_button_press_event(GdkEventButton* event)
+void Wheelbarrow::on_button_pressed(int /* n_press */, double x, double y)
 {
-  switch(event->button)
+  const auto current_button = m_gesture_click->get_current_button();
+  switch (current_button)
   {
-    case 1: begin_move_drag(event->button, int(event->x_root), int(event->y_root), event->time); break;
+    case 1:
+    {
+      auto toplevel = std::dynamic_pointer_cast<Gdk::ToplevelSurfaceImpl>(get_surface());
+      if (toplevel)
+        toplevel->begin_move(m_gesture_click->get_current_event_device(),
+          current_button, x, y, m_gesture_click->get_current_event_time());
+      break;
+    }
     case 3: set_visible(false); break;
   }
+}
 
-  return false;
+void Wheelbarrow::on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section,
+  const Glib::Error& error)
+{
+  std::cerr << "on_parsing_error(): " << error.what() << std::endl;
+  if (section)
+  {
+    const auto file = section->get_file();
+    if (file)
+    {
+      std::cerr << "  URI = " << file->get_uri() << std::endl;
+    }
+
+    auto start_location = section->get_start_location();
+    auto end_location = section->get_end_location();
+    std::cerr << "  start_line = " << start_location.get_lines()+1
+              << ", end_line = " << end_location.get_lines()+1 << std::endl;
+    std::cerr << "  start_position = " << start_location.get_line_chars()
+              << ", end_position = " << end_location.get_line_chars() << std::endl;
+  }
 }
 
 } // anonymous namespace
