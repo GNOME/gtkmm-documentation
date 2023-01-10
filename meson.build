@@ -22,10 +22,9 @@ gnome = import('gnome')
 install_prefix = get_option('prefix')
 install_datadir = get_option('datadir')
 
-# Use these instead of meson.source_root() and meson.build_root() in subdirectories.
-# source_root() and build_root() are not useful, if this is a subproject.
-project_source_root = meson.current_source_dir()
-project_build_root = meson.current_build_dir()
+# Source and build root directories of the current (sub)project.
+project_source_root = meson.project_source_root()
+project_build_root = meson.project_build_root()
 
 script_dir = project_source_root / 'tools' / 'meson_aux'
 compile_schemas = script_dir / 'compile-schemas.py'

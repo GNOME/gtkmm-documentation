@@ -1,6 +1,6 @@
 option('warnings', type: 'combo', choices: ['no', 'min', 'max', 'fatal'], value: 'min',
   description: 'Compiler warning level')
-option('dist-warnings', type: 'combo', choices: ['no', 'min', 'max', 'fatal'], value: 'fatal',
+option('dist-warnings', type: 'combo', choices: ['no', 'min', 'max', 'fatal'], value: 'max',
   description: 'Compiler warning level when a tarball is created')
 option('build-examples', type: 'boolean', value: false,
   description: 'Build all example programs')

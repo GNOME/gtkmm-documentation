@@ -1,7 +1,7 @@
 ## This file is part of gtkmm-documentation.
 
 ACLOCAL_AMFLAGS	= -I build ${ACLOCAL_FLAGS}
-DISTCHECK_CONFIGURE_FLAGS = --enable-warnings=fatal
+DISTCHECK_CONFIGURE_FLAGS = --enable-warnings=max
 
 SUBDIRS = examples docs/tutorial
 
