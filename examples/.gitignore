@@ -29,17 +29,9 @@ example
 /book/socket/plug
 /book/socket/socket
 /book/timeout/timeout
-/others/arrow/arrow
-/others/arrow/direction
 /others/calendar/calendar
-/others/cellrenderercustom/cellrenderertoggle
-/others/cellrenderercustom/testpopup
 /others/dnd/testdnd
 /others/exception/exceptiontest
-/others/gdk/radar
-/others/idle/idle
-/others/rulers/rulers
 /others/statusbar/statusbar
-/others/stock/stock
 /others/tictactoe/ttt_test
 /others/window/wheelbarrow

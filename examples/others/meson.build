@@ -6,17 +6,11 @@
 
 examples_others = [
 # [[dir-name], exe-name, [sources]]
-  [['arrow'], 'arrow', ['arrow.cc']],
   [['calendar'], 'calendar', ['calendar.cc']],
-  [['cellrenderercustom'], 'cellrenderertoggle', ['cellrenderertoggle.cc']],
-  [['cellrenderercustom'], 'testpopup',
-    ['cellrendererlist.cc', 'cellrendererpopup.cc', 'popupentry.cc', 'testpopup.cc']],
   [['dnd'], 'testdnd', ['dndwindow.cc', 'main.cc']],
   [['exception'], 'exceptiontest', ['exceptiontest.cc']],
-  [['idle'], 'idle', ['idle.cc']],
   [['statusbar'], 'statusbar', ['statusbar.cc']],
   [['tictactoe'], 'ttt_test', ['tictactoe.cc', 'ttt_test.cc']],
-  [['treemodelcustom'], 'example', ['exampletreemodel.cc', 'examplewindow.cc', 'main.cc']],
   [['window'], 'wheelbarrow', ['wheelbarrow.cc']],
 ]
 

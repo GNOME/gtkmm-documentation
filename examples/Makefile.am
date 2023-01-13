@@ -111,16 +111,11 @@ check_PROGRAMS =					\
 	book/treeview/popup/example			\
 	book/treeview/tree/example			\
 	book/update_ui/example				\
-	others/arrow/arrow				\
 	others/calendar/calendar			\
-	others/cellrenderercustom/cellrenderertoggle	\
-	others/cellrenderercustom/testpopup		\
 	others/dnd/testdnd				\
 	others/exception/exceptiontest			\
-	others/idle/idle				\
 	others/statusbar/statusbar			\
 	others/tictactoe/ttt_test			\
-	others/treemodelcustom/example \
 	others/window/wheelbarrow
 
 dist_noinst_DATA = \
@@ -691,23 +686,8 @@ book_update_ui_example_SOURCES =	\
 	book/update_ui/examplewindow.h	\
 	book/update_ui/main.cc
 
-others_arrow_arrow_SOURCES = \
-	others/arrow/arrow.cc
-
 others_calendar_calendar_SOURCES = \
 	others/calendar/calendar.cc
-
-others_cellrenderercustom_cellrenderertoggle_SOURCES = \
-	others/cellrenderercustom/cellrenderertoggle.cc
-
-others_cellrenderercustom_testpopup_SOURCES =		\
-	others/cellrenderercustom/cellrendererlist.cc	\
-	others/cellrenderercustom/cellrendererlist.h	\
-	others/cellrenderercustom/cellrendererpopup.cc	\
-	others/cellrenderercustom/cellrendererpopup.h	\
-	others/cellrenderercustom/popupentry.cc		\
-	others/cellrenderercustom/popupentry.h		\
-	others/cellrenderercustom/testpopup.cc
 
 others_dnd_testdnd_SOURCES =	\
 	others/dnd/dnd_images.h	\
@@ -721,9 +701,6 @@ others_exception_exceptiontest_SOURCES = \
 #others_gdk_radar_SOURCES = \
 #	others/gdk/radar.cc
 
-others_idle_idle_SOURCES = \
-	others/idle/idle.cc
-
 others_statusbar_statusbar_SOURCES = \
 	others/statusbar/statusbar.cc
 
@@ -731,13 +708,6 @@ others_tictactoe_ttt_test_SOURCES =	\
 	others/tictactoe/tictactoe.cc	\
 	others/tictactoe/tictactoe.h	\
 	others/tictactoe/ttt_test.cc
-
-others_treemodelcustom_example_SOURCES =		\
-	others/treemodelcustom/exampletreemodel.cc	\
-	others/treemodelcustom/exampletreemodel.h	\
-	others/treemodelcustom/examplewindow.cc		\
-	others/treemodelcustom/examplewindow.h		\
-	others/treemodelcustom/main.cc
 
 others_window_wheelbarrow_SOURCES = \
 	others/window/wheelbarrow.cc
