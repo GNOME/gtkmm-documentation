@@ -26,7 +26,7 @@ AC_PATH_PROG([PERL], [perl], [perl])
 AC_PROG_SED
 
 PKG_CHECK_MODULES([GIOMM], [giomm-2.68 >= 2.68.0])
-PKG_CHECK_MODULES([GTKMM], [gtkmm-4.0  >= 4.0.0])
+PKG_CHECK_MODULES([GTKMM], [gtkmm-4.0  >= 4.9.2])
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
 
 # glib-compile-resources and C compiler are needed to generate and compile

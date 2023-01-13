@@ -13,7 +13,7 @@ project('gtkmm-documentation', 'c', 'cpp',
 python3 = find_program('python3', version: '>=3.5')
 
 gtkmm_pcname = 'gtkmm-4.0'
-gtkmm_req = '>= 4.0.0'
+gtkmm_req = '>= 4.9.2'
 giomm_pcname = 'giomm-2.68'
 giomm_req = '>= 2.68.0'
 gnome = import('gnome')
