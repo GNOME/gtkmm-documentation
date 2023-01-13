@@ -7837,9 +7837,13 @@ buffer-&gt;apply_tag(tag, buffer-&gt;begin(), buffer-&gt;end());
 At this point, the application will already react if you change one of the settings,
 e.g. using the <command>gsettings</command> commandline tool. Of course, we expect
 the application to provide a preference dialog for these. So lets do that now.
-Our preference dialog will be a subclass of <classname>Gtk::Dialog</classname>, and
+Our preference dialog will be a subclass of <classname>Gtk::Window</classname>, and
 we'll use the same techniques that we've already seen in <classname>ExampleAppWindow</classname>:
 a <classname>Gtk::Builder</classname> ui file and settings bindings.
+In this case the bindings are more involved, though. We use
+<classname>Gtk::FontDialogButton</classname> and <classname>Gtk::DropDown</classname>
+in the preference dialog. The types of the properties in these classes can't be
+automatically converted to the string type that <classname>Gio::Settings</classname> requires.
 </para>
 
 <para>

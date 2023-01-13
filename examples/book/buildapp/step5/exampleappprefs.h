@@ -18,7 +18,7 @@
 
 #include <gtkmm.h>
 
-class ExampleAppPrefs : public Gtk::Dialog
+class ExampleAppPrefs : public Gtk::Window
 {
 public:
   ExampleAppPrefs(BaseObjectType* cobject,
@@ -27,10 +27,16 @@ public:
   static ExampleAppPrefs* create(Gtk::Window& parent);
 
 protected:
+  // Signal handlers
+  void on_font_setting_changed(const Glib::ustring& key);
+  void on_font_selection_changed();
+  void on_transition_setting_changed(const Glib::ustring& key);
+  void on_transition_selection_changed();
+
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
   Glib::RefPtr<Gio::Settings> m_settings;
-  Gtk::FontButton* m_font {nullptr};
-  Gtk::ComboBoxText* m_transition {nullptr};
+  Gtk::FontDialogButton* m_font {nullptr};
+  Gtk::DropDown* m_transition {nullptr};
 };
 
 #endif /* GTKMM_EXAMPLEAPPPREFS_H_ */
