@@ -18,8 +18,7 @@
 
 ExampleWindow::ExampleWindow()
  : m_title_buttons_label("Show title buttons:", Gtk::Align::END, Gtk::Align::CENTER),
-   m_title_label("Title:", Gtk::Align::END, Gtk::Align::CENTER),
-   m_dialog("Button clicked")
+   m_title_label("Title:", Gtk::Align::END, Gtk::Align::CENTER)
 {
   // Window properties
   set_title("HeaderBar Example");
@@ -56,11 +55,8 @@ ExampleWindow::ExampleWindow()
   set_child(m_grid);
 
   // Dialog, shown after a button click
-  m_dialog.set_transient_for(*this);
-  m_dialog.set_modal();
-  m_dialog.set_hide_on_close();
-  m_dialog.signal_response().connect(
-    [this](int /* response_id */){ m_dialog.set_visible(false); });
+  m_dialog = Gtk::AlertDialog::create("Button clicked");
+  m_dialog->set_modal();
 }
 
 ExampleWindow::~ExampleWindow()
@@ -84,5 +80,5 @@ void ExampleWindow::on_title_entry_changed()
 
 void ExampleWindow::on_button_clicked()
 {
-  m_dialog.set_visible(true);
+  m_dialog->show(*this);
 }

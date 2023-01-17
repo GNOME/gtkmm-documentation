@@ -23,7 +23,7 @@ class ExampleWindow : public Gtk::Window
 {
 public:
   ExampleWindow();
-  virtual ~ExampleWindow();
+  ~ExampleWindow() override;
 
 protected:
   // Signal handlers
@@ -41,7 +41,7 @@ protected:
   Gtk::Switch m_switch;
   Gtk::Label m_title_label;
   Gtk::Entry m_title_entry;
-  Gtk::MessageDialog m_dialog;
+  Glib::RefPtr<Gtk::AlertDialog> m_dialog;
 };
 
 #endif // GTKMM_EXAMPLEWINDOW_H

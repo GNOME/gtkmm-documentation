@@ -34,7 +34,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   m_refActionGroup->add_action("new",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_new));
 
-  //A menu item to open the file chooser dialog:
+  //A menu item to open the file dialog:
   m_refActionGroup->add_action("files-dialog",
     sigc::mem_fun(*this, &ExampleWindow::on_menu_file_files_dialog));
 
@@ -66,7 +66,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
     "        <attribute name='accel'>&lt;Primary&gt;n</attribute>"
     "      </item>"
     "      <item>"
-    "        <attribute name='label' translatable='yes'>File Chooser _Dialog</attribute>"
+    "        <attribute name='label' translatable='yes'>File _Dialog</attribute>"
     "        <attribute name='action'>example.files-dialog</attribute>"
     "        <attribute name='accel'>&lt;Primary&gt;o</attribute>"
     "      </item>"
@@ -147,30 +147,29 @@ void ExampleWindow::on_menu_file_quit()
 
 void ExampleWindow::on_menu_file_files_dialog()
 {
-  if (!m_pDialog)
+  if (!m_refFileDialog)
   {
-    m_pDialog.reset(new Gtk::FileChooserDialog(*this, "Files",
-      Gtk::FileChooser::Action::OPEN, /* use_header_bar= */ true));
-    m_pDialog->set_transient_for(*this);
-    m_pDialog->set_modal(true);
-    m_pDialog->signal_response().connect(
-      sigc::mem_fun(*this, &ExampleWindow::on_dialog_response));
-
-    m_pDialog->add_button("Select File", Gtk::ResponseType::OK);
-    m_pDialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
+    m_refFileDialog = Gtk::FileDialog::create();
+    m_refFileDialog->set_modal(true);
   }
-  m_pDialog->set_visible(true);
+  m_refFileDialog->open(*this, sigc::mem_fun(*this, &ExampleWindow::on_dialog_finish));
 }
 
-void ExampleWindow::on_dialog_response(int response_id)
+void ExampleWindow::on_dialog_finish(Glib::RefPtr<Gio::AsyncResult>& result)
 {
-  m_pDialog->set_visible(false);
-
-  if (response_id == Gtk::ResponseType::OK)
+  Glib::RefPtr<Gio::File> file;
+  try
   {
-    auto selected_uri = m_pDialog->get_file()->get_uri();
-    std::cout << "URI selected = " << selected_uri << std::endl;
-    std::cout << (m_refRecentManager->has_item(selected_uri) ? "A" : "Not a")
-      << " recently used file" << std::endl;
+    file = m_refFileDialog->open_finish(result);
   }
+  catch (const Gtk::DialogError& err)
+  {
+    std::cout << "No file selected, " << err.what() << std::endl;
+    return;
+  }
+
+  auto selected_uri = file->get_uri();
+  std::cout << "URI selected = " << selected_uri << std::endl;
+  std::cout << (m_refRecentManager->has_item(selected_uri) ? "A" : "Not a")
+    << " recently used file" << std::endl;
 }

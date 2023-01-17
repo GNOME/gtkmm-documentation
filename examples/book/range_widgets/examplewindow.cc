@@ -15,6 +15,7 @@
  */
 
 #include "examplewindow.h"
+#include <array>
 #include <iostream>
 
 namespace
@@ -25,12 +26,12 @@ struct PositionTypeStruct
   Glib::ustring text;
 };
 
-const PositionTypeStruct positionTypes[] =
+const std::array<PositionTypeStruct, 4> positionTypes =
 {
-  { Gtk::PositionType::TOP,    "Top" },
-  { Gtk::PositionType::BOTTOM, "Bottom" },
-  { Gtk::PositionType::LEFT,   "Left" },
-  { Gtk::PositionType::RIGHT,  "Right" }
+  PositionTypeStruct{Gtk::PositionType::TOP,    "Top"},
+  PositionTypeStruct{Gtk::PositionType::BOTTOM, "Bottom"},
+  PositionTypeStruct{Gtk::PositionType::LEFT,   "Left"},
+  PositionTypeStruct{Gtk::PositionType::RIGHT,  "Right"}
 };
 
 } // anonymous namespace
@@ -115,8 +116,8 @@ ExampleWindow::ExampleWindow()
   m_DropDown_Position.set_model(string_list);
 
   // Fill the DropDown's list model:
-  for (std::size_t i = 0; i < G_N_ELEMENTS(positionTypes); ++i)
-    string_list->append(positionTypes[i].text);
+  for (const auto& positionType : positionTypes)
+    string_list->append(positionType.text);
 
   m_VBox2.append(m_HBox_DropDown);
   m_HBox_DropDown.append(*Gtk::make_managed<Gtk::Label>("Scale Value Position:", 0));

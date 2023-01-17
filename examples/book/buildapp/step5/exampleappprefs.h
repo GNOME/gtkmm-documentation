@@ -18,6 +18,12 @@
 
 #include <gtkmm.h>
 
+#ifdef GLIBMM_CHECK_VERSION
+#define HAS_GIO_SETTINGS_BIND_WITH_MAPPING GLIBMM_CHECK_VERSION(2,75,0)
+#else
+#define HAS_GIO_SETTINGS_BIND_WITH_MAPPING 0
+#endif
+
 class ExampleAppPrefs : public Gtk::Window
 {
 public:
@@ -27,12 +33,19 @@ public:
   static ExampleAppPrefs* create(Gtk::Window& parent);
 
 protected:
+#if HAS_GIO_SETTINGS_BIND_WITH_MAPPING
+  // Mappings from Gio::Settings to properties
+  std::optional<Pango::FontDescription> map_from_ustring_to_fontdesc(const Glib::ustring& font);
+  std::optional<Glib::ustring> map_from_fontdesc_to_ustring(const Pango::FontDescription& fontdesc);
+  std::optional<unsigned int> map_from_ustring_to_int(const Glib::ustring& transition);
+  std::optional<Glib::ustring> map_from_int_to_ustring(const unsigned int& pos);
+#else
   // Signal handlers
   void on_font_setting_changed(const Glib::ustring& key);
   void on_font_selection_changed();
   void on_transition_setting_changed(const Glib::ustring& key);
   void on_transition_selection_changed();
-
+#endif
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
   Glib::RefPtr<Gio::Settings> m_settings;
   Gtk::FontDialogButton* m_font {nullptr};

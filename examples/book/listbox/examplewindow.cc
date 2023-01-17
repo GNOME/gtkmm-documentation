@@ -14,6 +14,7 @@
  */
 
 #include "examplewindow.h"
+#include <array>
 #include <iostream>
 
 namespace
@@ -24,12 +25,12 @@ struct SelectionModeStruct
   Glib::ustring text;
 };
 
-const SelectionModeStruct selectionModes[] =
+const std::array<SelectionModeStruct, 4> selectionModes =
 {
-  { Gtk::SelectionMode::NONE,     "SelectionMode::NONE" },
-  { Gtk::SelectionMode::SINGLE,   "SelectionMode::SINGLE" },
-  { Gtk::SelectionMode::BROWSE,   "SelectionMode::BROWSE" },
-  { Gtk::SelectionMode::MULTIPLE, "SelectionMode::MULTIPLE" }
+  SelectionModeStruct{Gtk::SelectionMode::NONE,     "SelectionMode::NONE"},
+  SelectionModeStruct{Gtk::SelectionMode::SINGLE,   "SelectionMode::SINGLE"},
+  SelectionModeStruct{Gtk::SelectionMode::BROWSE,   "SelectionMode::BROWSE"},
+  SelectionModeStruct{Gtk::SelectionMode::MULTIPLE, "SelectionMode::MULTIPLE"}
 };
 
 } // anonymous namespace
@@ -69,8 +70,8 @@ ExampleWindow::ExampleWindow() :
 
   // DropDown for selection mode.
   auto string_list = Gtk::StringList::create({});
-  for (std::size_t i = 0; i < G_N_ELEMENTS(selectionModes); ++i)
-    string_list->append(selectionModes[i].text);
+  for (const auto& selectionMode : selectionModes)
+    string_list->append(selectionMode.text);
 
   m_DropDown.set_model(string_list);
   m_DropDown.property_selected().signal_changed().connect(
@@ -79,7 +80,7 @@ ExampleWindow::ExampleWindow() :
 
   const auto mode = m_ListBox.get_selection_mode();
   int index = 0;
-  for (std::size_t i = 0; i < G_N_ELEMENTS(selectionModes); ++i)
+  for (std::size_t i = 0; i < selectionModes.size(); ++i)
   {
     if (selectionModes[i].mode == mode)
     {

@@ -5530,8 +5530,8 @@ if (info)
     </section>
   </section>
 
-  <section xml:id="sec-filechooser">
-  <title>FileChooser</title>
+  <section xml:id="sec-filechooser-filedialog">
+  <title>FileChooser and FileDialog</title>
 
     <para>
       <classname>FileChooser</classname> is an interface that can be
@@ -5549,14 +5549,19 @@ if (info)
       <classname>FileChooserDialog</classname>, but you can embed it into your
       user interface if you want to.
     </para>
+    <note><para><classname>FileChooser</classname> and the classes that
+      implement it are deprecated since &gtkmm; 4.10.0. They have been replaced
+      by <classname>FileDialog</classname>, which is new in &gtkmm; 4.10.0.
+    </para></note>
+
     <section xml:id="recentfiles-example">
-    <title>Simple FileChooserDialog example</title>
+    <title>Simple FileDialog example</title>
 
       <para>
         Shown below is a simple example of how to use the
-        <classname>FileChooserDialog</classname> class in a program.
+        <classname>FileDialog</classname> class in a program.
         This simple program has a menubar with a
-        <guimenuitem>File Chooser Dialog</guimenuitem> menu item.
+        <guimenuitem>File Dialog</guimenuitem> menu item.
         When you select this menu item, a dialog pops up showing a list of files.
         If you select <guimenuitem>Recent</guimenuitem> in the sidebar,
         the list of recently used files is shown.
@@ -5570,7 +5575,7 @@ if (info)
         </para>
       </note>
       <para>
-        After selecting the <guimenuitem>File Chooser Dialog</guimenuitem> menu
+        After selecting the <guimenuitem>File Dialog</guimenuitem> menu
         item and the <guimenuitem>Recent</guimenuitem> sidebar item, you should
         see something similar to the following window.
       </para>
