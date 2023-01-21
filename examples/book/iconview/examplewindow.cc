@@ -1,5 +1,3 @@
-//$Id: examplewindow.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2006 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -147,13 +145,22 @@ void ExampleWindow::on_selection_changed()
 }
 
 void ExampleWindow::add_entry(const std::string& filename,
-        const Glib::ustring& description )
+        const Glib::ustring& description)
 {
-  Gtk::TreeModel::Row row = *(m_refListModel->append());
-  row[m_Columns.m_col_filename] = filename;
-  row[m_Columns.m_col_description] = description;
-
-  row[m_Columns.m_col_pixbuf] = Gdk::Pixbuf::create_from_file(filename);
+  try
+  {
+    auto pixbuf = Gdk::Pixbuf::create_from_file(filename);
+    Gtk::TreeModel::Row row = *(m_refListModel->append());
+    row[m_Columns.m_col_filename] = filename;
+    row[m_Columns.m_col_description] = description;
+    row[m_Columns.m_col_pixbuf] = pixbuf;
+  }
+  catch (const Glib::FileError& err)
+  {
+    std::cout << "Glib::FileError: " << err.what() << std::endl;
+  }
+  catch (const Gdk::PixbufError& err)
+  {
+    std::cout << "Gdk::PixbufError: " << err.what() << std::endl;
+  }
 }
-
-
