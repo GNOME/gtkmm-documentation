@@ -251,16 +251,9 @@ void ExampleWindow::on_printoperation_done(Gtk::PrintOperation::Result result)
 
   if (result == Gtk::PrintOperation::Result::ERROR)
   {
-    if (!m_pDialog)
-    {
-      m_pDialog.reset(new Gtk::MessageDialog(*this, "Error printing form",
-        false /* use_markup */, Gtk::MessageType::ERROR, Gtk::ButtonsType::OK,
-        true /* modal */));
-      m_pDialog->set_hide_on_close(true);
-      m_pDialog->signal_response().connect(
-        [this](int /* response_id */){ m_pDialog->set_visible(false); });
-    }
-    m_pDialog->set_visible(true);
+    if (!m_refDialog)
+      m_refDialog = Gtk::AlertDialog::create("Error printing form");
+    m_refDialog->show(*this);
   }
   else if (result == Gtk::PrintOperation::Result::APPLY)
   {

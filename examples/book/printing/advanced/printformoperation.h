@@ -57,8 +57,8 @@ class PrintFormOperation : public Gtk::PrintOperation
   Glib::ustring m_Comments;
   Glib::RefPtr<Pango::Layout> m_refLayout;
   std::vector<int> m_PageBreaks; // line numbers where a page break occurs
-  Gtk::FontButton m_FontButton; // displayed in a custom print dialog tab
-  Glib::ustring m_Font;
+  Gtk::FontDialogButton m_FontDialogButton; // displayed in a custom print dialog tab
+  Pango::FontDescription m_FontDesc;
 };
 
 #endif // GTKMM_PRINT_FORM_OPERATION_H

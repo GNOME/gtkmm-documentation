@@ -20,7 +20,8 @@
 
 PrintFormOperation::PrintFormOperation()
   :
-  m_Font("sans 12")
+  m_FontDialogButton(Gtk::FontDialog::create()),
+  m_FontDesc("sans 12")
 {
 }
 
@@ -41,8 +42,7 @@ void PrintFormOperation::on_begin_print(const Glib::RefPtr<Gtk::PrintContext>&
   //the lines that are on each page.
   m_refLayout = print_context->create_pango_layout();
 
-  Pango::FontDescription font_desc(m_Font);
-  m_refLayout->set_font_description(font_desc);
+  m_refLayout->set_font_description(m_FontDesc);
 
   const double width = print_context->get_width();
   const double height = print_context->get_height();
@@ -164,8 +164,8 @@ Gtk::Widget* PrintFormOperation::on_create_custom_widget()
   auto label = Gtk::make_managed<Gtk::Label>("Choose a font: ");
   hbox->append(*label);
 
-  m_FontButton.set_font(m_Font);
-  hbox->append(m_FontButton);
+  m_FontDialogButton.set_font_desc(m_FontDesc);
+  hbox->append(m_FontDialogButton);
 
   return vbox;
 }
@@ -174,10 +174,9 @@ void PrintFormOperation::on_custom_widget_apply(Gtk::Widget*)
 {
   // Note: the returned widget is the VBox we created in
   // on_create_custom_widget().  We don't need to use it, because we can use the
-  // child FontButton directly:
+  // child FontDialogButton directly:
 
-  auto selected_font = m_FontButton.get_font();
-  m_Font = selected_font;
+  m_FontDesc = m_FontDialogButton.get_font_desc();
 }
 
 bool PrintFormOperation::on_preview(const
