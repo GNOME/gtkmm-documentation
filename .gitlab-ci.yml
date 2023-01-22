@@ -1,4 +1,4 @@
-# 2022-05-22: fedora:latest = 36, fedora:rawhide = 37
+# 2023-01-21: fedora:latest = 37, fedora:rawhide = 38
 # See https://hub.docker.com/_/fedora
 stages:
   - validate
@@ -57,7 +57,7 @@ html-tutorial:
     # Installation copies all documentation files to one directory.
     - ninja -C _build install
     - mkdir -p _build/docs/installed-tutorial
-    - mv /usr/share/doc/gtkmm-4.0/tutorial/html _build/docs/installed-tutorial
+    - cp -r /usr/share/doc/gtkmm-4.0/tutorial/html _build/docs/installed-tutorial
   artifacts:
     when: always
     paths:
