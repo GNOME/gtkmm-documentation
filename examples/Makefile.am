@@ -66,10 +66,10 @@ check_PROGRAMS =					\
 	book/giomm/volumes/example			\
 	book/giomm/write_file/example			\
 	book/grid/example				\
+	book/gridview/example				\
 	book/headerbar/example				\
 	book/helloworld/helloworld			\
 	book/helloworld2/helloworld2			\
-	book/iconview/example				\
 	book/idle/idle					\
 	book/infobar/example				\
 	book/input/example				\
@@ -125,14 +125,14 @@ dist_noinst_DATA = \
 	book/custom/custom_css_name/custom_gtkmm.css	\
 	$(DIALOGS_ABOUTDIALOG_RESOURCES) \
 	$(DRAWINGAREA_IMAGE_RESOURCES) \
-	book/iconview/gnome-dice-1.svg		\
-	book/iconview/gnome-dice-2.svg		\
-	book/iconview/gnome-dice-3.svg		\
-	book/iconview/gnome-dice-4.svg		\
-	book/iconview/gnome-dice-5.svg		\
-	book/iconview/gnome-dice-6.svg		\
-	book/iconview/mozilla-firefox.png	\
-	book/iconview/xmms.xpm			\
+	book/gridview/gnome-dice-1.svg		\
+	book/gridview/gnome-dice-2.svg		\
+	book/gridview/gnome-dice-3.svg		\
+	book/gridview/gnome-dice-4.svg		\
+	book/gridview/gnome-dice-5.svg		\
+	book/gridview/gnome-dice-6.svg		\
+	book/gridview/mozilla-firefox.png	\
+	book/gridview/xmms.xpm			\
 	$(MENUS_AND_TOOLBARS_RESOURCES)
 
 book_actionbar_example_SOURCES = \
@@ -437,6 +437,11 @@ book_grid_example_SOURCES = \
 	book/grid/examplewindow.h \
 	book/grid/main.cc
 
+book_gridview_example_SOURCES =		\
+	book/gridview/examplewindow.cc	\
+	book/gridview/examplewindow.h	\
+	book/gridview/main.cc
+
 book_helloworld_helloworld_SOURCES =	\
 	book/helloworld/helloworld.cc	\
 	book/helloworld/helloworld.h	\
@@ -446,11 +451,6 @@ book_helloworld2_helloworld2_SOURCES =	\
 	book/helloworld2/helloworld.cc	\
 	book/helloworld2/helloworld.h	\
 	book/helloworld2/main.cc
-
-book_iconview_example_SOURCES =		\
-	book/iconview/examplewindow.cc	\
-	book/iconview/examplewindow.h	\
-	book/iconview/main.cc
 
 book_idle_idle_SOURCES =		\
 	book/idle/idleexample.cc	\

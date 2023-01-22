@@ -833,9 +833,44 @@ that can help with this by defining them optionally at build time. See the
 <link xlink:href="https://wiki.gnome.org/Projects/gtkmm/PortingToGtkmm3">Porting from
 gtkmm-2.4 to gtkmm-3.0</link> wiki page for more details.</para>
 
-<para>See also <link xlink:href="https://developer.gnome.org/gtk4/unstable/gtk-migrating-3-to-4.html">
+<para>See also <link xlink:href="https://docs.gtk.org/gtk4/migrating-3to4.html">
 Migrating from GTK 3.x to GTK 4</link>.</para>
 
+<section xml:id="sec-deprecations-4-10">
+<title>Deprecations in &gtkmm; 4.10</title>
+
+<para>Many classes are deprecated since &gtkmm; 4.10. They can still be used in
+&gtkmm;4 applications, provided GTKMM_DISABLE_DEPRECATED and GDKMM_DISABLE_DEPRECATED
+are not defined. There are also many new classes in &gtkmm; 4.10, which replace
+some of the deprecated classes. Some example programs in this tutorial use classes
+deprecated since &gtkmm; 4.10. Some other programs use classes available since &gtkmm; 4.10.
+</para>
+<para>Deprecated classes:
+  AppChooser, AppChooserButton, AppChooserDialog,
+  AppChooserWidget, CellArea, CellAreaBox, CellAreaContext,
+  CellLayout, CellRenderer, CellRendererAccel, CellRendererCombo,
+  CellRendererPixbuf, CellRendererProgress, CellRendererSpin,
+  CellRendererSpinner, CellRendererText, CellRendererToggle, CellView,
+  ComboBox, ComboBoxText, EntryCompletion, IconView, ListStore,
+  ListViewText, StyleContext, TreeDragDest, TreeDragSource,
+  TreeIter and other classes in treeiter.h,
+  TreeModel, TreeModelFilter, TreeModelSort, TreePath, TreeRowReference,
+  TreeSelection, TreeSortable, TreeStore, TreeView, TreeViewColumn,
+  namespace CellRenderer_Generation, namespace TreeView_Private,
+  ColorButton, ColorChooser, ColorChooserDialog,
+  FileChooser, FileChooserDialog, FileChooserNative, FileChooserWidget,
+  FontButton, FontChooser, FontChooserDialog, FontChooserWidget,
+  MessageDialog, TreeModelColumn, TreeModelColumnRecord, InfoBar.
+</para>
+<para>New classes and enums:
+  AlertDialog, ColorDialog, ColorDialogButton, ColumnViewSorter, FileDialog,
+  FontDialog, FontDialogButton, enums DialogError, FontLevel.
+</para>
+<para>In most cases there are replacements for the deprecated classes.
+See the reference documentation.
+</para>
+
+</section>
 </chapter>
 
 <chapter xml:id="chapter-button-widget">
@@ -1264,7 +1299,7 @@ echoed on the screen, calling <methodname>set_visibility()</methodname> with
 <para>
 You might want to be notified whenever the user types in a text entry widget.
 <classname>Gtk::Entry</classname> provides two signals,
-<literal>activate</literal> (since &gtkmm; 4.8.0) and <literal>changed</literal>, for this purpose.
+<literal>activate</literal> (since &gtkmm; 4.8) and <literal>changed</literal>, for this purpose.
 <literal>activate</literal> is emitted when the user presses the <keycap>Enter</keycap> key in
 a text-entry widget; <literal>changed</literal> is emitted when the text in
 the widget changes. You can use these, for instance, to validate or filter
@@ -2262,7 +2297,7 @@ which are not mentioned elsewhere in this tutorial.
 
 <para><link xlink:href="&url_examples_base;actionbar">Source Code, ActionBar</link></para>
 <para><link xlink:href="&url_examples_base;flowbox">Source Code, FlowBox</link></para>
-<para><link xlink:href="&url_examples_base;iconview">Source Code, IconView</link></para>
+<para><link xlink:href="&url_examples_base;gridview">Source Code, GridView</link></para>
 
 </section>
 </section>
@@ -2825,7 +2860,7 @@ treeview.set_model(sorted_model);</programlisting>
 <para>
 <classname>Gtk::TreeView</classname> already implements simple drag-and-drop
 when used with the <classname>Gtk::ListStore</classname> or
-<classname>Gtk::TreeStore</classname> models (since gtk 4.8.0). If necessary, it also allows you
+<classname>Gtk::TreeStore</classname> models (since gtk 4.8). If necessary, it also allows you
 to implement more complex behaviour when items are dragged and dropped, using
 the normal <link linkend="chapter-draganddrop">Drag and Drop</link> API.
 </para>
@@ -3104,7 +3139,7 @@ It is not emitted when the user presses the <keycap>Enter</keycap> key.
 Pressing the <keycap>Enter</keycap> key or moving the keyboard focus to another
 widget may signal that the user has finished entering text. To be notified of
 these events, connect to the <classname>Entry</classname>'s <literal>activate</literal>
-signal (available since &gtkmm; 4.8.0), and add a <classname>Gtk::EventControllerFocus</classname>
+signal (available since &gtkmm; 4.8), and add a <classname>Gtk::EventControllerFocus</classname>
 and connect to its <literal>leave</literal> signal, like so
 </para>
 <programlisting><![CDATA[auto entry = m_Combo.get_entry();
@@ -5550,8 +5585,8 @@ if (info)
       user interface if you want to.
     </para>
     <note><para><classname>FileChooser</classname> and the classes that
-      implement it are deprecated since &gtkmm; 4.10.0. They have been replaced
-      by <classname>FileDialog</classname>, which is new in &gtkmm; 4.10.0.
+      implement it are deprecated since &gtkmm; 4.10. They have been replaced
+      by <classname>FileDialog</classname>, which is available since &gtkmm; 4.10.
     </para></note>
 
     <section xml:id="recentfiles-example">
@@ -7038,7 +7073,7 @@ instance, you cannot use the copyright sign (&copy;).
        (a <classname>gtkmm__GtkWidget</classname>) is finalized. If your container
        is used as a managed widget, it shall unparent its children in a
        <methodname>Gtk::Widget::signal_destroy()</methodname> handler (available
-       since &gtkmm; 4.8.0). If your container is not managed, that signal handler
+       since &gtkmm; 4.8). If your container is not managed, that signal handler
        is not called. Instead the children shall be unparented in the C++ destructor.
        If you want your container to be useful both ways, unparent the children
        both in the destructor and in a signal handler. See the example code.</para>
@@ -7152,9 +7187,9 @@ a widget name.</para>
 <para>To add a style sheet to an application, use one of the
 <methodname>Gtk::CssProvider::load_from_*()</methodname> methods.
 Then add it with <methodname>Gtk::StyleProvider::add_provider_for_display()</methodname>
-(available since &gtkmm; 4.10.0) or <methodname>Gtk::StyleContext::add_provider_for_display()</methodname>.
+(available since &gtkmm; 4.10) or <methodname>Gtk::StyleContext::add_provider_for_display()</methodname>.
 <classname>Gtk::StyleContext</classname> also contains methods to read some style
-information, but this class is deprecated since &gtkmm; 4.10.0.</para>
+information, but this class is deprecated since &gtkmm; 4.10.</para>
 
 <para>CSS files are described in the documentation of GTK.</para>
 </section>
@@ -10622,20 +10657,20 @@ _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')
       parameters from C output parameters if the C function being wrapped has
       any.  Suppose, for example, that we want to wrap the following C function
       that returns a value in its C output parameter
-      <parameter>rect</parameter>:
+      <parameter>out_mime_type</parameter>:
 <programlisting>
-gboolean gtk_icon_view_get_cell_rect(GtkIconView* icon_view,
-  GtkTreePath* path, GtkCellRenderer* cell, GdkRectangle* rect);
+GInputStream* gdk_clipboard_read_finish(GdkClipboard* clipboard,
+  GAsyncResult* result, const char** out_mime_type, GError** error)
 </programlisting>
       To have <command>gmmproc</command> place the value returned in the C++
-      <parameter>rect</parameter> output parameter, something like the
+      <parameter>out_mime_type</parameter> output parameter, something like the
       following <function>_WRAP_METHOD()</function> macro could be used:
-<programlisting>
-_WRAP_METHOD(bool get_cell_rect(const TreeModel::Path&amp; path,
-  const CellRenderer&amp; cell, Gdk::Rectangle&amp; rect{&gt;&gt;}) const,
-  gtk_icon_view_get_cell_rect)
-</programlisting>
-      The <literal>{&gt;&gt;}</literal> following the <parameter>rect</parameter>
+<programlisting><![CDATA[
+_WRAP_METHOD(Glib::RefPtr<Gio::InputStream> read_finish(
+  const Glib::RefPtr<Gio::AsyncResult>& result,
+  Glib::ustring& out_mime_type{>>}), gdk_clipboard_read_finish, errthrow)
+]]></programlisting>
+      The <literal>{&gt;&gt;}</literal> following the <parameter>out_mime_type</parameter>
       parameter name indicates that the C++ output parameter should be set from
       the value returned in the C parameter from the C function.
       <command>gmmproc</command> will generate a declaration of a temporary
@@ -10643,11 +10678,11 @@ _WRAP_METHOD(bool get_cell_rect(const TreeModel::Path&amp; path,
       statement that sets the C++ output parameter from the temporary variable.
       In this case it may be necessary to have an
       <function>_INITIALIZATION()</function> describing how to set a
-      <classname>Gdk::Rectangle&amp;</classname> from a
-      <classname>GdkRectangle*</classname> such as the following:
-<programlisting>
-_INITIALIZATION(`Gdk::Rectangle&amp;',`GdkRectangle',`$3 = Glib::wrap(&amp;($4))')
-</programlisting>
+      <classname>Glib::ustring&amp;</classname> from a
+      <classname>const char**</classname> such as the following:
+<programlisting><![CDATA[
+_INITIALIZATION(`Glib::ustring&',`const char*',`$3 = Glib::convert_const_gchar_ptr_to_ustring($4)')
+]]></programlisting>
     </para>
   </section>
 
