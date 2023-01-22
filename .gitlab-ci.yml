@@ -1,7 +1,6 @@
-# 2022-05-22: fedora:latest = 36, fedora:rawhide = 37
+# 2023-01-21: fedora:latest = 37, fedora:rawhide = 38
 # See https://hub.docker.com/_/fedora
 stages:
-  - validate
   - build
   - deploy
 
@@ -11,31 +10,6 @@ stages:
     - export PATH="$HOME/.local/bin:$PATH"
     - dnf install -y ${FEDORA_DEPS}
     - pip install --user "meson==0.56.0"
-
-docs-validation:
-  extends: .build-default
-  stage: validate
-  variables:
-    # If docbook-style-xsl is installed, the xsltproc command reads
-    # stylesheets from local files instead of http://docbook.sourceforge.net.
-    # Faster and safer. Reading from docbook.sourceforge.net sometimes fails.
-    FEDORA_DEPS:
-      gcc
-      gcc-c++
-      gettext
-      itstool
-      libxml2
-      docbook5-schemas
-      docbook-style-xsl
-      libxslt
-      ninja-build
-      python3
-      python3-pip
-      python3-wheel
-    MESON_OPTIONS: "-Dbuild-examples=false -Dvalidation=true -Dbuild-translations=true -Dbuild-pdf=false"
-  script:
-    - meson setup ${MESON_OPTIONS} _build .
-    - ninja -C _build
 
 html-tutorial:
   extends: .build-default
@@ -56,12 +30,12 @@ html-tutorial:
     - ninja -C _build
     # Installation copies all documentation files to one directory.
     - ninja -C _build install
-    - mkdir -p _build/docs/installed-tutorial
-    - mv /usr/share/doc/gtkmm-4.0/tutorial/html _build/docs/installed-tutorial
+    - mkdir -p _build/docs/installed-tutorial/html
+    - mv /usr/share/doc/gtkmm-4.0/tutorial/html/* _build/docs/installed-tutorial/html
   artifacts:
     when: always
     paths:
-      - _build/docs/installed-tutorial
+      - _build/docs/installed-tutorial/html
 
 # Publish the gtkmm tutorial at gnome.pages.gitlab.gnome.org/gtkmm-documentation
 pages:
