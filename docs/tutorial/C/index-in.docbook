@@ -7,7 +7,7 @@
   <!ENTITY url_refdocs_base_gdk "&url_refdocs_base_gtk_html;classGdk_1_1">
   <!ENTITY url_refdocs_base_gtk "&url_refdocs_base_gtk_html;classGtk_1_1">
   <!ENTITY url_figures_base "figures/">
-  <!ENTITY url_examples_branch "master">
+  <!ENTITY url_examples_branch "gtkmm-4-0">
   <!ENTITY url_examples_base "https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/&url_examples_branch;/examples/book/">
   <!ENTITY url_gtkmm_base "https://gitlab.gnome.org/GNOME/gtkmm/tree/&url_examples_branch;/">
   <!ENTITY gtkmm "<application xmlns='http://docbook.org/ns/docbook'>gtkmm</application>">
@@ -833,7 +833,7 @@ that can help with this by defining them optionally at build time. See the
 <link xlink:href="https://wiki.gnome.org/Projects/gtkmm/PortingToGtkmm3">Porting from
 gtkmm-2.4 to gtkmm-3.0</link> wiki page for more details.</para>
 
-<para>See also <link xlink:href="https://developer.gnome.org/gtk4/unstable/gtk-migrating-3-to-4.html">
+<para>See also <link xlink:href="https://docs.gtk.org/gtk4/migrating-3to4.html">
 Migrating from GTK 3.x to GTK 4</link>.</para>
 
 </chapter>
