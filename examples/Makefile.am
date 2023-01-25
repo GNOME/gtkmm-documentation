@@ -35,12 +35,11 @@ check_PROGRAMS =					\
 	book/custom/custom_css_name/example \
 	book/custom/custom_widget/example		\
 	book/dialogs/aboutdialog/example		\
-	book/dialogs/colorchooserdialog/example	\
-	book/dialogs/filechooserdialog/example		\
-	book/dialogs/filechoosernative/example		\
-	book/dialogs/fontchooserdialog/example	\
-	book/dialogs/messagedialog/example		\
-	book/dialogs/simple/example			\
+	book/dialogs/alertdialog/example		\
+	book/dialogs/colordialog/example	\
+	book/dialogs/filedialog/example		\
+	book/dialogs/fontdialog/example	\
+	book/dialogs/windowdialog/example			\
 	book/drag_and_drop/drag_and_drop		\
 	book/drawingarea/arcs/drawingareaarcs		\
 	book/drawingarea/clock/cairoclock		\
@@ -282,35 +281,32 @@ book_dialogs_aboutdialog_example_SOURCES =		\
 	book/dialogs/aboutdialog/examplewindow.h	\
 	book/dialogs/aboutdialog/main.cc
 
-book_dialogs_colorchooserdialog_example_SOURCES =		\
-	book/dialogs/colorchooserdialog/examplewindow.cc	\
-	book/dialogs/colorchooserdialog/examplewindow.h	\
-	book/dialogs/colorchooserdialog/main.cc
+book_dialogs_alertdialog_example_SOURCES =		\
+	book/dialogs/alertdialog/examplewindow.cc	\
+	book/dialogs/alertdialog/examplewindow.h	\
+	book/dialogs/alertdialog/main.cc
 
-book_dialogs_filechooserdialog_example_SOURCES =	\
-	book/dialogs/filechooserdialog/examplewindow.cc	\
-	book/dialogs/filechooserdialog/examplewindow.h	\
-	book/dialogs/filechooserdialog/main.cc
+book_dialogs_colordialog_example_SOURCES =		\
+	book/dialogs/colordialog/examplewindow.cc	\
+	book/dialogs/colordialog/examplewindow.h	\
+	book/dialogs/colordialog/main.cc
 
-book_dialogs_filechoosernative_example_SOURCES =	\
-	book/dialogs/filechoosernative/examplewindow.cc	\
-	book/dialogs/filechoosernative/examplewindow.h	\
-	book/dialogs/filechoosernative/main.cc
+book_dialogs_filedialog_example_SOURCES =	\
+	book/dialogs/filedialog/examplewindow.cc	\
+	book/dialogs/filedialog/examplewindow.h	\
+	book/dialogs/filedialog/main.cc
 
-book_dialogs_fontchooserdialog_example_SOURCES =		\
-	book/dialogs/fontchooserdialog/examplewindow.cc	\
-	book/dialogs/fontchooserdialog/examplewindow.h	\
-	book/dialogs/fontchooserdialog/main.cc
+book_dialogs_fontdialog_example_SOURCES =		\
+	book/dialogs/fontdialog/examplewindow.cc	\
+	book/dialogs/fontdialog/examplewindow.h	\
+	book/dialogs/fontdialog/main.cc
 
-book_dialogs_messagedialog_example_SOURCES =		\
-	book/dialogs/messagedialog/examplewindow.cc	\
-	book/dialogs/messagedialog/examplewindow.h	\
-	book/dialogs/messagedialog/main.cc
-
-book_dialogs_simple_example_SOURCES =		\
-	book/dialogs/simple/examplewindow.cc	\
-	book/dialogs/simple/examplewindow.h	\
-	book/dialogs/simple/main.cc
+book_dialogs_windowdialog_example_SOURCES =		\
+	book/dialogs/windowdialog/examplewindow.cc	\
+	book/dialogs/windowdialog/examplewindow.h	\
+	book/dialogs/windowdialog/main.cc \
+	book/dialogs/windowdialog/namedialog.cc	\
+	book/dialogs/windowdialog/namedialog.h
 
 book_drag_and_drop_drag_and_drop_SOURCES =	\
 	book/drag_and_drop/dndwindow.cc		\

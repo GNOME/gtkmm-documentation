@@ -3928,6 +3928,17 @@ writing a new type of range widget.
 <chapter xml:id="chapter-dialogs">
 <title>Dialogs</title>
 
+<note><para><classname>Gtk::Dialog</classname> and the classes derived from it,
+are deprecated since &gtkmm; 4.10. They can still be used in &gtkmm;4 applications,
+provided GTKMM_DISABLE_DEPRECATED and GDKMM_DISABLE_DEPRECATED are not defined.
+Some of the dialog classes are replaced by classes that are available since &gtkmm; 4.10.
+</para>
+<para>The examples in this chapter use classes that are available since &gtkmm; 4.10.
+Similar examples with the deprecated classes are available in the
+<link xlink:href="https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/gtkmm-4-0/examples/book/dialogs/">
+gtkmm-4-0 branch</link> in the git repository.
+</para></note>
+
 <para>
 Dialogs are used as secondary windows, to provide specific information or to
 ask questions. <classname>Gtk::Dialog</classname> windows contain a few pre-packed
@@ -3968,107 +3979,113 @@ should hide the dialog.
 
 <para><link xlink:href="&url_refdocs_base_gtk;Dialog.html">Reference</link></para>
 
-<section xml:id="sec-dialogs-messagedialog">
-<title>MessageDialog</title>
+<section xml:id="sec-dialogs-alertdialog">
+<title>AlertDialog and MessageDialog</title>
 <para>
-<classname>MessageDialog</classname> is a convenience class, used to create
-simple, standard message dialogs, with a message and buttons for user
-response. You can specify the type of message and the text in the constructor,
-as well as specifying standard buttons via the <type>Gtk::ButtonsType</type> enum.
+<classname>MessageDialog</classname> (deprecated since &gtkmm; 4.10) and
+<classname>AlertDialog</classname> (available since &gtkmm; 4.10) are convenience
+classes, used to create simple, standard message dialogs, with a message and buttons
+for user response.
 </para>
 
-<para><link xlink:href="&url_refdocs_base_gtk;MessageDialog.html">Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;AlertDialog.html">AlertDialog Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;MessageDialog.html">MessageDialog Reference</link></para>
 
-<section xml:id="messagedialog-example">
+<section xml:id="alertdialog-example">
 <title>Example</title>
 
-<figure xml:id="figure-dialogs-messagedialog">
-  <title>MessageDialog</title>
+<figure xml:id="figure-dialogs-alertdialog">
+  <title>AlertDialog</title>
   <screenshot>
-    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;dialogs_messagedialog.png"/></imageobject></mediaobject>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;dialogs_alertdialog.png"/></imageobject></mediaobject>
   </screenshot>
 </figure>
 
-<para><link xlink:href="&url_examples_base;dialogs/messagedialog">Source Code</link></para>
+<para><link xlink:href="&url_examples_base;dialogs/alertdialog">Source Code</link></para>
+</section>
 </section>
 
-</section>
-
-<section xml:id="sec-dialogs-filechooserdialog">
-<title>FileChooserDialog</title>
+<section xml:id="sec-dialogs-filedialog">
+<title>FileDialog and FileChooserDialog</title>
 <para>
-The <classname>FileChooserDialog</classname> is suitable for use with
-"Open" or "Save" menu items.
+The <classname>FileChooserDialog</classname> (deprecated since &gtkmm; 4.10) and
+<classname>FileDialog</classname> (available since &gtkmm; 4.10) are suitable
+for use with "Open" or "Save" menu items.
 </para>
 <para>
-Most of the useful member methods for this class are actually in the
-<classname>Gtk::FileChooser</classname> base class.
+Most of the useful member methods for <classname>FileChooserDialog</classname>
+are actually in the <classname>Gtk::FileChooser</classname> base class.
 </para>
 
-<para><link xlink:href="&url_refdocs_base_gtk;FileChooserDialog.html">Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;FileDialog.html">FileDialog Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;FileChooserDialog.html">FileChooserDialogReference</link></para>
 
-<section xml:id="filechooserdialog-example">
+<section xml:id="filedialog-example">
 <title>Example</title>
 
-<figure xml:id="figure-dialogs-filechooser">
-  <title>FileChooser</title>
+<figure xml:id="figure-dialogs-filedialog">
+  <title>FileDialog</title>
   <screenshot>
-    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;dialogs_filechooser.png"/></imageobject></mediaobject>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;dialogs_filedialog.png"/></imageobject></mediaobject>
   </screenshot>
 </figure>
 
-<para><link xlink:href="&url_examples_base;dialogs/filechooserdialog">Source Code</link></para>
+<para><link xlink:href="&url_examples_base;dialogs/filedialog">Source Code</link></para>
 </section>
 </section>
 
-<section xml:id="sec-color-selection-dialog">
-<title>ColorChooserDialog</title>
+<section xml:id="sec-dialogs-colordialog">
+<title>ColorDialog and ColorChooserDialog</title>
 <para>
-The <classname>ColorChooserDialog</classname> allows the user to choose a
-color. The <classname>ColorButton</classname> opens a color selection dialog
-when it is clicked.
+The <classname>ColorChooserDialog</classname> (deprecated since &gtkmm; 4.10) and
+<classname>ColorDialog</classname> (available since &gtkmm; 4.10) allow the user
+to choose a color. The <classname>ColorButton</classname> (deprecated since &gtkmm; 4.10)
+and <classname>ColorDialogButton</classname> (available since &gtkmm; 4.10) open
+a color selection dialog when it is clicked.
 </para>
 
-<para><link xlink:href="&url_refdocs_base_gtk;ColorChooserDialog.html">Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;ColorDialog.html">ColorDialog Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;ColorChooserDialog.html">ColorChooserDialog Reference</link></para>
 
-<section xml:id="colorchooserdialog-example">
+<section xml:id="colordialog-example">
 <title>Example</title>
 
-<figure xml:id="figure-dialogs-colorchooserdialog">
-  <title>ColorChooserDialog</title>
+<figure xml:id="figure-dialogs-colordialog">
+  <title>ColorDialog</title>
   <screenshot>
-    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;dialogs_colorchooserdialog.png"/></imageobject></mediaobject>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;dialogs_colordialog.png"/></imageobject></mediaobject>
   </screenshot>
 </figure>
 
-<para><link xlink:href="&url_examples_base;dialogs/colorchooserdialog">Source Code</link></para>
+<para><link xlink:href="&url_examples_base;dialogs/colordialog">Source Code</link></para>
+</section>
 </section>
 
-</section>
-
-<section xml:id="sec-font-chooser-dialog">
-<title>FontChooserDialog</title>
+<section xml:id="sec-dialogs-fontdialog">
+<title>FontDialog and FontChooserDialog</title>
 <para>
-The <classname>FontChooserDialog</classname> allows the user to choose a
-font. The <classname>FontButton</classname> opens a font chooser dialog
-when it is clicked.
+The <classname>FontChooserDialog</classname> (deprecated since &gtkmm; 4.10) and
+<classname>FontDialog</classname> (available since &gtkmm; 4.10) allow the user
+to choose a font. The <classname>FontButton</classname> (deprecated since &gtkmm; 4.10)
+and <classname>FontDialogButton</classname> (available since &gtkmm; 4.10) open
+a font chooser dialog when it is clicked.
 </para>
 
-<para><link xlink:href="&url_refdocs_base_gtk;FontChooserDialog.html">Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;FontDialog.html">FontDialog Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;FontChooserDialog.html">FontChooserDialog Reference</link></para>
 
-<section xml:id="fontchooserdialog-example">
+<section xml:id="fontdialog-example">
 <title>Example</title>
 
-<figure xml:id="figure-dialogs-fontchooserdialog">
-  <title>FontChooserDialog</title>
+<figure xml:id="figure-dialogs-fontdialog">
+  <title>FontDialog</title>
   <screenshot>
-    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;dialogs_fontchooserdialog.png"/></imageobject></mediaobject>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;dialogs_fontdialog.png"/></imageobject></mediaobject>
   </screenshot>
 </figure>
 
-<para><link xlink:href="&url_examples_base;dialogs/fontchooserdialog">Source Code</link></para>
+<para><link xlink:href="&url_examples_base;dialogs/fontdialog">Source Code</link></para>
 </section>
-
 </section>
 
 <section xml:id="sec-about-dialog">
@@ -4101,7 +4118,30 @@ search-and-replace dialog is non-modal.
 
 <para><link xlink:href="&url_examples_base;dialogs/aboutdialog">Source Code</link></para> <!-- Insert aboutdialog.gresource.xml -->
 </section>
+</section>
 
+<section xml:id="sec-dialogs-windowdialog">
+<title>Custom Dialog</title>
+<para>
+When none of the predefined dialog classes suit your needs, you can make your own
+dialog by deriving a class from <classname>Window</classname> and fill it with
+the widgets you need.
+</para>
+
+<para><link xlink:href="&url_refdocs_base_gtk;Window.html">Window Reference</link></para>
+
+<section xml:id="windowdialog-example">
+<title>Example</title>
+
+<figure xml:id="figure-dialogs-windowdialog">
+  <title>Window Dialog</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;dialogs_windowdialog.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;dialogs/windowdialog">Source Code</link></para>
+</section>
 </section>
 
 </chapter>

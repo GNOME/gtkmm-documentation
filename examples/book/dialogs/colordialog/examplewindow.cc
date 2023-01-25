@@ -21,14 +21,17 @@ ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::Orientation::VERTICAL, 5),
   m_Button_Dialog("Choose Color")
 {
-  set_title("Gtk::ColorChooserDialog example");
+  set_title("Gtk::ColorDialog example");
   set_default_size(200, 200);
+
+  m_pDialog = Gtk::ColorDialog::create();
+  m_ColorDialogButton.set_dialog(m_pDialog);
 
   set_child(m_VBox);
 
-  m_VBox.append(m_ColorButton);
-  m_ColorButton.signal_color_set().connect(sigc::mem_fun(*this,
-    &ExampleWindow::on_color_button_color_set) );
+  m_VBox.append(m_ColorDialogButton);
+  m_ColorDialogButton.property_rgba().signal_changed().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_color_button_color_set));
 
   m_VBox.append(m_Button_Dialog);
   m_Button_Dialog.signal_clicked().connect(sigc::mem_fun(*this,
@@ -39,7 +42,7 @@ ExampleWindow::ExampleWindow()
   m_Color.set_green(0.0);
   m_Color.set_blue(1.0);
   m_Color.set_alpha(1.0); //opaque
-  m_ColorButton.set_rgba(m_Color);
+  m_ColorDialogButton.set_rgba(m_Color);
 
   m_VBox.append(m_DrawingArea);
   m_DrawingArea.set_expand(true);
@@ -53,52 +56,37 @@ ExampleWindow::~ExampleWindow()
 void ExampleWindow::on_color_button_color_set()
 {
   //Store the chosen color:
-  m_Color = m_ColorButton.get_rgba();
+  m_Color = m_ColorDialogButton.get_rgba();
   m_DrawingArea.queue_draw();
 }
 
 void ExampleWindow::on_button_dialog_clicked()
 {
-  if (!m_pDialog)
-  {
-    m_pDialog = std::make_unique<Gtk::ColorChooserDialog>("Please choose a color", *this);
-    m_pDialog->set_modal(true);
-    m_pDialog->set_hide_on_close(true);
-    m_pDialog->signal_response().connect(
-      sigc::mem_fun(*this, &ExampleWindow::on_dialog_response));
-  }
-
-  //Get the previously selected color:
-  m_pDialog->set_rgba(m_Color);
-
-  m_pDialog->set_visible(true);
+  m_pDialog->choose_rgba(*this, m_Color,
+    sigc::mem_fun(*this, &ExampleWindow::on_dialog_finish));
 }
 
-void ExampleWindow::on_dialog_response(int response_id)
+void ExampleWindow::on_dialog_finish(const Glib::RefPtr<Gio::AsyncResult>& result)
 {
-  m_pDialog->set_visible(false);
-
-  //Handle the response:
-  switch (response_id)
+  try
   {
-    case Gtk::ResponseType::OK:
-    {
-      //Store the chosen color:
-      m_Color = m_pDialog->get_rgba();
-      m_ColorButton.set_rgba(m_Color);
-      m_DrawingArea.queue_draw();
-      break;
-    }
-    case Gtk::ResponseType::CANCEL:
-    {
-      std::cout << "Cancel clicked." << std::endl;
-      break;
-    }
-    default:
-    {
-      std::cout << "Unexpected button clicked: " << response_id << std::endl;
-      break;
-    }
+    // If this call changes the color, it will trigger a call to
+    // on_color_button_color_set().
+    m_ColorDialogButton.set_rgba(m_pDialog->choose_rgba_finish(result));
+
+    // This is what you should do if m_ColorDialogButton and
+    // on_color_button_color_set() did not exist:
+    //m_Color = m_pDialog->choose_rgba_finish(result);
+    //m_DrawingArea.queue_draw();
+  }
+  catch (const Gtk::DialogError& err)
+  {
+    // Can be thrown by m_pDialog->choose_rgba_finish(result).
+    std::cout << "No color selected. " << err.what() << std::endl;
+  }
+  catch (const Glib::Error& err)
+  {
+    std::cout << "Unexpected exception. " << err.what() << std::endl;
   }
 }
 

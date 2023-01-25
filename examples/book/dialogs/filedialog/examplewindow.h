@@ -18,25 +18,26 @@
 #define GTKMM_EXAMPLEWINDOW_H
 
 #include <gtkmm.h>
-#include <memory>
 
 class ExampleWindow : public Gtk::Window
 {
 public:
   ExampleWindow();
-  virtual ~ExampleWindow();
+  ~ExampleWindow() override;
 
 protected:
   //Signal handlers:
-  void on_button_info_clicked();
-  void on_button_question_clicked();
-  void on_question_dialog_response(int response_id);
+  void on_button_file_clicked();
+  void on_button_folder_clicked();
+  void on_file_dialog_finish(const Glib::RefPtr<Gio::AsyncResult>& result,
+    const Glib::RefPtr<Gtk::FileDialog>& dialog);
+  void on_folder_dialog_finish(const Glib::RefPtr<Gio::AsyncResult>& result,
+    const Glib::RefPtr<Gtk::FileDialog>& dialog);
 
   //Child widgets:
   Gtk::Box m_ButtonBox;
-  Gtk::Button m_Button_Info, m_Button_Question;
-
-  std::unique_ptr<Gtk::MessageDialog> m_pDialog;
+  Gtk::Button m_Button_File;
+  Gtk::Button m_Button_Folder;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 705 2006-07-19 02:55:32Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -25,16 +23,25 @@ class ExampleWindow : public Gtk::Window
 {
 public:
   ExampleWindow();
-  virtual ~ExampleWindow();
+  ~ExampleWindow() override;
 
 protected:
   //Signal handlers:
-  void on_button_clicked();
+  void on_color_button_color_set();
+  void on_button_dialog_clicked();
+  void on_dialog_finish(const Glib::RefPtr<Gio::AsyncResult>& result);
+
+  //Draw function:
+  void on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);
 
   //Child widgets:
-  Gtk::Button m_Button;
+  Gtk::Box m_VBox;
+  Gtk::ColorDialogButton m_ColorDialogButton;
+  Gtk::Button m_Button_Dialog;
+  Gtk::DrawingArea m_DrawingArea; //To show the color.
 
-  Gtk::Dialog m_Dialog;
+  Glib::RefPtr<Gtk::ColorDialog> m_pDialog;
+  Gdk::RGBA m_Color;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

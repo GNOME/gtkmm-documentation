@@ -55,10 +55,11 @@ HELP_MEDIA =					\
 	figures/custom_css_name.png \
 	figures/custom_widget.png		\
 	figures/dialogs_about.png		\
-	figures/dialogs_colorchooserdialog.png\
-	figures/dialogs_filechooser.png		\
-	figures/dialogs_fontchooserdialog.png	\
-	figures/dialogs_messagedialog.png	\
+	figures/dialogs_alertdialog.png	\
+	figures/dialogs_colordialog.png\
+	figures/dialogs_filedialog.png		\
+	figures/dialogs_fontdialog.png	\
+	figures/dialogs_windowdialog.png	\
 	figures/drag_and_drop.png		\
 	figures/drawingarea_arcs.png		\
 	figures/drawingarea_curve.png		\

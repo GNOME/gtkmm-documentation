@@ -23,18 +23,20 @@ class ExampleWindow : public Gtk::Window
 {
 public:
   ExampleWindow();
-  virtual ~ExampleWindow();
+  ~ExampleWindow() override;
 
 protected:
   //Signal handlers:
-  void on_button_file_clicked();
-  void on_button_folder_clicked();
-  void on_file_dialog_response(int response_id, Gtk::FileChooserDialog* dialog);
-  void on_folder_dialog_response(int response_id, Gtk::FileChooserDialog* dialog);
+  void on_button_info_clicked();
+  void on_button_question_clicked();
+  void on_question_dialog_finish(const Glib::RefPtr<Gio::AsyncResult>& result);
 
   //Child widgets:
   Gtk::Box m_ButtonBox;
-  Gtk::Button m_Button_File, m_Button_Folder;
+  Gtk::Button m_Button_Info;
+  Gtk::Button m_Button_Question;
+
+  Glib::RefPtr<Gtk::AlertDialog> m_pDialog;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

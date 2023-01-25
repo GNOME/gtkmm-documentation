@@ -18,31 +18,24 @@
 #define GTKMM_EXAMPLEWINDOW_H
 
 #include <gtkmm.h>
-#include <memory>
+#include "namedialog.h"
 
 class ExampleWindow : public Gtk::Window
 {
 public:
   ExampleWindow();
-  virtual ~ExampleWindow();
+  ~ExampleWindow() override;
 
 protected:
   //Signal handlers:
-  void on_color_button_color_set();
-  void on_button_dialog_clicked();
-  void on_dialog_response(int response_id);
-
-  //Draw function:
-  void on_drawing_area_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height);
+  void on_button_clicked();
+  void on_dialog_response(const Glib::ustring& response);
+  void on_dialog_hidden();
 
   //Child widgets:
-  Gtk::Box m_VBox;
-  Gtk::ColorButton m_ColorButton;
-  Gtk::Button m_Button_Dialog;
-  Gtk::DrawingArea m_DrawingArea; //To show the color.
+  Gtk::Button m_Button;
 
-  std::unique_ptr<Gtk::ColorChooserDialog> m_pDialog;
-  Gdk::RGBA m_Color;
+  NameDialog m_Dialog;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H
