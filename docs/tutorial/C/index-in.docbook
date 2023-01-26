@@ -6426,8 +6426,10 @@ widget. For instance, this call to <methodname>get_widget_derived()</methodname>
 auto pDialog = Gtk::Builder::get_widget_derived&lt;DerivedDialog&gt;(builder, "DialogDerived", true);
 </programlisting>
 can invoke this constructor
+</para>
 <programlisting>
-DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder, bool warning)
+DerivedDialog::DerivedDialog(BaseObjectType* cobject,
+  const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder, bool warning)
 : Gtk::Window(cobject),
   m_builder(builder),
   m_pButton(m_builder-&gt;get_widget&lt;Gtk::Button&gt;("quit_button"))
@@ -6435,7 +6437,6 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk:
   // ....
 }
 </programlisting>
-</para>
 
 <section xml:id="sec-builder-and-property">
 <title>Gtk::Builder and Glib::Property</title>
