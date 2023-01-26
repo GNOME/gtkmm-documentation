@@ -3,7 +3,7 @@
 
 namespace
 {
-Gtk::Dialog* pDialog = nullptr;
+Gtk::Window* pDialog = nullptr;
 Glib::RefPtr<Gtk::Application> app;
 
 void on_button_clicked()
@@ -37,7 +37,7 @@ void on_app_activate()
   }
 
   // Get the GtkBuilder-instantiated dialog:
-  pDialog = refBuilder->get_widget<Gtk::Dialog>("DialogBasic");
+  pDialog = refBuilder->get_widget<Gtk::Window>("DialogBasic");
   if (!pDialog)
   {
     std::cerr << "Could not get the dialog" << std::endl;

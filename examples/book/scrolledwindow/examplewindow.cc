@@ -18,21 +18,23 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
+: m_VBox(Gtk::Orientation::VERTICAL, 10),
+  m_ButtonClose("_Close", true)
 {
   set_title("Gtk::ScrolledWindow example");
   set_size_request(300, 300);
 
-  m_ScrolledWindow.set_margin(10);
+  set_child(m_VBox);
+  m_VBox.set_margin(10);
 
-  /* the policy is one of Gtk::PolicyType::AUTOMATIC, or Gtk::PolicyType::ALWAYS.
+  /* The policy is one of Gtk::PolicyType::AUTOMATIC, or Gtk::PolicyType::ALWAYS.
    * Gtk::PolicyType::AUTOMATIC will automatically decide whether you need
    * scrollbars, whereas Gtk::PolicyType::ALWAYS will always leave the scrollbars
-   * there.  The first one is the horizontal scrollbar, the second,
-   * the vertical. */
+   * there. The first one is the horizontal scrollbar, the second, the vertical. */
   m_ScrolledWindow.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::ALWAYS);
   m_ScrolledWindow.set_expand();
 
-  get_content_area()->append(m_ScrolledWindow);
+  m_VBox.append(m_ScrolledWindow);
 
   /* set the spacing to 10 on x and 10 on y */
   m_Grid.set_row_spacing(10);
@@ -43,40 +45,31 @@ ExampleWindow::ExampleWindow()
 
   /* this simply creates a grid of toggle buttons
    * to demonstrate the scrolled window. */
-  for(int i = 0; i < 10; i++)
+  for (int i = 0; i < 10; i++)
   {
-     for(int j = 0; j < 10; j++)
-     {
-        char buffer[32];
-        sprintf(buffer, "button (%d,%d)\n", i, j);
-        auto pButton = Gtk::make_managed<Gtk::ToggleButton>(buffer);
-        m_Grid.attach(*pButton, i, j, 1, 1);
-     }
+    for (int j = 0; j < 10; j++)
+    {
+      auto s = Glib::ustring::compose("button (%1,%2)", i, j);
+      auto pButton = Gtk::make_managed<Gtk::ToggleButton>(s);
+      m_Grid.attach(*pButton, i, j);
+    }
   }
 
   /* Add a "close" button to the bottom of the dialog */
-  add_button("_Close", Gtk::ResponseType::CLOSE);
-  signal_response().connect(sigc::mem_fun(*this, &ExampleWindow::on_dialog_response));
+  m_VBox.append(m_ButtonClose);
+  m_ButtonClose.set_halign(Gtk::Align::END);
+  m_ButtonClose.signal_clicked().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_button_close));
 
-  /* This makes it so the button is the default.
-   * Simply hitting the "Enter" key will cause this button to activate. */
-  set_default_response(Gtk::ResponseType::CLOSE);
+  /* Hitting the "Enter" key will cause this button to activate. */
+  m_ButtonClose.grab_focus();
 }
 
 ExampleWindow::~ExampleWindow()
 {
 }
 
-void ExampleWindow::on_dialog_response(int response_id)
+void ExampleWindow::on_button_close()
 {
-  switch (response_id)
-  {
-  case Gtk::ResponseType::CLOSE:
-  case Gtk::ResponseType::DELETE_EVENT:
-    set_visible(false);
-    break;
-  default:
-    std::cout << "Unexpected response_id=" << response_id << std::endl;
-    break;
-  }
+  set_visible(false);
 }

@@ -1,5 +1,3 @@
-//$Id: examplewindow.h 705 2006-07-19 02:55:32Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -21,19 +19,21 @@
 
 #include <gtkmm.h>
 
-class ExampleWindow : public Gtk::Dialog
+class ExampleWindow : public Gtk::Window
 {
 public:
   ExampleWindow();
-  virtual ~ExampleWindow();
+  ~ExampleWindow() override;
 
 protected:
   //Signal handlers:
-  void on_dialog_response(int response_id);
+  void on_button_close();
 
   //Child widgets:
+  Gtk::Box m_VBox;
   Gtk::ScrolledWindow m_ScrolledWindow;
   Gtk::Grid m_Grid;
+  Gtk::Button m_ButtonClose;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H

@@ -6315,12 +6315,16 @@ name should be specified in the <application>Glade</application> Properties
 window. If the widget could not be found, or is of the wrong type, then the
 pointer will be set to nullptr.
 </para>
+<para>
+The dialogs in this chapter are derived from <classname>Gtk::Window</classname>
+because <classname>Gtk::Dialog</classname> is deprecated since &gtkmm; 4.10.
+</para>
 <programlisting>
-auto pDialog = builder-&gt;get_widget&lt;Gtk::Dialog&gt;("DialogBasic");
+auto pDialog = builder-&gt;get_widget&lt;Gtk::Window&gt;("DialogBasic");
 </programlisting>
 
 <para>
-<application>Gtk::Builder</application> checks for a null pointer, and checks
+<classname>Gtk::Builder</classname> checks for a null pointer, and checks
 that the widget is of the expected type, and will show warnings on the command
 line about these.
 </para>
@@ -6381,8 +6385,8 @@ auto pDialog = Gtk::Builder::get_widget_derived&lt;DerivedDialog&gt;(builder, "D
 Your derived class must have a constructor that takes a pointer to the
 underlying C type, and the <classname>Gtk::Builder</classname> instance.
 All relevant classes of &gtkmm; typedef their underlying C type as
-<classname>BaseObjectType</classname> (<classname>Gtk::Dialog</classname>
-typedefs <classname>BaseObjectType</classname> as <type>GtkDialog</type>, for instance).
+<classname>BaseObjectType</classname> (<classname>Gtk::Window</classname>
+typedefs <classname>BaseObjectType</classname> as <type>GtkWindow</type>, for instance).
 </para>
 <para>
 You must call the base class's constructor in the initialization list, providing the C pointer. For
@@ -6390,7 +6394,7 @@ instance,
 </para>
 <programlisting>
 DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)
-: Gtk::Dialog(cobject)
+: Gtk::Window(cobject)
 {
 }
 </programlisting>
@@ -6402,12 +6406,12 @@ or <methodname>get_widget_derived()</methodname> again. For instance,
 </para>
 <programlisting>
 DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)
-: Gtk::Dialog(cobject),
+: Gtk::Window(cobject),
   m_builder(builder),
   //Get the Glade-instantiated Button, and connect a signal handler:
   m_pButton(m_builder-&gt;get_widget&lt;Gtk::Button&gt;("quit_button"))
 {
-  if(m_pButton)
+  if (m_pButton)
   {
     m_pButton-&gt;signal_clicked().connect( sigc::mem_fun(*this, &amp;DerivedDialog::on_button_quit) );
   }
@@ -6424,7 +6428,7 @@ auto pDialog = Gtk::Builder::get_widget_derived&lt;DerivedDialog&gt;(builder, "D
 can invoke this constructor
 <programlisting>
 DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder, bool warning)
-: Gtk::Dialog(cobject),
+: Gtk::Window(cobject),
   m_builder(builder),
   m_pButton(m_builder-&gt;get_widget&lt;Gtk::Button&gt;("quit_button"))
 {

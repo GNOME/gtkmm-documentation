@@ -20,19 +20,19 @@
 #include <gtkmm.h>
 #include "derivedbutton.h"
 
-class DerivedDialog : public Gtk::Dialog
+class DerivedDialog : public Gtk::Window
 {
 public:
-  DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade);
-  DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade,
+  DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder);
+  DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder,
     bool is_glad);
-  virtual ~DerivedDialog();
+  ~DerivedDialog() override;
 
 protected:
   //Signal handlers:
   void on_button_quit();
 
-  Glib::RefPtr<Gtk::Builder> m_refGlade;
+  Glib::RefPtr<Gtk::Builder> m_refBuilder;
   DerivedButton* m_pButton;
 };
 

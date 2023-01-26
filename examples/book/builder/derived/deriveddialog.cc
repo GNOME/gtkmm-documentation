@@ -17,13 +17,13 @@
 #include "deriveddialog.h"
 #include <iostream>
 
-DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
-: Gtk::Dialog(cobject),
-  m_refGlade(refGlade),
+DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder)
+: Gtk::Window(cobject),
+  m_refBuilder(refBuilder),
   m_pButton(nullptr)
 {
   // Get the Glade-instantiated Button, and connect a signal handler:
-  m_pButton = Gtk::Builder::get_widget_derived<DerivedButton>(m_refGlade, "quit_button");
+  m_pButton = Gtk::Builder::get_widget_derived<DerivedButton>(m_refBuilder, "quit_button");
   if (m_pButton)
   {
     m_pButton->signal_clicked().connect( sigc::mem_fun(*this, &DerivedDialog::on_button_quit) );
@@ -39,16 +39,22 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Bu
 // from Gtk::Builder::get_widget_derived().
 // Additional parameters, if any, correspond to additional arguments in the call
 // to Gtk::Builder::get_widget_derived().
-DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade,
+DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder,
   bool is_glad)
-: DerivedDialog(cobject, refGlade) // Delegate to the other constructor
+: DerivedDialog(cobject, refBuilder) // Delegate to the other constructor
 {
   // Show an icon.
+  auto content_area = refBuilder->get_widget<Gtk::Box>("dialog-content_area");
+  if (!content_area)
+  {
+    std::cerr << "Could not get the content area" << std::endl;
+    return;
+  }
   auto pImage = Gtk::make_managed<Gtk::Image>();
   pImage->set_from_icon_name(is_glad ? "face-smile" : "face-sad");
   pImage->set_icon_size(Gtk::IconSize::LARGE);
   pImage->set_expand();
-  get_content_area()->append(*pImage);
+  content_area->append(*pImage);
 }
 
 DerivedDialog::~DerivedDialog()
