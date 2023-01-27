@@ -1657,6 +1657,10 @@ An <classname>InfoBar</classname> may show small items of information or ask bri
 <section xml:id="infobar-example">
 <title>Example</title>
 
+<para>The <classname>InfoBar</classname> widget is deprecated since &gtkmm; 4.10.
+The example shows an info bar consisting of a <classname>Box</classname> with
+a <classname>Label</classname> and a <classname>Button</classname>.</para>
+
 <figure xml:id="figure-infobar">
   <title>InfoBar</title>
   <screenshot>

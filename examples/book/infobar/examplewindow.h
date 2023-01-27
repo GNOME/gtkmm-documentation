@@ -23,14 +23,18 @@ class ExampleWindow : public Gtk::Window
 {
 public:
   ExampleWindow();
-  virtual ~ExampleWindow();
+  ~ExampleWindow() override;
 
 protected:
   //Signal handlers:
-  void on_infobar_response(int response);
+  void on_infobar_ok();
   void on_button_quit();
   void on_button_clear();
   void on_textbuffer_changed();
+  void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section,
+    const Glib::Error& error);
+
+  void set_infobar_background();
 
   //Child widgets:
   Gtk::Box m_VBox;
@@ -40,11 +44,13 @@ protected:
 
   Glib::RefPtr<Gtk::TextBuffer> m_refTextBuffer;
 
-  Gtk::InfoBar m_InfoBar;
+  Gtk::Box m_InfoBar;
   Gtk::Label m_Message_Label;
+  Gtk::Button m_Button_OK;
 
   Gtk::Box m_ButtonBox;
-  Gtk::Button m_Button_Quit, m_Button_Clear;
+  Gtk::Button m_Button_Quit;
+  Gtk::Button m_Button_Clear;
 };
 
 #endif //GTKMM_EXAMPLEWINDOW_H
