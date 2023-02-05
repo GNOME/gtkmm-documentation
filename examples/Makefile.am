@@ -49,6 +49,10 @@ check_PROGRAMS =					\
 	book/drawingarea/pango_text/example		\
 	book/drawingarea/simple/drawingarea		\
 	book/drawingarea/thin_lines/example		\
+	book/dropdown/complex/example			\
+	book/dropdown/search_font/example			\
+	book/dropdown/search_string/example		\
+	book/dropdown/string/example		\
 	book/entry/completion/example			\
 	book/entry/icon/example				\
 	book/entry/progress/example			\
@@ -355,6 +359,26 @@ book_drawingarea_thin_lines_example_SOURCES =	\
 	book/drawingarea/thin_lines/examplewindow.h  \
 	book/drawingarea/thin_lines/myarea.cc	\
 	book/drawingarea/thin_lines/myarea.h
+
+book_dropdown_complex_example_SOURCES =		\
+	book/dropdown/complex/examplewindow.cc	\
+	book/dropdown/complex/examplewindow.h	\
+	book/dropdown/complex/main.cc
+
+book_dropdown_search_font_example_SOURCES =		\
+	book/dropdown/search_font/examplewindow.cc	\
+	book/dropdown/search_font/examplewindow.h	\
+	book/dropdown/search_font/main.cc
+
+book_dropdown_search_string_example_SOURCES =		\
+	book/dropdown/search_string/examplewindow.cc	\
+	book/dropdown/search_string/examplewindow.h	\
+	book/dropdown/search_string/main.cc
+
+book_dropdown_string_example_SOURCES =		\
+	book/dropdown/string/examplewindow.cc	\
+	book/dropdown/string/examplewindow.h		\
+	book/dropdown/string/main.cc
 
 book_entry_completion_example_SOURCES =		\
 	book/entry/completion/examplewindow.cc	\
