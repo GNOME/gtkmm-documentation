@@ -22,7 +22,8 @@
 ExampleWindow::ExampleWindow()
 : m_VBox(Gtk::Orientation::VERTICAL),
   m_Button_Child("Button with custom CSS node name"),
-  m_Label_Child("Label with custom name"),
+  m_Label_Child1("Label with custom name"),
+  m_Label_Child2("Label with custom CSS class"),
   m_Button_Quit("Quit")
 {
   set_title("Custom CSS name example");
@@ -32,19 +33,29 @@ ExampleWindow::ExampleWindow()
   m_VBox.set_spacing(5);
   set_child(m_VBox);
 
-  // The CSS name can be set either
-  // - for a GType with gtk_widget_class_set_css_name(), or
-  // - for a widget instance with gtk_widget_set_name() (Gtk::Widget::set_name()).
+  // There are 3 ways to set custom CSS data for a widget:
+  // 1. The CSS name can be set for a GType with gtk_widget_class_set_css_name().
+  // 2. The CSS name can be set for a widget instance with gtk_widget_set_name()
+  //    (Gtk::Widget::set_name()).
+  // 3. A CSS class can be set for a widget instance with
+  //    gtk_widget_add_css_class() (Gtk::Widget::add_css_class()).
   //
-  // gtk_widget_class_set_css_name(), if used, must be called in the class init function.
-  // It has not been wrapped in a C++ function.
-  // Gtk::Widget::set_name() can be called in a C++ constructor.
-  m_Label_Child.set_name("my-label"); // CSS name, which must be used in the CSS file.
+  // gtk_widget_class_set_css_name(), if used, must be called in the class init
+  // function. It has not been wrapped in a C++ function.
+  // Gtk::Widget::set_name() and Gtk::Widget::add_css_class() can be called in
+  // a C++ constructor.
+
+  // CSS widget name, which must be used in the CSS file, preceded by "#".
+  m_Label_Child1.set_name("my-label1");
+
+  // CSS class name, which must be used in the CSS file, preceded by ".".
+  m_Label_Child2.add_css_class("my-label2");
 
   // Add the child widgets to m_VBox:
   m_VBox.append(*Gtk::make_managed<Gtk::Label>("Ordinary label"));
   m_VBox.append(m_Button_Child);
-  m_VBox.append(m_Label_Child);
+  m_VBox.append(m_Label_Child1);
+  m_VBox.append(m_Label_Child2);
   m_VBox.set_expand();
   m_VBox.append(m_ButtonBox);
 

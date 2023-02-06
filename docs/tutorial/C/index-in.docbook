@@ -7209,25 +7209,28 @@ shows how that's done.</para>
 
 <para>Many aspects of the look of widgets are controled by CSS (Cascading Style
 Sheet) files. With CSS files you can choose color, font, line thickness, etc.
-If you give some widgets their own names, you can define CSS rules that apply
-only to those widgets, for instance certain buttons, without affecting
-other similar widgets.</para>
+If you give some widgets their own names or their own CSS classes, you can define
+CSS rules that apply only to those widgets, for instance certain buttons,
+without affecting other similar widgets.</para>
 
-<section xml:id="widget-name-css-node-name">
-<title>Widget Name and CSS Node Name</title>
+<section xml:id="css-widget-class-name">
+<title>CSS Node Name, Widget Name, CSS Class Name</title>
 
-<para>There are two ways of giving a widget a name that you can refer to from a CSS file:
+<para>There are three ways of referring from a widget to data in a CSS file:
   <itemizedlist>
-    <listitem><para><methodname>Gtk::Widget::set_name()</methodname>
-    can be called from a C++ constructor. It sets the name of
-    a widget instance.</para></listitem>
     <listitem><para><methodname>gtk_widget_class_set_css_name()</methodname>
     can only be called from the class init function. It sets the CSS node name
     of all instances of a class (a GType). See the <link linkend="custom-init-functions">
     Class Init and Instance Init Functions</link> section.</para></listitem>
+    <listitem><para><methodname>Gtk::Widget::set_name()</methodname>
+    can be called from a C++ constructor. It sets the name of
+    a widget instance.</para></listitem>
+    <listitem><para><methodname>Gtk::Widget::add_class_name()</methodname>
+    can be called from a C++ constructor. It adds the name of a CSS class,
+    used by a widget instance.</para></listitem>
   </itemizedlist>
-The following example shows a button with its own CSS node name and a label with
-a widget name.</para>
+The following example shows a button with its own CSS node name, a label with
+a widget name and a label that uses its own CSS class.</para>
 </section>
 
 <section xml:id="custom-style-information">
@@ -7246,7 +7249,7 @@ information, but this class is deprecated since &gtkmm; 4.10.</para>
 <section xml:id="custom-css-name-example">
 <title>Example</title>
 
-<para>This example implements a button and a babel with custom style information.</para>
+<para>This example implements a button and two labels with custom style information.</para>
 
 <figure xml:id="figure-custom-css-name">
   <title>Custom CSS Name</title>
