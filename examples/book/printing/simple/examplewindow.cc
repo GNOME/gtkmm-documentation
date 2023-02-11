@@ -20,8 +20,6 @@
 #include "printformoperation.h"
 #include <iostream>
 
-const Glib::ustring app_title = "gtkmm Printing Example";
-
 ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
 : m_VBox(Gtk::Orientation::VERTICAL),
   m_NameLabel("Name"),
@@ -31,9 +29,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   m_refPageSetup = Gtk::PageSetup::create();
   m_refSettings = Gtk::PrintSettings::create();
 
-  m_ContextId = m_Statusbar.get_context_id(app_title);
-
-  set_title(app_title);
+  set_title("gtkmm Printing Example");
   set_default_size(400, 300);
 
   set_child(m_VBox);
@@ -65,7 +61,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   m_refTextBuffer = Gtk::TextBuffer::create();
   m_TextView.set_buffer(m_refTextBuffer);
 
-  m_Statusbar.set_expand(true);
+  m_Statusbar.set_hexpand(true);
   m_VBox.append(m_Statusbar);
 }
 
@@ -242,7 +238,7 @@ void ExampleWindow::on_printoperation_status_changed()
     status_msg = m_refPrintFormOperation->get_status_string();
   }
 
-  m_Statusbar.push(status_msg, m_ContextId);
+  m_Statusbar.set_text(status_msg);
 }
 
 void ExampleWindow::on_printoperation_done(Gtk::PrintOperation::Result result)

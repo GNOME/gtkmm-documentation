@@ -9,7 +9,6 @@ examples_others = [
   [['calendar'], 'calendar', ['calendar.cc']],
   [['dnd'], 'testdnd', ['dndwindow.cc', 'main.cc']],
   [['exception'], 'exceptiontest', ['exceptiontest.cc']],
-  [['statusbar'], 'statusbar', ['statusbar.cc']],
   [['tictactoe'], 'ttt_test', ['tictactoe.cc', 'ttt_test.cc']],
   [['window'], 'wheelbarrow', ['wheelbarrow.cc']],
 ]

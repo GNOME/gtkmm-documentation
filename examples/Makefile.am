@@ -117,7 +117,6 @@ check_PROGRAMS =					\
 	others/calendar/calendar			\
 	others/dnd/testdnd				\
 	others/exception/exceptiontest			\
-	others/statusbar/statusbar			\
 	others/tictactoe/ttt_test			\
 	others/window/wheelbarrow
 
@@ -717,12 +716,6 @@ others_dnd_testdnd_SOURCES =	\
 
 others_exception_exceptiontest_SOURCES = \
 	others/exception/exceptiontest.cc
-
-#others_gdk_radar_SOURCES = \
-#	others/gdk/radar.cc
-
-others_statusbar_statusbar_SOURCES = \
-	others/statusbar/statusbar.cc
 
 others_tictactoe_ttt_test_SOURCES =	\
 	others/tictactoe/tictactoe.cc	\

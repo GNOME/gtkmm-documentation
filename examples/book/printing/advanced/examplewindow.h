@@ -69,8 +69,7 @@ protected:
 
   Glib::RefPtr<Gtk::TextBuffer> m_refTextBuffer;
 
-  unsigned m_ContextId;
-  Gtk::Statusbar m_Statusbar;
+  Gtk::Label m_Statusbar;
 
   Glib::RefPtr<Gtk::Builder> m_refBuilder;
 

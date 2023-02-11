@@ -860,11 +860,13 @@ deprecated since &gtkmm; 4.10. Some other programs use classes available since &
   ColorButton, ColorChooser, ColorChooserDialog,
   FileChooser, FileChooserDialog, FileChooserNative, FileChooserWidget,
   FontButton, FontChooser, FontChooserDialog, FontChooserWidget,
-  MessageDialog, TreeModelColumn, TreeModelColumnRecord, InfoBar.
+  MessageDialog, TreeModelColumn, TreeModelColumnRecord, InfoBar,
+  Assistant, AssistantPage, LockButton, Statusbar.
 </para>
 <para>New classes and enums:
   AlertDialog, ColorDialog, ColorDialogButton, ColumnViewSorter, FileDialog,
-  FontDialog, FontDialogButton, enums DialogError, FontLevel.
+  FontDialog, FontDialogButton, FileLauncher, UriLauncher, ATContext,
+  enums DialogError, FontLevel, Collation.
 </para>
 <para>In most cases there are replacements for the deprecated classes.
 See the reference documentation.
@@ -1344,6 +1346,10 @@ visible flags.
 
 <section xml:id="sec-text-entry-completion">
 <title>Entry Completion</title>
+
+<note><para><classname>Gtk::EntryCompletion</classname> is deprecated since &gtkmm; 4.10.
+There is no replacement in &gtkmm;.
+</para></note>
 
 <para>An <classname>Entry</classname> widget can offer a drop-down list of
 pre-existing choices based on the first few characters typed by the user. For
@@ -2252,6 +2258,12 @@ To programmatically change the selected page, use the
 <section xml:id="sec-assistant">
 <title>Assistant</title>
 
+<note><para><classname>Gtk::Assistant</classname> is deprecated since &gtkmm; 4.10.
+There is no replacement in &gtkmm;. libadwaita (a C library) has replacement parts
+(like AdwCarousel). In some cases, a <classname>Gtk::Notebook</classname> might
+be an acceptable replacement.
+</para></note>
+
 <para>
 An <classname>Assistant</classname> splits a complex operation into steps. Each step is a page, containing a header, a child widget and an action area. The Assistant's action area has navigation buttons which update automatically depending on the type of the page, set with <methodname>set_page_type()</methodname>.
 </para>
@@ -2309,6 +2321,11 @@ which are not mentioned elsewhere in this tutorial.
 
 <chapter xml:id="chapter-treeview">
 <title>The TreeView widget</title>
+
+<note><para><classname>Gtk::TreeView</classname> is deprecated since &gtkmm; 4.10.
+In new code, use <classname>Gtk::ListView</classname> for lists and
+<classname>Gtk::ColumnView</classname> for tabular lists.
+</para></note>
 
 <para>
 The <classname>Gtk::TreeView</classname> widget can contain lists or trees of
@@ -3024,6 +3041,10 @@ code and popup menu code in our derived class. See the
 
 <chapter xml:id="chapter-combobox">
 <title>Combo Boxes</title>
+
+<note><para><classname>Gtk::ComboBox</classname> and <classname>Gtk::ComboBoxText</classname>
+are deprecated since &gtkmm; 4.10. Use <classname>Gtk::DropDown</classname> in new code.
+</para></note>
 
 <para>The <classname>ComboBox</classname> widget offers a list (or tree) of choices in a dropdown menu. If appropriate, it can show extra information about each item, such as text, a picture, a check button, or a progress bar. The <classname>ComboBox</classname> widget usually restricts the user to the available choices, but it can optionally have an <classname>Entry</classname>, allowing the user to enter arbitrary text if none of the available choices are suitable.
 </para>
