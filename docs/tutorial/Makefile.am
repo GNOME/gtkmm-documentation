@@ -67,6 +67,10 @@ HELP_MEDIA =					\
 	figures/drawingarea_lines.png		\
 	figures/drawingarea_pango_text.png		\
 	figures/drawingarea_thin_lines.png		\
+	figures/dropdown_complex.png \
+	figures/dropdown_search_font.png \
+	figures/dropdown_search_string.png \
+	figures/dropdown_string.png \
 	figures/entry.png			\
 	figures/entry_completion.png		\
 	figures/entry_icon.png		\

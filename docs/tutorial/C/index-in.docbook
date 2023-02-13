@@ -3039,6 +3039,190 @@ code and popup menu code in our derived class. See the
 </section>
 </chapter>
 
+<chapter xml:id="chapter-dropdown">
+<title>The DropDown Widget</title>
+
+<para>The <classname>DropDown</classname> widget is an alternative to the deprecated
+<classname>ComboBox</classname>. It uses list models instead of tree models,
+and the content is displayed using widgets instead of cell renderers.
+</para>
+
+<para>The <classname>DropDown</classname> widget offers a list of choices in a
+dropdown menu. If appropriate, it can show extra information about each item,
+such as text, a picture, or a check button. The <classname>DropDown</classname> widget
+can optionally have an <classname>Entry</classname> in the dropdown menu, allowing
+the user to search in a long list.
+</para>
+
+<para>The list is provided via a <classname>Gio::ListModel</classname>, and data
+from this model is added to the <classname>DropDown</classname>'s view with
+signal handlers connected to a <classname>SignalListItemFactory</classname>.
+This provides flexibility, but the <classname>StringList</classname> class provides
+a simpler text-based specialization in case that flexibility is not required.
+</para>
+
+<para><link xlink:href="&url_refdocs_base_gtk;DropDown.html">Reference</link></para>
+
+<section xml:id="sec-dropdown-model">
+<title>The model</title>
+
+<para>The model for a <classname>DropDown</classname> can be defined and filled
+exactly as for a <classname>ListView</classname> or a <classname>ColumnView</classname>.
+It must be a subclass of <classname>Glib::Object</classname>.
+For instance, you might have a <classname>DropDown</classname> with one integer
+and one text column, like so:
+</para>
+<programlisting><![CDATA[class ModelColumns : public Glib::Object
+{
+public:
+  int m_col_id;
+  Glib::ustring m_col_name;
+
+  static Glib::RefPtr<ModelColumns> create(
+    int col_id, const Glib::ustring& col_name)
+  {
+    return Glib::make_refptr_for_instance<ModelColumns>(
+      new ModelColumns(col_id, col_name));
+  }
+
+protected:
+  ModelColumns(int col_id, const Glib::ustring& col_name)
+  : m_col_id(col_id), m_col_name(col_name)
+  {}
+};
+
+Glib::RefPtr<Gio::ListStore<ModelColumns>> m_ListStore;
+]]></programlisting>
+
+<para>After appending rows to this model, you should provide the model to the
+<classname>DropDown</classname> with the <methodname>set_model()</methodname> method.
+Unless you use the <classname>StringList</classname> model, you also need to set
+a <classname>ListItemFactory</classname> with <methodname>set_factory()</methodname>.
+If you want the items in the dropdown menu to look different from the item
+in the <classname>DropDown</classname> widget, you also need to set a separate
+<classname>ListItemFactory</classname> with <methodname>set_list_factory()</methodname>.
+</para>
+</section>
+
+<section xml:id="sec-dropdown-get">
+<title>The selected item</title>
+
+<para>To discover what item, if any, the user has selected from the <classname>DropDown</classname>,
+call <methodname>DropDown::get_selected()</methodname>. This returns an
+<type>unsigned int</type> that you can use to get the selected data from the model.
+For instance, you might read an integer ID value from the model, even though you
+have chosen only to show the human-readable description in the
+<classname>DropDown</classname>. For instance:
+</para>
+<programlisting><![CDATA[unsigned int sel = m_DropDown.get_selected();
+if (sel != GTK_INVALID_LIST_POSITION)
+{
+  // Get the data for the selected row, using our knowledge of the list model:
+  auto id = m_ListStore->get_item(sel).m_col_id;
+  set_some_id_chosen(id); // Your own function.
+}
+else
+  set_nothing_chosen(); // Your own function.
+]]></programlisting>
+</section>
+
+<section xml:id="sec-dropdown-changes">
+<title>Responding to changes</title>
+
+<para>You might need to react to every change of selection in the <classname>DropDown</classname>,
+for instance to update other widgets. To do so, you should connect to
+<methodname>property_selected().signal_changed()</methodname>. For instance:
+</para>
+<programlisting><![CDATA[m_DropDown.property_selected().signal_changed().connect(
+  sigc::mem_fun(*this, &ExampleWindow::on_dropdown_changed));
+]]></programlisting>
+</section>
+
+<section xml:id="sec-dropdown-simple">
+<title>Simple String Example</title>
+
+<figure xml:id="figure-dropdown-string">
+  <title>Simple DropDown</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;dropdown_string.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;dropdown/string">Source Code</link></para>
+</section>
+
+<section xml:id="sec-dropdown-search">
+<title>Examples with a Search Entry</title>
+
+<para>The dropdown menu may contain an <classname>Entry</classname> that allows
+to search for items in the list. Call <methodname>set_enable_search()</methodname>
+and <methodname>set_expression()</methodname>. For instance:
+</para>
+<programlisting><![CDATA[m_DropDown.set_enable_search(true);
+auto expression = Gtk::ClosureExpression<Glib::ustring>::create(
+  sigc::mem_fun(*this, &ExampleWindow::get_col_name));
+m_DropDown.set_expression(expression);
+
+//-------
+Glib::ustring ExampleWindow::get_col_name(const Glib::RefPtr<Glib::ObjectBase>& item)
+{
+  const auto col = std::dynamic_pointer_cast<ModelColumns>(item);
+  return col ? col->m_col_name : "";
+}
+]]></programlisting>
+
+<section xml:id="sec-dropdown-search-string">
+<title>String Example</title>
+
+<figure xml:id="figure-dropdown-search-string">
+  <title>Search String</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;dropdown_search_string.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;dropdown/search_string">Source Code</link></para>
+</section>
+
+<section xml:id="sec-dropdown-search-font">
+<title>Font Example</title>
+
+<para>This example uses a <classname>Pango::CairoFontMap</classname> as its model.
+This is possible because <classname>Pango::CairoFontMap</classname> implements
+the <classname>Gio::ListModel</classname> interface. Of course you can use a
+<classname>FontDialogButton</classname> instead.
+</para>
+
+<figure xml:id="figure-dropdown-search-font">
+  <title>Search Font</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;dropdown_search_font.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;dropdown/search_font">Source Code</link></para>
+</section>
+</section>
+
+<section xml:id="sec-dropdown-complex">
+<title>Complex Example</title>
+
+<para>This is a more complex example with two <classname>SignalListItemFactory</classname>
+objects and their signal handlers. This example would be simpler without the
+checkmark in the dropdown menu.
+</para>
+
+<figure xml:id="figure-dropdown-complex">
+  <title>Search Font</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;dropdown_complex.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;dropdown/complex">Source Code</link></para>
+</section>
+</chapter>
+
 <chapter xml:id="chapter-combobox">
 <title>Combo Boxes</title>
 
