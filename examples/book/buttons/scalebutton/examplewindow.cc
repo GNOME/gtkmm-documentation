@@ -18,26 +18,26 @@
 #include <iostream>
 
 ExampleWindow::ExampleWindow()
-: m_button(0.0, 100.0, 10.0)
+: m_button(0.0, 100.0, 2.0)
 {
-  //Make the window big enough to show the popup scale from the GtkVolumeButton.
-  //Otherwise it will be truncated.
-  set_default_size(300, 300);
+  set_default_size(300, 200);
 
   set_title("ScaleButton Example");
 
+  // These are the icons used by the deprecated VolumeButton widget,
+  // although it can alternatively use the corresponding symbolic icons.
   std::vector<Glib::ustring> icons;
-  icons.push_back("audio-volume-low");
-  icons.push_back("audio-volume-high");
-  icons.push_back("audio-volume-medium");
+  icons.push_back("audio-volume-muted");  // lowest value
+  icons.push_back("audio-volume-high");   // highest value
+  icons.push_back("audio-volume-low");    // 0% < value < 50%
+  icons.push_back("audio-volume-medium"); // 50% < value < 100%
   m_button.set_icons(icons);
 
   m_grid.set_margin(12);
   set_child(m_grid);
-  m_grid.set_vexpand(true);
-  m_grid.set_hexpand(true);
+  m_grid.set_expand(true);
 
-  m_grid.attach(m_button, 1, 1, 1, 1);
+  m_grid.attach(m_button, 1, 1);
   m_button.set_valign(Gtk::Align::END);
   m_button.set_halign(Gtk::Align::END);
 
@@ -54,5 +54,3 @@ void ExampleWindow::on_value_changed(double value)
 {
   std::cout << "Value: " << value << std::endl;
 }
-
-

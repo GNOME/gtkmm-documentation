@@ -31,7 +31,7 @@ ExampleWindow::ExampleWindow()
     sigc::mem_fun(*this, &ExampleWindow::get_family_name));
   m_DropDown.set_expression(expression);
 
-  // Pango::CairoFontMap is a Gio::ListModel.
+  // Pango::FontMap is a Gio::ListModel.
   auto model = Pango::CairoFontMap::get_default();
   m_DropDown.set_model(model);
   m_DropDown.set_selected(0);
@@ -52,9 +52,9 @@ void ExampleWindow::on_dropdown_changed()
   std::cout << "DropDown changed: Row=" << selected
     << ", Font=" << get_family_name(item) << std::endl;
 
-  // Pango::CairoFontMap is often a list of items of type Pango::FontFamily.
-  // From the class description: "The actual type of the font map will depend on
-  // the particular font technology Cairo was compiled to use."
+  // Pango::FontMap is often a list of items of type Pango::FontFamily.
+  // From the description of Pango::CairoFontMap: "The actual type of the font map
+  // will depend on the particular font technology Cairo was compiled to use."
   // If get_family_name() does not return a family name, you can add
   // #include <typeinfo> and query the type of the items with:
   //   std::cout << typeid(*item.get()).name() << std::endl;

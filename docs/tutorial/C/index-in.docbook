@@ -861,7 +861,7 @@ deprecated since &gtkmm; 4.10. Some other programs use classes available since &
   FileChooser, FileChooserDialog, FileChooserNative, FileChooserWidget,
   FontButton, FontChooser, FontChooserDialog, FontChooserWidget,
   MessageDialog, TreeModelColumn, TreeModelColumnRecord, InfoBar,
-  Assistant, AssistantPage, LockButton, Statusbar.
+  Assistant, AssistantPage, LockButton, Statusbar, VolumeButton.
 </para>
 <para>New classes and enums:
   AlertDialog, ColorDialog, ColorDialogButton, ColumnViewSorter, FileDialog,
@@ -3187,8 +3187,8 @@ Glib::ustring ExampleWindow::get_col_name(const Glib::RefPtr<Glib::ObjectBase>& 
 <section xml:id="sec-dropdown-search-font">
 <title>Font Example</title>
 
-<para>This example uses a <classname>Pango::CairoFontMap</classname> as its model.
-This is possible because <classname>Pango::CairoFontMap</classname> implements
+<para>This example uses a <classname>Pango::FontMap</classname> as its model.
+This is possible because <classname>Pango::FontMap</classname> implements
 the <classname>Gio::ListModel</classname> interface. Of course you can use a
 <classname>FontDialogButton</classname> instead.
 </para>

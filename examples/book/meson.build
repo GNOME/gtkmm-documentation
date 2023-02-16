@@ -28,7 +28,6 @@ examples_book = [
   [['buttons', 'radiobutton'], 'radiobuttons', ['main.cc', 'radiobuttons.cc']],
   [['buttons', 'scalebutton'], 'example', exwindow_main],
   [['buttons', 'togglebutton'], 'example', exwindow_main],
-  [['buttons', 'volumebutton'], 'example', exwindow_main],
   [['clipboard', 'ideal'], 'example', exwindow_main],
   [['clipboard', 'simple'], 'example', exwindow_main],
   [['combobox', 'complex'], 'example', exwindow_main],
