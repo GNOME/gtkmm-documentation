@@ -26,6 +26,13 @@ check_PROGRAMS =					\
 	book/buttons/togglebutton/example		\
 	book/clipboard/ideal/example			\
 	book/clipboard/simple/example			\
+	book/combobox/columnview_listview/editable_cells/example \
+	book/combobox/columnview_listview/filter/example \
+	book/combobox/columnview_listview/list_columnview/example \
+	book/combobox/columnview_listview/list_listview/example \
+	book/combobox/columnview_listview/sort/example \
+	book/combobox/columnview_listview/tree_columnview/example \
+	book/combobox/columnview_listview/tree_listview/example \
 	book/combobox/complex/example			\
 	book/combobox/text/example			\
 	book/combobox/entry_complex/example		\
@@ -228,6 +235,41 @@ book_clipboard_simple_example_SOURCES =		\
 	book/clipboard/simple/examplewindow.cc	\
 	book/clipboard/simple/examplewindow.h	\
 	book/clipboard/simple/main.cc
+
+book_columnview_listview_editable_cells_example_SOURCES = \
+	book/columnview_listview/editable_cells/examplewindow.cc \
+	book/columnview_listview/editable_cells/examplewindow.h \
+	book/columnview_listview/editable_cells/main.cc
+
+book_columnview_listview_filter_example_SOURCES = \
+	book/columnview_listview/filter/examplewindow.cc \
+	book/columnview_listview/filter/examplewindow.h \
+	book/columnview_listview/filter/main.cc
+
+book_columnview_listview_list_columnview_example_SOURCES = \
+	book/columnview_listview/list_columnview/examplewindow.cc \
+	book/columnview_listview/list_columnview/examplewindow.h \
+	book/columnview_listview/list_columnview/main.cc
+
+book_columnview_listview_list_listview_example_SOURCES = \
+	book/columnview_listview/list_listview/examplewindow.cc \
+	book/columnview_listview/list_listview/examplewindow.h \
+	book/columnview_listview/list_listview/main.cc
+
+book_columnview_listview_sort_example_SOURCES = \
+	book/columnview_listview/sort/examplewindow.cc \
+	book/columnview_listview/sort/examplewindow.h \
+	book/columnview_listview/sort/main.cc
+
+book_columnview_listview_tree_columnview_example_SOURCES = \
+	book/columnview_listview/tree_columnview/examplewindow.cc \
+	book/columnview_listview/tree_columnview/examplewindow.h \
+	book/columnview_listview/tree_columnview/main.cc
+
+book_columnview_listview_tree_listview_example_SOURCES = \
+	book/columnview_listview/tree_listview/examplewindow.cc \
+	book/columnview_listview/tree_listview/examplewindow.h \
+	book/columnview_listview/tree_listview/main.cc
 
 book_combobox_complex_example_SOURCES =		\
 	book/combobox/complex/examplewindow.cc	\
