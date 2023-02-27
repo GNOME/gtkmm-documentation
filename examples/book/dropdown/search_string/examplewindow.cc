@@ -38,7 +38,12 @@ ExampleWindow::ExampleWindow()
   // Show a search entry.
   m_DropDown.set_enable_search(true);
   auto expression = Gtk::ClosureExpression<Glib::ustring>::create(
-    sigc::mem_fun(*this, &ExampleWindow::get_time));
+    [](const Glib::RefPtr<Glib::ObjectBase>& item)->Glib::ustring
+    {
+      // An item in a StringList is a StringObject.
+      const auto string_object = std::dynamic_pointer_cast<Gtk::StringObject>(item);
+      return string_object ? string_object->get_string() : "";
+    });
   m_DropDown.set_expression(expression);
 
   // Connect signal handler:
@@ -55,11 +60,4 @@ void ExampleWindow::on_dropdown_changed()
   const auto selected = m_DropDown.get_selected();
   std::cout << "DropDown changed: Row=" << selected
     << ", String=" << m_StringList->get_string(selected) << std::endl;
-}
-
-Glib::ustring ExampleWindow::get_time(const Glib::RefPtr<Glib::ObjectBase>& item)
-{
-  // An item in a StringList is a StringObject.
-  const auto string_object = std::dynamic_pointer_cast<Gtk::StringObject>(item);
-  return string_object ? string_object->get_string() : "";
 }

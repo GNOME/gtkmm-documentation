@@ -52,6 +52,7 @@ ExampleWindow::ExampleWindow()
     /* passthrough */ false, /* autoexpand */ false);
   auto selection_model = Gtk::MultiSelection::create(m_TreeListModel);
   m_ColumnView.set_model(selection_model);
+  m_ColumnView.add_css_class("data-table"); // high density table
 
   // Make the columns reorderable.
   // This is not necessary, but it's nice to show the feature.

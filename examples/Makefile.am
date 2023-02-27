@@ -26,13 +26,6 @@ check_PROGRAMS =					\
 	book/buttons/togglebutton/example		\
 	book/clipboard/ideal/example			\
 	book/clipboard/simple/example			\
-	book/combobox/columnview_listview/editable_cells/example \
-	book/combobox/columnview_listview/filter/example \
-	book/combobox/columnview_listview/list_columnview/example \
-	book/combobox/columnview_listview/list_listview/example \
-	book/combobox/columnview_listview/sort/example \
-	book/combobox/columnview_listview/tree_columnview/example \
-	book/combobox/columnview_listview/tree_listview/example \
 	book/combobox/complex/example			\
 	book/combobox/text/example			\
 	book/combobox/entry_complex/example		\
@@ -64,7 +57,6 @@ check_PROGRAMS =					\
 	book/entry/progress/example			\
 	book/entry/simple/example			\
 	book/expander/example				\
-	book/flowbox/example				\
 	book/frame/example				\
 	book/giomm/directory_list/example		\
 	book/giomm/getline/getline			\
@@ -75,7 +67,6 @@ check_PROGRAMS =					\
 	book/giomm/volumes/example			\
 	book/giomm/write_file/example			\
 	book/grid/example				\
-	book/gridview/example				\
 	book/headerbar/example				\
 	book/helloworld/helloworld			\
 	book/helloworld2/helloworld2			\
@@ -85,8 +76,17 @@ check_PROGRAMS =					\
 	book/keyboard_events/simple/example	\
 	book/keyboard_events/propagation/example	\
 	book/label/example				\
-	book/listbox/example				\
-	book/listmodel/example			\
+	book/listbox_flowbox/flowbox/example \
+	book/listbox_flowbox/listbox/example \
+	book/listbox_flowbox/listmodel/example \
+	book/listmodelviews/editable_cells/example \
+	book/listmodelviews/filter/example \
+	book/listmodelviews/gridview/example \
+	book/listmodelviews/list_columnview/example \
+	book/listmodelviews/list_listview/example \
+	book/listmodelviews/sort/example \
+	book/listmodelviews/tree_columnview/example \
+	book/listmodelviews/tree_listview/example \
 	book/menus/main_menu/main_menu			\
 	book/menus/popup/popup				\
 	book/menus_and_toolbars/example			\
@@ -133,14 +133,14 @@ dist_noinst_DATA = \
 	book/custom/custom_css_name/custom_gtkmm.css	\
 	$(DIALOGS_ABOUTDIALOG_RESOURCES) \
 	$(DRAWINGAREA_IMAGE_RESOURCES) \
-	book/gridview/gnome-dice-1.svg		\
-	book/gridview/gnome-dice-2.svg		\
-	book/gridview/gnome-dice-3.svg		\
-	book/gridview/gnome-dice-4.svg		\
-	book/gridview/gnome-dice-5.svg		\
-	book/gridview/gnome-dice-6.svg		\
-	book/gridview/mozilla-firefox.png	\
-	book/gridview/xmms.xpm			\
+	book/listmodelviews/gridview/gnome-dice-1.svg		\
+	book/listmodelviews/gridview/gnome-dice-2.svg		\
+	book/listmodelviews/gridview/gnome-dice-3.svg		\
+	book/listmodelviews/gridview/gnome-dice-4.svg		\
+	book/listmodelviews/gridview/gnome-dice-5.svg		\
+	book/listmodelviews/gridview/gnome-dice-6.svg		\
+	book/listmodelviews/gridview/mozilla-firefox.png	\
+	book/listmodelviews/gridview/xmms.xpm			\
 	$(MENUS_AND_TOOLBARS_RESOURCES)
 
 book_actionbar_example_SOURCES = \
@@ -235,41 +235,6 @@ book_clipboard_simple_example_SOURCES =		\
 	book/clipboard/simple/examplewindow.cc	\
 	book/clipboard/simple/examplewindow.h	\
 	book/clipboard/simple/main.cc
-
-book_columnview_listview_editable_cells_example_SOURCES = \
-	book/columnview_listview/editable_cells/examplewindow.cc \
-	book/columnview_listview/editable_cells/examplewindow.h \
-	book/columnview_listview/editable_cells/main.cc
-
-book_columnview_listview_filter_example_SOURCES = \
-	book/columnview_listview/filter/examplewindow.cc \
-	book/columnview_listview/filter/examplewindow.h \
-	book/columnview_listview/filter/main.cc
-
-book_columnview_listview_list_columnview_example_SOURCES = \
-	book/columnview_listview/list_columnview/examplewindow.cc \
-	book/columnview_listview/list_columnview/examplewindow.h \
-	book/columnview_listview/list_columnview/main.cc
-
-book_columnview_listview_list_listview_example_SOURCES = \
-	book/columnview_listview/list_listview/examplewindow.cc \
-	book/columnview_listview/list_listview/examplewindow.h \
-	book/columnview_listview/list_listview/main.cc
-
-book_columnview_listview_sort_example_SOURCES = \
-	book/columnview_listview/sort/examplewindow.cc \
-	book/columnview_listview/sort/examplewindow.h \
-	book/columnview_listview/sort/main.cc
-
-book_columnview_listview_tree_columnview_example_SOURCES = \
-	book/columnview_listview/tree_columnview/examplewindow.cc \
-	book/columnview_listview/tree_columnview/examplewindow.h \
-	book/columnview_listview/tree_columnview/main.cc
-
-book_columnview_listview_tree_listview_example_SOURCES = \
-	book/columnview_listview/tree_listview/examplewindow.cc \
-	book/columnview_listview/tree_listview/examplewindow.h \
-	book/columnview_listview/tree_listview/main.cc
 
 book_combobox_complex_example_SOURCES =		\
 	book/combobox/complex/examplewindow.cc	\
@@ -440,11 +405,6 @@ book_expander_example_SOURCES =		\
 	book/expander/examplewindow.h	\
 	book/expander/main.cc
 
-book_flowbox_example_SOURCES =		\
-	book/flowbox/examplewindow.cc	\
-	book/flowbox/examplewindow.h	\
-	book/flowbox/main.cc
-
 book_frame_example_SOURCES =		\
 	book/frame/examplewindow.cc	\
 	book/frame/examplewindow.h	\
@@ -492,11 +452,6 @@ book_grid_example_SOURCES = \
 	book/grid/examplewindow.h \
 	book/grid/main.cc
 
-book_gridview_example_SOURCES =		\
-	book/gridview/examplewindow.cc	\
-	book/gridview/examplewindow.h	\
-	book/gridview/main.cc
-
 book_helloworld_helloworld_SOURCES =	\
 	book/helloworld/helloworld.cc	\
 	book/helloworld/helloworld.h	\
@@ -538,19 +493,64 @@ book_label_example_SOURCES =		\
 	book/label/examplewindow.h	\
 	book/label/main.cc
 
-book_listbox_example_SOURCES =		\
-	book/listbox/examplewindow.cc	\
-	book/listbox/examplewindow.h	\
-	book/listbox/examplerow.cc	\
-	book/listbox/examplerow.h	\
-	book/listbox/main.cc
+book_listbox_flowbox_flowbox_example_SOURCES =		\
+	book/listbox_flowbox/flowbox/examplewindow.cc	\
+	book//listbox_flowbox/flowbox/examplewindow.h	\
+	book//listbox_flowbox/flowbox/main.cc
 
-book_listmodel_example_SOURCES =		\
-	book/listmodel/examplewindow.cc	\
-	book/listmodel/examplewindow.h	\
-	book/listmodel/myobject.cc	\
-	book/listmodel/myobject.h	\
-	book/listmodel/main.cc
+book_listbox_flowbox_listbox_example_SOURCES =		\
+	book/listbox_flowbox/listbox/examplewindow.cc	\
+	book/listbox_flowbox/listbox/examplewindow.h	\
+	book/listbox_flowbox/listbox/examplerow.cc	\
+	book/listbox_flowbox/listbox/examplerow.h	\
+	book/listbox_flowbox/listbox/main.cc
+
+book_listbox_flowbox_listmodel_example_SOURCES =		\
+	book/listbox_flowbox/listmodel/examplewindow.cc	\
+	book/listbox_flowbox/listmodel/examplewindow.h	\
+	book/listbox_flowbox/listmodel/myobject.cc	\
+	book/listbox_flowbox/listmodel/myobject.h	\
+	book/listbox_flowbox/listmodel/main.cc
+
+book_listmodelviews_editable_cells_example_SOURCES = \
+	book/listmodelviews/editable_cells/examplewindow.cc \
+	book/listmodelviews/editable_cells/examplewindow.h \
+	book/listmodelviews/editable_cells/main.cc
+
+book_listmodelviews_filter_example_SOURCES = \
+	book/listmodelviews/filter/examplewindow.cc \
+	book/listmodelviews/filter/examplewindow.h \
+	book/listmodelviews/filter/main.cc
+
+book_listmodelviews_gridview_example_SOURCES =		\
+	book/listmodelviews/gridview/examplewindow.cc	\
+	book/listmodelviews/gridview/examplewindow.h	\
+	book/listmodelviews/gridview/main.cc
+
+book_listmodelviews_list_columnview_example_SOURCES = \
+	book/listmodelviews/list_columnview/examplewindow.cc \
+	book/listmodelviews/list_columnview/examplewindow.h \
+	book/listmodelviews/list_columnview/main.cc
+
+book_listmodelviews_list_listview_example_SOURCES = \
+	book/listmodelviews/list_listview/examplewindow.cc \
+	book/listmodelviews/list_listview/examplewindow.h \
+	book/listmodelviews/list_listview/main.cc
+
+book_listmodelviews_sort_example_SOURCES = \
+	book/listmodelviews/sort/examplewindow.cc \
+	book/listmodelviews/sort/examplewindow.h \
+	book/listmodelviews/sort/main.cc
+
+book_listmodelviews_tree_columnview_example_SOURCES = \
+	book/listmodelviews/tree_columnview/examplewindow.cc \
+	book/listmodelviews/tree_columnview/examplewindow.h \
+	book/listmodelviews/tree_columnview/main.cc
+
+book_listmodelviews_tree_listview_example_SOURCES = \
+	book/listmodelviews/tree_listview/examplewindow.cc \
+	book/listmodelviews/tree_listview/examplewindow.h \
+	book/listmodelviews/tree_listview/main.cc
 
 book_menus_main_menu_main_menu_SOURCES =	\
 	book/menus/main_menu/exampleapplication.cc	\

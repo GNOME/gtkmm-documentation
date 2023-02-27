@@ -54,6 +54,7 @@ ExampleWindow::ExampleWindow()
   selection_model->set_autoselect(false);
   selection_model->set_can_unselect(true);
   m_ListView.set_model(selection_model);
+  m_ListView.add_css_class("data-table"); // high density table
 
   // Add the factory for the ListView's single column.
   auto factory = Gtk::SignalListItemFactory::create();

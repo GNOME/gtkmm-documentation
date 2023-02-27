@@ -2312,8 +2312,8 @@ which are not mentioned elsewhere in this tutorial.
 </para>
 
 <para><link xlink:href="&url_examples_base;actionbar">Source Code, ActionBar</link></para>
-<para><link xlink:href="&url_examples_base;flowbox">Source Code, FlowBox</link></para>
-<para><link xlink:href="&url_examples_base;gridview">Source Code, GridView</link></para>
+<para><link xlink:href="&url_examples_base;listbox_flowbox/flowbox">Source Code, FlowBox</link></para>
+<para><link xlink:href="&url_examples_base;listmodelviews/gridview">Source Code, GridView</link></para>
 
 </section>
 </section>

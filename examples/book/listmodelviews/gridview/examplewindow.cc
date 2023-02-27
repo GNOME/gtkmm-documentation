@@ -78,7 +78,7 @@ ExampleWindow::ExampleWindow()
   m_factory->signal_bind().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_bind_listitem));
 
-  // Fill the ListSore's data model and sort it.
+  // Fill the Gio::ListStore's data model and sort it.
   for (const auto& entry : entries)
     add_entry(entry.m_filename, entry.m_description);
   m_data_model->sort(sigc::mem_fun(*this, &ExampleWindow::on_model_sort));

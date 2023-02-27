@@ -30,8 +30,6 @@ protected:
   // Signal handler:
   void on_dropdown_changed();
 
-  Glib::ustring get_time(const Glib::RefPtr<Glib::ObjectBase>& item);
-
   // Child widget:
   Gtk::DropDown m_DropDown;
   

@@ -56,6 +56,7 @@ ExampleWindow::ExampleWindow()
     /* passthrough */ false, /* autoexpand */ false);
   auto selection_model = Gtk::MultiSelection::create(m_TreeListModel);
   m_ListView.set_model(selection_model);
+  m_ListView.add_css_class("data-table"); // high density table
 
   // Add the factory for the ListView's single column.
   auto factory = Gtk::SignalListItemFactory::create();

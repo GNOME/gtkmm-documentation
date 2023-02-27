@@ -85,6 +85,7 @@ ExampleWindow::ExampleWindow()
   m_SelectionModel->set_autoselect(false);
   m_SelectionModel->set_can_unselect(true);
   m_ColumnView.set_model(m_SelectionModel);
+  m_ColumnView.add_css_class("data-table"); // high density table
 
   // Make the columns reorderable.
   // This is not necessary, but it's nice to show the feature.
