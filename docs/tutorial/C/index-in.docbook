@@ -145,7 +145,7 @@ the package generally went by the name &gtkmm;, and that's what we stuck with.</
 <section xml:id="why-use-gtkmm">
 <title>Why use &gtkmm; instead of GTK?</title>
 
-<para>&gtkmm; allows you to write code using normal C++ techniques such as encapsulation, derivation, and polymorphism. As a C++ programmer you probably already realise that this leads to clearer and better organized code.</para>
+<para>&gtkmm; allows you to write code using normal C++ techniques such as encapsulation, derivation, and polymorphism. As a C++ programmer you probably already realize that this leads to clearer and better organized code.</para>
 <para>&gtkmm; is more type-safe, so the compiler can detect errors that would only be detected at run time when using C. This use of specific types also makes the API clearer because you can see what types should be used just by looking at a method's declaration.</para>
 <para>Inheritance can be used to derive new widgets. The derivation of new widgets in GTK C code is so complicated and error prone that almost no C coders do it. As a C++ developer you know that derivation is an essential Object Orientated technique.</para>
 <para>Member instances can be used, simplifying memory management. All GTK C widgets are dealt with by use of pointers. As a C++ coder you know that pointers should be avoided where possible.</para>
@@ -157,7 +157,7 @@ the package generally went by the name &gtkmm;, and that's what we stuck with.</
 
 <para>Trolltech's Qt is the closest competition to &gtkmm;, so it deserves discussion.</para>
 
-<para>&gtkmm; developers tend to prefer &gtkmm; to Qt because &gtkmm; does things in a more C++ way. Qt originates from a time when C++ and the standard library were not standardised or well supported by compilers. It therefore duplicates a lot of stuff that is now in the standard library, such as containers and type information. Most significantly, Trolltech modified the C++ language to provide signals, so that Qt classes cannot be used easily with non-Qt classes. &gtkmm; was able to use standard C++ to provide signals without changing the C++ language.
+<para>&gtkmm; developers tend to prefer &gtkmm; to Qt because &gtkmm; does things in a more C++ way. Qt originates from a time when C++ and the standard library were not standardized or well supported by compilers. It therefore duplicates a lot of stuff that is now in the standard library, such as containers and type information. Most significantly, Trolltech modified the C++ language to provide signals, so that Qt classes cannot be used easily with non-Qt classes. &gtkmm; was able to use standard C++ to provide signals without changing the C++ language.
 See the <link xlink:href="https://wiki.gnome.org/Projects/gtkmm/FAQ">FAQ</link> for more detailed differences.</para>
 </section>
 
@@ -494,7 +494,7 @@ just connecting to the existing &gtkmm; signals, see the <link linkend="chapter-
 <para>You might be surprised to learn that &gtkmm; doesn't use <classname>std::string</classname> in its interfaces. Instead it uses <classname>Glib::ustring</classname>, which is so similar and unobtrusive that you could actually pretend that each <classname>Glib::ustring</classname> is a <classname>std::string</classname> and ignore the rest of this section. But read on if you want to use languages other than English in your application.</para>
 <para>std::string uses 8 bits per character, but 8 bits aren't enough to encode languages such as Arabic, Chinese, and Japanese.
 Although the encodings for these languages have been specified by the <link xlink:href="http://www.unicode.org/">Unicode Consortium</link>,
-the C and C++ languages do not yet provide any standardised Unicode support for UTF-8 encoding.
+the C and C++ languages do not yet provide any standardized Unicode support for UTF-8 encoding.
 GTK and GNOME chose to implement Unicode using UTF-8, and that's what is wrapped by Glib::ustring.
 It provides almost exactly the same interface as std::string, along with automatic conversions to and from std::string.</para>
 <para>One of the benefits of UTF-8 is that you don't need to use it unless you want to, so you don't need to retrofit all of your code at once. <classname>std::string</classname> will still work for 7-bit ASCII strings. But when you try to localize your application for languages like Chinese, for instance, you will start to see strange errors, and possible crashes. Then all you need to do is start using <classname>Glib::ustring</classname> instead.</para>
@@ -599,7 +599,7 @@ protected:
 This class implements the "Hello World" window. It's derived from
 <classname>Gtk::Window</classname>, and has a single <classname>Gtk::Button</classname> as a member.
 We've chosen to use the
-constructor to do all of the initialisation work for the window,
+constructor to do all of the initialization work for the window,
 including setting up the signals. Here it is, with the comments
 omitted:
 </para>
@@ -614,7 +614,7 @@ omitted:
 }</programlisting>
 
 <para>
-Notice that we've used an initialiser statement to give the <literal>m_button</literal>
+Notice that we've used an initializer statement to give the <literal>m_button</literal>
 object the label "Hello World".
 </para>
 
@@ -704,7 +704,7 @@ orientation (vertical or horizontal) to be specified without requiring the use o
 
 <listitem><simpara><classname>Gdk::RGBA</classname> replaces <classname>Color</classname>, adding an alpha component for opacity. <classname>Colormap</classname> was removed, along with its awkward use to allocate colors.</simpara></listitem>
 
-<listitem><simpara><classname>Gdk::Pixmap</classname> and <classname>Gdk::Bitmap</classname> were removed in favour of <classname>Gdk::Pixbuf</classname>.</simpara></listitem>
+<listitem><simpara><classname>Gdk::Pixmap</classname> and <classname>Gdk::Bitmap</classname> were removed in favor of <classname>Gdk::Pixbuf</classname>.</simpara></listitem>
 
 <listitem><simpara><classname>Gdk::Drawable</classname> was removed, with its methods moving into <classname>Gdk::Window</classname>.</simpara></listitem>
 
@@ -1110,7 +1110,7 @@ They both contain a "trough" and a "slider" (sometimes called a
 moves it within the trough, while clicking in the trough advances the slider
 towards the location of the click, either completely, or by a designated
 amount, depending on which mouse button is used. This should be familiar
-scrollbar behaviour.
+scrollbar behavior.
 </para>
 
 <para>
@@ -1165,7 +1165,7 @@ As with <classname>Scrollbar</classname>s, the orientation can be either
 horizontal or vertical. The default constructor creates an
 <classname>Adjustment</classname> with all of its values set to
 <literal>0.0</literal>. This isn't useful so you will need to set some
-<classname>Adjustment</classname> details to get meaningful behaviour.
+<classname>Adjustment</classname> details to get meaningful behavior.
 </para>
 
 <section xml:id="scale-useful-methods">
@@ -1953,7 +1953,7 @@ all this information to resize and reposition everything sensibly and smoothly w
 &gtkmm; arranges widgets hierarchically, using <emphasis>containers</emphasis>.
 A container widget contains other widgets. Most &gtkmm; widgets are
 containers. Windows, Notebook tabs, and Buttons are all container widgets.
-There are two flavours of containers: single-child containers and multiple-child
+There are two flavors of containers: single-child containers and multiple-child
 containers. Most container widgets in &gtkmm; are single-child containers,
 including <classname>Gtk::Window</classname>.
 </para>
@@ -2016,7 +2016,7 @@ Let's take a look at a slightly improved <literal>helloworld</literal>, showing 
 
 <para>
 After building and running this program, try resizing the window to see the
-behaviour. Also, try playing with <methodname>set_expand()</methodname>,
+behavior. Also, try playing with <methodname>set_expand()</methodname>,
 <methodname>set_hexpand()</methodname>, <methodname>set_vexpand()</methodname>,
 <methodname>set_halign()</methodname> and <methodname>set_valign()</methodname>
 while reading the <link linkend="sec-boxes">Boxes</link> section.
@@ -2180,7 +2180,7 @@ the grid with <methodname>attach_next_to()</methodname>. Individual rows and col
 <methodname>set_column_homogeneous()</methodname>.
 </para>
 <para>You can set the <emphasis>margin</emphasis> and <emphasis>expand</emphasis> properties of the
-child <classname>Widget</classname>s to control their spacing and their behaviour when the Grid is resized.
+child <classname>Widget</classname>s to control their spacing and their behavior when the Grid is resized.
 </para>
 
 <para><link xlink:href="&url_refdocs_base_gtk;Grid.html">Reference</link></para>
@@ -2580,7 +2580,7 @@ m_TreeView.append_column(*pColumn);</programlisting>
 <title>Specifying CellRenderer details</title>
 
 <para>
-The default <classname>CellRenderer</classname>s and their default behaviour
+The default <classname>CellRenderer</classname>s and their default behavior
 will normally suffice, but you might occasionally need finer control. For
 instance, this example code from
 <filename>gtkmm/demos/gtk-demo/example_treeview_treestore.cc</filename>, appends a
@@ -2882,7 +2882,7 @@ treeview.set_model(sorted_model);</programlisting>
 <classname>Gtk::TreeView</classname> already implements simple drag-and-drop
 when used with the <classname>Gtk::ListStore</classname> or
 <classname>Gtk::TreeStore</classname> models (since gtk 4.8). If necessary, it also allows you
-to implement more complex behaviour when items are dragged and dropped, using
+to implement more complex behavior when items are dragged and dropped, using
 the normal <link linkend="chapter-draganddrop">Drag and Drop</link> API.
 </para>
 
@@ -4227,7 +4227,7 @@ are actually in the <classname>Gtk::FileChooser</classname> base class.
 </para>
 
 <para><link xlink:href="&url_refdocs_base_gtk;FileDialog.html">FileDialog Reference</link></para>
-<para><link xlink:href="&url_refdocs_base_gtk;FileChooserDialog.html">FileChooserDialogReference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;FileChooserDialog.html">FileChooserDialog Reference</link></para>
 
 <section xml:id="filedialog-example">
 <title>Example</title>
@@ -5624,7 +5624,7 @@ op-&gt;run(Gtk::PrintOperation::Action::PREVIEW, *this);
 <para>
 On Unix, the default preview handler uses an external viewer program.
 On Windows, the native preview dialog will be shown. If necessary you may
-override this behaviour and provide a custom preview dialog. See the example
+override this behavior and provide a custom preview dialog. See the example
 located in /examples/book/printing/advanced.
 </para>
 
@@ -6307,7 +6307,7 @@ Usually, the programmer will prefer to allow containers to automatically destroy
 their children by creating them using <function>Gtk::make_managed()</function>
 (see below). This is not strictly required, as the <literal>new</literal> and
 <literal>delete</literal> operators may also be used, but modern C++ style
-discourages those in favour of safer models of memory management, so it is
+discourages those in favor of safer models of memory management, so it is
 better to create widgets using <function>Gtk::make_managed()</function> and
 let their parent destroy them, than to manually perform dynamic allocation.
 <programlisting>
@@ -6677,7 +6677,7 @@ onwards, it is possible also to specify properties of derived widgets, declared
 in C++ using &gtkmm;, within <filename>.glade</filename> files and load/set
 these using <classname>Gtk::Builder</classname>. See the documentation of
 <classname>Gtk::Builder</classname> for more details on how to achieve this.
-Glade won’t recognise such properties as-is, but it should be able to through
+Glade won’t recognize such properties as-is, but it should be able to through
 use of <link xlink:href="https://developer-old.gnome.org/gladeui/stable/properties.html">
 property class definitions</link> and a catalog declaring those new properties.
 </para>
@@ -7180,7 +7180,7 @@ If you use <application>Glib</application>'s support macros, it's easier. Use
 
 <para>
 C programmers use <function>sprintf()</function> to compose and concatenate
-strings. C++ favours streams, but unfortunately, this approach makes
+strings. C++ favors streams, but unfortunately, this approach makes
 translation difficult, because each fragment of text is translated separately,
 without allowing the translators to rearrange them according to the grammar of
 the language.</para>
@@ -7274,7 +7274,7 @@ instance, you cannot use the copyright sign (&copy;).
 
     <para>&gtkmm; makes it very easy to derive new widgets by inheriting from an
       existing widget class, either by deriving from a container and adding child
-      widgets, or by deriving from a single-item widget, and changing its behaviour.
+      widgets, or by deriving from a single-item widget, and changing its behavior.
       But you might occasionally find that no suitable starting point already exists.
       In this case, you can implement a widget from scratch.</para>
 
@@ -7412,7 +7412,7 @@ shows how that's done.</para>
 <section xml:id="sec-custom-css-names">
 <title>Custom CSS Names</title>
 
-<para>Many aspects of the look of widgets are controled by CSS (Cascading Style
+<para>Many aspects of the look of widgets are controlled by CSS (Cascading Style
 Sheet) files. With CSS files you can choose color, font, line thickness, etc.
 If you give some widgets their own names or their own CSS classes, you can define
 CSS rules that apply only to those widgets, for instance certain buttons,
@@ -8510,7 +8510,7 @@ initialized to <literal>nullptr</literal> so you don't need to remember to do th
 <title>Constness</title>
 <para>
 The use of the <literal>const</literal> keyword in C++ is not always clear. You
-might not realise that <type>const Something*</type> declares a pointer to a
+might not realize that <type>const Something*</type> declares a pointer to a
 <type>const Something</type>. The pointer can be changed, but not the
 <type>Something</type> that it points to.
 </para>
@@ -9025,7 +9025,7 @@ Program received signal SIGTRAP, Trace/breakpoint trap.
 </programlisting>
 The exception is caught in <application>glibmm</application>, and the program
 ends with a call to <function>g_error()</function>. Other exceptions may result
-in different behaviour, but in any case the exception from a signal handler is
+in different behavior, but in any case the exception from a signal handler is
 caught in <application>glibmm</application> or &gtkmm;, and
 <application>gdb</application> can't see where it was thrown.
 </para>
@@ -9660,7 +9660,7 @@ int main(int, char**)
         code will be copied verbatim into the corresponding
         .h or .cc file.</para>
     <para>A .hg file will typically include some headers
-        and then declare a class, using some macros to add API or behaviour to
+        and then declare a class, using some macros to add API or behavior to
         this class. For instance, &gtkmm;'s <filename>button.hg</filename> looks
         roughly like this:</para>
 
