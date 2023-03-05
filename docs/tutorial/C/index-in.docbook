@@ -80,12 +80,14 @@ See https://gitlab.gnome.org/GNOME/gtkmm-documentation/-/merge_requests/11
       </author>
       <author>
         <personname><firstname>Pedro</firstname><surname>Ferreira</surname></personname>
-        <contrib>Chapter on Keyboard Events.</contrib>
+        <contrib>Chapter on "Keyboard Events".</contrib>
       </author>
       <author>
         <personname><firstname>Kjell</firstname><surname>Ahlstedt</surname></personname>
         <contrib>Update from gtkmm 3 to gtkmm 4.</contrib>
         <contrib>Chapter on "Building applications".</contrib>
+        <contrib>Chapter on "The DropDown Widget".</contrib>
+        <contrib>Chapter on "ListView, GridView, ColumnView".</contrib>
       </author>
     </authorgroup>
 
@@ -2313,10 +2315,295 @@ which are not mentioned elsewhere in this tutorial.
 
 <para><link xlink:href="&url_examples_base;actionbar">Source Code, ActionBar</link></para>
 <para><link xlink:href="&url_examples_base;listbox_flowbox/flowbox">Source Code, FlowBox</link></para>
-<para><link xlink:href="&url_examples_base;listmodelviews/gridview">Source Code, GridView</link></para>
 
 </section>
 </section>
+</chapter>
+
+<chapter xml:id="chapter-listmodel">
+<title>ListView, GridView, ColumnView</title>
+
+<para>
+Lists are intended to be used whenever developers want to display many objects
+in roughly the same way. They are perfectly fine to be used for very short lists
+of only 2 or 3 items, but generally scale fine to thousands of items.
+</para>
+
+<para>
+Lists are meant to be used with changing data, both with the items themselves
+changing as well as the list adding and removing items. Of course, they work just
+as well with static data.
+</para>
+
+<para>
+Some examples are shown in this chapter. There are more examples in the
+<link xlink:href="&url_examples_base;listmodelviews/">listmodelviews directory</link>
+in <application>gtkmm-documentation</application>'s examples.</para>
+
+<section xml:id="sec-listmodel-datamodel">
+<title>The Data Model</title>
+
+<para>
+The data model is a class that implements the <classname>Gio::ListModel</classname>
+interface. Examples of such classes are <classname>Gio::ListStore</classname>
+(not to be confused with the deprecated <classname>Gtk::ListStore</classname>),
+<classname>Gtk:StringList</classname>, <classname>Gtk:DirectoryList</classname>
+and <classname>Pango::FontMap</classname>.
+</para>
+
+<para>
+The elements in a model are called <emphasis>items</emphasis>.
+All items are instances of a subclass of <classname>Glib::Object</classname>.
+For instance, you might have a <classname>ColumnView</classname> with one integer
+and one text column, like so:
+</para>
+<programlisting><![CDATA[class ModelColumns : public Glib::Object
+{
+public:
+  int m_col_id;
+  Glib::ustring m_col_name;
+
+  static Glib::RefPtr<ModelColumns> create(
+    int col_id, const Glib::ustring& col_name)
+  {
+    return Glib::make_refptr_for_instance<ModelColumns>(
+      new ModelColumns(col_id, col_name));
+  }
+
+protected:
+  ModelColumns(int col_id, const Glib::ustring& col_name)
+  : m_col_id(col_id), m_col_name(col_name)
+  {}
+};
+
+Glib::RefPtr<Gio::ListStore<ModelColumns>> m_ListStore;
+]]></programlisting>
+
+<para>
+Every item in a model has a position which is the unsigned integer that describes
+where in the model the item is located. The first item in a model is at position 0.
+The position of an item can of course change as other items are added to or removed
+from the model.
+</para>
+<para><link xlink:href="&url_refdocs_base_gio;ListStore.html">Gio::ListStore Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;StringList.html">StringList Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;DirectoryList.html">DirectoryList Reference</link></para>
+</section>
+
+<section xml:id="sec-listmodel-selectionmodel">
+<title>The Selection Model</title>
+
+<para>
+The selection model is a class that implements the <classname>Gtk::SelectionModel</classname>
+interface. You can choose between <classname>NoSelection</classname>,
+<classname>SingleSelection</classname> and <classname>MultiSelection</classname>.
+</para>
+<para><link xlink:href="&url_refdocs_base_gtk;NoSelection.html">NoSelection Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;SingleSelection.html">SingleSelection Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;MultiSelection.html">MultiSelection Reference</link></para>
+</section>
+
+<section xml:id="sec-listmodel-factory">
+<title>The Factory</title>
+
+<para>
+Data from the data model is added to the view by a factory, which is a subclass of
+<classname>ListItemFactory</classname>. There is only one such subclass in &gtkmm;,
+<classname>SignalListItemFactory</classname>. Data from the model is added to the
+view with signal handlers connected to a <classname>SignalListItemFactory</classname>.
+</para>
+<para><link xlink:href="&url_refdocs_base_gtk;SignalListItemFactory.html">SignalListItemFactory Reference</link></para>
+</section>
+
+<section xml:id="sec-listmodel-view">
+<title>The View</title>
+
+<para>
+The View is the widget that displays the model data and allows the user to interact
+with it. The View can show all of the model's columns, or just some, and it can show
+them in various ways.
+</para>
+
+<para>
+An important requirement for views (especially views of long lists) is that they need
+to know which items are not visible so they can be recycled. Views achieve that by
+implementing the <classname>Scrollable</classname> interface and expecting
+to be placed directly into a <classname>ScrolledWindow</classname>.
+</para>
+
+<para>
+There are different view widgets to choose from.
+</para>
+
+<section xml:id="sec-listmodel-listview">
+<title>ListView</title>
+
+<para>
+The <classname>ListView</classname> shows a 1-dimensional list with one column.
+</para>
+
+<para><link xlink:href="&url_refdocs_base_gtk;ListView.html">Reference</link></para>
+
+<section xml:id="listmodel-listview-example">
+<title>Example</title>
+
+<figure xml:id="figure-listmodel-listview">
+  <title>ListView</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;listmodel_listview.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;listmodelviews/list_listview">Source Code</link></para>
+
+</section>
+</section>
+
+<section xml:id="sec-listmodel-gridview">
+<title>GridView</title>
+
+<para>
+The <classname>GridView</classname> shows a 2-dimensional grid.
+</para>
+
+<para><link xlink:href="&url_refdocs_base_gtk;GridView.html">Reference</link></para>
+
+<section xml:id="listmodel-gridview-example">
+<title>Example</title>
+
+<figure xml:id="figure-listmodel-gridview">
+  <title>GridView</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;listmodel_gridview.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;listmodelviews/gridview">Source Code</link></para>
+
+</section>
+</section>
+
+<section xml:id="sec-listmodel-columnview">
+<title>ColumnView</title>
+
+<para>
+The <classname>ColumnView</classname> shows a 1-dimensional list with one or more columns.
+</para>
+
+<para><link xlink:href="&url_refdocs_base_gtk;ColumnView.html">Reference</link></para>
+
+<section xml:id="listmodel-columnview-example">
+<title>Example</title>
+
+<figure xml:id="figure-listmodel-columnview">
+  <title>ColumnView</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;listmodel_columnview.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;listmodelviews/list_columnview">Source Code</link></para>
+
+</section>
+</section>
+</section>
+
+<section xml:id="sec-listmodel-sorting">
+<title>Sorting</title>
+
+<para>
+The list can be sorted by wrapping it in a <classname>SortListModel</classname>.
+There are two ways to do this.
+</para>
+<itemizedlist>
+  <listitem><para>In a <classname>ColumnView</classname>, get the
+  <classname>ColumnViewSorter</classname> from the <classname>ColumnView</classname>
+  and set it to the <classname>SortListModel</classname>. Set a <classname>Sorter</classname>
+  to each <classname>ColumnViewColumn</classname>. Then the user of your app can
+  sort the items by clicking on a column heading.</para></listitem>
+  <listitem><para>In any view, set a <classname>Sorter</classname> such as a
+  <classname>StringSorter</classname> or a <classname>NumericSorter</classname>
+  to the <classname>SortListModel</classname>.</para></listitem>
+</itemizedlist>
+
+<para><link xlink:href="&url_refdocs_base_gtk;SortListModel.html">SortListModel Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;StringSorter.html">StringSorter Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;NumericSorter.html">NumericSorter Reference</link></para>
+
+<section xml:id="listmodel-sorting-example">
+<title>Example</title>
+
+<figure xml:id="figure-listmodel-sorting">
+  <title>SortListModel</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;listmodel_sort.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;listmodelviews/sort">Source Code</link></para>
+
+</section>
+</section>
+
+<section xml:id="sec-listmodel-filtering">
+<title>Filtering</title>
+
+<para>
+The list can be filtered by wrapping it in a <classname>FilterListModel</classname>.
+Set a <classname>Filter</classname> such as a <classname>StringFilter</classname>
+or a <classname>BoolFilter</classname> to the <classname>FilterListModel</classname>.
+</para>
+
+<para><link xlink:href="&url_refdocs_base_gtk;FilterListModel.html">FilterListModel Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;StringFilter.html">StringFilter Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;BoolFilter.html">BoolFilter Reference</link></para>
+
+<section xml:id="listmodel-filtering-example">
+<title>Example</title>
+
+<figure xml:id="figure-listmodel-filtering">
+  <title>FilterListModel</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;listmodel_filter.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;listmodelviews/filter">Source Code</link></para>
+
+</section>
+</section>
+
+<section xml:id="sec-listmodel-trees">
+<title>Displaying Trees</title>
+
+<para>
+While the deprecated <classname>TreeView</classname> provided built-in support for trees,
+the list widgets, and in particular <classname>Gio::ListModel</classname>, do not.
+However, &gtkmm; provides functionality to make trees look and behave like lists for
+the people who still want to display lists. This is achieved by using the
+<classname>TreeListModel</classname> to flatten a tree into a list.
+The <classname>TreeExpander</classname> widget can then be used inside a listitem
+to allow users to expand and collapse rows.
+</para>
+
+<para><link xlink:href="&url_refdocs_base_gtk;TreeListModel.html">TreeListModel Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_gtk;TreeExpander.html">TreeExpander Reference</link></para>
+
+<section xml:id="listmodel-tree-example">
+<title>Example</title>
+
+<figure xml:id="figure-listmodel-tree">
+  <title>TreeListModel</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;listmodel_tree.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;listmodelviews/tree_columnview">Source Code</link></para>
+
+</section>
+</section>
+
 </chapter>
 
 <chapter xml:id="chapter-treeview">

@@ -83,6 +83,12 @@ HELP_MEDIA =					\
 	figures/keyboardevents_simple.png			\
 	figures/keyboardevents_propagation.png		\
 	figures/label.png			\
+	figures/listmodel_columnview.png \
+	figures/listmodel_filter.png \
+	figures/listmodel_gridview.png \
+	figures/listmodel_listview.png \
+	figures/listmodel_sort.png \
+	figures/listmodel_tree.png \
 	figures/main_menu.png			\
 	figures/menu_popup.png			\
 	figures/menus_and_toolbars.png		\
