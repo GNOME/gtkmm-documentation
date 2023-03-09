@@ -1,7 +1,7 @@
 # This file is part of gtkmm-documentation.
 
 project('gtkmm-documentation', 'c', 'cpp',
-  version: '4.0.3',
+  version: '4.10.0',
   license: 'GPLv2',
   default_options: [
     'cpp_std=c++17',
@@ -13,7 +13,7 @@ project('gtkmm-documentation', 'c', 'cpp',
 python3 = find_program('python3', version: '>=3.5')
 
 gtkmm_pcname = 'gtkmm-4.0'
-gtkmm_req = '>= 4.9.2'
+gtkmm_req = '>= 4.10.0'
 giomm_pcname = 'giomm-2.68'
 giomm_req = '>= 2.68.0'
 gnome = import('gnome')
