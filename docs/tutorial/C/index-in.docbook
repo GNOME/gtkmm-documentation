@@ -2336,6 +2336,11 @@ as well with static data.
 </para>
 
 <para>
+The <link xlink:href="https://docs.gtk.org/gtk4/section-list-widget.html">List Widget Overview</link>
+chapter in the GTK documentation contains more information about list widgets.
+</para>
+
+<para>
 Some examples are shown in this chapter. There are more examples in the
 <link xlink:href="&url_examples_base;listmodelviews/">listmodelviews directory</link>
 in <application>gtkmm-documentation</application>'s examples.</para>
@@ -9184,12 +9189,20 @@ Here's a simple example:</para>
 void on_button_press(int n_press, double x, double y);
 Gtk::Button button("label");
 auto controller = Gtk::GestureClick::create();
+controller->set_propagation_phase(Gtk::PropagationPhase::CAPTURE);
 controller->signal_pressed().connect(sigc::ptr_fun(&amp;on_button_press));
 button.add_controller(controller);
 </programlisting>
 <para>
 When the mouse is over the button and a mouse button is pressed,
 <methodname>on_button_press()</methodname> will be called.
+</para>
+<para>
+The call to <methodname>set_propagation_phase()</methodname> is necessary in
+this case because the <classname>GtkButton</classname> C class adds an event
+controller, handling button clicks in the capture phase. <classname>GtkButton</classname>
+claims the event, meaning that the event is not propagated in the bubble phase,
+where event controllers handle events by default.
 </para>
 
 <section xml:id="signal-handler-sequence">
