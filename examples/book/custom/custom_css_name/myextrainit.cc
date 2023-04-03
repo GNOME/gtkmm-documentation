@@ -22,8 +22,18 @@ namespace
 using BaseObjectType = GtkWidget;
 using BaseClassType = GtkWidgetClass;
 
+// These callback functions are called from GLib (a C library).
+// They shall have C linkage. (Many compilers accept callback functions
+// with C++ linkage, but such a program has undefined behavior.)
+//
+// If you want the functions with C linkage to have internal linkage,
+// they must be declared 'static', even though they are defined in an anonymous
+// namespace. The compiler respects namespace declarations of functions
+// with C linkage, but the linker does not.
+extern "C"
+{
 // Extra class init function.
-void class_init_function(void* g_class, void* class_data)
+static void class_init_function(void* g_class, void* class_data)
 {
   g_return_if_fail(GTK_IS_WIDGET_CLASS(g_class));
 
@@ -34,7 +44,7 @@ void class_init_function(void* g_class, void* class_data)
 }
 
 // Extra instance init function.
-void instance_init_function(GTypeInstance* instance, void* /* g_class */)
+static void instance_init_function(GTypeInstance* instance, void* /* g_class */)
 {
   g_return_if_fail(GTK_IS_WIDGET(instance));
 
@@ -42,7 +52,7 @@ void instance_init_function(GTypeInstance* instance, void* /* g_class */)
   // This extra instance init function just shows how such a function can
   // be added to a custom widget, if necessary.
 }
-
+} // extern "C"
 } // anonymous namespace
 
 MyExtraInit::MyExtraInit(const Glib::ustring& css_name)
