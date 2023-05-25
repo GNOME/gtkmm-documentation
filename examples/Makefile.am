@@ -127,8 +127,8 @@ check_PROGRAMS =					\
 	others/window/wheelbarrow
 
 dist_noinst_DATA = \
-	book/builder/basic/basic.glade		\
-	book/builder/derived/derived.glade	\
+	book/builder/basic/basic.ui \
+	book/builder/derived/derived.ui \
 	book/buttons/button/info.xpm		\
 	book/custom/custom_css_name/custom_gtkmm.css	\
 	$(DIALOGS_ABOUTDIALOG_RESOURCES) \
@@ -783,7 +783,7 @@ book/drawingarea/image/resources.c: $(DRAWINGAREA_IMAGE_RESOURCES)
 MENUS_AND_TOOLBARS_RESOURCES = \
   book/menus_and_toolbars/toolbar.gresource.xml \
   book/menus_and_toolbars/rain.png \
-  book/menus_and_toolbars/toolbar.glade
+  book/menus_and_toolbars/toolbar.ui
 
 book/menus_and_toolbars/resources.c: $(MENUS_AND_TOOLBARS_RESOURCES)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(dir $<) --generate-source $<

@@ -37,7 +37,7 @@ DerivedButton::DerivedButton()
 {
 }
 
-DerivedButton::DerivedButton(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& /* refGlade */)
+DerivedButton::DerivedButton(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& /* refBuilder */)
 : // To register custom properties, you must register a custom GType.  If
   // you don't know what that means, don't worry, just remember to add
   // this Glib::ObjectBase constructor call to your class' constructor.

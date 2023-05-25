@@ -22,7 +22,7 @@ class DerivedButton : public Gtk::Button
 {
 public:
   DerivedButton();
-  DerivedButton(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade);
+  DerivedButton(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refBuilder);
   virtual ~DerivedButton();
 
   // Provide proxies for the properties. The proxy allows you to connect to

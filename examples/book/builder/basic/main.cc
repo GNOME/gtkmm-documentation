@@ -18,7 +18,7 @@ void on_app_activate()
   auto refBuilder = Gtk::Builder::create();
   try
   {
-    refBuilder->add_from_file("basic.glade");
+    refBuilder->add_from_file("basic.ui");
   }
   catch(const Glib::FileError& ex)
   {

@@ -110,7 +110,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   try
   {
     m_refBuilder->add_from_string(ui_info);
-    m_refBuilder->add_from_resource("/toolbar/toolbar.glade");
+    m_refBuilder->add_from_resource("/toolbar/toolbar.ui");
   }
   catch(const Glib::Error& ex)
   {

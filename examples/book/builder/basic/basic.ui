@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.1 and then changed manually -->
 <interface>
   <object class="GtkWindow" id="DialogBasic">
     <property name="can_focus">True</property>
@@ -18,7 +17,7 @@
             <child>
               <object class="GtkLabel" id="label1">
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">This is a basic Glade and Gtk::Builder example</property>
+                <property name="label" translatable="yes">This is a basic Gtk::Builder example</property>
                 <property name="wrap">True</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>

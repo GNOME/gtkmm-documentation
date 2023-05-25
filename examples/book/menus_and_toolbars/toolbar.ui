@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.18.3 and then changed manually -->
 <interface>
   <object class="GtkBox" id="toolbar">
     <property name="can_focus">False</property>
