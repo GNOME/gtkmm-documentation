@@ -453,7 +453,10 @@ and here is how to add the <classname>Gtk::Box</classname>, containing those but
 Most of the chapters in this book deal with specific widgets. See the <link linkend="chapter-container-widgets">Container Widgets</link> section for more details about adding widgets to container widgets.
 </para>
 
-<para>Although you can specify the layout and appearance of windows and widgets with C++ code, you will probably find it more convenient to design your user interfaces with <literal>Glade</literal> and load them at runtime with <literal>Gtk::Builder</literal>. See the <link linkend="chapter-builder">Glade and Gtk::Builder</link> chapter.
+<para>Although you can specify the layout and appearance of windows and widgets with C++ code,
+you will probably find it more convenient to design your user interfaces with
+<filename class="extension">.ui</filename> XML files and load them at runtime with
+<classname>Gtk::Builder</classname>. See the <link linkend="chapter-builder">Gtk::Builder</link> chapter.
 </para>
 
 <para>Although &gtkmm; widget instances have lifetimes and scopes just like
@@ -2059,9 +2062,8 @@ be confusing at first. You can modify the packing by using <methodname>set_expan
 <methodname>set_halign()</methodname>, <methodname>set_valign()</methodname>
 and/or <methodname>set_margin()</methodname> on the child widgets. If you have
 difficulties, then it is sometimes a good idea to play with the
-<application>glade</application> GUI designer to see what is possible.
-You might even decide to use the <classname>Gtk::Builder</classname>
-API to load your GUI at runtime.
+<application>Cambalache</application> GUI designer to see what is possible.
+You can then use the <classname>Gtk::Builder</classname> API to load your GUI at runtime.
 </para>
 
 <para>
@@ -4063,7 +4065,7 @@ Glib::ustring ui_info =
   "&lt;/interface&gt;";
 
 m_refBuilder-&gt;add_from_string(ui_info);
-m_refBuilder-&gt;add_from_resource("/toolbar/toolbar.glade");
+m_refBuilder-&gt;add_from_resource("/toolbar/toolbar.ui");
 </programlisting>
 
 <para>This is where we specify the names of the menu items as they will be seen
@@ -4149,7 +4151,7 @@ void ExampleWindow::on_label_pressed(int /* n_press */, double x, double y)
 <para>
 Applications and libraries often contain binary or textual data that is
 really part of the application, rather than user data. For instance
-<classname>Gtk::Builder</classname> <filename class="extension">.glade</filename> files,
+<classname>Gtk::Builder</classname> <filename class="extension">.ui</filename> files,
 splashscreen images, <classname>Gio::Menu</classname> markup xml, CSS files,
 icons, etc. These are often shipped as files in <filename class="directory">$datadir/appname</filename>,
 or manually included as literal strings in the code.
@@ -4178,14 +4180,14 @@ An example:
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;gresources&gt;
   &lt;gresource prefix="/toolbar"&gt;
-    &lt;file preprocess="xml-stripblanks"&gt;toolbar.glade&lt;/file&gt;
+    &lt;file preprocess="xml-stripblanks"&gt;toolbar.ui&lt;/file&gt;
     &lt;file&gt;rain.png&lt;/file&gt;
   &lt;/gresource&gt;
 &lt;/gresources&gt;
 </programlisting>
 This will create a resource bundle with the files
 <itemizedlist>
-  <listitem><para><filename>/toolbar/toolbar.glade</filename></para></listitem>
+  <listitem><para><filename>/toolbar/toolbar.ui</filename></para></listitem>
   <listitem><para><filename>/toolbar/rain.png</filename></para></listitem>
 </itemizedlist>
 </para>
@@ -6758,16 +6760,16 @@ Nicolai M. Josuttis, "The C++ Standard Library" - section 4.2
 </chapter>
 
 <chapter xml:id="chapter-builder">
-<title>Glade and Gtk::Builder</title>
+<title>Gtk::Builder</title>
 
 <para>
-Although you can use C++ code to instantiate and arrange widgets, this
-can soon become tedious and repetitive. And it requires a recompilation to show
-changes. The <application>Glade</application> application allows you to layout
-widgets on screen and then save an XML description of the arrangement. Your
-application can then use the <application>Gtk::Builder</application> API to load
-that XML file at runtime and obtain a pointer to specifically named widget
-instances.
+Although you can use C++ code to instantiate and arrange widgets, this can soon
+become tedious and repetitive. And it requires a recompilation to show changes.
+The <link xlink:href="https://gitlab.gnome.org/jpu/cambalache">Cambalache</link>
+application allows you to layout widgets on screen and then save an XML description
+of the arrangement. Your application can then use the <application>Gtk::Builder</application>
+API to load that XML file at runtime and obtain a pointer to specifically named
+widget instances.
 </para>
 
 <para>
@@ -6785,23 +6787,29 @@ actions, but using <application>Gtk::Builder</application> for the widget
 layout allows you to focus on implementing that functionality.
 </para>
 
-<section xml:id="sec-builder-loading-glade-file">
-<title>Loading the .glade file</title>
+<para>
+<application>Cambalache</application> replaces the <application>Glade</application>
+application. <application>Glade</application> can generate XML files to be used
+with gtk3/&gtkmm;3, but it does not support gtk4/&gtkmm;4.
+</para>
+
+<section xml:id="sec-builder-loading-ui-file">
+<title>Loading the .ui file</title>
 
 <para>
 <classname>Gtk::Builder</classname> must be used via a
 <classname>Glib::RefPtr</classname>. Like all such classes, you need to use a
 <methodname>create()</methodname> method to instantiate it. For instance,
 <programlisting>
-auto builder = Gtk::Builder::create_from_file("basic.glade");
+auto builder = Gtk::Builder::create_from_file("basic.ui");
 </programlisting>
-This will instantiate the windows defined in the <filename>.glade</filename> file.
+This will instantiate the windows defined in the <filename class="extension">.ui</filename> file.
 </para>
 
 <para>To instantiate just one window, or just one of the child widgets, you can specify the name of a widget as the second parameter. For instance,
 </para>
 <programlisting>
-auto builder = Gtk::Builder::create_from_file("basic.glade", "treeview_products");
+auto builder = Gtk::Builder::create_from_file("basic.ui", "treeview_products");
 </programlisting>
 
 </section>
@@ -6811,10 +6819,10 @@ auto builder = Gtk::Builder::create_from_file("basic.glade", "treeview_products"
 
 <para>
 To access a widget, for instance to show a dialog, use
-the <methodname>get_widget()</methodname> method, providing the widget's name. This
-name should be specified in the <application>Glade</application> Properties
+the <methodname>get_widget()</methodname> method, providing the widget's name.
+This name should be specified in the <application>Cambalache</application>
 window. If the widget could not be found, or is of the wrong type, then the
-pointer will be set to nullptr.
+pointer will be set to <literal>nullptr</literal>.
 </para>
 <para>
 The dialogs in this chapter are derived from <classname>Gtk::Window</classname>
@@ -6855,8 +6863,8 @@ about the memory management of different kinds of objects.
 <title>Example</title>
 
 <para>
-This simple example shows how to load a <application>Glade</application> file at runtime and access the widgets with
-<application>Gtk::Builder</application>.
+This simple example shows how to load a <filename class="extension">.ui</filename>
+file at runtime and access the widgets with <classname>Gtk::Builder</classname>.
 </para>
 
 <para><link xlink:href="&url_examples_base;builder/basic">Source Code</link></para>
@@ -6869,8 +6877,8 @@ This simple example shows how to load a <application>Glade</application> file at
 <title>Using derived widgets</title>
 
 <para>
-You can use <classname>Gtk::Builder</classname> and
-<application>Glade</application> to layout your own custom widgets
+You can use <application>Cambalache</application> and
+<classname>Gtk::Builder</classname> to layout your own custom widgets
 derived from &gtkmm; widget classes. This keeps your code organized and
 encapsulated, separating declarative presentation from business logic, avoiding
 having most of your source just be setting properties and packing in containers.
@@ -6909,7 +6917,7 @@ or <methodname>get_widget_derived()</methodname> again. For instance,
 DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)
 : Gtk::Window(cobject),
   m_builder(builder),
-  //Get the Glade-instantiated Button, and connect a signal handler:
+  // Get the GtkBuilder-instantiated Button, and connect a signal handler:
   m_pButton(m_builder-&gt;get_widget&lt;Gtk::Button&gt;("quit_button"))
 {
   if (m_pButton)
@@ -6964,14 +6972,13 @@ DerivedButton::DerivedButton(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk:
 }
 </programlisting>
 <para>
-When using &gtkmm; with a version of <application>glibmm</application> from 2.62
-onwards, it is possible also to specify properties of derived widgets, declared
-in C++ using &gtkmm;, within <filename>.glade</filename> files and load/set
+It is possible also to specify properties of derived widgets, declared in C++
+using &gtkmm;, within <filename class="extension">.ui</filename> files and load/set
 these using <classname>Gtk::Builder</classname>. See the documentation of
 <classname>Gtk::Builder</classname> for more details on how to achieve this.
-Glade won’t recognize such properties as-is, but it should be able to through
-use of <link xlink:href="https://developer-old.gnome.org/gladeui/stable/properties.html">
-property class definitions</link> and a catalog declaring those new properties.
+<application>Cambalache</application> won’t recognize such properties as-is,
+but you should be able to add a few lines of hand-coded XML to the XML code
+generated by <application>Cambalache</application>.
 </para>
 </section>
 
@@ -6979,7 +6986,8 @@ property class definitions</link> and a catalog declaring those new properties.
 <title>Example</title>
 
 <para>
-This example shows how to load a <application>Glade</application> file at runtime and access the widgets via derived classes.
+This example shows how to load a <filename class="extension">.ui</filename> file
+at runtime and access the widgets via derived classes.
 </para>
 
 <para><link xlink:href="&url_examples_base;builder/derived">Source Code</link></para>
@@ -7040,7 +7048,7 @@ This example shows how to load a <application>Glade</application> file at runtim
         <function>gettext()</function>, which extracts strings from source code,
         but <application>intltool</application> can also combine strings from
         other files, for example from desktop menu details, and GUI resource
-        files such as <application>Glade</application> files, into standard
+        files such as <filename class="extension">.ui</filename> files, into standard
         <application>gettext</application> <filename>.pot/.po</filename> files.
       </para>
       <para>
@@ -7121,10 +7129,11 @@ src/other.cc</programlisting>
       mark strings for translation if they are in source code file. However, if
       you use <application>intltool</application>, you can mark strings for
       translation in a variety of other file formats, including
-      <application>Glade</application> UI files, xml, <link xlink:href="http://standards.freedesktop.org/desktop-entry-spec/latest/">.desktop
-        files</link> and several more. So, if you have designed some of the
-      application UI in <application>Glade</application> then also add your
-      <filename>.glade</filename> files to the list in
+      <filename class="extension">.ui</filename> files, xml,
+      <link xlink:href="http://standards.freedesktop.org/desktop-entry-spec/latest/">.desktop files</link>
+      and several more. So, if you have designed some of the
+      application UI in xml files then also add your
+      <filename class="extension">.ui</filename> files to the list in
       <literal>POTFILES.in</literal>.
     </para>
 
