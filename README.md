@@ -22,7 +22,7 @@ and are installed at expected locations, the commands make no network accesses.
 Create a build directory:
 ```
   $ cd gtkmm-3-documentation
-  $ meson [options] <build-dir>
+  $ meson setup [options] <build-dir>
 ```
 Do not call the build-dir gtkmm-3-documentation/build. There is already such a
 directory, used when building with Autotools.
