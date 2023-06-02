@@ -79,9 +79,8 @@ ExampleWindow::ExampleWindow()
   m_TreeView.append_column_editable("ID", m_Columns.m_col_id);
   m_TreeView.append_column_editable("Name", m_Columns.m_col_name);
   m_TreeView.append_column_editable("foo", m_Columns.m_col_foo);
-  m_TreeView.append_column_numeric_editable("foo", m_Columns.m_col_number,
+  m_TreeView.append_column_numeric_editable("Number", m_Columns.m_col_number,
           "%010d");
-
 
   //For this column, we create the CellRenderer ourselves, and connect our own
   //signal handlers, so that we can validate the data that the user enters, and
