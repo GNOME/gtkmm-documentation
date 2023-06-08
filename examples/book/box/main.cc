@@ -63,7 +63,9 @@ int main(int argc, char *argv[])
   // Note after = false.
   // Only one signal handler is invoked. This signal handler must run before
   // the default signal handler, or else it won't run at all.
-  app->signal_command_line().connect(sigc::bind(sigc::ptr_fun(&on_command_line), app), false);
+  app->signal_command_line().connect(
+    [&app](const auto& command_line)
+    { return on_command_line(command_line, app); }, false);
 #else
   // Gio::Application::Flags::NON_UNIQUE makes it possible to run several instances of
   // this application simultaneously.

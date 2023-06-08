@@ -52,9 +52,15 @@ m_button_quit("_Quit", true)
   m_grid.attach(m_scrolled_window_list_box, 0, 0, 1 ,1);
   m_scrolled_window_list_box.set_child(m_list_box);
   if (use_bind_model)
-    m_list_box.bind_model(m_store, sigc::ptr_fun(&ExampleWindow::on_create_widget1));
+    m_list_box.bind_model(m_store,
+      [](const auto& item)
+      { return on_create_widget1(item); }
+    );
   else
-    m_list_box.bind_list_store(m_store, sigc::ptr_fun(&ExampleWindow::on_create_widget2));
+    m_list_box.bind_list_store(m_store,
+      [](const auto& item)
+      { return on_create_widget2(item); }
+    );
 
   // A FlowBox to the right.
   m_scrolled_window_flow_box.set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
@@ -63,9 +69,15 @@ m_button_quit("_Quit", true)
   m_grid.attach(m_scrolled_window_flow_box, 1, 0, 1 ,1);
   m_scrolled_window_flow_box.set_child(m_flow_box);
   if (use_bind_model)
-    m_flow_box.bind_model(m_store, sigc::ptr_fun(&ExampleWindow::on_create_widget1));
+    m_flow_box.bind_model(m_store,
+      [](const auto& item)
+      { return on_create_widget1(item); }
+    );
   else
-    m_flow_box.bind_list_store(m_store, sigc::ptr_fun(&ExampleWindow::on_create_widget2));
+    m_flow_box.bind_list_store(m_store,
+      [](const auto& item)
+      { return on_create_widget2(item); }
+    );
 
   // Buttons at the bottom.
   m_button_add_some.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_add_some));
@@ -113,7 +125,9 @@ void ExampleWindow::on_add_some()
     const auto i = std::rand() % std::max(2*n_items, 4u);
     const auto label = Glib::ustring::format("Added ", i);
     m_store->insert_sorted(MyObject::create(i, label),
-      sigc::ptr_fun(&MyObject::compare));
+      [](const auto& a, const auto& b)
+      { return MyObject::compare(a, b); }
+    );
   }
 }
 

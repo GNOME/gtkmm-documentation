@@ -16,19 +16,6 @@
 #include "derivedbutton.h"
 #include <iostream>
 
-namespace
-{
-void on_ustring_changed()
-{
-  std::cout << "- ustring property changed!" << std::endl;
-}
-
-void on_int_changed()
-{
-  std::cout << "- int property changed!" << std::endl;
-}
-} // anonymous namespace
-
 // For creating a dummy object in main.cc.
 DerivedButton::DerivedButton()
 : Glib::ObjectBase("MyButton"),
@@ -51,8 +38,12 @@ DerivedButton::DerivedButton(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Bu
 {
   // Register some handlers that will be called when the values of the
   // specified parameters are changed.
-  property_ustring().signal_changed().connect(sigc::ptr_fun(&on_ustring_changed));
-  property_int().signal_changed().connect(sigc::ptr_fun(&on_int_changed));
+  property_ustring().signal_changed().connect(
+    [](){ std::cout << "- ustring property changed!" << std::endl; }
+  );
+  property_int().signal_changed().connect(
+    [](){ std::cout << "- int property changed!" << std::endl; }
+  );
 }
 
 DerivedButton::~DerivedButton()

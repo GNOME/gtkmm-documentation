@@ -175,16 +175,18 @@ void ExampleWindow::on_row_activated(Gtk::ListBoxRow* row)
 
 void ExampleWindow::on_sort_clicked()
 {
-  m_ListBox.set_sort_func(sigc::ptr_fun(&ExampleWindow::sort_func));
+  m_ListBox.set_sort_func(
+    [] (Gtk::ListBoxRow* row1, Gtk::ListBoxRow* row2)
+    { return sort_func(row1, row2); }
+  );
 }
 
 void ExampleWindow::on_reverse_sort_clicked()
 {
   m_ListBox.set_sort_func(
     [] (Gtk::ListBoxRow* row1, Gtk::ListBoxRow* row2)
-    {
-      return sort_func(row2, row1);
-    });
+    { return sort_func(row2, row1); }
+  );
 }
 
 int ExampleWindow::sort_func(Gtk::ListBoxRow* row1, Gtk::ListBoxRow* row2)
@@ -237,7 +239,10 @@ void ExampleWindow::on_add_clicked()
 
 void ExampleWindow::on_separate_clicked()
 {
-  m_ListBox.set_header_func(sigc::ptr_fun(&ExampleWindow::update_header_func));
+  m_ListBox.set_header_func(
+    [] (Gtk::ListBoxRow* row, Gtk::ListBoxRow* before)
+    { update_header_func(row, before); }
+  );
 }
 
 void ExampleWindow::on_unseparate_clicked()

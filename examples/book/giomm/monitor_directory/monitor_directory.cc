@@ -19,7 +19,14 @@
  *
  *******************************************************************************/
 #include <iostream>
+#include <utility>
 #include <giomm.h>
+
+// How to connect on_directory_changed() to a signal:
+// 1. sigc::ptr_fun()
+// 2. C++11 lambda expression with explicit parameters
+// 3. C++14 variadic lambda expression with perfect forwarding
+#define LAMBDA_EXPRESSION_OR_PTR_FUN 1
 
 namespace
 {
@@ -132,18 +139,34 @@ int main(int /* argc */, char** /* argv */)
 
   std::cout << "Monitoring directory '" << current_dir << "'..."
     << std::endl << std::endl;
+#if LAMBDA_EXPRESSION_OR_PTR_FUN == 1
+  // sigc::ptr_fun() can sometimes be nicer than a lambda expression.
   monitor->signal_changed().connect(sigc::ptr_fun(on_directory_changed));
-
+#elif LAMBDA_EXPRESSION_OR_PTR_FUN == 2
+  monitor->signal_changed().connect(
+    [](const Glib::RefPtr<Gio::File>& file,
+    const Glib::RefPtr<Gio::File>& other_file,
+    Gio::FileMonitor::Event event)
+    { on_directory_changed(file, other_file, event); }
+  );
+#elif LAMBDA_EXPRESSION_OR_PTR_FUN == 3
+  monitor->signal_changed().connect(
+    [](auto&&... pars)
+    { on_directory_changed(std::forward<decltype(pars)>(pars)...); }
+  );
+#else
+  #error Unknown value of LAMBDA_EXPRESSION_OR_PTR_FUN
+#endif
   std::cout << "Creating test file '" << FILENAME << "' to see what happens..."
     << std::endl << std::endl;
 
   // Wait a couple seconds and then create a temp file to trigger the
   // directory monitor.
-  Glib::signal_timeout().connect_seconds(sigc::ptr_fun(&create_temp_file), 2);
+  Glib::signal_timeout().connect_seconds([](){ return create_temp_file(); }, 2);
 
   // Then exit when the user has had some time to make changes in
   // the monitored directory.
-  Glib::signal_timeout().connect_seconds(sigc::ptr_fun(&quit), 30);
+  Glib::signal_timeout().connect_seconds([](){ return quit(); }, 30);
   mainloop->run();
   return 0;
 }

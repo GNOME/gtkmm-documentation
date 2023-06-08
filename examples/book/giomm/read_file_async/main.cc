@@ -1,5 +1,3 @@
-//$Id: main.cc 836 2007-05-09 03:02:38Z jjongsma $ -*- c++ -*-
-
 /* gtkmm example Copyright (C) 2002 gtkmm development team
  *
  * This program is free software; you can redistribute it and/or modify
@@ -68,7 +66,10 @@ void on_file_read_async_ready(Glib::RefPtr<Gio::AsyncResult>& result)
   if(stream)
   {
     memset(buffer, 0, 1000);
-    stream->read_async(buffer, 1000, sigc::ptr_fun(&on_stream_read_async_ready));
+    stream->read_async(buffer, 1000,
+      [](auto& stream_result)
+      { on_stream_read_async_ready(stream_result); }
+    );
   }
 }
 
@@ -89,9 +90,11 @@ int main(int /* argc */, char** /* argv */)
 
   mainloop = Glib::MainLoop::create();
 
-  file->read_async( sigc::ptr_fun(&on_file_read_async_ready) );
+  file->read_async(
+    [](auto& result)
+    { on_file_read_async_ready(result); }
+  );
   mainloop->run();
 
   return 0;
 }
-

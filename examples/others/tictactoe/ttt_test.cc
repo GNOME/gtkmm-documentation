@@ -1,11 +1,12 @@
 #include "tictactoe.h"
 #include <gtkmm/window.h>
 #include <gtkmm/application.h>
+#include <iostream>
 
 void
-win (TicTacToe *ttt)
+win (TicTacToe* ttt)
 {
-  g_print ("Yay!\n");
+  std::cout << "Yay!\n";
   ttt->clear();
 }
 
@@ -20,7 +21,7 @@ MyWindow::MyWindow()
   set_title("Tic-Tac-Toe");
 
   auto ttt = Gtk::make_managed<TicTacToe>();
-  ttt->tictactoe.connect(sigc::bind (sigc::ptr_fun(&win), ttt));
+  ttt->tictactoe.connect([ttt](){ win(ttt); });
   ttt->set_margin(10);
   set_child(*ttt);
 }

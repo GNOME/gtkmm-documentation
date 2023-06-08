@@ -28,30 +28,32 @@ Glib::RefPtr<Glib::IOChannel> iochannel;
 // and quit the program if the message was 'Q'.
 bool MyCallback(Glib::IOCondition io_condition)
 {
-  if ((io_condition & Glib::IOCondition::IO_IN) != Glib::IOCondition::IO_IN) {
+  if ((io_condition & Glib::IOCondition::IO_IN) != Glib::IOCondition::IO_IN)
+  {
     std::cerr << "Invalid fifo response" << std::endl;
   }
-  else {
+  else
+  {
    Glib::ustring buf;
 
    iochannel->read_line(buf);
    std::cout << buf;
    if (buf == "Q\n")
      app->quit();
-
   }
   return true;
 }
-
 
 int main(int argc, char *argv[])
 {
   app = Gtk::Application::create("org.gtkmm.example");
 
-  if (access("testfifo", F_OK) == -1) {
+  if (access("testfifo", F_OK) == -1)
+  {
     // fifo doesn't exist - create it
     #ifndef DONT_HAVE_MKFIFO
-    if (mkfifo("testfifo", 0666) != 0) {
+    if (mkfifo("testfifo", 0666) != 0)
+    {
       std::cerr << "error creating fifo" << std::endl;
       return -1;
     }
@@ -75,7 +77,9 @@ int main(int argc, char *argv[])
   }
 
   // connect the signal handler
-  Glib::signal_io().connect(sigc::ptr_fun(MyCallback), read_fd, Glib::IOCondition::IO_IN);
+  Glib::signal_io().connect(
+    [](Glib::IOCondition io_condition){ return MyCallback(io_condition); },
+    read_fd, Glib::IOCondition::IO_IN);
 
   // Creates a iochannel from the file descriptor
   iochannel = Glib::IOChannel::create_from_fd(read_fd);
