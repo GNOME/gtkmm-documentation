@@ -42,8 +42,7 @@ ExampleAppWindow* ExampleApplication::create_appwindow()
   // unless Gio::Application::hold() has been called.
 
   // Delete the window when it is hidden.
-  appwindow->signal_hide().connect(sigc::bind(sigc::mem_fun(*this,
-    &ExampleApplication::on_hide_window), appwindow));
+  appwindow->signal_hide().connect([appwindow](){ delete appwindow; });
 
   return appwindow;
 }
@@ -110,11 +109,6 @@ void ExampleApplication::on_open(const Gio::Application::type_vec_files& files,
   }
 }
 
-void ExampleApplication::on_hide_window(Gtk::Window* window)
-{
-  delete window;
-}
-
 void ExampleApplication::on_action_preferences()
 {
   try
@@ -123,8 +117,7 @@ void ExampleApplication::on_action_preferences()
     prefs_dialog->present();
 
     // Delete the dialog when it is hidden.
-    prefs_dialog->signal_hide().connect(sigc::bind(sigc::mem_fun(*this,
-      &ExampleApplication::on_hide_window), prefs_dialog));
+    prefs_dialog->signal_hide().connect([prefs_dialog](){ delete prefs_dialog; });
   }
   catch (const Glib::Error& ex)
   {

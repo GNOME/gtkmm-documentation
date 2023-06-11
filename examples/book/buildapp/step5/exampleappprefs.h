@@ -35,10 +35,8 @@ public:
 protected:
 #if HAS_GIO_SETTINGS_BIND_WITH_MAPPING
   // Mappings from Gio::Settings to properties
-  std::optional<Pango::FontDescription> map_from_ustring_to_fontdesc(const Glib::ustring& font);
-  std::optional<Glib::ustring> map_from_fontdesc_to_ustring(const Pango::FontDescription& fontdesc);
-  std::optional<unsigned int> map_from_ustring_to_int(const Glib::ustring& transition);
-  std::optional<Glib::ustring> map_from_int_to_ustring(const unsigned int& pos);
+  static std::optional<unsigned int> map_from_ustring_to_int(const Glib::ustring& transition);
+  static std::optional<Glib::ustring> map_from_int_to_ustring(const unsigned int& pos);
 #else
   // Signal handlers
   void on_font_setting_changed(const Glib::ustring& key);

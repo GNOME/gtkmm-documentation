@@ -61,12 +61,14 @@ ExampleAppPrefs::ExampleAppPrefs(BaseObjectType* cobject,
 #if HAS_GIO_SETTINGS_BIND_WITH_MAPPING
   m_settings->bind<Glib::ustring, Pango::FontDescription>("font",
     m_font->property_font_desc(), Gio::Settings::BindFlags::DEFAULT,
-    sigc::mem_fun(*this, &ExampleAppPrefs::map_from_ustring_to_fontdesc),
-    sigc::mem_fun(*this, &ExampleAppPrefs::map_from_fontdesc_to_ustring));
+    [](const auto& font) { return Pango::FontDescription(font); },
+    [](const auto& fontdesc) { return fontdesc.to_string(); }
+  );
   m_settings->bind<Glib::ustring, unsigned int>("transition",
     m_transition->property_selected(), Gio::Settings::BindFlags::DEFAULT,
-    sigc::mem_fun(*this, &ExampleAppPrefs::map_from_ustring_to_int),
-    sigc::mem_fun(*this, &ExampleAppPrefs::map_from_int_to_ustring));
+    [](const auto& transition) { return map_from_ustring_to_int(transition); },
+    [](const auto& pos) { return map_from_int_to_ustring(pos); }
+  );
 #else
   // This is easier when g_settings_bind_with_mapping() is
   // wrapped in a Gio::Settings method.
@@ -102,16 +104,6 @@ ExampleAppPrefs* ExampleAppPrefs::create(Gtk::Window& parent)
 }
 
 #if HAS_GIO_SETTINGS_BIND_WITH_MAPPING
-std::optional<Pango::FontDescription> ExampleAppPrefs::map_from_ustring_to_fontdesc(const Glib::ustring& font)
-{
-  return Pango::FontDescription(font);
-}
-
-std::optional<Glib::ustring> ExampleAppPrefs::map_from_fontdesc_to_ustring(const Pango::FontDescription& fontdesc)
-{
-  return fontdesc.to_string();
-}
-
 std::optional<unsigned int> ExampleAppPrefs::map_from_ustring_to_int(const Glib::ustring& transition)
 {
   for (std::size_t i = 0; i < transitionTypes.size(); ++i)

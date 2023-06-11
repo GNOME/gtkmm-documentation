@@ -44,7 +44,8 @@ protected:
   static Glib::ustring font_style_to_string(Pango::Style font_style);
   void on_font_button_font_set();
   void on_button_close();
-  void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error);
+  static void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section,
+    const Glib::Error& error);
 
   static const int n_checkboxes = 3;
   Gtk::CheckButton* flag_checkboxes_[n_checkboxes];
@@ -259,7 +260,9 @@ CalendarExample::CalendarExample()
     calendar_->get_display(), css_provider_, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 #endif
   css_provider_->signal_parsing_error().connect(
-    sigc::mem_fun(*this, &CalendarExample::on_parsing_error));
+    [](const auto& section, const auto& error)
+    { on_parsing_error(section, error); }
+  );
 
   // Set initial font.
   on_font_button_font_set();

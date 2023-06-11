@@ -27,7 +27,7 @@ public:
 
 private:
   //Signal handlers:
-  void on_action_file_new();
+  //void on_action_file_new();
   void on_action_file_quit();
   void on_action_others();
   void on_action_toggle();

@@ -77,7 +77,9 @@ ExampleWindow::ExampleWindow()
 #endif
 
   m_refCssProvider->signal_parsing_error().connect(
-    sigc::mem_fun(*this, &ExampleWindow::on_parsing_error));
+    [](const auto& section, const auto& error)
+    { on_parsing_error(section, error); }
+  );
   m_refCssProvider->load_from_path("custom_gtkmm.css");
 }
 

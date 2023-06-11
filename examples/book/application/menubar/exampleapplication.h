@@ -35,7 +35,6 @@ protected:
 private:
   void create_window();
 
-  void on_window_hide(Gtk::Window* window);
   void on_action_something();
   void on_action_quit();
   void on_action_print(const Glib::VariantBase& parameter);

@@ -34,7 +34,7 @@ private:
   void on_reverse_sort_clicked();
   void on_change_clicked();
   void on_filter_clicked();
-  void on_unfilter_clicked();
+  //void on_unfilter_clicked();
   void on_add_clicked();
   void on_separate_clicked();
   void on_unseparate_clicked();

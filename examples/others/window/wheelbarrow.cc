@@ -143,7 +143,7 @@ public:
 
 protected:
   void on_button_pressed(int n_press, double x, double y);
-  void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section,
+  static void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section,
     const Glib::Error& error);
 
   Glib::RefPtr<Gtk::GestureClick> m_gesture_click;
@@ -167,7 +167,9 @@ Wheelbarrow::Wheelbarrow()
     GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 #endif
   css_provider->signal_parsing_error().connect(
-    sigc::mem_fun(*this, &Wheelbarrow::on_parsing_error));
+    [](const auto& section, const auto& error)
+    { on_parsing_error(section, error); }
+  );
   css_provider->load_from_data(transparent_background_css);
 
   const auto pixbuf = Gdk::Pixbuf::create_from_xpm_data(wheelbarrow_xpm);

@@ -39,8 +39,7 @@ ExampleAppWindow* ExampleApplication::create_appwindow()
   // unless Gio::Application::hold() has been called.
 
   // Delete the window when it is hidden.
-  appwindow->signal_hide().connect(sigc::bind(sigc::mem_fun(*this,
-    &ExampleApplication::on_hide_window), appwindow));
+  appwindow->signal_hide().connect([appwindow](){ delete appwindow; });
 
   return appwindow;
 }
@@ -69,9 +68,4 @@ void ExampleApplication::on_open(const Gio::Application::type_vec_files& files,
     appwindow->open_file_view(file);
 
   appwindow->present();
-}
-
-void ExampleApplication::on_hide_window(Gtk::Window* window)
-{
-  delete window;
 }

@@ -128,17 +128,34 @@ ExampleWindow::ExampleWindow() :
   m_ListBox.append(*row);
 
   // Put buttons in a vertical box, and connect signal handlers.
+  // There are several ways of connecting to a signal or any other function that
+  // takes a sigc::slot.
   m_HBox.append(m_VBox2);
   m_VBox2.append(m_Button_Sort);
+  // With sigc::mem_fun() or (for non-member functions and static member functions)
+  // sigc::ptr_fun(). The only way before C++11 introduced lambda expressions.
   m_Button_Sort.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_sort_clicked));
   m_VBox2.append(m_Button_ReverseSort);
-  m_Button_ReverseSort.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_reverse_sort_clicked));
+  // With a lambda expression. Does not disconnect automatically when ExampleWindow
+  // is deleted, like sigc::mem_fun() does.
+  m_Button_ReverseSort.signal_clicked().connect([this] { on_reverse_sort_clicked(); });
   m_VBox2.append(m_Button_Change);
-  m_Button_Change.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_change_clicked));
+  // With a lambda expression and sigc::track_obj() or sigc::track_object().
+  // Disconnects automatically like sigc::mem_fun().
+#if SIGCXX_MINOR_VERSION >= 4
+  m_Button_Change.signal_clicked().connect(
+    sigc::track_object([this] { on_change_clicked(); }, *this));
+#else
+  m_Button_Change.signal_clicked().connect(
+    sigc::track_obj([this] { on_change_clicked(); }, *this));
+#endif
   m_VBox2.append(m_Button_Filter);
   m_Button_Filter.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_filter_clicked));
   m_VBox2.append(m_Button_Unfilter);
-  m_Button_Unfilter.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_unfilter_clicked));
+  // If the signal handler is very short, it might be easier to skip the on_xxx()
+  // method and put its contents directly in the lambda expression.
+  m_Button_Unfilter.signal_clicked().connect(
+    [this] { m_ListBox.unset_filter_func(); /* on_unfilter_clicked() */});
   m_VBox2.append(m_Button_Add);
   m_Button_Add.signal_clicked().connect(sigc::mem_fun(*this, &ExampleWindow::on_add_clicked));
   m_VBox2.append(m_Button_Separate);
@@ -223,10 +240,10 @@ void ExampleWindow::on_filter_clicked()
    });
 }
 
-void ExampleWindow::on_unfilter_clicked()
-{
-  m_ListBox.unset_filter_func();
-}
+//void ExampleWindow::on_unfilter_clicked()
+//{
+//  m_ListBox.unset_filter_func();
+//}
 
 void ExampleWindow::on_add_clicked()
 {

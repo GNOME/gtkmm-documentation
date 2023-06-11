@@ -50,8 +50,6 @@ protected:
 
 private:
   void create_window(const Glib::RefPtr<Gio::File>& file = Glib::RefPtr<Gio::File>());
-
-  void on_window_hide(Gtk::Window* window);
 };
 
 #endif /* GTKMM_EXAMPLEAPPLICATION_H */

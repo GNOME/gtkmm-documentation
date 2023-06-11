@@ -28,7 +28,7 @@ public:
 protected:
   // Signal handlers:
   void on_button_quit();
-  void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section,
+  static void on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section,
     const Glib::Error& error);
 
   // Child widgets:

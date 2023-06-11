@@ -88,8 +88,7 @@ void ExampleApplication::create_window(const Glib::RefPtr<Gio::File>& file)
 
   //Delete the window when it is hidden.
   //That's enough for this simple example.
-  window->signal_hide().connect(sigc::bind(sigc::mem_fun(*this,
-    &ExampleApplication::on_window_hide), window));
+  window->signal_hide().connect([window]() { delete window; });
 
   window->set_visible(true);
 
@@ -103,11 +102,6 @@ void ExampleApplication::create_window(const Glib::RefPtr<Gio::File>& file)
   const bool loaded = window->load_file(file);
   if(!loaded)
     std::cerr << "This file could not be loaded: " << file->get_path() << std::endl;
-}
-
-void ExampleApplication::on_window_hide(Gtk::Window* window)
-{
-  delete window;
 }
 
 void ExampleApplication::on_activate()

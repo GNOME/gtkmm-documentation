@@ -29,19 +29,33 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   //Define the actions:
   m_refActionGroup = Gio::SimpleActionGroup::create();
 
+  // There are several ways of calling a function that takes a sigc::slot.
+  // If the slot function is very short, it might be easy to skip the on_xxx()
+  // method and put its contents directly in a lambda expression.
   m_refActionGroup->add_action("new",
-    sigc::mem_fun(*this, &ExampleWindow::on_action_file_new) );
+    [] { std::cout << "A File|New menu item was selected.\n"; /* on_action_file_new() */});
+  // With sigc::mem_fun() or (for non-member functions and static member functions)
+  // sigc::ptr_fun(). The only way before C++11 introduced lambda expressions.
   m_refActionGroup->add_action("open",
     sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
 
+  // With a lambda expression. Does not disconnect automatically when ExampleWindow
+  // is deleted, like sigc::mem_fun() does.
   m_refActionRain = m_refActionGroup->add_action_bool("rain",
-    sigc::mem_fun(*this, &ExampleWindow::on_action_toggle), false);
+    [this] { on_action_toggle(); }, false);
 
   m_refActionGroup->add_action("quit",
     sigc::mem_fun(*this, &ExampleWindow::on_action_file_quit) );
 
+  // With a lambda expression and sigc::track_obj() or sigc::track_object().
+  // Disconnects automatically like sigc::mem_fun().
+#if SIGCXX_MINOR_VERSION >= 4
   m_refActionGroup->add_action("cut",
-    sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
+    sigc::track_object([this] { on_action_others(); }, *this));
+#else
+  m_refActionGroup->add_action("cut",
+    sigc::track_obj([this] { on_action_others(); }, *this));
+#endif
   m_refActionGroup->add_action("copy",
     sigc::mem_fun(*this, &ExampleWindow::on_action_others) );
   m_refActionGroup->add_action("paste",
@@ -146,10 +160,10 @@ void ExampleWindow::on_action_file_quit()
   set_visible(false); //Closes the main window to stop the app->make_window_and_run().
 }
 
-void ExampleWindow::on_action_file_new()
-{
-   std::cout << "A File|New menu item was selected." << std::endl;
-}
+//void ExampleWindow::on_action_file_new()
+//{
+//   std::cout << "A File|New menu item was selected." << std::endl;
+//}
 
 void ExampleWindow::on_action_others()
 {

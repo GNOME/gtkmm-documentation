@@ -36,7 +36,6 @@ protected:
 
 private:
   ExampleAppWindow* create_appwindow();
-  void on_hide_window(Gtk::Window* window);
 };
 
 #endif /* GTKMM_EXAMPLEAPPLICATION_H */
