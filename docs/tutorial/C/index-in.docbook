@@ -750,14 +750,29 @@ If you don't want <application>glibmm</application> or &gtkmm;
 to set the global locale for you, you should add a call to
 <function>Glib::set_init_to_users_preferred_locale(false)</function> before any call to
 <function>Glib::init()</function> or <methodname>Gtk::Application::create()</methodname>.
-</para>
-<para><link xlink:href="&url_refdocs_base_glib_html;namespaceGlib.html">Reference</link></para>
+See the <application>glibmm</application> <link xlink:href="&url_refdocs_base_glib_html;namespaceGlib.html">
+reference</link>.</para>
 
 <para>There are lots and lots of differences between &gtkmm;-3.0 and &gtkmm;-4.0.
 The following lists are not complete.</para>
 
-<para>Some new classes were added in &gtkmm; 4 and <application>glibmm</application> 2.68:</para>
+<para>There are some important behavioural changes, to which you must adapt when migrating:</para>
+<para>
+<itemizedlist>
+<listitem><simpara>
+Whereas in &gtkmm;-3.0, destruction of a non-managed C++ widget wrapper caused the wrapped GtkWidget
+to be destroyed, changes in GTK4 mean that in &gtkmm;-4.0 this canʼt always be the case. GTK4 has no
+uniform way to remove a widget from a parent, as GTK3 did with <methodname>Gtk::Container::remove()</methodname>,
+so &gtkmm;-4.0 canʼt do the removal for you as &gtkmm;-3.0 did. Hence, if a non-managed C++ widget
+instance is destructed while the widget is a child of another, &gtkmm;-4.0 wonʼt remove it from the
+parent, the parent retains a ref that stops the child being disposed, and the GtkWidget stays alive.
+The end result is that to destroy a non-managed widget with its C++ wrapper you must first remove it
+from its parent (however that parent allows) so the C++ wrapperʼs dtor can drop the final reference.
+</simpara></listitem>
+</itemizedlist>
+</para>
 
+<para>Some new classes were added in &gtkmm; 4 and <application>glibmm</application> 2.68:</para>
 <orderedlist inheritnum="ignore" continuation="restarts">
 <listitem><simpara><classname>Glib::ExtraClassInit</classname> and <classname>Gtk::Snapshot</classname>:
   These classes are needed only for writing custom widgets. See the
@@ -780,7 +795,6 @@ The following lists are not complete.</para>
 
 <para>There have also been several changes to the API, which you will probably encounter
 when porting code that used &gtkmm;-3.0 and <application>glibmm</application>-2.4. Here is a short list:</para>
-
 <para>
 <orderedlist inheritnum="ignore" continuation="restarts">
 <listitem><simpara>A C++17 compiler is required.</simpara></listitem>
@@ -826,7 +840,6 @@ when porting code that used &gtkmm;-3.0 and <application>glibmm</application>-2.
   with <methodname>set_group()</methodname>.</simpara></listitem>
 </orderedlist>
 </para>
-
 <para>All deprecated API was removed in &gtkmm; 4.0 and <application>glibmm</application> 2.68,
   though there will be new deprecations in future versions.</para>
 
@@ -837,13 +850,11 @@ GLIBMM_DISABLE_DEPRECATED and GIOMM_DISABLE_DEPRECATED. There are some autotools
 that can help with this by defining them optionally at build time. See the
 <link xlink:href="https://wiki.gnome.org/Projects/gtkmm/PortingToGtkmm3">Porting from
 gtkmm-2.4 to gtkmm-3.0</link> wiki page for more details.</para>
-
 <para>See also <link xlink:href="https://docs.gtk.org/gtk4/migrating-3to4.html">
 Migrating from GTK 3.x to GTK 4</link>.</para>
 
 <section xml:id="sec-deprecations-4-10">
 <title>Deprecations in &gtkmm; 4.10</title>
-
 <para>Many classes are deprecated since &gtkmm; 4.10. They can still be used in
 &gtkmm;4 applications, provided GTKMM_DISABLE_DEPRECATED and GDKMM_DISABLE_DEPRECATED
 are not defined. There are also many new classes in &gtkmm; 4.10, which replace
@@ -876,8 +887,8 @@ deprecated since &gtkmm; 4.10. Some other programs use classes available since &
 <para>In most cases there are replacements for the deprecated classes.
 See the reference documentation.
 </para>
-
 </section>
+
 </chapter>
 
 <chapter xml:id="chapter-button-widget">
@@ -6538,24 +6549,27 @@ instance goes out of scope). This flexibility is not present in some C++ GUI
 toolkits, which restrict the programmer to only a subset of C++'s memory
 management features.
 </para>
-
+<para>
+An important difference in &gtkmm;-4.0 vs. older versions is that a C++ widgetʼs
+destruction no longer causes the widget to be destroyed if itʼs within a parent;
+in that case the C GtkWidget stays alive. If you had relied on that behavior in
+an older version, in &gtkmm;-4.0 you must now remove the widget from its parent
+first. See <link linkend="changes-gtkmm4">Changes in &gtkmm;-4.0</link>.
+</para>
 <para>Here are some examples of normal C++ memory management:</para>
 
 <section xml:id="memory-class-scope">
 <title>Class Scope widgets</title>
-
 <para>
 If a programmer does not need dynamic memory allocation, automatic widgets in class
 scope may be used. One advantage of automatic widgets in class scope is that
 memory management is grouped in one place. The programmer does not
 risk memory leaks from failing to <literal>delete</literal> a widget.
 </para>
-
 <para>
 The primary disadvantage of using class scope widgets is revealing
 the class implementation rather than the class interface in the class header.
 </para>
-
 <programlisting>
 #include &lt;gtkmm/button.h&gt;
 #include &lt;gtkmm/window.h&gt;
@@ -6570,7 +6584,6 @@ private:
 
 <section xml:id="memory-function-scope">
 <title>Function scope widgets</title>
-
 <para>
 If a programmer does not need a class scope widget, a function scope widget
 may also be used. The advantages to function scope over class scope are the
@@ -6595,7 +6608,6 @@ deleted after <methodname>Gtk::Application::run()</methodname> or
 
 <section xml:id="memory-dynamic-allocation">
 <title>Dynamic allocation with new and delete</title>
-
 <para>
 Usually, the programmer will prefer to allow containers to automatically destroy
 their children by creating them using <function>Gtk::make_managed()</function>
@@ -6606,9 +6618,7 @@ better to create widgets using <function>Gtk::make_managed()</function> and
 let their parent destroy them, than to manually perform dynamic allocation.
 <programlisting>
 auto pButton = new Gtk::Button("Test");
-
 // do something useful with pButton
-
 delete pButton;
 </programlisting>
 Here, the programmer deletes <varname>pButton</varname> to prevent a memory leak.
