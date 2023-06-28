@@ -89,6 +89,10 @@ See https://gitlab.gnome.org/GNOME/gtkmm-documentation/-/merge_requests/11
         <contrib>Chapter on "The DropDown Widget".</contrib>
         <contrib>Chapter on "ListView, GridView, ColumnView".</contrib>
       </author>
+      <author>
+        <personname><firstname>Daniel</firstname><surname>Boles</surname></personname>
+        <contrib>Notes on need to remove widgets in non-managed wrappers from parents to dispose, other tweaks.</contrib>
+      </author>
     </authorgroup>
 
     <abstract>
