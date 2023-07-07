@@ -35,6 +35,8 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_clicked()
 {
-  std::cout << "The Button was clicked." << std::endl;
+  std::cout << "The Button was "
+        << (m_button.get_active() ? "toggled" : "untoggled")
+        << "." << std::endl;
 }
 
