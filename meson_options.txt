@@ -9,6 +9,6 @@ option('validation', type: 'boolean', value: true,
 option('allow-network-access', type: 'boolean', value: true,
   description: 'Allow xmllint and xsltproc to fetch files over the network')
 option('build-translations', type: 'boolean', value: true,
-  description: 'Build translated tutorials (built during installation)')
+  description: 'Build translated tutorials')
 option('build-pdf', type: 'boolean', value: false,
   description: 'Build tutorial PDF file')

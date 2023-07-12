@@ -5,7 +5,7 @@ DISTCHECK_CONFIGURE_FLAGS = --enable-warnings=max
 
 SUBDIRS = examples docs/tutorial
 
-dist_noinst_DATA = COPYING.examples
+dist_noinst_DATA = COPYING.examples README.md
 dist_noinst_SCRIPTS = autogen.sh
 
 # Distribute files needed when building with Meson.
