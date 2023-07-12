@@ -44,7 +44,7 @@ TicTacToe::TicTacToe()
       button->set_size_request(20, 20);
     }
   }
-
+  clear();
   grid->show_all();
 }
 
