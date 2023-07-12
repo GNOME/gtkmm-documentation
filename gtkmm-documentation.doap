@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
          xmlns:foaf="http://xmlns.com/foaf/0.1/"
@@ -5,10 +6,19 @@
          xmlns="http://usefulinc.com/ns/doap#">
 
   <name xml:lang="en">gtkmm-documentation</name>
-  <shortdesc xml:lang="en">GNOME C++ bindings documentation</shortdesc>
-  <homepage rdf:resource="http://www.gtkmm.org/" />
-  <mailing-list rdf:resource="mailto:gtkmm-list@gnome.org" />
+  <shortdesc xml:lang="en">Documentation for gtkmm, a C++ API for GTK</shortdesc>
+  <description xml:lang="en">
+Programming with gtkmm. This tutorial explains key concepts of the gtkmm
+C++ API for creating user interfaces. It also introduces the main user
+interface elements ("widgets").
+  </description>
+  <homepage rdf:resource="https://www.gtkmm.org/" />
+  <developer-forum rdf:resource="https://discourse.gnome.org/tag/cplusplus/" />
+  <download-page rdf:resource="https://download.gnome.org/sources/gtkmm-documentation/" />
+  <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/gtkmm-documentation/issues/" />
   <category rdf:resource="http://api.gnome.org/doap-extensions#bindings" />
+  <programming-language>XML</programming-language>
+  <programming-language>C++</programming-language>
 
   <maintainer>
     <foaf:Person>
