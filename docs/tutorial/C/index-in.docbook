@@ -4145,7 +4145,7 @@ m_MenuPopup.set_menu_model(gmenu);
 </programlisting>
 
 <para>
-To show the popup menu, use  a <classname>Gtk::EventControllerClick</classname>
+To show the popup menu, use  a <classname>Gtk::GestureClick</classname>
 and connect to its <literal>pressed</literal> signal. In the signal handler,
 use <classname>Gtk::PopoverMenu</classname>'s
 <methodname>popup()</methodname> method. For instance:
