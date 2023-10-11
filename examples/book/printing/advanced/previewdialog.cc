@@ -89,8 +89,13 @@ void PreviewDialog::on_drawing_area_realized()
       const int scale = gdk_surface->get_scale_factor();
       const int width = gdk_surface->get_width() * scale;
       const int height = gdk_surface->get_height() * scale;
-      auto cairo_surface = gdk_surface->create_similar_surface(
-        Cairo::Content::CONTENT_COLOR, width, height);
+      //auto cairo_surface = gdk_surface->create_similar_surface(
+      //  Cairo::Content::CONTENT_COLOR, width, height);
+      //>>> This is what the deprecated create_similar_surface() does:
+      auto cairo_surface = Cairo::ImageSurface::create(
+        Cairo::Surface::Format::RGB24, width * scale, height * scale);
+      cairo_surface->set_device_scale(scale, scale);
+      //<<< end of create_similar_surface()
       m_refCairoContext = Cairo::Context::create(cairo_surface);
 
       if (m_refPrintContext)
@@ -145,8 +150,8 @@ void PreviewDialog::on_popreview_got_page_size(
 
   if(m_DrawingArea.get_realized()) //Avoid getting an odd allocation.
   {
-    double dpi_x = m_DrawingArea.get_allocation().get_width() / width;
-    double dpi_y = m_DrawingArea.get_allocation().get_height() / height;
+    double dpi_x = m_DrawingArea.get_width() / width;
+    double dpi_y = m_DrawingArea.get_height() / height;
 
     // We get a cairo context for the DrawingArea and then give that cairo
     // context to the PrintOperation's pango layout so that render_page() will
