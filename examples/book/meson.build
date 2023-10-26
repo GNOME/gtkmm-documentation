@@ -91,6 +91,7 @@ examples_book = [
   [['paned'], 'example', exwindow_main + ['messageslist.cc', 'messagetext.cc']],
   [['popover'], 'example', exwindow_main],
   [['printing', 'advanced'], 'example', exwindow_main + ['previewdialog.cc', 'printformoperation.cc']],
+  [['printing', 'print_dialog'], 'example', exwindow_main + ['printformdialog.cc']],
   [['printing', 'simple'], 'example', exwindow_main + ['printformoperation.cc']],
   [['progressbar'], 'example', exwindow_main],
   [['range_widgets'], 'example', exwindow_main],

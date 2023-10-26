@@ -95,6 +95,7 @@ check_PROGRAMS =					\
 	book/paned/example				\
 	book/popover/example			\
 	book/printing/advanced/example			\
+	book/printing/print_dialog/example \
 	book/printing/simple/example			\
 	book/progressbar/example			\
 	book/range_widgets/example			\
@@ -605,6 +606,13 @@ book_printing_advanced_example_SOURCES =		\
 	book/printing/advanced/previewdialog.h		\
 	book/printing/advanced/printformoperation.cc	\
 	book/printing/advanced/printformoperation.h
+
+book_printing_print_dialog_example_SOURCES = \
+	book/printing/print_dialog/examplewindow.cc \
+	book/printing/print_dialog/examplewindow.h \
+	book/printing/print_dialog/main.cc \
+	book/printing/print_dialog/printformdialog.cc \
+	book/printing/print_dialog/printformdialog.h
 
 book_printing_simple_example_SOURCES =			\
 	book/printing/simple/examplewindow.cc		\
