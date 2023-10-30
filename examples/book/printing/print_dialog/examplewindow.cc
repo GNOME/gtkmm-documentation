@@ -23,7 +23,7 @@ ExampleWindow::ExampleWindow(const Glib::RefPtr<Gtk::Application>& app)
   m_SurnameLabel("Surname"),
   m_CommentsLabel("Comments")
 {
-  set_title("gtkmm Printing Example");
+  set_title("gtkmm PrintDialog Example");
   set_default_size(400, 300);
 
 #if HAS_PRINT_DIALOG

@@ -95,7 +95,8 @@ HELP_MEDIA =					\
 	figures/multithread.png		\
 	figures/notebook.png			\
 	figures/paned.png			\
-	figures/printing.png			\
+	figures/printing_printdialog.png \
+	figures/printing_simple.png \
 	figures/progressbar.png			\
 	figures/radiobuttons.png		\
 	figures/range_widgets.png		\

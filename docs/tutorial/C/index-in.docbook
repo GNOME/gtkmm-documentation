@@ -5130,7 +5130,7 @@ context-&gt;restore();</programlisting>
         <para>
            Here is an example of a program that draws some text, some of it
            upside-down. The Printing chapter contains another
-           <link linkend="sec-printing-example">example</link> of drawing text.
+           <link linkend="sec-printing-examples">example</link> of drawing text.
         </para>
         <figure xml:id="figure-drawingarea-pango-text">
           <title>Drawing Area - Text</title>
@@ -5774,7 +5774,7 @@ page number.
 </para>
 
 <para>
-See <link linkend="sec-printing-example-simple">an example</link>
+See <link linkend="sec-printing-examples-simple">an example</link>
 of exactly how this can be done.
 </para>
 
@@ -5939,23 +5939,36 @@ located in /examples/book/printing/advanced.
 
 </section>
 
-<section xml:id="sec-printing-example">
-<title>Example</title>
+<section xml:id="sec-printing-printdialog">
+<title>PrintDialog</title>
 
-<section xml:id="sec-printing-example-simple">
+<para>
+Since &gtkmm; 4.14 <classname>Gtk::PrintDialog</classname> is an alternative
+to <classname>Gtk::PrintOperation</classname>. <classname>PrintDialog</classname>
+uses the same <classname>PageSetup</classname> and <classname>PrintSettings</classname>
+classes as <classname>PrintOperation</classname>. The rendering with Cairo and
+Pango is also similar.
+</para>
+
+</section>
+
+<section xml:id="sec-printing-examples">
+<title>Examples</title>
+
+<section xml:id="sec-printing-examples-simple">
 <title>Simple</title>
 
 <para>
-The following example demonstrates how to print some input from a user
-interface. It shows how to implement <literal>on_begin_print</literal>
-and <literal>on_draw_page</literal>, as well as how to track print status
-and update the print settings.
+The following example demonstrates how to print some input from a user interface
+using <classname>PrintOperation</classname>. It shows how to implement
+<literal>on_begin_print</literal> and <literal>on_draw_page</literal>,
+as well as how to track print status and update the print settings.
 </para>
 
 <figure xml:id="figure-printing-simple">
   <title>Printing - Simple</title>
   <screenshot>
-    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;printing.png"/></imageobject></mediaobject>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;printing_simple.png"/></imageobject></mediaobject>
   </screenshot>
 </figure>
 
@@ -5963,8 +5976,26 @@ and update the print settings.
 
 </section>
 
-</section>
+<section xml:id="sec-printing-examples-printdialog">
+<title>PrintDialog</title>
 
+<para>
+The following example demonstrates how to print some input from a user
+interface using <classname>PrintDialog</classname>. The user interface is
+similar to the previous example.
+</para>
+
+<figure xml:id="figure-printing-printdialog">
+  <title>Printing - PrintDialog</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;printing_printdialog.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;printing/print_dialog/">Source Code</link></para>
+
+</section>
+</section>
 </chapter>
 
 <chapter xml:id="chapter-recent-documents">
