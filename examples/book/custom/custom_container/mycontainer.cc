@@ -16,6 +16,8 @@
 
 #include "mycontainer.h"
 
+#include <algorithm> // std::max()
+
 // This example container is a simplified vertical Box.
 //
 // It can't be used as a managed widget, managed by another container
@@ -79,56 +81,32 @@ void MyContainer::measure_vfunc(Gtk::Orientation orientation, int for_size,
   minimum = 0;
   natural = 0;
 
-  int dummy_minimum_baseline = 0;
-  int dummy_natural_baseline = 0;
+  // Number of visible children.
+  const int nvis_children = get_nvis_children();
 
   if (orientation == Gtk::Orientation::HORIZONTAL)
   {
-    int height_per_child = for_size;
-
-    if (for_size >= 0)
-    {
-      // Number of visible children.
-      const int nvis_children = get_nvis_children();
-
-      // Divide the height equally among the visible children.
-      if (nvis_children > 0)
-        height_per_child = for_size / nvis_children;
-    }
+    // Divide the height equally among the visible children.
+    if (for_size > 0 && nvis_children > 0)
+      for_size /= nvis_children;
 
     // Request a width equal to the width of the widest visible child.
-    for (const Widget* child = get_first_child(); child; child = child->get_next_sibling())
-      if (child->get_visible())
-      {
-        int child_minimum_width = 0;
-        int child_natural_width = 0;
-        child->measure(orientation, height_per_child, child_minimum_width,
-          child_natural_width, dummy_minimum_baseline, dummy_natural_baseline);
-        if (child_minimum_width > minimum)
-          minimum = child_minimum_width;
-        if (child_natural_width > natural)
-          natural = child_natural_width;
-      }
   }
-  else // Gtk::Orientation::VERTICAL
+
+  for (const Widget* child = get_first_child(); child; child = child->get_next_sibling())
+    if (child->get_visible())
+    {
+      int child_minimum, child_natural, ignore;
+      child->measure(orientation, for_size, child_minimum, child_natural, ignore, ignore);
+      minimum = std::max(minimum, child_minimum);
+      natural = std::max(natural, child_natural);
+    }
+
+  if (orientation == Gtk::Orientation::VERTICAL)
   {
     // The allocated height will be divided equally among the visible children.
     // Request a height equal to the number of visible children times the height
     // of the highest child.
-    int nvis_children = 0;
-    for (const Widget* child = get_first_child(); child; child = child->get_next_sibling())
-      if (child->get_visible())
-      {
-        ++nvis_children;
-        int child_minimum_height = 0;
-        int child_natural_height = 0;
-        child->measure(orientation, for_size, child_minimum_height,
-          child_natural_height, dummy_minimum_baseline, dummy_natural_baseline);
-        if (child_minimum_height > minimum)
-          minimum = child_minimum_height;
-        if (child_natural_height > natural)
-          natural = child_natural_height;
-      }
     minimum *= nvis_children;
     natural *= nvis_children;
   }
