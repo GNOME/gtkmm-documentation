@@ -1,3 +1,37 @@
+4.10.1 (stable):
+
+* Update the "Event signals" section
+  (Kjell Ahlstedt)
+* Mention Cambalache instead of Glade
+  (Kjell Ahlstedt) Issue #18 (Ludovic Jozeau)
+* Add notes regarding widget destructor behaviour vs gtkmm3
+  (Daniel Boles) Merge request !18
+* Remove AUTHORS and add general information to README.md
+  (Kjell Ahlstedt) Issue gtkmm#140
+* Menus and Toolbars: Replace mention of non-existing class
+  Gtk::EventControllerClick for Gtk::GestureClick
+  (Federico Gallo Herosa) Merge request !20
+* Add the PrintDialog section
+  (Kjell Ahlstedt)
+
+Example programs:
+* book/custom/custom_css_name: Add extern "C" and a comment
+  (Kjell Ahlstedt) Issue glibmm#1 (Murray Cumming)
+* Rename .glade files to .ui
+  (Kjell Ahlstedt) Issue #18 (Ludovic Jozeau)
+* Replace some sigc::mem_fun()s and sigc::ptr_fun()s by lambda expressions
+  (Kjell Ahlstedt) Issue #10 (Zongren Zhang)
+* book/printing/advanced: Don't use deprecated API
+* Add book/printing/print_dialog example
+  (Kjell Ahlstedt)
+* book/custom/custom_container: Tidy up MyContainer::measure_vfunc()
+ (Daniel Boles) Merge request !21
+
+Meson build:
+* Don't fail if warning_level=everything
+  (Daniel Boles, Kjell Ahlstedt) Merge request gtkmm!87
+
+
 4.10.0: (stable)
 
 There are no releases between 4.0.x and 4.10.0. This release is

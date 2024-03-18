@@ -1,7 +1,7 @@
 # This file is part of gtkmm-documentation.
 
 project('gtkmm-documentation', 'c', 'cpp',
-  version: '4.10.0',
+  version: '4.10.1',
   license: 'GPLv2',
   default_options: [
     'cpp_std=c++17',
@@ -109,6 +109,7 @@ if can_add_dist_script
     'docs' / 'tutorial' / 'kindle_cover.jpg',
     'docs' / 'tutorial' / 'kindle_cover.svg',
     'tools' / 'make_screenshots',
+    'gtkmm-documentation.doap',
     '.gitlab-ci.yml',
   ]
   # Modify the contents of the distribution directory.
