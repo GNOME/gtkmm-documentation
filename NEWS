@@ -1,3 +1,18 @@
+3.24.4 (stable):
+
+* Remove AUTHORS and add general information to README.md
+  (Kjell Ahlstedt) Issue gtkmm#140
+
+Example programs:
+* Update the others/window example
+* book/iconview: Catch exceptions from Gdk::Pixbuf
+  (Kjell Ahlstedt)
+
+Meson build:
+* Don't fail if warning_level=everything
+  (Daniel Boles, Kjell Ahlstedt) Merge request gtkmm!87
+
+
 3.24.3: (stable)
 
 * Update links to gtk and glib documentation

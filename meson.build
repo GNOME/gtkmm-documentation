@@ -1,7 +1,7 @@
 # This file is part of gtkmm-documentation.
 
 project('gtkmm-documentation', 'c', 'cpp',
-  version: '3.24.3',
+  version: '3.24.4',
   license: 'GPLv2',
   default_options: [
     'cpp_std=c++14',
@@ -110,6 +110,7 @@ if can_add_dist_script
     'docs' / 'tutorial' / 'kindle_cover.jpg',
     'docs' / 'tutorial' / 'kindle_cover.svg',
     'tools' / 'make_screenshots',
+    'gtkmm-documentation.doap',
   ]
   # Modify the contents of the distribution directory.
   meson.add_dist_script(
