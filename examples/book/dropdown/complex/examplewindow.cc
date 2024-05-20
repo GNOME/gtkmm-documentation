@@ -37,6 +37,8 @@ ExampleWindow::ExampleWindow()
     sigc::mem_fun(*this, &ExampleWindow::on_setup_list_item));
   factory->signal_bind().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_bind_list_item));
+  factory->signal_unbind().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_unbind_list_item));
   m_DropDown.set_list_factory(factory);
 
   // Create the model and fill it.
