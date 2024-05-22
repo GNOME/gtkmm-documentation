@@ -18,6 +18,8 @@
 
 #include <gtkmm.h>
 
+#define HAS_SEARCH_ENTRY2 GTKMM_CHECK_VERSION(4,13,2)
+
 class ExampleAppWindow : public Gtk::ApplicationWindow
 {
 public:
@@ -38,7 +40,11 @@ protected:
   Gtk::Stack* m_stack {nullptr};
   Gtk::ToggleButton* m_search {nullptr};
   Gtk::SearchBar* m_searchbar {nullptr};
+#if HAS_SEARCH_ENTRY2
+  Gtk::SearchEntry2* m_searchentry {nullptr};
+#else
   Gtk::SearchEntry* m_searchentry {nullptr};
+#endif
   Gtk::MenuButton* m_gears {nullptr};
   Glib::RefPtr<Glib::Binding> m_prop_binding;
 };

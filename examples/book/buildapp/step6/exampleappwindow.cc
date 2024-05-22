@@ -35,7 +35,11 @@ ExampleAppWindow::ExampleAppWindow(BaseObjectType* cobject,
   if (!m_searchbar)
     throw std::runtime_error("No \"searchbar\" object in window.ui");
 
+#if HAS_SEARCH_ENTRY2
+  m_searchentry = m_refBuilder->get_widget<Gtk::SearchEntry2>("searchentry");
+#else
   m_searchentry = m_refBuilder->get_widget<Gtk::SearchEntry>("searchentry");
+#endif
   if (!m_searchentry)
     throw std::runtime_error("No \"searchentry\" object in window.ui");
 

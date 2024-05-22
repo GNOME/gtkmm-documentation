@@ -19,6 +19,8 @@
 
 #include <gtkmm.h>
 
+#define HAS_SEARCH_ENTRY2 GTKMM_CHECK_VERSION(4,13,2)
+
 class ExampleWindow : public Gtk::Window
 {
 public:
@@ -39,7 +41,11 @@ private:
 
   // Widgets
   Gtk::SearchBar m_search_bar;
+#if HAS_SEARCH_ENTRY2
+  Gtk::SearchEntry2 m_entry;
+#else
   Gtk::SearchEntry m_entry;
+#endif
   Gtk::Button m_go_up_button;
   Gtk::Button m_go_down_button;
   Gtk::Label m_label;

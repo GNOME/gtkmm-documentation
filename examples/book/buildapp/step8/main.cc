@@ -1,2 +1,2 @@
-#include "../step5/main.cc"
-// Equal to the corresponding file in step5
+#include "../step6/main.cc"
+// Equal to the corresponding file in step6
