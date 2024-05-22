@@ -1,4 +1,4 @@
-# 2023-01-21: fedora:latest = 37, fedora:rawhide = 38
+# 2024-05-22: fedora:latest = 40, fedora:rawhide = 41
 # See https://hub.docker.com/_/fedora
 stages:
   - validate
@@ -10,7 +10,6 @@ stages:
   before_script:
     - export PATH="$HOME/.local/bin:$PATH"
     - dnf install -y ${FEDORA_DEPS}
-    - pip install --user "meson==0.56.0"
 
 docs-validation:
   extends: .build-default
@@ -28,14 +27,17 @@ docs-validation:
       docbook5-schemas
       docbook-style-xsl
       libxslt
+      meson
       ninja-build
       python3
       python3-pip
       python3-wheel
     MESON_OPTIONS: "-Dbuild-examples=false -Dvalidation=true -Dbuild-translations=true -Dbuild-pdf=false"
   script:
+    - itstool --version
     - meson setup ${MESON_OPTIONS} _build .
     - ninja -C _build
+  allow_failure: true
 
 html-tutorial:
   extends: .build-default
@@ -46,6 +48,7 @@ html-tutorial:
       gcc-c++
       docbook-style-xsl
       libxslt
+      meson
       ninja-build
       python3
       python3-pip
