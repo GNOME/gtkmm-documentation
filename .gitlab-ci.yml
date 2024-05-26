@@ -34,10 +34,9 @@ docs-validation:
       python3-wheel
     MESON_OPTIONS: "-Dbuild-examples=false -Dvalidation=true -Dbuild-translations=true -Dbuild-pdf=false"
   script:
-    - itstool --version
     - meson setup ${MESON_OPTIONS} _build .
     - ninja -C _build
-  allow_failure: true
+  allow_failure: false
 
 html-tutorial:
   extends: .build-default
