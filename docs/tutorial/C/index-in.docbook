@@ -3752,8 +3752,11 @@ the resource files is efficient (as they are already in memory, shared with othe
 simple (no need to check for things like I/O errors or locate the files in the filesystem). It
 also makes it easier to create relocatable applications.
 </para>
+<!-- TODO: Add a link to the description of glib-compile-resources, if it will
+be described at https://docs.gtk.org/gio/glib-compile-resources.html or elsewhere.
+-->
 <para>
-Resource bundles are created by the <link xlink:href="https://developer-old.gnome.org/gio/stable/glib-compile-resources.html">glib-compile-resources</link>
+Resource bundles are created by the <application>glib-compile-resources</application>
 program which takes an xml file that describes the bundle, and a set of files that the xml references.
 These are combined into a binary resource bundle.
 </para>
@@ -6685,10 +6688,16 @@ Nicolai M. Josuttis, "The C++ Standard Library" - section 4.2
 <chapter xml:id="chapter-builder">
 <title>Glade and Gtk::Builder</title>
 
+<note><para>
+<application>Glade</application> is not actively developed or maintained.
+It can't be used with gtk4 and gtkmm4.
+</para></note>
+
 <para>
 Although you can use C++ code to instantiate and arrange widgets, this
 can soon become tedious and repetitive. And it requires a recompilation to show
-changes. The <application>Glade</application> application allows you to layout
+changes. The <link xlink:href="https://gitlab.gnome.org/GNOME/glade">Glade</link>
+application allows you to layout
 widgets on screen and then save an XML description of the arrangement. Your
 application can then use the <application>Gtk::Builder</application> API to load
 that XML file at runtime and obtain a pointer to specifically named widget
@@ -6902,7 +6911,7 @@ in C++ using &gtkmm;, within <filename>.glade</filename> files and load/set
 these using <classname>Gtk::Builder</classname>. See the documentation of
 <classname>Gtk::Builder</classname> for more details on how to achieve this.
 Glade won’t recognise such properties as-is, but it should be able to through
-use of <link xlink:href="https://developer-old.gnome.org/gladeui/stable/properties.html">
+use of <link xlink:href="https://gitlab.gnome.org/GNOME/glade/-/blob/master/doc/properties.sgml">
 property class definitions</link> and a catalog declaring those new properties.
 </para>
 </section>
@@ -9422,7 +9431,7 @@ practical - and sensible - to subclass a button for that purpose.
     correct order. This section will give a brief explanation of how to set up
     <application>jhbuild</application> to build and install &gtkmm; from the
     source repository (git). For up-to-date information
-    on <application>jhbuild</application>, please refer to the <link xlink:href="http://developer-old.gnome.org/jhbuild/unstable/">jhbuild manual</link>.
+    on <application>jhbuild</application>, please refer to the <link xlink:href="https://gnome.pages.gitlab.gnome.org/jhbuild/">jhbuild manual</link>.
   </para>
   <note>
     <para>
@@ -9444,7 +9453,7 @@ practical - and sensible - to subclass a button for that purpose.
   <title>Setting up jhbuild</title>
     <para>
       To set up <application>jhbuild</application>, follow the basic
-      installation instructions from the <link xlink:href="http://developer-old.gnome.org/jhbuild/unstable/">jhbuild manual</link>.
+      installation instructions from the <link xlink:href="https://gnome.pages.gitlab.gnome.org/jhbuild/">jhbuild manual</link>.
       After you have installed <application>jhbuild</application>, you
       should copy the sample <application>jhbuild</application> configuration
       file into your home directory by executing the following command from the
