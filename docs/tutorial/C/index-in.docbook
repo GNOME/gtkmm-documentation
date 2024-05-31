@@ -4181,11 +4181,11 @@ the resource files is efficient (as they are already in memory, shared with othe
 simple (no need to check for things like I/O errors or locate the files in the filesystem). It
 also makes it easier to create relocatable applications.
 </para>
-<!-- TODO: Update the link to the description of glib-compile-resources, if it will
-be described in https://docs.gtk.org/glib/ or https://docs.gtk.org/gio/.
+<!-- TODO: Add a link to the description of glib-compile-resources, if it will
+be described at https://docs.gtk.org/gio/glib-compile-resources.html or elsewhere.
 -->
 <para>
-Resource bundles are created by the <link xlink:href="https://developer-old.gnome.org/gio/stable/glib-compile-resources.html">glib-compile-resources</link>
+Resource bundles are created by the <application>glib-compile-resources</application>
 program which takes an xml file that describes the bundle, and a set of files that the xml references.
 These are combined into a binary resource bundle.
 </para>
