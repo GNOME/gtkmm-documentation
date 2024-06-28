@@ -24,12 +24,13 @@ Web site
 Download location
  - https://download.gnome.org/sources/gtkmm-documentation
 
-Programming with gtkmm3 (gtkmm tutorial)
- - https://developer-old.gnome.org/gtkmm-tutorial/3.24/
+Programming with gtkmm4 (gtkmm tutorial)
+ - https://gnome.pages.gitlab.gnome.org/gtkmm-documentation
 
-This tutorial does not document the latest release. If you want newer
-documentation, download a tarball. Tarballs contain the tutorial
-in HTML format. See the docs/tutorial/html directory.
+The documentation on the web describes gtkmm4.
+If you want the gtkmm3 tutorial, download a tarball.
+Tarballs contain the tutorial in HTML format.
+See the docs/tutorial/html directory.
 
 Discussion on GNOME's discourse forum
  - https://discourse.gnome.org/tag/cplusplus

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE book [
-  <!ENTITY url_refdocs_base_glib_html "http://developer.gnome.org/glibmm/2.66/">
+  <!ENTITY url_refdocs_base_glib_html "https://gnome.pages.gitlab.gnome.org/glibmm/">
   <!ENTITY url_refdocs_base_glib "&url_refdocs_base_glib_html;classGlib_1_1">
   <!ENTITY url_refdocs_base_gio "&url_refdocs_base_glib_html;classGio_1_1">
-  <!ENTITY url_refdocs_base_gtk_html "http://developer.gnome.org/gtkmm/3.24/">
+  <!ENTITY url_refdocs_base_gtk_html "https://gnome.pages.gitlab.gnome.org/gtkmm/">
   <!ENTITY url_refdocs_base_gtk "&url_refdocs_base_gtk_html;classGtk_1_1">
   <!ENTITY url_refdocs_base_gtk_namespace "&url_refdocs_base_gtk_html;namespaceGtk_1_1">
   <!ENTITY url_figures_base "figures/">
@@ -168,6 +168,20 @@ See the <link xlink:href="https://wiki.gnome.org/Projects/gtkmm/FAQ">FAQ</link> 
 </section>
 </section>
 
+<section xml:id="sec-prefer-gtkmm4">
+<title>Prefer gtkmm4 to gtkmm3</title>
+
+<para>
+This tutorial describes gtkmm-3.0. The latest ABI/API is gtkmm-4.0.
+Use gtkmm4 in new applications.
+</para>
+<para>
+The reference documentation of gtkmm3 is no longer available online.
+The links to reference documentation in this document link to descriptions
+of classes with the same name in gtkmm4. There may be broken links when
+there is no such class in gtkmm4.
+</para>
+</section>
 </chapter>
 
 <chapter xml:id="chapter-installation">
@@ -410,7 +424,11 @@ in your <filename>meson.build</filename> files. For instance:
   dependencies: gtkmm_dep,
   win_subsystem: 'windows',
 )</programlisting>
-<para>gtkmm-3.0 is the name of the current stable API. There was an older API called gtkmm-2-4 which installs in parallel when it is available. There were several versions of gtkmm-2.4, such as gtkmm 2.10 and there are several versions of the gtkmm-3.0 API. Note that the API name does not change for every version because that would be an incompatible API and ABI break. Theoretically, there might be a future gtkmm-4.0 API which would install in parallel with gtkmm-3.0 without affecting existing applications.
+<para>gtkmm-3.0 is the name of the current stable API. There was an older API called gtkmm-2-4
+which installs in parallel when it is available. There were several versions of gtkmm-2.4,
+such as gtkmm 2.10 and there are several versions of the gtkmm-3.0 API. Note that the API name
+does not change for every version because that would be an incompatible API and ABI break.
+There is a newer gtkmm-4.0 API which installs in parallel with gtkmm-3.0 without affecting existing applications.
 </para>
 <para>If you start by experimenting with a small application that you plan to use just for yourself,
 it's easier to start with a <filename>meson.build</filename> similar to the <filename>meson.build</filename> files
@@ -8626,7 +8644,7 @@ which is also reference-counting. <classname>Glib::RefPtr&lt;&gt;</classname> wa
 long before there was a reference-counting smartpointer in the C++ Standard Library.
 </para>
 
-<para><link xlink:href="&url_refdocs_base_glib;RefPtr.html">Reference</link></para>
+<para><link xlink:href="&url_refdocs_base_glib_html;group__RefPtr.html">Reference</link></para>
 
 <para>A smartpointer acts much like a normal pointer. Here are a few examples.</para>
 
@@ -10811,7 +10829,7 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
 <title>_WRAP_CHILD_PROPERTY</title>
 
 <para>This macro generates the C++ method to wrap a GtkContainer child property.
-    (See <link xlink:href="https://developer.gnome.org/gtk3/stable/GtkContainer.html">
+    (See <link xlink:href="https://docs.gtk.org/gtk3/class.Container.html">
     GtkContainer</link> for more information about child properties).
     Similarly to _WRAP_PROPERTY, you must specify the property name and the
     wanted C++ type for the property. <command>gmmproc</command> uses the .defs
