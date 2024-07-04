@@ -10,7 +10,7 @@ project('gtkmm-documentation', 'c', 'cpp',
   meson_version: '>= 0.56.0', # required for executable(win_subsystem:)
 )
 
-python3 = find_program('python3', version: '>=3.5')
+python3 = find_program('python3', version: '>=3.7')
 
 gtkmm_pcname = 'gtkmm-4.0'
 gtkmm_req = '>= 4.10.0'

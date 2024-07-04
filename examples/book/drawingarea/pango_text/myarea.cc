@@ -68,13 +68,13 @@ void MyArea::draw_rectangle(const Cairo::RefPtr<Cairo::Context>& cr,
 void MyArea::draw_text(const Cairo::RefPtr<Cairo::Context>& cr,
                        int rectangle_width, int rectangle_height)
 {
-  // http://developer.gnome.org/pangomm/unstable/classPango_1_1FontDescription.html
+  // https://gnome.pages.gitlab.gnome.org/pangomm/classPango_1_1FontDescription.html
   Pango::FontDescription font;
 
   font.set_family("Monospace");
   font.set_weight(Pango::Weight::BOLD);
 
-  // http://developer.gnome.org/pangomm/unstable/classPango_1_1Layout.html
+  // https://gnome.pages.gitlab.gnome.org/pangomm/classPango_1_1Layout.html
   auto layout = create_pango_layout("Hi there!");
 
   layout->set_font_description(font);
