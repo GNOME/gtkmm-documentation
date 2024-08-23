@@ -56,6 +56,9 @@ check_PROGRAMS =					\
 	book/entry/icon/example				\
 	book/entry/progress/example			\
 	book/entry/simple/example			\
+	book/events/keyboard_propagation/example	\
+	book/events/keyboard_simple/example	\
+	book/events/mouse/example	\
 	book/expander/example				\
 	book/frame/example				\
 	book/giomm/directory_list/example		\
@@ -73,8 +76,6 @@ check_PROGRAMS =					\
 	book/idle/idle					\
 	book/infobar/example				\
 	book/input/example				\
-	book/keyboard_events/simple/example	\
-	book/keyboard_events/propagation/example	\
 	book/label/example				\
 	book/listbox_flowbox/flowbox/example \
 	book/listbox_flowbox/listbox/example \
@@ -401,6 +402,21 @@ book_entry_simple_example_SOURCES =		\
 	book/entry/simple/examplewindow.h	\
 	book/entry/simple/main.cc
 
+book_events_keyboard_propagation_example_SOURCES =		\
+	book/events/keyboard_propagation/examplewindow.cc	\
+	book/events/keyboard_propagation/examplewindow.h	\
+	book/events/keyboard_propagation/main.cc
+
+book_events_keyboard_simple_example_SOURCES =		\
+	book/events/keyboard_simple/examplewindow.cc	\
+	book/events/keyboard_simple/examplewindow.h	\
+	book/events/keyboard_simple/main.cc
+
+book_events_mouse_example_SOURCES =		\
+	book/events/mouse/examplewindow.cc	\
+	book/events/mouse/examplewindow.h	\
+	book/events/mouse/main.cc
+
 book_expander_example_SOURCES =		\
 	book/expander/examplewindow.cc	\
 	book/expander/examplewindow.h	\
@@ -478,16 +494,6 @@ book_input_example_SOURCES = \
 if !MKFIFO_EXISTS
 book_input_example_CXXFLAGS = -DDONT_HAVE_MKFIFO=1
 endif
-
-book_keyboard_events_simple_example_SOURCES =		\
-	book/keyboard_events/simple/examplewindow.cc	\
-	book/keyboard_events/simple/examplewindow.h	\
-	book/keyboard_events/simple/main.cc
-
-book_keyboard_events_propagation_example_SOURCES =		\
-	book/keyboard_events/propagation/examplewindow.cc	\
-	book/keyboard_events/propagation/examplewindow.h	\
-	book/keyboard_events/propagation/main.cc
 
 book_label_example_SOURCES =		\
 	book/label/examplewindow.cc	\

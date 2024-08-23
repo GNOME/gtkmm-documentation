@@ -75,13 +75,14 @@ HELP_MEDIA =					\
 	figures/entry_completion.png		\
 	figures/entry_icon.png		\
 	figures/entry_progress.png		\
+	figures/events_mouse.png			\
+	figures/events_propagation.png \
+	figures/events_simple.png			\
 	figures/frame.png			\
 	figures/grid.png			\
 	figures/helloworld.png			\
 	figures/helloworld2.png			\
 	figures/infobar.png			\
-	figures/keyboardevents_simple.png			\
-	figures/keyboardevents_propagation.png		\
 	figures/label.png			\
 	figures/listmodel_columnview.png \
 	figures/listmodel_filter.png \

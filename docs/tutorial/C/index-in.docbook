@@ -6235,12 +6235,12 @@ if (info)
 </chapter>
 
 <chapter xml:id="chapter-keyboardevents">
-<title>Keyboard Events</title>
+<title>Keyboard and Mouse Events</title>
   <para>
     Event signals differ in some ways from other signals. These differences are described
     in the <link linkend="sec-eventsignals">Event signals</link> section in
-    the appendix. Here we will use keyboard events to show how events can be
-    used in a program.
+    the appendix. Here we will use keyboard events and mouse events to show how
+    events can be used in a program.
   </para>
   <section xml:id="sec-keyboardevents-overview">
   <title>Overview</title>
@@ -6302,11 +6302,11 @@ add_controller(controller);
       <figure xml:id="figure-keyboardevents-simple">
         <title>Keyboard Events - Simple</title>
         <screenshot>
-          <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;keyboardevents_simple.png"/></imageobject></mediaobject>
+          <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;events_simple.png"/></imageobject></mediaobject>
         </screenshot>
       </figure>
 
-      <para><link xlink:href="&url_examples_base;keyboard_events/simple/">Source Code</link></para>
+      <para><link xlink:href="&url_examples_base;events/keyboard_simple/">Source Code</link></para>
     </section>
   </section>
 
@@ -6366,11 +6366,55 @@ add_controller(controller);
       <figure xml:id="figure-keyboardevents-propagation">
         <title>Keyboard Events - Event Propagation</title>
         <screenshot>
-          <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;keyboardevents_propagation.png"/></imageobject></mediaobject>
+          <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;events_propagation.png"/></imageobject></mediaobject>
         </screenshot>
       </figure>
 
-      <para><link xlink:href="&url_examples_base;keyboard_events/propagation/">Source Code</link></para>
+      <para><link xlink:href="&url_examples_base;events/keyboard_propagation/">Source Code</link></para>
+    </section>
+  </section>
+
+  <section xml:id="sec-keyboardevents-mouse">
+  <title>Mouse Events</title>
+
+  <para>
+    Mouse events are similar to keyboard events. There are some differences, though.
+    <itemizedlist>
+      <listitem><para>You use <classname>Gtk::GestureClick</classname> instead of
+        <classname>Gtk::EventControllerKey</classname>.</para></listitem>
+      <listitem><para>There are other event classes that can be used for handling
+        mouse events, for instance <classname>Gtk::EventControllerMotion</classname> and
+        <classname>Gtk::EventControllerScroll</classname>.</para></listitem>
+      <listitem><para>Many signal handlers don't return a <literal>bool</literal>.
+        You can't stop those events from propagating.</para></listitem>
+    </itemizedlist>
+  </para>
+
+  <para>
+    The event classes that handle mouse events are also useful for handling
+    events from touchscreens. There are also many subclasses of
+    <classname>Gtk::EventController</classname> which are only (or mainly) useful
+    for touchscreens. Examples: <classname>Gtk::GestureRotate</classname>,
+    <classname>Gtk::GestureZoom</classname>, <classname>Gtk::GestureSwipe</classname>,
+    <classname>Gtk::GestureLongPress</classname>.
+  </para>
+
+  <para><link xlink:href="&url_refdocs_base_gtk;EventController.html">Reference</link></para>
+
+    <section xml:id="keyboardevents-mouse-example">
+    <title>Example</title>
+      <para>
+        This is an expanded version of the simple keyboard events example.
+      </para>
+
+      <figure xml:id="figure-keyboardevents-mouse">
+        <title>Keyboard and Mouse Events</title>
+        <screenshot>
+          <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;events_mouse.png"/></imageobject></mediaobject>
+        </screenshot>
+      </figure>
+
+      <para><link xlink:href="&url_examples_base;events/mouse/">Source Code</link></para>
     </section>
   </section>
 </chapter>
