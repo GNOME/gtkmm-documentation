@@ -22,7 +22,7 @@ def process_source_file(source_directory, source_basename, outfile, skip_leading
   source_filename = os.path.join(source_directory, source_basename)
   with open(source_filename, mode='r', encoding='utf-8', errors='surrogateescape') as srcfile:
     outfile.write('<para>File: <filename>' + source_basename + '</filename> (For use with gtkmm 4)</para>\n')
-    outfile.write('<programlisting><code>\n<![CDATA[')
+    outfile.write('<programlisting><code><![CDATA[')
 
     for line in srcfile:
       if not found_start:
