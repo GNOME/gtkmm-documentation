@@ -51,12 +51,13 @@ def insert_ex_code():
 
 # Called from custom_target()
 def html():
-  #      argv[2]               argv[3]           argv[4]
-  # <allow_network_access> <input_xml_file> <output_html_dir>
+  #      argv[2]               argv[3]           argv[4]          argv[5]
+  # <allow_network_access> <input_xsl_file> <input_xml_file> <output_html_dir>
 
   allow_network_access = sys.argv[2] == 'true'
-  input_xml_file = sys.argv[3]
-  output_html_dir = sys.argv[4]
+  input_xsl_file = sys.argv[3]
+  input_xml_file = sys.argv[4]
+  output_html_dir = sys.argv[5]
 
   # Set the use.id.as.filename param so that we don't use the chapter / section
   # number as the filename, otherwise the url will change every time anything is
@@ -76,7 +77,6 @@ def html():
     '--stringparam', 'toc.list.type', 'ul',
     '--param', 'use.id.as.filename', '1',
   ]
-  xslt_stylesheet = 'http://docbook.sourceforge.net/release/xsl/current/html/chunk.xsl'
 
   # Remove old files and create the destination directory.
   shutil.rmtree(output_html_dir, ignore_errors=True)
@@ -91,7 +91,7 @@ def html():
   if not allow_network_access:
     cmd += ['--nonet']
   cmd += [
-    xslt_stylesheet,
+    input_xsl_file,
     input_xml_file,
   ]
   result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,

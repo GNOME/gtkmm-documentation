@@ -199,6 +199,7 @@ custom_target('html_index.html',
   command: [
     python3, tutorial_custom_cmd, 'html',
     allow_network_access,
+    project_source_root / 'docs' / 'tutorial' / 'book.xsl',
     '@INPUT@',
     '@OUTPUT@',    
   ],
