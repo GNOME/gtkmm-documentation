@@ -289,8 +289,10 @@ span.guimenuitem    {
 }
 
 code.classname, code.function, code.filename, code.code, *.command  {
+    font-size: 1.2em;
     font-weight: normal;
     font-family: monospace;
+    line-height: 1.4;
 }
 
 hr  {
