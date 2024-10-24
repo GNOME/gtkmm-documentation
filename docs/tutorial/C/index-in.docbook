@@ -332,7 +332,7 @@ program possible. This program will create an empty 200 x 200 pixel window.
 <para><link xlink:href="&url_examples_base;base">Source Code</link></para>
 
 <para>We will now explain each part of the example</para>
-<programlisting>#include &lt;gtkmm.h&gt;</programlisting>
+<programlisting><code>#include &lt;gtkmm.h&gt;</code></programlisting>
 <para>
 All &gtkmm; programs must include certain &gtkmm; headers; <literal>gtkmm.h</literal>
 includes the entire &gtkmm; kit. This is usually not a good idea, because
@@ -341,7 +341,7 @@ suffices.
 </para>
 
 <para>The next part of the program:</para>
-<programlisting>class MyWindow : public Gtk::Window
+<programlisting><code>class MyWindow : public Gtk::Window
 {
 public:
   MyWindow();
@@ -351,14 +351,14 @@ MyWindow::MyWindow()
 {
   set_title("Basic application");
   set_default_size(200, 200);
-}</programlisting>
+}</code></programlisting>
 <para>
 defines the <classname>MyWindow</classname> class. Its default constructor sets the
 window's title and default (initial) size.
 </para>
 
 <para>The <function>main()</function> function's first statement:</para>
-<programlisting>auto app = Gtk::Application::create("org.gtkmm.examples.base");</programlisting>
+<programlisting><code>auto app = Gtk::Application::create("org.gtkmm.examples.base");</code></programlisting>
 <para>
 creates a <classname>Gtk::Application</classname> object, stored in a <classname>Glib::RefPtr</classname> smartpointer.
 This is needed in all &gtkmm; applications. The <methodname>create()</methodname> method for this object initializes &gtkmm;.
@@ -370,13 +370,13 @@ Your <function>main()</function> function will then return with an appropriate s
 The <parameter>argc</parameter> and <parameter>argv</parameter> arguments, passed to your application on the command line,
 can be checked when <methodname>make_window_and_run()</methodname> is called, but this simple application does not use those arguments.
 </para>
-<programlisting>return app-&gt;make_window_and_run&lt;MyWindow&gt;(argc, argv);</programlisting>
+<programlisting><code>return app-&gt;make_window_and_run&lt;MyWindow&gt;(argc, argv);</code></programlisting>
 
 <para>
 After putting the source code in <literal>simple.cc</literal> you can compile
 the above program with <application>gcc</application> using:
 </para>
-<programlisting>g++ simple.cc -o simple `pkg-config --cflags --libs gtkmm-4.0` -std=c++17</programlisting>
+<programlisting><code>g++ simple.cc -o simple `pkg-config --cflags --libs gtkmm-4.0` -std=c++17</code></programlisting>
 <para>
 Note that you must surround the <literal>pkg-config</literal> invocation with backquotes.
 Backquotes cause the shell to execute the command inside them, and to use
@@ -412,15 +412,15 @@ find them in. Try running it from your shell-prompt to see the results on your s
 However, this is even simpler when using the <function>dependency()</function> function
 in a <filename>meson.build</filename> file with Meson. For instance:
 </para>
-<programlisting>gtkmm_dep = dependency('gtkmm-4.0', version: '>= 4.6.0')</programlisting>
+<programlisting><code>gtkmm_dep = dependency('gtkmm-4.0', version: '>= 4.6.0')</code></programlisting>
 <para>
 This checks for the presence of gtkmm and defines <literal>gtkmm_dep</literal> for use
 in your <filename>meson.build</filename> files. For instance:
 </para>
-<programlisting>exe_file = executable('my_program', 'my_source1.cc', 'my_source2.cc',
+<programlisting><code>exe_file = executable('my_program', 'my_source1.cc', 'my_source2.cc',
   dependencies: gtkmm_dep,
   win_subsystem: 'windows',
-)</programlisting>
+)</code></programlisting>
 <para>gtkmm-4.0 is the name of the current stable API. There are older APIs called gtkmm-2.4
 and gtkmm-3.0 which install in parallel when they are available. There are several
 versions of gtkmm-2.4, such as gtkmm 2.10 and there are several versions of the gtkmm-3.0 API.
@@ -449,11 +449,11 @@ Automake, and Libtool" by John Calcote.
 <para>&gtkmm; applications consist of windows containing widgets, such as buttons and text boxes. In some other systems, widgets are called "controls". For each widget in your application's windows, there is a C++ object in your application's code. So you just need to call a method of the widget's class to affect the visible widget.</para>
 <para>Widgets are arranged inside container widgets such as frames and notebooks, in a hierarchy of widgets within widgets. Some of these container widgets, such as <classname>Gtk::Grid</classname>, are not visible - they exist only to arrange other widgets. Here is some example code that adds 2 <classname>Gtk::Button</classname> widgets to a <classname>Gtk::Box</classname> container widget:
 </para>
-<programlisting>m_box.append(m_Button1);
-m_box.append(m_Button2);</programlisting>
+<programlisting><code>m_box.append(m_Button1);
+m_box.append(m_Button2);</code></programlisting>
 <para>and here is how to add the <classname>Gtk::Box</classname>, containing those buttons, to a <classname>Gtk::Frame</classname>, which has a visible frame and title:
 </para>
-<programlisting>m_frame.set_child(m_box);</programlisting>
+<programlisting><code>m_frame.set_child(m_box);</code></programlisting>
 <para>
 Most of the chapters in this book deal with specific widgets. See the <link linkend="chapter-container-widgets">Container Widgets</link> section for more details about adding widgets to container widgets.
 </para>
@@ -489,8 +489,8 @@ button click result in an action, we set up a
 </para>
 <para>&gtkmm; uses the libsigc++ library to implement signals. Here is an example line of code that connects a Gtk::Button's "clicked" signal with a signal handler called "on_button_clicked":
 </para>
-<programlisting>m_button1.signal_clicked().connect( sigc::mem_fun(*this,
-  &amp;HelloWorld::on_button_clicked) );</programlisting>
+<programlisting><code>m_button1.signal_clicked().connect( sigc::mem_fun(*this,
+  &amp;HelloWorld::on_button_clicked) );</code></programlisting>
 
 <para>For more detailed information about signals, see the <link linkend="chapter-signals">appendix</link>.</para>
 <para>For information about implementing your own signals rather than
@@ -533,10 +533,10 @@ To use a &gtkmm; instance with a C function that requires a C
 <classname>GObject</classname> instance, use the C++ instance’s
 <function>gobj()</function> function to obtain a pointer to the underlying C
 instance. For example:</para>
-<programlisting>
+<programlisting><code>
 Gtk::Button button("example");
 gtk_button_do_something_that_gtkmm_cannot(button.gobj());
-</programlisting>
+</code></programlisting>
 
 <para>
 To obtain a &gtkmm; instance from a C <classname>GObject</classname> instance,
@@ -544,11 +544,11 @@ use one of the many overloaded <function>Glib::wrap()</function> functions.
 The C instance’s reference count is not incremented, unless you set the optional
 <parameter>take_copy</parameter> argument to <literal>true</literal>. For
 example:</para>
-<programlisting>
+<programlisting><code>
 GtkButton* cbutton = get_a_button();
 Gtk::Button* button = Glib::wrap(cbutton);
 button-&gt;set_label("Now I speak C++ too!");
-</programlisting>
+</code></programlisting>
 <para>The C++ wrapper shall be explicitly deleted if
 <itemizedlist>
 <listitem><para>it's a widget or other class that inherits from <classname>Gtk::Object</classname>, and</para></listitem>
@@ -591,7 +591,7 @@ Pretty thrilling, eh?  Let's examine the code. First, the
 <classname>HelloWorld</classname> class:
 </para>
 
-<programlisting>class HelloWorld : public Gtk::Window
+<programlisting><code>class HelloWorld : public Gtk::Window
 {
 public:
   HelloWorld();
@@ -603,7 +603,7 @@ protected:
 
   //Member widgets:
   Gtk::Button m_button;
-};</programlisting>
+};</code></programlisting>
 
 <para>
 This class implements the "Hello World" window. It's derived from
@@ -614,14 +614,14 @@ including setting up the signals. Here it is, with the comments
 omitted:
 </para>
 
-<programlisting>HelloWorld::HelloWorld()
+<programlisting><code>HelloWorld::HelloWorld()
 : m_button("Hello World")
 {
   m_button.set_margin(10);
   m_button.signal_clicked().connect(sigc::mem_fun(*this,
     &amp;HelloWorld::on_button_clicked));
   set_child(m_button);
-}</programlisting>
+}</code></programlisting>
 
 <para>
 Notice that we've used an initializer statement to give the <literal>m_button</literal>
@@ -649,11 +649,11 @@ Now let's look at our program's <function>main()</function> function. Here it is
 without comments:
 </para>
 
-<programlisting>int main(int argc, char* argv[])
+<programlisting><code>int main(int argc, char* argv[])
 {
   auto app = Gtk::Application::create("org.gtkmm.example");
   return app-&gt;make_window_and_run&lt;HelloWorld&gt;(argc, argv);
-}</programlisting>
+}</code></programlisting>
 
 <para>
 First we instantiate an object stored in a <classname>Glib::RefPtr</classname> smartpointer called <literal>app</literal>. This is of type
@@ -970,7 +970,7 @@ or set it later with <methodname>set_label()</methodname>.
 
 <para>To define an accelerator key for keyboard navigation, place an underscore before one of the label's characters and specify <literal>true</literal> for the optional <literal>mnemonic</literal> parameter. For instance:
 </para>
-<programlisting>Gtk::Button* pButton = new Gtk::Button("_Something", true);</programlisting>
+<programlisting><code>Gtk::Button* pButton = new Gtk::Button("_Something", true);</code></programlisting>
 
 <para>
 <classname>Gtk::Button</classname> is also
@@ -1070,13 +1070,13 @@ You create the buttons, and set up their group afterwards. In the following exam
 we put 3 radio buttons in a group:
 </para>
 
-<programlisting>
+<programlisting><code>
 auto rb1 = Gtk::make_managed&lt;Gtk::CheckButton&gt;("button1");
 auto rb2 = Gtk::make_managed&lt;Gtk::CheckButton&gt;("button2");
 auto rb3 = Gtk::make_managed&lt;Gtk::CheckButton&gt;("button3");
 rb2-&gt;set_group(*rb1);
 rb3-&gt;set_group(*rb1);
-</programlisting>
+</code></programlisting>
 
 <para>
 We told &gtkmm; to put all three <classname>CheckButton</classname>s in the
@@ -2112,10 +2112,10 @@ methods.
 <para>
 Here's the constructor for the <classname>Box</classname> widget,
 and methods that set per-container packing options:</para>
-<programlisting>Gtk::Box(Gtk::Orientation orientation = Gtk::Orientation::HORIZONTAL, int spacing = 0);
+<programlisting><code>Gtk::Box(Gtk::Orientation orientation = Gtk::Orientation::HORIZONTAL, int spacing = 0);
 void set_orientation(Gtk::Orientation orientation);
 void set_spacing(int spacing);
-void set_homogeneous(bool homogeneous = true);</programlisting>
+void set_homogeneous(bool homogeneous = true);</code></programlisting>
 <para>Passing <literal>true</literal> to <methodname>set_homogeneous()</methodname> will
 cause all of the contained widgets to be the same size.
 <parameter>spacing</parameter> is a (minimum) number of pixels to leave between
@@ -2380,7 +2380,7 @@ All items are instances of a subclass of <classname>Glib::Object</classname>.
 For instance, you might have a <classname>ColumnView</classname> with one integer
 and one text column, like so:
 </para>
-<programlisting><![CDATA[class ModelColumns : public Glib::Object
+<programlisting><code><![CDATA[class ModelColumns : public Glib::Object
 {
 public:
   int m_col_id;
@@ -2400,7 +2400,7 @@ protected:
 };
 
 Glib::RefPtr<Gio::ListStore<ModelColumns>> m_ListStore;
-]]></programlisting>
+]]></code></programlisting>
 
 <para>
 Every item in a model has a position which is the unsigned integer that describes
@@ -2715,7 +2715,7 @@ model rows. You will probably find it convenient to derive a new
 <classname>TreeModelColumn</classname> instances as member data.
 </para>
 
-<programlisting>class ModelColumns : public Gtk::TreeModelColumnRecord
+<programlisting><code>class ModelColumns : public Gtk::TreeModelColumnRecord
 {
 public:
 
@@ -2726,14 +2726,14 @@ public:
   Gtk::TreeModelColumn&lt;int&gt; m_col_number;
 };
 
-ModelColumns m_Columns;</programlisting>
+ModelColumns m_Columns;</code></programlisting>
 
 <para>
 You specify the <classname>ColumnRecord</classname> when creating the Model,
 like so:
 </para>
-<programlisting>Glib::RefPtr&lt;Gtk::ListStore&gt; refListStore =
-    Gtk::ListStore::create(m_Columns);</programlisting>
+<programlisting><code>Glib::RefPtr&lt;Gtk::ListStore&gt; refListStore =
+    Gtk::ListStore::create(m_Columns);</code></programlisting>
 <para>
 As a <classname>TreeModelColumnRecord</classname> describes structure, not data,
 it can be shared among multiple models, and this is preferable for efficiency.
@@ -2752,10 +2752,10 @@ on-demand, whenever the first model accesses it.
 Add rows to the model with the <methodname>append()</methodname>,
 <methodname>prepend()</methodname>, or <methodname>insert()</methodname> methods.
 </para>
-<programlisting>auto iter = m_refListStore-&gt;append();</programlisting>
+<programlisting><code>auto iter = m_refListStore-&gt;append();</code></programlisting>
 <para>You can dereference the iterator to get the Row:
 </para>
-<programlisting>auto row = *iter;</programlisting>
+<programlisting><code>auto row = *iter;</code></programlisting>
 <section xml:id="treeview-adding-child-rows">
 <title>Adding child rows</title>
 <para>
@@ -2763,8 +2763,8 @@ Add rows to the model with the <methodname>append()</methodname>,
 with the <methodname>append()</methodname>, <methodname>prepend()</methodname>, or
 <methodname>insert()</methodname> methods, like so:
 </para>
-<programlisting>auto iter_child =
-    m_refTreeStore-&gt;append(row.children());</programlisting>
+<programlisting><code>auto iter_child =
+    m_refTreeStore-&gt;append(row.children());</code></programlisting>
 </section>
 
 </section>
@@ -2777,7 +2777,7 @@ You can use the <methodname>operator[]</methodname> overload to set the data for
 particular column in the row, specifying the
 <classname>TreeModelColumn</classname> used to create the model.
 </para>
-<programlisting>row[m_Columns.m_col_text] = "sometext";</programlisting>
+<programlisting><code>row[m_Columns.m_col_text] = "sometext";</code></programlisting>
 </section>
 
 <section xml:id="treeview-getting-values">
@@ -2788,14 +2788,14 @@ You can use the <methodname>operator[]</methodname> overload to get the data in 
 particular column in a row, specifying the
 <classname>TreeModelColumn</classname> used to create the model.
 </para>
-<programlisting>auto strText = row[m_Columns.m_col_text];
-auto number = row[m_Columns.m_col_number];</programlisting>
+<programlisting><code>auto strText = row[m_Columns.m_col_text];
+auto number = row[m_Columns.m_col_number];</code></programlisting>
 <para>
 The compiler will complain if you use an inappropriate type. For
 instance, this would generate a compiler error:
 </para>
-<programlisting>//compiler error - no conversion from ustring to int.
-int number = row[m_Columns.m_col_text];</programlisting>
+<programlisting><code>//compiler error - no conversion from ustring to int.
+int number = row[m_Columns.m_col_text];</code></programlisting>
 </section>
 
 <section xml:id="treeview-hidden-columns">
@@ -2829,7 +2829,7 @@ You can specify a <classname>Gtk::TreeModel</classname> when constructing the
 <classname>Gtk::TreeView</classname>, or you can use the
 <methodname>set_model()</methodname> method, like so:
 </para>
-<programlisting>m_TreeView.set_model(m_refListStore);</programlisting>
+<programlisting><code>m_TreeView.set_model(m_refListStore);</code></programlisting>
 </section>
 
 <section xml:id="treeview-adding-view-columns">
@@ -2840,7 +2840,7 @@ You can use the <methodname>append_column()</methodname> method to  tell the Vie
 that it should display certain Model columns, in a certain order, with a
 certain column title.
 </para>
-<programlisting>m_TreeView.append_column("Messages", m_Columns.m_col_text);</programlisting>
+<programlisting><code>m_TreeView.append_column("Messages", m_Columns.m_col_text);</code></programlisting>
 <para>
 When using this simple <methodname>append_column()</methodname> overload, the
 <classname>TreeView</classname> will display the model data with an appropriate
@@ -2875,7 +2875,7 @@ appropriate <classname>Gtk::TreeView::Column</classname> widget.
 <para>
 Here is some example code, which has a pixbuf icon and a text name in the same column:
 </para>
-<programlisting>
+<programlisting><code>
 auto pColumn = Gtk::make_managed&lt;Gtk::TreeView::Column&gt;("Icon Name");
 
 // m_columns.icon and m_columns.iconname are columns in the model.
@@ -2883,7 +2883,7 @@ auto pColumn = Gtk::make_managed&lt;Gtk::TreeView::Column&gt;("Icon Name");
 pColumn-&gt;pack_start(m_columns.icon, /* expand= */ false);
 pColumn-&gt;pack_start(m_columns.iconname);
 
-m_TreeView.append_column(*pColumn);</programlisting>
+m_TreeView.append_column(*pColumn);</code></programlisting>
 </section>
 
 <section xml:id="treeview-cellrenderer-details">
@@ -2897,24 +2897,24 @@ instance, this example code from
 <classname>Gtk::CellRenderer</classname> widget and instructs it to render the
 data from various model columns through various aspects of its appearance.
 </para>
-<programlisting>auto cols_count = m_TreeView.append_column_editable("Alex", m_columns.alex);
+<programlisting><code>auto cols_count = m_TreeView.append_column_editable("Alex", m_columns.alex);
 auto pColumn = m_TreeView.get_column(cols_count-1);
 if(pColumn)
 {
   auto pRenderer = static_cast&lt;Gtk::CellRendererToggle*&gt;(pColumn-&gt;get_first_cell());
   pColumn-&gt;add_attribute(pRenderer-&gt;property_visible(), m_columns.visible);
-  pColumn-&gt;add_attribute(pRenderer-&gt;property_activatable(), m_columns.world);</programlisting>
+  pColumn-&gt;add_attribute(pRenderer-&gt;property_activatable(), m_columns.world);</code></programlisting>
 
 <para>
     You can also connect to <classname>CellRenderer</classname> signals to detect user
 actions. For instance:
 </para>
-<programlisting>
+<programlisting><code>
 auto pRenderer = Gtk::make_managed&lt;Gtk::CellRendererToggle&gt;();
 pRenderer-&gt;signal_toggled().connect(
     sigc::bind( sigc::mem_fun(*this,
         &amp;Example_TreeView_TreeStore::on_cell_toggled), m_columns.dave)
-);</programlisting>
+);</code></programlisting>
 </section>
 
 <section xml:id="treeview-editable-cells">
@@ -2957,7 +2957,7 @@ specific <classname>CellRenderer</classname> that you expect, so you can use spe
 <para>For instance, for a CellRendererText, you would set the cell's <emphasis>editable</emphasis> property to true, like
 so:
 </para>
-<programlisting>cell-&gt;property_editable() = true;</programlisting>
+<programlisting><code>cell-&gt;property_editable() = true;</code></programlisting>
 <para>
 For a CellRendererToggle, you would set the <emphasis>activatable</emphasis>
 property instead.
@@ -2987,22 +2987,22 @@ children, via the <methodname>children()</methodname> method. You can use the
 familiar <methodname>begin()</methodname> and <methodname>end()</methodname> methods
 iterator incrementing, like so:
 </para>
-<programlisting>
+<programlisting><code>
 auto children = refModel-&gt;children();
 for (auto iter = children.begin(), end = children.end(); iter != end; ++iter)
 {
   auto row = *iter;
   //Do something with the row - see above for set/get.
-}</programlisting>
+}</code></programlisting>
 <para>
 If you always want to iterate across the entire range, much more succinct syntax
 is possible using C++'s range-based <literal>for</literal> loop:
 </para>
-<programlisting>
+<programlisting><code>
 for (auto row: refModel-&gt;children())
 {
   //Do something with the row - see above for set/get.
-}</programlisting>
+}</code></programlisting>
 
 <section xml:id="treeview-row-children">
 <title>Row children</title>
@@ -3012,7 +3012,7 @@ When using a <classname>Gtk::TreeStore</classname>, the rows can have child
 rows, which can have their own children in turn. Use
 <methodname>Gtk::TreeModel::Row::children()</methodname> to get the container of child <classname>Row</classname>s:
 </para>
-<programlisting>Gtk::TreeModel::Children children = row.children();</programlisting>
+<programlisting><code>Gtk::TreeModel::Children children = row.children();</code></programlisting>
 </section>
 
 </section>
@@ -3025,7 +3025,7 @@ To find out what rows the user has selected, get the
 <classname>Gtk::TreeView::Selection</classname> object from the
 <classname>TreeView</classname>, like so:
 </para>
-<programlisting>auto refTreeSelection = m_TreeView.get_selection();</programlisting>
+<programlisting><code>auto refTreeSelection = m_TreeView.get_selection();</code></programlisting>
 
 <section xml:id="treeview-selection-mode">
 <title>Single or multiple selection</title>
@@ -3034,7 +3034,7 @@ To find out what rows the user has selected, get the
 By default, only single rows can be selected, but you can allow
 multiple selection by setting the mode, like so:
 </para>
-<programlisting>refTreeSelection-&gt;set_mode(Gtk::SelectionMode::MULTIPLE);</programlisting>
+<programlisting><code>refTreeSelection-&gt;set_mode(Gtk::SelectionMode::MULTIPLE);</code></programlisting>
 </section>
 
 <section xml:id="treeview-selected-rows">
@@ -3044,12 +3044,12 @@ multiple selection by setting the mode, like so:
 For single-selection, you can just call <methodname>get_selected()</methodname>,
 like so:
 </para>
-<programlisting>auto iter = refTreeSelection-&gt;get_selected();
+<programlisting><code>auto iter = refTreeSelection-&gt;get_selected();
 if(iter) //If anything is selected
 {
   auto row = *iter;
   //Do something with the row.
-}</programlisting>
+}</code></programlisting>
 
 <para>
 For multiple-selection, you need to call <methodname>get_selected_rows()</methodname>
@@ -3058,7 +3058,7 @@ or define a callback, and give it to
 <methodname>selected_foreach_path()</methodname>, or
 <methodname>selected_foreach_iter()</methodname>, like so:
 </para>
-<programlisting>refTreeSelection-&gt;selected_foreach_iter(
+<programlisting><code>refTreeSelection-&gt;selected_foreach_iter(
     sigc::mem_fun(*this, &amp;TheClass::selected_row_callback) );
 
 void TheClass::selected_row_callback(
@@ -3066,7 +3066,7 @@ void TheClass::selected_row_callback(
 {
   auto row = *iter;
   //Do something with the row.
-}</programlisting>
+}</code></programlisting>
 
 </section>
 
@@ -3077,9 +3077,9 @@ void TheClass::selected_row_callback(
 To respond to the user clicking on a row or range of rows, connect to the
 signal like so:
 </para>
-<programlisting>refTreeSelection-&gt;signal_changed().connect(
+<programlisting><code>refTreeSelection-&gt;signal_changed().connect(
     sigc::mem_fun(*this, &amp;Example_IconTheme::on_selection_changed)
-);</programlisting>
+);</code></programlisting>
 </section>
 
 <section xml:id="treeview-selection-preventing">
@@ -3095,18 +3095,18 @@ To control which rows can be selected, use the
 <methodname>set_select_function()</methodname> method, providing a
 <classname>sigc::slot</classname> callback. For instance:
 </para>
-<programlisting>m_refTreeSelection-&gt;set_select_function( sigc::mem_fun(*this,
-    &amp;DemoWindow::select_function) );</programlisting>
+<programlisting><code>m_refTreeSelection-&gt;set_select_function( sigc::mem_fun(*this,
+    &amp;DemoWindow::select_function) );</code></programlisting>
 <para>
 and then
 </para>
-<programlisting>bool DemoWindow::select_function(
+<programlisting><code>bool DemoWindow::select_function(
     const Glib::RefPtr&lt;Gtk::TreeModel&gt;&amp; model,
     const Gtk::TreeModel::Path&amp; path, bool)
 {
   const auto iter = model-&gt;get_iter(path);
   return iter-&gt;children().empty(); // only allow leaf nodes to be selected
-}</programlisting>
+}</code></programlisting>
 </section>
 
 <section xml:id="treeview-selection-changing">
@@ -3117,15 +3117,15 @@ To change the selection, specify a
 <classname>Gtk::TreeModel::iterator</classname> or
 <classname>Gtk::TreeModel::Row</classname>, like so:
 </para>
-<programlisting>auto row = m_refModel-&gt;children()[5]; //The sixth row.
+<programlisting><code>auto row = m_refModel-&gt;children()[5]; //The sixth row.
 if(row)
-  refTreeSelection-&gt;select(row.get_iter());</programlisting>
+  refTreeSelection-&gt;select(row.get_iter());</code></programlisting>
 <para>
 or
 </para>
-<programlisting>auto iter = m_refModel-&gt;children().begin()
+<programlisting><code>auto iter = m_refModel-&gt;children().begin()
 if(iter)
-  refTreeSelection-&gt;select(iter);</programlisting>
+  refTreeSelection-&gt;select(iter);</code></programlisting>
 </section>
 </section>
 
@@ -3144,9 +3144,9 @@ The standard tree models (<classname>TreeStore</classname> and <classname>ListSt
 <para>
 So that a user can click on a <classname>TreeView</classname>'s column header to sort the <classname>TreeView</classname>'s contents, call <methodname>Gtk::TreeView::Column::set_sort_column()</methodname>, supplying the model column on which model should be sorted when the header is clicked. For instance:
 </para>
-<programlisting>auto pColumn = treeview.get_column(0);
+<programlisting><code>auto pColumn = treeview.get_column(0);
 if(pColumn)
-  pColumn-&gt;set_sort_column(m_columns.m_col_id);</programlisting>
+  pColumn-&gt;set_sort_column(m_columns.m_col_id);</code></programlisting>
 </section>
 
 <section xml:id="treeview-sort-independent-views">
@@ -3160,13 +3160,13 @@ for instance, <methodname>Gtk::TreeViewColumn::set_sort_column()</methodname>.
 <classname>TreeModelSort</classname> is a model that contains another model, presenting a sorted version
 of that model. For instance, you might add a sorted version of a model to a <classname>TreeView</classname> like so:
 </para>
-<programlisting>auto sorted_model = Gtk::TreeModelSort::create(model);
+<programlisting><code>auto sorted_model = Gtk::TreeModelSort::create(model);
 sorted_model-&gt;set_sort_column(columns.m_col_name, Gtk::SortType::ASCENDING);
-treeview.set_model(sorted_model);</programlisting>
+treeview.set_model(sorted_model);</code></programlisting>
 
 <para>Note, however, that the TreeView will provide iterators to the sorted model. You must convert them to iterators to the underlying child model in order to perform actions on that model. For instance:
 </para>
-<programlisting>void ExampleWindow::on_button_delete()
+<programlisting><code>void ExampleWindow::on_button_delete()
 {
   auto refTreeSelection = m_treeview.get_selection();
   if(refTreeSelection)
@@ -3178,7 +3178,7 @@ treeview.set_model(sorted_model);</programlisting>
       m_refModel-&gt;erase(iter);
     }
   }
-}</programlisting>
+}</code></programlisting>
 
 <para><link xlink:href="&url_refdocs_base_gtk;TreeModelSort.html">TreeModelSort Reference</link></para>
 </section>
@@ -3382,7 +3382,7 @@ It must be a subclass of <classname>Glib::Object</classname>.
 For instance, you might have a <classname>DropDown</classname> with one integer
 and one text column, like so:
 </para>
-<programlisting><![CDATA[class ModelColumns : public Glib::Object
+<programlisting><code><![CDATA[class ModelColumns : public Glib::Object
 {
 public:
   int m_col_id;
@@ -3402,7 +3402,7 @@ protected:
 };
 
 Glib::RefPtr<Gio::ListStore<ModelColumns>> m_ListStore;
-]]></programlisting>
+]]></code></programlisting>
 
 <para>After appending rows to this model, you should provide the model to the
 <classname>DropDown</classname> with the <methodname>set_model()</methodname> method.
@@ -3424,7 +3424,7 @@ For instance, you might read an integer ID value from the model, even though you
 have chosen only to show the human-readable description in the
 <classname>DropDown</classname>. For instance:
 </para>
-<programlisting><![CDATA[unsigned int sel = m_DropDown.get_selected();
+<programlisting><code><![CDATA[unsigned int sel = m_DropDown.get_selected();
 if (sel != GTK_INVALID_LIST_POSITION)
 {
   // Get the data for the selected row, using our knowledge of the list model:
@@ -3433,7 +3433,7 @@ if (sel != GTK_INVALID_LIST_POSITION)
 }
 else
   set_nothing_chosen(); // Your own function.
-]]></programlisting>
+]]></code></programlisting>
 </section>
 
 <section xml:id="sec-dropdown-changes">
@@ -3443,9 +3443,9 @@ else
 for instance to update other widgets. To do so, you should connect to
 <methodname>property_selected().signal_changed()</methodname>. For instance:
 </para>
-<programlisting><![CDATA[m_DropDown.property_selected().signal_changed().connect(
+<programlisting><code><![CDATA[m_DropDown.property_selected().signal_changed().connect(
   sigc::mem_fun(*this, &ExampleWindow::on_dropdown_changed));
-]]></programlisting>
+]]></code></programlisting>
 </section>
 
 <section xml:id="sec-dropdown-simple">
@@ -3468,7 +3468,7 @@ for instance to update other widgets. To do so, you should connect to
 to search for items in the list. Call <methodname>set_enable_search()</methodname>
 and <methodname>set_expression()</methodname>. For instance:
 </para>
-<programlisting><![CDATA[m_DropDown.set_enable_search(true);
+<programlisting><code><![CDATA[m_DropDown.set_enable_search(true);
 auto expression = Gtk::ClosureExpression<Glib::ustring>::create(
   sigc::mem_fun(*this, &ExampleWindow::get_col_name));
 m_DropDown.set_expression(expression);
@@ -3479,7 +3479,7 @@ Glib::ustring ExampleWindow::get_col_name(const Glib::RefPtr<Glib::ObjectBase>& 
   const auto col = std::dynamic_pointer_cast<ModelColumns>(item);
   return col ? col->m_col_name : "";
 }
-]]></programlisting>
+]]></code></programlisting>
 
 <section xml:id="sec-dropdown-search-string">
 <title>String Example</title>
@@ -3553,7 +3553,7 @@ are deprecated since &gtkmm; 4.10. Use <classname>Gtk::DropDown</classname> in n
 
 <para>The model for a ComboBox can be defined and filled exactly as for a <classname>TreeView</classname>. For instance, you might derive a ComboBox class with one integer and one text column, like so:
 </para>
-<programlisting>class ModelColumns : public Gtk::TreeModel::ColumnRecord
+<programlisting><code>class ModelColumns : public Gtk::TreeModel::ColumnRecord
 {
 public:
   ModelColumns()
@@ -3563,7 +3563,7 @@ public:
   Gtk::TreeModelColumn&lt;Glib::ustring&gt; m_col_name;
 };
 
-ModelColumns m_columns;</programlisting>
+ModelColumns m_columns;</code></programlisting>
 
 <para>After appending rows to this model, you should provide the model to the <classname>ComboBox</classname> with the <methodname>set_model()</methodname> method. Then use the <methodname>pack_start()</methodname> or <methodname>pack_end()</methodname> methods to specify what columns will be displayed in the ComboBox. As with the TreeView you may either use the default cell renderer by passing the <classname>TreeModelColumn</classname> to the pack methods, or you may instantiate a specific <classname>CellRenderer</classname> and specify a particular mapping with either <methodname>add_attribute()</methodname> or <methodname>set_cell_data_func()</methodname>. Note that these methods are in the <classname>CellLayout</classname> base class.</para>
 </section>
@@ -3573,7 +3573,7 @@ ModelColumns m_columns;</programlisting>
 
 <para>To discover what item, if any, the user has chosen from the ComboBox, call <methodname>ComboBox::get_active()</methodname>. This returns a <classname>TreeModel::iterator</classname> that you can dereference to a <classname>Row</classname> in order to read the values in your columns. For instance, you might read an integer ID value from the model, even though you have chosen only to show the human-readable description in the ComboBox. For instance:
 </para>
-<programlisting>Gtk::TreeModel::iterator iter = m_Combo.get_active();
+<programlisting><code>Gtk::TreeModel::iterator iter = m_Combo.get_active();
 if(iter)
 {
   auto row = *iter;
@@ -3584,7 +3584,7 @@ if(iter)
   set_something_id_chosen(id); //Your own function.
 }
 else
-  set_nothing_chosen(); //Your own function.</programlisting>
+  set_nothing_chosen(); //Your own function.</code></programlisting>
 </section>
 
 <section xml:id="sec-combobox-changes">
@@ -3593,8 +3593,8 @@ else
 <para>
 You might need to react to every change of selection in the ComboBox, for instance to update other widgets. To do so, you should handle the <literal>changed</literal> signal. For instance:
 </para>
-<programlisting>m_combo.signal_changed().connect( sigc::mem_fun(*this,
-      &amp;ExampleWindow::on_combo_changed) );</programlisting>
+<programlisting><code>m_combo.signal_changed().connect( sigc::mem_fun(*this,
+      &amp;ExampleWindow::on_combo_changed) );</code></programlisting>
 </section>
 
 <section xml:id="combobox-example-full">
@@ -3635,7 +3635,7 @@ You might need to react to every change of selection in the ComboBox, for instan
 
 <para>So that the <classname>Entry</classname> can interact with the drop-down list of choices, you must specify which of your model columns is the text column, with <methodname>set_entry_text_column()</methodname>. For instance:
 </para>
-<programlisting>m_combo.set_entry_text_column(m_columns.m_col_name);</programlisting>
+<programlisting><code>m_combo.set_entry_text_column(m_columns.m_col_name);</code></programlisting>
 <para>
 When you select a choice from the drop-down menu, the value from this column will be placed in the <classname>Entry</classname>.
 </para>
@@ -3661,7 +3661,7 @@ these events, connect to the <classname>Entry</classname>'s <literal>activate</l
 signal (available since &gtkmm; 4.8), and add a <classname>Gtk::EventControllerFocus</classname>
 and connect to its <literal>leave</literal> signal, like so
 </para>
-<programlisting><![CDATA[auto entry = m_Combo.get_entry();
+<programlisting><code><![CDATA[auto entry = m_Combo.get_entry();
 if (entry)
 {
   // Alternatively you can connect to m_Combo.signal_changed().
@@ -3674,7 +3674,7 @@ if (entry)
   m_ConnectionFocusLeave = controller->signal_leave().connect(
     sigc::mem_fun(*this, &ExampleWindow::on_entry_focus_leave));
   entry->add_controller(controller);
-}]]></programlisting>
+}]]></code></programlisting>
 <para>
 The <literal>changed</literal> signals of <classname>ComboBox</classname> and
 <classname>Entry</classname> are both emitted for every change. It doesn't matter
@@ -3767,8 +3767,8 @@ across buffer modifications. To preserve a position, use <classname>Gtk::TextBuf
 <para>
 To specify that some text in the buffer should have specific formatting, you must define a tag to hold that formatting information, and then apply that tag to the region of text. For instance, to define the tag and its properties:
 </para>
-<programlisting>auto refTagMatch = Gtk::TextBuffer::Tag::create();
-refTagMatch-&gt;property_background() = "orange";</programlisting>
+<programlisting><code>auto refTagMatch = Gtk::TextBuffer::Tag::create();
+refTagMatch-&gt;property_background() = "orange";</code></programlisting>
 <para>
 You can specify a name for the <classname>Tag</classname> when using the
 <methodname>create()</methodname> method, but it is not necessary.
@@ -3793,11 +3793,11 @@ Each <classname>Gtk::TextBuffer</classname> uses a
 <classname>TagTable</classname>. When you create <classname>Tag</classname>s
 you should add them to the <classname>TagTable</classname>. For instance:
 </para>
-<programlisting>auto refTagTable = Gtk::TextBuffer::TagTable::create();
+<programlisting><code>auto refTagTable = Gtk::TextBuffer::TagTable::create();
 refTagTable-&gt;add(refTagMatch);
 //Hopefully a future version of &gtkmm; will have a set_tag_table() method,
 //for use after creation of the buffer.
-auto refBuffer = Gtk::TextBuffer::create(refTagTable);</programlisting>
+auto refBuffer = Gtk::TextBuffer::create(refTagTable);</code></programlisting>
 
 <para>
 You can also use <methodname>get_tag_table()</methodname> to get, and maybe modify,
@@ -3819,11 +3819,11 @@ If you have created a <classname>Tag</classname> and added it to the
 formatting. You define the start and end of the range of text by specifying
 <classname>Gtk::TextBuffer::iterator</classname>s. For instance:
 </para>
-<programlisting>refBuffer-&gt;apply_tag(refTagMatch, iterRangeStart, iterRangeStop);</programlisting>
+<programlisting><code>refBuffer-&gt;apply_tag(refTagMatch, iterRangeStart, iterRangeStop);</code></programlisting>
 <para>
 Or you could specify the tag when first inserting the text:
 </para>
-<programlisting>refBuffer-&gt;insert_with_tag(iter, "Some text", refTagMatch);</programlisting>
+<programlisting><code>refBuffer-&gt;insert_with_tag(iter, "Some text", refTagMatch);</code></programlisting>
 
 <para>
 You can apply more than one <classname>Tag</classname> to the same text, by
@@ -3844,7 +3844,7 @@ conflicts by using <methodname>Tag::set_priority()</methodname>.
 text changes, but you can use a <classname>Gtk::TextBuffer::Mark</classname> to
 remember a position in these situations. For instance,
 </para>
-<programlisting>auto refMark = refBuffer-&gt;create_mark(iter);</programlisting>
+<programlisting><code>auto refMark = refBuffer-&gt;create_mark(iter);</code></programlisting>
 
 <para>
 You can then use the <methodname>get_iter()</methodname> method later to create an
@@ -3921,13 +3921,13 @@ ChildAnchors are associated with <classname>iterator</classname>s. For
 instance, to create a child anchor at a particular position, use
 <methodname>Gtk::TextBuffer::create_child_anchor()</methodname>:
 </para>
-<programlisting>auto refAnchor = refBuffer-&gt;create_child_anchor(iter);</programlisting>
+<programlisting><code>auto refAnchor = refBuffer-&gt;create_child_anchor(iter);</code></programlisting>
 
 <para>
 Then, to add a widget at that position, use
 <methodname>Gtk::TextView::add_child_at_anchor()</methodname>:
 </para>
-<programlisting>m_TextView.add_child_at_anchor(m_Button, refAnchor);</programlisting>
+<programlisting><code>m_TextView.add_child_at_anchor(m_Button, refAnchor);</code></programlisting>
 
 <para><link xlink:href="&url_refdocs_base_gtk;TextChildAnchor.html">Reference</link></para>
 
@@ -3991,7 +3991,7 @@ a toolbar button.
 
 <para>For instance:
 </para>
-<programlisting>
+<programlisting><code>
 m_refActionGroup = Gio::SimpleActionGroup::create();
 
 m_refActionGroup-&gt;add_action("new", sigc::mem_fun(*this, &amp;ExampleWindow::on_action_file_new));
@@ -3999,7 +3999,7 @@ m_refActionGroup-&gt;add_action("open", sigc::mem_fun(*this, &amp;ExampleWindow:
 m_refActionGroup-&gt;add_action("quit", sigc::mem_fun(*this, &amp;ExampleWindow::on_action_file_quit));
 
 insert_action_group("example", m_refActionGroup);
-</programlisting>
+</code></programlisting>
 
 <para>
 If you use an <classname>Gtk::ApplicationWindow</classname>, you don't have to
@@ -4022,14 +4022,14 @@ by using <methodname>Gtk::Application::set_accel_for_action()</methodname>.
 
 <para>For instance,
 </para>
-<programlisting>
+<programlisting><code>
 m_refBuilder = Gtk::Builder::create();
 
 app-&gt;set_accel_for_action("example.new", "&lt;Primary&gt;n");
 app-&gt;set_accel_for_action("example.quit", "&lt;Primary&gt;q");
 app-&gt;set_accel_for_action("example.copy", "&lt;Primary&gt;c");
 app-&gt;set_accel_for_action("example.paste", "&lt;Primary&gt;v");
-</programlisting>
+</code></programlisting>
 
 <!-- Not true in gtkmm4 (July 2022). Will it become true in the future?
 <para>
@@ -4047,7 +4047,7 @@ add the UI layout to the <classname>Builder</classname>. This "ui
 string" uses an XML format, in which you should mention the names of the
 actions that you have already created. For instance:
 </para>
-<programlisting>
+<programlisting><code>
 Glib::ustring ui_info =
   "&lt;interface&gt;"
   "  &lt;menu id='menubar'&gt;"
@@ -4082,7 +4082,7 @@ Glib::ustring ui_info =
 
 m_refBuilder-&gt;add_from_string(ui_info);
 m_refBuilder-&gt;add_from_resource("/toolbar/toolbar.ui");
-</programlisting>
+</code></programlisting>
 
 <para>This is where we specify the names of the menu items as they will be seen
 by users in the menu. Therefore, this is where you should make strings
@@ -4095,14 +4095,14 @@ the <methodname>Builder::get_object()</methodname> and
 <methodname>Builder::get_widget()</methodname> methods, and then add the widgets
 to a container. For instance:
 </para>
-<programlisting>
+<programlisting><code>
 auto gmenu = m_refBuilder-&gt;get_object&lt;Gio::Menu&gt;("menubar");
 auto pMenuBar = Gtk::make_managed&lt;Gtk::PopoverMenuBar&gt;(gmenu);
 m_Box.append(*pMenuBar);
 
 auto toolbar = m_refBuilder-&gt;get_widget&lt;Gtk::Box&gt;("toolbar");
 m_Box.append(*toolbar);
-</programlisting>
+</code></programlisting>
 
 </section>
 
@@ -4118,7 +4118,7 @@ mouse button.
 
 <para>For instance:
 </para>
-<programlisting>
+<programlisting><code>
 Glib::ustring ui_info =
   "&lt;interface&gt;"
   "  &lt;menu id='menu-examplepopup'&gt;"
@@ -4143,7 +4143,7 @@ m_refBuilder-&gt;add_from_string(ui_info);
 
 auto gmenu = m_refBuilder-&gt;get_object&lt;Gio::Menu&gt;("menu-examplepopup");
 m_MenuPopup.set_menu_model(gmenu);
-</programlisting>
+</code></programlisting>
 
 <para>
 To show the popup menu, use  a <classname>Gtk::GestureClick</classname>
@@ -4151,13 +4151,13 @@ and connect to its <literal>pressed</literal> signal. In the signal handler,
 use <classname>Gtk::PopoverMenu</classname>'s
 <methodname>popup()</methodname> method. For instance:
 </para>
-<programlisting>
+<programlisting><code>
 void ExampleWindow::on_label_pressed(int /* n_press */, double x, double y)
 {
   const Gdk::Rectangle rect(x, y, 1, 1);
   m_MenuPopup.set_pointing_to(rect);
   m_MenuPopup.popup();
-}</programlisting>
+}</code></programlisting>
 
 </section>
 
@@ -4191,7 +4191,7 @@ These are combined into a binary resource bundle.
 </para>
 <para><link xlink:href="&url_refdocs_base_gio;Resource.html">Gio::Resource Reference</link></para>
 <para>An example:</para>
-<programlisting>
+<programlisting><code>
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;gresources&gt;
   &lt;gresource prefix="/toolbar"&gt;
@@ -4199,7 +4199,7 @@ These are combined into a binary resource bundle.
     &lt;file&gt;rain.png&lt;/file&gt;
   &lt;/gresource&gt;
 &lt;/gresources&gt;
-</programlisting>
+</code></programlisting>
 <para>This will create a resource bundle with the files
 <itemizedlist>
   <listitem><para><filename>/toolbar/toolbar.ui</filename></para></listitem>
@@ -4315,13 +4315,13 @@ The <classname>Gtk::Adjustment</classname> is created by its
 <methodname>create()</methodname> method which is as follows:
 </para>
 
-<programlisting>Glib::RefPtr&lt;Gtk::Adjustment&gt; Gtk::Adjustment::create(
+<programlisting><code>Glib::RefPtr&lt;Gtk::Adjustment&gt; Gtk::Adjustment::create(
   double value,
   double lower,
   double upper,
   double step_increment = 1,
   double page_increment = 10,
-  double page_size = 0);</programlisting>
+  double page_size = 0);</code></programlisting>
 
 <para>
 The <parameter>value</parameter> argument is the initial value of the
@@ -4375,10 +4375,10 @@ If you share an adjustment object between a Scrollbar and a TextView
 widget, manipulating the scrollbar will automagically adjust the TextView
 widget. You can set it up like this:
 </para>
-<programlisting>// creates its own adjustments
+<programlisting><code>// creates its own adjustments
 Gtk::TextView textview;
 // uses the newly-created adjustment for the scrollbar as well
-Gtk::Scrollbar vscrollbar(textview.get_vadjustment(), Gtk::Orientation::VERTICAL);</programlisting>
+Gtk::Scrollbar vscrollbar(textview.get_vadjustment(), Gtk::Orientation::VERTICAL);</code></programlisting>
 
 </section>
 
@@ -4407,15 +4407,15 @@ So, for example, if you have a <classname>Scale</classname> widget, and you
 want to change the rotation of a picture whenever its value changes, you would
 create a signal handler like this:
 </para>
-<programlisting>void cb_rotate_picture(MyPicture* picture)
+<programlisting><code>void cb_rotate_picture(MyPicture* picture)
 {
   picture-&gt;set_rotation(adj-&gt;get_value());
-...</programlisting>
+...</code></programlisting>
 <para>
 and connect it to the scale widget's adjustment like this:
 </para>
-<programlisting>adj-&gt;signal_value_changed().connect(sigc::bind&lt;MyPicture*&gt;(sigc::mem_fun(*this,
-    &amp;cb_rotate_picture), picture));</programlisting>
+<programlisting><code>adj-&gt;signal_value_changed().connect(sigc::bind&lt;MyPicture*&gt;(sigc::mem_fun(*this,
+    &amp;cb_rotate_picture), picture));</code></programlisting>
 
 <para>
 What if a widget reconfigures the <parameter>upper</parameter> or
@@ -4437,7 +4437,7 @@ the difference between the <parameter>lower</parameter> and
 You probably won't ever need to attach a handler to this signal, unless you're
 writing a new type of range widget.
 </para>
-<programlisting>adjustment-&gt;signal_changed();</programlisting>
+<programlisting><code>adjustment-&gt;signal_changed();</code></programlisting>
 
 </section>
 
@@ -4734,13 +4734,13 @@ the widgets you need.
         foreground color of red and a width of 2. Any drawing functions that
         use this context will use these settings.
     </para>
-    <programlisting>
+    <programlisting><code>
 Gtk::DrawingArea myArea;
 auto gdkCairoContext = myArea.get_surface()-&gt;create_cairo_context();
 auto myContext = gdkCairoContext-&gt;cairo_create();
 myContext-&gt;set_source_rgb(1.0, 0.0, 0.0);
 myContext-&gt;set_line_width(2.0);
-    </programlisting>
+    </code></programlisting>
     <para>
         Each <classname>Cairo::Context</classname> is associated with a
         particular <classname>Gdk::Surface</classname>, so the first line of the
@@ -4787,13 +4787,13 @@ myContext-&gt;set_line_width(2.0);
             <classname>Cairo::Context</classname> reference as an argument, you
             might implement it as follows:
           </para>
-          <programlisting>void doSomething(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; context, int x)
+          <programlisting><code>void doSomething(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; context, int x)
 {
     context-&gt;save();
     // change graphics state
     // perform drawing operations
     context-&gt;restore();
-}</programlisting>
+}</code></programlisting>
         </tip>
     </para>
     <para>
@@ -5046,11 +5046,11 @@ myContext-&gt;set_line_width(2.0);
           an ellipse with center at <varname>x</varname>, <varname>y</varname>
           and size <varname>width</varname>, <varname>height</varname>:
       </para>
-      <programlisting>context-&gt;save();
+      <programlisting><code>context-&gt;save();
 context-&gt;translate(x, y);
 context-&gt;scale(width / 2.0, height / 2.0);
 context-&gt;arc(0.0, 0.0, 1.0, 0.0, 2 * M_PI);
-context-&gt;restore();</programlisting>
+context-&gt;restore();</code></programlisting>
 
       <section xml:id="cairo-example-arcs">
       <title>Example</title>
@@ -5183,14 +5183,14 @@ context-&gt;restore();</programlisting>
               usually you wouldn't load the image every time in the draw
               signal handler! It's just shown here to keep it all together.)
           </para>
-          <programlisting>void MyArea::on_draw(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; cr, int width, int height)
+          <programlisting><code>void MyArea::on_draw(const Cairo::RefPtr&lt;Cairo::Context&gt;&amp; cr, int width, int height)
 {
   auto image = Gdk::Pixbuf::create_from_file("myimage.png");
   // Draw the image at 110, 90, except for the outermost 10 pixels.
   Gdk::Cairo::set_source_pixbuf(cr, image, 100, 80);
   cr-&gt;rectangle(110, 90, image-&gt;get_width()-20, image-&gt;get_height()-20);
   cr-&gt;fill();
-}</programlisting>
+}</code></programlisting>
 
         <section xml:id="cairo-example-image">
         <title>Example</title>
@@ -5311,8 +5311,8 @@ available <type>GType</type>s and mime types (media types).
 <classname>Gtk::DragSource</classname> and <classname>Gtk::DropTarget</classname>
 event controllers.
 </para>
-<programlisting>auto source = Gtk::DragSource::create();
-m_source_widget.add_controller(source);</programlisting>
+<programlisting><code>auto source = Gtk::DragSource::create();
+m_source_widget.add_controller(source);</code></programlisting>
 
 <para>
 Some <classname>DragSource</classname> methods:
@@ -5339,8 +5339,8 @@ Some <classname>DragSource</classname> methods:
 </itemizedlist>
 </para>
 
-<programlisting>auto target = Gtk::DropTarget::create(gtype, actions);
-m_target_widget.add_controller(target);</programlisting>
+<programlisting><code>auto target = Gtk::DropTarget::create(gtype, actions);
+m_target_widget.add_controller(target);</code></programlisting>
 
 <para>
 Some <classname>DropTarget</classname> methods:
@@ -5511,10 +5511,10 @@ You should probably use the same data formats for both Clipboard and Drag and Dr
 When the user asks to copy some data, you should copy the data to the
 <classname>Clipboard</classname>. For instance,
 </para>
-<programlisting>void ExampleWindow::on_button_copy()
+<programlisting><code>void ExampleWindow::on_button_copy()
 {
   get_clipboard()-&gt;set_text("example_custom_target");
-}</programlisting>
+}</code></programlisting>
 
 </section>
 
@@ -5526,19 +5526,19 @@ When the user asks to paste data from the <classname>Clipboard</classname>, you
 should request a specific format and provide a callback method which will be
 called with the actual data. For instance:
 </para>
-<programlisting>void ExampleWindow::on_button_paste()
+<programlisting><code>void ExampleWindow::on_button_paste()
 {
   get_clipboard()-&gt;read_text_async(sigc::mem_fun(*this,
               &amp;ExampleWindow::on_clipboard_received));
-}</programlisting>
+}</code></programlisting>
 
 <para>Here is an example callback method:
 </para>
-<programlisting>void ExampleWindow::on_clipboard_received(Glib::RefPtr&lt;Gio::AsyncResult&gt;&amp; result)
+<programlisting><code>void ExampleWindow::on_clipboard_received(Glib::RefPtr&lt;Gio::AsyncResult&gt;&amp; result)
 {
   auto text = get_clipboard()-&gt;read_text_finish(result);
   //Do something with the pasted data.
-}</programlisting>
+}</code></programlisting>
 
 <section xml:id="sec-clipboard-discovering-formats">
 <title>Discovering the available formats</title>
@@ -5733,12 +5733,12 @@ and to access the selected <classname>Gtk::PaperSize</classname>,
 so you can use it again if the page setup dialog is shown again.</para>
 
 <para>For instance,</para>
-<programlisting>
+<programlisting><code>
 // Within a class that inherits from Gtk::Window and keeps m_refPageSetup
 // and m_refSettings as members...
 auto new_page_setup = Gtk::run_page_setup_dialog(*this, m_refPageSetup, m_refSettings);
 m_refPageSetup = new_page_setup;
-</programlisting>
+</code></programlisting>
 
 <para>
 <link xlink:href="&url_refdocs_base_gtk;PageSetup.html">Reference</link>
@@ -5798,18 +5798,18 @@ the <literal>done</literal> and <literal>status_changed</literal> signals:
 </para>
 
 <para>For instance,</para>
-<programlisting>
+<programlisting><code>
 // in class ExampleWindow's method...
 auto op = PrintOperation::create();
 // ...set up op...
 op-&gt;signal_done().connect(sigc::bind(sigc::mem_fun(
   *this, &amp;ExampleWindow::on_printoperation_done), op));
 // run the op
-</programlisting>
+</code></programlisting>
 
 <para>Second, check for an error and connect to the <literal>status_changed</literal> signal. For instance:
 </para>
-<programlisting>
+<programlisting><code>
 void ExampleWindow::on_printoperation_done(Gtk::PrintOperation::Result result,
   const Glib::RefPtr&lt;PrintOperation&gt;&amp; op)
 {
@@ -5822,10 +5822,10 @@ void ExampleWindow::on_printoperation_done(Gtk::PrintOperation::Result result,
     op-&gt;signal_status_changed().connect(sigc::bind(sigc::mem_fun(
       *this, &amp;ExampleWindow::on_printoperation_status_changed), op));
 }
-</programlisting>
+</code></programlisting>
 
 <para>Finally, check the status. For instance,</para>
-<programlisting>
+<programlisting><code>
 void ExampleWindow::on_printoperation_status_changed(const Glib::RefPtr&lt;PrintOperation&gt;&amp; op)
 {
   if (op-&gt;is_finished())
@@ -5835,7 +5835,7 @@ void ExampleWindow::on_printoperation_status_changed(const Glib::RefPtr&lt;Print
 
   //update UI
 }
-</programlisting>
+</code></programlisting>
 
 </section>
 
@@ -5845,12 +5845,12 @@ void ExampleWindow::on_printoperation_status_changed(const Glib::RefPtr&lt;Print
 <para>
 The 'Print to file' option is available in the print dialog, without the need for extra implementation. However, it is sometimes useful to generate a pdf file directly from code. For instance,
 </para>
-<programlisting>
+<programlisting><code>
 auto op = Gtk::PrintOperation::create();
 // ...set up op...
 op-&gt;set_export_filename("test.pdf");
 auto res = op-&gt;run(Gtk::PrintOperation::Action::EXPORT);
-</programlisting>
+</code></programlisting>
 
 </section>
 
@@ -5887,7 +5887,7 @@ to contain some user input as class members. For example, let's say you have
 a <classname>Gtk::Entry</classname> called <literal>m_Entry</literal> as
 a member of your <classname>CustomPrintOperation</classname> class:
 </para>
-<programlisting>
+<programlisting><code>
 Gtk::Widget* CustomPrintOperation::on_create_custom_widget()
 {
   set_custom_tab_label("My custom tab");
@@ -5908,7 +5908,7 @@ void CustomPrintOperation::on_custom_widget_apply(Gtk::Widget* /* widget */)
   auto user_input = m_Entry.get_text();
   //...
 }
-</programlisting>
+</code></programlisting>
 
 <para>
 The example in examples/book/printing/advanced demonstrates this.
@@ -5923,12 +5923,12 @@ The example in examples/book/printing/advanced demonstrates this.
 The native GTK print dialog has a preview button, but you may also start
 a preview directly from an application:</para>
 
-<programlisting>
+<programlisting><code>
 // in a class that inherits from Gtk::Window...
 auto op = PrintOperation::create();
 // ...set up op...
 op-&gt;run(Gtk::PrintOperation::Action::PREVIEW, *this);
-</programlisting>
+</code></programlisting>
 
 <para>
 On Unix, the default preview handler uses an external viewer program.
@@ -6034,8 +6034,8 @@ similar to the previous example.
         To add a new file to the list of recent documents, in the simplest case,
         you only need to provide the URI. For example:
       </para>
-      <programlisting>auto recent_manager = Gtk::RecentManager::get_default();
-recent_manager-&gt;add_item(uri);</programlisting>
+      <programlisting><code>auto recent_manager = Gtk::RecentManager::get_default();
+recent_manager-&gt;add_item(uri);</code></programlisting>
       <para>
         If you want to register a file with metadata, you can pass a
         <classname>RecentManager::Data</classname> parameter to
@@ -6092,7 +6092,7 @@ recent_manager-&gt;add_item(uri);</programlisting>
         <methodname>lookup_item()</methodname> throws a
         <classname>RecentManagerError</classname> exception. For example:
       </para>
-<programlisting>Glib::RefPtr&lt;Gtk::RecentInfo&gt; info;
+<programlisting><code>Glib::RefPtr&lt;Gtk::RecentInfo&gt; info;
 try
 {
   info = recent_manager-&gt;lookup_item(uri);
@@ -6104,7 +6104,7 @@ catch(const Gtk::RecentManagerError&amp; ex)
 if (info)
 {
   // item was found
-}</programlisting>
+}</code></programlisting>
       <para>
         A <classname>RecentInfo</classname> object is essentially an object
         containing all of the metadata about a single recently-used file. You
@@ -6119,7 +6119,7 @@ if (info)
         recently used files. The following code demonstrates how you might get a
         list of recently used files:
       </para>
-      <programlisting>auto info_list = recent_manager-&gt;get_items();</programlisting>
+      <programlisting><code>auto info_list = recent_manager-&gt;get_items();</code></programlisting>
       <para>
         The maximum age of items in the recently used files list can be set with
         <methodname>Gtk::Settings::property_gtk_recent_files_max_age()</methodname>.
@@ -6269,7 +6269,7 @@ if (info)
     <para>
       Here's a simple example:
     </para>
-<programlisting><![CDATA[
+<programlisting><code><![CDATA[
 bool MyClass::on_key_pressed(guint keyval, guint, Gdk::ModifierType state)
 {
   if (keyval == GDK_KEY_1 &&
@@ -6287,7 +6287,7 @@ auto controller = Gtk::EventControllerKey::create();
 controller->signal_key_pressed().connect(
   sigc::mem_fun(*this, &MyClass::on_key_pressed), false);
 add_controller(controller);
-]]></programlisting>
+]]></code></programlisting>
 
     <section xml:id="keyboardevents-simple-example">
     <title>Example</title>
@@ -6431,10 +6431,10 @@ you have several options. Using the following methods you can create a timeout
 method that will be called every few milliseconds.
 </para>
 
-<programlisting>
+<programlisting><code>
 sigc::connection Glib::SignalTimeout::connect(const sigc::slot&lt;bool()&gt;&amp; slot,
                                       unsigned int interval, int priority = Glib::PRIORITY_DEFAULT);
-</programlisting>
+</code></programlisting>
 
 <para>
 The first argument is a <classname>slot</classname> you wish to have called
@@ -6444,9 +6444,9 @@ between calls to that method. You receive a
 the connection using its <methodname>disconnect()</methodname> method:
 </para>
 
-<programlisting>
+<programlisting><code>
 my_connection.disconnect();
-</programlisting>
+</code></programlisting>
 
 <para>
 Another way of destroying the connection is your signal handler.
@@ -6456,9 +6456,9 @@ the type <literal>bool</literal>. A definition of a sample method might
 look like this:
 </para>
 
-<programlisting>
+<programlisting><code>
 bool MyCallback() { std::cout &lt;&lt; "Hello World!\n" &lt;&lt; std::endl; return true; }
-</programlisting>
+</code></programlisting>
 
 <para>
 You can stop the timeout method by returning <literal>false</literal> from
@@ -6484,11 +6484,11 @@ for you. This is especially useful for networking applications. The
 following method is used to do this:
 </para>
 
-<programlisting>
+<programlisting><code>
 sigc::connection Glib::SignalIO::connect(const sigc::slot&lt;bool(Glib::IOCondition)&gt;&amp; slot,
                                  Glib::PollFD::fd_t fd, Glib::IOCondition condition,
                                  int priority = Glib::PRIORITY_DEFAULT);
-</programlisting>
+</code></programlisting>
 
 <para>
 The first argument is a slot you wish to have called when
@@ -6533,9 +6533,9 @@ this file descriptor using its <methodname>disconnect()</methodname> method. The
 <parameter>slot</parameter> signal handler should be declared as follows:
 </para>
 
-<programlisting>
+<programlisting><code>
 bool input_callback(Glib::IOCondition condition);
-</programlisting>
+</code></programlisting>
 
 <para>
 where <parameter>condition</parameter> is as
@@ -6566,10 +6566,10 @@ testfifo</literal>.
 If you want to specify a method that gets called when nothing else is happening, use the following:
 </para>
 
-<programlisting>
+<programlisting><code>
 sigc::connection  Glib::SignalIdle::connect(const sigc::slot&lt;bool()&gt;&amp; slot,
                                     int priority = Glib::PRIORITY_DEFAULT_IDLE);
-</programlisting>
+</code></programlisting>
 
 <para>
 This causes &gtkmm; to call the specified method whenever nothing else is
@@ -6580,9 +6580,9 @@ happening. You can add a priority (lower numbers are higher priorities). There a
 as follows:
 </para>
 
-<programlisting>
+<programlisting><code>
 bool idleFunc();
-</programlisting>
+</code></programlisting>
 
 <para>
 Since this is very similar to the methods above this explanation should
@@ -6649,7 +6649,7 @@ risk memory leaks from failing to <literal>delete</literal> a widget.
 The primary disadvantage of using class scope widgets is revealing
 the class implementation rather than the class interface in the class header.
 </para>
-<programlisting>
+<programlisting><code>
 #include &lt;gtkmm/button.h&gt;
 #include &lt;gtkmm/window.h&gt;
 class Foo : public Gtk::Window
@@ -6658,7 +6658,7 @@ private:
   Gtk::Button theButton;
   // will be destroyed when the Foo object is destroyed
 };
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="memory-function-scope">
@@ -6668,14 +6668,14 @@ If a programmer does not need a class scope widget, a function scope widget
 may also be used. The advantages to function scope over class scope are the
 increased data hiding and reduced dependencies.
 </para>
-<programlisting>
+<programlisting><code>
 {
   Gtk::Button aButton;
   aButton.set_visible(true);
   ...
   app-&gt;run();
 }
-</programlisting>
+</code></programlisting>
 <para>
 However, this technique is rarely useful. Most widgets can't safely be created
 before the application has been registered or activated. They can't safely be
@@ -6696,11 +6696,11 @@ discourages those in favor of safer models of memory management, so it is
 better to create widgets using <function>Gtk::make_managed()</function> and
 let their parent destroy them, than to manually perform dynamic allocation.
 </para>
-<programlisting>
+<programlisting><code>
 auto pButton = new Gtk::Button("Test");
 // do something useful with pButton
 delete pButton;
-</programlisting>
+</code></programlisting>
 <para>Here, the programmer deletes <varname>pButton</varname> to prevent a memory leak.
 </para>
 </section>
@@ -6749,13 +6749,13 @@ avoids you having to write <literal>new</literal>, which is discouraged in
 modern C++ style, and more clearly expresses intent to create a managed widget.
 </para>
 
-<programlisting>
+<programlisting><code>
 MyContainer::MyContainer()
 {
   auto pButton = Gtk::make_managed&lt;Gtk::Button&gt;("Test");
   append(*pButton); //add *pButton to MyContainer
 }
-</programlisting>
+</code></programlisting>
 <para>
 Now, when objects of type <classname>MyContainer</classname> are destroyed, the
 button will also be deleted. It is no longer necessary to delete <varname>pButton</varname>
@@ -6798,22 +6798,22 @@ smartpointer, <classname>Cairo::RefPtr&lt;&gt;</classname>.
 Objects such as <classname>Gdk::Pixbuf</classname> can only be instantiated
 with a <methodname>create()</methodname> function. For instance,
 </para>
-<programlisting>
+<programlisting><code>
 auto pixbuf = Gdk::Pixbuf::create_from_file(filename);
-</programlisting>
+</code></programlisting>
 
 <para>
 You have no way of getting a bare <classname>Gdk::Pixbuf</classname>. In the
 example, <varname>pixbuf</varname> is a smart pointer, so you can do this, much
 like a normal pointer:
 </para>
-<programlisting>
+<programlisting><code>
 auto width = 0;
 if(pixbuf)
 {
   width = pixbuf-&gt;get_width();
 }
-</programlisting>
+</code></programlisting>
 
 <para>
 When <varname>pixbuf</varname> goes out of scope an
@@ -6823,9 +6823,9 @@ to worry about it anymore. There's no <literal>new</literal> so there's no
 </para>
 <para>
 If you copy a <classname>RefPtr</classname>, for instance</para>
-<programlisting>
+<programlisting><code>
 auto pixbuf2 = pixbuf;
-</programlisting>
+</code></programlisting>
 <para>or if you pass it as a method argument or a return type, then
 <classname>RefPtr</classname> will do any necessary referencing to ensure that
 the instance will not be destroyed until the last <classname>RefPtr</classname>
@@ -6890,17 +6890,17 @@ with gtk3/&gtkmm;3, but it does not support gtk4/&gtkmm;4.
 <classname>Gtk::Builder</classname> must be used via a
 <classname>Glib::RefPtr</classname>. Like all such classes, you need to use a
 <methodname>create()</methodname> method to instantiate it. For instance,</para>
-<programlisting>
+<programlisting><code>
 auto builder = Gtk::Builder::create_from_file("basic.ui");
-</programlisting>
+</code></programlisting>
 <para>This will instantiate the windows defined in the <filename class="extension">.ui</filename> file.
 </para>
 
 <para>To instantiate just one window, or just one of the child widgets, you can specify the name of a widget as the second parameter. For instance,
 </para>
-<programlisting>
+<programlisting><code>
 auto builder = Gtk::Builder::create_from_file("basic.ui", "treeview_products");
-</programlisting>
+</code></programlisting>
 
 </section>
 
@@ -6918,9 +6918,9 @@ pointer will be set to <literal>nullptr</literal>.
 The dialogs in this chapter are derived from <classname>Gtk::Window</classname>
 because <classname>Gtk::Dialog</classname> is deprecated since &gtkmm; 4.10.
 </para>
-<programlisting>
+<programlisting><code>
 auto pDialog = builder-&gt;get_widget&lt;Gtk::Window&gt;("DialogBasic");
-</programlisting>
+</code></programlisting>
 
 <para>
 <classname>Gtk::Builder</classname> checks for a null pointer, and checks
@@ -6976,9 +6976,9 @@ having most of your source just be setting properties and packing in containers.
 
 <para>Use <methodname>Gtk::Builder::get_widget_derived()</methodname> like so:
 </para>
-<programlisting>
+<programlisting><code>
 auto pDialog = Gtk::Builder::get_widget_derived&lt;DerivedDialog&gt;(builder, "DialogDerived");
-</programlisting>
+</code></programlisting>
 
 <para>
 Your derived class must have a constructor that takes a pointer to the
@@ -6991,19 +6991,19 @@ typedefs <classname>BaseObjectType</classname> as <type>GtkWindow</type>, for in
 You must call the base class's constructor in the initialization list, providing the C pointer. For
 instance,
 </para>
-<programlisting>
+<programlisting><code>
 DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)
 : Gtk::Window(cobject)
 {
 }
-</programlisting>
+</code></programlisting>
 
 <para>
 You could then encapsulate the manipulation of the child widgets in the
 constructor of the derived class, maybe using <methodname>get_widget()</methodname>
 or <methodname>get_widget_derived()</methodname> again. For instance,
 </para>
-<programlisting>
+<programlisting><code>
 DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)
 : Gtk::Window(cobject),
   m_builder(builder),
@@ -7015,19 +7015,19 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk:
     m_pButton-&gt;signal_clicked().connect( sigc::mem_fun(*this, &amp;DerivedDialog::on_button_quit) );
   }
 }
-</programlisting>
+</code></programlisting>
 
 <para>
 It's possible to pass additional arguments from
 <methodname>get_widget_derived()</methodname> to the constructor of the derived
 widget. For instance, this call to <methodname>get_widget_derived()</methodname>
 </para>
-<programlisting>
+<programlisting><code>
 auto pDialog = Gtk::Builder::get_widget_derived&lt;DerivedDialog&gt;(builder, "DialogDerived", true);
-</programlisting>
+</code></programlisting>
 <para>can invoke this constructor
 </para>
-<programlisting>
+<programlisting><code>
 DerivedDialog::DerivedDialog(BaseObjectType* cobject,
   const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder, bool warning)
 : Gtk::Window(cobject),
@@ -7036,7 +7036,7 @@ DerivedDialog::DerivedDialog(BaseObjectType* cobject,
 {
   // ....
 }
-</programlisting>
+</code></programlisting>
 
 <section xml:id="sec-builder-and-property">
 <title>Gtk::Builder and Glib::Property</title>
@@ -7052,7 +7052,7 @@ Your derived widget must have a constructor that has the parameters required by
 <methodname>get_widget_derived()</methodname> and calls the <classname>Glib::ObjectBase</classname>
 constructor to register the <type>GType</type>.
 </para>
-<programlisting>
+<programlisting><code>
 DerivedButton::DerivedButton(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder)
 : Glib::ObjectBase("MyButton"), // The GType name will be gtkmm__CustomObject_MyButton.
   Gtk::Button(cobject),
@@ -7061,7 +7061,7 @@ DerivedButton::DerivedButton(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk:
 {
   // ....
 }
-</programlisting>
+</code></programlisting>
 <para>
 It is possible also to specify properties of derived widgets, declared in C++
 using &gtkmm;, within <filename class="extension">.ui</filename> files and load/set
@@ -7165,14 +7165,14 @@ at runtime and access the widgets via derived classes.
       An alternative to <application>gnome-common</application>'s
       <literal>autogen.sh</literal> may look like this:
     </para>
-    <programlisting>#! /bin/sh -e
+    <programlisting><code>#! /bin/sh -e
 test -n "$srcdir" || srcdir=`dirname "$0"`
 test -n "$srcdir" || srcdir=.
 
 autoreconf --force --install --verbose --warnings=all "$srcdir"
 echo "Running intltoolize --copy --force --automake"
 intltoolize --copy --force --automake
-test -n "$NOCONFIGURE" || "$srcdir/configure" "$@"</programlisting>
+test -n "$NOCONFIGURE" || "$srcdir/configure" "$@"</code></programlisting>
 
     <para>
       Create a sub-directory named <literal>po</literal> in your project's root
@@ -7193,9 +7193,9 @@ test -n "$NOCONFIGURE" || "$srcdir/configure" "$@"</programlisting>
       and Japanese translations, your <literal>LINGUAS</literal> file would
       look like this:
     </para>
-    <programlisting># keep this file sorted alphabetically, one language code per line
+    <programlisting><code># keep this file sorted alphabetically, one language code per line
 de
-ja</programlisting>
+ja</code></programlisting>
     <para>
       (In addition, you'd have the files <literal>de.po</literal> and
       <literal>ja.po</literal> in your
@@ -7212,8 +7212,8 @@ ja</programlisting>
       <literal>POTFILES.in</literal> file might look like this:
     </para>
 
-    <programlisting>src/main.cc
-src/other.cc</programlisting>
+    <programlisting><code>src/main.cc
+src/other.cc</code></programlisting>
 
     <para>
       If you are using <application>gettext</application> directly, you can only
@@ -7235,7 +7235,7 @@ src/other.cc</programlisting>
       substituting 'programname' with the name of your program:
     </para>
 
-    <programlisting>IT_PROG_INTLTOOL([0.35.0])
+    <programlisting><code>IT_PROG_INTLTOOL([0.35.0])
 
 GETTEXT_PACKAGE=programname
 AC_SUBST(GETTEXT_PACKAGE)
@@ -7245,7 +7245,7 @@ AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.17])
 
 PROGRAMNAME_LOCALEDIR=[${datadir}/locale]
-AC_SUBST(PROGRAMNAME_LOCALEDIR)</programlisting>
+AC_SUBST(PROGRAMNAME_LOCALEDIR)</code></programlisting>
 
     <para>
       This <varname>PROGRAMNAME_LOCALEDIR</varname> variable will be used later
@@ -7272,9 +7272,9 @@ AC_SUBST(PROGRAMNAME_LOCALEDIR)</programlisting>
         <listitem>
           <para>
             Define <literal>INTLTOOL_FILES</literal> as:</para>
-            <programlisting>INTLTOOL_FILES = intltool-extract.in \
+            <programlisting><code>INTLTOOL_FILES = intltool-extract.in \
                  intltool-merge.in \
-                 intltool-update.in</programlisting>
+                 intltool-update.in</code></programlisting>
         </listitem>
         <listitem>
           <para>
@@ -7287,19 +7287,19 @@ AC_SUBST(PROGRAMNAME_LOCALEDIR)</programlisting>
         <listitem>
           <para>
             Update your <literal>DISTCLEANFILES</literal>:</para>
-            <programlisting>DISTCLEANFILES = ... intltool-extract \
+            <programlisting><code>DISTCLEANFILES = ... intltool-extract \
                  intltool-merge \
                  intltool-update \
-                 po/.intltool-merge-cache</programlisting>
+                 po/.intltool-merge-cache</code></programlisting>
         </listitem>
         <listitem>
           <para>
             Depending on the types of files that contain translatable strings,
             add code such as</para>
-            <programlisting>desktopdir = $(datadir)/applications
+            <programlisting><code>desktopdir = $(datadir)/applications
 desktop_in_files = programname.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-@INTLTOOL_DESKTOP_RULE@</programlisting>
+@INTLTOOL_DESKTOP_RULE@</code></programlisting>
         </listitem>
       </itemizedlist>
     </para>
@@ -7309,7 +7309,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
       <literal>AM_CPPFLAGS</literal> to add the following preprocessor macro
       definition:
     </para>
-    <programlisting>AM_CPPFLAGS = ... -DPROGRAMNAME_LOCALEDIR=\"${PROGRAMNAME_LOCALEDIR}\"</programlisting>
+    <programlisting><code>AM_CPPFLAGS = ... -DPROGRAMNAME_LOCALEDIR=\"${PROGRAMNAME_LOCALEDIR}\"</code></programlisting>
     <para>
       This macro will be used when you initialize <literal>gettext</literal> in
       your source code.
@@ -7339,9 +7339,9 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
     support macros which are shorter wrappers in an easy-to-use form.
     To use these macros, include <literal>&lt;glibmm/i18n.h&gt;</literal>,
     and then, for example, substitute:</para>
-    <programlisting>display_message("Getting ready for i18n.");</programlisting>
+    <programlisting><code>display_message("Getting ready for i18n.");</code></programlisting>
     <para>with:</para>
-    <programlisting>display_message(_("Getting ready for i18n."));</programlisting>
+    <programlisting><code>display_message(_("Getting ready for i18n."));</code></programlisting>
 
   <para>
     For reference, it is possible to generate a file which contains all
@@ -7352,16 +7352,16 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
     within the source code directory:
   </para>
 
-  <programlisting>xgettext -a -o my-strings --omit-header *.cc *.h</programlisting>
+  <programlisting><code>xgettext -a -o my-strings --omit-header *.cc *.h</code></programlisting>
 
   <para>
     Finally, to let your program use the translation for the current locale,
     add this code to the beginning of your <filename>main.cc</filename> file, to initialize gettext.
   </para>
 
-<programlisting>bindtextdomain(GETTEXT_PACKAGE, PROGRAMNAME_LOCALEDIR);
+<programlisting><code>bindtextdomain(GETTEXT_PACKAGE, PROGRAMNAME_LOCALEDIR);
 bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
-textdomain(GETTEXT_PACKAGE);</programlisting>
+textdomain(GETTEXT_PACKAGE);</code></programlisting>
 
   <section xml:id="sec-i18n-gettext">
   <title>How gettext works</title>
@@ -7407,7 +7407,7 @@ textdomain(GETTEXT_PACKAGE);</programlisting>
       <filename>po</filename> subdirectory of your project and
       execute the following command:
     </para>
-    <programlisting>intltool-update --pot</programlisting>
+    <programlisting><code>intltool-update --pot</code></programlisting>
 
     <para>
       That will create a file named <filename>programname.pot</filename>.
@@ -7520,12 +7520,12 @@ result is a corrupted <classname>Glib::ustring</classname>. You can work around
 this with a manual conversion. For instance, to retrieve the
 <classname>std::string</classname> from a <classname>ostringstream</classname>:
 </para>
-<programlisting>std::locale::global(std::locale("")); // Set the global locale to the user's preferred locale.
+<programlisting><code>std::locale::global(std::locale("")); // Set the global locale to the user's preferred locale.
                                       // Usually unnecessary here, because Glib::init()
                                       // or Gtk::Application::create() does it for you.
 std::ostringstream output;
 output &lt;&lt; percentage &lt;&lt; " % done";
-label-&gt;set_text(Glib::locale_to_utf8(output.str()));</programlisting>
+label-&gt;set_text(Glib::locale_to_utf8(output.str()));</code></programlisting>
 </section>
 
 </section>
@@ -7551,15 +7551,15 @@ add a comment for the translators before the <function>gettext</function> call.
 Such comments will be shown in the <filename>.po</filename> files. For
 instance:
 </para>
-<programlisting>// note to translators: don't translate the "[noun]" part - it is
+<programlisting><code>// note to translators: don't translate the "[noun]" part - it is
 // just here to distinguish the string from another "jumps" string
-text = strip(gettext("jumps[noun]"), "[noun]");</programlisting>
+text = strip(gettext("jumps[noun]"), "[noun]");</code></programlisting>
 
 <para>
 If you use <application>Glib</application>'s support macros, it's easier. Use
 <function>C_()</function> instead of <function>_()</function>. For instance:
 </para>
-<programlisting>GLib::ustring text(C_("noun", "jumps"));</programlisting>
+<programlisting><code>GLib::ustring text(C_("noun", "jumps"));</code></programlisting>
 
 </section>
 
@@ -7575,20 +7575,20 @@ the language.</para>
 
 <para>For instance, this code would be problematic:</para>
 
-<programlisting>std::cout &lt;&lt; _("Current amount: ") &lt;&lt; amount
+<programlisting><code>std::cout &lt;&lt; _("Current amount: ") &lt;&lt; amount
           &lt;&lt; _(" Future: ") &lt;&lt; future &lt;&lt; std::endl;
 
-label.set_text(_("Really delete ") + filename + _(" now?"));</programlisting>
+label.set_text(_("Really delete ") + filename + _(" now?"));</code></programlisting>
 
 <para>
 So you should either avoid this situation or use
 <link xlink:href="&url_refdocs_base_glib;ustring.html"><function>Glib::ustring::compose()</function></link>
 which supports syntax such as:
 </para>
-<programlisting>std::cout &lt;&lt; Glib::ustring::compose(
+<programlisting><code>std::cout &lt;&lt; Glib::ustring::compose(
              _("Current amount: %1 Future: %2"), amount, future) &lt;&lt; std::endl;
 
-label.set_text(Glib::ustring::compose(_("Really delete %1 now?"), filename));</programlisting>
+label.set_text(Glib::ustring::compose(_("Really delete %1 now?"), filename));</code></programlisting>
 </section>
 
 <section xml:id="i18n-display-size">
@@ -8502,21 +8502,21 @@ One convenient way to do this is to use <methodname>Gio::Settings::bind()</metho
 to bind settings keys to object properties, as we do for the transition setting in
 <classname>ExampleAppWindow</classname>'s constructor.
 </para>
-<programlisting>
+<programlisting><code>
 m_settings = Gio::Settings::create("org.gtkmm.exampleapp");
 m_settings-&gt;bind("transition", m_stack-&gt;property_transition_type());
-</programlisting>
+</code></programlisting>
 
 <para>
 The code to connect the font setting is a little more involved, since it corresponds to
 an object property in a <classname>Gtk::TextTag</classname> that we must first create.
 The code is in <methodname>ExampleAppWindow::open_file_view()</methodname>.
 </para>
-<programlisting>
+<programlisting><code>
 auto tag = buffer-&gt;create_tag();
 m_settings-&gt;bind("font", tag-&gt;property_font());
 buffer-&gt;apply_tag(tag, buffer-&gt;begin(), buffer-&gt;end());
-</programlisting>
+</code></programlisting>
 
 <para>
 At this point, the application will already react if you change one of the settings,
@@ -8536,10 +8536,10 @@ When we've created the <filename>prefs.ui</filename> file and the <classname>Exa
 class, we revisit the <methodname>ExampleApplication::on_action_preferences()</methodname>
 method in our application class, and make it open a new preference dialog.
 </para>
-<programlisting>
+<programlisting><code>
 auto prefs_dialog = ExampleAppPrefs::create(*get_active_window());
 prefs_dialog-&gt;present();
-</programlisting>
+</code></programlisting>
 
 <para>
 After all this work, our application can now show a preference dialog like this:
@@ -8575,7 +8575,7 @@ Implementing the search needs quite a few code changes that we are not going to 
 go over here. The central piece of the search implementation is a signal handler that
 listens for text changes in the search entry, shown here without error handling.
 </para>
-<programlisting>
+<programlisting><code>
 void ExampleAppWindow::on_search_text_changed()
 {
   const auto text = m_searchentry-&gt;get_text();
@@ -8593,7 +8593,7 @@ void ExampleAppWindow::on_search_text_changed()
     view-&gt;scroll_to(match_start);
   }
 }
-</programlisting>
+</code></programlisting>
 
 <para>
 With the search bar, our application now looks like this:
@@ -8631,7 +8631,7 @@ To connect the menu item to the new <literal>show-words</literal> setting, we us
 <classname>Gio::Action</classname> corresponding to the given <classname>Gio::Settings</classname>
 key. In <classname>ExampleAppWindow</classname>'s constructor:
 </para>
-<programlisting>
+<programlisting><code>
 // Connect the menu to the MenuButton m_gears, and bind the show-words setting
 // to the win.show-words action and the "Words" menu item.
 // (The connection between action and menu item is specified in gears_menu.ui.)
@@ -8639,7 +8639,7 @@ auto menu_builder = Gtk::Builder::create_from_resource("/org/gtkmm/exampleapp/ge
 auto menu = menu_builder-&gt;get_object&lt;Gio::MenuModel&gt;("menu");
 m_gears-&gt;set_menu_model(menu);
 add_action(m_settings-&gt;create_action("show-words"));
-</programlisting>
+</code></programlisting>
 
 <para>
 What our application looks like now:
@@ -8683,11 +8683,11 @@ property of the <literal>lines_label</literal> widget to the same property of th
 <literal>lines</literal> widget.
 In <classname>ExampleAppWindow</classname>'s constructor:
 </para>
-<programlisting>add_action(Gio::PropertyAction::create("show-lines", m_lines-&gt;property_visible()));
+<programlisting><code>add_action(Gio::PropertyAction::create("show-lines", m_lines-&gt;property_visible()));
 m_binding_lines_visible = Glib::Binding::bind_property(m_lines-&gt;property_visible(),
   m_lines_label-&gt;property_visible());
 
-</programlisting>
+</code></programlisting>
 
 <para>
 We also need a function that counts the lines of the currently active tab, and updates
@@ -8726,10 +8726,10 @@ button, and hide the minimize and maximize buttons. We also include an icon in t
 resource file, and set up this icon as the window icon.
 In <classname>ExampleAppWindow</classname>'s constructor:
 </para>
-<programlisting>Gtk::IconTheme::get_for_display(get_display())-&gt;add_resource_path("/org/gtkmm/exampleapp");
+<programlisting><code>Gtk::IconTheme::get_for_display(get_display())-&gt;add_resource_path("/org/gtkmm/exampleapp");
 set_icon_name("exampleapp");
 
-</programlisting>
+</code></programlisting>
 
 <para>
 Here is how the application now looks:
@@ -8816,19 +8816,19 @@ You can copy <classname>RefPtr</classname>s, just like normal pointers. But
 unlike normal pointers, you don't need to worry about deleting the underlying
 instance.
 </para>
-<programlisting>
+<programlisting><code>
 auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);
 auto refPixbuf2 = refPixbuf;
-</programlisting>
+</code></programlisting>
 <para>
 Of course this means that you can store <classname>RefPtr</classname>s in
 standard containers, such as <classname>std::vector</classname> or
 <classname>std::list</classname>.</para>
-<programlisting>
+<programlisting><code>
 std::list&lt;Glib::RefPtr&lt;Gdk::Pixbuf&gt;&gt; listPixbufs;
 auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);
 listPixbufs.push_back(refPixbuf);
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="sec-refptr-dereferencing">
@@ -8836,19 +8836,19 @@ listPixbufs.push_back(refPixbuf);
 <para>You can dereference a smartpointer with the -&gt; operator, to
 call the methods of the underlying instance, just like a normal pointer.
 </para>
-<programlisting>
+<programlisting><code>
 auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);
 auto width = refPixbuf-&gt;get_width();
-</programlisting>
+</code></programlisting>
 <para>You can also use the * operator and the <methodname>get()</methodname> method
 to access the underlying instance, but it's usually a bad idea to do so. Unless
 you are careful, you can end up with a pointer or a reference which is not included
 in the reference count.
 </para>
-<programlisting>
+<programlisting><code>
 auto refPixbuf = Gdk::Pixbuf::create_from_file(filename);
 auto&amp; underlying = *refPixbuf; // Possible, but not recommended
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="sec-refptr-casting">
@@ -8857,10 +8857,10 @@ auto&amp; underlying = *refPixbuf; // Possible, but not recommended
 You can cast <classname>RefPtr</classname>s to base types, just like normal
 pointers.
 </para>
-<programlisting>
+<programlisting><code>
 auto refStore = Gtk::TreeStore::create(columns);
 Glib::RefPtr&lt;Gtk::TreeModel&gt; refModel = refStore;
-</programlisting>
+</code></programlisting>
 <para>This means that any method which takes a <type>const
 Glib::RefPtr&lt;BaseType&gt;&amp;</type> argument can also take a
 <type>const Glib::RefPtr&lt;DerivedType&gt;&amp;</type>. The cast is
@@ -8868,10 +8868,10 @@ implicit, just as it would be for a normal pointer.</para>
 <para>You can also cast to a derived type, but the syntax is
 a little different than with a normal pointer.
 </para>
-<programlisting>
+<programlisting><code>
 auto refStore = std::dynamic_pointer_cast&lt;Gtk::TreeStore&gt;(refModel);
 auto refStore2 = std::static_pointer_cast&lt;Gtk::TreeStore&gt;(refModel);
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="sec-refptr-checking-for-null">
@@ -8880,14 +8880,14 @@ auto refStore2 = std::static_pointer_cast&lt;Gtk::TreeStore&gt;(refModel);
 Just like normal pointers, you can check whether a
 <classname>RefPtr</classname> points to anything.
 </para>
-<programlisting>
+<programlisting><code>
 auto refModel = m_TreeView.get_model();
 if (refModel)
 {
   auto cols_count = refModel-&gt;get_n_columns();
   ...
 }
-</programlisting>
+</code></programlisting>
 <para>
 But unlike normal pointers, <classname>RefPtr</classname>s are automatically
 initialized to <literal>nullptr</literal> so you don't need to remember to do that yourself.
@@ -8939,7 +8939,7 @@ signal handlers are often named callbacks.
 Here's an example of a signal handler being connected to a signal:
 </para>
 
-<programlisting><![CDATA[
+<programlisting><code><![CDATA[
 #include <gtkmm/button.h>
 
 void on_button_clicked()
@@ -8957,7 +8957,7 @@ public:
 private:
   Gtk::Button button {"Hello World"};
 };
-]]></programlisting>
+]]></code></programlisting>
 
 <para>
 There's rather a lot to think about in this (non-functional) code.
@@ -8992,11 +8992,11 @@ When the Button emits its <literal>clicked</literal> signal,
 Now let's look at the connection again:
 </para>
 
-<programlisting>
+<programlisting><code>
     ...
     button.signal_clicked().connect(sigc::ptr_fun(&amp;on_button_clicked));
     ...
-</programlisting>
+</code></programlisting>
 
 <para>
 Note that we don't pass a pointer to <methodname>on_button_clicked()</methodname>
@@ -9027,7 +9027,7 @@ but then you won't get automatic disconnection of the signal handler when a
 Here's a slightly larger example of slots in action:
 </para>
 
-<programlisting><![CDATA[
+<programlisting><code><![CDATA[
 #include <gtkmm/button.h>
 
 void on_button_clicked()
@@ -9047,7 +9047,7 @@ public:
 private:
   Gtk::Button button {"Hello World"};
 };
-]]></programlisting>
+]]></code></programlisting>
 
 <para>
 The first call to <methodname>connect()</methodname> is just like the one we saw
@@ -9088,9 +9088,9 @@ look it up in the reference documentation or the header file. Here's an example 
 might see in the &gtkmm; headers:
 </para>
 
-<programlisting>
+<programlisting><code>
 Glib::SignalProxy&lt;bool(Gtk::DirectionType)&gt; signal_focus()
-</programlisting>
+</code></programlisting>
 
 <para>
 Other than the signal's name (<literal>focus</literal>), the template arguments are
@@ -9106,9 +9106,9 @@ The same principles apply for signals which have more arguments. Here's one
 with three (taken from <filename>&lt;gtkmm/textbuffer.h&gt;</filename>):
 </para>
 
-<programlisting>
+<programlisting><code>
 Glib::SignalProxy&lt;void(TextBuffer::iterator&amp;, const Glib::ustrin&amp;, int)&gt; signal_insert();
-</programlisting>
+</code></programlisting>
 
 <para>
 It follows the same form. The first type is <type>void</type>, so that should be
@@ -9117,9 +9117,9 @@ The following three types are the argument types, in order. Our signal
 handler's prototype could look like this:
 </para>
 
-<programlisting>
+<programlisting><code>
 void on_insert(TextBuffer::iterator&amp; pos, const Glib::ustring&amp; text, int bytes)
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="sec-disconnecting-signal-handlers">
@@ -9129,9 +9129,9 @@ void on_insert(TextBuffer::iterator&amp; pos, const Glib::ustring&amp; text, int
 Let's take another look at a Signal's <literal>connect</literal> method:
 </para>
 
-<programlisting>
+<programlisting><code>
 sigc::connection signal&lt;void(int)&gt;::connect(const sigc::slot&lt;void(int)&gt;&amp;);
-</programlisting>
+</code></programlisting>
 
 <para>
 The returned <classname>sigc::connection</classname> can be used to control the
@@ -9171,7 +9171,7 @@ virtual member methods specifically intended to be overridden.
 Let's look at an example of overriding:
 </para>
 
-<programlisting>
+<programlisting><code>
 #include &lt;gtkmm/button.h&gt;
 
 class OverriddenButton : public Gtk::Button
@@ -9187,7 +9187,7 @@ void OverriddenButton::on_clicked()
   // call the base class's version of the method:
   Gtk::Button::on_clicked();
 }
-</programlisting>
+</code></programlisting>
 
 <para>
 Here  we define a new class called <classname>OverriddenButton</classname>,
@@ -9222,17 +9222,17 @@ you might like that signal handler to receive some extra information. For
 instance, you might want to know which button was clicked. You can do this with
 <function>sigc::bind()</function>. Here's some code from the <link linkend="sec-helloworld2">helloworld2</link> example.
 </para>
-<programlisting>
+<programlisting><code>
 m_button1.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &amp;HelloWorld::on_button_clicked), "button 1"));
-</programlisting>
+</code></programlisting>
 <para>This says that we want the signal to send an extra
 <classname>Glib::ustring</classname> argument to the signal handler, and that
 the value of that argument should be "button 1". Of course we will need to add
 that extra argument to the declaration of our signal handler:
 </para>
-<programlisting>
+<programlisting><code>
 void on_button_clicked(const Glib::ustring&amp; data);
-</programlisting>
+</code></programlisting>
 <para>Of course, a normal "clicked" signal handler would have no arguments.
 </para>
 <para>
@@ -9283,14 +9283,14 @@ Handling an event doesn't affect the Widget's other signals. If you handle
 
 <para>
 Here's a simple example:</para>
-<programlisting>
+<programlisting><code>
 void on_button_press(int n_press, double x, double y);
 Gtk::Button button("label");
 auto controller = Gtk::GestureClick::create();
 controller->set_propagation_phase(Gtk::PropagationPhase::CAPTURE);
 controller->signal_pressed().connect(sigc::ptr_fun(&amp;on_button_press));
 button.add_controller(controller);
-</programlisting>
+</code></programlisting>
 <para>
 When the mouse is over the button and a mouse button is pressed,
 <methodname>on_button_press()</methodname> will be called.
@@ -9316,9 +9316,9 @@ you can specify <literal>false</literal> for the <literal>after</literal> parame
 This <methodname>connect()</methodname> parameter is optional, if the signal handler
 returns <type>void</type>. For instance,
 </para>
-<programlisting>
+<programlisting><code>
 key_controller->signal_key_pressed().connect(sigc::ptr_fun(&amp;on_mywindow_key_pressed), false);
-</programlisting>
+</code></programlisting>
 <para>The event is propagated between widgets in 3 phases.
 <orderedlist inheritnum="ignore" continuation="restarts">
 <listitem><simpara>Capture phase - runs from the toplevel down to the event widget.</simpara></listitem>
@@ -9350,7 +9350,7 @@ use <link xlink:href="http://www.gnu.org/software/gdb/">the gdb debugger</link>.
 First, let's look at a simple example where an exception is thrown from a normal
 function (no signal handler).
 </para>
-<programlisting>
+<programlisting><code>
 // without_signal.cc
 #include &lt;gtkmm.h&gt;
 
@@ -9366,12 +9366,12 @@ int main(int argc, char** argv)
   auto app = Gtk::Application::create("org.gtkmm.without_signal");
   return app-&gt;run();
 }
-</programlisting>
+</code></programlisting>
 <para>
 Here is an excerpt from a <application>gdb</application> session. Only the most
 interesting parts of the output are shown.
 </para>
-<programlisting>
+<programlisting><code>
 &gt; gdb without_signal
 (gdb) run
 terminate called after throwing an instance of 'char const*'
@@ -9380,7 +9380,7 @@ Program received signal SIGABRT, Aborted.
 (gdb) backtrace
 #7  0x08048864 in throwSomething () at without_signal.cc:6
 #8  0x0804887d in main (argc=1, argv=0xbfffecd4) at without_signal.cc:12
-</programlisting>
+</code></programlisting>
 <para>You can see that the exception was thrown from <filename>without_signal.cc</filename>,
 line 6 (<code>throw "Something";</code>).
 </para>
@@ -9388,7 +9388,7 @@ line 6 (<code>throw "Something";</code>).
 Now let's see what happens when an exception is thrown from a signal handler.
 Here's the source code.
 </para>
-<programlisting>
+<programlisting><code>
 // with_signal.cc
 #include &lt;gtkmm.h&gt;
 
@@ -9405,11 +9405,11 @@ int main(int argc, char** argv)
   app-&gt;hold();
   return app-&gt;run();
 }
-</programlisting>
+</code></programlisting>
 <para>
 And here's an excerpt from a <application>gdb</application> session.
 </para>
-<programlisting>
+<programlisting><code>
 &gt; gdb with_signal
 (gdb) run
 (with_signal:2703): glibmm-ERROR **:
@@ -9422,7 +9422,7 @@ Program received signal SIGTRAP, Trace/breakpoint trap.
 #4  0x0063d370 in glibmm_source_callback (data=0x804d620) at main.cc:212
 #13 0x002e1b31 in Gtk::Application::run (this=0x804f300) at application.cc:178
 #14 0x08048ccc in main (argc=1, argv=0xbfffecd4) at with_signal.cc:16
-</programlisting>
+</code></programlisting>
 <para>The exception is caught in <application>glibmm</application>, and the program
 ends with a call to <function>g_error()</function>. Other exceptions may result
 in different behavior, but in any case the exception from a signal handler is
@@ -9433,7 +9433,7 @@ caught in <application>glibmm</application> or &gtkmm;, and
 To see where the exception is thrown, you can use the <application>gdb</application>
 command <userinput>catch throw</userinput>.
 </para>
-<programlisting>
+<programlisting><code>
 &gt; gdb with_signal
 (gdb) catch throw
 Catchpoint 1 (throw)
@@ -9448,13 +9448,13 @@ Continuing.
 unhandled exception (type unknown) in signal handler
 
 Program received signal SIGTRAP, Trace/breakpoint trap.
-</programlisting>
+</code></programlisting>
 <para>
 If there are many caught exceptions before the interesting uncaught one, this
 method can be tedious. It can be automated with the following
 <application>gdb</application> commands.
 </para>
-<programlisting>
+<programlisting><code>
 (gdb) catch throw
 (gdb) commands
 (gdb)   backtrace
@@ -9462,7 +9462,7 @@ method can be tedious. It can be automated with the following
 (gdb)   end
 (gdb) set pagination off
 (gdb) run
-</programlisting>
+</code></programlisting>
 <para>These commands will print a backtrace from each <code>throw</code> and continue.
 The backtrace from the last (or possibly the last but one) <code>throw</code>
 before the program stops, is the interesting one.
@@ -9492,15 +9492,15 @@ For instance, to create a signal that sends 2 parameters, a <type>bool</type>
 and an <type>int</type>, just declare a <classname>sigc::signal</classname>,
 like so:
 </para>
-<programlisting>
+<programlisting><code>
 sigc::signal&lt;void(bool, int)&gt; signal_something;
-</programlisting>
+</code></programlisting>
 <para>
 You could just declare that signal as a public member variable, but
 some people find that distasteful and prefer to make it available via
 an accessor method, like so:
 </para>
-<programlisting>
+<programlisting><code>
 class Server
 {
 public:
@@ -9516,16 +9516,16 @@ Server::type_signal_something Server::signal_something()
 {
   return m_signal_something;
 }
-</programlisting>
+</code></programlisting>
 
 <para>
 You can then connect to the signal using the same syntax used when
 connecting to &gtkmm; signals. For instance,
 </para>
-<programlisting>
+<programlisting><code>
 server.signal_something().connect(
   sigc::mem_fun(client, &amp;Client::on_server_something) );
-</programlisting>
+</code></programlisting>
 
 <section xml:id="chapter-custom-signals-example">
 <title>Example</title>
@@ -9658,14 +9658,14 @@ practical - and sensible - to subclass a button for that purpose.
       <filename>gnome-suites-core-deps-latest.modules</filename> moduleset. So edit your
       <filename>jhbuildrc</filename> file and set your moduleset setting like so:
     </para>
-    <programlisting>moduleset = 'gnome-suites-core-deps-latest'</programlisting>
+    <programlisting><code>moduleset = 'gnome-suites-core-deps-latest'</code></programlisting>
     <para>
       After setting the correct moduleset, you need to tell
       <application>jhbuild</application> which module or modules to build. To
       build &gtkmm; and all of its dependencies, set <varname>modules</varname>
       like so:
     </para>
-    <programlisting>modules = [ 'gtkmm' ]</programlisting>
+    <programlisting><code>modules = [ 'gtkmm' ]</code></programlisting>
     <para>
       You can build several modules by setting the
       <varname>modules</varname> variable to a meta-package, e.g.
@@ -9812,10 +9812,10 @@ $ jhbuild sanitycheck</screen>
   Starting with <application>mm-common</application> 1.0.0 this skeleton application
   is built with the <link xlink:href="https://mesonbuild.com/">Meson build system</link>.
 </para>
-<programlisting>
+<programlisting><code>
   $ git clone https://gitlab.gnome.org/GNOME/mm-common.git
   $ cp -a mm-common/skeletonmm libsomethingmm
-</programlisting>
+</code></programlisting>
 <para>This provides a directory structure for the source .hg and .ccg files and the hand-written
   .h and .cc files, with <filename>meson.build</filename> files that can specify the
   various files in use, in terms of Meson variables. The directory structure usually
@@ -9837,11 +9837,11 @@ $ jhbuild sanitycheck</screen>
 
 <para>As well as renaming the directories, we should rename some of the source
     files. For instance:</para>
-<programlisting>
+<programlisting><code>
 $ for f in $(find libsomethingmm -depth -name '*skeleton*'); do \
     d="${f%/*}"; b="${f##*/}"; mv "$f" "$d/${b//skeleton/libsomething}"; \
   done
-</programlisting>
+</code></programlisting>
 <para>A number of the skeleton files must still be filled in with project-specific content later.
 </para>
 <para>Note that files ending in <filename>.in</filename> will be used to generate
@@ -9982,9 +9982,9 @@ described in the <link linkend="sec-wrapping-documentation">Documentation</link>
   It is generated by the <command>h2def.py</command> script which you can find in
   glibmm's <filename>tools/defs_gen</filename> directory. For instance,
 </para>
-<programlisting>
+<programlisting><code>
 $ ./h2def.py /usr/include/gtk-4.0/gtk/*.h &gt; gtk_methods.defs
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="generating-defs-enums">
@@ -9994,9 +9994,9 @@ $ ./h2def.py /usr/include/gtk-4.0/gtk/*.h &gt; gtk_methods.defs
   values. It is generated by the <filename>enumextract.py</filename> script which you can
   also find in glibmm's <filename>tools/defs_gen</filename> directory. For instance,
 </para>
-<programlisting>
+<programlisting><code>
 $ ./enumextract.py /usr/include/gtk-4.0/gtk/*.h &gt; gtk_enums.defs
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="generating-defs-signals-properties">
@@ -10007,10 +10007,10 @@ $ ./enumextract.py /usr/include/gtk-4.0/gtk/*.h &gt; gtk_enums.defs
   wrapping project, such as <filename>gtkmm/tools/extra_defs_gen/</filename>.
   For instance
 </para>
-<programlisting>
+<programlisting><code>
 $ cd tools/extra_defs_gen
 $ ./generate_extra_defs &gt; gtk_signals.defs
-</programlisting>
+</code></programlisting>
 <para>You must edit the source code of your own <filename>generate_extra_defs</filename> tool
   in order to generate the <filename>.defs</filename> for the GObject C types that you wish to
   wrap. In the skeleton source tree, the source file is named
@@ -10021,7 +10021,7 @@ $ ./generate_extra_defs &gt; gtk_signals.defs
 <para>Then edit the <filename>.cc</filename> file to specify the correct types.
   For instance, your <function>main()</function> function might look like this:
 </para>
-<programlisting>
+<programlisting><code>
 #include &lt;glibmm_generate_extra_defs/generate_extra_defs.h&gt;
 #include &lt;libsomething.h&gt;
 #include &lt;iostream&gt;
@@ -10034,7 +10034,7 @@ int main(int, char**)
             &lt;&lt; get_defs(SOME_TYPE_STUFF);
   return 0;
 }
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="writing-defs-vfuncs">
@@ -10065,7 +10065,7 @@ int main(int, char**)
         this class. For instance, &gtkmm;'s <filename>button.hg</filename> looks
         roughly like this:</para>
 
-<programlisting>
+<programlisting><code>
 #include &lt;gtkmm/widget.h&gt;
 #include &lt;gtkmm/actionable.h&gt;
 _DEFS(gtkmm,gtk)
@@ -10097,7 +10097,7 @@ public:
 };
 
 } // namespace Gtk
-</programlisting>
+</code></programlisting>
 <para>The macros in this example do the following:
 <variablelist>
     <varlistentry>
@@ -10132,10 +10132,10 @@ public:
     processing them with <command>gmmproc</command> like so, though this happens
     automatically when using the above build structure:
 </para>
-<programlisting>
+<programlisting><code>
 $ cd gtk/src
 $ /usr/lib/glibmm-2.68/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtkmm
-</programlisting>
+</code></programlisting>
 <para>Notice that we provided <command>gmmproc</command> with the path to the
     .m4 convert files, the path to the .defs file, the name of a .hg file, the
     source directory, and the destination directory.</para>
@@ -10157,9 +10157,9 @@ passing the appropriate parameters to that C function. For instance, this
 tells <command>gmmproc</command> how to convert a <classname>GtkTreeView</classname>
 pointer to a <classname>Gtk::TreeView</classname> pointer:
 </para>
-<programlisting>
+<programlisting><code>
 _CONVERSION(`GtkTreeView*',`TreeView*',`Glib::wrap($3)')
-</programlisting>
+</code></programlisting>
 
 <para><literal>$3</literal> will be replaced by the parameter name when this
 conversion is used by <command>gmmproc</command>.
@@ -10169,11 +10169,11 @@ conversion is used by <command>gmmproc</command>.
 Some extra macros make this easier and consistent. Look in &gtkmm;'s .m4 files
 for examples. For instance:
 </para>
-<programlisting>
+<programlisting><code>
 _CONVERSION(`PrintSettings&amp;',`GtkPrintSettings*',__FR2P)
 _CONVERSION(`const PrintSettings&amp;',`GtkPrintSettings*',__FCR2P)
 _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REFPTR_TO_P($3))
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="gmmproc-m4-initializations">
@@ -10195,9 +10195,9 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
   widget in a specified output parameter, an initialization macro such as the
   following would be necessary:
 </para>
-<programlisting>
+<programlisting><code>
 _INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')
-</programlisting>
+</code></programlisting>
 
 <para>
   <literal>$3</literal> will be replaced by the output parameter name of the
@@ -10228,9 +10228,9 @@ _INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')
     <classname>Gtk::Object</classname>.</para>
 <para><function>_CLASS_GOBJECT( C++ class, C class, C casting macro, C++ base class, C base class )</function></para>
 <para>For instance, from <filename>adjustment.hg</filename>:</para>
-<programlisting>
+<programlisting><code>
 _CLASS_GOBJECT(Adjustment, GtkAdjustment, GTK_ADJUSTMENT, Glib::Object, GObject)
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="gmmproc-class-gtkobject">
@@ -10240,9 +10240,9 @@ _CLASS_GOBJECT(Adjustment, GtkAdjustment, GTK_ADJUSTMENT, Glib::Object, GObject)
     <classname>Gtk::Object</classname>, such as a widget or dialog.</para>
 <para><function>_CLASS_GTKOBJECT( C++ class, C class, C casting macro, C++ base class, C base class )</function></para>
 <para>For instance, from <filename>button.hg</filename>:</para>
-<programlisting>
+<programlisting><code>
 _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Widget, GtkWidget)
-</programlisting>
+</code></programlisting>
 <para>You will typically use this macro when the class already derives from
     <classname>Gtk::Object</classname>. For instance, you will use it when wrapping
     a GTK Widget, because <classname>Gtk::Widget</classname> derives from
@@ -10264,9 +10264,9 @@ _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Widget, GtkWidget)
     <function>g_boxed_type_register_static()</function>.</para>
 <para><function>_CLASS_BOXEDTYPE( C++ class, C class, new function, copy function, free function )</function></para>
 <para>For instance, from <classname>Gdk::RGBA</classname>:</para>
-<programlisting>
+<programlisting><code>
 _CLASS_BOXEDTYPE(RGBA, GdkRGBA, NONE, gdk_rgba_copy, gdk_rgba_free)
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="gmmproc-class-boxedtype-static">
@@ -10278,9 +10278,9 @@ _CLASS_BOXEDTYPE(RGBA, GdkRGBA, NONE, gdk_rgba_copy, gdk_rgba_free)
     dynamically.</para>
 <para><function>_CLASS_BOXEDTYPE_STATIC( C++ class, C class )</function></para>
 <para>For instance, for <classname>Gdk::Rectangle</classname>:</para>
-<programlisting>
+<programlisting><code>
 _CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle)
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="gmmproc-class-opaque-copyable">
@@ -10291,9 +10291,9 @@ _CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle)
     default constructor, copy constructor and destructor.</para>
 <para><function>_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, copy function, free function )</function></para>
 <para>For instance, from <classname>Glib::VariantType</classname>:</para>
-<programlisting>
+<programlisting><code>
 _CLASS_OPAQUE_COPYABLE(VariantType, GVariantType, NONE, g_variant_type_copy, g_variant_type_free)
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="gmmproc-class-opaque-refcounted">
@@ -10304,9 +10304,9 @@ _CLASS_OPAQUE_COPYABLE(VariantType, GVariantType, NONE, g_variant_type_copy, g_v
     <classname>Glib::RefPtr</classname>.</para>
 <para><function>_CLASS_OPAQUE_REFCOUNTED( C++ class, C class, new function, ref function, unref function )</function></para>
 <para>For instance, for <classname>Gtk::CssSection</classname>:</para>
-<programlisting>
+<programlisting><code>
 _CLASS_OPAQUE_REFCOUNTED(CssSection, GtkCssSection, NONE, gtk_css_section_ref, gtk_css_section_unref)
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="gmmproc-class-generic">
@@ -10316,9 +10316,9 @@ _CLASS_OPAQUE_REFCOUNTED(CssSection, GtkCssSection, NONE, gtk_css_section_ref, g
     specialized category.</para>
 <para><function>_CLASS_GENERIC( C++ class, C class )</function></para>
 <para>For instance, for <classname>Gdk::TimeCoord</classname>:</para>
-<programlisting>
+<programlisting><code>
 _CLASS_GENERIC(TimeCoord, GdkTimeCoord)
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="gmmproc-class-interface">
@@ -10330,18 +10330,18 @@ _CLASS_GENERIC(TimeCoord, GdkTimeCoord)
 <para><function>_CLASS_INTERFACE( C++ class, C class, C casting macro, C interface struct, Base C++ class (optional), Base C class (optional) )</function></para>
 <para>
 For instance, from <filename>celleditable.hg</filename>:</para>
-<programlisting>
+<programlisting><code>
 _CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)
-</programlisting>
+</code></programlisting>
 <para>Two extra optional parameters were once added, for the case that the interface derives
 from another interface, which was believed to be the case when the GInterface has another
 GInterface as a prerequisite. This is a misunderstanding, though.
 When GInterface A has GInterface B as a prerequisite, it means that every class
 that implements A shall also implement B.
 For instance, from <filename>loadableicon.hg</filename> in glibmm-2.4:</para>
-<programlisting>
+<programlisting><code>
 _CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)
-</programlisting>
+</code></programlisting>
 </section>
 
 </section>
@@ -10364,7 +10364,7 @@ _CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIfac
     corresponding <function>_WRAP_CREATE()</function> in the public section.
     This prevents the class from being instantiated without using a
     <classname>RefPtr</classname>. For instance:</para>
-<programlisting>
+<programlisting><code>
 class TextMark : public Glib::Object
 {
   _CLASS_GOBJECT(TextMark, GtkTextMark, GTK_TEXT_MARK, Glib::Object, GObject)
@@ -10374,7 +10374,7 @@ protected:
 
 public:
   _WRAP_CREATE(const Glib::ustring&amp; name, bool left_gravity = true)
-</programlisting>
+</code></programlisting>
 
 <section xml:id="gmmproc-ctor-default">
 <title>_CTOR_DEFAULT</title>
@@ -10417,12 +10417,12 @@ public:
     .ccg file to save some work. The <function>_CONSTRUCT</function> macro takes
     a series of property names and values. For instance, from
     <filename>button.ccg</filename>:</para>
-<programlisting>
+<programlisting><code>
 Button::Button(const Glib::ustring&amp; label, bool mnemonic)
 :
   _CONSTRUCT("label", label.c_str(), "use_underline", gboolean(mnemonic))
 {}
-</programlisting>
+</code></programlisting>
 </section>
 
 </section>
@@ -10478,7 +10478,7 @@ assignment operator in <function>_CLASS_GOBJECT</function> and
 <function>_CLASS_GTKOBJECT</function>.
 </para>
 <para>For example:</para>
-<programlisting>
+<programlisting><code>
 class Derived : public Glib::Object
 {
   _CLASS_GOBJECT(Derived, GDerived, G_DERIVED, Glib::Object, GObject)
@@ -10490,7 +10490,7 @@ public:
   Derived&amp; operator=(Derived&amp;&amp; src) noexcept;
   // ...
 };
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="gmmproc-custom-wrap-new">
@@ -10530,9 +10530,9 @@ function in <function>_CLASS_GOBJECT</function>, <function>_CLASS_BOXEDTYPE</fun
 <para>This macro generates the C++ method to wrap a C function.</para>
 <para><function>_WRAP_METHOD( C++ method signature, C function name)</function></para>
 <para>For instance, from <filename>entry.hg</filename>:</para>
-<programlisting>
+<programlisting><code>
 _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
-</programlisting>
+</code></programlisting>
 <para>The C function (e.g. <function>gtk_entry_set_text</function>) is described
     more fully in the .defs file, and the <filename>convert*.m4</filename> files
     contain the necessary conversion from the C++ parameter type to the C
@@ -10660,7 +10660,7 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
         for the m4 conversion rule, which you should probably put directly into
         the .hg file because the ownership depends on the
         function rather than the type. For instance:</para>
-<programlisting>#m4 _CONVERSION(`GSList*',`std::vector&lt;Widget*&gt;',`Glib::SListHandler&lt;Widget*&gt;::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')</programlisting></listitem>
+<programlisting><code>#m4 _CONVERSION(`GSList*',`std::vector&lt;Widget*&gt;',`Glib::SListHandler&lt;Widget*&gt;::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')</code></programlisting></listitem>
 </itemizedlist>
 </para>
 </section>
@@ -10674,9 +10674,9 @@ _WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
     that would be generated if the method was generated.</para>
 <para><function>_WRAP_METHOD_DOCS_ONLY(C function name)</function></para>
 <para>For instance, from <filename>recentinfo.hg</filename>:</para>
-<programlisting>
+<programlisting><code>
 _WRAP_METHOD_DOCS_ONLY(gtk_recent_info_get_applications)
-</programlisting>
+</code></programlisting>
 <para>There are some optional extra arguments:
 <variablelist>
     <varlistentry>
@@ -10727,10 +10727,10 @@ _IGNORE_SIGNAL(C signal name 1, C signal name 2, etc)
 _IGNORE_PROPERTY(C property name 1, C property name 2, etc)</function></literallayout>
 </para>
 <para>For instance, from <filename>flowbox.hg</filename>:</para>
-<programlisting>
+<programlisting><code>
 _IGNORE(gtk_flow_box_set_filter_func, gtk_flow_box_set_sort_func)
 _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="gmmproc-wrap-signal">
@@ -10744,9 +10744,9 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
     conversions.</para>
 <para><function>_WRAP_SIGNAL( C++ signal handler signature, C signal name)</function></para>
 <para>For instance, from <filename>button.hg</filename>:</para>
-<programlisting>
+<programlisting><code>
 _WRAP_SIGNAL(void clicked(),"clicked")
-</programlisting>
+</code></programlisting>
 <para>Signals usually have function pointers in the GTK struct, with a
     corresponding enum value and a <function>g_signal_new()</function> in the
     .c file.</para>
@@ -10849,9 +10849,9 @@ _WRAP_SIGNAL(void clicked(),"clicked")
     discover appropriate type conversions.</para>
 <para><function>_WRAP_PROPERTY(C property name, C++ type)</function></para>
 <para>For instance, from <filename>button.hg</filename>:</para>
-<programlisting>
+<programlisting><code>
 _WRAP_PROPERTY("label", Glib::ustring)
-</programlisting>
+</code></programlisting>
 <para>There are some optional extra arguments:
 <variablelist>
     <varlistentry>
@@ -10878,9 +10878,9 @@ _WRAP_PROPERTY("label", Glib::ustring)
 <para>This macro generates the C++ method to wrap a virtual C function.</para>
 <para><function>_WRAP_VFUNC( C++ method signature, C function name)</function></para>
 <para>For instance, from <filename>widget.hg</filename>:</para>
-<programlisting>
+<programlisting><code>
 _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
-</programlisting>
+</code></programlisting>
 <para>The C function (e.g. <function>get_request_mode</function>) is described
     more fully in the <filename>*_vfuncs.defs</filename> file, and the
     <filename>convert*.m4</filename> files contain the necessary conversion from
@@ -11019,9 +11019,9 @@ _WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
 <para>This macro generates initialization code for the interface.</para>
 <para><function>_IMPLEMENTS_INTERFACE(C++ interface name)</function></para>
 <para>For instance, from <filename>grid.hg</filename>:</para>
-<programlisting>
+<programlisting><code>
 _IMPLEMENTS_INTERFACE(Orientable)
-</programlisting>
+</code></programlisting>
 <para>There is one optional extra argument:
 <variablelist>
     <varlistentry>
@@ -11040,9 +11040,9 @@ _IMPLEMENTS_INTERFACE(Orientable)
 <para>This macro generates a C++ enum to wrap a C enum. You must specify the desired C++ name and
     the name of the underlying C enum.</para>
 <para>For instance, from <filename>enums.hg</filename>:</para>
-<programlisting>
+<programlisting><code>
 _WRAP_ENUM(Orientation, GtkOrientation)
-</programlisting>
+</code></programlisting>
 <para>There are some optional extra arguments:
 <variablelist>
   <varlistentry>
@@ -11057,9 +11057,9 @@ _WRAP_ENUM(Orientation, GtkOrientation)
         type in _WRAP_PROPERTY. It would cause a runtime error, when the generated
         <methodname>property_*()</methodname> method is called.</para>
       <para>For example, from <filename>icontheme.hg</filename>:</para>
-      <programlisting>
+      <programlisting><code>
 _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
-      </programlisting>
+      </code></programlisting>
     </listitem>
   </varlistentry>
   <varlistentry>
@@ -11069,9 +11069,9 @@ _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
         for the C enum. Use this parameter if <command>gmmproc</command> can't
         deduce the correct function name from the name of the C enum type.</para>
       <para>For example, from <filename>dbusproxy.hg</filename> in glibmm:</para>
-      <programlisting>
+      <programlisting><code>
 _WRAP_ENUM(ProxyFlags, GDBusProxyFlags, gtype_func g_dbus_proxy_flags_get_type)
-      </programlisting>
+      </code></programlisting>
     </listitem>
   </varlistentry>
   <varlistentry>
@@ -11081,9 +11081,9 @@ _WRAP_ENUM(ProxyFlags, GDBusProxyFlags, gtype_func g_dbus_proxy_flags_get_type)
         within a class. Such an enum is scoped like an enum class, but unlike an
         enum class, it can be implicitly converted to <type>int</type>.</para>
       <para>For example, from <filename>dialog.hg</filename>:</para>
-      <programlisting>
+      <programlisting><code>
 _WRAP_ENUM(ResponseType, GtkResponseType, CONV_TO_INT)
-      </programlisting>
+      </code></programlisting>
     </listitem>
   </varlistentry>
   <varlistentry>
@@ -11092,9 +11092,9 @@ _WRAP_ENUM(ResponseType, GtkResponseType, CONV_TO_INT)
       <para>Substitutes (part of) the name of one or more enum constants.
         You can add any number of substitutions.</para>
       <para>For example, from <filename>iochannel.hg</filename> in glibmm:</para>
-      <programlisting>
+      <programlisting><code>
 _WRAP_ENUM(SeekType, GSeekType, NO_GTYPE, s#^SEEK_#SEEK_TYPE_#)
-      </programlisting>
+      </code></programlisting>
     </listitem>
   </varlistentry>
   <varlistentry>
@@ -11138,9 +11138,9 @@ of the corresponding C enum, and the prefix for the C enum values.</para>
 <para>This exception can then be thrown by methods which are generated from
 _WRAP_METHOD() with the errthrow option.</para>
 <para>For instance, from <filename>pixbuf.hg</filename>:</para>
-<programlisting>
+<programlisting><code>
 _WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)
-</programlisting>
+</code></programlisting>
 <para>_WRAP_GERROR() accepts the same optional arguments as _WRAP_ENUM() (though
 CONV_TO_INT is ignored because all exception class enums are plain enums within a class).
 </para>
@@ -11157,7 +11157,7 @@ CONV_TO_INT is ignored because all exception class enums are plain enums within 
   <para>
     For example, in <filename>rectangle.hg</filename>:
   </para>
-  <programlisting>_MEMBER_GET(x, x, int, int)</programlisting>
+  <programlisting><code>_MEMBER_GET(x, x, int, int)</code></programlisting>
 </section>
 
 <section xml:id="gmmproc-member-get-set-ptr">
@@ -11171,10 +11171,10 @@ CONV_TO_INT is ignored because all exception class enums are plain enums within 
   <para><function>_MEMBER_SET_PTR(C++ name, C name, C++ type, C type)</function></para>
   <para>For example, for <classname>Pango::Analysis</classname> in <filename>item.hg</filename>:
   </para>
-<programlisting>
+<programlisting><code>
 // _MEMBER_GET_PTR(engine_lang, lang_engine, EngineLang*, PangoEngineLang*)
 // It's just a comment. It's difficult to find a real-world example.
-</programlisting>
+</code></programlisting>
 </section>
 
 <section xml:id="gmmproc-member-get-set-gobject">
@@ -11187,9 +11187,9 @@ CONV_TO_INT is ignored because all exception class enums are plain enums within 
   <para><function>_MEMBER_GET_GOBJECT(C++ name, C name, C++ type, C type)</function></para>
   <para><function>_MEMBER_SET_GOBJECT(C++ name, C name, C++ type, C type)</function></para>
   <para>For example, in Pangomm, <filename>layoutline.hg</filename>:</para>
-<programlisting>
+<programlisting><code>
 _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
-</programlisting>
+</code></programlisting>
 </section>
 
 </section>
@@ -11211,29 +11211,29 @@ _MEMBER_GET_GOBJECT(layout, layout, Pango::Layout, PangoLayout*)
       in the C function, virtual function or signal.  For example, say that the
       following C function were being wrapped as a C++ method for the
       <classname>Gtk::Widget</classname> class:</para>
-<programlisting>
+<programlisting><code>
 void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device,
   GdkEventMask events);
-</programlisting>
+</code></programlisting>
     <para>
       However, changing the order of the C++ method's two parameters is
       necessary.  Something like the following would wrap the function as a C++
       method with a different order for the two parameters:</para>
-<programlisting>
+<programlisting><code>
 _WRAP_METHOD(void set_device_events(Gdk::EventMask events{events},
   const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{device}),
   gtk_widget_set_device_events)
-</programlisting>
+</code></programlisting>
       <para>The <literal>{c_param_name}</literal> following the method parameter
       names tells <command>gmmproc</command> to map the C++ parameter to the
       specified C parameter within the <literal>{}</literal>.  Since the C++
       parameter names correspond to the C ones, the above could be re-written
       as:</para>
-<programlisting>
+<programlisting><code>
 _WRAP_METHOD(void set_device_events(Gdk::EventMask events{.},
   const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{.}),
   gtk_widget_set_device_events)
-</programlisting>
+</code></programlisting>
     <warning>
       <para>
         Please note that when reordering parameters for a
@@ -11257,19 +11257,19 @@ _WRAP_METHOD(void set_device_events(Gdk::EventMask events{.},
       specified optional parameter.  For example, say that the following
       <function>*_new()</function> function were being wrapped as a constructor
       in the <classname>Gtk::ToolButton</classname> class:</para>
-<programlisting>
+<programlisting><code>
 GtkToolItem* gtk_tool_button_new(GtkWidget* icon_widget, const gchar* label);
-</programlisting>
+</code></programlisting>
       <para>Also, say that the C API allowed NULL for the function's
       <parameter>label</parameter> parameter so that that parameter is optional.
       It would be possible to have <command>gmmproc</command> generate the
       original constructor (with all the parameters) along with an additional
       constructor without that optional parameter by appending a
       <literal>{?}</literal> to the parameter name like so:</para>
-<programlisting>
+<programlisting><code>
 _WRAP_CTOR(ToolButton(Widget&amp; icon_widget, const Glib::ustring&amp; label{?}),
   gtk_tool_button_new)
-</programlisting>
+</code></programlisting>
       <para>In this case, two constructors would be generated: One with the optional
       parameter and one without it.
     </para>
@@ -11287,47 +11287,47 @@ _WRAP_CTOR(ToolButton(Widget&amp; icon_widget, const Glib::ustring&amp; label{?}
       <literal>{OUT}</literal> to the output parameter name.  For example, if
       <function>gtk_widget_get_request_mode()</function> is declared as the
       following:</para>
-<programlisting>
+<programlisting><code>
 GtkSizeRequestMode gtk_widget_get_request_mode(GtkWidget* widget);
-</programlisting>
+</code></programlisting>
       <para>And having the C++ method set an output parameter is desired instead of
       returning a <type>SizeRequestMode</type>, something like the following
       could be used:</para>
-<programlisting>
+<programlisting><code>
 _WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{OUT}) const,
   gtk_widget_get_request_mode)
-</programlisting>
+</code></programlisting>
       <para>The <literal>{OUT}</literal> appended to the name of the
       <parameter>mode</parameter> output parameter tells
       <command>gmmproc</command> to place the return of the C function in that
       output parameter.  In this case, however, a necessary initialization
       macro like the following would also have to be specified:</para>
-<programlisting>
+<programlisting><code>
 _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = (SizeRequestMode)($4)')
-</programlisting>
+</code></programlisting>
       <para>Which could also be written as:</para>
-<programlisting>
+<programlisting><code>
 _INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')
-</programlisting>
+</code></programlisting>
     <para>
       <function>_WRAP_METHOD()</function> also supports setting C++ output
       parameters from C output parameters if the C function being wrapped has
       any.  Suppose, for example, that we want to wrap the following C function
       that returns a value in its C output parameter
       <parameter>out_mime_type</parameter>:</para>
-<programlisting>
+<programlisting><code>
 GInputStream* gdk_clipboard_read_finish(GdkClipboard* clipboard,
   GAsyncResult* result, const char** out_mime_type, GError** error)
-</programlisting>
+</code></programlisting>
       <para>To have <command>gmmproc</command> place the value returned in the C++
       <parameter>out_mime_type</parameter> output parameter, something like the
       following <function>_WRAP_METHOD()</function> macro could be used:
       </para>
-<programlisting><![CDATA[
+<programlisting><code><![CDATA[
 _WRAP_METHOD(Glib::RefPtr<Gio::InputStream> read_finish(
   const Glib::RefPtr<Gio::AsyncResult>& result,
   Glib::ustring& out_mime_type{>>}), gdk_clipboard_read_finish, errthrow)
-]]></programlisting>
+]]></code></programlisting>
       <para>The <literal>{&gt;&gt;}</literal> following the <parameter>out_mime_type</parameter>
       parameter name indicates that the C++ output parameter should be set from
       the value returned in the C parameter from the C function.
@@ -11338,9 +11338,9 @@ _WRAP_METHOD(Glib::RefPtr<Gio::InputStream> read_finish(
       <function>_INITIALIZATION()</function> describing how to set a
       <classname>Glib::ustring&amp;</classname> from a
       <classname>const char**</classname> such as the following:</para>
-<programlisting><![CDATA[
+<programlisting><code><![CDATA[
 _INITIALIZATION(`Glib::ustring&',`const char*',`$3 = Glib::convert_const_gchar_ptr_to_ustring($4)')
-]]></programlisting>
+]]></code></programlisting>
   </section>
 
   <section xml:id="gmmproc-string-parameter-processing">
@@ -11418,13 +11418,13 @@ _INITIALIZATION(`Glib::ustring&',`const char*',`$3 = Glib::convert_const_gchar_p
     files. This function should initialize your dependencies (such as the C
     function, and &gtkmm;) and call your generated
     <function>wrap_init()</function> function. For instance:</para>
-<programlisting>
+<programlisting><code>
 void init()
 {
   Gtk::init_gtkmm_internals(); //Sets up the g type system and the Glib::wrap() table.
   wrap_init(); //Tells the Glib::wrap() table about the libsomethingmm classes.
 }
-</programlisting>
+</code></programlisting>
 <para>The implementation of the <function>wrap_init()</function> method in
     <filename>wrap_init.cc</filename> is generated by
     <filename>generate_wrap_init.pl</filename>, but the declaration in
@@ -11441,14 +11441,14 @@ void init()
 <title>Unable to predeclare structs</title>
 
 <para>By convention, structs are declared in glib/GTK-style headers like so:</para>
-<programlisting>
+<programlisting><code>
 typedef struct _ExampleWidget ExampleWidget;
 
 struct _ExampleWidget
 {
   ...
 };
-</programlisting>
+</code></programlisting>
 <para>The extra typedef allows the struct to be used in a header without including
   its full definition, simply by predeclaring it, by repeating that typedef.
   This means that you don't have to include the C library's header in your C++ header,
@@ -11456,16 +11456,16 @@ struct _ExampleWidget
   this technique was used, so you will see compiler errors if that is not the case.</para>
 <para>
 This compiler error might look like this:</para>
-<programlisting>
+<programlisting><code>
 example-widget.h:56: error: using typedef-name 'ExampleWidget' after 'struct'
 ../../libexample/libexamplemm/example-widget.h:34: error: 'ExampleWidget' has a previous declaration here
 make[4]: *** [example-widget.lo] Error 1
-</programlisting>
+</code></programlisting>
 <para>or this:</para>
-<programlisting>
+<programlisting><code>
 example-widget.h:60: error: '_ExampleWidget ExampleWidget' redeclared as different kind of symbol
 ../../libexample/libexamplemm/example-widget.h:34: error: previous declaration of 'typedef struct _ExampleWidget ExampleWidget'
-</programlisting>
+</code></programlisting>
 <para>This is easy to correct in the C library, so do send a patch to the relevant maintainer.</para>
 </section>
 
@@ -11478,12 +11478,12 @@ example-widget.h:60: error: '_ExampleWidget ExampleWidget' redeclared as differe
     The input parameters are supplied to <function>g_object_new()</function>
     along with the names of the properties for which they are values. For
     instance,</para>
-<programlisting>
+<programlisting><code>
 GtkWidget* example_widget_new(int something, const char* thing)
 {
         return g_object_new (EXAMPLE_TYPE_WIDGET, "something", something, "thing", thing, NULL);
 }
-</programlisting>
+</code></programlisting>
 <para>This allows language bindings to implement their own equivalents (such as
     C++ constructors), without using the <function>*_new()</function> function.
     This is often necessary so that they can actually instantiate a derived
@@ -11496,7 +11496,7 @@ GtkWidget* example_widget_new(int something, const char* thing)
 <para>Another workaround is to add a <function>*_construct()</function> function
     that the C++ constructor can call after instantiating its own type. For
     instance,</para>
-<programlisting>
+<programlisting><code>
 GtkWidget* example_widget_new(int something, const char* thing)
 {
         ExampleWidget* widget;
@@ -11510,7 +11510,7 @@ void example_widget_construct(ExampleWidget* widget, int something, const char* 
         widget-&gt;priv-&gt;thing = thing;
         do_something(something);
 }
-</programlisting>
+</code></programlisting>
 <para>Adding properties, and ensuring that they interact properly with each
     other, is relatively difficult to correct in the C library, but it is
     possible, so do file a bug and try to send a patch to the relevant
@@ -11536,8 +11536,8 @@ void example_widget_construct(ExampleWidget* widget, int something, const char* 
   documentation to make it more appropriate for a C++ API.</para>
 <para>
 For instance,</para>
-<programlisting>./docextract_to_xml.py -s ~/checkout/gnome/gtk/gtk/ &gt; gtk_docs.xml
-</programlisting>
+<programlisting><code>./docextract_to_xml.py -s ~/checkout/gnome/gtk/gtk/ &gt; gtk_docs.xml
+</code></programlisting>
 <para>Because this automatic transformation is not always appropriate, you might
     want to provide hand-written text for a particular method. You can do this
     by copying the XML node for the function from your
