@@ -3795,7 +3795,7 @@ you should add them to the <classname>TagTable</classname>. For instance:
 </para>
 <programlisting><code>auto refTagTable = Gtk::TextBuffer::TagTable::create();
 refTagTable-&gt;add(refTagMatch);
-//Hopefully a future version of &gtkmm; will have a set_tag_table() method,
+//Hopefully a future version of gtkmm will have a set_tag_table() method,
 //for use after creation of the buffer.
 auto refBuffer = Gtk::TextBuffer::create(refTagTable);</code></programlisting>
 
