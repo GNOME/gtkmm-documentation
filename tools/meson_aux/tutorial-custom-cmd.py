@@ -202,6 +202,7 @@ def dblatex():
     '-P', 'toc.section.depth=1',
     '-P', 'paper.type=a4paper',
     '-P', 'doc.collab.show=1',
+    '-P', 'output.quietly=1',
     '-P', 'latex.output.revhistory=0',
   ]
   figures_dir_parent = os.path.dirname(figures_dir)
