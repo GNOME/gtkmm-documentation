@@ -199,6 +199,7 @@ custom_target('html_index.html',
   command: [
     python3, tutorial_custom_cmd, 'html',
     allow_network_access,
+    project_source_root / 'docs' / 'tutorial' / 'book.xsl',
     '@INPUT@',
     '@OUTPUT@',    
   ],
@@ -207,8 +208,20 @@ custom_target('html_index.html',
   install_dir: tutorialdir
 )
 
+# highlight.js files were downloaded from
+# https://highlightjs.org/download. Choose 'cpp' option (which
+# contains only C++ related files) and click 'Download'. This should
+# download a .zip containing .js and huge set of .css files (like
+# 'intellij-light.min.css' etc). 'highlight.min.css' is actually
+# 'intellij-light.min.css'.
+style_files = [
+  'style.css',
+  'highlight.js/highlight.min.css',
+  'highlight.js/highlight.min.js',
+]
+
 # Install extra files in the html directory.
-install_data('style.css', install_dir: tutorial_htmldir)
+install_data(style_files, install_dir: tutorial_htmldir)
 install_data(tutorial_C_figures, install_dir: tutorial_figuresdir)
 install_data(tutorial_icons, install_dir: tutorial_iconsdir)
 
