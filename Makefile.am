@@ -12,10 +12,13 @@ dist_noinst_SCRIPTS = autogen.sh
 EXTRA_DIST = \
   meson.build \
   meson_options.txt \
+  docs/tutorial/book.xsl \
   docs/tutorial/can_use_xmllint.xml \
   docs/tutorial/insert_example_code.py \
   docs/tutorial/meson.build \
   docs/tutorial/LINGUAS \
+  docs/tutorial/highlight.js/highlight.min.css \
+  docs/tutorial/highlight.js/highlight.min.js \
   examples/meson.build \
   examples/book/meson.build \
   examples/book/buildapp/meson.build \
