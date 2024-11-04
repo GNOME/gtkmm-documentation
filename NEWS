@@ -1,3 +1,20 @@
+4.12.0 (stable) 2024-11-04:
+
+* dropdown/complex example: Add a missing signal_unbind().connect()
+  (Dawid Chemloul) Merge request !22
+* book/buildapp/step6, step7, step8, step9 and book/searchbar examples:
+  Use Gtk::SearchEntry2 if gtkmm-4.0 >= 4.13.2
+* index-in.docbook: Avoid <programlisting> elements within <para> elements.
+  Can confuse the translation tools (itstool and friends)
+  (Kjell Ahlstedt)
+* Remove link to developer-old.gnome.org
+  (Kjell Ahlstedt) Issue #21 (Andre Klapper)
+* Add example and description of mouse events
+  (Kjell Ahlstedt) Issue #23 (Petr Talla)
+* Add support for code syntax highlighting in generated html files
+  (Sid) Issue #24, merge request !23
+
+
 4.10.1 (stable):
 
 * Update the "Event signals" section
@@ -595,142 +612,6 @@ Updated translations:
 
 Just a version increase.
 
-2.99.4: (unstable):
 
-* Remove use of Gtk::Application because it was removed from gtkmm 3.0.
-  (Murray Cumming)
-* Builder section: Remove a now non-existent property.
-  (Murray Cumming)
-* ComboBox section: Mention set_entry_text_column() instead of set_text_column().
-  (Kalev Lember)
-* Add basic information on Gtk::Grid.
-  (David King)
-* Modify the custom_container and custom_widget examples.
-  (Kjell Ahlstedt)
-* Replace gtkmm-2.24 mentions with gtkmm-3.0.
-  (David King)
-* Build: Fix the installation path.
-  (David King)
-
-2.99.3: (ustable):
-
-* Ported to the latest gtkmm API.
-  (Murray Cumming, Krzesimir Nowak)
-* Modified the custom_container and custom_widget examples to use
-  the extended layout API.
-  (Kjell Ahlstedt)
-* Fix the print preview dialog in the printing/advanced example.
-  (Kjell Ahlstedt)
-* Build: Check for mm-common.
-  (Kjell Ahlstedt) Bug #628713 (Patricia Santana Cruz)
-* Book: Fix some typos.
-  (Chris Kühl)
-
-2.91.6: (unstable):
-
-* Ported to the recent gtkmm API, using Gdk::RGBA and Gtk::StyleContext
-  and the slightly-changed ComboBoxText API.
-
-2.91.5: (unstable):
-
-* Removed use of widgets removed from gtkmm.
-
-2.91.4: (unstable):
-
-* Improved the clipboard/ideal example.
-	(Kjell Ahlstedt)
-* Label section: Fix a /<b> -> </b> typo.
-  (Murray Cumming)
-* Rearranged an include to fix the build due to a not-yet-explained
-  compiler error.
-  (Murray Cumming)
-
-2.91.2: (unstable):
-
-* Book:
-  - Remove mentions of the removed STL-style container APIs.
-  - Fix/Hide remaining TODO comments.
-  - Mark examples as being for gtkmm 3, not gtkmm 2.
-
-2.91.1: (unstable)
-
-* Book: Combo Boxes: Update for the removal of ComboBoxEntry.
-*	Fix the build with latest gtkmm.
-(Murray Cumming)
-
-2.91.0: (unstable)
-
-* Adapt example code to (unstable) gtkmm-3.0.
-* Wrapping C Libraries with gmmproc:
-  Correct the skeletonmm directory paths.
-  Bug #627425. (Geodebay)
-
-This is the master branch. See also the gtkmm-2-22 branch.
-
-2010-07-21  Murray Cumming  <murrayc@murrayc.com>
-
-	Buttons chapter: Remove text about non-existant XPMLabelBox class.
-
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: The mention of an XPMLabelBox
-	was very odd and probably about a very very old version of the API.
-
-2010-07-16  Murray Cumming  <murrayc@murrayc.com>
-
-	Fix the build with latest gtkmm-2.22 with --enable-warnings=fatal.
-
-	Generally include gtkmm/box.h before other gtkmm headers and include
-	gtkmm/main.h after other gtkmm headers. Not pleasant.
-
-2010-06-01  Murray Cumming  <murrayc@murrayc.com>
-
-	Remove orphaned undef.
-
-	* examples/book/treeview/popup/treeview_withpopup.cc: Remove an undef
-    still left over from the removal.
-
-2010-06-01  Murray Cumming  <murrayc@murrayc.com>
-
-	Book: Remove the optional API appendix.
-
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: Remove the appendix about the
-    reduced API because we no longer offer it in glibmm or gtkmm.
-
-2010-05-31  Murray Cumming  <murrayc@murrayc.com>
-
-	Finish removal of use of reduced API.
-
-	* examples/book/treeview/drag_and_drop/treemodel_dnd.cc: Removed some
-	orhpaned #endif lines left from my previous commit.
-
-2010-05-31  Murray Cumming  <murrayc@murrayc.com>
-
-	Remove use of reduced API.
-
-	* examples/*.[h|cc]: Remove all ifdefed code that supported the various
-	reduced API, because we no longer support that in latest glibmm and gtkmm.
-
-2010-05-07  David King  <davidk@openismus.com>
-
-	Improve the Assistant example
-
-	* examples/book/assistant/*: Move examplewindow.[cc|h] to
-	exampleassistant.[cc|h]]. Add another window which opens the assistant
-	and receives the result from it.
-
-2010-05-07  David King  <davidk@openismus.com>
-
-	Recommend non-deprecated Tooltip API in Tooltips chapter
-
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: Remove text that recommended
-	use of the deprecated Tooltips API, and suggest the Tooltip API
-	instead.
-
-2010-05-07  David King  <davidk@openismus.com>
-
-	Update copyright years for tutorial
-
-	* docs/tutorial/C/gtkmm-tutorial-in.xml: Update copyright years to
-	include all years, not a range.
-
-gtkmm-documentation-2 news has been removed. It can be found in releases
-prior to gtkmm-documentation 3.95.1.
+Older gtkmm-documentation news has been removed. It can be found in releases
+prior to gtkmm-documentation 4.12.0 or (even older news) 3.95.1.
