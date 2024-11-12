@@ -8755,6 +8755,12 @@ you must use <function>Glib::make_refptr_for_instance()</function> in your
 with a special deleter, which handles the reference-count for the wrapped C object.
 </para>
 
+<para>
+<classname>Glib::RefPtr</classname> is not used for storing widgets derived from
+<classname>Gtk::Widget</classname>. Widgets have public constructors instead of
+protected constructors and <methodname>create()</methodname> methods.
+</para>
+
 <para><link xlink:href="&url_refdocs_base_glib_html;group__RefPtr.html">Reference</link></para>
 
 <para>A smartpointer acts much like a normal pointer. Here are a few examples.</para>
