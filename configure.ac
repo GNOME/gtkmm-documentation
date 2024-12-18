@@ -3,7 +3,7 @@
 AC_PREREQ([2.59])
 AC_INIT([gtkmm-documentation], [3.24.4],
         [https://gitlab.gnome.org/GNOME/gtkmm-documentation/issues/],
-        [gtkmm-documentation], [http://www.gtkmm.org/])
+        [gtkmm-documentation], [https://gtkmm.gnome.org/])
 
 AC_CONFIG_SRCDIR([examples/book/box/packbox.cc])
 AC_CONFIG_AUX_DIR([build])

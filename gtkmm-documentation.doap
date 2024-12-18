@@ -12,7 +12,7 @@ Programming with gtkmm. This tutorial explains key concepts of the gtkmm
 C++ API for creating user interfaces. It also introduces the main user
 interface elements ("widgets").
   </description>
-  <homepage rdf:resource="https://www.gtkmm.org/" />
+  <homepage rdf:resource="https://gtkmm.gnome.org/" />
   <developer-forum rdf:resource="https://discourse.gnome.org/tag/cplusplus/" />
   <download-page rdf:resource="https://download.gnome.org/sources/gtkmm-documentation/" />
   <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/gtkmm-documentation/issues/" />
