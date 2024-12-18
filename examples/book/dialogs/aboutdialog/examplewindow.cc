@@ -52,7 +52,7 @@ ExampleWindow::ExampleWindow()
   m_Dialog.set_comments("This is just an example application.");
   m_Dialog.set_license("LGPL");
 
-  m_Dialog.set_website("http://www.gtkmm.org");
+  m_Dialog.set_website("https://gtkmm.gnome.org");
   m_Dialog.set_website_label("gtkmm website");
 
   std::vector<Glib::ustring> list_authors;

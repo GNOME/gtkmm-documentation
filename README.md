@@ -19,7 +19,7 @@ and are installed at expected locations, the commands make no network accesses.
 # General information
 
 Web site
- - https://www.gtkmm.org
+ - https://gtkmm.gnome.org
 
 Download location
  - https://download.gnome.org/sources/gtkmm-documentation
