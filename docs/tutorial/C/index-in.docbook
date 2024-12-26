@@ -305,8 +305,8 @@ be downloaded from <link xlink:href="https://download.gnome.org/sources/gtkmm/"/
 developers encourage its use on the win32 platform. However, Windows has no standard
 installation system for development libraries. Please see the
 <link xlink:href="https://wiki.gnome.org/Projects/gtkmm/MSWindows">Windows Installation</link>
-page or the <link linkend="sec-windows-installation">&gtkmm; and Win32</link> appendix
-for Windows-specific installation instructions and notes.</para>
+page (somewhat outdated) or the <link linkend="sec-windows-installation">&gtkmm; and Win32</link>
+appendix for Windows-specific installation instructions and notes.</para>
 </section>
 
 </chapter>
@@ -9536,20 +9536,37 @@ practical - and sensible - to subclass a button for that purpose.
     <para>
       &gtkmm; currently works with the
       <link xlink:href="http://mingw.org/">MinGW/GCC compiler</link> with a compiler version
-      that supports C++17, such as gcc 7 or 8. It also works with Microsoft
+      that supports C++17, such as gcc 7 or later. It also works with Microsoft
       Visual C++ 2017 15.7.x or later (including the freely available express/community
       editions) on the Windows platform. There is an
-      <link xlink:href="ftp://ftp.gnome.org/pub/GNOME/binaries/win32/gtkmm">installer</link>
+      <link xlink:href="https://download.gnome.org/binaries/win32/gtkmm">installer</link>
       available for &gtkmm; on Microsoft Windows, but as of this writing
-      (October 2020) it has not been updated for a long time.
+      (December 2024) it only contains an installer for gtkmm2.
       Please be aware that although normally it is fine to mix builds done with
       Visual Studio 2017 and 2019, please do not do so when building
       &gtkmm; with its -mm dependencies.
     </para>
-    <para>Refer to the <link xlink:href="&url_gtkmm_base;README.win32">README.win32</link>,
-    as well as the <link xlink:href="&url_gtkmm_base;MSVC_NMake/README">README</link>
-    files in the &gtkmm;, pangomm and glibmm for instructions on how to build &gtkmm; on Windows.
+    <para>There are README files, describing how to build &gtkmm; and its dependencies
+      on Windows:
     </para>
+    <itemizedlist>
+    <listitem>
+    <para>libsigc++: <link xlink:href="https://github.com/libsigcplusplus/libsigcplusplus/blob/master/MSVC_NMake/MSVC-Builds.md">MSVC_NMake/MSVC-Builds.md</link></para>
+    </listitem>
+    <listitem>
+    <para>glibmm: <link xlink:href="https://gitlab.gnome.org/GNOME/glibmm/tree/master/README.win32.md">README.win32.md</link></para>
+    </listitem>
+    <listitem>
+    <para>cairomm: <link xlink:href="https://gitlab.freedesktop.org/cairo/cairomm/-/blob/master/MSVC_NMake/MSVC-Builds.md">MSVC_NMake/MSVC-Builds.md</link></para>
+    </listitem>
+    <listitem>
+    <para>pangomm: <link xlink:href="https://gitlab.gnome.org/GNOME/pangomm/tree/master/README.win32.md">README.win32.md</link></para>
+    </listitem>
+    <listitem>
+    <para>gtkmm: <link xlink:href="&url_gtkmm_base;README.win32.md">README.win32.md</link>,
+      <link xlink:href="&url_gtkmm_base;MSVC_NMake/README">MSVC_NMake/README</link></para>
+    </listitem>
+    </itemizedlist>
 </appendix>
 
 <appendix xml:id="chapter-working-with-source">
