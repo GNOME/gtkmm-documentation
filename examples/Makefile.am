@@ -73,6 +73,7 @@ check_PROGRAMS =					\
 	book/headerbar/example				\
 	book/helloworld/helloworld			\
 	book/helloworld2/helloworld2			\
+	book/i18n/example					\
 	book/idle/idle					\
 	book/infobar/example				\
 	book/input/example				\
@@ -478,6 +479,11 @@ book_helloworld2_helloworld2_SOURCES =	\
 	book/helloworld2/helloworld.cc	\
 	book/helloworld2/helloworld.h	\
 	book/helloworld2/main.cc
+
+book_i18n_example_SOURCES =		\
+	book/i18n/examplewindow.cc	\
+	book/i18n/examplewindow.h	\
+	book/i18n/main.cc
 
 book_idle_idle_SOURCES =		\
 	book/idle/idleexample.cc	\

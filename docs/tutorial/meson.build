@@ -105,6 +105,7 @@ tutorial_figurefiles = [
   'grid.png',
   'helloworld.png',
   'helloworld2.png',
+  'i18n.png',
   'infobar.png',
   'label.png',
   'listmodel_columnview.png',

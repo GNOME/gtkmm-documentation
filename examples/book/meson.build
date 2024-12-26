@@ -69,6 +69,7 @@ examples_book = [
   [['headerbar'], 'example', exwindow_main],
   [['helloworld'], 'helloworld', ['helloworld.cc', 'main.cc']],
   [['helloworld2'], 'helloworld2', ['helloworld.cc', 'main.cc']],
+  [['i18n'], 'example', exwindow_main],
   [['idle'], 'idle', ['idleexample.cc', 'main.cc']],
   [['infobar'], 'example', exwindow_main],
   [['input'], 'example', ['main.cc']],

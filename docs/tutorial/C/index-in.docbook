@@ -3942,6 +3942,17 @@ Then, to add a widget at that position, use
 <para><link xlink:href="&url_examples_base;textview/">Source Code</link></para>
 
 </section>
+<section xml:id="textview-example-other">
+<title>Other Examples</title>
+
+<para>The example in the <link linkend="sec-i18n-example">
+Internationalization and Localization</link> chapter uses <classname>TextView</classname>.
+</para>
+
+<para>There is a more complicated example among
+<link xlink:href="&url_gtkmm_base;demos/gtk-demo/example_textview.cc">&gtkmm;'s demo programs</link>.
+</para>
+</section>
 </section>
 </chapter>
 
@@ -7101,7 +7112,7 @@ at runtime and access the widgets via derived classes.
         We also assume that you are using autotools (<application>automake</application>
         and <application>autoconf</application>) to build your project (although
         autotools is not recommended for new applications), and
-        that you are using <link xlink:href="https://gitlab.gnome.org/GNOME/gnome-common/blob/master/autogen.sh">
+        that you are using <link xlink:href="https://gitlab.gnome.org/Archive/gnome-common/-/blob/master/autogen.sh">
           <literal>./autogen.sh</literal> from <application>gnome-common</application></link>
         or a similar <literal>autogen.sh</literal> file, which, among other
         things, takes care of some <application>intltool</application>
@@ -7133,10 +7144,7 @@ test -n "$NOCONFIGURE" || "$srcdir/configure" "$@"</code></programlisting>
       Create a sub-directory named <literal>po</literal> in your project's root
       directory. This directory will eventually contain all of your
       translations. Within it, create a file named <literal>LINGUAS</literal>
-      and a file named <literal>POTFILES.in</literal>. It is common practice to
-      also create a <literal>ChangeLog</literal> file in the
-      <literal>po</literal> directory so that translators can keep track of
-      translation changes.
+      and a file named <literal>POTFILES.in</literal>.
     </para>
 
     <para>
@@ -7362,7 +7370,7 @@ textdomain(GETTEXT_PACKAGE);</code></programlisting>
       <filename>po</filename> subdirectory of your project and
       execute the following command:
     </para>
-    <programlisting><code>intltool-update --pot</code></programlisting>
+    <programlisting><code>intltool-update --pot --gettext-package programname</code></programlisting>
 
     <para>
       That will create a file named <filename>programname.pot</filename>.
@@ -7371,9 +7379,9 @@ textdomain(GETTEXT_PACKAGE);</code></programlisting>
       that language code to <literal>LINGUAS</literal>. The
       <filename>.po</filename> file contains a header and a list of English strings,
       with space for the translated strings to be entered. Make sure you set the
-      encoding of the <filename>.po</filename> file (specified in the header, but
-      also as content) to <literal>UTF-8</literal>.
+      encoding of the <filename>.po</filename> file to <literal>UTF-8</literal>.
     </para>
+    <programlisting><code>"Content-Type: text/plain; charset=UTF-8\n"</code></programlisting>
 
     <!-- TODO: This need more explanation. What's the point of the fuzzy tag then? murrayc -->
     <note>
@@ -7418,18 +7426,6 @@ textdomain(GETTEXT_PACKAGE);</code></programlisting>
         <listitem>
           <para>
             <link xlink:href="http://www.gnu.org/software/gettext/manual/gettext.html">gettext manual</link>
-          </para>
-        </listitem>
-
-        <listitem>
-          <para>
-            <link xlink:href="http://ftp.gnome.org/pub/GNOME/sources/gtkmm_hello/"><literal>gtkmm_hello</literal> example package</link>
-          </para>
-        </listitem>
-
-        <listitem>
-          <para>
-            <link xlink:href="http://ftp.gnome.org/pub/GNOME/sources/gnomemm_hello/"><literal>gnomemm_hello</literal> example package</link>
           </para>
         </listitem>
       </itemizedlist>
@@ -7557,7 +7553,7 @@ label.set_text(Glib::ustring::compose(_("Really delete %1 now?"), filename));</c
 
         <para>You should avoid cryptic abbreviations, slang, or jargon.
           They are usually difficult to translate, and are often difficult
-for even native speakers to understand. For instance, prefer "application" to "app"</para>
+          for even native speakers to understand.</para>
 </section>
 
 <section xml:id="i18n-non-ascii-characters">
@@ -7585,8 +7581,9 @@ instance, you cannot use the copyright sign (&copy;).
         Translation Project</link>.</para>
 
       <para>The way it works is that you upload your source code to a git
-        repository where translators can access it, then contact the gnome-i18n
-        mailing list and ask to have your program added to the
+        repository where translators can access it, then file an
+        <link xlink:href="https://gitlab.gnome.org/Infrastructure/damned-lies/-/issues">
+        issue to the damned-lies project</link> and ask to have your program added to the
         <link xlink:href="http://l10n.gnome.org/module/">list of modules to translate</link>.</para>
 
       <para>Then you make sure you update the file
@@ -7596,10 +7593,10 @@ instance, you cannot use the copyright sign (&copy;).
         that the translators always access updated
         <filename>myprogram.pot</filename> files, and simply freeze
         the strings at least a couple of days before you make a new
-        release, announcing it on gnome-i18n. Depending on the number
+        release. Depending on the number
         of strings your program contains and how popular it is, the
         translations will then start to tick in as
-        <filename>languagename.po</filename> files.</para>
+        <filename>.po</filename> files.</para>
 
       <para>Note that most language teams only consist of 1-3 persons,
         so if your program contains a lot of strings, it might last a
@@ -7610,6 +7607,23 @@ instance, you cannot use the copyright sign (&copy;).
         polished and being maintained) they may decide to spend their
         time on some other project.</para>
     </section>
+
+<section xml:id="sec-i18n-example">
+<title>Example</title>
+
+<para>Here is a simple example with translatable strings in C++ code. It shows what
+you can do if you don't use autotools or <application>meson</application>.
+It is also an example of using the <classname>Gtk::TextView</classname> widget.</para>
+
+<figure xml:id="figure-i18n">
+  <title>Translatable Strings</title>
+  <screenshot>
+    <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;i18n.png"/></imageobject></mediaobject>
+  </screenshot>
+</figure>
+
+<para><link xlink:href="&url_examples_base;i18n">Source Code</link></para>
+</section>
 </chapter>
 
 <chapter xml:id="chapter-customwidgets">

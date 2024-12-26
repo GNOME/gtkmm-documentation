@@ -82,6 +82,7 @@ HELP_MEDIA =					\
 	figures/grid.png			\
 	figures/helloworld.png			\
 	figures/helloworld2.png			\
+	figures/i18n.png			\
 	figures/infobar.png			\
 	figures/label.png			\
 	figures/listmodel_columnview.png \
