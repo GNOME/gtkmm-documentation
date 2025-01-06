@@ -4939,7 +4939,9 @@ myContext-&gt;set_line_width(2.0);
         <para>
             There are other things you can customize as well, including
             creating dashed lines and other things. For more information, see
-            the Cairo API documentation.
+            the Cairo API documentation. Dashed lines are shown in the example
+            in the <link linkend="cairo-example-curves">Drawing Curved Lines</link>
+            section.
         </para>
     </section>
 
@@ -4991,7 +4993,7 @@ myContext-&gt;set_line_width(2.0);
                 the control points for each end of the curve.
             </para>
         <figure xml:id="figure-drawingarea-curve">
-          <title>Drawing Area - Lines</title>
+          <title>Drawing Area - Curve</title>
             <screenshot>
                 <mediaobject><imageobject><imagedata format="PNG" fileref="&url_figures_base;drawingarea_curve.png"/></imageobject></mediaobject>
             </screenshot>
@@ -5027,6 +5029,11 @@ myContext-&gt;set_line_width(2.0);
             <methodname>set_source_rgba()</methodname>. This function takes a
             fourth argument specifying the alpha value of the color (valid
             values are between 0 and 1).
+        </para>
+        <para>
+            The control point lines are dashed lines. These are just two possible
+            variations. Dashed lines can be more complicated. For instance the
+            dashes can have different lengths like in dash-dotted lines.
         </para>
         </section>
   </section>
