@@ -374,3 +374,7 @@ div.toc a:link, div.toc a:visited,
 div.list-of-figures a:link, div.list-of-figures a:visited   {
     text-decoration: none;
 }
+
+.nowrap {
+    white-space: nowrap;
+}

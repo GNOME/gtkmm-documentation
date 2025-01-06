@@ -11,11 +11,12 @@
   <!ENTITY url_examples_base "https://gitlab.gnome.org/GNOME/gtkmm-documentation/tree/&url_examples_branch;/examples/book/">
   <!ENTITY url_gtkmm_base "https://gitlab.gnome.org/GNOME/gtkmm/tree/&url_examples_branch;/">
   <!ENTITY gtkmm "<application xmlns='http://docbook.org/ns/docbook'>gtkmm</application>">
+  <!ENTITY cpp "<phrase xmlns='http://docbook.org/ns/docbook' role='nowrap'>C++</phrase>">
   <!ENTITY uuml "&#252;" >
   <!ENTITY szlig "&#223;" >
-  <!ENTITY verbar "&#124;" >
   <!ENTITY copy "&#169;" >
-  <!ENTITY nbsp "&#160;" >
+  <!ENTITY nbsp "&#160;" >   <!-- non-breaking space -->
+  <!ENTITY nbhy "&#8209;" >  <!-- non-breaking hyphen -->
 ]>
 
 <!--
@@ -97,7 +98,7 @@ See https://gitlab.gnome.org/GNOME/gtkmm-documentation/-/merge_requests/11
 
     <abstract>
       <!-- This text is copied from the introduction. -->
-      <para>This book explains key concepts of the &gtkmm; C++ API for creating user interfaces. It also introduces the main user interface elements ("widgets").
+      <para>This book explains key concepts of the &gtkmm; &cpp; API for creating user interfaces. It also introduces the main user interface elements ("widgets").
       </para>
     </abstract>
     <copyright>
@@ -122,9 +123,9 @@ See https://gitlab.gnome.org/GNOME/gtkmm-documentation/-/merge_requests/11
 <section xml:id="sec-this-book">
 <title>This book</title>
 
-<para>This book explains key concepts of the &gtkmm; C++ API for creating user interfaces. It also introduces the main user interface elements ("widgets"). Although it mentions classes, constructors, and methods, it does not go into great detail. Therefore, for full API information you should follow the links into the reference documentation.</para>
+<para>This book explains key concepts of the &gtkmm; &cpp; API for creating user interfaces. It also introduces the main user interface elements ("widgets"). Although it mentions classes, constructors, and methods, it does not go into great detail. Therefore, for full API information you should follow the links into the reference documentation.</para>
 
-<para>This book assumes a good understanding of C++, and how to create C++ programs.</para>
+<para>This book assumes a good understanding of &cpp;, and how to create &cpp; programs.</para>
 
 <para>
 We would very much like to hear of any problems you have learning &gtkmm;
@@ -137,7 +138,7 @@ with this document, and would appreciate input regarding improvements. Please se
 <title>gtkmm</title>
 
 <para>
-&gtkmm; is a C++ wrapper for
+&gtkmm; is a &cpp; wrapper for
 <link xlink:href="http://www.gtk.org/">GTK</link>,
 a library used to create graphical user
 interfaces. It is licensed using the LGPL license, so you can develop
@@ -151,10 +152,10 @@ the package generally went by the name &gtkmm;, and that's what we stuck with.</
 <section xml:id="why-use-gtkmm">
 <title>Why use &gtkmm; instead of GTK?</title>
 
-<para>&gtkmm; allows you to write code using normal C++ techniques such as encapsulation, derivation, and polymorphism. As a C++ programmer you probably already realize that this leads to clearer and better organized code.</para>
+<para>&gtkmm; allows you to write code using normal &cpp; techniques such as encapsulation, derivation, and polymorphism. As a &cpp; programmer you probably already realize that this leads to clearer and better organized code.</para>
 <para>&gtkmm; is more type-safe, so the compiler can detect errors that would only be detected at run time when using C. This use of specific types also makes the API clearer because you can see what types should be used just by looking at a method's declaration.</para>
-<para>Inheritance can be used to derive new widgets. The derivation of new widgets in GTK C code is so complicated and error prone that almost no C coders do it. As a C++ developer you know that derivation is an essential Object Orientated technique.</para>
-<para>Member instances can be used, simplifying memory management. All GTK C widgets are dealt with by use of pointers. As a C++ coder you know that pointers should be avoided where possible.</para>
+<para>Inheritance can be used to derive new widgets. The derivation of new widgets in GTK C code is so complicated and error prone that almost no C coders do it. As a &cpp; developer you know that derivation is an essential Object Orientated technique.</para>
+<para>Member instances can be used, simplifying memory management. All GTK C widgets are dealt with by use of pointers. As a &cpp; coder you know that pointers should be avoided where possible.</para>
 <para>&gtkmm; involves less code compared to GTK, which uses prefixed function names and lots of cast macros.</para>
 </section>
 
@@ -163,16 +164,27 @@ the package generally went by the name &gtkmm;, and that's what we stuck with.</
 
 <para>Trolltech's Qt is the closest competition to &gtkmm;, so it deserves discussion.</para>
 
-<para>&gtkmm; developers tend to prefer &gtkmm; to Qt because &gtkmm; does things in a more C++ way. Qt originates from a time when C++ and the standard library were not standardized or well supported by compilers. It therefore duplicates a lot of stuff that is now in the standard library, such as containers and type information. Most significantly, Trolltech modified the C++ language to provide signals, so that Qt classes cannot be used easily with non-Qt classes. &gtkmm; was able to use standard C++ to provide signals without changing the C++ language.
-See the <link xlink:href="https://wiki.gnome.org/Projects/gtkmm/FAQ">FAQ</link> for more detailed differences.</para>
+<para>&gtkmm; developers tend to prefer &gtkmm; to Qt because &gtkmm; does things in a more &cpp; way. Qt originates from a time when &cpp; and the standard library were not standardized or well supported by compilers. It therefore duplicates a lot of stuff that is now in the standard library, such as containers and type information. Most significantly, Trolltech modified the &cpp; language to provide signals, so that Qt classes cannot be used easily with non-Qt classes. &gtkmm; was able to use standard &cpp; to provide signals without changing the &cpp; language.
+See the <link xlink:href="https://gtkmm.gnome.org/en/faq.html">FAQ</link> for more detailed differences.</para>
 </section>
 
 <section xml:id="gtkmm-is-a-wrapper">
 <title>&gtkmm; is a wrapper</title>
 
 <para>
-&gtkmm; is not a native C++ toolkit, but a C++ wrapper of a C toolkit. This separation of interface and implementation has advantages. The &gtkmm; developers spend most of their time talking about how &gtkmm; can present the clearest API, without awkward compromises due to obscure technical details. We contribute a little to the underlying GTK code base, but so do the C coders, and the Perl coders and the Python coders, etc. Therefore GTK benefits from a broader user base than language-specific toolkits - there are more implementers, more developers, more testers, and more users.</para>
+&gtkmm; is not a native &cpp; toolkit, but a &cpp; wrapper of a C toolkit. This separation of interface and implementation has advantages. The &gtkmm; developers spend most of their time talking about how &gtkmm; can present the clearest API, without awkward compromises due to obscure technical details. We contribute a little to the underlying GTK code base, but so do the C coders, and the Perl coders and the Python coders, etc. Therefore GTK benefits from a broader user base than language-specific toolkits - there are more implementers, more developers, more testers, and more users.</para>
 </section>
+</section>
+
+<section xml:id="sec-cpp-resources">
+<title>C++ Resources</title>
+<para>Useful links:</para>
+<itemizedlist>
+  <listitem><para><link xlink:href="https://en.wikipedia.org/wiki/C%2B%2B">Wikipedia C++</link>: An introduction to &cpp;, and many links.</para></listitem>
+  <listitem><para><link xlink:href="https://en.cppreference.com/w/">C++ reference</link>: A convenient version of the C and &cpp; standards.</para></listitem>
+  <listitem><para><link xlink:href="https://cplusplus.com/">The C++ Resources Network</link></para></listitem>
+  <listitem><para><link xlink:href="https://www.stroustrup.com/">Bjarne Stroustrup's homepage</link></para></listitem>
+</itemizedlist>
 </section>
 
 </chapter>
@@ -318,7 +330,7 @@ appendix for Windows-specific installation instructions and notes.</para>
 This chapter will introduce some of the most important aspects of &gtkmm; coding. These will be demonstrated with simple working example code. However, this is just a taster, so you need to look at the other chapters for more substantial information.
 </para>
 <para>
-Your existing knowledge of C++ will help you with &gtkmm; as it would with any library. Unless we state otherwise, you can expect &gtkmm; classes to behave like any other C++ class, and you can expect to use your existing C++ techniques with &gtkmm; classes.
+Your existing knowledge of &cpp; will help you with &gtkmm; as it would with any library. Unless we state otherwise, you can expect &gtkmm; classes to behave like any other &cpp; class, and you can expect to use your existing &cpp; techniques with &gtkmm; classes.
 </para>
 
 <section xml:id="sec-basics-simple-example">
@@ -382,8 +394,8 @@ Note that you must surround the <literal>pkg-config</literal> invocation with ba
 Backquotes cause the shell to execute the command inside them, and to use
 the command's output as part of the command line.
 Note also that <literal>simple.cc</literal> must come before the <literal>pkg-config</literal>
-invocation on the command line. <literal>-std=c++17</literal> is necessary only if
-your compiler is not C++17 compliant by default.
+invocation on the command line. <literal><phrase role="nowrap">-std=c++17</phrase></literal> is necessary only if
+your compiler is not <phrase role="nowrap">C++17</phrase> compliant by default.
 </para>
 </section>
 
@@ -446,7 +458,7 @@ Automake, and Libtool" by John Calcote.
 <section xml:id="sec-widgets-overview">
 <title>Widgets</title>
 
-<para>&gtkmm; applications consist of windows containing widgets, such as buttons and text boxes. In some other systems, widgets are called "controls". For each widget in your application's windows, there is a C++ object in your application's code. So you just need to call a method of the widget's class to affect the visible widget.</para>
+<para>&gtkmm; applications consist of windows containing widgets, such as buttons and text boxes. In some other systems, widgets are called "controls". For each widget in your application's windows, there is a &cpp; object in your application's code. So you just need to call a method of the widget's class to affect the visible widget.</para>
 <para>Widgets are arranged inside container widgets such as frames and notebooks, in a hierarchy of widgets within widgets. Some of these container widgets, such as <classname>Gtk::Grid</classname>, are not visible - they exist only to arrange other widgets. Here is some example code that adds 2 <classname>Gtk::Button</classname> widgets to a <classname>Gtk::Box</classname> container widget:
 </para>
 <programlisting><code>m_box.append(m_Button1);
@@ -458,14 +470,14 @@ m_box.append(m_Button2);</code></programlisting>
 Most of the chapters in this book deal with specific widgets. See the <link linkend="chapter-container-widgets">Container Widgets</link> section for more details about adding widgets to container widgets.
 </para>
 
-<para>Although you can specify the layout and appearance of windows and widgets with C++ code,
+<para>Although you can specify the layout and appearance of windows and widgets with &cpp; code,
 you will probably find it more convenient to design your user interfaces with
 <filename class="extension">.ui</filename> XML files and load them at runtime with
 <classname>Gtk::Builder</classname>. See the <link linkend="chapter-builder">Gtk::Builder</link> chapter.
 </para>
 
 <para>Although &gtkmm; widget instances have lifetimes and scopes just like
-those of other C++ classes, &gtkmm; has an optional time-saving feature that you
+those of other &cpp; classes, &gtkmm; has an optional time-saving feature that you
 will see in some of the examples. The <function>Gtk::make_managed()</function>
 allows you to create a new widget and state that it will become owned by the
 container into which you place it. This allows you to create the widget, add it
@@ -504,7 +516,7 @@ just connecting to the existing &gtkmm; signals, see the <link linkend="chapter-
 <para>You might be surprised to learn that &gtkmm; doesn't use <classname>std::string</classname> in its interfaces. Instead it uses <classname>Glib::ustring</classname>, which is so similar and unobtrusive that you could actually pretend that each <classname>Glib::ustring</classname> is a <classname>std::string</classname> and ignore the rest of this section. But read on if you want to use languages other than English in your application.</para>
 <para>std::string uses 8 bits per character, but 8 bits aren't enough to encode languages such as Arabic, Chinese, and Japanese.
 Although the encodings for these languages have been specified by the <link xlink:href="http://www.unicode.org/">Unicode Consortium</link>,
-the C and C++ languages do not yet provide any standardized Unicode support for UTF-8 encoding.
+the C and &cpp; languages do not yet provide any standardized Unicode support for UTF-8 encoding.
 GTK and GNOME chose to implement Unicode using UTF-8, and that's what is wrapped by Glib::ustring.
 It provides almost exactly the same interface as std::string, along with automatic conversions to and from std::string.</para>
 <para>One of the benefits of UTF-8 is that you don't need to use it unless you want to, so you don't need to retrofit all of your code at once. <classname>std::string</classname> will still work for 7-bit ASCII strings. But when you try to localize your application for languages like Chinese, for instance, you will start to see strange errors, and possible crashes. Then all you need to do is start using <classname>Glib::ustring</classname> instead.</para>
@@ -522,15 +534,15 @@ It provides almost exactly the same interface as std::string, along with automat
 <section xml:id="sec-basics-gobj-and-wrap">
 <title>Mixing C and C++ APIs</title>
 
-<para>You can use C APIs which do not yet have convenient C++ interfaces.
-It is generally not a problem to use C APIs from C++, and &gtkmm; helps by
+<para>You can use C APIs which do not yet have convenient &cpp; interfaces.
+It is generally not a problem to use C APIs from &cpp;, and &gtkmm; helps by
 providing access to the underlying C object, and providing an easy way to create
-a C++ wrapper object from a C object, provided that the C API is also based on
+a &cpp; wrapper object from a C object, provided that the C API is also based on
 the <classname>GObject</classname> system.</para>
 
 <para>
 To use a &gtkmm; instance with a C function that requires a C
-<classname>GObject</classname> instance, use the C++ instance’s
+<classname>GObject</classname> instance, use the &cpp; instance’s
 <function>gobj()</function> function to obtain a pointer to the underlying C
 instance. For example:</para>
 <programlisting><code>Gtk::Button button("example");
@@ -547,17 +559,17 @@ example:</para>
 Gtk::Button* button = Glib::wrap(cbutton);
 button-&gt;set_label("Now I speak C++ too!");
 </code></programlisting>
-<para>The C++ wrapper shall be explicitly deleted if
+<para>The &cpp; wrapper shall be explicitly deleted if
 <itemizedlist>
 <listitem><para>it's a widget or other class that inherits from <classname>Gtk::Object</classname>, and</para></listitem>
 <listitem><para>the C instance has a floating reference when the wrapper is created, and</para></listitem>
 <listitem><para><function>Gtk::manage()</function> has not been called on it (which includes if it was created with <function>Gtk::make_managed()</function>), or</para></listitem>
 <listitem><para><function>Gtk::manage()</function> was called on it, but it was never added to a parent.</para></listitem>
 </itemizedlist>
-<function>Glib::wrap()</function> binds the C and C++ instances to each other.
-Don't delete the C++ instance before you want the C instance to die.
+<function>Glib::wrap()</function> binds the C and &cpp; instances to each other.
+Don't delete the &cpp; instance before you want the C instance to die.
 </para>
-<para>In all other cases the C++ instance is automatically deleted when the last reference
+<para>In all other cases the &cpp; instance is automatically deleted when the last reference
 to the C instance is dropped. This includes all <function>Glib::wrap()</function>
 overloads that return a <classname>Glib::RefPtr</classname>.</para>
 
@@ -763,14 +775,14 @@ The following lists are not complete.</para>
 <para>
 <itemizedlist>
 <listitem><simpara>
-Whereas in &gtkmm;-3.0, destruction of a non-managed C++ widget wrapper caused the wrapped GtkWidget
+Whereas in &gtkmm;-3.0, destruction of a non-managed &cpp; widget wrapper caused the wrapped GtkWidget
 to be destroyed, changes in GTK4 mean that in &gtkmm;-4.0 this canʼt always be the case. GTK4 has no
 uniform way to remove a widget from a parent, as GTK3 did with <methodname>Gtk::Container::remove()</methodname>,
-so &gtkmm;-4.0 canʼt do the removal for you as &gtkmm;-3.0 did. Hence, if a non-managed C++ widget
+so &gtkmm;-4.0 canʼt do the removal for you as &gtkmm;-3.0 did. Hence, if a non-managed &cpp; widget
 instance is destructed while the widget is a child of another, &gtkmm;-4.0 wonʼt remove it from the
 parent, the parent retains a ref that stops the child being disposed, and the GtkWidget stays alive.
-The end result is that to destroy a non-managed widget with its C++ wrapper you must first remove it
-from its parent (however that parent allows) so the C++ wrapperʼs dtor can drop the final reference.
+The end result is that to destroy a non-managed widget with its &cpp; wrapper you must first remove it
+from its parent (however that parent allows) so the &cpp; wrapperʼs dtor can drop the final reference.
 </simpara></listitem>
 </itemizedlist>
 </para>
@@ -815,7 +827,7 @@ when porting code that used &gtkmm;-3.0 and <application>glibmm</application>-2.
 <listitem><simpara><classname>Glib::ArrayHandle</classname>, <classname>Glib::StringArrayHandle</classname>,
   <classname>Glib::ListHandle</classname> and <classname>Glib::SListHandle</classname> have been removed.
   They were used in <application>glibmm</application>-2.4, but not used in &gtkmm;-3.0.
-  If you've ever used these classes, replace them with a standard C++ container, such as <classname>std::vector</classname>.</simpara></listitem>
+  If you've ever used these classes, replace them with a standard &cpp; container, such as <classname>std::vector</classname>.</simpara></listitem>
 <listitem><simpara><classname>Gtk::Container</classname> has been removed.</simpara></listitem>
 <listitem><simpara><methodname>Gtk::Widget::show_all()</methodname> has been removed. The default value
   of <methodname>Gtk::Widget::property_visible()</methodname> has been changed from
@@ -2977,7 +2989,7 @@ store it in the Model if that is appropriate for your application.
 <title>Iterating over Model Rows</title>
 
 <para>
-<classname>Gtk::TreeModel</classname> provides a C++ Standard Library-style container of its
+<classname>Gtk::TreeModel</classname> provides a &cpp; Standard Library-style container of its
 children, via the <methodname>children()</methodname> method. You can use the
 familiar <methodname>begin()</methodname> and <methodname>end()</methodname> methods
 iterator incrementing, like so:
@@ -2990,7 +3002,7 @@ for (auto iter = children.begin(), end = children.end(); iter != end; ++iter)
 }</code></programlisting>
 <para>
 If you always want to iterate across the entire range, much more succinct syntax
-is possible using C++'s range-based <literal>for</literal> loop:
+is possible using &cpp;'s range-based <literal>for</literal> loop:
 </para>
 <programlisting><code>for (auto row: refModel-&gt;children())
 {
@@ -4677,7 +4689,7 @@ the widgets you need.
 
   <para>
       GTK uses the <link xlink:href="http://cairographics.org">Cairo</link> drawing API.
-      With &gtkmm;, you may use the <link xlink:href="http://www.cairographics.org/cairomm/">cairomm</link> C++ API for cairo.
+      With &gtkmm;, you may use the <link xlink:href="http://www.cairographics.org/cairomm/">cairomm</link> &cpp; API for cairo.
   </para>
 
   <para>
@@ -5195,7 +5207,7 @@ context-&gt;restore();</code></programlisting>
                 The program loads the image from a resource file. See the <link linkend="sec-gio-resource">Gio::Resource and glib-compile-resources</link>
                 section. Use <application>glib-compile-resources</application> to compile
                 the resources into a C source file that can be compiled and
-                linked with the C++ code. E.g.
+                linked with the &cpp; code. E.g.
                 <screen>$ glib-compile-resources --target=resources.c --generate-source image.gresource.xml</screen>
             </para>
         <figure xml:id="figure-drawingarea-image">
@@ -6479,7 +6491,7 @@ following method is used to do this:
 The first argument is a slot you wish to have called when
 the specified event (see argument 3) occurs on the file descriptor you specify
 using argument two. Argument three may be one or more (using
-<literal>&verbar;</literal>) of:
+<literal>|</literal>) of:
 </para>
 
 <itemizedlist>
@@ -6601,23 +6613,23 @@ progress bar will increase steadily; the lower one will slow down.
 
 <para>
 &gtkmm; allows the programmer to control the lifetime (that is, the construction
-and destruction) of any widget in the same manner as any other C++ object.
+and destruction) of any widget in the same manner as any other &cpp; object.
 This flexibility allows you to use <literal>new</literal> and
 <literal>delete</literal> to create and destroy objects dynamically
 or to use regular class members (that are destroyed automatically when the
 class is destroyed) or to use local instances (that are destroyed when the
-instance goes out of scope). This flexibility is not present in some C++ GUI
-toolkits, which restrict the programmer to only a subset of C++'s memory
+instance goes out of scope). This flexibility is not present in some &cpp; GUI
+toolkits, which restrict the programmer to only a subset of &cpp;'s memory
 management features.
 </para>
 <para>
-An important difference in &gtkmm;-4.0 vs. older versions is that a C++ widgetʼs
+An important difference in &gtkmm;-4.0 vs. older versions is that a &cpp; widgetʼs
 destruction no longer causes the widget to be destroyed if itʼs within a parent;
 in that case the C GtkWidget stays alive. If you had relied on that behavior in
 an older version, in &gtkmm;-4.0 you must now remove the widget from its parent
 first. See <link linkend="changes-gtkmm4">Changes in &gtkmm;-4.0</link>.
 </para>
-<para>Here are some examples of normal C++ memory management:</para>
+<para>Here are some examples of normal &cpp; memory management:</para>
 
 <section xml:id="memory-class-scope">
 <title>Class Scope widgets</title>
@@ -6671,7 +6683,7 @@ deleted after <methodname>Gtk::Application::run()</methodname> or
 Usually, the programmer will prefer to allow containers to automatically destroy
 their children by creating them using <function>Gtk::make_managed()</function>
 (see below). This is not strictly required, as the <literal>new</literal> and
-<literal>delete</literal> operators may also be used, but modern C++ style
+<literal>delete</literal> operators may also be used, but modern &cpp; style
 discourages those in favor of safer models of memory management, so it is
 better to create widgets using <function>Gtk::make_managed()</function> and
 let their parent destroy them, than to manually perform dynamic allocation.
@@ -6720,12 +6732,12 @@ this way was to call <function>manage()</function>, passing in the result of a
 <para>
 However, usually, when you create such a widget, you will already know that its
 parent container should be responsible for destroying it. In addition, modern
-C++ style discourages use of the <literal>new</literal> operator, which was
+&cpp; style discourages use of the <literal>new</literal> operator, which was
 required when passing a newly created widget to <function>manage()</function>.
 Therefore, &gtkmm; has added <function>make_managed()</function>, which combines
 creation and marking with <function>manage()</function> into a single step. This
 avoids you having to write <literal>new</literal>, which is discouraged in
-modern C++ style, and more clearly expresses intent to create a managed widget.
+modern &cpp; style, and more clearly expresses intent to create a managed widget.
 </para>
 
 <programlisting><code>MyContainer::MyContainer()
@@ -6751,7 +6763,7 @@ it's deleted by the container.
 <para>
 Of course, a top-level container will not be added to another container. The
 programmer is responsible for destroying the top-level container using one of
-the traditional C++ techniques. Or you can let <methodname>Gtk::Application::make_window_and_run()</methodname>
+the traditional &cpp; techniques. Or you can let <methodname>Gtk::Application::make_window_and_run()</methodname>
 create a top-level window and delete it when it's hidden.
 </para>
 
@@ -6828,7 +6840,7 @@ Nicolai M. Josuttis, "The C++ Standard Library" - section 4.2
 <title>Gtk::Builder</title>
 
 <para>
-Although you can use C++ code to instantiate and arrange widgets, this can soon
+Although you can use &cpp; code to instantiate and arrange widgets, this can soon
 become tedious and repetitive. And it requires a recompilation to show changes.
 The <link xlink:href="https://gitlab.gnome.org/jpu/cambalache">Cambalache</link>
 application allows you to layout widgets on screen and then save an XML description
@@ -6847,7 +6859,7 @@ This has the following advantages:
 </para>
 
 <para>
-You still need C++ code to deal with User Interface changes triggered by user
+You still need &cpp; code to deal with User Interface changes triggered by user
 actions, but using <application>Gtk::Builder</application> for the widget
 layout allows you to focus on implementing that functionality.
 </para>
@@ -7029,7 +7041,7 @@ constructor to register the <type>GType</type>.
 }
 </code></programlisting>
 <para>
-It is possible also to specify properties of derived widgets, declared in C++
+It is possible also to specify properties of derived widgets, declared in &cpp;
 using &gtkmm;, within <filename class="extension">.ui</filename> files and load/set
 these using <classname>Gtk::Builder</classname>. See the documentation of
 <classname>Gtk::Builder</classname> for more details on how to achieve this.
@@ -7519,7 +7531,7 @@ If you use <application>Glib</application>'s support macros, it's easier. Use
 
 <para>
 C programmers use <function>sprintf()</function> to compose and concatenate
-strings. C++ favors streams, but unfortunately, this approach makes
+strings. &cpp; favors streams, but unfortunately, this approach makes
 translation difficult, because each fragment of text is translated separately,
 without allowing the translators to rearrange them according to the grammar of
 the language.</para>
@@ -7611,7 +7623,7 @@ instance, you cannot use the copyright sign (&copy;).
 <section xml:id="sec-i18n-example">
 <title>Example</title>
 
-<para>Here is a simple example with translatable strings in C++ code. It shows what
+<para>Here is a simple example with translatable strings in &cpp; code. It shows what
 you can do if you don't use autotools or <application>meson</application>.
 It is also an example of using the <classname>Gtk::TextView</classname> widget.</para>
 
@@ -7685,7 +7697,7 @@ It is also an example of using the <classname>Gtk::TextView</classname> widget.<
        is used as a managed widget, it shall unparent its children in a
        <methodname>Gtk::Widget::signal_destroy()</methodname> handler (available
        since &gtkmm; 4.8). If your container is not managed, that signal handler
-       is not called. Instead the children shall be unparented in the C++ destructor.
+       is not called. Instead the children shall be unparented in the &cpp; destructor.
        If you want your container to be useful both ways, unparent the children
        both in the destructor and in a signal handler. See the example code.</para>
 
@@ -7785,10 +7797,10 @@ without affecting other similar widgets.</para>
     of all instances of a class (a GType). See the <link linkend="custom-init-functions">
     Class Init and Instance Init Functions</link> section.</para></listitem>
     <listitem><para><methodname>Gtk::Widget::set_name()</methodname>
-    can be called from a C++ constructor. It sets the name of
+    can be called from a &cpp; constructor. It sets the name of
     a widget instance.</para></listitem>
     <listitem><para><methodname>Gtk::Widget::add_class_name()</methodname>
-    can be called from a C++ constructor. It adds the name of a CSS class,
+    can be called from a &cpp; constructor. It adds the name of a CSS class,
     used by a widget instance.</para></listitem>
   </itemizedlist>
 The following example shows a button with its own CSS node name, a label with
@@ -8081,7 +8093,7 @@ and hints for creating &gtkmm; applications.
 </para>
 
 <para>Use <application>Meson</application>! It is your friend :)
-    It examines C and C++ files, determines how they depend on each other,
+    It examines C and &cpp; files, determines how they depend on each other,
     and generates <filename>build.ninja</filename> or an equivalent file so the
     files can be compiled in the correct order. <application>Meson</application>
     permits automatic configuration of software installation, handling a large
@@ -8758,7 +8770,7 @@ and <classname>std::shared_ptr&lt;&gt;</classname>, which are also smartpointers
 In &gtkmm;-4.0 <classname>Glib::RefPtr&lt;&gt;</classname> is an alias for
 <classname>std::shared_ptr&lt;&gt;</classname>,
 which is reference-counting. <classname>Glib::RefPtr&lt;&gt;</classname> was introduced
-long before there was a reference-counting smartpointer in the C++ Standard Library.
+long before there was a reference-counting smartpointer in the &cpp; Standard Library.
 </para>
 
 <para>
@@ -8860,7 +8872,7 @@ initialized to <literal>nullptr</literal> so you don't need to remember to do th
 <section xml:id="sec-refptr-constness">
 <title>Constness</title>
 <para>
-The use of the <literal>const</literal> keyword in C++ is not always clear. You
+The use of the <literal>const</literal> keyword in &cpp; is not always clear. You
 might not realize that <type>const Something*</type> declares a pointer to a
 <type>const Something</type>. The pointer can be changed, but not the
 <type>Something</type> that it points to.
@@ -8977,7 +8989,7 @@ known as function objects, or functors.
 </para>
 
 <para>
-A C++ lambda expression is a functor which can be implicitly converted to a
+A &cpp; lambda expression is a functor which can be implicitly converted to a
 <classname>sigc::slot</classname> in the call to <methodname>connect()</methodname>.
 A lambda expression can be used instead of <function>sigc::ptr_fun()</function>.
 It's also possible to use a lambda expression instead of <function>sigc::mem_fun()</function>,
@@ -9291,7 +9303,7 @@ chapter in the GTK documentation describes user input handling in more detail.
 <title>Exceptions in signal handlers</title>
 
 <para>
-When a program is aborted because of an unhandled C++ exception, it's sometimes
+When a program is aborted because of an unhandled &cpp; exception, it's sometimes
 possible to use a debugger to find the location where the exception was thrown.
 This is more difficult than usual if the exception was thrown from a signal handler.
 </para>
@@ -9431,7 +9443,7 @@ own classes. That's actually very simple by using the
 This isn't purely a &gtkmm; or GUI issue. &gtkmm; uses
 <application>libsigc++</application> to implement its proxy wrappers for the
 <application>GTK</application> signal system, but for new,
-non-GTK signals, you can create pure C++ signals, using the
+non-GTK signals, you can create pure &cpp; signals, using the
 <classname>sigc::signal&lt;&gt;</classname> template.
 </para>
 <para>
@@ -9507,21 +9519,21 @@ play the role of listeners - sort of. More on this later.)
 <application>GTK</application> C code allows you to connect a callback with
 the wrong number and type of arguments, leading to a segfault at runtime. And,
 unlike <application>Qt</application>, &gtkmm; achieves this without modifying
-the C++ language.</para>
+the &cpp; language.</para>
 <para>
 Re. Overriding signal handlers: You can do this in the straight-C world of GTK too; that's what GTK's
 object system is for. But in GTK, you have to go through some
 complicated procedures to get object-oriented features like
-inheritance and overloading. In C++, it's simple, since those
+inheritance and overloading. In &cpp;, it's simple, since those
 features are supported in the language itself; you can let the
 compiler do the dirty work.
 </para>
 <para>
-This is one of the places where the beauty of C++ really comes out.
+This is one of the places where the beauty of &cpp; really comes out.
 One wouldn't think of subclassing a GTK widget simply to override its
 action method; it's just too much trouble. In GTK, you almost always
 use signals to get things done, unless you're writing a new widget.
-But because overriding methods is so easy in C++, it's entirely
+But because overriding methods is so easy in &cpp;, it's entirely
 practical - and sensible - to subclass a button for that purpose.
 </para>
 </appendix>
@@ -9536,8 +9548,8 @@ practical - and sensible - to subclass a button for that purpose.
     <para>
       &gtkmm; currently works with the
       <link xlink:href="http://mingw.org/">MinGW/GCC compiler</link> with a compiler version
-      that supports C++17, such as gcc 7 or later. It also works with Microsoft
-      Visual C++ 2017 15.7.x or later (including the freely available express/community
+      that supports <phrase role="nowrap">C++17</phrase>, such as gcc 7 or later. It also works with Microsoft
+      Visual &cpp; 2017 15.7.x or later (including the freely available express/community
       editions) on the Windows platform. There is an
       <link xlink:href="https://download.gnome.org/binaries/win32/gtkmm">installer</link>
       available for &gtkmm; on Microsoft Windows, but as of this writing
@@ -9836,7 +9848,7 @@ $ jhbuild sanitycheck</screen>
         be 1.23.0. However, avoid starting with an even minor version number as
         that usually indicates a stable release.</para></listitem>
     <listitem><para>In the <function>project()</function> function, change the
-    license and the C++ version, if necessary.</para></listitem>
+    license and the &cpp; version, if necessary.</para></listitem>
     <listitem><para>You probably need to add more required modules than
     <application>glibmm</application> and <application>skeleton</application>
     (<application>libsomething</application>).</para></listitem>
@@ -10008,11 +10020,11 @@ int main(int, char**)
 <section xml:id="sec-wrapping-hg-files">
 <title>The .hg and .ccg files</title>
     <para>The .hg and .ccg source files are very much like
-        .h and .cc C++ source files, but they contain extra macros, such as
+        .h and .cc &cpp; source files, but they contain extra macros, such as
         <function>_CLASS_GOBJECT()</function> and
         <function>_WRAP_METHOD()</function>, from which
-        <command>gmmproc</command> generates appropriate C++ source code,
-        usually at the same position in the header. Any additional C++ source
+        <command>gmmproc</command> generates appropriate &cpp; source code,
+        usually at the same position in the header. Any additional &cpp; source
         code will be copied verbatim into the corresponding
         .h or .cc file.</para>
     <para>A .hg file will typically include some headers
@@ -10092,7 +10104,7 @@ $ /usr/lib/glibmm-2.68/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtk
 <para>Notice that we provided <command>gmmproc</command> with the path to the
     .m4 convert files, the path to the .defs file, the name of a .hg file, the
     source directory, and the destination directory.</para>
-<para>You should avoid including the C header from your C++ header, to avoid
+<para>You should avoid including the C header from your &cpp; header, to avoid
     polluting the global namespace, and to avoid exporting unnecessary public
     API. But you will need to include the necessary C headers from your
     .ccg file.</para>
@@ -10103,9 +10115,9 @@ $ /usr/lib/glibmm-2.68/proc/gmmproc -I ../../tools/m4 --defs . button . ./../gtk
 <title>m4 Conversions</title>
 
 <para>The macros that you use in the .hg and .ccg files often need to know how
-to convert a C++ type to a C type, or vice-versa. <command>gmmproc</command> takes this information
+to convert a &cpp; type to a C type, or vice-versa. <command>gmmproc</command> takes this information
 from an .m4 file in your <literal>tools/m4/</literal> or <literal>codegen/m4/</literal> directory.
-This allows it to call a C function in the implementation of your C++ method,
+This allows it to call a C function in the implementation of your &cpp; method,
 passing the appropriate parameters to that C function. For instance, this
 tells <command>gmmproc</command> how to convert a <classname>GtkTreeView</classname>
 pointer to a <classname>Gtk::TreeView</classname> pointer:
@@ -10132,17 +10144,17 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
 
 <para>
   Often when wrapping methods, it is desirable to store the return of the C
-  function in what is called an output parameter.  In this case, the C++ method
+  function in what is called an output parameter.  In this case, the &cpp; method
   returns <type>void</type> but an output parameter in which to store the value
-  of the C function is included in the argument list of the C++ method.
+  of the C function is included in the argument list of the &cpp; method.
   <command>gmmproc</command> allows such functionality, but appropriate initialization macros must
-  be included to tell <command>gmmproc</command> how to initialize the C++ parameter from the
+  be included to tell <command>gmmproc</command> how to initialize the &cpp; parameter from the
   return of the C function.
 </para>
 <para>
   For example, if there was a C function that returned a
-  <type>GtkWidget*</type> and for some reason, instead of having the C++ method
-  also return the widget, it was desirable to have the C++ method place the
+  <type>GtkWidget*</type> and for some reason, instead of having the &cpp; method
+  also return the widget, it was desirable to have the &cpp; method place the
   widget in a specified output parameter, an initialization macro such as the
   following would be necessary:
 </para>
@@ -10151,9 +10163,9 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
 
 <para>
   <literal>$3</literal> will be replaced by the output parameter name of the
-  C++ method and <literal>$4</literal> will be replaced by the return of the C
+  &cpp; method and <literal>$4</literal> will be replaced by the return of the C
   function when this initialization is used by <command>gmmproc</command>.  For convenience,
-  <literal>$1</literal> will also be replaced by the C++ type without the
+  <literal>$1</literal> will also be replaced by the &cpp; type without the
   ampersand (&amp;) and <literal>$2</literal> will be replaced by the C type.
 </para>
 </section>
@@ -10245,7 +10257,7 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
 <title>_CLASS_OPAQUE_REFCOUNTED</title>
 
 <para>This macro declares a wrapper for a reference-counted opaque struct. The
-    C++ wrapper cannot be directly instantiated and can only be used with
+    &cpp; wrapper cannot be directly instantiated and can only be used with
     <classname>Glib::RefPtr</classname>.</para>
 <para><function>_CLASS_OPAQUE_REFCOUNTED( C++ class, C class, new function, ref function, unref function )</function></para>
 <para>For instance, for <classname>Gtk::CssSection</classname>:</para>
@@ -10329,7 +10341,7 @@ public:
 <para>This macro creates a constructor with arguments, equivalent to a
   <function>*_new()</function> C function. It won't actually call the
   <function>*_new()</function> function, but will simply create an equivalent
-  constructor with the same argument types. It takes a C++ constructor
+  constructor with the same argument types. It takes a &cpp; constructor
   signature, and a C function name.
 </para>
 
@@ -10465,14 +10477,14 @@ function in <function>_CLASS_GOBJECT</function>, <function>_CLASS_BOXEDTYPE</fun
 <section xml:id="gmmproc-wrap-method">
 <title>_WRAP_METHOD</title>
 
-<para>This macro generates the C++ method to wrap a C function.</para>
+<para>This macro generates the &cpp; method to wrap a C function.</para>
 <para><function>_WRAP_METHOD( C++ method signature, C function name)</function></para>
 <para>For instance, from <filename>entry.hg</filename>:</para>
 <programlisting><code>_WRAP_METHOD(void set_text(const Glib::ustring&amp; text), gtk_entry_set_text)
 </code></programlisting>
 <para>The C function (e.g. <function>gtk_entry_set_text</function>) is described
     more fully in the .defs file, and the <filename>convert*.m4</filename> files
-    contain the necessary conversion from the C++ parameter type to the C
+    contain the necessary conversion from the &cpp; parameter type to the C
     parameter type. This macro also generates doxygen documentation comments
     based on the <filename>*_docs.xml</filename> and
     <filename>*_docs_override.xml</filename> files.</para>
@@ -10568,8 +10580,8 @@ function in <function>_CLASS_GOBJECT</function>, <function>_CLASS_BOXEDTYPE</fun
     </varlistentry>
 </variablelist>
 </para>
-<para>Selecting which C++ types should be used is also important when wrapping
-  C API.  Though it's usually obvious what C++ types should be used in the C++
+<para>Selecting which &cpp; types should be used is also important when wrapping
+  C API.  Though it's usually obvious what &cpp; types should be used in the &cpp;
   method, here are some hints:
 <itemizedlist>
     <listitem><para>Objects used via <classname>RefPtr</classname>: Pass the
@@ -10588,7 +10600,7 @@ function in <function>_CLASS_GOBJECT</function>, <function>_CLASS_BOXEDTYPE</fun
         then be wrapped by a <classname>std::vector</classname> type.
         For instance, <code>std::vector&lt;Glib::RefPtr&lt;Gdk::Pixbuf&gt;&gt;</code>.
         You may need to define a Traits type to specify how the C
-        and C++ types should be converted.</para></listitem>
+        and &cpp; types should be converted.</para></listitem>
 <listitem><para>Wrapping <classname>GList*</classname> and
         <classname>GSList*</classname> return types: You must discover whether
         the caller should free the list and whether it should release the items
@@ -10606,7 +10618,7 @@ function in <function>_CLASS_GOBJECT</function>, <function>_CLASS_BOXEDTYPE</fun
 <title>_WRAP_METHOD_DOCS_ONLY</title>
 
 <para>This macro is like <function>_WRAP_METHOD()</function>, but it generates
-    only the documentation for a  C++ method that wraps a C function. Use this
+    only the documentation for a  &cpp; method that wraps a C function. Use this
     when you must hand-code the method, but you want to use the documentation
     that would be generated if the method was generated.</para>
 <para><function>_WRAP_METHOD_DOCS_ONLY(C function name)</function></para>
@@ -10640,7 +10652,7 @@ function in <function>_CLASS_GOBJECT</function>, <function>_CLASS_BOXEDTYPE</fun
         <listitem>
             <para>Don't include a @return Doxygen command in the documentation.
                 Useful if the wrapped C function returns a value, but the corresponding
-                C++ method returns <type>void</type>.</para>
+                &cpp; method returns <type>void</type>.</para>
         </listitem>
     </varlistentry>
 </variablelist>
@@ -10671,7 +10683,7 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
 <section xml:id="gmmproc-wrap-signal">
 <title>_WRAP_SIGNAL</title>
 
-<para>This macro generates the C++ libsigc++-style signal to wrap a C GObject
+<para>This macro generates the &cpp; libsigc++-style signal to wrap a C GObject
     signal. It actually generates a public accessor method, such as
     <function>signal_clicked()</function>, which returns a proxy object.
     <command>gmmproc</command> uses the .defs file to discover the C parameter
@@ -10777,8 +10789,8 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
 <section xml:id="gmmproc-wrap-property">
 <title>_WRAP_PROPERTY</title>
 
-<para>This macro generates the C++ method to wrap a C GObject property. You must
-    specify the property name and the wanted C++ type for the property. <command>gmmproc</command>
+<para>This macro generates the &cpp; method to wrap a C GObject property. You must
+    specify the property name and the wanted &cpp; type for the property. <command>gmmproc</command>
     uses the .defs file to discover the C type and the .m4 convert files to
     discover appropriate type conversions.</para>
 <para><function>_WRAP_PROPERTY(C property name, C++ type)</function></para>
@@ -10808,7 +10820,7 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
 <section xml:id="gmmproc-wrap-vfunc">
 <title>_WRAP_VFUNC</title>
 
-<para>This macro generates the C++ method to wrap a virtual C function.</para>
+<para>This macro generates the &cpp; method to wrap a virtual C function.</para>
 <para><function>_WRAP_VFUNC( C++ method signature, C function name)</function></para>
 <para>For instance, from <filename>widget.hg</filename>:</para>
 <programlisting><code>_WRAP_VFUNC(SizeRequestMode get_request_mode() const, get_request_mode)
@@ -10816,7 +10828,7 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
 <para>The C function (e.g. <function>get_request_mode</function>) is described
     more fully in the <filename>*_vfuncs.defs</filename> file, and the
     <filename>convert*.m4</filename> files contain the necessary conversion from
-    the C++ parameter type to the C parameter type. Conversions can also be
+    the &cpp; parameter type to the C parameter type. Conversions can also be
     written in the .hg file. Virtual functions often require special conversions
     that are best kept local to the .hg file where they are used.</para>
 <para>There are some optional extra arguments:
@@ -10915,7 +10927,7 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
     <varlistentry>
         <term>err_return_value &lt;value&gt;</term>
 	      <listitem>
-	        <para>Defines a non-default return value, used only if the C++
+	        <para>Defines a non-default return value, used only if the &cpp;
 	          <function>something_vfunc()</function> function throws an exception
 	          which is propagated to the C callback function. If return_value is
 	          specified, but err_return_value is not, then return_value is used
@@ -10934,7 +10946,7 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
 </para>
 <para>A rule to which there may be exceptions: If the virtual C function returns
     a pointer to an object derived from <classname>GObject</classname>, i.e. a
-    reference-counted object, then the virtual C++ function shall return a
+    reference-counted object, then the virtual &cpp; function shall return a
     <classname>Glib::RefPtr&lt;&gt;</classname> object. One of the extra
     arguments <parameter>refreturn</parameter> or
     <parameter>refreturn_ctype</parameter> is required.</para>
@@ -10968,7 +10980,7 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
 <section xml:id="gmmproc-wrap-enum">
 <title>_WRAP_ENUM</title>
 
-<para>This macro generates a C++ enum to wrap a C enum. You must specify the desired C++ name and
+<para>This macro generates a &cpp; enum to wrap a C enum. You must specify the desired &cpp; name and
     the name of the underlying C enum.</para>
 <para>For instance, from <filename>enums.hg</filename>:</para>
 <programlisting><code>_WRAP_ENUM(Orientation, GtkOrientation)
@@ -11058,8 +11070,8 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
 <section xml:id="gmmproc-wrap-gerror">
 <title>_WRAP_GERROR</title>
 
-<para>This macro generates a C++ exception class, derived from <classname>Glib::Error</classname>, with
-a <type>Code</type> enum and a <methodname>code()</methodname> method. You must specify the desired C++ name, the name
+<para>This macro generates a &cpp; exception class, derived from <classname>Glib::Error</classname>, with
+a <type>Code</type> enum and a <methodname>code()</methodname> method. You must specify the desired &cpp; name, the name
 of the corresponding C enum, and the prefix for the C enum values.</para>
 <para>This exception can then be thrown by methods which are generated from
 _WRAP_METHOD() with the errthrow option.</para>
@@ -11130,24 +11142,24 @@ CONV_TO_INT is ignored because all exception class enums are plain enums within 
 
     <para>
       For all the macros that process method signatures, it is possible to
-      specify a different order for the C++ parameters than the existing order
+      specify a different order for the &cpp; parameters than the existing order
       in the C function, virtual function or signal.  For example, say that the
-      following C function were being wrapped as a C++ method for the
+      following C function were being wrapped as a &cpp; method for the
       <classname>Gtk::Widget</classname> class:</para>
 <programlisting><code>void gtk_widget_set_device_events(GtkWidget* widget, GdkDevice* device,
   GdkEventMask events);
 </code></programlisting>
     <para>
-      However, changing the order of the C++ method's two parameters is
-      necessary.  Something like the following would wrap the function as a C++
+      However, changing the order of the &cpp; method's two parameters is
+      necessary.  Something like the following would wrap the function as a &cpp;
       method with a different order for the two parameters:</para>
 <programlisting><code>_WRAP_METHOD(void set_device_events(Gdk::EventMask events{events},
   const Glib::RefPtr&lt;const Gdk::Device&gt;&amp; device{device}),
   gtk_widget_set_device_events)
 </code></programlisting>
       <para>The <literal>{c_param_name}</literal> following the method parameter
-      names tells <command>gmmproc</command> to map the C++ parameter to the
-      specified C parameter within the <literal>{}</literal>.  Since the C++
+      names tells <command>gmmproc</command> to map the &cpp; parameter to the
+      specified C parameter within the <literal>{}</literal>.  Since the &cpp;
       parameter names correspond to the C ones, the above could be re-written
       as:</para>
 <programlisting><code>_WRAP_METHOD(void set_device_events(Gdk::EventMask events{.},
@@ -11173,7 +11185,7 @@ CONV_TO_INT is ignored because all exception class enums are plain enums within 
       For all macros processing method signatures except
       <function>_WRAP_SIGNAL()</function> and
       <function>_WRAP_VFUNC()</function> it is also possible to make the
-      parameters optional so that extra C++ methods are generated without the
+      parameters optional so that extra &cpp; methods are generated without the
       specified optional parameter.  For example, say that the following
       <function>*_new()</function> function were being wrapped as a constructor
       in the <classname>Gtk::ToolButton</classname> class:</para>
@@ -11199,15 +11211,15 @@ CONV_TO_INT is ignored because all exception class enums are plain enums within 
     <para>
       With <function>_WRAP_METHOD()</function> it is also possible for the
       return of the wrapped C function (if it has one) to be placed in an
-      output parameter of the C++ method instead of having the C++ method also
+      output parameter of the &cpp; method instead of having the &cpp; method also
       return a value like the C function does.  To do that, simply include the
-      output parameter in the C++ method parameter list appending a
+      output parameter in the &cpp; method parameter list appending a
       <literal>{OUT}</literal> to the output parameter name.  For example, if
       <function>gtk_widget_get_request_mode()</function> is declared as the
       following:</para>
 <programlisting><code>GtkSizeRequestMode gtk_widget_get_request_mode(GtkWidget* widget);
 </code></programlisting>
-      <para>And having the C++ method set an output parameter is desired instead of
+      <para>And having the &cpp; method set an output parameter is desired instead of
       returning a <type>SizeRequestMode</type>, something like the following
       could be used:</para>
 <programlisting><code>_WRAP_METHOD(void get_request_mode(SizeRequestMode&amp; mode{OUT}) const,
@@ -11224,7 +11236,7 @@ CONV_TO_INT is ignored because all exception class enums are plain enums within 
 <programlisting><code>_INITIALIZATION(`SizeRequestMode&amp;',`GtkSizeRequestMode',`$3 = ($1)($4)')
 </code></programlisting>
     <para>
-      <function>_WRAP_METHOD()</function> also supports setting C++ output
+      <function>_WRAP_METHOD()</function> also supports setting &cpp; output
       parameters from C output parameters if the C function being wrapped has
       any.  Suppose, for example, that we want to wrap the following C function
       that returns a value in its C output parameter
@@ -11232,7 +11244,7 @@ CONV_TO_INT is ignored because all exception class enums are plain enums within 
 <programlisting><code>GInputStream* gdk_clipboard_read_finish(GdkClipboard* clipboard,
   GAsyncResult* result, const char** out_mime_type, GError** error)
 </code></programlisting>
-      <para>To have <command>gmmproc</command> place the value returned in the C++
+      <para>To have <command>gmmproc</command> place the value returned in the &cpp;
       <parameter>out_mime_type</parameter> output parameter, something like the
       following <function>_WRAP_METHOD()</function> macro could be used:
       </para>
@@ -11242,11 +11254,11 @@ _WRAP_METHOD(Glib::RefPtr<Gio::InputStream> read_finish(
   Glib::ustring& out_mime_type{>>}), gdk_clipboard_read_finish, errthrow)
 ]]></code></programlisting>
       <para>The <literal>{&gt;&gt;}</literal> following the <parameter>out_mime_type</parameter>
-      parameter name indicates that the C++ output parameter should be set from
+      parameter name indicates that the &cpp; output parameter should be set from
       the value returned in the C parameter from the C function.
       <command>gmmproc</command> will generate a declaration of a temporary
       variable in which to store the value of the C output parameter and a
-      statement that sets the C++ output parameter from the temporary variable.
+      statement that sets the &cpp; output parameter from the temporary variable.
       In this case it may be necessary to have an
       <function>_INITIALIZATION()</function> describing how to set a
       <classname>Glib::ustring&amp;</classname> from a
@@ -11260,7 +11272,7 @@ _INITIALIZATION(`Glib::ustring&',`const char*',`$3 = Glib::convert_const_gchar_p
   <title>String Parameter Processing</title>
 
     <para>
-      A string-valued input parameter in a C++ method is usually a
+      A string-valued input parameter in a &cpp; method is usually a
       <type>const Glib::ustring&amp;</type> or a <type>const std::string&amp;</type>.
       In C code it's a <type>const gchar*</type>. When an empty string is converted
       to <type>const gchar*</type>, it can be converted either to <literal>nullptr</literal>
@@ -11290,9 +11302,9 @@ _INITIALIZATION(`Glib::ustring&',`const char*',`$3 = Glib::convert_const_gchar_p
 <section xml:id="gmmproc-basic-types">
 <title>Basic Types</title>
   <para>Some of the basic types that are used in C APIs have better alternatives
-    in C++. For example, there's no need for a <type>gboolean</type> type since
-    C++ has <type>bool</type>. The following list shows some commonly-used
-    types in C APIs and what you might convert them to in a C++ wrapper library.
+    in &cpp;. For example, there's no need for a <type>gboolean</type> type since
+    &cpp; has <type>bool</type>. The following list shows some commonly-used
+    types in C APIs and what you might convert them to in a &cpp; wrapper library.
   </para>
   <segmentedlist>
     <?dbhtml list-presentation="table"?>
@@ -11342,7 +11354,7 @@ _INITIALIZATION(`Glib::ustring&',`const char*',`$3 = Glib::convert_const_gchar_p
     <filename>generate_wrap_init.pl</filename>, but the declaration in
     <filename>wrap_init.h</filename> is hand-coded, so you will need to adjust
     <filename>wrap_init.h</filename> so that the <function>wrap_init()</function>
-    function appears in the correct C++ namespace.</para>
+    function appears in the correct &cpp; namespace.</para>
 </section>
 
 <section xml:id="sec-wrapping-problems">
@@ -11362,7 +11374,7 @@ struct _ExampleWidget
 </code></programlisting>
 <para>The extra typedef allows the struct to be used in a header without including
   its full definition, simply by predeclaring it, by repeating that typedef.
-  This means that you don't have to include the C library's header in your C++ header,
+  This means that you don't have to include the C library's header in your &cpp; header,
   thus keeping it out of your public API. <command>gmmproc</command> assumes that
   this technique was used, so you will see compiler errors if that is not the case.</para>
 <para>
@@ -11393,7 +11405,7 @@ make[4]: *** [example-widget.lo] Error 1
 }
 </code></programlisting>
 <para>This allows language bindings to implement their own equivalents (such as
-    C++ constructors), without using the <function>*_new()</function> function.
+    &cpp; constructors), without using the <function>*_new()</function> function.
     This is often necessary so that they can actually instantiate a derived
     GType, to add their own hooks for signal handlers and vfuncs.</para>
 <para>At the least, the <function>_new()</function> function should not use any
@@ -11402,7 +11414,7 @@ make[4]: *** [example-widget.lo] Error 1
     <function>_new()</function> function as long as those lines of code use API
     that is available to us.</para>
 <para>Another workaround is to add a <function>*_construct()</function> function
-    that the C++ constructor can call after instantiating its own type. For
+    that the &cpp; constructor can call after instantiating its own type. For
     instance,</para>
 <programlisting><code>GtkWidget* example_widget_new(int something, const char* thing)
 {
@@ -11428,7 +11440,7 @@ void example_widget_construct(ExampleWidget* widget, int something, const char* 
 <section xml:id="sec-wrapping-documentation">
 <title>Documentation</title>
 
-<para>In general, gtkmm-style projects use Doxygen, which reads specially formatted C++ comments and generates HTML documentation. You may write these doxygen comments directly in the header files.</para>
+<para>In general, gtkmm-style projects use Doxygen, which reads specially formatted &cpp; comments and generates HTML documentation. You may write these doxygen comments directly in the header files.</para>
 
 <section xml:id="wrapping-reusing-c-documentation">
 <title>Reusing C documentation</title>
@@ -11440,7 +11452,7 @@ void example_widget_construct(ExampleWidget* widget, int something, const char* 
   <filename>tools/defs_gen</filename> directory, can read these files and
   generate an .xml file that <command>gmmproc</command> can use to generate
   doxygen comments. <command>gmmproc</command> will even try to transform the
-  documentation to make it more appropriate for a C++ API.</para>
+  documentation to make it more appropriate for a &cpp; API.</para>
 <para>
 For instance,</para>
 <programlisting><code>./docextract_to_xml.py -s ~/checkout/gnome/gtk/gtk/ &gt; gtk_docs.xml
