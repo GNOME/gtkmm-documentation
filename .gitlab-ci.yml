@@ -70,7 +70,7 @@ html-tutorial:
     # Installation copies all documentation files to one directory.
     - ninja -C _build install
     - mkdir -p _build/docs/installed-tutorial
-    - cp -r /usr/share/doc/gtkmm-4.0/tutorial/html _build/docs/installed-tutorial
+    - cp -r /usr/share/doc/gtkmm-3.0/tutorial/html _build/docs/installed-tutorial
   artifacts:
     when: always
     paths:
