@@ -1,0 +1,132 @@
+# 2025-01-21: fedora:latest = 41, fedora:rawhide = 42
+# See https://hub.docker.com/_/fedora
+# 2025-01-15: ubuntu:latest = 24.04, ubuntu:rolling = 24.10, ubuntu:devel = 25.04
+# See https://hub.docker.com/_/ubuntu
+
+include:
+  - component: "gitlab.gnome.org/GNOME/citemplates/release-service@master"
+    inputs:
+      job-stage: "release"
+      dist-job-name: "build_release_tarball"
+      tarball-artifact-path: "_build/meson-dist/${CI_PROJECT_NAME}-${CI_COMMIT_TAG}.tar.xz"
+
+stages:
+  - validate
+  - build
+  - deploy
+  - release
+
+.build-default:
+  image: "fedora:latest"
+  before_script:
+    - export PATH="$HOME/.local/bin:$PATH"
+    - dnf install -y ${FEDORA_DEPS}
+
+docs-validation:
+  extends: .build-default
+  stage: validate
+  variables:
+    # If docbook-style-xsl is installed, the xsltproc command reads
+    # stylesheets from local files instead of http://docbook.sourceforge.net.
+    # Faster and safer. Reading from docbook.sourceforge.net sometimes fails.
+    FEDORA_DEPS:
+      gcc
+      gcc-c++
+      gettext
+      itstool
+      libxml2
+      docbook5-schemas
+      docbook-style-xsl
+      libxslt
+      meson
+      ninja-build
+      python3
+      python3-pip
+      python3-wheel
+    MESON_OPTIONS: "-Dbuild-examples=false -Dvalidation=true -Dbuild-translations=true -Dbuild-pdf=false"
+  script:
+    - meson setup ${MESON_OPTIONS} _build .
+    - ninja -C _build
+  allow_failure: false
+
+html-tutorial:
+  extends: .build-default
+  stage: build
+  variables:
+    FEDORA_DEPS:
+      gcc
+      gcc-c++
+      docbook-style-xsl
+      libxslt
+      meson
+      ninja-build
+      python3
+      python3-pip
+      python3-wheel
+    MESON_OPTIONS: "-Dbuild-examples=false -Dvalidation=false -Dbuild-translations=false -Dbuild-pdf=false"
+  script:
+    - meson setup --prefix=/usr --datadir=share ${MESON_OPTIONS} _build .
+    - ninja -C _build
+    # Installation copies all documentation files to one directory.
+    - ninja -C _build install
+    - mkdir -p _build/docs/installed-tutorial
+    - cp -r /usr/share/doc/gtkmm-4.0/tutorial/html _build/docs/installed-tutorial
+  artifacts:
+    when: always
+    paths:
+      - _build/docs/installed-tutorial
+
+# Publish the gtkmm tutorial at gnome.pages.gitlab.gnome.org/gtkmm-documentation
+pages:
+  stage: deploy
+  needs: ["html-tutorial"]
+  script:
+    - mkdir public
+    - mv _build/docs/installed-tutorial/html/* public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+build_release_tarball:
+  image: ubuntu:rolling
+  variables:
+    UBUNTU_DEPS:
+      git
+      g++
+      yelp-tools
+      gettext
+      itstool
+      libxml2-utils
+      docbook5-xml
+      docbook-xsl
+      xsltproc
+      meson
+      ninja-build
+      python3-pygments
+      python3-setuptools
+      libgtkmm-3.0-dev
+
+  before_script:
+    - export DEBIAN_FRONTEND=noninteractive
+    - apt update && apt -y upgrade && apt -y install $UBUNTU_DEPS
+  stage: build
+  needs: []
+  rules:
+    - if: $CI_COMMIT_TAG  # Run this job when a tag is created
+    - when: manual        # and when manually triggered.
+      allow_failure: true # Don't block the CI pipeline until triggered.
+  script:
+    - mkdir _build && cd _build
+    # Don't use warning_level and werror. They are applied also to subprojects.
+    - meson setup --buildtype=release -Dvalidation=true -Dbuild-translations=true -Dbuild-pdf=false
+    # Must compile before 'meson dist' to generate index.docbook.
+    - meson compile
+    - meson dist
+  artifacts:
+    name: "${CI_JOB_NAME}-${CI_COMMIT_REF_NAME}"
+    when: always
+    paths:
+      - "_build/meson-dist/*.tar.xz"
+    expire_in: 1 week
