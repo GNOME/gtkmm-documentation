@@ -93,6 +93,7 @@ build_release_tarball:
   image: ubuntu:rolling
   variables:
     UBUNTU_DEPS:
+      git
       g++
       yelp-tools
       gettext
