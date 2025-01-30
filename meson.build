@@ -7,7 +7,7 @@ project('gtkmm-documentation', 'c', 'cpp',
     'cpp_std=c++14',
     'warning_level=1',
   ],
-  meson_version: '>= 0.56.0', # required for executable(win_subsystem:)
+  meson_version: '>= 0.58.0', # required for meson.add_dist_script() in subproject
 )
 
 python3 = find_program('python3', version: '>=3.7')
@@ -22,10 +22,9 @@ gnome = import('gnome')
 install_prefix = get_option('prefix')
 install_datadir = get_option('datadir')
 
-# Use these instead of meson.source_root() and meson.build_root() in subdirectories.
-# source_root() and build_root() are not useful, if this is a subproject.
-project_source_root = meson.current_source_dir()
-project_build_root = meson.current_build_dir()
+# Source and build root directories of the current (sub)project.
+project_source_root = meson.project_source_root()
+project_build_root = meson.project_build_root()
 
 script_dir = project_source_root / 'tools' / 'meson_aux'
 compile_schemas = script_dir / 'compile-schemas.py'
@@ -98,28 +97,24 @@ add_project_arguments(warning_flags, language: 'cpp')
 c_warning_flags = ['-Wno-overlength-strings']
 add_project_arguments(c_compiler.get_supported_arguments(c_warning_flags), language: 'c')
 
-# add_dist_script() is not allowed in a subproject if meson.version() < 0.58.0.
-can_add_dist_script = not meson.is_subproject() or meson.version().version_compare('>= 0.58.0')
-
 subdir('docs/tutorial')
 subdir('examples')
 
-if can_add_dist_script
-  # Don't distribute these files and directories.
-  dont_distribute = [
-    'docs' / 'tutorial' / 'kindle_cover.jpg',
-    'docs' / 'tutorial' / 'kindle_cover.svg',
-    'tools' / 'make_screenshots',
-    'gtkmm-documentation.doap',
-  ]
-  # Modify the contents of the distribution directory.
-  meson.add_dist_script(
-    python3, extra_dist_cmd,
-    project_source_root,
-    project_build_root,
-    dont_distribute,
-  )
-endif
+# Don't distribute these files and directories.
+dont_distribute = [
+  'docs' / 'tutorial' / 'kindle_cover.jpg',
+  'docs' / 'tutorial' / 'kindle_cover.svg',
+  'tools' / 'make_screenshots',
+  'gtkmm-documentation.doap',
+  '.gitlab-ci.yml',
+]
+# Modify the contents of the distribution directory.
+meson.add_dist_script(
+  python3, extra_dist_cmd,
+  project_source_root,
+  project_build_root,
+  dont_distribute,
+)
 
 # Print a summary.
 explain_ex = ''
