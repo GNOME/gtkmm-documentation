@@ -197,7 +197,7 @@ index_docbook = custom_target('index.docbook',
 install_data(tutorial_C_figures, install_dir: tutorial_C_xmldir / 'figures')
 
 # Create an html version of the C locale's version of the DocBook.
-custom_target('html_index.html',
+html_target = custom_target('html_index.html',
   input: index_docbook,
   output: 'html',
   command: [
@@ -215,6 +215,27 @@ custom_target('html_index.html',
 install_data('style.css', install_dir: tutorial_htmldir)
 install_data(tutorial_C_figures, install_dir: tutorial_figuresdir)
 install_data(tutorial_icons, install_dir: tutorial_iconsdir)
+
+# Copy extra files to the html directory in the build tree.
+# The html files can then be viewed correctly formatted without installing.
+current_build_dir_html = meson.current_build_dir() / 'html'
+custom_target('copy-doc-files',
+  input: html_target,
+  output: 'copy_doc_files.stamp',
+  command: [
+    python3, tutorial_custom_cmd, 'copy_files',
+    meson.current_source_dir(),
+    '@OUTPUT@',
+    current_build_dir_html,
+    'style.css',
+    current_build_dir_html / 'figures',
+    tutorial_C_figures,
+    current_build_dir_html / 'icons',
+    tutorial_icons,
+  ],
+  build_by_default: true,
+  install: false,
+)
 
 if can_parse_and_validate
   # Parse and possibly validate the C locale's version of the DocBook.

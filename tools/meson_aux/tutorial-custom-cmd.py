@@ -104,6 +104,40 @@ def html():
   return result.returncode
 
 # Called from custom_target()
+def copy_files():
+  #   argv[2]       argv[3]              argv[4:]
+  # <input_dir> <stamp_file_path> <files_and_output_dirs>...
+
+  # Each element in files_and_output_dirs is either an absolute path
+  # to an output directory, which may or may not exist,
+  # or a relative path to an input file, relative to input_dir.
+  # The first element must be an output directory.
+
+  input_dir = sys.argv[2]
+  stamp_file_path = sys.argv[3]
+  files_and_output_dirs = sys.argv[4:]
+  output_dir = ''
+
+  for f in files_and_output_dirs:
+    if os.path.isabs(f):
+      # It's an output directory.
+      output_dir = f
+      # Create the destination directory, if it does not exist.
+      os.makedirs(output_dir, exist_ok=True)
+    else:
+      input_path = os.path.join(input_dir, f)
+      output_path = os.path.join(output_dir, os.path.basename(f))
+      if os.path.isfile(input_path):
+        # shutil.copy2() copies timestamps and some other file metadata.
+        shutil.copy2(input_path, output_path)
+      else:
+        # Ignore non-existent files.
+        print(input_path, 'not found, not copied.')
+
+  Path(stamp_file_path).touch(exist_ok=True)
+  return 0
+
+# Called from custom_target()
 def xmllint():
 
   #  argv[2]          argv[3]              argv[4]          argv[5]
@@ -202,6 +236,7 @@ def dblatex():
     '-P', 'toc.section.depth=1',
     '-P', 'paper.type=a4paper',
     '-P', 'doc.collab.show=1',
+    '-P', 'output.quietly=1',
     '-P', 'latex.output.revhistory=0',
   ]
   figures_dir_parent = os.path.dirname(figures_dir)
@@ -318,6 +353,8 @@ if subcommand == 'insert_example_code':
   sys.exit(insert_ex_code())
 if subcommand == 'html':
   sys.exit(html())
+if subcommand == 'copy_files':
+  sys.exit(copy_files())
 if subcommand == 'xmllint':
   sys.exit(xmllint())
 if subcommand == 'translate_xml':
