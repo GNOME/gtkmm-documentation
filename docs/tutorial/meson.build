@@ -194,13 +194,13 @@ index_docbook = custom_target('index.docbook',
 install_data(tutorial_C_figures, install_dir: tutorial_C_xmldir / 'figures')
 
 # Create an html version of the C locale's version of the DocBook.
-custom_target('html_index.html',
+html_target = custom_target('html_index.html',
   input: index_docbook,
   output: 'html',
   command: [
     python3, tutorial_custom_cmd, 'html',
     allow_network_access,
-    project_source_root / 'docs' / 'tutorial' / 'book.xsl',
+    meson.current_source_dir() / 'book.xsl',
     '@INPUT@',
     '@OUTPUT@',    
   ],
@@ -217,14 +217,35 @@ custom_target('html_index.html',
 # 'intellij-light.min.css'.
 style_files = [
   'style.css',
-  'highlight.js/highlight.min.css',
-  'highlight.js/highlight.min.js',
+  'highlight.js' / 'highlight.min.css',
+  'highlight.js' / 'highlight.min.js',
 ]
 
 # Install extra files in the html directory.
 install_data(style_files, install_dir: tutorial_htmldir)
 install_data(tutorial_C_figures, install_dir: tutorial_figuresdir)
 install_data(tutorial_icons, install_dir: tutorial_iconsdir)
+
+# Copy extra files to the html directory in the build tree.
+# The html files can then be viewed correctly formatted without installing.
+current_build_dir_html = meson.current_build_dir() / 'html'
+custom_target('copy-doc-files',
+  input: html_target,
+  output: 'copy_doc_files.stamp',
+  command: [
+    python3, tutorial_custom_cmd, 'copy_files',
+    meson.current_source_dir(),
+    '@OUTPUT@',
+    current_build_dir_html,
+    style_files,
+    current_build_dir_html / 'figures',
+    tutorial_C_figures,
+    current_build_dir_html / 'icons',
+    tutorial_icons,
+  ],
+  build_by_default: true,
+  install: false,
+)
 
 if can_parse_and_validate
   # Parse and possibly validate the C locale's version of the DocBook.
