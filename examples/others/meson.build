@@ -25,7 +25,8 @@ foreach ex : examples_others
     if src.endswith('.gresource.xml')
       resources = gnome.compile_resources(dir.underscorify() + '_resources',
         dir / src,
-        source_dir: dir
+        source_dir: dir,
+        install: false,
       )
     else
       ex_sources += dir / src
@@ -35,7 +36,8 @@ foreach ex : examples_others
   exe_file = executable(ex_name, ex_sources, resources,
     dependencies: gtkmm_dep,
     win_subsystem: 'windows',
-    build_by_default: build_examples_by_default
+    build_by_default: build_examples_by_default,
+    install: false,
   )
 
   stamp_file_name = ex_name + '_copy.stamp'
@@ -49,7 +51,8 @@ foreach ex : examples_others
       ex[1],
       '@OUTPUT@',
     ],
-    build_by_default: build_examples_by_default
+    build_by_default: build_examples_by_default,
+    install: false,
   )
 
   target_name = 'examples' / 'others' / stamp_file_name

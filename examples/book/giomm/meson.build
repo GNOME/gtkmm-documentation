@@ -28,7 +28,8 @@ foreach ex : examples_book_giomm
     if src.endswith('.gresource.xml')
       resources = gnome.compile_resources(dir.underscorify() + '_resources',
         dir / src,
-        source_dir: dir
+        source_dir: dir,
+        install: false,
       )
     else
       ex_sources += dir / src
@@ -38,7 +39,8 @@ foreach ex : examples_book_giomm
   exe_file = executable(ex_name, ex_sources, resources,
     dependencies: giomm_dep,
     win_subsystem: 'console',
-    build_by_default: build_examples_by_default
+    build_by_default: build_examples_by_default,
+    install: false,
   )
 
   stamp_file_name = ex_name + '_copy.stamp'
@@ -52,7 +54,8 @@ foreach ex : examples_book_giomm
       ex[1],
       '@OUTPUT@',
     ],
-    build_by_default: build_examples_by_default
+    build_by_default: build_examples_by_default,
+    install: false,
   )
 
   # These example programs build quite fast. No need for extra timeout time.

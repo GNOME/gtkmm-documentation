@@ -188,10 +188,14 @@ index_docbook = custom_target('index.docbook',
   build_by_default: true,
   install: true,
   install_dir: tutorial_C_xmldir,
+  install_tag: 'doc',
 )
 
 # Install extra files in the C locale XML file directory.
-install_data(tutorial_C_figures, install_dir: tutorial_C_xmldir / 'figures')
+install_data(tutorial_C_figures,
+  install_dir: tutorial_C_xmldir / 'figures',
+  install_tag: 'doc',
+)
 
 # Create an html version of the C locale's version of the DocBook.
 html_target = custom_target('html_index.html',
@@ -206,7 +210,8 @@ html_target = custom_target('html_index.html',
   ],
   build_by_default: true,
   install: true,
-  install_dir: tutorialdir
+  install_dir: tutorialdir,
+  install_tag: 'doc',
 )
 
 # highlight.js files were downloaded from
@@ -222,9 +227,18 @@ style_files = [
 ]
 
 # Install extra files in the html directory.
-install_data(style_files, install_dir: tutorial_htmldir)
-install_data(tutorial_C_figures, install_dir: tutorial_figuresdir)
-install_data(tutorial_icons, install_dir: tutorial_iconsdir)
+install_data(style_files,
+  install_dir: tutorial_htmldir,
+  install_tag: 'doc',
+)
+install_data(tutorial_C_figures,
+  install_dir: tutorial_figuresdir,
+  install_tag: 'doc',
+)
+install_data(tutorial_icons,
+  install_dir: tutorial_iconsdir,
+  install_tag: 'doc',
+)
 
 # Copy extra files to the html directory in the build tree.
 # The html files can then be viewed correctly formatted without installing.
@@ -311,12 +325,14 @@ foreach language : languages
     'index.docbook',
     '..' / '..' / '..' / 'C' / gtkmm_tutorial / 'figures', # relative symlink dir
     tutorial_figurefiles,
+    install_tag: 'doc',
   )
   # Install extra symlinks in the translated XML file directory.
   # install_symlink() requires meson >= 0.61.0
   #foreach figure : tutorial_figurefiles
   #  install_symlink(figure,
   #    install_dir: tutorial_language_xmldir / 'figures',
+  #    install_tag: 'doc',
   #    pointing_to: '..' / '..' / '..' / 'C' / gtkmm_tutorial / 'figures' / figure,
   #  )
   #endforeach

@@ -124,7 +124,8 @@ foreach ex : examples_book
     if src.endswith('.gresource.xml')
       resources = gnome.compile_resources(dir.underscorify() + '_resources',
         dir / src,
-        source_dir: dir
+        source_dir: dir,
+        install: false,
       )
     else
       ex_sources += dir / src
@@ -138,7 +139,8 @@ foreach ex : examples_book
       dependencies: gtkmm_dep,
       win_subsystem: 'console',
       cpp_args: has_mkfifo ? [] : [ '-DDONT_HAVE_MKFIFO=1' ],
-      build_by_default: build_examples_by_default
+      build_by_default: build_examples_by_default,
+      install: false,
     )
   else
     # multi-threaded programs need thread support
@@ -147,7 +149,8 @@ foreach ex : examples_book
     exe_file = executable(ex_name, ex_sources, resources,
       dependencies: deps,
       win_subsystem: 'windows',
-      build_by_default: build_examples_by_default
+      build_by_default: build_examples_by_default,
+      install: false,
     )
   endif
 
@@ -162,7 +165,8 @@ foreach ex : examples_book
       ex[1],
       '@OUTPUT@',
     ],
-    build_by_default: build_examples_by_default
+    build_by_default: build_examples_by_default,
+    install: false,
   )
 
   target_name = 'examples' / 'book' / stamp_file_name
