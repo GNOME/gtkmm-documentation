@@ -7,7 +7,7 @@ project('gtkmm-documentation', 'c', 'cpp',
     'cpp_std=c++14',
     'warning_level=1',
   ],
-  meson_version: '>= 0.58.0', # required for meson.add_dist_script() in subproject
+  meson_version: '>= 0.60.0', # required for install_tag keyword argument.
 )
 
 python3 = find_program('python3', version: '>=3.7')

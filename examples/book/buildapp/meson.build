@@ -36,7 +36,8 @@ foreach ex : examples_book_buildapp
     if src.endswith('.gresource.xml')
       resources = gnome.compile_resources(dir.underscorify() + '_resources',
         dir / src,
-        source_dir: dir
+        source_dir: dir,
+        install: false,
       )
     elif src.endswith('.gschema.xml')
       if glib_compile_schemas.found()
@@ -48,7 +49,9 @@ foreach ex : examples_book_buildapp
             meson.current_source_dir() / dir,
             meson.current_build_dir() / dir,
             '@OUTPUT@'
-          ]
+          ],
+          build_by_default: build_examples_by_default,
+          install: false,
         )
       endif
     else
@@ -59,7 +62,8 @@ foreach ex : examples_book_buildapp
   exe_file = executable(ex_name, ex_sources, resources, schemas,
     dependencies: gtkmm_dep,
     win_subsystem: 'windows',
-    build_by_default: build_examples_by_default
+    build_by_default: build_examples_by_default,
+    install: false,
   )
 
   stamp_file_name = ex_name + '_copy.stamp'
@@ -73,7 +77,8 @@ foreach ex : examples_book_buildapp
       ex[1],
       '@OUTPUT@',
     ],
-    build_by_default: build_examples_by_default
+    build_by_default: build_examples_by_default,
+    install: false,
   )
 
   target_name = 'examples' / 'book' / 'buildapp' / stamp_file_name
