@@ -10047,11 +10047,11 @@ _PINCLUDE(gtkmm/private/widget_p.h)
 namespace Gtk
 {
 
-class Button
+class GTKMM_API Button
   : public Widget,
     public Actionable
 {
-  _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Widget, GtkWidget)
+  _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Widget, GtkWidget, , , GTKMM_API)
   _IMPLEMENTS_INTERFACE(Actionable)
 public:
 
@@ -10188,6 +10188,10 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
 <para>Other macros, such as <function>_WRAP_METHOD()</function> and
     <function>_WRAP_SIGNAL()</function> may only be used after a call to a
     <function>_CLASS_*</function> macro.</para>
+<para>Most class macros take an optional argument, <parameter>declaration prefix</parameter>.
+    It's typically used for a C preprocessor macro defined as <literal>__declspec(dllexport)</literal>
+    or <literal>__declspec(dllimport)</literal> when building with MSVC on Windows,
+    defined as an empty string otherwise.</para>
 
 <section xml:id="gmmproc-class-gobject">
 <title>_CLASS_GOBJECT</title>
@@ -10195,9 +10199,11 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
 <para>This macro declares a wrapper for a type that is derived from
     <classname>GObject</classname>, but whose wrapper is not derived from
     <classname>Gtk::Object</classname>.</para>
-<para><function>_CLASS_GOBJECT( C++ class, C class, C casting macro, C++ base class, C base class )</function></para>
-<para>For instance, from <filename>adjustment.hg</filename>:</para>
-<programlisting><code>_CLASS_GOBJECT(Adjustment, GtkAdjustment, GTK_ADJUSTMENT, Glib::Object, GObject)
+<para><function>_CLASS_GOBJECT( C++ class, C class, C casting macro, C++ base class,
+    C base class, real C class, real C base class, declaration prefix )</function></para>
+<para><parameter>real C class</parameter> and <parameter>real C base class</parameter>
+    are optional. They are seldom used. For instance, from <filename>adjustment.hg</filename>:</para>
+<programlisting><code>_CLASS_GOBJECT(Adjustment, GtkAdjustment, GTK_ADJUSTMENT, Glib::Object, GObject, , , GTKMM_API)
 </code></programlisting>
 </section>
 
@@ -10206,9 +10212,11 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
 
 <para>This macro declares a wrapper for a type whose wrapper is derived from
     <classname>Gtk::Object</classname>, such as a widget or dialog.</para>
-<para><function>_CLASS_GTKOBJECT( C++ class, C class, C casting macro, C++ base class, C base class )</function></para>
-<para>For instance, from <filename>button.hg</filename>:</para>
-<programlisting><code>_CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Widget, GtkWidget)
+<para><function>_CLASS_GTKOBJECT( C++ class, C class, C casting macro, C++ base class,
+    C base class, real C class, real C base class, declaration prefix )</function></para>
+<para><parameter>real C class</parameter> and <parameter>real C base class</parameter>
+    are optional. They are seldom used. For instance, from <filename>button.hg</filename>:</para>
+<programlisting><code>_CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Widget, GtkWidget, , , GTKMM_API)
 </code></programlisting>
 <para>You will typically use this macro when the class already derives from
     <classname>Gtk::Object</classname>. For instance, you will use it when wrapping
@@ -10229,9 +10237,10 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
 <para>This macro declares a wrapper for a non-<classname>GObject</classname>
     struct, registered with
     <function>g_boxed_type_register_static()</function>.</para>
-<para><function>_CLASS_BOXEDTYPE( C++ class, C class, new function, copy function, free function )</function></para>
+<para><function>_CLASS_BOXEDTYPE( C++ class, C class, new function, copy function,
+    free function, declaration prefix )</function></para>
 <para>For instance, from <classname>Gdk::RGBA</classname>:</para>
-<programlisting><code>_CLASS_BOXEDTYPE(RGBA, GdkRGBA, NONE, gdk_rgba_copy, gdk_rgba_free)
+<programlisting><code>_CLASS_BOXEDTYPE(RGBA, GdkRGBA, NONE, gdk_rgba_copy, gdk_rgba_free, GDKMM_API)
 </code></programlisting>
 </section>
 
@@ -10242,9 +10251,9 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
     <classname>GdkRectangle</classname>. It is similar to
     <function>_CLASS_BOXEDTYPE</function>, but the C struct is not allocated
     dynamically.</para>
-<para><function>_CLASS_BOXEDTYPE_STATIC( C++ class, C class )</function></para>
+<para><function>_CLASS_BOXEDTYPE_STATIC( C++ class, C class, declaration prefix )</function></para>
 <para>For instance, for <classname>Gdk::Rectangle</classname>:</para>
-<programlisting><code>_CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle)
+<programlisting><code>_CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle, GDKMM_API)
 </code></programlisting>
 </section>
 
@@ -10254,9 +10263,10 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
 <para>This macro declares a wrapper for an opaque struct that has copy and free
     functions. The new, copy and free functions will be used to instantiate the
     default constructor, copy constructor and destructor.</para>
-<para><function>_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, copy function, free function )</function></para>
+<para><function>_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, copy function,
+    free function, declaration prefix )</function></para>
 <para>For instance, from <classname>Glib::VariantType</classname>:</para>
-<programlisting><code>_CLASS_OPAQUE_COPYABLE(VariantType, GVariantType, NONE, g_variant_type_copy, g_variant_type_free)
+<programlisting><code>_CLASS_OPAQUE_COPYABLE(VariantType, GVariantType, NONE, g_variant_type_copy, g_variant_type_free, GLIBMM_API)
 </code></programlisting>
 </section>
 
@@ -10266,9 +10276,10 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
 <para>This macro declares a wrapper for a reference-counted opaque struct. The
     &cpp; wrapper cannot be directly instantiated and can only be used with
     <classname>Glib::RefPtr</classname>.</para>
-<para><function>_CLASS_OPAQUE_REFCOUNTED( C++ class, C class, new function, ref function, unref function )</function></para>
+<para><function>_CLASS_OPAQUE_REFCOUNTED( C++ class, C class, new function, ref function,
+    unref function, declaration prefix )</function></para>
 <para>For instance, for <classname>Gtk::CssSection</classname>:</para>
-<programlisting><code>_CLASS_OPAQUE_REFCOUNTED(CssSection, GtkCssSection, NONE, gtk_css_section_ref, gtk_css_section_unref)
+<programlisting><code>_CLASS_OPAQUE_REFCOUNTED(CssSection, GtkCssSection, NONE, gtk_css_section_ref, gtk_css_section_unref, GTKMM_API)
 </code></programlisting>
 </section>
 
@@ -10278,7 +10289,8 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
 <para>This macro can be used to wrap structs which don't fit into any
     specialized category.</para>
 <para><function>_CLASS_GENERIC( C++ class, C class )</function></para>
-<para>For instance, for <classname>Gdk::TimeCoord</classname>:</para>
+<para>Note: No <parameter>declaration prefix</parameter> argument. For instance,
+    for <classname>Gdk::TimeCoord</classname>:</para>
 <programlisting><code>_CLASS_GENERIC(TimeCoord, GdkTimeCoord)
 </code></programlisting>
 </section>
@@ -10289,10 +10301,11 @@ _CONVERSION(`const Glib::RefPtr&lt;Printer&gt;&amp;',`GtkPrinter*',__CONVERT_REF
 <para>This macro declares a wrapper for a type that is derived from
     <classname>GTypeInterface</classname>.
 </para>
-<para><function>_CLASS_INTERFACE( C++ class, C class, C casting macro, C interface struct, Base C++ class (optional), Base C class (optional) )</function></para>
+<para><function>_CLASS_INTERFACE( C++ class, C class, C casting macro, C interface struct,
+    Base C++ class (optional), Base C class (optional), declaration prefix (optional) )</function></para>
 <para>
 For instance, from <filename>celleditable.hg</filename>:</para>
-<programlisting><code>_CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)
+<programlisting><code>_CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface, , , GTKMM_API)
 </code></programlisting>
 <para>Two extra optional parameters were once added, for the case that the interface derives
 from another interface, which was believed to be the case when the GInterface has another
@@ -10300,7 +10313,7 @@ GInterface as a prerequisite. This is a misunderstanding, though.
 When GInterface A has GInterface B as a prerequisite, it means that every class
 that implements A shall also implement B.
 For instance, from <filename>loadableicon.hg</filename> in glibmm-2.4:</para>
-<programlisting><code>_CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)
+<programlisting><code>_CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon, GIOMM_API)
 </code></programlisting>
 </section>
 
@@ -10324,9 +10337,9 @@ For instance, from <filename>loadableicon.hg</filename> in glibmm-2.4:</para>
     corresponding <function>_WRAP_CREATE()</function> in the public section.
     This prevents the class from being instantiated without using a
     <classname>RefPtr</classname>. For instance:</para>
-<programlisting><code>class TextMark : public Glib::Object
+<programlisting><code>class GTKMM_API TextMark : public Glib::Object
 {
-  _CLASS_GOBJECT(TextMark, GtkTextMark, GTK_TEXT_MARK, Glib::Object, GObject)
+  _CLASS_GOBJECT(TextMark, GtkTextMark, GTK_TEXT_MARK, Glib::Object, GObject, , , GTKMM_API)
 
 protected:
   _WRAP_CTOR(TextMark(const Glib::ustring&amp; name, bool left_gravity = true), gtk_text_mark_new)
@@ -10990,7 +11003,7 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
 <para>This macro generates a &cpp; enum to wrap a C enum. You must specify the desired &cpp; name and
     the name of the underlying C enum.</para>
 <para>For instance, from <filename>enums.hg</filename>:</para>
-<programlisting><code>_WRAP_ENUM(Orientation, GtkOrientation)
+<programlisting><code>_WRAP_ENUM(Orientation, GtkOrientation, decl_prefix GTKMM_API)
 </code></programlisting>
 <para>There are some optional extra arguments:
 <variablelist>
@@ -11006,7 +11019,7 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
         type in _WRAP_PROPERTY. It would cause a runtime error, when the generated
         <methodname>property_*()</methodname> method is called.</para>
       <para>For example, from <filename>icontheme.hg</filename>:</para>
-      <programlisting><code>_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
+      <programlisting><code>_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE, decl_prefix GTKMM_API)
       </code></programlisting>
     </listitem>
   </varlistentry>
@@ -11017,7 +11030,7 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
         for the C enum. Use this parameter if <command>gmmproc</command> can't
         deduce the correct function name from the name of the C enum type.</para>
       <para>For example, from <filename>dbusproxy.hg</filename> in glibmm:</para>
-      <programlisting><code>_WRAP_ENUM(ProxyFlags, GDBusProxyFlags, gtype_func g_dbus_proxy_flags_get_type)
+      <programlisting><code>_WRAP_ENUM(ProxyFlags, GDBusProxyFlags, gtype_func g_dbus_proxy_flags_get_type, decl_prefix GIOMM_API)
       </code></programlisting>
     </listitem>
   </varlistentry>
@@ -11028,7 +11041,7 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
         within a class. Such an enum is scoped like an enum class, but unlike an
         enum class, it can be implicitly converted to <type>int</type>.</para>
       <para>For example, from <filename>dialog.hg</filename>:</para>
-      <programlisting><code>_WRAP_ENUM(ResponseType, GtkResponseType, CONV_TO_INT)
+      <programlisting><code>_WRAP_ENUM(ResponseType, GtkResponseType, CONV_TO_INT, decl_prefix GTKMM_API)
       </code></programlisting>
     </listitem>
   </varlistentry>
@@ -11037,9 +11050,19 @@ _IGNORE_SIGNAL(activate-cursor-child, toggle-cursor-child, move-cursor)
     <listitem>
       <para>Substitutes (part of) the name of one or more enum constants.
         You can add any number of substitutions.</para>
-      <para>For example, from <filename>iochannel.hg</filename> in glibmm:</para>
-      <programlisting><code>_WRAP_ENUM(SeekType, GSeekType, NO_GTYPE, s#^SEEK_#SEEK_TYPE_#)
+      <para>For example, from <filename>toplevel.hg</filename>:</para>
+      <programlisting><code>_WRAP_ENUM(FullscreenMode, GdkFullscreenMode,
+  s#^CURRENT_MONITOR$#ON_CURRENT_MONITOR#, s#^ALL_MONITORS$#ON_ALL_MONITORS#,
+  decl_prefix GDKMM_API)
       </code></programlisting>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>decl_prefix &lt;declaration_prefix&gt;</term>
+    <listitem>
+      <para>Typically used for a C preprocessor macro defined as <literal>__declspec(dllexport)</literal>
+        or <literal>__declspec(dllimport)</literal> when building with MSVC on Windows,
+        defined as an empty string otherwise.</para>
     </listitem>
   </varlistentry>
   <varlistentry>
@@ -11083,7 +11106,7 @@ of the corresponding C enum, and the prefix for the C enum values.</para>
 <para>This exception can then be thrown by methods which are generated from
 _WRAP_METHOD() with the errthrow option.</para>
 <para>For instance, from <filename>pixbuf.hg</filename>:</para>
-<programlisting><code>_WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)
+<programlisting><code>_WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR, decl_prefix GDKMM_API)
 </code></programlisting>
 <para>_WRAP_GERROR() accepts the same optional arguments as _WRAP_ENUM() (though
 CONV_TO_INT is ignored because all exception class enums are plain enums within a class).
