@@ -9902,11 +9902,11 @@ _PINCLUDE(gtkmm/private/bin_p.h)
 namespace Gtk
 {
 
-class Button
+class GTKMM_API Button
   : public Bin,
     public Activatable // Activatable is deprecated. Will be replaced at ABI break.
 {
-  _CLASS_GTKOBJECT(Button,GtkButton,GTK_BUTTON,Gtk::Bin,GtkBin)
+  _CLASS_GTKOBJECT(Button,GtkButton,GTK_BUTTON,Gtk::Bin,GtkBin,,,GTKMM_API)
   _IMPLEMENTS_INTERFACE(Activatable)
 public:
 
@@ -10048,6 +10048,10 @@ _INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')
 <para>Other macros, such as <function>_WRAP_METHOD()</function> and
     <function>_WRAP_SIGNAL()</function> may only be used after a call to a
     <function>_CLASS_*</function> macro.</para>
+<para>Most class macros take an optional argument, <parameter>declaration prefix</parameter>.
+    It's typically used for a C preprocessor macro defined as <literal>__declspec(dllexport)</literal>
+    or <literal>__declspec(dllimport)</literal> when building with MSVC on Windows,
+    defined as an empty string otherwise.</para>
 
 <section xml:id="gmmproc-class-gobject">
 <title>_CLASS_GOBJECT</title>
@@ -10055,11 +10059,12 @@ _INITIALIZATION(`Gtk::Widget&amp;',`GtkWidget*',`$3 = Glib::wrap($4)')
 <para>This macro declares a wrapper for a type that is derived from
     <classname>GObject</classname>, but whose wrapper is not derived from
     <classname>Gtk::Object</classname>.</para>
-<para><function>_CLASS_GOBJECT( C++ class, C class, C casting macro, C++ base class, C base class )</function></para>
-<para>For instance, from <filename>accelgroup.hg</filename>:
-</para>
+<para><function>_CLASS_GOBJECT( C++ class, C class, C casting macro, C++ base class,
+    C base class, real C class, real C base class, declaration prefix )</function></para>
+<para><parameter>real C class</parameter> and <parameter>real C base class</parameter>
+    are optional. They are seldom used. For instance, from <filename>accelgroup.hg</filename>:</para>
 <programlisting>
-_CLASS_GOBJECT(AccelGroup, GtkAccelGroup, GTK_ACCEL_GROUP, Glib::Object, GObject)
+_CLASS_GOBJECT(AccelGroup, GtkAccelGroup, GTK_ACCEL_GROUP, Glib::Object, GObject, , , GTKMM_API)
 </programlisting>
 </section>
 
@@ -10068,11 +10073,12 @@ _CLASS_GOBJECT(AccelGroup, GtkAccelGroup, GTK_ACCEL_GROUP, Glib::Object, GObject
 
 <para>This macro declares a wrapper for a type whose wrapper is derived from
     <classname>Gtk::Object</classname>, such as a widget or dialog.</para>
-<para><function>_CLASS_GTKOBJECT( C++ class, C class, C casting macro, C++ base class, C base class )</function></para>
-<para>For instance, from <filename>button.hg</filename>:
-</para>
+<para><function>_CLASS_GTKOBJECT( C++ class, C class, C casting macro, C++ base class,
+    C base class, real C class, real C base class, declaration prefix )</function></para>
+<para><parameter>real C class</parameter> and <parameter>real C base class</parameter>
+    are optional. They are seldom used. For instance, from <filename>button.hg</filename>:</para>
 <programlisting>
-_CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)
+_CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin, , , GTKMM_API)
 </programlisting>
 <para>You will typically use this macro when the class already derives from Gtk::Object. For instance, you will use it when wrapping a GTK+ Widget, because Gtk::Widget derives from Gtk::Object.</para>
 <para>You might also derive non-widget classes from
@@ -10090,11 +10096,12 @@ _CLASS_GTKOBJECT(Button, GtkButton, GTK_BUTTON, Gtk::Bin, GtkBin)
 <para>This macro declares a wrapper for a non-<classname>GObject</classname>
     struct, registered with
     <function>g_boxed_type_register_static()</function>.</para>
-<para><function>_CLASS_BOXEDTYPE( C++ class, C class, new function, copy function, free function )</function></para>
+<para><function>_CLASS_BOXEDTYPE( C++ class, C class, new function, copy function,
+    free function, declaration prefix )</function></para>
 <para>For instance, from <classname>Gdk::RGBA</classname>:
 </para>
 <programlisting>
-_CLASS_BOXEDTYPE(RGBA, GdkRGBA, NONE, gdk_rgba_copy, gdk_rgba_free)
+_CLASS_BOXEDTYPE(RGBA, GdkRGBA, NONE, gdk_rgba_copy, gdk_rgba_free, GDKMM_API)
 </programlisting>
 </section>
 
@@ -10105,11 +10112,11 @@ _CLASS_BOXEDTYPE(RGBA, GdkRGBA, NONE, gdk_rgba_copy, gdk_rgba_free)
     <classname>GdkRectangle</classname>. It is similar to
     <function>_CLASS_BOXEDTYPE</function>, but the C struct is not allocated
     dynamically.</para>
-<para><function>_CLASS_BOXEDTYPE_STATIC( C++ class, C class )</function></para>
+<para><function>_CLASS_BOXEDTYPE_STATIC( C++ class, C class, declaration prefix )</function></para>
 <para>For instance, for <classname>Gdk::Rectangle</classname>:
 </para>
 <programlisting>
-_CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle)
+_CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle, GDKMM_API)
 </programlisting>
 </section>
 
@@ -10119,11 +10126,12 @@ _CLASS_BOXEDTYPE_STATIC(Rectangle, GdkRectangle)
 <para>This macro declares a wrapper for an opaque struct that has copy and free
     functions. The new, copy and free functions will be used to instantiate the
     default constructor, copy constructor and destructor.</para>
-<para><function>_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, copy function, free function )</function></para>
+<para><function>_CLASS_OPAQUE_COPYABLE( C++ class, C class, new function, copy function,
+    free function, declaration prefix )</function></para>
 <para>For instance, from <classname>Glib::Checksum</classname>:
 </para>
 <programlisting>
-_CLASS_OPAQUE_COPYABLE(Checksum, GChecksum, NONE, g_checksum_copy, g_checksum_free)
+_CLASS_OPAQUE_COPYABLE(Checksum, GChecksum, NONE, g_checksum_copy, g_checksum_free, GLIBMM_API)
 </programlisting>
 </section>
 
@@ -10133,11 +10141,12 @@ _CLASS_OPAQUE_COPYABLE(Checksum, GChecksum, NONE, g_checksum_copy, g_checksum_fr
 <para>This macro declares a wrapper for a reference-counted opaque struct. The
     C++ wrapper cannot be directly instantiated and can only be used with
     <classname>Glib::RefPtr</classname>.</para>
-<para><function>_CLASS_OPAQUE_REFCOUNTED( C++ class, C class, new function, ref function, unref function )</function></para>
-<para>For instance, for <classname>Pango::Coverage</classname>:
-</para>
+<para><function>_CLASS_OPAQUE_REFCOUNTED( C++ class, C class, new function, ref function,
+    unref function, declaration prefix )</function></para>
+<para>For instance, for <classname>Gtk::CssSection</classname>:</para>
 <programlisting>
-_CLASS_OPAQUE_REFCOUNTED(Coverage, PangoCoverage, pango_coverage_new, pango_coverage_ref, pango_coverage_unref)
+_CLASS_OPAQUE_REFCOUNTED(CssSection, GtkCssSection, NONE, gtk_css_section_ref,
+  gtk_css_section_unref, GTKMM_API)
 </programlisting>
 </section>
 
@@ -10147,10 +10156,10 @@ _CLASS_OPAQUE_REFCOUNTED(Coverage, PangoCoverage, pango_coverage_new, pango_cove
 <para>This macro can be used to wrap structs which don't fit into any
     specialized category.</para>
 <para><function>_CLASS_GENERIC( C++ class, C class )</function></para>
-<para>For instance, for <classname>Pango::AttrIter</classname>:
-</para>
+<para>Note: No <parameter>declaration prefix</parameter> argument. For instance,
+    for <classname>Gdk::TimeCoord</classname>:</para>
 <programlisting>
-_CLASS_GENERIC(AttrIter, PangoAttrIterator)
+_CLASS_GENERIC(TimeCoord, GdkTimeCoord)
 </programlisting>
 </section>
 
@@ -10160,19 +10169,22 @@ _CLASS_GENERIC(AttrIter, PangoAttrIterator)
 <para>This macro declares a wrapper for a type that is derived from
     <classname>GTypeInterface</classname>.
 </para>
-<para><function>_CLASS_INTERFACE( C++ class, C class, C casting macro, C interface struct, Base C++ class (optional), Base C class (optional) )</function></para>
+<para><function>_CLASS_INTERFACE( C++ class, C class, C casting macro, C interface struct,
+    Base C++ class (optional), Base C class (optional), declaration prefix (optional) )</function></para>
 <para>
 For instance, from <filename>celleditable.hg</filename>:
 </para>
 <programlisting>
-_CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface)
+_CLASS_INTERFACE(CellEditable, GtkCellEditable, GTK_CELL_EDITABLE, GtkCellEditableIface, , , GTKMM_API)
 </programlisting>
-<para>Two extra parameters are optional, for the case that the interface derives from another interface,
-which should be the case when the GInterface has another GInterface as a prerequisite.
-For instance, from <filename>loadableicon.hg</filename>:
-</para>
+<para>Two extra optional parameters were once added, for the case that the interface derives
+from another interface, which was believed to be the case when the GInterface has another
+GInterface as a prerequisite. This is a misunderstanding, though.
+When GInterface A has GInterface B as a prerequisite, it means that every class
+that implements A shall also implement B.
+For instance, from <filename>loadableicon.hg</filename> in glibmm:</para>
 <programlisting>
-_CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon)
+_CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIface, Icon, GIcon, GIOMM_API)
 </programlisting>
 </section>
 
@@ -10198,9 +10210,9 @@ _CLASS_INTERFACE(LoadableIcon, GLoadableIcon, G_LOADABLE_ICON, GLoadableIconIfac
     <classname>RefPtr</classname>. For instance:
 </para>
 <programlisting>
-class TextMark : public Glib::Object
+class GTKMM_API TextMark : public Glib::Object
 {
-  _CLASS_GOBJECT(TextMark, GtkTextMark, GTK_TEXT_MARK, Glib::Object, GObject)
+  _CLASS_GOBJECT(TextMark, GtkTextMark, GTK_TEXT_MARK, Glib::Object, GObject, , , GTKMM_API)
 
 protected:
   _WRAP_CTOR(TextMark(const Glib::ustring&amp; name, bool left_gravity = true), gtk_text_mark_new)
@@ -10880,7 +10892,7 @@ _IMPLEMENTS_INTERFACE(Orientable)
 <para>For instance, from <filename>enums.hg</filename>:
 </para>
 <programlisting>
-_WRAP_ENUM(WindowType, GtkWindowType)
+_WRAP_ENUM(WindowType, GtkWindowType, decl_prefix GTKMM_API)
 </programlisting>
 <para>There are some optional extra arguments:
 <variablelist>
@@ -10892,10 +10904,26 @@ _WRAP_ENUM(WindowType, GtkWindowType)
         function for the C enum, but be careful that you don't just need to
         include an extra header for that function. You should also file a bug
         against the C API, because all enums should be registered as GTypes.</para>
+      <para>If you specify <literal>NO_GTYPE</literal>, don't use that enum as the
+        type in _WRAP_PROPERTY. It would cause a runtime error, when the generated
+        <methodname>property_*()</methodname> method is called.</para>
       <para>For example, from <filename>icontheme.hg</filename>:
       </para>
       <programlisting>
-_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
+_WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE, decl_prefix GTKMM_API)
+      </programlisting>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>gtype_func &lt;function_name&gt;</term>
+    <listitem>
+      <para>Specifies the name of the <function>*_get_type()</function> function
+        for the C enum. Use this parameter if <command>gmmproc</command> can't
+        deduce the correct function name from the name of the C enum type.</para>
+      <para>For example, from <filename>dbusproxy.hg</filename> in glibmm:</para>
+      <programlisting>
+_WRAP_ENUM(ProxyFlags, GDBusProxyFlags, s#^DBUS_##,
+  gtype_func g_dbus_proxy_flags_get_type, decl_prefix GIOMM_API)
       </programlisting>
     </listitem>
   </varlistentry>
@@ -10907,8 +10935,16 @@ _WRAP_ENUM(IconLookupFlags, GtkIconLookupFlags, NO_GTYPE)
       <para>For example, from <filename>iochannel.hg</filename> in glibmm:
       </para>
       <programlisting>
-_WRAP_ENUM(SeekType, GSeekType, NO_GTYPE, s#^SEEK_#SEEK_TYPE_#)
+_WRAP_ENUM(SeekType, GSeekType, NO_GTYPE, s#^SEEK_#SEEK_TYPE_#, decl_prefix GLIBMM_API)
       </programlisting>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>decl_prefix &lt;declaration_prefix&gt;</term>
+    <listitem>
+      <para>Typically used for a C preprocessor macro defined as <literal>__declspec(dllexport)</literal>
+        or <literal>__declspec(dllimport)</literal> when building with MSVC on Windows,
+        defined as an empty string otherwise.</para>
     </listitem>
   </varlistentry>
   <varlistentry>
@@ -10954,7 +10990,7 @@ _WRAP_METHOD() with the errthrow option.</para>
 <para>For instance, from <filename>pixbuf.hg</filename>:
 </para>
 <programlisting>
-_WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR)
+_WRAP_GERROR(PixbufError, GdkPixbufError, GDK_PIXBUF_ERROR, decl_prefix GDKMM_API)
 </programlisting>
 <para>_WRAP_GERROR() accepts the same optional arguments as _WRAP_ENUM().</para>
 </section>
