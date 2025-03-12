@@ -346,7 +346,7 @@ program possible. This program will create an empty 200 x 200 pixel window.
 <para>We will now explain each part of the example</para>
 <programlisting><code>#include &lt;gtkmm.h&gt;</code></programlisting>
 <para>
-All &gtkmm; programs must include certain &gtkmm; headers; <literal>gtkmm.h</literal>
+All &gtkmm; programs must include certain &gtkmm; headers; <filename>gtkmm.h</filename>
 includes the entire &gtkmm; kit. This is usually not a good idea, because
 it includes a megabyte or so of headers, but for simple programs, it
 suffices.
@@ -385,15 +385,15 @@ can be checked when <methodname>make_window_and_run()</methodname> is called, bu
 <programlisting><code>return app-&gt;make_window_and_run&lt;MyWindow&gt;(argc, argv);</code></programlisting>
 
 <para>
-After putting the source code in <literal>simple.cc</literal> you can compile
+After putting the source code in <filename>base.cc</filename> you can compile
 the above program with <application>gcc</application> using:
 </para>
-<programlisting><code>g++ simple.cc -o simple `pkg-config --cflags --libs gtkmm-4.0` -std=c++17</code></programlisting>
+<programlisting><code>g++ base.cc -o base `pkg-config --cflags --libs gtkmm-4.0` -std=c++17</code></programlisting>
 <para>
-Note that you must surround the <literal>pkg-config</literal> invocation with backquotes.
+Note that you must surround the <application>pkg-config</application> invocation with backquotes.
 Backquotes cause the shell to execute the command inside them, and to use
 the command's output as part of the command line.
-Note also that <literal>simple.cc</literal> must come before the <literal>pkg-config</literal>
+Note also that <filename>base.cc</filename> must come before the <application>pkg-config</application>
 invocation on the command line. <literal><phrase role="nowrap">-std=c++17</phrase></literal> is necessary only if
 your compiler is not <phrase role="nowrap">C++17</phrase> compliant by default.
 </para>
