@@ -379,13 +379,13 @@ Your <function>main()</function> function will then return with an appropriate s
 <programlisting>return app-&gt;run(window);</programlisting>
 
 <para>
-After putting the source code in <literal>simple.cc</literal> you can compile
+After putting the source code in <literal>base.cc</literal> you can compile
 the above program with <application>gcc</application> using:</para>
-<programlisting>g++ simple.cc -o simple `pkg-config gtkmm-3.0 --cflags --libs`</programlisting>
+<programlisting>g++ base.cc -o base `pkg-config gtkmm-3.0 --cflags --libs`</programlisting>
 <para>Note that you must surround the <literal>pkg-config</literal> invocation with backquotes.
 Backquotes cause the shell to execute the command inside them, and to use
 the command's output as part of the command line.
-Note also that <literal>simple.cc</literal> must come before the <literal>pkg-config</literal>
+Note also that <literal>base.cc</literal> must come before the <literal>pkg-config</literal>
 invocation on the command line.
 </para>
 </section>
