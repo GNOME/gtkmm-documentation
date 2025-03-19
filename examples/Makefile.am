@@ -146,6 +146,13 @@ dist_noinst_DATA = \
 	book/listmodelviews/gridview/xmms.xpm			\
 	$(MENUS_AND_TOOLBARS_RESOURCES)
 
+# The WebKit example can be built only if webkitgtk is installed.
+# Meson can build it conditionally. Autotools can't.
+dist_noinst_DATA += \
+  others/webkit/examplewindow.cc \
+  others/webkit/examplewindow.h \
+  others/webkit/main.cc
+
 book_actionbar_example_SOURCES = \
 	book/actionbar/examplewindow.cc \
 	book/actionbar/examplewindow.h \

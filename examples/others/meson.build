@@ -10,8 +10,11 @@ examples_others = [
   [['dnd'], 'testdnd', ['dndwindow.cc', 'main.cc']],
   [['exception'], 'exceptiontest', ['exceptiontest.cc']],
   [['tictactoe'], 'ttt_test', ['tictactoe.cc', 'ttt_test.cc']],
+  [['webkit'], 'example', ['examplewindow.cc', 'main.cc']],
   [['window'], 'wheelbarrow', ['wheelbarrow.cc']],
 ]
+
+webkit_dep = dependency('webkitgtk-6.0', required: false)
 
 foreach ex : examples_others
   dir = ''
@@ -33,32 +36,36 @@ foreach ex : examples_others
     endif
   endforeach
 
-  exe_file = executable(ex_name, ex_sources, resources,
-    dependencies: gtkmm_dep,
-    win_subsystem: 'windows',
-    build_by_default: build_examples_by_default,
-    install: false,
-  )
+  # The WebKit example can be built only if webkitgtk is installed.
+  if ex[0][0] != 'webkit' or webkit_dep.found()
+    deps = (ex[0][0] == 'webkit') ? [gtkmm_dep, webkit_dep] : gtkmm_dep
+    exe_file = executable(ex_name, ex_sources, resources,
+      dependencies: deps,
+      win_subsystem: 'windows',
+      build_by_default: build_examples_by_default,
+      install: false,
+    )
 
-  stamp_file_name = ex_name + '_copy.stamp'
-  examples_targets += custom_target(stamp_file_name,
-    input: exe_file,
-    output: stamp_file_name,
-    command: [
-      python3, copy_to_subdir,
-      '@INPUT@',
-      dir,
-      ex[1],
-      '@OUTPUT@',
-    ],
-    build_by_default: build_examples_by_default,
-    install: false,
-  )
+    stamp_file_name = ex_name + '_copy.stamp'
+    examples_targets += custom_target(stamp_file_name,
+      input: exe_file,
+      output: stamp_file_name,
+      command: [
+        python3, copy_to_subdir,
+        '@INPUT@',
+        dir,
+        ex[1],
+        '@OUTPUT@',
+      ],
+      build_by_default: build_examples_by_default,
+      install: false,
+    )
 
-  target_name = 'examples' / 'others' / stamp_file_name
-  test('others_' + ex_name, meson_backend,
-    args: target_name,
-    workdir: project_build_root,
-    timeout: test_timeout
-  )
+    target_name = 'examples' / 'others' / stamp_file_name
+    test('others_' + ex_name, meson_backend,
+      args: target_name,
+      workdir: project_build_root,
+      timeout: test_timeout
+    )
+  endif
 endforeach
