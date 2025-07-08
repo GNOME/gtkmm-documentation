@@ -25,14 +25,22 @@ public:
   ExampleWindow();
   ~ExampleWindow() override;
 
+  // Configuration file, showing configured locale.
+  static const std::string config_file_name;
+
 protected:
   void fill_text_tag_table();
   void fill_buffer();
 
-  // Child widgets:
+  void on_dropdown_changed();
+
+  // Child widgets
+  Gtk::HeaderBar m_HeaderBar;
+  Gtk::DropDown m_DropDown;
   Gtk::ScrolledWindow m_ScrolledWindow;
   Gtk::TextView m_TextView;
 
+  Glib::RefPtr<Gtk::StringList> m_StringList;
   Glib::RefPtr<Gtk::TextTagTable> m_refTextTagTable;
   Glib::RefPtr<Gtk::TextBuffer> m_refTextBuffer;
 };

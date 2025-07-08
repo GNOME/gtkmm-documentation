@@ -15,12 +15,34 @@
  */
 
 #include "examplewindow.h"
+#include <fstream>
+#include <iostream>
 #include <glibmm/i18n.h>
+
+const std::string ExampleWindow::config_file_name("appconfig.cfg");
 
 ExampleWindow::ExampleWindow()
 {
   set_title(_("English i18n example"));
   set_default_size(500, 300);
+
+  // Header bar
+  m_HeaderBar.set_show_title_buttons(true);
+  m_HeaderBar.pack_start(m_DropDown);
+
+  // Set headerbar as titlebar
+  set_titlebar(m_HeaderBar);
+
+  // Fill the dropdown
+  const std::vector<Glib::ustring> strings{
+    "Locale", "en_US.UTF-8", "de_DE.UTF-8", "cs_CZ.UTF-8", "sv_SE.UTF-8"
+  };
+  m_StringList = Gtk::StringList::create(strings);
+  m_DropDown.set_model(m_StringList);
+  m_DropDown.set_selected(0);
+
+  m_DropDown.property_selected().signal_changed().connect(
+    sigc::mem_fun(*this, &ExampleWindow::on_dropdown_changed));
 
   // Add the TextView, inside a ScrolledWindow.
   m_ScrolledWindow.set_child(m_TextView);
@@ -33,6 +55,25 @@ ExampleWindow::ExampleWindow()
 
 ExampleWindow::~ExampleWindow()
 {
+}
+
+void ExampleWindow::on_dropdown_changed()
+{
+  const auto selected = m_DropDown.get_selected();
+  const auto text = m_StringList->get_string(selected);
+  std::cout << "DropDown changed: " << text << std::endl;
+  if (selected > 0)
+  {
+    std::ofstream myfile;
+    myfile.open(config_file_name);
+    if (myfile.is_open())
+    {
+      myfile << text << std::endl;
+      myfile.close();
+    }
+    else
+      std::cout << "Could not open file " << config_file_name << std::endl;
+  }
 }
 
 void ExampleWindow::fill_text_tag_table()
@@ -88,8 +129,12 @@ void ExampleWindow::fill_buffer()
     "Now run poedit or some other editor, open file de.po and translate texts of messages."
     " Write the translations after 'msgstr'."
     " If charset is not UTF-8 in the .po file, change to UTF-8."
-    " Then save the de.po file. Still in the po directory, create myapp.mo from de.po:\n\n",
+    " Then save the de.po file. (Later, to update the .po file, use ",
     "plain-text");
+  iter = m_refTextBuffer->insert_with_tag(iter,
+    "intltool-update de", "script");
+  iter = m_refTextBuffer->insert_with_tag(iter,
+    ".) Still in the po directory, create myapp.mo from de.po:\n\n", "plain-text");
   iter = m_refTextBuffer->insert_with_tag(iter,
     "mkdir --parents ../locale/de/LC_MESSAGES\n"
     "msgfmt --check --verbose --output-file ../locale/de/LC_MESSAGES/myapp.mo de.po\n\n",

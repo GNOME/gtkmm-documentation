@@ -7635,6 +7635,10 @@ instance, you cannot use the copyright sign (&copy;).
 you can do if you don't use autotools or <application>meson</application>.
 It is also an example of using the <classname>Gtk::TextView</classname> widget.</para>
 
+<para>This program can set the locale, if it's specified in a configuration file.
+This is not normal behavior. Most programs accept the locale that the user
+has selected, for instance with an environment variable.</para>
+
 <figure xml:id="figure-i18n">
   <title>Translatable Strings</title>
   <screenshot>
