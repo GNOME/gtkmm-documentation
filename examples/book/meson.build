@@ -65,6 +65,7 @@ examples_book = [
   [['events', 'mouse'], 'example', exwindow_main],
   [['expander'], 'example', exwindow_main],
   [['frame'], 'example', exwindow_main],
+  [['glarea'], 'example', ['exampleglarea.cc'] + exwindow_main],
   [['grid'], 'example', exwindow_main],
   [['headerbar'], 'example', exwindow_main],
   [['helloworld'], 'helloworld', ['helloworld.cc', 'main.cc']],
@@ -111,8 +112,17 @@ examples_book = [
 ]
 
 thread_dep = dependency('threads')
+epoxy_dep = dependency('epoxy', required: false)
+glm_dep = dependency('glm', required: false)
 
 foreach ex : examples_book
+  # The GLArea example can be built only if epoxy and glm are installed.
+  if ex[0][0] == 'glarea' and not (epoxy_dep.found() and glm_dep.found() and \
+    gtkmm_dep.version().version_compare('>=4.12.0'))
+    message('The GLArea example can\'t be built.\n' + \
+            '  epoxy or glm is not installed or gtkmm version < 4.12.0.')
+    continue
+  endif
   dir = ''
   foreach dir_part : ex[0]
     dir = dir / dir_part
@@ -143,9 +153,14 @@ foreach ex : examples_book
       install: false,
     )
   else
-    # multi-threaded programs need thread support
-    deps = (ex[0][0] == 'multithread') ? [gtkmm_dep, thread_dep] : gtkmm_dep
-
+    if ex[0][0] == 'glarea'
+      deps = [gtkmm_dep, epoxy_dep, glm_dep]
+    elif ex[0][0] == 'multithread'
+      # Multi-threaded programs need thread support.
+      deps = [gtkmm_dep, thread_dep]
+    else
+      deps = gtkmm_dep
+    endif
     exe_file = executable(ex_name, ex_sources, resources,
       dependencies: deps,
       win_subsystem: 'windows',

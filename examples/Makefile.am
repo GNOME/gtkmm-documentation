@@ -146,9 +146,17 @@ dist_noinst_DATA = \
 	book/listmodelviews/gridview/xmms.xpm			\
 	$(MENUS_AND_TOOLBARS_RESOURCES)
 
+# The GLArea example can be built only if epoxy and glm are installed.
 # The WebKit example can be built only if webkitgtk is installed.
-# Meson can build it conditionally. Autotools can't.
+# Meson can build them conditionally. Autotools can't.
 dist_noinst_DATA += \
+  book/glarea/colors.h \
+  book/glarea/exampleglarea.cc \
+  book/glarea/exampleglarea.h \
+  book/glarea/examplewindow.cc \
+  book/glarea/examplewindow.h \
+  book/glarea/main.cc \
+  book/glarea/shaders.h \
   others/webkit/examplewindow.cc \
   others/webkit/examplewindow.h \
   others/webkit/main.cc
