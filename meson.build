@@ -2,7 +2,7 @@
 
 project('gtkmm-documentation', 'c', 'cpp',
   version: '3.24.4',
-  license: 'GPLv2',
+  license: 'GFDL-1.2-no-invariants-or-later',
   default_options: [
     'cpp_std=c++14',
     'warning_level=1',
