@@ -10,7 +10,8 @@ project('gtkmm-documentation', 'c', 'cpp',
   meson_version: '>= 0.60.0', # required for install_tag keyword argument.
 )
 
-python3 = find_program('python3', version: '>=3.7')
+# Use the Python installation that Meson uses. Its version is >= 3.7.
+python3 = import('python').find_installation()
 
 gtkmm_pcname = 'gtkmm-3.0'
 gtkmm_req = '>= 3.24.0'
