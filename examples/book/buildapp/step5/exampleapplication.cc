@@ -23,6 +23,8 @@
 ExampleApplication::ExampleApplication()
 : Gtk::Application("org.gtkmm.examples.application", Gio::Application::Flags::HANDLES_OPEN)
 {
+  // Delete a window when it is removed from the application.
+  signal_window_removed().connect([](Gtk::Window* window) { delete window; });
 }
 
 Glib::RefPtr<ExampleApplication> ExampleApplication::create()
@@ -38,12 +40,9 @@ ExampleAppWindow* ExampleApplication::create_appwindow()
   add_window(*appwindow);
 
   // A window can be added to an application with Gtk::Application::add_window()
-  // or Gtk::Window::set_application(). When all added windows have been hidden
-  // or removed, the application stops running (Gtk::Application::run() returns()),
+  // or Gtk::Window::set_application(). When all added windows have been removed,
+  // the application stops running (Gtk::Application::run() returns),
   // unless Gio::Application::hold() has been called.
-
-  // Delete the window when it is hidden.
-  appwindow->signal_hide().connect([appwindow](){ delete appwindow; });
 
   return appwindow;
 }
@@ -137,13 +136,14 @@ void ExampleApplication::on_action_quit()
   // from the application. Neither the window's nor the application's
   // destructors will be called, because there will be remaining reference
   // counts in both of them. If we want the destructors to be called, we
-  // must remove the window from the application. One way of doing this
-  // is to hide the window. See comment in create_appwindow().
+  // must remove the window from the application. See ExampleApplication's constructor.
+  // A window can be removed from an application with Gtk::Application::remove_window()
+  // or Gtk::Window::unset_application().
   auto windows = get_windows();
   for (auto window : windows)
-    window->set_visible(false);
+    remove_window(*window);
 
-  // Not really necessary, when Gtk::Widget::set_visible(false) is called,
+  // Not really necessary, when Gtk::Application::remove_window() is called,
   // unless Gio::Application::hold() has been called without a corresponding
   // call to Gio::Application::release().
   quit();

@@ -70,7 +70,7 @@ void on_app_activate()
 
   // It's not possible to delete widgets after app->run() has returned.
   // Delete the dialog with its child widgets before app->run() returns.
-  pDialog->signal_hide().connect([] () { delete pDialog; });
+  app->signal_window_removed().connect([](Gtk::Window* window) { delete window; });
 
   app->add_window(*pDialog);
   pDialog->set_visible(true);

@@ -22,6 +22,8 @@
 ExampleApplication::ExampleApplication()
 : Gtk::Application("org.gtkmm.examples.application", Gio::Application::Flags::HANDLES_OPEN)
 {
+  // Delete a window when it is removed from the application.
+  signal_window_removed().connect([](Gtk::Window* window) { delete window; });
 }
 
 Glib::RefPtr<ExampleApplication> ExampleApplication::create()
@@ -37,12 +39,9 @@ ExampleAppWindow* ExampleApplication::create_appwindow()
   add_window(*appwindow);
 
   // A window can be added to an application with Gtk::Application::add_window()
-  // or Gtk::Window::set_application(). When all added windows have been hidden
-  // or removed, the application stops running (Gtk::Application::run() returns()),
+  // or Gtk::Window::set_application(). When all added windows have been removed,
+  // the application stops running (Gtk::Application::run() returns),
   // unless Gio::Application::hold() has been called.
-
-  // Delete the window when it is hidden.
-  appwindow->signal_hide().connect([appwindow](){ delete appwindow; });
 
   return appwindow;
 }

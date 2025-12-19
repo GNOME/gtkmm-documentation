@@ -5,7 +5,6 @@
     <property name="title" translatable="yes">Derived Builder example</property>
     <property name="default_width">250</property>
     <property name="default_height">120</property>
-    <property name="hide_on_close">True</property>
     <child>
       <object class="GtkBox" id="dialog-vbox">
         <property name="can_focus">True</property>

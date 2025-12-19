@@ -79,5 +79,5 @@ RadioButtons::~RadioButtons()
 
 void RadioButtons::on_button_clicked()
 {
-  set_visible(false); //to close the application.
+  close();
 }

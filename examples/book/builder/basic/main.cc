@@ -8,8 +8,10 @@ Glib::RefPtr<Gtk::Application> app;
 
 void on_button_clicked()
 {
+  // When the application's only window is removed with
+  // unset_application(), Gtk::Application::run() will end.
   if (pDialog)
-    pDialog->set_visible(false); // set_visible(false) will cause Gtk::Application::run() to end.
+    pDialog->unset_application();
 }
 
 void on_app_activate()
@@ -51,7 +53,7 @@ void on_app_activate()
 
   // It's not possible to delete widgets after app->run() has returned.
   // Delete the dialog with its child widgets before app->run() returns.
-  pDialog->signal_hide().connect([] () { delete pDialog; });
+  app->signal_window_removed().connect([](Gtk::Window* window) { delete window; });
 
   app->add_window(*pDialog);
   pDialog->set_visible(true);

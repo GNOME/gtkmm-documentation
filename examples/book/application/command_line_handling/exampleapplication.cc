@@ -81,14 +81,14 @@ Glib::RefPtr<ExampleApplication> ExampleApplication::create()
 
 void ExampleApplication::create_window(const Glib::RefPtr<Gio::File>& file)
 {
-  auto window = new ExampleWindow();
+  // Since gtkmm 4.8, a Gtk::Window can be managed. If managed and not created
+  // by Gtk::Builder, it's deleted when its underlying C instance is destroyed.
+  // The underlying C instance is destroyed when it's closed, unless
+  // Gtk::Window::set_hide_on_close() has been called.
+  auto window = Gtk::make_managed<ExampleWindow>();
 
   //Make sure that the application runs for as long this window is still open:
   add_window(*window);
-
-  //Delete the window when it is hidden.
-  //That's enough for this simple example.
-  window->signal_hide().connect([window]() { delete window; });
 
   window->set_visible(true);
 

@@ -63,5 +63,7 @@ DerivedDialog::~DerivedDialog()
 
 void DerivedDialog::on_button_quit()
 {
-  set_visible(false); // set_visible(false) will cause Gtk::Application::run() to end.
+  // When the application's only window is removed with
+  // unset_application(), Gtk::Application::run() will end.
+  unset_application();
 }

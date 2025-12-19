@@ -55,12 +55,8 @@ bool ExampleWindow::load_file(const Glib::RefPtr<Gio::File>& file)
     //Tell the application that this window can no longer be useful to
     //this application, so it can forget about it. The instance might then exit
     //if this is its last open window.
-    //Note that we must be careful that the caller only calls this method _after_
-    //calling set_visible(true), or this would be useless:
-    set_visible(false);
+    close(); // May delete this window.
     return false;
   }
-
-  set_visible(true);
   return true;
 }

@@ -80,14 +80,14 @@ void ExampleApplication::on_startup()
 
 void ExampleApplication::create_window()
 {
-  auto window = new ExampleWindow();
+  // Since gtkmm 4.8, a Gtk::Window can be managed. If managed and not created
+  // by Gtk::Builder, it's deleted when its underlying C instance is destroyed.
+  // The underlying C instance is destroyed when it's closed, unless
+  // Gtk::Window::set_hide_on_close() has been called.
+  auto window = Gtk::make_managed<ExampleWindow>();
 
   //Make sure that the application runs for as long this window is still open:
   add_window(*window);
-
-  //Delete the window when it is hidden.
-  //That's enough for this simple example.
-  window->signal_hide().connect([window]() { delete window; });
 
   window->set_visible(true);
 }
@@ -109,18 +109,17 @@ void ExampleApplication::on_action_something()
 void ExampleApplication::on_action_quit()
 {
   std::cout << G_STRFUNC << std::endl;
-  quit(); // Not really necessary, when Gtk::Widget::set_visible(false) is called.
+  quit(); // Not really necessary, when Gtk::Window::close() is called.
 
   // Gio::Application::quit() will make Gio::Application::run() return,
   // but it's a crude way of ending the program. The window is not removed
   // from the application. Neither the window's nor the application's
   // destructors will be called, because there will be remaining reference
   // counts in both of them. If we want the destructors to be called, we
-  // must remove the window from the application. One way of doing this
-  // is to hide the window.
+  // must close the window.
   auto windows = get_windows();
-  if (windows.size() > 0)
-    windows[0]->set_visible(false); // In this simple case, we know there is only one window.
+  for (auto window : windows)
+    window->close();
 }
 
 void ExampleApplication::on_action_print(const Glib::VariantBase& parameter)
