@@ -6305,7 +6305,7 @@ add_controller(controller);
         In this example there are three keyboard shortcuts:
         <keycap>Alt</keycap>+<keycap>1</keycap> selects the first radio button,
         <keycap>Alt</keycap>+<keycap>2</keycap> selects the second one, and the
-        <keycap>Esc</keycap> key hides (closes) the window.
+        <keycap>Esc</keycap> key closes the window.
       </para>
 
       <figure xml:id="figure-keyboardevents-simple">
@@ -6772,7 +6772,7 @@ it's deleted by the container.
 Of course, a top-level container will not be added to another container. The
 programmer is responsible for destroying the top-level container using one of
 the traditional &cpp; techniques. Or you can let <methodname>Gtk::Application::make_window_and_run()</methodname>
-create a top-level window and delete it when it's hidden.
+create a top-level window and delete it when it's closed.
 </para>
 
 </section>
@@ -8130,11 +8130,11 @@ and hints for creating &gtkmm; applications.
 <para>Most applications will have only one <classname>Window</classname>, or
     only one main window. These applications can use
     <methodname>Gtk::Application::make_window_and_run(int argc, char** argv, T_Args&amp;&amp;... args)</methodname>.
-    It creates and shows a window. When the window is hidden, <methodname>make_window_and_run()</methodname>
+    It creates and shows a window. When the window is closed, <methodname>make_window_and_run()</methodname>
     deletes the window and returns to the caller.
     This might happen when the user closes the window, or when your code decides to
-    hide the window with <methodname>set_visible(false)</methodname>. You can prevent the user from
-    closing the window (for instance, if there are unsaved changes) by
+    close the window with <methodname>Gtk::Window::close()</methodname>. You can prevent
+    the user from closing the window (for instance, if there are unsaved changes) by
     overriding <methodname>Gtk::Window::on_close_request()</methodname>.</para>
 <para>Most of our examples use this technique.</para>
 </section>
