@@ -45,7 +45,7 @@ TimerExample::TimerExample() :
 
 void TimerExample::on_button_quit()
 {
-  set_visible(false);
+  close();
 }
 
 void TimerExample::on_button_add_timer()

@@ -92,7 +92,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_quit()
 {
-  set_visible(false);
+  close();
 }
 
 void ExampleWindow::on_treeview_row_activated(const Gtk::TreeModel::Path& path,

@@ -40,8 +40,6 @@ ExampleWindow::ExampleWindow()
   m_Button_Close.signal_clicked().connect( sigc::mem_fun(*this,
               &ExampleWindow::on_button_close) );
 
-  // set_remove_on_hide(false); // Exists since gtkmm 4.22
-
   //Add the toolbar items:
   {
     //You would normally use the Builder and Gio::Actions to create the menus and
@@ -88,14 +86,10 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_close()
 {
-  // unset_application() is an alternative to set_visible(false).
-  // unset_application() makes the app exit even if set_remove_on_hide(false)
-  // has been called.
-  unset_application();
+  close();
 }
 
 void ExampleWindow::on_toolbar_item()
 {
   std::cout << "Toolbar item clicked." << std::endl;
 }
-

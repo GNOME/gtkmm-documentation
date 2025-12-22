@@ -199,7 +199,9 @@ void Wheelbarrow::on_button_pressed(int /* n_press */, double x, double y)
           current_button, x, y, m_gesture_click->get_current_event_time());
       break;
     }
-    case 3: set_visible(false); break;
+    case 3:
+      close();
+      break;
   }
 }
 

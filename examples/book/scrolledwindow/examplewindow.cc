@@ -71,5 +71,5 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_close()
 {
-  set_visible(false);
+  close();
 }

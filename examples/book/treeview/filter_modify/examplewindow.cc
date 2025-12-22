@@ -136,5 +136,5 @@ void ExampleWindow::on_filter_modify(const Gtk::TreeModel::iterator& iter,
 
 void ExampleWindow::on_button_quit()
 {
-  set_visible(false);
+  close();
 }

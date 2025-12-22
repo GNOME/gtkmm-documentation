@@ -143,7 +143,7 @@ Glib::ustring CalendarExample::font_style_to_string(Pango::Style font_style)
 
 void CalendarExample::on_button_close()
 {
-  set_visible(false);
+  close();
 }
 
 void CalendarExample::on_parsing_error(const Glib::RefPtr<const Gtk::CssSection>& section, const Glib::Error& error)

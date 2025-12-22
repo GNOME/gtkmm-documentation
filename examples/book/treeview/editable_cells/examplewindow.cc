@@ -115,7 +115,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_quit()
 {
-  set_visible(false);
+  close();
 }
 
 void ExampleWindow::treeviewcolumn_validated_on_cell_data(

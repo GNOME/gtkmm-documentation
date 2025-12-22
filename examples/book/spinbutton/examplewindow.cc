@@ -170,7 +170,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_close()
 {
-  set_visible(false);
+  close();
 }
 
 void ExampleWindow::on_checkbutton_snap()
