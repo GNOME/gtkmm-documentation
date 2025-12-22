@@ -208,7 +208,10 @@ Gdk::DragAction DnDWindow::on_image_drag_enter(const Glib::RefPtr<Gdk::Drop>& dr
 
 void DnDWindow::on_image_drag_leave(const Glib::RefPtr<Gdk::Drop>& drop)
 {
-  std::cout << "trashcan leave: " << drop->get_formats()->to_string() << std::endl;
+  if (drop)
+    std::cout << "trashcan leave: " << drop->get_formats()->to_string() << std::endl;
+  else
+    std::cout << "trashcan leave: " << (m_have_drag ? "no drop" : "after drop") << std::endl;
 
   m_have_drag = false;
   m_Image.set(m_trashcan_closed);
