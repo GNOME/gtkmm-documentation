@@ -175,7 +175,7 @@ void PreviewDialog::on_popreview_got_page_size(
   }
 }
 
-void PreviewDialog::on_hide()
+bool PreviewDialog::on_close_request()
 {
   m_refPreview->end_preview();
 
@@ -183,9 +183,10 @@ void PreviewDialog::on_hide()
   m_refPreview.reset();
   m_refPrintContext.reset();
   m_refCairoContext.reset();
+  return Gtk::Window::on_close_request();
 }
 
 void PreviewDialog::on_close_clicked()
 {
-  set_visible(false);
+  close();
 }

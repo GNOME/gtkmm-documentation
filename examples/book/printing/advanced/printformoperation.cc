@@ -190,21 +190,14 @@ bool PrintFormOperation::on_preview(const
     return false;
   }
 
-  //Use our custom preview dialog:
-  m_pDialog = new PreviewDialog(this, preview, context, *parent);
-  m_pDialog->signal_hide().connect(sigc::mem_fun(*this,
-              &PrintFormOperation::on_preview_window_hide));
+  // Since gtkmm 4.8, a Gtk::Window can be managed. If managed and not created
+  // by Gtk::Builder, it's deleted when its underlying C instance is destroyed.
+  // The underlying C instance is destroyed when it's closed, unless
+  // Gtk::Window::set_hide_on_close() has been called.
 
-  m_pDialog->set_visible(true);
+  // Use our custom preview dialog:
+  auto pDialog = Gtk::make_managed<PreviewDialog>(this, preview, context, *parent);
+  pDialog->set_visible(true);
 
   return true;
-}
-
-void PrintFormOperation::on_preview_window_hide()
-{
-  if(m_pDialog)
-  {
-    delete m_pDialog; //This would hide it anyway.
-    m_pDialog = nullptr;
-  }
 }

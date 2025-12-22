@@ -81,7 +81,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_close()
 {
-  set_visible(false);
+  close();
 }
 
 /* You can do more complex matching with a handler like this.

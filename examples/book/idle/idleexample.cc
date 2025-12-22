@@ -57,10 +57,9 @@ IdleExample::IdleExample() :
   Glib::signal_idle().connect( sigc::mem_fun(*this, &IdleExample::on_idle) );
 }
 
-
 void IdleExample::on_button_clicked()
 {
-  set_visible(false);
+  close();
 }
 
 // this timer callback function is executed once every 50ms (set in connection

@@ -152,7 +152,7 @@ void ExampleWindow::on_quit_button_clicked()
     if (m_WorkerThread->joinable())
       m_WorkerThread->join();
   }
-  set_visible(false);
+  close();
 }
 
 // notify() is called from ExampleWorker::do_work(). It is executed in the worker

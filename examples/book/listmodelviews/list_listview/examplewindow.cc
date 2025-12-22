@@ -72,7 +72,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_quit()
 {
-  set_visible(false);
+  close();
 }
 
 void ExampleWindow::on_setup_label(const Glib::RefPtr<Gtk::ListItem>& list_item)

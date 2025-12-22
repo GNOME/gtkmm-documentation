@@ -86,7 +86,7 @@ ExampleWindow::~ExampleWindow()
 
 void ExampleWindow::on_button_quit()
 {
-  set_visible(false);
+  close();
 }
 
 Glib::RefPtr<Gio::ListModel> ExampleWindow::create_model(

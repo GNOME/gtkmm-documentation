@@ -328,5 +328,5 @@ void ExampleWindow::on_menu_file_print()
 
 void ExampleWindow::on_menu_file_quit()
 {
-  set_visible(false);
+  close();
 }

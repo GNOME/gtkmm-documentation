@@ -101,7 +101,7 @@ void ExampleWindow::on_checkbutton_inverted()
 
 void ExampleWindow::on_button_close()
 {
-  set_visible(false);
+  close();
 }
 
 /* Update the value of the progress bar so that we get

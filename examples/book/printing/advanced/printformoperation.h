@@ -29,7 +29,7 @@ class PrintFormOperation : public Gtk::PrintOperation
 {
  public:
   static Glib::RefPtr<PrintFormOperation> create();
-  virtual ~PrintFormOperation();
+  ~PrintFormOperation() override;
 
   Glib::RefPtr<Pango::Layout> get_pango_layout() { return m_refLayout; }
 
@@ -46,12 +46,7 @@ class PrintFormOperation : public Gtk::PrintOperation
   Gtk::Widget* on_create_custom_widget() override;
   void on_custom_widget_apply(Gtk::Widget* widget) override;
 
-
   bool on_preview(const Glib::RefPtr<Gtk::PrintOperationPreview>& preview, const Glib::RefPtr<Gtk::PrintContext>& context, Gtk::Window* parent) override;
-
-  void on_preview_window_hide();
-
-  PreviewDialog* m_pDialog;
 
   Glib::ustring m_Name;
   Glib::ustring m_Comments;

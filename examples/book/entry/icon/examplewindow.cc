@@ -50,6 +50,5 @@ void ExampleWindow::on_icon_pressed(Gtk::Entry::IconPosition /* icon_pos */)
 
 void ExampleWindow::on_button_close()
 {
-  set_visible(false);
+  close();
 }
-

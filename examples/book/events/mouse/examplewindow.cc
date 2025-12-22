@@ -177,7 +177,7 @@ bool ExampleWindow::on_key_pressed(guint keyval, guint, Gdk::ModifierType state)
   else if (keyval == GDK_KEY_Escape)
   {
     // Close the window, when the 'Esc' key is pressed
-    set_visible(false);
+    close();
     return true;
   }
 

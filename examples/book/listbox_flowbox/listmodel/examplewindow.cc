@@ -146,5 +146,5 @@ void ExampleWindow::on_remove_some()
 
 void ExampleWindow::on_quit()
 {
-  set_visible(false);
+  close();
 }

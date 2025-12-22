@@ -39,5 +39,5 @@ ExampleWindow::ExampleWindow()
 
 void ExampleWindow::on_quit_button_clicked()
 {
-    set_visible(false); // Hide the window to gracefully exit the application
+    close();
 }

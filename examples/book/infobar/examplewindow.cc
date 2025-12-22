@@ -103,7 +103,7 @@ void ExampleWindow::on_infobar_ok()
 
 void ExampleWindow::on_button_quit()
 {
-  set_visible(false);
+  close();
 }
 
 void ExampleWindow::on_button_clear()

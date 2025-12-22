@@ -147,7 +147,7 @@ void ExampleWindow::on_button_showm()
 
 void ExampleWindow::on_button_quit()
 {
-  set_visible(false);
+  close();
 }
 
 void ExampleWindow::on_setup_label(
