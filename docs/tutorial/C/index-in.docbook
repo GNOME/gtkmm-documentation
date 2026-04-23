@@ -2929,7 +2929,7 @@ pRenderer-&gt;signal_toggled().connect(
 <title>Editable Cells</title>
 
 <section xml:id="treeview-editable-cells-automatic">
-<title>Automatically-stored editable cells.</title>
+<title>Automatically-stored editable cells</title>
 
 <para>
 Cells in a <classname>TreeView</classname> can be edited in-place by the user.
@@ -2945,7 +2945,7 @@ long.
 </section>
 
 <section xml:id="treeview-editable-cells-custom">
-<title>Implementing custom logic for editable cells.</title>
+<title>Implementing custom logic for editable cells</title>
 
 <para>
 However, you might not want the new values to be stored
@@ -9913,7 +9913,7 @@ $ jhbuild sanitycheck</screen>
 </section>
 
 <section xml:id="sec-wrapping-defs-files">
-<title>Generating the .defs files.</title>
+<title>Generating the .defs files</title>
 
 <para>The <filename>.defs</filename> files are text files, in a lisp format, that describe the API
   of a C library, including its
@@ -9926,8 +9926,7 @@ $ jhbuild sanitycheck</screen>
   <listitem><para>vfuncs</para></listitem>
 </itemizedlist>
 </para>
-<para>At the moment, we have separate tools for generating different parts of
-  these <filename>.defs</filename>, so we split them up into separate files.
+<para>We split these <filename>.defs</filename> files into separate files.
   For instance, in the <filename>gtk/src</filename> directory of the &gtkmm;
   sources, you will find these files:
     <variablelist>
@@ -9957,6 +9956,14 @@ $ jhbuild sanitycheck</screen>
 generates all <filename>.defs</filename> files and the <filename>*_docs.xml</filename> file,
 described in the <link linkend="sec-wrapping-documentation">Documentation</link> section.
 </para>
+<para>If the wrapped C library uses <link xlink:href="https://gi.readthedocs.io">GObject-introspection</link>
+and generates a GIR file, you can alternatively copy and adapt the
+<filename>skeletonmm/tools/generate_from_gir.sh</filename> script, which also generates
+all <filename>.defs</filename> files and the <filename>*_docs.xml</filename> file.
+</para>
+
+<section xml:id="generating-defs-without-gir">
+<title>Generating .defs without a GIR file</title>
 
 <section xml:id="generating-defs-methods">
 <title>Generating the methods .defs</title>
@@ -10025,6 +10032,26 @@ int main(int, char**)
   <filename>skeleton/src/skeleton_vfunc.defs</filename> to start from. You can also look
   at &gtkmm;'s <filename>gtk/src/gtk_vfuncs.defs</filename> file.
 </para>
+</section>
+</section>
+
+<section xml:id="generating-defs-from-gir">
+<title>Generating .defs from a GIR file</title>
+
+<para>Glibmm since version 2.89.0 contains the <command>mmgir</command> tool.
+This is a &cpp; program. To use it, build glibmm with <command>meson</command>
+with the <literal>-Dbuild-mmgir=true</literal> option.
+</para>
+<para><command>mmgir</command> can generate all the <filename>.defs</filename>
+files. For instance,
+</para>
+<programlisting><code>$ ./mmgir --gir /usr/share/gir-1.0/Gtk-4.0.gir \
+    --gir-search-dir /usr/share/gir-1.0 \
+    --enum-defs gtk_enums.defs \
+    --function-defs gtk_methods.defs \
+    --signal-defs gtk_signals.defs \
+    --vfunc-defs gtk_vfuncs.defs
+</code></programlisting>
 </section>
 
 </section>
@@ -11393,7 +11420,7 @@ _INITIALIZATION(`Glib::ustring&',`const char*',`$3 = Glib::convert_const_gchar_p
 </section>
 
 <section xml:id="sec-wrapping-problems">
-<title>Problems in the C API.</title>
+<title>Problems in the C API</title>
 
 <para>You are likely to encounter some problems in the library that you are wrapping, particularly if it is a new project. Here are some common problems, with solutions.</para>
 <section xml:id="wrapping-predeclare-structs">
