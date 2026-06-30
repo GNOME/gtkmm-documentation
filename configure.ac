@@ -1,7 +1,7 @@
 ## This file is part of gtkmm-documentation.
 
 AC_PREREQ([2.59])
-AC_INIT([gtkmm-documentation], [3.24.4],
+AC_INIT([gtkmm-documentation], [3.24.5],
         [https://gitlab.gnome.org/GNOME/gtkmm-documentation/issues/],
         [gtkmm-documentation], [https://gtkmm.gnome.org/])
 

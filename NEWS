@@ -1,3 +1,29 @@
+3.24.5 (stable) 2026-06-30
+
+* Avoid <programlisting> elements within <para> elements.
+  Can confuse the translation tools (itstool and friends)
+  (Kjell Ahlstedt)
+* Remove links to developer-old.gnome.org
+  (Kjell Ahlstedt) Issue #21 (Andre Klapper)
+* Remove links to developer.gnome.org
+* Replace gtkmm.org by gtkmm.gnome.org
+* Update "The .hg and .ccg files" section
+  (Kjell Ahlstedt)
+* Chapter 3. Basics: Use consistent file name
+  (Kjell Ahlstedt) Issue #29 (Cosmin Humeniuc)
+* Add the "GNU Free Documentation License" appendix
+* Remove obsolete FSF (Free Software Foundation) address in example programs
+  (Kjell Ahlstedt)
+
+Meson build:
+* Require python3 >= 3.7. That's what Meson requires.
+* Require meson version >= 0.60.0
+* Copy stylesheet, figures and icons to the build directory
+* Use the Python installation that Meson uses.
+  See merge request glibmm!67.
+  (Kjell Ahlstedt)
+
+
 3.24.4 (stable):
 
 * Remove AUTHORS and add general information to README.md
