@@ -1,3 +1,53 @@
+4.14.0 (stable) 2026-06-30
+
+* RefPtr appendix: Make it clear that widgets don't use RefPtr
+* Replace gtkmm.org by gtkmm.gnome.org
+  (Kjell Ahlstedt)
+* Update the Internationalization and Localization chapter
+  (Kjell Ahlstedt) Issue #25 (Petr Talla)
+* Update links for building gtkmm on Windows
+  (Kjell Ahlstedt) Issue #27 (Jack Oztosun)
+* Add the C++ Resources section
+* Update the link to Frequently Asked Questions
+* Update "The .hg and .ccg files" section
+  (Kjell Ahlstedt)
+* Chapter 3. Basics: Use consistent file name
+  (Kjell Ahlstedt) Issue #29 (Cosmin Humeniuc)
+* Add the "GNU Free Documentation License" appendix
+* Remove obsolete FSF (Free Software Foundation) address in example programs
+* Talk about closing a window instead of hiding it
+* others/dnd: Avoid a segfault in on_image_drag_leave()
+  (Kjell Ahlstedt)
+* "Generating the .defs files" section: Describe mmgir
+  See merge request glibmm!71.
+  (Kjell Ahlstedt)
+
+* Translation updates:
+  - New translation: Serbian (Марко Костић)
+
+Example programs:
+* others/exception: Use Gtk::make_managed()
+  (Kjell Ahlstedt)
+* Drawing Curved Lines: Make some lines dashed
+  (Kjell Ahlstedt) Issue #28 (Petr Talla)
+* Add the others/webkit program
+ (Petr Talla) Issue #26
+* Add the book/i18n program
+  (Kjell Ahlstedt) Issue #25 (Petr Talla)
+* Add the book/glarea program
+  (Petr Talla) Issue #30
+* Toolbar example: Exit the app with unset_application()
+* Exit apps with close() or remove_window() (was set_visible(false))
+  (Kjell Ahlstedt)
+
+Meson build:
+* Require meson version >= 0.60.0
+* Copy stylesheet, figures and icons to the build directory
+* Use the Python installation that Meson uses.
+  See merge request glibmm!67.
+  (Kjell Ahlstedt)
+
+
 4.12.0 (stable) 2024-11-04:
 
 * dropdown/complex example: Add a missing signal_unbind().connect()
