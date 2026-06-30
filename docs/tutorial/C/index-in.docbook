@@ -10038,7 +10038,7 @@ int main(int, char**)
 <section xml:id="generating-defs-from-gir">
 <title>Generating .defs from a GIR file</title>
 
-<para>Glibmm since version 2.89.0 contains the <command>mmgir</command> tool.
+<para>Glibmm since version 2.88.1 contains the <command>mmgir</command> tool.
 This is a &cpp; program. To use it, build glibmm with <command>meson</command>
 with the <literal>-Dbuild-mmgir=true</literal> option.
 </para>
